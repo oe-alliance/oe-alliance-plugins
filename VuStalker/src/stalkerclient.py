@@ -2,7 +2,11 @@ from Components.config import config, ConfigSubsection, ConfigSelection, ConfigT
 
 from enigma import eTimer
 
-import collections
+try:
+	from collections.abc import Mapping, Iterable
+except ImportError:
+	from collections import Mapping, Iterable
+
 import json
 import os
 import threading
@@ -47,9 +51,9 @@ config.plugins.stalker_client.numFavlist = ConfigInteger(default=0)
 def convert(data):
 	if isinstance(data, str):
 		return str(data)
-	elif isinstance(data, collections.Mapping):
+	elif isinstance(data, Mapping):
 		return dict(list(map(convert, iter(data.items()))))
-	elif isinstance(data, collections.Iterable):
+	elif isinstance(data, Iterable):
 		return type(data)(list(map(convert, data)))
 	else:
 		return data
