@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = ABMCustomMixImporter AboutBoxBranding Blindscan BTDevicesManager ChannelsImporter DLNABrowser DLNAServer EPGTranslator Fempa LCD4linux OnDemand RemoteChannelStreamConverter SatipClient StreamTV tmdb TunerServer xmlUpdate 3GModemManager Chefkoch
+SUBDIRS = ABMCustomMixImporter AboutBoxBranding Blindscan BTDevicesManager ChannelsImporter DLNABrowser DLNAServer EPGTranslator Fempa LCD4linux OnDemand RemoteChannelStreamConverter SatipClient StreamTV tmdb TunerServer xmlUpdate 3GModemManager Chefkoch PiconsUpdater
 
 if MIPSEL
 SUBDIRS += WirelessAccessPoint
@@ -455,5 +455,5 @@ SUBDIRS += GigaBlueChromium GigaBlueBluetoothSetup
 endif
 
 if HAVE_PYTHON3
-SUBDIRS += PiconsUpdater TVSpielfilm
+SUBDIRS += TVSpielfilm
 endif
