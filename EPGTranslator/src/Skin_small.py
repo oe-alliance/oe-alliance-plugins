@@ -35,11 +35,11 @@ class MySkinData:
             <widget render="Label" source="global.CurrentTime" position="740,0" size="240,50" font="Regular;24" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
                 <convert type="ClockToText">Format:%H:%M:%S</convert>
             </widget>
-            <widget name="timing" position="308,55" size="750,32" foregroundColor="orange" font="Bold;24" halign="left" zPosition="1" />
+            <widget name="timing" position="308,55" size="720,32" foregroundColor="orange" font="Bold;24" halign="left" zPosition="1" />
             <widget name="flag" position="10,90" size="288,288" alphatest="blend" zPosition="1" />
-            <widget name="text" position="308,90" size="750,{size}" font="Regular;24" halign="left" zPosition="2" />
+            <widget name="text" position="308,90" size="720,{size}" font="Regular;24" halign="left" zPosition="2" />
             <widget name="flag2" position="10,350" size="288,288" alphatest="blend" zPosition="1" />
-            <widget name="text2" position="308,350" size="750,255" font="Regular;24" halign="left" zPosition="1" />
+            <widget name="text2" position="308,350" size="720,255" font="Regular;24" halign="left" zPosition="1" />
         </screen>
         """
     tMyes = "255"
