@@ -234,7 +234,7 @@ if USTYM4KPRO
 SUBDIRS += MultiTransCodingSetup
 endif
 
-if USTYM4KOTT
+if USTYM4KOTTPREMIUM
 SUBDIRS += MultiTransCodingSetup
 endif
 
