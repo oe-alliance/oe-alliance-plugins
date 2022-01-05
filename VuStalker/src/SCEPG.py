@@ -571,11 +571,11 @@ def StalkerEPGComponent(entry, size, type):
 		days = (_("Mon"), _("Tue"), _("Wed"), _("Thu"), _("Fri"), _("Sat"), _("Sun"))
 		t = localtime(float(entry.time))
 
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width / 20 * 2 - 10, height, 0, RT_HALIGN_RIGHT, days[t[6]]))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 20 * 2, 0, width / 20 * 5 - 15, height, 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4])))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 20 * 7, 0, width / 20 * 13, height, 0, RT_HALIGN_LEFT, entry.name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, int(width / 20 * 2 - 10), height, 0, RT_HALIGN_RIGHT, days[t[6]]))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(width / 20 * 2), 0, int(width / 20 * 5 - 15), height, 0, RT_HALIGN_RIGHT, "%02d.%02d, %02d:%02d" % (t[2], t[1], t[3], t[4])))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, int(width / 20 * 7), 0, int(width / 20 * 13), height, 0, RT_HALIGN_LEFT, entry.name))
 	else:
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, width / 10 * 3 - 10, height, 0, RT_HALIGN_LEFT, entry.ch_name))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, 0, 0, int(width / 10 * 3 - 10), height, 0, RT_HALIGN_LEFT, entry.ch_name))
 
 		epglist = entry.epglist
 		if len(epglist) > 0:
@@ -588,11 +588,11 @@ def StalkerEPGComponent(entry, size, type):
 				if begin_time > now_time:
 					begin = localtime(begin_time)
 					end = localtime(end_time)
-					res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 10 * 3, 0, width / 10 * 2 - 10, height, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, "%02d.%02d - %02d.%02d" % (begin[3], begin[4], end[3], end[4])))
+					res.append((eListboxPythonMultiContent.TYPE_TEXT, int(width / 10 * 3), 0, int(width / 10 * 2 - 10), height, 1, RT_HALIGN_CENTER | RT_VALIGN_CENTER, "%02d.%02d - %02d.%02d" % (begin[3], begin[4], end[3], end[4])))
 				else:
 					percent = (now_time - begin_time) * 100 / (end_time - begin_time)
-					res.append((eListboxPythonMultiContent.TYPE_PROGRESS, width / 10 * 3, 4, width / 10 * 2 - 10, height - 8, percent))
-				res.append((eListboxPythonMultiContent.TYPE_TEXT, width / 10 * 3 + width / 10 * 2, 0, width / 10 * 5, height, 0, RT_HALIGN_LEFT, name))
+					res.append((eListboxPythonMultiContent.TYPE_PROGRESS, int(width / 10 * 3), 4, int(width / 10 * 2 - 10), height - 8, percent))
+				res.append((eListboxPythonMultiContent.TYPE_TEXT, int(width / 10 * 3 + width / 10 * 2), 0, int(width / 10 * 5), height, 0, RT_HALIGN_LEFT, name))
 
 	return res
 
