@@ -602,6 +602,8 @@ class ChefkochView(Screen):
                     return []
                 result = loads(content)
                 for j in range(len(result['results'])):
+                    if result['results'][j]['recipe']['isRejected']:
+                        continue
                     dict = {}
                     dict['id'] = result['results'][j]['recipe']['id']
                     dict['createdAt'] = result['results'][j]['recipe']['createdAt']
@@ -700,7 +702,8 @@ class ChefkochView(Screen):
         if self.current == 'menu':
             self.sort = self.sort + 1 if self.sort < len(self.sortname) - 1 else 0
             self.currItem = 0
-            self.makeChefkoch()
+            self.makeChefkochTimer.callback.append(self.makeChefkoch)
+            self.makeChefkochTimer.start(200, True)
 
     def green_return(self, answer):
         if answer:
@@ -1279,8 +1282,8 @@ class ChefkochPicShow(Screen):
         self.getInfoTimer.callback.append(self.getPixPage())
         self.getInfoTimer.start(200, True)
 
-    def formatUsername(self, username, rank, trim):
-        return 'Unbekannt' if "unknown" in username else (str(username) + ' (' + str(rank) + '*)')[:trim if trim > 0 else 100]
+    def formatUsername(self, username, rank, trim=100):
+        return 'Unbekannt' if "unknown" in username else (str(username) + ' (' + str(rank) + '*)')[:trim]
 
     def getPixPage(self):
         self.count = 0
@@ -1304,7 +1307,7 @@ class ChefkochPicShow(Screen):
             for i in range(len(self.IMG['results'])):
                 self.pixlist.append(self.IMG['results'][i]['id'])
             picurl = picurlbase + '/' + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
-            self.Wdownload(picurl, self.getPic)
+            self.download(picurl, self.getPic)
             self.picmax = len(self.pixlist) - 1
             username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
             self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
@@ -1317,14 +1320,14 @@ class ChefkochPicShow(Screen):
     def picup(self):
         self.count += 1 if self.count < self.picmax else - self.count
         picurl = picurlbase + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
-        self.Wdownload(picurl, self.getPic)
+        self.download(picurl, self.getPic)
         username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
         self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
     def picdown(self):
         self.count -= 1 if self.count > 0 else - self.picmax
         picurl = picurlbase + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
-        self.Wdownload(picurl, self.getPic)
+        self.download(picurl, self.getPic)
         username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
         self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
@@ -1337,7 +1340,7 @@ class ChefkochPicShow(Screen):
         self.count = number - 1
         picurl = picuribase + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
         self.pixlist[self.count]
-        self.Wdownload(picurl, self.getPic)
+        self.download(picurl, self.getPic)
         username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
         self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
@@ -1357,12 +1360,12 @@ class ChefkochPicShow(Screen):
         if currPic:
             self['score'].instance.setPixmap(currPic)
 
-    def Wdownload(self, link, name):
+    def download(self, link, name):
         link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-        getPage(link).addCallback(name).addErrback(self.WdownloadError)
+        getPage(link).addCallback(name).addErrback(self.downloadError)
 
-    def WdownloadError(self, output):
-        CKlog('Wdownloaderror:', output)
+    def downloadError(self, output):
+        CKlog('downloaderror:', output)
         pass
 
     def infoScreen(self):
@@ -2143,6 +2146,7 @@ class chefkochConfig(ConfigListScreen, Screen):
         Screen.__init__(self, session)
         self['VKeyIcon'] = Boolean(False)
         self.password = config.plugins.chefkoch.password.value
+
         self['plugin'] = Pixmap()
         list = []
         list.append(getConfigListEntry('Plugin Größe:', config.plugins.chefkoch.plugin_size, "Plugin Größe"))
@@ -2181,7 +2185,7 @@ class chefkochConfig(ConfigListScreen, Screen):
 
     def keySave(self):
         if config.plugins.chefkoch.password.value != self.password:
-            password = b64encode(config.plugins.chefkoch.password.value.encode('utf-8'))
+            password = b64encode(ensure_binary(config.plugins.chefkoch.password.value))
             config.plugins.chefkoch.password.value = password
         current = self['config'].getCurrent()
         self.saveAll()
