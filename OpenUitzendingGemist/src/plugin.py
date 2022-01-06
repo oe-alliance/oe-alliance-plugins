@@ -1,5 +1,4 @@
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Components.MenuList import MenuList
@@ -24,16 +23,14 @@ from six.moves.urllib.request import Request, urlopen as urlopen2
 from six.moves.urllib.error import URLError, HTTPError
 from twisted.web import client
 from os import path as os_path, remove as os_remove, mkdir as os_mkdir
-import socket
 from datetime import date, timedelta
-import time
-import urlparse
-import base64
+from time import time, strftime, localtime
+from urlparse import urlparse
+from base64 import b64decode
 from .pygoogle import pygoogle
-import json
-import re
-
-import six
+from json import loads
+from re import compile, DOTALL, IGNORECASE
+from six import ensure_binary, ensure_str, unichr
 from six.moves import http_client
 from six.moves.http_client import HTTPException
 
@@ -70,7 +67,7 @@ def wgetUrl(target, refer='', cookie=''):
 def resolve_http_redirect(url, depth=0):
 	if depth > 10:
 		raise Exception("Redirected " + depth + " times, giving up.")
-	o = urlparse.urlparse(url, allow_fragments=True)
+	o = urlparse(url, allow_fragments=True)
 	conn = http_client.HTTPConnection(o.netloc)
 	path = o.path
 	if o.query:
@@ -851,7 +848,7 @@ class OpenUg(Screen):
 			self.moveToChar(charstr[0], self["chosenletter"])
 
 	def keyAsciiCode(self):
-		unichar = six.unichr(getPrevAsciiCode())
+		unichar = unichr(getPrevAsciiCode())
 		charstr = unichar.encode("utf-8")
 		if len(charstr) == 1:
 			self.moveToString(charstr[0], self["chosenletter"])
@@ -960,7 +957,7 @@ class OpenUg(Screen):
 						self.fetchFinished(True, picture_id=tmp_icon, failed=False)
 					else:
 						if config.plugins.OpenUitzendingGemist.showpictures.value:
-							u = six.ensure_binary(x[self.UG_ICON])
+							u = ensure_binary(x[self.UG_ICON])
 							client.downloadPage(u, thumbnailFile).addCallback(self.fetchFinished, tmp_icon).addErrback(self.fetchFailed, tmp_icon)
 				pos += 1
 			self["list"].setList(self.tmplist)
@@ -1182,8 +1179,8 @@ class OpenUg(Screen):
 			self.title = "Open Uitzending Gemist NPO"
 			if retval >= 128:
 				retval -= 128
-				now = int(time.time())
-				worktime = '%s' % (time.strftime("%H:%M:%S", time.localtime()))
+				now = int(time())
+				worktime = '%s' % (strftime("%H:%M:%S", localtime()))
 				wtime = worktime.split(":")
 				if int(wtime[0]) < 6:
 					t = int(wtime[0]) + (24 - 6)
@@ -1394,17 +1391,17 @@ class OpenUg(Screen):
 				self.session.open(UGMediaPlayer, myreference, False)
 		else:
 			data = wgetUrl('http://ida.omroep.nl/npoplayer/i.js')
-			token = re.compile('.token\s*=\s*"(.*?)"', re.DOTALL + re.IGNORECASE).search(str(data)).group(1)
+			token = compile('.token\s*=\s*"(.*?)"', DOTALL + IGNORECASE).search(str(data)).group(1)
 			playerid = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
 			data = wgetUrl('http://ida.omroep.nl/odi/?prid=' + playerid + '&puboptions=adaptive&adaptive=yes&part=1&token=' + token)
 			if data != '':
-				json_data = json.loads(data)
+				json_data = loads(data)
 				streamdataurl = json_data['streams'][0]
 				streamurl = str(streamdataurl.split("?")[0]) + '?extension=m3u8'
 				data = wgetUrl(streamurl)
 				if data == '':
 					return
-				json_data = json.loads(data)
+				json_data = loads(data)
 				url_play = json_data['url']
 				if url_play != '':
 					myreference = eServiceReference(4097, 0, url)
@@ -1856,7 +1853,7 @@ class OpenUg(Screen):
 			tmp = 'data-files="'
 			if tmp in data:
 				url = data.split(tmp)[1].split('"')[0]
-				url = base64.b64decode(url)
+				url = ensure_str(b64decode(url))
 				url = url.replace("{", "").replace("}", "").split(",")
 				for line in url:
 					if '"720p"' in line:
