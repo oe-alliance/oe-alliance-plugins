@@ -79,7 +79,7 @@ def errorWrite(error):
 			f = open(picon_debug_file, "w")
 		else:
 			f = open(picon_debug_file, "a")
-		f.write(error+"\n")
+		f.write(error + "\n")
 		f.close()
 
 def getServiceList(ref):
@@ -109,7 +109,7 @@ def buildChannellist():
 	return rm_chlist
 
 class PiconManagerScreen(Screen, HelpableScreen):
-	skin = 	"""
+	skin = """
 	<screen name="PiconManager" title="PiconManager" position="center,center" size="1160,650">
 		<widget name="piconpath" position="20,10" size="690,60" font="Regular;20" foregroundColor="#00fba207" transparent="1" zPosition="1" halign="left" />
 		<widget name="piconpath2" position="200,10" size="500,60" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />
@@ -342,7 +342,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			if free > 1024:
 				free = free / 1024
 				which = "GB"
-			self['piconspace'].setText(_("FreeSpace:")+" %s %s" % (str(free), which))
+			self['piconspace'].setText(_("FreeSpace:") + " %s %s" % (str(free), which))
 		else:
 			self['piconspace'].setText(_("FreeSpace: Drive Not Found !"))
 
@@ -362,7 +362,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def getPiconList(self):
 		print("[PiconManager] started ...")
-		self['piconcount'].setText(_("Channels:")+" %s" % str(self.countchlist))
+		self['piconcount'].setText(_("Channels:") + " %s" % str(self.countchlist))
 		self['selected'].setText(_(str(config.plugins.piconmanager.selected.value).replace("_",", ").replace("+"," ").replace("-"," ")))
 		if config.plugins.piconmanager.spicon.value != "":
 			txt = config.plugins.piconmanager.spicon.value.split('|')
@@ -524,15 +524,15 @@ class PiconManagerScreen(Screen, HelpableScreen):
 	def selectedMediaFile(self, res):
 		if res is not None:
 			self.piconfolder = res
-			self.piconname=res.split("/")[-2]
+			self.piconname = res.split("/")[-2]
 			self['piconpath2'].setText(self.piconfolder)
 
 	def changeDrive(self):
-		if re.search("/usr/share/enigma2/", self.piconfolder, re.S|re.I):
+		if re.search("/usr/share/enigma2/", self.piconfolder, re.S | re.I):
 			self.picondir = "/media/usb/"
-		elif re.search("/media/usb/", self.piconfolder, re.S|re.I):
+		elif re.search("/media/usb/", self.piconfolder, re.S | re.I):
 			self.picondir = "/media/hdd/"
-		elif re.search("/media/hdd/", self.piconfolder, re.S|re.I):
+		elif re.search("/media/hdd/", self.piconfolder, re.S | re.I):
 			self.picondir = "/usr/share/enigma2/"
 		self.piconfolder = "%s%s/" % (self.picondir, self.piconname)
 		self['piconpath2'].setText(self.piconfolder)
@@ -565,7 +565,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			urls = []
 			if int(self.countchlist) > 0 and not self.keyLocked and self['list'].getCurrent():
 				if len(self['list'].getCurrent()[0]) >= 2:
-					self.auswahl = self['list'].getCurrent()[0][1]+"/"
+					self.auswahl = self['list'].getCurrent()[0][1] + "/"
 					for channel in self.chlist:
 						downloadPiconUrl = channel.replace(':', '_')
 						downloadPiconUrl = downloadPiconUrl[:-1] + ".png"
@@ -586,14 +586,14 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def downloadError(self, error):
 		self.counterrors += 1
-		self['piconerror'].setText(_("Not found Picons:")+" %s" % str(self.counterrors))
-		total = self.countload+self.counterrors
+		self['piconerror'].setText(_("Not found Picons:") + " %s" % str(self.counterrors))
+		total = self.countload + self.counterrors
 		self["piconslider"].setValue(total)
 
 	def downloadDone(self, data):
 		self.countload += 1
-		self['picondownload'].setText(_("Loaded Picons:")+" %s" % str(self.countload))
-		total = self.countload+self.counterrors
+		self['picondownload'].setText(_("Loaded Picons:") + " %s" % str(self.countload))
+		total = self.countload + self.counterrors
 		self["piconslider"].setValue(total)
 		if self.countchlist == total:
 			self['piconpath2'].setText(_("Download finished !"))
@@ -601,7 +601,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def dataError2(self, error=None):
 		if hasattr(self, "server_url"):
-			errorWrite(str(self.server_url)+"\n")
+			errorWrite(str(self.server_url) + "\n")
 			self.tried_mirrors.append(self.server_url)
 			all_mirrors = True
 			for x in server_choices:
@@ -621,7 +621,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				self.session.open(MessageBox, _("Server temporarily unavailable"), MessageBox.TYPE_ERROR, timeout=10)
 		except TypeError:
 			pass
-		errorWrite(str(len(self.auswahl)) +" - "+str(self.auswahl)+"\n"+str(error)+"\n")
+		errorWrite(str(len(self.auswahl)) + " - " + str(self.auswahl) + "\n" + str(error) + "\n")
 		self["picon"].hide()
 
 	def showPiconFile(self, data, picPath):
@@ -661,7 +661,7 @@ class PiconManagerFolderScreen(Screen):
 			"green": self.green,
 			"red": self.cancel
 		}, -1)
-		self.title=_("Choose Picon folder")
+		self.title = _("Choose Picon folder")
 		try:
 			self["title"] = StaticText(self.title)
 		except:
@@ -748,7 +748,7 @@ class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 		self.liste.append(getConfigListEntry(_("Size"), config.plugins.piconmanager.size))
 		self.liste.append(getConfigListEntry(_("Creator"), config.plugins.piconmanager.creator))
 		self.liste.append(getConfigListEntry(_("bit"), config.plugins.piconmanager.bit))
-		self.liste.append(getConfigListEntry("------ "+_("Option:")+" ------",))
+		self.liste.append(getConfigListEntry("------ " + _("Option:") + " ------",))
 		self.liste.append(getConfigListEntry(_("Remember permanently?"),config.plugins.piconmanager.saving))
 		self.liste.append(getConfigListEntry(_("Activate debug logging?"),config.plugins.piconmanager.debug))
 		self["config"].setList(self.liste)
