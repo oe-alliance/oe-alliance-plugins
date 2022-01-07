@@ -627,6 +627,7 @@ PiconManager/Makefile
 PiconManager/meta/Makefile
 PiconManager/src/Makefile
 PiconManager/src/pic/Makefile
+PiconManager/po/Makefile
 
 ])
 AC_OUTPUT
