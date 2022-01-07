@@ -1,17 +1,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PiconManagerMod\n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 16:50+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NaseDC\n"
 "Language-Team: NaseDC+shadowrider <plugins@fselbig.de>\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 1.7.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: de_DE\n"
+
+msgid " "
+msgstr ""
+
+#, python-format
+msgid "%s"
+msgstr ""
 
 msgid "Activate debug logging?"
 msgstr "Debug-Protokollierung aktivieren?"
@@ -27,6 +35,9 @@ msgstr "Kanäle:"
 
 msgid "Choose Picon folder"
 msgstr "Wähle Piconverzeichnis"
+
+msgid "Clean up the directory"
+msgstr ""
 
 msgid "Color depth: "
 msgstr "Farbtiefe: "
@@ -58,17 +69,18 @@ msgstr "Beenden"
 msgid "FreeSpace:"
 msgstr "Freier Speicher:"
 
-msgid "FreeSpace: "
-msgstr "Freier Speicher: "
-
 msgid "FreeSpace: Drive Not Found !"
 msgstr "Freier Speicher: Kein Speicher gefunden"
 
-msgid "Loaded Picons: "
+#, fuzzy
+msgid "Loaded Picons:"
 msgstr "Geladene Picons: "
 
 msgid "Loading, please wait..."
 msgstr "Lade, bitte warten ..."
+
+msgid "Manage your Picons"
+msgstr ""
 
 msgid "More selections"
 msgstr "Weitere Filter"
@@ -88,8 +100,18 @@ msgstr "Nächste Picongrösse"
 msgid "No search results, please change filter options ..."
 msgstr "Keine Suchergebnisse , ändere bitte die Filteroptionen ..."
 
-msgid "Not found Picons: "
+#, fuzzy
+msgid "Not found Picons:"
 msgstr "Nicht gefundene Picons: "
+
+msgid "Not older than X days:"
+msgstr ""
+
+msgid "Not older than X days: "
+msgstr ""
+
+msgid "OK"
+msgstr ""
 
 msgid "OK and exit"
 msgstr "OK und Beenden"
@@ -103,8 +125,20 @@ msgstr "Option:"
 msgid "Picon folder: "
 msgstr "Piconordner: "
 
+#, fuzzy
+msgid "PiconManager (mod)"
+msgstr "PiconManagerMod - Einstellungen"
+
 msgid "PiconManagerMod - Settings"
 msgstr "PiconManagerMod - Einstellungen"
+
+#, fuzzy
+msgid "Picons loaded: "
+msgstr "Piconordner: "
+
+#, fuzzy
+msgid "Picons not found: "
+msgstr "Piconordner: "
 
 msgid "Previous Group"
 msgstr "Vorherige Gruppe"
@@ -130,11 +164,11 @@ msgstr "Wähle Server:"
 msgid "Select drive"
 msgstr "Laufwerk auswählen"
 
-msgid "Select from list"
-msgstr "Aus Liste auswählen"
-
 msgid "Select path"
 msgstr "Verzeichnispfad wählen"
+
+msgid "Select service for preferred picon"
+msgstr ""
 
 msgid "Server temporarily unavailable"
 msgstr "Server momentan nicht erreichbar"
@@ -157,8 +191,27 @@ msgstr "Größe"
 msgid "Size: "
 msgstr "Größe: "
 
+#, fuzzy
+msgid "Sorry, service is temporarily unavailable"
+msgstr "Server momentan nicht erreichbar"
+
 msgid "Standard picon: "
 msgstr "Standard-Picon: "
 
-msgid "bit"
-msgstr "bit"
+msgid "V"
+msgstr ""
+
+msgid "is not installed."
+msgstr ""
+
+msgid "loading"
+msgstr ""
+
+#~ msgid "FreeSpace: "
+#~ msgstr "Freier Speicher: "
+
+#~ msgid "Select from list"
+#~ msgstr "Aus Liste auswählen"
+
+#~ msgid "bit"
+#~ msgstr "bit"
