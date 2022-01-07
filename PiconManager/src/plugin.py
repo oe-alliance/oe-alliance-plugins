@@ -70,7 +70,7 @@ config.plugins.piconmanager.debug = ConfigYesNo(default=False)
 config.plugins.piconmanager.server = ConfigSelection(default=server_choices[0][0], choices=server_choices)
 
 def ListEntry(entry):
-	x, y, w, h = skin.parameters.get("PiconManagerList", (10,0,1280,25))
+	x, y, w, h = skin.parameters.get("PiconManagerList", (10, 0, 1280, 25))
 	return [entry, (eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, entry[0])]
 
 def errorWrite(error):
@@ -214,7 +214,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			"blue": (self.changePiconName, _("Create folder")),
 			}, -2)
 		self.channelMenuList = MenuList([], enableWrapAround=True, content=eListboxPythonMultiContent)
-		font, size = skin.parameters.get("PiconManagerListFont", ('Regular',22))
+		font, size = skin.parameters.get("PiconManagerListFont", ('Regular', 22))
 		self.channelMenuList.l.setFont(0, gFont(font, size))
 		self.channelMenuList.l.setItemHeight(25)
 		self.setTitle(pname + " " * 3 + _("V") + " %s" % pversion)
@@ -240,7 +240,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		service_name = ""
 		if isinstance(service, eServiceReference):
 			service_name = ServiceReference(service).getServiceName()
-			service = service.toString().replace(':','_').rstrip('_') + ".png"
+			service = service.toString().replace(':', '_').rstrip('_') + ".png"
 		if service == "":
 			config.plugins.piconmanager.spicon.value = service
 		else:
@@ -358,12 +358,12 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			if not os.path.exists(self.downloadPiconPath):
 				downloadPage(six.ensure_binary(self.auswahl), self.downloadPiconPath).addCallback(self.showPiconFile, self.downloadPiconPath).addErrback(self.dataError)
 			else: 
-				self.showPiconFile(None,self.downloadPiconPath)
+				self.showPiconFile(None, self.downloadPiconPath)
 
 	def getPiconList(self):
 		print("[PiconManager] started ...")
 		self['piconcount'].setText(_("Channels:") + " %s" % str(self.countchlist))
-		self['selected'].setText(_(str(config.plugins.piconmanager.selected.value).replace("_",", ").replace("+"," ").replace("-"," ")))
+		self['selected'].setText(_(str(config.plugins.piconmanager.selected.value).replace("_", ", ").replace("+", " ").replace("-", " ")))
 		if config.plugins.piconmanager.spicon.value != "":
 			txt = config.plugins.piconmanager.spicon.value.split('|')
 			if len(txt) == 2:
@@ -380,7 +380,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			config.plugins.piconmanager.selected.setValue("All")
 			config.plugins.piconmanager.selected.save()
 		self.channelMenuList.setList(list(map(ListEntry, [(_("Loading, please wait..."),)])))
-		getPage(url,method=b'GET').addCallback(self.parsePiconList).addErrback(self.dataError2)
+		getPage(url, method=b'GET').addCallback(self.parsePiconList).addErrback(self.dataError2)
 
 	def parsePiconList(self, data):
 		print("[PiconManager] parsing ...")
@@ -730,14 +730,14 @@ class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 		
 		self["SetupActions"] = HelpableActionMap(self, "SetupActions", 
 		{
-			"cancel": (self.cancel,_("Cancel")),
-			"ok": (self.save,_("OK and exit")),
+			"cancel": (self.cancel, _("Cancel")),
+			"ok": (self.save, _("OK and exit")),
 		}, -1)
 		
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 		{
-			"green": (self.save,_("OK and exit")),
-			"red": (self.cancel,_("Cancel")),
+			"green": (self.save, _("OK and exit")),
+			"red": (self.cancel, _("Cancel")),
 		}, -1)
 		self.onLayoutFinish.append(self.load_list)
 
@@ -749,8 +749,8 @@ class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 		self.liste.append(getConfigListEntry(_("Creator"), config.plugins.piconmanager.creator))
 		self.liste.append(getConfigListEntry(_("bit"), config.plugins.piconmanager.bit))
 		self.liste.append(getConfigListEntry("------ " + _("Option:") + " ------",))
-		self.liste.append(getConfigListEntry(_("Remember permanently?"),config.plugins.piconmanager.saving))
-		self.liste.append(getConfigListEntry(_("Activate debug logging?"),config.plugins.piconmanager.debug))
+		self.liste.append(getConfigListEntry(_("Remember permanently?"), config.plugins.piconmanager.saving))
+		self.liste.append(getConfigListEntry(_("Activate debug logging?"), config.plugins.piconmanager.debug))
 		self["config"].setList(self.liste)
 
 	def save(self):
