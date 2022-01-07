@@ -69,9 +69,11 @@ config.plugins.piconmanager.saving = ConfigYesNo(default=True)
 config.plugins.piconmanager.debug = ConfigYesNo(default=False)
 config.plugins.piconmanager.server = ConfigSelection(default=server_choices[0][0], choices=server_choices)
 
+
 def ListEntry(entry):
 	x, y, w, h = skin.parameters.get("PiconManagerList", (10, 0, 1280, 25))
 	return [entry, (eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, entry[0])]
+
 
 def errorWrite(error):
 	if config.plugins.piconmanager.debug.value:
@@ -82,16 +84,20 @@ def errorWrite(error):
 		f.write(error + "\n")
 		f.close()
 
+
 def getServiceList(ref):
 	root = eServiceReference(str(ref))
 	serviceHandler = eServiceCenter.getInstance()
 	return serviceHandler.list(root).getContent("SN", True)
 
+
 def getTVBouquets():
 	return getServiceList(service_types_tv + ' FROM BOUQUET "bouquets.tv" ORDER BY bouquet')
 
+
 def getRadioBouquets():
 	return getServiceList(service_types_radio + ' FROM BOUQUET "bouquets.radio" ORDER BY bouquet')
+
 
 def buildChannellist():
 	rm_chlist = None
@@ -107,6 +113,7 @@ def buildChannellist():
 		for (serviceref, servicename) in bouquetlist:
 			rm_chlist.append((serviceref))
 	return rm_chlist
+
 
 class PiconManagerScreen(Screen, HelpableScreen):
 	skin = """
@@ -630,6 +637,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			if picPath is not None:
 				self["picon"].instance.setPixmapFromFile(picPath)
 
+
 class PiconManagerFolderScreen(Screen):
 	skin = """
 		<screen position="center,center" size="650,400" title=" ">
@@ -705,6 +713,7 @@ class PiconManagerFolderScreen(Screen):
 		currFolder = self["folderlist"].getSelection()[0]
 		self["media"].setText(currFolder)
 
+
 class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 	skin = """
 		<screen position="center,center" size="600,480" title="Select Color" >
@@ -775,8 +784,10 @@ class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 	def cancel(self):
 		self.close(self.creator, self.size, self.bit, self.server, False, False)
 
+
 def main(session, **kwargs):
 	session.open(PiconManagerScreen)
+
 
 def Plugins(**kwargs):
 	return PluginDescriptor(name=pname, description=pdesc, where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main)
