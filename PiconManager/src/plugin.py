@@ -12,7 +12,7 @@
 # this version is complete modified by shadowrider and NaseDC
 # python3 fix by jbleyel
 #######################################################################
-#  Thanks to vuplus-support.org and the User Tekram3456 for the webspace
+#  Thanks to vuplus-support.org for the webspace
 #######################################################################
 
 from Screens.ChannelSelection import SimpleChannelSelection, service_types_tv, service_types_radio
@@ -26,7 +26,7 @@ from Tools.LoadPixmap import LoadPixmap
 from Plugins.Plugin import PluginDescriptor
 from Components.Label import Label
 from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigYesNo, ConfigSubsection, NoSave
+from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigYesNo, ConfigSubsection, NoSave, ConfigInteger
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
@@ -34,20 +34,27 @@ from Components.FileList import FileList
 from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
 from twisted.internet import defer
-from twisted.web.client import downloadPage, getPage
+from twisted.web.client import downloadPage, getPage, error
 import re
 import os
 import shutil
 import random
 import uuid
 import skin
+import datetime
 import six
 from . import _
 
+if six.PY2:
+    from urllib import quote
+else:
+    from urllib.parse import quote
+
+
 pname = _("PiconManager (mod)")
 pdesc = _("Manage your Picons")
-pversion = "2.2-r0"
-pdate = "20150329"
+pversion = "2.4-r0"
+pdate = "20161103"
 
 picon_tmp_dir = "/tmp/piconmanager/"
 picon_debug_file = "/tmp/piconmanager_error"
@@ -56,7 +63,6 @@ picon_info_file = "picons/picon_info.txt"
 picon_list_file = "zz_picon_list.txt"
 
 server_choices = [
-			("http://piconmanager.piconmanager.de/", "Tekram3456: piconmanager.de"),
 			("http://picons.vuplus-support.org/", "VTi: vuplus-support.org"),
 		]
 
@@ -68,6 +74,7 @@ config.plugins.piconmanager.spicon = ConfigText(default="", fixed_size=False)
 config.plugins.piconmanager.saving = ConfigYesNo(default=True)
 config.plugins.piconmanager.debug = ConfigYesNo(default=False)
 config.plugins.piconmanager.server = ConfigSelection(default=server_choices[0][0], choices=server_choices)
+config.plugins.piconmanager.alter = ConfigInteger(default=0, limits=(0, 1000))
 
 
 def ListEntry(entry):
@@ -84,6 +91,11 @@ def errorWrite(error):
 		f.write(error + "\n")
 		f.close()
 
+def notfoundWrite(picon):
+	if config.plugins.piconmanager.debug.value:
+			f=open("/tmp/picon_dl_err","a")
+			f.write(picon+"\n")
+			f.close()
 
 def getServiceList(ref):
 	root = eServiceReference(str(ref))
@@ -111,7 +123,7 @@ def buildChannellist():
 		bouquetlist = []
 		bouquetlist = getServiceList(bouquet[0])
 		for (serviceref, servicename) in bouquetlist:
-			rm_chlist.append((serviceref))
+			rm_chlist.append((serviceref, servicename))
 	return rm_chlist
 
 
@@ -130,11 +142,13 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		<widget name="creatorname" position="20,220" size="160,40" font="Regular;20" foregroundColor="#00fba207" transparent="1" zPosition="1" halign="left" />
 		<widget name="creator" position="180,220" size="200,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />
 		<widget name="sizename" position="390,190" size="160,40" font="Regular;20" foregroundColor="#00fba207" transparent="1" zPosition="1" halign="left" />
-		<widget name="size" position="520,190" size="160,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />
+		<widget name="size" position="580,190" size="160,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />
 		<widget name="bitname" position="390,220" size="160,40" font="Regular;20" foregroundColor="#00fba207" transparent="1" zPosition="1" halign="left" />
-		<widget name="bit" position="520,220" size="160,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />
+		<widget name="bit" position="580,220" size="160,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />
 		<widget name="spiconname" position="20,250" size="690,40" font="Regular;20" foregroundColor="#00fba207" transparent="1" zPosition="1" halign="left" />
 		<widget name="spicon" position="180,250" size="690,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />
+		<widget name="altername" position="390,250" size="690,40" font="Regular;20" foregroundColor="#00fba207" transparent="1" zPosition="1" halign="left" />
+		<widget name="alter" position="580,250" size="690,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />		
 		<widget name="piconslider" position="280,164" size="180,20" zPosition="2" transparent="0" />
 		<widget name="picon" position="738,10" size="400,240" zPosition="4" transparent="1" borderWidth="0" borderColor="#0000000" alphatest="blend" />
 		<widget name="list" position="10,300" size="1130,295" zPosition="1" foregroundColor="#00ffffff" foregroundColorSelected="#00fff000" scrollbarMode="showOnDemand" transparent="1" />
@@ -159,6 +173,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self.server_url = config.plugins.piconmanager.server.value
 		self.piconname = config.plugins.piconmanager.piconname.value
 		self.picondir = config.plugins.piconmanager.savetopath.value
+		self.alter = config.plugins.piconmanager.alter.value
 		self.piconfolder = "%s%s/" % (self.picondir, self.piconname)
 		self.picon_name = ""
 		self.piconlist = []
@@ -166,12 +181,13 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self.art_list = []
 		self.prev_sel = None
 		self.spicon_name = ""
+		self.aktdl_pico=None
 		self['piconpath'] = Label(_("Picon folder: "))
 		self['piconpath2'] = Label(self.piconfolder)
 		self['piconspace'] = Label(_(" "))
 		self['piconcount'] = Label(_("Reading Channels..."))
-		self['picondownload'] = Label(_("Loaded Picons: "))
-		self['piconerror'] = Label(_("Not found Picons: "))
+		self['picondownload'] = Label(_("Picons loaded: "))
+		self['piconerror'] = Label(_("Picons not found: "))
 		self['piconslidername'] = Label(_("Download progress: "))
 		self['selectedname'] = Label(_("Show group: "))
 		self['selected'] = Label()
@@ -181,6 +197,8 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self['size'] = Label()
 		self['bitname'] = Label(_("Color depth: "))
 		self['bit'] = Label()
+		self['altername'] = Label(_("Not older than X days: "))
+		self['alter'] = Label(str(self.alter))
 		self['spiconname'] = Label(_("Standard picon: "))
 		self['spicon'] = Label()
 		self.chlist = buildChannellist()
@@ -247,10 +265,15 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		service_name = ""
 		if isinstance(service, eServiceReference):
 			service_name = ServiceReference(service).getServiceName()
-			service = service.toString().replace(':', '_').rstrip('_') + ".png"
+			service2 = service.toString()
+			service = service.toString().replace(':','_').rstrip('_') + ".png"
 		if service == "":
 			config.plugins.piconmanager.spicon.value = service
 		else:
+			for channel in self.chlist:
+				if channel[0] == service2:
+					service_name = channel[1]
+					break    
 			config.plugins.piconmanager.spicon.value = service + "|" + service_name
 		config.plugins.piconmanager.spicon.save()
 		self['spicon'].setText(service_name)
@@ -338,7 +361,8 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				config.plugins.piconmanager.selected.value = self.art_list[idx]
 				self['selected'].setText(str(config.plugins.piconmanager.selected.value).replace("+", " ").replace("-", " "))
 				config.plugins.piconmanager.selected.save()
-		self.makeList(config.plugins.piconmanager.creator.value, config.plugins.piconmanager.size.value, config.plugins.piconmanager.bit.value, config.plugins.piconmanager.server.value, True, False)
+		alter=config.plugins.piconmanager.alter.value
+		self.makeList(config.plugins.piconmanager.creator.value, config.plugins.piconmanager.size.value, config.plugins.piconmanager.bit.value, config.plugins.piconmanager.server.value, True, False, alter)
 
 	def getFreeSpace(self):
 		if os.path.isdir(self.picondir):
@@ -359,7 +383,10 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self.auswahl = self['list'].getCurrent()[0][2]
 			picon_name = os.path.basename(self.auswahl)
 			if config.plugins.piconmanager.spicon.value != "":
-				picon_sname = txt = config.plugins.piconmanager.spicon.value.split('|')[0]
+				if not "by name" in self['list'].getCurrent()[0][0].lower():
+					picon_sname = txt = config.plugins.piconmanager.spicon.value.split('|')[0]
+				else:
+					picon_sname = txt = config.plugins.piconmanager.spicon.value.split('|')[1].replace(" ","%20")+".png"
 				self.auswahl = self.auswahl.replace(picon_name, picon_sname)
 			self.downloadPiconPath = os.path.join(self.piconTempDir, self['list'].getCurrent()[0][4] + ".png")
 			if not os.path.exists(self.downloadPiconPath):
@@ -457,7 +484,8 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				self['creator'].setText(_(str(config.plugins.piconmanager.creator.value)))
 				self['size'].setText(_(str(config.plugins.piconmanager.size.value)))
 				self['bit'].setText(_(str(config.plugins.piconmanager.bit.value)))
-				self.makeList(config.plugins.piconmanager.creator.value, config.plugins.piconmanager.size.value, config.plugins.piconmanager.bit.value, self.server_url, True, False)
+				alter=config.plugins.piconmanager.alter.value
+				self.makeList(config.plugins.piconmanager.creator.value, config.plugins.piconmanager.size.value, config.plugins.piconmanager.bit.value, self.server_url, True, False, alter)
 
 	def createChoiceList(self, choicelist, default_choice):
 		ret = default_choice
@@ -466,7 +494,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				ret.append((x, _("%s") % x))
 		return ret
 
-	def makeList(self, creator="All", size="All", bit="All", server=config.plugins.piconmanager.server.value, update=True, reload_picons=False):
+	def makeList(self, creator="All", size="All", bit="All", server=config.plugins.piconmanager.server.value, update=True, reload_picons=False, alter=0):
 		if reload_picons:
 			self.server_url = server
 			self.channelMenuList.setList([])
@@ -474,8 +502,17 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		else:
 			if update:
 				new_list = []
+				self['alter'].setText(str(alter))
 				art = config.plugins.piconmanager.selected.value
 				for x in self.piconlist:
+					if alter:
+						present = datetime.date.today()
+						pdatestr=str(x[0]).split(" | ")[4]
+						pdatestr=pdatestr.split(".")
+						pdate=datetime.date(int(pdatestr[2]),int(pdatestr[1]),int(pdatestr[0]))
+						diff=present-pdate
+						if int(diff.days)>alter:
+							continue
 					if (art != "All" and x[3][3] != art) or (creator != "All" and x[3][0] != creator) or (size != "All" and x[3][1] != size) or (bit != "All" and x[3][2] != bit):
 						continue
 					else:
@@ -568,17 +605,30 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			if not os.path.isdir(self.piconfolder):
 				print("[PiconManager] create folder %s" % self.piconfolder)
 				os.makedirs(self.piconfolder)
-
+			self['piconpath2'].setText(self.piconfolder)
 			urls = []
 			if int(self.countchlist) > 0 and not self.keyLocked and self['list'].getCurrent():
 				if len(self['list'].getCurrent()[0]) >= 2:
+					f=open("/tmp/picon_dl_err","w")
+					f.write(self['list'].getCurrent()[0][0]+"\n"+"#"*50+"\n")
+					f.close()
+					self['piconpath2'].setText(_("loading"))
 					self.auswahl = self['list'].getCurrent()[0][1] + "/"
 					for channel in self.chlist:
-						downloadPiconUrl = channel.replace(':', '_')
-						downloadPiconUrl = downloadPiconUrl[:-1] + ".png"
-						downloadPiconPath = self.piconfolder + downloadPiconUrl
-						downloadPiconUrl = self.auswahl + downloadPiconUrl
-						urls.append((downloadPiconUrl, downloadPiconPath))
+						downloadPiconUrl=None
+						if "by name" in self['list'].getCurrent()[0][0].lower():
+							downloadPiconUrl = quote(channel[1] + ".png")
+							downloadPiconPath = self.piconfolder + channel[1] + ".png"
+						else:
+							downloadPiconUrl = channel[0]
+							downloadPiconUrl = str(downloadPiconUrl).split("http")[0]
+							downloadPiconUrl = str(downloadPiconUrl).split("rtmp")[0]
+							downloadPiconUrl = downloadPiconUrl.replace(':', '_')
+							downloadPiconUrl = downloadPiconUrl[:-1] + ".png"
+							downloadPiconPath = self.piconfolder + downloadPiconUrl#.replace("%20"," ")
+						if downloadPiconUrl:
+							downloadPiconUrl = self.auswahl + downloadPiconUrl
+							urls.append((downloadPiconUrl, downloadPiconPath))
 
 			if len(urls) > 0:
 				self.countload = 0
@@ -589,24 +639,60 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def download(self, downloadPiconUrl, downloadPiconPath):
 		downloadPiconUrl = six.ensure_binary(downloadPiconUrl)
+		self.aktdl_pico=os.path.splitext(os.path.basename(downloadPiconPath))[0]
 		return downloadPage(downloadPiconUrl, downloadPiconPath)
 
 	def downloadError(self, error):
+		if self.aktdl_pico:
+			if not "by name" in self['list'].getCurrent()[0][0].lower():
+				for channel in self.chlist:
+					if channel[0]== self.aktdl_pico.replace('_', ':')+":":
+						self.aktdl_pico=self.aktdl_pico+ " = "+channel[1] +" / "+ channel[0]
+						notfoundWrite(self.aktdl_pico)
 		self.counterrors += 1
 		self['piconerror'].setText(_("Not found Picons:") + " %s" % str(self.counterrors))
 		total = self.countload + self.counterrors
 		self["piconslider"].setValue(total)
-
+		if self.countchlist == total:self.checkDouble(5)
 	def downloadDone(self, data):
 		self.countload += 1
 		self['picondownload'].setText(_("Loaded Picons:") + " %s" % str(self.countload))
 		total = self.countload + self.counterrors
 		self["piconslider"].setValue(total)
 		if self.countchlist == total:
-			self['piconpath2'].setText(_("Download finished !"))
+			self.checkDouble(5)
 			self.getFreeSpace()
 
-	def dataError2(self, error=None):
+	def checkDouble(self, num=0):
+		if num==5:
+			try:
+				os.remove("/tmp/piconmanager_err")
+			except:
+				pass
+			lena=1
+			self['piconpath2'].setText(_("Clean up the directory"))
+			for channel in self.chlist:
+				downloadPiconUrl = channel[0]
+				downloadPiconUrl = str(downloadPiconUrl).split("http")[0]
+				downloadPiconUrl = str(downloadPiconUrl).split("rtmp")[0]
+				downloadPiconUrl = downloadPiconUrl.replace(':', '_')
+				downloadPiconUrl = self.piconfolder + downloadPiconUrl[:-1] + ".png"
+				d2=self.piconfolder + channel[1] + ".png"
+				try:
+					if os.path.exists(downloadPiconUrl) and os.path.exists(d2):
+						if "by name" in self['list'].getCurrent()[0][0].lower():
+							os.remove(downloadPiconUrl)
+						else:
+							os.remove(d2)
+
+				except:
+					pass
+				if lena<len(self.chlist):
+					lena+=1
+				else:
+					self['piconpath2'].setText(_("Download finished !"))
+  
+	def dataError2(self, error = None):
 		if hasattr(self, "server_url"):
 			errorWrite(str(self.server_url) + "\n")
 			self.tried_mirrors.append(self.server_url)
@@ -622,7 +708,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				self.getPiconList()
 
 	def dataError(self, error):
-		print("[PiconManager] ERROR") #, error)
+		print("[PiconManager] ERROR" % str(error))
 		try:
 			if "500 Internal Server Error" in error:
 				self.session.open(MessageBox, _("Server temporarily unavailable"), MessageBox.TYPE_ERROR, timeout=10)
@@ -730,6 +816,7 @@ class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 		self.creator = config.plugins.piconmanager.creator.value
 		self.bit = config.plugins.piconmanager.bit.value
 		self.server = config.plugins.piconmanager.server.value
+		self.alter = config.plugins.piconmanager.alter.value
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
 		ConfigListScreen.__init__(self, self.liste, on_change=self.load_list)
@@ -752,24 +839,28 @@ class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 
 	def load_list(self):
 		self.liste = []
-		self.liste.append(getConfigListEntry(_("Select Server:"), config.plugins.piconmanager.server))
+		if len(server_choices)>1:
+			self.liste.append(getConfigListEntry(_("Select Server:"), config.plugins.piconmanager.server))
 		self.liste.append(getConfigListEntry(_("Set Filter:"),))
 		self.liste.append(getConfigListEntry(_("Size"), config.plugins.piconmanager.size))
 		self.liste.append(getConfigListEntry(_("Creator"), config.plugins.piconmanager.creator))
-		self.liste.append(getConfigListEntry(_("bit"), config.plugins.piconmanager.bit))
-		self.liste.append(getConfigListEntry("------ " + _("Option:") + " ------",))
-		self.liste.append(getConfigListEntry(_("Remember permanently?"), config.plugins.piconmanager.saving))
-		self.liste.append(getConfigListEntry(_("Activate debug logging?"), config.plugins.piconmanager.debug))
+		self.liste.append(getConfigListEntry(_("Color depth: "), config.plugins.piconmanager.bit))
+		self.liste.append(getConfigListEntry(_("Not older than X days:"), config.plugins.piconmanager.alter))
+		self.liste.append(getConfigListEntry("------ "+_("Option:")+" ------",))
+		self.liste.append(getConfigListEntry(_("Remember permanently?"),config.plugins.piconmanager.saving))
+		self.liste.append(getConfigListEntry(_("Activate debug logging?"),config.plugins.piconmanager.debug))
 		self["config"].setList(self.liste)
 
 	def save(self):
 		self.size = config.plugins.piconmanager.size.value
 		self.creator = config.plugins.piconmanager.creator.value
 		self.bit = config.plugins.piconmanager.bit.value
+		self.alter= config.plugins.piconmanager.alter.value
 		reload_picons = False
-		if self.server != config.plugins.piconmanager.server.value:
-			reload_picons = True
-			self.server = config.plugins.piconmanager.server.value
+		if len(server_choices)>1:
+			if self.server != config.plugins.piconmanager.server.value:
+				reload_picons = True
+				self.server = config.plugins.piconmanager.server.value
 		config.plugins.piconmanager.saving.save()
 		if config.plugins.piconmanager.saving.value:
 			for x in self.liste:
@@ -779,7 +870,7 @@ class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 			for x in self.liste:
 				if len(x) >= 2:
 					x[1].cancel()
-		self.close(self.creator, self.size, self.bit, self.server, True, reload_picons)
+		self.close(self.creator, self.size, self.bit, self.server, True, reload_picons, self.alter)
 
 	def cancel(self):
 		self.close(self.creator, self.size, self.bit, self.server, False, False)
