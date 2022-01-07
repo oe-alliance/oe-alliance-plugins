@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #######################################################################
-# maintainer: einfall & schomi (schomi@vuplus-support.org) 
+# maintainer: einfall & schomi (schomi@vuplus-support.org)
 # This plugin is free software, you are allowed to
 # modify it (if you keep the license),
 # but you are not allowed to distribute/publish
@@ -167,7 +167,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self.prev_sel = None
 		self.spicon_name = ""
 		self['piconpath'] = Label(_("Picon folder: "))
-		self['piconpath2'] = Label(self.piconfolder)	
+		self['piconpath2'] = Label(self.piconfolder)
 		self['piconspace'] = Label(_(" "))
 		self['piconcount'] = Label(_("Reading Channels..."))
 		self['picondownload'] = Label(_("Loaded Picons: "))
@@ -364,7 +364,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self.downloadPiconPath = os.path.join(self.piconTempDir, self['list'].getCurrent()[0][4] + ".png")
 			if not os.path.exists(self.downloadPiconPath):
 				downloadPage(six.ensure_binary(self.auswahl), self.downloadPiconPath).addCallback(self.showPiconFile, self.downloadPiconPath).addErrback(self.dataError)
-			else: 
+			else:
 				self.showPiconFile(None, self.downloadPiconPath)
 
 	def getPiconList(self):
@@ -527,7 +527,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def keyYellow(self):
 		self.session.openWithCallback(self.selectedMediaFile, PiconManagerFolderScreen, self.picondir)
-		
+
 	def selectedMediaFile(self, res):
 		if res is not None:
 			self.piconfolder = res
@@ -736,13 +736,13 @@ class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 		self.setTitle(_("PiconManagerMod - Settings"))
 		self["key_green"] = Label(_("OK"))
 		self["key_red"] = Label(_("Cancel"))
-		
-		self["SetupActions"] = HelpableActionMap(self, "SetupActions", 
+
+		self["SetupActions"] = HelpableActionMap(self, "SetupActions",
 		{
 			"cancel": (self.cancel, _("Cancel")),
 			"ok": (self.save, _("OK and exit")),
 		}, -1)
-		
+
 		self["ColorActions"] = HelpableActionMap(self, "ColorActions",
 		{
 			"green": (self.save, _("OK and exit")),
