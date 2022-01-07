@@ -363,7 +363,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 	def getPiconList(self):
 		print("[PiconManager] started ...")
 		self['piconcount'].setText(_("Channels:")+" %s" % str(self.countchlist))
-		self['selected'].setText(_(str(config.plugins.piconmanager.selected.value ).replace("_",", ").replace("+"," ").replace("-"," ")))
+		self['selected'].setText(_(str(config.plugins.piconmanager.selected.value).replace("_",", ").replace("+"," ").replace("-"," ")))
 		if config.plugins.piconmanager.spicon.value != "":
 			txt = config.plugins.piconmanager.spicon.value.split('|')
 			if len(txt) == 2:
@@ -447,9 +447,9 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				config.plugins.piconmanager.creator = ConfigSelection(default="All", choices=self.createChoiceList(self.creator_list, [("All", _("All"))]))
 				if prev_value:
 					config.plugins.piconmanager.creator.value = prev_value
-				self['creator'].setText(_(str(config.plugins.piconmanager.creator.value )))
-				self['size'].setText(_(str(config.plugins.piconmanager.size.value )))
-				self['bit'].setText(_(str(config.plugins.piconmanager.bit.value )))
+				self['creator'].setText(_(str(config.plugins.piconmanager.creator.value)))
+				self['size'].setText(_(str(config.plugins.piconmanager.size.value)))
+				self['bit'].setText(_(str(config.plugins.piconmanager.bit.value)))
 				self.makeList(config.plugins.piconmanager.creator.value, config.plugins.piconmanager.size.value, config.plugins.piconmanager.bit.value, self.server_url, True, False)
 
 	def createChoiceList(self, choicelist, default_choice):
@@ -610,7 +610,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 					all_mirrors = False
 					break
 			if all_mirrors:
-				self.channelMenuList.setList(list(map(ListEntry, [(_("Sorry, service is temporarily unavailable" ),)])))
+				self.channelMenuList.setList(list(map(ListEntry, [(_("Sorry, service is temporarily unavailable"),)])))
 			else:
 				self.getPiconList()
 
@@ -618,7 +618,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		print("[PiconManager] ERROR") #, error)
 		try:
 			if "500 Internal Server Error" in error:
-				self.session.open(MessageBox, _("Server temporarily unavailable" ), MessageBox.TYPE_ERROR, timeout=10)
+				self.session.open(MessageBox, _("Server temporarily unavailable"), MessageBox.TYPE_ERROR, timeout=10)
 		except TypeError:
 			pass
 		errorWrite(str(len(self.auswahl)) +" - "+str(self.auswahl)+"\n"+str(error)+"\n")
