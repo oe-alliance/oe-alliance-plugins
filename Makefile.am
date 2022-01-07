@@ -455,5 +455,5 @@ SUBDIRS += GigaBlueChromium GigaBlueBluetoothSetup
 endif
 
 if HAVE_PYTHON3
-SUBDIRS += TVSpielfilm
+SUBDIRS += TVSpielfilm PiconManager
 endif

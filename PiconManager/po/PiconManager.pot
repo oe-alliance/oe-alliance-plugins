@@ -1,0 +1,255 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-01-07 15:02+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: plugin.py:160
+msgid " "
+msgstr ""
+
+#: plugin.py:455
+#, python-format
+msgid "%s"
+msgstr ""
+
+#: plugin.py:749
+msgid "Activate debug logging?"
+msgstr ""
+
+#: plugin.py:375 plugin.py:418 plugin.py:431 plugin.py:437 plugin.py:443
+msgid "All"
+msgstr ""
+
+#: plugin.py:665 plugin.py:725 plugin.py:729 plugin.py:736
+msgid "Cancel"
+msgstr ""
+
+#: plugin.py:361
+msgid "Channels:"
+msgstr ""
+
+#: plugin.py:660
+msgid "Choose Picon folder"
+msgstr ""
+
+#: plugin.py:171
+msgid "Color depth: "
+msgstr ""
+
+#: plugin.py:183 plugin.py:210
+msgid "Create folder"
+msgstr ""
+
+#: plugin.py:745
+msgid "Creator"
+msgstr ""
+
+#: plugin.py:167
+msgid "Creator: "
+msgstr ""
+
+#: plugin.py:595
+msgid "Download finished !"
+msgstr ""
+
+#: plugin.py:181 plugin.py:208
+msgid "Download picons"
+msgstr ""
+
+#: plugin.py:164
+msgid "Download progress: "
+msgstr ""
+
+#: plugin.py:539
+msgid "Enter Picon Dir:"
+msgstr ""
+
+#: plugin.py:188
+msgid "Exit"
+msgstr ""
+
+#: plugin.py:341
+msgid "FreeSpace:"
+msgstr ""
+
+#: plugin.py:343
+msgid "FreeSpace: Drive Not Found !"
+msgstr ""
+
+#: plugin.py:591
+msgid "Loaded Picons:"
+msgstr ""
+
+#: plugin.py:162
+msgid "Loaded Picons: "
+msgstr ""
+
+#: plugin.py:378
+msgid "Loading, please wait..."
+msgstr ""
+
+#: plugin.py:44
+msgid "Manage your Picons"
+msgstr ""
+
+#: plugin.py:203
+msgid "More selections"
+msgstr ""
+
+#: plugin.py:204
+msgid "Next Group"
+msgstr ""
+
+#: plugin.py:198
+msgid "Next color depth"
+msgstr ""
+
+#: plugin.py:194
+msgid "Next picon creator"
+msgstr ""
+
+#: plugin.py:196
+msgid "Next picon size"
+msgstr ""
+
+#: plugin.py:475
+msgid "No search results, please change filter options ..."
+msgstr ""
+
+#: plugin.py:585
+msgid "Not found Picons:"
+msgstr ""
+
+#: plugin.py:163
+msgid "Not found Picons: "
+msgstr ""
+
+#: plugin.py:724
+msgid "OK"
+msgstr ""
+
+#: plugin.py:730 plugin.py:735
+msgid "OK and exit"
+msgstr ""
+
+#: plugin.py:666
+msgid "Ok"
+msgstr ""
+
+#: plugin.py:747
+msgid "Option:"
+msgstr ""
+
+#: plugin.py:158
+msgid "Picon folder: "
+msgstr ""
+
+#: plugin.py:43
+msgid "PiconManager (mod)"
+msgstr ""
+
+#: plugin.py:723
+msgid "PiconManagerMod - Settings"
+msgstr ""
+
+#: plugin.py:205
+msgid "Previous Group"
+msgstr ""
+
+#: plugin.py:197
+msgid "Previous color depth"
+msgstr ""
+
+#: plugin.py:193
+msgid "Previous picon creator"
+msgstr ""
+
+#: plugin.py:195
+msgid "Previous picon size"
+msgstr ""
+
+#: plugin.py:161
+msgid "Reading Channels..."
+msgstr ""
+
+#: plugin.py:748
+msgid "Remember permanently?"
+msgstr ""
+
+#: plugin.py:742
+msgid "Select Server:"
+msgstr ""
+
+#: plugin.py:180 plugin.py:207
+msgid "Select drive"
+msgstr ""
+
+#: plugin.py:182 plugin.py:209
+msgid "Select path"
+msgstr ""
+
+#: plugin.py:231
+msgid "Select service for preferred picon"
+msgstr ""
+
+#: plugin.py:617
+msgid "Server temporarily unavailable"
+msgstr ""
+
+#: plugin.py:206
+msgid "Set / clear standard Picon"
+msgstr ""
+
+#: plugin.py:743
+msgid "Set Filter:"
+msgstr ""
+
+#: plugin.py:165
+msgid "Show group: "
+msgstr ""
+
+#: plugin.py:187
+msgid "Show random Picon"
+msgstr ""
+
+#: plugin.py:744
+msgid "Size"
+msgstr ""
+
+#: plugin.py:169
+msgid "Size: "
+msgstr ""
+
+#: plugin.py:609
+msgid "Sorry, service is temporarily unavailable"
+msgstr ""
+
+#: plugin.py:173
+msgid "Standard picon: "
+msgstr ""
+
+#: plugin.py:216
+msgid "V"
+msgstr ""
+
+#: plugin.py:746
+msgid "bit"
+msgstr ""
+
+#: plugin.py:552
+msgid "is not installed."
+msgstr ""

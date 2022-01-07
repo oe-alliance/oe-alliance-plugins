@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+					<tag type="extra" />
+	  </prerequisites>
+		  <info>
+					<author>NaseDC</author>
+					<name>PiconManager</name>
+					<packagename>enigma2-plugin-extensions-piconmanager</packagename>
+					<shortdescription>Picon Manager by VTi</shortdescription>
+					<description>Picon Manager by VTi</description>
+		  </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-piconmanager" />
+	  </files>
+</default>

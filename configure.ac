@@ -623,5 +623,10 @@ Chefkoch/src/pic/starbars/Makefile
 Chefkoch/src/pic/setup/Makefile
 Chefkoch/src/pic/slider/Makefile
 
+PiconManager/Makefile
+PiconManager/meta/Makefile
+PiconManager/src/Makefile
+PiconManager/src/pic/Makefile
+
 ])
 AC_OUTPUT

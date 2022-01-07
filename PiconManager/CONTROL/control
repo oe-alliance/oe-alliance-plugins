@@ -1,0 +1,8 @@
+Package: enigma2-plugin-extensions-piconmanager
+Version: 2.2-20150329-r0
+Description: Picon Manager by VTi
+Section: extra
+Priority: optional
+Maintainer: NaseDC, oe-alliance
+MD5Sum: 36fd26a2e4df85a6bf2c2cbc6e591372
+OE: enigma2-plugin-extensions-piconmanager

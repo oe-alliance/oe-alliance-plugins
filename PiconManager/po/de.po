@@ -1,0 +1,164 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PiconManagerMod\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: NaseDC\n"
+"Language-Team: NaseDC+shadowrider <plugins@fselbig.de>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.7.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+
+msgid "Activate debug logging?"
+msgstr "Debug-Protokollierung aktivieren?"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Channels:"
+msgstr "Kanäle:"
+
+msgid "Choose Picon folder"
+msgstr "Wähle Piconverzeichnis"
+
+msgid "Color depth: "
+msgstr "Farbtiefe: "
+
+msgid "Create folder"
+msgstr "Erstelle Ordner"
+
+msgid "Creator"
+msgstr "Ersteller"
+
+msgid "Creator: "
+msgstr "Ersteller: "
+
+msgid "Download finished !"
+msgstr "Herunterladen beendet !"
+
+msgid "Download picons"
+msgstr "Lade Picons"
+
+msgid "Download progress: "
+msgstr "Fortschritt: "
+
+msgid "Enter Picon Dir:"
+msgstr "Erstelle Piconverzeichnis:"
+
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "FreeSpace:"
+msgstr "Freier Speicher:"
+
+msgid "FreeSpace: "
+msgstr "Freier Speicher: "
+
+msgid "FreeSpace: Drive Not Found !"
+msgstr "Freier Speicher: Kein Speicher gefunden"
+
+msgid "Loaded Picons: "
+msgstr "Geladene Picons: "
+
+msgid "Loading, please wait..."
+msgstr "Lade, bitte warten ..."
+
+msgid "More selections"
+msgstr "Weitere Filter"
+
+msgid "Next Group"
+msgstr "Nächste Gruppe"
+
+msgid "Next color depth"
+msgstr "Nächste Farbtiefe"
+
+msgid "Next picon creator"
+msgstr "Nächster Piconersteller"
+
+msgid "Next picon size"
+msgstr "Nächste Picongrösse"
+
+msgid "No search results, please change filter options ..."
+msgstr "Keine Suchergebnisse , ändere bitte die Filteroptionen ..."
+
+msgid "Not found Picons: "
+msgstr "Nicht gefundene Picons: "
+
+msgid "OK and exit"
+msgstr "OK und Beenden"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Option:"
+msgstr "Option:"
+
+msgid "Picon folder: "
+msgstr "Piconordner: "
+
+msgid "PiconManagerMod - Settings"
+msgstr "PiconManagerMod - Einstellungen"
+
+msgid "Previous Group"
+msgstr "Vorherige Gruppe"
+
+msgid "Previous color depth"
+msgstr "Vorherige Farbtiefe"
+
+msgid "Previous picon creator"
+msgstr "Vorheriger Piconersteller"
+
+msgid "Previous picon size"
+msgstr "Vorherige Picongrösse"
+
+msgid "Reading Channels..."
+msgstr "Lese Kanäle..."
+
+msgid "Remember permanently?"
+msgstr "dauerhaft merken?"
+
+msgid "Select Server:"
+msgstr "Wähle Server:"
+
+msgid "Select drive"
+msgstr "Laufwerk auswählen"
+
+msgid "Select from list"
+msgstr "Aus Liste auswählen"
+
+msgid "Select path"
+msgstr "Verzeichnispfad wählen"
+
+msgid "Server temporarily unavailable"
+msgstr "Server momentan nicht erreichbar"
+
+msgid "Set / clear standard Picon"
+msgstr "Setze / entferne Standardpicon"
+
+msgid "Set Filter:"
+msgstr "Setze Filter:"
+
+msgid "Show group: "
+msgstr "Zeige Gruppe: "
+
+msgid "Show random Picon"
+msgstr "Zeige zufälliges Picon"
+
+msgid "Size"
+msgstr "Größe"
+
+msgid "Size: "
+msgstr "Größe: "
+
+msgid "Standard picon: "
+msgstr "Standard-Picon: "
+
+msgid "bit"
+msgstr "bit"
