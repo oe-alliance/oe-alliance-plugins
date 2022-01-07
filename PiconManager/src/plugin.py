@@ -693,7 +693,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				else:
 					self['piconpath2'].setText(_("Download finished !"))
   
-	def dataError2(self, error = None):
+	def dataError2(self, error=None):
 		if hasattr(self, "server_url"):
 			errorWrite(str(self.server_url) + "\n")
 			self.tried_mirrors.append(self.server_url)
