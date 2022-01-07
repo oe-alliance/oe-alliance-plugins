@@ -653,7 +653,8 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self['piconerror'].setText(_("Not found Picons:") + " %s" % str(self.counterrors))
 		total = self.countload + self.counterrors
 		self["piconslider"].setValue(total)
-		if self.countchlist == total:self.checkDouble(5)
+		if self.countchlist == total:
+		    self.checkDouble(5)
 	def downloadDone(self, data):
 		self.countload += 1
 		self['picondownload'].setText(_("Loaded Picons:") + " %s" % str(self.countload))
