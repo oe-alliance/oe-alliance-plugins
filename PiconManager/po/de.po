@@ -1,3 +1,8 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PiconManagerMod\n"
@@ -10,16 +15,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.7.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-msgid " "
-msgstr ""
-
-#, python-format
-msgid "%s"
-msgstr ""
+"X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "Activate debug logging?"
 msgstr "Debug-Protokollierung aktivieren?"
@@ -37,7 +35,7 @@ msgid "Choose Picon folder"
 msgstr "Wähle Piconverzeichnis"
 
 msgid "Clean up the directory"
-msgstr ""
+msgstr "Verzeichnis bereinigen"
 
 msgid "Color depth: "
 msgstr "Farbtiefe: "
@@ -70,17 +68,16 @@ msgid "FreeSpace:"
 msgstr "Freier Speicher:"
 
 msgid "FreeSpace: Drive Not Found !"
-msgstr "Freier Speicher: Kein Speicher gefunden"
+msgstr "Freier Speicher: Kein Speicher gefunden!"
 
-#, fuzzy
 msgid "Loaded Picons:"
-msgstr "Geladene Picons: "
+msgstr "Geladene Picons:"
 
 msgid "Loading, please wait..."
 msgstr "Lade, bitte warten ..."
 
 msgid "Manage your Picons"
-msgstr ""
+msgstr "Verwalten Sie Ihre Picons"
 
 msgid "More selections"
 msgstr "Weitere Filter"
@@ -100,18 +97,17 @@ msgstr "Nächste Picongrösse"
 msgid "No search results, please change filter options ..."
 msgstr "Keine Suchergebnisse , ändere bitte die Filteroptionen ..."
 
-#, fuzzy
 msgid "Not found Picons:"
-msgstr "Nicht gefundene Picons: "
+msgstr "Nicht gefundene Picons:"
 
 msgid "Not older than X days:"
-msgstr ""
+msgstr "Nicht älter als x Tage:"
 
 msgid "Not older than X days: "
-msgstr ""
+msgstr "Nicht älter als x Tage: "
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "OK and exit"
 msgstr "OK und Beenden"
@@ -125,20 +121,17 @@ msgstr "Option:"
 msgid "Picon folder: "
 msgstr "Piconordner: "
 
-#, fuzzy
 msgid "PiconManager (mod)"
-msgstr "PiconManagerMod - Einstellungen"
+msgstr "PiconManager (mod)"
 
 msgid "PiconManagerMod - Settings"
 msgstr "PiconManagerMod - Einstellungen"
 
-#, fuzzy
 msgid "Picons loaded: "
-msgstr "Piconordner: "
+msgstr "Picons geladen: "
 
-#, fuzzy
 msgid "Picons not found: "
-msgstr "Piconordner: "
+msgstr "Nicht gefundene Picons: "
 
 msgid "Previous Group"
 msgstr "Vorherige Gruppe"
@@ -168,7 +161,7 @@ msgid "Select path"
 msgstr "Verzeichnispfad wählen"
 
 msgid "Select service for preferred picon"
-msgstr ""
+msgstr "Sender für das Picon wählen"
 
 msgid "Server temporarily unavailable"
 msgstr "Server momentan nicht erreichbar"
@@ -191,7 +184,6 @@ msgstr "Größe"
 msgid "Size: "
 msgstr "Größe: "
 
-#, fuzzy
 msgid "Sorry, service is temporarily unavailable"
 msgstr "Server momentan nicht erreichbar"
 
@@ -199,19 +191,10 @@ msgid "Standard picon: "
 msgstr "Standard-Picon: "
 
 msgid "V"
-msgstr ""
+msgstr "V"
 
 msgid "is not installed."
-msgstr ""
+msgstr "ist nicht installiert."
 
 msgid "loading"
-msgstr ""
-
-#~ msgid "FreeSpace: "
-#~ msgstr "Freier Speicher: "
-
-#~ msgid "Select from list"
-#~ msgstr "Aus Liste auswählen"
-
-#~ msgid "bit"
-#~ msgstr "bit"
+msgstr "Herunterladen der Picons"
