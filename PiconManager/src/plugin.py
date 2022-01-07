@@ -150,7 +150,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		<widget name="spiconname" position="20,250" size="690,40" font="Regular;20" foregroundColor="#00fba207" transparent="1" zPosition="1" halign="left" />
 		<widget name="spicon" position="180,250" size="690,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />
 		<widget name="altername" position="390,250" size="690,40" font="Regular;20" foregroundColor="#00fba207" transparent="1" zPosition="1" halign="left" />
-		<widget name="alter" position="580,250" size="690,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />		
+		<widget name="alter" position="580,250" size="690,40" font="Regular;20" foregroundColor="#00f8f2e6" transparent="1" zPosition="1" halign="left" />
 		<widget name="piconslider" position="280,164" size="180,20" zPosition="2" transparent="0" />
 		<widget name="picon" position="738,10" size="400,240" zPosition="4" transparent="1" borderWidth="0" borderColor="#0000000" alphatest="blend" />
 		<widget name="list" position="10,300" size="1130,295" zPosition="1" foregroundColor="#00ffffff" foregroundColorSelected="#00fff000" scrollbarMode="showOnDemand" transparent="1" />
@@ -275,7 +275,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			for channel in self.chlist:
 				if channel[0] == service2:
 					service_name = channel[1]
-					break    
+					break
 			config.plugins.piconmanager.spicon.value = service + "|" + service_name
 		config.plugins.piconmanager.spicon.save()
 		self['spicon'].setText(service_name)
@@ -695,7 +695,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 					lena += 1
 				else:
 					self['piconpath2'].setText(_("Download finished !"))
-  
+
 	def dataError2(self, error=None):
 		if hasattr(self, "server_url"):
 			errorWrite(str(self.server_url) + "\n")
