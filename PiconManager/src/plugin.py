@@ -35,7 +35,11 @@ from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
 from twisted.internet import defer
 from twisted.web.client import downloadPage, getPage
-import re, os, shutil, random, uuid
+import re
+import os
+import shutil
+import random
+import uuid
 import skin
 import six
 from . import _
