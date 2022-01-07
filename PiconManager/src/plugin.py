@@ -91,11 +91,13 @@ def errorWrite(error):
 		f.write(error + "\n")
 		f.close()
 
+
 def notfoundWrite(picon):
 	if config.plugins.piconmanager.debug.value:
 			f = open("/tmp/picon_dl_err", "a")
 			f.write(picon + "\n")
 			f.close()
+
 
 def getServiceList(ref):
 	root = eServiceReference(str(ref))
@@ -655,6 +657,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self["piconslider"].setValue(total)
 		if self.countchlist == total:
 		    self.checkDouble(5)
+
 	def downloadDone(self, data):
 		self.countload += 1
 		self['picondownload'].setText(_("Loaded Picons:") + " %s" % str(self.countload))
