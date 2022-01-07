@@ -93,7 +93,7 @@ def errorWrite(error):
 
 def notfoundWrite(picon):
 	if config.plugins.piconmanager.debug.value:
-			f = open("/tmp/picon_dl_err","a")
+			f = open("/tmp/picon_dl_err", "a")
 			f.write(picon + "\n")
 			f.close()
 
@@ -266,7 +266,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		if isinstance(service, eServiceReference):
 			service_name = ServiceReference(service).getServiceName()
 			service2 = service.toString()
-			service = service.toString().replace(':','_').rstrip('_') + ".png"
+			service = service.toString().replace(':', '_').rstrip('_') + ".png"
 		if service == "":
 			config.plugins.piconmanager.spicon.value = service
 		else:
@@ -386,7 +386,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				if not "by name" in self['list'].getCurrent()[0][0].lower():
 					picon_sname = txt = config.plugins.piconmanager.spicon.value.split('|')[0]
 				else:
-					picon_sname = txt = config.plugins.piconmanager.spicon.value.split('|')[1].replace(" ","%20") + ".png"
+					picon_sname = txt = config.plugins.piconmanager.spicon.value.split('|')[1].replace(" ", "%20") + ".png"
 				self.auswahl = self.auswahl.replace(picon_name, picon_sname)
 			self.downloadPiconPath = os.path.join(self.piconTempDir, self['list'].getCurrent()[0][4] + ".png")
 			if not os.path.exists(self.downloadPiconPath):
@@ -509,7 +509,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 						present = datetime.date.today()
 						pdatestr = str(x[0]).split(" | ")[4]
 						pdatestr = pdatestr.split(".")
-						pdate = datetime.date(int(pdatestr[2]),int(pdatestr[1]),int(pdatestr[0]))
+						pdate = datetime.date(int(pdatestr[2]), int(pdatestr[1]), int(pdatestr[0]))
 						diff = present - pdate
 						if int(diff.days) > alter:
 							continue
@@ -609,7 +609,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			urls = []
 			if int(self.countchlist) > 0 and not self.keyLocked and self['list'].getCurrent():
 				if len(self['list'].getCurrent()[0]) >= 2:
-					f = open("/tmp/picon_dl_err","w")
+					f = open("/tmp/picon_dl_err", "w")
 					f.write(self['list'].getCurrent()[0][0] + "\n" + "#" * 50 + "\n")
 					f.close()
 					self['piconpath2'].setText(_("loading"))
@@ -848,8 +848,8 @@ class pm_conf(Screen, ConfigListScreen, HelpableScreen):
 		self.liste.append(getConfigListEntry(_("Color depth: "), config.plugins.piconmanager.bit))
 		self.liste.append(getConfigListEntry(_("Not older than X days:"), config.plugins.piconmanager.alter))
 		self.liste.append(getConfigListEntry("------ " + _("Option:") + " ------",))
-		self.liste.append(getConfigListEntry(_("Remember permanently?"),config.plugins.piconmanager.saving))
-		self.liste.append(getConfigListEntry(_("Activate debug logging?"),config.plugins.piconmanager.debug))
+		self.liste.append(getConfigListEntry(_("Remember permanently?"), config.plugins.piconmanager.saving))
+		self.liste.append(getConfigListEntry(_("Activate debug logging?"), config.plugins.piconmanager.debug))
 		self["config"].setList(self.liste)
 
 	def save(self):
