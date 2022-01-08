@@ -46,9 +46,9 @@ import six
 from . import _
 
 if six.PY2:
-    from urllib import quote
+	from urllib import quote
 else:
-    from urllib.parse import quote
+	from urllib.parse import quote
 
 
 pname = _("PiconManager (mod)")
@@ -62,9 +62,7 @@ picon_debug_file = "/tmp/piconmanager_error"
 picon_info_file = "picons/picon_info.txt"
 picon_list_file = "zz_picon_list.txt"
 
-server_choices = [
-			("http://picons.vuplus-support.org/", "VTi: vuplus-support.org"),
-		]
+server_choices = [("http://picons.vuplus-support.org/", "VTi: vuplus-support.org"),]
 
 config.plugins.piconmanager = ConfigSubsection()
 config.plugins.piconmanager.savetopath = ConfigText(default="/usr/share/enigma2/", fixed_size=False)
@@ -74,7 +72,7 @@ config.plugins.piconmanager.spicon = ConfigText(default="", fixed_size=False)
 config.plugins.piconmanager.saving = ConfigYesNo(default=True)
 config.plugins.piconmanager.debug = ConfigYesNo(default=False)
 config.plugins.piconmanager.server = ConfigSelection(default=server_choices[0][0], choices=server_choices)
-config.plugins.piconmanager.alter = ConfigInteger(default=0, limits=(0, 1000))
+config.plugins.piconmanager.alter = ConfigInteger(default=365, limits=(0, 1000))
 
 
 def ListEntry(entry):
@@ -373,7 +371,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			statvfs = os.statvfs(self.picondir)
 			free = (statvfs.f_frsize * statvfs.f_bfree) / 1024 / 1024
 			if free > 1024:
-				free = free / 1024
+				free = int(free / 1024.)
 				which = "GB"
 			self['piconspace'].setText(_("FreeSpace:") + " %s %s" % (str(free), which))
 		else:
@@ -392,7 +390,10 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				self.auswahl = self.auswahl.replace(picon_name, picon_sname)
 			self.downloadPiconPath = os.path.join(self.piconTempDir, self['list'].getCurrent()[0][4] + ".png")
 			if not os.path.exists(self.downloadPiconPath):
-				downloadPage(six.ensure_binary(self.auswahl), self.downloadPiconPath).addCallback(self.showPiconFile, self.downloadPiconPath).addErrback(self.dataError)
+				try: # ignore codings like '\xc3\x90'
+					downloadPage(six.ensure_binary(self.auswahl), self.downloadPiconPath).addCallback(self.showPiconFile, self.downloadPiconPath).addErrback(self.dataError)
+				except ValueError:
+					pass
 			else:
 				self.showPiconFile(None, self.downloadPiconPath)
 
@@ -425,7 +426,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self.creator_list = ["All"]
 		self.piconlist = []
 		self.art_list = ["All"]
-		data = six.ensure_str(data)
+		data = six.ensure_str(data).replace("\xc2\x86", "").replace("\xc2\x87", "")
 		picon_data = data.split("\n")
 		if picon_data:
 			for picon_info in picon_data:
@@ -656,7 +657,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		total = self.countload + self.counterrors
 		self["piconslider"].setValue(total)
 		if self.countchlist == total:
-		    self.checkDouble(5)
+			self.checkDouble(5)
 
 	def downloadDone(self, data):
 		self.countload += 1
