@@ -62,7 +62,7 @@ picon_debug_file = "/tmp/piconmanager_error"
 picon_info_file = "picons/picon_info.txt"
 picon_list_file = "zz_picon_list.txt"
 
-server_choices = [("http://picons.vuplus-support.org/", "VTi: vuplus-support.org"),]
+server_choices = [("http://picons.vuplus-support.org/", "VTi: vuplus-support.org"), ]
 
 config.plugins.piconmanager = ConfigSubsection()
 config.plugins.piconmanager.savetopath = ConfigText(default="/usr/share/enigma2/", fixed_size=False)
