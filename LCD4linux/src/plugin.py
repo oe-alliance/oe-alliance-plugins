@@ -9670,7 +9670,7 @@ class UpdateStatus(Screen):
 						from base64 import b64encode
 						username, password = Auth[0].split(":", 1)[-1].split(":")
 						up = "%s:%s" % (username, password)
-						basicAuth = b64encode(up.encode('utf-8'))
+						basicAuth = b64encode(ensure_binary(up))
 						if PY3:
 							basicAuth = basicAuth.decode()
 						Header = {"Authorization": "Basic %s" % basicAuth}
@@ -9728,7 +9728,7 @@ class UpdateStatus(Screen):
 						from base64 import b64encode
 						username, password = Auth[0].split(":", 1)[-1].split(":")
 						up = "%s:%s" % (username, password)
-						basicAuth = b64encode(up.encode('utf-8'))
+						basicAuth = b64encode(ensure_binary(up))
 						if PY3:
 							basicAuth = basicAuth.decode()
 						Header = {"Authorization": "Basic %s" % basicAuth}
