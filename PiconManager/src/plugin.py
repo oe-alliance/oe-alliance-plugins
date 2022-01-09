@@ -215,7 +215,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		{
 			"ok": (self.keyOK, _("Show random Picon")),
 			"cancel": (self.keyCancel, _("Exit")),
-			}, -2)
+		}, -2)
 
 		self["SetupActions"] = HelpableActionMap(self, "SetupActions",
 			{
@@ -229,7 +229,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		)
 		self["EPGSelectActions"] = HelpableActionMap(self, "EPGSelectActions",
 		{
-			"input_date_time": (self.settings, _("More selections")),
+			"menu": (self.settings, _("More selections")),
 			"nextBouquet": (self.sel_satpos_next, _("Next Group")),
 			"prevBouquet": (self.sel_satpos_back, _("Previous Group")),
 			"info": (self.set_picon, _("Set / clear standard Picon")),
