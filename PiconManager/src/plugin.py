@@ -230,8 +230,8 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self["EPGSelectActions"] = HelpableActionMap(self, "EPGSelectActions",
 		{
 			"menu": (self.settings, _("More selections")),
-			"nextBouquet": (self.sel_satpos_next, _("Next Group")),
-			"prevBouquet": (self.sel_satpos_back, _("Previous Group")),
+			"nextService": (self.sel_satpos_next, _("Next Group")),
+			"prevServive": (self.sel_satpos_back, _("Previous Group")),
 			"info": (self.set_picon, _("Set / clear standard Picon")),
 			"red": (self.changeDrive, _("Select drive")),
 			"timerAdd": (self.downloadPicons, _("Download picons")),
