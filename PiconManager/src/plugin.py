@@ -231,7 +231,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		{
 			"menu": (self.settings, _("More selections")),
 			"nextService": (self.sel_satpos_next, _("Next Group")),
-			"prevServive": (self.sel_satpos_back, _("Previous Group")),
+			"prevService": (self.sel_satpos_back, _("Previous Group")),
 			"info": (self.set_picon, _("Set / clear standard Picon")),
 			"red": (self.changeDrive, _("Select drive")),
 			"timerAdd": (self.downloadPicons, _("Download picons")),
