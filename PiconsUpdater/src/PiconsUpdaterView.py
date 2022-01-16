@@ -24,7 +24,6 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
     <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="77,645" size="250,33" text="Cancel" transparent="1" />
     <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="375,645" size="250,33" text="Save" transparent="1" />
     <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="682,645" size="250,33" text="Download Picons" transparent="1" />
-    <eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="682,645" size="250,33" text="Download Picons" transparent="1" />
     <widget name="config" position="61,114" size="590,500" scrollbarMode="showOnDemand" transparent="1" />
     <eLabel position="60,55" size="348,50" text="PiconsUpdater" font="Regular; 40" valign="center" transparent="1" backgroundColor="#20000000" />
     <eLabel position="400,58" size="349,50" text="Setup" foregroundColor="unffffff" font="Regular; 30" valign="center" backgroundColor="#20000000" transparent="1" halign="left" />
