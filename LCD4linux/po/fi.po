@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-10 21:04+0200\n"
-"PO-Revision-Date: 2021-10-10 23:10+0200\n"
-"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
-"Language-Team: Kojo\n"
+"POT-Creation-Date: 2021-08-27 17:17+0200\n"
+"PO-Revision-Date: 2021-10-29 18:38+0200\n"
+"Last-Translator: Orlandox\n"
+"Language-Team: Kojo/Orlandox\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 1.5.7\n"
 
 msgid "%"
 msgstr "%"
@@ -194,7 +194,7 @@ msgid "- HTTP Width"
 msgstr "- HTTP Leveys"
 
 msgid "- Infolines"
-msgstr "- Infolinjat"
+msgstr "- Tietorivit"
 
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 Taustaväri"
@@ -383,7 +383,7 @@ msgid "- Show State"
 msgstr "- Näytä tila"
 
 msgid "- Show chill temperature from difference"
-msgstr "- Näytä viileän läpötilan ero paikasta"
+msgstr "- Näytä viileän lämpötilan ero paikasta"
 
 msgid "- Show in Mode"
 msgstr "- Näytä tilassa"
@@ -803,7 +803,7 @@ msgid "BlueSound Ping Timeout [ms]"
 msgstr "BlueSound: Ping Aikakatkaisu [ms]"
 
 msgid "BlueSound Play Check"
-msgstr "BlueSound: Play-tarkistus"
+msgstr "BlueSound: Toisto-tarkistus"
 
 msgid "BlueSound Refresh [s]"
 msgstr "BlueSound: Virkistä [s]"
@@ -995,13 +995,13 @@ msgid "Distance only"
 msgstr "Vain etäisyys"
 
 msgid "Distance+Illumination"
-msgstr "Etäisyys+valaistus"
+msgstr "Etäisyys + valaistu %"
 
 msgid "Illumination+Moonphase"
-msgstr "Valaistus+Kuun vaihe"
+msgstr "Valaistu % + kuuvaihe"
 
 msgid "Distance+Moonphase"
-msgstr "Etäisyys+kuun vaihe"
+msgstr "Etäisyys + kuuvaihe"
 
 msgid "Double-button switches"
 msgstr "Kaksoispainallus vaihtaa näyttöä"
@@ -1011,9 +1011,6 @@ msgstr "Lataa lokitiedosto"
 
 msgid "E"
 msgstr "Itä"
-
-msgid "Element"
-msgstr "Elementti"
 
 msgid "ENE"
 msgstr "Itäkoillinen"
@@ -1040,16 +1037,13 @@ msgid "Extended Description"
 msgstr "Laajennettu kuvaus"
 
 msgid "External IP Address"
-msgstr "Ulkoinen IP Osoite"
-
-msgid "Filename"
-msgstr "Tiedostonimi"
+msgstr "Ulkoinen IP-osoite"
 
 msgid "Fastmode (2s)"
 msgstr "Nopea (2s)"
 
 msgid "First Quarter"
-msgstr "Ensimmäinen neljännes"
+msgstr "Kasvava Kuunsirppi"
 
 msgid "Flaps Design Date"
 msgstr "\"Läppä\"-mallinen päivämäärä"
@@ -1152,7 +1146,7 @@ msgid "HDD"
 msgstr "Kiintolevy"
 
 msgid "Illumination only"
-msgstr "Vain valaistus"
+msgstr "Vain valaistu %"
 
 msgid "IMAP"
 msgstr "IMAP"
@@ -1290,7 +1284,7 @@ msgid "LCD4linux enabled"
 msgstr "LCD4linux päällä"
 
 msgid "Last Quarter"
-msgstr "Viimeinen neljännes"
+msgstr "Vähenevä Kuunsirppi"
 
 msgid "Line"
 msgstr "Line"
@@ -1375,7 +1369,7 @@ msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG: Syöte LCD 3 Päälle"
 
 msgid "Moonphase only"
-msgstr "Vain kuun vaihe"
+msgstr "Vain kuuvaihe"
 
 msgid "MSN"
 msgstr "MSN"
@@ -1548,9 +1542,6 @@ msgstr "Moduli 5-6"
 msgid "Module 6"
 msgstr "Moduli 6"
 
-msgid "Mode"
-msgstr "Tila"
-
 msgid "Mon"
 msgstr "Maa"
 
@@ -1564,7 +1555,7 @@ msgid "Moon-Icon-Path [ok]>"
 msgstr "Kuu-ikonin polku [ok]>"
 
 msgid "Moonphase"
-msgstr "Kuunkierto"
+msgstr "Kuuvaihe"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -1630,7 +1621,7 @@ msgid "Network Check active"
 msgstr "Verkkotarkistus aktiivinen"
 
 msgid "New Moon"
-msgstr "Uusi kuu"
+msgstr "Uusikuu"
 
 msgid "Next Program Info"
 msgstr "Seuraavan ohjelman info"
@@ -2042,7 +2033,7 @@ msgid "Set Media >>"
 msgstr "Aseta Media >>"
 
 msgid "Set On >>"
-msgstr "Aseta >>"
+msgstr "Aseta Päällä >>"
 
 msgid "Shadow Edges"
 msgstr "Varjostetut reunat"
@@ -2267,16 +2258,16 @@ msgid "WWW-Internet Converter"
 msgstr "WWW Internet-muunnin"
 
 msgid "Waning Crescent"
-msgstr "Vähenevä puolikuu"
+msgstr "Kolmas Neljännes"
 
 msgid "Waning Moon"
-msgstr "Vähenevä kuu"
+msgstr "Vähenevä Kuu"
 
 msgid "Waxing Crescent"
-msgstr "Kasvava puolikuu"
+msgstr "Ensimmäinen Neljännes"
 
 msgid "Waxing Moon"
-msgstr "Kasvava kuu"
+msgstr "Kasvava Kuu"
 
 msgid "Weather"
 msgstr "Sää"
@@ -2318,10 +2309,10 @@ msgid "Weather Transparency"
 msgstr "Sää: Läpiväkyvyys"
 
 msgid "Weather Wind speed unit"
-msgstr "Sää: Tuulen nopeuden yksikkö"
+msgstr "Sää: Tuulen nopeusyksikkö"
 
 msgid "Weather Wind Info Lines"
-msgstr "Sää: Tuuli Info Linja"
+msgstr "Sää: Tuuli tietorivit"
 
 msgid "Weather-Icon Zoom"
 msgstr "Sää-ikoni zoom"
@@ -2423,10 +2414,10 @@ msgid "copy to Idle"
 msgstr "kopioi Valmiustilaan"
 
 msgid "copy to Media"
-msgstr "kopioi Mediaan"
+msgstr "kopioi Media-tilaan"
 
 msgid "copy to On"
-msgstr "kopioi Päällä"
+msgstr "kopioi Päällä-tilaan"
 
 msgid "cornflowerblue"
 msgstr "cornflowerblue"
@@ -2571,7 +2562,7 @@ msgid "no LCD3 Picture-File"
 msgstr "ei LCD3 -kuvatiedostoa"
 
 msgid "no Netatmo-Plugin installed"
-msgstr "ei Netatmo-Pluginia ole asennettu"
+msgstr "Netatmo-Pluginia ei ole asennettu"
 
 msgid "no Timer"
 msgstr "ei Ajastusta"
@@ -2679,7 +2670,7 @@ msgid "slategray"
 msgstr "slategray"
 
 msgid "stop Screencycle"
-msgstr "pysäytä ruutujen kierrätys"
+msgstr "Pysäytä ruutujen kierrätys"
 
 msgid "tomato"
 msgstr "tomaatti"
