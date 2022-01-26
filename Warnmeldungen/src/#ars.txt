@@ -1,0 +1,9 @@
+# (Kommentarzeilen beginnen mit #... )
+# Hier koennen weitere  Abfrageorte eingetragen werden
+# WICHTIG: Die Datei "#ars.txt" muss dazu nach "ars.txt" umbenannt werden
+# Syntax:  ARS (Ort)     [ARS muss mindestens 5-stellig definiert sein]
+# 08115 (Sindelfingen)
+
+
+
+

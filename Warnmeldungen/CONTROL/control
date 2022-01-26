@@ -1,0 +1,11 @@
+Package: enigma2-plugin-extensions-warnmeldungen
+Version: 1.0.2
+Description: Warnmeldungen
+Architecture: all
+Section: plugin
+Priority: optional
+Maintainer: Oberhesse <oh20@gmx.net>
+Homepage: ---
+Depends: enigma2
+Source: ---
+

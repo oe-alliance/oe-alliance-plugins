@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+					<tag type="extra" />
+	  </prerequisites>
+		  <info>
+					<author>Oberhesse oh20@gmx.net</author>
+					<name>Warnmeldungen</name>
+					<packagename>enigma2-plugin-extensions-warnmeldungen</packagename>
+					<shortdescription>Warnmeldungen</shortdescription>
+					<description>Warnmeldungen</description>
+		  </info>
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-warnmeldungen" />
+	  </files>
+</default>
