@@ -34,7 +34,7 @@ from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
-Release = 'V1.7'
+RELEASE = 'V1.7'
 config.plugins.chefkoch = ConfigSubsection()
 Pluginpath = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
 deskWidth = getDesktop(0).size().width()
@@ -68,9 +68,8 @@ def applySkinVars(skin, dict):
         skin = skin.replace('{' + key + '}', dict[key])
     return skin
 
-
-picurlbase = 'https://img.chefkoch-cdn.de/rezepte'
-apiuribase = 'https://api.chefkoch.de/v2'
+PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte'
+APIURIBASE = 'https://api.chefkoch.de/v2'
 
 
 def APIget(apiuri):
@@ -82,7 +81,7 @@ def APIget(apiuri):
 
 
 def getAPIdata(apiuri):
-    apiuri = apiuribase + apiuri
+    apiuri = APIURIBASE + apiuri
     content, resp = APIget(apiuri)
     if resp != 200:
         CKlog('request failure from', apiuri)
@@ -103,6 +102,23 @@ def CKlog(info, wert="", debug=False):
             print('[Chefkoch] Logging-Error')
     else:
         print('[Chefkoch] %s %s' % (str(info), str(wert)))
+
+
+def hideScreen():
+    global HIDEFLAG
+    if ALPHA:
+        if HIDEFLAG:
+            HIDEFLAG = False
+            for i in range(40, -1, -1):
+                f = open(ALPHA, 'w')
+                f.write('%i' % (config.av.osd_alpha.value * i / 40))
+                f.close()
+        else:
+            HIDEFLAG = True
+            for i in range(41):
+                f = open(ALPHA, 'w')
+                f.write('%i' % (config.av.osd_alpha.value * i / 40))
+                f.close()
 
 
 class ChefkochView(Screen):
@@ -239,6 +255,8 @@ class ChefkochView(Screen):
         </screen>'''
 
     def __init__(self, session, query, titel, sort, fav, zufall):
+        global HIDEFLAG
+        HIDEFLAG = True
         self.session = session
         self.query = query
         self.titel = titel
@@ -253,10 +271,10 @@ class ChefkochView(Screen):
         position = str(config.plugins.chefkoch.position.value)
         if config.plugins.chefkoch.font_size.value == 'large':
             self.fontlarge = True
-            fontsize = '%d' % int(22 * scale)
+            fontsize = '%d' % int(22 * SCALE)
         else:
             self.fontlarge = False
-            fontsize = '%d' % int(20 * scale)
+            fontsize = '%d' % int(20 * SCALE)
         self.dict = {'position': position, 'picpath': Pluginpath + 'pic/', 'font': font, 'fontsize': fontsize}
         if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
             self.skin = applySkinVars(ChefkochView.skinFHD, self.dict)
@@ -267,7 +285,6 @@ class ChefkochView(Screen):
         Screen.__init__(self, session)
         self.currItem = 0
         self.rezeptfile = '/tmp/Rezept.html'
-        self.hideflag = True
         self.ready = False
         self.postviewready = False
         self.comment = False
@@ -286,7 +303,7 @@ class ChefkochView(Screen):
         self.rezeptelist = []
         self.rezeptelinks = []
         self.pic = []
-        for i in range(linesPerPage):
+        for i in range(LINESPERPAGE):
             self['pic%d' % i] = Pixmap()
             self['vid%d' % i] = Pixmap()
             self['pic%d' % i].hide()
@@ -322,7 +339,7 @@ class ChefkochView(Screen):
         self['label5'] = Label('')
         self['label6'] = Label('')
         self['label7'] = Label('')
-        self['release'] = Label(Release)
+        self['release'] = Label(RELEASE)
         self['helpactions'] = ActionMap(['HelpActions'], {'displayHelp': self.infoScreen}, -1)
         self['NumberActions'] = NumberActionMap(['NumberActions', 'OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'ButtonSetupActions'], {
             'ok': self.ok,
@@ -338,7 +355,7 @@ class ChefkochView(Screen):
             'red': self.red,
             'yellow': self.yellow,
             'green': self.green,
-            'blue': self.hideScreen,
+            'blue': hideScreen,
             '0': self.gotoPage,
             '1': self.gotoPage,
             '2': self.gotoPage,
@@ -353,20 +370,20 @@ class ChefkochView(Screen):
         self.onLayoutFinish.append(self.onLayoutFinished)  # warte bis __Init__ abgeschlossen ist
         self.postpicload = ePicLoad()
         self.prevpicload = []
-        for i in range(linesPerPage):
+        for i in range(LINESPERPAGE):
             self.prevpicload.append(ePicLoad())
 
     def onLayoutFinished(self):
         self.postpicload.setPara((self['postpic'].instance.size().width(), self['postpic'].instance.size().height(), 1.0, 0, False, 1, "#00000000"))
         xres = self['pic0'].instance.size().width()
         yres = self['pic0'].instance.size().height()
-        for i in range(linesPerPage):
+        for i in range(LINESPERPAGE):
             self.prevpicload[i].setPara((xres, yres, 1.0, 0, False, 1, "#00000000"))
         self.makeChefkochTimer = eTimer()
         if self.zufall:
             self.current = 'postview'
             self.GRP = self.getGRP()
-            self.maxPage = (len(self.GRP) - 1) // linesPerPage + 1
+            self.maxPage = (len(self.GRP) - 1) // LINESPERPAGE + 1
             zufallsId = self.GRP[randrange(0, len(self.GRP))]['id']
             self.makeChefkochTimer.callback.append(self.makePostviewPage(zufallsId))
         elif self.fav:
@@ -378,11 +395,11 @@ class ChefkochView(Screen):
         self.makeChefkochTimer.start(200, True)
 
     def makeChefkoch(self):  # erzeuge Rezeptliste
-        for i in range(linesPerPage):
+        for i in range(LINESPERPAGE):
             self['pic%d' % i].hide()
             self['vid%d' % i].hide()
         self.GRP = self.getGRP()
-        self.maxPage = (len(self.GRP) - 1) // linesPerPage + 1
+        self.maxPage = (len(self.GRP) - 1) // LINESPERPAGE + 1
         self.kochentries = []
         self.kochId = []
         self.picurllist = []
@@ -398,11 +415,11 @@ class ChefkochView(Screen):
         self['label1'].setText('')
         self['label2'].setText('Rezept zu Favoriten hinzufügen =')
         self['label3'].setText('Ein-/Ausblenden =')
-        self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // linesPerPage + 1)) + ' von ' + str(self.maxPage)
+        self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
         self['label4'].setText(self.seitenlabel)
         self['label5'].setText('= Sortierung: %s' % self.sortname[self.sort])
         self['label6'].setText('= Suche')
-        self.headline = str(len(self.GRP)) + ' "' + self.titel.replace(' Rezepte', '') + '" Rezepte ('
+        self.headline = str(len(self.GRP)) + ' ' + self.titel.replace(' Rezepte', '') + ' Rezepte ('
         self.headline += '1 Video)' if self.videocount == 1 else str(self.videocount) + ' Videos)'
         self.setTitle(str(self.headline))
         for i in range(len(self.GRP)):
@@ -416,7 +433,7 @@ class ChefkochView(Screen):
                 count = 'keine'
                 score = '0'
             if self.GRP[i]['previewImageId']:
-                picurl = picurlbase + '/' + id + '/bilder/' + str(self.GRP[i]['previewImageId']) + '/crop-160x120/' + titel.replace(' ', '-') + '.jpg'
+                picurl = PICURLBASE + '/' + id + '/bilder/' + str(self.GRP[i]['previewImageId']) + '/crop-160x120/' + titel.replace(' ', '-') + '.jpg'
             else:
                 picurl = 'http://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
             text = self.GRP[i]['subtitle']
@@ -427,23 +444,23 @@ class ChefkochView(Screen):
             self.titellist.append(titel)
             self.videolist.append(self.GRP[i]['hasVideo'])
             res = [i]
-            res.append(MultiContentEntryText(pos=(int(110 * scale), 0), size=(int(965 * scale), int(30 * scale)), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titel))  # TITLE
+            res.append(MultiContentEntryText(pos=(int(110 * SCALE), 0), size=(int(965 * SCALE), int(30 * SCALE)), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titel))  # TITLE
             if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
                 png = Pluginpath + 'pic/starbars/smallFHD-%s.png' % score
             else:
                 png = Pluginpath + 'pic/starbars/smallHD-%s.png' % score
             if fileExists(png):
-                res.append(MultiContentEntryPixmapAlphaTest(pos=(int(12 * scale), int(33 * scale)), size=(int(72 * scale), int(15 * scale)), png=loadPNG(png)))  # SCORE
-            res.append(MultiContentEntryText(pos=(0, int(52 * scale)), size=(int(95 * scale), int(25 * scale)), font=-
+                res.append(MultiContentEntryPixmapAlphaTest(pos=(int(12 * SCALE), int(33 * SCALE)), size=(int(72 * SCALE), int(15 * SCALE)), png=loadPNG(png)))  # SCORE
+            res.append(MultiContentEntryText(pos=(0, int(52 * SCALE)), size=(int(95 * SCALE), int(25 * SCALE)), font=-
                        1, color=16777215, color_sel=16777215, flags=RT_HALIGN_CENTER, text='(' + count + ')'))  # COUNT
-            res.append(MultiContentEntryText(pos=(int(111 * scale), int(30 * scale)), size=(int(965 * scale), int(60 * scale)),
+            res.append(MultiContentEntryText(pos=(int(111 * SCALE), int(30 * SCALE)), size=(int(965 * SCALE), int(60 * SCALE)),
                        font=-1, color=10857646, color_sel=13817818, flags=RT_HALIGN_LEFT | RT_WRAP, text=text))  # TEXT
-            res.append(MultiContentEntryText(pos=(0, 0), size=(int(95 * scale), int(30 * scale)), font=-1, backcolor=12255304,
+            res.append(MultiContentEntryText(pos=(0, 0), size=(int(95 * SCALE), int(30 * SCALE)), font=-1, backcolor=12255304,
                        color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=time))  # TIME
             self.kochentries.append(res)
         self.setPrevIcons(0)
         self.len = len(self.kochentries)
-        self['menu'].l.setItemHeight(int(90 * scale))
+        self['menu'].l.setItemHeight(int(90 * SCALE))
         self['menu'].l.setList(self.kochentries)
         self['menu'].moveToIndex(0)
         self.ready = True
@@ -463,7 +480,7 @@ class ChefkochView(Screen):
         self.currId = Id
         self.rezept = 'https://www.chefkoch.de/rezepte/'
         effort = ['keiner', 'simpel', 'normal', 'pfiffig']
-        for i in range(linesPerPage):
+        for i in range(LINESPERPAGE):
             self['pic%d' % i].hide()
             self['vid%d' % i].hide()
         self['menu'].hide()
@@ -545,7 +562,7 @@ class ChefkochView(Screen):
         self['recipetext'].setText(str(recipetext))
         self['recipetext'].show()
         if self.REZ['hasImage']:
-            picurl = picurlbase + '/' + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
+            picurl = PICURLBASE + '/' + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
         else:
             picurl = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
         self.Pdownload(picurl, self.getPostPic)
@@ -653,7 +670,7 @@ class ChefkochView(Screen):
         return ausgabe
 
     def ok(self):
-        if self.hideflag:
+        if HIDEFLAG:
             if self.current == 'menu':
                 self.selectPage()
             elif self.current == 'postview' and self.postviewready:
@@ -817,9 +834,9 @@ class ChefkochView(Screen):
     def nextPage(self):
         if self.current == 'menu':
             self.currItem = self['menu'].getSelectedIndex()
-            offset = self.currItem % linesPerPage
-            if self.currItem + linesPerPage > self.len - 1:
-                if offset > (self.len - 1) % linesPerPage:
+            offset = self.currItem % LINESPERPAGE
+            if self.currItem + LINESPERPAGE > self.len - 1:
+                if offset > (self.len - 1) % LINESPERPAGE:
                     self.currItem = self.len - 1
                     self['menu'].moveToIndex(self.currItem)  # springe auf letzten Eintrag der letzten Seite
                     self.setPrevIcons(self.currItem - offset)
@@ -828,10 +845,10 @@ class ChefkochView(Screen):
                     self['menu'].moveToIndex(self.currItem)  # springe auf gleichen Offset der ersten Seite
                     self.setPrevIcons(0)
             else:
-                self.currItem = self.currItem + linesPerPage
+                self.currItem = self.currItem + LINESPERPAGE
                 self['menu'].pageDown()
                 self.setPrevIcons(self.currItem - offset)
-            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // linesPerPage + 1)) + ' von ' + str(self.maxPage)
+            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
             self['label4'].setText(self.seitenlabel)
         else:
             self['textpage'].pageDown()
@@ -839,10 +856,10 @@ class ChefkochView(Screen):
     def prevPage(self):
         if self.current == 'menu':
             self.currItem = self['menu'].getSelectedIndex()
-            offset = self.currItem % linesPerPage
-            lasttop = (self.len - 1) // linesPerPage * linesPerPage
-            if self.currItem - linesPerPage < 0:
-                if offset > (self.len - 1) % linesPerPage:
+            offset = self.currItem % LINESPERPAGE
+            lasttop = (self.len - 1) // LINESPERPAGE * LINESPERPAGE
+            if self.currItem - LINESPERPAGE < 0:
+                if offset > (self.len - 1) % LINESPERPAGE:
                     self.currItem = self.len - 1
                     self['menu'].moveToIndex(self.currItem)  # springe auf gleichen Offset der vorherigen Seite
                 else:
@@ -850,10 +867,10 @@ class ChefkochView(Screen):
                     self['menu'].moveToIndex(self.currItem)  # springe auf letzten Eintrag der letzten Seite
                 self.setPrevIcons(lasttop)
             else:
-                self.currItem = self.currItem - linesPerPage
+                self.currItem = self.currItem - LINESPERPAGE
                 self['menu'].pageUp()
                 self.setPrevIcons(self.currItem - offset)
-            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // linesPerPage + 1)) + ' von ' + str(self.maxPage)
+            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
             self['label4'].setText(self.seitenlabel)
         else:
             self['textpage'].pageUp()
@@ -862,11 +879,11 @@ class ChefkochView(Screen):
         if self.current == 'menu':
             self['menu'].down()
             self.currItem = self['menu'].getSelectedIndex()
-            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // linesPerPage + 1)) + ' von ' + str(self.maxPage)
+            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
             self['label4'].setText('%s' % self.seitenlabel)
             if self.currItem == self.len:  # neue Vorschaubilder der ersten Seite anzeigen
                 self.setPrevIcons(0)
-            if self.currItem % linesPerPage == 0:  # neue Vorschaubilder der nächsten Seite anzeigen
+            if self.currItem % LINESPERPAGE == 0:  # neue Vorschaubilder der nächsten Seite anzeigen
                 self.setPrevIcons(self.currItem)
         else:
             self['textpage'].pageDown()
@@ -875,13 +892,13 @@ class ChefkochView(Screen):
         if self.current == 'menu':
             self['menu'].up()
             self.currItem = self['menu'].getSelectedIndex()
-            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // linesPerPage + 1)) + ' von ' + str(self.maxPage)
+            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
             self['label4'].setText('%s' % self.seitenlabel)
             if self.currItem == self.len - 1:  # neue Vorschaubilder der letzte Seite anzeigen
-                d = self.len % linesPerPage if self.len % linesPerPage != 0 else linesPerPage
+                d = self.len % LINESPERPAGE if self.len % LINESPERPAGE != 0 else LINESPERPAGE
                 self.setPrevIcons(self.len - d)
-            if self.currItem % linesPerPage == linesPerPage - 1:  # neue Vorschaubilder der vorherige Seite anzeigen
-                self.setPrevIcons(self.currItem // linesPerPage * linesPerPage)
+            if self.currItem % LINESPERPAGE == LINESPERPAGE - 1:  # neue Vorschaubilder der vorherige Seite anzeigen
+                self.setPrevIcons(self.currItem // LINESPERPAGE * LINESPERPAGE)
         else:
             self['textpage'].pageUp()
 
@@ -903,14 +920,14 @@ class ChefkochView(Screen):
             if count > self.maxPage:
                 count = self.maxPage
                 self.session.open(MessageBox, '\nNur %s Seiten verfügbar. Gehe zu Seite %s.' % (str(count), str(count)), MessageBox.TYPE_INFO, close_on_any_key=True)
-            self.currItem = (count - 1) * linesPerPage
+            self.currItem = (count - 1) * LINESPERPAGE
             self['menu'].moveToIndex(self.currItem)
             self.setPrevIcons(self.currItem)
-            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // linesPerPage + 1)) + ' von ' + str(self.maxPage)
+            self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
             self['label4'].setText(self.seitenlabel)
 
     def setPrevIcons(self, toppos):
-        for i in range(linesPerPage):
+        for i in range(LINESPERPAGE):
             if len(self.picurllist) > toppos + i:
                 self.prevpicload[i].PictureData.get().append(self.showPrevPic)
                 self.Idownload(i, self.picurllist[toppos + i], self.getPrevPic)
@@ -1064,7 +1081,7 @@ class ChefkochView(Screen):
         self['label1'].setText('')
         self['label2'].setText('Rezept zu Favoriten hinzufügen =')
         self['label3'].setText('Ein / Ausblenden =')
-        self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // linesPerPage + 1)) + ' von ' + str(self.maxPage)
+        self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
         self['label4'].setText(self.seitenlabel)
         self['label5'].setText('= Sortierung: %s' % self.sortname[self.sort])
         self['label6'].setText('= Suche')
@@ -1077,7 +1094,7 @@ class ChefkochView(Screen):
         self['postpic'].hide()
         self['menu'].show()
         self.currItem = self['menu'].getSelectedIndex()
-        self.setPrevIcons(self.currItem - self.currItem % linesPerPage)
+        self.setPrevIcons(self.currItem - self.currItem % LINESPERPAGE)
 
     def returnPicShow(self):
         pass
@@ -1092,27 +1109,15 @@ class ChefkochView(Screen):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
 
-    def hideScreen(self):
-        if self.hideflag:
-            self.hideflag = False
-            for i in range(40, 0, -1):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
-        else:
-            self.hideflag = True
-            for i in range(1, 41):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
 
     def eject(self, answer):
         self.exit()
 
     def exit(self):
-        if not self.hideflag:
-            self.hideflag = True
-            f = open('/proc/stb/video/alpha', 'w')
+        global HIDEFLAG
+        if not HIDEFLAG:
+            HIDEFLAG = True
+            f = open(ALPHA, 'w')
             f.write('%i' % config.av.osd_alpha.value)
             f.close()
         if self.current == 'menu':
@@ -1217,6 +1222,8 @@ class ChefkochPicShow(Screen):
         </screen>'''
 
     def __init__(self, session, titel, recipe, images):
+        global HIDEFLAG
+        HIDEFLAG = True
         self.REZ = recipe
         self.IMG = images
         self.titel = titel
@@ -1238,7 +1245,6 @@ class ChefkochPicShow(Screen):
         Screen.__init__(self, session)
         self.setTitle(titel)
         self.picfile = '/tmp/chefkoch.jpg'
-        self.hideflag = True
         self.pixlist = []
         self.picmax = 0
         self.count = 0
@@ -1259,7 +1265,7 @@ class ChefkochPicShow(Screen):
             'red': self.infoScreen,
             'yellow': self.infoScreen,
             'green': self.infoScreen,
-            'blue': self.hideScreen,
+            'blue': hideScreen,
             '0': self.gotoPic,
             '1': self.gotoPic,
             '2': self.gotoPic,
@@ -1306,7 +1312,7 @@ class ChefkochPicShow(Screen):
         if self.IMG['count'] > 0:
             for i in range(len(self.IMG['results'])):
                 self.pixlist.append(self.IMG['results'][i]['id'])
-            picurl = picurlbase + '/' + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
+            picurl = PICURLBASE + '/' + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
             self.download(picurl, self.getPic)
             self.picmax = len(self.pixlist) - 1
             username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
@@ -1319,14 +1325,14 @@ class ChefkochPicShow(Screen):
 
     def picup(self):
         self.count += 1 if self.count < self.picmax else - self.count
-        picurl = picurlbase + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
+        picurl = PICURLBASE + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
         self.download(picurl, self.getPic)
         username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
         self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
     def picdown(self):
         self.count -= 1 if self.count > 0 else - self.picmax
-        picurl = picurlbase + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
+        picurl = PICURLBASE + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
         self.download(picurl, self.getPic)
         username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
         self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
@@ -1371,23 +1377,9 @@ class ChefkochPicShow(Screen):
     def infoScreen(self):
         pass
 
-    def hideScreen(self):
-        if self.hideflag:
-            self.hideflag = False
-            for i in range(40, 0, -1):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
-        else:
-            self.hideflag = True
-            for i in range(1, 41):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
-
     def exit(self):
-        if not self.hideflag:
-            f = open('/proc/stb/video/alpha', 'w')
+        if not HIDEFLAG:
+            f = open(ALPHA, 'w')
             f.write('%i' % config.av.osd_alpha.value)
             f.close()
         self.close()
@@ -1406,13 +1398,14 @@ class FullScreen(Screen):
         </screen>'''
 
     def __init__(self, session):
+        global HIDEFLAG
+        HIDEFLAG = True
         if 'FHD' in config.plugins.chefkoch.plugin_size.value:
             self.skin = FullScreen.skinFHD
         else:
             self.skin = FullScreen.skinHD
         Screen.__init__(self, session)
         self.picfile = '/tmp/chefkoch.jpg'
-        self.hideflag = True
         self['picture'] = Pixmap()
         self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {
             'ok': self.exit,
@@ -1420,7 +1413,7 @@ class FullScreen(Screen):
             'red': self.infoScreen,
             'yellow': self.infoScreen,
             'green': self.infoScreen,
-            'blue': self.hideScreen
+            'blue': hideScreen
         }, -1)
         self.onLayoutFinish.append(self.onLayoutFinished)
         self.picload = ePicLoad()
@@ -1438,23 +1431,9 @@ class FullScreen(Screen):
     def infoScreen(self):
         pass
 
-    def hideScreen(self):
-        if self.hideflag:
-            self.hideflag = False
-            for i in range(40, 0, -1):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
-        else:
-            self.hideflag = True
-            for i in range(1, 41):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
-
     def exit(self):
-        if not self.hideflag:
-            f = open('/proc/stb/video/alpha', 'w')
+        if not HIDEFLAG:
+            f = open(ALPHA, 'w')
             f.write('%i' % config.av.osd_alpha.value)
             f.close()
         self.close()
@@ -1477,6 +1456,8 @@ class chefkochFav(Screen):
         </screen>'''
 
     def __init__(self, session, favmode=True):
+        global HIDEFLAG
+        HIDEFLAG = True
         self.favmode = favmode
         position = str(config.plugins.chefkoch.position.value)
         font = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
@@ -1493,7 +1474,6 @@ class chefkochFav(Screen):
             self.skin = applySkinVars(chefkochFav.skinHD, self.dict)
         self.session = session
         Screen.__init__(self, session)
-        self.hideflag = True
         self.count = 0
         self.favlist = []
         self.favId = []
@@ -1508,7 +1488,7 @@ class chefkochFav(Screen):
             'red': self.red,
             'yellow': self.infoScreen,
             'green': self.infoScreen,
-            'blue': self.hideScreen,
+            'blue': hideScreen,
             '0': self.move2end,
             '1': self.move2first
         }, -1)
@@ -1522,7 +1502,7 @@ class chefkochFav(Screen):
             self.favoriten = Pluginpath + 'db/suchen'
             titel = '>>> Neue Suche <<<'
             res = ['']
-            res.append(MultiContentEntryText(pos=(0, 0), size=(int(1220 * scale), int(30 * scale)), font=self.font,
+            res.append(MultiContentEntryText(pos=(0, 0), size=(int(1220 * SCALE), int(30 * SCALE)), font=self.font,
                     color=16777215, backcolor_sel=16777215, color_sel=0, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
             self.faventries.append(res)
             self.favlist.append(titel)
@@ -1536,14 +1516,14 @@ class chefkochFav(Screen):
                     titel = str(favline[0])
                     Id = favline[1].replace('\n', '')
                     res = ['']
-                    res.append(MultiContentEntryText(pos=(0, 0), size=(int(1220 * scale), int(30 * scale)), font=self.font,
+                    res.append(MultiContentEntryText(pos=(0, 0), size=(int(1220 * SCALE), int(30 * SCALE)), font=self.font,
                                color=16777215, backcolor_sel=16777215, color_sel=0, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
                     self.faventries.append(res)
                     self.favlist.append(titel)
                     self.favId.append(Id)
             f.close()
             self['favmenu'].l.setList(self.faventries)
-            self['favmenu'].l.setItemHeight(int(30 * scale))
+            self['favmenu'].l.setItemHeight(int(30 * SCALE))
 
     def ok(self):
         self.currItem = self.getIndex(self['favmenu'])
@@ -1552,7 +1532,7 @@ class chefkochFav(Screen):
             titel = self.favlist[self.currItem]
             Id = self.favId[self.currItem]
             if self.favmode:
-                self.session.open(ChefkochView, Id, titel, 1, True, False)
+                self.session.open(ChefkochView, Id, '"' + titel + '"', 1, True, False)
         if titel == '>>> Neue Suche <<<':
             titel = ''
             self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='Chefkoch - Suche Rezepte:', text=titel)
@@ -1671,23 +1651,9 @@ class chefkochFav(Screen):
     def infoScreen(self):
         pass
 
-    def hideScreen(self):
-        if self.hideflag:
-            self.hideflag = False
-            for i in range(40, 0, -1):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
-        else:
-            self.hideflag = True
-            for i in range(1, 41):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
-
     def exit(self):
-        if not self.hideflag:
-            f = open('/proc/stb/video/alpha', 'w')
+        if not HIDEFLAG:
+            f = open(ALPHA, 'w')
             f.write('%i' % config.av.osd_alpha.value)
             f.close()
         self.close()
@@ -1709,11 +1675,11 @@ class ItemList(MenuList):
         MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
         fontname = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
         fontoffset = 2 if config.plugins.chefkoch.font_size.value == 'large' else 0
-        self.l.setFont(-2, gFont(fontname, int(24 * scale)))
-        self.l.setFont(-1, gFont(fontname, int((22 + fontoffset) * scale)))
-        self.l.setFont(0, gFont(fontname, int((20 + fontoffset) * scale)))
-        self.l.setFont(1, gFont(fontname, int((18 + fontoffset) * scale)))
-        self.l.setFont(2, gFont(fontname, int((16 + fontoffset) * scale)))
+        self.l.setFont(-2, gFont(fontname, int(24 * SCALE)))
+        self.l.setFont(-1, gFont(fontname, int((22 + fontoffset) * SCALE)))
+        self.l.setFont(0, gFont(fontname, int((20 + fontoffset) * SCALE)))
+        self.l.setFont(1, gFont(fontname, int((18 + fontoffset) * SCALE)))
+        self.l.setFont(2, gFont(fontname, int((16 + fontoffset) * SCALE)))
 
 
 class ChefkochMain(Screen):
@@ -1751,19 +1717,25 @@ class ChefkochMain(Screen):
         </screen>'''
 
     def __init__(self, session):
-        global scale
-        global linesPerPage
+        global SCALE
+        global LINESPERPAGE
+        global ALPHA
+        global HIDEFLAG
         self.session = session
+        HIDEFLAG = True
+        ALPHA = '/proc/stb/video/alpha' if fileExists('/proc/stb/video/alpha') else None
+        if not ALPHA:
+            CKlog('Alphachannel not found! Hide/Show-Function (=blue button) disabled')
         font = 'Sans' if config.plugins.chefkoch.font.value else 'Regular'
         position = str(config.plugins.chefkoch.position.value)
-        scale = 1.0
-        linesPerPage = 6
+        SCALE = 1.0
+        LINESPERPAGE = 6
         if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
             self.dict = {'position': position, 'ssize': '885,980', 'msize': '855,860', 'picpath': Pluginpath + 'pic/', 'font': font}
             self.skin = applySkinVars(ChefkochMain.skinFHD, self.dict)
-            scale = 1.5
+            SCALE = 1.5
         elif config.plugins.chefkoch.plugin_size.value == 'FHDaltern':
-            linesPerPage = 10
+            LINESPERPAGE = 10
             self.dict = {'position': position, 'ssize': '590,980', 'msize': '570,900', 'picpath': Pluginpath + 'pic/', 'font': font}
             self.skin = applySkinVars(ChefkochMain.skinHD, self.dict)
         else:
@@ -1773,7 +1745,6 @@ class ChefkochMain(Screen):
         self.picfile = '/tmp/chefkoch.jpg'
         self.rezeptfile = '/tmp/Rezept.html'
         self.actmenu = 'mainmenu'
-        self.hideflag = True
         self['mainmenu'] = ItemList([])
         self['secondmenu'] = ItemList([])
         self['thirdmenu'] = ItemList([])
@@ -1781,7 +1752,7 @@ class ChefkochMain(Screen):
         self['label2'] = Label('= Suche')
         self['label3'] = Label('Favorit =')
         self['label4'] = Label('Ausblenden =')
-        self['release'] = Label(Release)
+        self['release'] = Label(RELEASE)
         self['helpactions'] = ActionMap(['HelpActions'], {'displayHelp': self.infoScreen}, -1)
         self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'MovieSelectionActions'], {
             'ok': self.ok,
@@ -1795,7 +1766,7 @@ class ChefkochMain(Screen):
             'red': self.fav,
             'yellow': self.yellow,
             'green': self.zufall,
-            'blue': self.hideScreen,
+            'blue': hideScreen,
             'showEventInfo': self.infoScreen,
             'contextMenu': self.config
         }, -1)
@@ -1826,7 +1797,7 @@ class ChefkochMain(Screen):
                     self.makeSecondMenu(mainId)
                 else:
                     sort = 4 if mainId == '999' else 1  # Datumsortierung für "Das perfekte Dinner"
-                    self.session.openWithCallback(self.selectMainMenu, ChefkochView, self.mainmenuquery[self.currItem], self.mainmenutitle[self.currItem], sort, False, False)
+                    self.session.openWithCallback(self.selectMainMenu, ChefkochView, self.mainmenuquery[self.currItem], '"' + self.mainmenutitle[self.currItem] + '"', sort, False, False)
 
         elif self.actmenu == 'secondmenu':
             secondId = self.secondId[self.currItem]
@@ -1834,11 +1805,11 @@ class ChefkochMain(Screen):
                 self.makeThirdMenu(secondId)
             else:
                 sort = 3 if self.CKvideo else 1  # Videosortierung für "Chefkoch Video"
-                self.session.openWithCallback(self.selectSecondMenu, ChefkochView, self.secondmenuquery[self.currItem], self.secondmenutitle[self.currItem], sort, False, False)
+                self.session.openWithCallback(self.selectSecondMenu, ChefkochView, self.secondmenuquery[self.currItem], '"' + self.secondmenutitle[self.currItem] + '"', sort, False, False)
 
         elif self.actmenu == 'thirdmenu':
             sort = 3 if self.CKvideo else 1  # Videosortierung für "Chefkoch Video"
-            self.session.openWithCallback(self.selectThirdMenu, ChefkochView, self.thirdmenuquery[self.currItem], self.thirdmenutitle[self.currItem], sort, False, False)
+            self.session.openWithCallback(self.selectThirdMenu, ChefkochView, self.thirdmenuquery[self.currItem], '"' + self.thirdmenutitle[self.currItem] + '"', sort, False, False)
 
     def makeMainMenu(self):
         global totalrecipes
@@ -1860,14 +1831,14 @@ class ChefkochMain(Screen):
         for i in range(len(self.currKAT)):
             res = ['']
             if self.currKAT[i]['level'] == 1:
-                res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * scale), int(30 * scale)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
+                res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
                 self.mainmenulist.append(res)
                 self.mainmenuquery.append(self.currKAT[i]['descriptionText'])
                 self.mainmenutitle.append(self.currKAT[i]['descriptionText'])
                 self.mainId.append(self.currKAT[i]['id'])
         self['mainmenu'].l.setList(self.mainmenulist)
-        self['mainmenu'].l.setItemHeight(int(30 * scale))
-        self['mainmenu'].l.setFont(-2, gFont('Sans', int(24 * scale)))
+        self['mainmenu'].l.setItemHeight(int(30 * SCALE))
+        self['mainmenu'].l.setFont(-2, gFont('Sans', int(24 * SCALE)))
         self.selectMainMenu()
 
     def makeSecondMenu(self, parentId):
@@ -1879,14 +1850,14 @@ class ChefkochMain(Screen):
         for i in range(len(self.currKAT)):
             res = ['']
             if self.currKAT[i]['level'] == 2 and self.currKAT[i]['parentId'] == parentId:
-                res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * scale), int(30 * scale)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
+                res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
                 self.secondmenulist.append(res)
                 self.secondmenuquery.append(self.currKAT[i]['descriptionText'])
                 self.secondmenutitle.append(self.currKAT[i]['descriptionText'])
                 self.secondId.append(self.currKAT[i]['id'])
         self['secondmenu'].l.setList(self.secondmenulist)
-        self['secondmenu'].l.setItemHeight(int(30 * scale))
-        self['secondmenu'].l.setFont(-2, gFont('Sans', int(24 * scale)))
+        self['secondmenu'].l.setItemHeight(int(30 * SCALE))
+        self['secondmenu'].l.setFont(-2, gFont('Sans', int(24 * SCALE)))
         self['secondmenu'].moveToIndex(0)
         for i in range(len(self.currKAT)):
             if self.currKAT[i]['id'] == parentId:
@@ -1901,13 +1872,13 @@ class ChefkochMain(Screen):
         for i in range(len(self.currKAT)):
             res = ['']
             if self.currKAT[i]['level'] == 3 and self.currKAT[i]['parentId'] == parentId:
-                res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * scale), int(30 * scale)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
+                res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
                 self.thirdmenulist.append(res)
                 self.thirdmenuquery.append(self.currKAT[i]['descriptionText'])
                 self.thirdmenutitle.append(self.currKAT[i]['descriptionText'])
         self['thirdmenu'].l.setList(self.thirdmenulist)
-        self['thirdmenu'].l.setItemHeight(int(30 * scale))
-        self['thirdmenu'].l.setFont(-2, gFont('Sans', int(24 * scale)))
+        self['thirdmenu'].l.setItemHeight(int(30 * SCALE))
+        self['thirdmenu'].l.setFont(-2, gFont('Sans', int(24 * SCALE)))
         self['thirdmenu'].moveToIndex(0)
         for i in range(len(self.currKAT)):
             if self.currKAT[i]['id'] == parentId:
@@ -2060,7 +2031,7 @@ class ChefkochMain(Screen):
         self.session.open(chefkochFav)
 
     def zufall(self):
-        self.session.openWithCallback(self.selectMainMenu, ChefkochView, 'recipe-of-today', 'Zufallsrezept', 1, False, True)
+        self.session.openWithCallback(self.selectMainMenu, ChefkochView, 'recipe-of-today', ' "Zufallsrezept"', 1, False, True)
 
     def zap(self):
         servicelist = self.session.instantiateDialog(ChannelSelection)
@@ -2074,33 +2045,20 @@ class ChefkochMain(Screen):
     def infoScreen(self):
         pass
 
-    def hideScreen(self):
-        if self.hideflag:
-            self.hideflag = False
-            for i in range(40, 0, -1):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
-        else:
-            self.hideflag = True
-            for i in range(1, 41):
-                f = open('/proc/stb/video/alpha', 'w')
-                f.write('%i' % (config.av.osd_alpha.value * i / 40))
-                f.close()
-
     def eject(self, dummy):
         self.exit()
 
     def exit(self):
-        if self.hideflag == False:
-            self.hideflag = True
-            f = open('/proc/stb/video/alpha', 'w')
+        global HIDEFLAG
+        if HIDEFLAG == False:
+            HIDEFLAG = True
+            f = open(ALPHA, 'w')
             f.write('%i' % config.av.osd_alpha.value)
             f.close()
         if self.actmenu == 'mainmenu':
             config.usage.on_movie_stop.value = self.movie_stop
             config.usage.on_movie_eof.value = self.movie_eof
-            for i in range(linesPerPage):
+            for i in range(LINESPERPAGE):
                 pic = '/tmp/chefkoch%d.jpg' % i
                 if fileExists(pic):
                     remove(pic)
