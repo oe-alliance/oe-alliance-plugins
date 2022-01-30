@@ -68,6 +68,7 @@ def applySkinVars(skin, dict):
         skin = skin.replace('{' + key + '}', dict[key])
     return skin
 
+
 PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte'
 APIURIBASE = 'https://api.chefkoch.de/v2'
 
@@ -1108,7 +1109,6 @@ class ChefkochView(Screen):
     def zap(self):
         servicelist = self.session.instantiateDialog(ChannelSelection)
         self.session.execDialog(servicelist)
-
 
     def eject(self, answer):
         self.exit()
