@@ -3,6 +3,7 @@ from six.moves import configparser
 from . import vbcfg
 from io import open
 
+
 class BookmarkData:
 	def __init__(self, _id, _title, _url, _parent, _type):
 		self.mId = _id
