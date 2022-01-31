@@ -1,7 +1,7 @@
 from __future__ import print_function, absolute_import
 from six.moves import configparser
 from . import vbcfg
-
+from io import open
 
 class BookmarkData:
 	def __init__(self, _id, _title, _url, _parent, _type):
@@ -52,7 +52,7 @@ class SimpleConfigParser:
 		self.mDataValid = True
 
 	def _save(self):
-		with open(self.mFileName, 'wb') as bookmarkFile:
+		with open(self.mFileName, 'w', encoding='utf-8') as bookmarkFile:
 			self.mConfig.write(bookmarkFile)
 		self.mDataValid = False
 		self.mPopulateValid = False
