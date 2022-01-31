@@ -53,8 +53,12 @@ class SimpleConfigParser:
 		self.mDataValid = True
 
 	def _save(self):
-		with open(self.mFileName, 'w', encoding='utf-8') as bookmarkFile:
-			self.mConfig.write(bookmarkFile)
+		if sis.PY2:
+			with open(self.mFileName, 'wb') as bookmarkFile:
+				self.mConfig.write(bookmarkFile)
+		elif sis.PY3:
+			with open(self.mFileName, 'w', encoding='utf-8') as bookmarkFile:
+				self.mConfig.write(bookmarkFile)
 		self.mDataValid = False
 		self.mPopulateValid = False
 
