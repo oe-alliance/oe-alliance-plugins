@@ -381,12 +381,14 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
         self.session.current_dialog.close(True)
 
     def showOptimizeFileSizeMessage(self, *args):
-        self.session.openWithCallback(self.__optimizeFileSizeWindowCallback, MessageBox, _('Optimize Picons file size?\n\nBe aware, this function is maybe very slow!!'), MessageBox.TYPE_YESNO)
+        self.session.openWithCallback(self.__optimizeFileSizeWindowCallback, MessageBox, _('Optimize Picons file size?\n\nBe aware, this function is maybe very slow and reduces the quality!!'), MessageBox.TYPE_YESNO, default=False)
 
     def __optimizeFileSizeWindowCallback(self, result):
         if result:
             addEventListener(OPTIMIZE_PICONS_FINISHED, self.__optimizePiconsFinished)
             OptimizePiconsFileSize(self.session)
+        else:
+            self.showFinishedMessage()
 
     def __optimizePiconsFinished(self):
         removeEventListener(OPTIMIZE_PICONS_FINISHED, self.__optimizePiconsFinished)
@@ -394,7 +396,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
         self.session.current_dialog.close(True)
 
     def showFinishedMessage(self, *args):
-        self.session.open(MessageBox, self.finishedMessage, type=MessageBox.TYPE_INFO, timeout=5)
+        self.session.open(MessageBox, self.finishedMessage, type=MessageBox.TYPE_INFO, timeout=10)
         print(' ')
         printToConsole('Finished!')
         print(' ')

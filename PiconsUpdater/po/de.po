@@ -31,47 +31,45 @@ msgid "Downloading %d of %d Picons"
 msgstr "Downloading %d von %d Picons"
 
 msgid "Exclude IPTV"
-msgstr ""
+msgstr "IPTV ausschließen"
 
 msgid "Exclude Radio"
-msgstr ""
+msgstr "Radio ausschließen"
 
 #, python-format
 msgid "Merge %d of %d Picons"
 msgstr "Installiert %d von %d Picons"
 
 msgid "Merge Picons"
-msgstr "Picons installieren in Bearbeitung"
+msgstr "Picons werden installiert"
 
 msgid "Mirror Effect"
-msgstr ""
+msgstr "Spiegeleffekt"
 
 #, python-format
 msgid "Optimize %d of %d Picons"
 msgstr "Optimiert %d von %d Picons"
 
 msgid "Optimize Picons Progress"
-msgstr "Picons Optimieren in Bearbeitung"
+msgstr "Picons werden optimiert"
 
 msgid ""
 "Optimize Picons file size?\n"
 "\n"
-"Be aware, this function is maybe very slow!!"
+"Be aware, this function is maybe very slow and reduces the quality!!"
 msgstr ""
 "Soll die Picons Dateigröße optimiert werden?\n"
 "\n"
-"Achtung! Die Optimierung ist unter umständen sehr langsam!!"
+"Achtung! Die Optimierung ist unter umständen sehr langsam und verringert die Qualität!!"
 
-#, fuzzy
 msgid "Picon Style"
-msgstr "Picons Verzeichnis"
+msgstr "Picon Stil"
 
 msgid "Picons Folder"
 msgstr "Picons Verzeichnis"
 
-#, fuzzy
 msgid "Picons background/foreground image"
-msgstr "Picons Hintergrundbild"
+msgstr "Picons Hintergrund-/Vordergrundbild"
 
 msgid ""
 "Picons folder\n"
@@ -91,7 +89,7 @@ msgid ""
 "%s Picons downloaded\n"
 "%s Picons not found"
 msgstr ""
-"Prozess abgeschlosse.\n"
+"Prozess abgeschlossen\n"
 "%s Picons heruntergeladen\n"
 "%s Picons nicht gefunden"
 
@@ -104,4 +102,4 @@ msgid ""
 "Make sure you select a writable directory instead."
 msgstr ""
 "Das Verzeichnis %s ist nicht beschreibbar\n"
-"Bitte sicherstellen dass das Verzeichnis beschreibbar ist."
+"Bitte sicherstellen, dass das Verzeichnis beschreibbar ist."
