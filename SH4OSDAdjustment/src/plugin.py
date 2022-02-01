@@ -338,7 +338,7 @@ def main(session, **kwargs):
 
 
 def menu(menuid, **kwargs):
-    if menuid == 'osd_menu':
+    if menuid == 'video_menu':
         return [(_('OSD Adjustment'),
           main,
           'OSD_Adjustment',
