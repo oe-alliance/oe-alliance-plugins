@@ -123,7 +123,6 @@ class MessageBoxConfirmCode(MessageBox):
 			self["text"].setText(self.text + (_(" within %d seconds.")) % self.timeout)
 			if self.timeout == 0:
 				self.timer.stop()
-				self.timerRunning = False
 				self.timeoutCallback()
 
 	def move(self, direction):
