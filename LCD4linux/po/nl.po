@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-10-10 21:04+0200\n"
-"PO-Revision-Date: 2021-10-10 23:13+0200\n"
-"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
+"PO-Revision-Date: 2022-02-12 17:31+0100\n"
+"Last-Translator: Snoete <snoete via GitHub.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
 
@@ -778,7 +778,7 @@ msgid "Background-Picture Type"
 msgstr "Achtergrond-type plaatje"
 
 msgid "Backup Config"
-msgstr "Sla configurtie op"
+msgstr "Back-up configuratie"
 
 msgid "Bar"
 msgstr "Balk"
@@ -1803,31 +1803,31 @@ msgid "Reload"
 msgstr "Herlaad"
 
 msgid "Remote Box"
-msgstr "Klant box"
+msgstr "Remote box"
 
 msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr "Klantbox 1 [Displayname:]IP/Name"
+msgstr "Remote box 1 [Displayname:]IP/Name"
 
 msgid "Remote Box 2 [Displayname:]IP/Name"
-msgstr "Klantbox 2 [Displayname:]IP/Name"
+msgstr "Remote box 2 [Displayname:]IP/Name"
 
 msgid "Remote Box 3 [Displayname:]IP/Name"
-msgstr "Klantbox 3 [Displayname:]IP/Name"
+msgstr "Remote box 3 [Displayname:]IP/Name"
 
 msgid "Remote Box 4 [Displayname:]IP/Name"
-msgstr "Klantbox 4 [Displayname:]IP/Name"
+msgstr "Remote box 4 [Displayname:]IP/Name"
 
 msgid "Remote Box 5 [Displayname:]IP/Name"
-msgstr "Klantbox 5 [Displayname:]IP/Name"
+msgstr "Remote box 5 [Displayname:]IP/Name"
 
 msgid "Remote Box Poll every Minutes"
-msgstr "Klantbox elke minuut pollen"
+msgstr "Remote box elke minuut controleren"
 
 msgid "Remote Box Timer"
-msgstr "Remote box timer"
+msgstr "Remote box Timer"
 
 msgid "Remote Box Timer Poll every Minutes"
-msgstr "Remote box timer polt elke minuten"
+msgstr "Remote box Timer elke minuut controleren"
 
 msgid "Remote Box Timer [Displayname:]IP/Name"
 msgstr "Remote box timer [Displayname:]IP/Name"
@@ -1902,7 +1902,7 @@ msgid "Satellite"
 msgstr "Satelliet"
 
 msgid "Save"
-msgstr "Sla op"
+msgstr "Bevestigen"
 
 msgid "Save Config"
 msgstr "Sla configuratie op"
@@ -2128,7 +2128,7 @@ msgid "Storage-Devices"
 msgstr "Opslagmedia"
 
 msgid "Storage-Devices: Color Back"
-msgstr "Opslagmedia:kleuk achter"
+msgstr "Opslagmedia: kleur achter"
 
 msgid "Storage-Devices: Color Bar"
 msgstr "Opslagmedia: kleur balk"
