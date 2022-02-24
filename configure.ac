@@ -606,13 +606,10 @@ TVSpielfilm/Makefile
 TVSpielfilm/meta/Makefile
 TVSpielfilm/src/Makefile
 TVSpielfilm/src/db/Makefile
-TVSpielfilm/src/font/Makefile
 TVSpielfilm/src/pic/Makefile
 TVSpielfilm/src/pic/buttons/Makefile
 TVSpielfilm/src/pic/icons/Makefile
-TVSpielfilm/src/pic/logos/Makefile
-TVSpielfilm/src/pic/setup/Makefile
-TVSpielfilm/src/pic/slider/Makefile
+TVSpielfilm/src/pic/picons/Makefile
 
 Chefkoch/Makefile
 Chefkoch/meta/Makefile
