@@ -8,6 +8,7 @@ from RecordTimer import RecordTimerEntry
 from time import mktime, strftime, gmtime, localtime
 from os import remove, linesep, rename, path
 from re import findall, match, search, split, sub, S, compile
+from glob import glob
 from Tools.Directories import fileExists, isPluginInstalled
 from twisted.web import client, error
 from twisted.web.client import getPage, downloadPage
@@ -6018,14 +6019,31 @@ class gotoPageMenu(tvAllScreen):
             endpos = output.find('<optgroup label="alle Sender alphabetisch">')
         bereich = output[startpos:endpos]
         sender = findall('"channel":"(.*?)","broadcastChannelGroup"', bereich)
-# for analysis purpose only, activate when picons are missing
+# for analysis purpose only! activate when picons are missing or for detecting unneeded picons
 #        fullname = findall("<option label='(.*?)' value=", bereich)
+#        availpicons = glob(PICPATH + 'picons/*.png')
+#        for i in range(len(availpicons)):
+#            availpicons[i] = availpicons[i][availpicons[i].rfind('/') + 1 :]
+#        ff = open("/home/root/logs/avail_picons.txt", "w")
+#        ff.write('list of available picons in pluginpath ../pic/picons/:\n')
+#        ff.write('----------------------------------------------------\n')
+#        for i in range(len(availpicons)):
+#            ff.write(availpicons[i] + '\n')
+#        ff.close()
 #        ff = open("/home/root/logs/missing_picons.txt", "w")
 #        ff.write('list of missing picons in pluginpath ../pic/picons/:\n')
 #        ff.write('----------------------------------------------------\n')
 #        for i in range(len(sender)):
-#            if not fileExists(PICPATH + 'picons/' + sender[i].lower() + '.png'):
+#            if fileExists(PICPATH + 'picons/' + sender[i].lower() + '.png'):
+#                availpicons.remove(sender[i].lower() + '.png')
+#            else:
 #                ff.write(str(fullname[i]) + ", " + str(sender[i].lower()) + '.png\n')
+#        ff.close()
+#        ff = open("/home/root/logs/unneeded_picons.txt", "w")
+#        ff.write('list of unneeded picons in pluginpath ../pic/picons/:\n')
+#        ff.write('----------------------------------------------------\n')
+#        for i in range(len(availpicons)):
+#            ff.write(availpicons[i] + '\n')
 #        ff.close()
 #        ff = open("/home/root/logs/complete_piconslist.txt", "w")
 #        ff.write('Complete list of picons from homepage:\n')
