@@ -4848,18 +4848,18 @@ class searchYouTube(tvAllScreen):
         self.trailer_id = findall('{"videoRenderer":{"videoId":"(.*?)","thumbnail', bereich)
         self.trailer_titel = findall('"title":{"runs":\[{"text":"(.*?)"}\],"accessibility', bereich)
         self.trailer_time = findall('{"text":{"accessibility":{"accessibilityData":{"label":"(.*?)"}},', bereich)
-        mh = int(81 * SCALE + 0.5)
+        mh = int(60 * SCALE)
         for i in range(len(self.trailer_id)):
             res = ['']
             if self.backcolor:
-                res.append(MultiContentEntryText(pos=(0, 0), size=(840, mh), font=2, backcolor_sel=self.back_color, text=''))
-            titel = self.trailer_titel[i].split(' | ')[0].replace('\u0026', '&')
+                res.append(MultiContentEntryText(pos=(0, 0), size=(int(560 * SCALE), mh), font=0, backcolor_sel=self.back_color, text=''))
+            titel = self.trailer_titel[i].split(' | ')[0].replace('\\u0026', '&')
             time = self.trailer_time[i]
-            res.append(MultiContentEntryText(pos=(int(10 * SCALE), 0), size=(int(730 * SCALE), int(50 * SCALE)), font=2, color=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=titel))
-            res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(50 * SCALE)), size=(840, 28), font=1, color=16777215, flags=RT_HALIGN_LEFT, text=time))
+            res.append(MultiContentEntryText(pos=(int(10 * SCALE), 0), size=(int(530 * SCALE), mh), font=0, color=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=titel))
+            res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(42 * SCALE)), size=(int(530 * SCALE), mh), font=-2, color=16777215, flags=RT_HALIGN_LEFT, text=time))
             self.trailer_list.append(res)
         self['list'].l.setList(self.trailer_list)
-        self['list'].l.setItemHeight(int(81 * SCALE))
+        self['list'].l.setItemHeight(int(mh))
         self['list'].moveToIndex(0)
         self.ready = True
         for i in range(self.LinesPerPage):
@@ -4909,7 +4909,7 @@ class searchYouTube(tvAllScreen):
         if self.ready:
             c = self['list'].getSelectedIndex()
             self['list'].down()
-            if c % self.LinesPerPage == 3 or c + 1 == len(self.trailer_id):
+            if (c + 1) % self.LinesPerPage == 0:
                 offset = (c + 1) // self.LinesPerPage * self.LinesPerPage if (c + 1) < len(self.trailer_id) else 0
                 self.setPosters(offset)
 
@@ -4934,7 +4934,7 @@ class searchYouTube(tvAllScreen):
             c = self['list'].getSelectedIndex()
             self['list'].pageUp()
             offset = (c - self.LinesPerPage) // self.LinesPerPage * self.LinesPerPage
-            if offset > 0:
+            if offset >= 0:
                 self.setPosters(offset)
 
     def setPosters(self, offset):

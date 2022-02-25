@@ -14,7 +14,7 @@
 		<widget name="bluebutton" position="250,700" size="28,28" pixmap="{picpath}buttons/blueFHD.png" alphatest="blend" zPosition="2"/>
 	</screen>
 
-	<screen name="tvTipps" position="center-585,center+232" size="750,260" flags="wfNoBorder" title=" ">
+	<screen name="tvTipps" position="center-585,center+237" size="750,260" flags="wfNoBorder" title=" ">
 		<widget name="picture" position="0,0" size="395,260" alphatest="blend" zPosition="1"/>
 		<widget name="elabel3" position="395,90" size="345,170" font="Regular;18" backgroundColor="#FFFFFF" zPosition="1"/>
 		<widget name="label" position="405,90" size="325,25" font="Regular;21" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2"/>
@@ -262,10 +262,10 @@
 		<widget name="infotext6" position="1550,220" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext7" position="1550,275" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="tvinfo0" position="15,320" size="60,20" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo1" position="75,320" size="60,20" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo2" position="135,320" size="60,20" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo3" position="195,320" size="60,20" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo4" position="255,320" size="60,20" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo1" position="80,320" size="60,20" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo2" position="145,320" size="60,20" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo3" position="210,320" size="60,20" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo4" position="275,320" size="60,20" alphatest="blend" zPosition="1"/>
 		<widget name="picon" position="605,110" size="89,54" alphatest="blend" zPosition="1"/>
 		<widget name="cinlogo" position="603,164" size="90,44" pixmap="{picpath}icons/cinFHD.png" alphatest="blend" zPosition="2"/>
 		<widget name="playlogo" position="585,225" size="109,58" pixmap="{picpath}icons/playFHD.png" alphatest="blend" zPosition="2"/>
@@ -290,24 +290,24 @@
 		<widget name="pagemenu" position="15,15" size="620,880" scrollbarMode="showAlways" zPosition="1"/>
 	</screen>
 
-	<screen name="searchYouTube" position="center,center" size="1000,580" title=" ">
+	<screen name="searchYouTube" position="center,center" size="1000,650" title=" ">
 		<ePixmap position="0,0" size="1000,50" pixmap="{picpath}youtube.png" alphatest="blend" zPosition="1"/>
-		<widget render="Label" source="global.CurrentTime" position="830,0" size="150,50" font="Regular;32" foregroundColor="#000DFE" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
+		<widget render="Label" source="global.CurrentTime" position="890,0" size="90,50" font="Regular;32" foregroundColor="#000DFE" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M</convert>
 		</widget>
-		<widget name="poster0" position="15,55" size="142,80" alphatest="blend" zPosition="1"/>
-		<widget name="poster1" position="15,136" size="142,80" alphatest="blend" zPosition="1"/>
-		<widget name="poster2" position="15,217" size="142,80" alphatest="blend" zPosition="1"/>
-		<widget name="poster3" position="15,298" size="142,80" alphatest="blend" zPosition="1"/>
-		<widget name="poster4" position="15,379" size="142,80" alphatest="blend" zPosition="1"/>
-		<widget name="poster5" position="15,460" size="142,80" alphatest="blend" zPosition="1"/>
-		<widget name="list" position="150,55" size="840,490" scrollbarMode="showOnDemand" zPosition="1"/>
-		<widget name="label2" position="485,545" size="200,35" font="Regular;26" halign="left" zPosition="2"/>
-		<widget name="label5" position="770,545" size="240,35" font="Regular;26" halign="left" zPosition="1"/>
-		<ePixmap position="30,550" size="28,28" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2"/>
-		<ePixmap position="240,550" size="28,28" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2"/>
-		<ePixmap position="450,550" size="28,28" pixmap="{picpath}buttons/yellowFHD.png" alphatest="blend" zPosition="2"/>
-		<widget name="bluebutton" position="730,550" size="28,28" pixmap="{picpath}buttons/blueFHD.png" alphatest="blend" zPosition="2"/>
+		<widget name="poster0" position="15,60" size="160,90" alphatest="blend" zPosition="1"/>
+		<widget name="poster1" position="15,150" size="160,90" alphatest="blend" zPosition="1"/>
+		<widget name="poster2" position="15,240" size="160,90" alphatest="blend" zPosition="1"/>
+		<widget name="poster3" position="15,330" size="160,90" alphatest="blend" zPosition="1"/>
+		<widget name="poster4" position="15,420" size="160,90" alphatest="blend" zPosition="1"/>
+		<widget name="poster5" position="15,510" size="160,90" alphatest="blend" zPosition="1"/>
+		<widget name="list" position="160,60" size="840,540" scrollbarMode="showOnDemand" zPosition="1"/>
+		<widget name="label2" position="485,615" size="240,35" font="Regular;26" halign="left" zPosition="2"/>
+		<widget name="label5" position="770,615" size="240,35" font="Regular;26" halign="left" zPosition="1"/>
+		<ePixmap position="30,620" size="28,28" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2"/>
+		<ePixmap position="240,620" size="28,28" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2"/>
+		<ePixmap position="450,620" size="28,28" pixmap="{picpath}buttons/yellowFHD.png" alphatest="blend" zPosition="2"/>
+		<widget name="bluebutton" position="730,620" size="28,28" pixmap="{picpath}buttons/blueFHD.png" alphatest="blend" zPosition="2"/>
 	</screen>
 
 	<screen name="tvsConfig" position="center,center" size="825,880" backgroundColor="#20000000" title="TV Spielfilm Setup">
