@@ -10823,7 +10823,7 @@ def LCD4linuxPIC(self, session):
 				if selection == "*":
 					selection = ["jpg", "png"]
 				for extension in selection:
-						if cover == "" and os.path.isfile(covername + extension):
+						if cover == "" and os.path.isfile(covername + "." + extension):
 							cover = covername + "." + extension
 							break
 			if cover == "" and LCD4linux.MPCoverPiconFirst.value == True:
