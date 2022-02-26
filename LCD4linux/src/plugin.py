@@ -7960,8 +7960,8 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				LCD4linux.MPTextFile.value = dirdir
 			elif sel == LCD4linux.MPCoverFile:
 				LCD4linux.MPCoverFile.value = dirdir
-			elif sel == LCD4linux.MPCoverFile2:
-				LCD4linux.MPCoverFile2.value = dirdir
+#			elif sel == LCD4linux.MPCoverFile2:
+#				LCD4linux.MPCoverFile2.value = dirdir
 			elif sel == LCD4linux.BildFile:
 				LCD4linux.BildFile.value = dirdir
 			elif sel == LCD4linux.Bild2File:
@@ -10817,8 +10817,15 @@ def LCD4linuxPIC(self, session):
 					L4log("Title Error", Title)
 			if cover == "" and os.path.isfile("/tmp/.cover"):
 				cover = "/tmp/.cover"
-			if cover == "" and os.path.isfile(LCD4linux.MPCoverFile2.value):
-				cover = LCD4linux.MPCoverFile2.value
+			for coverfile in LCD4linux.MPCoverFile2.value.split(','):
+				covername = coverfile.split(".")[0].strip()
+				selection = coverfile.split(".")[1].strip()
+				if selection == "*":
+					selection = [".jpg", ".png"]
+				for extension in selection:
+						if cover == "" and os.path.isfile(covername + extension):
+							cover = covername + extension
+							break
 			if cover == "" and LCD4linux.MPCoverPiconFirst.value == True:
 				if WebRadioFSok == True and os.path.isfile(self.l4l_info.get("Logo", "")):
 					cover = self.l4l_info.get("Logo", "")
