@@ -10821,10 +10821,10 @@ def LCD4linuxPIC(self, session):
 				covername = coverfile.split(".")[0].strip()
 				selection = coverfile.split(".")[1].strip()
 				if selection == "*":
-					selection = [".jpg", ".png"]
+					selection = ["jpg", "png"]
 				for extension in selection:
 						if cover == "" and os.path.isfile(covername + extension):
-							cover = covername + extension
+							cover = covername + "." + extension
 							break
 			if cover == "" and LCD4linux.MPCoverPiconFirst.value == True:
 				if WebRadioFSok == True and os.path.isfile(self.l4l_info.get("Logo", "")):
