@@ -1,5 +1,5 @@
 <setupxml>
-	<setup key="transcoding" title="Transcoding Setup" showOpenWebIF="1">
+	<setup key="transcoding" title="Transcoding Setup" showOpenWebIf="1">
 		<item level="0" text="Encoder Bitrate" description="Setup your timezone.">config.plugins.transcodingsetup.bitrate</item>
 		<item level="0" text="Encoder Framerate" description="Setup your timezone.">config.plugins.transcodingsetup.framerate</item>
 		<item level="0" text="Encoder Resolution" description="Setup your timezone.">config.plugins.transcodingsetup.resolution</item>
