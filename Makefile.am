@@ -26,10 +26,6 @@ if DAGSMV200
 SUBDIRS += MultiTransCodingSetup
 endif
 
-if DREAMBOX
-SUBDIRS +=  DMBlindscan
-endif
-
 if DINOBOT
 SUBDIRS += MultiTransCodingSetup
 endif

@@ -84,7 +84,7 @@ class DmmBlindscanState(Screen):
 		self["post_action"] = Label()
 		self["progress"] = Label()
 		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText("Auto / Manual")
+		self["key_green"] = StaticText(_("Auto / Manual"))
 		self["actions"] = ActionMap(["OkCancelActions", "ColorActions"],
 		{
 			"ok": self.keyOk,
@@ -233,7 +233,11 @@ class SatelliteTransponderSearchSupport:
 				else:
 					parm.symbol_rate = int(round(d["symbol_rate"], -3))
 					parm.fec = d["fec_inner"]
-					parm.inversion = eDVBFrontendParametersSatellite.Inversion_Unknown
+					fec_inner = r["fec_inner"]
+					if parm.fec == eDVBFrontendParametersSatellite.FEC_None:
+						parm.fec = eDVBFrontendParametersSatellite.FEC_Auto
+						fec_inner = "Auto"
+					parm.inversion = eDVBFrontendParametersSatellite.Inversion_Off
 					parm.polarisation = d["polarization"]
 					parm.orbital_position = d["orbital_position"]
 					parm.system = d["system"]
@@ -262,7 +266,7 @@ class SatelliteTransponderSearchSupport:
 						str(parm.frequency // 1000),
 						{eDVBFrontendParametersSatellite.Polarisation_Horizontal: "H", eDVBFrontendParametersSatellite.Polarisation_Vertical: "V", eDVBFrontendParametersSatellite.Polarisation_CircularLeft: "L", eDVBFrontendParametersSatellite.Polarisation_CircularRight: "R"}.get(parm.polarisation),
 						str(parm.symbol_rate // 1000),
-						r["fec_inner"],
+						fec_inner,
 						r["system"],
 						r["modulation"])
 
@@ -276,7 +280,7 @@ class SatelliteTransponderSearchSupport:
 						print("[dmmBlindscan][frontendStateChanged] LOCKED at", freq, "SEARCHED at", self.parm.frequency, "half bw", (135 * ((sr + 1000) // 1000) // 200), "half search range", (self.parm.symbol_rate / 2))
 						self.parm.frequency = freq
 						self.parm.frequency += (135 * ((sr + 999) // 1000) // 200)
-						self.parm.frequency += self.parm.symbol_rate / 2
+						self.parm.frequency += self.parm.symbol_rate // 2
 
 					if parm_list:
 						bm = state.getConstellationBitmap(5)
