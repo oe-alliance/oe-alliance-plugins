@@ -7203,7 +7203,6 @@ class TVHeuteView(tvBaseScreen):
         if self.current != 'postview' and self.ready and not self.search:
             self.session.openWithCallback(self.numberEntered, gotoPageMenu, self.count, self.maxpages)
 
-
     def gotoPage(self, number):
         if self.current != 'postview' and self.ready and not self.search:
             self.session.openWithCallback(self.numberEntered, getNumber, number)
