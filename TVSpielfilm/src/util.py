@@ -88,13 +88,13 @@ class ItemList(MenuList):
         else:
             basesize = 16
         if FULLHD:
-            self.l.setFont(-2, gFont('Regular', 22))
+            self.l.setFont(-2, gFont('Regular', 24))
             self.l.setFont(-1, gFont('Regular', basesize + 8))
             self.l.setFont(0, gFont('Regular', basesize + 10))
             self.l.setFont(1, gFont('Regular', basesize + 12))
             self.l.setFont(2, gFont('Regular', 30))
         else:
-            self.l.setFont(-2, gFont('Regular', 12))
+            self.l.setFont(-2, gFont('Regular', 16))
             self.l.setFont(-1, gFont('Regular', basesize - 2))
             self.l.setFont(0, gFont('Regular', basesize))
             self.l.setFont(1, gFont('Regular', basesize + 2))

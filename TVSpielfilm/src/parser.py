@@ -12,10 +12,11 @@ NEXTPage2 = '<a href="(.*?)"\n\\s+class="js-track-link pagination__link paginati
 
 
 def shortenChannel(text):
-    text = text.replace('ProSieben ', 'Pro7 ').replace('kabel eins CLASSICS', 'k1CLASSICS').replace('Sky Family', 'SkyFamily').replace('Sky Cinema+', 'SkyCine+').replace('Sky Comedy', 'SkyComedy').replace(
-        'Sky Emotion', 'SkyEmotion').replace('Sky Sport HD', 'SkySport').replace('Eurosport ', 'Eurosport').replace('EXTREME SPORTS', 'EXTREME').replace('NAT GEO WILD', 'NatGeoWild').replace('Romance TV', 'RomanceTV')
-    text = text.replace('13th Street', '13thStreet').replace('VH1 Classic', 'VH1Classic').replace('COMEDY CENTRAL', 'COMEDY C').replace(
-        'Cartoon Network', 'CartoonNet').replace('Disney Cinemagic', 'DisneyCine').replace('HISTORY HD', 'History HD').replace('DELUXE MUSIC', 'DeluxMusic')
+    text = text.replace('ProSieben ', 'Pro7 ').replace('kabel eins CLASSICS', 'k1CLASSICS').replace('Sky Family', 'SkyFamily').replace('Sky Cinema+', 'SkyCine+')
+    text = text.replace('Sky Comedy', 'SkyComedy').replace('Sky Emotion', 'SkyEmotion').replace('Sky Sport HD', 'SkySport').replace('Eurosport ', 'Eurosport')
+    text = text.replace('EXTREME SPORTS', 'EXTREME').replace('NAT GEO WILD', 'NatGeoWild').replace('Romance TV', 'RomanceTV').replace('13th Street', '13thStreet')
+    text = text.replace('VH1 Classic', 'VH1Classic').replace('COMEDY CENTRAL', 'COMEDY C').replace('Cartoon Network', 'CartoonNet')
+    text = text.replace('Disney Cinemagic', 'DisneyCine').replace('HISTORY HD', 'History HD').replace('DELUXE MUSIC', 'DeluxMusic')
     return text
 
 
@@ -26,14 +27,15 @@ def transWIKI(text):
 
 
 def transHTML(text):
-    text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;',
-                                                                                                                                               '"').replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '')
-    text = text.replace('&copy;.*', ' ').replace('&amp;copy;', '').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;',
-                                                                                                                                                             '\xc3\xb6').replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
-    text = text.replace('&Uuml;', 'Ue').replace('&Auml;', 'Ae').replace('&Ouml;', 'Oe').replace('&#034;', '"').replace('&#039;', "'").replace('&#34;', '"').replace('&#38;', 'und').replace('&#39;', "'").replace('&#133;', '...').replace('&#196;', '\xc3\x84').replace(
-        '&#214;', '\xc3\x96').replace('&#220;', '\xc3\x9c').replace('&#223;', '\xc3\x9f').replace('&#228;', '\xc3\xa4').replace('&#246;', '\xc3\xb6').replace('&#252;', '\xc3\xbc').replace('&#287;', 'c').replace('&#324;', 'n').replace('&#351;', 's')
-    text = text.replace('&#8211;', '-').replace('&#8212;', '\x97').replace('&#8216;', "'").replace('&#8217;', "'").replace('&#8220;',
-                                                                                                                           '"').replace('&#8221;', '"').replace('&#8230;', '...').replace('&#8242;', "'").replace('&#8243;', '"')
+    text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ss').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;','"')
+    text = text.replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '').replace('&copy;.*', ' ')
+    text = text.replace('&amp;copy;', '').replace('&amp;', '&').replace('&uuml;', '\xc3\xbc').replace('&auml;', '\xc3\xa4').replace('&ouml;', '\xc3\xb6')
+    text = text.replace('&eacute;', '\xe9').replace('&hellip;', '...').replace('&egrave;', '\xe8').replace('&agrave;', '\xe0').replace('&mdash;', '-')
+    text = text.replace('&Uuml;', 'Ue').replace('&Auml;', 'Ae').replace('&Ouml;', 'Oe').replace('&#034;', '"').replace('&#039;', "'").replace('&#34;', '"')
+    text = text.replace('&#38;', 'und').replace('&#39;', "'").replace('&#133;', '...').replace('&#196;', '\xc3\x84').replace('&#214;', '\xc3\x96')
+    text = text.replace('&#223;', '\xc3\x9f').replace('&#228;', '\xc3\xa4').replace('&#246;', '\xc3\xb6').replace('&#220;', '\xc3\x9c').replace('&#252;', '\xc3\xbc')
+    text = text.replace('&#287;', 'c').replace('&#324;', 'n').replace('&#351;', 's').replace('&#8211;', '-').replace('&#8212;', '\x97').replace('&#8216;', "'")
+    text = text.replace('&#8217;', "'").replace('&#8220;', '"').replace('&#8221;', '"').replace('&#8230;', '...').replace('&#8242;', "'").replace('&#8243;', '"')
     return text
 
 
@@ -72,6 +74,7 @@ def transCHANNEL(data):
     data = sub('kabel.*? d.*?,', 'k1doku', data)
     data = sub('kabel.*?,', 'k1', data)
     data = sub('sky 1.*?,', 'sky1', data)
+    data = sub('sky one.*?,', 'sky1', data)
     data = sub('sky .*?action.*?,', 'sky-a', data)
     data = sub('sky .*?atlantic.*?,', 'skyat', data)
     data = sub('sky .*?fun.*?,', 'sky-c', data)
@@ -90,6 +93,7 @@ def transCHANNEL(data):
     data = sub('sky .*?xmas.*?,', 'xmas', data)
     data = sub('sky .*?christmas.*?,', 'xmas', data)
     data = sub('sky bundesliga.*?,', 'buli', data)
+    data = sub('sky comedy.*?,', 'sky-co', data)
     data = sub('sky sport news.*?,', 'snhd', data)
     data = sub('sky sport hd,', 'snhd', data)
     data = sub('sky sport hd 1,', 'hdspo', data)
@@ -103,6 +107,7 @@ def transCHANNEL(data):
     data = sub('sport.*?[+].*?,', 's1plu', data)
     data = sub('sport.*?,', 'sport', data)
     data = sub('sport.*?us.*?,', 'sp1us', data)
+    data = sub('one.*?,', 'fes', data)
     data = sub('eurosport 2.*?,', 'euro2', data)
     data = sub('eurosport .*?,', 'euro', data)
     data = sub('espn america.*?,', 'nasn', data)
@@ -111,17 +116,13 @@ def transCHANNEL(data):
     data = sub('motorvision tv.*?,', 'movtv', data)
     data = sub('sportdigital.*?,', 'spo-d', data)
     data = sub('extreme sports.*?,', 'ex-sp', data)
-    data = sub('mgm.*?,', 'mgm', data)
     data = sub('kinowelt.*?,', 'kinow', data)
     data = sub('fox.*?,', 'fox', data)
     data = sub('syfy.*?,', 'scifi', data)
-    data = sub('tnt g.*?,', 'glitz', data)
-    data = sub('glitz.*?,', 'glitz', data)
     data = sub('universal.*?,', 'unive', data)
     data = sub('toggo.*?,', 'toggo', data)
     data = sub('romance tv.*?,', 'rom', data)
     data = sub('heimatkanal.*?,', 'heima', data)
-    data = sub('the biography.*?,', 'bio', data)
     data = sub('biography.*?,', 'bio', data)
     data = sub('bio channel,', 'bio', data)
     data = sub('tele 5.*?,', 'tele5', data)
@@ -197,13 +198,10 @@ def transCHANNEL(data):
     data = sub('atv ii,', 'atv2', data)
     data = sub('puls 4.*?,', 'puls4', data)
     data = sub('boomerang.*?,', 'boom', data)
-    data = sub('nick/comedy.*?,', 'nickcc', data)
-    data = sub('viva/comedy.*?,', 'vivacc', data)
     data = sub('nick jr.*?,', 'nickj', data)
     data = sub('nick.*?,', 'nick', data)
     data = sub('nicktoons.*?,', 'nickt', data)
     data = sub('comedy central.*?,', 'cc', data)
-    data = sub('comedycentral.*?,', 'cc', data)
     data = sub('cartoon net.*?,', 'c-net', data)
     data = sub('disney cinema.*?,', 'dcm', data)
     data = sub('disney channel.*?,', 'disne', data)
@@ -232,7 +230,6 @@ def transCHANNEL(data):
     data = sub('lust pur.*?,', 'lustp', data)
     data = sub('playboy tv,', 'pboy', data)
     data = sub('al jazeera.*?,', 'aljaz', data)
-    data = sub('center.tv.*?,', 'cente', data)
     data = sub('bloomberg.*?,', 'blm', data)
     data = sub('euronews.*?,', 'euron', data)
     data = sub('bibel tv.*?,', 'bibel', data)
@@ -241,9 +238,6 @@ def transCHANNEL(data):
     data = sub('sonnenklar.*?,', 'sklar', data)
     data = sub('goldstar tv,', 'gold', data)
     data = sub('animax,', 'amax', data)
-    data = sub('blue movie 2.*?,', 'blum2', data)
-    data = sub('blue movie 3.*?,', 'blum3', data)
-    data = sub('blue movie.*?,', 'blum', data)
     data = sub('adult channel.*?,', 'adult', data)
     data = sub('das neue tv.*?,', 'dntv', data)
     data = sub('deutsches wetter.*?,', 'dwf', data)
@@ -268,20 +262,10 @@ def transCHANNEL(data):
     data = sub('tlc.*?,', 'tlc', data)
     data = sub('star tv.*?,', 'sttv', data)
     data = sub('center.tv.*?,', 'cente', data)
-    data = sub('liga total!.*?,', 'liga', data)
     data = sub('sony.*?,', 'sony', data)
-    data = sub('eotv.*?,', 'eotv', data)
-    data = sub('erf.*?,', 'erf', data)
-    data = sub('flt.*?,', 'flt', data)
-    data = sub('joiz.*?,', 'joiz', data)
     data = sub('auto motor sport.*?,', 'ams', data)
     data = sub('3 plus.*?,', '3plus', data)
     data = sub('3+.*?,', '3plus', data)
-    data = sub('a&e.*?,', 'aetv', data)
-    data = sub('blizz.*?,', 'blizz', data)
-    data = sub('qlar.*?,', 'qlar', data)
-    data = sub('fine living.*?,', 'fln', data)
-    data = sub('food network.*?,', 'food', data)
     data = sub('marco polo.*?,', 'mapo', data)
     data = sub('travel channel.*?,', 'trch', data)
     data = sub('channel21.*?,', 'ch21', data)
@@ -298,7 +282,6 @@ def transCHANNEL(data):
     data = sub('hr.*?,', 'hr', data)
     data = sub('swr.*?,', 'swr', data)
     data = sub('br.*?,', 'swr', data)
-    data = sub('one.*?,', 'fes', data)
     data = sub('tele 5.*?,', 'TELE5', data)
     data = sub('bild hd,', 'bild', data)
     data = sub('warner .*?comedy.*?,', 'tnt-c', data)

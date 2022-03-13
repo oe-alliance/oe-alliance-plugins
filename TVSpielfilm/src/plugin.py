@@ -56,7 +56,8 @@ config.plugins.tvspielfilm.logtofile = ConfigYesNo(default=False)
 HIDEFLAG = True
 ALPHA = '/proc/stb/video/alpha' if fileExists('/proc/stb/video/alpha') else None
 if not ALPHA:
-    TVSlog('Alphachannel not found! Hide/Show-Function (=blue button) disabled')
+    print('Alphachannel not found! Hide/show-function (=blue button) is disabled')
+    TVSlog('Alphachannel not found! Hide/show-function (=blue button) is disabled')
 
 
 def main(session, **kwargs):
@@ -76,7 +77,7 @@ def mainevent(session, **kwargs):
 
 
 def Plugins(**kwargs):
-    return [PluginDescriptor(name='TV Spielfilm', description='TV Spielfilm', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main),
-            PluginDescriptor(name='TV Spielfilm 20:15', description='TV Spielfilm Prime Time', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=mainprime),
-            PluginDescriptor(name='TV Spielfilm Jetzt', description='TV Spielfilm Jetzt im TV', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='jetzt.png', fnc=mainjetzt),
-            PluginDescriptor(name='TV Spielfilm EventView', description='TV Spielfilm EventView', where=[PluginDescriptor.WHERE_EVENTINFO], fnc=mainevent)]
+    return [PluginDescriptor(name='TV Spielfilm', description='TV Spielfilm', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TVmain.png', fnc=main),
+            PluginDescriptor(name='TV Spielfilm 20:15', description='TV Spielfilm Prime Time', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TV2015.png', fnc=mainprime),
+            PluginDescriptor(name='TV Spielfilm Jetzt', description='TV Spielfilm Jetzt im TV', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TVjetzt.png', fnc=mainjetzt),
+            PluginDescriptor(name='TV Spielfilm EventView', description='TV Spielfilm EventView', where=[PluginDescriptor.WHERE_EVENTINFO], icon='TVevent.png', fnc=mainevent)]
