@@ -10817,15 +10817,16 @@ def LCD4linuxPIC(self, session):
 					L4log("Title Error", Title)
 			if cover == "" and os.path.isfile("/tmp/.cover"):
 				cover = "/tmp/.cover"
-			for coverfile in LCD4linux.MPCoverFile2.value.split(','):
+			for coverfile in LCD4linux.MPCoverFile2.value.split(","):
 				covername = coverfile.split(".")[0].strip()
-				selection = coverfile.split(".")[1].strip()
+				selection = coverfile.split(".")[1].strip() if coverfile.find('.') != -1 else "*"
 				if selection == "*":
-					selection = ["jpg", "png"]
+					selection = "jpg,png"
+				selection = selection.split(",")
 				for extension in selection:
-						if cover == "" and os.path.isfile(covername + "." + extension):
-							cover = covername + "." + extension
-							break
+					if cover == "" and os.path.isfile(covername + "." + extension):
+						cover = covername + "." + extension
+						break
 			if cover == "" and LCD4linux.MPCoverPiconFirst.value == True:
 				if WebRadioFSok == True and os.path.isfile(self.l4l_info.get("Logo", "")):
 					cover = self.l4l_info.get("Logo", "")
