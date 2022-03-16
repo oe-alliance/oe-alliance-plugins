@@ -79,7 +79,7 @@ def showPic(pixmap, picpath):
 def getEPGText():
     try:
         NOEPGTIME = 'Noch keine EPG Informationen verfügbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (
-            str(config.misc.epgcache_timespan.value), str(config.misc.epgcache_outdated_timespan.value))
+            str(config.epg.maxdays), str(config.epg.histminutes))
         return NOEPGTIME
     except (KeyError, NameError):
         return NOEPG
@@ -857,7 +857,7 @@ class tvBaseScreen(tvAllScreen):
                             RATING = RATING.replace(' ', '-')
                             png = '%s%sFHD.png' % (ICONPATH, RATING) if FULLHD else '%s%s.png' % (ICONPATH, RATING)
                             if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(int(785 * SCALE), 0), size=(int(40 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(int(785 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
                     res.append(MultiContentEntryText(pos=(int(190 * SCALE), 10), size=(int(445 * SCALE), 40), font=0, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titelfilter))
                     self.searchentries.append(res)
         self['searchmenu'].l.setItemHeight(mh)
@@ -1056,7 +1056,7 @@ class TVTippsView(tvBaseScreen):
                 if self.sparte == 'Spielfilm':
                     png = ICONPATH + 'rating-small1FHD.png' if FULLHD else ICONPATH + 'rating-small1.png'
                     if fileExists(png):
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), 0), size=(int(40 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
             if LOGO:
                 service = LOGO
                 sref = self.service_db.lookup(service)
@@ -1797,7 +1797,7 @@ class TVGenreView(tvGenreJetztProgrammView):
                         self.rec = True
                         png = ICONPATH + 'recFHD.png' if FULLHD else ICONPATH + 'rec.png'
                         if fileExists(png):
-                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - int(170 * SCALE), 0), size=(int(40 * SCALE), int(14 * SCALE)), png=loadPNG(png)))
+                            res.append(MultiContentEntryPixmapAlphaTest(pos=(self.menuwidth - int(170 * SCALE), int(7 * SCALE)), size=(int(40 * SCALE), int(14 * SCALE)), png=loadPNG(png)))
                     self.tvlink.append(LINK)
                     self.tvtitel.append(TITLE)
                     if GENRE:
@@ -1821,7 +1821,7 @@ class TVGenreView(tvGenreJetztProgrammView):
                             RATING = RATING.replace(' ', '-')
                             png = '%s%sFHD.png' % (ICONPATH, RATING) if FULLHD else '%s%s.png' % (ICONPATH, RATING)
                             if fileExists(png):
-                                res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), 0), size=(int(40 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+                                res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
                     res.append(MultiContentEntryText(pos=(int(180 * SCALE), 0), size=(int(500 * SCALE), mh), font=1,
                                color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=titelfilter))
                     self.tventries.append(res)
@@ -2456,7 +2456,7 @@ class TVJetztView(tvGenreJetztProgrammView):
                     RATING = RATING.replace(' ', '-')
                     png = '%s%sFHD.png' % (ICONPATH, RATING) if FULLHD else '%s%s.png' % (ICONPATH, RATING)
                     if fileExists(png):
-                        res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), 0), size=(int(40 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+                        res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
                 self.tventries.append(res)
         order = eval(self.order)
         self.sref = sorted(self.sref, key=lambda x: order[x[0]])
@@ -3146,7 +3146,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
                 RATING = RATING.replace(' ', '-')
                 png = '%s%sFHD.png' % (ICONPATH, RATING) if FULLHD else '%s%s.png' % (ICONPATH, RATING)
                 if fileExists(png):
-                    res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1180 * SCALE), 0), size=(int(40 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+                    res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1180 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
             self.tventries.append(res)
         self['menu'].l.setItemHeight(mh)
         self['menu'].l.setList(self.tventries)
@@ -6863,7 +6863,7 @@ class TVHeuteView(tvBaseScreen):
                     x = sub('RATING', '', x).replace(' ', '-')
                     png = '%s%sFHD.png' % (ICONPATH, x) if FULLHD else '%s%s.png' % (ICONPATH, x)
                     if fileExists(png):
-                        currentitem.append(MultiContentEntryPixmapAlphaTest(pos=(0, int((24 + icount * 14) * SCALE)), size=(int(40 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+                        currentitem.append(MultiContentEntryPixmapAlphaTest(pos=(int(6 * SCALE), int((24 + icount * 14) * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
                 if search('LINK', x):
                     x = sub('LINK', '', x)
                     currentlink = x
