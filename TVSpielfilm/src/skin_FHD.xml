@@ -9,7 +9,7 @@
 		<widget name="label" position="50,695" size="90,39" font="Regular;26" transparent="1" zPosition="2"/>
 		<widget name="label2" position="180,695" size="60,39" font="Regular;26" transparent="1" zPosition="2"/>
 		<widget name="label5" position="285,695" size="60,39" font="Regular;26" transparent="1" zPosition="2"/>
-		<eLabel name="" position="355,700" size="65,35" text="MENU" font="Regular;21"/>
+		<eLabel name="" position="355,700" size="65,35" text="MENÜ" font="Regular;21"/>
 		<ePixmap position="15,700" size="28,28" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="145,700" size="28,28" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2"/>
 		<widget name="bluebutton" position="250,700" size="28,28" pixmap="{picpath}buttons/blueFHD.png" alphatest="blend" zPosition="2"/>
@@ -18,12 +18,12 @@
 	<screen name="tvTipps" position="center-585,center+237" size="750,260" flags="wfNoBorder" title=" ">
 		<widget name="picture" position="0,0" size="395,260" alphatest="blend" zPosition="1"/>
 		<widget name="elabel3" position="395,90" size="345,170" font="Regular;18" backgroundColor="#FFFFFF" zPosition="1"/>
-		<widget name="label" position="405,90" size="325,25" font="Regular;21" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2"/>
+		<widget name="label" position="405,90" size="325,30" font="Regular;21" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" zPosition="2"/>
 		<widget name="label2" position="405,120" size="295,80" font="Regular;22" foregroundColor="#0a8aee" backgroundColor="#FFFFFF" halign="left" zPosition="2"/>
 		<widget name="label3" position="405,205" size="325,60" font="Regular;19" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2"/>
 		<widget name="label4" position="520,20" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
 		<widget name="label5" position="520,45" size="100,25" font="Regular;18" foregroundColor="#CC4942" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2"/>
-		<widget name="thumb" position="690,120" size="60,60" pixmap="{picpath}icons/rating-small1FHD.png" alphatest="blend" zPosition="2"/>
+		<widget name="thumb" position="690,120" size="40,40" pixmap="{picpath}icons/rating-small1FHD.png" alphatest="blend" zPosition="2"/>
 	</screen>
 
 	<screen name="FullScreen" position="center,center" size="1920,1080" flags="wfNoBorder" title="  " >
@@ -274,7 +274,6 @@
 		<widget name="label3" position="950,925" size="215,36" font="Regular;28" halign="left" zPosition="1"/>
 		<widget name="label4" position="545,925" size="215,36" font="Regular;28" halign="left" zPosition="1"/>
 		<widget name="label5" position="1335,925" size="285,36" font="Regular;28" halign="left" zPosition="1"/>
-		<eLabel name="" position="1760,925" size="100,36" text="MENU" font="Regular;28" zPosition="2"/>
 		<ePixmap position="120,930" size="28,28" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="510,930" size="28,28" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="920,930" size="28,28" pixmap="{picpath}buttons/yellowFHD.png" alphatest="blend" zPosition="2"/>
