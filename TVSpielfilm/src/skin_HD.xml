@@ -9,7 +9,7 @@
 		<widget name="label" position="30,460" size="60,26" font="Regular;18" transparent="1" zPosition="2"/>
 		<widget name="label2" position="120,460" size="40,26" font="Regular;18" transparent="1" zPosition="2"/>
 		<widget name="label5" position="190,460" size="40,26" font="Regular;18" transparent="1" zPosition="2"/>
-		<eLabel name="" position="236,465" size="39,20" text="MENÜ" font="Regular; 14"/>
+		<eLabel name="" position="236,465" size="39,20" text="MENU" font="Regular; 14"/>
 		<ePixmap position="10,465" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="97,465" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="2"/>
 		<widget name="bluebutton" position="167,465" size="18,18" pixmap="{picpath}buttons/blue.png" alphatest="blend" zPosition="2"/>
@@ -263,6 +263,7 @@
 		<widget name="label3" position="635,615" size="135,24" font="Regular;18" halign="left" zPosition="1"/>
 		<widget name="label4" position="365,615" size="135,24" font="Regular;18" halign="left" zPosition="1"/>
 		<widget name="label5" position="890,615" size="190,24" font="Regular;18" halign="left" zPosition="1"/>
+		<eLabel name="" position="1180,615" size="100,24" text="MENU" font="Regular;18" zPosition="2"/>
 		<ePixmap position="80,620" size="18,18" pixmap="{picpath}buttons/red.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="340,620" size="18,18" pixmap="{picpath}buttons/green.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="615,620" size="18,18" pixmap="{picpath}buttons/yellow.png" alphatest="blend" zPosition="2"/>
