@@ -23,7 +23,7 @@
 		<widget name="label3" position="405,205" size="325,60" font="Regular;19" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" zPosition="2"/>
 		<widget name="label4" position="520,20" size="100,25" font="Regular;22" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
 		<widget name="label5" position="520,45" size="100,25" font="Regular;18" foregroundColor="#CC4942" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2"/>
-		<widget name="thumb" position="690,120" size="40,40" pixmap="{picpath}icons/rating-small1FHD.png" alphatest="blend" zPosition="2"/>
+		<widget name="thumb" position="700,130" size="40,40" pixmap="{picpath}icons/rating-small1FHD.png" alphatest="blend" zPosition="2"/>
 	</screen>
 
 	<screen name="FullScreen" position="center,center" size="1920,1080" flags="wfNoBorder" title="  " >
