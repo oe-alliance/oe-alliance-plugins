@@ -122,7 +122,7 @@ class ChefkochView(Screen):
 			<widget name="vid0" position="1132,90" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
 			<widget name="vid1" position="1132,180" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
 			<widget name="vid2" position="1132,270" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid3" position="1132,360 size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
+			<widget name="vid3" position="1132,360" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
 			<widget name="vid4" position="1132,450" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
 			<widget name="vid5" position="1132,540" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
 			<widget name="pic0" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />
