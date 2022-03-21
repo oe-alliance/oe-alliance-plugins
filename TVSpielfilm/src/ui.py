@@ -5822,7 +5822,6 @@ class makeServiceFile(Screen):
 				eventlist = []
 				for eventinfo in events:
 					eventlist.append((eventinfo[8], eventinfo[7]))
-
 			except Exception:
 				bouquet = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'
 				bouquet = eServiceReference(bouquet)
@@ -5848,11 +5847,12 @@ class makeServiceFile(Screen):
 # for analysis purpose only, activate when picons are missing
 #            Bouquetlog('Sendernamen aus Bouquets:\n' + '-'*70 + '\n')
 #            Bouquetlog(data)
-			data = transCHANNEL(data + '\n')
+			data = transCHANNEL(data)
 #            Bouquetlog('\n\nSendernamen als Piconname:\n' + '-'*70 + '\n')
 #            Bouquetlog(data)
-			with open(self.servicefile, 'a') as f:
-				f.write(data)
+			f = open(self.servicefile, 'a')
+			f.write(data)
+			f.close()
 			fnew = open(self.servicefile + '.new', 'w')
 			newdata = ''
 			count = 0
@@ -5872,7 +5872,6 @@ class makeServiceFile(Screen):
 					fnew.write(line)
 					fnew.write(linesep)
 					newdata = newdata + '#' + str(line[0:5])
-
 			f.close()
 			fnew.close()
 			rename(self.servicefile + '.new', self.servicefile)
