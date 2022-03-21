@@ -9,9 +9,9 @@ from .util import DESKTOP_WIDTH
 
 config.plugins.tvspielfilm = ConfigSubsection()
 if DESKTOP_WIDTH > 1280:
-    config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='FHD', choices=[('FHD', 'FullHD (1920x1080)'), ('HD', 'HD (1280x720)')])
+	config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='FHD', choices=[('FHD', 'FullHD (1920x1080)'), ('HD', 'HD (1280x720)')])
 else:
-    config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='HD', choices=[('HD', 'HD (1280x720)')])
+	config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='HD', choices=[('HD', 'HD (1280x720)')])
 config.plugins.tvspielfilm.position = ConfigInteger(40, (0, 160))
 config.plugins.tvspielfilm.font_size = ConfigSelection(default='normal', choices=[('large', 'Groß'), ('normal', 'Normal'), ('small', 'Klein')])
 config.plugins.tvspielfilm.meintvs = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
@@ -21,27 +21,27 @@ config.plugins.tvspielfilm.encrypt = ConfigSelection(default='no', choices=[('ye
 config.plugins.tvspielfilm.picon = ConfigSelection(default='standard', choices=[('plugin', 'vom Plugin'), ('standard', 'Standard'), ('own', 'Eigener Ordner')])
 config.plugins.tvspielfilm.piconfolder = ConfigDirectory(default='/usr/share/enigma2/picon/')
 config.plugins.tvspielfilm.color = ConfigSelection(default='0x00000000', choices=[('0x00000000', 'Skin Default'),
-                                                                                  ('0x00F0A30A', 'Amber'),
-                                                                                  ('0x007895BC', 'Blue'),
-                                                                                  ('0x00825A2C', 'Brown'),
-                                                                                  ('0x000050EF', 'Cobalt'),
-                                                                                  ('0x00911D10', 'Crimson'),
-                                                                                  ('0x001BA1E2', 'Cyan'),
-                                                                                  ('0x00008A00', 'Emerald'),
-                                                                                  ('0x0070AD11', 'Green'),
-                                                                                  ('0x006A00FF', 'Indigo'),
-                                                                                  ('0x00BB0048', 'Magenta'),
-                                                                                  ('0x0076608A', 'Mauve'),
-                                                                                  ('0x006D8764', 'Olive'),
-                                                                                  ('0x00C3461B', 'Orange'),
-                                                                                  ('0x00F472D0', 'Pink'),
-                                                                                  ('0x00E51400', 'Red'),
-                                                                                  ('0x007A3B3F', 'Sienna'),
-                                                                                  ('0x00647687', 'Steel'),
-                                                                                  ('0x00149BAF', 'Teal'),
-                                                                                  ('0x004176B6', 'Tufts'),
-                                                                                  ('0x006C0AAB', 'Violet'),
-                                                                                  ('0x00BF9217', 'Yellow')])
+																				  ('0x00F0A30A', 'Amber'),
+																				  ('0x007895BC', 'Blue'),
+																				  ('0x00825A2C', 'Brown'),
+																				  ('0x000050EF', 'Cobalt'),
+																				  ('0x00911D10', 'Crimson'),
+																				  ('0x001BA1E2', 'Cyan'),
+																				  ('0x00008A00', 'Emerald'),
+																				  ('0x0070AD11', 'Green'),
+																				  ('0x006A00FF', 'Indigo'),
+																				  ('0x00BB0048', 'Magenta'),
+																				  ('0x0076608A', 'Mauve'),
+																				  ('0x006D8764', 'Olive'),
+																				  ('0x00C3461B', 'Orange'),
+																				  ('0x00F472D0', 'Pink'),
+																				  ('0x00E51400', 'Red'),
+																				  ('0x007A3B3F', 'Sienna'),
+																				  ('0x00647687', 'Steel'),
+																				  ('0x00149BAF', 'Teal'),
+																				  ('0x004176B6', 'Tufts'),
+																				  ('0x006C0AAB', 'Violet'),
+																				  ('0x00BF9217', 'Yellow')])
 config.plugins.tvspielfilm.tipps = ConfigSelection(default='yes', choices=[('no', 'Gruene Taste im Startmenue'), ('yes', 'Beim Start des Plugins'), ('false', 'Deaktiviert')])
 config.plugins.tvspielfilm.primetime = ConfigSelection(default='primetime', choices=[('primetime', 'Primetime'), ('now', 'Aktuelle Zeit')])
 config.plugins.tvspielfilm.eventview = ConfigSelection(default='list', choices=[('list', 'Programmliste'), ('info', 'Sendungsinfo')])
@@ -56,28 +56,33 @@ config.plugins.tvspielfilm.logtofile = ConfigYesNo(default=False)
 HIDEFLAG = True
 ALPHA = '/proc/stb/video/alpha' if fileExists('/proc/stb/video/alpha') else None
 if not ALPHA:
-    print('Alphachannel not found! Hide/show-function (=blue button) is disabled')
-    TVSlog('Alphachannel not found! Hide/show-function (=blue button) is disabled')
+	print('Alphachannel not found! Hide/show-function (=blue button) is disabled')
+	TVSlog('Alphachannel not found! Hide/show-function (=blue button) is disabled')
 
 
 def main(session, **kwargs):
-    session.open(tvMain)
+	session.open(tvMain)
 
 
 def mainjetzt(session, **kwargs):
-    session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
+	session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
 
 
 def mainprime(session, **kwargs):
-    session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
+	session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
+
+
+def mainlate(session, **kwargs):
+	session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/fernsehprogramm-nachts.html')
 
 
 def mainevent(session, **kwargs):
-    session.open(tvEvent)
+	session.open(tvEvent)
 
 
 def Plugins(**kwargs):
-    return [PluginDescriptor(name='TV Spielfilm', description='TV Spielfilm', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TVmain.png', fnc=main),
-            PluginDescriptor(name='TV Spielfilm 20:15', description='TV Spielfilm Prime Time', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TV2015.png', fnc=mainprime),
-            PluginDescriptor(name='TV Spielfilm Jetzt', description='TV Spielfilm Jetzt im TV', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TVjetzt.png', fnc=mainjetzt),
-            PluginDescriptor(name='TV Spielfilm EventView', description='TV Spielfilm EventView', where=[PluginDescriptor.WHERE_EVENTINFO], icon='TVevent.png', fnc=mainevent)]
+	return [PluginDescriptor(name='TV Spielfilm', description='TV Spielfilm', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TVmain.png', fnc=main),
+			PluginDescriptor(name='TV Spielfilm 20:15', description='TV Spielfilm Prime Time', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TV2015.png', fnc=mainprime),
+			PluginDescriptor(name='TV Spielfilm 22:00', description='TV Spielfilm LateNight', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TVlate.png', fnc=mainlate),
+			PluginDescriptor(name='TV Spielfilm Jetzt', description='TV Spielfilm Jetzt im TV', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='TVjetzt.png', fnc=mainjetzt),
+			PluginDescriptor(name='TV Spielfilm EventView', description='TV Spielfilm EventView', where=[PluginDescriptor.WHERE_EVENTINFO], icon='TVevent.png', fnc=mainevent)]
