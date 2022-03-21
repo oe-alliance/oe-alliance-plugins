@@ -9,7 +9,7 @@
 		<widget name="label" position="50,695" size="90,39" font="Regular;26" transparent="1" zPosition="2"/>
 		<widget name="label2" position="180,695" size="60,39" font="Regular;26" transparent="1" zPosition="2"/>
 		<widget name="label5" position="285,695" size="60,39" font="Regular;26" transparent="1" zPosition="2"/>
-		<eLabel name="" position="355,700" size="65,35" text="MENÜ" font="Regular;21"/>
+		<eLabel name="" position="355,700" size="65,35" text="MENU" font="Regular;21"/>
 		<ePixmap position="15,700" size="28,28" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="145,700" size="28,28" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2"/>
 		<widget name="bluebutton" position="250,700" size="28,28" pixmap="{picpath}buttons/blueFHD.png" alphatest="blend" zPosition="2"/>
@@ -45,14 +45,14 @@
 		<widget render="Label" source="global.CurrentTime" position="1600,0" size="225,90" font="Regular;48" foregroundColor="#000DFE" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
-		<widget name="infotext0" position="15,105" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext1" position="15,105" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext2" position="15,140" size="525,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
-		<widget name="infotext3" position="15,175" size="300,48" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext4" position="1030,70" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext5" position="1030,105" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext6" position="1030,140" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext7" position="1030,175" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext0" position="15,110" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext1" position="15,165" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext2" position="15,220" size="570,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
+		<widget name="infotext3" position="15,275" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext4" position="1160,110" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext5" position="1160,165" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext6" position="1160,220" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext7" position="1160,275" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="textpage" position="25,105" size="250,560" font="Regular;18" halign="left" zPosition="1"/>
 		<widget name="picture" position="center,145" size="1170,657" alphatest="blend" zPosition="2"/>
 		<widget name="picindex" position="center,105" size="165,36" font="Regular;30" halign="center" zPosition="1"/>
@@ -98,24 +98,24 @@
 		<widget name="searchtext" position="365,110" size="1430,95" font="Regular;38" valign="center" zPosition="1"/>
 		<widget name="searchmenu" position="15,210" size="1830,720" scrollbarMode="showNever" zPosition="1"/>
 		<widget name="picpost" position="700,110" size="454,255" alphatest="blend" zPosition="1"/>
-		<widget name="infotext0" position="15,110" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext1" position="15,165" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext2" position="15,220" size="350,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
-		<widget name="infotext3" position="15,275" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext4" position="1550,110" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext5" position="1550,165" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext6" position="1550,220" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext7" position="1550,275" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext0" position="15,110" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext1" position="15,165" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext2" position="15,220" size="570,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
+		<widget name="infotext3" position="15,275" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext4" position="1160,110" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext5" position="1160,165" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext6" position="1160,220" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext7" position="1160,275" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="tvinfo0" position="15,320" size="90,30" alphatest="blend" zPosition="1"/>
 		<widget name="tvinfo1" position="120,320" size="90,30" alphatest="blend" zPosition="1"/>
 		<widget name="tvinfo2" position="225,320" size="90,30" alphatest="blend" zPosition="1"/>
 		<widget name="tvinfo3" position="330,320" size="90,30" alphatest="blend" zPosition="1"/>
 		<widget name="tvinfo4" position="435,320" size="90,30" alphatest="blend" zPosition="1"/>
-		<widget name="picon" position="605,110" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="cinlogo" position="603,164" size="90,44" pixmap="{picpath}icons/cinFHD.png" alphatest="blend" zPosition="2"/>
+		<widget name="picon" position="595,110" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="cinlogo" position="600,172" size="90,44" pixmap="{picpath}icons/cinFHD.png" alphatest="blend" zPosition="2"/>
 		<widget name="playlogo" position="882,192" size="90,90" pixmap="{picpath}icons/playFHD.png" alphatest="blend" zPosition="2"/>
-		<widget name="piclabel" position="565,298" size="130,30" font="Regular;28" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
-		<widget name="piclabel2" position="565,328" size="130,30" font="Regular;21" foregroundColor="#CC4942" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2"/>
+		<widget name="piclabel" position="565,304" size="130,30" font="Regular;28" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="piclabel2" position="565,334" size="130,30" font="Regular;21" foregroundColor="#CC4942" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2"/>
 		<widget name="textpage" position="15,360" size="1830,555" font="Regular;33" halign="left" zPosition="0"/>
 		<widget name="label" position="center,39" size="1800,36" font="Regular;28" foregroundColor="#000DFE" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2"/>
 		<widget name="label2" position="155,925" size="205,36" font="Regular;28" halign="left" zPosition="1"/>
@@ -145,24 +145,24 @@
 		<widget name="searchtext" position="365,110" size="1430,95" font="Regular;38" valign="center" zPosition="1"/>
 		<widget name="searchmenu" position="15,210" size="1830,720" scrollbarMode="showNever" zPosition="1"/>
 		<widget name="picpost" position="700,110" size="454,255" alphatest="blend" zPosition="1"/>
-		<widget name="infotext0" position="15,110" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext1" position="15,165" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext2" position="15,220" size="350,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
-		<widget name="infotext3" position="15,275" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext4" position="1550,110" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext5" position="1550,165" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext6" position="1550,220" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext7" position="1550,275" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext0" position="15,110" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext1" position="15,165" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext2" position="15,220" size="570,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
+		<widget name="infotext3" position="15,275" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext4" position="1160,110" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext5" position="1160,165" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext6" position="1160,220" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext7" position="1160,275" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="tvinfo0" position="15,320" size="90,30" alphatest="blend" zPosition="1"/>
 		<widget name="tvinfo1" position="120,320" size="90,30" alphatest="blend" zPosition="1"/>
 		<widget name="tvinfo2" position="225,320" size="90,30" alphatest="blend" zPosition="1"/>
 		<widget name="tvinfo3" position="330,320" size="90,30" alphatest="blend" zPosition="1"/>
 		<widget name="tvinfo4" position="435,320" size="90,30" alphatest="blend" zPosition="1"/>
-		<widget name="picon" position="605,110" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="cinlogo" position="603,164" size="90,44" pixmap="{picpath}icons/cinFHD.png" alphatest="blend" zPosition="2"/>
+		<widget name="picon" position="595,110" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="cinlogo" position="600,172" size="90,44" pixmap="{picpath}icons/cinFHD.png" alphatest="blend" zPosition="2"/>
 		<widget name="playlogo" position="882,192" size="90,90" pixmap="{picpath}icons/playFHD.png" alphatest="blend" zPosition="2"/>
-		<widget name="piclabel" position="565,298" size="130,30" font="Regular;28" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
-		<widget name="piclabel2" position="565,328" size="130,30" font="Regular;21" foregroundColor="#CC4942" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2"/>
+		<widget name="piclabel" position="565,304" size="130,30" font="Regular;28" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="piclabel2" position="565,334" size="130,30" font="Regular;21" foregroundColor="#CC4942" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2"/>
 		<widget name="textpage" position="15,360" size="1830,555" font="Regular;33" halign="left" zPosition="0"/>
 		<widget name="label" position="center,39" size="1800,36" font="Regular;28" foregroundColor="#000DFE" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2"/>
 		<widget name="label2" position="155,925" size="205,36" font="Regular;28" halign="left" zPosition="1"/>
@@ -212,30 +212,30 @@
 		<widget render="Label" source="global.CurrentTime" position="1600,0" size="225,90" font="Regular;48" foregroundColor="#000DFE" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
-		<widget name="sender0" position="15,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender1" position="320,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender2" position="625,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender3" position="930,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender4" position="1235,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender5" position="1540,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="picon0" position="220,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon1" position="525,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon2" position="830,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon3" position="1135,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon4" position="1440,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon5" position="1745,125" size="89,54" alphatest="blend" zPosition="1"/>
+		<widget name="sender0" position="15,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender1" position="320,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender2" position="625,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender3" position="930,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender4" position="1235,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender5" position="1540,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="picon0" position="217,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon1" position="522,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon2" position="827,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon3" position="1132,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon4" position="1437,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon5" position="1742,125" size="100,60" alphatest="blend" zPosition="1"/>
 		<widget name="pic0" position="15,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic1" position="320,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic2" position="625,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic3" position="930,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic4" position="1235,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic5" position="1540,125" size="201,168" alphatest="blend" zPosition="1"/>
-		<widget name="pictime0" position="230,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime1" position="535,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime2" position="840,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime3" position="1145,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime4" position="1450,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime5" position="1755,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime0" position="230,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime1" position="535,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime2" position="840,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime3" position="1145,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime4" position="1450,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime5" position="1755,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
 		<widget name="pictext0" position="15,290" size="290,68" font="Regular;24" valign="top" halign="left" zPosition="1"/>
 		<widget name="pictext1" position="320,290" size="290,68" font="Regular;24" valign="top" halign="left" zPosition="1"/>
 		<widget name="pictext2" position="625,290" size="290,68" font="Regular;24" valign="top" halign="left" zPosition="1"/>
@@ -251,29 +251,30 @@
 		<widget name="searchtext" position="365,110" size="1430,95" font="Regular;38" valign="center" zPosition="1"/>
 		<widget name="searchmenu" position="15,210" size="1830,720" scrollbarMode="showNever" zPosition="1"/>
 		<widget name="picpost" position="700,110" size="454,255" alphatest="blend" zPosition="1"/>
-		<widget name="infotext0" position="15,110" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext1" position="15,165" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext2" position="15,220" size="350,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
-		<widget name="infotext3" position="15,275" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext4" position="1550,110" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext5" position="1550,165" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext6" position="1550,220" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="infotext7" position="1550,275" size="300,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="tvinfo0" position="15,320" size="60,20" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo1" position="80,320" size="60,20" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo2" position="145,320" size="60,20" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo3" position="210,320" size="60,20" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo4" position="275,320" size="60,20" alphatest="blend" zPosition="1"/>
-		<widget name="picon" position="605,110" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="cinlogo" position="603,164" size="90,44" pixmap="{picpath}icons/cinFHD.png" alphatest="blend" zPosition="2"/>
+		<widget name="infotext0" position="15,110" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext1" position="15,165" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext2" position="15,220" size="570,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
+		<widget name="infotext3" position="15,275" size="570,38" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext4" position="1160,110" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext5" position="1160,165" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext6" position="1160,220" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext7" position="1160,275" size="670,38" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="tvinfo0" position="15,320" size="90,30" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo1" position="120,320" size="90,30" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo2" position="225,320" size="90,30" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo3" position="330,320" size="90,30" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo4" position="435,320" size="90,30" alphatest="blend" zPosition="1"/>
+		<widget name="picon" position="595,110" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="cinlogo" position="600,172" size="90,44" pixmap="{picpath}icons/cinFHD.png" alphatest="blend" zPosition="2"/>
 		<widget name="playlogo" position="882,192" size="90,90" pixmap="{picpath}icons/playFHD.png" alphatest="blend" zPosition="2"/>
-		<widget name="piclabel" position="565,305" size="130,30" font="Regular;28" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
-		<widget name="piclabel2" position="565,335" size="130,30" font="Regular;21" foregroundColor="#CC4942" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2"/>
+		<widget name="piclabel" position="565,304" size="130,30" font="Regular;28" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="piclabel2" position="565,334" size="130,30" font="Regular;21" foregroundColor="#CC4942" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2"/>
 		<widget name="textpage" position="15,360" size="1830,555" font="Regular;33" halign="left" zPosition="0"/>
 		<widget name="label2" position="155,925" size="215,36" font="Regular;28" halign="left" zPosition="1"/>
 		<widget name="label3" position="950,925" size="215,36" font="Regular;28" halign="left" zPosition="1"/>
 		<widget name="label4" position="545,925" size="215,36" font="Regular;28" halign="left" zPosition="1"/>
 		<widget name="label5" position="1335,925" size="285,36" font="Regular;28" halign="left" zPosition="1"/>
+		<eLabel name="label6" position="1760,925" size="100,36" text="MENU" font="Regular;28" zPosition="2"/>
 		<ePixmap position="120,930" size="28,28" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="510,930" size="28,28" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="920,930" size="28,28" pixmap="{picpath}buttons/yellowFHD.png" alphatest="blend" zPosition="2"/>
