@@ -6876,7 +6876,7 @@ class TVHeuteView(tvBaseScreen):
 				if self.rec:
 					self.rec = False
 				if SCALE == 1.5:
-					tsize = mh if self.fontlarge else mh
+					tsize = mh - 15 if self.fontlarge else mh
 				else:
 					tsize = mh - 10 if self.fontlarge else mh
 				currentitem.append(MultiContentEntryText(pos=(int(45 * SCALE), 0), size=(int(155 * SCALE), tsize), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=currenttitle))

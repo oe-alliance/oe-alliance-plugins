@@ -9,7 +9,7 @@
 		<widget name="label" position="50,695" size="90,39" font="Regular;26" transparent="1" zPosition="2"/>
 		<widget name="label2" position="180,695" size="60,39" font="Regular;26" transparent="1" zPosition="2"/>
 		<widget name="label5" position="285,695" size="60,39" font="Regular;26" transparent="1" zPosition="2"/>
-		<eLabel name="" position="355,700" size="65,35" text="MENÜ" font="Regular;21"/>
+		<eLabel name="" position="355,700" size="65,35" text="MENU" font="Regular;21"/>
 		<ePixmap position="15,700" size="28,28" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="145,700" size="28,28" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2"/>
 		<widget name="bluebutton" position="250,700" size="28,28" pixmap="{picpath}buttons/blueFHD.png" alphatest="blend" zPosition="2"/>
@@ -212,30 +212,30 @@
 		<widget render="Label" source="global.CurrentTime" position="1600,0" size="225,90" font="Regular;48" foregroundColor="#000DFE" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
-		<widget name="sender0" position="15,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender1" position="320,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender2" position="625,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender3" position="930,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender4" position="1235,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="sender5" position="1540,90" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
-		<widget name="picon0" position="220,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon1" position="525,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon2" position="830,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon3" position="1135,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon4" position="1440,125" size="89,54" alphatest="blend" zPosition="1"/>
-		<widget name="picon5" position="1745,125" size="89,54" alphatest="blend" zPosition="1"/>
+		<widget name="sender0" position="15,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender1" position="320,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender2" position="625,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender3" position="930,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender4" position="1235,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="sender5" position="1540,88" size="300,36" font="Regular;30" halign="left" zPosition="1"/>
+		<widget name="picon0" position="217,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon1" position="522,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon2" position="827,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon3" position="1132,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon4" position="1437,125" size="100,60" alphatest="blend" zPosition="1"/>
+		<widget name="picon5" position="1742,125" size="100,60" alphatest="blend" zPosition="1"/>
 		<widget name="pic0" position="15,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic1" position="320,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic2" position="625,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic3" position="930,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic4" position="1235,125" size="201,168" alphatest="blend" zPosition="1"/>
 		<widget name="pic5" position="1540,125" size="201,168" alphatest="blend" zPosition="1"/>
-		<widget name="pictime0" position="230,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime1" position="535,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime2" position="840,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime3" position="1145,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime4" position="1450,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
-		<widget name="pictime5" position="1755,180" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime0" position="230,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime1" position="535,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime2" position="840,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime3" position="1145,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime4" position="1450,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
+		<widget name="pictime5" position="1755,185" size="80,38" font="Regular;28" valign="top" halign="center" zPosition="1"/>
 		<widget name="pictext0" position="15,290" size="290,68" font="Regular;24" valign="top" halign="left" zPosition="1"/>
 		<widget name="pictext1" position="320,290" size="290,68" font="Regular;24" valign="top" halign="left" zPosition="1"/>
 		<widget name="pictext2" position="625,290" size="290,68" font="Regular;24" valign="top" halign="left" zPosition="1"/>
@@ -274,6 +274,7 @@
 		<widget name="label3" position="950,925" size="215,36" font="Regular;28" halign="left" zPosition="1"/>
 		<widget name="label4" position="545,925" size="215,36" font="Regular;28" halign="left" zPosition="1"/>
 		<widget name="label5" position="1335,925" size="285,36" font="Regular;28" halign="left" zPosition="1"/>
+		<eLabel name="label6" position="1760,925" size="100,36" text="MENU" font="Regular;28" zPosition="2"/>
 		<ePixmap position="120,930" size="28,28" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="510,930" size="28,28" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2"/>
 		<ePixmap position="920,930" size="28,28" pixmap="{picpath}buttons/yellowFHD.png" alphatest="blend" zPosition="2"/>
