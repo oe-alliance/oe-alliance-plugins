@@ -126,7 +126,7 @@ class tvAllScreen(Screen):
 			self.skin = applySkinVars(skin, dic)
 		Screen.__init__(self, session)
 		self.fontlarge = True if config.plugins.tvspielfilm.font_size.value == 'large' else False
-		self.fontsmall = True if config.plugins.tvspielfilm.font_size.value == 'normal' else False
+		self.fontsmall = True if config.plugins.tvspielfilm.font_size.value == 'small' else False
 		self.baseurl = 'https://www.tvspielfilm.de'
 		self.servicefile = PLUGINPATH + 'db/service.references'
 
@@ -212,7 +212,7 @@ class tvBaseScreen(tvAllScreen):
 			self['tvinfo%s' % i].hide()
 
 	def infotextHide(self):
-		for i in range(8):
+		for i in range(9):
 			self['infotext%s' % i].hide()
 		self['picon'].hide()
 		self['cinlogo'].hide()
@@ -321,7 +321,7 @@ class tvBaseScreen(tvAllScreen):
 			for i in range(len(infotext)):
 				parts = infotext[i].split(', ')
 				for j in range(len(parts)):
-					if idx < 8:
+					if idx < 9:
 						self['infotext%s' % idx].setText(parts[j])
 						self['infotext%s' % idx].show()
 						idx += 1
@@ -391,6 +391,7 @@ class tvBaseScreen(tvAllScreen):
 		self['label2'].setText('= Timer')
 		self['label3'].setText('= YouTube Trailer')
 		self['label4'].setText('')  # = Wikipedia
+		self['label6'].setText('')
 		self.setBlueButton('= Aus-/Einblenden')
 		self['searchmenu'].hide()
 		self['searchtext'].hide()
@@ -736,7 +737,7 @@ class tvBaseScreen(tvAllScreen):
 		self['cinlogo'] = Pixmap()
 		self['playlogo'] = Pixmap()
 		self['searchtext'] = Label('')
-		for i in range(8):
+		for i in range(9):
 			self['infotext%s' % i] = Label('')
 		self['searchmenu'] = ItemList([])
 		self['textpage'] = ScrollLabel('')
@@ -750,6 +751,7 @@ class tvBaseScreen(tvAllScreen):
 		self['label2'] = Label('= Timer')
 		self['label3'] = Label(ltxt)
 		self['label4'] = Label(lltxt)
+		self['label6'] = Label('MENU')
 		self.initBlueButton('= Aus-/Einblenden')
 
 	def _makeSearchView(self, url, titlemode=0, searchmode=0):
@@ -4426,7 +4428,7 @@ class TVPicShow(tvBaseScreen):
 		self.count = 0
 		self['release'] = Label(RELEASE)
 		self['release'].show()
-		for i in range(8):
+		for i in range(9):
 			self['infotext%s' % i] = Label('')
 		self['picture'] = Pixmap()
 		self['picindex'] = Label('')
@@ -5850,9 +5852,8 @@ class makeServiceFile(Screen):
 			data = transCHANNEL(data)
 #            Bouquetlog('\n\nSendernamen als Piconname:\n' + '-'*70 + '\n')
 #            Bouquetlog(data)
-			f = open(self.servicefile, 'a')
-			f.write(data)
-			f.close()
+			with open(self.servicefile, 'a') as f:
+				f.write(data)
 			fnew = open(self.servicefile + '.new', 'w')
 			newdata = ''
 			count = 0
@@ -6874,11 +6875,8 @@ class TVHeuteView(tvBaseScreen):
 						currenttitle = currenttitle + ', ' + x
 				if self.rec:
 					self.rec = False
-				if SCALE == 1.5:
-					tsize = mh - 15 if self.fontlarge else mh
-				else:
-					tsize = mh - 10 if self.fontlarge else mh
-				currentitem.append(MultiContentEntryText(pos=(int(45 * SCALE), 0), size=(int(155 * SCALE), tsize), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=currenttitle))
+#				mh = mh - int(10 * SCALE) if self.fontsmall or self.fontlarge else mh
+				currentitem.append(MultiContentEntryText(pos=(int(45 * SCALE), 0), size=(int(155 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=currenttitle))
 			midx += 1
 
 		if currentitem:
@@ -7541,6 +7539,7 @@ class TVHeuteView(tvBaseScreen):
 		self['label2'].setText('= Timer')
 		self['label3'].setText('= Suche')
 		self['label4'].setText('= Zappen')
+		self['label6'].setText('MENU')
 		self.infotextHide()
 		self['textpage'].hide()
 		self['picpost'].hide()
