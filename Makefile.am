@@ -214,6 +214,10 @@ if SF8008OPT
 SUBDIRS += MultiTransCodingSetup VPLEDControl
 endif
 
+if SFX6008
+SUBDIRS += VPLEDControl
+endif
+
 if SX988
 SUBDIRS += MultiTransCodingSetup
 endif
