@@ -1,6 +1,5 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import print_function, absolute_import
+from __future__ import print_function
 import datetime
 from socket import error as socketerror
 from base64 import b64encode, b64decode
@@ -48,7 +47,7 @@ try:
 except Exception:
 	from http.cookiejar import MozillaCookieJar
 
-RELEASE = 'V6.7'
+RELEASE = 'V6.8beta'
 NOTIMER = '\nTimer nicht möglich:\nKeine Service Reference vorhanden, der ausgewählte Sender wurde nicht importiert.'
 NOEPG = 'Keine EPG Informationen verfügbar'
 ALPHA = '/proc/stb/video/alpha' if fileExists('/proc/stb/video/alpha') else None
@@ -215,7 +214,6 @@ class tvBaseScreen(tvAllScreen):
 		for i in range(9):
 			self['infotext%s' % i].hide()
 		self['picon'].hide()
-		self['cinlogo'].hide()
 		self['playlogo'].hide()
 		self['searchtext'].hide()
 		self['searchmenu'].hide()
@@ -328,6 +326,43 @@ class tvBaseScreen(tvAllScreen):
 		except IndexError:
 			self['infotext%s' % idx].setText('')
 
+	def showRatingInfos(self, output):
+		startpos = output.find('<section class="broadcast-detail__rating">')
+		endpos = output.find('<section class="broadcast-detail__description">')
+		bereich = output[startpos:endpos]
+		bereich = cleanHTML(bereich)
+		ratinglabels = findall('<span class="rating-dots__label">(.*?)</span>', bereich)
+		ratingdots = findall('<span class="rating-dots__rating" data-rating="(.*?)"><i></i></span>', bereich)
+		for i in range(len(ratinglabels)):
+			ratingfile = ICONPATH + 'starbar%sFHD.png' % ratingdots[i] if FULLHD else ICONPATH + 'starbar%s.png' % ratingdots[i]
+			if fileExists(ratingfile):
+				try:
+					self['ratinglabel%s' % i].setText(ratinglabels[i])
+					self['ratinglabel%s' % i].show()
+					self['ratingdot%s' % i].instance.setPixmapFromFile(ratingfile)
+					self['ratingdot%s' % i].show()
+				except IndexError:
+					pass
+		starslabel = findall('<span class="rating-stars__label">(.*?)</span>', bereich)
+		starsrating = findall('<span class="rating-stars__rating" data-rating="(.*?)"></span>', bereich)
+		if len(starsrating) > 0:
+			starsfile = ICONPATH + 'starbar%sFHD.png' % starsrating[0] if FULLHD else ICONPATH + 'starbar%s.png' % starsrating[0]
+			if fileExists(starsfile):
+				try:
+					self['starslabel'].setText(starslabel[0])
+					self['starslabel'].show()
+					self['starsrating'].instance.setPixmapFromFile(starsfile)
+					self['starsrating'].show()
+				except IndexError:
+					pass
+
+	def hideRatingInfos(self):
+		for i in range(5):
+			self['ratinglabel%s' % i].hide()
+			self['ratingdot%s' % i].hide()
+		self['starslabel'].hide()
+		self['starsrating'].hide()
+
 	def _shortdesc(self, bereich):
 		shortdesc = search('<section class="serial-info">\\n\\s+(.*?)</section>', bereich)
 		if shortdesc:
@@ -356,8 +391,7 @@ class tvBaseScreen(tvAllScreen):
 				endpos = output.find('<div class="OUTBRAIN"')
 				if endpos == -1:
 					endpos = output.find('</footer>')
-		bereich = output[startpos:endpos]
-		bereich = transHTML(bereich)
+		bereich = transHTML(output[startpos:endpos])
 		infotext = findall('<span class="text-row">(.*?)<', bereich)
 		self.infotextStartEnd(infotext)
 		self._shortdesc(bereich)
@@ -448,6 +482,7 @@ class tvBaseScreen(tvAllScreen):
 		infotext = findall('<span class="text-row">(.*?)<', bereich)
 		self.infotextStartEnd(infotext)
 		self.infotextText(infotext)
+		self.showRatingInfos(output)
 		tvinfo = findall('<span class="add-info (.*?)">', bereich)
 		for i in list(range(len(tvinfo))):
 			try:
@@ -528,7 +563,6 @@ class tvBaseScreen(tvAllScreen):
 				self['piclabel'].show()
 				self['piclabel2'].show()
 			if self.trailer:
-				self['cinlogo'].show()
 				self['playlogo'].show()
 
 	def downloadPicPost(self, link, label):
@@ -628,66 +662,62 @@ class tvBaseScreen(tvAllScreen):
 			else:
 				self.session.openWithCallback(self.showPicPost, FullScreen)
 
-	def redTimer(self, search=False, sref=None):
+	def redTimer(self, searching=False, sref=None):
 		if sref == None:
-			try:
-				if search:
-					c = self['searchmenu'].getSelectedIndex()
-					self.oldsearchindex = c
-					sref = self.searchref[c]
-				else:
-					c = self['menu'].getSelectedIndex()
-					self.oldindex = c
-					sref = self.sref[c]
-				serviceref = ServiceReference(sref)
-			except IndexError:
-				serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+#			try:
+			if searching:
+				c = self['searchmenu'].getSelectedIndex()
+				self.oldsearchindex = c
+				sref = self.searchref[c]
+			else:
+				c = self['menu'].getSelectedIndex()
+				self.oldindex = c
+				sref = self.sref[c]
+			serviceref = ServiceReference(sref)
+#			except IndexError:
+#				serviceref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
 		else:
 			serviceref = ServiceReference(sref)
-		try:
-			start = self.start
-			s1 = sub(':..', '', start)
-			date = str(self.postdate) + 'FIN'
-			date = sub('..FIN', '', date)
-			date = date + self.day
-			parts = start.split(':')
-			seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-			seconds -= int(config.recording.margin_before.value) * 60
-			start = strftime('%H:%M:%S', gmtime(seconds))
-			s2 = sub(':..:..', '', start)
-			if int(s2) > int(s1):
-				start = str(self.date) + ' ' + start
-			else:
-				start = date + ' ' + start
-			start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
-			end = self.end
-			parts = end.split(':')
-			seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
-			seconds += int(config.recording.margin_after.value) * 60
-			end = strftime('%H:%M:%S', gmtime(seconds))
-			e2 = sub(':..:..', '', end)
-			if int(s2) > int(e2):
-				end = str(self.nextdate) + ' ' + end
-			else:
-				end = date + ' ' + end
-			end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
-		except IndexError:
-			pass
+#		try:
+		start = self.start
+		s1 = sub(':..', '', start)
+		date = str(self.postdate) + 'FIN'
+		date = sub('..FIN', '', date)
+		date = date + self.day
+		parts = start.split(':')
+		seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+		seconds -= int(config.recording.margin_before.value) * 60
+		start = strftime('%H:%M:%S', gmtime(seconds))
+		s2 = sub(':..:..', '', start)
+		if int(s2) > int(s1):
+			start = str(self.date) + ' ' + start
+		else:
+			start = date + ' ' + start
+		start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+		end = self.end
+		parts = end.split(':')
+		seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
+		seconds += int(config.recording.margin_after.value) * 60
+		end = strftime('%H:%M:%S', gmtime(seconds))
+		e2 = sub(':..:..', '', end)
+		if int(s2) > int(e2):
+			end = str(self.nextdate) + ' ' + end
+		else:
+			end = date + ' ' + end
+		end = datetime.datetime.strptime(end, '%Y-%m-%d %H:%M:%S')
+#		except IndexError:
+#			pass
 
 		name = self.name
 		shortdesc = self.shortdesc
-		if shortdesc != '' and search('Staffel [0-9]+, Folge [0-9]+', shortdesc):
+		if shortdesc and search('Staffel [0-9]+, Folge [0-9]+', shortdesc):
 			episode = search('(Staffel [0-9]+, Folge [0-9]+)', shortdesc)
 			episode = sub('Staffel ', 'S', episode.group(1))
 			episode = sub(', Folge ', 'E', episode)
 			name = name + ' ' + episode
 
 		try:
-			data = (int(mktime(start.timetuple())),
-					int(mktime(end.timetuple())),
-					name,
-					shortdesc,
-					None)
+			data = (int(mktime(start.timetuple())), int(mktime(end.timetuple())), name, shortdesc, None)
 		except:
 			printStackTrace()
 
@@ -707,8 +737,7 @@ class tvBaseScreen(tvAllScreen):
 				newTimer.name = self.name
 				newTimer.match = ''
 				newTimer.enabled = True
-				self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(
-					mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
+				self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
 		except:
 			printStackTrace()
 
@@ -734,11 +763,15 @@ class tvBaseScreen(tvAllScreen):
 		for i in range(5):
 			self['tvinfo%s' % i] = Pixmap()
 		self['picon'] = Pixmap()
-		self['cinlogo'] = Pixmap()
 		self['playlogo'] = Pixmap()
 		self['searchtext'] = Label('')
 		for i in range(9):
 			self['infotext%s' % i] = Label('')
+		for i in range(5):
+			self['ratinglabel%s' % i] = Label('')
+			self['ratingdot%s' % i] = Pixmap()
+		self['starslabel'] = Label('')
+		self['starsrating'] = Pixmap()
 		self['searchmenu'] = ItemList([])
 		self['textpage'] = ScrollLabel('')
 		self['piclabel'] = Label('')
@@ -777,7 +810,7 @@ class tvBaseScreen(tvAllScreen):
 				self.setTitle(title.group(1))
 		items, bereich = parsePrimeTimeTable(output)
 		mh = int(41 * SCALE + 0.5)
-		for DATUM, START, TITLE, GENRE, INFOS, LOGO, LINK, RATING in items:  # TV-Genre
+		for DATUM, START, TITLE, GENRE, INFOS, LOGO, LINK, RATING in items:
 			if DATUM:
 				self.datum_string = DATUM
 				res_datum = [DATUM]
@@ -870,14 +903,11 @@ class tvBaseScreen(tvAllScreen):
 			else:
 				self.ready = True
 		else:
-			try:
-				if self.searchref[-1] == 'na':
-					del self.searchref[-1]
-					del self.searchlink[-1]
-					del self.searchentries[-1]
-					self['searchmenu'].l.setList(self.searchentries)
-			except IndexError:
-				pass
+			if self.searchref[-1] == 'na':
+				del self.searchref[-1]
+				del self.searchlink[-1]
+				del self.searchentries[-1]
+				self['searchmenu'].l.setList(self.searchentries)
 			self['searchmenu'].moveToIndex(self.oldsearchindex)
 			self.current = 'searchmenu'
 			self.ready = True
@@ -1002,8 +1032,7 @@ class TVTippsView(tvBaseScreen):
 		self.makeTVTimer.start(200, True)
 
 	def makeTVTipps(self, string):
-		output = open(self.localhtml, 'r').read()
-		output = ensure_str(output)
+		output = ensure_str(open(self.localhtml, 'r').read())
 		self.sref = []
 		for i in range(6):
 			self['pic%s' % i].hide()
@@ -1119,10 +1148,7 @@ class TVTippsView(tvBaseScreen):
 				pass
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
-			try:
-				self.postlink = self.searchlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.searchlink[c]
 
 		if action == 'ok' and self.ready:
 			if search('www.tvspielfilm.de', self.postlink):
@@ -1212,22 +1238,14 @@ class TVTippsView(tvBaseScreen):
 		elif self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
-			try:
-				self.postlink = self.tvlink[c]
-			except IndexError:
-				pass
-
+			self.postlink = self.tvlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
 				self.download(self.postlink, self.makePostTimer)
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c
-			try:
-				self.postlink = self.searchlink[c]
-			except IndexError:
-				pass
-
+			self.postlink = self.searchlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
 				self.download(self.postlink, self.makePostTimer)
@@ -1869,10 +1887,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
-			try:
-				self.postlink = self.searchlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.searchlink[c]
 		if action == 'ok' and self.ready:
 			if search('www.tvspielfilm.de', self.postlink):
 				self.current = 'postview'
@@ -1975,11 +1990,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c
-			try:
-				self.postlink = self.searchlink[c]
-			except IndexError:
-				pass
-
+			self.postlink = self.searchlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
 				self.download(self.postlink, self.makePostTimer)
@@ -2506,10 +2517,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
-			try:
-				self.postlink = self.searchlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.searchlink[c]
 
 		if action == 'ok' and self.ready:
 			if search('www.tvspielfilm.de', self.postlink):
@@ -2631,11 +2639,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 		elif self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
-			try:
-				self.postlink = self.tvlink[c][0]
-			except IndexError:
-				pass
-
+			self.postlink = self.tvlink[c][0]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
 				self.index = self.oldindex
@@ -2643,11 +2647,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c
-			try:
-				self.postlink = self.searchlink[c]
-			except IndexError:
-				pass
-
+			self.postlink = self.searchlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
 				self.download(self.postlink, self.makePostTimer)
@@ -3181,10 +3181,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
-			try:
-				self.postlink = self.searchlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.searchlink[c]
 
 		if action == 'ok' and self.ready:
 			if search('www.tvspielfilm.de', self.postlink):
@@ -3292,10 +3289,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c
-			try:
-				self.postlink = self.searchlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.searchlink[c]
 
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
@@ -3769,8 +3763,7 @@ class TVTrailerBilder(tvBaseScreen):
 		self.makestart()
 		startpos = output.find('<p class="headline headline--section">')
 		endpos = output.find('<div id="gtm-livetv-footer"></div>')
-		bereich = output[startpos:endpos]
-		bereich = transHTML(bereich)
+		bereich = transHTML(output[startpos:endpos])
 		date = str(self.date.strftime('%d.%m.%Y'))
 		self.titel = str(self.weekday) + ', ' + date
 		self.setTitle(self.titel)
@@ -3883,9 +3876,6 @@ class TVTrailerBilder(tvBaseScreen):
 					else:
 						self.tvtitel.append(x)
 					res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(30 * SCALE)), size=(int(1140 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-					png = ICONPATH + 'cinFHD.png' if FULLHD else ICONPATH + 'cin.png'
-					if fileExists(png):
-						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1160 * SCALE), int(15 * SCALE)), size=(int(60 * SCALE), int(29 * SCALE)), png=loadPNG(png)))
 					self.tventries.append(res)
 				y = (y + 1) % offset
 			self['menu'].l.setItemHeight(mh)
@@ -3924,9 +3914,6 @@ class TVTrailerBilder(tvBaseScreen):
 					else:
 						self.tvtitel.append(x)
 					res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(10 * SCALE)), size=(int(1140 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
-					png = ICONPATH + 'cinFHD.png' if FULLHD else ICONPATH + 'cin.png'
-					if fileExists(png):
-						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1160 * SCALE), int(15 * SCALE)), size=(int(60 * SCALE), int(29 * SCALE)), png=loadPNG(png)))
 				if y == 3:
 					x = sub('TEXT', '', x)
 					res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(30 * SCALE)), size=(int(1140 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
@@ -3966,9 +3953,6 @@ class TVTrailerBilder(tvBaseScreen):
 					else:
 						self.tvtitel.append(x)
 					res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(10 * SCALE)), size=(int(1140 * SCALE), mh), font=1, color=10857646, color_sel=10857646, flags=RT_HALIGN_LEFT, text=x))
-					png = ICONPATH + 'cinFHD.png' if FULLHD else ICONPATH + 'cin.png'
-					if fileExists(png):
-						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1160 * SCALE), int(15 * SCALE)), size=(int(60 * SCALE), int(29 * SCALE)), png=loadPNG(png)))
 				if y == 2:
 					x = sub('TEXT', '', x)
 					res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(30 * SCALE)), size=(int(1140 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=x))
@@ -4126,8 +4110,6 @@ class TVNews(tvBaseScreen):
 		self['release'].show()
 		self['picture'] = Pixmap()
 		self['picpost'] = Pixmap()
-		self['cinlogo'] = Pixmap()
-		self['cinlogo'].hide()
 		self['playlogo'] = Pixmap()
 		self['playlogo'].hide()
 		self['statuslabel'] = Label('')
@@ -4165,7 +4147,9 @@ class TVNews(tvBaseScreen):
 		self.titel = titel.group(1).replace('&amp;', '&')
 		self.setTitle(self.titel)
 		startpos = output.find('<div class="content-area">')
-		endpos = output.find('<div class="widget-box tvsearch">')
+		endpos = output.find('<div class="text--list">')
+		if endpos == -1: # andere Endekennung bei Genres
+			endpos = output.find('<div class="pagination pagination--numbers"')
 		bereich = output[startpos:endpos]
 		bereich = sub('<ul class=".*?</ul>', '', bereich, flags=S)
 		bereich = sub('<script.*?</script>', '', bereich, flags=S)
@@ -4177,23 +4161,25 @@ class TVNews(tvBaseScreen):
 		picurl = findall('<img src="(.*?)"', bereich)
 		picurltvsp = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/TV-Spielfilm-Logo.svg/500px-TV-Spielfilm-Logo.svg.png'
 		name = findall('<span class="headline">(.*?)</span>', bereich)
-		idx = 0
-		for x in name:
-			idx += 1
-		for i in range(idx):
+		if len(name) == 0: # andere Umklammerung bei Genres
+			name = findall('<p class="title">(.*?)</p>', bereich)
+		subline = findall('<span class="subline">(.*?)</span>', bereich)
+		fullname = []
+		for i in range(len(name)):
+			fullname.append(name[i] + ' | ' + subline[i]) if len(subline) > 0 else fullname.append(name[i])
 			try:
 				self.picurllist.append(picurl[i])
 			except IndexError:
 				self.picurllist.append(picurltvsp)
 			try:
-				self.pictextlist.append(name[i])
+				self.pictextlist.append(fullname[i])
 			except IndexError:
 				self.pictextlist.append(' ')
 			try:
 				res = ['']
 				if self.backcolor:
 					res.append(MultiContentEntryText(pos=(0, 0), size=(int(870 * SCALE), int(30 * SCALE)), font=0, backcolor_sel=self.back_color, text=''))
-				res.append(MultiContentEntryText(pos=(0, 0), size=(int(870 * SCALE), int(30 * SCALE)), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=name[i]))
+				res.append(MultiContentEntryText(pos=(0, 0), size=(int(870 * SCALE), int(30 * SCALE)), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=fullname[i]))
 				self.menulist.append(res)
 				self.menulink.append(link[i])
 			except IndexError:
@@ -4329,7 +4315,6 @@ class TVNews(tvBaseScreen):
 		self['picturetext'].show()
 		self['textpage'].hide()
 		self['picpost'].hide()
-		self['cinlogo'].hide()
 		self['playlogo'].hide()
 		self['statuslabel'].hide()
 
@@ -4467,8 +4452,7 @@ class TVPicShow(tvBaseScreen):
 		self.getInfoTimer.start(200, True)
 
 	def getPicPage(self, output):
-		output = ensure_str(output)
-		output = transHTML(output)
+		output = transHTML(ensure_str(output))
 		self.setTVTitle(output)
 		startpos = output.find('<div class="film-gallery">')
 		endpos = output.find('<div class="swiper-slide more-galleries">')
@@ -4498,6 +4482,7 @@ class TVPicShow(tvBaseScreen):
 		if endpos == -1:
 			endpos = output.find('<div class="paragraph clear film-gallery"')
 		bereich = output[startpos:endpos]
+		bereich = cleanHTML(bereich)
 		bereich = sub('<br />\r\n<br />\r\n', ' \x95 ', bereich)
 		bereich = sub('<br />\r\n<br />', ' \x95 ', bereich)
 		bereich = sub('<br />', '', bereich)
@@ -4509,7 +4494,7 @@ class TVPicShow(tvBaseScreen):
 		bereich = sub('<a href.*?</a>', '', bereich)
 		bereich = sub('</h2>\n\\s+<p>', '', bereich)
 		bereich = sub('&copy;', '', bereich)
-		bereich = transHTML(bereich)
+		bereich = sub('&amp;', '&', bereich)
 		self.pixlist = findall('<img src="(.*?)"', bereich)
 		try:
 			self.download(self.pixlist[0], self.getPic)
@@ -4827,8 +4812,7 @@ class searchYouTube(tvAllScreen):
 		output = ensure_str(open(self.localhtml, 'r').read())
 		startpos = output.find('class="masthead-skeleton-icon">')
 		endpos = output.find(';/*')
-		bereich = output[startpos:endpos]
-		bereich = transHTML(bereich)
+		bereich = transHTML(output[startpos:endpos])
 # remove this after tests are finished #################################################
 #        analyse = bereich.replace('a><a', 'a>\n<a').replace('script><script', 'script>\n<script').replace('},{', '},\n{').replace('}}}]},"publishedTimeText"', '}}}]},\n"publishedTimeText"')
 #        with open('/home/root/logs/bereich.log', 'a') as f:
@@ -5168,26 +5152,19 @@ class tvMain(tvBaseScreen):
 					if search('jetzt', self.mainmenulink[c]) or search('time=shortly', self.mainmenulink[c]) or search('abends', self.mainmenulink[c]) or search('nachts', self.mainmenulink[c]):
 						if self.tipps:
 							self.stopTipps()
-						link = self.mainmenulink[c]
-						self.session.openWithCallback(self.selectMainMenu, TVJetztView, link, False)
+						self.session.openWithCallback(self.selectMainMenu, TVJetztView, self.mainmenulink[c], False)
 					elif search('page=1', self.mainmenulink[c]):
 						if self.tipps:
 							self.stopTipps()
-						link = self.mainmenulink[c]
-						self.session.openWithCallback(self.selectMainMenu, TVHeuteView, link, self.opener)
+						self.session.openWithCallback(self.selectMainMenu, TVHeuteView, self.mainmenulink[c], self.opener)
 					elif search('/bilder', self.mainmenulink[c]):
 						if self.tipps:
 							self.stopTipps()
-						link = self.mainmenulink[c]
-						self.session.openWithCallback(self.selectMainMenu, TVTrailerBilder, link, '_pic')
-					elif search('/tv-tipps//', self.mainmenulink[c]):
+						self.session.openWithCallback(self.selectMainMenu, TVTrailerBilder, self.mainmenulink[c], '_pic')
+					elif search('/tv-tipps|/tv-genre|/trailer-und-clips|/news-und-specials', self.mainmenulink[c]):
 						if self.tipps:
 							self.stopTipps()
-						link = self.mainmenulink[c]
-						self.session.openWithCallback(self.selectMainMenu, TVTippsView, link, 'neu')
-					elif search('/tv-tipps/', self.mainmenulink[c]) or search('/tv-genre/', self.mainmenulink[c]) or search('/trailer-und-clips/', self.mainmenulink[c]) or search('/news-und-specials/', self.mainmenulink[c]):
-						link = self.mainmenulink[c]
-						self.makeSecondMenu(None, link)
+						self.makeSecondMenu(None, self.mainmenulink[c])
 					else:
 						self.ready = False
 						link = self.mainmenulink[c]
@@ -5199,76 +5176,63 @@ class tvMain(tvBaseScreen):
 					self.ready = True
 
 			elif self.actmenu == 'secondmenu':
-				if search('/tv-tipps/', self.secondmenulink[c]):
+				if search('UNUSED', self.secondmenulink[c]):
 					try:
 						if self.tipps:
 							self.stopTipps()
-						sparte = self.sparte[c]
-						link = self.secondmenulink[c]
-						self.session.openWithCallback(self.selectSecondMenu, TVTippsView, link, sparte)
+						self.session.openWithCallback(self.selectSecondMenu, TVTrailerBilder, self.secondmenulink[c], self.sparte[c])
 					except IndexError:
 						pass
-				elif search('/trailer-und-clips/', self.secondmenulink[c]) or search('/kino/charts/', self.secondmenulink[c]) or search('/dvd/charts/', self.secondmenulink[c]) or search('/kino/kino-vorschau/', self.secondmenulink[c]):
-					try:
-						if self.tipps:
-							self.stopTipps()
-						sparte = self.sparte[c]
-						link = self.secondmenulink[c]
-						self.session.openWithCallback(self.selectSecondMenu, TVTrailerBilder, link, sparte)
-					except IndexError:
-						pass
-				elif search('/news|/news-und-specials|/streaming|/kino|/stars|/tatort|/kids-tv|/tv-tipps|/tv-programm', self.secondmenulink[c]):
-					try:
-						if self.tipps:
-							self.stopTipps()
-						link = self.secondmenulink[c]
-						self.session.openWithCallback(self.selectSecondMenu, TVNews, link)
-					except IndexError:
-						pass
-				elif search('/tv-genre/', self.secondmenulink[c]):
-					try:
-						self.ready = False
-						sparte = self.sparte[c]
-						link = self.secondmenulink[c]
-						self.makeThirdMenu(None, sparte)
-					except IndexError:
-						self.ready = True
+				elif search('/genre', self.secondmenulink[c]):
+#					try:
+					self.ready = False
+					self.makeThirdMenu(self.secondmenulink[c], self.sparte[c])
+#					except IndexError:
+#						self.ready = True
+				elif search('/news|/serien|/streaming|/trailer-und-clips|/stars|/charts|/neustarts|/neuerscheinungen|/kino-vorschau|/tatort|/kids-tv|/bestefilme|/tv-programm|/tv-tipps|/awards|/oscars', self.secondmenulink[c]):
+#					try:
+					if self.tipps:
+						self.stopTipps()
+					self.session.openWithCallback(self.selectSecondMenu, TVNews, self.secondmenulink[c])
+#					except IndexError:
+#						pass
 				else:
-					try:
-						self.ready = False
-						sender = self.sender[c]
-						link = self.secondmenulink[c]
-						self.makeThirdMenu('string', sender)
-					except IndexError:
-						self.ready = True
+#					try:
+					self.ready = False
+					self.makeThirdMenu(None, self.sender[c])
+#					except IndexError:
+#						self.ready = True
 
 			elif self.actmenu == 'thirdmenu':
-				if search('/suche/', self.thirdmenulink[c]):
+				if search('/suche', self.thirdmenulink[c]):
+#					try:
+					if self.tipps:
+						self.stopTipps()
+					self.session.openWithCallback(self.selectThirdMenu, TVGenreView, self.thirdmenulink[c], self.genre[c])
+#					except IndexError:
+#						pass
+				elif search('/genre', self.thirdmenulink[c]):
+#					try:
+					if self.tipps:
+						self.stopTipps()
+					self.session.openWithCallback(self.selectThirdMenu, TVNews, self.thirdmenulink[c])
+#					except IndexError:
+#						pass
+				elif search('/tv-tipps', self.thirdmenulink[c]):
 					try:
 						if self.tipps:
 							self.stopTipps()
-						genre = self.genre[c]
-						link = self.thirdmenulink[c]
-						self.session.openWithCallback(self.selectThirdMenu, TVGenreView, link, genre)
-					except IndexError:
-						pass
-				elif search('/tv-tipps/', self.thirdmenulink[c]):
-					try:
-						if self.tipps:
-							self.stopTipps()
-						sparte = self.genre[c]
-						link = self.thirdmenulink[c]
-						self.session.openWithCallback(self.selectThirdMenu, TVTippsView, link, sparte)
+						self.session.openWithCallback(self.selectThirdMenu, TVTippsView, self.thirdmenulink[c], self.genre[c])
 					except IndexError:
 						pass
 				else:
-					try:
-						if self.tipps:
-							self.stopTipps()
-						link = self.thirdmenulink[c].replace('my.tvspielfilm.de', 'www.tvspielfilm.de')
-						self.session.openWithCallback(self.selectThirdMenu, TVProgrammView, link, False, False)
-					except IndexError:
-						pass
+#					try:
+					if self.tipps:
+						self.stopTipps()
+					link = self.thirdmenulink[c].replace('my.tvspielfilm.de', 'www.tvspielfilm.de')
+					self.session.openWithCallback(self.selectThirdMenu, TVProgrammView, link, False, False)
+#					except IndexError:
+#						pass
 
 	def makeMenuItem(self, text, link):
 		res = ['']
@@ -5296,26 +5260,26 @@ class tvMain(tvBaseScreen):
 
 	def makeMainMenu(self):
 		self.makeMenuItem('Heute im TV', '/tv-programm/tv-sender/?page=1')
-		self.makeMenuItem('TV-Tipps', '/tv-tipps/')
-		self.makeMenuItem('TV-Genre', '/tv-genre/')
-		self.makeMenuItem('Neu im TV', '/tv-tipps//')
 		self.makeMenuItem('Jetzt im TV', '/tv-programm/sendungen/jetzt.html')
 		self.makeMenuItem('Gleich im TV', '/tv-programm/sendungen/?page=1&order=time&time=shortly')
 		self.makeMenuItem('20:15 im TV', '/tv-programm/sendungen/abends.html')
 		self.makeMenuItem('22:00 im TV', '/tv-programm/sendungen/fernsehprogramm-nachts.html')
 		self.makeMenuItem('TV-Programm', '/tv-programm/tv-sender/')
-		self.makeMenuItem('TV-Trailer', '/kino/trailer-und-clips/')
-		self.makeMenuItem('TV-Bilder', '/bilder/')
-		self.makeMenuItem('TV-News', '/news-und-specials/')
+		self.makeMenuItem('TV-News', '/news/')
+		self.makeMenuItem('TV-Tipps', '/tv-tipps/')
+		self.makeMenuItem('TV-Serien', '/serien/')
 		self.makeMenuItem('Streaming', '/streaming/')
+		self.makeMenuItem('Filme', '/kino/')
+		self.makeMenuItem('Stars', '/stars/')
+		self.makeMenuItem('TV-Nachrichten', '/news-und-specials/')
+		self.makeMenuItem('TV-Bildergalerien', '/bilder/')
 		self['mainmenu'].l.setList(self.mainmenulist)
 		self['mainmenu'].l.setItemHeight(int(30 * SCALE))
 		self.selectMainMenu()
 
 	def makeSecondMenu(self, string, link):
 		if fileExists(self.senderhtml):
-			output = open(self.senderhtml, 'r').read()
-			output = ensure_str(output)
+			output = ensure_str(open(self.senderhtml, 'r').read())
 		else:
 			output = ''
 		self.secondmenulist = []
@@ -5327,45 +5291,45 @@ class tvMain(tvBaseScreen):
 			endpos = output.find('<div class="button-toggle">')
 			bereich = output[startpos:endpos]
 			bereich = transHTML(bereich)
-			bereich = sub('verschlüsselte ', '', bereich)
-			bereich = sub(' .deutschspr..', '', bereich)
-			bereich = sub('Spartensender ARD', 'Digitale ARD', bereich)
-			bereich = sub('Meine Lieblingssender', 'Lieblingssender', bereich)
 			name = findall('<optgroup label="(.*?)">', bereich)
-			for i in range(len(name)):
-				if name[i] in ['Lieblingssender', 'Hauptsender', 'Dritte Programme', 'Digitale ARD & ZDF', 'Sky Cinema', 'Sky 3D HD', 'Sky Sport', 'Sky Entertainment', 'Sky Select', 'Pay-TV']:
-					self.makeSecondMenuItem(name[i])
-			for mi in ['Kindersender', 'Sportsender', 'Musiksender', 'News', 'Ausland', 'Spartensender', 'Auslandssender', 'Regionalsender']:
-				self.makeSecondMenuItem(mi)
+			for ni in name:
+				self.makeSecondMenuItem(ni)
 			if self.tipps:
 				self.hideTipps()
-		elif search('/tv-tipps/', link):
-			for mi in ['Spielfilm', 'Serie', 'Report', 'Unterhaltung', 'Kinder', 'Sport']:
-				self.makeSecondMenuItem2(mi, '/tv-tipps/')
-		elif search('/tv-genre/', link):
-			for mi in ['Spielfilm', 'Serie', 'Report', 'Unterhaltung', 'Kinder', 'Sport']:
-				self.makeSecondMenuItem2(mi, '/tv-genre/')
-		elif search('/trailer-und-clips/', link):
-			self.makeSecondMenuItem2('Kino Neustarts', '/kino/trailer-und-clips/')
-			self.makeSecondMenuItem2('Kino Vorschau', '/kino/kino-vorschau/')
-			self.makeSecondMenuItem2('Neueste Trailer', '/kino/trailer-und-clips/')
-			self.makeSecondMenuItem2('Kino Charts', '/kino/charts/')
-			self.makeSecondMenuItem2('DVD Charts', '/kino/dvd/charts/')
-		elif search('/news-und-specials/', link):
-			self.makeSecondMenuItem3('TV News', '/news/tv/')
+		elif search('/news/', link):
+			self.makeSecondMenuItem3('TV-News', '/news/tv/')
 			self.makeSecondMenuItem3('Serien-News', '/news/serien/')
 			self.makeSecondMenuItem3('Streaming-News', '/news/streaming/')
 			self.makeSecondMenuItem3('Film-News', '/news/filme/')
-			self.makeSecondMenuItem3('Kino Neustarts', '/kino/neustarts/')
 			self.makeSecondMenuItem3('Star-News', '/news/stars/')
-			self.makeSecondMenuItem3('Star Videos', '/news-und-specials/star-video-news/')
 			self.makeSecondMenuItem3('Shopping-News', '/news/shopping/')
-			self.makeSecondMenuItem3('Interviews & Stories', '/news-und-specials/interviewsundstories/')
-			self.makeSecondMenuItem3('Tatort', '/tatort/')
-			self.makeSecondMenuItem3('Kids TV', '/kids-tv/')
+		elif search('/tv-tipps/', link):
+			self.makeSecondMenuItem3('Filmtipps', '/tv-tipps/spielfilm/')
+			self.makeSecondMenuItem3('Serie', '/tv-tipps/serien/')
+			self.makeSecondMenuItem3('Unterhaltung', '/tv-tipps/unterhaltung/')
+			self.makeSecondMenuItem3('Sport', '/tv-tipps/sport/')
+			self.makeSecondMenuItem3('Report', '/tv-tipps/report/')
+			self.makeSecondMenuItem3('Kinder', '/kids-tv/')
+			self.makeSecondMenuItem3('Free-TV', '/tv-tipps/free-tv/')
+			self.makeSecondMenuItem3('Pay-TV', '/tv-tipps/pay-tv/')
+			self.makeSecondMenuItem3('Erstmals im Free-TV', '/tv-tipps/galerien/freetvpremieren/')
+			self.makeSecondMenuItem3('Programmänderungen', '/tv-programm/programmaenderung/')
+		elif search('/serien/', link):
+			self.makeSecondMenuItem2('Serien', '/serien/')
+			self.makeSecondMenuItem2('Serien-News', '/news/serien/')
+			self.makeSecondMenuItem2('Quizze', '/news/quizze/')
+			self.makeSecondMenuItem2('Serien-Trailer', '/serien/serien-trailer/')
+			self.makeSecondMenuItem2('Serien A-Z', '/serien/serienarchiv/')
+			self.makeSecondMenuItem2('Genres', '/serien/genre/')
+			self.makeSecondMenuItem2('Beste Serien', '/news/serien/die-besten-us-serien-aller-zeiten,9250353,ApplicationArticle.html')
+			self.makeSecondMenuItem2('Beste Netflix Serien', '/news/serien/die-besten-netflix-serien,9437468,ApplicationArticle.html')
+			self.makeSecondMenuItem2('The Walking Dead', '/serien/walkingdead/')
+			self.makeSecondMenuItem2('The Big Bang Theory', '/serien/thebigbangtheory/')
+			self.makeSecondMenuItem2('''Grey's Anatomy''', '/serien/greys-anatomy/')
+			self.makeSecondMenuItem2('Tatort', '/tatort/')
 		elif search('/streaming/', link):
 			self.makeSecondMenuItem3('Streaming-News', '/news/streaming/')
-			self.makeSecondMenuItem3('Vergleich: Netflix & Co.', '/streaming/streamingvergleich/')
+			self.makeSecondMenuItem3('Streaming-Vergleich', '/streaming/streamingvergleich/')
 			self.makeSecondMenuItem3('Neu auf Netflix', '/news/filme/neu-bei-netflix-diese-serien-und-filme-lohnen-sich,8941871,ApplicationArticle.html')
 			self.makeSecondMenuItem3('Neu bei Amazon Prime', '/news/filme/neu-bei-amazon-prime-diese-serien-und-filme-lohnen-sich,10035760,ApplicationArticle.html')
 			self.makeSecondMenuItem3('Neu auf Disney+', '/news/serien/neu-auf-disneyplus-serien-filme,10127377,ApplicationArticle.html')
@@ -5373,15 +5337,33 @@ class tvMain(tvBaseScreen):
 			self.makeSecondMenuItem3('beste Netflix Serien', '/news/serien/die-besten-netflix-serien,9437468,ApplicationArticle.html')
 			self.makeSecondMenuItem3('beste Netflix Filme', '/news/filme/die-besten-netflix-filme,9659520,ApplicationArticle.html')
 			self.makeSecondMenuItem3('beste Amazon Prime Filme', '/news-und-specials/die-besten-filme-bei-amazon-prime-unsere-empfehlungen,10155040,ApplicationArticle.html')
+		elif search('/kino/', link):
+			self.makeSecondMenuItem2('Film-News', '/news/filme/')
+			self.makeSecondMenuItem2('Beste Filme', '/bestefilme/')
+			self.makeSecondMenuItem2('Filmtipps', '/bestefilme/toplisten/')
+			self.makeSecondMenuItem2('Trailer', '/kino/trailer-und-clips/')
+			self.makeSecondMenuItem2('Genres', '/genre/')
+			self.makeSecondMenuItem2('Neu im Kino', '/kino/neustarts/')
+			self.makeSecondMenuItem2('Kino-Charts', '/kino/charts/')
+			self.makeSecondMenuItem2('Kino Vorschau', '/kino/kino-vorschau/')
+			self.makeSecondMenuItem2('Neu auf DVD', '/dvd/neuerscheinungen/')
+			self.makeSecondMenuItem2('DVD Charts', '/kino/dvd/charts/')
+			self.makeSecondMenuItem2('TV Spielfilm Awards', '/awards/')
+			self.makeSecondMenuItem2('Oscar - Academy Awards', '/kino/oscars/')
+		elif search('/stars/', link):
+			self.makeSecondMenuItem3('Star-News', '/news/stars/')
+			self.makeSecondMenuItem3('Star-Videos', '/news-und-specials/star-video-news/')
+			self.makeSecondMenuItem3('Interviews', '/news-und-specials/interviewsundstories/')
+			self.makeSecondMenuItem3('TV Spielfilm Awards', '/stars/awards/')
+			self.makeSecondMenuItem3('Stars A-Z', '/kino/stars/archiv/')
 		self['secondmenu'].l.setList(self.secondmenulist)
 		self['secondmenu'].l.setItemHeight(int(30 * SCALE))
 		self.selectSecondMenu()
 
-	def makeThirdMenuItem(self, output, start, end):
-		startpos = output.find('<optgroup label="%s' % start)
-		endpos = output.find('<optgroup label="%s' % end)
-		bereich = output[startpos:endpos]
-		bereich = transHTML(bereich)
+	def makeThirdMenuItem(self, output, start):
+		startpos = output.find('<optgroup label="%s"' % start)
+		endpos = output.find('</optgroup>', startpos)
+		bereich = transHTML(output[startpos:endpos])
 		lnk = findall("value='(.*?)'", bereich)
 		name = findall("<option label='(.*?)'", bereich)
 		for i in range(len(name)):
@@ -5392,146 +5374,40 @@ class tvMain(tvBaseScreen):
 			self.thirdmenulist.append(res)
 			self.thirdmenulink.append(lnk[i])
 
-	def makeThirdMenuItem2(self, text, genre, link=None, cat='SP'):
+	def makeThirdMenuItem2(self, genre, link):
 		res = ['']
 		if self.backcolor:
 			res.append(MultiContentEntryText(pos=(0, 0), size=(int(270 * SCALE), int(30 * SCALE)), font=2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-		res.append(MultiContentEntryText(pos=(0, 1), size=(int(270 * SCALE), int(30 * SCALE)), font=2, flags=RT_HALIGN_CENTER, text=text))
+		res.append(MultiContentEntryText(pos=(0, 1), size=(int(270 * SCALE), int(30 * SCALE)), font=2, flags=RT_HALIGN_CENTER, text=genre))
 		self.thirdmenulist.append(res)
-		if link == None:
-			link = text
-		self.thirdmenulink.append(self.baseurl + '/suche/?tab=TV-Sendungen&ext=1&q=&cat[]=' + cat + '&genre' + cat + '=' + link + '&time=day&date=&channel=')
-		self.genre.append(genre + ':' + text)
+		self.thirdmenulink.append(link)
+		self.genre.append(genre)
 
-	def makeThirdMenu(self, string, sender):
-		if string:
-			output = open(self.senderhtml, 'r').read()
-			output = ensure_str(output)
+	def makeThirdMenu(self, link, sender):
 		self.thirdmenulist = []
 		self.thirdmenulink = []
 		self.genre = []
-		if sender == 'Lieblingssender':
-			self.makeThirdMenuItem(output, 'Meine Lieblingssender">', 'Hauptsender">')
-		elif sender == 'Hauptsender':
-			self.makeThirdMenuItem(output, 'Hauptsender">', 'Dritte Programme">')
-		elif sender == 'Dritte Programme':
-			self.makeThirdMenuItem(output, 'Dritte Programme">', 'Sportsender">')
-		elif sender == 'Kindersender':
-			self.makeThirdMenuItem(output, 'Kindersender">', 'Ausland ')
-		elif sender == 'Digitale ARD & ZDF':
-			self.makeThirdMenuItem(output, 'Spartensender ARD', 'News')
-		elif sender == 'Ausland':
-			self.makeThirdMenuItem(output, 'Ausland (deutschspr.)">', 'Regionalsender">')
-		elif sender == 'Regionalsender':
-			self.makeThirdMenuItem(output, 'Regionalsender">', 'Musiksender">')
-		elif sender == 'News':
-			self.makeThirdMenuItem(output, 'News', 'Kindersender">')
-		elif sender == 'Sportsender':
-			self.makeThirdMenuItem(output, 'Sportsender">', 'Spartensender ARD')
-		elif sender == 'Musiksender':
-			self.makeThirdMenuItem(output, 'Musiksender">', 'Spartensender">')
-		elif sender == 'Spartensender':
-			self.makeThirdMenuItem(output, 'Spartensender">', 'Shopping">')
-		elif sender == 'Sky Cinema':
-			self.makeThirdMenuItem(output, 'Sky Cinema">', 'Sky Sport">')
-		elif sender == 'Sky Sport':
-			self.makeThirdMenuItem(output, 'Sky Sport">', 'Sky Sport">')
-		elif sender == 'Sky Entertainment':
-			self.makeThirdMenuItem(output, 'Sky Entertainment">', 'Blue Movie">')
-		elif sender == 'Sky Select':
-			self.makeThirdMenuItem(output, 'Sky Select">', 'Pay-TV">')
-		elif sender == 'Pay-TV':
-			self.makeThirdMenuItem(output, 'Pay-TV">', 'Auslandssender">')
-		elif sender == 'Auslandssender':
-			self.makeThirdMenuItem(output, 'Auslandssender">', 'alle Sender')
-		elif sender == 'Spielfilm':
-			self.makeThirdMenuItem2('Alle Genres', sender, '')
-			self.makeThirdMenuItem2('Abenteuer', sender)
-			self.makeThirdMenuItem2('Action', sender)
-			self.makeThirdMenuItem2('Dokumentation', sender)
-			self.makeThirdMenuItem2('Drama', sender)
-			self.makeThirdMenuItem2('Episodenfilm', sender)
-			self.makeThirdMenuItem2('Erotik', sender)
-			self.makeThirdMenuItem2('Familie/Kinder', sender, 'Familie%2FKinder')
-			self.makeThirdMenuItem2('Fantasy', sender)
-			self.makeThirdMenuItem2('Filmkunst', sender)
-			self.makeThirdMenuItem2('Heimat', sender)
-			self.makeThirdMenuItem2('Historie', sender)
-			self.makeThirdMenuItem2('Horror', sender)
-			self.makeThirdMenuItem2('Klassiker', sender)
-			self.makeThirdMenuItem2('Komödie', sender, 'Kom%C3%B6die')
-			self.makeThirdMenuItem2('Kriegsfilm', sender)
-			self.makeThirdMenuItem2('Krimi', sender)
-			self.makeThirdMenuItem2('Literatur/Theater', sender, 'Literatur%2FTheater')
-			self.makeThirdMenuItem2('Love Story', sender, 'Love+Story')
-			self.makeThirdMenuItem2('Märchen', sender, 'M%C3%A4rchen')
-			self.makeThirdMenuItem2('Musikfilm', sender)
-			self.makeThirdMenuItem2('Porträt', sender, 'Portr%C3%A4t')
-			self.makeThirdMenuItem2('Road Movie', sender, 'Road+Movie')
-			self.makeThirdMenuItem2('SciFi', sender)
-			self.makeThirdMenuItem2('Thriller', sender)
-			self.makeThirdMenuItem2('Trickfilm', sender)
-			self.makeThirdMenuItem2('Western', sender)
-		elif sender == 'Serie':
-			self.makeThirdMenuItem2('Alle Genres', sender, '', 'SE')
-			self.makeThirdMenuItem2('Action', sender, None, 'SE')
-			self.makeThirdMenuItem2('Arzt', sender, None, 'SE')
-			self.makeThirdMenuItem2('Comedy', sender, None, 'SE')
-			self.makeThirdMenuItem2('Daily Soap', sender, 'Daily+Soap', 'SE')
-			self.makeThirdMenuItem2('Dokuserie', sender, None, 'SE')
-			self.makeThirdMenuItem2('Familienserie', sender, None, 'SE')
-			self.makeThirdMenuItem2('Horror', sender, None, 'SE')
-			self.makeThirdMenuItem2('Kinder-/Jugend', sender, 'Kinder-%2FJugend', 'SE')
-			self.makeThirdMenuItem2('Krimi', sender, None, 'SE')
-			self.makeThirdMenuItem2('Science Fiction', sender, 'Science+Fiction', 'SE')
-			self.makeThirdMenuItem2('Soap', sender, None, 'SE')
-			self.makeThirdMenuItem2('Western', sender, None, 'SE')
-		elif sender == 'Report':
-			self.makeThirdMenuItem2('Alle Genres', sender, '', 'RE')
-			self.makeThirdMenuItem2('Gesellschaft', sender, None, 'RE')
-			self.makeThirdMenuItem2('Justiz', sender, None, 'RE')
-			self.makeThirdMenuItem2('Magazin', sender, None, 'RE')
-			self.makeThirdMenuItem2('Natur', sender, None, 'RE')
-			self.makeThirdMenuItem2('Politik', sender, None, 'RE')
-			self.makeThirdMenuItem2('Ratgeber', sender, None, 'RE')
-			self.makeThirdMenuItem2('Technik', sender, None, 'RE')
-			self.makeThirdMenuItem2('Wissenschaft', sender, None, 'RE')
-		elif sender == 'Unterhaltung':
-			self.makeThirdMenuItem2('Alle Genres', sender, '', 'U')
-			self.makeThirdMenuItem2('Comedy', sender, None, 'U')
-			self.makeThirdMenuItem2('Familie', sender, None, 'U')
-			self.makeThirdMenuItem2('Kultur', sender, None, 'U')
-			self.makeThirdMenuItem2('Late Night', sender, 'Late+Night', 'U')
-			self.makeThirdMenuItem2('Musik', sender, None, 'U')
-			self.makeThirdMenuItem2('Quiz', sender, None, 'U')
-			self.makeThirdMenuItem2('Show', sender, None, 'U')
-			self.makeThirdMenuItem2('Talk', sender, None, 'U')
-		elif sender == 'Kinder':
-			self.makeThirdMenuItem2('Alle Genres', sender, '', 'KIN')
-			self.makeThirdMenuItem2('Bildung', sender, None, 'KIN')
-			self.makeThirdMenuItem2('Magazin', sender, None, 'KIN')
-			self.makeThirdMenuItem2('Reportage', sender, None, 'KIN')
-			self.makeThirdMenuItem2('Serie', sender, None, 'KIN')
-			self.makeThirdMenuItem2('Show', sender, None, 'KIN')
-		elif sender == 'Sport':
-			self.makeThirdMenuItem2('Alle Genres', sender, '', 'SPO')
-			self.makeThirdMenuItem2('Basketball', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Billard', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Boxen', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Formel 1', sender, 'Formel+1', 'SPO')
-			self.makeThirdMenuItem2('Funsport', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Fußball', sender, 'Fu%C3%9Fball', 'SPO')
-			self.makeThirdMenuItem2('Golf', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Handball', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Kampfsport', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Leichtathletik', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Motorsport', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Poker', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Radsport', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Tennis', sender, None, 'SPO')
-			self.makeThirdMenuItem2('US Sport', sender, 'US+Sport', 'SPO')
-			self.makeThirdMenuItem2('Wassersport', sender, None, 'SPO')
-			self.makeThirdMenuItem2('Wintersport', sender, None, 'SPO')
+		if link is None:
+			output = ensure_str(open(self.senderhtml, 'r').read())
+			startpos = output.find('<option value="" label="Alle Sender">Alle Sender</option>')
+			endpos = output.find('<div class="button-toggle">')
+			string = transHTML(output[startpos:endpos])
+			self.makeThirdMenuItem(string, sender)
+			self['thirdmenu'].l.setList(self.thirdmenulist)
+			self['thirdmenu'].l.setItemHeight(int(30 * SCALE))
+			self.selectThirdMenu()
+		elif search('/genre', link):
+			self.downloadFullPage(link, self.makeGenres)
+
+	def makeGenres(self, dummy):
+		output = ensure_str(open(self.localhtml, 'r').read())
+		startpos = output.find('<p class="filter-title">Genre</p>')
+		endpos = output.find('<section class="filter abc-filter">')
+		bereich = transHTML(output[startpos:endpos])
+		genres = findall('<a title="(.*?)" href="', bereich)
+		links = findall('" href="(.*?)/">', bereich)
+		for i in range(len(genres)):
+			self.makeThirdMenuItem2(genres[i], links[i])
 		self['thirdmenu'].l.setList(self.thirdmenulist)
 		self['thirdmenu'].l.setItemHeight(int(30 * SCALE))
 		self.selectThirdMenu()
@@ -5561,7 +5437,6 @@ class tvMain(tvBaseScreen):
 			self['mainmenu'].selectionEnabled(0)
 			self['secondmenu'].selectionEnabled(1)
 			self['thirdmenu'].selectionEnabled(0)
-			self['secondmenu'].moveToIndex(0)
 			if self.tipps and not self.hidetipps:
 				self.showTipps()
 		self.ready = True
@@ -5575,7 +5450,6 @@ class tvMain(tvBaseScreen):
 			self['mainmenu'].selectionEnabled(0)
 			self['secondmenu'].selectionEnabled(0)
 			self['thirdmenu'].selectionEnabled(1)
-			self['thirdmenu'].moveToIndex(0)
 			if self.tipps:
 				self.hideTipps()
 		self.ready = True
@@ -5618,6 +5492,16 @@ class tvMain(tvBaseScreen):
 
 	def rightDown(self):
 		self[self.actmenu].pageDown()
+
+	def downloadFullPage(self, link, name):
+		downloadPage(ensure_binary(link), self.localhtml).addCallback(name).addErrback(self.downloadFPError)
+
+	def downloadFPError(self, output):
+		try:
+			error = output.getErrorMessage()
+			self.session.open(MessageBox, 'Download Fehler:\n%s' % error, MessageBox.TYPE_ERROR)
+		except AttributeError:
+			self.session.open(MessageBox, 'Download Fehler:\n%s' % output, MessageBox.TYPE_ERROR)
 
 	def downloadError(self, output):
 		try:
@@ -5751,8 +5635,10 @@ class tvMain(tvBaseScreen):
 			config.usage.on_movie_eof.value = self.movie_eof
 			self.close()
 		elif self.actmenu == 'secondmenu':
+			self['secondmenu'].moveToIndex(0)
 			self.selectMainMenu()
 		elif self.actmenu == 'thirdmenu':
+			self['thirdmenu'].moveToIndex(0)
 			self.selectSecondMenu()
 
 
@@ -5803,10 +5689,6 @@ class makeServiceFile(Screen):
 				bouquets.append((info.getName(bouquet_root), bouquet_root))
 		entrys = [(x[0], x[1]) for x in bouquets]
 		self['list'].l.setList(entrys)
-#        try:
-#        self['list'].l.setFont(gFont('Regular', 24))
-#        except (AttributeError, TypeError):
-#            pass
 		self.ready = True
 
 	def ok(self):
@@ -6370,11 +6252,10 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
 		elif config.plugins.tvspielfilm.encrypt.value != self.encrypt:
 			if self.encrypt == 'yes':
 				try:
-					password = ensure_str(b64decode(config.plugins.tvspielfilm.password.value))
+					password = ensure_str(b64decode(config.plugins.tvspielfilm.password.value.encode('ascii', 'xmlcharrefreplace')))
 					config.plugins.tvspielfilm.password.value = password
 				except TypeError:
 					pass
-
 			else:
 				password = b64encode(ensure_binary(config.plugins.tvspielfilm.password.value))
 				config.plugins.tvspielfilm.password.value = password
@@ -6705,8 +6586,7 @@ class TVHeuteView(tvBaseScreen):
 		self.setTitle(self.titel)
 		startpostop = output.find('<div class="gallery-area">')
 		endpostop = output.find('<div class="info-block">')
-		bereichtop = output[startpostop:endpostop]
-		bereichtop = transHTML(bereichtop)
+		bereichtop = transHTML(output[startpostop:endpostop])
 		bereichtop = sub('<wbr/>', '', bereichtop)
 		bereichtop = sub('<div class="first-program block-1">\n.*?</div>', '<div class="first-program block-1"><img src="http://a2.tvspielfilm.de/imedia/8461/5218461,qfQElNSTpxAGvxxuSsPkPjQRIrO6vJjPQCu3KaA_RQPfIknB77GUEYh_MB053lNvumg7bMd+vkJk3F+_CzBZSQ==.jpg" width="149" height="99" border="0" /><span class="time"> </span><strong class="title"> </strong></div>', bereichtop)
 		picons = findall('"sendericon","channel":"(.*?)","broadcastChannelGroup"', bereichtop)
@@ -6714,11 +6594,9 @@ class TVHeuteView(tvBaseScreen):
 			for i in range(6):
 				sref = picons[i].lower().replace(' ', '').replace('.', '').replace('ii', '2')
 				if sref == 'nope':
-					self.srefs[i].append('')
 					self.zaps[i] = False
 					self['picon%s' % i].hide()
 				else:
-					self.srefs[i].append(sref)
 					picon = PICPATH + 'picons/' + sref + '.png'
 					if fileExists(picon):
 						self['picon%s' % i].instance.setScale(1)
@@ -6729,10 +6607,12 @@ class TVHeuteView(tvBaseScreen):
 		sender = findall('<h3>(.*?)</h3>', bereichtop)
 		if sender:
 			for i in range(6):
+				self.srefs[i].append(sender[i])
 				self['sender%s' % i].setText(sender[i])
 				self['sender%s' % i].show()
 		else:
 			for i in range(6):
+				self.srefs[i].append('')
 				self['sender%s' % i].setText('')
 		pic = findall('<img src="(.*?)" alt="(.*?)"', bereichtop)
 		idx = 0
@@ -6777,8 +6657,7 @@ class TVHeuteView(tvBaseScreen):
 		elif self.vorabend:
 			startpos = output.find('<div id="toggleslot-18-p"')
 			endpos = output.find('<div id="toggleslot-20-p"')
-		bereich = output[startpos:endpos]
-		bereich = transHTML(bereich)
+		bereich = transHTML(output[startpos:endpos])
 		bereich = sub('<a href="javascript://".*?\n', '', bereich)
 		bereich = sub('<a title="Sendung jetzt.*?\n', '', bereich)
 		bereich = sub('<span class="add-info icon-livetv"></span>', '', bereich)
@@ -6935,14 +6814,11 @@ class TVHeuteView(tvBaseScreen):
 						pass
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
-			try:
-				self.postlink = self.searchlink[c]
-				if action == 'ok':
-					if search('www.tvspielfilm.de', self.postlink):
-						self.current = 'postview'
-						self.downloadPostPage(self.postlink, self.makePostviewPage)
-			except IndexError:
-				pass
+			self.postlink = self.searchlink[c]
+			if action == 'ok':
+				if search('www.tvspielfilm.de', self.postlink):
+					self.current = 'postview'
+					self.downloadPostPage(self.postlink, self.makePostviewPage)
 
 	def getEPG(self):
 		if self.current == 'postview' and self.postviewready:
@@ -7088,13 +6964,10 @@ class TVHeuteView(tvBaseScreen):
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c
-			try:
-				self.postlink = self.searchlink[c]
-				if search('www.tvspielfilm.de', self.postlink):
-					self.oldcurrent = self.current
-					self.download(self.postlink, self.makePostTimer)
-			except IndexError:
-				pass
+			self.postlink = self.searchlink[c]
+			if search('www.tvspielfilm.de', self.postlink):
+				self.oldcurrent = self.current
+				self.download(self.postlink, self.makePostTimer)
 
 	def finishedTimer(self, answer):
 		if answer[0]:
@@ -7560,7 +7433,7 @@ class TVHeuteView(tvBaseScreen):
 			HIDEFLAG = True
 			with open(ALPHA, 'w') as f:
 				f.write('%i' % config.av.osd_alpha.value)
-		if self.current == 'menu0' or self.current == 'menu1' or self.current == 'menu2' or self.current == 'menu3' or self.current == 'menu4' or self.current == 'menu5':
+		if "menu" in self.current:
 			self.close()
 		elif self.current == 'searchmenu':
 			self.search = False
@@ -7572,12 +7445,14 @@ class TVHeuteView(tvBaseScreen):
 			self.current = self.currentsearch
 			self.showProgrammPage()
 		elif self.current == 'postview' and not self.search:
+			self.hideRatingInfos()
 			self.postviewready = False
 			self.setTitle('')
 			self.setTitle(self.titel)
 			self.current = self.oldcurrent
 			self.showProgrammPage()
 		elif self.current == 'postview' and self.search:
+			self.hideRatingInfos()
 			self.postviewready = False
 			self.showsearch()
 			self.current = 'searchmenu'
