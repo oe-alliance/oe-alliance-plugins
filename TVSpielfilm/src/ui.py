@@ -316,11 +316,11 @@ class tvBaseScreen(tvAllScreen):
 	def infotextText(self, infotext):
 		try:
 			idx = 0
-			for i in range(len(infotext)):
-				parts = infotext[i].split(', ')
-				for j in range(len(parts)):
+			for itext in infotext:
+				parts = itext.split(', ')
+				for i in range(len(parts)):
 					if idx < 9:
-						self['infotext%s' % idx].setText(parts[j])
+						self['infotext%s' % idx].setText(parts[i])
 						self['infotext%s' % idx].show()
 						idx += 1
 		except IndexError:
@@ -1634,11 +1634,13 @@ class TVTippsView(tvBaseScreen):
 			self.setTitle('')
 			self.setTitle(self.titel)
 		elif self.current == 'postview' and not self.search:
+			self.hideRatingInfos()
 			self.postviewready = False
 			self.setTitle('')
 			self.setTitle(self.titel)
 			self.showProgrammPage()
 		elif self.current == 'postview' and self.search:
+			self.hideRatingInfos()
 			self.postviewready = False
 			self.showsearch()
 			self.current = 'searchmenu'
@@ -2355,6 +2357,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 			nowsec = int(nowhour) * 3600 + int(nowminute) * 60
 		else:
 			self.progress = False
+		self.hideRatingInfos()
 #20:15#########################################################################################
 		mh = int(41 * SCALE + 0.5)
 		for LOGO, TIME, LINK, title, sparte, genre, RATING in items:
@@ -2911,11 +2914,13 @@ class TVJetztView(tvGenreJetztProgrammView):
 			self.setTitle(self.titel)
 			self.showProgrammPage()
 		elif self.current == 'postview' and not self.search:
+			self.hideRatingInfos()
 			self.postviewready = False
 			self.setTitle('')
 			self.setTitle(self.titel)
 			self.showProgrammPage()
 		elif self.current == 'postview' and self.search:
+			self.hideRatingInfos()
 			self.postviewready = False
 			self.showsearch()
 			self.current = 'searchmenu'
@@ -3027,6 +3032,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 		output = ensure_str(output)
 		titel = search('<title>(.*?)von', output)
 		date = str(self.date.strftime('%d.%m.%Y'))
+		self.hideRatingInfos()
 		self.titel = str(titel.group(1)) + ' - ' + str(self.weekday) + ', ' + date
 		self.setTitle(self.titel)
 		items, bereich = parseNow(output)
@@ -5149,21 +5155,17 @@ class tvMain(tvBaseScreen):
 
 			if self.actmenu == 'mainmenu':
 				try:
+					if self.tipps:
+						self.stopTipps()
 					if search('jetzt', self.mainmenulink[c]) or search('time=shortly', self.mainmenulink[c]) or search('abends', self.mainmenulink[c]) or search('nachts', self.mainmenulink[c]):
-						if self.tipps:
-							self.stopTipps()
 						self.session.openWithCallback(self.selectMainMenu, TVJetztView, self.mainmenulink[c], False)
 					elif search('page=1', self.mainmenulink[c]):
-						if self.tipps:
-							self.stopTipps()
 						self.session.openWithCallback(self.selectMainMenu, TVHeuteView, self.mainmenulink[c], self.opener)
 					elif search('/bilder', self.mainmenulink[c]):
-						if self.tipps:
-							self.stopTipps()
 						self.session.openWithCallback(self.selectMainMenu, TVTrailerBilder, self.mainmenulink[c], '_pic')
-					elif search('/tv-tipps|/tv-genre|/trailer-und-clips|/news-und-specials', self.mainmenulink[c]):
-						if self.tipps:
-							self.stopTipps()
+					elif search('/news-und-specials', self.mainmenulink[c]):
+						self.session.openWithCallback(self.selectMainMenu, TVNews, self.mainmenulink[c])
+					elif search('/tv-tipps|/tv-genre|/trailer-und-clips', self.mainmenulink[c]):
 						self.makeSecondMenu(None, self.mainmenulink[c])
 					else:
 						self.ready = False
@@ -5177,47 +5179,45 @@ class tvMain(tvBaseScreen):
 
 			elif self.actmenu == 'secondmenu':
 				if search('UNUSED', self.secondmenulink[c]):
+					if self.tipps:
+						self.stopTipps()
 					try:
-						if self.tipps:
-							self.stopTipps()
 						self.session.openWithCallback(self.selectSecondMenu, TVTrailerBilder, self.secondmenulink[c], self.sparte[c])
 					except IndexError:
 						pass
 				elif search('/genre', self.secondmenulink[c]):
-#					try:
-					self.ready = False
-					self.makeThirdMenu(self.secondmenulink[c], self.sparte[c])
-#					except IndexError:
-#						self.ready = True
+					try:
+						self.ready = False
+						self.makeThirdMenu(self.secondmenulink[c], self.sparte[c])
+					except IndexError:
+						self.ready = True
 				elif search('/news|/serien|/streaming|/trailer-und-clips|/stars|/charts|/neustarts|/neuerscheinungen|/kino-vorschau|/tatort|/kids-tv|/bestefilme|/tv-programm|/tv-tipps|/awards|/oscars', self.secondmenulink[c]):
-#					try:
-					if self.tipps:
-						self.stopTipps()
-					self.session.openWithCallback(self.selectSecondMenu, TVNews, self.secondmenulink[c])
-#					except IndexError:
-#						pass
+					try:
+						self.session.openWithCallback(self.selectSecondMenu, TVNews, self.secondmenulink[c])
+					except IndexError:
+						pass
 				else:
-#					try:
-					self.ready = False
-					self.makeThirdMenu(None, self.sender[c])
-#					except IndexError:
-#						self.ready = True
+					try:
+						self.ready = False
+						self.makeThirdMenu(None, self.sender[c])
+					except IndexError:
+						self.ready = True
 
 			elif self.actmenu == 'thirdmenu':
 				if search('/suche', self.thirdmenulink[c]):
-#					try:
-					if self.tipps:
-						self.stopTipps()
-					self.session.openWithCallback(self.selectThirdMenu, TVGenreView, self.thirdmenulink[c], self.genre[c])
-#					except IndexError:
-#						pass
+					try:
+						if self.tipps:
+							self.stopTipps()
+						self.session.openWithCallback(self.selectThirdMenu, TVGenreView, self.thirdmenulink[c], self.genre[c])
+					except IndexError:
+						pass
 				elif search('/genre', self.thirdmenulink[c]):
-#					try:
-					if self.tipps:
-						self.stopTipps()
-					self.session.openWithCallback(self.selectThirdMenu, TVNews, self.thirdmenulink[c])
-#					except IndexError:
-#						pass
+					try:
+						if self.tipps:
+							self.stopTipps()
+						self.session.openWithCallback(self.selectThirdMenu, TVNews, self.thirdmenulink[c])
+					except IndexError:
+						pass
 				elif search('/tv-tipps', self.thirdmenulink[c]):
 					try:
 						if self.tipps:
@@ -5226,13 +5226,13 @@ class tvMain(tvBaseScreen):
 					except IndexError:
 						pass
 				else:
-#					try:
-					if self.tipps:
-						self.stopTipps()
-					link = self.thirdmenulink[c].replace('my.tvspielfilm.de', 'www.tvspielfilm.de')
-					self.session.openWithCallback(self.selectThirdMenu, TVProgrammView, link, False, False)
-#					except IndexError:
-#						pass
+					try:
+						if self.tipps:
+							self.stopTipps()
+						link = self.thirdmenulink[c].replace('my.tvspielfilm.de', 'www.tvspielfilm.de')
+						self.session.openWithCallback(self.selectThirdMenu, TVProgrammView, link, False, False)
+					except IndexError:
+						pass
 
 	def makeMenuItem(self, text, link):
 		res = ['']
@@ -5315,11 +5315,11 @@ class tvMain(tvBaseScreen):
 			self.makeSecondMenuItem3('Erstmals im Free-TV', '/tv-tipps/galerien/freetvpremieren/')
 			self.makeSecondMenuItem3('Programmänderungen', '/tv-programm/programmaenderung/')
 		elif search('/serien/', link):
-			self.makeSecondMenuItem2('Serien', '/serien/')
+#			self.makeSecondMenuItem2('Serien', '/serien/')
 			self.makeSecondMenuItem2('Serien-News', '/news/serien/')
 			self.makeSecondMenuItem2('Quizze', '/news/quizze/')
 			self.makeSecondMenuItem2('Serien-Trailer', '/serien/serien-trailer/')
-			self.makeSecondMenuItem2('Serien A-Z', '/serien/serienarchiv/')
+#			self.makeSecondMenuItem2('Serien A-Z', '/serien/serienarchiv/')
 			self.makeSecondMenuItem2('Genres', '/serien/genre/')
 			self.makeSecondMenuItem2('Beste Serien', '/news/serien/die-besten-us-serien-aller-zeiten,9250353,ApplicationArticle.html')
 			self.makeSecondMenuItem2('Beste Netflix Serien', '/news/serien/die-besten-netflix-serien,9437468,ApplicationArticle.html')
@@ -5348,7 +5348,7 @@ class tvMain(tvBaseScreen):
 			self.makeSecondMenuItem2('Kino Vorschau', '/kino/kino-vorschau/')
 			self.makeSecondMenuItem2('Neu auf DVD', '/dvd/neuerscheinungen/')
 			self.makeSecondMenuItem2('DVD Charts', '/kino/dvd/charts/')
-			self.makeSecondMenuItem2('TV Spielfilm Awards', '/awards/')
+			self.makeSecondMenuItem2('TV Spielfilm Awards', '/stars/awards/')
 			self.makeSecondMenuItem2('Oscar - Academy Awards', '/kino/oscars/')
 		elif search('/stars/', link):
 			self.makeSecondMenuItem3('Star-News', '/news/stars/')
