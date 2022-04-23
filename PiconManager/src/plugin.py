@@ -536,6 +536,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 						self.getPiconFiles()
 					else:
 						url = self.server_url + self.cur_selected_dir + "/" + picon_list_file
+						url = url.replace(" ", "%20")
 						url = six.ensure_binary(url)
 						downloadPage(url, self.picon_list_file).addCallback(self.getPiconFiles).addErrback(self.dataError)
 
@@ -548,7 +549,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self.picon_name = random.choice(self.picon_files)
 			downloadPiconUrl = self.server_url + self.cur_selected_dir + "/" + self.picon_name
 			downloadPiconUrl = downloadPiconUrl.replace(" ", "%20")
-			self.downloadPiconPath = self.piconTempDir + self.auswahl
+			self.downloadPiconPath = self.piconTempDir + self.auswahl + ".png"
 			self.keyLocked = False
 			downloadPiconUrl = six.ensure_binary(downloadPiconUrl)
 			downloadPage(downloadPiconUrl, self.downloadPiconPath).addCallback(self.showPiconFile, self.downloadPiconPath).addErrback(self.dataError)

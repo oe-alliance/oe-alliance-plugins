@@ -158,7 +158,7 @@ msgid "Select drive"
 msgstr "Laufwerk auswählen"
 
 msgid "Select path"
-msgstr "Verzeichnispfad wählen"
+msgstr "Verzeichnis wählen"
 
 msgid "Select service for preferred picon"
 msgstr "Sender für das Picon wählen"
