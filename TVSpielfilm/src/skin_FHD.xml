@@ -303,7 +303,7 @@
 		<widget name="piclabel" position="570,105" size="127,30" font="Regular;27" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
 		<widget name="piclabel2" position="570,135" size="127,30" font="Regular;21" foregroundColor="#CC4942" backgroundColor="#FFFFFF" halign="center" valign="center" zPosition="2"/>
 		<widget name="picon" position="1157,105" size="100,60" alphatest="blend" zPosition="2"/>
-		<widget name="playlogo" position="877,187" size="90,90" pixmap="{picpath}icons/playFHD.png" alphatest="blend" zPosition="2"/>
+		<widget name="playlogo" position="882,192" size="90,90" pixmap="{picpath}icons/playFHD.png" alphatest="blend" zPosition="2"/>
 		<widget name="textpage" position="15,360" size="1830,555" font="Regular;33" halign="left" zPosition="0"/>
 		<widget name="label2" position="155,925" size="215,36" font="Regular;28" halign="left" zPosition="1"/>
 		<widget name="label3" position="950,925" size="215,36" font="Regular;28" halign="left" zPosition="1"/>
