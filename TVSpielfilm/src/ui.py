@@ -3679,10 +3679,12 @@ class TVProgrammView(tvGenreJetztProgrammView):
 			if self.eventview:
 				config.usage.on_movie_stop.value = self.movie_stop
 				config.usage.on_movie_eof.value = self.movie_eof
+			self.hideRatingInfos()
 			self.close()
 		elif self.current == 'searchmenu':
 			self.search = False
 			self.oldsearchindex = 1
+			self.hideRatingInfos()
 			self['searchmenu'].hide()
 			self['searchtext'].hide()
 			self.showProgrammPage()
@@ -3693,6 +3695,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 				self.close()
 			else:
 				self.postviewready = False
+				self.hideRatingInfos()
 				self.setTitle('')
 				self.setTitle(self.titel)
 				self.showProgrammPage()
