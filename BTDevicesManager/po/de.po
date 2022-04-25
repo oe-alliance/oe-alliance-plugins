@@ -34,7 +34,7 @@ msgid "Bluetooth Devices Manager"
 msgstr "Bluetooth Geräte-Manager"
 
 msgid "Bluetooth Devices Manager Setup"
-msgstr "Bluetooth Geräte-Manager Einstellungen"
+msgstr "Bluetooth Geräte-Manager"
 
 msgid "Can't not pair with selected device!"
 msgstr "Kann nicht mit ausgewähltem Gerät koppeln!"
