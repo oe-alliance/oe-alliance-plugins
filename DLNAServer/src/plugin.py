@@ -16,6 +16,7 @@ from Components.config import config, ConfigSelection, getConfigListEntry, Confi
 from Components.FileList import FileList
 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from . import _
 
 config.plugins.dlnaserver = ConfigSubsection()
 config.plugins.dlnaserver.autostart = ConfigYesNo(default=False)

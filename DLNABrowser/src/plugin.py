@@ -23,6 +23,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.MultiContent import MultiContentEntryText
 
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from . import _
 
 EXTENSIONS = {
 	".m4a": "music",
