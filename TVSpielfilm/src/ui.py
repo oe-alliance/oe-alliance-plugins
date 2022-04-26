@@ -334,6 +334,8 @@ class tvBaseScreen(tvAllScreen):
 		ratinglabels = findall('<span class="rating-dots__label">(.*?)</span>', bereich)
 		ratingdots = findall('<span class="rating-dots__rating" data-rating="(.*?)"><i></i></span>', bereich)
 		for i in range(len(ratinglabels)):
+			if i >= len(ratingdots):
+				ratingdots.append('0')
 			ratingfile = ICONPATH + 'starbar%sFHD.png' % ratingdots[i] if FULLHD else ICONPATH + 'starbar%s.png' % ratingdots[i]
 			if fileExists(ratingfile):
 				try:
