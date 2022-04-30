@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 import datetime
+from json import loads
 from socket import error as socketerror
 from base64 import b64encode, b64decode
 from RecordTimer import RecordTimerEntry
@@ -280,51 +281,46 @@ class tvBaseScreen(tvAllScreen):
 		return None
 
 	def infotextStartEnd(self, infotext):
-		try:
-			parts = infotext[0].split(', ')
-			x = parts[0]
-			if x == 'Heute':
-				d = sub('....-', '', str(self.date))
-				d2 = sub('-..', '', d)
-				d3 = sub('..-', '', d)
-				x = 'he ' + d3 + '.' + d2 + '.'
-			day = sub('.. ', '', x)
-			self.day = sub('[.]..[.]', '', day)
-			month = sub('.. ..[.]', '', x)
-			month = sub('[.]', '', month)
-			date = str(self.date) + 'FIN'
-			year = sub('......FIN', '', date)
-			self.postdate = year + '-' + month + '-' + self.day
-			today = datetime.date(int(year), int(month), int(self.day))
-			one_day = datetime.timedelta(days=1)
-			self.nextdate = today + one_day
-		except:
-			pass
+#		try:
+		parts = infotext[0].split(', ')
+		x = parts[0]
+		if x == 'Heute':
+			d = sub('....-', '', str(self.date))
+			d2 = sub('-..', '', d)
+			d3 = sub('..-', '', d)
+			x = 'he ' + d3 + '.' + d2 + '.'
+		day = sub('.. ', '', x)
+		self.day = sub('[.]..[.]', '', day)
+		month = sub('.. ..[.]', '', x)
+		month = sub('[.]', '', month)
+		date = str(self.date) + 'FIN'
+		year = sub('......FIN', '', date)
+		self.postdate = year + '-' + month + '-' + self.day
+		today = datetime.date(int(year), int(month), int(self.day))
+		one_day = datetime.timedelta(days=1)
+		self.nextdate = today + one_day
+#		except:
+#			pass
+#		try:
+		parts = infotext[0].split(', ')
+		x = parts[1]
+		start = sub(' - ..:..', '', x)
+		start = start + ':00'
+		end = sub('..:.. - ', '', x)
+		end = end + ':00'
+		self.start = start
+		self.end = end
+#		except IndexError:
+#			pass
 
+	def showInfotext(self, infotext):
 		try:
-			parts = infotext[0].split(', ')
-			x = parts[1]
-			start = sub(' - ..:..', '', x)
-			start = start + ':00'
-			end = sub('..:.. - ', '', x)
-			end = end + ':00'
-			self.start = start
-			self.end = end
+			for i, pi in enumerate(infotext):
+				if i < 9:
+					self['infotext%s' % i].setText(pi)
+					self['infotext%s' % i].show()
 		except IndexError:
-			pass
-
-	def infotextText(self, infotext):
-		try:
-			idx = 0
-			for itext in infotext:
-				parts = itext.split(', ')
-				for i in range(len(parts)):
-					if idx < 9:
-						self['infotext%s' % idx].setText(parts[i])
-						self['infotext%s' % idx].show()
-						idx += 1
-		except IndexError:
-			self['infotext%s' % idx].setText('')
+			self['infotext%s' % i].setText('')
 
 	def showRatingInfos(self, output):
 		startpos = output.find('<section class="broadcast-detail__rating">')
@@ -332,14 +328,13 @@ class tvBaseScreen(tvAllScreen):
 		bereich = output[startpos:endpos]
 		bereich = cleanHTML(bereich)
 		ratinglabels = findall('<span class="rating-dots__label">(.*?)</span>', bereich)
-		ratingdots = findall('<span class="rating-dots__rating" data-rating="(.*?)"><i></i></span>', bereich)
-		for i in range(len(ratinglabels)):
-			if i >= len(ratingdots):
-				ratingdots.append('0')
+		ratingdots = findall('data-rating="(.*?)"><i></i></span>', bereich)
+		for i, ri in enumerate(ratinglabels):
+			if len(ratingdots) <= i: ratingdots.append('0')
 			ratingfile = ICONPATH + 'starbar%sFHD.png' % ratingdots[i] if FULLHD else ICONPATH + 'starbar%s.png' % ratingdots[i]
 			if fileExists(ratingfile):
 				try:
-					self['ratinglabel%s' % i].setText(ratinglabels[i])
+					self['ratinglabel%s' % i].setText(ri)
 					self['ratinglabel%s' % i].show()
 					self['ratingdot%s' % i].instance.setPixmapFromFile(ratingfile)
 					self['ratingdot%s' % i].show()
@@ -394,8 +389,8 @@ class tvBaseScreen(tvAllScreen):
 				if endpos == -1:
 					endpos = output.find('</footer>')
 		bereich = transHTML(output[startpos:endpos])
-		infotext = findall('<span class="text-row">(.*?)<', bereich)
-		self.infotextStartEnd(infotext)
+		infotext = findall('<span class="text-row">(.*?)</span>', bereich)
+#		self.infotextStartEnd(infotext)
 		self._shortdesc(bereich)
 		self.current = 'postview'
 		self.postviewready = True
@@ -481,24 +476,47 @@ class tvBaseScreen(tvAllScreen):
 				self['label'].setText('OK = Zum Video, Text = Vollbild, 7/8/9 = IMDb/TMDb/TVDb, Info = EPG')
 			else:
 				self['label'].setText('OK = Vollbild, 7/8/9 = IMDb/TMDb/TVDb, Info = EPG')
-		infotext = findall('<span class="text-row">(.*?)<', bereich)
-		self.infotextStartEnd(infotext)
-		self.infotextText(infotext)
-		self.showRatingInfos(output)
-		tvinfo = findall('<span class="add-info (.*?)">', bereich)
-		for i in list(range(len(tvinfo))):
-			try:
-				tvi = ICONPATH + tvinfo[i] + 'FHD.png' if FULLHD else ICONPATH + tvinfo[i] + '.png'
-				self.showTVinfos(tvi, i)
-			except IndexError:
-				pass
+# Infoausgabe: NEU, TIPP, LIVE
+		tvinfo = []
+		info = findall('<span class="add-info icon-new nodistance">(.*?)</span>', bereich)
+		if len(info): tvinfo.append(info[0])
+		info = findall('<span class="add-info icon-tip nodistance">(.*?)</span>', bereich)
+		if len(info): tvinfo.append(info[0])
+		info = findall('<span class="add-info icon-live nodistance">(.*?)</span>', bereich)
+		if len(info): tvinfo.append(info[0])
+		for i, ti in enumerate(tvinfo):
+			self['tvinfo%s' % i].setText(ti)
+			self['tvinfo%s' % i].show()
+# weitere Sendungsinformationen
+		startpos = bereich.find('<div class="text-wrapper">')
+		endpos = bereich.find('<section class="broadcast-detail__stage')
+		extract = bereich[startpos:endpos]
+		text = findall('span\ class="text\-row">(.*?)</span>', extract, S) # Suchstring voher mit re.escape wandeln
+# Sendezeit & Sender
+		startpos = bereich.find('<div class="schedule-widget__header__attributes">')
+		if startpos > 0:
+			endpos = bereich.find('<div class="schedule-widget__tabs">')
+			extract = bereich[startpos:endpos]
+			infotext = findall('<li>(.*?)</li>', extract)
+			infotext.extend(text[1].strip().split(' | '))
+			self.start = infotext[1]
+		else: # manche Sendungen (z.B. Tagesschau) benötigen eine andere Auswertung
+			channel = findall("data-tracking-point='(.*?)'", bereich)
+			if len(text) > 0:
+				infotext = text[0].strip().split(' | ')
+				infotext[2] = loads(channel[0])['channel']
+				infotext.extend(text[1].strip().split(' | '))
+				self.start = infotext[1][0:5]
+			else:
+				self.start = ''
+		if len(text) > 2:
+			infotext.append(text[2][:text[2].find('(')])
+			infotext.append(text[2][text[2].find('('):])
 		self['piclabel'].setText(self.start[0:5])
-		try:
-			parts = infotext[0].split(', ')
-			text = shortenChannel(parts[2])
-			self['piclabel2'].setText(text[0:10])
-		except IndexError:
-			self['piclabel2'].setText('')
+		self['piclabel2'].setText(infotext[2])
+		text = findall('</h1(.*?)</span>', extract, S)
+		self.showInfotext(infotext)
+		self.showRatingInfos(output)
 		self._shortdesc(bereich)
 		if self.tagestipp:
 			channel = findall("var adsc_sender = '(.*?)'", output)
@@ -540,11 +558,6 @@ class tvBaseScreen(tvAllScreen):
 		self['label5'].setText('')
 		self['searchmenu'].show()
 		self['searchtext'].show()
-
-	def showTVinfos(self, picinfo, idx):
-		if fileExists(picinfo):
-			self['tvinfo%s' % idx].instance.setPixmapFromFile(picinfo)
-			self['tvinfo%s' % idx].show()
 
 	def getPicPost(self, output, label):
 		with open(self.picfile, 'wb') as f:
@@ -763,7 +776,7 @@ class tvBaseScreen(tvAllScreen):
 	def _commonInit(self, ltxt='= Suche', lltxt='= Zappen'):
 		self['picpost'] = Pixmap()
 		for i in range(5):
-			self['tvinfo%s' % i] = Pixmap()
+			self['tvinfo%s' % i] = Label('')
 		self['picon'] = Pixmap()
 		self['playlogo'] = Pixmap()
 		self['searchtext'] = Label('')
@@ -1144,10 +1157,7 @@ class TVTippsView(tvBaseScreen):
 	def selectPage(self, action):
 		if self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
-			try:
-				self.postlink = self.tvlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.tvlink[c]
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.postlink = self.searchlink[c]
@@ -1884,10 +1894,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 	def selectPage(self, action):
 		if self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
-			try:
-				self.postlink = self.tvlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.tvlink[c]
 
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
@@ -1983,10 +1990,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 		elif self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
-			try:
-				self.postlink = self.tvlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.tvlink[c]
 
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
@@ -2262,6 +2266,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 		self.date = datetime.date.today()
 		self._commonInit()
 		self.infotextHide()
+		self._tvinfoHide()
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'DirectionActions',
 									 'EPGSelectActions',
@@ -2515,10 +2520,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 	def selectPage(self, action):
 		if self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
-			try:
-				self.postlink = self.tvlink[c][1]
-			except IndexError:
-				pass
+			self.postlink = self.tvlink[c][1]
 
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
@@ -3182,10 +3184,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 	def selectPage(self, action):
 		if self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
-			try:
-				self.postlink = self.tvlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.tvlink[c]
 
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
@@ -3286,10 +3285,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 		elif self.current == 'menu' and self.ready and self.zap:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
-			try:
-				self.postlink = self.tvlink[c]
-			except IndexError:
-				pass
+			self.postlink = self.tvlink[c]
 
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
@@ -4176,8 +4172,8 @@ class TVNews(tvBaseScreen):
 			name = findall('<p class="title">(.*?)</p>', bereich)
 		subline = findall('<span class="subline">(.*?)</span>', bereich)
 		fullname = []
-		for i in range(len(name)):
-			fullname.append(name[i] + ' | ' + subline[i]) if len(subline) > 0 else fullname.append(name[i])
+		for i, ni in enumerate(name):
+			fullname.append(ni + ' | ' + subline[i]) if len(subline) > 0 else fullname.append(ni)
 			try:
 				self.picurllist.append(picurl[i])
 			except IndexError:
@@ -4283,17 +4279,14 @@ class TVNews(tvBaseScreen):
 
 	def selectPage(self, action):
 		c = self['menu'].getSelectedIndex()
-		try:
-			self.postlink = self.menulink[c]
-			if action == 'ok':
-				if search('www.tvspielfilm.de', self.postlink):
-					self.current = 'postview'
-					self.downloadPostPage(self.postlink, self.makePostviewPageNews)
-				else:
-					self['statuslabel'].setText('Kein Artikel verfuegbar')
-					self['statuslabel'].show()
-		except IndexError:
-			pass
+		self.postlink = self.menulink[c]
+		if action == 'ok':
+			if search('www.tvspielfilm.de', self.postlink):
+				self.current = 'postview'
+				self.downloadPostPage(self.postlink, self.makePostviewPageNews)
+			else:
+				self['statuslabel'].setText('Kein Artikel verfuegbar')
+				self['statuslabel'].show()
 
 	def getPic(self, output):
 		with open(self.picfile, 'wb') as f:
@@ -4481,7 +4474,7 @@ class TVPicShow(tvBaseScreen):
 		self['picindex'].setText('%s von %s' % (self.count + 1, self.picmax))
 		self['pictext'].setText(self.description[0])
 		self.topline = findall('data-caption="<div class="firstParagraph">(.*?)</div>', bereich)
-		self.infotextText(self.topline)
+		self.showInfotext(self.topline)
 
 	def getNewsPicPage(self, output):
 		output = ensure_str(output)
@@ -4832,7 +4825,7 @@ class searchYouTube(tvAllScreen):
 		self.trailer_titel = findall('"title":{"runs":\[{"text":"(.*?)"}\],"accessibility', bereich)
 		self.trailer_time = findall('{"text":{"accessibility":{"accessibilityData":{"label":"(.*?)"}},', bereich)
 		mh = int(60 * SCALE)
-		for i in range(len(self.trailer_id)):
+		for i in enumerate(self.trailer_id):
 			res = ['']
 			if self.backcolor:
 				res.append(MultiContentEntryText(pos=(0, 0), size=(int(560 * SCALE), mh), font=0, backcolor_sel=self.back_color, text=''))
@@ -5371,11 +5364,11 @@ class tvMain(tvBaseScreen):
 		bereich = transHTML(output[startpos:endpos])
 		lnk = findall("value='(.*?)'", bereich)
 		name = findall("<option label='(.*?)'", bereich)
-		for i in range(len(name)):
+		for i, ni in enumerate(name):
 			res = ['']
 			if self.backcolor:
 				res.append(MultiContentEntryText(pos=(0, 0), size=(int(270 * SCALE), int(30 * SCALE)), font=2, color=16777215, color_sel=16777215, backcolor_sel=self.back_color, text=''))
-			res.append(MultiContentEntryText(pos=(0, 1), size=(int(270 * SCALE), int(30 * SCALE)), font=2, flags=RT_HALIGN_CENTER, text=name[i]))
+			res.append(MultiContentEntryText(pos=(0, 1), size=(int(270 * SCALE), int(30 * SCALE)), font=2, flags=RT_HALIGN_CENTER, text=ni))
 			self.thirdmenulist.append(res)
 			self.thirdmenulink.append(lnk[i])
 
@@ -5411,8 +5404,8 @@ class tvMain(tvBaseScreen):
 		bereich = transHTML(output[startpos:endpos])
 		genres = findall('<a title="(.*?)" href="', bereich)
 		links = findall('" href="(.*?)/">', bereich)
-		for i in range(len(genres)):
-			self.makeThirdMenuItem2(genres[i], links[i])
+		for i, gi in enumerate(genres):
+			self.makeThirdMenuItem2(gi, links[i])
 		self['thirdmenu'].l.setList(self.thirdmenulist)
 		self['thirdmenu'].l.setItemHeight(int(30 * SCALE))
 		self.selectThirdMenu()
@@ -6073,8 +6066,8 @@ class tvTipps(tvAllScreen):
 		if search('pdf.tvspielfilm.de', bereich):
 			bereich = sub('<a href="https://pdf.tvspielfilm.de/.*?</a>', '', bereich, flags=S)
 		self.tippspicture = findall('<img src="(.*?)"', bereich, flags=S)
-		for i in range(len(self.tippspicture)):
-			self.idownload(self.tippspicture[i], self.getPics, i)
+		for i, ti in enumerate(self.tippspicture):
+			self.idownload(ti, self.getPics, i)
 		self.tippschannel = findall('<span class="subline .*?">(.*?)</span>', bereich)
 		try:
 			parts = self.tippschannel[0].split(' | ')
@@ -6486,6 +6479,7 @@ class TVHeuteView(tvBaseScreen):
 			self['pictime%s' % i] = Label('')
 			self['pictext%s' % i] = Label('')
 		self.infotextHide()
+		self._tvinfoHide()
 		for i in range(6):
 			self['menu%s' % i] = ItemList([])
 		self.oldcurrent = 'menu0'
@@ -6621,9 +6615,9 @@ class TVHeuteView(tvBaseScreen):
 				self['sender%s' % i].setText('')
 		pic = findall('<img src="(.*?)" alt="(.*?)"', bereichtop)
 		idx = 0
-		for i in range(len(pic)):
+		for i, pi in enumerate(pic):
 			try:
-				picdata, dummy = pic[i]
+				picdata, dummy = pi
 				if picdata[-4:] == '.jpg':
 					picurl = ('https://' + search('https://(.*).jpg', picdata).group(1) + '.jpg').replace('159', '300')
 					self.idownloadPic(picurl, self.getPics, idx)
@@ -6700,7 +6694,7 @@ class TVHeuteView(tvBaseScreen):
 			else:
 				menuitems[menupos].append(x)
 		midx = 0
-		currentitem = None
+		currentitem = []
 		currentlink = 'na'
 		currenttitle = ''
 		mh = int(92 * SCALE)
@@ -6709,11 +6703,12 @@ class TVHeuteView(tvBaseScreen):
 			for x in mi:
 				if search('TIME', x):
 					x = sub('TIME', '', x)
-					currentitem = [x]
-					if currentitem:
+					if len(currentitem) == 0: currentitem = [x]
+					if currentitem != [x]:
 						self.tventriess[midx].append(currentitem)
 						self.tvlinks[midx].append(currentlink)
 						self.tvtitels[midx].append(currenttitle)
+						currentitem = [x]
 					if self.backcolor:
 						currentitem.append(MultiContentEntryText(pos=(0, 0), size=(int(200 * SCALE), mh), font=0, backcolor_sel=self.back_color, text=''))
 					currentitem.append(MultiContentEntryText(pos=(0, 0), size=(int(40 * SCALE), int(23 * SCALE)), font=-2, backcolor=13388098, color=16777215, backcolor_sel=13388098, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
@@ -6754,24 +6749,19 @@ class TVHeuteView(tvBaseScreen):
 					x = sub('TITEL', '', x)
 					currenttitle = x
 				if search('SUBTITEL', x):
-					x = sub('SUBTITEL', '', x)
+					x = sub('SUBTITEL', '', x).strip()
 					if x != '':
 						currenttitle = currenttitle + ', ' + x
 				if self.rec:
 					self.rec = False
 #				mh = mh - int(10 * SCALE) if self.fontsmall or self.fontlarge else mh
 				currentitem.append(MultiContentEntryText(pos=(int(45 * SCALE), 0), size=(int(155 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=currenttitle))
-			midx += 1
-
-		if currentitem:
-			midx -= 1
 			self.tventriess[midx].append(currentitem)
 			self.tvlinks[midx].append(currentlink)
 			self.tvtitels[midx].append(currenttitle)
-
+			currentitem = []
+			midx += 1
 		for i in range(6):
-			self.tvlinks[i].pop(0)  # der jeweils allererster Eintrag ist für die Tonne
-			self.tvtitels[i].pop(0)
 			self['menu%s' % i].l.setItemHeight(mh)
 			self['menu%s' % i].l.setList(self.tventriess[i])
 			self['menu%s' % i].moveToIndex(self.oldindex)
@@ -6809,14 +6799,11 @@ class TVHeuteView(tvBaseScreen):
 			for i in range(6):
 				if self.current == 'menu%s' % i:
 					c = self['menu%s' % i].getSelectedIndex()
-					try:
-						self.postlink = self.tvlinks[i][c]
-						if action == 'ok':
-							if search('www.tvspielfilm.de', self.postlink):
-								self.current = 'postview'
-								self.downloadPostPage(self.postlink, self.makePostviewPage)
-					except IndexError:
-						pass
+					self.postlink = self.tvlinks[i][c]
+					if action == 'ok':
+						if search('www.tvspielfilm.de', self.postlink):
+							self.current = 'postview'
+							self.downloadPostPage(self.postlink, self.makePostviewPage)
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.postlink = self.searchlink[c]
@@ -6959,13 +6946,10 @@ class TVHeuteView(tvBaseScreen):
 				if self.current == 'menu%s' % i:
 					c = self['menu%s' % i].getSelectedIndex()
 					self.oldindex = c
-					try:
-						self.postlink = self.tvlinks[i][c]
-						if search('www.tvspielfilm.de', self.postlink):
-							self.oldcurrent = self.current
-							self.download(self.postlink, self.makePostTimer)
-					except IndexError:
-						pass
+					self.postlink = self.tvlinks[i][c]
+					if search('www.tvspielfilm.de', self.postlink):
+						self.oldcurrent = self.current
+						self.download(self.postlink, self.makePostTimer)
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c

@@ -93,21 +93,21 @@
 		<widget name="menu" position="15,100" size="1830,808" scrollbarMode="showOnDemand" zPosition="1"/>
 		<widget name="searchtext" position="365,110" size="1430,95" font="Regular;38" valign="center" zPosition="1"/>
 		<widget name="searchmenu" position="15,210" size="1830,720" scrollbarMode="showNever" zPosition="1"/>
-		<widget name="picpost" position="700,110" size="454,255" alphatest="blend" zPosition="1"/>
+		<widget name="picpost" position="700,105" size="454,255" alphatest="blend" zPosition="1"/>
 		<widget name="infotext0" position="15,105" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
 		<widget name="infotext1" position="15,142" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
 		<widget name="infotext2" position="15,180" size="545,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
-		<widget name="infotext3" position="15,232" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext4" position="1260,105" size="540,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext4" position="15,232" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext3" position="1260,105" size="540,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext5" position="1260,142" size="540,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext6" position="1155,180" size="645,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext7" position="1155,232" size="645,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext8" position="1155,270" size="645,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="tvinfo0" position="15,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo1" position="82,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo2" position="150,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo3" position="217,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo4" position="285,277" size="60,19" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo0" position="15,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo1" position="82,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo2" position="150,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo3" position="217,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo4" position="285,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
 		<widget name="ratinglabel0" position="15,307" size="110,30" font="Regular;21" halign="center" zPosition="1"/>
 		<widget name="ratingdot0" position="38,333" size="60,22" alphatest="blend" zPosition="1"/>
 		<widget name="ratinglabel1" position="125,307" size="110,30" font="Regular;21" halign="center" zPosition="1"/>
@@ -154,21 +154,21 @@
 		<widget name="pic5" position="1695,525" size="135,90" alphatest="blend" zPosition="1"/>
 		<widget name="searchtext" position="365,110" size="1430,95" font="Regular;38" valign="center" zPosition="1"/>
 		<widget name="searchmenu" position="15,210" size="1830,720" scrollbarMode="showNever" zPosition="1"/>
-		<widget name="picpost" position="700,110" size="454,255" alphatest="blend" zPosition="1"/>
+		<widget name="picpost" position="700,105" size="454,255" alphatest="blend" zPosition="1"/>
 		<widget name="infotext0" position="15,105" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
 		<widget name="infotext1" position="15,142" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
 		<widget name="infotext2" position="15,180" size="545,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
-		<widget name="infotext3" position="15,232" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext4" position="1260,105" size="540,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext4" position="15,232" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext3" position="1260,105" size="540,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext5" position="1260,142" size="540,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext6" position="1155,180" size="645,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext7" position="1155,232" size="645,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext8" position="1155,270" size="645,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="tvinfo0" position="15,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo1" position="82,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo2" position="150,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo3" position="217,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo4" position="285,277" size="60,19" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo0" position="15,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo1" position="82,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo2" position="150,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo3" position="217,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo4" position="285,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
 		<widget name="ratinglabel0" position="15,307" size="110,30" font="Regular;21" halign="center" zPosition="1"/>
 		<widget name="ratingdot0" position="38,333" size="60,22" alphatest="blend" zPosition="1"/>
 		<widget name="ratinglabel1" position="125,307" size="110,30" font="Regular;21" halign="center" zPosition="1"/>
@@ -277,17 +277,17 @@
 		<widget name="infotext0" position="15,105" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
 		<widget name="infotext1" position="15,142" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
 		<widget name="infotext2" position="15,180" size="545,52" font="Regular;42" foregroundColor="#14EAF2" halign="left" zPosition="1"/>
-		<widget name="infotext3" position="15,232" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
-		<widget name="infotext4" position="1260,105" size="540,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
+		<widget name="infotext4" position="15,232" size="545,40" font="Regular;30" foregroundColor="#AAB2BA" halign="left" zPosition="1"/>
+		<widget name="infotext3" position="1260,105" size="540,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext5" position="1260,142" size="540,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext6" position="1155,180" size="645,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext7" position="1155,232" size="645,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
 		<widget name="infotext8" position="1155,270" size="645,40" font="Regular;30" foregroundColor="#AAB2BA" halign="right" zPosition="1"/>
-		<widget name="tvinfo0" position="15,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo1" position="82,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo2" position="150,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo3" position="217,277" size="60,19" alphatest="blend" zPosition="1"/>
-		<widget name="tvinfo4" position="285,277" size="60,19" alphatest="blend" zPosition="1"/>
+		<widget name="tvinfo0" position="15,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo1" position="82,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo2" position="150,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo3" position="217,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
+		<widget name="tvinfo4" position="285,277" size="60,24" font="Bold;21" foregroundColor="#FFFFFF" backgroundColor="#CC4942" halign="center" valign="center" zPosition="2"/>
 		<widget name="ratinglabel0" position="15,307" size="110,30" font="Regular;21" halign="center" zPosition="1"/>
 		<widget name="ratingdot0" position="38,333" size="60,22" alphatest="blend" zPosition="1"/>
 		<widget name="ratinglabel1" position="125,307" size="110,30" font="Regular;21" halign="center" zPosition="1"/>
