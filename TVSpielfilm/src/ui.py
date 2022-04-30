@@ -330,7 +330,8 @@ class tvBaseScreen(tvAllScreen):
 		ratinglabels = findall('<span class="rating-dots__label">(.*?)</span>', bereich)
 		ratingdots = findall('data-rating="(.*?)"><i></i></span>', bereich)
 		for i, ri in enumerate(ratinglabels):
-			if len(ratingdots) <= i: ratingdots.append('0')
+			if len(ratingdots) <= i:
+				ratingdots.append('0')
 			ratingfile = ICONPATH + 'starbar%sFHD.png' % ratingdots[i] if FULLHD else ICONPATH + 'starbar%s.png' % ratingdots[i]
 			if fileExists(ratingfile):
 				try:
@@ -479,11 +480,14 @@ class tvBaseScreen(tvAllScreen):
 # Infoausgabe: NEU, TIPP, LIVE
 		tvinfo = []
 		info = findall('<span class="add-info icon-new nodistance">(.*?)</span>', bereich)
-		if len(info): tvinfo.append(info[0])
+		if len(info):
+			tvinfo.append(info[0])
 		info = findall('<span class="add-info icon-tip nodistance">(.*?)</span>', bereich)
-		if len(info): tvinfo.append(info[0])
+		if len(info):
+			tvinfo.append(info[0])
 		info = findall('<span class="add-info icon-live nodistance">(.*?)</span>', bereich)
-		if len(info): tvinfo.append(info[0])
+		if len(info):
+			tvinfo.append(info[0])
 		for i, ti in enumerate(tvinfo):
 			self['tvinfo%s' % i].setText(ti)
 			self['tvinfo%s' % i].show()
@@ -6703,7 +6707,8 @@ class TVHeuteView(tvBaseScreen):
 			for x in mi:
 				if search('TIME', x):
 					x = sub('TIME', '', x)
-					if len(currentitem) == 0: currentitem = [x]
+					if len(currentitem) == 0:
+						currentitem = [x]
 					if currentitem != [x]:
 						self.tventriess[midx].append(currentitem)
 						self.tvlinks[midx].append(currentlink)
