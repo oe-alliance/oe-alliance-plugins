@@ -1698,6 +1698,7 @@ class tvGenreJetztProgrammView(tvBaseScreen):
 		self['release'].show()
 		self.initBlueButton('Aus-/Einblenden')
 
+
 class TVGenreView(tvGenreJetztProgrammView):
 
 	def __init__(self, session, link, genre):
