@@ -207,11 +207,11 @@ class tvBaseScreen(tvAllScreen):
 		else:
 			self.picon = False
 
-	def _tvinfoHide(self):
+	def hideTVinfo(self):
 		for i in range(5):
 			self['tvinfo%s' % i].hide()
 
-	def infotextHide(self):
+	def hideInfotext(self):
 		for i in range(9):
 			self['infotext%s' % i].hide()
 		self['picon'].hide()
@@ -322,7 +322,7 @@ class tvBaseScreen(tvAllScreen):
 		except IndexError:
 			self['infotext%s' % i].setText('')
 
-	def showRatingInfos(self, output):
+	def showRatinginfos(self, output):
 		startpos = output.find('<section class="broadcast-detail__rating">')
 		endpos = output.find('<section class="broadcast-detail__description">')
 		bereich = output[startpos:endpos]
@@ -391,7 +391,7 @@ class tvBaseScreen(tvAllScreen):
 					endpos = output.find('</footer>')
 		bereich = transHTML(output[startpos:endpos])
 		infotext = findall('<span class="text-row">(.*?)</span>', bereich)
-#		self.infotextStartEnd(infotext)
+		self.infotextStartEnd(infotext)
 		self._shortdesc(bereich)
 		self.current = 'postview'
 		self.postviewready = True
@@ -420,11 +420,11 @@ class tvBaseScreen(tvAllScreen):
 	def _makePostviewPage(self, string):
 		output = open(self.localhtml2, 'r').read()
 		output = ensure_str(output)
-		self['label2'].setText('= Timer')
-		self['label3'].setText('= YouTube Trailer')
+		self['label2'].setText('Timer')
+		self['label3'].setText('YouTube Trailer')
 		self['label4'].setText('')  # = Wikipedia
 		self['label6'].setText('')
-		self.setBlueButton('= Aus-/Einblenden')
+		self.setBlueButton('Aus-/Einblenden')
 		self['searchmenu'].hide()
 		self['searchtext'].hide()
 		output = sub('</dl>.\n\\s+</div>.\n\\s+</section>', '</cast>', output)
@@ -514,13 +514,16 @@ class tvBaseScreen(tvAllScreen):
 			else:
 				self.start = ''
 		if len(text) > 2:
-			infotext.append(text[2][:text[2].find('(')])
-			infotext.append(text[2][text[2].find('('):])
+			if text[2].find(')') > 0:
+				infotext.append(text[2][:text[2].find('(')])
+				infotext.append(text[2][text[2].find('('):])
+			else:
+				infotext.extend(text[2].split(', '))
 		self['piclabel'].setText(self.start[0:5])
 		self['piclabel2'].setText(infotext[2])
 		text = findall('</h1(.*?)</span>', extract, S)
 		self.showInfotext(infotext)
-		self.showRatingInfos(output)
+		self.showRatinginfos(output)
 		self._shortdesc(bereich)
 		if self.tagestipp:
 			channel = findall("var adsc_sender = '(.*?)'", output)
@@ -548,12 +551,12 @@ class tvBaseScreen(tvAllScreen):
 
 	def showsearch(self):
 		self.postviewready = False
-		self.infotextHide()
+		self.hideInfotext()
 		self['textpage'].hide()
 		self['picpost'].hide()
 		self['piclabel'].hide()
 		self['piclabel2'].hide()
-		self._tvinfoHide()
+		self.hideTVinfo()
 		self['seitennr'].setText('')
 		self['label'].setText('')
 		self['label2'].setText('')
@@ -777,7 +780,7 @@ class tvBaseScreen(tvAllScreen):
 			self['bluebutton'].hide()
 			self['label5'].setText('')
 
-	def _commonInit(self, ltxt='= Suche', lltxt='= Zappen'):
+	def _commonInit(self, ltxt='Suche', lltxt='Zappen'):
 		self['picpost'] = Pixmap()
 		for i in range(5):
 			self['tvinfo%s' % i] = Label('')
@@ -800,11 +803,11 @@ class tvBaseScreen(tvAllScreen):
 		self['seitennr'] = Label('')
 		self['label'] = BlinkingLabel('Bitte warten...')
 		self['label'].startBlinking()
-		self['label2'] = Label('= Timer')
+		self['label2'] = Label('Timer')
 		self['label3'] = Label(ltxt)
 		self['label4'] = Label(lltxt)
 		self['label6'] = Label('MENU')
-		self.initBlueButton('= Aus-/Einblenden')
+		self.initBlueButton('Aus-/Einblenden')
 
 	def _makeSearchView(self, url, titlemode=0, searchmode=0):
 		header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -993,7 +996,7 @@ class TVTippsView(tvBaseScreen):
 		for i in range(6):
 			self['pic%s' % i] = Pixmap()
 		self._commonInit()
-		self.infotextHide()
+		self.hideInfotext()
 		self['menu'] = ItemList([])
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'ChannelSelectBaseActions',
@@ -1544,15 +1547,15 @@ class TVTippsView(tvBaseScreen):
 		self['label'].setText('Info = Filter: NEU, Bouquet = +- Tag, <> = +- Woche')
 		if self.sparte == 'neu':
 			self['label'].setText('Bouquet = +- Tag, <> = +- Woche')
-		self['label2'].setText('= Timer')
-		self['label3'].setText('= Suche')
-		self['label4'].setText('= Zappen')
-		self.infotextHide()
+		self['label2'].setText('Timer')
+		self['label3'].setText('Suche')
+		self['label4'].setText('Zappen')
+		self.hideInfotext()
 		self['textpage'].hide()
 		self['picpost'].hide()
 		self['piclabel'].hide()
 		self['piclabel2'].hide()
-		self._tvinfoHide()
+		self.hideTVinfo()
 		self.current = 'menu'
 		self['menu'].show()
 		try:
@@ -1693,8 +1696,7 @@ class tvGenreJetztProgrammView(tvBaseScreen):
 		self['menu'] = ItemList([])
 		self['release'] = Label(RELEASE)
 		self['release'].show()
-		self.initBlueButton('= Aus-/Einblenden')
-
+		self.initBlueButton('Aus-/Einblenden')
 
 class TVGenreView(tvGenreJetztProgrammView):
 
@@ -1710,8 +1712,8 @@ class TVGenreView(tvGenreJetztProgrammView):
 		self.load = True
 		self.maxgenrecount = config.plugins.tvspielfilm.maxgenre.value
 		self.genrecount = 0
-		self._commonInit('= Filter')
-		self.infotextHide()
+		self._commonInit(' Filter')
+		self.hideInfotext()
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'DirectionActions',
 									 'EPGSelectActions',
@@ -2159,15 +2161,15 @@ class TVGenreView(tvGenreJetztProgrammView):
 
 	def showProgrammPage(self):
 		self['label'].setText('OK = Sendung, Stop = YouTube Trailer')
-		self['label2'].setText('= Timer')
-		self['label3'].setText('= Filter')
-		self['label4'].setText('= Zappen')
-		self.infotextHide()
+		self['label2'].setText('Timer')
+		self['label3'].setText('Filter')
+		self['label4'].setText('Zappen')
+		self.hideInfotext()
 		self['textpage'].hide()
 		self['picpost'].hide()
 		self['piclabel'].hide()
 		self['piclabel2'].hide()
-		self._tvinfoHide()
+		self.hideTVinfo()
 		self.current = 'menu'
 		self['menu'].show()
 
@@ -2269,8 +2271,9 @@ class TVJetztView(tvGenreJetztProgrammView):
 		self.index = 0
 		self.date = datetime.date.today()
 		self._commonInit()
-		self.infotextHide()
-		self._tvinfoHide()
+		self.hideInfotext()
+		self.hideRatingInfos()
+		self.hideTVinfo()
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'DirectionActions',
 									 'EPGSelectActions',
@@ -2368,7 +2371,6 @@ class TVJetztView(tvGenreJetztProgrammView):
 			nowsec = int(nowhour) * 3600 + int(nowminute) * 60
 		else:
 			self.progress = False
-		self.hideRatingInfos()
 #20:15#########################################################################################
 		mh = int(41 * SCALE + 0.5)
 		for LOGO, TIME, LINK, title, sparte, genre, RATING in items:
@@ -2836,15 +2838,15 @@ class TVJetztView(tvGenreJetztProgrammView):
 
 	def showProgrammPage(self):
 		self['label'].setText('Text = Sender, Info = Jetzt im TV/Gleich im TV')
-		self['label2'].setText('= Timer')
-		self['label3'].setText('= Suche')
-		self['label4'].setText('= Zappen')
-		self.infotextHide()
+		self['label2'].setText('Timer')
+		self['label3'].setText('Suche')
+		self['label4'].setText('Zappen')
+		self.hideInfotext()
 		self['textpage'].hide()
 		self['picpost'].hide()
 		self['piclabel'].hide()
 		self['piclabel2'].hide()
-		self._tvinfoHide()
+		self.hideTVinfo()
 		self.current = 'menu'
 		self['menu'].show()
 
@@ -2959,8 +2961,10 @@ class TVProgrammView(tvGenreJetztProgrammView):
 		if not self.eventview:
 			self._commonInit()
 		else:
-			self._commonInit('= Suche', '= Refresh')
-		self.infotextHide()
+			self._commonInit('Suche', ' Refresh')
+		self.hideTVinfo()
+		self.hideInfotext()
+		self.hideRatingInfos()
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'ChannelSelectBaseActions',
 									 'DirectionActions',
@@ -3040,8 +3044,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 		output = ensure_str(output)
 		titel = search('<title>(.*?)von', output)
 		date = str(self.date.strftime('%d.%m.%Y'))
-		self.hideRatingInfos()
-		self.titel = str(titel.group(1)) + ' - ' + str(self.weekday) + ', ' + date
+		self.titel = str(titel.group(1)) + str(self.weekday) + ', ' + date
 		self.setTitle(self.titel)
 		items, bereich = parseNow(output)
 		today = datetime.date.today()
@@ -3587,20 +3590,20 @@ class TVProgrammView(tvGenreJetztProgrammView):
 	def showProgrammPage(self):
 		if not self.eventview:
 			self['label'].setText('Bouquet = +- Tag, <> = +- Woche')
-			self['label2'].setText('= Timer')
-			self['label3'].setText('= Suche')
-			self['label4'].setText('= Zappen')
+			self['label2'].setText('Timer')
+			self['label3'].setText('Suche')
+			self['label4'].setText('Zappen')
 		else:
 			self['label'].setText('Bouquet = +- Tag, <> = +- Woche, 1/2 = Zap Up/Down')
-			self['label2'].setText('= Timer')
-			self['label3'].setText('= Suche')
-			self['label4'].setText('= Refresh')
-		self.infotextHide()
+			self['label2'].setText('Timer')
+			self['label3'].setText('Suche')
+			self['label4'].setText('Refresh')
+		self.hideInfotext()
 		self['textpage'].hide()
 		self['picpost'].hide()
 		self['piclabel'].hide()
 		self['piclabel2'].hide()
-		self._tvinfoHide()
+		self.hideTVinfo()
 		self.current = 'menu'
 		self['menu'].show()
 
@@ -3735,7 +3738,7 @@ class TVTrailerBilder(tvBaseScreen):
 			self.title = 'Bildergalerien - TV Spielfilm'
 		else:
 			self.title = 'Trailer - Video - TV Spielfilm'
-		self.initBlueButton('= Aus-/Einblenden')
+		self.initBlueButton('Aus-/Einblenden')
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'DirectionActions',
 									 'ColorActions',
@@ -4129,7 +4132,7 @@ class TVNews(tvBaseScreen):
 		self['textpage'] = ScrollLabel('')
 		self['menu'] = ItemList([])
 		self['label'] = Label('')
-		self.initBlueButton('= Aus-/Einblenden')
+		self.initBlueButton('Aus-/Einblenden')
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'DirectionActions',
 									 'ColorActions',
@@ -4428,7 +4431,7 @@ class TVPicShow(tvBaseScreen):
 		self['pictext'] = ScrollLabel('')
 		self['textpage'] = ScrollLabel('')
 		self['label'] = Label('OK = Vollbild\n< > = Zurück / Vorwärts')
-		self.initBlueButton('= Aus-/Einblenden')
+		self.initBlueButton('Aus-/Einblenden')
 		self['NumberActions'] = NumberActionMap(['NumberActions',
 												 'OkCancelActions',
 												 'DirectionActions',
@@ -4777,8 +4780,8 @@ class searchYouTube(tvAllScreen):
 		HIDEFLAG = True
 		self.count = 1
 		self['list'] = ItemList([])
-		self['label2'] = Label('= YouTube Suche')
-		self.initBlueButton('= Aus-/Einblenden')
+		self['label2'] = Label(' YouTube Suche')
+		self.initBlueButton('Aus-/Einblenden')
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'DirectionActions',
 									 'ColorActions',
@@ -6473,7 +6476,7 @@ class TVHeuteView(tvBaseScreen):
 		self.localhtml = '/tmp/tvspielfilm.html'
 		self['release'] = Label(RELEASE)
 		self['release'].show()
-		self.initBlueButton('= Aus-/Einblenden')
+		self.initBlueButton('Aus-/Einblenden')
 		for i in range(6):
 			self['pic%s' % i] = Pixmap()
 			self['picon%s' % i] = Pixmap()
@@ -6482,8 +6485,8 @@ class TVHeuteView(tvBaseScreen):
 			self['sender%s' % i] = Label('')
 			self['pictime%s' % i] = Label('')
 			self['pictext%s' % i] = Label('')
-		self.infotextHide()
-		self._tvinfoHide()
+		self.hideInfotext()
+		self.hideTVinfo()
 		for i in range(6):
 			self['menu%s' % i] = ItemList([])
 		self.oldcurrent = 'menu0'
@@ -7403,16 +7406,16 @@ class TVHeuteView(tvBaseScreen):
 		self.ready = True
 
 	def showProgrammPage(self):
-		self['label2'].setText('= Timer')
-		self['label3'].setText('= Suche')
-		self['label4'].setText('= Zappen')
+		self['label2'].setText('Timer')
+		self['label3'].setText('Suche')
+		self['label4'].setText('Zappen')
 		self['label6'].setText('MENU')
-		self.infotextHide()
+		self.hideInfotext()
 		self['textpage'].hide()
 		self['picpost'].hide()
 		self['piclabel'].hide()
 		self['piclabel2'].hide()
-		self._tvinfoHide()
+		self.hideTVinfo()
 		for i in range(6):
 			self['sender%s' % i].show()
 			self['picon%s' % i].show()
