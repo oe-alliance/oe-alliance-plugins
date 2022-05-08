@@ -281,17 +281,15 @@ class tvBaseScreen(tvAllScreen):
 		return None
 
 	def infotextStartEnd(self, infotext):
-#		try:
-		parts = infotext[0].split(', ')
-		x = parts[0]
-		if x == 'Heute':
+		part = infotext[1].strip()
+		if infotext[0].strip() == 'Heute':
 			d = sub('....-', '', str(self.date))
 			d2 = sub('-..', '', d)
 			d3 = sub('..-', '', d)
-			x = 'he ' + d3 + '.' + d2 + '.'
-		day = sub('.. ', '', x)
+			part = 'he ' + d3 + '.' + d2 + '.'
+		day = sub('.. ', '', part)
 		self.day = sub('[.]..[.]', '', day)
-		month = sub('.. ..[.]', '', x)
+		month = sub('.. ..[.]', '', part)
 		month = sub('[.]', '', month)
 		date = str(self.date) + 'FIN'
 		year = sub('......FIN', '', date)
@@ -299,19 +297,10 @@ class tvBaseScreen(tvAllScreen):
 		today = datetime.date(int(year), int(month), int(self.day))
 		one_day = datetime.timedelta(days=1)
 		self.nextdate = today + one_day
-#		except:
-#			pass
-#		try:
-		parts = infotext[0].split(', ')
-		x = parts[1]
-		start = sub(' - ..:..', '', x)
-		start = start + ':00'
-		end = sub('..:.. - ', '', x)
-		end = end + ':00'
-		self.start = start
-		self.end = end
-#		except IndexError:
-#			pass
+
+		part = infotext[1].split(' - ')
+		self.start = part[0].replace(' Uhr', '').strip()
+		self.end = part[1].replace(' Uhr', '').strip()
 
 	def showInfotext(self, infotext):
 		try:
@@ -369,11 +358,11 @@ class tvBaseScreen(tvAllScreen):
 			self.shortdesc = sub('  ', '', self.shortdesc)
 		else:
 			self.shortdesc = ''
-		name = findall('<h1 class="headline headline--article">(.*?)</h1>', bereich)
+		name = findall('<h1 class="headline headline--article broadcast">(.*?)</h1>', bereich)
 		try:
 			self.name = name[0]
 		except IndexError:
-			name = findall('<span itemprop="name"><strong>(.*?)</strong></span>', bereich)
+			name = findall('headline headline--article broadcast">(.*?)</h1>', bereich)
 			try:
 				self.name = name[0]
 			except IndexError:
@@ -382,15 +371,15 @@ class tvBaseScreen(tvAllScreen):
 	def makePostTimer(self, output):
 		output = ensure_str(output)
 		startpos = output.find('<div class="content-area">')
-		endpos = output.find('>Weitere Bildergalerien<')
+		endpos = output.find('<h2 class="broadcast-info">')
 		if endpos == -1:
-			endpos = output.find('<h2 class="broadcast-info">')
+			endpos = output.find('>Weitere Bildergalerien<') # unnötig?
 			if endpos == -1:
-				endpos = output.find('<div class="OUTBRAIN"')
+				endpos = output.find('<div class="OUTBRAIN"') # unnötig?
 				if endpos == -1:
-					endpos = output.find('</footer>')
+					endpos = output.find('</footer>') # unnötig?
 		bereich = transHTML(output[startpos:endpos])
-		infotext = findall('<span class="text-row">(.*?)</span>', bereich)
+		infotext = self.getInfotext(bereich)
 		self.infotextStartEnd(infotext)
 		self._shortdesc(bereich)
 		self.current = 'postview'
@@ -425,6 +414,7 @@ class tvBaseScreen(tvAllScreen):
 		self['label4'].setText('')  # = Wikipedia
 		self['label6'].setText('')
 		self.setBlueButton('Aus-/Einblenden')
+#		self.hideLowerButtons()
 		self['searchmenu'].hide()
 		self['searchtext'].hide()
 		output = sub('</dl>.\n\\s+</div>.\n\\s+</section>', '</cast>', output)
@@ -491,37 +481,10 @@ class tvBaseScreen(tvAllScreen):
 		for i, ti in enumerate(tvinfo):
 			self['tvinfo%s' % i].setText(ti)
 			self['tvinfo%s' % i].show()
-# weitere Sendungsinformationen
-		startpos = bereich.find('<div class="text-wrapper">')
-		endpos = bereich.find('<section class="broadcast-detail__stage')
-		extract = bereich[startpos:endpos]
-		text = findall('span\ class="text\-row">(.*?)</span>', extract, S) # Suchstring voher mit re.escape wandeln
-# Sendezeit & Sender
-		startpos = bereich.find('<div class="schedule-widget__header__attributes">')
-		if startpos > 0:
-			endpos = bereich.find('<div class="schedule-widget__tabs">')
-			extract = bereich[startpos:endpos]
-			infotext = findall('<li>(.*?)</li>', extract)
-			infotext.extend(text[1].strip().split(' | '))
-			self.start = infotext[1]
-		else: # manche Sendungen (z.B. Tagesschau) benötigen eine andere Auswertung
-			channel = findall("data-tracking-point='(.*?)'", bereich)
-			if len(text) > 0:
-				infotext = text[0].strip().split(' | ')
-				infotext[2] = loads(channel[0])['channel']
-				infotext.extend(text[1].strip().split(' | '))
-				self.start = infotext[1][0:5]
-			else:
-				self.start = ''
-		if len(text) > 2:
-			if text[2].find(')') > 0:
-				infotext.append(text[2][:text[2].find('(')])
-				infotext.append(text[2][text[2].find('('):])
-			else:
-				infotext.extend(text[2].split(', '))
+		infotext = self.getInfotext(bereich)
 		self['piclabel'].setText(self.start[0:5])
 		self['piclabel2'].setText(infotext[2])
-		text = findall('</h1(.*?)</span>', extract, S)
+		self.infotextStartEnd(infotext)
 		self.showInfotext(infotext)
 		self.showRatinginfos(output)
 		self._shortdesc(bereich)
@@ -548,6 +511,51 @@ class tvBaseScreen(tvAllScreen):
 		self['textpage'].show()
 		self.showEPG = False
 		self.postviewready = True
+
+	def getInfotext(self, bereich):
+# weitere Sendungsinformationen
+		startpos = bereich.find('<div class="text-wrapper">')
+		endpos = bereich.find('<section class="broadcast-detail__stage')
+		extract = bereich[startpos:endpos]
+		text = findall('span\ class="text\-row">(.*?)</span>', extract, S) # Suchstring voher mit re.escape wandeln
+# Sendezeit & Sender
+		startpos = bereich.find('<div class="schedule-widget__header__attributes">')
+		if startpos > 0:
+			endpos = bereich.find('<div class="schedule-widget__tabs">')
+			extract = bereich[startpos:endpos]
+			infotext = findall('<li>(.*?)</li>', extract)
+			infotext.extend(text[1].strip().split(' | '))
+			self.start = infotext[1]
+		else: # manche Sendungen (z.B. Tagesschau) benötigen eine andere Auswertung
+			channel = findall("data-tracking-point='(.*?)'", bereich)
+			if len(text) > 0:
+				infotext = text[0].strip().split(' | ')
+				infotext[2] = loads(channel[0])['channel']
+				infotext.extend(text[1].strip().split(' | '))
+				self.start = infotext[1][0:5]
+			else:
+				self.start = ''
+		if len(text) > 2:
+			for pi in text[2].split(', '):
+				if pi.find('(') > 0:
+					part = pi
+				elif pi.find(')') > 0:
+					infotext.append(part + ', ' + pi)
+				else:
+					infotext.append(pi)
+		return infotext
+
+#	def hideLowerButtons(self):
+#		self['INFOkey'].hide()
+#		self['MENUkey'].hide()
+#		self['BOUQUETkey'].hide()
+#		self['CHANNELkey'].hide()
+
+#	def showLowerButtons(self):
+#		self['INFOkey'].show()
+#		self['MENUkey'].show()
+#		self['BOUQUETkey'].show()
+#		self['CHANNELkey'].show()
 
 	def showsearch(self):
 		self.postviewready = False
@@ -1698,7 +1706,6 @@ class tvGenreJetztProgrammView(tvBaseScreen):
 		self['release'].show()
 		self.initBlueButton('Aus-/Einblenden')
 
-
 class TVGenreView(tvGenreJetztProgrammView):
 
 	def __init__(self, session, link, genre):
@@ -1998,7 +2005,6 @@ class TVGenreView(tvGenreJetztProgrammView):
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
 			self.postlink = self.tvlink[c]
-
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
 				self.download(self.postlink, self.makePostTimer)
@@ -5766,7 +5772,7 @@ class makeServiceFile(Screen):
 			rename(self.servicefile + '.new', self.servicefile)
 			self.ready = True
 			if newdata == '':
-				self.session.openWithCallback(self.noBouquet, MessageBox, '\nKeine TV Spielfilm Sender gefunden.\nBitte waehlen Sie ein anderes TV Bouquet.', MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(self.noBouquet, MessageBox, '\nKeine TV Spielfilm Sender gefunden.\nBitte wählen Sie ein anderes TV Bouquet.', MessageBox.TYPE_YESNO)
 			else:
 				self.session.openWithCallback(self.otherBouquet, MessageBox,
 											  '\nInsgesamt %s TV Spielfilm Sender importiert.\nMoechten Sie ein weiteres TV Bouquet importieren?' % str(count), MessageBox.TYPE_YESNO)
@@ -6294,7 +6300,7 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
 	def exit(self):
 		if config.plugins.tvspielfilm.meintvs.value == 'yes' and config.plugins.tvspielfilm.login.value == '' or config.plugins.tvspielfilm.meintvs.value == 'yes' and config.plugins.tvspielfilm.password.value == '':
 			self.session.openWithCallback(
-				self.nologin_return, MessageBox, 'Sie haben den Mein TV SPIELFILM Login aktiviert, aber unvollstaendige Login-Daten angegeben.\n\nMoechten Sie die Mein TV SPIELFILM Login-Daten jetzt angeben oder Mein TV SPIELFILM deaktivieren?', MessageBox.TYPE_YESNO)
+				self.nologin_return, MessageBox, 'Sie haben den Mein TV SPIELFILM Login aktiviert, aber unvollständige Login-Daten angegeben.\n\nMöchten Sie die Mein TV SPIELFILM Login-Daten jetzt angeben oder Mein TV SPIELFILM deaktivieren?', MessageBox.TYPE_YESNO)
 		else:
 			self.session.openWithCallback(self.close, tvMain)
 
@@ -6478,6 +6484,10 @@ class TVHeuteView(tvBaseScreen):
 		self['release'] = Label(RELEASE)
 		self['release'].show()
 		self.initBlueButton('Aus-/Einblenden')
+#		self['INFOkey'] = Pixmap()
+#		self['MENUkey'] = Pixmap()
+#		self['BOUQUETkey'] = Pixmap()
+#		self['CHANNELkey'] = Pixmap()
 		for i in range(6):
 			self['pic%s' % i] = Pixmap()
 			self['picon%s' % i] = Pixmap()
@@ -6488,6 +6498,7 @@ class TVHeuteView(tvBaseScreen):
 			self['pictext%s' % i] = Label('')
 		self.hideInfotext()
 		self.hideTVinfo()
+#		self.showLowerButtons()
 		for i in range(6):
 			self['menu%s' % i] = ItemList([])
 		self.oldcurrent = 'menu0'
@@ -6934,20 +6945,20 @@ class TVHeuteView(tvBaseScreen):
 				if self.oldcurrent == 'menu%s' % i and self.zaps[i]:
 					c = self['menu%s' % i].getSelectedIndex()
 					self.oldindex = c
-					try:
-						sref = self.srefs[i][0]
-						self.redTimer(False, sref)
-					except IndexError:
-						self.redTimer(False)
+#                    try:
+					sref = self.srefs[i][0].lower()
+					self.redTimer(False, sref)
+#                    except IndexError:
+#                        self.redTimer(False)
 			if self.oldcurrent == 'searchmenu':
 				c = self['searchmenu'].getSelectedIndex()
 				self.oldsearchindex = c
-				try:
-					c = self['searchmenu'].getSelectedIndex()
-					sref = self.searchref[c]
-					self.redTimer(False, sref)
-				except IndexError:
-					self.redTimer(False)
+#                try:
+				c = self['searchmenu'].getSelectedIndex()
+				sref = self.searchref[c]
+				self.redTimer(False, sref)
+#                except IndexError:
+#                    self.redTimer(False)
 			else:
 				self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
 		if self.ready:
@@ -7443,6 +7454,7 @@ class TVHeuteView(tvBaseScreen):
 			self.current = self.currentsearch
 			self.showProgrammPage()
 		elif self.current == 'postview' and not self.search:
+#			self.showLowerButtons()
 			self.hideRatingInfos()
 			self.postviewready = False
 			self.setTitle('')
