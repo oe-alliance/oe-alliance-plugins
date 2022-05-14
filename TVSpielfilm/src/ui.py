@@ -4832,22 +4832,25 @@ class searchYouTube(tvAllScreen):
 		startpos = output.find('class="masthead-skeleton-icon">')
 		endpos = output.find(';/*')
 		bereich = transHTML(output[startpos:endpos])
-# remove this after tests are finished #################################################
+# for analysis purpose only, activate when YouTube-Access won't work properly
 #        analyse = bereich.replace('a><a', 'a>\n<a').replace('script><script', 'script>\n<script').replace('},{', '},\n{').replace('}}}]},"publishedTimeText"', '}}}]},\n"publishedTimeText"')
 #        with open('/home/root/logs/bereich.log', 'a') as f:
 #                f.write(analyse)
-		self.trailer_id = findall('{"videoRenderer":{"videoId":"(.*?)","thumbnail', bereich)
-		self.trailer_titel = findall('"title":{"runs":\[{"text":"(.*?)"}\],"accessibility', bereich)
-		self.trailer_time = findall('{"text":{"accessibility":{"accessibilityData":{"label":"(.*?)"}},', bereich)
+		self.trailer_id = findall('{"videoRenderer":{"videoId":"(.*?)","thumbnail', bereich) # Suchstring voher mit re.escape wandeln
+		self.trailer_titel = findall('"title":{"runs":\[{"text":"(.*?)"}\]', bereich) # Suchstring voher mit re.escape wandeln
+		self.trailer_time = findall('"lengthText":{"accessibility":{"accessibilityData":{"label":"(.*?)"}},"simpleText"', bereich) # Suchstring voher mit re.escape wandeln
+		trailer_info = findall('"viewCountText":{"simpleText":"(.*?)"},"navigationEndpoint"', bereich) # Suchstring voher mit re.escape wandeln
 		mh = int(60 * SCALE)
-		for i in enumerate(self.trailer_id):
+		for i in range(len(self.trailer_id)):
 			res = ['']
 			if self.backcolor:
 				res.append(MultiContentEntryText(pos=(0, 0), size=(int(560 * SCALE), mh), font=0, backcolor_sel=self.back_color, text=''))
 			titel = self.trailer_titel[i].split(' | ')[0].replace('\\u0026', '&')
 			time = self.trailer_time[i]
-			res.append(MultiContentEntryText(pos=(int(10 * SCALE), 0), size=(int(530 * SCALE), mh), font=1, color=16777215, flags=RT_HALIGN_LEFT, text=titel))
-			res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(42 * SCALE)), size=(int(530 * SCALE), mh), font=-2, color=16777215, flags=RT_HALIGN_LEFT, text=time))
+			info = trailer_info[i]
+			res.append(MultiContentEntryText(pos=(int(10 * SCALE), 0), size=(int(530 * SCALE), mh), font=0, color=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=titel))
+			res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(40 * SCALE)), size=(int(380 * SCALE), mh), font=-2, color=16777215, flags=RT_HALIGN_LEFT, text=time))
+			res.append(MultiContentEntryText(pos=(int(400 * SCALE), int(40 * SCALE)), size=(int(130 * SCALE), mh), font=-2, color=16777215, flags=RT_HALIGN_RIGHT, text=info))
 			self.trailer_list.append(res)
 		self['list'].l.setList(self.trailer_list)
 		self['list'].l.setItemHeight(int(mh))
