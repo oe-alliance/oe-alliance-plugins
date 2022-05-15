@@ -4847,7 +4847,7 @@ class searchYouTube(tvAllScreen):
 				res.append(MultiContentEntryText(pos=(0, 0), size=(int(560 * SCALE), mh), font=0, backcolor_sel=self.back_color, text=''))
 			titel = self.trailer_titel[i].split(' | ')[0].replace('\\u0026', '&')
 			time = self.trailer_time[i]
-			info = trailer_info[i]
+			info = trailer_info[i] if i < len(trailer_info) else ''
 			res.append(MultiContentEntryText(pos=(int(10 * SCALE), 0), size=(int(530 * SCALE), mh), font=0, color=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=titel))
 			res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(40 * SCALE)), size=(int(380 * SCALE), mh), font=-2, color=16777215, flags=RT_HALIGN_LEFT, text=time))
 			res.append(MultiContentEntryText(pos=(int(400 * SCALE), int(40 * SCALE)), size=(int(130 * SCALE), mh), font=-2, color=16777215, flags=RT_HALIGN_RIGHT, text=info))
