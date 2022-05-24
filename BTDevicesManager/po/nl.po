@@ -8,36 +8,35 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2019-03-08 14:35+0100\n"
+"PO-Revision-Date: 2022-05-24 16:13+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Basepath: .\n"
+"X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
 msgid "(Re)Scan"
 msgstr "(Re)Scan"
 
 msgid "Audio Address"
-msgstr ""
+msgstr "Audio-adres"
 
-#, fuzzy
 msgid "Audio Connect"
-msgstr "Verbind"
+msgstr "Verbind audio"
 
 msgid "Autostart"
 msgstr "Autostart"
 
 msgid "Bluetooth Devices Manager"
-msgstr "Bluetooth Apparaatbeheer"
+msgstr "Bluetooth apparaat beheer"
 
 msgid "Bluetooth Devices Manager Setup"
-msgstr "Bluetooth Apparaatbeheer instellingen"
+msgstr "Bluetooth apparaat beheer instellingen"
 
 msgid "Can't not pair with selected device!"
 msgstr "Kan niet verbinden met geselecteerd apparaat!"
@@ -52,7 +51,7 @@ msgid "Connection with:\n"
 msgstr "Verbonden met:\n"
 
 msgid "Disconnect"
-msgstr "Verbinding verbroken"
+msgstr "verbreek verbinding"
 
 msgid "Disconnect with:\n"
 msgstr "Verbreek verbinding met:\n"
