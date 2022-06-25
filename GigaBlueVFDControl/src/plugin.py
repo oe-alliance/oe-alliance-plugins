@@ -562,7 +562,7 @@ def main(menuid, **kwargs):
 		else:
 			return []
 	elif getImageDistro() == "openhdf":
-		if menuid == "display":
+		if menuid == "fp_menu":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		else:
 			return[]
