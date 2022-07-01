@@ -9841,7 +9841,7 @@ class UpdateStatus(Screen):
 	def downloadMeteo(self):
 		global wwwMeteo
 		L4log("Meteodownloadstart")
-		self.feedurl = six.ensure_binary(LCD4linux.MeteoURL.value)
+		self.feedurl = six.ensure_str(LCD4linux.MeteoURL.value)
 		try:
 			opener = FancyURLopener({})
 			f = opener.open(self.feedurl)
