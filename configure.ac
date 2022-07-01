@@ -602,10 +602,19 @@ TVSpielfilm/Makefile
 TVSpielfilm/meta/Makefile
 TVSpielfilm/src/Makefile
 TVSpielfilm/src/db/Makefile
-TVSpielfilm/src/pic/Makefile
-TVSpielfilm/src/pic/buttons/Makefile
-TVSpielfilm/src/pic/icons/Makefile
-TVSpielfilm/src/pic/picons/Makefile
+TVSpielfilm/src/font/Makefile
+TVSpielfilm/src/picons/Makefile
+TVSpielfilm/src/pics/Makefile
+TVSpielfilm/src/pics/FHD/Makefile
+TVSpielfilm/src/pics/FHD/buttons/Makefile
+TVSpielfilm/src/pics/FHD/icons/Makefile
+TVSpielfilm/src/pics/FHD/logos/Makefile
+TVSpielfilm/src/pics/FHD/selectors/Makefile
+TVSpielfilm/src/pics/HD/Makefile
+TVSpielfilm/src/pics/HD/buttons/Makefile
+TVSpielfilm/src/pics/HD/icons/Makefile
+TVSpielfilm/src/pics/HD/logos/Makefile
+TVSpielfilm/src/pics/HD/selectors/Makefile
 
 Chefkoch/Makefile
 Chefkoch/meta/Makefile
