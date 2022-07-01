@@ -111,7 +111,7 @@ def transCHANNEL(data):
 	data = sub('sky .*?bundesliga.*?\t', 'buli', data)
 	data = sub('sky.bundesliga.*?\t', 'buli', data)
 	data = sub('bundesliga.*?\t', 'buli', data)
-	data = sub('sky. bundesliga.*?\t', 'buli', data)    
+	data = sub('sky. bundesliga.*?\t', 'buli', data)
 	data = sub('eurosport 1.*?\t', 'euro', data)
 	data = sub('eurosport 2.*?\t', 'euro2', data)
 	data = sub('sport1\\+.*?\t', 's1plu', data)
