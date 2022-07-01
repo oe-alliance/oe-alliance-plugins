@@ -306,6 +306,7 @@ def transCHANNEL(data):
 	data = sub('qvc.*?\t', 'qvc', data)
 	return data
 
+
 def parsedetail(bereich, debug=None):
 	bereich = sub('<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
 	bereich = sub('</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
