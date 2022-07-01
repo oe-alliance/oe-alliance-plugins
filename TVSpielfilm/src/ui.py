@@ -3117,9 +3117,9 @@ class TVProgrammView(tvGenreJetztProgrammView):
 			else:
 				png = findPicon(sref, self.piconfolder)
 			if png:
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(2* SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 			else:
-				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2* SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 			if self.progress:
 				start = sub(' - ..:..', '', TIME)
 				startparts = start.split(':')
@@ -5364,10 +5364,10 @@ class makeServiceFile(Screen):
 				service = sub(':0:0:0::[a-zA-Z0-9_-]+', ':0:0:0:', service)
 				data += '%s\t %s\n' % (station, service)
 ##			for analysis purpose only, activate when picons are missing
-			Bouquetlog('Sendernamen aus Bouquets:\n' + '-'*70 + '\n') # analysis
+			Bouquetlog('Sendernamen aus Bouquets:\n' + '-' * 70 + '\n') # analysis
 			Bouquetlog(data) # analysis
 			data = transCHANNEL(data) # Diese Zeile darf nicht auskommentiert werden
-			Bouquetlog('\n\nSendernamen als Piconname:\n' + '-'*70 + '\n') # analysis
+			Bouquetlog('\n\nSendernamen als Piconname:\n' + '-' * 70 + '\n') # analysis
 			Bouquetlog(data) # analysis
 			with open(self.servicefile, 'a') as f:
 				f.write(data)

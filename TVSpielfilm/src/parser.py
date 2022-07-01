@@ -46,7 +46,7 @@ def transCHANNEL(data):
 			if x.find('\t') == -1:
 				x += '\t'
 			name, sref = x.split('\t')
-			neu += '%s\t %s\n' %(name.strip().lower(), sref.strip())
+			neu += '%s\t %s\n' % (name.strip().lower(), sref.strip())
 	data = neu
 	data = sub('das erste.*?\t', 'ard', data)
 	data = sub('zdf_neo.*?\t', '2neo', data)
