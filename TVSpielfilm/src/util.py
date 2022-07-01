@@ -9,22 +9,22 @@ from Components.Label import Label
 from Components.MenuList import MenuList
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from enigma import eListboxPythonMultiContent, gFont, getDesktop
+
 from xml.etree.ElementTree import fromstring, tostring, parse
 from six import ensure_str
 
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/TVSpielfilm/'
-PICPATH = PLUGINPATH + "pic/"
-ICONPATH = PICPATH + "icons/"
+PICPATH = PLUGINPATH + "pics/"
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
 
 if DESKTOP_HEIGHT > 720:
 	SCALE = 1.5
-	FULLHD = True
+	ICONPATH = PICPATH + "FHD/icons/"
 	SKINFILE = PLUGINPATH + "skin_FHD.xml"
 else:
 	SCALE = 1.0
-	FULLHD = False
+	ICONPATH = PICPATH + "HD/icons/"
 	SKINFILE = PLUGINPATH + "skin_HD.xml"
 
 
