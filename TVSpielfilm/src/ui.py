@@ -3180,7 +3180,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 				res.append(MultiContentEntryProgress(pos=(int(77 * SCALE), int(32 * SCALE)), size=(int(95 * SCALE), int(6 * SCALE)), percent=percent, borderWidth=1, foreColor=16777215))
 			else:
 				ypos = int(14 * SCALE)
-			res.append(MultiContentEntryText(pos=(int(75 * SCALE), ypos), size=(int(110 * SCALE),int(20 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=TIME))
+			res.append(MultiContentEntryText(pos=(int(75 * SCALE), ypos), size=(int(110 * SCALE), int(20 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=TIME))
 			res.append(MultiContentEntryText(pos=(int(220 * SCALE), 0), size=(int(830 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
 			if TRAILER:
 				png = ICONPATH + 'trailer.png'
