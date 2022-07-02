@@ -583,9 +583,10 @@ class tvBaseScreen(tvAllScreen):
 			self['tvinfo%s' % i].show()
 		if self.tagestipp:
 			channel = findall("var adsc_sender = '(.*?)'", output)
-			self.sref = self.service_db.lookup(channel[0])
-			if self.sref != 'nope':
-				self.zap = True
+			if len(channel) > 0:
+				self.sref = self.service_db.lookup(channel[0])
+				if self.sref != 'nope':
+					self.zap = True
 		picons = findall('<img src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png.*?', bereich)
 		picon = PLUGINPATH + 'picons/' + picons[0] + '.png'
 		if fileExists(picon):
@@ -6133,6 +6134,7 @@ class TVHeuteView(tvBaseScreen):
 		self.hideInfotext()
 		self.hideTVinfo()
 		self.showMenubar()
+		self.initBlueButton('Aus-/Einblenden')
 		self['NumberActions'] = NumberActionMap(['NumberActions',
 												 'OkCancelActions',
 												 'ChannelSelectBaseActions',
@@ -6211,7 +6213,6 @@ class TVHeuteView(tvBaseScreen):
 		self['Line_mid'].hide()
 		self['Line_down'].show()
 		self['seitennr'].hide()
-		self.initBlueButton('Aus-/Einblenden')
 		self.makeTVTimer = eTimer()
 		self.makeTVTimer.callback.append(self.downloadFullPage(self.link, self.makeTVHeuteView))
 		self.makeTVTimer.start(200, True)

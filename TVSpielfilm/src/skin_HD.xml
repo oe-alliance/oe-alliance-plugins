@@ -231,7 +231,7 @@
 		<eLabel name="Background" position="0,0" size="1280,720" backgroundColor="#00000000" foregroundColor="#00000000" zPosition="-1"  />
 		<ePixmap position="10,0" size="1260,60" pixmap="{picpath}HD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="200,32" size="70,20" font="Regular;16" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-    <widget name="waiting" position="190,24" size="130,20" font="Regular;16" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+    <widget name="waiting" position="200,24" size="130,20" font="Regular;16" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
     <widget name="seitennr" position="1145,44" size="105,14" font="Regular;12" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center"  zPosition="2" />
 		<widget render="Label" source="global.CurrentTime" position="1122,0" size="150,60" font="Regular;27" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
