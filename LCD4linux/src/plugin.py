@@ -4753,7 +4753,7 @@ def InitWebIF():
 		if os.path.exists(LCD4enigma2plugin + "Extensions/OpenWebif/pluginshook.src"):
 			try:
 				addExternalChild(("lcd4linux", root, "LCD4linux", Version))
-				L4log("use OpenWebIf")
+				L4log("use OpenWebif")
 			except:
 				pass
 	else:
