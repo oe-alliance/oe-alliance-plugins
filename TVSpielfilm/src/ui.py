@@ -2379,7 +2379,6 @@ class TVJetztView(tvGenreJetztProgrammView):
 		self.makeTVTimer.start(200, True)
 
 	def makeTVJetztView(self, output):
-		self['CHANNELtext'].hide()
 		self['BOUQUETkey'].hide()
 		self['BOUQUETtext'].hide()
 		self['INFOkey'].show()
