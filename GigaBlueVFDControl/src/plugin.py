@@ -640,4 +640,4 @@ def sessionstart(reason, **kwargs):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
-		PluginDescriptor(name="LED_Giga", description="Change LED display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]
+		PluginDescriptor(name="LED_Giga", description=_("Change LED display settings"), where=PluginDescriptor.WHERE_MENU, fnc=main)]
