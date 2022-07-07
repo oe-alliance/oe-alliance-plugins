@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-11-26 19:57+0100\n"
+"POT-Creation-Date: 2022-07-07 19:50+0200\n"
+"PO-Revision-Date: 2022-07-07 19:52+0200\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
@@ -11,29 +11,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 1.8.8\n"
+"X-Generator: Poedit 3.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-
-msgid "Always off"
-msgstr "Immer aus"
-
-msgid "Brightness Level 1"
-msgstr "Helligkeitsstufe 1"
-
-msgid "Brightness Level 2"
-msgstr "Helligkeitsstufe 2"
-
-msgid "Brightness level"
-msgstr "Helligkeitsstufe"
-
-msgid "Cancel"
-msgstr "Abbrechen"
-
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalnummer / Uhr im Standby"
 
 msgid "Channelnumber in Standby off"
 msgstr "Kanalnummer / im Standby aus"
+
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalnummer / Uhr im Standby"
 
 msgid "Channelnumber/Clock in Standby Clock"
 msgstr "Kanalnummer/Uhr / Uhr im Standby"
@@ -41,8 +26,14 @@ msgstr "Kanalnummer/Uhr / Uhr im Standby"
 msgid "Clock always"
 msgstr "Immer Uhr"
 
-msgid "LED Display Setup"
-msgstr "LED Display Einstellungen"
+msgid "Always off"
+msgstr "Immer aus"
+
+msgid "yes"
+msgstr "Ja"
+
+msgid "no"
+msgstr "Nein"
 
 msgid "Off"
 msgstr "Aus"
@@ -50,14 +41,20 @@ msgstr "Aus"
 msgid "On/Off"
 msgstr "Ein/Aus"
 
+msgid "Brightness level"
+msgstr "Helligkeitsstufe"
+
+msgid "LED Display Setup"
+msgstr "LED Display Einstellungen"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
 msgid "Save"
 msgstr "Speichern"
 
-msgid "Show REC-Symbol in Display"
-msgstr "Zeige REC-Symbol im Display"
-
-msgid "Show blinking Clock on Display during recording"
-msgstr "Blinkende Uhr im Display während Aufnahme"
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktualisieren"
 
 msgid "Show on LED"
 msgstr "Displayanzeige"
@@ -65,11 +62,17 @@ msgstr "Displayanzeige"
 msgid "Time mode"
 msgstr "Zeit Modus"
 
-msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktualisieren"
+msgid "Show REC-Symbol in Display"
+msgstr "Zeige REC-Symbol im Display"
 
-msgid "no"
-msgstr "Nein"
+msgid "Show blinking Clock on Display during recording"
+msgstr "Blinkende Uhr im Display während Aufnahme"
 
-msgid "yes"
-msgstr "Ja"
+msgid "Brightness Level 1"
+msgstr "Helligkeitsstufe 1"
+
+msgid "Brightness Level 2"
+msgstr "Helligkeitsstufe 2"
+
+msgid "Change LED display settings"
+msgstr "LED-Anzeige konfigurieren."

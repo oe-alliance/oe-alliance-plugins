@@ -8,40 +8,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-17 09:16+0200\n"
+"POT-Creation-Date: 2022-07-07 19:41+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Always off"
-msgstr ""
-
-msgid "Blink Record Led"
-msgstr ""
-
-msgid "Blue"
-msgstr ""
-
-msgid "Brightness"
-msgstr ""
-
-msgid "Brightness Standby"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Channel number with leading zeros"
+msgid "Channelnumber in Standby off"
 msgstr ""
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-msgid "Channelnumber in Standby off"
 msgstr ""
 
 msgid "Channelnumber/Clock in Standby Clock"
@@ -50,22 +29,58 @@ msgstr ""
 msgid "Clock always"
 msgstr ""
 
-msgid "Display/LED"
+msgid "Always off"
 msgstr ""
 
-msgid "Enable led"
+msgid "No"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Blue"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
+msgid "Purple"
 msgstr ""
 
 msgid "GigaBlue Setup"
 msgstr ""
 
-msgid "LED"
+msgid "Cancel"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Update Date/Time"
+msgstr ""
+
+msgid "Enable led"
 msgstr ""
 
 msgid "Led Deep Standby"
 msgstr ""
 
+msgid "Led state RUN"
+msgstr ""
+
+msgid "Led state Standby"
+msgstr ""
+
 msgid "Led state Deep Standby"
+msgstr ""
+
+msgid "Led state Record"
+msgstr ""
+
+msgid "Blink Record Led"
 msgstr ""
 
 msgid "Led state HDD /dev/sda active"
@@ -74,41 +89,29 @@ msgstr ""
 msgid "Led state HDD /dev/sdb active"
 msgstr ""
 
-msgid "Led state RUN"
+msgid "Brightness"
 msgstr ""
 
-msgid "Led state Record"
-msgstr ""
-
-msgid "Led state Standby"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Purple"
-msgstr ""
-
-msgid "Red"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Show clock in Deep Standby"
+msgid "Brightness Standby"
 msgstr ""
 
 msgid "Show on VFD"
 msgstr ""
 
+msgid "Show clock in Deep Standby"
+msgstr ""
+
 msgid "Time mode"
 msgstr ""
 
-msgid "Update Date/Time"
+msgid "Channel number with leading zeros"
 msgstr ""
 
-msgid "Yes"
+msgid "Display/LED"
+msgstr ""
+
+msgid "LED"
+msgstr ""
+
+msgid "Change LED display settings"
 msgstr ""

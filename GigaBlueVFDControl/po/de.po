@@ -2,44 +2,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2018-10-14 14:14+0200\n"
-"Last-Translator: Manfred Aabye <openmanniland@gmx.de>\n"
+"POT-Creation-Date: 2022-07-07 19:41+0200\n"
+"PO-Revision-Date: 2022-07-07 19:44+0200\n"
+"Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 3.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-
-msgid "Always off"
-msgstr "Immer aus"
-
-msgid "Blink Record Led"
-msgstr "Blinkende Aufnahme-Led"
-
-msgid "Blue"
-msgstr "Blau"
-
-msgid "Brightness"
-msgstr "Helligkeit"
-
-msgid "Brightness Standby"
-msgstr "Helligkeit im Standby"
-
-msgid "Cancel"
-msgstr "Abbrechen"
-
-msgid "Channel number with leading zeros"
-msgstr "Kanalnummer mit führenden Nullen"
-
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalnummer im Standby Uhr"
 
 msgid "Channelnumber in Standby off"
 msgstr "Kanalnummer im Standby aus"
+
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalnummer im Standby Uhr"
 
 msgid "Channelnumber/Clock in Standby Clock"
 msgstr "Kanalnummer/Uhr im Standby Uhr"
@@ -47,23 +26,59 @@ msgstr "Kanalnummer/Uhr im Standby Uhr"
 msgid "Clock always"
 msgstr "Uhr immer anzeigen"
 
-msgid "Display/LED"
-msgstr "Display/LED"
+msgid "Always off"
+msgstr "Immer aus"
 
-msgid "Enable led"
-msgstr "Led aktivieren"
+msgid "No"
+msgstr "Nein"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "None"
+msgstr "Keine"
+
+msgid "Blue"
+msgstr "Blau"
+
+msgid "Red"
+msgstr "Rot"
+
+msgid "Purple"
+msgstr "Violett"
 
 msgid "GigaBlue Setup"
 msgstr "GigaBlue Einstellungen"
 
-msgid "LED"
-msgstr "LED"
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktuallisieren"
+
+msgid "Enable led"
+msgstr "Led aktivieren"
 
 msgid "Led Deep Standby"
 msgstr "Led im Deep-Standby"
 
+msgid "Led state RUN"
+msgstr "Led-Farbe wenn Eingeschaltet"
+
+msgid "Led state Standby"
+msgstr "Led-Farbe im Standby"
+
 msgid "Led state Deep Standby"
 msgstr "Led-Farbe im Deep-Standby"
+
+msgid "Led state Record"
+msgstr "Led-Farbe bei Aufnahme"
+
+msgid "Blink Record Led"
+msgstr "Blinkende Aufnahme-Led"
 
 msgid "Led state HDD /dev/sda active"
 msgstr "Led-Farbe wenn HDD /dev/sda aktiv ist"
@@ -71,41 +86,29 @@ msgstr "Led-Farbe wenn HDD /dev/sda aktiv ist"
 msgid "Led state HDD /dev/sdb active"
 msgstr "Led-Farbe wenn HDD /dev/sdb aktiv ist"
 
-msgid "Led state RUN"
-msgstr "Led-Farbe wenn Eingeschaltet"
+msgid "Brightness"
+msgstr "Helligkeit"
 
-msgid "Led state Record"
-msgstr "Led-Farbe bei Aufnahme"
-
-msgid "Led state Standby"
-msgstr "Led-Farbe im Standby"
-
-msgid "No"
-msgstr "Nein"
-
-msgid "None"
-msgstr "Keine"
-
-msgid "Purple"
-msgstr "Violett"
-
-msgid "Red"
-msgstr "Rot"
-
-msgid "Save"
-msgstr "Speichern"
-
-msgid "Show clock in Deep Standby"
-msgstr "Zeige Uhr im Deep Standby"
+msgid "Brightness Standby"
+msgstr "Helligkeit im Standby"
 
 msgid "Show on VFD"
 msgstr "Im VFD anzeigen"
 
+msgid "Show clock in Deep Standby"
+msgstr "Zeige Uhr im Deep Standby"
+
 msgid "Time mode"
 msgstr "Zeit Modus"
 
-msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktuallisieren"
+msgid "Channel number with leading zeros"
+msgstr "Kanalnummer mit führenden Nullen"
 
-msgid "Yes"
-msgstr "Ja"
+msgid "Display/LED"
+msgstr "Display/LED"
+
+msgid "LED"
+msgstr "LED"
+
+msgid "Change LED display settings"
+msgstr "LED-Anzeige konfigurieren."

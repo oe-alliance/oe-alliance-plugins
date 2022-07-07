@@ -8,25 +8,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-17 09:16+0200\n"
+"POT-Creation-Date: 2022-07-07 19:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Always off"
-msgstr ""
-
-msgid "Cancel"
+msgid "Channelnumber in Standby off"
 msgstr ""
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-msgid "Channelnumber in Standby off"
 msgstr ""
 
 msgid "Channelnumber/Clock in Standby Clock"
@@ -35,7 +29,16 @@ msgstr ""
 msgid "Clock always"
 msgstr ""
 
+msgid "Always off"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
 msgid "Save"
+msgstr ""
+
+msgid "Update Date/Time"
 msgstr ""
 
 msgid "Show on VFD"
@@ -44,8 +47,8 @@ msgstr ""
 msgid "Time mode"
 msgstr ""
 
-msgid "Update Date/Time"
+msgid "VFD_SF8"
 msgstr ""
 
-msgid "VFD_SF8"
+msgid "Change LED display settings"
 msgstr ""
