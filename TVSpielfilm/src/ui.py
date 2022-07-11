@@ -4327,7 +4327,7 @@ class TVPicShow(tvBaseScreen):
 		self['pictext'].setText('Download Fehler')
 
 	def initBlueButton(self, text):
-		self['bluebutton'] =Label()
+		self['bluebutton'] = Label()
 		if ALPHA:
 			self['bluebutton'].show()
 			self['label5'] = Label(text)
