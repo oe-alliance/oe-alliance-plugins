@@ -1059,6 +1059,7 @@ class tvBaseScreen(tvAllScreen):
 				f.write(response.content)
 			name(response.content)
 
+
 class TVTippsView(tvBaseScreen):
 
 	def __init__(self, session, link, sparte):
