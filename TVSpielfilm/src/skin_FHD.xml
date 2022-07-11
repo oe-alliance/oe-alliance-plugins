@@ -153,7 +153,7 @@
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
 		<!-- TVProgrammView Start-Screen -->
-		<widget name="menu" position="15,97" size="1897,922" scrollbarMode="showOnDemand" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="0027408b" selectionPixmap="{picpath}FHD/selectors/selector_1900_71_{selbg}.png" alphatest="blend" />
+		<widget name="menu" position="15,97" size="1897,923" scrollbarMode="showOnDemand" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="0027408b" selectionPixmap="{picpath}FHD/selectors/selector_1900_71_{selbg}.png" alphatest="blend" />
 		<widget name="searchtext" position="367,142" size="1432,97" font="Regular;39" valign="center" zPosition="1" />
 		<widget name="searchmenu" position="15,97" size="1905,922" scrollbarMode="showOnDemand" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#20000000" />
 		<!-- TVProgrammView Event -->
