@@ -99,7 +99,7 @@ from Components.NimManager import nimmanager
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_FONTS, SCOPE_LIBDIR, SCOPE_SYSETC, resolveFilename
 from twisted.internet import reactor
-from twisted.web.client import getPage, HTTPClientFactory, downloadPage
+from twisted.web.client import getPage, downloadPage
 from xml.dom.minidom import parseString
 from xml.etree.cElementTree import parse as parseE
 from .myFileList import FileList as myFileList
@@ -10438,14 +10438,6 @@ class myE2Timer(object):
 		return self.name, self.begin, self.end, self.disabled, self.justplay, self.ice_timer_id, self.service_ref, self.state
 
 
-class myHTTPClientFactory(HTTPClientFactory):
-	def __init__(self, url, method='GET', postdata=None, headers=None,
-	agent="Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)", timeout=0, cookies=None,
-	followRedirect=1, lastModified=None, etag=None):
-		HTTPClientFactory.__init__(self, url, method=method, postdata=postdata,
-		headers=headers, agent=agent, timeout=timeout, cookies=cookies, followRedirect=followRedirect)
-
-
 def url_parse(url, defaultPort=None):
 	parsed = urlparse(url)
 	scheme = parsed[0]
@@ -10460,13 +10452,6 @@ def url_parse(url, defaultPort=None):
 		host, port = host.split(':')
 		port = int(port)
 	return scheme, host, port, path
-
-
-def sendUrlCommand(url, contextFactory=None, timeout=60, *args, **kwargs):
-	scheme, host, port, path = url_parse(url)
-	factory = myHTTPClientFactory(url, *args, **kwargs)
-	reactor.connectTCP(host, port, factory, timeout=timeout)
-	return factory.deferred
 
 
 def getShowPicture(BildFile, idx):
