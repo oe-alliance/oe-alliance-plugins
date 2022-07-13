@@ -386,7 +386,7 @@ class tvBaseScreen(tvAllScreen):
 		for i, ri in enumerate(ratinglabels):
 			if len(ratingdots) <= i:
 				ratingdots.append('0')
-			ratingfile = ICONPATH + 'starbar%s.png' % ratingdots[i]
+			ratingfile = ICONPATH + 'pointbar%s.png' % ratingdots[i]
 			if isfile(ratingfile):
 				try:
 					self['ratinglabel%s' % i].setText(ri)
@@ -397,7 +397,7 @@ class tvBaseScreen(tvAllScreen):
 					pass
 		starslabel = findall('<span class="rating-stars__label">(.*?)</span>', bereich)
 		starsrating = findall('<span class="rating-stars__rating" data-rating="(.*?)"></span>', bereich)
-		if len(starsrating) > 0:
+		if len(starsrating):
 			starsfile = ICONPATH + 'starbar%s.png' % starsrating[0]
 			if isfile(starsfile):
 				try:
@@ -439,11 +439,11 @@ class tvBaseScreen(tvAllScreen):
 		startpos = output.find('<div class="content-area">')
 		endpos = output.find('<h2 class="broadcast-info">')
 		if endpos == -1:
-			endpos = output.find('>Weitere Bildergalerien<') # unnötig?
+			endpos = output.find('>Weitere Bildergalerien<')  # unnötig?
 			if endpos == -1:
-				endpos = output.find('<div class="OUTBRAIN"') # unnötig?
+				endpos = output.find('<div class="OUTBRAIN"')  # unnötig?
 				if endpos == -1:
-					endpos = output.find('</footer>') # unnötig?
+					endpos = output.find('</footer>')  # unnötig?
 		bereich = transHTML(output[startpos:endpos])
 		infotext = self.getInfotext(bereich)
 		self.infotextStartEnd(infotext)
@@ -599,7 +599,7 @@ class tvBaseScreen(tvAllScreen):
 			self['tvinfo%s' % i].show()
 		if self.tagestipp:
 			channel = findall("var adsc_sender = '(.*?)'", output)
-			if len(channel) > 0:
+			if len(channel):
 				self.sref = self.service_db.lookup(channel[0])
 				if self.sref != 'nope':
 					self.zap = True
@@ -612,6 +612,10 @@ class tvBaseScreen(tvAllScreen):
 		else:
 			self['picon'].hide()
 		text = parsedetail(bereich)
+		parts = text.split('\n')
+		text = ''
+		for part in parts:
+			text += part.replace('\\n', '') if ':' in part else part + '\n'
 		fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
 		self.POSTtext = text + fill
 		self['textpage'].setText(self.POSTtext)
@@ -620,11 +624,11 @@ class tvBaseScreen(tvAllScreen):
 		self.postviewready = True
 
 	def getInfotext(self, bereich):
-# weitere Sendungsinformationen
+		# weitere Sendungsinformationen
 		startpos = bereich.find('<div class="text-wrapper">')
 		endpos = bereich.find('<section class="broadcast-detail__stage')
 		extract = bereich[startpos:endpos]
-		text = findall('span\ class="text\-row">(.*?)</span>', extract, S) # Suchstring voher mit re.escape wandeln
+		text = findall('span\ class="text\-row">(.*?)</span>', extract, S)  # Suchstring voher mit re.escape wandeln
 # Sendezeit & Sender
 		startpos = bereich.find('<div class="schedule-widget__header__attributes">')
 		if startpos > 0:
@@ -633,9 +637,9 @@ class tvBaseScreen(tvAllScreen):
 			infotext = findall('<li>(.*?)</li>', extract)
 			infotext.extend(text[1].strip().split(' | '))
 			self.start = infotext[1]
-		else: # manche Sendungen (z.B. Tagesschau) benötigen eine andere Auswertung
+		else:  # manche Sendungen (z.B. Tagesschau) benötigen eine andere Auswertung
 			channel = findall("data-tracking-point='(.*?)'", bereich)
-			if len(text) > 0:
+			if len(text):
 				infotext = text[0].strip().split(' | ')
 				infotext[2] = loads(channel[0])['channel']
 				infotext.extend(text[1].strip().split(' | '))
@@ -661,10 +665,10 @@ class tvBaseScreen(tvAllScreen):
 		self['piclabel2'].hide()
 		self.hideTVinfo()
 		self['seitennr'].hide()
-		self['label2'].hide()
+		self['label2'].show()
 		self['label3'].hide()
 		self['label4'].hide()
-		self['label5'].hide()
+		self['label5'].show()
 		self['searchmenu'].show()
 		self['searchtext'].show()
 
@@ -711,7 +715,8 @@ class tvBaseScreen(tvAllScreen):
 				from Plugins.Extensions.IMDb.plugin import IMDB
 				self.session.open(IMDB, self.name)
 			else:
-				self.session.openWithCallback(self.IMDbInstall, MessageBox, '\nDas IMDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(
+					self.IMDbInstall, MessageBox, '\nDas IMDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
 
 	def TMDb(self):
 		if self.current == 'postview':
@@ -719,7 +724,8 @@ class tvBaseScreen(tvAllScreen):
 				from Plugins.Extensions.tmdb.tmdb import tmdbScreen
 				self.session.open(tmdbScreen, self.name, 2)
 			else:
-				self.session.openWithCallback(self.TMDbInstall, MessageBox, '\nDas TMDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(
+					self.TMDbInstall, MessageBox, '\nDas TMDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
 
 	def TVDb(self):
 		if self.current == 'postview':
@@ -728,7 +734,8 @@ class tvBaseScreen(tvAllScreen):
 				self.name = sub('Die ', '', self.name)
 				self.session.open(TheTVDBMain, self.name)
 			else:
-				self.session.openWithCallback(self.TVDbInstall, MessageBox, '\nDas TheTVDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(
+					self.TVDbInstall, MessageBox, '\nDas TheTVDb Plugin ist nicht installiert.\n\nDas Plugin kann automatisch installiert werden, wenn es auf dem Feed ihres Images vorhanden ist.\n\nSoll das Plugin jetzt auf dem Feed gesucht und wenn vorhanden automatisch installiert werden?', MessageBox.TYPE_YESNO)
 
 	def IMDbInstall(self, answer):
 		if answer is True:
@@ -852,16 +859,8 @@ class tvBaseScreen(tvAllScreen):
 			newTimer.name = self.name
 			newTimer.match = ''
 			newTimer.enabled = True
-			self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
-
-	def initBlueButton(self, text):
-		self['bluebutton'] = Label()
-		if ALPHA:
-			self['bluebutton'].show()
-			self['label5'] = Label(text)
-		else:
-			self['bluebutton'].hide()
-			self['label5'] = Label('')
+			self.session.openWithCallback(self.finishedAutoTimer, AutoTimerImporter, newTimer, self.name, int(
+				mktime(start.timetuple())), int(mktime(end.timetuple())), None, serviceref, None, None, None, None)
 
 	def setBlueButton(self, text):
 		if ALPHA:
@@ -875,34 +874,36 @@ class tvBaseScreen(tvAllScreen):
 	def _commonInit(self, ltxt='Suche', lltxt='Zappen'):
 		self['picpost'] = Pixmap()
 		for i in range(5):
-			self['tvinfo%s' % i] = Label('')
+			self['tvinfo%s' % i] = Label()
 		self['picon'] = Pixmap()
 		self['playlogo'] = Pixmap()
-		self['searchtext'] = Label('')
+		self['searchtext'] = Label()
 		for i in range(9):
-			self['infotext%s' % i] = Label('')
+			self['infotext%s' % i] = Label()
 		for i in range(5):
-			self['ratinglabel%s' % i] = Label('')
+			self['ratinglabel%s' % i] = Label()
 			self['ratingdot%s' % i] = Pixmap()
-		self['starslabel'] = Label('')
+		self['starslabel'] = Label()
 		self['starsrating'] = Pixmap()
 		self['searchmenu'] = ItemList([])
-		self['textpage'] = ScrollLabel('')
-		self['piclabel'] = Label('')
+		self['textpage'] = ScrollLabel()
+		self['piclabel'] = Label()
 		self['piclabel'].hide()
-		self['piclabel2'] = Label('')
+		self['piclabel2'] = Label()
 		self['piclabel2'].hide()
 		self['release'] = Label(RELEASE)
 		self['release'].hide()
 		self['waiting'] = BlinkingLabel('Bitte warten...')
 		self['waiting'].startBlinking()
 		self['waiting'].show()
-		self['seitennr'] = Label('')
+		self['seitennr'] = Label()
 		self['label2'] = Label('Timer')
 		self['label3'] = Label(ltxt)
 		self['label4'] = Label(lltxt)
+		self['label5'] = Label()
 		self['label6'] = Label('MENU')
-		self.initBlueButton('Aus-/Einblenden')
+		self['bluebutton'] = Label()
+		self.setBlueButton('Aus-/Einblenden')
 
 	def _makeSearchView(self, url, titlemode=0, searchmode=0):
 		self.hideMenubar()
@@ -928,7 +929,8 @@ class tvBaseScreen(tvAllScreen):
 			if DATUM:
 				self.datum_string = DATUM
 				res_datum = [DATUM]
-				res_datum.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(120 * SCALE), mh), font=2, color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
+				res_datum.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(120 * SCALE), mh), font=2,
+													   color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
 				self.searchref.append('na')
 				self.searchlink.append('na')
 				self.searchentries.append(res_datum)
@@ -953,7 +955,8 @@ class tvBaseScreen(tvAllScreen):
 					if png:
 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 					else:
-						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+														 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 					start = sub(' - ..:..', '', start)
 					daynow = sub('....-..-', '', str(self.date))
 					day = search(', ([0-9]+). ', self.datum_string)
@@ -975,10 +978,11 @@ class tvBaseScreen(tvAllScreen):
 							res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), int(16 * SCALE)), size=(int(40 * SCALE), int(14 * SCALE)), png=loadPNG(png)))
 					self.searchlink.append(LINK)
 					if GENRE:
-						res.append(MultiContentEntryText(pos=(int(940 * SCALE), 0), size=(int(220 * SCALE), mh), font=-2, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=GENRE))
+						res.append(MultiContentEntryText(pos=(int(940 * SCALE), 0), size=(int(220 * SCALE), mh), font=-
+														 2, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=GENRE))
 					self.datum = False
 					self.rec = False
-					if RATING: # DAUMEN
+					if RATING:  # DAUMEN
 						if RATING != 'rating small':
 							RATING = RATING.replace(' ', '-')
 							png = '%s%s.png' % (ICONPATH, RATING)
@@ -1186,13 +1190,14 @@ class TVTippsView(tvBaseScreen):
 				picfilter = PIC
 			if TIME:
 				start = TIME
-				res.append(MultiContentEntryText(pos=(int(70 * SCALE), 0), size=(int(60 * SCALE), mh), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=TIME))
+				res.append(MultiContentEntryText(pos=(int(70 * SCALE), 0), size=(int(60 * SCALE), mh), font=1,
+												 color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=TIME))
 			icount = 0
 			for INFO in INFOS:
 				if search('neu|new', INFO) or self.sparte != "neu":
 					self.new = True
 				png = '%s%s.png' % (ICONPATH, INFO)
-				if isfile(png): # NEU, TIPP
+				if isfile(png):  # NEU, TIPP
 					yoffset = int((mh - 14 * SCALE * len(INFOS)) / 2 + 14 * SCALE * icount)
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), yoffset), size=(int(40 * SCALE), int(14 * SCALE)), png=loadPNG(png)))
 					icount += 1
@@ -1201,7 +1206,8 @@ class TVTippsView(tvBaseScreen):
 				res.append(MultiContentEntryText(pos=(int(160 * SCALE), 0), size=(int(580 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=NAME))
 			if GENRE:
 				text = GENRE.replace(',', '\n', 1)
-				res.append(MultiContentEntryText(pos=(int(1040 * SCALE), 0), size=(int(400 * SCALE), mh), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=text))
+				res.append(MultiContentEntryText(pos=(int(1040 * SCALE), 0), size=(int(400 * SCALE), mh), font=-2,
+												 color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=text))
 				if self.sparte == 'Spielfilm':
 					png = ICONPATH + 'rating-small1.png'
 					if isfile(png):
@@ -1216,7 +1222,8 @@ class TVTippsView(tvBaseScreen):
 				if png:
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), 0), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 				else:
-					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+													 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 				if sref == 'nope':
 					sref = None
 				elif self.new:
@@ -1406,10 +1413,6 @@ class TVTippsView(tvBaseScreen):
 			self['menu'].hide()
 			for i in range(6):
 				self['pic%s' % i].hide()
-			self['label2'].hide()
-			self['label3'].hide()
-			self['label4'].hide()
-			self['label5'].hide()
 			self.searchlink = []
 			self.searchref = []
 			self.searchentries = []
@@ -1780,33 +1783,35 @@ class tvGenreJetztProgrammView(tvBaseScreen):
 		self['waiting'] = BlinkingLabel('Bitte warten...')
 		self['waiting'].startBlinking()
 		self['waiting'].show()
-		self['seitennr'] = Label('')
+		self['seitennr'] = Label()
 		self['CHANNELkey'] = Pixmap()
-		self['CHANNELtext'] = Label('')
+		self['CHANNELtext'] = Label()
 		self['BOUQUETkey'] = Pixmap()
-		self['BOUQUETtext'] = Label('')
+		self['BOUQUETtext'] = Label()
 		self['INFOkey'] = Pixmap()
-		self['INFOtext'] = Label('')
+		self['INFOtext'] = Label()
 		self['TEXTkey'] = Pixmap()
-		self['TEXTtext'] = Label('')
+		self['TEXTtext'] = Label()
 		self['button_OK'] = Pixmap()
-		self['label_OK'] = Label('')
+		self['label_OK'] = Label()
 		self['button_TEXT'] = Pixmap()
-		self['label_TEXT'] = Label('')
+		self['label_TEXT'] = Label()
 		self['button_INFO'] = Pixmap()
-		self['label_INFO'] = Label('')
+		self['label_INFO'] = Label()
 		self['1_zapup'] = Pixmap()
 		self['2_zapdown'] = Pixmap()
 		self['button_7_8_9'] = Pixmap()
-		self['Line_top'] = Label('')
-		self['Line_mid'] = Label('')
-		self['Line_down'] = Label('')
+		self['Line_top'] = Label()
+		self['Line_mid'] = Label()
+		self['Line_down'] = Label()
 		self['button_OK'] = Pixmap()
 		self['button_TEXT'] = Pixmap()
 		self['button_INFO'] = Pixmap()
-		self['CHANNELtext'] = Label('')
-		self['BOUQUETtext'] = Label('')
-		self.initBlueButton('Aus-/Einblenden')
+		self['CHANNELtext'] = Label()
+		self['BOUQUETtext'] = Label()
+		self['label5'] = Label()
+		self['bluebutton'] = Label()
+		self.setBlueButton('Aus-/Einblenden')
 
 
 class TVGenreView(tvGenreJetztProgrammView):
@@ -1887,7 +1892,8 @@ class TVGenreView(tvGenreJetztProgrammView):
 			if DATUM:
 				self.datum_string = DATUM
 				res_datum = [DATUM]
-				res_datum.append(MultiContentEntryText(pos=(int(85 * SCALE), 0), size=(int(500 * SCALE), mh), font=2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
+				res_datum.append(MultiContentEntryText(pos=(int(85 * SCALE), 0), size=(int(500 * SCALE), mh), font=2,
+													   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
 				self.sref.append('na')
 				self.tvlink.append('na')
 				self.tvtitel.append('na')
@@ -1912,7 +1918,8 @@ class TVGenreView(tvGenreJetztProgrammView):
 					if png:
 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), 0), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 					else:
-						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(30 * (SCALE - 1))), size=(int(67 * SCALE), int(40 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(30 * (SCALE - 1))), size=(int(67 * SCALE), int(40 * SCALE)), font=-
+														 2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 					start = sub(' - ..:..', '', start)
 					daynow = sub('....-..-', '', str(self.date))
 					day = search(', ([0-9]+). ', self.datum_string)
@@ -1937,14 +1944,15 @@ class TVGenreView(tvGenreJetztProgrammView):
 					if GENRE:
 						titelfilter = TITLE.replace(GENRE, '')
 						text = GENRE.replace(',', '\n', 1)
-						res.append(MultiContentEntryText(pos=(int(1040 * SCALE), 0), size=(int(400 * SCALE), mh), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=text))
+						res.append(MultiContentEntryText(pos=(int(1040 * SCALE), 0), size=(int(400 * SCALE), mh), font=-2,
+														 color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=text))
 					icount = 0
 					for INFO in INFOS:
 						if self.rec:
 							self.rec = False
 						else:
 							png = '%s%s.png' % (ICONPATH, INFO)
-							if isfile(png): # DAUMEN
+							if isfile(png):  # DAUMEN
 								yoffset = int(icount * 21 + (3 - len(INFOS)) * 10 + int(30 * (SCALE - 1)))
 								res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1220 * SCALE), yoffset), size=(int(40 * SCALE), int(14 * SCALE)), png=loadPNG(png)))
 								icount += 1
@@ -1955,7 +1963,8 @@ class TVGenreView(tvGenreJetztProgrammView):
 							png = '%s%s.png' % (ICONPATH, RATING)
 							if isfile(png):
 								res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
-					res.append(MultiContentEntryText(pos=(int(160 * SCALE), 0), size=(int(600 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=titelfilter))
+					res.append(MultiContentEntryText(pos=(int(160 * SCALE), 0), size=(int(600 * SCALE), mh), font=1,
+													 color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=titelfilter))
 					self.tventries.append(res)
 		self['menu'].l.setItemHeight(mh)
 		self['menu'].l.setList(self.tventries)
@@ -2141,10 +2150,6 @@ class TVGenreView(tvGenreJetztProgrammView):
 		if search and search != '':
 			self.searchstring = search
 			self['menu'].hide()
-			self['label2'].hide()
-			self['label3'].hide()
-			self['label4'].hide()
-			self['label5'].hide()
 			self.searchlink = []
 			self.searchref = []
 			self.searchentries = []
@@ -2336,7 +2341,6 @@ class TVGenreView(tvGenreJetztProgrammView):
 			self['button_TEXT'].hide()
 			self['button_INFO'].hide()
 			self['button_7_8_9'].hide()
-
 		elif self.current == 'postview' and self.search:
 			self.postviewready = False
 			self.showsearch()
@@ -2396,6 +2400,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 		f.close()
 		ordertext = ['"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines)]
 		self.order = '{' + str(''.join(ordertext)) + '}'
+		self.date = datetime.date.today()
 		if self.standalone:
 			self.movie_stop = config.usage.on_movie_stop.value
 			self.movie_eof = config.usage.on_movie_eof.value
@@ -2407,7 +2412,6 @@ class TVJetztView(tvGenreJetztProgrammView):
 				self.timer = open(PLUGINPATH + 'db/timer.db').read().split('\n')
 			else:
 				self.timer = ''
-		self.date = datetime.date.today()
 		one_day = datetime.timedelta(days=1)
 		self.nextdate = self.date + one_day
 		self.weekday = makeWeekDay(self.date.weekday())
@@ -2482,7 +2486,8 @@ class TVJetztView(tvGenreJetztProgrammView):
 				if png:
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 				else:
-					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+													 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 				percent = None
 				if self.progress:
 					start = sub(' - ..:..', '', TIME)
@@ -2565,7 +2570,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 				if RATING != 'rating small':
 					RATING = RATING.replace(' ', '-')
 					png = '%s%s.png' % (ICONPATH, RATING)
-					if isfile(png): # DAUMEN
+					if isfile(png):  # DAUMEN
 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1220 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
 				if trailer:
 					png = ICONPATH + 'trailer.png'
@@ -2645,11 +2650,9 @@ class TVJetztView(tvGenreJetztProgrammView):
 		if self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
 			self.postlink = self.tvlink[c][1]
-
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.postlink = self.searchlink[c]
-
 		if action == 'ok' and self.ready:
 			if search('www.tvspielfilm.de', self.postlink):
 				self.current = 'postview'
@@ -2813,12 +2816,10 @@ class TVJetztView(tvGenreJetztProgrammView):
 
 	def searchReturn(self, search):
 		if search and search != '':
-			self.searchstring = search
 			self['menu'].hide()
-			self['label2'].hide()
-			self['label3'].hide()
-			self['label4'].hide()
-			self['label5'].hide()
+			self['TEXTtext'].hide()
+			self['TEXTkey'].hide()
+			self.searchstring = search
 			self.searchlink = []
 			self.searchref = []
 			self.searchentries = []
@@ -2941,6 +2942,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 		self['label3'].show()
 		self['label4'].setText('Zappen')
 		self['label4'].show()
+		self.setBlueButton('Aus-/Einblenden')
 		self.hideInfotext()
 		self['textpage'].hide()
 		self['picpost'].hide()
@@ -2949,6 +2951,15 @@ class TVJetztView(tvGenreJetztProgrammView):
 		self.hideTVinfo()
 		self.current = 'menu'
 		self['menu'].show()
+
+	def setBlueButton(self, text):
+		if ALPHA:
+			self['bluebutton'].show()
+			self['label5'].setText(text)
+			self['label5'].show()
+		else:
+			self['bluebutton'].hide()
+			self['label5'].hide()
 
 	def down(self):
 		try:
@@ -3016,9 +3027,13 @@ class TVJetztView(tvGenreJetztProgrammView):
 			self.oldsearchindex = 1
 			self['searchmenu'].hide()
 			self['searchtext'].hide()
+			self.showProgrammPage()
+			self['label_TEXT'].show()
+			self['button_TEXT'].show()
+			self['TEXTtext'].show()
+			self['TEXTkey'].show()
 			self.setTitle('')
 			self.setTitle(self.titel)
-			self.showProgrammPage()
 		elif self.current == 'postview' and not self.search:
 			self.hideRatingInfos()
 			self.postviewready = False
@@ -3174,7 +3189,8 @@ class TVProgrammView(tvGenreJetztProgrammView):
 			if png:
 				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 			else:
-				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+												 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 			if self.progress:
 				start = sub(' - ..:..', '', TIME)
 				startparts = start.split(':')
@@ -3235,7 +3251,8 @@ class TVProgrammView(tvGenreJetztProgrammView):
 				res.append(MultiContentEntryProgress(pos=(int(77 * SCALE), int(32 * SCALE)), size=(int(95 * SCALE), int(6 * SCALE)), percent=percent, borderWidth=1, foreColor=16777215))
 			else:
 				ypos = int(14 * SCALE)
-			res.append(MultiContentEntryText(pos=(int(75 * SCALE), ypos), size=(int(110 * SCALE), int(20 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=TIME))
+			res.append(MultiContentEntryText(pos=(int(75 * SCALE), ypos), size=(int(110 * SCALE), int(20 * SCALE)),
+											 font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=TIME))
 			res.append(MultiContentEntryText(pos=(int(220 * SCALE), 0), size=(int(830 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
 			if TRAILER:
 				png = ICONPATH + 'trailer.png'
@@ -3256,7 +3273,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 			if RATING != 'rating small':
 				RATING = RATING.replace(' ', '-')
 				png = '%s%s.png' % (ICONPATH, RATING)
-				if isfile(png): # DAUMEN
+				if isfile(png):  # DAUMEN
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1220 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
 			self.tventries.append(res)
 		self['menu'].l.setItemHeight(mh)
@@ -3382,7 +3399,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
-			if not self.search: #if self.zap and not self.search:
+			if not self.search:  # if self.zap and not self.search:
 				c = self['menu'].getSelectedIndex()
 				self.oldindex = c
 				sref = self.sref
@@ -3394,7 +3411,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 				self.redTimer(False, sref)
 			else:
 				self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
-		elif self.current == 'menu' and self.ready: # and self.zap:
+		elif self.current == 'menu' and self.ready:  # and self.zap:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
 			self.postlink = self.tvlink[c]
@@ -3458,10 +3475,8 @@ class TVProgrammView(tvGenreJetztProgrammView):
 		if search and search != '':
 			self.searchstring = search
 			self['menu'].hide()
-			self['label2'].hide()
 			self['label3'].hide()
 			self['label4'].hide()
-			self['label5'].hide()
 			self.searchlink = []
 			self.searchref = []
 			self.searchentries = []
@@ -3812,16 +3827,18 @@ class TVNews(tvBaseScreen):
 		self['picpost'] = Pixmap()
 		self['playlogo'] = Pixmap()
 		self['playlogo'].hide()
-		self['statuslabel'] = Label('')
+		self['statuslabel'] = Label()
 		self['statuslabel'].hide()
-		self['picturetext'] = Label('')
-		self['seitennr'] = Label('')
-		self['textpage'] = ScrollLabel('')
+		self['picturetext'] = Label()
+		self['seitennr'] = Label()
+		self['textpage'] = ScrollLabel()
 		self['menu'] = ItemList([])
 		self['OKkey'] = Pixmap()
-		self['OKtext'] = Label('')
-		self['Line_down'] = Label('')
-		self.initBlueButton('Aus-/Einblenden')
+		self['OKtext'] = Label()
+		self['Line_down'] = Label()
+		self['label5'] = Label()
+		self['bluebutton'] = Label()
+		self.setBlueButton('Aus-/Einblenden')
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'DirectionActions',
 									 'ColorActions',
@@ -3847,7 +3864,7 @@ class TVNews(tvBaseScreen):
 		self['Line_down'].show()
 		startpos = output.find('<div class="content-area">')
 		endpos = output.find('<div class="text--list">')
-		if endpos == -1: # andere Endekennung bei Genres
+		if endpos == -1:  # andere Endekennung bei Genres
 			endpos = output.find('<div class="pagination pagination--numbers"')
 		bereich = output[startpos:endpos]
 		bereich = sub('<ul class=".*?</ul>', '', bereich, flags=S)
@@ -3860,12 +3877,12 @@ class TVNews(tvBaseScreen):
 		picurl = findall('<img src="(.*?)"', bereich)
 		picurltvsp = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/TV-Spielfilm-Logo.svg/500px-TV-Spielfilm-Logo.svg.png'
 		name = findall('<span class="headline">(.*?)</span>', bereich)
-		if len(name) == 0: # andere Umklammerung bei Genres
+		if not len(name):  # andere Umklammerung bei Genres
 			name = findall('<p class="title">(.*?)</p>', bereich)
 		subline = findall('<span class="subline">(.*?)</span>', bereich)
 		fullname = []
 		for i, ni in enumerate(name):
-			fullname.append(ni + ' | ' + subline[i]) if len(subline) > 0 else fullname.append(ni)
+			fullname.append(ni + ' | ' + subline[i]) if len(subline) else fullname.append(ni)
 			try:
 				self.picurllist.append(picurl[i])
 			except IndexError:
@@ -3924,7 +3941,7 @@ class TVNews(tvBaseScreen):
 		if picurl:
 			self.downloadPicPost(picurl.group(1) + '.jpg', False)
 		else:
-			picurl = search('<meta property="og:image" content="(.*?)"', output)
+			picurl = search('<meta property="og:image" content="(.*?)"', bereich)
 			if picurl:
 				self.downloadPicPost(picurl.group(1), False)
 			else:
@@ -3954,6 +3971,8 @@ class TVNews(tvBaseScreen):
 			head = search('<p class="prelude">(.*?)</p>', bereich)
 		if not head:
 			head = search('<h1 class="headline headline--article broadcast">(.*?)</h1>', bereich)
+		if not head:
+			head = search('<h1 class="headline headline--article">(.*?)</h1>', bereich)
 		short = search('<span class="title-caption">(.*?)</span>', bereich)
 		if not short:
 			short = search('<span class="title-caption">(.*?)</span>', bereich)
@@ -4030,7 +4049,7 @@ class TVNews(tvBaseScreen):
 		self['picpost'].hide()
 		self['playlogo'].hide()
 		self['statuslabel'].hide()
-		self.initBlueButton('Aus-/Einblenden')
+		self.setBlueButton('Aus-/Einblenden')
 
 	def down(self):
 		try:
@@ -4124,20 +4143,17 @@ class TVPicShow(tvBaseScreen):
 		self['release'] = Label(RELEASE)
 		self['release'].hide()
 		self['waiting'] = BlinkingLabel('Bitte warten...')
-		self['waiting'].startBlinking()
-		self['waiting'].show()
-		for i in range(9):
-			self['infotext%s' % i] = Label('')
 		self['picture'] = Pixmap()
-		self['picindex'] = Label('')
-		self['pictext'] = ScrollLabel('')
-		self['textpage'] = ScrollLabel('')
-		self['label5'] = Label('')
-		self['seitennr'] = Label('')
+		self['picindex'] = Label()
+		self['pictext'] = ScrollLabel()
+		self['textpage'] = ScrollLabel()
+		self['seitennr'] = Label()
 		self['OKkey'] = Pixmap()
-		self['OKtext'] = Label('')
-		self['Line_down'] = Label('')
-		self.initBlueButton('Aus-/Einblenden')
+		self['OKtext'] = Label()
+		self['Line_down'] = Label()
+		self['label5'] = Label()
+		self['bluebutton'] = Label()
+		self.setBlueButton('Aus-/Einblenden')
 		self['NumberActions'] = NumberActionMap(['NumberActions',
 												 'OkCancelActions',
 												 'DirectionActions',
@@ -4327,15 +4343,6 @@ class TVPicShow(tvBaseScreen):
 		tvAllScreen.downloadError(output)
 		self['pictext'].setText('Download Fehler')
 
-	def initBlueButton(self, text):
-		self['bluebutton'] = Label()
-		if ALPHA:
-			self['bluebutton'].show()
-			self['label5'] = Label(text)
-		else:
-			self['bluebutton'].hide()
-			self['label5'] = Label('')
-
 	def exit(self):
 		global HIDEFLAG
 		if ALPHA and not HIDEFLAG:
@@ -4363,7 +4370,7 @@ class PicShowFull(tvBaseScreen):
 		self['waiting'].startBlinking()
 		self['waiting'].show()
 		self['picture'] = Pixmap()
-		self['picindex'] = Label('')
+		self['picindex'] = Label()
 		self['NumberActions'] = NumberActionMap(['NumberActions',
 												 'OkCancelActions',
 												 'DirectionActions',
@@ -4513,15 +4520,17 @@ class searchYouTube(tvAllScreen):
 		self.count = 1
 		self['list'] = ItemList([])
 		self['label2'] = Label(' YouTube Suche')
-		self['Line_down'] = Label('')
-		self.initBlueButton('Aus-/Einblenden')
+		self['Line_down'] = Label()
+		self['label5'] = Label()
+		self['bluebutton'] = Label()
+		self.setBlueButton('Aus-/Einblenden')
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'DirectionActions',
 									 'ColorActions',
 									 'ChannelSelectBaseActions',
 									 'NumberActions',
 									 'MovieSelectionActions'], {'ok': self.ok,
-									'cancel': self.exit,
+																'cancel': self.exit,
 																'right': self.rightDown,
 																'left': self.leftUp,
 																'down': self.down,
@@ -4538,15 +4547,6 @@ class searchYouTube(tvAllScreen):
 		self.makeTrailerTimer.start(200, True)
 		self['Line_down'].show()
 
-	def initBlueButton(self, text):
-		self['bluebutton'] = Label()
-		if ALPHA:
-			self['bluebutton'].show()
-			self['label5'] = Label(text)
-		else:
-			self['bluebutton'].hide()
-			self['label5'] = Label('')
-
 	def makeTrailerList(self, string):
 		self.setTitle(self.titel)
 		output = ensure_str(open(self.localhtml, 'r').read())
@@ -4557,10 +4557,10 @@ class searchYouTube(tvAllScreen):
 #		analyse = bereich.replace('a><a', 'a>\n<a').replace('script><script', 'script>\n<script').replace('},{', '},\n{').replace('}}}]},"publishedTimeText"', '}}}]},\n"publishedTimeText"')
 #		with open('/home/root/logs/analyse.log', 'a') as f:
 #			f.write(analyse)
-		self.trailer_id = findall('{"videoRenderer":{"videoId":"(.*?)","thumbnail', bereich) # Suchstring voher mit re.escape wandeln
-		self.trailer_titel = findall('"title":{"runs":\[{"text":"(.*?)"}\]', bereich) # Suchstring voher mit re.escape wandeln
-		self.trailer_time = findall('"lengthText":{"accessibility":{"accessibilityData":{"label":"(.*?)"}},"simpleText"', bereich) # Suchstring voher mit re.escape wandeln
-		trailer_info = findall('"viewCountText":{"simpleText":"(.*?)"},"navigationEndpoint"', bereich) # Suchstring voher mit re.escape wandeln
+		self.trailer_id = findall('{"videoRenderer":{"videoId":"(.*?)","thumbnail', bereich)  # Suchstring voher mit re.escape wandeln
+		self.trailer_titel = findall('"title":{"runs":\[{"text":"(.*?)"}\]', bereich)  # Suchstring voher mit re.escape wandeln
+		self.trailer_time = findall('"lengthText":{"accessibility":{"accessibilityData":{"label":"(.*?)"}},"simpleText"', bereich)  # Suchstring voher mit re.escape wandeln
+		trailer_info = findall('"viewCountText":{"simpleText":"(.*?)"},"navigationEndpoint"', bereich)  # Suchstring voher mit re.escape wandeln
 		mh = int(100 * SCALE)
 		for i in range(len(self.trailer_id)):
 			res = ['']
@@ -4722,6 +4722,15 @@ class searchYouTube(tvAllScreen):
 				remove(self.localposter[i])
 		self.close()
 
+	def setBlueButton(self, text):
+		if ALPHA:
+			self['bluebutton'].show()
+			self['label5'].setText(text)
+			self['label5'].show()
+		else:
+			self['bluebutton'].hide()
+			self['label5'].hide()
+
 
 class tvMain(tvBaseScreen):
 
@@ -4761,7 +4770,9 @@ class tvMain(tvBaseScreen):
 		self['label'] = Label('Import')
 		if self.tipps:
 			self['label2'] = Label('Tipp')
-		self.initBlueButton('Hide')
+		self['label5'] = Label()
+		self['bluebutton'] = Label()
+		self.setBlueButton('Hide')
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'DirectionActions',
 									 'ColorActions',
@@ -5042,7 +5053,7 @@ class tvMain(tvBaseScreen):
 			self.makeSecondMenuItem3('Erstmals im Free-TV', '/tv-tipps/galerien/freetvpremieren/')
 			self.makeSecondMenuItem3('Programmänderungen', '/tv-programm/programmaenderung/')
 		elif search('/serien/', link):
-#			self.makeSecondMenuItem2('Serien', '/serien/')
+			#			self.makeSecondMenuItem2('Serien', '/serien/')
 			self.makeSecondMenuItem2('Serien-News', '/news/serien/')
 			self.makeSecondMenuItem2('Quizze', '/news/quizze/')
 			self.makeSecondMenuItem2('Serien-Trailer', '/serien/serien-trailer/')
@@ -5153,7 +5164,7 @@ class tvMain(tvBaseScreen):
 		self.ready = True
 
 	def selectSecondMenu(self):
-		if len(self.secondmenulist) > 0:
+		if len(self.secondmenulist):
 			self.actmenu = 'secondmenu'
 			self['mainmenu'].hide()
 			self['secondmenu'].show()
@@ -5166,7 +5177,7 @@ class tvMain(tvBaseScreen):
 		self.ready = True
 
 	def selectThirdMenu(self):
-		if len(self.thirdmenulist) > 0:
+		if len(self.thirdmenulist):
 			self.actmenu = 'thirdmenu'
 			self['mainmenu'].hide()
 			self['secondmenu'].hide()
@@ -5445,10 +5456,10 @@ class makeServiceFile(Screen):
 				service = sub(':0:0:0:.*?[)], ', ':0:0:0:\n', service)
 				service = sub(':0:0:0::[a-zA-Z0-9_-]+', ':0:0:0:', service)
 				data += '%s\t %s\n' % (station, service)
-##			for analysis purpose only, activate when picons are missing
+# for analysis purpose only, activate when picons are missing
 #			Bouquetlog('Sendernamen aus Bouquets:\n' + '-' * 70 + '\n') # analysis
 #			Bouquetlog(data) # analysis
-			data = transCHANNEL(data) # Diese Zeile darf nicht auskommentiert werden
+			data = transCHANNEL(data)  # Diese Zeile darf nicht auskommentiert werden
 #			Bouquetlog('\n\nSendernamen als Piconname:\n' + '-' * 70 + '\n') # analysis
 #			Bouquetlog(data) # analysis
 			with open(self.servicefile, 'a') as f:
@@ -5471,7 +5482,8 @@ class makeServiceFile(Screen):
 			if newdata == '':
 				self.session.openWithCallback(self.noBouquet, MessageBox, '\nKeine TV Spielfilm Sender gefunden.\nBitte wählen Sie ein anderes TV Bouquet.', MessageBox.TYPE_YESNO)
 			else:
-				self.session.openWithCallback(self.otherBouquet, MessageBox, '\nInsgesamt %s TV Spielfilm Sender importiert.\nMöchten Sie ein weiteres TV Bouquet importieren?' % str(count), MessageBox.TYPE_YESNO, default=False)
+				self.session.openWithCallback(self.otherBouquet, MessageBox, '\nInsgesamt %s TV Spielfilm Sender importiert.\nMöchten Sie ein weiteres TV Bouquet importieren?' %
+											  str(count), MessageBox.TYPE_YESNO, default=False)
 
 	def otherBouquet(self, answer):
 		if answer is True:
@@ -5647,7 +5659,8 @@ class gotoPageMenu(tvAllScreen):
 		mh = int(37 * SCALE + 0.5)
 		while page <= self.maxpages:
 			res = ['']
-			res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(28 * SCALE), mh), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=str(page)))
+			res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(28 * SCALE), mh), font=1,
+											 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=str(page)))
 			for i in range(6):
 				try:
 					service = sender[count].lower().replace(' ', '').replace('.', '').replace('ii', '2')
@@ -5724,12 +5737,12 @@ class tvTipps(tvAllScreen):
 		self['thumb'] = Pixmap()
 		self['picture'].hide()
 		self['thumb'].hide()
-		self['label'] = Label('')
-		self['label2'] = Label('')
-		self['label3'] = Label('')
-		self['label4'] = Label('')
-		self['label5'] = Label('')
-		self['label6'] = Label('')
+		self['label'] = Label()
+		self['label2'] = Label()
+		self['label3'] = Label()
+		self['label4'] = Label()
+		self['label5'] = Label()
+		self['label6'] = Label()
 		self['label'].hide()
 		self['label2'].hide()
 		self['label3'].hide()
@@ -5994,7 +6007,8 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
 
 	def exit(self):
 		if config.plugins.tvspielfilm.meintvs.value == 'yes' and config.plugins.tvspielfilm.login.value == '' or config.plugins.tvspielfilm.meintvs.value == 'yes' and config.plugins.tvspielfilm.password.value == '':
-			self.session.openWithCallback(self.nologin_return, MessageBox, 'Sie haben den Mein TV SPIELFILM Login aktiviert, aber unvollständige Login-Daten angegeben.\n\nMöchten Sie die Mein TV SPIELFILM Login-Daten jetzt angeben oder Mein TV SPIELFILM deaktivieren?', MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(
+				self.nologin_return, MessageBox, 'Sie haben den Mein TV SPIELFILM Login aktiviert, aber unvollständige Login-Daten angegeben.\n\nMöchten Sie die Mein TV SPIELFILM Login-Daten jetzt angeben oder Mein TV SPIELFILM deaktivieren?', MessageBox.TYPE_YESNO)
 		else:
 			self.session.openWithCallback(self.close, tvMain)
 
@@ -6184,31 +6198,33 @@ class TVHeuteView(tvBaseScreen):
 		self['waiting'].startBlinking()
 		self['waiting'].show()
 		self['CHANNELkey'] = Pixmap()
-		self['CHANNELtext'] = Label('')
+		self['CHANNELtext'] = Label()
 		self['BOUQUETkey'] = Pixmap()
-		self['BOUQUETtext'] = Label('')
+		self['BOUQUETtext'] = Label()
 		self['INFOkey'] = Pixmap()
-		self['INFOtext'] = Label('')
+		self['INFOtext'] = Label()
 		self['MENUkey'] = Pixmap()
-		self['MENUtext'] = Label('')
+		self['MENUtext'] = Label()
 		self['button_OK'] = Pixmap()
-		self['label_OK'] = Label('')
+		self['label_OK'] = Label()
 		self['button_TEXT'] = Pixmap()
-		self['label_TEXT'] = Label('')
+		self['label_TEXT'] = Label()
 		self['button_INFO'] = Pixmap()
 		self['label_INFO'] = Label()
 		self['button_7_8_9'] = Pixmap()
-		self['Line_top'] = Label('')
-		self['Line_mid'] = Label('')
-		self['Line_down'] = Label('')
+		self['Line_top'] = Label()
+		self['Line_mid'] = Label()
+		self['Line_down'] = Label()
+		self['label5'] = Label()
+		self['bluebutton'] = Label()
 		for i in range(6):
 			self['pic%s' % i] = Pixmap()
 			self['picon%s' % i] = Pixmap()
-			self['sender%s' % i] = Label('')
+			self['sender%s' % i] = Label()
 			self['sender%s' % i].hide()
-			self['pictime%s' % i] = Label('')
-			self['pictext%s' % i] = Label('')
-			self['pictext%s_bg' % i] = Label('')
+			self['pictime%s' % i] = Label()
+			self['pictext%s' % i] = Label()
+			self['pictext%s_bg' % i] = Label()
 			self['pictext%s_bg' % i].hide()
 			self['menu%s' % i] = ItemList([])
 		self._commonInit()
@@ -6219,7 +6235,7 @@ class TVHeuteView(tvBaseScreen):
 		self.hideInfotext()
 		self.hideTVinfo()
 		self.showMenubar()
-		self.initBlueButton('Aus-/Einblenden')
+		self.setBlueButton('Aus-/Einblenden')
 		self['NumberActions'] = NumberActionMap(['NumberActions',
 												 'OkCancelActions',
 												 'ChannelSelectBaseActions',
@@ -6465,14 +6481,15 @@ class TVHeuteView(tvBaseScreen):
 			for x in mi:
 				if search('TIME', x):
 					x = sub('TIME', '', x)
-					if len(currentitem) == 0:
+					if not len(currentitem):
 						currentitem = [x]
 					if currentitem != [x]:
 						self.tventriess[midx].append(currentitem)
 						self.tvlinks[midx].append(currentlink)
 						self.tvtitels[midx].append(currenttitle)
 						currentitem = [x]
-					currentitem.append(MultiContentEntryText(pos=(0, 2), size=(int(40 * SCALE), int(17 * SCALE)), font=-2, backcolor=13388098, color=16777215, backcolor_sel=13388098, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
+					currentitem.append(MultiContentEntryText(pos=(0, 2), size=(int(40 * SCALE), int(17 * SCALE)), font=-2, backcolor=13388098,
+									   color=16777215, backcolor_sel=13388098, color_sel=16777215, flags=RT_HALIGN_CENTER, text=x))
 					currentlink = 'na'
 					currenttitle = ''
 					hour = sub(':..', '', x)
@@ -6485,7 +6502,7 @@ class TVHeuteView(tvBaseScreen):
 					timer = str(date) + ':::' + x + ':::' + self.srefs[midx][0]
 					boxtimers = ''
 					for item in self.timer:
-						boxtimers += item + '\n'# [:21] + transCHANNEL(ServiceReference(eServiceReference(item[21:].strip())).getServiceName())
+						boxtimers += item + '\n'  # [:21] + transCHANNEL(ServiceReference(eServiceReference(item[21:].strip())).getServiceName())
 					if timer in boxtimers:
 						self.rec = True
 						png = ICONPATH + 'rec.png'
@@ -6516,16 +6533,16 @@ class TVHeuteView(tvBaseScreen):
 				if self.rec:
 					self.rec = False
 				currentitem.append(MultiContentEntryText(pos=(int(45 * SCALE), 0), size=(int(155 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_WRAP, text=currenttitle))
-			self.tventriess[midx].append(currentitem)
-			self.tvlinks[midx].append(currentlink)
-			self.tvtitels[midx].append(currenttitle)
+			if currentitem:
+				self.tventriess[midx].append(currentitem)
+				self.tvlinks[midx].append(currentlink)
+				self.tvtitels[midx].append(currenttitle)
 			currentitem = []
 			midx += 1
 		for i in range(6):
 			self['menu%s' % i].l.setItemHeight(mh)
 			self['menu%s' % i].l.setList(self.tventriess[i])
 			self['menu%s' % i].moveToIndex(self.oldindex)
-		for i in range(6):
 			if self.current == 'menu%s' % i:
 				for j in range(6):
 					self['menu%s' % j].selectionEnabled(1 if i == j else 0)
@@ -6586,7 +6603,7 @@ class TVHeuteView(tvBaseScreen):
 				channel = ''
 				if not self.search:
 					for i in range(6):
-						if self.oldcurrent == 'menu%s' % i: # and self.zaps[i]:
+						if self.oldcurrent == 'menu%s' % i:  # and self.zaps[i]:
 							try:
 								c = self['menu%s' % i].getSelectedIndex()
 								sref = self.srefs[i][0]
@@ -6696,7 +6713,7 @@ class TVHeuteView(tvBaseScreen):
 			else:
 				sref = None
 				for i in range(6):
-					if self.oldcurrent == 'menu%s' % i: # and self.zaps[i]:
+					if self.oldcurrent == 'menu%s' % i:  # and self.zaps[i]:
 						c = self['menu%s' % i].getSelectedIndex()
 						self.oldindex = c
 						sref = self.srefs[i][0]
@@ -6766,10 +6783,6 @@ class TVHeuteView(tvBaseScreen):
 			self['seitennr'].hide()
 			self['MENUkey'].hide()
 			self['MENUtext'].hide()
-			self['label2'].hide()
-			self['label3'].hide()
-			self['label4'].hide()
-			self['label5'].hide()
 			self.searchlink = []
 			self.searchref = []
 			self.searchentries = []
@@ -7189,7 +7202,7 @@ class TVHeuteView(tvBaseScreen):
 			HIDEFLAG = True
 			with open(ALPHA, 'w') as f:
 				f.write('%i' % config.av.osd_alpha.value)
-		if "menu" in self.current:
+		if sub('[0-9]', '', self.current) == "menu":
 			self.close()
 		elif self.current == 'searchmenu':
 			self.search = False
