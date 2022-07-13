@@ -55,7 +55,6 @@
 		<eLabel name="button_red" position="15,757" size="12,45" backgroundColor="red" zPosition="1" />
 		<eLabel name="button_green" position="142,757" size="12,45" backgroundColor="green" zPosition="1" />
 		<eLabel name="button_yellow" position="255,757" size="12,45" backgroundColor="yellow" zPosition="1" />
-		<eLabel name="button_blue" position="375,757" size="12,45" backgroundColor="blue" zPosition="3" />
 		<widget name="bluebutton" position="375,757" size="12,45" backgroundColor="blue" zPosition="2" />
 		<eLabel name="Background_Grey" position="13,103" size="468,648" backgroundColor="#00c0c0c0" zPosition="-5" />
 		<eLabel name="Background_Metrixbackground" position="15,105" size="465,645" backgroundColor="#20000000" zPosition="0" />
@@ -106,7 +105,6 @@
 		<widget name="picindex" position="532,126" size="165,36" font="Regular;30" halign="center" zPosition="1" transparent="1" />
 		<widget name="pictext" position="1275,171" size="630,750" font="Regular;30" halign="center" zPosition="1" backgroundColor="#20000000" transparent="1"/>
 		<widget name="label5" position="757,1035" size="285,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<eLabel name="button_blue" position="735,1030" size="12,45" backgroundColor="blue" zPosition="3" />
 		<widget name="bluebutton" position="735,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 		<widget name="OKkey" pixmap="{picpath}FHD/buttons/button_ok.png" position="1507,1036" size="84,36" alphatest="blend" zPosition="0" />
 		<widget name="OKtext" position="1605,1038" size="300,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
@@ -132,7 +130,6 @@
 		<widget name="textpage" position="15,112" size="915,900" font="Regular;30" halign="left" zPosition="0" backgroundColor="#20000000" transparent="0" scrollbarMode="showOnDemand"  foregroundColor="#00c0c0c0"  foregroundColorSelected="#00ffffff"/>
 		<widget name="statuslabel" position="1134,879" size="741,21" font="Regular;21" foregroundColor="#00697279" halign="center" zPosition="2" />
 		<widget name="label5" position="757,1035" size="285,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<eLabel name="button_blue" position="735,1030" size="12,45" backgroundColor="blue" zPosition="3" />
 		<widget name="bluebutton" position="735,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 		<widget name="OKkey" pixmap="{picpath}FHD/buttons/button_ok.png" position="1507,1036" size="84,36" alphatest="blend" zPosition="0" />
 		<widget name="OKtext" position="1605,1038" size="300,36" font="Regular;27"  foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
@@ -198,7 +195,6 @@
 		<eLabel name="button_red" position="15,1030" size="12,45" backgroundColor="red" zPosition="1" />
 		<eLabel name="button_green" position="255,1030" size="12,45" backgroundColor="green" zPosition="1" />
 		<eLabel name="button_yellow" position="495,1030" size="12,45" backgroundColor="yellow" zPosition="1" />
-		<eLabel name="button_blue" position="735,1030" size="12,45" backgroundColor="blue" zPosition="3" />
 		<widget name="bluebutton" position="735,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 		<!-- Beschriftung TVProgrammView Event-->
 		<widget name="label_OK" position="1045,974" size="184,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
@@ -325,7 +321,6 @@
 		<eLabel name="button_red" position="15,1030" size="12,45" backgroundColor="red" zPosition="1" />
 		<eLabel name="button_green" position="255,1030" size="12,45" backgroundColor="green" zPosition="1" />
 		<eLabel name="button_yellow" position="495,1030" size="12,45" backgroundColor="yellow" zPosition="1" />
-		<eLabel name="button_blue" position="735,1030" size="12,45" backgroundColor="blue" zPosition="3" />
 		<widget name="bluebutton" position="735,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 		<!-- Beschriftung Icons TV Heute Event-->
 		<widget name="label_OK" position="1045,974" size="184,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
@@ -379,7 +374,6 @@
 		<widget name="label2" position="37,1035" size="300,36"  foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;27" halign="left" transparent="1" zPosition="1" />
 		<widget name="label5" position="382,1035" size="285,36"  foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;27" halign="left" transparent="1" zPosition="1" />
 		<eLabel name="button_yellow" position="15,1030" size="12,45" backgroundColor="yellow" zPosition="1" />
-		<eLabel name="button_blue" position="360,1030" size="12,45" backgroundColor="blue" zPosition="3" />
 		<widget name="bluebutton" position="360,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 	</screen>
 
