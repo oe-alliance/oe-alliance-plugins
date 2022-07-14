@@ -182,14 +182,16 @@ class tvAllScreen(Screen):
 	def makeTimerDB(self):
 		timerxml = open('/etc/enigma2/timers.xml').read()
 		timers = findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-		with open(PLUGINPATH + 'db/timer.db', 'w') as f:
-			self.timer = []
-			for timer in timers:
-				timerstart = int(timer[0]) + int(config.recording.margin_before.value) * 60
-				timerday = strftime('%Y-%m-%d', localtime(timerstart))
-				timerhour = strftime('%H:%M', localtime(timerstart))
-				self.timer.append(timerday + ':::' + timerhour + ':::' + timer[1])
-			f.write('\n'.join(self.timer))
+		timerfile = PLUGINPATH + 'db/timer.db'
+		if isfile(timerfile):
+			with open(timerfile, 'w') as f:
+				self.timer = []
+				for timer in timers:
+					timerstart = int(timer[0]) + int(config.recording.margin_before.value) * 60
+					timerday = strftime('%Y-%m-%d', localtime(timerstart))
+					timerhour = strftime('%H:%M', localtime(timerstart))
+					self.timer.append(timerday + ':::' + timerhour + ':::' + timer[1])
+				f.write('\n'.join(self.timer))
 
 	def getFill(self, text):
 		return '______________________________________\n%s' % text
@@ -5447,6 +5449,7 @@ class makeServiceFile(Screen):
 			self.epgcache = eEPGCache.getInstance()
 			events = self.epgcache.lookupEvent(search)
 			data = ''
+			fdata = ''
 			for eventinfo in events:
 				station = eventinfo[8]
 				station = sub('[/]', ' ', station)
@@ -5455,15 +5458,19 @@ class makeServiceFile(Screen):
 				service = sub(':0:0:0:.*?[)], ', ':0:0:0:\n', service)
 				service = sub(':0:0:0::[a-zA-Z0-9_-]+', ':0:0:0:', service)
 				data += '%s\t %s\n' % (station, service)
+				fdata += '{0:<30} {1:<50}'.format(station, service) + '\n'
 # Bouquetlog for analysis purposes, e.g. when picons are missing
 			logdatei = '/home/root/logs/Bouquetimport.log'
 			if isfile(logdatei):
 				remove(logdatei)
 			Bouquetlog('Sendernamen aus Bouquets:\n' + '-' * 70 + '\n')  # analysis
-			Bouquetlog(data)  # analysis
+			Bouquetlog(fdata)  # analysis
 			data = transCHANNEL(data)  # Diese Zeile darf nicht auskommentiert werden
+			fdata = ''
+			for eintrag in data.split('\n'):
+				fdata += '{0:<15} {1:<50}'.format(eintrag[:eintrag.rfind(' ')], eintrag[eintrag.rfind(' ') + 1:]) + '\n'
 			Bouquetlog('\n\nSendernamen als Piconname:\n' + '-' * 70 + '\n')  # analysis
-			Bouquetlog(data)  # analysis
+			Bouquetlog(fdata)  # analysis
 ######################################################
 			with open(self.servicefile, 'a') as f:
 				f.write(data)
@@ -5620,38 +5627,38 @@ class gotoPageMenu(tvAllScreen):
 # for analysis purposes, e.g. when picons are missing or for detecting unneeded picons
 		if config.plugins.tvspielfilm.debuglog.value and config.plugins.tvspielfilm.logtofile.value:
 			from glob import glob
-			fullname = findall("<option label='(.*?)' value=", bereich)
+			fullnames = findall("<option label='(.*?)' value=", bereich)
+			ff = open('/home/root/logs/complete_stationlist.log', 'w')
+			ff.write('complete list of from homepage supported stations:\n')
+			ff.write('--------------------------------------------------\n')
+			for i, sendung in enumerate(sender):
+				ff.write('{0:<30} {1:<2} {2:10}'.format(str(fullnames[i]), '=', str(sendung.lower())) + '\n')
+			ff.close()
 			availpicons = glob(PLUGINPATH + 'picons/*.png')
 			if availpicons:
-				for i in range(len(availpicons)):
-					availpicons[i] = availpicons[i][availpicons[i].rfind('/') + 1:]
 				ff = open('/home/root/logs/avail_picons.log', 'w')
 				ff.write('list of available picons in pluginpath ./picons/:\n')
 				ff.write('----------------------------------------------------\n')
-				for i in range(len(availpicons)):
-					ff.write(availpicons[i] + '\n')
+				for availpicon in availpicons:
+					availpicon = availpicon[availpicon.rfind('/') + 1:]
+					ff.write(availpicon + '\n')
 				ff.close()
 				ff = open('/home/root/logs/missing_picons.log', 'w')
 				ff.write('list of missing picons in pluginpath ./picons/:\n')
-				ff.write('----------------------------------------------------\n')
-				for i in range(len(sender)):
-					if isfile(PLUGINPATH + 'picons/' + sender[i].lower() + '.png'):
-						availpicons.remove(sender[i].lower() + '.png')
+				ff.write('-----------------------------------------------\n')
+				for i, sendung in enumerate(sender):
+					eintrag = PLUGINPATH + 'picons/' + sendung.lower() + '.png'
+					if isfile(eintrag):
+						availpicons = list(set(availpicons).difference(set([eintrag])))
 					else:
-						ff.write(str(fullname[i]) + ", " + str(sender[i].lower()) + '.png\n')
+						ff.write(str(fullnames[i]) + ", " + str(sendung.lower()) + '.png\n')
 				ff.close()
 				ff = open('/home/root/logs/unneeded_picons.log', 'w')
 				ff.write('list of unneeded picons in pluginpath ./picons/:\n')
-				ff.write('----------------------------------------------------\n')
-				for i in range(len(availpicons)):
-					ff.write(availpicons[i] + '\n')
+				ff.write('------------------------------------------------\n')
+				for availpicon in availpicons:
+					ff.write(availpicon + '\n')
 				ff.close()
-				ff = open('/home/root/logs/complete_stationlist.log', 'w')
-				ff.write('complete list of from homepage supported stations:\n')
-				ff.write('--------------------------------------\n')
-			for i in range(len(sender)):
-				ff.write(str(fullname[i]) + " = " + str(sender[i].lower()) + '\n')
-			ff.close()
 ##############################################################################################
 		self.maxpages = len(sender) // 6
 		if len(sender) % 6 != 0:
