@@ -91,12 +91,10 @@ def Bouquetlog(info, wert='', debug=False):
 		return
 	if config.plugins.tvspielfilm.logtofile.value:
 		try:
-			with open('/home/root/logs/tvspielfilm.log', 'a') as f:
+			with open('/home/root/logs/Bouquetimport.log', 'a') as f:
 				f.write(info)
 		except IOError:
 			TVSlog('Logging-Error:', IOError)
-	else:
-		print('[TVSpielfilm] %s %s' % (str(info), str(wert)))
 
 
 def TVSlog(info, wert='', debug=False):
@@ -612,9 +610,8 @@ class tvBaseScreen(tvAllScreen):
 		else:
 			self['picon'].hide()
 		text = parsedetail(bereich)
-		parts = text.split('\n')
 		text = ''
-		for part in parts:
+		for part in text.split('\n'):
 			text += part.replace('\\n', '') if ':' in part else part + '\n'
 		fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
 		self.POSTtext = text + fill
@@ -930,7 +927,7 @@ class tvBaseScreen(tvAllScreen):
 				self.datum_string = DATUM
 				res_datum = [DATUM]
 				res_datum.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(120 * SCALE), mh), font=2,
-													   color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
+								 color=16777215, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
 				self.searchref.append('na')
 				self.searchlink.append('na')
 				self.searchentries.append(res_datum)
@@ -956,7 +953,7 @@ class tvBaseScreen(tvAllScreen):
 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 					else:
 						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
-														 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+								   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 					start = sub(' - ..:..', '', start)
 					daynow = sub('....-..-', '', str(self.date))
 					day = search(', ([0-9]+). ', self.datum_string)
@@ -979,7 +976,7 @@ class tvBaseScreen(tvAllScreen):
 					self.searchlink.append(LINK)
 					if GENRE:
 						res.append(MultiContentEntryText(pos=(int(940 * SCALE), 0), size=(int(220 * SCALE), mh), font=-
-														 2, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=GENRE))
+								   2, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=GENRE))
 					self.datum = False
 					self.rec = False
 					if RATING:  # DAUMEN
@@ -1191,7 +1188,7 @@ class TVTippsView(tvBaseScreen):
 			if TIME:
 				start = TIME
 				res.append(MultiContentEntryText(pos=(int(70 * SCALE), 0), size=(int(60 * SCALE), mh), font=1,
-												 color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=TIME))
+						   color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=TIME))
 			icount = 0
 			for INFO in INFOS:
 				if search('neu|new', INFO) or self.sparte != "neu":
@@ -1207,7 +1204,7 @@ class TVTippsView(tvBaseScreen):
 			if GENRE:
 				text = GENRE.replace(',', '\n', 1)
 				res.append(MultiContentEntryText(pos=(int(1040 * SCALE), 0), size=(int(400 * SCALE), mh), font=-2,
-												 color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=text))
+						   color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=text))
 				if self.sparte == 'Spielfilm':
 					png = ICONPATH + 'rating-small1.png'
 					if isfile(png):
@@ -1223,7 +1220,7 @@ class TVTippsView(tvBaseScreen):
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), 0), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 				else:
 					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
-													 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+							   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 				if sref == 'nope':
 					sref = None
 				elif self.new:
@@ -1893,7 +1890,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 				self.datum_string = DATUM
 				res_datum = [DATUM]
 				res_datum.append(MultiContentEntryText(pos=(int(85 * SCALE), 0), size=(int(500 * SCALE), mh), font=2,
-													   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
+								 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=DATUM))
 				self.sref.append('na')
 				self.tvlink.append('na')
 				self.tvtitel.append('na')
@@ -1919,7 +1916,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), 0), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 					else:
 						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(30 * (SCALE - 1))), size=(int(67 * SCALE), int(40 * SCALE)), font=-
-														 2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+								   2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 					start = sub(' - ..:..', '', start)
 					daynow = sub('....-..-', '', str(self.date))
 					day = search(', ([0-9]+). ', self.datum_string)
@@ -1945,7 +1942,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 						titelfilter = TITLE.replace(GENRE, '')
 						text = GENRE.replace(',', '\n', 1)
 						res.append(MultiContentEntryText(pos=(int(1040 * SCALE), 0), size=(int(400 * SCALE), mh), font=-2,
-														 color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=text))
+								   color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=text))
 					icount = 0
 					for INFO in INFOS:
 						if self.rec:
@@ -1964,7 +1961,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 							if isfile(png):
 								res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
 					res.append(MultiContentEntryText(pos=(int(160 * SCALE), 0), size=(int(600 * SCALE), mh), font=1,
-													 color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=titelfilter))
+							   color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text=titelfilter))
 					self.tventries.append(res)
 		self['menu'].l.setItemHeight(mh)
 		self['menu'].l.setList(self.tventries)
@@ -2487,7 +2484,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 				else:
 					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
-													 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+							   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 				percent = None
 				if self.progress:
 					start = sub(' - ..:..', '', TIME)
@@ -3190,7 +3187,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 			else:
 				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
-												 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+						   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 			if self.progress:
 				start = sub(' - ..:..', '', TIME)
 				startparts = start.split(':')
@@ -3252,7 +3249,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 			else:
 				ypos = int(14 * SCALE)
 			res.append(MultiContentEntryText(pos=(int(75 * SCALE), ypos), size=(int(110 * SCALE), int(20 * SCALE)),
-											 font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=TIME))
+					   font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=TIME))
 			res.append(MultiContentEntryText(pos=(int(220 * SCALE), 0), size=(int(830 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=x))
 			if TRAILER:
 				png = ICONPATH + 'trailer.png'
@@ -4553,10 +4550,12 @@ class searchYouTube(tvAllScreen):
 		startpos = output.find('class="masthead-skeleton-icon">')
 		endpos = output.find(';/*')
 		bereich = transHTML(output[startpos:endpos])
-# for analysis purpose only, activate when YouTube-Access won't work properly
-#		analyse = bereich.replace('a><a', 'a>\n<a').replace('script><script', 'script>\n<script').replace('},{', '},\n{').replace('}}}]},"publishedTimeText"', '}}}]},\n"publishedTimeText"')
-#		with open('/home/root/logs/analyse.log', 'a') as f:
-#			f.write(analyse)
+# for analysis purposes, e.g. when YouTube-Access won't work properly
+		if config.plugins.tvspielfilm.debuglog.value and config.plugins.tvspielfilm.logtofile.value:
+			analyse = bereich.replace('a><a', 'a>\n<a').replace('script><script', 'script>\n<script').replace('},{', '},\n{').replace('}}}]},"publishedTimeText"', '}}}]},\n"publishedTimeText"')
+			with open('/home/root/logs/YT-analyse.log', 'w') as f:
+				f.write(analyse)
+#############################################################################
 		self.trailer_id = findall('{"videoRenderer":{"videoId":"(.*?)","thumbnail', bereich)  # Suchstring voher mit re.escape wandeln
 		self.trailer_titel = findall('"title":{"runs":\[{"text":"(.*?)"}\]', bereich)  # Suchstring voher mit re.escape wandeln
 		self.trailer_time = findall('"lengthText":{"accessibility":{"accessibilityData":{"label":"(.*?)"}},"simpleText"', bereich)  # Suchstring voher mit re.escape wandeln
@@ -5456,12 +5455,16 @@ class makeServiceFile(Screen):
 				service = sub(':0:0:0:.*?[)], ', ':0:0:0:\n', service)
 				service = sub(':0:0:0::[a-zA-Z0-9_-]+', ':0:0:0:', service)
 				data += '%s\t %s\n' % (station, service)
-# for analysis purpose only, activate when picons are missing
-#			Bouquetlog('Sendernamen aus Bouquets:\n' + '-' * 70 + '\n') # analysis
-#			Bouquetlog(data) # analysis
+# Bouquetlog for analysis purposes, e.g. when picons are missing
+			logdatei = '/home/root/logs/Bouquetimport.log'
+			if isfile(logdatei):
+				remove(logdatei)
+			Bouquetlog('Sendernamen aus Bouquets:\n' + '-' * 70 + '\n')  # analysis
+			Bouquetlog(data)  # analysis
 			data = transCHANNEL(data)  # Diese Zeile darf nicht auskommentiert werden
-#			Bouquetlog('\n\nSendernamen als Piconname:\n' + '-' * 70 + '\n') # analysis
-#			Bouquetlog(data) # analysis
+			Bouquetlog('\n\nSendernamen als Piconname:\n' + '-' * 70 + '\n')  # analysis
+			Bouquetlog(data)  # analysis
+######################################################
 			with open(self.servicefile, 'a') as f:
 				f.write(data)
 			fnew = open(self.servicefile + '.new', 'w')
@@ -5614,43 +5617,42 @@ class gotoPageMenu(tvAllScreen):
 			endpos = output.find('<optgroup label="alle Sender alphabetisch">')
 		bereich = output[startpos:endpos]
 		sender = findall('"channel":"(.*?)","broadcastChannelGroup"', bereich)
-# for analysis purpose only! activate when picons are missing or for detecting unneeded picons
-#		fullname = findall("<option label='(.*?)' value=", bereich)
-#		from glob import glob
-#		availpicons = glob(PLUGINPATH + 'picons/*.png')
-#		if availpicons:
-#			TVSlog('availpicons:', availpicons)
-#			for i in range(len(availpicons)):
-#				availpicons[i] = availpicons[i][availpicons[i].rfind('/') + 1 :]
-#			ff = open("/home/root/logs/avail_picons.txt", "w")
-#			ff.write('list of available picons in pluginpath ./picons/:\n')
-#			ff.write('----------------------------------------------------\n')
-#			for i in range(len(availpicons)):
-#				ff.write(availpicons[i] + '\n')
-#			ff.close()
-#			ff = open("/home/root/logs/missing_picons.txt", "w")
-#			ff.write('list of missing picons in pluginpath ./picons/:\n')
-#			ff.write('----------------------------------------------------\n')
-#			TVSlog('sender:', sender)
-#			for i in range(len(sender)):
-#				if isfile(PLUGINPATH + 'picons/' + sender[i].lower() + '.png'):
-#					TVSlog('sender[i]:', sender[i])
-#					availpicons.remove(sender[i].lower() + '.png')
-#				else:
-#					ff.write(str(fullname[i]) + ", " + str(sender[i].lower()) + '.png\n')
-#				ff.close()
-#			ff = open("/home/root/logs/unneeded_picons.txt", "w")
-#			ff.write('list of unneeded picons in pluginpath ./picons/:\n')
-#			ff.write('----------------------------------------------------\n')
-#			for i in range(len(availpicons)):
-#				ff.write(availpicons[i] + '\n')
-#			ff.close()
-#			ff = open("/home/root/logs/complete_stationlist.txt", "w")
-#			ff.write('complete list of from homepage supported stations:\n')
-#			ff.write('--------------------------------------\n')
-#		for i in range(len(sender)):
-#			ff.write(str(fullname[i]) + " = " + str(sender[i].lower())\n')
-#		ff.close()
+# for analysis purposes, e.g. when picons are missing or for detecting unneeded picons
+		if config.plugins.tvspielfilm.debuglog.value and config.plugins.tvspielfilm.logtofile.value:
+			from glob import glob
+			fullname = findall("<option label='(.*?)' value=", bereich)
+			availpicons = glob(PLUGINPATH + 'picons/*.png')
+			if availpicons:
+				for i in range(len(availpicons)):
+					availpicons[i] = availpicons[i][availpicons[i].rfind('/') + 1:]
+				ff = open('/home/root/logs/avail_picons.log', 'w')
+				ff.write('list of available picons in pluginpath ./picons/:\n')
+				ff.write('----------------------------------------------------\n')
+				for i in range(len(availpicons)):
+					ff.write(availpicons[i] + '\n')
+				ff.close()
+				ff = open('/home/root/logs/missing_picons.log', 'w')
+				ff.write('list of missing picons in pluginpath ./picons/:\n')
+				ff.write('----------------------------------------------------\n')
+				for i in range(len(sender)):
+					if isfile(PLUGINPATH + 'picons/' + sender[i].lower() + '.png'):
+						availpicons.remove(sender[i].lower() + '.png')
+					else:
+						ff.write(str(fullname[i]) + ", " + str(sender[i].lower()) + '.png\n')
+				ff.close()
+				ff = open('/home/root/logs/unneeded_picons.log', 'w')
+				ff.write('list of unneeded picons in pluginpath ./picons/:\n')
+				ff.write('----------------------------------------------------\n')
+				for i in range(len(availpicons)):
+					ff.write(availpicons[i] + '\n')
+				ff.close()
+				ff = open('/home/root/logs/complete_stationlist.log', 'w')
+				ff.write('complete list of from homepage supported stations:\n')
+				ff.write('--------------------------------------\n')
+			for i in range(len(sender)):
+				ff.write(str(fullname[i]) + " = " + str(sender[i].lower()) + '\n')
+			ff.close()
+##############################################################################################
 		self.maxpages = len(sender) // 6
 		if len(sender) % 6 != 0:
 			self.maxpages += 1
@@ -5660,7 +5662,7 @@ class gotoPageMenu(tvAllScreen):
 		while page <= self.maxpages:
 			res = ['']
 			res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(28 * SCALE), mh), font=1,
-											 color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=str(page)))
+					   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=str(page)))
 			for i in range(6):
 				try:
 					service = sender[count].lower().replace(' ', '').replace('.', '').replace('ii', '2')
