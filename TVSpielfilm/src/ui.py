@@ -180,18 +180,20 @@ class tvAllScreen(Screen):
 		pass
 
 	def makeTimerDB(self):
-		timerxml = open('/etc/enigma2/timers.xml').read()
-		timers = findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-		timerfile = PLUGINPATH + 'db/timer.db'
-		makedirs(timerfile[:timerfile.rfind('/')], exist_ok=True)
-		with open(PLUGINPATH + 'db/timer.db', 'w') as f:
-			self.timer = []
-			for timer in timers:
-				timerstart = int(timer[0]) + int(config.recording.margin_before.value) * 60
-				timerday = strftime('%Y-%m-%d', localtime(timerstart))
-				timerhour = strftime('%H:%M', localtime(timerstart))
-				self.timer.append(timerday + ':::' + timerhour + ':::' + timer[1])
-			f.write('\n'.join(self.timer))
+		e2timer = '/etc/enigma2/timers.xml'
+		if isfile(e2timer):
+			timerxml = open(e2timer).read()
+			timers = findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
+			timerfile = PLUGINPATH + 'db/timer.db'
+			makedirs(timerfile[:timerfile.rfind('/')], exist_ok=True)
+			with open(PLUGINPATH + 'db/timer.db', 'w') as f:
+				self.timer = []
+				for timer in timers:
+					timerstart = int(timer[0]) + int(config.recording.margin_before.value) * 60
+					timerday = strftime('%Y-%m-%d', localtime(timerstart))
+					timerhour = strftime('%H:%M', localtime(timerstart))
+					self.timer.append(timerday + ':::' + timerhour + ':::' + timer[1])
+				f.write('\n'.join(self.timer))
 
 	def getFill(self, text):
 		return '______________________________________\n%s' % text
