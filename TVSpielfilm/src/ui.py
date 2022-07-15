@@ -7,7 +7,7 @@ from socket import error as socketerror
 from base64 import b64encode, b64decode
 from RecordTimer import RecordTimerEntry
 from time import mktime, strftime, gmtime, localtime
-from os import remove, linesep, rename
+from os import remove, linesep, rename, makedirs
 from os.path import isfile
 from re import findall, match, search, split, sub, S, compile
 from Tools.Directories import isPluginInstalled
@@ -180,11 +180,13 @@ class tvAllScreen(Screen):
 		pass
 
 	def makeTimerDB(self):
-		timerxml = open('/etc/enigma2/timers.xml').read()
-		timers = findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
-		timerfile = PLUGINPATH + 'db/timer.db'
-		if isfile(timerfile):
-			with open(timerfile, 'w') as f:
+		e2timer = '/etc/enigma2/timers.xml'
+		if isfile(e2timer):
+			timerxml = open(e2timer).read()
+			timers = findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
+			timerfile = PLUGINPATH + 'db/timer.db'
+			makedirs(timerfile[:timerfile.rfind('/')], exist_ok=True)
+			with open(PLUGINPATH + 'db/timer.db', 'w') as f:
 				self.timer = []
 				for timer in timers:
 					timerstart = int(timer[0]) + int(config.recording.margin_before.value) * 60
@@ -611,9 +613,9 @@ class tvBaseScreen(tvAllScreen):
 			self['picon'].show()
 		else:
 			self['picon'].hide()
-		text = parsedetail(bereich)
+		rohtext = parsedetail(bereich)
 		text = ''
-		for part in text.split('\n'):
+		for part in rohtext.split('\n'):
 			text += part.replace('\\n', '') if ':' in part else part + '\n'
 		fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
 		self.POSTtext = text + fill
@@ -5472,6 +5474,7 @@ class makeServiceFile(Screen):
 			Bouquetlog('\n\nSendernamen als Piconname:\n' + '-' * 70 + '\n')  # analysis
 			Bouquetlog(fdata)  # analysis
 ######################################################
+			makedirs(self.servicefile[:self.servicefile.rfind('/')], exist_ok=True)
 			with open(self.servicefile, 'a') as f:
 				f.write(data)
 			fnew = open(self.servicefile + '.new', 'w')
