@@ -611,9 +611,9 @@ class tvBaseScreen(tvAllScreen):
 			self['picon'].show()
 		else:
 			self['picon'].hide()
-		text = parsedetail(bereich)
+		rohtext = parsedetail(bereich)
 		text = ''
-		for part in text.split('\n'):
+		for part in rohtext.split('\n'):
 			text += part.replace('\\n', '') if ':' in part else part + '\n'
 		fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
 		self.POSTtext = text + fill
