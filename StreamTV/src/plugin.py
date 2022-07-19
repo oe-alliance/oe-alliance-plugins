@@ -3,28 +3,23 @@ from Plugins.Plugin import PluginDescriptor
 
 import os
 from os import system
-from xml.etree.cElementTree import fromstring, ElementTree
+from xml.etree.cElementTree import ElementTree
 
-from enigma import gFont, eTimer, eConsoleAppContainer, ePicLoad, loadPNG, getDesktop, eServiceReference, iPlayableService, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
+from enigma import gFont, eTimer, eConsoleAppContainer, ePicLoad, loadPNG, eServiceReference, iPlayableService, eListboxPythonMultiContent, RT_HALIGN_LEFT
 
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 
-from Components.Button import Button
 from Components.Label import Label
-from Components.ConfigList import ConfigListScreen
-from Components.Sources.StaticText import StaticText
-from Components.ActionMap import NumberActionMap, ActionMap
-from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigDirectory, ConfigYesNo, ConfigSelection
-from Components.FileList import FileList, FileEntryComponent
+from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
-from Components.Pixmap import Pixmap, MovingPixmap
+from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
 from Components.ServiceEventTracker import ServiceEventTracker
 
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
 PLUGIN_PATH = resolveFilename(SCOPE_PLUGINS, "Extensions/StreamTV")
 
