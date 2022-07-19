@@ -1,3 +1,3 @@
-installdir = $(libdir)/enigma2/python/Plugins/Extensions/TVSpielfilm/pic/buttons
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/buttons
 
 install_DATA = *.png
