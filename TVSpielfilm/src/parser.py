@@ -339,7 +339,7 @@ def parsedetail(bereich, debug=None):
 	a = findall('<p.*?>(.*?)</p>', bereich)
 	for x in a:
 		if x != '':
-			text = text + x + '\n\n'
+			text += x + '\n\n'
 	if debug != None:
 		print("[DEBUG] parsedetail %s\n" % debug)
 		print(text)
