@@ -615,7 +615,9 @@ class tvBaseScreen(tvAllScreen):
 		text = ''
 		for part in rawtext.split('\n'):
 			if ':' in part:
-				text += '\n' + part + '\n' if 'cast & crew:' in part.lower() or 'info' in part.lower() else part + '\n'
+				text += '\n' + part if 'cast & crew:' in part.lower() else part
+			else:
+				text += part + '\n'
 		fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
 		self.POSTtext = text + fill
 		self['textpage'].setText(self.POSTtext)
