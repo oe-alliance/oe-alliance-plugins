@@ -2,27 +2,24 @@ from __future__ import print_function
 from Plugins.Plugin import PluginDescriptor
 from Plugins.Extensions.PicturePlayer.ui import *
 import os
-from enigma import gFont, eTimer, eConsoleAppContainer, ePicLoad, getDesktop, eServiceReference, iPlayableService, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
+from enigma import eTimer, eConsoleAppContainer, ePicLoad, getDesktop, eServiceReference, iPlayableService
 
 from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.MessageBox import MessageBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 
-from Components.Button import Button
 from Components.Label import Label
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
-from Components.ActionMap import NumberActionMap, ActionMap
-from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigDirectory, ConfigYesNo, ConfigSelection
-from Components.FileList import FileList, FileEntryComponent
+from Components.ActionMap import ActionMap
+from Components.config import config, ConfigSelection, getConfigListEntry, ConfigYesNo, ConfigSelection, ConfigSubsection
+from Components.FileList import FileList
 from Components.MenuList import MenuList
-from Components.Pixmap import Pixmap, MovingPixmap
+from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.MultiContent import MultiContentEntryText
 
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 from . import _
 
 EXTENSIONS = {
@@ -604,7 +601,7 @@ class DLNAImageViewer(Screen):
 		self["status"].show()
 
 	def cbSlideShow(self):
-		print("slide to next Picture index=" + str(self.lsatIndex))
+		print("slide to next Picture index=%s" % str(self.lsatIndex))
 		if config.pic.loop.value == False and self.lsatIndex == self.fileListLen:
 			self.PlayPause()
 		self.displayNow = True
@@ -686,7 +683,7 @@ def isRunning():
 
 class DLNAClientConfig(ConfigListScreen, Screen):
 	skin = """
-		<screen position="center,center" size="600,350" title="Mini DLNA Runcher">
+		<screen position="center,center" size="600,350" title="Mini DLNA Luncher">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
@@ -829,14 +826,12 @@ class DLNADeviceBrowser(Screen):
 			"blue": self.keyBlue,
 		}, -1)
 
-		global DLNA_CONFIG_CLIENT_CONFNAME
 		self.configFileName = DLNA_CONFIG_CLIENT_CONFNAME
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("Start"))
 		self["key_yellow"] = StaticText(_("Setting"))
 		self["key_blue"] = StaticText(_("Reload Device"))
 
-		#self["devicelist"] = MenuList(self.setListOnView())
 		self["devicelist"] = MenuList([])
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -848,7 +843,6 @@ class DLNADeviceBrowser(Screen):
 
 		self.deviceListRefreshTimer = eTimer()
 		self.deviceListRefreshTimer.timeout.get().append(self.cbDeviceListRefresh)
-		global DLNA_CONFIG_DEVICE_REFRESH
 		self.deviceListRefreshTimer.start(DLNA_CONFIG_DEVICE_REFRESH)
 
 	def layoutFinished(self):
@@ -856,7 +850,6 @@ class DLNADeviceBrowser(Screen):
 			os.system('mkdir -p /media/upnp')
 		self.updateGUI()
 		if self["key_green"].getText() == 'Start':
-			global DLNA_CONFIG_DEVICE_REFRESH
 			self.deviceListRefreshTimer.start(DLNA_CONFIG_DEVICE_REFRESH)
 
 	def keyYellow(self):
@@ -864,7 +857,6 @@ class DLNADeviceBrowser(Screen):
 		self.session.openWithCallback(self.cbConfigClose, DLNAClientConfig)
 
 	def keyGreen(self):
-		global DLNA_CONFIG_ROOT_DIR
 		if self["key_green"].getText() == 'Stop':
 			cmd = 'fusermount -u %s' % (DLNA_CONFIG_ROOT_DIR)
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbPrintClose)
@@ -884,7 +876,6 @@ class DLNADeviceBrowser(Screen):
 		self.close()
 
 	def keyOK(self):
-		global DLNA_CONFIG_ROOT_DIR
 		selectedItem = self["devicelist"].getCurrent()
 		if selectedItem is None:
 			return
@@ -970,7 +961,6 @@ class DLNADeviceBrowser(Screen):
 		self.deviceListRefreshTimer.stop()
 
 	def cbStartDone(self, ret):
-		global DLNA_CONFIG_DEVICE_REFRESH
 		self.taskManager.clean()
 		self.toggleGreenButtonTimer.start(1000)
 		self.deviceListRefreshTimer.start(DLNA_CONFIG_DEVICE_REFRESH)
@@ -980,12 +970,10 @@ class DLNADeviceBrowser(Screen):
 		self.updateGUI()
 
 	def cbDeviceListRefresh(self):
-		global DLNA_CONFIG_DEVICE_REFRESH
 		self.deviceListRefreshTimer.start(DLNA_CONFIG_DEVICE_REFRESH)
 		self.keyBlue()
 
 	def setListOnView(slelf):
-		global DLNA_CONFIG_ROOT_DIR
 		items, rootdir = [], DLNA_CONFIG_ROOT_DIR
 		deviceList = [name for name in os.listdir(rootdir) if os.path.isdir(os.path.join(rootdir, name))]
 		deviceList.sort()
