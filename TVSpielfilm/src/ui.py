@@ -185,7 +185,6 @@ class tvAllScreen(Screen):
 			timerxml = open(e2timer).read()
 			timers = findall('<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
 			timerfile = PLUGINPATH + 'db/timer.db'
-			timerpath = timerfile[:timerfile.rfind('/') + 1]
 			with open(PLUGINPATH + 'db/timer.db', 'w') as f:
 				self.timer = []
 				for timer in timers:
