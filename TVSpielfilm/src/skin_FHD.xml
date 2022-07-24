@@ -1,7 +1,7 @@
 <skin>
 
 	<!-- TV Spielfilm_tvMain -->
-	<screen name="tvMain" position="742,165" size="495,810" backgroundColor="transparent" flags="wfNoBorder" title="TV Spielfilm">
+	<screen name="TVSMain" position="742,165" size="495,810" backgroundColor="transparent" flags="wfNoBorder" title="TV Spielfilm">
 		<ePixmap position="0,0" size="495,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
 		<widget name="waiting" position="305,34" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
@@ -18,11 +18,11 @@
 		<widget name="bluebutton" position="375,757" size="12,45" backgroundColor="blue" zPosition="2" />
 		<eLabel name="Background_Grey" position="13,103" size="468,648" backgroundColor="#00c0c0c0" zPosition="-5" />
 		<eLabel name="Background_Metrixbackground" position="15,105" size="465,645" backgroundColor="#20000000" zPosition="0" />
-			<eLabel name="Background" position="0,0" size="495,810" backgroundColor="#20000000" zPosition="-10" />
+	    <eLabel name="Background" position="0,0" size="495,810" backgroundColor="#20000000" zPosition="-10" />
 	</screen>
 
 	<!-- TV Spielfilm_tvTipps -->
-	<screen name="tvTipps" position="center-585,center+308" size="750,255" flags="wfNoBorder" title=" ">
+	<screen name="TVSTipps" position="center-585,center+308" size="750,255" flags="wfNoBorder" title=" ">
 		<widget name="picture" position="8,3" size="379,249" alphatest="blend" zPosition="1" />
 		<widget name="label" position="397,80" size="342,30" font="Regular;21" foregroundColor="#00000000" backgroundColor="green" halign="left" zPosition="3" />
 		<widget name="label2" position="397,110" size="300,87" font="Regular;22" foregroundColor="blue" backgroundColor="#00ffffff" halign="left" zPosition="2" />
@@ -37,20 +37,20 @@
 	</screen>
 
 	<!-- TV Spielfilm_FullScreen -->
-	<screen name="FullScreen" position="center,center" size="1920,1080" flags="wfNoBorder" title="  ">
+	<screen name="TVSFullScreen" position="center,center" size="1920,1080" flags="wfNoBorder" title="  ">
 		<eLabel position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="1" />
 		<widget name="picture" position="0,0" size="1920,1080" alphatest="blend" zPosition="3" />
 	</screen>
 
 	<!-- TV Spielfilm_PicShowFull -->
-	<screen name="PicShowFull" position="center,center" size="1920,1080" title=" ">
+	<screen name="TVSPicShowFull" position="center,center" size="1920,1080" title=" ">
 		<eLabel position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="1" />
 		<widget name="picture" position="0,0" size="1920,1080" alphatest="blend" zPosition="3" />
 		<widget name="picindex" position="center,15" size="210,24" font="Regular;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" transparent="0" zPosition="4" />
 	</screen>
 
 	<!-- TV Spielfilm_TVPicShow -->
-	<screen name="TVPicShow" position="0,0" size="1920,1080" backgroundColor="#20000000" flags="wfNoBorder">
+	<screen name="TVSPicShow" position="0,0" size="1920,1080" backgroundColor="#20000000" flags="wfNoBorder">
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="-5" />
 		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_down" position="0,1020" size="1920,1" backgroundColor="#00c0c0c0" zPosition="0" />
@@ -71,7 +71,7 @@
 	</screen>
 
 	<!-- TV Spielfilm_TVNews -->
-	<screen name="TVNews" position="0,0" size="1920,1080" backgroundColor="#20000000" flags="wfNoBorder" title="TV-News - TV Spielfilm">
+	<screen name="TVSNews" position="0,0" size="1920,1080" backgroundColor="#20000000" flags="wfNoBorder" title="TV-News - TV Spielfilm">
 		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_down" position="0,1020" size="1920,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="-5" />
@@ -96,7 +96,7 @@
 	</screen>
 
 	<!-- TV Spielfilm_TVProgrammView -->
-	<screen name="TVProgrammView" position="0,0" size="1920,1080" backgroundColor="#20000000" flags="wfNoBorder" title=" ">
+	<screen name="TVSProgrammView" position="0,0" size="1920,1080" backgroundColor="#20000000" flags="wfNoBorder" title=" ">
 		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_top" position="15,405" size="1890,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<widget name="Line_mid" position="1005,952" size="900,1" backgroundColor="#00c0c0c0" zPosition="0" />
@@ -180,7 +180,7 @@
 	</screen>
 
 		<!-- TV Spielfilm_TVHeuteView -->
-	<screen name="TVHeuteView" position="0,0" size="1920,1080" backgroundColor="#00000000" flags="wfNoBorder" title="TV Programm - TV Spielfilm">
+	<screen name="TVSHeuteView" position="0,0" size="1920,1080" backgroundColor="#00000000" flags="wfNoBorder" title="TV Programm - TV Spielfilm">
 		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_top" position="15,405" size="1890,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<widget name="Line_mid" position="1005,952" size="900,1" backgroundColor="#00c0c0c0" zPosition="0" />
@@ -304,17 +304,17 @@
 	</screen>
 
 	<!-- TV Spielfilm_getNumber -->
-	<screen name="getNumber" position="center,center" size="262,105" backgroundColor="#20000000" flags="wfNoBorder" title=" ">
+	<screen name="TVSgetNumber" position="center,center" size="262,105" backgroundColor="#20000000" flags="wfNoBorder" title=" ">
 		<widget name="number" position="0,0" size="262,105" font="Regular;60" halign="center" valign="center" transparent="1" zPosition="1" />
 	</screen>
 
 	<!-- TV Spielfilm_gotoPageMenu -->
-	<screen name="gotoPageMenu" position="center,90" size="682,960" title=" ">
+	<screen name="TVSgotoPageMenu" position="center,90" size="682,960" title=" ">
 		<widget name="pagemenu" position="15,15" size="652,943" foregroundColor="#00ffffff" backgroundColor="#20000000" scrollbarMode="showOnDemand" zPosition="1" />
 	</screen>
 
 	<!-- TV Spielfilm_searchYouTube -->
-	<screen name="searchYouTube" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" title="">
+	<screen name="TVSsearchYouTube" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" title="">
 		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_down" position="0,1020" size="1920,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="-5" transparent="0" />
@@ -338,14 +338,14 @@
 	</screen>
 
 	<!-- TV Spielfilm_tvsConfig -->
-	<screen name="tvsConfig" position="center,center" size="1279,1080" backgroundColor="transparent" flags="wfNoBorder" title="TV Spielfilm Setup">
-				<widget source="Title" render="Label" position="480,24" size="525,51" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
+	<screen name="TVSConfig" position="center,center" size="1279,1080" backgroundColor="transparent" flags="wfNoBorder" title="TV Spielfilm Setup">
+        <widget source="Title" render="Label" position="480,24" size="525,51" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget render="Label" source="global.CurrentTime" position="1054,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
 		<ePixmap position="0,0" size="1279,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="config" position="15,90" size="799,977" font="Regular;27" itemHeight="47" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" scrollbarMode="showOnDemand" borderWidth="1" borderColor="#00000000" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="0027408b" zPosition="1" />
+		<widget name="config" position="15,90" size="799,943" font="Regular;27" itemHeight="47" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" scrollbarMode="showOnDemand" borderWidth="1" borderColor="#00000000" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="0027408b" zPosition="1" />
 		<eLabel name="button_red" position="840,1029" size="12,45" backgroundColor="red" zPosition="1" />
 		<eLabel name="button_green" position="1069,1029" size="12,45" backgroundColor="green" zPosition="1" />
 		<eLabel position="864,1036" size="199,33" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="= Abbrechen" transparent="1" zPosition="1" />
@@ -368,8 +368,8 @@
 		<eLabel position="975,583" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Tag vor/zurück" transparent="1" zPosition="1" />
 		<eLabel position="975,453" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Gleich im TV" transparent="1" zPosition="1" />
 		<eLabel name="Background" position="0,0" size="1279,1080" backgroundColor="#20000000" zPosition="-10" />
-		<eLabel name="Background_Grey" position="14,90" size="801,978" backgroundColor="#00c0c0c0" zPosition="0" />
-		<eLabel name="Background_Metrixbackground" position="15,90" size="799,978" backgroundColor="#20000000" zPosition="-1" />
+		<eLabel name="Background_Grey" position="14,90" size="801,978" backgroundColor="#00c0c0c0" zPosition="-5" />
+		<eLabel name="Background_Metrixbackground" position="15,90" size="799,977" backgroundColor="#20000000" zPosition="-1" />
 		<ePixmap pixmap="{picpath}FHD/logos/TV2015.png" position="1012,360" size="100,40" alphatest="blend" zPosition="1" />
 		<ePixmap pixmap="{picpath}FHD/logos/TVevent.png" position="849,702" size="100,40" alphatest="blend" zPosition="1" />
 		<ePixmap pixmap="{picpath}FHD/logos/TVjetzt.png" position="849,360" size="100,40" alphatest="blend" zPosition="1" />
@@ -394,10 +394,12 @@
 		<eLabel name="Background_Grey" position="840,675" size="424,1" backgroundColor="#00c0c0c0" zPosition="5" />
 		<eLabel name="Background_Grey" position="840,501" size="424,1" backgroundColor="#00c0c0c0" zPosition="5" />
 		<eLabel name="Background_Grey" position="840,330" size="424,1" backgroundColor="#00c0c0c0" zPosition="55" />
+		<eLabel name="Background_Grey" position="15,1029" size="800,1" backgroundColor="#00c0c0c0" zPosition="55" />
+		<eLabel position="15,1038" size="800,27" font="Regular; 18" text="***  Authors: Kashmir(†), Mr.Servo, jbleyel - skinned by stein17  ***" foregroundColor="#00c0c0c0" backgroundColor="#00000000" halign="center" transparent="1" zPosition="4" />
 	</screen>
 
 	<!-- TV Spielfilm_FolderSelection -->
-	<screen name="FolderSelection" position="center,center" size="1290,1050" backgroundColor="#20000000" flags="wfNoBorder" title="TV Spielfilm Setup">
+	<screen name="TVSFolderSelection" position="center,center" size="1290,1050" backgroundColor="#20000000" flags="wfNoBorder" title="TV Spielfilm Setup">
 		<eLabel name="Background" position="0,0" size="1290,1050" backgroundColor="#20000000" zPosition="-5" />
 		<widget source="Title" render="Label" position="480,24" size="660,51" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="1065,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
@@ -415,7 +417,7 @@
 	</screen>
 
 	<!-- class makeServiceFile Screen -->
-	<screen name="makeServiceFile" position="center,center" size="900,930" backgroundColor="#20000000" title="Import TV Spielfilm Sender: TV Bouquet Auswahl" flags="wfNoBorder">
+	<screen name="TVSmakeServiceFile" position="center,center" size="900,930" backgroundColor="#20000000" title="Import TV Spielfilm Sender: TV Bouquet Auswahl" flags="wfNoBorder">
 		<widget source="Title" render="Label" position="300,24" size="540,51" font="Regular;39" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="900,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />

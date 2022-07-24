@@ -2,36 +2,33 @@
 from __future__ import print_function
 import datetime
 import requests
-from json import loads
-from socket import error as socketerror
+from json import loads, dumps
+from socket import error as SocketError
 from base64 import b64encode, b64decode
 from RecordTimer import RecordTimerEntry
 from time import mktime, strftime, gmtime, localtime
 from os import remove, linesep, rename
-from os.path import isfile
-from re import findall, match, search, split, sub, S, compile
+from os.path import isfile, isdir
+from re import findall, search, sub, S, compile
 from Tools.Directories import isPluginInstalled
 from twisted.internet import reactor
-from six import PY2, ensure_binary, ensure_str
+from ServiceReference import ServiceReference
+from six import ensure_binary, ensure_str
 from six.moves.http_client import HTTPException
 from six.moves.urllib.error import URLError, HTTPError
-from six.moves.urllib.parse import unquote_plus, quote, urlencode, parse_qs
+from six.moves.urllib.parse import quote, urlencode
 from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirectHandler, HTTPHandler, HTTPCookieProcessor
-from Components.Input import Input
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from Components.Slider import Slider
-from Components.Sources.List import List
 from Components.MenuList import MenuList
 from Components.FileList import FileList
 from Components.ScrollLabel import ScrollLabel
 from Components.ConfigList import ConfigListScreen
 from Components.ActionMap import ActionMap, NumberActionMap
-from Components.config import config, configfile, ConfigSubsection, getConfigListEntry
+from Components.config import config, configfile, getConfigListEntry
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest, MultiContentEntryProgress
-from enigma import ePicLoad, eConsoleAppContainer, eListboxPythonMultiContent, eListbox, eEPGCache, eServiceCenter, eServiceReference, eTimer, gFont, loadJPG, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER
+from enigma import eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER
 from Screens.Screen import Screen
-from Screens.Console import Console
 from Screens.ChoiceBox import ChoiceBox
 from Screens.TimerEntry import TimerEntry
 from Screens.MessageBox import MessageBox
@@ -41,15 +38,15 @@ from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.TimerEdit import TimerSanityConflict
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.ChannelSelection import ChannelSelection
-from .util import applySkinVars, PLUGINPATH, PICPATH, ICONPATH, serviceDB, BlinkingLabel, ItemList, makeWeekDay, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, SCALE
-from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, fiximgLink, parsePrimeTimeTable, parseTrailerUrl, buildTVTippsArray, parseNow, NEXTPage1, NEXTPage2
-
+from Screens.LocationBox import LocationBox
+from .util import applySkinVars, PLUGINPATH, PICPATH, PICONPATH, ICONPATH, serviceDB, BlinkingLabel, ItemList, makeWeekDay, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, SCALE
+from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, parsePrimeTimeTable, parseTrailerUrl, buildTVTippsArray, parseNow, NEXTPage1, NEXTPage2
 try:
 	from cookielib import MozillaCookieJar
 except Exception:
 	from http.cookiejar import MozillaCookieJar
 
-RELEASE = 'V6.8'
+RELEASE = 'V6.9'
 NOTIMER = '\nTimer nicht möglich:\nKeine Service Reference vorhanden, der ausgewählte Sender wurde nicht importiert.'
 NOEPG = 'Keine EPG Informationen verfügbar'
 ALPHA = '/proc/stb/video/alpha' if isfile('/proc/stb/video/alpha') else None
@@ -84,6 +81,15 @@ def getEPGText():
 		return NOEPGTIME
 	except (KeyError, NameError):
 		return NOEPG
+
+
+def getPiconfolder():
+	if config.plugins.tvspielfilm.picon.value == "own":
+		return config.plugins.tvspielfilm.piconfolder.value
+	elif config.plugins.tvspielfilm.picon.value == "plugin":
+		return PLUGINPATH + 'picons/'
+	else:
+		return PICONPATH
 
 
 def Bouquetlog(info, wert='', debug=False):
@@ -194,7 +200,7 @@ class tvAllScreen(Screen):
 				f.write('\n'.join(self.timer))
 
 	def getFill(self, text):
-		return '______________________________________\n%s' % text
+		return '______________________________________\n%s\n' % text
 
 
 class tvAllScreenFull(tvAllScreen):
@@ -217,22 +223,17 @@ class tvBaseScreen(tvAllScreen):
 		self.day = ''
 		self.name = ''
 		self.shortdesc = ''
-		self.picfile = '/tmp/tvspielfilm.jpg'
-		self.pics = []
 		self.trailer = False
 		self.trailerurl = ''
 		self.searchcount = 0
+		self.picfile = '/tmp/tvspielfilm.jpg'
+		self.pics = []
 		for i in range(6):
 			self.pics.append('/tmp/tvspielfilm%s.jpg' % i)
 		self.localhtml = '/tmp/tvspielfilm.html'
 		self.localhtml2 = '/tmp/tvspielfilmii.html'
 		self.tagestipp = False
-		if config.plugins.tvspielfilm.picon.value == "own":
-			self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
-		elif config.plugins.tvspielfilm.picon.value == "plugin":
-			self.piconfolder = PLUGINPATH + 'picons/'
-		else:
-			self.piconfolder = '/usr/share/enigma2/picon/'
+		self.piconfolder = getPiconfolder()
 		self.finishedTimerMode = 0
 		self.showgenre = config.plugins.tvspielfilm.genreinfo.value != 'no'
 
@@ -303,10 +304,10 @@ class tvBaseScreen(tvAllScreen):
 			autotimer.writeXml()
 
 	def getPics(self, output, idx):
-		with open(self.pic[idx], 'wb') as f:
+		with open(self.pics[idx], 'wb') as f:
 			f.write(output)
 		if isfile(self.pics[idx]):
-			self['pic%s' % idx].instance.setPixmapFromFile(self.pic[idx])
+			self['pic%s' % idx].instance.setPixmapFromFile(self.pics[idx])
 
 	def GetPics(self, picurllist, offset, show=True, playshow=False):
 		for i in range(6):
@@ -618,8 +619,8 @@ class tvBaseScreen(tvAllScreen):
 				text += '\n' + part if 'cast & crew:' in part.lower() else part
 			else:
 				text += part + '\n'
-		fill = self.getFill('TV Spielfilm Online\n\n*Info/EPG = EPG einblenden')
-		self.POSTtext = text + fill
+		fill = self.getFill('TV Spielfilm Online')
+		self.POSTtext = text.strip() + '\n' + fill
 		self['textpage'].setText(self.POSTtext)
 		self['textpage'].show()
 		self.showEPG = False
@@ -1070,7 +1071,7 @@ class TVTippsView(tvBaseScreen):
 
 	def __init__(self, session, link, sparte):
 		global HIDEFLAG
-		skin = readSkin("TVTippsView")
+		skin = readSkin("TVSTippsView")
 		tvBaseScreen.__init__(self, session, skin)
 		self.skinName = "TVTippsView"
 		if sparte == 'neu':
@@ -1156,12 +1157,7 @@ class TVTippsView(tvBaseScreen):
 		self.weekday = makeWeekDay(self.date.weekday())
 		self.makeTVTimer = eTimer()
 		self.makeTVTimer.callback.append(self.downloadFullPage(link, self.makeTVTipps))
-		if config.plugins.tvspielfilm.picon.value == "own":
-			self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
-		elif config.plugins.tvspielfilm.picon.value == "plugin":
-			self.piconfolder = PLUGINPATH + 'picons/'
-		else:
-			self.piconfolder = '/usr/share/enigma2/picon/'
+		self.piconfolder = getPiconfolder()
 		self.makeTVTimer.start(200, True)
 
 	def makeTVTipps(self, string):
@@ -1345,7 +1341,7 @@ class TVTippsView(tvBaseScreen):
 				else:
 					self.EPGtext = NOEPG
 				fill = self.getFill(channel)
-				self.EPGtext += '\n\n' + fill
+				self.EPGtext += '\n' + fill
 				self['textpage'].setText(self.EPGtext)
 				self['textpage'].show()
 			else:
@@ -1754,7 +1750,7 @@ class tvGenreJetztProgrammView(tvBaseScreen):
 
 	def __init__(self, session, link):
 		global HIDEFLAG
-		skin = readSkin("TVProgrammView")
+		skin = readSkin("TVSProgrammView")
 		tvBaseScreen.__init__(self, session, skin)
 		self.skinName = "TVProgrammView"
 		self.tventries = []
@@ -1871,12 +1867,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 		self.date = datetime.date.today()
 		one_day = datetime.timedelta(days=1)
 		self.nextdate = self.date + one_day
-		if config.plugins.tvspielfilm.picon.value == "own":
-			self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
-		elif config.plugins.tvspielfilm.picon.value == "plugin":
-			self.piconfolder = PLUGINPATH + 'picons/'
-		else:
-			self.piconfolder = '/usr/share/enigma2/picon/'
+		self.piconfolder = getPiconfolder()
 		self.makeTVTimer = eTimer()
 		self.makeTVTimer.callback.append(self.downloadFull(link, self.makeTVGenreView))
 		self.makeTVTimer.start(200, True)
@@ -2097,7 +2088,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 				else:
 					self.EPGtext = NOEPG
 				fill = self.getFill(channel)
-				self.EPGtext += '\n\n' + fill
+				self.EPGtext += '\n' + fill
 				self['textpage'].setText(self.EPGtext)
 				self['textpage'].show()
 			else:
@@ -2417,12 +2408,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 		one_day = datetime.timedelta(days=1)
 		self.nextdate = self.date + one_day
 		self.weekday = makeWeekDay(self.date.weekday())
-		if config.plugins.tvspielfilm.picon.value == "own":
-			self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
-		elif config.plugins.tvspielfilm.picon.value == "plugin":
-			self.piconfolder = PLUGINPATH + 'picons/'
-		else:
-			self.piconfolder = '/usr/share/enigma2/picon/'
+		self.piconfolder = getPiconfolder()
 		if search('/sendungen/jetzt.html', link):
 			self.jetzt = True
 		elif search('time=shortly', link):
@@ -2472,6 +2458,10 @@ class TVJetztView(tvGenreJetztProgrammView):
 		for LOGO, TIME, LINK, title, sparte, genre, RATING, trailer in items:
 			service = LOGO
 			sref = self.service_db.lookup(service)
+			MYCHANSEL = InfoBar.instance.servicelist
+			myRoot = MYCHANSEL.getRoot()
+			mySrv = MYCHANSEL.servicelist.getCurrent()
+			test = MYCHANSEL.servicelist.l.lookupService(mySrv)
 			if sref == 'nope':
 				self.filter = True
 			else:
@@ -2490,6 +2480,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 				else:
 					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 							   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+
 				percent = None
 				if self.progress:
 					start = sub(' - ..:..', '', TIME)
@@ -2722,7 +2713,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 				else:
 					self.EPGtext = NOEPG
 				fill = self.getFill(channel)
-				self.EPGtext += '\n\n' + fill
+				self.EPGtext += '\n' + fill
 				self['textpage'].setText(self.EPGtext)
 				self['textpage'].show()
 			else:
@@ -3080,6 +3071,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 			self._commonInit()
 		else:
 			self._commonInit('Suche', ' Refresh')
+		self['seitennr'].hide()
 		self.hideTVinfo()
 		self.hideInfotext()
 		self.hideRatingInfos()
@@ -3142,21 +3134,10 @@ class TVProgrammView(tvGenreJetztProgrammView):
 		else:
 			self.current = 'postview'
 			self.makeTVTimer.callback.append(self.downloadPostPage(self.link, self.makePostviewPage))
-		if config.plugins.tvspielfilm.picon.value == "own":
-			self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
-		elif config.plugins.tvspielfilm.picon.value == "plugin":
-			self.piconfolder = PLUGINPATH + 'picons/'
-		else:
-			self.piconfolder = '/usr/share/enigma2/picon/'
+		self.piconfolder = getPiconfolder()
 		self.makeTVTimer.start(200, True)
 
 	def makeTVProgrammView(self, string):
-		output = ensure_str(open(self.localhtml, 'r').read())
-		titel = search('<title>(.*?)von', output)
-		date = str(self.date.strftime('%d.%m.%Y'))
-		self.titel = str(titel.group(1)) + str(self.weekday) + ', ' + date
-		self.setTitle(self.titel)
-		items, bereich = parseNow(output)
 		self['CHANNELkey'].show()
 		self['CHANNELtext'].setText('Tag +/-')
 		self['CHANNELtext'].show()
@@ -3167,7 +3148,12 @@ class TVProgrammView(tvGenreJetztProgrammView):
 		self['INFOtext'].hide()
 		self['TEXTkey'].hide()
 		self['TEXTtext'].hide()
-		self['seitennr'].hide()
+		output = ensure_str(open(self.localhtml, 'r').read())
+		titel = search('<title>(.*?)von', output)
+		date = str(self.date.strftime('%d.%m.%Y'))
+		self.titel = str(titel.group(1)) + str(self.weekday) + ', ' + date
+		self.setTitle(self.titel)
+		items, bereich = parseNow(output)
 		today = datetime.date.today()
 		one_day = datetime.timedelta(days=1)
 		yesterday = today - one_day
@@ -3391,7 +3377,7 @@ class TVProgrammView(tvGenreJetztProgrammView):
 				else:
 					self.EPGtext = NOEPG
 				fill = self.getFill(channel)
-				self.EPGtext += '\n\n' + fill
+				self.EPGtext += '\n' + fill
 				self['textpage'].setText(self.EPGtext)
 				self['textpage'].show()
 			else:
@@ -3807,7 +3793,7 @@ class TVNews(tvBaseScreen):
 
 	def __init__(self, session, link):
 		global HIDEFLAG
-		skin = readSkin("TVNews")
+		skin = readSkin("TVSNews")
 		tvBaseScreen.__init__(self, session, skin)
 		self.menulist = []
 		self.menulink = []
@@ -3992,7 +3978,7 @@ class TVNews(tvBaseScreen):
 		else:
 			text = '{keine Beschreibung gefunden}\n'
 		fill = self.getFill('TV Spielfilm Online')
-		self.POSTtext = text + fill
+		self.POSTtext = text.strip() + '\n' + fill
 		self['textpage'].setText(self.POSTtext)
 		self['textpage'].show()
 		self.showEPG = False
@@ -4131,7 +4117,7 @@ class TVPicShow(tvBaseScreen):
 
 	def __init__(self, session, link, picmode=0):
 		global HIDEFLAG
-		skin = readSkin("TVPicShow")
+		skin = readSkin("TVSPicShow")
 		tvBaseScreen.__init__(self, session, skin)
 		self.link = link
 		self.picmode = picmode
@@ -4360,7 +4346,7 @@ class PicShowFull(tvBaseScreen):
 
 	def __init__(self, session, link, count):
 		global HIDEFLAG
-		skin = readSkin("PicShowFull")
+		skin = readSkin("TVSPicShowFull")
 		tvBaseScreen.__init__(self, session, skin)
 		HIDEFLAG = True
 		self.pixlist = []
@@ -4468,7 +4454,7 @@ class FullScreen(tvAllScreen):
 
 	def __init__(self, session):
 		global HIDEFLAG
-		skin = readSkin("FullScreen")
+		skin = readSkin("TVSFullScreen")
 		tvAllScreen.__init__(self, session, skin)
 		self.picfile = '/tmp/tvspielfilm.jpg'
 		HIDEFLAG = True
@@ -4502,7 +4488,7 @@ class searchYouTube(tvAllScreen):
 		name = ensure_str(name)
 		global HIDEFLAG
 		self.LinesPerPage = 6
-		skin = readSkin("searchYouTube")
+		skin = readSkin("TVSsearchYouTube")
 		tvAllScreen.__init__(self, session, skin)
 		if movie:
 			name = name + ' Trailer'
@@ -4740,7 +4726,7 @@ class tvMain(tvBaseScreen):
 
 	def __init__(self, session):
 		global HIDEFLAG
-		skin = readSkin("tvMain")
+		skin = readSkin("TVSMain")
 		tvBaseScreen.__init__(self, session, skin)
 		self.senderhtml = '/tmp/tvssender.html'
 		if config.plugins.tvspielfilm.tipps.value == 'false':
@@ -4804,8 +4790,7 @@ class tvMain(tvBaseScreen):
 		if self.tipps:
 			self.TagesTipps = self.session.instantiateDialog(tvTipps)
 			if not self.hidetipps:
-				self.TagesTipps.start()
-				self.TagesTipps.show()
+				self.startTipps()
 		if config.plugins.tvspielfilm.meintvs.value == 'yes':
 			self.MeinTVS = True
 			self.error = False
@@ -4840,15 +4825,12 @@ class tvMain(tvBaseScreen):
 			self.AnzTimer.start(200, True)
 
 	def loginToTVSpielfilm(self):
-		values = urlencode({'email': self.login,
-							'pw': self.password,
-							'perma_login': '1',
-							'done': '1',
-							'checkErrors': '1'})
+		values = {'email': self.login, 'pw': self.password, 'perma_login': '1', 'done': '1', 'checkErrors': '1'}
+		values = ensure_binary(dumps(values))
 		try:
-			response = self.opener.open(ensure_binary('https://member.tvspielfilm.de/login/70.html'), values, timeout=60)
-			result = response.read()
-			error = ''
+			# https://member.tvspielfilm.de/login/70.html?email=myNutzername%40gmx.de&pw=myPasswort&perma_login=1&done=1&checkErrors=1
+			response = self.opener.open("https://member.tvspielfilm.de/login/70.html", data=values, timeout=60)
+			result = ensure_str(response.read())
 			if search('"error":"', result):
 				error = search('"error":"(.*?)\\.', result)
 				self.error = 'Mein TV SPIELFILM: ' + error.group(1) + '!'
@@ -4864,10 +4846,11 @@ class tvMain(tvBaseScreen):
 			self.error = 'HTTP Error: ' + str(e.code)
 		except URLError as e:
 			self.error = 'URL Error: ' + str(e.reason)
-		except error as e:
+		except SocketError as e:
 			self.error = 'Socket Error: ' + str(e)
 		except AttributeError as e:
-			self.error = 'Attribute Error: ' + str(e.message)
+#			self.error = 'Attribute Error: ' + str(e.message) # das war so im Original drin
+			self.error = 'Attribute Error: ' + str(e)
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
@@ -5367,7 +5350,7 @@ class tvMain(tvBaseScreen):
 				f.write('%i' % config.av.osd_alpha.value)
 		if self.actmenu == 'mainmenu':
 			if self.tipps:
-				self.TagesTipps.stop()
+				self.stopTipps()
 				self.session.deleteDialog(self.TagesTipps)
 			if isfile(self.picfile):
 				remove(self.picfile)
@@ -5394,7 +5377,7 @@ class tvMain(tvBaseScreen):
 class makeServiceFile(Screen):
 
 	def __init__(self, session):
-		self.skin = readSkin("makeServiceFile")
+		self.skin = readSkin("TVSmakeServiceFile")
 		Screen.__init__(self, session)
 		dic = {}
 		dic['picpath'] = PICPATH
@@ -5532,7 +5515,7 @@ class makeServiceFile(Screen):
 class getNumber(Screen):
 
 	def __init__(self, session, number):
-		self.skin = readSkin("getNumber")
+		self.skin = readSkin("TVSgetNumber")
 		Screen.__init__(self, session)
 		self.field = str(number)
 		self['release'] = Label(RELEASE)
@@ -5579,7 +5562,7 @@ class gotoPageMenu(tvAllScreen):
 
 	def __init__(self, session, count, maxpages):
 		global HIDEFLAG
-		self.skin = readSkin("gotoPageMenu")
+		self.skin = readSkin("TVSgotoPageMenu")
 		tvAllScreen.__init__(self, session)
 		self.localhtml = '/tmp/tvspielfilm.html'
 		HIDEFLAG = True
@@ -5728,18 +5711,18 @@ class tvTipps(tvAllScreen):
 	def __init__(self, session):
 		global HIDEFLAG
 		self.dict = {'picpath': PICPATH, 'selbg': str(config.plugins.tvspielfilm.selectorcolor.value)}
-		skin = readSkin("tvTipps")
+		skin = readSkin("TVSTipps")
 		self.skin = applySkinVars(skin, self.dict)
 		tvAllScreen.__init__(self, session)
 		self.baseurl = 'http://www.tvspielfilm.de'
 		self.localhtml = '/tmp/tvspielfilm.html'
-		self.max = 6
-		self.pic = []
-		for i in range(self.max):
-			self.pic.append('/tmp/tvspielfilm%s.jpg' % i)
 		self.count = 0
 		self.ready = False
 		HIDEFLAG = True
+		self.max = 6
+		self.pics = []
+		for i in range(self.max):
+			self.pics.append('/tmp/tvspielfilm%s.jpg' % i)
 		self.infolink = ''
 		self.tippsinfo = []
 		self.tippslink = []
@@ -5829,6 +5812,20 @@ class tvTipps(tvAllScreen):
 		self['thumb'].show()
 		self.ready = True
 
+	def idownload(self):
+		for idx, link in enumerate(self.tippspicture):
+			try:
+				response = requests.get(link)
+				response.raise_for_status()
+			except requests.exceptions.RequestException as error:
+				self.ready = True
+				TVSlog(error)
+			else:
+				with open(self.pics[idx], 'wb') as f:
+					f.write(response.content)
+				if idx == 0:
+					showPic(self['picture'], self.pics[idx])
+
 	def ok(self):
 		if self.ready and search('/tv-programm/sendung/', self.infolink):
 			self.hide()
@@ -5844,8 +5841,8 @@ class tvTipps(tvAllScreen):
 			self.count += 1
 			if self.tippspicture:
 				self.count = self.count % len(self.tippspicture)
-			if isfile(self.pic[self.count]):
-				showPic(self['picture'], self.pic[self.count])
+			if isfile(self.pics[self.count]):
+				showPic(self['picture'], self.pics[self.count])
 			try:
 				self.infolink = self.tippslink[self.count]
 				tipp = 'Tipp des Tages'
@@ -5874,20 +5871,6 @@ class tvTipps(tvAllScreen):
 				self['label4'].hide()
 				self['label5'].hide()
 
-	def idownload(self):
-		for idx, link in enumerate(self.tippspicture):
-			try:
-				response = requests.get(link)
-				response.raise_for_status()
-			except requests.exceptions.RequestException as error:
-				self.ready = True
-				TVSlog(error)
-			else:
-				with open(self.pic[idx], 'wb') as f:
-					f.write(response.content)
-				if idx == 0:
-					showPic(self['picture'], self.pic[idx])
-
 	def downloadFirst(self, link):
 		reactor.callInThread(self._downloadFirst, link)
 
@@ -5911,7 +5894,7 @@ class tvTipps(tvAllScreen):
 class tvsConfig(ConfigListScreen, tvAllScreen):
 
 	def __init__(self, session):
-		skin = readSkin("tvsConfig")
+		skin = readSkin("TVSConfig")
 		tvAllScreen.__init__(self, session, skin)
 		self.password = config.plugins.tvspielfilm.password.value
 		self.encrypt = config.plugins.tvspielfilm.encrypt.value
@@ -5921,6 +5904,13 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
 		self['waiting'].startBlinking()
 		self['waiting'].show()
 		self['plugin'] = Pixmap()
+		ConfigListScreen.__init__(self, [], on_change=self.UpdateComponents)
+		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'cancel': self.exit,
+																		  'red': self.exit,
+																		  'green': self.save}, -1)
+		self.onLayoutFinish.append(self.UpdateComponents)
+
+	def createSetup(self):
 		list = []
 		if config.plugins.tvspielfilm.plugin_size == 'FHD':
 			list.append(getConfigListEntry('Plugin Größe:', config.plugins.tvspielfilm.plugin_size))
@@ -5933,14 +5923,16 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
 		list.append(getConfigListEntry('Passwort:', config.plugins.tvspielfilm.password))
 		list.append(getConfigListEntry('Passwort Verschlüsselung:', config.plugins.tvspielfilm.encrypt))
 		list.append(getConfigListEntry('Herkunft der Picons:', config.plugins.tvspielfilm.picon))
-		self.piconfolder = getConfigListEntry('Eigener Picon Ordner:', config.plugins.tvspielfilm.piconfolder)
-		list.append(self.piconfolder)
 		if config.plugins.tvspielfilm.picon.value == "own":
-			pass
+			list.append(getConfigListEntry('Eigener Picon Ordner:', config.plugins.tvspielfilm.piconfolder))
+			self.piconfolder = config.plugins.tvspielfilm.piconfolder.value
+			if not isdir(self.piconfolder):
+				list.append(getConfigListEntry('>>> Eigener Picon Ordner nicht vorhanden, nutze Standard <<<'))
+				self.piconfolder = PICONPATH
 		elif config.plugins.tvspielfilm.picon.value == "plugin":
-			self.piconfolder = PICPATH + 'picons'
+			self.piconfolder = PICPATH + 'picons/'
 		else:
-			self.piconfolder = '/usr/share/enigma2/picon/'
+			self.piconfolder = PICONPATH
 		list.append(getConfigListEntry('Zeige Tipp des Tages:', config.plugins.tvspielfilm.tipps))
 		list.append(getConfigListEntry('Starte Heute im TV mit:', config.plugins.tvspielfilm.primetime))
 		list.append(getConfigListEntry('Starte TVS EventView mit:', config.plugins.tvspielfilm.eventview))
@@ -5952,69 +5944,36 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
 		list.append(getConfigListEntry('Maximale YouTube-Auflösung:', config.plugins.tvspielfilm.ytresolution))
 		list.append(getConfigListEntry('DebugLog', config.plugins.tvspielfilm.debuglog, "Debug Logging aktivieren"))
 		list.append(getConfigListEntry('Log in Datei', config.plugins.tvspielfilm.logtofile, "Log in Datei '/home/root/logs'"))
-		ConfigListScreen.__init__(self, list, on_change=self.UpdateComponents)
-		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'cancel': self.cancel,
-																		  'red': self.cancel,
-																		  'green': self.save}, -1)
-		self.onLayoutFinish.append(self.UpdateComponents)
+		self["config"].setList(list)
 
 	def UpdateComponents(self):
 		self['release'].show()
 		self['waiting'].stopBlinking()
-		current = self['config'].getCurrent()
-		if current == self.piconfolder:
-			self.session.openWithCallback(self.folderSelected, FolderSelection, config.plugins.tvspielfilm.piconfolder.value)
+		self.createSetup()
+
+	def keySelect(self):
+		if self["config"].getCurrent()[1] is config.plugins.tvspielfilm.piconfolder:
+			self.session.openWithCallback(self.folderSelected, LocationBox, text=_("Select target folder"))
+		else:
+			ConfigListScreen.keySelect(self)
 
 	def folderSelected(self, folder):
 		if folder:
 			config.plugins.tvspielfilm.piconfolder.value = folder
-			config.plugins.tvspielfilm.piconfolder.save()
 
 	def save(self):
-		# config.plugins.tvspielfilm.plugin_size.save()
-		config.plugins.tvspielfilm.font.save()
-		config.plugins.tvspielfilm.font_size.save()
-		config.plugins.tvspielfilm.meintvs.save()
-		config.plugins.tvspielfilm.login.save()
 		if config.plugins.tvspielfilm.password.value != self.password:
 			if config.plugins.tvspielfilm.encrypt.value == 'yes':
-				password = b64encode(ensure_binary(config.plugins.tvspielfilm.password.value))
-				config.plugins.tvspielfilm.password.value = password
-			config.plugins.tvspielfilm.password.save()
+				config.plugins.tvspielfilm.password.value = b64encode(ensure_binary(config.plugins.tvspielfilm.password.value))
 		elif config.plugins.tvspielfilm.encrypt.value != self.encrypt:
 			if self.encrypt == 'yes':
 				try:
-					password = ensure_str(b64decode(config.plugins.tvspielfilm.password.value.encode('ascii', 'xmlcharrefreplace')))
-					config.plugins.tvspielfilm.password.value = password
+					config.plugins.tvspielfilm.password.value = b64decode(config.plugins.tvspielfilm.password.value.encode('ascii', 'xmlcharrefreplace'))
 				except TypeError:
 					pass
 			else:
-				password = b64encode(ensure_binary(config.plugins.tvspielfilm.password.value))
-				config.plugins.tvspielfilm.password.value = password
-			config.plugins.tvspielfilm.password.save()
-			config.plugins.tvspielfilm.encrypt.save()
-		config.plugins.tvspielfilm.picon.save()
-		config.plugins.tvspielfilm.piconfolder.save()
-		config.plugins.tvspielfilm.selectorcolor.save()
-		config.plugins.tvspielfilm.tipps.save()
-		config.plugins.tvspielfilm.primetime.save()
-		config.plugins.tvspielfilm.eventview.save()
-		config.plugins.tvspielfilm.zapexit.save()
-		config.plugins.tvspielfilm.genreinfo.save()
-		config.plugins.tvspielfilm.maxsearch.save()
-		config.plugins.tvspielfilm.maxgenre.save()
-		config.plugins.tvspielfilm.autotimer.save()
-		config.plugins.tvspielfilm.ytresolution.save()
-		config.plugins.tvspielfilm.debuglog.save()
-		config.plugins.tvspielfilm.logtofile.save()
-
-		configfile.save()
-		self.exit()
-
-	def cancel(self):
-		for x in self['config'].list:
-			x[1].cancel()
-
+				config.plugins.tvspielfilm.password.value = b64encode(ensure_binary(config.plugins.tvspielfilm.password.value))
+		ConfigListScreen.saveAll(self)
 		self.exit()
 
 	def exit(self):
@@ -6037,7 +5996,7 @@ class tvsConfig(ConfigListScreen, tvAllScreen):
 class FolderSelection(tvAllScreen):
 
 	def __init__(self, session, folder):
-		skin = readSkin("FolderSelection")
+		skin = readSkin("TVSFolderSelection")
 		tvAllScreen.__init__(self, session, skin)
 		self['release'] = Label(RELEASE)
 		self['release'].hide()
@@ -6157,7 +6116,7 @@ class TVHeuteView(tvBaseScreen):
 
 	def __init__(self, session, link, opener):
 		global HIDEFLAG
-		skin = readSkin("TVHeuteView")
+		skin = readSkin("TVSHeuteView")
 		tvBaseScreen.__init__(self, session, skin)
 		if config.plugins.tvspielfilm.meintvs.value == 'yes':
 			self.MeinTVS = True
@@ -6670,7 +6629,7 @@ class TVHeuteView(tvBaseScreen):
 				else:
 					self.EPGtext = NOEPG
 				fill = self.getFill(channel)
-				self.EPGtext += '\n\n' + fill
+				self.EPGtext += '\n' + fill
 				self['textpage'].setText(self.EPGtext)
 			else:
 				self.showEPG = False
@@ -6787,7 +6746,7 @@ class TVHeuteView(tvBaseScreen):
 			for i in range(6):
 				self['sender%s' % i].hide()
 				self['picon%s' % i].hide()
-				self['pic%s' % i].hide()
+				self['pics%s' % i].hide()
 				self['pictime%s' % i].hide()
 				self['pictext%s' % i].hide()
 				self['pictext%s_bg' % i].hide()
