@@ -7,12 +7,13 @@ from Components.ConditionalWidget import BlinkingWidget
 from Components.ScrollLabel import ScrollLabel
 from Components.Label import Label
 from Components.MenuList import MenuList
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 from enigma import eListboxPythonMultiContent, gFont, getDesktop
 
 from xml.etree.ElementTree import fromstring, tostring, parse
 from six import ensure_str
 
+PICONPATH = resolveFilename(SCOPE_SKIN_IMAGE) + 'picon/'
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/TVSpielfilm/'
 PICPATH = PLUGINPATH + "pics/"
 DESKTOP_WIDTH = getDesktop(0).size().width()

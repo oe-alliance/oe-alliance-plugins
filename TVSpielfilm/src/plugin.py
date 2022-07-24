@@ -1,12 +1,14 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-from Components.config import config, configfile, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigText, getConfigListEntry, ConfigYesNo
-from Tools.Directories import fileExists
+from Components.config import config, configfile, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigLocations, ConfigText, getConfigListEntry, ConfigYesNo
+from Tools.Directories import isfile
 from Plugins.Plugin import PluginDescriptor
 from glob import glob
+from os import mkdir
+from os.path import exists, join as pathjoin
 from .ui import tvEvent, tvJetzt, tvMain, TVSlog
-from .util import DESKTOP_WIDTH, PLUGINPATH
+from .util import DESKTOP_WIDTH, PLUGINPATH, PICONPATH
 
 config.plugins.tvspielfilm = ConfigSubsection()
 if DESKTOP_WIDTH > 1280:
@@ -18,16 +20,16 @@ config.plugins.tvspielfilm.font = ConfigSelection(default='yes', choices=[('yes'
 if config.plugins.tvspielfilm.font.value == 'yes':
     from enigma import addFont
     try:
-        addFont('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/font/Roboto-Regular.ttf', 'Regular', 100, False)
+        addFont(PLUGINPATH + 'font/Roboto-Regular.ttf', 'Regular', 100, False)
     except Exception as ex:
-        addFont('/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/font/Roboto-Regular.ttf', 'Regular', 100, False, 0)
+        addFont(PLUGINPATH + 'font/Roboto-Regular.ttf', 'Regular', 100, False, 0)
 config.plugins.tvspielfilm.font_size = ConfigSelection(default='normal', choices=[('large', 'Groß'), ('normal', 'Normal'), ('small', 'Klein')])
 config.plugins.tvspielfilm.meintvs = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.tvspielfilm.login = ConfigText(default='', fixed_size=False)
 config.plugins.tvspielfilm.password = ConfigPassword(default='', fixed_size=False)
 config.plugins.tvspielfilm.encrypt = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.tvspielfilm.picon = ConfigSelection(default='standard', choices=[('plugin', 'vom Plugin'), ('standard', 'Standard'), ('own', 'Eigener Ordner')])
-config.plugins.tvspielfilm.piconfolder = ConfigDirectory(default='/usr/share/enigma2/picon/')
+config.plugins.tvspielfilm.piconfolder = ConfigDirectory(default=PICONPATH)
 fullpaths = glob(PLUGINPATH + 'pics/FHD/selectors/selector_*.png') if config.plugins.tvspielfilm.plugin_size == 'FHD' else glob(PLUGINPATH + 'pics/HD/selectors/selector_*.png')
 selectors = list(set([i[i.rfind('_') + 1:].replace('.png', '') if '_' in i else None for i in fullpaths]))
 config.plugins.tvspielfilm.selectorcolor = ConfigSelection(default='Standard', choices=selectors)
@@ -43,7 +45,7 @@ config.plugins.tvspielfilm.ytresolution = ConfigSelection(default='best', choice
 config.plugins.tvspielfilm.debuglog = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.logtofile = ConfigYesNo(default=False)
 HIDEFLAG = True
-ALPHA = '/proc/stb/video/alpha' if fileExists('/proc/stb/video/alpha') else None
+ALPHA = '/proc/stb/video/alpha' if isfile('/proc/stb/video/alpha') else None
 if not ALPHA:
 	print('Alphachannel not found! Hide/show-function (=blue button) is disabled')
 	TVSlog('Alphachannel not found! Hide/show-function (=blue button) is disabled')
