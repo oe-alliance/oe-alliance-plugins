@@ -683,7 +683,7 @@ def isRunning():
 
 class DLNAClientConfig(ConfigListScreen, Screen):
 	skin = """
-		<screen position="center,center" size="600,350" title="Mini DLNA Luncher">
+		<screen position="center,center" size="600,350" title="Mini DLNA Settings">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/green.png" position="155,0" size="140,40" alphatest="on" />
 			<ePixmap pixmap="skin_default/buttons/yellow.png" position="305,0" size="140,40" alphatest="on" />
