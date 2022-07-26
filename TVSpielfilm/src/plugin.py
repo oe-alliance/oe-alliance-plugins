@@ -1,12 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import
-from Components.config import config, configfile, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigLocations, ConfigText, getConfigListEntry, ConfigYesNo
-from Tools.Directories import isfile
+from Components.config import config, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo
+from os.path import isfile
 from Plugins.Plugin import PluginDescriptor
 from glob import glob
-from os import mkdir
-from os.path import exists, join as pathjoin
 from .ui import tvEvent, tvJetzt, tvMain, TVSlog
 from .util import DESKTOP_WIDTH, PLUGINPATH, PICONPATH
 
