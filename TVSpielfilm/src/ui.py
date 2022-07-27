@@ -11,7 +11,7 @@ from os import remove, linesep, rename
 from os.path import isfile, isdir
 from re import findall, search, sub, S, compile
 from Tools.Directories import isPluginInstalled
-from twisted.internet import reactor
+from twisted.internet.reactor import callInThread
 from ServiceReference import ServiceReference
 from six import ensure_binary, ensure_str
 from six.moves.http_client import HTTPException
@@ -141,7 +141,7 @@ class tvAllScreen(Screen):
 		self.session.execDialog(servicelist)
 
 	def download(self, link, name):
-		reactor.callInThread(self._download, link, name)
+		callInThread(self._download, link, name)
 
 	def _download(self, link, name):
 		try:
@@ -325,7 +325,7 @@ class tvBaseScreen(tvAllScreen):
 					self['pic%s' % i].hide()
 
 	def picdownload(self, link, idx):
-		reactor.callInThread(self._picdownload, link, idx)
+		callInThread(self._picdownload, link, idx)
 
 	def _picdownload(self, link, idx):
 		try:
@@ -698,7 +698,7 @@ class tvBaseScreen(tvAllScreen):
 
 	def downloadPicPost(self, link, label):
 		link = sub('.*?data-src="', '', link)
-		reactor.callInThread(self._downloadPicPost, link, label)
+		callInThread(self._downloadPicPost, link, label)
 
 	def _downloadPicPost(self, link, label):
 		try:
@@ -1039,7 +1039,7 @@ class tvBaseScreen(tvAllScreen):
 			self.selectPage('ok')
 
 	def downloadPostPage(self, link, name):
-		reactor.callInThread(self._downloadPostPage, link, name)
+		callInThread(self._downloadPostPage, link, name)
 
 	def _downloadPostPage(self, link, name):
 		try:
@@ -1053,7 +1053,7 @@ class tvBaseScreen(tvAllScreen):
 			name(response.content)
 
 	def downloadFullPage(self, link, name):
-		reactor.callInThread(self._downloadFullPage, link, name)
+		callInThread(self._downloadFullPage, link, name)
 
 	def _downloadFullPage(self, link, name):
 		try:
@@ -2176,7 +2176,7 @@ class TVGenreView(tvGenreJetztProgrammView):
 			self['searchmenu'].moveToIndex(end)
 
 	def downloadFull(self, link, name):
-		reactor.callInThread(self._downloadFull, link, name)
+		callInThread(self._downloadFull, link, name)
 
 	def _downloadFull(self, link, name):
 		try:
@@ -2458,10 +2458,6 @@ class TVJetztView(tvGenreJetztProgrammView):
 		for LOGO, TIME, LINK, title, sparte, genre, RATING, trailer in items:
 			service = LOGO
 			sref = self.service_db.lookup(service)
-			MYCHANSEL = InfoBar.instance.servicelist
-			myRoot = MYCHANSEL.getRoot()
-			mySrv = MYCHANSEL.servicelist.getCurrent()
-			test = MYCHANSEL.servicelist.l.lookupService(mySrv)
 			if sref == 'nope':
 				self.filter = True
 			else:
@@ -2480,7 +2476,6 @@ class TVJetztView(tvGenreJetztProgrammView):
 				else:
 					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 							   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
-
 				percent = None
 				if self.progress:
 					start = sub(' - ..:..', '', TIME)
@@ -2854,7 +2849,7 @@ class TVJetztView(tvGenreJetztProgrammView):
 			self['searchmenu'].moveToIndex(end)
 
 	def downloadFull(self, link, name):
-		reactor.callInThread(self._downloadFull, link, name)
+		callInThread(self._downloadFull, link, name)
 
 	def _downloadFull(self, link, name):
 		try:
@@ -4568,7 +4563,7 @@ class searchYouTube(tvAllScreen):
 		for i in range(self.LinesPerPage):
 			try:
 				poster = 'https://i.ytimg.com/vi/' + self.trailer_id[i] + '/mqdefault.jpg'
-				reactor.callInThread(self.igetPoster, poster, i)
+				callInThread(self.igetPoster, poster, i)
 				self['poster%s' % i].show()
 			except IndexError:
 				self['poster%s' % i].hide()
@@ -4644,7 +4639,7 @@ class searchYouTube(tvAllScreen):
 			if offset + i < len(self.trailer_id):
 				poster = 'https://i.ytimg.com/vi/' + self.trailer_id[offset + i] + '/mqdefault.jpg'
 				try:
-					reactor.callInThread(self.igetPoster, poster, i)
+					callInThread(self.igetPoster, poster, i)
 					self['poster%s' % i].show()
 				except IndexError:
 					self['poster%s' % i].hide()
@@ -4677,7 +4672,7 @@ class searchYouTube(tvAllScreen):
 				self['poster%s' % i].instance.setPixmap(currPic)
 
 	def downloadFullPage(self, link, name):
-		reactor.callInThread(self._downloadFullpage, link, name)
+		callInThread(self._downloadFullpage, link, name)
 
 	def _downloadFullpage(self, link, name):
 		try:
@@ -5256,7 +5251,7 @@ class tvMain(tvBaseScreen):
 				self.makeErrorTimer.callback.append(self.displayError)
 				self.makeErrorTimer.start(200, True)
 		else:
-			reactor.callInThread(self.download, link, self.makeSecondMenu)
+			callInThread(self.download, link, self.makeSecondMenu)
 
 	def download(self, link, name):
 		try:
@@ -5767,6 +5762,9 @@ class tvTipps(tvAllScreen):
 
 	def getTagesTipps(self, output):
 		self.ready = False
+		self.pics = []
+		for i in range(self.max):
+			self.pics.append('/tmp/tvspielfilm%s.jpg' % i)
 		output = ensure_str(output)
 		startpos = output.find('teaser-top">')
 		endpos = output.find('<div class="block-rotation">')
@@ -5778,7 +5776,7 @@ class tvTipps(tvAllScreen):
 		if search('pdf.tvspielfilm.de', bereich):
 			bereich = sub('<a href="https://pdf.tvspielfilm.de/.*?</a>', '', bereich, flags=S)
 		self.tippspicture = findall('<img src="(.*?)"', bereich, flags=S)
-		reactor.callInThread(self.idownload)
+		callInThread(self.idownload)
 		self.tippschannel = findall('<span class="subline .*?">(.*?)</span>', bereich)
 		try:
 			parts = self.tippschannel[0].split(' | ')
@@ -5872,7 +5870,7 @@ class tvTipps(tvAllScreen):
 				self['label5'].hide()
 
 	def downloadFirst(self, link):
-		reactor.callInThread(self._downloadFirst, link)
+		callInThread(self._downloadFirst, link)
 
 	def _downloadFirst(self, link):
 		try:
@@ -6135,10 +6133,11 @@ class TVHeuteView(tvBaseScreen):
 			self.picon = False
 		self.localhtml = '/tmp/tvspielfilm.html'
 		self.localhtml2 = '/tmp/tvspielfilm2.html'
-		self.tventriess = [[], [], [], [], [], []]
-		self.tvlinks = [[], [], [], [], [], []]
-		self.tvtitels = [[], [], [], [], [], []]
-		self.srefs = [[], [], [], [], [], []]
+		self.tventriess = [[] for _ in range(6)]
+		self.tvlinks = [[] for _ in range(6)]
+		self.tvtitels = [[] for _ in range(6)]
+		self.srefs = [[] for _ in range(6)]
+		self.zaps = [True for _ in range(6)]
 		self.picloads = {}
 		self.searchlink = []
 		self.searchref = []
@@ -6150,7 +6149,6 @@ class TVHeuteView(tvBaseScreen):
 		self.EPGtext = ''
 		HIDEFLAG = True
 		self.search = False
-		self.zaps = [True, True, True, True, True, True]
 		self.rec = False
 		self.first = True
 		self.ready = False
@@ -6311,14 +6309,12 @@ class TVHeuteView(tvBaseScreen):
 			else:
 				endpos = output.find('<optgroup label="alle Sender alphabetisch">')
 			bereich = output[startpos:endpos]
-			sender = findall("<option label='(.*?)' value='https", bereich)
-			self.maxpages = len(sender) // 6
-			if len(sender) % 6 != 0:
+			allsender = findall("<option label='(.*?)' value='https", bereich)
+			self.maxpages = len(allsender) // 6
+			if len(allsender) % 6 != 0:
 				self.maxpages += 1
 			self['seitennr'].show()
 			self['seitennr'].setText('Seite %s von %s' % (self.count, self.maxpages))
-		self.zaps = [True, True, True, True, True, True]
-		self.srefs = [[], [], [], [], [], []]
 		date = str(self.date.strftime('%d.%m.%Y'))
 		self.titel = 'Heute im TV  - ' + str(self.weekday) + ', ' + date
 		self.setTitle(self.titel)
@@ -6328,64 +6324,86 @@ class TVHeuteView(tvBaseScreen):
 		bereichtop = sub('<wbr/>', '', bereichtop)
 		bereichtop = sub('<div class="first-program block-1">\n.*?</div>', '<div class="first-program block-1"><img src="http://a2.tvspielfilm.de/imedia/8461/5218461,qfQElNSTpxAGvxxuSsPkPjQRIrO6vJjPQCu3KaA_RQPfIknB77GUEYh_MB053lNvumg7bMd+vkJk3F+_CzBZSQ==.jpg" width="149" height="99" border="0" /><span class="time"> </span><strong class="title"> </strong></div>', bereichtop)
 		picons = findall('"sendericon","channel":"(.*?)","broadcastChannelGroup"', bereichtop)
-		for i in range(6):
-			self['sender%s' % i].show()
-			self['pictext%s_bg' % i].show()
 		self['release'].show()
 		self['waiting'].stopBlinking()
+		self.zaps = [True for _ in range(6)]
 		if picons:
 			for i in range(6):
-				sref = picons[i].lower().replace(' ', '').replace('.', '').replace('ii', '2')
-				if sref == 'nope':
-					self.zaps[i] = False
-					self['picon%s' % i].hide()
-				else:
-					picon = PLUGINPATH + 'picons/' + sref + '.png'
-					if isfile(picon):
-						self['picon%s' % i].instance.setScale(1)
-						self['picon%s' % i].instance.setPixmapFromFile(picon)
-						self['picon%s' % i].show()
-					else:
+				if i < len(picons):
+					sref = picons[i].lower().replace(' ', '').replace('.', '').replace('ii', '2')
+					if sref == 'nope':
+						self.zaps[i] = False
 						self['picon%s' % i].hide()
-		sender = findall('<h3>(.*?)</h3>', bereichtop)
-		if sender:
-			for i in range(6):
-				self.srefs[i].append(serviceDB(self.servicefile).lookup(transCHANNEL(sender[i]).strip()))
-				self.srefs[i].append(sender[i])
-				self['sender%s' % i].setText(sender[i])
-				self['sender%s' % i].show()
+					else:
+						piconfile = PLUGINPATH + 'picons/' + sref + '.png'
+						if isfile(piconfile):
+							self['picon%s' % i].instance.setScale(1)
+							self['picon%s' % i].instance.setPixmapFromFile(piconfile)
+							self['picon%s' % i].show()
+						else:
+							self['picon%s' % i].hide()
+				else:
+					self['picon%s' % i].hide()
 		else:
 			for i in range(6):
-				self.srefs[i].append('')
+				self['picon%s' % i].hide()
+		sender = findall('<h3>(.*?)</h3>', bereichtop)
+		self.spalten = len(sender)
+		self.srefs = [[] for _ in range(6)]
+		if sender:
+			for i in range(6):
+				if i < self.spalten:
+					self.srefs[i].append(serviceDB(self.servicefile).lookup(transCHANNEL(sender[i]).strip()))
+					self.srefs[i].append(sender[i])
+					self['sender%s' % i].setText(sender[i])
+					self['sender%s' % i].show()
+				else:
+					self['sender%s' % i].hide()
+		else:
+			for i in range(6):
 				self['sender%s' % i].hide()
-		pic = findall('<img src="(.*?)" alt="(.*?)"', bereichtop)
+		pics = findall('<img src="(.*?)" alt="(.*?)"', bereichtop)
 		idx = 0
 		picDownloads = []
-		for i, pi in enumerate(pic):
-			try:
-				picdata, dummy = pi
-				if picdata[-4:] == '.jpg':
-					picurl = ('https://' + search('https://(.*).jpg', picdata).group(1) + '.jpg').replace('159', '300')
-					picDownloads.append((picurl, idx))
-					self['pic%s' % idx].show()
-					idx += 1
-			except IndexError:
-				pass
-		reactor.callInThread(self.idownloadPics, picDownloads)
-		pictime = findall('<span class="time">(.*?)</span>', bereichtop)
-		if pictime:
+		if pics:
+			for i, pic in enumerate(pics):
+				try:
+					picdata, dummy = pic
+					if picdata[-4:] == '.jpg':
+						picurl = ('https://' + search('https://(.*).jpg', picdata).group(1) + '.jpg').replace('159', '300')
+						picDownloads.append((picurl, idx))
+						self['pic%s' % idx].show()
+						idx += 1
+				except IndexError:
+					pass
+			for i in range(idx, 6):  # hide column in case column is unused
+				self['pic%s' % idx].hide()
+				idx += 1
+			callInThread(self.idownloadPics, picDownloads)
+		else:
 			for i in range(6):
-				self['pictime%s' % i].setText(pictime[i])
-				self['pictime%s' % i].show()
+				self['pic%s' % i].hide()
+		pictimes = findall('<span class="time">(.*?)</span>', bereichtop)
+		if pictimes:
+			for i in range(6):
+				if i < len(pictimes):
+					self['pictime%s' % i].setText(pictimes[i])
+					self['pictime%s' % i].show()
+				else:
+					self['pictime%s' % i].hide()
 		else:
 			for i in range(6):
 				self['pictime%s' % i].hide()
-		pictext = findall('<strong class="title">(.*?)</strong>', bereichtop)
-		if pictext:
+		pictexts = findall('<strong class="title">(.*?)</strong>', bereichtop)
+		if pictexts:
 			for i in range(6):
-				self['pictext%s' % i].setText(pictext[i])
-				self['pictext%s' % i].show()
-				self['pictext%s_bg' % i].show()
+				if i < len(pictexts):
+					self['pictext%s' % i].setText(pictexts[i])
+					self['pictext%s' % i].show()
+					self['pictext%s_bg' % i].show()
+				else:
+					self['pictext%s' % i].hide()
+					self['pictext%s_bg' % i].hide()
 		else:
 			for i in range(6):
 				self['pictext%s' % i].hide()
@@ -6431,15 +6449,15 @@ class TVHeuteView(tvBaseScreen):
 		bereich = sub('</span>', '</td>', bereich)
 		bereich = sub('<wbr/>', '', bereich)
 		bereich = sub('<div class="program-block">', '<td>BLOCK</td>', bereich)
-		self.tventriess = [[], [], [], [], [], []]
-		self.tvlinks = [[], [], [], [], [], []]
-		self.tvtitels = [[], [], [], [], [], []]
+		self.tventriess = [[] for _ in range(6)]
+		self.tvlinks = [[] for _ in range(6)]
+		self.tvtitels = [[] for _ in range(6)]
 		menupos = - 1
-		menuitems = [[], [], [], [], [], []]
+		menuitems = [[] for _ in range(6)]
 		a = findall('<td>(.*?)</td>', bereich)
 		for x in a:
 			if x == 'BLOCK':
-				menupos = (menupos + 1) % 6
+				menupos = (menupos + 1) % self.spalten
 			else:
 				menuitems[menupos].append(x)
 		midx = 0
@@ -6510,6 +6528,9 @@ class TVHeuteView(tvBaseScreen):
 				self.tvtitels[midx].append(currenttitle)
 			currentitem = []
 			midx += 1
+		if self.current[-1].isdigit():
+			if int(self.current[-1]) > self.spalten - 1:
+				self.current = 'menu%s' % (self.spalten - 1)
 		for i in range(6):
 			self['menu%s' % i].l.setItemHeight(mh)
 			self['menu%s' % i].l.setList(self.tventriess[i])
@@ -6987,8 +7008,8 @@ class TVHeuteView(tvBaseScreen):
 			for i in range(6):
 				if self.current == 'menu%s' % i:
 					self['menu%s' % i].selectionEnabled(0)
-					self['menu%s' % ((i + 1) % 6)].selectionEnabled(1)
-					self.current = 'menu%s' % ((i + 1) % 6)
+					self['menu%s' % ((i + 1) % self.spalten)].selectionEnabled(1)
+					self.current = 'menu%s' % ((i + 1) % self.spalten)
 					break
 			if self.current == 'menu0':
 				self.count = self.count + 1 if self.count < self.maxpages else 1
@@ -7108,7 +7129,7 @@ class TVHeuteView(tvBaseScreen):
 				self.makeErrorTimer.callback.append(self.displayError)
 				self.makeErrorTimer.start(200, True)
 		else:
-			reactor.callInThread(self._downloadFullPage, link)
+			callInThread(self._downloadFullPage, link)
 
 	def _downloadFullPage(self, link):
 		try:
