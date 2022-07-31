@@ -5,7 +5,7 @@ from Components.config import config, ConfigDirectory, ConfigInteger, ConfigPass
 from os.path import isfile
 from Plugins.Plugin import PluginDescriptor
 from glob import glob
-from .ui import tvEvent, tvJetzt, tvMain, TVSlog
+from .ui import TVSEvent, TVSJetzt, TVSMain, TVSlog
 from .util import DESKTOP_WIDTH, PLUGINPATH, PICONPATH
 
 config.plugins.tvspielfilm = ConfigSubsection()
@@ -50,23 +50,23 @@ if not ALPHA:
 
 
 def main(session, **kwargs):
-	session.open(tvMain)
+	session.open(TVSMain)
 
 
 def mainjetzt(session, **kwargs):
-	session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
+	session.open(TVSJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
 
 
 def mainprime(session, **kwargs):
-	session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
+	session.open(TVSJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
 
 
 def mainlate(session, **kwargs):
-	session.open(tvJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/fernsehprogramm-nachts.html')
+	session.open(TVSJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/fernsehprogramm-nachts.html')
 
 
 def mainevent(session, **kwargs):
-	session.open(tvEvent)
+	session.open(TVSEvent)
 
 
 def Plugins(**kwargs):
