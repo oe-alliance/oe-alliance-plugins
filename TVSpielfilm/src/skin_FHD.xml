@@ -309,8 +309,8 @@
 	</screen>
 
 	<!-- TV Spielfilm_gotoPageMenu -->
-	<screen name="TVSgotoPageMenu" position="center,90" size="682,960" title=" ">
-		<widget name="pagemenu" position="15,15" size="652,943" foregroundColor="#00ffffff" backgroundColor="#20000000" scrollbarMode="showOnDemand" zPosition="1" />
+	<screen name="TVSgotoPageMenu" position="center,90" size="682,980" title=" ">
+		<widget name="pagemenu" position="15,15" size="652,952" foregroundColor="#00ffffff" backgroundColor="#20000000" scrollbarMode="showOnDemand" zPosition="1" />
 	</screen>
 
 	<!-- TV Spielfilm_searchYouTube -->
