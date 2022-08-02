@@ -4584,8 +4584,8 @@ class TVSsearchYouTube(TVSAllScreen):
 				trailer_url = 'https://www.youtube.com/watch?v=%s' % trailer_id
 				result = ydl.extract_info(trailer_url, download=False)  # only the extracted info is needed
 			try:
-				sref = eServiceReference(4097, 0, result['url'])
-				sref.setName(result['title'])
+				sref = eServiceReference(4097, 0, ensure_str(result['url']))
+				sref.setName(ensure_str(result['title']))
 				self.session.open(MoviePlayer, sref)
 			except ValueError:
 				pass
