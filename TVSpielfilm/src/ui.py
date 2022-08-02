@@ -1,46 +1,48 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+from base64 import b64decode, b64encode
 import datetime
+from json import dumps, loads
+from os import linesep, remove, rename
+from os.path import isdir, isfile
+from re import S, compile, findall, search, sub
 import requests
-from json import loads, dumps
 from socket import error as SocketError
-from base64 import b64encode, b64decode
-from RecordTimer import RecordTimerEntry
-from time import mktime, strftime, gmtime, localtime
-from os import remove, linesep, rename
-from os.path import isfile, isdir
-from re import findall, search, sub, S, compile
-from Tools.Directories import isPluginInstalled
-from twisted.internet.reactor import callInThread
-from ServiceReference import ServiceReference
 from six import ensure_binary, ensure_str
 from six.moves.http_client import HTTPException
-from six.moves.urllib.error import URLError, HTTPError
+from six.moves.urllib.error import HTTPError, URLError
 from six.moves.urllib.parse import quote
-from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirectHandler, HTTPHandler, HTTPCookieProcessor
-from Components.Label import Label
-from Components.Pixmap import Pixmap
-from Components.MenuList import MenuList
-from Components.FileList import FileList
-from Components.ScrollLabel import ScrollLabel
-from Components.ConfigList import ConfigListScreen
+from six.moves.urllib.request import HTTPCookieProcessor, HTTPHandler, HTTPRedirectHandler, Request, build_opener, urlopen
+from time import gmtime, localtime, mktime, strftime
+from twisted.internet.reactor import callInThread
+
+from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_WRAP, eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG
+
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, configfile, getConfigListEntry
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest, MultiContentEntryPixmapAlphaBlend, MultiContentEntryProgress
-from enigma import eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER
-from Screens.Screen import Screen
-from Screens.ChoiceBox import ChoiceBox
-from Screens.TimerEntry import TimerEntry
-from Screens.MessageBox import MessageBox
-from Screens.Standby import TryQuitMainloop
-from ServiceReference import ServiceReference
-from Screens.InfoBar import InfoBar, MoviePlayer
-from Screens.TimerEdit import TimerSanityConflict
-from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Components.ConfigList import ConfigListScreen
+from Components.FileList import FileList
+from Components.Label import Label
+from Components.MenuList import MenuList
+from Components.MultiContent import MultiContentEntryPixmapAlphaBlend, MultiContentEntryPixmapAlphaTest, MultiContentEntryProgress, MultiContentEntryText
+from Components.Pixmap import Pixmap
+from Components.ScrollLabel import ScrollLabel
+from RecordTimer import RecordTimerEntry
 from Screens.ChannelSelection import ChannelSelection
+from Screens.ChoiceBox import ChoiceBox
+from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.LocationBox import LocationBox
-from .util import applySkinVars, PLUGINPATH, PICPATH, PICONPATH, ICONPATH, serviceDB, BlinkingLabel, ItemList, makeWeekDay, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, SCALE
-from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, parsePrimeTimeTable, parseTrailerUrl, buildTVTippsArray, parseNow, NEXTPage1, NEXTPage2
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Screens.Standby import TryQuitMainloop
+from Screens.TimerEdit import TimerSanityConflict
+from Screens.TimerEntry import TimerEntry
+from Screens.VirtualKeyBoard import VirtualKeyBoard
+from ServiceReference import ServiceReference
+from Tools.Directories import isPluginInstalled
+
+from .parser import NEXTPage1, NEXTPage2, buildTVTippsArray, cleanHTML, parsedetail, parseNow, parsePrimeTimeTable, parseTrailerUrl, shortenChannel, transCHANNEL, transHTML
+from .util import DESKTOP_HEIGHT, DESKTOP_WIDTH, ICONPATH, PICONPATH, PICPATH, PLUGINPATH, SCALE, BlinkingLabel, ItemList, applySkinVars, channelDB, makeWeekDay, printStackTrace, readSkin, serviceDB
+
 try:
 	from cookielib import MozillaCookieJar
 except Exception:
@@ -124,7 +126,7 @@ class TVSAllScreen(Screen):
 		h = DESKTOP_HEIGHT - (120 * SCALE) - 40
 		mh = h - 60
 		self.menuwidth = mw
-		if dic == None:
+		if dic is None:
 			dic = {}
 		dic['picpath'] = PICPATH
 		dic['selbg'] = str(config.plugins.tvspielfilm.selectorcolor.value)
@@ -805,7 +807,7 @@ class TVSBaseScreen(TVSAllScreen):
 				self.session.openWithCallback(self.showPicPost, TVSFullScreen)
 
 	def redTimer(self, searching=False, sref=None):
-		if sref == None:
+		if sref is None:
 			if searching:
 				c = self['searchmenu'].getSelectedIndex()
 				self.oldsearchindex = c
@@ -1373,7 +1375,7 @@ class TVSTippsView(TVSBaseScreen):
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
-			self.redTimer(self.search != None)
+			self.redTimer(self.search is not None)
 		else:
 			self.redDownload()
 
@@ -2100,7 +2102,7 @@ class TVSGenreView(TVSGenreJetztProgrammView):
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
-			self.redTimer(self.search != None)
+			self.redTimer(self.search is not None)
 		elif self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c

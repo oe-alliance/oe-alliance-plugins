@@ -1,17 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import print_function, absolute_import
-from re import sub, findall, S as RES
+from six import ensure_str
+from xml.etree.ElementTree import fromstring, tostring, parse
+
+from enigma import eListboxPythonMultiContent, gFont, getDesktop
+
 from Components.config import config
 from Components.ConditionalWidget import BlinkingWidget
-from Components.ScrollLabel import ScrollLabel
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-from enigma import eListboxPythonMultiContent, gFont, getDesktop
 
-from xml.etree.ElementTree import fromstring, tostring, parse
-from six import ensure_str
 
 PICONPATH = resolveFilename(SCOPE_SKIN_IMAGE) + 'picon/'
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/TVSpielfilm/'
@@ -100,7 +99,7 @@ def applySkinVars(skin, dict):
 		try:
 			skin = skin.replace('{' + key + '}', dict[key])
 		except Exception as e:
-			print(e, '@key=', key)
+			print("%s@key=%s" % (str(e), key))
 	return skin
 
 
@@ -163,7 +162,7 @@ def readSkin(skin):
 			except Exception as err:
 				print("[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (SKINFILE, err))
 
-	except Exception as err:
+	except OSError as err:
 		print("[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (SKINFILE, err))
 	return skintext
 
