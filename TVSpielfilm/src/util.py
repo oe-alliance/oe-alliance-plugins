@@ -34,12 +34,10 @@ class channelDB():
 	def __init__(self, servicefile):
 		self.servicefile = servicefile
 		self.d = dict()
-		try:
-			for x in open(self.servicefile):
-				val, key = x.split()
-				self.d[key] = val
-		except:
-			pass
+		for x in open(self.servicefile):
+			key = x[:x.find('1:')]
+			val = x[x.find('1:'):].strip()
+			self.d[key] = val
 
 	def lookup(self, key):
 		if key in self.d:
@@ -55,12 +53,11 @@ class serviceDB():
 	def __init__(self, servicefile):
 		self.servicefile = servicefile
 		self.d = dict()
-		try:
-			for x in open(self.servicefile):
-				key, val = x.split()
-				self.d[key] = val
-		except:
-			pass
+		for x in open(self.servicefile):
+			key = x[:x.find('1:') - 1]
+			ref = x[x.find('1:'):].strip().split(':')
+			val = ':'.join(ref[i] for i in range(10)) + ':'
+			self.d[key] = val
 
 	def lookup(self, key):
 		if key in self.d:

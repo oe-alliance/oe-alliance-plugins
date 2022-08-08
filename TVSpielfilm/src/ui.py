@@ -953,12 +953,17 @@ class TVSBaseScreen(TVSAllScreen):
 				else:
 					self.filter = False
 					self.searchref.append(sref)
-					if config.plugins.tvspielfilm.picon.value == "plugin":
-						png = self.piconfolder + '%s.png' % LOGO
-					else:
+				if config.plugins.tvspielfilm.picon.value == "plugin":
+					png = self.piconfolder + '%s.png' % LOGO
+				else:
+					png = findPicon(sref, self.piconfolder)
+					if not png:  # Fallback 'from 1_0_?_...' to '1_0_1_...'
+						sref = sref.split(':')
+						sref[2] = '1'
+						sref = ':'.join(sref)
 						png = findPicon(sref, self.piconfolder)
 					if png:
-						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+ 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 					else:
 						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 								   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
@@ -1219,10 +1224,15 @@ class TVSTippsView(TVSBaseScreen):
 					png = self.piconfolder + '%s.png' % LOGO
 				else:
 					png = findPicon(sref, self.piconfolder)
+					if not png:  # Fallback 'from 1_0_?_...' to '1_0_1_...'
+						sref = sref.split(':')
+						sref[2] = '1'
+						sref = ':'.join(sref)
+						png = findPicon(sref, self.piconfolder)
 				if png:
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), 0), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 				else:
-					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 							   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 				if sref == 'nope':
 					sref = None
@@ -1906,15 +1916,20 @@ class TVSGenreView(TVSGenreJetztProgrammView):
 				else:
 					self.filter = False
 					self.sref.append(sref)
-					if config.plugins.tvspielfilm.picon.value == "plugin":
-						png = self.piconfolder + '%s.png' % LOGO
-					else:
+				if config.plugins.tvspielfilm.picon.value == "plugin":
+					png = self.piconfolder + '%s.png' % LOGO
+				else:
+					png = findPicon(sref, self.piconfolder)
+					if not png:  # 1_0_??_ auf die 1_0_1_...
+						sref = sref.split(':')
+						sref[2] = '1'
+						sref = ':'.join(sref)
 						png = findPicon(sref, self.piconfolder)
 					if png:
-						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), 0), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+ 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 					else:
-						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(30 * (SCALE - 1))), size=(int(67 * SCALE), int(40 * SCALE)), font=-
-								   2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+								   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 					start = sub(' - ..:..', '', start)
 					daynow = sub('....-..-', '', str(self.date))
 					day = search(', ([0-9]+). ', self.datum_string)
@@ -2473,6 +2488,11 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 					png = self.piconfolder + '%s.png' % LOGO
 				else:
 					png = findPicon(sref, self.piconfolder)
+					if not png:  # Fallback 'from 1_0_?_...' to '1_0_1_...'
+						sref = sref.split(':')
+						sref[2] = '1'
+						sref = ':'.join(sref)
+						png = findPicon(sref, self.piconfolder)
 				if png:
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 				else:
@@ -3171,10 +3191,15 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 				png = self.piconfolder + '%s.png' % LOGO
 			else:
 				png = findPicon(sref, self.piconfolder)
+				if not png:  # Fallback 'from 1_0_?_...' to '1_0_1_...'
+					sref = sref.split(':')
+					sref[2] = '1'
+					sref = ':'.join(sref)
+					png = findPicon(sref, self.piconfolder)
 			if png:
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 			else:
-				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 						   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 			if self.progress:
 				start = sub(' - ..:..', '', TIME)
@@ -5438,7 +5463,6 @@ class TVSmakeServiceFile(Screen):
 				station = sub('[/]', ' ', station)
 				station = sub("'", '', station)
 				service = eventinfo[7]
-				TVSlog(service)
 				service = sub(':0:0:0:.*?[)], ', ':0:0:0:\n', service)
 				service = sub(':0:0:0::[a-zA-Z0-9_-]+', ':0:0:0:', service)
 				data += '%s\t %s\n' % (station, service)
@@ -5464,10 +5488,11 @@ class TVSmakeServiceFile(Screen):
 			search = compile(' [a-z0-9-]+ ').search
 			for line in open(self.servicefile):
 				line = line.strip()
-				if line != '' and ',' not in line and '/' not in line and '#' + line[0:5] not in newdata:
+				channel = line.split('1:')[0][:-1]
+				if line != '' and ',' not in line and '#' + channel not in newdata:
 					fnew.write(line)
 					fnew.write(linesep)
-					newdata = newdata + '#' + str(line[0:5])
+					newdata = newdata + '#' + channel
 					count += 1
 			f.close()
 			fnew.close()
