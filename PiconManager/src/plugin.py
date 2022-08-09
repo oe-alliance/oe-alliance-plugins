@@ -622,28 +622,28 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self.picon_list_file = self.piconTempDir + self.auswahl + "_list" 
 			url = self.server_url + self.cur_selected_dir + "/" + picon_list_file
 			for x in self.url2Str(url).split('\n'): 
-				self.nameList.append( x[:-4] )
-				self.reducedList.append (reducedName ( x[:-4] ))
+				self.nameList.append(x[:-4])
+				self.reducedList.append(reducedName(x[:-4]))
 		except:
 			pass 
 		
-	def comparableChannelName (self, channelName): # check picon list for comparable channelname
+	def comparableChannelName(self, channelName): # check picon list for comparable channelname
 		try:
 			if channelName in self.nameList:
 				return channel
 			r = reducedName(channelName)
 			if r in self.reducedList:
-				return self.nameList[ self.reducedList.index(r) ]
+				return self.nameList[self.reducedList.index(r)]
 		except:
 			pass
 		return channelName
 		
-	def primaryByName (self, channelName): # if a picon-by-name already exists, use its name
+	def primaryByName(self, channelName): # if a picon-by-name already exists, use its name
 		try:
-			if os.path.exists( self.piconfolder + channelName + '.png'):
+			if os.path.exists(self.piconfolder + channelName + '.png'):
 				return channelName
-			for c in getInteroperableNames (channelName):
-				if os.path.exists( self.piconfolder + c + '.png'):
+			for c in getInteroperableNames(channelName):
+				if os.path.exists(self.piconfolder + c + '.png'):
 					return c
 		except:
 			pass
@@ -678,7 +678,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 						if "by name" in self['list'].getCurrent()[0][0].lower():
 							#downloadPiconUrl = quote(channel[1] + ".png")     #### OH #####
 							#downloadPiconPath = self.piconfolder + channel[1] + ".png"     #### OH #####
-							downloadPiconUrl = quote( self.comparableChannelName(channel[1]) + ".png")  #### OH #####
+							downloadPiconUrl = quote(self.comparableChannelName(channel[1]) + ".png")  #### OH #####
 							downloadPiconPath = self.piconfolder + self.primaryByName(channel[1]) + ".png"  #### OH #####
 						else:
 							downloadPiconUrl = channel[0]
