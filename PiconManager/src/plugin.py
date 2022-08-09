@@ -604,7 +604,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 	def url2Str(self, url):
 		try: 
 			from urllib.request import Request, urlopen
-			header= {'User-Agent':'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
+			header = {'User-Agent':'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
 					'Accept-Charset':'utf-8;q=0.7,*;q=0.7', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
 			searchrequest = Request(url, None, header) 
 			return urlopen(searchrequest).read()
@@ -684,9 +684,9 @@ class PiconManagerScreen(Screen, HelpableScreen):
 							downloadPiconUrl = channel[0]
 							downloadPiconUrl = str(downloadPiconUrl).split("http")[0]
 							downloadPiconUrl = str(downloadPiconUrl).split("rtmp")[0]
-							downloadPiconUrl = (str(downloadPiconUrl).split("::")[0]).rstrip(':')+':'  #### OH #####
+							downloadPiconUrl = (str(downloadPiconUrl).split("::")[0]).rstrip(':') + ':'  #### OH #####
 							if downloadPiconUrl.startswith('4097:'):
-								downloadPiconUrl = '1'+downloadPiconUrl[4:]  #### OH #####
+								downloadPiconUrl = '1' + downloadPiconUrl[4:]  #### OH #####
 							downloadPiconUrl = downloadPiconUrl.replace(':', '_')
 							downloadPiconUrl = downloadPiconUrl[:-1] + ".png"
 							downloadPiconPath = self.piconfolder + downloadPiconUrl#.replace("%20"," ")

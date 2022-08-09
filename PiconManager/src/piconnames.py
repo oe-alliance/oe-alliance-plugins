@@ -12,19 +12,19 @@ def VTiName(serviceName):
 	
 def interoperableName(serviceName):
 	import re
-	for ch in [('ä','ae'), ('ö','oe'),  ('ü','ue'), ('Ä','Ae'), ('Ö','Oe'),  ('Ü','Ue'),  ('ß', 'ss'), ('*', 'star'), ('+', 'plus'), ('&', 'and')]:
+	for ch in [('ä','ae'), ('ö','oe'), ('ü','ue'), ('Ä','Ae'), ('Ö','Oe'), ('Ü','Ue'), ('ß', 'ss'), ('*', 'star'), ('+', 'plus'), ('&', 'and')]:
 		serviceName = serviceName.replace(ch[0], ch[1])
 	return re.sub('[^a-z0-9]', '', serviceName.lower())
 	
 def fallBackName(serviceName):
 	res, ok = serviceName, True
 	for x in 'hd,uhd,austria,oesterreich,österreich,deutschland,nord,sued,süd'.split(','): 
-		if res.lower().endswith(' '+x):  
-			res = res[:-(len(x)+1)]
+		if res.lower().endswith(' ' + x):  
+			res = res[:-(len(x) + 1)]
 	for x in 'WDR,NDR,BR Fernsehen,SR,SWR,MDR,RTL,SAT.1,RBB,rbb,VOX,ORF2,ORF1,BBC,CNN'.split(','):
-		if res.startswith(x+' '):
+		if res.startswith(x + ' '):
 			for chSub in 'gold,emotion,ii,2,zwei'.split(','):
-				if res.lower().find(' '+chSub)>=0:
+				if res.lower().find(' ' + chSub) >= 0:
 					ok = False
 			if ok:
 				res = x
@@ -48,7 +48,7 @@ def getInteroperableNames(serviceName, vtiMode=1):
 			serviceNameVTi = serviceName   #Nick/MTV+ HD
 			
 		corr = correctedFileName(serviceName)   #NickMTV+ HD
-		if (corr!= serviceName): 
+		if (corr != serviceName): 
 			res.append(corr)
 			serviceName = corr
 			
