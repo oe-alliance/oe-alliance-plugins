@@ -50,11 +50,14 @@ if six.PY2:
 else:
 	from urllib.parse import quote
 
+from .piconnames import reducedName
+from .piconnames import getInteroperableNames  #check for by-name-picons that dont fit with VTi Syntax (Picon Buddy Mode)
+
 
 pname = _("PiconManager (mod)")
 pdesc = _("Manage your Picons")
-pversion = "2.4-r0"
-pdate = "20161103"
+pversion = "2.5-r0"
+pdate = "20220617"
 
 picon_tmp_dir = "/tmp/piconmanager/"
 picon_debug_file = "/tmp/piconmanager_error"
@@ -596,6 +599,57 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self.piconfolder = "%s%s/" % (self.picondir, self.piconname)
 			self['piconpath2'].setText(self.piconfolder)
 			print("[PiconManager] set picon path to: %s" % self.piconfolder)
+	##################################### OH #############################################
+			
+	def url2Str(self, url):
+		try: 
+			from urllib.request import Request, urlopen
+			header= {'User-Agent':'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
+					'Accept-Charset':'utf-8;q=0.7,*;q=0.7', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
+			searchrequest = Request(url, None, header) 
+			return urlopen(searchrequest).read()
+		except:
+			return ''
+			
+	def prepByNameList(self):  #load picon list, then create reducedNames (for flexible comparing with channel names)
+		self.nameList = []
+		self.reducedList = []
+		try: 
+			if not "by name" in self['list'].getCurrent()[0][0].lower():
+				return 1
+			self.auswahl = self['list'].getCurrent()[0][4]
+			self.cur_selected_dir = self['list'].getCurrent()[0][5]
+			self.picon_list_file = self.piconTempDir + self.auswahl + "_list" 
+			url = self.server_url + self.cur_selected_dir + "/" + picon_list_file
+			for x in self.url2Str(url).split('\n'): 
+				self.nameList.append( x[:-4] )
+				self.reducedList.append (reducedName ( x[:-4] ))
+		except:
+			pass 
+		
+	def comparableChannelName (self, channelName): # check picon list for comparable channelname
+		try:
+			if channelName in self.nameList:
+				return channel
+			r = reducedName(channelName)
+			if r in self.reducedList:
+				return self.nameList[ self.reducedList.index(r) ]
+		except:
+			pass
+		return channelName
+		
+	def primaryByName (self, channelName): # if a picon-by-name already exists, use its name
+		try:
+			if os.path.exists( self.piconfolder + channelName + '.png'):
+				return channelName
+			for c in getInteroperableNames (channelName):
+				if os.path.exists( self.piconfolder + c + '.png'):
+					return c
+		except:
+			pass
+		return channelName
+		
+	##################################### /OH #############################################
 
 	def downloadPicons(self):
 		no_drive = False
@@ -605,6 +659,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				self.session.open(MessageBox, txt, MessageBox.TYPE_INFO, timeout=3)
 				no_drive = True
 
+		self.prepByNameList()  #### OH #####
 		if not no_drive:
 			if not os.path.isdir(self.piconfolder):
 				print("[PiconManager] create folder %s" % self.piconfolder)
@@ -621,12 +676,17 @@ class PiconManagerScreen(Screen, HelpableScreen):
 					for channel in self.chlist:
 						downloadPiconUrl = None
 						if "by name" in self['list'].getCurrent()[0][0].lower():
-							downloadPiconUrl = quote(channel[1] + ".png")
-							downloadPiconPath = self.piconfolder + channel[1] + ".png"
+							#downloadPiconUrl = quote(channel[1] + ".png")     #### OH #####
+							#downloadPiconPath = self.piconfolder + channel[1] + ".png"     #### OH #####
+							downloadPiconUrl = quote( self.comparableChannelName(channel[1]) + ".png")  #### OH #####
+							downloadPiconPath = self.piconfolder + self.primaryByName(channel[1]) + ".png"  #### OH #####
 						else:
 							downloadPiconUrl = channel[0]
 							downloadPiconUrl = str(downloadPiconUrl).split("http")[0]
 							downloadPiconUrl = str(downloadPiconUrl).split("rtmp")[0]
+							downloadPiconUrl = (str(downloadPiconUrl).split("::")[0]).rstrip(':')+':'  #### OH #####
+							if downloadPiconUrl.startswith('4097:'):
+								downloadPiconUrl = '1'+downloadPiconUrl[4:]  #### OH #####
 							downloadPiconUrl = downloadPiconUrl.replace(':', '_')
 							downloadPiconUrl = downloadPiconUrl[:-1] + ".png"
 							downloadPiconPath = self.piconfolder + downloadPiconUrl#.replace("%20"," ")
