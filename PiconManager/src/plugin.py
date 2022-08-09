@@ -600,33 +600,33 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self['piconpath2'].setText(self.piconfolder)
 			print("[PiconManager] set picon path to: %s" % self.piconfolder)
 	##################################### OH #############################################
-			
+
 	def url2Str(self, url):
-		try: 
+		try:
 			from urllib.request import Request, urlopen
 			header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
 					'Accept-Charset': 'utf-8;q=0.7,*;q=0.7', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
-			searchrequest = Request(url, None, header) 
+			searchrequest = Request(url, None, header)
 			return urlopen(searchrequest).read()
 		except:
 			return ''
-			
+
 	def prepByNameList(self):  #load picon list, then create reducedNames (for flexible comparing with channel names)
 		self.nameList = []
 		self.reducedList = []
-		try: 
+		try:
 			if not "by name" in self['list'].getCurrent()[0][0].lower():
 				return 1
 			self.auswahl = self['list'].getCurrent()[0][4]
 			self.cur_selected_dir = self['list'].getCurrent()[0][5]
-			self.picon_list_file = self.piconTempDir + self.auswahl + "_list" 
+			self.picon_list_file = self.piconTempDir + self.auswahl + "_list"
 			url = self.server_url + self.cur_selected_dir + "/" + picon_list_file
-			for x in self.url2Str(url).split('\n'): 
+			for x in self.url2Str(url).split('\n'):
 				self.nameList.append(x[:-4])
 				self.reducedList.append(reducedName(x[:-4]))
 		except:
-			pass 
-		
+			pass
+
 	def comparableChannelName(self, channelName): # check picon list for comparable channelname
 		try:
 			if channelName in self.nameList:
@@ -637,7 +637,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		except:
 			pass
 		return channelName
-		
+
 	def primaryByName(self, channelName): # if a picon-by-name already exists, use its name
 		try:
 			if os.path.exists(self.piconfolder + channelName + '.png'):
@@ -648,7 +648,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		except:
 			pass
 		return channelName
-		
+
 	##################################### /OH #############################################
 
 	def downloadPicons(self):
