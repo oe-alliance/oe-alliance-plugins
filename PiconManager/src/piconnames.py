@@ -24,9 +24,12 @@ def fallBackName (serviceName):
 	for x in 'WDR,NDR,BR Fernsehen,SR,SWR,MDR,RTL,SAT.1,RBB,rbb,VOX,ORF2,ORF1,BBC,CNN'.split(','):
 		if res.startswith(x+' '):
 			for chSub in 'gold,emotion,ii,2,zwei'.split(','):
-				if res.lower().find( ' '+chSub )>=0:  ok = False
-			if ok: res = x
-	if res == serviceName: res = ''
+				if res.lower().find( ' '+chSub )>=0:
+					ok = False
+			if ok:
+				res = x
+	if res == serviceName:
+		res = ''
 	return res
 	
 def reducedName ( byName):
