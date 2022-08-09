@@ -5,14 +5,14 @@
 #
 
 def correctedFileName(s):  #remove forbidden characters
-	return s.replace('>','').replace('<','').replace('|','').replace(':','').replace('*','').replace('=','').replace('\\','').replace('/','').replace('?','')
+	return s.replace('>', '').replace('<', '').replace('|', '').replace(':', '').replace('*', '').replace('=', '').replace('\\', '').replace('/', '').replace('?', '')
 	
 def VTiName(serviceName):
 	return correctedFileName(serviceName.replace('\xc2\x86', '').replace('\xc2\x87', '').replace('/', '_') + '.png')
 	
 def interoperableName(serviceName):
 	import re
-	for ch in [('ä','ae'), ('ö','oe'), ('ü','ue'), ('Ä','Ae'), ('Ö','Oe'), ('Ü','Ue'), ('ß', 'ss'), ('*', 'star'), ('+', 'plus'), ('&', 'and')]:
+	for ch in [('ä', 'ae'), ('ö', 'oe'), ('ü', 'ue'), ('Ä', 'Ae'), ('Ö', 'Oe'), ('Ü', 'Ue'), ('ß', 'ss'), ('*', 'star'), ('+', 'plus'), ('&', 'and')]:
 		serviceName = serviceName.replace(ch[0], ch[1])
 	return re.sub('[^a-z0-9]', '', serviceName.lower())
 	

@@ -604,8 +604,8 @@ class PiconManagerScreen(Screen, HelpableScreen):
 	def url2Str(self, url):
 		try: 
 			from urllib.request import Request, urlopen
-			header = {'User-Agent':'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
-					'Accept-Charset':'utf-8;q=0.7,*;q=0.7', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
+			header = {'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
+					'Accept-Charset': 'utf-8;q=0.7,*;q=0.7', 'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8'}
 			searchrequest = Request(url, None, header) 
 			return urlopen(searchrequest).read()
 		except:
