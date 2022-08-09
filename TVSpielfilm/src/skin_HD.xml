@@ -420,7 +420,7 @@
 	<screen name="TVSmakeServiceFile" position="center,center" size="600,620" backgroundColor="#20000000" title="Import TV Spielfilm Sender: TV Bouquet Auswahl" flags="wfNoBorder">
 		<widget source="Title" render="Label" position="200,16" size="360,34" font="Regular;26" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="600,60" pixmap="{picpath}HD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="190,32" size="70,20" font="Regular;16" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<eLabel name="release" position="190,32" size="70,20" font="Regular;16" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
 		<widget name="list" position="10,70" size="580,540" font="Regular;20" itemHeight="32" scrollbarMode="showOnDemand" foregroundColor="#00ffffff" backgroundColor="#20000000" transparent="1" />
 	</screen>
 </skin>

@@ -1,11 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-from six import ensure_str
 from re import sub, findall, S as RES, search
-from twisted.web.client import getPage
+from six import ensure_str
 from twisted.internet import reactor
-import sys
 
 NEXTPage1 = 'class="js-track-link pagination__link pagination__link--next"'
 NEXTPage2 = '<a href="(.*?)"\n\\s+class="js-track-link pagination__link pagination__link--next"'
@@ -569,6 +566,7 @@ def testparseInfo(output):
 
 
 def test():
+	# from twisted.web.client import getPage
 	#    link = b'https://www.tvspielfilm.de/tv-tipps/'
 	link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&date=2021-05-06&tips=0&time=day&channel=3SAT'
