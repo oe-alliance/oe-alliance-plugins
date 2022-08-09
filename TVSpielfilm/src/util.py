@@ -1,17 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from __future__ import print_function, absolute_import
-from re import sub, findall, S as RES
+from six import ensure_str
+from xml.etree.ElementTree import fromstring, tostring, parse
+
+from enigma import eListboxPythonMultiContent, gFont, getDesktop
+
 from Components.config import config
 from Components.ConditionalWidget import BlinkingWidget
-from Components.ScrollLabel import ScrollLabel
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
-from enigma import eListboxPythonMultiContent, gFont, getDesktop
 
-from xml.etree.ElementTree import fromstring, tostring, parse
-from six import ensure_str
 
 PICONPATH = resolveFilename(SCOPE_SKIN_IMAGE) + 'picon/'
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/TVSpielfilm/'
@@ -34,12 +33,10 @@ class channelDB():
 	def __init__(self, servicefile):
 		self.servicefile = servicefile
 		self.d = dict()
-		try:
-			for x in open(self.servicefile):
-				val, key = x.split()
-				self.d[key] = val
-		except:
-			pass
+		for x in open(self.servicefile):
+			key = x[:x.find('1:')]
+			val = x[x.find('1:'):].strip()
+			self.d[key] = val
 
 	def lookup(self, key):
 		if key in self.d:
@@ -55,12 +52,11 @@ class serviceDB():
 	def __init__(self, servicefile):
 		self.servicefile = servicefile
 		self.d = dict()
-		try:
-			for x in open(self.servicefile):
-				key, val = x.split()
-				self.d[key] = val
-		except:
-			pass
+		for x in open(self.servicefile):
+			key = x[:x.find('1:') - 1]
+			ref = x[x.find('1:'):].strip().split(':')
+			val = ':'.join(ref[i] for i in range(10)) + ':'
+			self.d[key] = val
 
 	def lookup(self, key):
 		if key in self.d:
@@ -100,7 +96,7 @@ def applySkinVars(skin, dict):
 		try:
 			skin = skin.replace('{' + key + '}', dict[key])
 		except Exception as e:
-			print(e, '@key=', key)
+			print("%s@key=%s" % (str(e), key))
 	return skin
 
 
@@ -163,7 +159,7 @@ def readSkin(skin):
 			except Exception as err:
 				print("[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (SKINFILE, err))
 
-	except Exception as err:
+	except OSError as err:
 		print("[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (SKINFILE, err))
 	return skintext
 

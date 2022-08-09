@@ -1,46 +1,48 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
+from base64 import b64decode, b64encode
 import datetime
+from json import dumps, loads
+from os import linesep, remove, rename
+from os.path import isdir, isfile
+from re import S, compile, findall, search, sub
 import requests
-from json import loads, dumps
 from socket import error as SocketError
-from base64 import b64encode, b64decode
-from RecordTimer import RecordTimerEntry
-from time import mktime, strftime, gmtime, localtime
-from os import remove, linesep, rename
-from os.path import isfile, isdir
-from re import findall, search, sub, S, compile
-from Tools.Directories import isPluginInstalled
-from twisted.internet.reactor import callInThread
-from ServiceReference import ServiceReference
 from six import ensure_binary, ensure_str
 from six.moves.http_client import HTTPException
-from six.moves.urllib.error import URLError, HTTPError
+from six.moves.urllib.error import HTTPError, URLError
 from six.moves.urllib.parse import quote
-from six.moves.urllib.request import Request, urlopen, build_opener, HTTPRedirectHandler, HTTPHandler, HTTPCookieProcessor
-from Components.Label import Label
-from Components.Pixmap import Pixmap
-from Components.MenuList import MenuList
-from Components.FileList import FileList
-from Components.ScrollLabel import ScrollLabel
-from Components.ConfigList import ConfigListScreen
+from six.moves.urllib.request import HTTPCookieProcessor, HTTPHandler, HTTPRedirectHandler, Request, build_opener, urlopen
+from time import gmtime, localtime, mktime, strftime
+from twisted.internet.reactor import callInThread
+
+from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_WRAP, eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG
+
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, configfile, getConfigListEntry
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmapAlphaTest, MultiContentEntryPixmapAlphaBlend, MultiContentEntryProgress
-from enigma import eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP, BT_SCALE, BT_KEEP_ASPECT_RATIO, BT_HALIGN_CENTER, BT_VALIGN_CENTER
-from Screens.Screen import Screen
-from Screens.ChoiceBox import ChoiceBox
-from Screens.TimerEntry import TimerEntry
-from Screens.MessageBox import MessageBox
-from Screens.Standby import TryQuitMainloop
-from ServiceReference import ServiceReference
-from Screens.InfoBar import InfoBar, MoviePlayer
-from Screens.TimerEdit import TimerSanityConflict
-from Screens.VirtualKeyBoard import VirtualKeyBoard
+from Components.ConfigList import ConfigListScreen
+from Components.FileList import FileList
+from Components.Label import Label
+from Components.MenuList import MenuList
+from Components.MultiContent import MultiContentEntryPixmapAlphaBlend, MultiContentEntryPixmapAlphaTest, MultiContentEntryProgress, MultiContentEntryText
+from Components.Pixmap import Pixmap
+from Components.ScrollLabel import ScrollLabel
+from RecordTimer import RecordTimerEntry
 from Screens.ChannelSelection import ChannelSelection
+from Screens.ChoiceBox import ChoiceBox
+from Screens.InfoBar import InfoBar, MoviePlayer
 from Screens.LocationBox import LocationBox
-from .util import applySkinVars, PLUGINPATH, PICPATH, PICONPATH, ICONPATH, serviceDB, BlinkingLabel, ItemList, makeWeekDay, printStackTrace, channelDB, readSkin, DESKTOP_WIDTH, DESKTOP_HEIGHT, SCALE
-from .parser import transCHANNEL, shortenChannel, transHTML, cleanHTML, parsedetail, parsePrimeTimeTable, parseTrailerUrl, buildTVTippsArray, parseNow, NEXTPage1, NEXTPage2
+from Screens.MessageBox import MessageBox
+from Screens.Screen import Screen
+from Screens.Standby import TryQuitMainloop
+from Screens.TimerEdit import TimerSanityConflict
+from Screens.TimerEntry import TimerEntry
+from Screens.VirtualKeyBoard import VirtualKeyBoard
+from ServiceReference import ServiceReference
+from Tools.Directories import isPluginInstalled
+
+from .parser import NEXTPage1, NEXTPage2, buildTVTippsArray, cleanHTML, parsedetail, parseNow, parsePrimeTimeTable, parseTrailerUrl, shortenChannel, transCHANNEL, transHTML
+from .util import DESKTOP_HEIGHT, DESKTOP_WIDTH, ICONPATH, PICONPATH, PICPATH, PLUGINPATH, SCALE, BlinkingLabel, ItemList, applySkinVars, channelDB, makeWeekDay, printStackTrace, readSkin, serviceDB
+
 try:
 	from cookielib import MozillaCookieJar
 except Exception:
@@ -124,7 +126,7 @@ class TVSAllScreen(Screen):
 		h = DESKTOP_HEIGHT - (120 * SCALE) - 40
 		mh = h - 60
 		self.menuwidth = mw
-		if dic == None:
+		if dic is None:
 			dic = {}
 		dic['picpath'] = PICPATH
 		dic['selbg'] = str(config.plugins.tvspielfilm.selectorcolor.value)
@@ -805,7 +807,7 @@ class TVSBaseScreen(TVSAllScreen):
 				self.session.openWithCallback(self.showPicPost, TVSFullScreen)
 
 	def redTimer(self, searching=False, sref=None):
-		if sref == None:
+		if sref is None:
 			if searching:
 				c = self['searchmenu'].getSelectedIndex()
 				self.oldsearchindex = c
@@ -953,12 +955,17 @@ class TVSBaseScreen(TVSAllScreen):
 				else:
 					self.filter = False
 					self.searchref.append(sref)
-					if config.plugins.tvspielfilm.picon.value == "plugin":
-						png = self.piconfolder + '%s.png' % LOGO
-					else:
+				if config.plugins.tvspielfilm.picon.value == "plugin":
+					png = self.piconfolder + '%s.png' % LOGO
+				else:
+					png = findPicon(sref, self.piconfolder)
+					if not png:  # Fallback from '1:0:*:...' to '1:0:1:...'
+						sref = sref.split(':')
+						sref[2] = '1'
+						sref = ':'.join(sref)
 						png = findPicon(sref, self.piconfolder)
 					if png:
-						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+ 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 					else:
 						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 								   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
@@ -1219,10 +1226,15 @@ class TVSTippsView(TVSBaseScreen):
 					png = self.piconfolder + '%s.png' % LOGO
 				else:
 					png = findPicon(sref, self.piconfolder)
+					if not png:  # Fallback from '1:0:*:...' to '1:0:1:...'
+						sref = sref.split(':')
+						sref[2] = '1'
+						sref = ':'.join(sref)
+						png = findPicon(sref, self.piconfolder)
 				if png:
-					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), 0), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 				else:
-					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 							   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 				if sref == 'nope':
 					sref = None
@@ -1373,7 +1385,7 @@ class TVSTippsView(TVSBaseScreen):
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
-			self.redTimer(self.search != None)
+			self.redTimer(self.search is not None)
 		else:
 			self.redDownload()
 
@@ -1906,15 +1918,20 @@ class TVSGenreView(TVSGenreJetztProgrammView):
 				else:
 					self.filter = False
 					self.sref.append(sref)
-					if config.plugins.tvspielfilm.picon.value == "plugin":
-						png = self.piconfolder + '%s.png' % LOGO
-					else:
+				if config.plugins.tvspielfilm.picon.value == "plugin":
+					png = self.piconfolder + '%s.png' % LOGO
+				else:
+					png = findPicon(sref, self.piconfolder)
+					if not png:  # Fallback from '1:0:*:...' to '1:0:1:...'
+						sref = sref.split(':')
+						sref[2] = '1'
+						sref = ':'.join(sref)
 						png = findPicon(sref, self.piconfolder)
 					if png:
-						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), 0), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+ 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 					else:
-						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(30 * (SCALE - 1))), size=(int(67 * SCALE), int(40 * SCALE)), font=-
-								   2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+								   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 					start = sub(' - ..:..', '', start)
 					daynow = sub('....-..-', '', str(self.date))
 					day = search(', ([0-9]+). ', self.datum_string)
@@ -2100,7 +2117,7 @@ class TVSGenreView(TVSGenreJetztProgrammView):
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
-			self.redTimer(self.search != None)
+			self.redTimer(self.search is not None)
 		elif self.current == 'menu' and self.ready:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
@@ -2354,6 +2371,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self.gleich = False
 		self.abends = False
 		self.nachts = False
+		self.date = datetime.date.today()
 		self.finishedTimerMode = 1
 		self.index = 0
 		self._commonInit()
@@ -2424,8 +2442,10 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
-		self['INFOkey'].show()
-		self['INFOtext'].hide()
+		self['CHANNELkey'].hide()
+		self['CHANNELtext'].hide()
+		self['BOUQUETkey'].hide()
+		self['BOUQUETtext'].hide()
 		self['TEXTkey'].show()
 		self['TEXTtext'].setText('Sender')
 		self['TEXTtext'].show()
@@ -2473,6 +2493,11 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 					png = self.piconfolder + '%s.png' % LOGO
 				else:
 					png = findPicon(sref, self.piconfolder)
+					if not png:  # Fallback from '1:0:*:...' to '1:0:1:...'
+						sref = sref.split(':')
+						sref[2] = '1'
+						sref = ':'.join(sref)
+						png = findPicon(sref, self.piconfolder)
 				if png:
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 				else:
@@ -2575,14 +2600,16 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self['menu'].l.setItemHeight(mh)
 		self['menu'].l.setList(self.tventries)
 		if self.jetzt:
+			self['CHANNELkey'].hide()
+			self['CHANNELtext'].hide()
+			self['BOUQUETkey'].hide()
+			self['BOUQUETtext'].hide()
 			nextpage = search(NEXTPage2, bereich)
 			if nextpage:
 				self.downloadFull(nextpage.group(1), self.makeTVJetztView)
 			else:
 				self['menu'].moveToIndex(self.index)
 				self.ready = True
-				self['CHANNELkey'].hide()
-				self['BOUQUETkey'].hide()
 				self['INFOkey'].hide()
 				self['TEXTkey'].show()
 				self['INFOkey'].show()
@@ -2596,8 +2623,6 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 			else:
 				self['menu'].moveToIndex(self.index)
 				self.ready = True
-				self['CHANNELkey'].hide()
-				self['BOUQUETkey'].hide()
 				self['INFOkey'].show()
 				self['TEXTkey'].show()
 				self['TEXTtext'].setText('Sender')
@@ -2613,8 +2638,6 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		else:
 			self['menu'].moveToIndex(self.index)
 			self.ready = True
-			self['CHANNELkey'].hide()
-			self['BOUQUETkey'].hide()
 			self['INFOkey'].show()
 			self['TEXTkey'].show()
 			self['TEXTtext'].setText('Sender')
@@ -2866,7 +2889,9 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		TVSlog(output)
 		try:
 			self['CHANNELkey'].hide()
+			self['CHANNELtext'].hide()
 			self['BOUQUETkey'].hide()
+			self['BOUQUETtext'].hide()
 			self['INFOkey'].show()
 			self['MENUkey'].hide()
 			self['TEXTkey'].show()
@@ -2882,7 +2907,9 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 	def downloadPageError(self, output):
 		TVSlog(output)
 		self['CHANNELkey'].hide()
+		self['CHANNELtext'].hide()
 		self['BOUQUETkey'].hide()
+		self['BOUQUETtext'].hide()
 		self['INFOkey'].show()
 		self['MENUkey'].hide()
 		self['TEXTkey'].show()
@@ -2919,7 +2946,9 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 
 	def showProgrammPage(self):
 		self['CHANNELkey'].hide()
+		self['CHANNELtext'].hide()
 		self['BOUQUETkey'].hide()
+		self['BOUQUETtext'].hide()
 		self['INFOkey'].show()
 		self['TEXTkey'].show()
 		self['TEXTtext'].setText('Sender')
@@ -3051,6 +3080,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self.eventview = eventview
 		self.tagestipp = tagestipp
 		self.service_db = serviceDB(self.servicefile)
+		self.localhtml = '/tmp/tvspielfilm.html'
 		if not self.tagestipp:
 			channel = findall(',(.*?).html', link)
 			service = channel[0].lower()
@@ -3068,11 +3098,15 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			self._commonInit()
 		else:
 			self._commonInit('Suche', ' Refresh')
-		self['seitennr'].hide()
 		self.hideTVinfo()
 		self.hideInfotext()
 		self.hideRatingInfos()
 		self.showMenubar()
+		self['seitennr'].hide()
+		self['INFOkey'].hide()
+		self['INFOtext'].hide()
+		self['TEXTkey'].hide()
+		self['TEXTtext'].hide()
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'ChannelSelectBaseActions',
 									 'DirectionActions',
@@ -3141,10 +3175,6 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self['BOUQUETkey'].show()
 		self['BOUQUETtext'].setText('Woche +/-')
 		self['BOUQUETtext'].show()
-		self['INFOkey'].hide()
-		self['INFOtext'].hide()
-		self['TEXTkey'].hide()
-		self['TEXTtext'].hide()
 		output = ensure_str(open(self.localhtml, 'r').read())
 		titel = search('<title>(.*?)von', output)
 		date = str(self.date.strftime('%d.%m.%Y'))
@@ -3171,10 +3201,15 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 				png = self.piconfolder + '%s.png' % LOGO
 			else:
 				png = findPicon(sref, self.piconfolder)
+				if not png:  # Fallback from '1:0:*:...' to '1:0:1:...'
+					sref = sref.split(':')
+					sref[2] = '1'
+					sref = ':'.join(sref)
+					png = findPicon(sref, self.piconfolder)
 			if png:
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 			else:
-				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
+				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 						   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 			if self.progress:
 				start = sub(' - ..:..', '', TIME)
@@ -4584,8 +4619,8 @@ class TVSsearchYouTube(TVSAllScreen):
 				trailer_url = 'https://www.youtube.com/watch?v=%s' % trailer_id
 				result = ydl.extract_info(trailer_url, download=False)  # only the extracted info is needed
 			try:
-				sref = eServiceReference(4097, 0, ensure_str(result['url']))
-				sref.setName(ensure_str(result['title']))
+				sref = eServiceReference(4097, 0, result['url'])
+				sref.setName(result['title'])
 				self.session.open(MoviePlayer, sref)
 			except ValueError:
 				pass
@@ -4884,7 +4919,6 @@ class TVSMain(TVSBaseScreen):
 				c = self.getIndex(self[self.actmenu])
 			except IndexError:
 				c = 0
-
 			if self.actmenu == 'mainmenu':
 				try:
 					if self.tipps:
@@ -5438,7 +5472,6 @@ class TVSmakeServiceFile(Screen):
 				station = sub('[/]', ' ', station)
 				station = sub("'", '', station)
 				service = eventinfo[7]
-				TVSlog(service)
 				service = sub(':0:0:0:.*?[)], ', ':0:0:0:\n', service)
 				service = sub(':0:0:0::[a-zA-Z0-9_-]+', ':0:0:0:', service)
 				data += '%s\t %s\n' % (station, service)
@@ -5464,10 +5497,11 @@ class TVSmakeServiceFile(Screen):
 			search = compile(' [a-z0-9-]+ ').search
 			for line in open(self.servicefile):
 				line = line.strip()
-				if line != '' and ',' not in line and '/' not in line and '#' + line[0:5] not in newdata:
+				channel = line.split('1:')[0][:-1]
+				if line != '' and ',' not in line and '#' + channel not in newdata:
 					fnew.write(line)
 					fnew.write(linesep)
-					newdata = newdata + '#' + str(line[0:5])
+					newdata = newdata + '#' + channel
 					count += 1
 			f.close()
 			fnew.close()
