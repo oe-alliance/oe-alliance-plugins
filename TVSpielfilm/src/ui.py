@@ -5,7 +5,7 @@ from json import dumps, loads
 from os import linesep, remove, rename
 from os.path import isdir, isfile
 from re import S, compile, findall, search, sub
-import requests
+from requests import get, exceptions
 from socket import error as SocketError
 from six import ensure_binary, ensure_str
 from six.moves.http_client import HTTPException
@@ -14,9 +14,7 @@ from six.moves.urllib.parse import quote
 from six.moves.urllib.request import HTTPCookieProcessor, HTTPHandler, HTTPRedirectHandler, Request, build_opener, urlopen
 from time import gmtime, localtime, mktime, strftime
 from twisted.internet.reactor import callInThread
-
 from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_WRAP, eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG
-
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, configfile, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
@@ -123,8 +121,6 @@ class TVSAllScreen(Screen):
 	def __init__(self, session, skin=None, dic=None, scale=False):
 		w = DESKTOP_WIDTH - (80 * SCALE)
 		mw = w - (20 * SCALE)
-		h = DESKTOP_HEIGHT - (120 * SCALE) - 40
-		mh = h - 60
 		self.menuwidth = mw
 		if dic is None:
 			dic = {}
@@ -147,9 +143,9 @@ class TVSAllScreen(Screen):
 
 	def _download(self, link, name):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadError(error)
 		else:
 			name(response.content)
@@ -331,7 +327,7 @@ class TVSBaseScreen(TVSAllScreen):
 
 	def _picdownload(self, link, idx):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
 			self.getPics(response.content, idx)
 		except OSError as err:
@@ -706,9 +702,9 @@ class TVSBaseScreen(TVSAllScreen):
 
 	def _downloadPicPost(self, link, label):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadPicPostError(error)
 		else:
 			self.getPicPost(response.content, label)
@@ -1052,9 +1048,9 @@ class TVSBaseScreen(TVSAllScreen):
 
 	def _downloadPostPage(self, link, name):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadError(error)
 		else:
 			with open(self.localhtml2, 'wb') as f:
@@ -1066,9 +1062,9 @@ class TVSBaseScreen(TVSAllScreen):
 
 	def _downloadFullPage(self, link, name):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadPageError(error)
 		else:
 			with open(self.localhtml, 'wb') as f:
@@ -2199,9 +2195,9 @@ class TVSGenreView(TVSGenreJetztProgrammView):
 
 	def _downloadFull(self, link, name):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadFullError(error)
 		else:
 			with open(self.localhtml2, 'wb') as f:
@@ -2878,9 +2874,9 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 
 	def _downloadFull(self, link, name):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadFullError(error)
 		else:
 			name(response.content)
@@ -4693,9 +4689,9 @@ class TVSsearchYouTube(TVSAllScreen):
 
 	def igetPoster(self, link, i):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadPageError(error)
 		else:
 			with open(self.localposter[i], 'wb') as f:
@@ -4713,9 +4709,9 @@ class TVSsearchYouTube(TVSAllScreen):
 
 	def _downloadFullpage(self, link, name):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadPageError(error)
 		else:
 			with open(self.localhtml, 'wb') as f:
@@ -5291,9 +5287,9 @@ class TVSMain(TVSBaseScreen):
 
 	def download(self, link, name):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadError(error)
 		else:
 			with open(self.senderhtml, 'wb') as f:
@@ -5799,9 +5795,6 @@ class TVSTipps(TVSAllScreen):
 
 	def getTagesTipps(self, output):
 		self.ready = False
-		self.pics = []
-		for i in range(self.max):
-			self.pics.append('/tmp/tvspielfilm%s.jpg' % i)
 		output = ensure_str(output)
 		startpos = output.find('teaser-top">')
 		endpos = output.find('<div class="block-rotation">')
@@ -5813,7 +5806,8 @@ class TVSTipps(TVSAllScreen):
 		if search('pdf.tvspielfilm.de', bereich):
 			bereich = sub('<a href="https://pdf.tvspielfilm.de/.*?</a>', '', bereich, flags=S)
 		self.tippspicture = findall('<img src="(.*?)"', bereich, flags=S)
-		callInThread(self.idownload)
+		for idx, link in enumerate(self.tippspicture):
+			callInThread(self.idownload, idx, link)
 		self.tippschannel = findall('<span class="subline .*?">(.*?)</span>', bereich)
 		try:
 			parts = self.tippschannel[0].split(' | ')
@@ -5847,19 +5841,21 @@ class TVSTipps(TVSAllScreen):
 		self['thumb'].show()
 		self.ready = True
 
-	def idownload(self):
-		for idx, link in enumerate(self.tippspicture):
-			try:
-				response = requests.get(link)
-				response.raise_for_status()
-			except requests.exceptions.RequestException as error:
-				self.ready = True
-				TVSlog(error)
-			else:
-				with open(self.pics[idx], 'wb') as f:
-					f.write(response.content)
-				if idx == 0:
-					showPic(self['picture'], self.pics[idx])
+	def idownload(self, idx, link):  # TVTipps-PicsDownload
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		callInThread(self._idownload, idx, link)
+
+	def _idownload(self, idx, link):
+		try:
+			response = get(link)
+			response.raise_for_status()
+		except exceptions.RequestException as error:
+			self.downloadError(error)
+		else:
+			with open(self.pics[idx], 'wb') as f:
+				f.write(response.content)
+			if idx == 0:
+				showPic(self['picture'], self.pics[idx])
 
 	def ok(self):
 		if self.ready and search('/tv-programm/sendung/', self.infolink):
@@ -5911,9 +5907,9 @@ class TVSTipps(TVSAllScreen):
 
 	def _downloadFirst(self, link):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.ready = True
 			self.session.open(MessageBox, 'Der TV Spielfilm Server ist zurzeit nicht erreichbar:\n%s' % error, MessageBox.TYPE_ERROR)
 		else:
@@ -6402,22 +6398,19 @@ class TVSHeuteView(TVSBaseScreen):
 				self['sender%s' % i].hide()
 		pics = findall('<img src="(.*?)" alt="(.*?)"', bereichtop)
 		idx = 0
-		picDownloads = []
 		if pics:
 			for i, pic in enumerate(pics):
 				try:
 					picdata, dummy = pic
 					if picdata[-4:] == '.jpg':
 						picurl = ('https://' + search('https://(.*).jpg', picdata).group(1) + '.jpg').replace('159', '300')
-						picDownloads.append((picurl, idx))
-						self['pic%s' % idx].show()
+						callInThread(self.idownload, idx, picurl)
 						idx += 1
 				except IndexError:
 					pass
 			for i in range(idx, 6):  # hide column in case column is unused
 				self['pic%s' % idx].hide()
 				idx += 1
-			callInThread(self.idownloadPics, picDownloads)
 		else:
 			for i in range(6):
 				self['pic%s' % i].hide()
@@ -7123,24 +7116,28 @@ class TVSHeuteView(TVSBaseScreen):
 		else:
 			self['textpage'].pageUp()
 
-	def idownloadPics(self, downloads):
-		for link, idx in downloads:
-			try:
-				response = requests.get(link)
-				response.raise_for_status()
-			except requests.exceptions.RequestException as error:
-				self.downloadError(error)
-			else:
-				with open(self.pics[idx], 'wb') as f:
-					f.write(response.content)
-				if isfile(self.pics[idx]):
-					try:
-						self['pic%s' % idx].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
-						self['pic%s' % idx].instance.setPixmapFromFile(self.pics[idx])
-					except:
-						currPic = loadJPG(self.pics[idx])
-						self['pic%s' % idx].instance.setScale(1)
-						self['pic%s' % idx].instance.setPixmap(currPic)
+	def idownload(self, idx, link):  # TVheute-PreviewpicsDownload
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		callInThread(self._idownload, idx, link)
+
+	def _idownload(self, idx, link):
+		try:
+			response = get(link)
+			response.raise_for_status()
+		except exceptions.RequestException as error:
+			self.downloadError(error)
+		else:
+			with open(self.pics[idx], 'wb') as f:
+				f.write(response.content)
+			if isfile(self.pics[idx]):
+				try:
+					self['pic%s' % idx].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
+					self['pic%s' % idx].instance.setPixmapFromFile(self.pics[idx])
+				except:
+					currPic = loadJPG(self.pics[idx])
+					self['pic%s' % idx].instance.setScale(1)
+					self['pic%s' % idx].instance.setPixmap(currPic)
+				self['pic%s' % idx].show()
 
 	def downloadFullPage(self, link):
 		if self.MeinTVS:
@@ -7171,9 +7168,9 @@ class TVSHeuteView(TVSBaseScreen):
 
 	def _downloadFullPage(self, link):
 		try:
-			response = requests.get(link)
+			response = get(link)
 			response.raise_for_status()
-		except requests.exceptions.RequestException as error:
+		except exceptions.RequestException as error:
 			self.downloadPageError(error)
 		else:
 			with open(self.localhtml, 'wb') as f:
