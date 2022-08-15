@@ -37,14 +37,20 @@ def transHTML(text):
 
 
 def transCHANNEL(data):
-	neu = ''
-	for x in data.split('\n'):
-		if x:
-			if x.find('\t') == -1:
-				x += '\t'
-			name, sref = x.split('\t')
-			neu += '%s\t %s\n' % (name.strip().lower(), sref.strip())
-	data = neu
+	data = data.split('\n')
+	neudata = ''
+	for x in data:
+		neu = ''
+		for ipstart in (' 1:', ' 4097:', ' 5001:', ' 5002:', ' 5003:'):
+			if ipstart in x:
+				channel = x[:x.find(ipstart)].strip().lower()
+				sref = x[x.find(ipstart):].strip()
+				neu = channel + '\t ' + sref + '\n'
+				break
+		if neu == '':
+			neu = x.lower() + '\t\n'
+		neudata += neu
+	data = neudata
 	data = sub('das erste.*?\t', 'ard', data)
 	data = sub('zdf_neo.*?\t', '2neo', data)
 	data = sub('zdf neo.*?\t', '2neo', data)
@@ -70,6 +76,7 @@ def transCHANNEL(data):
 	data = sub('rtlup.*?\t', 'rtlpl', data)
 	data = sub('super rtl.*?\t', 'super', data)
 	data = sub('rtl.*?\t', 'rtl', data)
+	data = sub('voxup.*?\t', 'voxup', data)
 	data = sub('vox.*?\t', 'vox', data)
 	data = sub('sixx.*?\t', 'sixx', data)
 	data = sub('kabel.*? c.*?\t', 'k1cla', data)
@@ -112,6 +119,7 @@ def transCHANNEL(data):
 	data = sub('eurosport 1.*?\t', 'euro', data)
 	data = sub('eurosport 2.*?\t', 'euro2', data)
 	data = sub('sport1\\+.*?\t', 's1plu', data)
+	data = sub('sport1.*?\t', 'sport', data)
 	data = sub('sport 1.*?\t', 'sport', data)
 	data = sub('dazn 2.*?\t', 'dazn', data)
 	data = sub('esports1.*?\t', 'es1', data)
@@ -196,6 +204,7 @@ def transCHANNEL(data):
 	data = sub('orf2.*?\t', 'orf2', data)
 	data = sub('orf.iii.*?\t', 'orf3', data)
 	data = sub('orf.sport.*?\t', 'orfsp', data)
+	data = sub('orf.*?\t', 'orf1', data)
 	data = sub('sf1.*?\t', 'sf1', data)
 	data = sub('sf 1.*?\t', 'sf1', data)
 	data = sub('sf 2.*?\t', 'sf2', data)

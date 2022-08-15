@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from six import ensure_str
 from xml.etree.ElementTree import fromstring, tostring, parse
-
+from os.path import isfile
 from enigma import eListboxPythonMultiContent, gFont, getDesktop
 
 from Components.config import config
@@ -30,17 +30,30 @@ else:
 
 class channelDB():
 
-	def __init__(self, servicefile):
+	def __init__(self, servicefile, dupesfile=None):
 		self.servicefile = servicefile
+		self.dupesfile = dupesfile
 		self.d = dict()
-		for x in open(self.servicefile):
-			key = x[:x.find('1:')]
-			val = x[x.find('1:'):].strip()
-			self.d[key] = val
+		if isfile(servicefile):
+			for x in open(servicefile):
+				key = x[x.find(' '):].strip()
+				val = x[:x.find(' ')].strip()
+				self.d[key] = val
+		if dupesfile is not None:
+			if isfile(dupesfile):
+				for x in open(dupesfile):
+					key = x[x.find(' '):].strip()
+					val = x[:x.find(' ')].strip()
+					self.d[key] = val
 
 	def lookup(self, key):
-		if key in self.d:
-			return self.d[key]
+		str_d = str(self.d)
+		if key in str_d:
+			start = str_d.find(key)
+			stop = str_d[start:].find("':")
+			fullkey = str_d[start:start + stop]
+			if fullkey in self.d:
+				return self.d[fullkey]
 		return 'nope'
 
 	def close(self):
@@ -52,11 +65,11 @@ class serviceDB():
 	def __init__(self, servicefile):
 		self.servicefile = servicefile
 		self.d = dict()
-		for x in open(self.servicefile):
-			key = x[:x.find('1:') - 1]
-			ref = x[x.find('1:'):].strip().split(':')
-			val = ':'.join(ref[i] for i in range(10)) + ':'
-			self.d[key] = val
+		if isfile(servicefile):
+			for x in open(servicefile):
+				key = x[:x.find(' ')].strip()
+				val = x[x.find(' '):].strip()
+				self.d[key] = val
 
 	def lookup(self, key):
 		if key in self.d:
