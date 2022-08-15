@@ -133,6 +133,7 @@ class TVSAllScreen(Screen):
 		self.fontsmall = True if config.plugins.tvspielfilm.font_size.value == 'small' else False
 		self.baseurl = 'https://www.tvspielfilm.de'
 		self.servicefile = PLUGINPATH + 'db/service.references'
+		self.dupesfile = PLUGINPATH + 'db/dupes.references'
 
 	def zap(self):
 		servicelist = self.session.instantiateDialog(ChannelSelection)
@@ -5414,6 +5415,7 @@ class TVSmakeServiceFile(Screen):
 		self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.ok,
 														  'cancel': self.exit}, -1)
 		self.servicefile = PLUGINPATH + 'db/service.references'
+		self.dupesfile = PLUGINPATH + 'db/dupes.references'
 		self.ready = False
 		self.bouquetsTimer = eTimer()
 		self.bouquetsTimer.callback.append(self.getBouquets)
@@ -5456,53 +5458,51 @@ class TVSmakeServiceFile(Screen):
 				bouquet = eServiceReference(bouquet)
 			from Components.Sources.ServiceList import ServiceList
 			slist = ServiceList(bouquet, validate_commands=False)
-			services = slist.getServicesAsList(format='S')
-			search = ['IBDCTSERNX']
-			search.extend([(service, 0, -1) for service in services])
-			self.epgcache = eEPGCache.getInstance()
-			events = self.epgcache.lookupEvent(search)
+			services = slist.getServicesAsList(format='SN')
 			data = ''
 			fdata = ''
-			for eventinfo in events:
-				station = eventinfo[8]
-				station = sub('[/]', ' ', station)
-				station = sub("'", '', station)
-				service = eventinfo[7]
-				service = sub(':0:0:0:.*?[)], ', ':0:0:0:\n', service)
-				service = sub(':0:0:0::[a-zA-Z0-9_-]+', ':0:0:0:', service)
-				data += '%s\t %s\n' % (station, service)
-				fdata += '{0:<30} {1:<50}'.format(station, service) + '\n'
-# Bouquetlog for analysis purposes, e.g. when picons are missing
-			logdatei = '/home/root/logs/Bouquetimport.log'
-			if isfile(logdatei):
-				remove(logdatei)
-			Bouquetlog('Sendernamen aus Bouquets:\n' + '-' * 70 + '\n')  # analysis
-			Bouquetlog(fdata)  # analysis
-			data = transCHANNEL(data)  # Diese Zeile darf nicht auskommentiert werden
-			fdata = ''
-			for eintrag in data.split('\n'):
-				fdata += '{0:<15} {1:<50}'.format(eintrag[:eintrag.rfind(' ')], eintrag[eintrag.rfind(' ') + 1:]) + '\n'
-			Bouquetlog('\n\nSendernamen als Piconname:\n' + '-' * 70 + '\n')  # analysis
-			Bouquetlog(fdata)  # analysis
-######################################################
+			avail = 0
+			for service in services:
+				if '#DESCRIPTION' not in service[0]:
+					data += '%s %s\n' % (service[1], service[0])
+					fdata += '{0:<40} {1:<0}'.format(service[1], service[0]) + '\n'
+					avail += 1
+			data = transCHANNEL(data)
 			with open(self.servicefile, 'a') as f:
 				f.write(data)
 			fnew = open(self.servicefile + '.new', 'w')
+			dnew = open(self.dupesfile + '.new', 'w')
 			count = 0
 			newdata = ''
-			search = compile(' [a-z0-9-]+ ').search
+			imported = ''
 			for line in open(self.servicefile):
 				line = line.strip()
-				channel = line.split('1:')[0][:-1]
-				if line != '' and ',' not in line and '#' + channel not in newdata:
-					fnew.write(line)
-					fnew.write(linesep)
+				channel = line[:line.find(' ')].strip()
+				sref = line[line.find(' '):].strip()
+				if line != '' and ',' not in line:
+					if '#' + channel not in newdata:
+						fnew.write(line)
+						fnew.write(linesep)
+					else:
+						dnew.write(line)
+						dnew.write(linesep)
+					imported += '{0:<15} {1:<0}'.format(channel, sref) + '\n'
 					newdata = newdata + '#' + channel
 					count += 1
-			f.close()
+			dnew.close()
 			fnew.close()
+			rename(self.dupesfile + '.new', self.dupesfile)
 			rename(self.servicefile + '.new', self.servicefile)
 			self.ready = True
+### Bouquetlog for analysis purposes, e.g. when picons are missing ###
+			logdatei = '/home/root/logs/Bouquetimport.log'
+			if isfile(logdatei):
+				remove(logdatei)
+			Bouquetlog('%i verfügbare Sendernamen aus Bouquets:\n' % avail + '-' * 70 + '\n')
+			Bouquetlog(fdata)
+			Bouquetlog('\n\n%i importierte Sendernamen als Piconname:\n' % count + '-' * 70 + '\n')
+			Bouquetlog(imported)
+######################################################################
 			if newdata == '':
 				self.session.openWithCallback(self.noBouquet, MessageBox, '\nKeine TV Spielfilm Sender gefunden.\nBitte wählen Sie ein anderes TV Bouquet.', MessageBox.TYPE_YESNO)
 			else:
@@ -6111,7 +6111,7 @@ class TVSEvent(TVSAllScreenFull):
 
 	def __init__(self, session):
 		TVSAllScreenFull.__init__(self, session)
-		self.channel_db = channelDB(self.servicefile)
+		self.channel_db = channelDB(self.servicefile, self.dupesfile)
 		self.EventTimer = eTimer()
 		self.EventTimer.callback.append(self.makeTimerDB)
 		self.EventTimer.callback.append(self.makeChannelLink)
@@ -6603,7 +6603,7 @@ class TVSHeuteView(TVSBaseScreen):
 		self.oldcurrent = self.current
 		if self.ready:
 			for i in range(6):
-				if self.current == 'menu%s' % i:
+				if self.current == 'menu%s' % i and i < len(self.tvlinks[i]):
 					c = self['menu%s' % i].getSelectedIndex()
 					self.postlink = self.tvlinks[i][c]
 					if action == 'ok':
