@@ -73,9 +73,9 @@ APIURIBASE = 'https://api.chefkoch.de/v2'
 def APIget(apiuri):
 	try:
 		f = get(apiuri)
-		return(f.text, f.status_code)
+		return (f.text, f.status_code)
 	except IOError:
-		return('Serverrespose error: ', IOError)
+		return ('Serverrespose error: ', IOError)
 
 
 def getAPIdata(apiuri):
@@ -83,7 +83,7 @@ def getAPIdata(apiuri):
 	content, resp = APIget(apiuri)
 	if resp != 200:
 		CKlog('request failure from', apiuri)
-	return(content, resp)
+	return (content, resp)
 
 
 def CKlog(info, wert="", debug=False):

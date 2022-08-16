@@ -565,7 +565,7 @@ def main(menuid, **kwargs):
 		if menuid == "fp_menu":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		else:
-			return[]
+			return []
 	else:
 		if getImageDistro() in ('teamblue'):
 			if menuid != "frontpanel_menu":
