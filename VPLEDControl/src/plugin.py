@@ -342,7 +342,7 @@ def main(menuid):
 			if menuid == "display":
 				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 			else:
-				return[]
+				return []
 		else:
 			if menuid != "system":
 				return []

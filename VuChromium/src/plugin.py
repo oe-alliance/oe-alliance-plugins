@@ -76,7 +76,7 @@ class BrowserHandlers(PServerHandlers):
         returned_data = None
         try:
             _g_launcher_handler.ShowVirtualKeyborad(default_data)
-            while(True):
+            while (True):
                 returned_data = _g_launcher_handler.GetVirtualKeyboardData()
                 if returned_data is not None:
                     break

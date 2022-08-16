@@ -377,7 +377,7 @@ class PlayerService:
 		self.sock.settimeout(self.socket_timeout)
 		self.sock.bind(self.uds_file)
 		self.sock.listen(1)
-		while(self.enable):
+		while (self.enable):
 			try:
 				conn, addr = self.sock.accept()
 				self.parseHandle(conn, addr)
