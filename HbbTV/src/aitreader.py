@@ -115,7 +115,7 @@ class eAITSectionReader:
 
 def unit_test(demux, pmtid, sid):
 	reader = eAITSectionReader(demux, pmtid, sid)
-	if reader.doOpen():
+	if reader.doOpen(None, None):
 		reader.doParseApplications()
 		#reader.doDump()
 	else:

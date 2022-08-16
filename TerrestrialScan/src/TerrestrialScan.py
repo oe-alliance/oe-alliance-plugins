@@ -24,7 +24,7 @@ import dvbreader
 from .TerrestrialScanSkin import downloadBar
 
 
-def setParams(frequency, system, bandwidth=8): # freq is nine digits (474000000)
+def setParams(frequency, system, bandwidth=8):  # freq is nine digits (474000000)
 	params = eDVBFrontendParametersTerrestrial()
 	params.frequency = frequency
 	params.bandwidth = bandwidth * 1000000
@@ -45,11 +45,11 @@ def setParamsFe(params):
 	return params_fe
 
 
-def channel2freq(channel, bandwidth=8): # Europe channels
-	if 4 < channel < 13: # Band III
+def channel2freq(channel, bandwidth=8):  # Europe channels
+	if 4 < channel < 13:  # Band III
 		return (((177 + (bandwidth * (channel - 5))) * 1000000) + 500000)
-	elif 20 < channel < 70: # Bands IV,V
-		return ((474 + (bandwidth * (channel - 21))) * 1000000) # returns nine digits
+	elif 20 < channel < 70:  # Bands IV,V
+		return ((474 + (bandwidth * (channel - 21))) * 1000000)  # returns nine digits
 
 
 def getChannelNumber(frequency, descr):
@@ -99,7 +99,7 @@ class TerrestrialScan(Screen):
 		self.uhf_vhf = "uhf"
 		self.networkid = 0
 		self.restrict_to_networkid = False
-		self.stabliseTime = 2 # time in seconds for tuner to stablise on tune before taking a signal quality reading
+		self.stabliseTime = 2  # time in seconds for tuner to stablise on tune before taking a signal quality reading
 		if args:
 			if "feid" in args:
 				self.selectedNIM = args["feid"]
@@ -122,22 +122,22 @@ class TerrestrialScan(Screen):
 		self.lockTimeout = 50 	# 100ms for tick - 5 sec
 		self.tsidOnidTimeout = 100 	# 100ms for tick - 10 sec
 		self.snrTimeout = 100 	# 100ms for tick - 10 sec
-		self.bandwidth = 8 # MHz
+		self.bandwidth = 8  # MHz
 		self.scanTransponders = []
 		if self.uhf_vhf == "uhf_vhf":
 			bandwidth = 7
 			for a in range(5, 13):
-				for b in (eDVBFrontendParametersTerrestrial.System_DVB_T, eDVBFrontendParametersTerrestrial.System_DVB_T2): # system
+				for b in (eDVBFrontendParametersTerrestrial.System_DVB_T, eDVBFrontendParametersTerrestrial.System_DVB_T2):  # system
 					self.scanTransponders.append({"frequency": channel2freq(a, bandwidth), "system": b, "bandwidth": bandwidth})
 		if self.uhf_vhf in ("uhf", "uhf_vhf"):
 			bandwidth = 8
 			for a in range(21, 70):
-				for b in (eDVBFrontendParametersTerrestrial.System_DVB_T, eDVBFrontendParametersTerrestrial.System_DVB_T2): # system
+				for b in (eDVBFrontendParametersTerrestrial.System_DVB_T, eDVBFrontendParametersTerrestrial.System_DVB_T2):  # system
 					self.scanTransponders.append({"frequency": channel2freq(a, bandwidth), "system": b, "bandwidth": bandwidth})
 		if self.uhf_vhf == "australia":
 			bandwidth = 7
 			base_frequency = 177500000
-			for a in range(0, 8) + range(50, 74):
+			for a in list(range(0, 8)) + list(range(50, 74)):
 				freq = (base_frequency + (a * bandwidth * 1000000 + (2000000 if a > 8 else 0)))
 				self.scanTransponders.append({"frequency": freq, "system": eDVBFrontendParametersTerrestrial.System_DVB_T, "bandwidth": bandwidth})
 		self.transponders_found = []
@@ -198,7 +198,7 @@ class TerrestrialScan(Screen):
 				answer = None
 			self.close(answer)
 
-	def config_mode(self, nim): # Workaround for OpenATV > 5.3
+	def config_mode(self, nim):  # Workaround for OpenATV > 5.3
 		try:
 			return nim.config_mode
 		except AttributeError:
@@ -207,7 +207,7 @@ class TerrestrialScan(Screen):
 	def getFrontend(self):
 		print("[TerrestrialScan][getFrontend] searching for available tuner")
 		nimList = []
-		if self.selectedNIM < 0: # automatic tuner selection
+		if self.selectedNIM < 0:  # automatic tuner selection
 			for nim in nimmanager.nim_slots:
 				if self.config_mode(nim) not in ("nothing",) and (nim.isCompatible("DVB-T2") or (nim.isCompatible("DVB-S") and nim.canBeCompatible("DVB-T2"))):
 					nimList.append(nim.slot)
@@ -221,7 +221,7 @@ class TerrestrialScan(Screen):
 				print("[TerrestrialScan][getFrontend] No terrestrial tuner found")
 				self.showError(_('No terrestrial tuner found'))
 				return
-		else: # manual tuner selection, and subsequent iterations
+		else:  # manual tuner selection, and subsequent iterations
 			nim = nimmanager.nim_slots[self.selectedNIM]
 			if self.config_mode(nim) not in ("nothing",) and (nim.isCompatible("DVB-T2") or (nim.isCompatible("DVB-S") and nim.canBeCompatible("DVB-T2"))):
 				nimList.append(nim.slot)
@@ -246,7 +246,7 @@ class TerrestrialScan(Screen):
 			self.showError(_('Cannot retrieve Resource Manager instance'))
 			return
 
-		if self.selectedNIM < 0: # automatic tuner selection
+		if self.selectedNIM < 0:  # automatic tuner selection
 			print("[TerrestrialScan][getFrontend] Choosing NIM")
 
 		# stop pip if running
@@ -272,9 +272,9 @@ class TerrestrialScan(Screen):
 		self.frontend = None
 		self.rawchannel = None
 
-		nimList.reverse() # start from the last
+		nimList.reverse()  # start from the last
 		for slotid in nimList:
-			if current_slotid == -1:	# mark the first valid slotid in case of no other one is free
+			if current_slotid == -1:  # mark the first valid slotid in case of no other one is free
 				current_slotid = slotid
 			self.rawchannel = resmanager.allocateRawChannel(slotid)
 			if self.rawchannel:
@@ -311,7 +311,7 @@ class TerrestrialScan(Screen):
 
 		print("[TerrestrialScan][getFrontend] Will wait up to %i seconds for tuner lock." % (self.lockTimeout / 10))
 
-		self.selectedNIM = current_slotid # Remember for next iteration
+		self.selectedNIM = current_slotid  # Remember for next iteration
 
 		self["tuner_text"].setText(chr(ord('A') + current_slotid))
 
@@ -343,7 +343,7 @@ class TerrestrialScan(Screen):
 		self.dict = {}
 		self.frontend.getFrontendStatus(self.dict)
 		if self.dict["tuner_state"] == "TUNING":
-			if self.lockcounter < 1: # only show this once in the log per retune event
+			if self.lockcounter < 1:  # only show this once in the log per retune event
 				print("[TerrestrialScan][checkTunerLock] TUNING")
 		elif self.dict["tuner_state"] == "LOCKED":
 			print("[TerrestrialScan][checkTunerLock] LOCKED")
@@ -379,12 +379,12 @@ class TerrestrialScan(Screen):
 	def getCurrentTsidOnid(self, from_retune=False):
 		adapter = 0
 		demuxer_device = "/dev/dvb/adapter%d/demux%d" % (adapter, self.demuxer_id)
-		start = time.time() # for debug info
+		start = time.time()  # for debug info
 
 		sdt_pid = 0x11
 		sdt_current_table_id = 0x42
 		mask = 0xff
-		tsidOnidTimeout = 5 # maximum time allowed to read the service descriptor table (seconds)
+		tsidOnidTimeout = 5  # maximum time allowed to read the service descriptor table (seconds)
 		self.tsid = None
 		self.onid = None
 
@@ -403,7 +403,7 @@ class TerrestrialScan(Screen):
 
 			section = dvbreader.read_sdt(fd, sdt_current_table_id, 0x00)
 			if section is None:
-				time.sleep(0.1)	# no data.. so we wait a bit
+				time.sleep(0.1)  # no data.. so we wait a bit
 				continue
 
 			if section["header"]["table_id"] == sdt_current_table_id:
@@ -417,7 +417,7 @@ class TerrestrialScan(Screen):
 	def signalQualityWait(self):
 		signalQuality = self.frontend.readFrontendData(iFrontendInformation.signalQuality)
 		if signalQuality > 0:
-			time.sleep(self.stabliseTime) # allow extra time to get a stable reading
+			time.sleep(self.stabliseTime)  # allow extra time to get a stable reading
 			signalQuality = self.frontend.readFrontendData(iFrontendInformation.signalQuality)
 			if signalQuality > 0:
 				found = {"frequency": self.frequency, "tsid": self.tsid, "onid": self.onid, "system": self.system, "bandwidth": self.bandwidth, "signalQuality": signalQuality}

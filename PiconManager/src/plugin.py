@@ -787,7 +787,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				self.getPiconList()
 
 	def dataError(self, error):
-		print("[PiconManager] ERROR" % str(error))
+		print("[PiconManager] ERROR:%s" % str(error))
 		try:
 			if "500 Internal Server Error" in error:
 				self.session.open(MessageBox, _("Server temporarily unavailable"), MessageBox.TYPE_ERROR, timeout=10)
