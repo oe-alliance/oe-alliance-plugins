@@ -334,15 +334,6 @@ class TVSBaseScreen(TVSAllScreen):
 	def picdownloadError(self, output):
 		TVSlog(output)
 
-	def getPNG(self, x, Pos):
-		png = '%s%s.png' % (ICONPATH, x)
-		if isfile(png):
-			return MultiContentEntryPixmapAlphaTest(pos=(Pos, 20), size=(int(40 * SCALE), int(14 * SCALE)), png=loadPNG(png))
-		else:
-			if isfile(png):
-				return MultiContentEntryPixmapAlphaTest(pos=(Pos, 10), size=(int(40 * SCALE), int(14 * SCALE)), png=loadPNG(png))
-		return None
-
 	def infotextStartEnd(self, infotext):
 		part = infotext[1].strip()
 		if 'heute' in infotext[0].strip().lower():
