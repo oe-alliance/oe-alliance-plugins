@@ -250,7 +250,7 @@ class VFDCtrlUpgradeCore():
 				os.system('rm -f %s' % (filename))
 		try:
 			max_size = 1024 * 16
-			size = max_size #os.path.getsize(self.firmwarefile)
+			size = max_size  # os.path.getsize(self.firmwarefile)
 			if size == 0:
 				raise Exception('data_size is zero')
 			#print '[VFDCtrlUpgradeCore] data_size :',size
@@ -423,7 +423,7 @@ class UpgradeStatus(Screen):
 		self.callback = cb
 
 	def cbTimerExit(self):
-		if self.exitTimerCallCount < 10: # exit after 10 sec.
+		if self.exitTimerCallCount < 10:  # exit after 10 sec.
 			self.exitTimerCallCount = self.exitTimerCallCount + 1
 			self.setTitle("%s Upgrade Status (%d)" % (self.firmware.upper(), 10 - self.exitTimerCallCount))
 			return
@@ -493,7 +493,7 @@ class FUFilebrowser(Screen):
 		if self.downloadLock:
 			return
 
-		if self["file_list"].canDescent(): # isDir
+		if self["file_list"].canDescent():  # isDir
 			self["file_list"].descent()
 			return
 
@@ -674,8 +674,8 @@ class FUFilebrowser(Screen):
 		self.resetGUI()
 		self["file_list"].pageDown()
 
-	def keyNone(self):
-		None
+#	def keyNone(self):
+#		None
 
 
 class FirmwareUpgrade(Screen, ConfigListScreen):
@@ -874,8 +874,8 @@ class FirmwareUpgrade(Screen, ConfigListScreen):
 		self.logmode.callback.append(self.cbLogMode)
 		self.logmode.start(1000)
 
-	def keyNone(self):
-		None
+#	def keyNone(self):
+#		None
 
 
 def main(session, **kwargs):

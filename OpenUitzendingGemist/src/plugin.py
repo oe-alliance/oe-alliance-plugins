@@ -935,10 +935,10 @@ class OpenUg(Screen):
 
 	def getThumbnailName(self, x):
 		if self.choice == 'rtl':
-			if x[self.UG_ICON]:
-				return ""
-			else:
-				return ""
+			#if x[self.UG_ICON]:
+			#	return ""
+			#else:
+			return ""
 		return str(x[self.UG_STREAMURL]) + str(x[self.UG_ICONTYPE])
 
 	def updateMenu(self):
@@ -1404,7 +1404,7 @@ class OpenUg(Screen):
 				json_data = loads(data)
 				url_play = json_data['url']
 				if url_play != '':
-					myreference = eServiceReference(4097, 0, url)
+					myreference = eServiceReference(4097, 0, url_play)
 					myreference.setName(self.mediaList[self["list"].getSelectionIndex()][self.UG_PROGNAME])
 					self.session.open(UGMediaPlayer, myreference, False)
 

@@ -75,10 +75,11 @@ class Channelnumber:
 		info = None
 		service = None
 		if val == 'NameOff' or val == 'NameOn':
-			if name == "----":
-				vfd_write(name)
-			else:
-				vfd_write(name)
+			vfd_write(name)
+			#if name == "----":
+			#	vfd_write(name)
+			#else:
+			#	vfd_write(name)
 		else:
 			if chnr == "----":
 				vfd_write(chnr)

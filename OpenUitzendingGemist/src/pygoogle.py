@@ -6,16 +6,9 @@ http://code.google.com/apis/ajaxsearch/documentation/reference.html
 Needs Python 2.6 or later
 """
 from __future__ import print_function
-try:
-    import json
-except ImportError as e:
-    import simplejson as json
-except ImportError as e:
-    print(e)
-    exit()
+import json
 
 import sys
-import urllib
 import logging
 import argparse
 from six.moves.urllib.parse import urlencode, unquote

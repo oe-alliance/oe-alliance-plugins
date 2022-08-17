@@ -414,12 +414,10 @@ class StreamsThumb(StreamsThumbCommon):
 			# No DNS set in Settings, exit.NOCONNECT
 			if (xml == "NODNS"):
 				return (streamURI, auth, "Non-UK User!!\n\nYou need to specify a DNS in the OnDemand Settings!!")
-				break
 
 			# No DNS set in Settings, exit.
 			if (xml == "NOCONNECT"):
 				return (streamURI, auth, "Non-UK User!!\n\nCould not connect to your specified DNS!\n\n Check the DNS in the OnDemand Settings!!")
-				break
 
 			# Only check stream data if data has been returned.
 			if xml:
@@ -520,7 +518,7 @@ class StreamsThumb(StreamsThumbCommon):
 #==============================================================================
 	def getShowMediaData(self, weekList, showId):
 
-		self.url = u"http://m.channel4.com/4od/%s%s" # (showId, /series-1 )
+		self.url = u"http://m.channel4.com/4od/%s%s"  # (showId, /series-1 )
 		channel = "CH4"
 		short = ''
 		name = ''
@@ -659,7 +657,7 @@ class StreamsThumb(StreamsThumbCommon):
 #==============================================================================
 	def getCatsMediaData(self, weekList, category):
 
-		self.url = u"http://m.channel4.com/4od/tags/%s%s%s" # % (category, /order?, /page-X? )
+		self.url = u"http://m.channel4.com/4od/tags/%s%s%s"  # % (category, /order?, /page-X? )
 		channel = "CH4"
 		short = ''
 		name = ''

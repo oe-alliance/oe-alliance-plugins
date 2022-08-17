@@ -214,7 +214,7 @@ class Filebrowser(Screen):
 		if self.downloadLock:
 			return
 
-		if self["file_list"].canDescent(): # isDir
+		if self["file_list"].canDescent():  # isDir
 			self["file_list"].descent()
 			return
 
@@ -376,8 +376,8 @@ class Filebrowser(Screen):
 		self.resetGUI()
 		self["file_list"].pageDown()
 
-	def keyNone(self):
-		None
+#	def keyNone(self):
+#		None
 
 
 class FirmwareUpgrade(Screen):
@@ -520,7 +520,7 @@ class FirmwareUpgrade(Screen):
 				self.session.open(MessageBox, _("You can not upgrade to the same or lower version !"), MessageBox.TYPE_INFO, timeout=10)
 				return
 		except:
-			pass # always flash when no micom version
+			pass  # always flash when no micom version
 		msg = "You should not be stop during the upgrade.\nDo you want to upgrade?"
 		self.session.openWithCallback(self.cbRunUpgrade, MessageBox, _(msg), MessageBox.TYPE_YESNO, timeout=15, default=True)
 		self.fileopenmode = False
@@ -530,8 +530,8 @@ class FirmwareUpgrade(Screen):
 			return
 		self.close()
 
-	def keyNone(self):
-		None
+#	def keyNone(self):
+#		None
 
 
 def main(session, **kwargs):

@@ -304,7 +304,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			L4logE("no command")
 		elif _command == "exec" and ex is not None:
 			L4logE("exec", _ex)
-			exec(_ex) # FIXME PY3
+			exec(_ex)  # FIXME PY3
 		elif _command == "enable":
 			ExeMode = True
 		elif _command == "status":
@@ -359,7 +359,7 @@ class LCD4linuxConfigweb(resource.Resource):
 				return str(getMJPEGreader(_ex))
 		elif _command == "getexec" and ex is not None:
 			L4logE("getexec", _ex)
-			_exec("getexec = " + _ex) # FIXME PY3
+			_exec("getexec = " + _ex)  # FIXME PY3
 			return str(getexec)
 		elif _command == "copyMP":
 			for a in req.args.keys():
@@ -614,7 +614,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			elif Mode == "4":
 				L = L4
 			else:
-				Mode == "1"
+				Mode = "1"
 				L = L1
 				Element = "other"
 			if str(LCD4linux.WebIfDesign.value) == "2":

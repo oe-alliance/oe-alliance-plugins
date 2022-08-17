@@ -271,7 +271,7 @@ class BookmarkManager(SimpleConfigParser):
 				n = self.getString(s, 'name')
 				categoryList[i] = CategoryData(i, n)
 			cx += 1
-		sorted(categoryList)
+		categoryList = sorted(categoryList)
 		while bx <= self.mBookmarkCurrentIdx:
 			s = 'b-%d' % (bx,)
 			i = self.getNumber(s, 'id', -1)
@@ -286,7 +286,7 @@ class BookmarkManager(SimpleConfigParser):
 					self._del(s)
 			bx += 1
 		for key in categoryList:
-			sorted(categoryList[key].mBookmarks)
+			categoryList[key].mBookmarks = sorted(categoryList[key].mBookmarks)
 		self.mBookmarkRoot = categoryList
 		self.mPopulateValid = True
 		self.dump()

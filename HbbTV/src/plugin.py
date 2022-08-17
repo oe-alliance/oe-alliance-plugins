@@ -358,11 +358,10 @@ class VBMain(Screen):
 
 	def stop_browser(self):
 		VBController.command('CONTROL_EXIT')
-		return True
-		try:
-			os.system("%s/%s stop" % (vbcfg.APPROOT, vbcfg.APP_RUN))
-		except:
-			pass
+		#try:
+		#	os.system("%s/%s stop" % (vbcfg.APPROOT, vbcfg.APP_RUN))
+		#except:
+		#	pass
 		return True
 
 	def check_browser(self):

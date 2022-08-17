@@ -234,9 +234,9 @@ WAIT_TIMEOUT = 3000
 #=============================================================================#
 # ICMP parameters
 
-ICMP_ECHOREPLY = 0 # Echo reply (per RFC792)
-ICMP_ECHO = 8 # Echo request (per RFC792)
-ICMP_MAX_RECV = 2048 # Max size of incoming buffer
+ICMP_ECHOREPLY = 0  # Echo reply (per RFC792)
+ICMP_ECHO = 8  # Echo request (per RFC792)
+ICMP_MAX_RECV = 2048  # Max size of incoming buffer
 
 MAX_SLEEP = 1000
 
@@ -252,7 +252,7 @@ class MyStats:
     fracLoss = 1.0
 
 
-myStats = MyStats # NOT Used globally anymore.
+myStats = MyStats  # NOT Used globally anymore.
 
 #=============================================================================#
 
@@ -286,14 +286,14 @@ def checksum(source_string):
 
     # Handle last byte if applicable (odd-number of bytes)
     # Endianness should be irrelevant in this case
-    if countTo < len(source_string): # Check for odd length
+    if countTo < len(source_string):  # Check for odd length
         loByte = source_string[len(source_string) - 1]
         try:      # For Python3
             sum += loByte
         except:   # For Python2
             sum += ord(loByte)
 
-    sum &= 0xffffffff # Truncate sum to 32 bits (a variance from ping.c, which
+    sum &= 0xffffffff  # Truncate sum to 32 bits (a variance from ping.c, which
                       # uses signed ints, but overflow is unlikely in ping)
 
     sum = (sum >> 16) + (sum & 0xffff)    # Add high 16 bits to low 16 bits
@@ -311,12 +311,12 @@ def do_one(myStats, destIP, hostname, timeout, mySeqNumber, packet_size, quiet=F
     Returns either the delay (in ms) or None on timeout.
     """
     delay = None
-    try: # One could use UDP here, but it's obscure
+    try:  # One could use UDP here, but it's obscure
         mySocket = socket.socket(socket.AF_INET, socket.SOCK_RAW, socket.getprotobyname("icmp"))
     except socket.error as e:
         if not quiet:
             print("failed. (socket error: '%s')" % e.args[1])
-        raise # raise the original error
+        raise  # raise the original error
 
     my_ID = os.getpid() & 0xFFFF
 
@@ -383,7 +383,7 @@ def send_one_ping(mySocket, destIP, myID, mySeqNumber, packet_size):
         data = bytearray(padBytes)
 
     # Calculate the checksum on the data and the dummy header.
-    myChecksum = checksum(header + data) # Checksum is in network order
+    myChecksum = checksum(header + data)  # Checksum is in network order
 
     # Now that we have the right checksum, we put that in. It's just easier
     # to make up a new header than to stuff it into the dummy.
@@ -396,7 +396,7 @@ def send_one_ping(mySocket, destIP, myID, mySeqNumber, packet_size):
     sendTime = default_timer()
 
     try:
-        mySocket.sendto(packet, (destIP, 1)) # Port number is irrelevant for ICMP
+        mySocket.sendto(packet, (destIP, 1))  # Port number is irrelevant for ICMP
     except socket.error as e:
         print("General failure (%s)" % (e.args[1]))
         return
@@ -412,11 +412,11 @@ def receive_one_ping(mySocket, myID, timeout):
     """
     timeLeft = float(timeout) / 1000
 
-    while True: # Loop while waiting for packet or timeout
+    while True:  # Loop while waiting for packet or timeout
         startedSelect = default_timer()
         whatReady = select.select([mySocket], [], [], timeLeft)
         howLongInSelect = (default_timer() - startedSelect)
-        if whatReady[0] == []: # Timeout
+        if whatReady[0] == []:  # Timeout
             return None, 0, 0, 0, 0
 
         timeReceived = default_timer()
@@ -436,7 +436,7 @@ def receive_one_ping(mySocket, myID, timeout):
             "!BBHHH", icmpHeader
         )
 
-        if icmpPacketID == myID: # Our packet
+        if icmpPacketID == myID:  # Our packet
             dataSize = len(recPacket) - 28
             #print (len(recPacket.encode()))
             return timeReceived, (dataSize + 8), iphSrcIP, icmpSeqNumber, iphTTL
@@ -467,7 +467,6 @@ def dump_stats(myStats):
         ))
 
     print("")
-    return
 
 #=============================================================================#
 
@@ -476,7 +475,7 @@ def signal_handler(signum, frame):
     """
     Handle exit via signals
     """
-    dump_stats()
+    #dump_stats()
     print("\n(Terminated with signal %d)\n" % (signum))
     sys.exit(0)
 
@@ -494,9 +493,9 @@ def verbose_ping(hostname, timeout=WAIT_TIMEOUT, count=NUM_PACKETS,
 # Handle Ctrl-Break e.g. under Windows
         signal.signal(signal.SIGBREAK, signal_handler)
 
-    myStats = MyStats() # Reset the stats
+    myStats = MyStats()  # Reset the stats
 
-    mySeqNumber = 0 # Starting value
+    mySeqNumber = 0  # Starting value
 
     try:
         destIP = socket.gethostbyname(hostname)
@@ -530,8 +529,8 @@ def quiet_ping(hostname, timeout=WAIT_TIMEOUT, count=NUM_PACKETS,
     """
     Same as verbose_ping, but the results are returned as tuple
     """
-    myStats = MyStats() # Reset the stats
-    mySeqNumber = 0 # Starting value
+    myStats = MyStats()  # Reset the stats
+    mySeqNumber = 0  # Starting value
     try:
         destIP = socket.gethostbyname(hostname)
     except socket.gaierror as e:

@@ -72,7 +72,7 @@ class AutoChannelsImporterTimer:
 		backupclock = config.plugins.ChannelsImporter.scheduletime.value
 		nowt = time()
 		now = localtime(nowt)
-		if config.plugins.ChannelsImporter.scheduleRepeatInterval.value.isdigit(): # contains wait time in minutes
+		if config.plugins.ChannelsImporter.scheduleRepeatInterval.value.isdigit():  # contains wait time in minutes
 			repeatIntervalMinutes = int(config.plugins.ChannelsImporter.scheduleRepeatInterval.value)
 			return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, now.tm_hour, now.tm_min + repeatIntervalMinutes, 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
 		return int(mktime((now.tm_year, now.tm_mon, now.tm_mday, backupclock[0], backupclock[1], 0, now.tm_wday, now.tm_yday, now.tm_isdst)))
@@ -84,7 +84,7 @@ class AutoChannelsImporterTimer:
 		now = int(time())
 		if ChannelsImporterTime > 0:
 			if ChannelsImporterTime < now + atLeast:
-				if config.plugins.ChannelsImporter.scheduleRepeatInterval.value.isdigit(): # contains wait time in minutes
+				if config.plugins.ChannelsImporter.scheduleRepeatInterval.value.isdigit():  # contains wait time in minutes
 					ChannelsImporterTime = now + (60 * int(config.plugins.ChannelsImporter.scheduleRepeatInterval.value))
 					while (int(ChannelsImporterTime) - 30) < now:
 						ChannelsImporterTime += 60 * int(config.plugins.ChannelsImporter.scheduleRepeatInterval.value)
@@ -119,14 +119,15 @@ class AutoChannelsImporterTimer:
 		if wake - now < 60:
 			atLeast = 60
 			print("[ChannelsImporterScheduler][ChannelsImporteronTimer] onTimer occured at", strftime("%c", localtime(now)))
-			from Screens.Standby import inStandby
-			if not inStandby:
+			#from Screens.Standby import inStandby
+			#if not inStandby:
 				#message = _("Your channels list is about to be updated.\nDo you want to allow this?")
 				#ybox = self.session.openWithCallback(self.doChannelsImporter, MessageBox, message, MessageBox.TYPE_YESNO, timeout = 30)
 				#ybox.setTitle('Scheduled ChannelsImporter.')
-				self.doChannelsImporter(True)
-			else:
-				self.doChannelsImporter(True)
+			#	self.doChannelsImporter(True)
+			#else:
+			#	self.doChannelsImporter(True)
+			self.doChannelsImporter(True)
 		self.channelsimporterdate(atLeast)
 
 	def doChannelsImporter(self, answer):

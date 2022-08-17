@@ -150,8 +150,7 @@ def getstatusoutput(cmd):
 		sts = 1
 		text = "- -"
 		print("[LCD4linux] Error on os-call")
-	finally:
-		return sts, text
+	return sts, text
 
 
 def L4LVtest(VV):

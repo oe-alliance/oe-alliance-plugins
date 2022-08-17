@@ -78,7 +78,7 @@ def change_galpha(set_const, set_value):
 		excute_cmd("echo \"%s\" > %s" % (str(hex(alpha_value)), val))
 
 
-def enable_rc_mouse(mode): #mode=[0|1]|[False|True]
+def enable_rc_mouse(mode):  # mode=[0|1]|[False|True]
 	mouse_cond = "/proc/stb/fp/mouse"
 	if os.path.exists(mouse_cond):
 		excute_cmd("echo %d > %s" % (mode, mouse_cond))
@@ -256,12 +256,12 @@ class Player(Screen, InfoBarNotifications):
 
 
 VIDEO_FMT_PRIORITY_MAP = {
-	'38': 1, #MP4 Original (HD)
-	'37': 2, #MP4 1080p (HD)
-	'22': 3, #MP4 720p (HD)
-	'18': 4, #MP4 360p
-	'35': 5, #FLV 480p
-	'34': 6, #FLV 360p
+	'38': 1,  # MP4 Original (HD)
+	'37': 2,  # MP4 1080p (HD)
+	'22': 3,  # MP4 720p (HD)
+	'18': 4,  # MP4 360p
+	'35': 5,  # FLV 480p
+	'34': 6,  # FLV 360p
 }
 std_headers = {
 	'User-Agent': 'Mozilla/5.0 (X11; U; Linux x86_64; en-US; rv:1.9.2.6) Gecko/20100627 Firefox/3.6.6',
@@ -394,14 +394,14 @@ class PlayerService:
 		if data.startswith("http://www.youtube.com"):
 			print("youtube start!!")
 			tmp = data.split("?")
-			print(tmp) # ['http://www.youtube.com/watch', 'v=BpThu778qB4&feature=related']
+			print(tmp)  # ['http://www.youtube.com/watch', 'v=BpThu778qB4&feature=related']
 			service = self.session.nav.getCurrentlyPlayingServiceReference()
 			if len(tmp) == 2 and tmp[0] == "http://www.youtube.com/watch":
 				tmp = tmp[1].split("&")
-				print(tmp) # ['v=BpThu778qB4', 'feature=related']
+				print(tmp)  # ['v=BpThu778qB4', 'feature=related']
 				if len(tmp) == 2:
 					tmp = tmp[0].split("=")
-					print(tmp) # ['v', 'BpThu778qB4']
+					print(tmp)  # ['v', 'BpThu778qB4']
 					if len(tmp) == 2 and tmp[0] == "v":
 						wb_lock()
 						player = PlayerLauncher()
@@ -498,8 +498,8 @@ class BrowserLauncher(ConfigListScreen, Screen):
 
 		self.test_cond = True
 
-	def keyNone(self):
-		None
+#	def keyNone(self):
+#		None
 
 	def doExit(self):
 		change_galpha(set_const=False, set_value=False)
@@ -508,7 +508,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 		excute_cmd("killall -15 %s" % (self.browser_name))
 		excute_cmd("echo 60 > /proc/sys/vm/swappiness")
 		excute_cmd("echo 0 > /proc/stb/fp/mouse")
-		enable_rc_mouse(False) #rc-mouse off
+		enable_rc_mouse(False)  # rc-mouse off
 		language.activateLanguageIndex(self.current_lang_idx)
 		fbClass.getInstance().unlock()
 		#eRCInput.getInstance().unlock()

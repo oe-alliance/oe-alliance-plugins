@@ -2,8 +2,6 @@
 # -*- coding: UTF-8 -*-
 
 from __future__ import print_function
-import os
-import sys
 import time
 import usb.core
 import usb.util
@@ -195,10 +193,10 @@ def main():
 	known_devices_list = get_known_devices()
 
 	# define which frame to use, here use Samsung SPF-87H
-	device0 = known_devices_list[0] # Mini Monitor mode
-	device1 = known_devices_list[1] # Mass Storage mode
+	device0 = known_devices_list[0]  # Mini Monitor mode
+	device1 = known_devices_list[1]  # Mass Storage mode
 
-	dev = init_device(device0, device1)
+	dev = init_device(1, device0, device1)
 	print("Frame is in Mini Monitor mode and initialized. Sending pictures now")
 
 	image = Image.open("mypicture.jpg")
