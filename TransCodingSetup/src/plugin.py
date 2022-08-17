@@ -227,7 +227,7 @@ class TranscodingSetupInit:
 	def getConfigFromProc(self, procPath, configElement):
 		if fileExists(procPath):
 			curValue = getProcValue(procPath)
-			if isinstance(configElement.value, int): # is int ?
+			if isinstance(configElement.value, int):  # is int ?
 				curValue = int(curValue)
 			configElement.value = curValue
 			configElement.save()
@@ -244,10 +244,10 @@ class TranscodingSetupInit:
 				config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.setValue("-1")
 				config.plugins.transcodingsetup.encoder[int(extra_args[0])].framerate.setValue("-1")
 			else:
-				configElement.setValue("Off") # set config failed, reset to previous value
+				configElement.setValue("Off")  # set config failed, reset to previous value
 				configElement.save()
 				self.showMessage("Set %s failed." % (configName), MessageBox.TYPE_ERROR)
-		else: # Off
+		else:  # Off
 			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "bitrate") and config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.value == '-1':
 				config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.setValue(config.plugins.transcodingsetup.encoder[int(extra_args[0])].bitrate.default)
 			if hasattr(config.plugins.transcodingsetup.encoder[int(extra_args[0])], "framerate") and config.plugins.transcodingsetup.encoder[int(extra_args[0])].framerate.value == '-1':
@@ -395,7 +395,7 @@ class TranscodingSetup(Screen, ConfigListScreen):
 		self.list = []
 		self.onChangedEntry = []
 		ConfigListScreen.__init__(self, self.list, session=self.session, on_change=self.changedEntry)
-		self.setupMode = "Normal" # Normal / Advanced
+		self.setupMode = "Normal"  # Normal / Advanced
 		self.encoder = None
 		self.automode = None
 		self.createSetup()

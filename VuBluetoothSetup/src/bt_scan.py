@@ -490,7 +490,7 @@ class BluetoothRCUSetup(BluetoothDiscoveryScreen):
 
 		self.pairingTimer = eTimer()
 		self.pairingTimer.callback.append(self.pairingTimerCB)
-		self.MaxscanTime = 10 # sec
+		self.MaxscanTime = 10  # sec
 		self.scanRetry = 3
 
 		self.scanningText = _("Scanning VUPLUS BLE RCU")

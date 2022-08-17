@@ -45,7 +45,7 @@ from six.moves.http_client import HTTPConnection
 from six.moves.urllib.request import HTTPHandler
 import six
 
-socket.setdefaulttimeout(300) #in seconds
+socket.setdefaulttimeout(300)  # in seconds
 
 
 class Rect:

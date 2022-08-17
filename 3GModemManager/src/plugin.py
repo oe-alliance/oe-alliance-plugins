@@ -1084,7 +1084,7 @@ class ModemManager(Screen):
 		self.writeConf('Dial Command = ATD')
 		self.writeConf('Username = %s' % (uid))
 		self.writeConf('Password = %s' % (pwd))
-		self.writeConf('Phone = %s' % (phone)) #*99#
+		self.writeConf('Phone = %s' % (phone))  # *99#
 		self.writeConf('Modem Type = Analog Modem')
 		self.writeConf('Stupid mode = yes')
 		self.writeConf('ISDN = 0')
@@ -1097,7 +1097,7 @@ class ModemManager(Screen):
 	def updateUSBInfo(self):
 		info = ' '
 		try:
-			apn, uid, pwd, pin, phone = config.plugins.gmodemmanager.apn.getValue(), config.plugins.gmodemmanager.uid.getValue(), config.plugins.gmodemmanager.pwd.getValue(), config.plugins.gmodemmanager.pin.getValue(), config.plugins.gmodemmanager.phone.getValue()#self.apn,self.uid,self.pwd,self.pin,self.phone
+			apn, uid, pwd, pin, phone = config.plugins.gmodemmanager.apn.getValue(), config.plugins.gmodemmanager.uid.getValue(), config.plugins.gmodemmanager.pwd.getValue(), config.plugins.gmodemmanager.pin.getValue(), config.plugins.gmodemmanager.phone.getValue()  # self.apn,self.uid,self.pwd,self.pin,self.phone
 			if apn is None:
 				apn = ""
 			if uid is None:

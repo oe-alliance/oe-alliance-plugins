@@ -201,7 +201,7 @@ class StreamsThumb(StreamsThumbCommon):
 				year = int(date_tmp[0:4])
 				month = int(date_tmp[5:7])
 				day = int(date_tmp[8:10])
-				oldDate = date(int(year), int(month), int(day)) # year, month, day
+				oldDate = date(int(year), int(month), int(day))  # year, month, day
 				dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 				newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " + date_tmp[11:16]
 				date1 = _("Last Updated:") + " " + str(newDate)
@@ -304,7 +304,7 @@ class StreamsThumb(StreamsThumbCommon):
 					year = int(date_tmp[0:4])
 					month = int(date_tmp[5:7])
 					day = int(date_tmp[8:10])
-					oldDate = date(int(year), int(month), int(day)) # year, month, day
+					oldDate = date(int(year), int(month), int(day))  # year, month, day
 					dayofWeek = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 					newDate = dayofWeek[date.weekday(oldDate)] + " " + oldDate.strftime("%d %b %Y") + " " + date_tmp[11:16]
 					date1 = _("Added: ") + str(newDate)

@@ -71,7 +71,7 @@ def getBackgroundList():
         if six.PY2:
             ucontent = six.text_type(configFile.read(), encoding)
         else:
-            ucontent = configFile.read() # FIXME non utf-8
+            ucontent = configFile.read()  # FIXME non utf-8
         getBackgroundList.config = byteify(json.loads(ucontent))
         configFile.close()
     return getBackgroundList.config

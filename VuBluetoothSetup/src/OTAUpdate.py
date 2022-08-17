@@ -190,7 +190,7 @@ class VuRcuOtaUpdate(Screen, HelpableScreen, BluetoothTask):
 		print("[VuRcuOtaUpdate][otaEventCallback] event : ", event)
 		print("[VuRcuOtaUpdate][otaEventCallback] value : ", value)
 
-		if event == OTA_PROGRESS_DATA: # OTA_PROGRESS_DATA
+		if event == OTA_PROGRESS_DATA:  # OTA_PROGRESS_DATA
 			self["text"].setText(_("Updateing %d %%") % value)
 			self["progress"].setValue(value)
 		elif event == OTA_RCU_DONE:

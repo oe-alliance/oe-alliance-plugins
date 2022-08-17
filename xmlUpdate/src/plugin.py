@@ -81,7 +81,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 				else:
 					print("[xmlUpdate][keyGo] Saving file succeeded.")
 					self.showRestartMessage(_("Fetching and saving %s.xml succeeded.\nRestart now for changes to take immediate effect?") % self.DVBtype.value)
-			else: # XML did not validate
+			else:  # XML did not validate
 				print("[xmlUpdate][validXML] Closing documentElement missing.")
 				self.showError(_("The %s.xml download was corrupt.") % self.DVBtype.value)
 
@@ -107,7 +107,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 			print('[xmlUpdate][fetchURL] undefined error', sys.exc_info()[0])
 		self.showError(_("The %s.xml file could not be fetched") % self.DVBtype.value)
 
-	def validXML(self, XMLdata): # Looks for closing documentElement, i.e. </satellites>, </cables>, or </locations>
+	def validXML(self, XMLdata):  # Looks for closing documentElement, i.e. </satellites>, </cables>, or </locations>
 		return self.DVBtype.value in ('satellites', 'cables') and ("</%s>" % self.DVBtype.value) in XMLdata or self.DVBtype.value == "terrestrial" and "</locations>" in XMLdata
 
 	def showError(self, message):

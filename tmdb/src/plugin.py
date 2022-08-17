@@ -32,7 +32,7 @@ def eventinfo(session, eventName="", **kwargs):
 	try:
 		s = session.nav.getCurrentService()
 		info = s.info()
-		event = info.getEvent(0) # 0 = now, 1 = next
+		event = info.getEvent(0)  # 0 = now, 1 = next
 		name = event and event.getEventName() or ''
 		session.open(tmdb.tmdbScreen, name, 2)
 	except:

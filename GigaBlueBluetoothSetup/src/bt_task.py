@@ -80,13 +80,13 @@ class BluetoothTask(BluetoothState):
 		self.curTask = None
 		self.doNextTmer = eTimer()
 		self.doNextTmer.callback.append(self.doNext)
-		self.doNextInterval = 100 # ms
+		self.doNextInterval = 100  # ms
 
 		self.tasks1 = []
 		self.curTask1 = None
 		self.doNextTmer1 = eTimer()
 		self.doNextTmer1.callback.append(self.doNext1)
-		self.doNextInterval1 = 100 # ms
+		self.doNextInterval1 = 100  # ms
 
 	def updateState(self, taskType):
 		if taskType == self.TASK_CONNECT:

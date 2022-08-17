@@ -199,8 +199,8 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		global apModeConfig
 		self.hostapdConf = {}
 		self.hostapdConf["interface"] = apModeConfig.wirelessdevice
-		self.hostapdConf["bridge"] = apModeConfig.branch # "br0"
-		self.hostapdConf["driver"] = apModeConfig.driver # "nl80211"
+		self.hostapdConf["bridge"] = apModeConfig.branch  # "br0"
+		self.hostapdConf["driver"] = apModeConfig.driver  # "nl80211"
 		self.hostapdConf["hw_mode"] = apModeConfig.wirelessmode
 		self.hostapdConf["channel"] = apModeConfig.channel
 		self.hostapdConf["ssid"] = apModeConfig.ssid
@@ -219,9 +219,9 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		self.hostapdConf["wep_key0"] = apModeConfig.wep_key0
 		self.hostapdConf["wpa"] = apModeConfig.wpa
 		self.hostapdConf["wpa_passphrase"] = apModeConfig.wpa_passphrase
-		self.hostapdConf["wpa_key_mgmt"] = apModeConfig.wpa_key_mgmt # "WPA-PSK"
-		self.hostapdConf["wpa_pairwise"] = apModeConfig.wpa_pairwise # "TKIP CCMP"
-		self.hostapdConf["rsn_pairwise"] = apModeConfig.rsn_pairwise # "CCMP"
+		self.hostapdConf["wpa_key_mgmt"] = apModeConfig.wpa_key_mgmt  # "WPA-PSK"
+		self.hostapdConf["wpa_pairwise"] = apModeConfig.wpa_pairwise  # "TKIP CCMP"
+		self.hostapdConf["rsn_pairwise"] = apModeConfig.rsn_pairwise  # "CCMP"
 		self.hostapdConf["wpa_group_rekey"] = apModeConfig.wpagrouprekey
 
 	def loadInterfacesConfig(self):
@@ -263,12 +263,12 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		if len(apModeConfig.wep_key0.value) > 10:
 			apModeConfig.wepType.value = "128"
 
-		if apModeConfig.wpa.value != "0" and apModeConfig.wpa_passphrase.value: # (1,WPA), (2,WPA2), (3,WPA/WPA2)
+		if apModeConfig.wpa.value != "0" and apModeConfig.wpa_passphrase.value:  # (1,WPA), (2,WPA2), (3,WPA/WPA2)
 			apModeConfig.encrypt.value = True
 			apModeConfig.method.value = apModeConfig.wpa.value
 		elif apModeConfig.wep.value and apModeConfig.wep_key0.value:
 			apModeConfig.encrypt.value = True
-			apModeConfig.method.value = "0" # wep
+			apModeConfig.method.value = "0"  # wep
 		else:
 			apModeConfig.encrypt.value = False
 
@@ -323,7 +323,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 			self.configList.append(self.encryptEntry)
 			if apModeConfig.encrypt.value is True:
 				self.configList.append(self.methodEntry)
-				if apModeConfig.method.value == "0": # wep
+				if apModeConfig.method.value == "0":  # wep
 					self.configList.append(self.wepKeyTypeEntry)
 					self.configList.append(self.wepKey0Entry)
 				else:
@@ -376,7 +376,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		iface = apModeConfig.wirelessdevice.value
 
 # check vendor ID for lagacy driver
-		vendorID = "148f" # ralink vendor ID
+		vendorID = "148f"  # ralink vendor ID
 		idVendorPath = "/sys/class/net/%s/device/idVendor" % iface
 		if access(idVendorPath, R_OK):
 			fd = open(idVendorPath, "r")
@@ -389,7 +389,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 				return True
 
 # check sys driver path for kernel driver
-		ralinkKmod = "rt2800usb" # ralink kernel driver name
+		ralinkKmod = "rt2800usb"  # ralink kernel driver name
 		driverPath = "/sys/class/net/%s/device/driver/" % iface
 		if os_path.exists(driverPath):
 			driverName = os_path.basename(os_path.realpath(driverPath))
@@ -487,7 +487,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 	def networkRestart_stop(self, nextFunc=None):
 		printDebugMsg("networkRestart_stop")
 		self.msgPlugins(False)
-		self.commands = [] # stop current network
+		self.commands = []  # stop current network
 		self.networkRestartConsole = Console()
 		self.commands.append("/etc/init.d/avahi-daemon stop")
 		for iface in iNetwork.getAdapterList():
@@ -573,8 +573,8 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 		isRalinkKmodUploaded = self.checkProcModules() == 1
 		needRalinkKmod_ = self.needRalinkKmod()
 
-		if needRalinkKmod_: # ralink device is activated in AP Mode.
-			if not isRalinkKmodUploaded: # reboot to loading kernel module.
+		if needRalinkKmod_:  # ralink device is activated in AP Mode.
+			if not isRalinkKmodUploaded:  # reboot to loading kernel module.
 				msg = "You should now reboot your STB in order to ralink device operate in AP mode.\n\nReboot now ?\n\n"
 				self.session.openWithCallback(self.doReboot, MessageBox, _(msg), type=MessageBox.TYPE_YESNO, default=True)
 			else:
@@ -599,12 +599,12 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 			data = fd.read()
 			fd.close()
 
-			if need_ralink_kmod: # check legacy modules in blacklist
+			if need_ralink_kmod:  # check legacy modules in blacklist
 				for mod in legacy_modules:
 					if data.find(mod) != -1:
 						return
 			else:
-				for mod in kernel_modules: # check kernel modules in blacklist
+				for mod in kernel_modules:  # check kernel modules in blacklist
 					if data.find(mod) != -1:
 						return
 
@@ -815,11 +815,11 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 
 			fix_line = None
 # for encrypt line
-			if line.find("wep_default_key=") != -1: # is wepLine
+			if line.find("wep_default_key=") != -1:  # is wepLine
 				if isEncryptOn and isEncryptWEP:
 					fix_line = "wep_default_key=%s\n" % self.hostapdConf["wep_default_key"].value
 
-			elif line.find("wep_key0=") != -1: # is WepKeyLine
+			elif line.find("wep_key0=") != -1:  # is WepKeyLine
 				if isEncryptOn:
 					if isEncryptWEP:
 						fix_line = "wep_key0=%s\n" % self.hostapdConf["wep_key0"].value
@@ -829,7 +829,7 @@ class WirelessAccessPoint(Screen, ConfigListScreen):
 				else:
 					fix_line = "#wep_key0=%s\n" % self.hostapdConf["wep_key0"].value
 
-			elif line.find("wpa=") != -1: # is wpaLine
+			elif line.find("wpa=") != -1:  # is wpaLine
 				if isEncryptOn and isEncryptWPA:
 					fix_line = "wpa=%s\n" % apModeConfig.method.value
 ##

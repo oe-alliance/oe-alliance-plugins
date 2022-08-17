@@ -205,7 +205,7 @@ class TerrestrialScanScreen(ConfigListScreen, Screen):
 		if answer:
 			self.close(True)
 
-	def config_mode(self, nim): # Workaround for OpenATV > 5.3
+	def config_mode(self, nim):  # Workaround for OpenATV > 5.3
 		try:
 			return nim.config_mode
 		except AttributeError:

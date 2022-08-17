@@ -143,7 +143,7 @@ class NinaScreen (Screen):
 		scrH = val(530)
 		dif = 0
 		s = s.replace('_fnt0_', valStr(18)).replace('_fnt1_', valStr(23)).replace('_fnt2_', valStr(26)).replace('_sb_', valStr(10))
-		if data.miniView: #Kompaktanzeige fuer Wanungen (oben)
+		if data.miniView:  # Kompaktanzeige fuer Wanungen (oben)
 			if getInt(configValue('format', '0')) == 2:
 				dif = 12
 			scrW = int(scale * 1280) - val(2 * dif)
@@ -350,7 +350,7 @@ class NinaMonitor ():
 				else:
 					self.interval = 1000 * 60 * self.getInterval()
 					if wasError:
-						self.interval = min(self.interval, 2 * 60 * 1000) #im Fehlerfall mind. nach 2 Min nachladen
+						self.interval = min(self.interval, 2 * 60 * 1000)  # im Fehlerfall mind. nach 2 Min nachladen
 				self.checkTimer.start(self.interval, True)
 				self.loop += 1
 		except Exception as e:

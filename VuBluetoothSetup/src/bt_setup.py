@@ -270,7 +270,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 
 		cur = self["deviceList"].getCurrent()
 		if cur:
-			mac = cur[4]["bd_addr"] # mac
+			mac = cur[4]["bd_addr"]  # mac
 
 		return mac
 
@@ -279,7 +279,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 
 		cur = self["deviceList"].getCurrent()
 		if cur:
-			name = cur[4]["name"] # mac
+			name = cur[4]["name"]  # mac
 
 		return name
 
@@ -298,7 +298,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 		cur = self["deviceList"].getCurrent()
 		if cur:
 			profile = cur[4]["profile"]
-			is_audio = isAudioProfile(profile) # is audio
+			is_audio = isAudioProfile(profile)  # is audio
 
 		return is_audio
 

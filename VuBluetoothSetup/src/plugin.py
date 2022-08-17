@@ -15,7 +15,7 @@ def main(session, **kwargs):
 
 
 def bt_keyPressed(key, flag):
-	if flag != 0: # if not release
+	if flag != 0:  # if not release
 		global g_BTVolumeControlHandle
 		if key in (114, 115):
 			if g_BTVolumeControlHandle:
@@ -34,13 +34,13 @@ def bt_keyPressed(key, flag):
 
 
 def auto_start_main(reason, **kwargs):
-	if reason == 0: # when add plugins
+	if reason == 0:  # when add plugins
 		global g_BTVolumeControlHandle
 		if g_BTVolumeControlHandle is None:
 			g_BTVolumeControlHandle = eDVBVolumecontrol.getInstance()
 			eActionMap.getInstance().bindAction('', -0x7FFFFFFF, bt_keyPressed)
 
-	else: # when remove plugins
+	else:  # when remove plugins
 		try:
 			if pybluetooth_instance:
 				pybluetooth_instance.disable()

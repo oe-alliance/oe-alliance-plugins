@@ -60,16 +60,16 @@ class MisPlsLcnScan(Screen):
 		self.path = "/etc/enigma2"
 		self.services_dict = {}
 		self.tmp_services_dict = {}
-		self.namespace_dict = {} # to store namespace when sub network is enabled
+		self.namespace_dict = {}  # to store namespace when sub network is enabled
 		self.logical_channel_number_dict = {}
-		self.ignore_visible_service_flag = False # make this a user override later if found necessary
+		self.ignore_visible_service_flag = False  # make this a user override later if found necessary
 		self.VIDEO_ALLOWED_TYPES = [1, 4, 5, 17, 22, 24, 25, 27, 135]
 		self.AUDIO_ALLOWED_TYPES = [2, 10]
 		self.BOUQUET_PREFIX = "userbouquet.MisPlsLcnScan."
 		self.bouquetsIndexFilename = "bouquets.tv"
 		self.bouquetFilename = self.BOUQUET_PREFIX + config.plugins.MisPlsLcnScan.provider.value + ".tv"
-		self.bouquetName = PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["name"] # already translated
-		self.namespace_complete = not (config.usage.subnetwork.value if hasattr(config.usage, "subnetwork") else True) # config.usage.subnetwork not available in all images
+		self.bouquetName = PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["name"]  # already translated
+		self.namespace_complete = not (config.usage.subnetwork.value if hasattr(config.usage, "subnetwork") else True)  # config.usage.subnetwork not available in all images
 
 		self.LOCK_TIMEOUT = self.LOCK_TIMEOUT_FIXED
 		self.scanTransponders = self.getMisTransponders(PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["orb_pos"])
@@ -213,9 +213,9 @@ class MisPlsLcnScan(Screen):
 		self.frontend = None
 		self.rawchannel = None
 
-		nimList = [slot for slot in nimList if not self.isRotorSat(slot, self.transpondercurrent.orbital_position)] + [slot for slot in nimList if self.isRotorSat(slot, self.transpondercurrent.orbital_position)] #If we have a choice of dishes try "fixed" before "motorised".
+		nimList = [slot for slot in nimList if not self.isRotorSat(slot, self.transpondercurrent.orbital_position)] + [slot for slot in nimList if self.isRotorSat(slot, self.transpondercurrent.orbital_position)]  # If we have a choice of dishes try "fixed" before "motorised".
 		for slotid in nimList:
-			if current_slotid == -1:	# mark the first valid slotid in case of no other one is free
+			if current_slotid == -1:  # mark the first valid slotid in case of no other one is free
 				current_slotid = slotid
 
 			self.rawchannel = resmanager.allocateRawChannel(slotid)
@@ -300,7 +300,7 @@ class MisPlsLcnScan(Screen):
 		self.dict = {}
 		self.frontend.getFrontendStatus(self.dict)
 		if self.dict["tuner_state"] == "TUNING":
-			if self.lockcounter < 1: # only show this once in the log per retune event
+			if self.lockcounter < 1:  # only show this once in the log per retune event
 				print("[MakeBouquet][checkTunerLock] TUNING")
 		elif self.dict["tuner_state"] == "LOCKED":
 			print("[MakeBouquet][checkTunerLock] TUNER LOCKED")
@@ -339,8 +339,8 @@ class MisPlsLcnScan(Screen):
 		self.onid = None
 		sdt_pid = 0x11
 		sdt_current_table_id = 0x42
-		mask = 0xff # only read SDT actual, not SDT other.
-		sdtTimeout = 5 # maximum time allowed to read the service descriptor table (seconds)
+		mask = 0xff  # only read SDT actual, not SDT other.
+		sdtTimeout = 5  # maximum time allowed to read the service descriptor table (seconds)
 
 		sdt_current_version_number = -1
 		sdt_current_sections_read = []
@@ -363,7 +363,7 @@ class MisPlsLcnScan(Screen):
 
 			section = dvbreader.read_sdt(fd, sdt_current_table_id, 0x00)
 			if section is None:
-				time.sleep(0.1)	# no data.. so we wait a bit
+				time.sleep(0.1)  # no data.. so we wait a bit
 				continue
 
 			if section["header"]["table_id"] == sdt_current_table_id and not sdt_current_completed:
@@ -376,7 +376,7 @@ class MisPlsLcnScan(Screen):
 				if section["header"]["section_number"] not in sdt_current_sections_read:
 					sdt_current_sections_read.append(section["header"]["section_number"])
 					sdt_current_content += section["content"]
-					if self.tsid is None or self.onid is None: # save first read of tsid and onid.
+					if self.tsid is None or self.onid is None:  # save first read of tsid and onid.
 						self.tsid = section["header"]["transport_stream_id"]
 						self.onid = section["header"]["original_network_id"]
 						if self.onid not in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["onids"]:
@@ -413,12 +413,12 @@ class MisPlsLcnScan(Screen):
 
 		nit_current_pid = 0x10
 		nit_current_table_id = 0x40
-		nit_other_table_id = 0x00 # don't read other table
+		nit_other_table_id = 0x00  # don't read other table
 		if nit_other_table_id == 0x00:
 			mask = 0xff
 		else:
 			mask = nit_current_table_id ^ nit_other_table_id ^ 0xff
-		nit_current_timeout = 20 # maximum time allowed to read the network information table (seconds)
+		nit_current_timeout = 20  # maximum time allowed to read the network information table (seconds)
 
 		nit_current_version_number = -1
 		nit_current_sections_read = []
@@ -441,7 +441,7 @@ class MisPlsLcnScan(Screen):
 
 			section = dvbreader.read_nit(fd, nit_current_table_id, nit_other_table_id)
 			if section is None:
-				time.sleep(0.1)	# no data.. so we wait a bit
+				time.sleep(0.1)  # no data.. so we wait a bit
 				continue
 
 			if section["header"]["table_id"] == nit_current_table_id and not nit_current_completed:
@@ -490,11 +490,11 @@ class MisPlsLcnScan(Screen):
 		servicekeys = self.tmp_services_dict.keys()
 		for servicekey in servicekeys:
 			if servicekey in self.logical_channel_number_dict and (self.logical_channel_number_dict[servicekey]["logical_channel_number"] not in self.services_dict or
-				"priority" in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value] and servicekey in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["priority"]): # this line decides who wins if an LCN maps to more than one service
+				"priority" in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value] and servicekey in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["priority"]):  # this line decides who wins if an LCN maps to more than one service
 				self.tmp_services_dict[servicekey]["logical_channel_number"] = self.logical_channel_number_dict[servicekey]["logical_channel_number"]
 				self.services_dict[self.logical_channel_number_dict[servicekey]["logical_channel_number"]] = self.tmp_services_dict[servicekey]
 
-		if "overrides" in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]: # ability to force missing LCNs
+		if "overrides" in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]:  # ability to force missing LCNs
 			for override in PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["overrides"]:
 				if override in servicekeys:
 					self.tmp_services_dict[override]["logical_channel_number"] = PROVIDERS[config.plugins.MisPlsLcnScan.provider.value]["overrides"][override]
@@ -565,7 +565,7 @@ class MisPlsLcnScan(Screen):
 
 	def createBouquet(self):
 		bouquetIndexContent = self.readBouquetIndex()
-		if '"' + self.bouquetFilename + '"' not in bouquetIndexContent: # only edit the index if bouquet file is not present
+		if '"' + self.bouquetFilename + '"' not in bouquetIndexContent:  # only edit the index if bouquet file is not present
 			self.writeBouquetIndex(bouquetIndexContent)
 		self.writeBouquet()
 

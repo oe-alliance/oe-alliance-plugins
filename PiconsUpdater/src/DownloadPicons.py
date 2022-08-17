@@ -45,7 +45,7 @@ class DownloadPicons:
                 piconName = getCleanFileName(service.getServiceName())
             else:
                 piconName = channelKey
-            if any(channelKey.find(i) + 1 for i in ['4097', '5001', '5002', '5003']): # Internetstream found, therefore use SNP:
+            if any(channelKey.find(i) + 1 for i in ['4097', '5001', '5002', '5003']):  # Internetstream found, therefore use SNP:
                 channelKey = piconName.replace('-', '')
             if not piconName:
                 continue

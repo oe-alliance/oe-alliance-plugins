@@ -1267,7 +1267,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 					self['cover'].instance.setPixmap(ptr)
 					self['cover'].show()
 			del self.picload
-		self.ok() # Shortcut
+		self.ok()  # Shortcut
 
 	def ok(self):
 		check = self['list'].getCurrent()

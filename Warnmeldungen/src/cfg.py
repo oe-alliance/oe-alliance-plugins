@@ -78,7 +78,7 @@ config.plugins.Warnung.debug = ConfigYesNo(default=False)
 
 
 def debugMode(reset=False):
-	global _isDebugMode #buffer
+	global _isDebugMode  # buffer
 	if reset or (_isDebugMode == None):
 		_isDebugMode = config.plugins.Warnung.debug.value
 	return _isDebugMode

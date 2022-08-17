@@ -383,11 +383,11 @@ class StreamsThumb(StreamsThumbCommon):
 						millisecs = 0
 
 					try:
-						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
+						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+00:00")))  # 2012-12-31T12:54:29+00:00
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 						date1 = _("Added: ") + str(date_tmp)
 					except (Exception) as exception:
-						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
+						lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[1].text), "%Y-%m-%dT%H:%M:%S+01:00")))  # 2012-12-31T12:54:29+01:00
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 						date1 = _("Added: ") + str(date_tmp)
 						print("canBeMultiple: date1 parse error: ", exception)
@@ -464,11 +464,11 @@ class StreamsThumb(StreamsThumbCommon):
 					millisecs = 0
 
 				try:
-					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+00:00")))  # 2012-12-31T12:54:29+00:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					date1 = _("Added: ") + str(date_tmp)
 				except (Exception) as exception:
-					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[3].text), "%Y-%m-%dT%H:%M:%S+01:00")))  # 2012-12-31T12:54:29+01:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					date1 = _("Added: ") + " " + str(date_tmp)
 					print("getMediaData: date1 parse error: ", exception)
@@ -480,7 +480,7 @@ class StreamsThumb(StreamsThumbCommon):
 				if self.showIcon == 'True':
 					try:
 						icon_url = str(elem[23].attrib.get('url'))
-						icon = icon_url[0:-4] + "-261.jpg" # higher quality image 261x147
+						icon = icon_url[0:-4] + "-261.jpg"  # higher quality image 261x147
 						#icon = line[5] lower quality image 150x84
 					except (Exception) as exception:
 						print("getMediaData: icon parse error: ", exception)
@@ -527,11 +527,11 @@ class StreamsThumb(StreamsThumbCommon):
 					name_tmp = ''
 
 				try:
-					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+00:00"))) #2012-12-31T12:54:29+00:00
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+00:00")))  # 2012-12-31T12:54:29+00:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					date1 = _("Added:") + " " + str(date_tmp)
 				except (Exception) as exception:
-					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+01:00"))) #2012-12-31T12:54:29+01:00
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(elem[4].text), "%Y-%m-%dT%H:%M:%S+01:00")))  # 2012-12-31T12:54:29+01:00
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					date1 = _("Added: ") + str(date_tmp)
 					print("getCatsMediaData: date1 parse error: ", exception)
@@ -545,7 +545,7 @@ class StreamsThumb(StreamsThumbCommon):
 				if self.showIcon == 'True':
 					try:
 						icon_url = str(elem[23].attrib.get('url'))
-						icon = icon_url[0:-4] + "-261.jpg" # higher quality image 261x147
+						icon = icon_url[0:-4] + "-261.jpg"  # higher quality image 261x147
 					except (Exception) as exception:
 						print("getCatsMediaData: icon parse error: ", exception)
 						icon = ''

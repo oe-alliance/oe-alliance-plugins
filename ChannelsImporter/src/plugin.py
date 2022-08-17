@@ -8,7 +8,7 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, configfile, ConfigSubsection, ConfigIP, ConfigText, ConfigInteger, ConfigYesNo, ConfigSelection, ConfigClock, NoSave, ConfigNumber
 from Screens.Setup import Setup
 from Components.SystemInfo import SystemInfo
-from Screens.MessageBox import MessageBox # for are you sure questions after config changes
+from Screens.MessageBox import MessageBox  # for are you sure questions after config changes
 
 from .ChannelsImporter import ChannelsImporter
 
@@ -28,7 +28,7 @@ config.plugins.ChannelsImporter.enableSchedule = ConfigYesNo(False)
 config.plugins.ChannelsImporter.extensions = ConfigYesNo(default=False)
 config.plugins.ChannelsImporter.setupFallback = ConfigYesNo(default=False)
 config.plugins.ChannelsImporter.scheduleRepeatInterval = ConfigSelection(default="daily", choices=[("2", _("Every 2 minutes (for testing)")), ("5", _("Every 5 minutes (for testing)")), ("60", _("Every hour")), ("120", _("Every 2 hours")), ("180", _("Every 3 hours")), ("360", _("Every 6 hours")), ("720", _("Every 12 hours")), ("daily", _("Daily"))])
-config.plugins.ChannelsImporter.scheduletime = ConfigClock(default=0) # 1:00
+config.plugins.ChannelsImporter.scheduletime = ConfigClock(default=0)  # 1:00
 config.plugins.ChannelsImporter.errorMessages = ConfigYesNo(False)
 
 

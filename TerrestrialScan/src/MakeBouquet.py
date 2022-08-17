@@ -41,16 +41,16 @@ class MakeBouquet(Screen):
 		self.path = "/etc/enigma2"
 		self.services_dict = {}
 		self.tmp_services_dict = {}
-		self.namespace_dict = {} # to store namespace when sub network is enabled
+		self.namespace_dict = {}  # to store namespace when sub network is enabled
 		self.logical_channel_number_dict = {}
-		self.ignore_visible_service_flag = False # make this a user override later if found necessary
+		self.ignore_visible_service_flag = False  # make this a user override later if found necessary
 		self.VIDEO_ALLOWED_TYPES = [1, 4, 5, 17, 22, 24, 25, 27, 135]
 		self.AUDIO_ALLOWED_TYPES = [2, 10]
 		self.BOUQUET_PREFIX = "userbouquet.TerrestrialScan."
 		self.bouquetsIndexFilename = "bouquets.tv"
 		self.bouquetFilename = self.BOUQUET_PREFIX + "tv"
 		self.bouquetName = _('Terrestrial')
-		self.namespace_complete_terrestrial = not (config.usage.subnetwork_terrestrial.value if hasattr(config.usage, "subnetwork_terrestrial") else True) # config.usage.subnetwork not available in all images
+		self.namespace_complete_terrestrial = not (config.usage.subnetwork_terrestrial.value if hasattr(config.usage, "subnetwork_terrestrial") else True)  # config.usage.subnetwork not available in all images
 
 		self.terrestrialXmlFilename = "terrestrial.xml"
 
@@ -187,7 +187,7 @@ class MakeBouquet(Screen):
 		self.dict = {}
 		self.frontend.getFrontendStatus(self.dict)
 		if self.dict["tuner_state"] == "TUNING":
-			if self.lockcounter < 1: # only show this once in the log per retune event
+			if self.lockcounter < 1:  # only show this once in the log per retune event
 				print("[MakeBouquet][checkTunerLock] TUNING")
 		elif self.dict["tuner_state"] == "LOCKED":
 			print("[MakeBouquet][checkTunerLock] TUNER LOCKED")
@@ -225,7 +225,7 @@ class MakeBouquet(Screen):
 		sdt_pid = 0x11
 		sdt_current_table_id = 0x42
 		mask = 0xff
-		sdtTimeout = 5 # maximum time allowed to read the service descriptor table (seconds)
+		sdtTimeout = 5  # maximum time allowed to read the service descriptor table (seconds)
 
 		sdt_current_version_number = -1
 		sdt_current_sections_read = []
@@ -248,7 +248,7 @@ class MakeBouquet(Screen):
 
 			section = dvbreader.read_sdt(fd, sdt_current_table_id, 0x00)
 			if section is None:
-				time.sleep(0.1)	# no data.. so we wait a bit
+				time.sleep(0.1)  # no data.. so we wait a bit
 				continue
 
 			if section["header"]["table_id"] == sdt_current_table_id and not sdt_current_completed:
@@ -261,7 +261,7 @@ class MakeBouquet(Screen):
 				if section["header"]["section_number"] not in sdt_current_sections_read:
 					sdt_current_sections_read.append(section["header"]["section_number"])
 					sdt_current_content += section["content"]
-					if self.tsid is None or self.onid is None: # save first read of tsid and onid, although data in self.transponder should already be correct.
+					if self.tsid is None or self.onid is None:  # save first read of tsid and onid, although data in self.transponder should already be correct.
 						self.tsid = self.transponder["tsid"] = section["header"]["transport_stream_id"]
 						self.onid = self.transponder["onid"] = section["header"]["original_network_id"]
 
@@ -295,12 +295,12 @@ class MakeBouquet(Screen):
 
 		nit_current_pid = 0x10
 		nit_current_table_id = 0x40
-		nit_other_table_id = 0x00 # don't read other table
+		nit_other_table_id = 0x00  # don't read other table
 		if nit_other_table_id == 0x00:
 			mask = 0xff
 		else:
 			mask = nit_current_table_id ^ nit_other_table_id ^ 0xff
-		nit_current_timeout = 20 # maximum time allowed to read the network information table (seconds)
+		nit_current_timeout = 20  # maximum time allowed to read the network information table (seconds)
 
 		nit_current_version_number = -1
 		nit_current_sections_read = []
@@ -323,7 +323,7 @@ class MakeBouquet(Screen):
 
 			section = dvbreader.read_nit(fd, nit_current_table_id, nit_other_table_id)
 			if section is None:
-				time.sleep(0.1)	# no data.. so we wait a bit
+				time.sleep(0.1)  # no data.. so we wait a bit
 				continue
 
 			if section["header"]["table_id"] == nit_current_table_id and not nit_current_completed:
@@ -350,13 +350,13 @@ class MakeBouquet(Screen):
 			return
 
 		# descriptor_tag 0x5A is DVB-T, descriptor_tag 0x7f is DVB-T
-		transponders = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] in (0x5A, 0x7f) and t["original_network_id"] == self.transponder["onid"] and t["transport_stream_id"] == self.transponder["tsid"]] # this should only ever have a length of one transponder
+		transponders = [t for t in nit_current_content if "descriptor_tag" in t and t["descriptor_tag"] in (0x5A, 0x7f) and t["original_network_id"] == self.transponder["onid"] and t["transport_stream_id"] == self.transponder["tsid"]]  # this should only ever have a length of one transponder
 		print("[MakeBouquet][readNIT] transponders", transponders)
 		if transponders:
 
-			if transponders[0]["descriptor_tag"] == 0x5A: # DVB-T
+			if transponders[0]["descriptor_tag"] == 0x5A:  # DVB-T
 				self.transponder["system"] = eDVBFrontendParametersTerrestrial.System_DVB_T
-			else: # must be DVB-T2
+			else:  # must be DVB-T2
 				self.transponder["system"] = eDVBFrontendParametersTerrestrial.System_DVB_T2
 
 			if "frequency" in transponders[0] and abs((transponders[0]["frequency"] * 10) - self.transponder["frequency"]) < 1000000 and self.transponder["frequency"] != transponders[0]["frequency"] * 10:
@@ -386,7 +386,7 @@ class MakeBouquet(Screen):
 
 	def createBouquet(self):
 		bouquetIndexContent = self.readBouquetIndex()
-		if '"' + self.bouquetFilename + '"' not in bouquetIndexContent: # only edit the index if bouquet file is not present
+		if '"' + self.bouquetFilename + '"' not in bouquetIndexContent:  # only edit the index if bouquet file is not present
 			self.writeBouquetIndex(bouquetIndexContent)
 		self.writeBouquet()
 

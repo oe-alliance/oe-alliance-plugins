@@ -43,7 +43,7 @@ def getBoxbranding():
 	for m in sorted(boxbranding.__dict__.keys()):
 		if callable(getattr(boxbranding, m)):
 			v = getattr(boxbranding, m)()
-			for x in ("http://", "https://"): # Trim URLs to domain only
+			for x in ("http://", "https://"):  # Trim URLs to domain only
 				if v.startswith(x):
 					v = v.split(x)[1].split('/')[0] + " [...]"
 					break

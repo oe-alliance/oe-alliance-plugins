@@ -37,7 +37,7 @@ class MergePiconJob:
         self.executionQueueList = deque()
         for service in self.serviceList:
             piconName = getChannelKey(service)
-            if any(piconName.find(i) + 1 for i in ['4097', '5001', '5002', '5003']): # Internetstream found, therefore use SNP:
+            if any(piconName.find(i) + 1 for i in ['4097', '5001', '5002', '5003']):  # Internetstream found, therefore use SNP:
                 piconName = getCleanFileName(service.getServiceName()).replace('-', '')
             piconFile = getTmpLocalPicon(piconName)
             if os.path.isfile(piconFile):

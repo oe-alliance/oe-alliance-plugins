@@ -40,7 +40,7 @@ class TransponderFiltering:
 				if hasattr(t, "t2mi_plp_id"):
 					t2mi_check = t.t2mi_plp_id == eDVBFrontendParametersSatellite.No_T2MI_PLP_Id or t.t2mi_plp_id == k.t2mi_plp_id
 				else:
-					t2mi_check = True # skip check
+					t2mi_check = True  # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
 					abs(t.frequency - k.frequency) < (tolerance * multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance * multiplier) and \
@@ -65,7 +65,7 @@ class TransponderFiltering:
 				if hasattr(t, "t2mi_plp_id"):
 					t2mi_check = t.t2mi_plp_id == eDVBFrontendParametersSatellite.No_T2MI_PLP_Id or t.t2mi_plp_id == k.t2mi_plp_id
 				else:
-					t2mi_check = True # skip check
+					t2mi_check = True  # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
 					abs(t.frequency - k.frequency) < (tolerance * multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance * multiplier) and \
@@ -87,7 +87,7 @@ class TransponderFiltering:
 				if hasattr(t, "t2mi_plp_id"):
 					t2mi_check = t.t2mi_plp_id == eDVBFrontendParametersSatellite.No_T2MI_PLP_Id or t.t2mi_plp_id == k.t2mi_plp_id
 				else:
-					t2mi_check = True # skip check
+					t2mi_check = True  # skip check
 				if (t.polarisation % 2) == (k.polarisation % 2) and \
 					abs(t.frequency - k.frequency) < (tolerance * multiplier) and \
 					abs(t.symbol_rate - k.symbol_rate) < (tolerance * multiplier) and \

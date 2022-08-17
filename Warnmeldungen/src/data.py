@@ -137,7 +137,7 @@ def afterAlarm():
 	return datetime.now() <= timeAlarmEnd
 
 
-def formatDate(s): s = s.split('+'); return s[0].replace('T', '  um ') #2021-07-23T12:26:47+02:00 zu  2021-07-23 12:26:47
+def formatDate(s): s = s.split('+'); return s[0].replace('T', '  um ')  # 2021-07-23T12:26:47+02:00 zu  2021-07-23 12:26:47
 	#return datetime.strptime( s , '%Y-%m-%d %H:%M:%S')
 
 
@@ -188,7 +188,7 @@ def headlineAlreadyShown(s):
 	if ignoreList and not inCheckList(s, ignoreList):
 		return False
 	if not (headLineSimple(s) in lastMessages):
-		return False # headline not shown before
+		return False  # headline not shown before
 	if (not d.isdigit()) or (lastDoubleTime == None):
 		lastDoubleTime = None
 		return True  # check always
@@ -226,7 +226,7 @@ def getNiNAHeadlines(s, checkMode=0, detail=0):  # checkmode:hintergrundpruefung
 		emulinfo = '#EMULATION# '
 	if diff:
 		d = datetime.now() - timedelta(days=diff)
-		ignoreDate = d.strftime("%Y-%m-%d um %H:%M:%S") #siehe formatDate()
+		ignoreDate = d.strftime("%Y-%m-%d um %H:%M:%S")  # siehe formatDate()
 	res, j = '', json.loads(s)
 	resetSourceData()
 	try:
@@ -337,7 +337,7 @@ def getNiNAHeadlines(s, checkMode=0, detail=0):  # checkmode:hintergrundpruefung
 		debug(_('Verk_uerzter Alarm bis ') + str(timeAlarmEnd))
 	if len(msgList):
 		global actMessages
-		if not checkMode: #Anzeige auf Screen
+		if not checkMode:  # Anzeige auf Screen
 			for h in headlineList:
 				actMessages.append(h)
 			debug('Aktuelle Headlines:\n' + str(actMessages) + '\n')
@@ -364,7 +364,7 @@ def downloadToString(url):
 				'Accept-Charset': 'ISO-8859-1,utf-8;q=0.7,*;q=0.7',
 				'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8', 'Accept-Language': 'en-us,en;q=0.5'}
 	try:
-		from urllib2 import Request, urlopen #self.message(url)
+		from urllib2 import Request, urlopen  # self.message(url)
 		searchrequest = Request(url, None, header)
 		return urlopen(searchrequest).read()
 	except:
@@ -510,9 +510,9 @@ def getNinaMsg(check=0, detail=0):
 				additionalPos = -1
 				bufferedJson = ''
 			if len(saveList):
-				miniMessages[:0] = saveList #insert
+				miniMessages[:0] = saveList  # insert
 		if not check:
-			lastMessages = [] #actMessages[:]
+			lastMessages = []  # actMessages[:]
 			for m in actMessages:
 				if m and not (m in lastMessages):
 					lastMessages.append(m)

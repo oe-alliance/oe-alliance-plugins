@@ -240,7 +240,7 @@ def createLink(sref, checkParentalControl, forceRestart):
 	check_available_instance.stop()
 	new_sref = sref
 	ssref = StalkerServiceReference(sref)
-	if ssref.isStalkerService(): # stalker channel
+	if ssref.isStalkerService():  # stalker channel
 		if stalker.isAvailable(0x1):
 			new_sref = getLink(sref)
 			if new_sref is None:

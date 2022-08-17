@@ -441,7 +441,7 @@ class StreamsThumb(StreamsThumbCommon):
 				rtmp_app = iview_config['rtmp_app']
 
 			token = xml.find("token").string
-			token = token.replace('&amp;', '&') # work around BeautifulSoup bug
+			token = token.replace('&amp;', '&')  # work around BeautifulSoup bug
 
 		except:
 			print("%s: version %s: parse_auth: Problem Parsing Auth: %s" % (__plugin__, __version__, exception))

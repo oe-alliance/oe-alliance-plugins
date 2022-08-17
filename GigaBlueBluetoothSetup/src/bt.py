@@ -412,8 +412,8 @@ class BTBatteryLevel:
 	def __init__(self):
 		self.batteryLevelTimer = eTimer()
 		self.batteryLevelTimer.callback.append(self.updateBatteryLevel)
-		self.batteryUpdateInterval = 60 * 60 * 12 * 1000 # every 12 hours
-		self.batteryCheckRetryTime = 15 * 1000 # maximum time to waiting voice stop
+		self.batteryUpdateInterval = 60 * 60 * 12 * 1000  # every 12 hours
+		self.batteryCheckRetryTime = 15 * 1000  # maximum time to waiting voice stop
 		self.lastMsgMday = -1
 		self.batteryLevel = 0
 
@@ -460,7 +460,7 @@ class BTOTAProcess:
 
 		self.firmwareCheckTimer = eTimer()
 		self.firmwareCheckTimer.callback.append(self.checkFWVersion)
-		self.FWCheckRetryTime = 15 * 1000 # maximum time to waiting voice stop
+		self.FWCheckRetryTime = 15 * 1000  # maximum time to waiting voice stop
 		self.bd_addr = None
 		self.rcuAppVersion = None
 

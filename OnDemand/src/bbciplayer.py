@@ -301,7 +301,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 					# Format the date to display onscreen
 					try:
-						lastDate = datetime.fromtimestamp(mktime(strptime(str(line[2]), "%Y-%m-%dT%H:%M:%SZ"))) #2013-03-06T18:27:43Z
+						lastDate = datetime.fromtimestamp(mktime(strptime(str(line[2]), "%Y-%m-%dT%H:%M:%SZ")))  # 2013-03-06T18:27:43Z
 						date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 						date1 = _("Added:") + " " + str(date_tmp)
 					except (Exception) as exception:
@@ -362,7 +362,7 @@ class StreamsThumb(StreamsThumbCommon):
 				stream = stream_split[1]
 
 				try:
-					lastDate = datetime.fromtimestamp(mktime(strptime(str(select('updated').text_content()), "%Y-%m-%dT%H:%M:%SZ"))) #2013-03-06T18:27:43Z
+					lastDate = datetime.fromtimestamp(mktime(strptime(str(select('updated').text_content()), "%Y-%m-%dT%H:%M:%SZ")))  # 2013-03-06T18:27:43Z
 					date_tmp = lastDate.strftime(u"%a %b %d %Y %H:%M")
 					date1 = _("Added:") + " " + str(date_tmp)
 				except (Exception) as exception:

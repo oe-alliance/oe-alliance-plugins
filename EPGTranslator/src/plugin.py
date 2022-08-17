@@ -80,7 +80,7 @@ for i in list(range(len(EPG_OPTIONS))):
         continue
     exec("epg_%s = %d" % (EPG_OPTIONS[i], ci))
     ci += 1
-epg_PB = ci # Extra index for Playback Begin time.
+epg_PB = ci  # Extra index for Playback Begin time.
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 # Configuration settings.
@@ -174,7 +174,7 @@ def applySkinVars(skin, dict):
 def transHTMLEnts(text):
     def repl(ent):              # The code for re.sub to run on matches
         res = ent.group(0)      # get the text of the match
-        ent = res[1:-1].lower() # Strip & and ;
+        ent = res[1:-1].lower()  # Strip & and ;
         if re.match("#\d+", ent):  # Numeric entity
             res = dec2utf8(int(ent[1:]))
         else:
@@ -665,7 +665,7 @@ Red: Refresh EPG
             pass
         self.setTitle(wintitle)
 
-        if not self.inPlayBack: # We can add in service-change keys
+        if not self.inPlayBack:  # We can add in service-change keys
             AMbindings.update({
              'right': self.rightDown,
              'left': self.leftUp,
@@ -790,7 +790,7 @@ Red: Refresh EPG
             descr = ''
         else:
             descr = descr.strip()
-        if (title == '') and (descr == ''): # Don't display nothing
+        if (title == '') and (descr == ''):  # Don't display nothing
             return
 
 # We might not have set epg_B for a recording, so this will drop to the
@@ -819,7 +819,7 @@ Red: Refresh EPG
 #
             uref = make_uref(self.event[epg_I], self.event[epg_N])
             (t_title, t_descr) = AfCache.fetch(uref)
-            if t_descr == None: # Not there...
+            if t_descr == None:  # Not there...
                 try:
                     start = self.event[epg_PB]
                 except:
@@ -1042,7 +1042,7 @@ Red: Refresh EPG
                 if self.hideflag:
                     wv = count      # 40 -> 0
                 else:
-                    wv = 40 - count # 0 -> 40
+                    wv = 40 - count  # 0 -> 40
                 f.write('%i' % (config.av.osd_alpha.getValue() * wv / 40))
                 f.flush()               # So it does something
                 count -= 1
@@ -1118,7 +1118,7 @@ def My_setEvent(self, event):
 #
     uref = make_uref(event.getEventId(), self.currentService.getServiceName())
     (t_title, t_descr) = AfCache.fetch(uref)
-    if t_descr == None: # Not there...
+    if t_descr == None:  # Not there...
 
 # You may need to lookup in EventBase.setEvent to see how these fields
 # are used and so how you can get the text to translate.

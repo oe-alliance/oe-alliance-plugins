@@ -150,7 +150,7 @@ class StalkerClient_ChannelContextMenu(Screen):
 	def addServiceToBouquetSelected(self, idx):
 		if idx == 0:
 			self.bsel = self.session.openWithCallback(self.bouquetSelClosed, BouquetSelector, self.bouquets, self.addCurrentServiceToBouquet)
-		elif idx == 1: # add to only one existing bouquet
+		elif idx == 1:  # add to only one existing bouquet
 			self.addCurrentServiceToBouquet(self.bouquets[0][1], closeBouquetSelection=False)
 
 	def bouquetSelClosed(self, recursive):
@@ -165,7 +165,7 @@ class StalkerClient_ChannelContextMenu(Screen):
 		if self.bsel is not None:
 			self.bsel.close(True)
 		else:
-			self.close(closeBouquetSelection) # close bouquet selection
+			self.close(closeBouquetSelection)  # close bouquet selection
 
 
 class StalkerClient_ChannelSelection(Screen):

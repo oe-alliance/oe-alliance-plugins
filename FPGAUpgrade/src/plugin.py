@@ -200,7 +200,7 @@ class UpgradeStatus(Screen):
 			self.timer_exit.callback.append(self.callbackExit)
 			self.timer_exit.start(1000)
 
-		elif self.status < 0:#elif self.status == -1 or self.status == -2:
+		elif self.status < 0:  # elif self.status == -1 or self.status == -2:
 			#print "fpga-upgrade error >> errno : [%d]" % (self.status)
 			ERROR_MSG = ''
 			ERROR_CODE = int(self.status) * -1
@@ -392,7 +392,7 @@ class FPGAUpgrade(Screen):
 			before_name = self.SOURCELIST.getFilename()
 
 	def onClickOk(self):
-		if self.SOURCELIST.canDescent(): # isDir
+		if self.SOURCELIST.canDescent():  # isDir
 			self.SOURCELIST.descent()
 			if self.SOURCELIST.getCurrentDirectory():
 				self.STATUS_BAR.setText(_(self.SOURCELIST.getCurrentDirectory()))
