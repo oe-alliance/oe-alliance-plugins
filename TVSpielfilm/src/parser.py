@@ -37,20 +37,14 @@ def transHTML(text):
 
 
 def transCHANNEL(data):
-	data = data.split('\n')
-	neudata = ''
-	for x in data:
-		neu = ''
-		for ipstart in (' 1:', ' 4097:', ' 5001:', ' 5002:', ' 5003:'):
-			if ipstart in x:
-				channel = x[:x.find(ipstart)].strip().lower()
-				sref = x[x.find(ipstart):].strip()
-				neu = channel + '\t ' + sref + '\n'
-				break
-		if neu == '':
-			neu = x.lower() + '\t\n'
-		neudata += neu
-	data = neudata
+	neu = ''
+	for x in data.split('\n'):
+		sref = search(' \d+:\d+:\d+:\w+:\w+:\w+:\w+:\d+:\d+:\d+:.*', x)
+		if sref is None:
+			neu += x.lower() + '\t\n'
+		else:
+			neu += x[:sref.start(0)].lower() + '\t' + sref.group(0) + '\n'
+	data = neu
 	data = sub('das erste.*?\t', 'ard', data)
 	data = sub('zdf_neo.*?\t', '2neo', data)
 	data = sub('zdf neo.*?\t', '2neo', data)
