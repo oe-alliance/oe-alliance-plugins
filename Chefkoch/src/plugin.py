@@ -557,7 +557,7 @@ class ChefkochView(Screen):
 			picurl = PICURLBASE + '/' + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
 		else:
 			picurl = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
-		self.Pdownload(picurl, self.getPostPic)
+		callInThread(self.threadGetPage, picurl, self.getPostPic, self.downloadError)
 		self.postpicload.PictureData.get().append(self.showPostPic)
 		self['postpic'].show()
 		self.makeRezept()
@@ -1042,18 +1042,18 @@ class ChefkochView(Screen):
 		else:
 			name(response.content, idx)
 
-	def Pdownload(self, link, name):  # Pic-Download
+	def threadGetPage(self, link, success, fail=None):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		callInThread(self._Pdownload, link, name)
-
-	def _Pdownload(self, link, name):
 		try:
-			response = get(link)
+			response = get(ensure_binary(link))
 			response.raise_for_status()
+			success(response.content)
 		except exceptions.RequestException as error:
-			self.downloadError(error)
-		else:
-			name(response.content)
+			if fail is not None:
+				fail(error)
+
+	def downloadError(self, output):
+		CKlog(output)
 
 	def showProgrammPage(self):  # zeige Rezeptliste
 		self.current = 'menu'
@@ -1290,7 +1290,7 @@ class ChefkochPicShow(Screen):
 			for i in range(len(self.IMG['results'])):
 				self.pixlist.append(self.IMG['results'][i]['id'])
 			picurl = PICURLBASE + '/' + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
-			self.Pdownload(picurl, self.getPic)
+			callInThread(self.threadGetPage, picurl, self.getPic, self.downloadError)
 			self.picmax = len(self.pixlist) - 1
 			username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 			self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
@@ -1303,14 +1303,14 @@ class ChefkochPicShow(Screen):
 	def picup(self):
 		self.count += 1 if self.count < self.picmax else - self.count
 		picurl = PICURLBASE + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
-		self.Pdownload(picurl, self.getPic)
+		callInThread(self.threadGetPage, picurl, self.getPic, self.downloadError)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
 	def picdown(self):
 		self.count -= 1 if self.count > 0 else - self.picmax
 		picurl = PICURLBASE + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
-		self.Pdownload(picurl, self.getPic)
+		callInThread(self.threadGetPage, picurl, self.getPic, self.downloadError)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
@@ -1323,7 +1323,7 @@ class ChefkochPicShow(Screen):
 		self.count = number - 1
 		picurl = picuribase + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
 		self.pixlist[self.count]
-		self.Pdownload(picurl, self.getPic)
+		callInThread(self.threadGetPage, picurl, self.getPic, self.downloadError)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
@@ -1342,18 +1342,18 @@ class ChefkochPicShow(Screen):
 		if currPic:
 			self['score'].instance.setPixmap(currPic)
 
-	def Pdownload(self, link, name):  # Pic-Download
+	def threadGetPage(self, link, success, fail=None):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		callInThread(self._Pdownload, link, name)
-
-	def _Pdownload(self, link, name):
 		try:
-			response = get(link)
+			response = get(ensure_binary(link))
 			response.raise_for_status()
+			success(response.content)
 		except exceptions.RequestException as error:
-			self.downloadError(error)
-		else:
-			name(response.content)
+			if fail is not None:
+				fail(error)
+
+	def downloadError(self, output):
+		CKlog(output)
 
 	def infoScreen(self):
 		pass
