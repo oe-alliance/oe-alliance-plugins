@@ -139,17 +139,14 @@ class TVSAllScreen(Screen):
 		servicelist = self.session.instantiateDialog(ChannelSelection)
 		self.session.execDialog(servicelist)
 
-	def download(self, link, name):
-		callInThread(self._download, link, name)
-
-	def _download(self, link, name):
+	def threadGetPage(self, link, success, fail=None):
 		try:
-			response = get(link)
+			response = get(ensure_binary(link))
 			response.raise_for_status()
+			success(response.content)
 		except exceptions.RequestException as error:
-			self.downloadError(error)
-		else:
-			name(response.content)
+			if fail is not None:
+				fail(error)
 
 	def downloadError(self, output):
 		TVSlog(output)
@@ -1378,7 +1375,7 @@ class TVSTippsView(TVSBaseScreen):
 			return
 		if search('www.tvspielfilm.de', self.postlink):
 			self.oldcurrent = self.current
-			self.download(self.postlink, self.makePostTimer)
+			callInThread(self.threadGetPage, self.postlink, self.makePostTimer, self.downloadError)
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
