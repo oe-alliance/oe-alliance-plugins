@@ -23,7 +23,7 @@ from re import S, I, search
 from skin import parameters
 from requests import get, exceptions
 from os import mkdir, makedirs, statvfs, remove
-from os.path import exists, isdir, basename, join
+from os.path import exists, isdir, basename, join, splitext
 from six import ensure_binary, ensure_str
 from Screens.ChannelSelection import SimpleChannelSelection, service_types_tv, service_types_radio
 from Screens.Screen import Screen
@@ -715,9 +715,9 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def download(self, downloadPiconUrl, downloadPiconPath):
 		downloadPiconUrl = self.cleanupURL(downloadPiconUrl)
-		self.aktdl_pico = path.splitext(basename(downloadPiconPath))[0]
+		self.aktdl_pico = splitext(basename(downloadPiconPath))[0]
 #		return downloadPage(downloadPiconUrl, downloadPiconPath)
-		return callInThread(self.threadDownloadpage, downloadPiconUrl, downloadPiconPath, None, None)
+		return callInThread(self.threadDownloadPage, downloadPiconUrl, downloadPiconPath, None, None)
 
 	def downloadError(self, error):
 		if self.aktdl_pico:
