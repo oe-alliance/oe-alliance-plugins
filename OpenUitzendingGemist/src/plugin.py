@@ -1242,9 +1242,9 @@ class OpenUg(Screen):
 			start = self.page * self.MAX_PIC_PAGE
 			end = (self.page * self.MAX_PIC_PAGE) + self.MAX_PIC_PAGE
 			count = 0
-			for x in self.mediaList:
+			for idx in self.mediaList:
 				if count >= start and count < end:
-					if self.getThumbnailName(x) == picture_id:
+					if self.getThumbnailName(idx) == picture_id:
 						self.picloads[picture_id] = ePicLoad()
 						self.picloads[picture_id].PictureData.get().append(boundFunction(self.finish_decode, picture_id))
 						self.picloads[picture_id].setPara((150, 150, sc[0], sc[1], False, 1, "#00000000"))

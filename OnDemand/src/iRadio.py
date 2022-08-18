@@ -368,6 +368,7 @@ def findPlayUrl(showID, function, showWMA, **kwargs):
 		html = wgetUrl(url)
 		print('findPlayUrl: html: ', html)
 
+		regexstring = r'http?://(?:[a-zA-Z]|[$@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+'  # NOSONAR
 		# If zero, an error occurred retrieving the url, pass empty string back
 		if html:
 			if function == 'tunein':
@@ -375,7 +376,7 @@ def findPlayUrl(showID, function, showWMA, **kwargs):
 				if stream[-3:] == "mp3":
 					fileUrl = stream
 				else:
-					urls = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', html)
+					urls = re.findall(regexstring, html)
 
 					for link in urls:
 						# Find out What type of URL we are dealing with.
@@ -385,7 +386,7 @@ def findPlayUrl(showID, function, showWMA, **kwargs):
 						if fileType == 'audio/x-mpegurl':
 							result = wgetUrl(link)
 							if result != '':
-								stream = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', result)
+								stream = re.findall(regexstring, result)
 								fileUrl = stream[0]
 								break
 
@@ -393,7 +394,7 @@ def findPlayUrl(showID, function, showWMA, **kwargs):
 						elif fileType == 'audio/x-scpls':
 							result = wgetUrl(link)
 							if html != '':
-								stream = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', result)
+								stream = re.findall(regexstring, result)
 								fileUrl = stream[0]
 								break
 
@@ -421,7 +422,7 @@ def findPlayUrl(showID, function, showWMA, **kwargs):
 				print('findPlayUrl: fileUrl: ', fileUrl)
 				return fileUrl
 			else:
-				stream = re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', html)
+				stream = re.findall(regexstring, html)
 
 				fileUrl = stream[0]
 				print('findPlayUrl: fileUrl: ', fileUrl)

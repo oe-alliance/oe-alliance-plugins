@@ -4779,8 +4779,6 @@ class L4LWorkerRes(Thread):
 					para[0](para[1], para[2], para[3])
 				elif len(para) == 5:
 					para[0](para[1], para[2], para[3], para[4])
-				elif len(para) == 3:
-					para[0](para[1], para[2])
 				elif len(para) == 7:
 					para[0](para[1], para[2], para[3], para[4], para[5], para[6])
 				elif len(para) == 8:
@@ -5423,7 +5421,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		key_y = size_h - 40
 		key_x = int((conf_w - 40) / 4)
 		pic_w = size_w - conf_w
-		if LCD4linux.LCDType3.value != "00":
+		if LCD4linux.LCDType3.value != "00":  # NOSONAR
 			pic_h = int(size_h / 2)  # replace 'pic_h = int(size_h / 3)' in case the current skin supports only 2 LCDs in the GUI-preview
 		else:
 			pic_h = int(size_h / 2)
@@ -8105,7 +8103,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			rmFiles(PIC + "*.*")
 			self.SavePicture = LCD4linux.SavePicture.value
 		if LCD4linux.TV.value == "0":
-			TVrunning == False
+			TVrunning = False
 		if LCD4linux.MJPEGenable1.isChanged() or LCD4linux.MJPEGenable2.isChanged() or LCD4linux.MJPEGenable3.isChanged():
 			MJPEG_stop("")
 			MJPEG_start()
