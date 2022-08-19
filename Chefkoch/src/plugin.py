@@ -596,7 +596,6 @@ class ChefkochView(Screen):
 			result = loads(content)
 			self.KOMlen = int(config.plugins.chefkoch.maxcomments.value) if result['count'] > int(config.plugins.chefkoch.maxcomments.value) else result['count']
 			return result
-		return self.KOM
 
 	def getGRP(self):  # hole die gewünschte Rezeptgruppe (alle Rezepte, davon 'videocount' mit Video)
 		if not self.orgGRP:
