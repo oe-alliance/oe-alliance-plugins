@@ -522,7 +522,8 @@ class TVSBaseScreen(TVSAllScreen):
 				self.downloadPicPost(picurl, True)
 		if not self.search:
 			title = search('<title>(.*?)</title>', output)
-			title = transHTML(title.group(1))
+			if title:
+				title = transHTML(title.group(1))
 			self.setTitle(title)
 		if search('<ul class="rating-dots">', bereich):
 			self.movie = True
@@ -568,6 +569,9 @@ class TVSBaseScreen(TVSAllScreen):
 		self.showInfotext(infotext)
 		self.showRatinginfos(output)
 		self._shortdesc(bereich)
+		self['release'].show()
+		self['waiting'].stopBlinking()
+
 
 # Infoausgabe: NEU, TIPP, LIVE
 		tvinfo = []
@@ -623,6 +627,7 @@ class TVSBaseScreen(TVSAllScreen):
 		text = findall('span\ class="text\-row">(.*?)</span>', extract, S)  # Suchstring voher mit re.escape wandeln
 # Sendezeit & Sender
 		startpos = bereich.find('<div class="schedule-widget__header__attributes">')
+		infotext = []
 		if startpos > 0:
 			endpos = bereich.find('<div class="schedule-widget__tabs">')
 			extract = bereich[startpos:endpos]
@@ -638,6 +643,7 @@ class TVSBaseScreen(TVSAllScreen):
 				self.start = infotext[1][0:5]
 			else:
 				self.start = ''
+		part = ''
 		if len(text) > 2:
 			for pi in text[2].split(', '):
 				if pi.find('(') > 0:
@@ -1178,12 +1184,19 @@ class TVSTippsView(TVSBaseScreen):
 			if LINK:
 				res = [LINK]
 				linkfilter = LINK
+			else:
+				res = []
+				linkfilter = ''
 			if PIC:
 				picfilter = PIC
+			else:
+				picfilter = ''
 			if TIME:
 				start = TIME
 				res.append(MultiContentEntryText(pos=(int(70 * SCALE), 0), size=(int(60 * SCALE), mh), font=1,
 						   color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=TIME))
+			else:
+				start = ''
 			icount = 0
 			for INFO in INFOS:
 				if search('neu|new', INFO) or self.sparte != "neu":
@@ -1908,7 +1921,7 @@ class TVSGenreView(TVSGenreJetztProgrammView):
 						sref = ':'.join(sref)
 						png = findPicon(sref, self.piconfolder)
 					if png:
- 						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+						res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 					else:
 						res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 								   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
@@ -1938,6 +1951,8 @@ class TVSGenreView(TVSGenreJetztProgrammView):
 						text = GENRE.replace(',', '\n', 1)
 						res.append(MultiContentEntryText(pos=(int(1040 * SCALE), 0), size=(int(400 * SCALE), mh), font=-2,
 								   color=10857646, color_sel=16777215, flags=RT_HALIGN_RIGHT | RT_VALIGN_CENTER | RT_WRAP, text=text))
+					else:
+						titelfilter = ''
 					icount = 0
 					for INFO in INFOS:
 						if self.rec:
@@ -3132,7 +3147,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			config.usage.on_movie_eof.value = 'quit'
 			from Components.ServiceEventTracker import ServiceEventTracker
 			from enigma import iPlayableService
-			self.__event_tracker = ServiceEventTracker(screen=self, eventmap={iPlayableService.evUpdatedEventInfo: self.zapRefresh})
+			self.event_tracker = ServiceEventTracker(screen=self, eventmap={iPlayableService.evUpdatedEventInfo: self.zapRefresh})
 			self.channel_db = channelDB(self.servicefile)
 		elif not self.tagestipp:
 			nextday = sub('/sendungen/.*?html', '/sendungen/?page=1&order=time&date=', self.link)
@@ -3170,6 +3185,8 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			nowminute = datetime.datetime.now().minute
 			nowsec = int(nowhour) * 3600 + int(nowminute) * 60
 		else:
+			nowminute = ''
+			nowsec = 0
 			self.progress = False
 			self.percent = False
 		mh = int(47 * SCALE + 0.5)
@@ -3858,56 +3875,69 @@ class TVSNews(TVSBaseScreen):
 	def makeTVSNews(self, string):
 		output = ensure_str(open(self.localhtml, 'r').read())
 		titel = search('<title>(.*?)</title>', output)
-		self.titel = titel.group(1).replace('&amp;', '&')
+		if titel:
+			self.titel = titel.group(1).replace('&amp;', '&')
 		self.setTitle(self.titel)
 		self['seitennr'].hide()
 		self['Line_down'].show()
-		startpos = output.find('<div class="content-area">')
-		endpos = output.find('<div class="text--list">')
-		if endpos == -1:  # andere Endekennung bei Genres
+		startpos = output.find('<div class="content-teaser teaser-m teaser-m-standard">')
+		startpos2 = output.find('id="c-sp-opener"><span>Spielfilm</span></a>')  # alternative Startpos wegen TV-Tipps
+		if startpos2 > startpos:
+			startpos = startpos2
+		endpos = output.find('<h2 class="headline headline--section">')
+		if endpos == -1 or endpos < startpos:  # andere Endekennung bei Genres
 			endpos = output.find('<div class="pagination pagination--numbers"')
+		if endpos == -1 or endpos < startpos:  # andere Endekennung bei Streaming
+			endpos = output.find('<div class="widget-box tips-box media-top3">')
+		if endpos == -1 or endpos < startpos:  # andere Endekennung bei TV-Tipps
+			endpos = output.find('class="desktop_rectangle_any "')
 		bereich = output[startpos:endpos]
-		bereich = sub('<ul class=".*?</ul>', '', bereich, flags=S)
-		bereich = sub('<script.*?</script>', '', bereich, flags=S)
-		bereich = sub('<section id="content">.*?</section>', '', bereich, flags=S)
-		bereich = sub('<a href="https://tvspielfilm-abo.de.*?\n', '', bereich)
-		bereich = sub('<a href="https://www.tvspielfilm.de/news".*?\n', '', bereich)
 		bereich = transHTML(bereich)
-		link = findall('<a href="(.*?)" target="_self"', bereich)
-		picurl = findall('<img src="(.*?)"', bereich)
-		picurltvsp = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/TV-Spielfilm-Logo.svg/500px-TV-Spielfilm-Logo.svg.png'
-		name = findall('<span class="headline">(.*?)</span>', bereich)
-		if not len(name):  # andere Umklammerung bei Genres
-			name = findall('<p class="title">(.*?)</p>', bereich)
-		subline = findall('<span class="subline">(.*?)</span>', bereich)
-		fullname = []
-		for i, ni in enumerate(name):
-			fullname.append(ni + ' | ' + subline[i]) if len(subline) else fullname.append(ni)
-			try:
-				self.picurllist.append(picurl[i])
-			except IndexError:
-				self.picurllist.append(picurltvsp)
-			try:
-				self.pictextlist.append(fullname[i])
-			except IndexError:
-				self.pictextlist.append(' ')
-			try:
-				res = ['']
-				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(2 * SCALE)), size=(int(870 * SCALE), int(30 * SCALE)), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=fullname[i]))
+		sektionen = bereich.split('</a>')
+		sektionen.pop(-1)
+		for sektion in sektionen:
+			link = search('<a href="(.*?)" target="_self"', sektion)
+			if link is None:
+				link = ''
+			else:
+				link = link.group(1)
+			picurl = search('<img src="(.*?)" ', sektion)
+			if picurl is None:
+				picurl = ''
+			else:
+				picurl = picurl.group(1)
+			trailer = search('"videoIntegration": "(.*?)"', sektion)
+			if trailer is None:
+				trailer = '0'
+			else:
+				trailer = trailer.group(1)
+			name = search('<span class="headline">(.*?)</span>', sektion)
+			if name is None:  # andere Umklammerung bei Genres
+				name = search('<p class="title">(.*?)</p>', sektion)
+			if name is None:
+				name = ''
+			else:
+				name = name.group(1)
+			subline = search('<span class="subline">(.*?)</span>', sektion)
+			if subline is None:
+				fullname = name
+			else:
+				fullname = name + ' | ' + subline.group(1)
+			res = ['']
+			res.append(MultiContentEntryText(pos=(int(10 * SCALE), 0), size=(int(870 * SCALE), int(30 * SCALE)), font=1, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=fullname))
+			if trailer is not None and trailer != "0":
+				png = ICONPATH + 'trailer.png'
+				if isfile(png):
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(790 * SCALE), 0), size=(int(30 * SCALE), int(30 * SCALE)), png=loadPNG(png)))
+			if len(picurl) > 0:
+				self.picurllist.append(picurl)
+				self.pictextlist.append(fullname)
 				self.menulist.append(res)
-				self.menulink.append(link[i])
-			except IndexError:
-				pass
+				self.menulink.append(link)
 		self['menu'].l.setItemHeight(int(30 * SCALE))
 		self['menu'].l.setList(self.menulist)
-		try:
-			self.download(picurl[0], self.getPic)
-		except IndexError:
-			self.download(picurltvsp, self.getPic)
-		try:
-			self['picturetext'].setText(name[0])
-		except IndexError:
-			self['picturetext'].hide()
+		callInThread(self.threadGetPage, self.picurllist[0], self.getPic)
+		self['picturetext'].setText(self.pictextlist[0])
 		self.ready = True
 		self.showTVSNews()
 
@@ -4052,64 +4082,52 @@ class TVSNews(TVSBaseScreen):
 		self.setBlueButton('Aus-/Einblenden')
 
 	def down(self):
-		try:
-			if self.current == 'menu':
-				self['menu'].down()
-				c = self['menu'].getSelectedIndex()
-				picurl = self.picurllist[c]
-				self.download(picurl, self.getPic)
-				pictext = self.pictextlist[c]
-				self['picturetext'].setText(pictext)
-				self['statuslabel'].hide()
-			else:
-				self['textpage'].pageDown()
-		except IndexError:
-			pass
+		if self.current == 'menu':
+			self['menu'].down()
+			c = self['menu'].getSelectedIndex()
+			picurl = self.picurllist[c]
+			callInThread(self.threadGetPage, picurl, self.getPic)
+			pictext = self.pictextlist[c]
+			self['picturetext'].setText(pictext)
+			self['statuslabel'].hide()
+		else:
+			self['textpage'].pageDown()
 
 	def up(self):
-		try:
-			if self.current == 'menu':
-				self['menu'].up()
-				c = self['menu'].getSelectedIndex()
-				picurl = self.picurllist[c]
-				self.download(picurl, self.getPic)
-				pictext = self.pictextlist[c]
-				self['picturetext'].setText(pictext)
-				self['statuslabel'].hide()
-			else:
-				self['textpage'].pageUp()
-		except IndexError:
-			pass
+		if self.current == 'menu':
+			self['menu'].up()
+			c = self['menu'].getSelectedIndex()
+			picurl = self.picurllist[c]
+			callInThread(self.threadGetPage, picurl, self.getPic)
+			pictext = self.pictextlist[c]
+			self['picturetext'].setText(pictext)
+			self['statuslabel'].hide()
+		else:
+			self['textpage'].pageUp()
 
 	def rightDown(self):
-		try:
-			if self.current == 'menu':
-				self['menu'].pageDown()
-				c = self['menu'].getSelectedIndex()
-				picurl = self.picurllist[c]
-				self.download(picurl, self.getPic)
-				pictext = self.pictextlist[c]
-				self['picturetext'].setText(pictext)
-				self['statuslabel'].hide()
-			else:
-				self['textpage'].pageDown()
-		except IndexError:
-			pass
+		if self.current == 'menu':
+			self['menu'].pageDown()
+			c = self['menu'].getSelectedIndex()
+			picurl = self.picurllist[c]
+			callInThread(self.threadGetPage, picurl, self.getPic)
+			pictext = self.pictextlist[c]
+			self['picturetext'].setText(pictext)
+			self['statuslabel'].hide()
+		else:
+			self['textpage'].pageDown()
 
 	def leftUp(self):
-		try:
-			if self.current == 'menu':
-				self['menu'].pageUp()
-				c = self['menu'].getSelectedIndex()
-				picurl = self.picurllist[c]
-				self.download(picurl, self.getPic)
-				pictext = self.pictextlist[c]
-				self['picturetext'].setText(pictext)
-				self['statuslabel'].hide()
-			else:
-				self['textpage'].pageUp()
-		except IndexError:
-			pass
+		if self.current == 'menu':
+			self['menu'].pageUp()
+			c = self['menu'].getSelectedIndex()
+			picurl = self.picurllist[c]
+			callInThread(self.threadGetPage, picurl, self.getPic)
+			pictext = self.pictextlist[c]
+			self['picturetext'].setText(pictext)
+			self['statuslabel'].hide()
+		else:
+			self['textpage'].pageUp()
 
 	def exit(self):
 		global HIDEFLAG
@@ -4948,7 +4966,7 @@ class TVSMain(TVSBaseScreen):
 					try:
 						if self.tipps:
 							self.stopTipps()
-						self.session.openWithCallback(self.selectThirdMenu, TVGenreView, self.thirdmenulink[c], self.genre[c])
+						self.session.openWithCallback(self.selectThirdMenu, self.TVGenreView, self.thirdmenulink[c], self.genre[c])
 					except IndexError:
 						pass
 				elif search('/genre', self.thirdmenulink[c]):
@@ -4962,7 +4980,7 @@ class TVSMain(TVSBaseScreen):
 					try:
 						if self.tipps:
 							self.stopTipps()
-						self.session.openWithCallback(self.selectThirdMenu, TVTippsView, self.thirdmenulink[c], self.genre[c])
+						self.session.openWithCallback(self.selectThirdMenu, self.TVTippsView, self.thirdmenulink[c], self.genre[c])
 					except IndexError:
 						pass
 				else:
@@ -5857,33 +5875,24 @@ class TVSTipps(TVSAllScreen):
 				self.count = self.count % len(self.tippspicture)
 			if isfile(self.pics[self.count]):
 				showPic(self['picture'], self.pics[self.count])
-			try:
-				self.infolink = self.tippslink[self.count]
-				tipp = 'Tipp des Tages'
-				titel = self.tippsinfo[self.count]
-				text = self.tippschannel[self.count]
-			except IndexError:
-				tipp = ''
-				titel = ''
-				text = ''
+			self.infolink = self.tippslink[self.count]
+			tipp = 'Tipp des Tages'
+			titel = self.tippsinfo[self.count]
+			text = self.tippschannel[self.count]
 			self['label'].setText(tipp)
 			self['label'].show()
 			self['label2'].setText(titel)
 			self['label2'].show()
 			self['label3'].setText(text)
 			self['label3'].show()
-			try:
-				parts = self.tippschannel[self.count].split(' | ')
-				times = parts[1]
-				channel = parts[2]
-				channel = shortenChannel(channel)
-				self['label4'].setText(times)
-				self['label4'].show()
-				self['label5'].setText(channel[0:10])
-				self['label5'].show()
-			except IndexError:
-				self['label4'].hide()
-				self['label5'].hide()
+			parts = self.tippschannel[self.count].split(' | ')
+			times = parts[1]
+			channel = parts[2]
+			channel = shortenChannel(channel)
+			self['label4'].setText(times)
+			self['label4'].show()
+			self['label5'].setText(channel[0:10])
+			self['label5'].show()
 
 	def downloadFirst(self, link):
 		callInThread(self._downloadFirst, link)
