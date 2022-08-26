@@ -2119,14 +2119,14 @@ class TVSGenreView(TVSGenreJetztProgrammView):
 			self.postlink = self.tvlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
-				self.download(self.postlink, self.makePostTimer)
+				callInThread(self.threadGetPage, self.postlink, self.makePostTimer)
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c
 			self.postlink = self.searchlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
-				self.download(self.postlink, self.makePostTimer)
+				callInThread(self.threadGetPage, self.postlink, self.makePostTimer)
 
 	def green(self):
 		if self.current == 'menu' and not self.search:
@@ -2581,7 +2581,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 					RATING = RATING.replace(' ', '-')
 					png = '%s%s.png' % (ICONPATH, RATING)
 					if isfile(png):  # DAUMEN
-						res.append(MultiContentEntryPixmapAlphaBlend(pos=(int(1220 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
+						res.append(MultiContentEntryPixmapAlphaBlend(pos=(int(1220 * SCALE), int(10 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
 				if trailer:
 					png = ICONPATH + 'trailer.png'
 					if isfile(png):
@@ -2779,7 +2779,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
 				self.index = self.oldindex
-				self.download(self.postlink, self.makePostTimer)
+				callInThread(self.threadGetPage, self.postlink, self.makePostTimer)
 			else:
 				self.redTimer(False, self.postlink)
 		elif self.current == 'searchmenu':
@@ -2788,7 +2788,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 			self.postlink = self.searchlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
-				self.download(self.postlink, self.makePostTimer)
+				callInThread(self.threadGetPage, self.postlink, self.makePostTimer)
 
 	def green(self):
 		if self.current == 'menu' and not self.search:
@@ -3291,7 +3291,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 				RATING = RATING.replace(' ', '-')
 				png = '%s%s.png' % (ICONPATH, RATING)
 				if isfile(png):  # DAUMEN
-					res.append(MultiContentEntryPixmapAlphaBlend(pos=(int(1220 * SCALE), int(7 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
+					res.append(MultiContentEntryPixmapAlphaBlend(pos=(int(1220 * SCALE), int(10 * SCALE)), size=(int(27 * SCALE), int(27 * SCALE)), png=loadPNG(png)))
 			self.tventries.append(res)
 		self['menu'].l.setItemHeight(mh)
 		self['menu'].l.setList(self.tventries)
@@ -3434,14 +3434,14 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			self.postlink = self.tvlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
-				self.download(self.postlink, self.makePostTimer)
+				callInThread(self.threadGetPage, self.postlink, self.makePostTimer)
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c
 			self.postlink = self.searchlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
-				self.download(self.postlink, self.makePostTimer)
+				callInThread(self.threadGetPage, self.postlink, self.makePostTimer)
 		else:
 			self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
 
@@ -4159,8 +4159,7 @@ class TVSPicShow(TVSBaseScreen):
 		self.picmax = 1
 		self.count = 0
 		self['release'] = Label(RELEASE)
-		self['release'].hide()
-		self['waiting'] = BlinkingLabel('Bitte warten...')
+		self['release'].show()
 		self['picture'] = Pixmap()
 		self['picindex'] = Label()
 		self['pictext'] = ScrollLabel()
@@ -4202,12 +4201,10 @@ class TVSPicShow(TVSBaseScreen):
 		self['OKtext'].show()
 		self['Line_down'].show()
 		self['seitennr'].hide()
-		self.getInfoTimer = eTimer()
 		if self.picmode == 1:
-			self.getInfoTimer.callback.append(self.download(self.link, self.getNewsPicPage))
+			callInThread(self.threadGetPage, self.link, self.getNewsPicPage)
 		else:
-			self.getInfoTimer.callback.append(self.download(self.link, self.getPicPage))
-		self.getInfoTimer.start(200, True)
+			callInThread(self.threadGetPage, self.link, self.getPicPage)
 
 	def getPicPage(self, output):
 		output = transHTML(ensure_str(output))
@@ -4219,10 +4216,7 @@ class TVSPicShow(TVSBaseScreen):
 		bereich = sub('<span class="counter">.*?</span>\n\\s+', '', bereich)
 		bereich = sub('</span>\n\\s+', '', bereich)
 		self.pixlist = findall('data-src="(.*?)"', bereich)
-		try:
-			self.download(self.pixlist[0], self.getPic)
-		except IndexError:
-			pass
+		callInThread(self.threadGetPage, self.pixlist[0], self.getPic)
 		self.topline = findall('data-caption="<div class="firstParagraph">(.*?)</div>', bereich)
 		self.description = findall(' alt="(.*?)" width=', bereich, flags=S)
 		self.picmax = len(self.pixlist) if self.pixlist else 1
@@ -4232,8 +4226,6 @@ class TVSPicShow(TVSBaseScreen):
 	def getNewsPicPage(self, output):
 		output = ensure_str(output)
 		self.setTVTitle(output)
-		self['release'].show()
-		self['waiting'].stopBlinking()
 		startpos = output.find('<div class="film-gallery">')
 		if startpos == -1:
 			startpos = output.find('class="film-gallery paragraph')
@@ -4259,13 +4251,10 @@ class TVSPicShow(TVSBaseScreen):
 		credits = []
 		datenfeld = findall('<div class="swiper-slide"(.*?)<span class="counter">', bereich, flags=S)
 		for daten in datenfeld:
-			foundpix = findall('<img src="(.*?)"', daten)
+			foundpix = findall('<source srcset="(.*?)" type="image/jpeg">', daten)
 			if foundpix:
 				self.pixlist.append(foundpix[0])
-				try:
-					self.download(self.pixlist[0], self.getPic)
-				except IndexError:
-					pass
+				callInThread(self.threadGetPage, self.pixlist[0], self.getPic)
 			else:
 				self.pixlist.append('https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/TV-Spielfilm-Logo.svg/500px-TV-Spielfilm-Logo.svg.png')
 			foundpara1 = findall('<div class="firstParagraph">(.*?)</div>', daten, flags=S)
@@ -4309,11 +4298,8 @@ class TVSPicShow(TVSBaseScreen):
 		self.picupdate()
 
 	def picupdate(self):
-		try:
-			link = self.pixlist[self.count]
-			self.download(link, self.getPic)
-		except IndexError:
-			pass
+		link = self.pixlist[self.count]
+		callInThread(self.threadGetPage, link, self.getPic)
 		if self.picmode == 0:
 			self['picindex'].setText('%s von %s' % (self.count + 1, self.picmax))
 			self['pictext'].setText(self.description[self.count])
@@ -4333,11 +4319,8 @@ class TVSPicShow(TVSBaseScreen):
 				number = self.picmax
 			self.count = number
 			self.picupdate()
-			try:
-				link = self.pixlist[self.count]
-				self.download(link, self.getPic)
-			except IndexError:
-				pass
+			link = self.pixlist[self.count]
+			callInThread(self.threadGetPage, link, self.getPic)
 
 	def up(self):
 		if self.picmode == 0:
@@ -4413,7 +4396,8 @@ class TVSPicShowFull(TVSBaseScreen):
 																			   '8': self.gotoPic,
 																			   '9': self.gotoPic}, -1)
 		self.getPicTimer = eTimer()
-		self.getPicTimer.callback.append(self.download(link, self.getPicPage))
+		self.getPicTimer.callback.append(callInThread(self.threadGetPage, link, self.getPicPage))
+
 		self.getPicTimer.start(200, True)
 
 	def getPicPage(self, output):
@@ -4431,7 +4415,7 @@ class TVSPicShowFull(TVSBaseScreen):
 		if not self.pixlist:
 			self.pixlist = findall('<img src="(.*?)" alt=', bereich)
 		if self.pixlist:
-			self.download(self.pixlist[self.count], self.getPic)
+			callInThread(self.threadGetPage, self.pixlist[self.count], self.getPic)
 		self.picmax = len(self.pixlist) if self.pixlist else 1
 		self['picindex'].setText('%s von %s' % (self.count + 1, self.picmax))
 
@@ -4444,11 +4428,8 @@ class TVSPicShowFull(TVSBaseScreen):
 		self.picupdate()
 
 	def picupdate(self):
-		try:
-			link = self.pixlist[self.count]
-			self.download(link, self.getPic)
-		except IndexError:
-			pass
+		link = self.pixlist[self.count]
+		callInThread(self.threadGetPage, link, self.getPic)
 		self['picindex'].setText('%s von %s' % (self.count + 1, self.picmax))
 
 	def gotoPic(self, number):
@@ -4879,7 +4860,6 @@ class TVSMain(TVSBaseScreen):
 		except SocketError as e:
 			self.error = 'Socket Error: ' + str(e)
 		except AttributeError as e:
-#			self.error = 'Attribute Error: ' + str(e.message) # das war so im Original drin
 			self.error = 'Attribute Error: ' + str(e)
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
@@ -5043,7 +5023,7 @@ class TVSMain(TVSBaseScreen):
 		if search('/tv-sender/', link):
 			startpos = output.find('<option value="" label="Alle Sender">Alle Sender</option>')
 			endpos = output.find('<div class="button-toggle">')
-			bereich = output[startpos:endpos]
+			bereich = output[startpos: endpos]
 			bereich = transHTML(bereich)
 			name = findall('<optgroup label="(.*?)">', bereich)
 			for ni in name:
@@ -5117,7 +5097,7 @@ class TVSMain(TVSBaseScreen):
 	def makeThirdMenuItem(self, output, start):
 		startpos = output.find('<optgroup label="%s"' % start)
 		endpos = output.find('</optgroup>', startpos)
-		bereich = transHTML(output[startpos:endpos])
+		bereich = transHTML(output[startpos: endpos])
 		lnk = findall("value='(.*?)'", bereich)
 		name = findall("<option label='(.*?)'", bereich)
 		for i, ni in enumerate(name):
@@ -5141,7 +5121,7 @@ class TVSMain(TVSBaseScreen):
 			output = ensure_str(open(self.senderhtml, 'r').read())
 			startpos = output.find('<option value="" label="Alle Sender">Alle Sender</option>')
 			endpos = output.find('<div class="button-toggle">')
-			string = transHTML(output[startpos:endpos])
+			string = transHTML(output[startpos: endpos])
 			self.makeThirdMenuItem(string, sender)
 			self['thirdmenu'].l.setList(self.thirdmenulist)
 			self['thirdmenu'].l.setItemHeight(int(30 * SCALE))
@@ -5153,7 +5133,7 @@ class TVSMain(TVSBaseScreen):
 		output = ensure_str(open(self.localhtml, 'r').read())
 		startpos = output.find('<p class="filter-title">Genre</p>')
 		endpos = output.find('<section class="filter abc-filter">')
-		bereich = transHTML(output[startpos:endpos])
+		bereich = transHTML(output[startpos: endpos])
 		genres = findall('<a title="(.*?)" href="', bereich)
 		links = findall('" href="(.*?)/">', bereich)
 		for i, gi in enumerate(genres):
@@ -5478,7 +5458,7 @@ class TVSmakeServiceFile(Screen):
 			imported = ''
 			for line in open(self.servicefile):
 				line = line.strip()
-				channel = line[:line.find(' ')].strip()
+				channel = line[: line.find(' ')].strip()
 				sref = line[line.find(' '):].strip()
 				if line != '' and ',' not in line:
 					if '#' + channel not in newdata:
@@ -6743,14 +6723,14 @@ class TVSHeuteView(TVSBaseScreen):
 					self.postlink = self.tvlinks[i][c]
 					if search('www.tvspielfilm.de', self.postlink):
 						self.oldcurrent = self.current
-						self.download(self.postlink, self.makePostTimer)
+						callInThread(self.threadGetPage, self.postlink, self.makePostTimer)
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c
 			self.postlink = self.searchlink[c]
 			if search('www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
-				self.download(self.postlink, self.makePostTimer)
+				callInThread(self.threadGetPage, self.postlink, self.makePostTimer)
 
 	def green(self):
 		for i in range(6):
