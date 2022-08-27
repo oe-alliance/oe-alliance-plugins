@@ -39,7 +39,7 @@ def transHTML(text):
 def transCHANNEL(data):
 	neu = ''
 	for x in data.split('\n'):
-		sref = search(' \d+:\d+:\d+:\w+:\w+:\w+:\w+:\d+:\d+:\d+:.*', x)
+		sref = search(' \d+:\d+:\w+:\w+:\w+:\w+:\w+:\d+:\w+:\w+:.*', x)
 		if sref is None:
 			neu += x.lower() + '\t\n'
 		else:
@@ -47,7 +47,6 @@ def transCHANNEL(data):
 	data = neu
 	data = sub('das erste.*?\t', 'ard', data)
 	data = sub('zdf_neo.*?\t', '2neo', data)
-	data = sub('zdf neo.*?\t', '2neo', data)
 	data = sub('zdfinfo.*?\t', 'zinfo', data)
 	data = sub('zdf.*?\t', 'zdf', data)
 	data = sub('tagesschau.*?\t', 'tag24', data)
@@ -141,7 +140,6 @@ def transCHANNEL(data):
 	data = sub('ntv.*?\t', 'ntv', data)
 	data = sub('n24 d.*?\t', 'n24doku', data)
 	data = sub('n24.*?\t', 'welt', data)
-	data = sub('welt.*?\t', 'welt', data)
 	data = sub('cnn.*?\t', 'cnn', data)
 	data = sub('bbc w.*?\t', 'bbc', data)
 	data = sub('bbc e.*?\t', 'bbc-e', data)
@@ -285,6 +283,7 @@ def transCHANNEL(data):
 	data = sub('geo tv.*?\t', 'geo', data)
 	data = sub('fix.*?foxi.*?\t', 'fftv', data)
 	data = sub('welt.*?\t', 'welt', data)
+	data = sub('uhd1.*?\t', 'uhd1', data)
 	data = sub('dw.*?\t', 'dwtv', data)
 	data = sub('deutsches musik fernsehen.*?\t', 'dmf', data)
 	data = sub('rbb.*?\t', 'rbb', data)
