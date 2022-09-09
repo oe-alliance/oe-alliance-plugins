@@ -222,6 +222,10 @@ if SX988
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if IP8
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if OG2OTT4K
 SUBDIRS += MultiTransCodingSetup
 endif
