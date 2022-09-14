@@ -7,16 +7,12 @@ from Plugins.Plugin import PluginDescriptor
 from Components.Console import Console
 from Components.Button import Button
 from Components.ActionMap import ActionMap
-from Components.ConfigList import ConfigList
 from Components.config import config, configfile, ConfigSubsection, getConfigListEntry, ConfigSelection
 from Components.ConfigList import ConfigListScreen
 from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.ServiceList import ServiceList
 from Screens.InfoBar import InfoBar
 from time import localtime, time
-from Tools.Directories import fileExists
-from enigma import pNavigation
 import Components.RecordingConfig
 
 from boxbranding import getBoxType

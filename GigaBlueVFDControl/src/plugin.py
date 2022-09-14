@@ -7,19 +7,17 @@ from Screens.Screen import Screen
 from Components.Console import Console
 from Components.Button import Button
 from Components.ActionMap import ActionMap
-from Components.config import config, configfile, ConfigSubsection, ConfigEnableDisable, getConfigListEntry, ConfigInteger, ConfigSelection, ConfigYesNo, ConfigSlider
-from Components.ConfigList import ConfigListScreen, ConfigList
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, fileExists
+from Components.config import config, configfile, ConfigSubsection, getConfigListEntry, ConfigSelection, ConfigYesNo, ConfigSlider
+from Components.ConfigList import ConfigListScreen
+from Tools.Directories import fileExists
 from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
 from boxbranding import getBoxType, getImageDistro
 from os import system
 from Plugins.Plugin import PluginDescriptor
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.ServiceList import ServiceList
 from Screens.InfoBar import InfoBar
 from time import localtime, time
 import Screens.Standby
-from enigma import pNavigation
 import Components.RecordingConfig
 from Components.Harddisk import harddiskmanager
 
