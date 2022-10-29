@@ -1,5 +1,3 @@
-SUBDIRS = buttons starbars setup slider
+SUBDIRS = FHD HD
 
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/Chefkoch/pic
-
-install_DATA = *.png

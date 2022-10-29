@@ -1,0 +1,145 @@
+<skin>
+	<screen name="CKview" position="center,center" size="1280,720" title="lade Daten, bitte warten..." flags="wfNoBorder" backgroundColor="background">
+		<widget source="Title" render="Label" position="center,0" size="870,60" font="Regular; 24" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
+		<ePixmap position="0,0" size="1280,60" pixmap="{picpath}HD/chefkochHD.png" alphatest="blend" zPosition="1" />
+		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}HD/backgroundHD.png"  zPosition="-10" />
+		<widget render="Label" source="global.CurrentTime" position="1112,0" size="120,30" font="Regular;26" foregroundColor="#697279" backgroundColor="white" halign="center" valign="center" zPosition="2">
+			<convert type="ClockToText">Format:%H:%M:%S</convert>
+		</widget>
+		<widget name="release" position="43,25" size="40,14" font="Regular; 14" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="menu" position="40,75" size="1065,600" font="Regular;{fontsize}" selectionPixmap="{picpath}HD/BG_Pixmap_Menu_HD.png" foregroundColor="white" backgroundColor="black"  scrollbarMode="showAlways" scrollbarBorderWidth="1" scrollbarWidth="10" scrollbarForegroundColor="#b5d7bb" scrollbarBorderColor="#336F3D" zPosition="1" transparent="1"/>
+		<widget name="vid0" position="1146,88" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
+		<widget name="vid1" position="1146,163" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
+		<widget name="vid2" position="1146,238" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
+		<widget name="vid3" position="1146,313" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
+		<widget name="vid4" position="1146,388" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
+		<widget name="vid5" position="1146,463" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
+		<widget name="vid6" position="1146,538" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
+		<widget name="vid7" position="1146,613" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
+		<widget name="pic0" position="1115,75" size="113,75" alphatest="blend" zPosition="1" />
+		<widget name="pic1" position="1115,150" size="113,75" alphatest="blend" zPosition="1" />
+		<widget name="pic2" position="1115,225" size="113,75" alphatest="blend" zPosition="1" />
+		<widget name="pic3" position="1115,300" size="113,75" alphatest="blend" zPosition="1" />
+		<widget name="pic4" position="1115,375" size="113,75" alphatest="blend" zPosition="1" />
+		<widget name="pic5" position="1115,450" size="113,75" alphatest="blend" zPosition="1" />
+		<widget name="pic6" position="1115,525" size="113,75" alphatest="blend" zPosition="1" />
+		<widget name="pic7" position="1115,600" size="113,75" alphatest="blend" zPosition="1" />
+		<widget name="postpic" position="center,70" size="280,210" zPosition="1" />
+		<widget name="postvid" position="center,145" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
+		<widget name="starsbg" position="53,75" size="228,40" pixmap="{picpath}HD/starsbar_empty_HD.png" transparent="1" zPosition="0" alphatest="blend" />
+		<widget name="stars" position="53,75" size="228,40" pixmap="{picpath}HD/starsbar_filled_HD.png" transparent="1" />
+		<widget name="scoretext" position="53,130" size="440,120" font="Regular; 20" halign="left" zPosition="1" transparent="1" />
+		<widget name="recipetext" position="790,70" size="438,180" font="Regular; 20" halign="left" zPosition="1" transparent="1" />
+		<widget name="textpage" position="50,300" size="1178,375" font="Regular;{fontsize}" scrollbarMode="showOnDemand" scrollbarBorderWidth="2" scrollbarWidth="10" scrollbarForegroundColor="#b5d7bb" scrollbarBorderColor="#336F3D" halign="left" zPosition="0" transparent="1" />
+		<widget name="pageinfo" position="1112,36" size="120,19" font="Regular; 16" foregroundColor="white" backgroundColor="#336f3d" halign="center" transparent="0" zPosition="2" />
+		<widget name="label_red" position="25,690" size="180,24" font="Regular;18" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
+		<widget name="label_green" position="235,690" size="300,24" font="Regular;18" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
+		<widget name="label_yellow" position="565,690" size="240,24" font="Regular;18" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
+		<widget name="label_blue" position="835,690" size="150,24" font="Regular;18" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
+		<widget name="label_rezeptnr" position="center,41" size="870,20" font="Regular; 14" foregroundColor="#697279" backgroundColor="white" halign="center" valign="center" transparent="1" zPosition="2" />
+		<widget name="label_1-0" position="86,254" size="350,27" font="Regular; 20" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="1" />
+		<widget name="button_1-0" position="49,252" size="30,30" pixmap="{picpath}HD/1-0_HD.png" alphatest="blend" zPosition="1" />
+		<widget name="label_ok" position="1030,690" size="180,24" font="Regular;18" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
+		<widget name="button_ok" position="992,686" size="30,30" pixmap="{picpath}HD/ok_HD.png" alphatest="blend" zPosition="1" />
+		<widget name="label_play" position="833,255" size="240,24" font="Regular;18" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
+		<widget name="button_play" position="794,252" size="30,30" pixmap="{picpath}HD/play_HD.png" alphatest="blend" zPosition="1" />
+		<widget name="button_green" position="331,740" size="18,18" zPosition="2" />
+		<widget name="button_yellow" position="714,740" size="18,18" zPosition="2" />
+		<widget name="button_red" position="30,740" size="18,18" alphatest="blend" zPosition="2" />
+		<widget name="button_blue" position="1091,740" size="18,18" alphatest="blend" zPosition="2" />
+		<eLabel name="button_red" position="5,687" size="8,30" backgroundColor="red" zPosition="2" />
+		<eLabel name="button_green" position="215,687" size="8,30" backgroundColor="green" zPosition="2" />
+		<eLabel name="button_yellow" position="545,687" size="8,30" backgroundColor="yellow" zPosition="2" />
+		<eLabel name="button_blue" position="815,687" size="8,30" backgroundColor="blue" zPosition="2" />
+		<eLabel name="Line_Bottom" position="0,680" size="1280,1" backgroundColor="#3B8047" zPosition="5" />
+		<widget name="Line_Bottom" position="50,290" size="1178,1" backgroundColor="#3B8047" zPosition="0" />
+	</screen>
+
+	<screen name="CKpicshow" position="center,center" size="1280,720" title="" flags="wfNoBorder" backgroundColor="background">
+		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}HD/backgroundHD.png" zPosition="-10" />
+		<widget source="Title" render="Label" position="center,13" size="1000,32" font="Regular; 24" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
+		<ePixmap position="0,0" size="1280,60" pixmap="{picpath}HD/chefkochHD.png" alphatest="blend" zPosition="1" />
+		<widget name="release" position="43,25" size="40,14" font="Regular; 14" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="scoretext" position="15,130" size="260,50" font="Regular;20" foregroundColor="white" backgroundColor="background" halign="left" zPosition="1" transparent="1" />
+		<widget name="picture" position="270,70" size="720,540" alphatest="blend" zPosition="1" />
+		<widget name="picindex" position="1000,70" size="250,260" foregroundColor="white" backgroundColor="background" font="Regular;22" halign="left" zPosition="1" transparent="1" />
+		<widget name="pictext" position="30,615" size="1220,48" font="Regular;22" foregroundColor="white" backgroundColor="background" halign="center" valign="center" zPosition="1" transparent="1" />
+		<eLabel name="Line_Bottom" position="0,675" size="1280,1" backgroundColor="#3B8047" zPosition="3" />
+		<widget name="label_left-right" position="665,688" size="240,24" font="Regular;18" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
+		<widget name="button_left-right" position="625,685" size="30,30" pixmap="{picpath}HD/left-right_HD.png" alphatest="blend" zPosition="1" />
+		<widget name="label_ok" position="365,689" size="240,24" font="Regular;18" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
+		<widget name="button_ok" position="325,685" size="30,30" pixmap="{picpath}HD/ok_HD.png" alphatest="blend" zPosition="1" />
+		<widget name="starsbg" position="15,75" size="228,40" pixmap="{picpath}HD/starsbar_empty_HD.png" transparent="1"  zPosition="0" alphatest="blend" />
+		<widget name="stars" position="15,75" size="228,40" pixmap="{picpath}HD/starsbar_filled_HD.png"  transparent="1"  />
+	</screen>
+
+	<screen name="CKfullscreen" position="center,center" size="1280,720" flags="wfNoBorder" title="" >
+			<eLabel position="center,center" size="960,720" backgroundColor="#000000" zPosition="1" />
+			<widget name="picture" position="center,center" size="960,720" alphatest="blend" zPosition="2" />
+	</screen>
+
+	<screen name="CKfavoriten" position="345,10" size="590,700" title="" flags="wfNoBorder" backgroundColor="background">
+	    <ePixmap position="0,0" size="1920,1080" pixmap="{picpath}HD/backgroundHD.png" zPosition="-10" />
+		<widget source="Title" render="Label" position="40,14" size="510,32" font="Regular; 24" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
+		<ePixmap position="0,0" size="590,60" pixmap="{picpath}HD/chefkochHD.png" alphatest="blend" zPosition="1" />
+		<widget name="release" position="43,25" size="40,14" font="Regular; 14" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="label_red" position="40,668" size="120,24" font="Regular;18" halign="left" transparent="1" zPosition="2" />
+		<eLabel name="button_red" position="15,665" size="8,30" backgroundColor="red" zPosition="2" />
+		<widget name="favmenu" position="11,73" size="570,580" foregroundColor="white" backgroundColor="background" backgroundColorSelected="#20336f3d" font="Regular;22" itemHeight="34" selectionPixmap="{picpath}HD/BG_Pixmap_HD.png" scrollbarMode="showOnDemand" halign="left" zPosition="1" transparent="1"/>
+		<eLabel name="Line_Left" position="9,72" size="1,582" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Line_Right" position="581,72" size="1,582" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Line_Top" position="9,72" size="572,1" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Line_Bottom" position="9,654" size="572,1" backgroundColor="#3B8047" zPosition="3" />
+	</screen>
+
+	<screen name="CKmain" position="345,10" size="590,700" title="kontaktiere den Server..." flags="wfNoBorder" backgroundColor="background">
+	    <ePixmap position="0,0" size="1920,1080" pixmap="{picpath}HD/backgroundHD.png" zPosition="-10" transparent="1"/>
+		<widget source="Title" render="Label" position="60,14" size="490,32" font="Regular; 24" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
+		<ePixmap position="0,0" size="590,60" pixmap="{picpath}HD/chefkochHD.png"  zPosition="1" />
+		<widget name="release" position="43,25" size="40,14" font="Regular; 14" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="mainmenu" position="10,73" size="570,580" font="Regular;22" itemHeight="34" selectionPixmap="{picpath}HD/BG_Pixmap_HD.png" scrollbarMode="showNever" foregroundColor="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="2" transparent="1"/>
+		<widget name="secondmenu" position="10,73" size="570,580" font="Regular;22" itemHeight="34" selectionPixmap="{picpath}HD/BG_Pixmap_HD.png" scrollbarMode="showNever" foregroundColor="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="2" transparent="1"/>
+		<widget name="thirdmenu" position="10,73" size="570,580" font="Regular;22" itemHeight="34" selectionPixmap="{picpath}HD/BG_Pixmap_HD.png" scrollbarMode="showOnDemand" scrollbarBorderWidth="2" scrollbarWidth="10" scrollbarForegroundColor="#b5d7bb" scrollbarBorderColor="#336F3D" foregroundColor="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="2" transparent="1"/>
+		<widget name="label_red" position="30,668" size="90,24" font="Regular;18" halign="left" transparent="1" zPosition="2" />
+		<widget name="label_green" position="140,668" size="90,24" font="Regular;18" halign="left" transparent="1" zPosition="2" />
+		<widget name="label_yellow" position="250,668" size="90,24" font="Regular;18" halign="left" transparent="1" zPosition="2" />
+		<widget name="label_blue" position="360,668" size="140,24" font="Regular;18" halign="left" transparent="1" zPosition="2" />
+		<eLabel name="Rahmen_grün" position="515,668" size="60,24" backgroundColor="#3B8047" zPosition="1" />
+		<eLabel name="Füllung" position="517,670" size="56,20" backgroundColor="#c1d2c7" zPosition="2" />
+		<eLabel text="Menü" position="517,670" size="56,20" zPosition="5" font="Regular; 14" halign="center" valign="center" foregroundColor="black" backgroundColor="grey" transparent="1" />
+		<eLabel name="button_red" position="15,665" size="8,30" backgroundColor="red" zPosition="2" />
+		<eLabel name="button_green" position="125,665" size="8,30" backgroundColor="green" zPosition="2" />
+		<eLabel name="button_yellow" position="235,665" size="8,30" backgroundColor="yellow" zPosition="2" />
+		<eLabel name="button_blue" position="345,665" size="8,30" backgroundColor="blue" zPosition="2" />
+		<eLabel name="Line_Left" position="9,72" size="1,582" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Line_Right" position="581,72" size="1,582" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Line_Top" position="9,72" size="572,1" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Line_Bottom" position="9,654" size="572,1" backgroundColor="#3B8047" zPosition="3" />
+	</screen>
+
+	<screen name="CKconfig" position="345,10" size="590,700" title="Chefkoch Setup" flags="wfNoBorder" backgroundColor="background">
+		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}HD/backgroundHD.png" zPosition="-10" />
+		<widget source="Title" render="Label" position="140,14" size="300,32" font="Regular; 24" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
+		<ePixmap position="0,0" size="590,60" pixmap="{picpath}HD/chefkochHD.png" alphatest="blend" zPosition="1" />
+		<widget name="release" position="43,25" size="40,14" font="Regular; 14" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="plugin" position="10,73" size="570,580" font="Regular;22" itemHeight="34" selectionPixmap="{picpath}HD/BG_Pixmap_HD.png" scrollbarMode="showNever" foregroundColor="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="1" transparent="1"/>
+		<widget name="config" position="10,73" size="570,580" font="Regular;22" itemHeight="34" selectionPixmap="{picpath}HD/BG_Pixmap_HD.png" scrollbarMode="showNever" foregroundColor="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="1" transparent="1"/>
+		<widget source="VKeyIcon" text="" render="Label" position="0,0" size="0,0" conditional="VKeyIcon">
+			<convert type="ConditionalShowHide" />
+		</widget>
+		<eLabel text="Abbrechen" position="30,668" size="120,24" font="Regular;18" halign="left" transparent="1" zPosition="2" />
+		<eLabel text="Speichern" position="175,668" size="120,24" font="Regular;18" halign="left" transparent="1" zPosition="2" />
+		<eLabel text="Edit" position="330,668" size="120,24" font="Regular;18" halign="left" transparent="1" zPosition="2" backgroundColor="background" />
+		<eLabel name="button_red" position="15,665" size="8,30" backgroundColor="red" zPosition="2" />
+		<eLabel name="button_green" position="160,665" size="8,30" backgroundColor="green" zPosition="2" />
+		<eLabel name="Line_Left" position="9,72" size="1,582" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Line_Right" position="581,72" size="1,582" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Line_Top" position="9,72" size="572,1" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Line_Bottom" position="9,654" size="572,1" backgroundColor="#3B8047" zPosition="3" />
+		<eLabel name="Rahmen_grün" position="292,668" size="28,24" backgroundColor="#3B8047" zPosition="1" />
+		<eLabel name="Füllung" position="294,670" size="24,20" backgroundColor="#c1d2c7" zPosition="2" />
+		<eLabel text="OK" position="293,670" size="26,20" zPosition="5" font="Regular; 14" halign="center" valign="center" foregroundColor="black" backgroundColor="grey" transparent="1" />
+		<eLabel position="11,633" size="569,20" font="Regular; 14" text="***  Authors: Kashmir(†), Mr.Servo, jbleyel - skinned by stein17  ***" foregroundColor="#336f3d" backgroundColor="#40ffffff" halign="center" valign="center" transparent="0" zPosition="4" />
+		<eLabel name="Line_Bottom" position="9,631" size="572,1" backgroundColor="#3B8047" zPosition="3" />
+	</screen>
+</skin>
