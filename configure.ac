@@ -621,12 +621,9 @@ Chefkoch/Makefile
 Chefkoch/meta/Makefile
 Chefkoch/src/Makefile
 Chefkoch/src/db/Makefile
-Chefkoch/src/font/Makefile
 Chefkoch/src/pic/Makefile
-Chefkoch/src/pic/buttons/Makefile
-Chefkoch/src/pic/starbars/Makefile
-Chefkoch/src/pic/setup/Makefile
-Chefkoch/src/pic/slider/Makefile
+Chefkoch/src/pic/FHD/Makefile
+Chefkoch/src/pic/HD/Makefile
 
 PiconManager/Makefile
 PiconManager/meta/Makefile

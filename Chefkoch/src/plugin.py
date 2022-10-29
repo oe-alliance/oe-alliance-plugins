@@ -11,6 +11,7 @@ from PIL import Image
 from smtplib import SMTP, SMTP_SSL
 from time import strftime
 from twisted.internet.reactor import callInThread
+from xml.etree.ElementTree import tostring, parse
 from six import ensure_str, ensure_binary
 from six.moves.email_mime_multipart import MIMEMultipart
 from six.moves.email_mime_text import MIMEText
@@ -25,6 +26,7 @@ from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixm
 from Components.Pixmap import Pixmap
 from Components.Sources.Boolean import Boolean
 from Components.ScrollLabel import ScrollLabel
+from Components.ProgressBar import ProgressBar
 from Plugins.Plugin import PluginDescriptor
 from Screens.ChannelSelection import ChannelSelection
 from Screens.ChoiceBox import ChoiceBox
@@ -34,16 +36,18 @@ from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
-RELEASE = 'V1.7'
+RELEASE = 'V2.0'
+MODULE_NAME = __name__.split(".")[-1]
+LINESPERPAGE = 8
+PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte/'
+APIURIBASE = 'https://api.chefkoch.de/v2/'
+
 config.plugins.chefkoch = ConfigSubsection()
-Pluginpath = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
-deskWidth = getDesktop(0).size().width()
-if deskWidth >= 1920:
-	config.plugins.chefkoch.plugin_size = ConfigSelection(default='FHDclassic', choices=[(
-		'FHDclassic', 'FullHD (1920x1080) klassisch'), ('FHDaltern', 'FullHD (1920x1080) alternativ'), ('HDclassic', 'HD (1280x720) klassisch')])
+PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
+if getDesktop(0).size().width() >= 1920:
+	config.plugins.chefkoch.plugin_size = ConfigSelection(default='FHD', choices=[('FHD', 'FullHD (1920x1080)'), ('HD', 'HD (1280x720)')])
 else:
-	config.plugins.chefkoch.plugin_size = ConfigSelection(default='HDclassic', choices=[('HDclassic', 'HD (1280x720) klassisch')])
-config.plugins.chefkoch.position = ConfigInteger(85, (0, 160))
+	config.plugins.chefkoch.plugin_size = ConfigSelection(default='HD', choices=[('HD', 'HD (1280x720)')])
 config.plugins.chefkoch.font_size = ConfigSelection(default='large', choices=[('large', 'Groß'), ('normal', 'Normal')])
 config.plugins.chefkoch.maxrecipes = ConfigSelection(default='100', choices=['10', '20', '50', '100', '200', '500', '1000'])
 config.plugins.chefkoch.maxcomments = ConfigSelection(default='100', choices=['10', '20', '50', '100', '200', '500'])
@@ -58,198 +62,80 @@ config.plugins.chefkoch.port = ConfigInteger(465, (0, 99999))
 config.plugins.chefkoch.ssl = ConfigYesNo(default=True)
 config.plugins.chefkoch.debuglog = ConfigYesNo(default=False)
 config.plugins.chefkoch.logtofile = ConfigYesNo(default=False)
+if config.plugins.chefkoch.plugin_size.value == "FHD":
+	SCALE = 1.5
+	SKINFILE = PLUGINPATH + "skin_FHD.xml"
+else:
+	SCALE = 1.0
+	SKINFILE = PLUGINPATH + "skin_HD.xml"
 
 
-def applySkinVars(skin, dict):
-	for key in dict.keys():
-		skin = skin.replace('{' + key + '}', dict[key])
-	return skin
+class AllScreen(Screen):
+	def __init__(self):
+		pass
 
+	def applySkinVars(self, skin, dict):
+		for key in dict.keys():
+			skin = skin.replace('{' + key + '}', dict[key])
+		return skin
 
-PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte'
-APIURIBASE = 'https://api.chefkoch.de/v2'
-
-
-def APIget(apiuri):
-	try:
-		f = get(apiuri)
+	def getAPIdata(self, apiuri, fail=None):
+		f = get('%s%s' % (APIURIBASE, apiuri))
 		return (f.text, f.status_code)
-	except IOError:
-		return ('Serverrespose error: ', IOError)
 
-
-def getAPIdata(apiuri):
-	apiuri = APIURIBASE + apiuri
-	content, resp = APIget(apiuri)
-	if resp != 200:
-		CKlog('request failure from', apiuri)
-	return (content, resp)
-
-
-def CKlog(info, wert="", debug=False):
-	if debug and not config.plugins.chefkoch.debuglog.value:
-		return
-	if config.plugins.chefkoch.logtofile.value:
-		try:
-			with open('/home/root/logs/chefkoch.log', 'a') as f:
-				f.write(strftime('%H:%M:%S') + ' %s %s\r\n' % (str(info), str(wert)))
-		except IOError:
-			print('[Chefkoch] Logging-Error')
-	else:
-		print('[Chefkoch] %s %s' % (str(info), str(wert)))
-
-
-def hideScreen():
-	global HIDEFLAG
-	if ALPHA:
-		if HIDEFLAG:
-			HIDEFLAG = False
-			for i in range(40, -1, -1):
-				with open(ALPHA, 'w') as f:
-					f.write('%i' % (config.av.osd_alpha.value * i / 40))
+	def CKlog(self, info, wert="", debug=False):
+		if debug and not config.plugins.chefkoch.debuglog.value:
+			return
+		if config.plugins.chefkoch.logtofile.value:
+			try:
+				with open('/home/root/logs/chefkoch.log', 'a') as f:
+					f.write(strftime('%H:%M:%S') + ' %s %s\r\n' % (str(info), str(wert)))
+			except IOError:
+				print('[Chefkoch] Logging-Error')
 		else:
-			HIDEFLAG = True
-			for i in range(41):
-				with open(ALPHA, 'w') as f:
-					f.write('%i' % (config.av.osd_alpha.value * i / 40))
+			print('[Chefkoch] %s %s' % (str(info), str(wert)))
+
+	def hideScreen(self):
+		global HIDEFLAG
+		if ALPHA:
+			if HIDEFLAG:
+				HIDEFLAG = False
+				for i in range(40, -1, -1):
+					with open(ALPHA, 'w') as f:
+						f.write('%i' % (config.av.osd_alpha.value * i / 40))
+			else:
+				HIDEFLAG = True
+				for i in range(41):
+					with open(ALPHA, 'w') as f:
+						f.write('%i' % (config.av.osd_alpha.value * i / 40))
+
+	def readSkin(self, skin):
+		skintext = ""
+		try:
+			with open(SKINFILE, "r") as fd:
+				try:
+					domSkin = parse(fd).getroot()
+					for element in domSkin:
+						if element.tag == "screen" and element.attrib['name'] == skin:
+							skintext = ensure_str(tostring(element))
+							break
+				except Exception as err:
+					print("[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (SKINFILE, err))
+		except OSError as err:
+			print("[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (SKINFILE, err))
+		return skintext
 
 
-class ChefkochView(Screen):
-	skinHD = '''
-		<screen position="center,{position}" size="1240,640" title="lade Daten, bitte warten...">
-			<ePixmap position="0,0" size="1240,60" pixmap="{picpath}chefkochHD.png" alphatest="blend" zPosition="1" />
-			<widget name="menu" position="10,75" size="1085,540" scrollbarMode="showNever" zPosition="1" />
-			<widget name="vid0" position="1132,90" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid1" position="1132,180" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid2" position="1132,270" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid3" position="1132,360" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid4" position="1132,450" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid5" position="1132,540" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="pic0" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic1" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic2" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic3" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic4" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic5" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="postpic" position="450,70" size="280,210" zPosition="1" />
-			<widget name="postvid" position="560,145" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="score" position="10,70" size="236,48" alphatest="blend" zPosition="1" />
-			<widget name="scoretext" position="10,118" size="440,165" font="Regular;{fontsize}" halign="left" zPosition="1" />
-			<widget name="recipetext" position="765,70" size="470,210" font="Regular;{fontsize}" halign="left" zPosition="1" />
-			<widget name="textpage" position="10,280" size="1220,365" font="Regular;{fontsize}" halign="left" zPosition="0" />
-			<widget name="slider_textpage" position="1214,280" size="22,360" pixmap="{picpath}slider/slider_360.png" alphatest="blend" zPosition="1" />
-			<widget name="label1" position="270,8" size="640,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-			<widget name="label2" position="740,8" size="350,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="label3" position="740,31" size="350,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="label4" position="120,0" size="350,60" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" valign="center" transparent="1" zPosition="2" />
-			<widget name="label5" position="300,8" size="350,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label6" position="300,31" size="350,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label7" position="270,31" size="640,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-			<widget render="Label" source="global.CurrentTime" position="1125,0" size="105,30" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
-				<convert type="ClockToText">Format:%H:%M:%S</convert>
-			</widget>
-			<widget name="release" position="1125,28" size="105,30" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" transparent="1" zPosition="2" />
-			<widget name="greenbutton" position="132,10" size="18,18" pixmap="{picpath}buttons/greenHD.png" alphatest="blend" zPosition="2" />
-			<widget name="greenbutton2" position="274,10" size="18,18" pixmap="{picpath}buttons/greenHD.png" alphatest="blend" zPosition="2" />
-			<widget name="yellowbutton" position="132,32" size="18,18" pixmap="{picpath}buttons/yellowHD.png" alphatest="blend" zPosition="2" />
-			<widget name="yellowbutton2" position="274,32" size="18,18" pixmap="{picpath}buttons/yellowHD.png" alphatest="blend" zPosition="2" />
-			<widget name="redbutton" position="1100,10" size="18,18" pixmap="{picpath}buttons/redHD.png" alphatest="blend" zPosition="2" />
-			<widget name="bluebutton" position="1100,32" size="18,18" pixmap="{picpath}buttons/blueHD.png" alphatest="blend" zPosition="2" />
-		</screen>'''
-	skinFHD = '''
-		<screen position="center,{position}" size="1860,960" title="lade Daten, bitte warten...">
-			<ePixmap position="0,0" size="1860,90" pixmap="{picpath}chefkochFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="menu" position="15,112" size="1627,810" scrollbarMode="showNever" zPosition="1" />
-			<widget name="vid0" position="1698,134" size="90,90" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid1" position="1698,269" size="90,90" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid2" position="1698,404" size="90,90" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid3" position="1698,539" size="90,90" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid4" position="1698,674" size="90,90" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid5" position="1698,809" size="90,90" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="pic0" position="1642,112" size="202,135" alphatest="blend" zPosition="1" />
-			<widget name="pic1" position="1642,247" size="202,135" alphatest="blend" zPosition="1" />
-			<widget name="pic2" position="1642,382" size="202,135" alphatest="blend" zPosition="1" />
-			<widget name="pic3" position="1642,517" size="202,135" alphatest="blend" zPosition="1" />
-			<widget name="pic4" position="1642,652" size="202,135" alphatest="blend" zPosition="1" />
-			<widget name="pic5" position="1642,787" size="202,135" alphatest="blend" zPosition="1" />
-			<widget name="postpic" position="675,105" size="420,315" zPosition="1" />
-			<widget name="postvid" position="840,217" size="90,90" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="score" position="15,105" size="354,71" alphatest="blend" zPosition="1" />
-			<widget name="scoretext" position="15,175" size="660,247" font="Regular;{fontsize}" halign="left" zPosition="1" />
-			<widget name="recipetext" position="1147,105" size="705,315" font="Regular;{fontsize}" halign="left" zPosition="1" />
-			<widget name="textpage" position="15,423" size="1830,547" font="Regular;{fontsize}" halign="left" zPosition="0" />
-			<widget name="slider_textpage" position="1821,420" size="33,540" pixmap="{picpath}slider/slider_360.png" alphatest="blend" zPosition="1" />
-			<widget name="label1" position="405,12" size="960,36" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-			<widget name="label2" position="1110,12" size="525,36" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="label3" position="1110,46" size="525,36" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="label4" position="180,0" size="525,90" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" valign="center" transparent="1" zPosition="2" />
-			<widget name="label5" position="456,12" size="525,36" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label6" position="456,46" size="525,36" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label7" position="405,46" size="960,36" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-			<widget render="Label" source="global.CurrentTime" position="1687,0" size="157,45" font="Regular;39" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
-				<convert type="ClockToText">Format:%H:%M:%S</convert>
-			</widget>
-			<widget name="release" position="1687,42" size="157,45" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" transparent="1" zPosition="2" />
-			<widget name="greenbutton" position="198,15" size="27,27" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2" />
-			<widget name="greenbutton2" position="420,15" size="27,27" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2" />
-			<widget name="yellowbutton" position="198,48" size="27,27" pixmap="{picpath}buttons/yellowFHD.png" alphatest="blend" zPosition="2" />
-			<widget name="yellowbutton2" position="420,48" size="27,27" pixmap="{picpath}buttons/yellowFHD.png" alphatest="blend" zPosition="2" />
-			<widget name="redbutton" position="1650,15" size="27,27" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2" />
-			<widget name="bluebutton" position="1650,48" size="27,27" pixmap="{picpath}buttons/blueFHD.png" alphatest="blend" zPosition="2" />
-		</screen>'''
-	skinALT = '''
-		<screen position="center,{position}" size="1240,980" title="lade Daten, bitte warten...">
-			<ePixmap position="0,0" size="1240,60" pixmap="{picpath}chefkochHD.png" alphatest="blend" zPosition="1" />
-			<widget name="menu" position="10,75" size="1085,900" scrollbarMode="showNever" zPosition="2" />
-			<widget name="vid0" position="1132,90" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid1" position="1132,180" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid2" position="1132,270" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid3" position="1132,360" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid4" position="1132,450" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid5" position="1132,540" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid6" position="1132,630" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid7" position="1132,720" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid8" position="1132,810" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="vid9" position="1132,900" size="60,60" pixmap="{picpath}videoiconHD.png" alphatest="blend" zPosition="1" />
-			<widget name="pic0" position="1095,75" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic1" position="1095,165" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic2" position="1095,255" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic3" position="1095,345" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic4" position="1095,435" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic5" position="1095,525" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic6" position="1095,615" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic7" position="1095,705" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic8" position="1095,795" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="pic9" position="1095,885" size="135,90" alphatest="blend" zPosition="1" />
-			<widget name="postpic" position="450,70" size="280,210" zPosition="1" />
-			<widget name="postvid" position="545,130" size="90,90" pixmap="{picpath}videoiconFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="score" position="10,70" size="236,48" alphatest="blend" zPosition="1" />
-			<widget name="scoretext" position="10,118" size="440,165" font="Regular;{fontsize}" halign="left" zPosition="1" />
-			<widget name="recipetext" position="765,70" size="470,210" font="Regular;{fontsize}" halign="left" zPosition="1" />
-			<widget name="textpage" position="10,280" size="1220,705" font="Regular;{fontsize}" halign="left" zPosition="0" />
-			<widget name="slider_textpage" position="1214,280" size="22,700" pixmap="{picpath}slider/slider_700.png" alphatest="blend" zPosition="1" />
-			<widget name="label1" position="270,8" size="640,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-			<widget name="label2" position="740,8" size="350,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="label3" position="740,31" size="350,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="label4" position="120,0" size="350,60" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" valign="center" transparent="1" zPosition="2" />
-			<widget name="label5" position="300,8" size="350,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label6" position="300,31" size="350,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label7" position="270,31" size="640,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-			<widget render="Label" source="global.CurrentTime" position="1125,0" size="105,30" font="Regular;26" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
-				<convert type="ClockToText">Format:%H:%M:%S</convert>
-			</widget>
-			<widget name="release" position="1125,28" size="105,30" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="right" valign="center" transparent="1" zPosition="2" />
-			<widget name="greenbutton" position="132,10" size="18,18" pixmap="{picpath}buttons/greenHD.png" alphatest="blend" zPosition="2" />
-			<widget name="greenbutton2" position="274,10" size="18,18" pixmap="{picpath}buttons/greenHD.png" alphatest="blend" zPosition="2" />
-			<widget name="yellowbutton" position="132,32" size="18,18" pixmap="{picpath}buttons/yellowHD.png" alphatest="blend" zPosition="2" />
-			<widget name="yellowbutton2" position="274,32" size="18,18" pixmap="{picpath}buttons/yellowHD.png" alphatest="blend" zPosition="2" />
-			<widget name="redbutton" position="1100,10" size="18,18" pixmap="{picpath}buttons/redHD.png" alphatest="blend" zPosition="2" />
-			<widget name="bluebutton" position="1100,32" size="18,18" pixmap="{picpath}buttons/blueHD.png" alphatest="blend" zPosition="2" />
-		</screen>'''
-
+class CKview(AllScreen):
 	def __init__(self, session, query, titel, sort, fav, zufall):
 		global HIDEFLAG
 		HIDEFLAG = True
+		fontsize = '%d' % int(22 * SCALE) if config.plugins.chefkoch.font_size.value == 'large' else '%d' % int(20 * SCALE)
+		self.dict = {'picpath': PLUGINPATH + 'pic/', 'fontsize': fontsize}
+		skin = self.readSkin("CKview")
+		self.skin = self.applySkinVars(skin, self.dict)
+		Screen.__init__(self, session, skin)
+		self.REZ = None
 		self.session = session
 		self.query = query
 		self.titel = titel
@@ -260,22 +146,8 @@ class ChefkochView(Screen):
 		self.orgGRP = []
 		self.KOM = []
 		self.picfile = '/tmp/chefkoch.jpg'
-		position = str(config.plugins.chefkoch.position.value)
-		if config.plugins.chefkoch.font_size.value == 'large':
-			self.fontlarge = True
-			fontsize = '%d' % int(18 * SCALE)
-		else:
-			self.fontlarge = False
-			fontsize = '%d' % int(16 * SCALE)
-		self.dict = {'position': position, 'picpath': Pluginpath + 'pic/', 'fontsize': fontsize}
-		if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
-			self.skin = applySkinVars(ChefkochView.skinFHD, self.dict)
-		elif config.plugins.chefkoch.plugin_size.value == 'FHDaltern':
-			self.skin = applySkinVars(ChefkochView.skinALT, self.dict)
-		else:
-			self.skin = applySkinVars(ChefkochView.skinHD, self.dict)
-		Screen.__init__(self, session)
 		self.currItem = 0
+		self.rezept = 'https://www.chefkoch.de/rezepte/'
 		self.rezeptfile = '/tmp/Rezept.html'
 		self.ready = False
 		self.postviewready = False
@@ -285,7 +157,6 @@ class ChefkochView(Screen):
 		self.maxPage = 0
 		self.current = 'menu'
 		self.name = ''
-		self.seitenlabel = ''
 		self.chefvideo = ''
 		self.kochentries = []
 		self.kochId = []
@@ -303,34 +174,47 @@ class ChefkochView(Screen):
 			self.pic.append('/tmp/chefkoch%d.jpg' % i)
 		self['postpic'] = Pixmap()
 		self['postvid'] = Pixmap()
-		self['score'] = Pixmap()
+		self["stars"] = ProgressBar()
+		self["starsbg"] = Pixmap()
+		self["stars"].hide()
+		self["starsbg"].hide()
 		self['scoretext'] = Label('')
 		self['scoretext'].hide()
 		self['recipetext'] = Label('')
 		self['recipetext'].hide()
-		self['greenbutton'] = Pixmap()
-		self['greenbutton2'] = Pixmap()
-		self['redbutton'] = Pixmap()
-		self['yellowbutton'] = Pixmap()
-		self['yellowbutton2'] = Pixmap()
-		self['bluebutton'] = Pixmap()
+		self['button_green'] = Pixmap()
+		self['button_red'] = Pixmap()
+		self['button_yellow'] = Pixmap()
+		self['button_blue'] = Pixmap()
 		self['textpage'] = ScrollLabel('')
-		self['slider_textpage'] = Pixmap()
-		self['slider_textpage'].hide()
+		self['textpage'].hide()
 		self['menu'] = ItemList([])
-		self['greenbutton'].hide()
-		self['greenbutton2'].hide()
-		self['yellowbutton'].hide()
-		self['yellowbutton2'].hide()
-		self['redbutton'].hide()
-		self['bluebutton'].hide()
-		self['label1'] = Label('')
-		self['label2'] = Label('')
-		self['label3'] = Label('')
-		self['label4'] = Label('')
-		self['label5'] = Label('')
-		self['label6'] = Label('')
-		self['label7'] = Label('')
+		self['button_green'].hide()
+		self['button_yellow'].hide()
+		self['button_red'].hide()
+		self['button_blue'].hide()
+		self['label_red'] = Label('')
+		self['label_green'] = Label('')
+		self['label_yellow'] = Label('')
+		self['label_blue'] = Label('')
+		self['label_rezeptnr'] = Label('')
+		self['label_1-0'] = Label('')
+		self['label_1-0'].hide()
+		self['button_1-0'] = Pixmap()
+		self['button_1-0'].hide()
+		self['pageinfo'] = Label('')
+		self['pageinfo'].hide()
+		self['label_ok'] = Label('')
+		self['label_ok'].hide()
+		self['button_ok'] = Pixmap()
+		self['button_ok'].hide()
+		self['postvid'].hide()
+		self['label_play'] = Label('')
+		self['label_play'].hide()
+		self['button_play'] = Pixmap()
+		self['button_play'].hide()
+		self['Line_Bottom'] = Label('')
+		self['Line_Bottom'].hide()
 		self['release'] = Label(RELEASE)
 		self['helpactions'] = ActionMap(['HelpActions'], {'displayHelp': self.infoScreen}, -1)
 		self['NumberActions'] = NumberActionMap(['NumberActions', 'OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'ButtonSetupActions'], {
@@ -347,7 +231,7 @@ class ChefkochView(Screen):
 			'red': self.red,
 			'yellow': self.yellow,
 			'green': self.green,
-			'blue': hideScreen,
+			'blue': self.hideScreen,
 			'0': self.gotoPage,
 			'1': self.gotoPage,
 			'2': self.gotoPage,
@@ -371,20 +255,18 @@ class ChefkochView(Screen):
 		yres = self['pic0'].instance.size().height()
 		for i in range(LINESPERPAGE):
 			self.prevpicload[i].setPara((xres, yres, 1.0, 0, False, 1, "#00000000"))
-		self.makeChefkochTimer = eTimer()
 		if self.zufall:
 			self.current = 'postview'
 			self.GRP = self.getGRP()
 			self.maxPage = (len(self.GRP) - 1) // LINESPERPAGE + 1
 			zufallsId = self.GRP[randrange(0, len(self.GRP))]['id']
-			self.makeChefkochTimer.callback.append(self.makePostviewPage(zufallsId))
+			callInThread(self.makePostviewPage, zufallsId)
 		elif self.fav:
 			self.current = 'postview'
-			self.makeChefkochTimer.callback.append(self.makePostviewPage(self.query))
+			callInThread(self.makePostviewPage, self.query)
 		else:
 			self.current = 'menu'
-			self.makeChefkochTimer.callback.append(self.makeChefkoch)
-		self.makeChefkochTimer.start(200, True)
+			callInThread(self.makeChefkoch)
 
 	def makeChefkoch(self):  # erzeuge Rezeptliste
 		for i in range(LINESPERPAGE):
@@ -398,19 +280,26 @@ class ChefkochView(Screen):
 		self.titellist = []
 		self.videolist = []
 		self['postvid'].hide()
-		self['greenbutton'].hide()
-		self['greenbutton2'].show()
-		self['yellowbutton'].hide()
-		self['yellowbutton2'].show()
-		self['redbutton'].show()
-		self['bluebutton'].show()
-		self['label1'].setText('')
-		self['label2'].setText('Rezept zu Favoriten hinzufügen =')
-		self['label3'].setText('Ein-/Ausblenden =')
-		self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
-		self['label4'].setText(self.seitenlabel)
-		self['label5'].setText('= Sortierung: %s' % self.sortname[self.sort])
-		self['label6'].setText('= Suche')
+		self['button_green'].hide()
+		self['button_yellow'].hide()
+		self['button_red'].show()
+		self['button_blue'].show()
+		self['label_red'].setText('Rezept zu Favoriten')
+		self['label_green'].setText('Sortierung: %s' % self.sortname[self.sort])
+		self['label_yellow'].setText('Suche')
+		self['label_blue'].setText('Ein-/Ausblenden')
+		self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
+		self['label_1-0'].setText('')
+		self['button_1-0'].hide()
+		self['postvid'].hide()
+		self['label_play'].setText('Video abspielen')
+		self['label_play'].hide()
+		self['button_play'].hide()
+		self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
+		self['pageinfo'].show()
+		self['label_ok'].setText('zum Rezept')
+		self['label_ok'].show()
+		self['button_ok'].show()
 		self.headline = str(len(self.GRP)) + ' ' + self.titel.replace(' Rezepte', '') + ' Rezepte ('
 		self.headline += '1 Video)' if self.videocount == 1 else str(self.videocount) + ' Videos)'
 		self.setTitle(str(self.headline))
@@ -425,34 +314,34 @@ class ChefkochView(Screen):
 				count = 'keine'
 				score = '0'
 			if self.GRP[i]['previewImageId']:
-				picurl = PICURLBASE + '/' + id + '/bilder/' + str(self.GRP[i]['previewImageId']) + '/crop-160x120/' + titel.replace(' ', '-') + '.jpg'
+				picurl = PICURLBASE + id + '/bilder/' + str(self.GRP[i]['previewImageId']) + '/crop-160x120/' + titel.replace(' ', '-') + '.jpg'
 			else:
 				picurl = 'http://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
 			text = self.GRP[i]['subtitle']
 			if len(text) > 155:
-				text = text[:155] + '...'
+				text = text[:155] + '…'
 			self.kochId.append(id)
 			self.picurllist.append(picurl)
 			self.titellist.append(titel)
 			self.videolist.append(self.GRP[i]['hasVideo'])
 			res = [i]
-			res.append(MultiContentEntryText(pos=(int(110 * SCALE), 0), size=(int(965 * SCALE), int(30 * SCALE)), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titel))  # TITLE
-			if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
-				png = Pluginpath + 'pic/starbars/smallFHD-%s.png' % score
+			res.append(MultiContentEntryText(pos=(int(110 * SCALE), 10), size=(int(965 * SCALE), int(30 * SCALE)), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titel))  # TITLE
+			if config.plugins.chefkoch.plugin_size.value == 'FHD':
+				png = PLUGINPATH + 'pic/FHD/smallFHD-%s.png' % score
 			else:
-				png = Pluginpath + 'pic/starbars/smallHD-%s.png' % score
+				png = PLUGINPATH + 'pic/HD/smallHD-%s.png' % score
 			if fileExists(png):
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(12 * SCALE), int(33 * SCALE)), size=(int(72 * SCALE), int(15 * SCALE)), png=loadPNG(png)))  # SCORE
-			res.append(MultiContentEntryText(pos=(0, int(52 * SCALE)), size=(int(95 * SCALE), int(25 * SCALE)), font=0,
-											 color=16777215, color_sel=16777215, flags=RT_HALIGN_CENTER, text='(' + count + ')'))  # COUNT
-			res.append(MultiContentEntryText(pos=(int(111 * SCALE), int(30 * SCALE)), size=(int(965 * SCALE), int(60 * SCALE)),
+				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(14 * SCALE), int(36 * SCALE)), size=(int(75 * SCALE), int(15 * SCALE)), png=loadPNG(png)))  # STARS
+			res.append(MultiContentEntryText(pos=(int(11 * SCALE), int(52 * SCALE)), size=(int(75 * SCALE), int(30 * SCALE)), font=1, color=16777215, color_sel=16777215,
+                                    		 flags=RT_HALIGN_CENTER, text='(' + count + ')'))  # COUNT
+			res.append(MultiContentEntryText(pos=(int(111 * SCALE), int(45 * SCALE)), size=(int(965 * SCALE), int(70 * SCALE)),
 											 font=-1, color=10857646, color_sel=13817818, flags=RT_HALIGN_LEFT | RT_WRAP, text=text))  # TEXT
-			res.append(MultiContentEntryText(pos=(0, 0), size=(int(95 * SCALE), int(30 * SCALE)), font=0, backcolor=12255304,
-											 color=16777215, backcolor_sel=12255304, color_sel=16777215, flags=RT_HALIGN_CENTER, text=time))  # TIME
+			res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(6 * SCALE)), size=(int(75 * SCALE), int(26 * SCALE)), font=0, backcolor=3899463,
+											 color=16777215, backcolor_sel=15704383, color_sel=16777215, flags=RT_HALIGN_CENTER, text=time))  # TIME
 			self.kochentries.append(res)
 		self.setPrevIcons(0)
 		self.len = len(self.kochentries)
-		self['menu'].l.setItemHeight(int(90 * SCALE))
+		self['menu'].l.setItemHeight(int(75 * SCALE))
 		self['menu'].l.setList(self.kochentries)
 		self['menu'].moveToIndex(0)
 		self.ready = True
@@ -468,62 +357,60 @@ class ChefkochView(Screen):
 	def formatUsername(self, username, rank, trim):
 		return 'Unbekannt' if "unknown" in username else (str(username) + ' (' + str(rank) + '*)')[:trim if trim > 0 else 100]
 
-	def makePostviewPage(self, Id):  # erzeuge Rezept
+	def makePostviewPage(self, Id):  # erzeuge eigentliches Rezept
 		self.currId = Id
-		self.rezept = 'https://www.chefkoch.de/rezepte/'
-		effort = ['keiner', 'simpel', 'normal', 'pfiffig']
 		for i in range(LINESPERPAGE):
 			self['pic%d' % i].hide()
 			self['vid%d' % i].hide()
 		self['menu'].hide()
-		self['greenbutton'].show()
-		self['greenbutton2'].hide()
-		self['yellowbutton'].hide()
-		self['yellowbutton2'].hide()
-		self['redbutton'].show()
-		self['bluebutton'].show()
-		self['label2'].setText('Rezept zu Favoriten hinzufügen =')
-		self['label3'].setText('Ein-/Ausblenden =')
-		self['label4'].setText('')
-		self['label5'].setText('')
-		self['label6'].setText('')
+		self['button_green'].hide()
+		self['button_yellow'].hide()
+		self['button_red'].show()
+		self['button_blue'].show()
+		self['label_green'].setText('Rezept per Email')
+		self['label_red'].setText('Rezept zu Favoriten')
+		self['label_yellow'].setText('')
+		self['label_blue'].setText('Ein-/Ausblenden')
+		self['label_rezeptnr'].setText('')
+		self['label_1-0'].setText('')
+		self['button_1-0'].hide()
+		self['pageinfo'].hide()
+		self['label_ok'].setText('zum Rezept')
+		self['label_ok'].show()
+		self['button_ok'].show()
+		self['postvid'].hide()
+		self['label_play'].hide()
+		self['button_play'].hide()
+		self['Line_Bottom'].hide()
+		self['textpage'].setText('')
 		self['textpage'].show()
 		self.REZ = self.getREZ(self.currId)
-		self.IMG = self.getIMG(self.currId)
-		self.KOM = self.getKOM(self.currId)
-		self.picCount = self.REZ['imageCount']
-		self.setTitle(str(self.REZ['title']))
-		if self.picCount == 0:
-			self['label7'].setText('')
-		elif self.picCount > 1:
-			self['label7'].setText('OK = zeige %d Rezeptbilder' % (self.IMGlen))
-		else:
-			self['label7'].setText('OK = Vollbild')
 		if self.REZ['rating']:
-			score = str(round(self.REZ['rating']['rating'] / 5, 1) * 5).replace('.', '_').replace('_0', '')
+			score = self.REZ['rating']['rating'] * 20
 			scoretext = str('%1.1f' % self.REZ['rating']['rating']) + ' (' + str(self.REZ['rating']['numVotes']) + ' Bewertungen)'
 		else:
-			score = '0'
+			score = 0.0
 			scoretext = '(ohne Bewertung)'
 		preptime = self.REZ['preparationTime']
 		cooktime = self.REZ['cookingTime']
 		resttime = self.REZ['restingTime']
 		totaltime = self.REZ['totalTime']
+		self.picCount = self.REZ['imageCount']
+		self.setTitle(str(self.REZ['title']))
 		if preptime != 0:
-			scoretext += '\nArbeitszeit\t: ' + self.getTimeString(preptime)
+			scoretext += '\nArbeitszeit\t: %s' % self.getTimeString(preptime)
 		if cooktime != 0:
-			scoretext += '\nKoch-/Backzeit\t: ' + self.getTimeString(cooktime)
+			scoretext += '\nKoch-/Backzeit\t: %s' % self.getTimeString(cooktime)
 		if resttime != 0:
-			scoretext += '\nRuhezeit\t: ' + self.getTimeString(resttime)
+			scoretext += '\nRuhezeit\t: %s' % self.getTimeString(resttime)
 		if totaltime != 0:
-			scoretext += '\nGesamtzeit\t: ' + self.getTimeString(totaltime)
-		pictype = 'FHD-' if config.plugins.chefkoch.plugin_size.value == 'FHDclassic' else 'HD-'
-		scorepng = Pluginpath + 'pic/starbars/large' + pictype + score + '.png'
-		if fileExists(scorepng):
-			self.showScore(scorepng)
-			self['score'].show()
+			scoretext += '\nGesamtzeit\t: %s' % self.getTimeString(totaltime)
+		self["starsbg"].show()
+		self["stars"].show()
+		self["stars"].setValue(score)
 		self['scoretext'].setText(scoretext)
 		self['scoretext'].show()
+		effort = ['keiner', 'simpel', 'normal', 'pfiffig']
 		recipetext = 'Rezept-Identnr.\t: ' + str(self.currId)
 		recipetext += '\nAufwand\t: ' + effort[self.REZ['difficulty']]
 		recipetext += '\nErstellername\t: ' + self.formatUsername(self.REZ['owner']['username'], self.REZ['owner']['rank'], 22)
@@ -531,40 +418,50 @@ class ChefkochView(Screen):
 		if self.REZ['nutrition']:
 			kcalori = self.REZ['nutrition']['kCalories']
 			if kcalori:
-				kcalori = str(kcalori)
+				kcalori = '%s' % kcalori
 			else:
 				kcalori = 'k.A.'
 			protein = self.REZ['nutrition']['proteinContent']
 			if protein:
-				protein = str(protein) + ' g'
+				protein = '%s g' % protein
 			else:
 				protein = 'k.A.'
 			fatcont = self.REZ['nutrition']['fatContent']
 			if fatcont:
-				fatcont = str(fatcont) + ' g'
+				fatcont = '%s g' % fatcont
 			else:
 				fatcont = 'k.A.'
 			carbohyd = self.REZ['nutrition']['carbohydrateContent']
 			if carbohyd:
-				carbohyd = str(carbohyd) + ' g'
+				carbohyd = '%s g' % carbohyd
 			else:
 				carbohyd = 'k.A.'
 			recipetext += '\n\n{0:13}{1:13}{2:14}{3}'.format('kcal', 'Eiweiß', 'Fett', 'Kohlenhydr.')
 			recipetext += '\n{0:13}{1:13}{2:12}{3}'.format(kcalori, protein, fatcont, carbohyd)
 		self['recipetext'].setText(str(recipetext))
 		self['recipetext'].show()
+		self['Line_Bottom'].show()
 		if self.REZ['hasImage']:
-			picurl = PICURLBASE + '/' + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
+			picurl = PICURLBASE + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
 		else:
 			picurl = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
-		callInThread(self.threadGetPage, picurl, self.getPostPic, self.downloadError)
+		callInThread(self.threadedGetPage, picurl, self.getPostPic, self.downloadError)
 		self.postpicload.PictureData.get().append(self.showPostPic)
 		self['postpic'].show()
+		self.IMG = self.getIMG(self.currId)
+		if self.picCount == 1:
+			self['label_ok'].setText('Vollbild')
+		elif self.picCount > 1:
+			self['label_ok'].setText('%d Rezeptbilder' % (self.IMGlen))
+		else:
+			self['label_ok'].setText('')
+			self['button_ok'].hide()
+		self.KOM = self.getKOM(self.currId)
 		self.makeRezept()
 		self.postviewready = True
 
 	def getREZ(self, id):  # hole den jeweiligen Rezeptdatensatz
-		content, resp = getAPIdata('/recipes/' + id)
+		content, resp = self.getAPIdata('recipes/' + id)
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 			self.close()
@@ -573,7 +470,7 @@ class ChefkochView(Screen):
 			return loads(content)
 
 	def getIMG(self, id):  # hole die jeweilige Rezeptbilderliste
-		content, resp = getAPIdata('/recipes/' + id + '/images?&offset=0&limit=' + config.plugins.chefkoch.maxpictures.value)
+		content, resp = self.getAPIdata('recipes/' + id + '/images?&offset=0&limit=' + config.plugins.chefkoch.maxpictures.value)
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 			self.close()
@@ -587,7 +484,7 @@ class ChefkochView(Screen):
 			return dict
 
 	def getKOM(self, id):  # hole die jeweilige Rezeptkommentarliste
-		content, resp = getAPIdata('/recipes/' + id + '/comments?&offset=0&limit=' + config.plugins.chefkoch.maxcomments.value)
+		content, resp = self.getAPIdata('recipes/' + id + '/comments?&offset=0&limit=' + config.plugins.chefkoch.maxcomments.value)
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 			self.close()
@@ -602,7 +499,7 @@ class ChefkochView(Screen):
 			limit = int(config.plugins.chefkoch.maxrecipes.value)
 			videocount = 0
 			for i in range(max((limit) // 100, 1)):
-				content, resp = getAPIdata('/recipes?query=%s&offset=%d&limit=%d' % (self.query, i * 100, min(limit, 100)))
+				content, resp = self.getAPIdata('recipes?query=%s&offset=%d&limit=%d' % (self.query, i * 100, min(limit, 100)))
 				if resp != 200:
 					self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 					self.close()
@@ -650,13 +547,13 @@ class ChefkochView(Screen):
 		minutes = duration % 60
 		if days == 0:
 			daytext = ''
-			hourtext = 'ca. ' + str(hours) + ' h ' if hours != 0 else ''
-			minutetext = str(minutes) + ' min' if minutes != 0 else ''
+			hourtext = 'ca. %s h' % hours if hours != 0 else ''
+			minutetext = '%s min' % minutes if minutes != 0 else ''
 		else:
-			daytext = str(days) + ' Tage' if days > 1 else '1 Tag'
+			daytext = '%s Tage' % days if days > 1 else '1 Tag'
 			hourtext = ''
 			minutetext = ''
-		ausgabe = daytext + hourtext + minutetext
+		ausgabe = '%s%s%s' % (daytext, hourtext, minutetext)
 		return ausgabe
 
 	def ok(self):
@@ -665,15 +562,16 @@ class ChefkochView(Screen):
 				self.selectPage()
 			elif self.current == 'postview' and self.postviewready:
 				if self.picCount == 1:
-					self.session.openWithCallback(self.showPostPic, FullScreen)
+					self.session.openWithCallback(self.showPostPic, CKfullscreen)
 				if self.picCount > 1:
-					self.session.openWithCallback(self.returnPicShow, ChefkochPicShow, self.titel, self.REZ, self.IMG)
+					self.session.openWithCallback(self.returnPicShow, CKpicshow, self.titel, self.REZ, self.IMG)
 
 	def selectPage(self):
 		if self.ready:
 			self.current = 'postview'
 			self.currItem = self['menu'].getSelectedIndex()
-			self.makePostviewPage(self.kochId[self.currItem])
+			self.currId = '%s%s' % ('recipes/', self.kochId[self.currItem])
+			callInThread(self.makePostviewPage, self.kochId[self.currItem])
 
 	def red(self):
 		if self.ready or self.postviewready:
@@ -686,7 +584,7 @@ class ChefkochView(Screen):
 
 	def red_return(self, answer):
 		if answer is True:
-			favoriten = Pluginpath + 'db/favoriten'
+			favoriten = PLUGINPATH + 'db/favoriten'
 			if not self.zufall:
 				self.currItem = self['menu'].getSelectedIndex()
 				data = self.titellist[self.currItem] + ':::' + self.kochId[self.currItem]
@@ -695,7 +593,7 @@ class ChefkochView(Screen):
 			with open(favoriten, 'a') as f:
 				f.write(data)
 				f.write(linesep)
-			self.session.open(chefkochFav)
+			self.session.open(CKfavoriten)
 
 	def green(self):
 		if self.current == 'postview' and self.postviewready:
@@ -708,8 +606,7 @@ class ChefkochView(Screen):
 		if self.current == 'menu':
 			self.sort = self.sort + 1 if self.sort < len(self.sortname) - 1 else 0
 			self.currItem = 0
-			self.makeChefkochTimer.callback.append(self.makeChefkoch)
-			self.makeChefkochTimer.start(200, True)
+			callInThread(self.makeChefkoch)
 
 	def green_return(self, answer):
 		if answer:
@@ -720,28 +617,22 @@ class ChefkochView(Screen):
 		msgText = '\n'
 		msgText = '<p>Linkadresse: <a href="' + self.rezept + self.currId + '">' + self.rezept + self.currId + '</a></p>'
 		if self.REZ['rating']:
-			score = str(round(self.REZ['rating']['rating'] / 5, 1) * 5).replace('.', '_').replace('_0', '')
 			scoretext = str('%1.1f' % self.REZ['rating']['rating']) + ' (' + str(self.REZ['rating']['numVotes']) + ' Bewertungen)'
 		else:
-			score = '0'
 			scoretext = '(ohne Bewertung)'
 		preptime = self.REZ['preparationTime']
 		cooktime = self.REZ['cookingTime']
 		resttime = self.REZ['restingTime']
 		totaltime = self.REZ['totalTime']
 		if preptime != 0:
-			scoretext += '\nArbeitszeit   : ' + self.getTimeString(preptime)
+			scoretext += '\nArbeitszeit   : %s' % self.getTimeString(preptime)
 		if cooktime != 0:
-			scoretext += '\nKoch-/Backzeit: ' + self.getTimeString(cooktime)
+			scoretext += '\nKoch-/Backzeit: %s' % self.getTimeString(cooktime)
 		if resttime != 0:
-			scoretext += '\nRuhezeit      : ' + self.getTimeString(resttime)
+			scoretext += '\nRuhezeit      : %s' % self.getTimeString(resttime)
 		if totaltime != 0:
-			scoretext += '\nGesamtzeit    : ' + self.getTimeString(totaltime)
+			scoretext += '\nGesamtzeit    : %s' % self.getTimeString(totaltime)
 		msgText += scoretext
-#        pictype = 'FHD-' if config.plugins.chefkoch.plugin_size.value == 'FHDclassic' else 'HD-'
-#        scorepng = Pluginpath + 'pic/starbars/large' + pictype + score + '.png'
-#        if fileExists(scorepng):
-#           Hier kann man noch die Bewertungssternchen mit reinnehmen
 		recipetext = '\n\nRezept-Identnr.: ' + str(self.currId)
 		recipetext += '\nAufwand: ' + effort[self.REZ['difficulty']]
 		recipetext += '\nErstellername: ' + self.formatUsername(self.REZ['owner']['username'], self.REZ['owner']['rank'], 22)
@@ -836,8 +727,8 @@ class ChefkochView(Screen):
 				self.currItem = self.currItem + LINESPERPAGE
 				self['menu'].pageDown()
 				self.setPrevIcons(self.currItem - offset)
-			self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
-			self['label4'].setText(self.seitenlabel)
+			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
 		else:
 			self['textpage'].pageDown()
 
@@ -858,8 +749,8 @@ class ChefkochView(Screen):
 				self.currItem = self.currItem - LINESPERPAGE
 				self['menu'].pageUp()
 				self.setPrevIcons(self.currItem - offset)
-			self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
-			self['label4'].setText(self.seitenlabel)
+			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
 		else:
 			self['textpage'].pageUp()
 
@@ -867,8 +758,8 @@ class ChefkochView(Screen):
 		if self.current == 'menu':
 			self['menu'].down()
 			self.currItem = self['menu'].getSelectedIndex()
-			self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
-			self['label4'].setText('%s' % self.seitenlabel)
+			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
 			if self.currItem == self.len:  # neue Vorschaubilder der ersten Seite anzeigen
 				self.setPrevIcons(0)
 			if self.currItem % LINESPERPAGE == 0:  # neue Vorschaubilder der nächsten Seite anzeigen
@@ -880,8 +771,8 @@ class ChefkochView(Screen):
 		if self.current == 'menu':
 			self['menu'].up()
 			self.currItem = self['menu'].getSelectedIndex()
-			self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
-			self['label4'].setText('%s' % self.seitenlabel)
+			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
 			if self.currItem == self.len - 1:  # neue Vorschaubilder der letzte Seite anzeigen
 				d = self.len % LINESPERPAGE if self.len % LINESPERPAGE != 0 else LINESPERPAGE
 				self.setPrevIcons(self.len - d)
@@ -911,11 +802,13 @@ class ChefkochView(Screen):
 			self.currItem = (count - 1) * LINESPERPAGE
 			self['menu'].moveToIndex(self.currItem)
 			self.setPrevIcons(self.currItem)
-			self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
-			self['label4'].setText(self.seitenlabel)
+			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
 
 	def setPrevIcons(self, toppos):
+		self.pic = []
 		for i in range(LINESPERPAGE):
+			self.pic.append('/tmp/chefkoch%d.jpg' % i)
 			if len(self.picurllist) > toppos + i:
 				self.prevpicload[i].PictureData.get().append(self.showPrevPic)
 				self.Idownload(i, self.picurllist[toppos + i], self.getPrevPic)
@@ -931,7 +824,7 @@ class ChefkochView(Screen):
 	def yellow(self):
 		if self.current == 'menu':
 			self.currItem = self['menu'].getSelectedIndex()
-			self.session.open(chefkochFav, False)
+			self.session.open(CKfavoriten, False)
 		elif self.current == 'postview' and self.postviewready:
 			if self.KOMlen > 0:
 				if self.comment:
@@ -943,42 +836,55 @@ class ChefkochView(Screen):
 
 	def makeKommentar(self):
 		self.postviewready = False
-		self['label1'].setText('1/0 = Erster/Letzer Kommentar')
-		self.seitenlabel = '        = Rezept per E-mail senden\n'
-		self.seitenlabel += '        = Rezeptbeschreibung einblenden'
-		self['label4'].setText(self.seitenlabel)
+		self['label_yellow'].setText('Beschreibung einblenden')
+		self['label_1-0'].setText('Erster/Letzer Kommentar')
+		self['label_1-0'].show()
+		self['button_1-0'].show()
+		self['label_ok'].setText('%d Rezeptbilder' % (self.IMGlen))
+		self['button_ok'].show()
+		self['pageinfo'].hide()
 		self['textpage'].setText('')
 		text = ''
 		for i in range(self.KOMlen):
-			text += '\nKommentar %s/%s' % (i + 1, self.KOMlen) + ' von '
+			text += 'Kommentar %s/%s' % (i + 1, self.KOMlen) + ' von '
 			text += self.formatUsername(self.KOM['results'][i]['owner']['username'], self.KOM['results'][i]['owner']['rank'], 0)
-			text += ' ' + self.formatDatumZeit(self.KOM['results'][i]['createdAt']) + ' Uhr\n'
+			text += ' %s Uhr\n' % self.formatDatumZeit(self.KOM['results'][i]['createdAt'])
 			text += self.KOM['results'][i]['text']
-			if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
-				repeat = 128 if self.fontlarge else 136
+			if config.plugins.chefkoch.plugin_size.value == 'FHD':
+				repeat = 102 if config.plugins.chefkoch.font_size.value == 'large' else 109
+				text += '\n%s\n' % ('_' * repeat)
 			else:
-				repeat = 132
-			text += '\n' + '_' * repeat
+				repeat = 96 if config.plugins.chefkoch.font_size.value == 'large' else 105
+				text += '\n%s\n' % ('_' * repeat)
 		text += '\nChefkoch.de'
 		self['textpage'].setText(str(text))
 		self.postviewready = True
 
 	def makeRezept(self):  # bereite die eigentliche Rezeptseite vor
 		self.postviewready = False
-		self.seitenlabel = '        = Rezept per E-mail senden\n'
+		self['button_green'].show()
+		self['label_green'].setText('Rezept per Email')
+		self['label_1-0'].setText('')
+		self['button_1-0'].hide()
+		self['pageinfo'].setText('')
 		if self.KOMlen > 0:
-			self['yellowbutton'].show()
-			self.seitenlabel += '        = ' + str(self.KOMlen) + ' Kommentare einblenden'
+			self['label_yellow'].setText('%s Kommentare einblenden' % self.KOMlen)
+			self['button_yellow'].show()
 		else:
-			self['yellowbutton'].hide()
-		self['label4'].setText(self.seitenlabel)
+			self['label_yellow'].setText('')
+			self['button_yellow'].hide()
+		self['label_rezeptnr'].setText('')
+		self['label_ok'].setText('%d Rezeptbilder' % (self.IMGlen))
+		self['button_ok'].show()
 		self['textpage'].setText('')
 		if self.REZ['hasVideo']:
 			self['postvid'].show()
-			self['label1'].setText('PLAY = Video abspielen')
+			self['label_play'].show()
+			self['button_play'].show()
 		else:
 			self['postvid'].hide()
-			self['label1'].setText('')
+			self['label_play'].hide()
+			self['button_play'].hide()
 		text = ''
 		if self.REZ['subtitle']:
 			text += 'BESCHREIBUNG: ' + self.REZ['subtitle'] + '\n\n'
@@ -993,11 +899,11 @@ class ChefkochView(Screen):
 				text += self.REZ['ingredientGroups'][i]['ingredients'][j]['name']
 				text += self.REZ['ingredientGroups'][i]['ingredients'][j]['usageInfo']
 		text += '\n\nZUBEREITUNG\n' + self.REZ['instructions']
-		if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
-			repeat = 128 if self.fontlarge else 136
+		if config.plugins.chefkoch.plugin_size.value == 'FHD':
+			repeat = 102 if config.plugins.chefkoch.font_size.value == 'large' else 109
 		else:
-			repeat = 132
-		text += '\n' + '_' * repeat + '\nChefkoch.de'
+			repeat = 96 if config.plugins.chefkoch.font_size.value == 'large' else 105
+		text += '\n%s\nChefkoch.de' % ('_' * repeat)
 		self['textpage'].setText(str(text))
 		self.postviewready = True
 
@@ -1009,9 +915,9 @@ class ChefkochView(Screen):
 	def showPrevPic(self, picInfo=None):
 		if picInfo:
 			i = int(match('/tmp/chefkoch(\d.*).jpg', picInfo).groups()[0])
-		ptr = self.prevpicload[i].getData()
-		if ptr:
-			self['pic%d' % i].instance.setPixmap(ptr.__deref__())
+			ptr = self.prevpicload[i].getData()
+			if ptr:
+				self['pic%d' % i].instance.setPixmap(ptr.__deref__())
 
 	def getPostPic(self, picdata):
 		with open(self.picfile, 'wb') as f:
@@ -1023,25 +929,20 @@ class ChefkochView(Screen):
 		if ptr:
 			self['postpic'].instance.setPixmap(ptr.__deref__())
 
-	def showScore(self, scorepng):
-		currPic = loadPNG(scorepng)
-		if currPic:
-			self['score'].instance.setPixmap(currPic)
-
-	def Idownload(self, idx, link, name):  # PrevPic-Download
+	def Idownload(self, idx, link, success):  # PrevPic-Download
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		callInThread(self._Idownload, idx, link, name)
+		callInThread(self._Idownload, idx, link, success)
 
-	def _Idownload(self, idx, link, name):
+	def _Idownload(self, idx, link, success):
 		try:
 			response = get(link)
 			response.raise_for_status()
 		except exceptions.RequestException as error:
 			self.downloadError(error)
 		else:
-			name(response.content, idx)
+			success(response.content, idx)
 
-	def threadGetPage(self, link, success, fail=None):
+	def threadedGetPage(self, link, success, fail=None):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 		try:
 			response = get(ensure_binary(link))
@@ -1052,29 +953,28 @@ class ChefkochView(Screen):
 				fail(error)
 
 	def downloadError(self, output):
-		CKlog(output)
+		self.CKlog(output)
 
 	def showProgrammPage(self):  # zeige Rezeptliste
 		self.current = 'menu'
-		self['greenbutton'].hide()
-		self['greenbutton2'].show()
-		self['yellowbutton'].hide()
-		self['yellowbutton2'].show()
-		self['redbutton'].show()
-		self['bluebutton'].show()
-		self['label1'].setText('')
-		self['label2'].setText('Rezept zu Favoriten hinzufügen =')
-		self['label3'].setText('Ein / Ausblenden =')
-		self.seitenlabel = 'Rezept Nr. ' + str(self.currItem + 1) + '\nSeite ' + str(int(self.currItem // LINESPERPAGE + 1)) + ' von ' + str(self.maxPage)
-		self['label4'].setText(self.seitenlabel)
-		self['label5'].setText('= Sortierung: %s' % self.sortname[self.sort])
-		self['label6'].setText('= Suche')
-		self['label7'].setText('')
-		self['score'].hide()
+		self['button_green'].hide()
+		self['button_yellow'].hide()
+		self['button_red'].show()
+		self['button_blue'].show()
+		self['label_red'].setText('Rezept zu Favoriten')
+		self['label_green'].setText('Sortierung: %s' % self.sortname[self.sort])
+		self['label_yellow'].setText('Suche')
+		self['label_blue'].setText('Ein-/Ausblenden')
+		self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
+		self['label_1-0'].setText('')
+		self['button_1-0'].hide()
+		self['label_ok'].setText('zum Rezept')
+		self['label_ok'].show()
+		self['button_ok'].show()
+		self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
 		self['scoretext'].hide()
 		self['recipetext'].hide()
 		self['textpage'].hide()
-		self['slider_textpage'].hide()
 		self['postpic'].hide()
 		self['menu'].show()
 		self.currItem = self['menu'].getSelectedIndex()
@@ -1109,6 +1009,16 @@ class ChefkochView(Screen):
 		elif self.current == 'postview' and self.zufall:
 			self.close()
 		elif self.current == 'postview' and not self.zufall:
+			self['label_ok'].setText('zum Rezept')
+			self['label_1-0'].setText('')
+			self['button_1-0'].hide()
+			self['postvid'].hide()
+			self['label_play'].hide()
+			self['button_play'].hide()
+			self['Line_Bottom'].hide()
+			self['pageinfo'].show()
+			self["starsbg"].hide()
+			self["stars"].hide()
 			self.postviewready = False
 			self.setTitle(str(self.headline))
 			self.showProgrammPage()
@@ -1117,7 +1027,7 @@ class ChefkochView(Screen):
 		if self.current == 'menu':
 			self.REZ = self.getREZ(self.kochId[self.currItem])
 		if self.REZ['recipeVideoId']:
-			content, resp = getAPIdata('/videos/' + self.REZ['recipeVideoId'])
+			content, resp = self.getAPIdata('videos/' + self.REZ['recipeVideoId'])
 			if resp != 200:
 				self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 				self.close()
@@ -1132,17 +1042,10 @@ class ChefkochView(Screen):
 			self.session.openWithCallback(self.returnVideo, MoviePlayer, sref)
 
 
-class getNumber(Screen):
-	skin = '''
-		<screen position="center,{position}" size="275,70" backgroundColor="#000000" flags="wfNoBorder" title="">
-			<widget name="number" position="0,0" size="175,70" font="Regular;40" halign="center" valign="center" transparent="1" zPosition="1"/>
-		</screen>'''
-
+class CKgetNumber(AllScreen):
 	def __init__(self, session, number, max):
-		position = str(config.plugins.chefkoch.position.value)
-		self.dict = {'position': position}
-		self.skin = applySkinVars(getNumber.skin, self.dict)
-		Screen.__init__(self, session)
+		self.skin = self.readSkin("CKgetNumber")
+		Screen.__init__(self, session, self.skin)
 		self.field = str(number)
 		self['number'] = Label(self.field)
 		self.max = max
@@ -1180,57 +1083,37 @@ class getNumber(Screen):
 		self.close(0)
 
 
-class ChefkochPicShow(Screen):
-	skinHD = '''
-		<screen position="center,{position}" size="1240,640" title="">
-			<ePixmap position="0,0" size="1240,60" pixmap="{picpath}chefkochHD.png" alphatest="blend" zPosition="1" />
-			<widget name="label" position="364,10" size="512,44" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-			<widget name="score" position="3,70" size="236,48" alphatest="blend" zPosition="1" />
-			<widget name="scoretext" position="10,113" size="260,50" font="Regular;{fontsize}" halign="left" zPosition="1" />
-			<widget name="picture" position="270,70" size="720,540" alphatest="blend" zPosition="1" />
-			<widget name="picindex" position="1000,70" size="250,50" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-			<widget name="pictext" position="10,595" size="1220,48" font="Regular;{fontsize2}" halign="center" valign="center" zPosition="1" />
-		</screen>'''
-	skinFHD = '''
-		<screen position="center,{position}" size="1860,960" title="">
-			<ePixmap position="0,0" size="1860,90" pixmap="{picpath}chefkochFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="label" position="546,15" size="768,66" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="center" transparent="1" zPosition="2" />
-			<widget name="score" position="15,105" size="354,71" alphatest="blend" zPosition="1" />
-			<widget name="scoretext" position="15,169" size="390,240" font="Regular;{fontsize}" halign="left" zPosition="1" />
-			<widget name="picture" position="405,105" size="1080,810" alphatest="blend" zPosition="1" />
-			<widget name="picindex" position="1500,105" size="375,75" font="Regular;{fontsize2}" halign="left" zPosition="1" />
-			<widget name="pictext" position="15,892" size="1830,72" font="Regular;{fontsize2}" halign="center" valign="center" zPosition="1" />
-		</screen>'''
-
+class CKpicshow(AllScreen):
 	def __init__(self, session, titel, recipe, images):
 		global HIDEFLAG
 		HIDEFLAG = True
+		self.dict = {'picpath': PLUGINPATH + 'pic/'}
+		skin = self.readSkin("CKpicshow")
+		self.skin = self.applySkinVars(skin, self.dict)
+		Screen.__init__(self, session, skin)
+		self.session = session
 		self.REZ = recipe
 		self.IMG = images
 		self.titel = titel
 		self.currId = str(recipe['id'])
-		position = str(config.plugins.chefkoch.position.value)
-		fontoffset = 2 if config.plugins.chefkoch.font_size.value == 'large' else 0
-		fontsize = '%d' % int((18 + fontoffset) * SCALE)
-		fontsize2 = '%d' % int((16 + fontoffset) * SCALE)
-		self.dict = {'position': position, 'picpath': Pluginpath + 'pic/', 'fontsize': fontsize, 'fontsize2': fontsize2}
-		if 'FHD' in config.plugins.chefkoch.plugin_size.value:
-			self.skin = applySkinVars(ChefkochPicShow.skinFHD, self.dict)
-		else:
-			self.skin = applySkinVars(ChefkochPicShow.skinHD, self.dict)
-		Screen.__init__(self, session)
 		self.setTitle(titel)
 		self.picfile = '/tmp/chefkoch.jpg'
 		self.pixlist = []
 		self.picmax = 0
 		self.count = 0
-		self['score'] = Pixmap()
+		self["stars"] = ProgressBar()
+		self["starsbg"] = Pixmap()
+		self["stars"].hide()
+		self["starsbg"].hide()
 		self['scoretext'] = Label('')
 		self['scoretext'].hide()
 		self['picture'] = Pixmap()
 		self['picindex'] = Label('')
 		self['pictext'] = Label('')
-		self['label'] = Label('OK = Vollbild\n< > = Zurück / Vorwärts')
+		self['label_ok'] = Label()
+		self['button_ok'] = Pixmap()
+		self['label_left-right'] = Label('')
+		self['button_left-right'] = Pixmap()
 		self['NumberActions'] = NumberActionMap(['NumberActions', 'OkCancelActions', 'DirectionActions', 'ColorActions', 'HelpActions'], {
 			'ok': self.ok,
 			'cancel': self.exit,
@@ -1241,7 +1124,7 @@ class ChefkochPicShow(Screen):
 			'red': self.infoScreen,
 			'yellow': self.infoScreen,
 			'green': self.infoScreen,
-			'blue': hideScreen,
+			'blue': self.hideScreen,
 			'0': self.gotoPic,
 			'1': self.gotoPic,
 			'2': self.gotoPic,
@@ -1259,57 +1142,56 @@ class ChefkochPicShow(Screen):
 		self.picload.PictureData.get().append(self.showPic)
 
 	def onLayoutFinished(self):
+		self['label_ok'].setText('Vollbild')
+		self['label_ok'].show()
+		self['button_ok'].show()
+		self['label_left-right'].setText('Zurück / Vorwärts')
+		self['label_left-right'].show()
+		self['button_left-right'].show()
 		self.picload.setPara((self['picture'].instance.size().width(), self['picture'].instance.size().height(), 1.0, 1, False, 1, "#00000000"))
-		self.getInfoTimer = eTimer()
-		self.getInfoTimer.callback.append(self.getPixPage())
-		self.getInfoTimer.start(200, True)
-
-	def formatUsername(self, username, rank, trim=100):
-		return 'Unbekannt' if "unknown" in username else (str(username) + ' (' + str(rank) + '*)')[:trim]
-
-	def getPixPage(self):
 		self.count = 0
 		self.setTitle(str(self.titel))
 		if self.REZ['subtitle']:
 			self['pictext'].setText('BESCHREIBUNG: ' + str(self.REZ['subtitle']))
 		if self.REZ['rating']:
-			score = str(round(self.REZ['rating']['rating'] / 5, 1) * 5).replace('.', '_').replace('_0', '')
+			score = self.REZ['rating']['rating'] * 20
 			scoretext = str(self.REZ['rating']['rating']) + ' (' + str(self.REZ['rating']['numVotes']) + ' Bewertungen)'
 		else:
-			score = '0'
+			score = 0.0
 			scoretext = '(ohne Bewertung)'
-		pictype = 'FHD-' if config.plugins.chefkoch.plugin_size.value == 'FHDclassic' else 'HD-'
-		scorepng = Pluginpath + 'pic/starbars/large' + pictype + score + '.png'
-		if fileExists(scorepng):
-			self.showScore(scorepng)
-			self['score'].show()
+		self["starsbg"].show()
+		self["stars"].show()
+		self["stars"].setValue(score)
 		self['scoretext'].setText(scoretext)
 		self['scoretext'].show()
 		if self.IMG['count'] > 0:
 			for i in range(len(self.IMG['results'])):
 				self.pixlist.append(self.IMG['results'][i]['id'])
-			picurl = PICURLBASE + '/' + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
-			callInThread(self.threadGetPage, picurl, self.getPic, self.downloadError)
+			picurl = PICURLBASE + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
+			callInThread(self.threadedGetPage, picurl, self.getPic, self.downloadError)
 			self.picmax = len(self.pixlist) - 1
 			username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 			self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 		else:
 			self.session.open(MessageBox, '\nKein Foto vorhanden', MessageBox.TYPE_INFO, close_on_any_key=True)
 
+	def formatUsername(self, username, rank, trim=100):
+		return 'Unbekannt' if "unknown" in username else (str(username) + ' (' + str(rank) + '*)')[:trim]
+
 	def ok(self):
-		self.session.openWithCallback(self.showPic(self.picfile), FullScreen)
+		self.session.openWithCallback(self.showPic, CKfullscreen)
 
 	def picup(self):
 		self.count += 1 if self.count < self.picmax else - self.count
-		picurl = PICURLBASE + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
-		callInThread(self.threadGetPage, picurl, self.getPic, self.downloadError)
+		picurl = PICURLBASE + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
+		callInThread(self.threadedGetPage, picurl, self.getPic, self.downloadError)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
 	def picdown(self):
 		self.count -= 1 if self.count > 0 else - self.picmax
-		picurl = PICURLBASE + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
-		callInThread(self.threadGetPage, picurl, self.getPic, self.downloadError)
+		picurl = PICURLBASE + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
+		callInThread(self.threadedGetPage, picurl, self.getPic, self.downloadError)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
@@ -1322,7 +1204,7 @@ class ChefkochPicShow(Screen):
 		self.count = number - 1
 		picurl = picuribase + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
 		self.pixlist[self.count]
-		callInThread(self.threadGetPage, picurl, self.getPic, self.downloadError)
+		callInThread(self.threadedGetPage, picurl, self.getPic, self.downloadError)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
@@ -1336,12 +1218,7 @@ class ChefkochPicShow(Screen):
 		if ptr:
 			self['picture'].instance.setPixmap(ptr.__deref__())
 
-	def showScore(self, scorepng):
-		currPic = loadPNG(scorepng)
-		if currPic:
-			self['score'].instance.setPixmap(currPic)
-
-	def threadGetPage(self, link, success, fail=None):
+	def threadedGetPage(self, link, success, fail=None):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 		try:
 			response = get(ensure_binary(link))
@@ -1352,7 +1229,7 @@ class ChefkochPicShow(Screen):
 				fail(error)
 
 	def downloadError(self, output):
-		CKlog(output)
+		self.CKlog(output)
 
 	def infoScreen(self):
 		pass
@@ -1364,36 +1241,21 @@ class ChefkochPicShow(Screen):
 		self.close()
 
 
-class FullScreen(Screen):
-	skinHD = '''
-		<screen position="center,center" size="1280,720" flags="wfNoBorder" title="" >
-			<eLabel position="center,center" size="960,720" backgroundColor="#000000" zPosition="1" />
-			<widget name="picture" position="center,center" size="960,720" alphatest="blend" zPosition="2" />
-		</screen>'''
-	skinFHD = '''
-		<screen position="center,center" size="1920,1080" flags="wfNoBorder" title="" >
-			<eLabel position="center,center" size="1440,1080" backgroundColor="#000000" zPosition="1" />
-			<widget name="picture" position="center,center" size="1440,1080" alphatest="blend" zPosition="2" />
-		</screen>'''
-
+class CKfullscreen(AllScreen):
 	def __init__(self, session):
 		global HIDEFLAG
 		HIDEFLAG = True
-		if 'FHD' in config.plugins.chefkoch.plugin_size.value:
-			self.skin = FullScreen.skinFHD
-		else:
-			self.skin = FullScreen.skinHD
-		Screen.__init__(self, session)
+		self.skin = self.readSkin("CKfullscreen")
+		Screen.__init__(self, session, self.skin)
 		self.picfile = '/tmp/chefkoch.jpg'
+		self.hideflag = True
 		self['picture'] = Pixmap()
-		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {
+		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
+			{
 			'ok': self.exit,
 			'cancel': self.exit,
-			'red': self.infoScreen,
-			'yellow': self.infoScreen,
-			'green': self.infoScreen,
-			'blue': hideScreen
-		}, -1)
+			'blue': self.hideScreen
+			}, -1)
 		self.onLayoutFinish.append(self.onLayoutFinished)
 		self.picload = ePicLoad()
 		self.picload.PictureData.get().append(self.showPic)
@@ -1407,9 +1269,6 @@ class FullScreen(Screen):
 		if ptr:
 			self['picture'].instance.setPixmap(ptr.__deref__())
 
-	def infoScreen(self):
-		pass
-
 	def exit(self):
 		if ALPHA and not HIDEFLAG:
 			with open(ALPHA, 'w') as f:
@@ -1417,43 +1276,22 @@ class FullScreen(Screen):
 		self.close()
 
 
-class chefkochFav(Screen):
-	skinHD = '''
-		<screen position="center,{position}" size="{ssize}" title="">
-			<ePixmap position="0,0" size="1240,60" pixmap="{picpath}chefkochHD.png" alphatest="blend" zPosition="1" />
-			<widget name="label" position="243,20" size="250,24" font="Regular;18" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<ePixmap position="219,20" size="18,18" pixmap="{picpath}buttons/redHD.png" alphatest="blend" zPosition="2" />
-			<widget name="favmenu" position="10,70" size="{msize}" scrollbarMode="showOnDemand" zPosition="1" />
-		</screen>'''
-	skinFHD = '''
-		<screen position="center,{position}" size="{ssize}" title="">
-			<ePixmap position="0,0" size="1860,90" pixmap="{picpath}chefkochFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="label" position="364,30" size="375,36" font="Regular;27" foregroundColor="#697279" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<ePixmap position="328,30" size="27,27" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2" />
-			<widget name="favmenu" position="15,105" size="{msize}" scrollbarMode="showOnDemand" zPosition="1" />
-		</screen>'''
-
+class CKfavoriten(AllScreen):
 	def __init__(self, session, favmode=True):
 		global HIDEFLAG
 		HIDEFLAG = True
+		self.dict = {'picpath': PLUGINPATH + 'pic/'}
+		skin = self.readSkin("CKfavoriten")
+		self.skin = self.applySkinVars(skin, self.dict)
+		Screen.__init__(self, session, skin)
+		self['release'] = Label(RELEASE)
 		self.favmode = favmode
-		position = str(config.plugins.chefkoch.position.value)
-		if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
-			self.dict = {'position': position, 'ssize': '1860,980', 'msize': '1800,865', 'picpath': Pluginpath + 'pic/'}
-			self.skin = applySkinVars(chefkochFav.skinFHD, self.dict)
-		elif config.plugins.chefkoch.plugin_size.value == 'FHDaltern':
-			self.dict = {'position': position, 'ssize': '1240,980', 'msize': '1200,865', 'picpath': Pluginpath + 'pic/'}
-			self.skin = applySkinVars(chefkochFav.skinHD, self.dict)
-		else:
-			self.dict = {'position': position, 'ssize': '1240,590', 'msize': '1200,510', 'picpath': Pluginpath + 'pic/'}
-			self.skin = applySkinVars(chefkochFav.skinHD, self.dict)
 		self.session = session
-		Screen.__init__(self, session)
 		self.favlist = []
 		self.favId = []
 		self.faventries = []
 		self['favmenu'] = ItemList([])
-		self['label'] = Label('= Entferne Favorit') if self.favmode else Label('= Entferne Suchbegriff')
+		self['label_red'] = Label('Entferne Favorit') if self.favmode else Label('Entferne Suchbegriff')
 		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'NumberActions'], {
 			'ok': self.ok,
 			'cancel': self.exit,
@@ -1462,7 +1300,7 @@ class chefkochFav(Screen):
 			'red': self.red,
 			'yellow': self.infoScreen,
 			'green': self.infoScreen,
-			'blue': hideScreen,
+			'blue': self.hideScreen,
 			'0': self.move2end,
 			'1': self.move2first
 		}, -1)
@@ -1470,14 +1308,14 @@ class chefkochFav(Screen):
 
 	def makeFav(self):
 		if self.favmode:
-			self.setTitle('Chefkoch:::Favoriten')
-			self.favoriten = Pluginpath + 'db/favoriten'
+			self.setTitle('Chefkoch - Favoriten')
+			self.favoriten = PLUGINPATH + 'db/favoriten'
 		else:
-			self.setTitle('Chefkoch:::letzte Suchbegriffe')
-			self.favoriten = Pluginpath + 'db/suchen'
+			self.setTitle('Chefkoch - letzte Suchbegriffe')
+			self.favoriten = PLUGINPATH + 'db/suchen'
 			titel = '>>> Neue Suche <<<'
 			res = ['']
-			res.append(MultiContentEntryText(pos=(0, 0), size=(int(1220 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
+			res.append(MultiContentEntryText(pos=(4, 0), size=(int(570 * SCALE), int(34 * SCALE)), font=-2, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
 			self.faventries.append(res)
 			self.favlist.append(titel)
 			self.favId.append('')
@@ -1489,12 +1327,12 @@ class chefkochFav(Screen):
 						titel = str(favline[0])
 						Id = favline[1].replace('\n', '')
 						res = ['']
-						res.append(MultiContentEntryText(pos=(0, 0), size=(int(1220 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
+						res.append(MultiContentEntryText(pos=(4, 0), size=(int(570 * SCALE), int(34 * SCALE)), font=-2, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
 						self.faventries.append(res)
 						self.favlist.append(titel)
 						self.favId.append(Id)
 		self['favmenu'].l.setList(self.faventries)
-		self['favmenu'].l.setItemHeight(int(30 * SCALE))
+		self['favmenu'].l.setItemHeight(int(34 * SCALE))
 
 	def ok(self):
 		self.currItem = self.getIndex(self['favmenu'])
@@ -1502,12 +1340,12 @@ class chefkochFav(Screen):
 			titel = self.favlist[self.currItem]
 			Id = self.favId[self.currItem]
 			if self.favmode:
-				self.session.open(ChefkochView, Id, '"' + titel + '"', 1, True, False)
+				self.session.open(CKview, Id, '"' + titel + '"', 1, True, False)
 			elif titel == '>>> Neue Suche <<<':
 				titel = ''
 				self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='Chefkoch - Suche Rezepte:', text=titel)
 			else:
-				self.session.openWithCallback(self.exit, ChefkochView, titel, 'mit "' + titel + '" gefundene Rezepte', 0, False, False)
+				self.session.openWithCallback(self.exit, CKview, titel, 'mit "' + titel + '" gefundene Rezepte', 0, False, False)
 
 	def searchReturn(self, search):
 		if search and search != '':
@@ -1522,7 +1360,7 @@ class chefkochFav(Screen):
 				with open(self.favoriten, 'a') as f:
 					f.write(search + ':::' + search)
 					f.write(linesep)
-			self.session.openWithCallback(self.exit, ChefkochView, search, 'mit "' + search + '" gefundene Rezepte', 0, False, False)
+			self.session.openWithCallback(self.exit, CKview, search, 'mit "' + search + '" gefundene Rezepte', 0, False, False)
 
 	def red(self):
 		if len(self.favlist) > 0:
@@ -1632,82 +1470,38 @@ class ItemList(MenuList):
 	def __init__(self, items, enableWrapAround=True):
 		MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
 		fontoffset = 2 if config.plugins.chefkoch.font_size.value == 'large' else 0
-		self.l.setFont(-2, gFont('Regular', int(22 * SCALE)))
-		self.l.setFont(-1, gFont('Regular', int((20 + fontoffset) * SCALE)))
-		self.l.setFont(0, gFont('Regular', int((18 + fontoffset) * SCALE)))
-		self.l.setFont(1, gFont('Regular', int((16 + fontoffset) * SCALE)))
-		self.l.setFont(2, gFont('Regular', int((14 + fontoffset) * SCALE)))
+		self.l.setFont(-2, gFont('Regular', int(24 * SCALE)))
+		self.l.setFont(-1, gFont('Regular', int((22 + fontoffset) * SCALE)))
+		self.l.setFont(0, gFont('Regular', int((20 + fontoffset) * SCALE)))
+		self.l.setFont(1, gFont('Regular', int((18 + fontoffset) * SCALE)))
+		self.l.setFont(2, gFont('Regular', int((16 + fontoffset) * SCALE)))
 
 
-class ChefkochMain(Screen):
-	skinHD = '''
-		<screen position="center,{position}" size="{ssize}" title="Kontaktiere den Chefkoch.de Server...">
-			<ePixmap position="0,0" size="590,60" pixmap="{picpath}menuHD.png" alphatest="blend" zPosition="1" />
-			<widget name="label1" position="34,10" size="140,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label2" position="34,32" size="140,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label3" position="416,10" size="140,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="label4" position="416,32" size="140,20" font="Regular;16" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="release" position="350,43" size="105,20" font="Regular;14" foregroundColor="#00000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<ePixmap position="10,10" size="18,18" pixmap="{picpath}buttons/greenHD.png" alphatest="blend" zPosition="2" />
-			<ePixmap position="10,32" size="18,18" pixmap="{picpath}buttons/yellowHD.png" alphatest="blend" zPosition="2" />
-			<ePixmap position="562,10" size="18,18" pixmap="{picpath}buttons/redHD.png" alphatest="blend" zPosition="2" />
-			<ePixmap position="562,32" size="18,18" pixmap="{picpath}buttons/blueHD.png" alphatest="blend" zPosition="2" />
-			<widget name="mainmenu" position="10,70" size="{msize}" scrollbarMode="showNever" zPosition="2" />
-			<widget name="secondmenu" position="10,70" size="{msize}" scrollbarMode="showNever" zPosition="2" />
-			<widget name="thirdmenu" position="10,70" size="{msize}" scrollbarMode="showNever" zPosition="2" />
-		</screen>'''
-	skinFHD = '''
-		<screen position="center,{position}" size="{ssize}" title="Kontaktiere den Chefkoch.de Server...">
-			<ePixmap position="0,0" size="885,90" pixmap="{picpath}menuFHD.png" alphatest="blend" zPosition="1" />
-			<widget name="label1" position="51,13" size="210,30" font="Regular;24" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label2" position="51,46" size="210,30" font="Regular;24" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<widget name="label3" position="624,13" size="210,30" font="Regular;24" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="label4" position="624,46" size="210,30" font="Regular;24" foregroundColor="#000000" backgroundColor="#FFFFFF" halign="right" transparent="1" zPosition="2" />
-			<widget name="release" position="525,65" size="158,30" font="Regular;21" foregroundColor="#00000" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
-			<ePixmap position="15,15" size="24,24" pixmap="{picpath}buttons/greenFHD.png" alphatest="blend" zPosition="2" />
-			<ePixmap position="15,48" size="24,24" pixmap="{picpath}buttons/yellowFHD.png" alphatest="blend" zPosition="2" />
-			<ePixmap position="843,15" size="24,24" pixmap="{picpath}buttons/redFHD.png" alphatest="blend" zPosition="2" />
-			<ePixmap position="843,48" size="24,24" pixmap="{picpath}buttons/blueFHD.png" alphatest="blend" zPosition="2" />
-			<widget name="mainmenu" position="15,105" size="{msize}" scrollbarMode="showNever" zPosition="2" />
-			<widget name="secondmenu" position="15,105" size="{msize}" scrollbarMode="showNever" zPosition="2" />
-			<widget name="thirdmenu" position="15,105" size="{msize}" scrollbarMode="showNever" zPosition="2" />
-		</screen>'''
-
+class CKmain(AllScreen):
 	def __init__(self, session):
-		global SCALE
-		global LINESPERPAGE
 		global ALPHA
 		global HIDEFLAG
 		self.session = session
 		HIDEFLAG = True
 		ALPHA = '/proc/stb/video/alpha' if fileExists('/proc/stb/video/alpha') else None
 		if not ALPHA:
-			CKlog('Alphachannel not found! Hide/Show-Function (=blue button) disabled')
-		position = str(config.plugins.chefkoch.position.value)
-		SCALE = 1.0
-		LINESPERPAGE = 6
-		if config.plugins.chefkoch.plugin_size.value == 'FHDclassic':
-			self.dict = {'position': position, 'ssize': '885,980', 'msize': '855,860', 'picpath': Pluginpath + 'pic/'}
-			self.skin = applySkinVars(ChefkochMain.skinFHD, self.dict)
-			SCALE = 1.5
-		elif config.plugins.chefkoch.plugin_size.value == 'FHDaltern':
-			LINESPERPAGE = 10
-			self.dict = {'position': position, 'ssize': '590,980', 'msize': '570,900', 'picpath': Pluginpath + 'pic/'}
-			self.skin = applySkinVars(ChefkochMain.skinHD, self.dict)
-		else:
-			self.dict = {'position': position, 'ssize': '590,625', 'msize': '570,540', 'picpath': Pluginpath + 'pic/'}
-			self.skin = applySkinVars(ChefkochMain.skinHD, self.dict)
-		Screen.__init__(self, session)
+			self.CKlog('Alphachannel not found! Hide/Show-Function (=blue button) disabled')
+		self.dict = {'picpath': PLUGINPATH + 'pic/'}
+		skin = self.readSkin("CKmain")
+		self.skin = self.applySkinVars(skin, self.dict)
+		Screen.__init__(self, session, skin)
+		self.apidata = None
+		self.mainId = None
 		self.picfile = '/tmp/chefkoch.jpg'
 		self.rezeptfile = '/tmp/Rezept.html'
 		self.actmenu = 'mainmenu'
 		self['mainmenu'] = ItemList([])
 		self['secondmenu'] = ItemList([])
 		self['thirdmenu'] = ItemList([])
-		self['label1'] = Label('= Zufall')
-		self['label2'] = Label('= Suche')
-		self['label3'] = Label('Favorit =')
-		self['label4'] = Label('Ausblenden =')
+		self['label_red'] = Label('Favorit')
+		self['label_green'] = Label('Zufall')
+		self['label_yellow'] = Label('Suche')
+		self['label_blue'] = Label('Ein-/Ausblenden')
 		self['release'] = Label(RELEASE)
 		self['helpactions'] = ActionMap(['HelpActions'], {'displayHelp': self.infoScreen}, -1)
 		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'MovieSelectionActions'], {
@@ -1722,7 +1516,7 @@ class ChefkochMain(Screen):
 			'red': self.fav,
 			'yellow': self.yellow,
 			'green': self.zufall,
-			'blue': hideScreen,
+			'blue': self.hideScreen,
 			'showEventInfo': self.infoScreen,
 			'contextMenu': self.config
 		}, -1)
@@ -1730,48 +1524,49 @@ class ChefkochMain(Screen):
 		self.movie_eof = config.usage.on_movie_eof.value
 		config.usage.on_movie_stop.value = 'quit'
 		config.usage.on_movie_eof.value = 'quit'
-		self.ChefTimer = eTimer()
-		self.ChefTimer.callback.append(self.makeMainMenu)
-		self.ChefTimer.start(200, True)
+		self.onLayoutFinish.append(self.onLayoutFinished)
+
+	def onLayoutFinished(self):
+		callInThread(self.makeMainMenu)
 
 	def ok(self):
 		self.currItem = self.getIndex(self[self.actmenu])
-		if self.actmenu == 'mainmenu':
+		if self.actmenu == 'mainmenu' and self.mainId:
 			mainId = self.mainId[self.currItem]
 			if mainId == '998':  # Id für CK-Video Hauptmenü (= Secondmenu)
 				self.CKvideo = True
 				self.currKAT = self.getVKAT()
-				self.makeSecondMenu(mainId)
+				callInThread(self.makeSecondMenu, mainId)
 			elif mainId == '996':  # Id für CK-Magazin Hauptmenü (= Secondmenu)
 				self.CKvideo = False
 				self.currKAT = self.getMKAT()
-				self.makeSecondMenu(mainId)
+				callInThread(self.makeSecondMenu, mainId)
 			else:
 				self.CKvideo = False
 				self.currKAT = self.getNKAT()
 				if list(filter(lambda i: i['parentId'] == mainId, self.currKAT)):
-					self.makeSecondMenu(mainId)
+					callInThread(self.makeSecondMenu, mainId)
 				else:
 					sort = 4 if mainId == '999' else 1  # Datumsortierung für "Das perfekte Dinner"
-					self.session.openWithCallback(self.selectMainMenu, ChefkochView, self.mainmenuquery[self.currItem], '"' + self.mainmenutitle[self.currItem] + '"', sort, False, False)
+					self.session.openWithCallback(self.selectMainMenu, CKview, self.mainmenuquery[self.currItem], '"' + self.mainmenutitle[self.currItem] + '"', sort, False, False)
 
 		elif self.actmenu == 'secondmenu':
 			secondId = self.secondId[self.currItem]
 			if list(filter(lambda i: i['parentId'] == secondId, self.currKAT)):
-				self.makeThirdMenu(secondId)
+				callInThread(self.makeThirdMenu, secondId)
 			else:
 				sort = 3 if self.CKvideo else 1  # Videosortierung für "Chefkoch Video"
-				self.session.openWithCallback(self.selectSecondMenu, ChefkochView, self.secondmenuquery[self.currItem], '"' + self.secondmenutitle[self.currItem] + '"', sort, False, False)
+				self.session.openWithCallback(self.selectSecondMenu, CKview, self.secondmenuquery[self.currItem], '"' + self.secondmenutitle[self.currItem] + '"', sort, False, False)
 
 		elif self.actmenu == 'thirdmenu':
 			sort = 3 if self.CKvideo else 1  # Videosortierung für "Chefkoch Video"
-			self.session.openWithCallback(self.selectThirdMenu, ChefkochView, self.thirdmenuquery[self.currItem], '"' + self.thirdmenutitle[self.currItem] + '"', sort, False, False)
+			self.session.openWithCallback(self.selectThirdMenu, CKview, self.thirdmenuquery[self.currItem], '"' + self.thirdmenutitle[self.currItem] + '"', sort, False, False)
 
 	def makeMainMenu(self):
 		global totalrecipes
-		content, resp = getAPIdata('/recipes')
+		content, resp = self.getAPIdata('recipes')
 		if resp != 200:
-			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.openWithCallback(self.eject, MessageBox, '\nDer XChefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 			self.close()
 			return
 		totalrecipes = loads(content)['count']
@@ -1783,7 +1578,7 @@ class ChefkochMain(Screen):
 		self.mainmenutitle = []
 		self.mainId = []
 		self.currKAT = self.getNKAT()
-		self.setTitle('Chefkoch.de')
+		self.setTitle('Hauptmenü')
 		for i in range(len(self.currKAT)):
 			res = ['']
 			if self.currKAT[i]['level'] == 1:
@@ -1793,7 +1588,7 @@ class ChefkochMain(Screen):
 				self.mainmenutitle.append(self.currKAT[i]['descriptionText'])
 				self.mainId.append(self.currKAT[i]['id'])
 		self['mainmenu'].l.setList(self.mainmenulist)
-		self['mainmenu'].l.setItemHeight(int(30 * SCALE))
+		self['mainmenu'].l.setItemHeight(int(34 * SCALE))
 		self.selectMainMenu()
 
 	def makeSecondMenu(self, parentId):
@@ -1811,7 +1606,7 @@ class ChefkochMain(Screen):
 				self.secondmenutitle.append(self.currKAT[i]['descriptionText'])
 				self.secondId.append(self.currKAT[i]['id'])
 		self['secondmenu'].l.setList(self.secondmenulist)
-		self['secondmenu'].l.setItemHeight(int(30 * SCALE))
+		self['secondmenu'].l.setItemHeight(int(34 * SCALE))
 		self['secondmenu'].moveToIndex(0)
 		for i in range(len(self.currKAT)):
 			if self.currKAT[i]['id'] == parentId:
@@ -1831,7 +1626,7 @@ class ChefkochMain(Screen):
 				self.thirdmenuquery.append(self.currKAT[i]['descriptionText'])
 				self.thirdmenutitle.append(self.currKAT[i]['descriptionText'])
 		self['thirdmenu'].l.setList(self.thirdmenulist)
-		self['thirdmenu'].l.setItemHeight(int(30 * SCALE))
+		self['thirdmenu'].l.setItemHeight(int(34 * SCALE))
 		self['thirdmenu'].moveToIndex(0)
 		for i in range(len(self.currKAT)):
 			if self.currKAT[i]['id'] == parentId:
@@ -1840,14 +1635,14 @@ class ChefkochMain(Screen):
 		self.selectThirdMenu()
 
 	def makeVKATdb(self):  # hole alle verfügbaren Videokategorien
-		content, resp = getAPIdata('/videos?&offset=0&limit=10000')
+		content, resp = self.getAPIdata('videos?&offset=0&limit=10000')
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 			self.close()
 			return
 		result = loads(content)
 		VKAT = []
-		with open(Pluginpath + 'db/VKATdb', 'a') as f:
+		with open(PLUGINPATH + 'db/VKATdb', 'a') as f:
 			for i in range(len(result)):
 				data = result[i]['video_format']
 				if data != 'unknown':
@@ -1858,7 +1653,7 @@ class ChefkochMain(Screen):
 
 	def getNKAT(self):  # erzeuge die normale Kategorie
 		if not self.NKAT:
-			content, resp = getAPIdata('/recipes/categories')
+			content, resp = self.getAPIdata('recipes/categories')
 			if resp != 200:
 				self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 				self.close()
@@ -1874,10 +1669,10 @@ class ChefkochMain(Screen):
 			for i in range(len(self.NKAT)):
 				if self.NKAT[i]['level'] == 1:
 					self.VKAT.append(self.NKAT[i])
-			if not fileExists(Pluginpath + 'db/VKATdb'):
+			if not fileExists(PLUGINPATH + 'db/VKATdb'):
 				self.makeVKATdb()  # wird nur bei fehlender VKATdb erzeugt (= Notfall)
 			i = 1000  # erzeuge eigene Video-IDs über 1000
-			with open(Pluginpath + 'db/VKATdb', 'r') as f:
+			with open(PLUGINPATH + 'db/VKATdb', 'r') as f:
 				for data in f:
 					dict = {}
 					dict['id'] = str(i)
@@ -1897,7 +1692,7 @@ class ChefkochMain(Screen):
 
 	def getMKAT(self):  # erzeuge die Magazinkategorie
 		if not self.MKAT:
-			content, resp = getAPIdata('/magazine/categories')
+			content, resp = self.getAPIdata('magazine/categories')
 			if resp != 200:
 				self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 				self.close()
@@ -1977,13 +1772,13 @@ class ChefkochMain(Screen):
 		return list.getSelectedIndex()
 
 	def yellow(self):
-		self.session.open(chefkochFav, False)
+		self.session.open(CKfavoriten, False)
 
 	def fav(self):
-		self.session.open(chefkochFav)
+		self.session.open(CKfavoriten)
 
 	def zufall(self):
-		self.session.openWithCallback(self.selectMainMenu, ChefkochView, 'recipe-of-today', ' "Zufallsrezept"', 1, False, True)
+		self.session.openWithCallback(self.selectMainMenu, CKview, 'recipe-of-today', ' "Zufallsrezept"', 1, False, True)
 
 	def zap(self):
 		servicelist = self.session.instantiateDialog(ChannelSelection)
@@ -1992,7 +1787,7 @@ class ChefkochMain(Screen):
 	def config(self):
 		config.usage.on_movie_stop.value = self.movie_stop
 		config.usage.on_movie_eof.value = self.movie_eof
-		self.session.openWithCallback(self.exit, chefkochConfig)
+		self.session.openWithCallback(self.exit, CKconfig)
 
 	def infoScreen(self):
 		pass
@@ -2020,7 +1815,7 @@ class ChefkochMain(Screen):
 			self.close()
 		elif self.actmenu == 'secondmenu':
 			self.CurrKAT = self.getNKAT()
-			self.setTitle('Chefkoch.de')
+			self.setTitle('Hauptmenü')
 			self.selectMainMenu()
 		elif self.actmenu == 'thirdmenu':
 			for i in range(len(self.currKAT)):
@@ -2030,36 +1825,18 @@ class ChefkochMain(Screen):
 			self.selectSecondMenu()
 
 
-class chefkochConfig(ConfigListScreen, Screen):
-	skin = '''
-		<screen position="center,center" size="530,640" backgroundColor="#20000000" title="Chefkoch Setup">
-			<ePixmap position="0,0" size="530,50" pixmap="{picpath}chefkoch.png" alphatest="blend" zPosition="1" />
-			<ePixmap position="9,59" size="512,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
-			<widget name="config" position="9,60" size="512,265" itemHeight="26" scrollbarMode="showOnDemand" zPosition="1" />
-			<ePixmap position="9,324" size="512,1" pixmap="{picpath}setup/seperator.png" alphatest="off" zPosition="1" />
-			<eLabel position="60,330" size="135,20" font="Regular;18" halign="left" text="TEXT = Tastatur" transparent="1" zPosition="1" />
-			<eLabel position="250,330" size="125,20" font="Regular;18" halign="left" text="Speichern" transparent="1" zPosition="1" />
-			<eLabel position="395,330" size="125,20" font="Regular;18" halign="left" text="Abbrechen" transparent="1" zPosition="1" />
-			<ePixmap position="225,332" size="18,18" pixmap="{picpath}buttons/greenHD.png" alphatest="blend" zPosition="1" />
-			<ePixmap position="370,332" size="18,18" pixmap="{picpath}buttons/redHD.png" alphatest="blend" zPosition="1" />
-			<widget name="plugin" position="9,360" size="512,290" alphatest="blend" zPosition="1" />
-			<widget source="VKeyIcon" text="" render="Label" position="0,0" size="0,0" conditional="VKeyIcon">
-				<convert type="ConditionalShowHide" />
-			</widget>
-		</screen>'''
-
+class CKconfig(ConfigListScreen, AllScreen):
 	def __init__(self, session):
-		self.dict = {'picpath': Pluginpath + 'pic/'}
-		self.skin = applySkinVars(chefkochConfig.skin, self.dict)
+		self.dict = {'picpath': PLUGINPATH + 'pic/'}
+		skin = self.readSkin("CKconfig")
+		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session)
 		self['VKeyIcon'] = Boolean(False)
 		self.password = config.plugins.chefkoch.password.value
-
 		self['plugin'] = Pixmap()
 		list = []
-		list.append(getConfigListEntry('Plugin Größe:', config.plugins.chefkoch.plugin_size, "Plugin Größe"))
-		list.append(getConfigListEntry('Plugin Position:', config.plugins.chefkoch.position, "Plugin Position"))
-		list.append(getConfigListEntry('Plugin Schriftgröße:', config.plugins.chefkoch.font_size, "Schriftgröße"))
+		list.append(getConfigListEntry('Plugin Auflösung:', config.plugins.chefkoch.plugin_size, "Plugin Auflösung"))
+		list.append(getConfigListEntry('Schriftgröße Rezepte/Kommentare:', config.plugins.chefkoch.font_size, "Schriftgröße Langtexte"))
 		list.append(getConfigListEntry('Maximale Anzahl Rezepte:', config.plugins.chefkoch.maxrecipes, "Maximale Anzahl Rezepte"))
 		list.append(getConfigListEntry('Maximale Anzahl Kommentare:', config.plugins.chefkoch.maxcomments, "Maximale Anzahl Kommentare"))
 		list.append(getConfigListEntry('Maximale Anzahl Rezeptbilder:', config.plugins.chefkoch.maxpictures, "Maximale Anzahl Rezeptbilder"))
@@ -2083,18 +1860,16 @@ class chefkochConfig(ConfigListScreen, Screen):
 		self.onLayoutFinish.append(self.UpdateComponents)
 
 	def UpdateComponents(self):
-		png = Pluginpath + 'pic/setup/' + config.plugins.chefkoch.plugin_size.value + '.png'
+		png = PLUGINPATH + 'pic/setup/' + config.plugins.chefkoch.plugin_size.value + '.png'
 		if fileExists(png):
 			PNG = loadPNG(png)
 			if PNG:
 				self['plugin'].instance.setPixmap(PNG)
-		current = self['config'].getCurrent()
 
 	def keySave(self):
 		if config.plugins.chefkoch.password.value != self.password:
 			password = b64encode(ensure_binary(config.plugins.chefkoch.password.value))
 			config.plugins.chefkoch.password.value = password
-		current = self['config'].getCurrent()
 		self.saveAll()
 		self.exit()
 
@@ -2104,11 +1879,11 @@ class chefkochConfig(ConfigListScreen, Screen):
 		self.exit()
 
 	def exit(self):
-		self.session.openWithCallback(self.close, ChefkochMain)
+		self.session.openWithCallback(self.close, CKmain)
 
 
 def main(session, **kwargs):
-	session.open(ChefkochMain)
+	session.open(CKmain)
 
 
 def Plugins(**kwargs):
