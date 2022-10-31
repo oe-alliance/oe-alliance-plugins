@@ -708,7 +708,7 @@ class CKview(AllScreen):
 			server.quit()
 			self.session.open(MessageBox, 'E-mail erfolgreich gesendet an: %s' % mailTo, MessageBox.TYPE_INFO, close_on_any_key=True)
 		except SMTPResponseException as err:
-			self.CKlog('SMTP_Response_Exception Error:', err)
+			self.CKlog('SMTP_Response_Exception Error:', str(err))
 			self.session.open(MessageBox, 'E-mail konnte aufgrund eines Serverproblems nicht gesendet werden: \n%s' % str(err), MessageBox.TYPE_INFO, close_on_any_key=True)
 
 	def nextPage(self):
