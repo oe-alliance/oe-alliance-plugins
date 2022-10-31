@@ -8,7 +8,7 @@ from random import randrange
 from re import match
 from requests import get, exceptions
 from PIL import Image
-from smtplib import SMTP, SMTP_SSL
+from smtplib import SMTP, SMTP_SSL, SMTPResponseException
 from time import strftime
 from twisted.internet.reactor import callInThread
 from xml.etree.ElementTree import tostring, parse
@@ -553,7 +553,7 @@ class CKview(AllScreen):
 			daytext = '%s Tage' % days if days > 1 else '1 Tag'
 			hourtext = ''
 			minutetext = ''
-		ausgabe = '%s%s%s' % (daytext, hourtext, minutetext)
+		ausgabe = '%s %s %s' % (daytext, hourtext, minutetext)
 		return ausgabe
 
 	def ok(self):
@@ -706,9 +706,10 @@ class CKview(AllScreen):
 			server.login(mailLogin, mailPassword)
 			server.sendmail(mailFrom, mailTo, msgRoot.as_string())
 			server.quit()
-			self.session.open(MessageBox, 'E-mail erfolgreich gesendet an: %s' % ensure_str(mailTo), MessageBox.TYPE_INFO, close_on_any_key=True)
-		except Exception as e:
-			self.session.open(MessageBox, 'E-mail kann nicht gesendet werden: %s' % ensure_str(e), MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-mail erfolgreich gesendet an: %s' % mailTo, MessageBox.TYPE_INFO, close_on_any_key=True)
+		except SMTPResponseException as err:
+			self.CKlog('SMTP_Response_Exception Error:', str(err))
+			self.session.open(MessageBox, 'E-mail konnte aufgrund eines Serverproblems nicht gesendet werden: \n%s' % str(err), MessageBox.TYPE_INFO, close_on_any_key=True)
 
 	def nextPage(self):
 		if self.current == 'menu':
