@@ -1,0 +1,206 @@
+# Italian translations for PACKAGE package
+# Traduzioni italiane per il pacchetto PACKAGE..
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#  <massimo@portatile.localdomain>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
+"PO-Revision-Date: 2022-11-03 14:32+0100\n"
+"Last-Translator:  <massimo@portatile.localdomain>\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid " "
+msgstr ""
+
+#, python-format
+msgid "%s"
+msgstr ""
+
+msgid "Activate debug logging?"
+msgstr ""
+
+msgid "All"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Channels:"
+msgstr ""
+
+msgid "Choose Picon folder"
+msgstr ""
+
+msgid "Clean up the directory"
+msgstr ""
+
+msgid "Color depth: "
+msgstr ""
+
+msgid "Create folder"
+msgstr ""
+
+msgid "Creator"
+msgstr ""
+
+msgid "Creator: "
+msgstr ""
+
+msgid "Download finished !"
+msgstr ""
+
+msgid "Download picons"
+msgstr ""
+
+msgid "Download progress: "
+msgstr ""
+
+msgid "Enter Picon Dir:"
+msgstr ""
+
+msgid "Exit"
+msgstr ""
+
+msgid "FreeSpace:"
+msgstr ""
+
+msgid "FreeSpace: Drive Not Found !"
+msgstr ""
+
+msgid "Loaded Picons:"
+msgstr ""
+
+msgid "Loading, please wait..."
+msgstr ""
+
+msgid "Manage your Picons"
+msgstr ""
+
+msgid "More selections"
+msgstr ""
+
+msgid "Next Group"
+msgstr ""
+
+msgid "Next color depth"
+msgstr ""
+
+msgid "Next picon creator"
+msgstr ""
+
+msgid "Next picon size"
+msgstr ""
+
+msgid "No search results, please change filter options ..."
+msgstr ""
+
+msgid "Not found Picons:"
+msgstr ""
+
+msgid "Not older than X days:"
+msgstr ""
+
+msgid "Not older than X days: "
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid "OK and exit"
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+msgid "Option:"
+msgstr ""
+
+msgid "Picon folder: "
+msgstr ""
+
+msgid "PiconManager (mod)"
+msgstr ""
+
+msgid "PiconManagerMod - Settings"
+msgstr ""
+
+msgid "Picons loaded: "
+msgstr ""
+
+msgid "Picons not found: "
+msgstr ""
+
+msgid "Previous Group"
+msgstr ""
+
+msgid "Previous color depth"
+msgstr ""
+
+msgid "Previous picon creator"
+msgstr ""
+
+msgid "Previous picon size"
+msgstr ""
+
+msgid "Reading Channels..."
+msgstr ""
+
+msgid "Remember permanently?"
+msgstr ""
+
+msgid "Select Server:"
+msgstr ""
+
+msgid "Select drive"
+msgstr ""
+
+msgid "Select path"
+msgstr ""
+
+msgid "Select service for preferred picon"
+msgstr ""
+
+msgid "Server temporarily unavailable"
+msgstr ""
+
+msgid "Set / clear standard Picon"
+msgstr ""
+
+msgid "Set Filter:"
+msgstr ""
+
+msgid "Show group: "
+msgstr ""
+
+msgid "Show random Picon"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Size: "
+msgstr ""
+
+msgid "Sorry, service is temporarily unavailable"
+msgstr ""
+
+msgid "Standard picon: "
+msgstr ""
+
+msgid "V"
+msgstr ""
+
+msgid "is not installed."
+msgstr ""
+
+msgid "loading"
+msgstr ""

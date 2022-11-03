@@ -1,0 +1,112 @@
+# Italian translations for PACKAGE package
+# Traduzioni italiane per il pacchetto PACKAGE..
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#  <massimo@portatile.localdomain>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
+"PO-Revision-Date: 2022-11-03 14:34+0100\n"
+"Last-Translator:  <massimo@portatile.localdomain>\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid " "
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "DVB-S"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Disable"
+msgstr ""
+
+msgid "Discover"
+msgstr ""
+
+#, python-format
+msgid "IP : %s"
+msgstr ""
+
+msgid "Manufacturer"
+msgstr ""
+
+msgid "No vtuner found."
+msgstr ""
+
+msgid "Ok"
+msgstr ""
+
+msgid "Really close without saving settings?"
+msgstr ""
+
+msgid "SAT>IP Client"
+msgstr ""
+
+msgid "SAT>IP Client Setup"
+msgstr ""
+
+msgid "SAT>IP Client Tuner Setup"
+msgstr ""
+
+msgid "SAT>IP Client attached to vtuner."
+msgstr ""
+
+#, python-format
+msgid "SAT>IP SERVER : %s"
+msgstr ""
+
+msgid "SAT>IP Server : "
+msgstr ""
+
+msgid "SAT>IP Tuner Type : "
+msgstr ""
+
+#, python-format
+msgid "SAT>IP server discovering for %d seconds..."
+msgstr ""
+
+msgid "SAT>IP server is not detected."
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Select tuner and press setup key (Yellow)"
+msgstr ""
+
+msgid "Server capacity is fulled."
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Starting..."
+msgstr ""
+
+#, python-format
+msgid "TUNER TYPE : %s"
+msgstr ""
+
+#, python-format
+msgid "TYPE : %s"
+msgstr ""
+
+#, python-format
+msgid "VIRTUAL TUNER %s"
+msgstr ""
