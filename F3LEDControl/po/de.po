@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 19:34+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2022-07-07 19:36+0200\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -13,21 +13,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Poedit 3.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-
-msgid "Channelnumber in Standby off"
-msgstr "Kanalnummer / im Standby aus"
-
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalnummer / Uhr im Standby"
-
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanalnummer/Uhr / Uhr im Standby"
-
-msgid "Clock always"
-msgstr "Immer Uhr"
-
-msgid "Always off"
-msgstr "Immer aus"
 
 msgid "15 sec"
 msgstr "15 sec"
@@ -41,26 +26,41 @@ msgstr "45 sec"
 msgid "60 sec"
 msgstr "60 sec"
 
-msgid "LED Display Setup"
-msgstr "LED Display Einstellungen"
+msgid "Always off"
+msgstr "Immer aus"
 
 msgid "Cancel"
 msgstr "Abbrechen"
 
+msgid "Change LED display settings"
+msgstr "LED-Anzeige konfigurieren."
+
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalnummer / Uhr im Standby"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalnummer / im Standby aus"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalnummer/Uhr / Uhr im Standby"
+
+msgid "Clock always"
+msgstr "Immer Uhr"
+
+msgid "LED Display Setup"
+msgstr "LED Display Einstellungen"
+
 msgid "Save"
 msgstr "Speichern"
-
-msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktuallisieren"
 
 msgid "Show on LED"
 msgstr "Displayanzeige"
 
-msgid "Time to show Clock in Display"
-msgstr "Zeit wie lange die Uhrzeit im Display angezeigt wird"
-
 msgid "Time mode"
 msgstr "Zeit Modus"
 
-msgid "Change LED display settings"
-msgstr "LED-Anzeige konfigurieren."
+msgid "Time to show Clock in Display"
+msgstr "Zeit wie lange die Uhrzeit im Display angezeigt wird"
+
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktuallisieren"

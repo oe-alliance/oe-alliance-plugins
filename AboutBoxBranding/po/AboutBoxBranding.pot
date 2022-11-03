@@ -17,53 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "15 sec"
+msgid "About Boxbranding"
 msgstr ""
 
-msgid "30 sec"
+msgid "Boxbranding"
 msgstr ""
 
-msgid "45 sec"
-msgstr ""
-
-msgid "60 sec"
-msgstr ""
-
-msgid "Always off"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Change LED display settings"
-msgstr ""
-
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-msgid "Clock always"
-msgstr ""
-
-msgid "LED Display Setup"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Show on LED"
-msgstr ""
-
-msgid "Time mode"
-msgstr ""
-
-msgid "Time to show Clock in Display"
-msgstr ""
-
-msgid "Update Date/Time"
+msgid "Close"
 msgstr ""

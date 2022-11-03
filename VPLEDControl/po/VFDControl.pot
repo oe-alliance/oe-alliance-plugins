@@ -8,67 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 19:50+0200\n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-msgid "Clock always"
-msgstr ""
-
 msgid "Always off"
-msgstr ""
-
-msgid "yes"
-msgstr ""
-
-msgid "no"
-msgstr ""
-
-msgid "Off"
-msgstr ""
-
-msgid "On/Off"
-msgstr ""
-
-msgid "Brightness level"
-msgstr ""
-
-msgid "LED Display Setup"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Update Date/Time"
-msgstr ""
-
-msgid "Show on LED"
-msgstr ""
-
-msgid "Time mode"
-msgstr ""
-
-msgid "Show REC-Symbol in Display"
-msgstr ""
-
-msgid "Show blinking Clock on Display during recording"
 msgstr ""
 
 msgid "Brightness Level 1"
@@ -77,5 +26,56 @@ msgstr ""
 msgid "Brightness Level 2"
 msgstr ""
 
+msgid "Brightness level"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
 msgid "Change LED display settings"
+msgstr ""
+
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
+msgid "LED Display Setup"
+msgstr ""
+
+msgid "Off"
+msgstr ""
+
+msgid "On/Off"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Show REC-Symbol in Display"
+msgstr ""
+
+msgid "Show blinking Clock on Display during recording"
+msgstr ""
+
+msgid "Show on LED"
+msgstr ""
+
+msgid "Time mode"
+msgstr ""
+
+msgid "Update Date/Time"
+msgstr ""
+
+msgid "no"
+msgstr ""
+
+msgid "yes"
 msgstr ""

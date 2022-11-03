@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ims\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
 "PO-Revision-Date: 2016-05-07 14:14+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: jerry00 <jerry00@quick.cz>\n"
@@ -29,6 +29,9 @@ msgstr ""
 #
 msgid "Cancel"
 msgstr "Zavřít"
+
+msgid "Change LED display settings"
+msgstr ""
 
 msgid "Channelnumber in Standby Clock"
 msgstr ""

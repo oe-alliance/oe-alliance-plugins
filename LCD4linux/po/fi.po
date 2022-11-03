@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-27 17:17+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2021-10-29 18:38+0200\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Kojo/Orlandox\n"
@@ -997,9 +997,6 @@ msgstr "Vain etäisyys"
 msgid "Distance+Illumination"
 msgstr "Etäisyys + valaistu %"
 
-msgid "Illumination+Moonphase"
-msgstr "Valaistu % + kuuvaihe"
-
 msgid "Distance+Moonphase"
 msgstr "Etäisyys + kuuvaihe"
 
@@ -1021,6 +1018,9 @@ msgstr "EPG"
 msgid "ESE"
 msgstr "Itäkaakko"
 
+msgid "Element"
+msgstr ""
+
 msgid "Event Icon Bar"
 msgstr "Tapatumapalkki"
 
@@ -1041,6 +1041,9 @@ msgstr "Ulkoinen IP-osoite"
 
 msgid "Fastmode (2s)"
 msgstr "Nopea (2s)"
+
+msgid "Filename"
+msgstr ""
 
 msgid "First Quarter"
 msgstr "Kasvava Kuunsirppi"
@@ -1145,9 +1148,6 @@ msgstr "Liukuväri"
 msgid "HDD"
 msgstr "Kiintolevy"
 
-msgid "Illumination only"
-msgstr "Vain valaistu %"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1159,6 +1159,12 @@ msgstr "Laite ei tue IP-turvallisuutta"
 
 msgid "Idle"
 msgstr "Valmiustila"
+
+msgid "Illumination only"
+msgstr "Vain valaistu %"
+
+msgid "Illumination+Moonphase"
+msgstr "Valaistu % + kuuvaihe"
 
 msgid "Indoor"
 msgstr "Sisätila"
@@ -1368,9 +1374,6 @@ msgstr "MJPEG: Syöte LCD 3 Virtuaalinen kirkkaus"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG: Syöte LCD 3 Päälle"
 
-msgid "Moonphase only"
-msgstr "Vain kuuvaihe"
-
 msgid "MSN"
 msgstr "MSN"
 
@@ -1473,6 +1476,9 @@ msgstr "Meteo-Sääasema"
 msgid "Mini-EPG"
 msgstr "Mini-EPG"
 
+msgid "Mode"
+msgstr ""
+
 msgid "Module 1"
 msgstr "Moduli 1"
 
@@ -1556,6 +1562,9 @@ msgstr "Kuu-ikonin polku [ok]>"
 
 msgid "Moonphase"
 msgstr "Kuuvaihe"
+
+msgid "Moonphase only"
+msgstr "Vain kuuvaihe"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2308,11 +2317,11 @@ msgstr "Sää: Sateen mahdollisuus"
 msgid "Weather Transparency"
 msgstr "Sää: Läpiväkyvyys"
 
-msgid "Weather Wind speed unit"
-msgstr "Sää: Tuulen nopeusyksikkö"
-
 msgid "Weather Wind Info Lines"
 msgstr "Sää: Tuuli tietorivit"
+
+msgid "Weather Wind speed unit"
+msgstr "Sää: Tuulen nopeusyksikkö"
 
 msgid "Weather-Icon Zoom"
 msgstr "Sää-ikoni zoom"

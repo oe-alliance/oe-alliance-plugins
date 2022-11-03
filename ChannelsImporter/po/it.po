@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ChannelsImporter\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2017-12-03 23:50+0000\n"
 "Last-Translator: insanity\n"
 "Language-Team: vuplus-community.net <insanity>\n"
@@ -106,9 +106,6 @@ msgstr "Ogni 6 ore"
 msgid "Every hour"
 msgstr "Ogni ora"
 
-msgid "Exit"
-msgstr "Esci"
-
 msgid "FTP Password"
 msgstr "Password FTP"
 
@@ -157,17 +154,11 @@ msgstr "Caricamento epg.dat..."
 msgid "Loading new channel list..."
 msgstr "Carico la nuova lista canali..."
 
-msgid "Main menu"
-msgstr "Menù principale"
-
 msgid "Passive mode"
 msgstr "Modalità passiva"
 
 msgid "Push error messages to the screen. Switch on for debugging only."
 msgstr "Visualizza i messaggi di errore sullo schermo. Attivare solo per debug."
-
-msgid "Really close without saving settings?"
-msgstr "Chiudere senza salvare le impostazioni?"
 
 # setup.xml
 msgid "Remote receiver IP"
@@ -182,26 +173,17 @@ msgstr "Ripeti quanto spesso"
 msgid "Run at restart"
 msgstr "Eseguire al riavvio"
 
-msgid "Save"
-msgstr "Salva"
-
 msgid "Schedule import"
 msgstr "Pianifica importazione"
 
 msgid "Searching for epg.dat"
 msgstr "Ricerca del file epg.dat"
 
-msgid "Service searching"
-msgstr "Ricerca canali"
-
 msgid "Set the repeat interval of the schedule."
 msgstr "Imposta l'intervallo di ripetizione del programma."
 
 msgid "Set the time of day to perform the scan."
 msgstr "Impostare a quale ora eseguire la ricerca."
-
-msgid "Setup"
-msgstr "Impostazioni"
 
 msgid "Should the FTP connection to the remote receiver be established in passive mode?"
 msgstr "La connessione FTP al ricevitore remoto deve essere stabilita in modalità passiva?"

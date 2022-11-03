@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ViX\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2018-07-31 07:36+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: Andy Blackburn, Rob van der Does\n"
@@ -35,6 +35,9 @@ msgstr "Altijd uit"
 
 msgid "Cancel"
 msgstr "Annuleer"
+
+msgid "Change LED display settings"
+msgstr ""
 
 msgid "Channelnumber in Standby Clock"
 msgstr "Zendernummer in stand-by klok"

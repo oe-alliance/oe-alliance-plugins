@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Blindscan - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2017-07-05 15:24+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -15,6 +15,11 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 2.0.2\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid ""
+"\n"
+"A recording is in progress."
+msgstr ""
 
 #, fuzzy
 msgid ""
@@ -42,6 +47,10 @@ msgstr "Imtuvas"
 msgid "\"channel scan\" searches for channels and saves them to your receiver; \"transponder scan\" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp"
 msgstr "Parinktis 'ieškoti kanalų' ieško kanalų ir išsaugo juos aparate; abi šios parinktys atlieka paiešką transponderiuose ir rezultatą išsaugo /tmp XML faile satellites.xml formatu"
 
+#, fuzzy
+msgid "\"scan for channels\" searches for channels and saves them to your receiver; \"Save to XML\" does a transponder search and saves the results in satellites.xml format and stores it in /tmp"
+msgstr "Parinktis 'ieškoti kanalų' ieško kanalų ir išsaugo juos aparate; abi šios parinktys atlieka paiešką transponderiuose ir rezultatą išsaugo /tmp XML faile satellites.xml formatu"
+
 #, fuzzy, python-format
 msgid "%d transponder(s) found"
 msgstr "Surasti %d transponderiai per %d:%02d min."
@@ -58,10 +67,10 @@ msgstr "Žingsnis %d %d:%02d min."
 msgid "%dMHz scanned"
 msgstr ""
 
-msgid "AUTOMATICALLY start service searching, press green to change."
+msgid "Accuracy (higher is better)"
 msgstr ""
 
-msgid "Accuracy (higher is better)"
+msgid "Auto / Manual"
 msgstr ""
 
 msgid "Blind scan"
@@ -147,10 +156,6 @@ msgid "Hardware blind scan is not supported by this tuner (%s)!"
 msgstr ""
 
 #, fuzzy
-msgid "Horizontal"
-msgstr "horizontali"
-
-#, fuzzy
 msgid "If you select \"yes\" all channels on the satellite being searched will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders."
 msgstr "Jeigu čia pasirinksite 'taip', prieš pradedant paiešką, visi ankstesni šio palydovo kanalai bus ištrinti"
 
@@ -176,15 +181,6 @@ msgstr ""
 "Ieškoma matomų transponderių.\n"
 "Tai užtruks ilgą laiką, būkite kantrūs."
 
-msgid "MANUALLY start service searching, press green to change."
-msgstr ""
-
-msgid "Maybe the reason that recording is currently running."
-msgstr ""
-
-msgid "Network scan"
-msgstr ""
-
 msgid ""
 "No new transponders found! \n"
 "\n"
@@ -198,16 +194,6 @@ msgstr ""
 
 msgid "No transponders were found for those search parameters!"
 msgstr "Pagal šiuos paieškos parametrus transponderių nerasta!"
-
-msgid ""
-"No tuner is enabled!\n"
-"Please setup your tuner settings before you start a service scan."
-msgstr ""
-
-msgid ""
-"Nothing to scan!\n"
-"Please setup your tuner settings before you start a service scan."
-msgstr ""
 
 msgid "Nothing to scan! Press Exit!"
 msgstr ""
@@ -225,6 +211,13 @@ msgid "Please setup your tuner configuration."
 msgstr "Sukonfigūruokite savo imtuvus."
 
 msgid "Polarisation"
+msgstr "Poliarizacija"
+
+msgid "Polarisation, select horizontal, vertical or both."
+msgstr ""
+
+#, fuzzy
+msgid "Polarization"
 msgstr "Poliarizacija"
 
 #, fuzzy
@@ -288,10 +281,17 @@ msgstr ""
 msgid "Search type"
 msgstr "Paieškos tipas"
 
+#, fuzzy
+msgid "Searching for active satellite transponders..."
+msgstr "Palydovuose ieškoti naujų transponderių"
+
 msgid "Select a tuner that is configured for the satellite you wish to search"
 msgstr "Pasirinkite imtuvą, sukonfigūruotą palydovui, kuriame norite ieškoti"
 
 msgid "Select all"
+msgstr ""
+
+msgid "Select between 1 and 5. Higher numbers give more accurat search results."
 msgstr ""
 
 msgid "Select the satellite you wish to search"
@@ -302,15 +302,41 @@ msgid ""
 "Press yellow to select all transponders and blue to deselect all."
 msgstr ""
 
+msgid "Service searching to be started MANUALLY by the user. To change this press green."
+msgstr ""
+
+msgid "Service searching will start AUTOMATICALLY. To change this press green."
+msgstr ""
+
 msgid "Smaller steps takes longer but scan is more thorough"
 msgstr ""
 
 msgid "Sorry, this tuner is in use."
 msgstr "Atleiskite, šis imtuvas užimtas."
 
+#, fuzzy
+msgid "Start frequency"
+msgstr "Pradinis paieškos dažnis"
+
+#, fuzzy
+msgid "Start symbol rate"
+msgstr "Pradinis paieškos simbolių dažnis"
+
 #, python-format
 msgid "Step %d %d:%02d min"
 msgstr "Žingsnis %d %d:%02d min."
+
+#, fuzzy
+msgid "Stop frequency"
+msgstr "Galutinis paieškos dažnis"
+
+#, fuzzy
+msgid "Stop symbol rate"
+msgstr "Galutinis paieškos simbolių dažnis"
+
+#, fuzzy, python-format
+msgid "Symbol rate values are in megasymbols; enter a value between %d and %d"
+msgstr "Simbolių dažnis išreikštas megasimboliais. Įrašykite reikšmę tarp 1 ir 44"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
 msgstr "Simbolių dažnis išreikštas megasimboliais. Įrašykite reikšmę tarp 1 ir 44"
@@ -328,20 +354,12 @@ msgstr "Rekomenduojama poliarizacija šiam palydovui yra \"%s\""
 msgid "Transponder searching finished!"
 msgstr ""
 
-#, fuzzy
-msgid "Try to find used satellite transponders..."
-msgstr "Palydovuose ieškoti naujų transponderių"
-
 msgid "Tuner"
 msgstr "Imtuvas"
 
 #, fuzzy
 msgid "Use Sundtek full hardware blind scan!"
 msgstr "   Pradedama akloji paieška Sundtek įranga."
-
-#, fuzzy
-msgid "Vertical"
-msgstr "vertikali"
 
 msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
 msgstr "Kai kaimyninis palydovas labai stiprus, taip išvengiama paieškos tarp transponderių, žinomai esančių kaimyniniame palydove"

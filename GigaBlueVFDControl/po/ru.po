@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2016-05-07 13:28+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: Russian / enigma(c) Ukraine, Kiev>\n"
@@ -34,6 +34,9 @@ msgstr ""
 #
 msgid "Cancel"
 msgstr "Отменить"
+
+msgid "Change LED display settings"
+msgstr ""
 
 msgid "Channel number with leading zeros"
 msgstr ""

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ChannelsImporter -  oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2017-10-09 20:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: BH Team\n"
@@ -103,9 +103,6 @@ msgstr "A cada 6 horas"
 msgid "Every hour"
 msgstr "Hora a hora"
 
-msgid "Exit"
-msgstr "Sair"
-
 msgid "FTP Password"
 msgstr "Palavra-passe FTP"
 
@@ -154,17 +151,11 @@ msgstr "A carregar epg.dat..."
 msgid "Loading new channel list..."
 msgstr "A carregar a nova lista de canais..."
 
-msgid "Main menu"
-msgstr "Menu Principal"
-
 msgid "Passive mode"
 msgstr "Modo Passivo"
 
 msgid "Push error messages to the screen. Switch on for debugging only."
 msgstr "Exibir mensagens de erro no ecrã. Ligue sómente para depuração."
-
-msgid "Really close without saving settings?"
-msgstr "Deseja sair sem gravar as definições?"
 
 msgid "Remote receiver IP"
 msgstr "IP do recetor remoto"
@@ -178,26 +169,17 @@ msgstr "Repetir quantas vezes"
 msgid "Run at restart"
 msgstr "Executar ao reiniciar"
 
-msgid "Save"
-msgstr "Guardar"
-
 msgid "Schedule import"
 msgstr "Importar agendamento"
 
 msgid "Searching for epg.dat"
 msgstr "À procura de epg.dat"
 
-msgid "Service searching"
-msgstr "Procura de Serviços"
-
 msgid "Set the repeat interval of the schedule."
 msgstr "Defina o intervalo de repetição do agendamento."
 
 msgid "Set the time of day to perform the scan."
 msgstr "Defina a hora do dia para realizar a busca."
-
-msgid "Setup"
-msgstr "Definições"
 
 msgid "Should the FTP connection to the remote receiver be established in passive mode?"
 msgstr "Poderá a conexão de FTP para o recetor remoto pode ser estabelecida em modo passivo?"
