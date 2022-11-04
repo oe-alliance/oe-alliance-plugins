@@ -2,123 +2,124 @@
 # Traduzioni italiane per il pacchetto PACKAGE..
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#  <massimo@portatile.localdomain>, 2022.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:54+0100\n"
-"PO-Revision-Date: 2022-11-03 14:30+0100\n"
-"Last-Translator:  <massimo@portatile.localdomain>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2022-11-04 10:08+0100\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 msgid "Connection failed! Aborted!"
-msgstr ""
+msgstr "Connessione fallita! Abortito!"
 
 msgid "Delete IPTV Bouquets before Import"
-msgstr ""
+msgstr "Elimina i bouquet IPTV prima dell'importazione"
 
 msgid "IPTV Import"
-msgstr ""
+msgstr "Importazione IPTV"
 
 msgid "Import Arabic Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali arabi nel bouquet"
 
 msgid "Import Bundesliga Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali della Bundesliga nel bouquet"
 
 msgid "Import Ex-Yu Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali balcanici in bouquet"
 
 msgid "Import Finland Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali finlandesi nel bouquet"
 
 msgid "Import France Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali francesi nel Bouquet"
 
 msgid "Import German Sport Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali sportivi tedeschi nel Bouquet"
 
 msgid "Import Germany Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali tedeschi nel Bouquet"
 
 msgid "Import Italian Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali italiani nel Bouquet"
 
 msgid "Import Netherlands Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali olandesi nel Bouquet"
 
 msgid "Import Polish Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali polacchi nel Bouquet"
 
 msgid "Import Portugal Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali portoghesi nel Bouquet"
 
 msgid "Import Romania Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali rumeni nel Bouquet"
 
 msgid "Import Sky Germany Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali Sky Germania nel Bouquet"
 
 msgid "Import Spain Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali spagnoli nel Bouquet"
 
 msgid "Import Suisse and Austria Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali svizzeri e austriaci nel Bouquet"
 
 msgid "Import Sweden Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali svedesi nel Bouquet"
 
 msgid "Import Turkey Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali turchi nel Bouquet"
 
 msgid "Import UK Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali inglesi nel Bouquet"
 
 msgid "Import US Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali statunitensi nel Bouquet"
 
 msgid "Import VOD in Bouquet"
-msgstr ""
+msgstr "Importa VOD nel Bouquet"
 
 msgid "Import XXX Channels in Bouquet"
-msgstr ""
+msgstr "Importa i canali XXX nel Bouquet"
 
 msgid "Import successful!"
-msgstr ""
+msgstr "Importazione riuscita!"
 
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 msgid "Portal"
-msgstr ""
+msgstr "Portale"
 
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 msgid "Show IPTV Importer in Extensions"
-msgstr ""
+msgstr "Mostra IPTV Importer nelle estensioni"
 
 msgid "Show IPTV Importer in Menu"
-msgstr ""
+msgstr "Mostra IPTV Importer nel menu"
 
 msgid "Show IPTV Importer in Plugins"
-msgstr ""
+msgstr "Mostra IPTV Importer nei plugin"
 
 msgid "Start Import"
-msgstr ""
+msgstr "Avvia importazione"
 
 msgid "User"
-msgstr ""
+msgstr "Utente"
 
 msgid "none"
-msgstr ""
+msgstr "nessuno"

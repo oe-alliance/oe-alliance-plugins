@@ -2,27 +2,28 @@
 # Traduzioni italiane per il pacchetto PACKAGE..
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#  <massimo@portatile.localdomain>, 2022.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:54+0100\n"
-"PO-Revision-Date: 2022-11-03 14:22+0100\n"
-"Last-Translator:  <massimo@portatile.localdomain>\n"
+"PO-Revision-Date: 2022-11-04 08:42+0100\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid "Norwegian P4 FEM PAA radio show player"
-msgstr ""
+msgstr "Riproduttore radiofonico norvegese P4 FEM PAA"
 
 msgid "Simple Search"
-msgstr ""
+msgstr "Ricerca semplice"
 
 msgid "VirtualKb Search"
-msgstr ""
+msgstr "Ricerca VirtualKb"
