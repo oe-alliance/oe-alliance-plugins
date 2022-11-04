@@ -2,507 +2,511 @@
 # Traduzioni italiane per il pacchetto PACKAGE..
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#  <massimo@portatile.localdomain>, 2022.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:55+0100\n"
-"PO-Revision-Date: 2022-11-03 14:31+0100\n"
-"Last-Translator:  <massimo@portatile.localdomain>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2022-11-04 18:21+0100\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid ""
 "\n"
 "\n"
 "Genre: "
-msgstr ""
+msgstr "\n\nGenere: "
 
 msgid "0 - 9"
-msgstr ""
+msgstr "0 - 9"
 
 msgid "3 Player"
-msgstr ""
+msgstr "3 Player"
 
 msgid "A - C"
-msgstr ""
+msgstr "A - C"
 
 msgid "A to Z"
-msgstr ""
+msgstr "A - Z"
 
 msgid "ABC News 24"
-msgstr ""
+msgstr "ABC News 24"
 
 msgid "ABC iView"
-msgstr ""
+msgstr "ABC iView"
 
 msgid "ABC iView - A to Z"
-msgstr ""
+msgstr "ABC iView - A - Z"
 
 msgid "ABC1"
-msgstr ""
+msgstr "ABC1"
 
 msgid "ABC2"
-msgstr ""
+msgstr "ABC2"
 
 msgid "ABC3"
-msgstr ""
+msgstr "ABC3"
 
 msgid "ABC4Kids"
-msgstr ""
+msgstr "ABC4Kids"
 
 msgid "About"
-msgstr ""
+msgstr "Informazioni su"
 
 msgid "Add to Favorites"
-msgstr ""
+msgstr "Aggiungi ai preferiti"
 
 msgid "Added:"
-msgstr ""
+msgstr "Aggiunto:"
 
 msgid "Added: "
-msgstr ""
+msgstr "Aggiunto: "
 
 msgid "All Shows"
-msgstr ""
+msgstr "Tutti gli spettacoli"
 
 msgid "Arts & Culture - Music"
-msgstr ""
+msgstr "Arte & Cultura - Musica"
 
 msgid "Arts & Culture - People"
-msgstr ""
+msgstr "Arte & Cultura - Persone"
 
 msgid "Arts & Culture - Performance"
-msgstr ""
+msgstr "Arte & Cultura - Spettacolo"
 
 msgid "Arts & Culture - Reviews"
-msgstr ""
+msgstr "Arte & Cultura - Recensioni"
 
 msgid "Audio: "
-msgstr ""
+msgstr "Audio: "
 
 msgid "Audio: Unknown"
-msgstr ""
+msgstr "Audio: Sconosciuto"
 
 msgid "BBC Alba"
-msgstr ""
+msgstr "BBC Alba"
 
 msgid "BBC Four"
-msgstr ""
+msgstr "BBC Four"
 
 msgid "BBC HD"
-msgstr ""
+msgstr "BBC HD"
 
 msgid "BBC News"
-msgstr ""
+msgstr "BBC News"
 
 msgid "BBC Northern Ireland"
-msgstr ""
+msgstr "BBC Northern Ireland"
 
 msgid "BBC One"
-msgstr ""
+msgstr "BBC One"
 
 msgid "BBC Parliamanent"
-msgstr ""
+msgstr "BBC Parliamanent"
 
 msgid "BBC Scotland"
-msgstr ""
+msgstr "BBC Scotland"
 
 msgid "BBC Three"
-msgstr ""
+msgstr "BBC Three"
 
 msgid "BBC Two"
-msgstr ""
+msgstr "BBC Two"
 
 msgid "BBC Wales"
-msgstr ""
+msgstr "BBC Wales"
 
 msgid "Back"
-msgstr ""
+msgstr "Indietro"
 
 msgid "Bitrate: "
-msgstr ""
+msgstr "Bitrate: "
 
 msgid "Bitrate: Unknown"
-msgstr ""
+msgstr "Bitrate: Sconosciuto"
 
 msgid "CBBC"
-msgstr ""
+msgstr "CBBC"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 msgid "Cbeebies"
-msgstr ""
+msgstr "Cbeebies"
 
 msgid "Childrens"
-msgstr ""
+msgstr "Bambini"
 
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 msgid "Comedy"
-msgstr ""
+msgstr "Commedia"
 
 msgid "Comedy - Cult"
-msgstr ""
+msgstr "Commedia - Culto"
 
 msgid "Comedy - Satire"
-msgstr ""
+msgstr "Commedia - Satira"
 
 msgid "Comedy - Sitcom"
-msgstr ""
+msgstr "Commedia - Sitcom"
 
 msgid "Comedy - Sketch"
-msgstr ""
+msgstr "Comedy - Sketch"
 
 msgid "D - F"
-msgstr ""
+msgstr "D - F"
 
 msgid "Delete from Favorites"
-msgstr ""
+msgstr "Elimina dai preferiti"
 
 msgid "Documentary - Biography"
-msgstr ""
+msgstr "Documentario - Biografie"
 
 msgid "Documentary - History"
-msgstr ""
+msgstr "Documentario - Storia"
 
 msgid "Documentary - Nature"
-msgstr ""
+msgstr "Documentario - Natura"
 
 msgid "Documentary - Real Life"
-msgstr ""
+msgstr "Documentario - Vita reale"
 
 msgid "Documentary - Science"
-msgstr ""
+msgstr "Documentario - Scienza"
 
 msgid "Drama"
-msgstr ""
+msgstr "Drammatico"
 
 msgid "Drama - Crime"
-msgstr ""
+msgstr "Drammatico - Crimine"
 
 msgid "Drama - Historical"
-msgstr ""
+msgstr "Drammatico - Storico"
 
 msgid "Drama - Period"
-msgstr ""
+msgstr "Drammatico - Periodo"
 
 msgid "Drama - Romance"
-msgstr ""
+msgstr "Drammatico - Romantico"
 
 msgid "Drama - Sci-fi"
-msgstr ""
+msgstr "Drammatico - Fantascienza"
 
 msgid "Duration:"
-msgstr ""
+msgstr "Durata:"
 
 msgid "Duration: "
-msgstr ""
+msgstr "Durata: "
 
 msgid "Education"
-msgstr ""
+msgstr "Formazione scolastica"
 
 msgid "Entertainment"
-msgstr ""
+msgstr "Divertimento"
 
 msgid "Episodes by Date"
-msgstr ""
+msgstr "Episodi per data"
 
 msgid "Episodes: "
-msgstr ""
+msgstr "Episodi: "
 
 msgid "Exit"
-msgstr ""
+msgstr "Esci"
 
 msgid "Factual"
-msgstr ""
+msgstr "Effettivo"
 
 msgid "Favorites"
-msgstr ""
+msgstr "Preferiti"
 
 msgid "Featured Programs"
-msgstr ""
+msgstr "Programmi in primo piano"
 
 msgid "G - J"
-msgstr ""
+msgstr "G - J"
 
 msgid "Going, Going..."
-msgstr ""
+msgstr "Going, Going..."
 
 msgid "HD"
-msgstr ""
+msgstr "HD"
 
 msgid "Health And Wellbeing"
-msgstr ""
+msgstr "Salute e benessere"
 
 msgid "High"
-msgstr ""
+msgstr "Alto"
 
 msgid "ITV Player"
-msgstr ""
+msgstr "Lettore ITV"
 
 msgid "Indigenous"
-msgstr ""
+msgstr "Indigeno"
 
 msgid "K - M"
-msgstr ""
+msgstr "K - M"
 
 msgid "Last Chance"
-msgstr ""
+msgstr "Ultima possibilità"
 
 msgid "Last Updated:"
-msgstr ""
+msgstr "Ultimo aggiornamento:"
 
 msgid "Latest Episodes"
-msgstr ""
+msgstr "Ultimi episodi"
 
 msgid "Lifestyle - Games"
-msgstr ""
+msgstr "Stile di vita - Giochi"
 
 msgid "Lifestyle - Reality"
-msgstr ""
+msgstr "Stile di vita - Reality"
 
 msgid "Low"
-msgstr ""
+msgstr "Basso"
 
 msgid "Most Popular Episodes"
-msgstr ""
+msgstr "Episodi più popolari"
 
 msgid "Most Popular TV"
-msgstr ""
+msgstr "TV più popolari"
 
 msgid "Most Talked About"
-msgstr ""
+msgstr "Di cui si parla di più"
 
 msgid "Movies"
-msgstr ""
+msgstr "Film-"
 
 msgid "Music"
-msgstr ""
+msgstr "Musica"
 
 msgid "N - P"
-msgstr ""
+msgstr "N - P"
 
 msgid "News"
-msgstr ""
+msgstr "Notizie"
 
 msgid "News & Current Affairs"
-msgstr ""
+msgstr "Notizie e attualità"
 
 msgid "No items matching your search criteria were found"
-msgstr ""
+msgstr "Non sono stati trovati elementi corrispondenti ai criteri di ricerca"
 
 msgid "No matching search items were found for "
 msgstr ""
+"Non sono stati trovati elementi corrispondenti ai criteri di ricerca per"
 
 msgid "Normal"
-msgstr ""
+msgstr "Normale"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "OnDemand"
-msgstr ""
+msgstr "OnDemand"
 
 msgid "OnDemand Configuration"
-msgstr ""
+msgstr "OnDemand configurazione"
 
 msgid ""
 "Open Uitzending Gemist\n"
 "\n"
 "Based on Xtrend code"
-msgstr ""
+msgstr "Open Uitzending Gemist\n\nBasato sul codice Xtrend"
 
 msgid "Panel & Discussion"
-msgstr ""
+msgstr "Tavola rotonda"
 
 msgid "Preferred Stream Quality"
-msgstr ""
+msgstr "Qualità dello stream preferita"
 
 msgid "Primary DNS: To watch UK Streams outside the UK"
 msgstr ""
+"DNS primario: per guardare gli stream del Regno Unito al di fuori del Regno"
+" Unito"
 
 msgid "Q - T"
-msgstr ""
+msgstr "Q - T"
 
 msgid "RTE Player"
-msgstr ""
+msgstr "Lettore RTE"
 
 msgid "RTE Player - A to Z"
-msgstr ""
+msgstr "Lettore RTE - A - Z"
 
 msgid "RTE Player - Categories"
-msgstr ""
+msgstr "Lettore RTE - Categorie"
 
 msgid "RTE Player - Choose Date"
-msgstr ""
+msgstr "Lettore RTE - Scegli data"
 
 msgid "RTL Number of days back"
-msgstr ""
+msgstr "RTL Numero di giorni indietro"
 
 msgid "RTL XL A-Z"
-msgstr ""
+msgstr "RTL XL A-Z"
 
 msgid "RTL XL Gemist"
-msgstr ""
+msgstr "RTL XL persi"
 
 msgid "Recently Added"
-msgstr ""
+msgstr "Aggiunti recentemente"
 
 msgid "Recently Played: "
-msgstr ""
+msgstr "Giocato recentemente: "
 
 msgid "Religion"
-msgstr ""
+msgstr "Religione"
 
 msgid "SHOUTcast Radio"
-msgstr ""
+msgstr "SHOUTcast Radio"
 
 msgid "Search"
-msgstr ""
+msgstr "Ricerca"
 
 msgid "Search term"
-msgstr ""
+msgstr "Termine di ricerca"
 
 msgid "Secondary DNS: A backup DNS if the primary is down"
-msgstr ""
+msgstr "DNS secondario: un DNS di backup se il primario è inattivo"
 
 msgid "Selection does not contain a stream!"
-msgstr ""
+msgstr "La selezione non contiene uno stream!"
 
 msgid "Show Categories"
-msgstr ""
+msgstr "Mostra categorie"
 
 msgid "Show Thumbnails"
-msgstr ""
+msgstr "Mostra miniature"
 
 msgid "Show in extensions"
-msgstr ""
+msgstr "Mostra nelle estensioni"
 
 msgid "Show in main menu"
-msgstr ""
+msgstr "Mostra nel menu principale"
 
 msgid "Show in plugin browser"
-msgstr ""
+msgstr "Mostra nel browser dei plug-in"
 
 msgid "Shows A to Z"
-msgstr ""
+msgstr "Mostra dalla A alla Z"
 
 msgid "Signed"
-msgstr ""
+msgstr "Firmato"
 
 msgid "Soaps"
-msgstr ""
+msgstr "Soap"
 
 msgid "Sorry, No Stations Found!"
-msgstr ""
+msgstr "Spiacenti, nessuna stazione trovata!"
 
 msgid "Sorry, unable to find playable stream!"
-msgstr ""
+msgstr "Spiacenti, impossibile trovare uno stream da riprodurre!"
 
 msgid "Sport"
-msgstr ""
+msgstr "Sport"
 
 msgid "Station Already Saved in Favorites!"
-msgstr ""
+msgstr "Stazione già salvata nei preferiti!"
 
 msgid "Station delete failed, please check the Debug logs!"
-msgstr ""
+msgstr "Eliminazione della stazione non riuscita, controlla i log di debug!"
 
 msgid "Station deleted from Favorites!"
-msgstr ""
+msgstr "Stazione eliminata dai preferiti!"
 
 msgid "Station save failed, please check the Debug logs!"
-msgstr ""
+msgstr "Salvataggio della stazione fallito, controlla i log di debug!"
 
 msgid "Station saved to Favorites!"
-msgstr ""
+msgstr "Stazione salvata nei preferiti!"
 
 msgid "Straight Off The Telly"
-msgstr ""
+msgstr "Direttamente dalla televisione"
 
 msgid "TV Highlights"
-msgstr ""
+msgstr "I momenti salienti della TV"
 
 msgid "Time: "
-msgstr ""
+msgstr "Orario: "
 
 msgid "Today"
-msgstr ""
+msgstr "Oggi"
 
 msgid "Trailers"
-msgstr ""
+msgstr "Trailer"
 
 msgid "Tunein Radio"
-msgstr ""
+msgstr "Tunein Radio"
 
 msgid "U - Z"
-msgstr ""
+msgstr "U - Z"
 
 msgid "UG A-Z"
-msgstr ""
+msgstr "UG A-Z"
 
 msgid "UG Popular"
-msgstr ""
+msgstr "UG popolare"
 
 msgid "UG Recently added"
-msgstr ""
+msgstr "UG aggiunti recentemente"
 
 msgid "UG Search"
-msgstr ""
+msgstr "UG cerca"
 
 msgid "Very Low"
-msgstr ""
+msgstr "Molto basso"
 
 msgid "Wait please while gathering data..."
-msgstr ""
+msgstr "Attendi per favore durante la raccolta dei dati..."
 
 msgid "Watch uitzending gemist"
-msgstr ""
+msgstr "Guarda le trasmissioni perse"
 
 msgid "iRadio Player"
-msgstr ""
+msgstr "Lettore iRadio"
 
 msgid "iRadio Player - Main Menu"
-msgstr ""
+msgstr "Lettore iRadio - Menu principale"
 
 msgid "iRadio Player - SHOUTcast Genres"
-msgstr ""
+msgstr "Lettore iRadio - Generi SHOUTcast"
 
 msgid "iRadio Player - SHOUTcast Sub Genres for "
-msgstr ""
+msgstr "Lettore iRadio - Sottogeneri SHOUTcast per"
 
 msgid "iRadio Player - Tunein Main Menu"
-msgstr ""
+msgstr "Lettore iRadio - Menu principale di Tunein"
 
 msgid "iRadio: Display Favorite Default Thumbnails"
-msgstr ""
+msgstr "iRadio: Mostra le miniature predefinite preferite"
 
 msgid "iRadio: Display Favorite Thumbnails"
-msgstr ""
+msgstr "iRadio: Mostra le miniature preferite"
 
 msgid "iRadio: Display SHOUTcast Default Thumbnails"
-msgstr ""
+msgstr "iRadio: Mostra le miniature predefinite di SHOUTcast"
 
 msgid "iRadio: Display SHOUTcast Thumbnails"
-msgstr ""
+msgstr "iRadio: Mostra le miniature SHOUTcast"
 
 msgid "iRadio: Display Tunein Default Thumbnails"
-msgstr ""
+msgstr "iRadio: Mostra le miniature predefinite di Tunein"
 
 msgid "iRadio: Display Tunein Thumbnails"
-msgstr ""
+msgstr "iRadio: Mostra le miniature di Tunein"
 
 msgid "iRadio: Display WMA Streams"
-msgstr ""
+msgstr "iRadio: mostra gli stream WMA"
 
 msgid "iView Exclusives"
-msgstr ""
+msgstr "iView Esclusive"

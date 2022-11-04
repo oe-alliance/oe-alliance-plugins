@@ -1,22 +1,24 @@
 # Italian translations for LCD4Linux package.
 # Copyright (C) 2013 THE LCD'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the LCD package.
-# Automatically generated, 2013.
 #
+# Automatically generated, 2013.
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:54+0100\n"
-"PO-Revision-Date: 2021-10-10 23:12+0200\n"
-"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2022-11-04 17:07+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Lokalize 22.08.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "%"
 msgstr "%"
@@ -161,7 +163,7 @@ msgid "- Extra Zoom"
 msgstr "- Extra Zoom"
 
 msgid "- Fast Grab lower quality"
-msgstr "- Veloce Grab qualità inferiore"
+msgstr "- Grab veloce qualità inferiore"
 
 msgid "- File [ok]>"
 msgstr "- File [OK] >"
@@ -194,7 +196,7 @@ msgid "- HTTP Width"
 msgstr "- Larghezza HTTP"
 
 msgid "- Infolines"
-msgstr "- Linee Informative"
+msgstr "- Linee informative"
 
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 colore sfondo"
@@ -209,10 +211,10 @@ msgid "- LCD 1 Night Reduction"
 msgstr "- LCD 1 riduzione notturna"
 
 msgid "- LCD 1 Refresh"
-msgstr "- LCD 1 aggiornare"
+msgstr "- LCD 1 aggiornamento"
 
 msgid "- LCD 1 Rotate"
-msgstr "- LCD 1 Ruotare"
+msgstr "- LCD 1 ruotare"
 
 msgid "- LCD 2 Background Color"
 msgstr "- LCD 2 colore sfondo"
@@ -227,7 +229,7 @@ msgid "- LCD 2 Night Reduction"
 msgstr "- LCD 2 riduzione notturna"
 
 msgid "- LCD 2 Refresh"
-msgstr "- LCD 2 aggiorna"
+msgstr "- LCD 2 aggiornamento"
 
 msgid "- LCD 2 Rotate"
 msgstr "- LCD 2 ruotare"
@@ -245,7 +247,7 @@ msgid "- LCD 3 Night Reduction"
 msgstr "- LCD 3 riduzione notturna"
 
 msgid "- LCD 3 Refresh"
-msgstr "- LCD 3 aggiorna"
+msgstr "- LCD 3 aggiornamento"
 
 msgid "- LCD 3 Rotate"
 msgstr "- LCD 3 ruotare"
@@ -281,22 +283,22 @@ msgid "- OSD Size"
 msgstr "- Dimensioni OSD"
 
 msgid "- Online Name:Address"
-msgstr "- Nome: Indirizzo online"
+msgstr "- Nome in linea:Indirizzo"
 
 msgid "- Picon Cache Path [ok]>"
-msgstr "- Picon Cache Path [OK] >"
+msgstr "- Percorso cache picon [OK] >"
 
 msgid "- Picon First"
-msgstr "- Prima Picon"
+msgstr "- Prima picon"
 
 msgid "- Picon Path 2 [ok]>"
-msgstr "- Percorso Picon  2 [OK] >"
+msgstr "- Percorso picon 2 [OK] >"
 
 msgid "- Picon Path [ok]>"
-msgstr "- Percorso Picon [OK] >"
+msgstr "- Percorso picon [OK] >"
 
 msgid "- Picon Size"
-msgstr "- Dimensioni Picon"
+msgstr "- Dimensioni picon"
 
 msgid "- Picture Alignment"
 msgstr "- Allineamento immagine"
@@ -326,7 +328,7 @@ msgid "- Position y"
 msgstr "- Posizione y"
 
 msgid "- Quick Update"
-msgstr "- Rapido aggiornamento"
+msgstr "- Aggiornamento rapido"
 
 msgid "- Rain Color"
 msgstr "- Colore pioggia"
@@ -338,34 +340,34 @@ msgid "- Rain Zoom"
 msgstr "- Zoom pioggia"
 
 msgid "- Rain use Color 2 from"
-msgstr "- Pioggia utilizzare colore 2 da"
+msgstr "- Pioggia utilizza colore 2 da"
 
 msgid "- Screen 2 Changing Time"
-msgstr "- Tempo cicla display 2"
+msgstr "- Schermata 2 modifica ora"
 
 msgid "- Screen 3 Changing Time"
-msgstr "- Tempo cicla display 3"
+msgstr "- Schermata 3 modifica ora"
 
 msgid "- Screen 4 Changing Time"
-msgstr "- Tempo cicla display 4"
+msgstr "- Schermata 4 modifica ora"
 
 msgid "- Screen 5 Changing Time"
-msgstr "- Tempo cicla display 5"
+msgstr "- Schermata 5 modifica ora"
 
 msgid "- Screen 6 Changing Time"
-msgstr "- Tempo cicla display 6"
+msgstr "- Schermata 6 modifica ora"
 
 msgid "- Screen 7 Changing Time"
-msgstr "- Tempo cicla display 7"
+msgstr "- Schermata 7 modifica ora"
 
 msgid "- Screen 8 Changing Time"
-msgstr "- Tempo cicla display 8"
+msgstr "- Schermata 8 modifica ora"
 
 msgid "- Screen 9 Changing Time"
-msgstr "- Tempo cicla display 9"
+msgstr "- Schermata 9 modifica ora"
 
 msgid "- Screens used for Changing"
-msgstr "- Display utilizzato per cicla"
+msgstr "- Schermi utilizzati per la modifica"
 
 msgid "- Search Path [ok]>"
 msgstr "- Ricerca percorso [OK] >"
@@ -425,7 +427,7 @@ msgid "- Trimmed"
 msgstr "- Rifilata"
 
 msgid "- Tunerinfo"
-msgstr "- Tunerinfo"
+msgstr "- Informazioni sintonizzatore"
 
 msgid "- Type"
 msgstr "- Tipo"
@@ -437,7 +439,7 @@ msgid "- Unit min"
 msgstr "- Unità min"
 
 msgid "- Weather Type"
-msgstr "- Tipo Meteo"
+msgstr "- Tipo meteo"
 
 msgid "- Zoom"
 msgstr "- Zoom"
@@ -446,25 +448,25 @@ msgid "- external IP URL"
 msgstr "- external IP URL"
 
 msgid "- extra Info"
-msgstr "- extra Info"
+msgstr "- informazioni extra"
 
 msgid "- free Warning"
 msgstr "- senza avviso"
 
 msgid "- max Width"
-msgstr "- larghezza Max"
+msgstr "- larghezza max"
 
 msgid "- maximum Lines"
 msgstr "- massimo righe"
 
 msgid "- only active Tuner"
-msgstr "- solo Tuner attivo"
+msgstr "- solo sintonizzatore attivo"
 
 msgid "- use Info when empty"
 msgstr "- utilizzare info quando vuoto"
 
 msgid "- which LCD"
-msgstr "- Quale LCD"
+msgstr "- quale LCD"
 
 msgid "0"
 msgstr "0"
@@ -542,10 +544,10 @@ msgid "2 - side by side"
 msgstr "2 - affiancati"
 
 msgid "2 Days 1 Line"
-msgstr "2 Giorni 1 linea"
+msgstr "2 giorni 1 linea"
 
 msgid "2 Days 2 Line"
-msgstr "2 Giorni 2 linee"
+msgstr "2 giorni 2 linee"
 
 msgid "2 x FastBackwardKey"
 msgstr "2 x Tasto indietro veloce"
@@ -560,7 +562,7 @@ msgid "2 x FastForwardKey Type 2"
 msgstr "2 x Tasto avanzamento veloce tipo 2"
 
 msgid "2 x InfoKey"
-msgstr "2 x  Tasto Info"
+msgstr "2 x Tasto Info"
 
 msgid "2 x Mute"
 msgstr "2 x Muto"
@@ -725,7 +727,7 @@ msgid "85%"
 msgstr "85%"
 
 msgid "8bit - grayscale/color"
-msgstr "8bit - scala di grigi / colori"
+msgstr "8bit - scala di grigi/colori"
 
 msgid "90"
 msgstr "90"
@@ -752,7 +754,7 @@ msgid "All"
 msgstr "Tutti"
 
 msgid "All Informations"
-msgstr "Tutte le Informazioni"
+msgstr "Tutte le informazioni"
 
 msgid "Always All"
 msgstr "Sempre tutto"
@@ -764,13 +766,13 @@ msgid "Analog"
 msgstr "Analogico"
 
 msgid "Analog+Date"
-msgstr "Analogico + Data"
+msgstr "Analogico+Data"
 
 msgid "Analog+Date+Weekday"
-msgstr "Analogico + Data + Giorno feriale"
+msgstr "Analogico+Data+Giorno feriale"
 
 msgid "Analog+Date+Weekday 2"
-msgstr "Analogico + Data + Giorno feriale 2"
+msgstr "Analogico+Data+Giorno feriale 2"
 
 msgid "Audio/Video"
 msgstr "Audio/Video"
@@ -788,7 +790,7 @@ msgid "Bar"
 msgstr "Barra"
 
 msgid "Bar+Value"
-msgstr "Barra + Valore"
+msgstr "Barra+Valore"
 
 msgid "Bitrate"
 msgstr "Bitrate"
@@ -800,13 +802,13 @@ msgid "BlueSound IP"
 msgstr "BlueSound IP"
 
 msgid "BlueSound Ping Timeout [ms]"
-msgstr "BlueSound Ping Timeout [ms]"
+msgstr "Timeout ping BlueSound [ms]"
 
 msgid "BlueSound Play Check"
 msgstr "BlueSound test riproduzione"
 
 msgid "BlueSound Refresh [s]"
-msgstr "BlueSound aggiornare [s]"
+msgstr "BlueSound aggiornamento [s]"
 
 msgid "Box-Skin-LCD"
 msgstr "Box-Skin-LCD"
@@ -815,16 +817,16 @@ msgid "Box-Skin-LCD Color"
 msgstr "Box-Skin-LCD colore"
 
 msgid "Box-Skin-LCD Dimension"
-msgstr "Box-Skin- LCD Dimensioni"
+msgstr "Box-Skin-LCD dimensioni"
 
 msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Box-SKIN-LCD Abilitato IDLE-Mode"
+msgstr "Box-Skin-LCD abilita modalità Idle"
 
 msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Box-SKIN-LCD Abilitato MEDIA-Mode"
+msgstr "Box-Skin-LCD abilita modalità Media"
 
 msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Box-SKIN-LCD Abilitato ON-Mode"
+msgstr "Box-Skin-LCD abilita modalità On"
 
 msgid "Box-Skin-LCD Offset"
 msgstr "Box-Skin-LCD Offset"
@@ -845,10 +847,10 @@ msgid "Calendar Day Event Preview"
 msgstr "Anteprima calendario giorno evento"
 
 msgid "Calendar Line Thickness"
-msgstr "Spessore  linea calendario"
+msgstr "Spessore linea calendario"
 
 msgid "Calendar Poll Interval"
-msgstr "Calendario Intervallo di polling"
+msgstr "Intervallo di sondaggio del calendario "
 
 msgid "Calendar Saturday Color"
 msgstr "Calendario colore Sabato"
@@ -863,28 +865,28 @@ msgid "Calendar Transparency"
 msgstr "Trasparenza calendario"
 
 msgid "Calendar ics-Path [ok]>"
-msgstr "Calendario ics-Path [OK] >"
+msgstr "Calendario percorso ics [OK] >"
 
 msgid "Calendar ics-URL"
-msgstr "Calendario ics-URL"
+msgstr "Calendario URL ics"
 
 msgid "Calendar planerFS"
 msgstr "Calendario planerFS"
 
 msgid "Cancel"
-msgstr "Cancella"
+msgstr "Annulla"
 
 msgid "Channel"
 msgstr "Canale"
 
 msgid "Channel+Title"
-msgstr "Canale  + Titolo"
+msgstr "Canale+Titolo"
 
 msgid "Choose dir"
 msgstr "Scegli cartella"
 
 msgid "Choose file"
-msgstr "Scegli il file"
+msgstr "Scegli file"
 
 msgid "Choose font"
 msgstr "Scegli carattere"
@@ -896,10 +898,10 @@ msgid "Clock 2"
 msgstr "Orologio 2"
 
 msgid "Config Backup Path [ok]>"
-msgstr "Configurazioni Backup Path [OK] >"
+msgstr "Configurazione percorso Backup [OK] >"
 
 msgid "Config Restore All Settings"
-msgstr "Ripristinare tutte le impostazioni"
+msgstr "Ripristina tutte le impostazioni"
 
 msgid "Console normal"
 msgstr "Console normale"
@@ -911,10 +913,10 @@ msgid "Corner"
 msgstr "Angolo"
 
 msgid "Corner+Timeshift"
-msgstr "Angolo + Timeshift"
+msgstr "Angolo+Timeshift"
 
 msgid "Coversearch"
-msgstr "Coperchio ricerca"
+msgstr "Ricerca cover"
 
 msgid "Crashlog"
 msgstr "Crashlog"
@@ -938,10 +940,10 @@ msgid "Date"
 msgstr "Data"
 
 msgid "Date+Time"
-msgstr "Data + Ora"
+msgstr "Data+Ora"
 
 msgid "Date+Time+Weekday"
-msgstr "Data + Ora + Giorni feriali"
+msgstr "Data+Ora+Giorni feriali"
 
 msgid "Dates"
 msgstr "Appuntamenti"
@@ -983,16 +985,16 @@ msgid "Delete"
 msgstr "Elimina"
 
 msgid "Delete File?"
-msgstr "Elimina file?"
+msgstr "Eliminare il file?"
 
 msgid "Delete Logfile"
 msgstr "Elimina file di log"
 
 msgid "Display Delay [ms]"
-msgstr "Ritardo [ms]"
+msgstr "Ritardo di visualizzazione [ms]"
 
 msgid "Distance only"
-msgstr "solo Distanza"
+msgstr "Solo distanza"
 
 msgid "Distance+Illumination"
 msgstr "Distanza+Illuminazione"
@@ -1001,28 +1003,28 @@ msgid "Distance+Moonphase"
 msgstr "Distanza+Fase lunare"
 
 msgid "Double-button switches"
-msgstr "Doppio tasto - Selettore"
+msgstr "Interruttori a doppio pulsante"
 
 msgid "Download Logfile"
-msgstr "Scaricare file di log"
+msgstr "Scarica file di log"
 
 msgid "E"
-msgstr "O"
+msgstr "E"
 
 msgid "ENE"
-msgstr "ONO"
+msgstr "ENE"
 
 msgid "EPG"
 msgstr "EPG"
 
 msgid "ESE"
-msgstr "OSO"
+msgstr "ESE"
 
 msgid "Element"
 msgstr "Elemento"
 
 msgid "Event Icon Bar"
-msgstr "Icona Barra Evento"
+msgstr "Icona barra evento"
 
 msgid "Exec"
 msgstr "Esegui"
@@ -1049,10 +1051,10 @@ msgid "First Quarter"
 msgstr "Primo quarto"
 
 msgid "Flaps Design Date"
-msgstr "Flaps Design Data"
+msgstr "Data di progettazione dei lembi"
 
 msgid "Flaps Design Weekday"
-msgstr "Flaps Design Giorno della settimana"
+msgstr "Design dei lembi nei giorni feriali"
 
 msgid "Font"
 msgstr "Carattere"
@@ -1061,7 +1063,7 @@ msgid "Font 1 [ok]>"
 msgstr "Carattere 1 [OK] >"
 
 msgid "Font 2 [ok]>"
-msgstr "Carattere 3 [OK] >"
+msgstr "Carattere 2 [OK] >"
 
 msgid "Font 3 [ok]>"
 msgstr "Carattere 3 [OK] >"
@@ -1091,10 +1093,10 @@ msgid "FritzCall Frame Picture [ok]>"
 msgstr "FritzCall riquadro [OK] >"
 
 msgid "FritzCall Number of Lines per Entry"
-msgstr "FritzCall numero di righe per voce"
+msgstr "FritzCall numero di linee per voce"
 
 msgid "FritzCall Number of List Entries"
-msgstr "FritzCall numero di voci lista"
+msgstr "FritzCall numero di voci di elenco"
 
 msgid "FritzCall Number of Pictures"
 msgstr "FritzCall numero di immagini"
@@ -1103,7 +1105,7 @@ msgid "FritzCall Picture Orientation"
 msgstr "FritzCall orientamento immagini"
 
 msgid "FritzCall Picture Path [ok]>"
-msgstr "FritzCall path immagini [OK] >"
+msgstr "FritzCall percorso immagini [OK] >"
 
 msgid "FritzCall Picture Transparency"
 msgstr "FritzCall trasparenza immagini"
@@ -1112,13 +1114,13 @@ msgid "FritzCall Pictures Search"
 msgstr "FritzCall cerca immagini"
 
 msgid "FritzCall Popup Color"
-msgstr "FritzCall  colore popup"
+msgstr "FritzCall colore popup"
 
 msgid "FritzCall Popup LCD"
 msgstr "FritzCall LCD popup"
 
 msgid "FritzCall Popup-Time"
-msgstr "FritzCall Popup-Ora"
+msgstr "FritzCall popup-ora"
 
 msgid "FritzCall remove Calls after hours"
 msgstr "FritzCall elimina chiamate dopo ore"
@@ -1133,8 +1135,8 @@ msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
 msgstr ""
-"La GUI ha bisogno di un riavvio per applicare le modifiche. \n"
-"Riavviare la GUI ora?"
+"La GUI necessita di un riavvio per applicare le modifiche.\nVuoi riavviare la"
+" GUI ora?"
 
 msgid "Global"
 msgstr "Globale"
@@ -1155,13 +1157,13 @@ msgid "IMAP-SSL"
 msgstr "IMAP-SSL"
 
 msgid "IP seurity not supported by Box"
-msgstr "Sicurezza IP non supportata dal Box"
+msgstr "Sicurezza IP non supportata dal ricevitore"
 
 msgid "Idle"
 msgstr "Idle"
 
 msgid "Illumination only"
-msgstr "solo Illuminazione"
+msgstr "solo illuminazione"
 
 msgid "Illumination+Moonphase"
 msgstr "Illuminazione+Fase lunare"
@@ -1179,7 +1181,7 @@ msgid "Informations 2"
 msgstr "Informazioni 2"
 
 msgid "Infos"
-msgstr "Infos"
+msgstr "Informazioni"
 
 msgid "Internal Box-Skin-LCD"
 msgstr "Box-Skin-LCD interno"
@@ -1188,7 +1190,7 @@ msgid "Internal TFT-LCD 400x240"
 msgstr "TFT-LCD 400x240 interno"
 
 msgid "Internal Vu+ Duo2 LCD 400x240"
-msgstr "Vu+ Duo2 LCD 400x240 interno"
+msgstr "Vu+Duo2 LCD 400x240 interno"
 
 msgid "JPG"
 msgstr "JPG"
@@ -1197,28 +1199,28 @@ msgid "Javascript"
 msgstr "Javascript"
 
 msgid "Javascript no Refresh"
-msgstr "Javascript aggiornare"
+msgstr "Javascript nessun aggiornamento"
 
 msgid "Key"
 msgstr "Tasto"
 
 msgid "Key for Screen Change"
-msgstr "Tasto per ciclare display"
+msgstr "Tasto per cambiare schermo"
 
 msgid "Key for Screen On/Off"
-msgstr "Tasto per display ON/OFF"
+msgstr "Tasto per schermo On/Off"
 
 msgid "Knob"
 msgstr "Percepita"
 
 msgid "Knob+Value"
-msgstr "Percepita + Valore"
+msgstr "Percepita+Valore"
 
 msgid "LCD 1"
 msgstr "LCD 1"
 
 msgid "LCD 1 Type"
-msgstr "LCD 1 Tipo"
+msgstr "LCD 1 tipo"
 
 msgid "LCD 1+2"
 msgstr "LCD 1+2"
@@ -1236,7 +1238,7 @@ msgid "LCD 2"
 msgstr "LCD 2"
 
 msgid "LCD 2 Type"
-msgstr "LCD 2 Tipo"
+msgstr "LCD 2 tipo"
 
 msgid "LCD 2+3"
 msgstr "LCD 2+3"
@@ -1245,7 +1247,7 @@ msgid "LCD 3"
 msgstr "LCD 3"
 
 msgid "LCD 3 Type"
-msgstr "LCD 3 Tipo"
+msgstr "LCD 3 tipo"
 
 msgid "LCD Custom Height"
 msgstr "LCD altezza personalizzata"
@@ -1260,10 +1262,10 @@ msgid "LCD Custom Width 2"
 msgstr "LCD larghezza personalizzata 2"
 
 msgid "LCD Display"
-msgstr "LCD Display"
+msgstr "Display LCD"
 
 msgid "LCD Off when shutdown"
-msgstr "LCD spento allo spegnimento"
+msgstr "LCD off quando spegni"
 
 msgid "LCD4Linux"
 msgstr "LCD4Linux"
@@ -1272,22 +1274,22 @@ msgid "LCD4linux"
 msgstr "LCD4linux"
 
 msgid "LCD4linux Display-Mode Idle"
-msgstr "LCD4 Linux modalità visualizzazione IDLE"
+msgstr "LCD4linux in modalità di visualizzazione Idle"
 
 msgid "LCD4linux Display-Mode MediaPlayer"
-msgstr "LCD4 Linux modalità visualizzazione MediaPlayer"
+msgstr "LCD4linux lettore multimediale in modalità display"
 
 msgid "LCD4linux Display-Mode On"
-msgstr "LCD4 Linux-modalità visualizzazione ON"
+msgstr "LCD4linux modalità display On"
 
 msgid "LCD4linux Screen Switch"
-msgstr "LCD4 Linux  switch display"
+msgstr "LCD4linux interruttore schermo"
 
 msgid "LCD4linux Settings"
-msgstr "LCD4 Linux impostazioni"
+msgstr "LCD4linux impostazioni"
 
 msgid "LCD4linux enabled"
-msgstr "LCD4 Linux abilitato"
+msgstr "LCD4linux abilitato"
 
 msgid "Last Quarter"
 msgstr "Ultimo quarto"
@@ -1299,20 +1301,20 @@ msgid "List of Storage Devices"
 msgstr "Elenco dei dispositivi di archiviazione"
 
 msgid "Load Active Config-File"
-msgstr "Caricare file di configurazione attivo"
+msgstr "Carica file di configurazione attivo"
 
 msgid "Load Defaults / Empty Config"
-msgstr "Caricare impostazioni di Default / Configurazione vuota"
+msgstr "Carica predefiniti/Configurazione vuota"
 
 #, python-format
 msgid "Load File : %s"
-msgstr "Caricare il file: %s"
+msgstr "Carica il file: %s"
 
 msgid "Load@1min"
-msgstr "Caricare @1min"
+msgstr "Carica@1min"
 
 msgid "Load@5min"
-msgstr "Caricare @5min"
+msgstr "Carica@5min"
 
 msgid "Logfile extensive"
 msgstr "File di registro esteso"
@@ -1342,43 +1344,43 @@ msgid "MJPEG Header Mode"
 msgstr "MJPEG modalità intestazione"
 
 msgid "MJPEG Restart on Error"
-msgstr "MJPEG Riavvia in caso di errore"
+msgstr "MJPEG riavvia in caso di errore"
 
 msgid "MJPEG Stream"
 msgstr "MJPEG Stream"
 
 msgid "MJPEG Stream LCD 1 Port"
-msgstr "MJPEG Stream LCD 1 Porta"
+msgstr "MJPEG Stream LCD 1 porta"
 
 msgid "MJPEG Stream LCD 1 Virtual Brightness"
-msgstr "MJPEG Stream LCD 1 Luminosità Virtuale"
+msgstr "MJPEG Stream LCD 1 luminosità virtuale"
 
 msgid "MJPEG Stream LCD 1 enable"
-msgstr "MJPEG Stream LCD 1 Abilitato"
+msgstr "MJPEG Stream LCD 1 abilita"
 
 msgid "MJPEG Stream LCD 2 Port"
-msgstr "MJPEG Stream LCD 2 Porta"
+msgstr "MJPEG Stream LCD 2 porta"
 
 msgid "MJPEG Stream LCD 2 Virtual Brightness"
-msgstr "MJPEG Stream LCD 2 Luminosità Virtuale"
+msgstr "MJPEG Stream LCD 2 luminosità virtuale"
 
 msgid "MJPEG Stream LCD 2 enable"
-msgstr "MJPEG Stream LCD 2 Abilitato"
+msgstr "MJPEG Stream LCD 2 abilita"
 
 msgid "MJPEG Stream LCD 3 Port"
-msgstr "MJPEG Stream LCD 3 Porta"
+msgstr "MJPEG Stream LCD 3 porta"
 
 msgid "MJPEG Stream LCD 3 Virtual Brightness"
-msgstr "MJPEG Stream LCD 3 Luminosità Virtuale"
+msgstr "MJPEG Stream LCD 3 luminosità virtuale"
 
 msgid "MJPEG Stream LCD 3 enable"
-msgstr "MJPEG Stream LCD 3 Abilitato"
+msgstr "MJPEG Stream LCD 3 abilitato"
 
 msgid "MSN"
 msgstr "MSN"
 
 msgid "MUTE or defined Keys"
-msgstr "MUTO o Chiavi definite"
+msgstr "MUTE o tasti definiti"
 
 msgid "Mail"
 msgstr "Mail"
@@ -1450,7 +1452,7 @@ msgid "Mail IMAP limit to last days"
 msgstr "Mail IMAP limite per ultimi giorni"
 
 msgid "Mail Poll Interval"
-msgstr "Posta intervallo di polling"
+msgstr "Mail intervallo sondaggio"
 
 msgid "Mail Show Date"
 msgstr "Mail mostra data"
@@ -1477,7 +1479,7 @@ msgid "Mini-EPG"
 msgstr "Mini - EPG"
 
 msgid "Mode"
-msgstr "Modo"
+msgstr "Modalità"
 
 msgid "Module 1"
 msgstr "Modulo 1"
@@ -1555,34 +1557,34 @@ msgid "Month"
 msgstr "Mese"
 
 msgid "Month+Header"
-msgstr "Mese  + Intestazione"
+msgstr "Mese+Intestazione"
 
 msgid "Moon-Icon-Path [ok]>"
-msgstr "Luna -Path- Icona [OK] >"
+msgstr "Luna-Percorso-Icona [OK] >"
 
 msgid "Moonphase"
 msgstr "Fase lunare"
 
 msgid "Moonphase only"
-msgstr "solo Fasi lunari"
+msgstr "Solo Fasi lunari"
 
 msgid "MusicCast"
 msgstr "MusicCast"
 
 msgid "MusicCast Cover"
-msgstr "MusicCast Coperchio"
+msgstr "MusicCast cover"
 
 msgid "MusicCast IP"
 msgstr "MusicCast IP"
 
 msgid "MusicCast Ping Timeout [ms]"
-msgstr "Sonos Ping Timeout [ms]"
+msgstr "MusicCast ping timeout [ms]"
 
 msgid "MusicCast Play Check"
-msgstr "Sonos test riproduzione"
+msgstr "MusicCast test riproduzione"
 
 msgid "MusicCast Refresh [s]"
-msgstr "Sonos aggiornare [s]"
+msgstr "MusicCast aggiornamento [s]"
 
 msgid "MusicCast Server IP [optional]"
 msgstr "MusicCast IP del Server [opzionale]"
@@ -1594,22 +1596,22 @@ msgid "N"
 msgstr "N"
 
 msgid "NE"
-msgstr "NO"
+msgstr "NE"
 
 msgid "NNE"
-msgstr "NNO"
+msgstr "NNE"
 
 msgid "NNW"
-msgstr "NNW"
+msgstr "NNO"
 
 msgid "NW"
-msgstr "NW"
+msgstr "NO"
 
 msgid "Name"
 msgstr "Nome"
 
 msgid "Netatmo"
-msgstr "Stazione meteo"
+msgstr "Netatmo"
 
 msgid "Netatmo 2"
 msgstr "Stazione meteo 2"
@@ -1624,7 +1626,7 @@ msgid "Netatmo CO2 Min Range"
 msgstr "Stazione meteo CO2 campo min"
 
 msgid "Netatmo Comfort Indicator"
-msgstr "Stazione meteo indicatore confort"
+msgstr "Stazione meteo indicatore comfort"
 
 msgid "Network Check active"
 msgstr "Test della rete attivato"
@@ -1639,7 +1641,7 @@ msgid "Next Timer Event"
 msgstr "Prossimo evento timer"
 
 msgid "No or wrong File selected, try a correct File first !"
-msgstr "No o selezionato file sbagliato, provare un file corretto !"
+msgstr "Nessun file selezionato o sbagliato, prova prima un file corretto!"
 
 msgid "Normal"
 msgstr "Normale"
@@ -1648,7 +1650,7 @@ msgid "Normal (5s)"
 msgstr "Normale (5s)"
 
 msgid "Now/Next"
-msgstr "Ora / Successivo"
+msgstr "Ora/Successivo"
 
 msgid "OSCAM not running"
 msgstr "OSCAM non in esecuzione"
@@ -1663,7 +1665,7 @@ msgid "Offline"
 msgstr "Offline"
 
 msgid "On"
-msgstr "ON"
+msgstr "On"
 
 msgid "On+Media+Standby"
 msgstr "On+Media+Standby"
@@ -1675,7 +1677,7 @@ msgid "Online [Ping]"
 msgstr "Online [Ping]"
 
 msgid "Online+Offline"
-msgstr "Online + Offline"
+msgstr "Online+Offline"
 
 msgid "Only New"
 msgstr "Solo nuovo"
@@ -1705,49 +1707,49 @@ msgid "Picon 2"
 msgstr "Picon 2"
 
 msgid "Picon+Channel"
-msgstr "Picon + Canale"
+msgstr "Picon+Canale"
 
 msgid "Picon+Channel+Title"
-msgstr "Picon  + Canale  + Titolo"
+msgstr "Picon+Canale+Titolo"
 
 msgid "Picon+Position below"
-msgstr "Picon + posizione al di sotto"
+msgstr "Picon+Posizione sotto"
 
 msgid "Picon+Position left"
-msgstr "Picon + posizione sinistra"
+msgstr "Picon+Posizione sinistra"
 
 msgid "Picon+Position right"
-msgstr "Picon + posizione destra"
+msgstr "Picon+Posizione destra"
 
 msgid "Picon+Timeshift"
-msgstr "Picon +Timeshift"
+msgstr "Picon+Timeshift"
 
 msgid "Picture"
 msgstr "Immagine"
 
 msgid "Picture Changing Time"
-msgstr "Tempo ciclo immagini"
+msgstr "Tempo cambio immagini"
 
 msgid "Picture Directory Recursive"
-msgstr "Directory immagine ricorsiva"
+msgstr "Directory immagini ricorsiva"
 
 msgid "Picture Quality for Resizing"
-msgstr "Qualità ridimensionamento"
+msgstr "Qualità immagine per il ridimensionamento"
 
 msgid "Picture Quick Update Time [s]"
 msgstr "Aggiornamento immagine Quick Time [s]"
 
 msgid "Picture Sort"
-msgstr "Ordinare immagini"
+msgstr "Ordina immagini"
 
 msgid "Picture Type [only Picture]"
-msgstr "Formato immagine [solo immagine]"
+msgstr "Tipo di immagine [solo immagine]"
 
 msgid "Picture not available"
 msgstr "Immagine non disponibile"
 
 msgid "Plug Tuner"
-msgstr "Plug Tuner"
+msgstr "Spina sintonizzatore"
 
 msgid "Pop3"
 msgstr "Pop3"
@@ -1759,13 +1761,13 @@ msgid "Popup Text"
 msgstr "Testo popup"
 
 msgid "Popup-Text"
-msgstr "Testo - popup"
+msgstr "Testo-popup"
 
 msgid "Position"
 msgstr "Posizione"
 
 msgid "Program Info"
-msgstr "Informazioni del programma"
+msgstr "Informazioni programma"
 
 msgid "Program Info 2"
 msgstr "Informazioni programma 2"
@@ -1786,7 +1788,7 @@ msgid "Radio"
 msgstr "Radio"
 
 msgid "Radio+Media"
-msgstr "Radio + Media"
+msgstr "Radio+Media"
 
 msgid "Rain"
 msgstr "Pioggia"
@@ -1807,37 +1809,37 @@ msgid "Reload"
 msgstr "Ricarica"
 
 msgid "Remote Box"
-msgstr "Box remoto"
+msgstr "Ricevitore remoto"
 
 msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr "Box remoto 1 [Displayname:] IP / Nome"
+msgstr "Ricevitore remoto 1 [Displayname:] IP/Nome"
 
 msgid "Remote Box 2 [Displayname:]IP/Name"
-msgstr "Box remoto 2 [Displayname:] IP / Nome"
+msgstr "Ricevitore remoto 2 [Displayname:] IP/Nome"
 
 msgid "Remote Box 3 [Displayname:]IP/Name"
-msgstr "Box remoto 3 [Displayname:] IP / Nome"
+msgstr "Ricevitore remoto 3 [Displayname:] IP/Nome"
 
 msgid "Remote Box 4 [Displayname:]IP/Name"
-msgstr "Box remoto 4 [Displayname:] IP / Nome"
+msgstr "Ricevitore remoto 4 [Displayname:] IP/Nome"
 
 msgid "Remote Box 5 [Displayname:]IP/Name"
-msgstr "Box remoto 5 [Displayname:] IP / Nome"
+msgstr "Ricevitore remoto 5 [Displayname:] IP/Nome"
 
 msgid "Remote Box Poll every Minutes"
-msgstr "Polling Box remoto ogni minuti"
+msgstr "Sondaggio ricevitore remoto ogni minuti"
 
 msgid "Remote Box Timer"
-msgstr "Timer Box remoto"
+msgstr "Timer ricevitore remoto"
 
 msgid "Remote Box Timer Poll every Minutes"
-msgstr "Timer polling Box remoto ogni minuti"
+msgstr "Timer sondaggio ricevitore remoto ogni minuti"
 
 msgid "Remote Box Timer [Displayname:]IP/Name"
-msgstr "Timer Box remoto [Displayname:] IP / Nome"
+msgstr "Timer ricevitore remoto [Displayname:] IP/Nome"
 
 msgid "Restart Displays"
-msgstr "Riavviare LCD"
+msgstr "Riavvia LCD"
 
 msgid "Restart GUI now?"
 msgstr "Riavviare la GUI?"
@@ -1852,13 +1854,13 @@ msgid "SE"
 msgstr "SE"
 
 msgid "SSE"
-msgstr "SSO"
+msgstr "SSE"
 
 msgid "SSW"
-msgstr "SSW"
+msgstr "SSO"
 
 msgid "SW"
-msgstr "SW"
+msgstr "SO"
 
 msgid "Samsung SPF-1000P 1024x600"
 msgstr "Samsung SPF-1000P 1024x600"
@@ -1870,7 +1872,7 @@ msgid "Samsung SPF-107H 1024x600"
 msgstr "Samsung SPF-107H 1024x600"
 
 msgid "Samsung SPF-107H old 1024x600"
-msgstr "Samsung SPF-107H alt 1024x600"
+msgstr "Samsung SPF-107H vecchio 1024x600"
 
 msgid "Samsung SPF-700T 800x600"
 msgstr "Samsung SPF-700T 800x600"
@@ -1909,14 +1911,14 @@ msgid "Save"
 msgstr "Salva"
 
 msgid "Save Config"
-msgstr "Salva Config"
+msgstr "Salva configurazione"
 
 #, python-format
 msgid "Save Config to File... (%s)"
-msgstr "Salva Config in File ... (%s)"
+msgstr "Salva configurazione nel file... (%s)"
 
 msgid "Save as Picture for WebIF"
-msgstr "Salva come immagine per WebIf"
+msgstr "Salva come immagine per WebIF"
 
 msgid "Screen"
 msgstr "Display"
@@ -1925,7 +1927,7 @@ msgid "Screen 1"
 msgstr "Display 1"
 
 msgid "Screen 1 Changing Time"
-msgstr "Display 1 tempo di ciclo"
+msgstr "Display 1 cambio tempo"
 
 msgid "Screen 1+2"
 msgstr "Display 1+2"
@@ -2027,7 +2029,7 @@ msgid "Screen Switch Select - Screen"
 msgstr "Display selettore - Display"
 
 msgid "Screens used for Changing"
-msgstr "Display utilizzati per ciclare"
+msgstr "Display utilizzati per cambiare"
 
 msgid "Service search first"
 msgstr "Ricerca prima servizio"
@@ -2036,13 +2038,13 @@ msgid "Set Global >>"
 msgstr "Imposta globale >>"
 
 msgid "Set Idle >>"
-msgstr "Imposta IDLE>>"
+msgstr "Imposta Idle >>"
 
 msgid "Set Media >>"
-msgstr "Imposta MEDIA >>"
+msgstr "Imposta Media >>"
 
 msgid "Set On >>"
-msgstr "Imposta ON >>"
+msgstr "Imposta On >>"
 
 msgid "Shadow Edges"
 msgstr "Bordi ombrati"
@@ -2054,61 +2056,61 @@ msgid "Short (Extended)"
 msgstr "Breve (esteso)"
 
 msgid "Short+Extended"
-msgstr "Breve  + esteso"
+msgstr "Breve+Esteso"
 
 msgid "Show"
 msgstr "Mostra"
 
 msgid "Show 'no ....' Messages"
-msgstr "Mostra 'nessuna ....' notifica"
+msgstr "Mostra 'nessun ....' messaggio"
 
 msgid "Show Cover"
-msgstr "Mostra copertina"
+msgstr "Mostra cover"
 
 msgid "Show Crash Corner"
 msgstr "Mostra angolo crash"
 
 msgid "Show Externals"
-msgstr "Visualizza esterni"
+msgstr "Mostra esterni"
 
 msgid "Show HTTP Text"
-msgstr "Visualizza testo HTTP"
+msgstr "Mostra testo HTTP"
 
 msgid "Show Picture"
-msgstr "Visualizza percentuale"
+msgstr "Mostra immagine"
 
 msgid "Show Picture 2"
-msgstr "Visualizza percentuale 2"
+msgstr "Mostra immagine 2"
 
 msgid "Show Picture 3"
-msgstr "Visualizza percentuale 3"
+msgstr "Mostra immagine 3"
 
 msgid "Show Picture 4"
-msgstr "Visualizza percentuale 4"
+msgstr "Mostra immagine 4"
 
 msgid "Show Text 1"
-msgstr "Visualizza testo 1"
+msgstr "Mostra testo 1"
 
 msgid "Show Text 2"
-msgstr "Visualizza testo 2"
+msgstr "Mostra testo 2"
 
 msgid "Show Textfile"
-msgstr "Visualizza file di testo"
+msgstr "Mostra file di testo"
 
 msgid "Show Textfile 2"
-msgstr "Visualizza file di testo 2"
+msgstr "Mostra file di testo 2"
 
 msgid "Show Textfile 3"
-msgstr "Visualizza file di testo 3"
+msgstr "Mostra file di testo 3"
 
 msgid "Show ecm.info"
-msgstr "Visualizza ecm.info"
+msgstr "Mostra ecm.info"
 
 msgid "Show oscam.lcd"
-msgstr "Visualizza oscam.lcd"
+msgstr "Mostra oscam.lcd"
 
 msgid "Signal Quality Bar"
-msgstr "Barra di qualità segnale"
+msgstr "Barra qualità segnale"
 
 msgid "Sonos"
 msgstr "Sonos"
@@ -2123,7 +2125,7 @@ msgid "Sonos Play Check"
 msgstr "Sonos test riproduzione"
 
 msgid "Sonos Refresh [s]"
-msgstr "Sonos aggiornare [s]"
+msgstr "Sonos aggiornamento [s]"
 
 msgid "Standby"
 msgstr "Standby"
@@ -2132,13 +2134,13 @@ msgid "Storage-Devices"
 msgstr "Dispositivi di archiviazione"
 
 msgid "Storage-Devices: Color Back"
-msgstr "Dispositivi di archiviazione: Colore Sfondo"
+msgstr "Dispositivi di archiviazione: Colore sfondo"
 
 msgid "Storage-Devices: Color Bar"
-msgstr "Dispositivi di archiviazione: Colore Sbarra"
+msgstr "Dispositivi di archiviazione: Colore barra"
 
 msgid "Storage-Devices: Color Full"
-msgstr "Dispositivi di archiviazione: Colore Pieno"
+msgstr "Dispositivi di archiviazione: Colore pieno"
 
 msgid "Storage-Devices: Force Read"
 msgstr "Dispositivi di archiviazione: Forza lettura"
@@ -2153,7 +2155,7 @@ msgid "Sunrise"
 msgstr "Alba"
 
 msgid "Switch FrameBuffer [if possible]"
-msgstr "Passare  FrameBuffer [se possibile]"
+msgstr "Cambia FrameBuffer [se possibile]"
 
 msgid "TV"
 msgstr "TV"
@@ -2174,13 +2176,13 @@ msgid "Temperature"
 msgstr "Temperatura"
 
 msgid "Temperature+Co2"
-msgstr "Temperatura + Co2"
+msgstr "Temperatura+Co2"
 
 msgid "Temperature+Co2+Pressure"
-msgstr "Temperatura + Co2 + Pressione"
+msgstr "Temperatura+Co2+Pressione"
 
 msgid "Temperature+Humidity"
-msgstr "Temperatura + Umidità"
+msgstr "Temperatura+Umidità"
 
 msgid "Threads per LCD"
 msgstr "Righe per LCD"
@@ -2192,16 +2194,16 @@ msgid "Time"
 msgstr "Ora"
 
 msgid "Time+Duration+Info"
-msgstr "Orario + Durata + Info"
+msgstr "Orario+Durata+Info"
 
 msgid "Time+Info"
-msgstr "Orario + Info"
+msgstr "Orario+Info"
 
 msgid "Time+Length+Info"
-msgstr "Orario + Durata + Info"
+msgstr "Orario+Durata+Info"
 
 msgid "Time+Weekday"
-msgstr "Orario + Giorni feriali"
+msgstr "Orario+Giorni feriali"
 
 msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
 msgstr "Timing ! Calcola tutti in Time/5*2 in Fastmode"
@@ -2213,19 +2215,19 @@ msgid "Tue"
 msgstr "Mar"
 
 msgid "Tuner"
-msgstr "Tuner"
+msgstr "Sintonizzatore"
 
 msgid "Tuner Color"
-msgstr "Tuner colore"
+msgstr "Colore sintonizzatore"
 
 msgid "Tuner Color Active"
-msgstr "Tuner colore attivo"
+msgstr "Colore attivo sintonizzatore"
 
 msgid "Tuner Color On"
-msgstr "Tuner colore ON"
+msgstr "Colore sintonizzatore On"
 
 msgid "USB Tuner"
-msgstr "USB Tuner"
+msgstr "Sintonizzatore USB"
 
 msgid "Underline"
 msgstr "Sottolineato"
@@ -2234,19 +2236,19 @@ msgid "Underline 2"
 msgstr "Sottolineato 2"
 
 msgid "Used Tuner"
-msgstr "Tuner usato"
+msgstr "Sintonizzatore usato"
 
 msgid "Volume"
 msgstr "Volume"
 
 msgid "W"
-msgstr "W"
+msgstr "O"
 
 msgid "WNW"
-msgstr "WNW"
+msgstr "ONO"
 
 msgid "WSW"
-msgstr "WSW"
+msgstr "OSO"
 
 msgid "WWW ApiKey from cloudconvert.org"
 msgstr "WWW ApiKey da cloudconvert.org"
@@ -2255,16 +2257,16 @@ msgid "WWW ApiKey from convertapi.com"
 msgstr "WWW ApiKey da convertapi.com"
 
 msgid "WWW Converter"
-msgstr "Convertitore  WWW"
+msgstr "Convertitore WWW"
 
 msgid "WWW Converter Poll Interval"
-msgstr "Intervallo di polling convertitore WWW"
+msgstr "Intervallo sondaggio convertitore WWW"
 
 msgid "WWW Converter Usage"
-msgstr "Utilizzo convertitore di WWW"
+msgstr "Utilizzo convertitore WWW"
 
 msgid "WWW-Internet Converter"
-msgstr "Convertitore  WWW-Internet"
+msgstr "Convertitore WWW-Internet"
 
 msgid "Waning Crescent"
 msgstr "Pericolo crescente"
@@ -2288,7 +2290,7 @@ msgid "Weather API"
 msgstr "Meteo API"
 
 msgid "Weather API-ID Key WeatherUnlocked"
-msgstr "Weather API-ID Key WeatherUnlocked"
+msgstr "Meteo API-ID Key WeatherUnlocked"
 
 msgid "Weather API-Key OpenWeatherMap"
 msgstr "Meteo API-Key OpenWeatherMap"
@@ -2300,34 +2302,34 @@ msgid "Weather City 2"
 msgstr "Meteo città 2"
 
 msgid "Weather Extra Infos"
-msgstr "Meteo - info supplementare"
+msgstr "Meteo informazioni extra"
 
 msgid "Weather High Temperature Color"
-msgstr "Meteo - alta temperatura colore"
+msgstr "Meteo alta temperatura colore"
 
 msgid "Weather Lines"
 msgstr "Meteo linee"
 
 msgid "Weather Low Temperature Color"
-msgstr "Meteo - bassa temperatura colore"
+msgstr "Meteo bassa temperatura colore"
 
 msgid "Weather Rain Chance"
 msgstr "Possibilità di pioggia"
 
 msgid "Weather Transparency"
-msgstr "Meteo - trasparenza"
+msgstr "Meteo trasparenza"
 
 msgid "Weather Wind Info Lines"
-msgstr "Meteo Vento Linee Informative"
+msgstr "Meteo linee informative sul vento"
 
 msgid "Weather Wind speed unit"
-msgstr "Unità di velocità vento"
+msgstr "Meteo unità di velocità vento"
 
 msgid "Weather-Icon Zoom"
 msgstr "Meteo - Zoom icona"
 
 msgid "Weather-Icon-Path [ok]>"
-msgstr "Meteo - Path icona [OK] >"
+msgstr "Meteo - Percorso icona [OK] >"
 
 msgid "WeatherUnlocked"
 msgstr "WeatherUnlocked"
@@ -2348,10 +2350,10 @@ msgid "WebIF Init Delay"
 msgstr "WebIF ritardo inizio"
 
 msgid "WebIF Refresh Type"
-msgstr "WebIF aggiornamento tipo"
+msgstr "WebIF tipo aggiornamento"
 
 msgid "WebIF Refresh [s]"
-msgstr "WebIF aggiornare [s]"
+msgstr "WebIF aggiornamento [s]"
 
 msgid "Wed"
 msgstr "Mer"
@@ -2360,7 +2362,7 @@ msgid "Week"
 msgstr "Settimana"
 
 msgid "Week+Header"
-msgstr "Settimana + intestazione"
+msgstr "Settimana+Intestazione"
 
 msgid "Weekday"
 msgstr "Feriale"
@@ -2375,19 +2377,19 @@ msgid "alphabetic"
 msgstr "alfabetico"
 
 msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr "copia modalità alternativa /DM800hd (24 bit)"
+msgstr "copia modalità alternativa/DM800hd (24 bit)"
 
 msgid "always"
 msgstr "sempre"
 
 msgid "any Key"
-msgstr "qualsiasi chiave"
+msgstr "qualsiasi tasto"
 
 msgid "aquamarine"
-msgstr "acquamarina"
+msgstr "acqua marina"
 
 msgid "better/slow"
-msgstr "migliore / lento"
+msgstr "migliore/lento"
 
 msgid "black"
 msgstr "nero"
@@ -2396,16 +2398,16 @@ msgid "blue"
 msgstr "blu"
 
 msgid "blueviolet"
-msgstr "viola blu"
+msgstr "blu viola"
 
 msgid "brown"
 msgstr "marrone"
 
 msgid "cache + adjustment (high quality, slow)"
-msgstr "regol. + cache (alta qualità, lento)"
+msgstr "cache + regolazione (alta qualità, lento)"
 
 msgid "cache + adjustment (low quality, fast)"
-msgstr "regol. + Cache (bassa qualità, veloce)"
+msgstr "cache + regolazione (bassa qualità, veloce)"
 
 msgid "cadetblue"
 msgstr "blu cadetto"
@@ -2420,13 +2422,13 @@ msgid "convertapi.com"
 msgstr "convertapi.com"
 
 msgid "copy to Idle"
-msgstr "copiare in IDLE"
+msgstr "copia in Idle"
 
 msgid "copy to Media"
-msgstr "copiare in MEDIA"
+msgstr "copia in Media"
 
 msgid "copy to On"
-msgstr "copiare in ON"
+msgstr "copia in On"
 
 msgid "cornflowerblue"
 msgstr "blu fiordaliso"
@@ -2487,7 +2489,7 @@ msgid "green"
 msgstr "verde"
 
 msgid "greenyellow"
-msgstr "giallo verde"
+msgstr "verde giallo"
 
 msgid "half left"
 msgstr "metà sinistra"
@@ -2499,10 +2501,10 @@ msgid "horizontally"
 msgstr "orizzontale"
 
 msgid "indianred"
-msgstr "indianRed"
+msgstr "rosso indiano"
 
 msgid "indigo"
-msgstr "indigo"
+msgstr "indaco"
 
 msgid "km/h"
 msgstr "km/h"
@@ -2523,10 +2525,10 @@ msgid "lime"
 msgstr "limetta"
 
 msgid "low/fast (Picture only)"
-msgstr "basso / veloce (solo immagine)"
+msgstr "basso/veloce (solo immagine)"
 
 msgid "low/fast (all)"
-msgstr "basso / veloce (tutti)"
+msgstr "basso/veloce (tutti)"
 
 msgid "m/s"
 msgstr "m/s"
@@ -2589,7 +2591,7 @@ msgid "normal (full)"
 msgstr "normale (completo)"
 
 msgid "off"
-msgstr "spento"
+msgstr "off"
 
 msgid "olive"
 msgstr "oliva"
@@ -2628,7 +2630,7 @@ msgid "orange"
 msgstr "arancione"
 
 msgid "orangered"
-msgstr "vermiglione"
+msgstr "rosso arancio"
 
 msgid "other"
 msgstr "altro"
@@ -2667,7 +2669,7 @@ msgid "show run"
 msgstr "visualizza esecuzione"
 
 msgid "show run+sleep"
-msgstr "visualizza esecuzione + standby"
+msgstr "visualizza esecuzione+standby"
 
 msgid "show total Timer"
 msgstr "visualizza timer totale"
@@ -2712,7 +2714,7 @@ msgid "with Current 00:00"
 msgstr "con corrente 00:00"
 
 msgid "with Current 00:00 (Size 1.5)"
-msgstr "con corrente 00:00 (sotto/dimensione 1.5)"
+msgstr "con corrente 00:00 (dimensione 1.5)"
 
 msgid "with Current 00:00 (Size 2)"
 msgstr "con corrente 00:00 (dimensione 2)"
@@ -2739,7 +2741,7 @@ msgid "with Icon"
 msgstr "con icona"
 
 msgid "with Icon & Targetnumber"
-msgstr "con icona & numero di destinazione"
+msgstr "con icona e numero di destinazione"
 
 msgid "with Minutes Total / Endtime (above)"
 msgstr "con minuti totale / orario fine (sopra)"
@@ -2754,7 +2756,7 @@ msgid "with Percent"
 msgstr "con percentuale"
 
 msgid "with Percent (Size 1.5)"
-msgstr "con percentuale dimensione 1,5)"
+msgstr "con percentuale (dimensione 1,5)"
 
 msgid "with Percent (Size 2)"
 msgstr "con percentuale (dimensione 2)"
@@ -2775,7 +2777,7 @@ msgid "with Percent (below/Size 1.5)"
 msgstr "con percentuale (sotto/dimensione 1.5)"
 
 msgid "with Percent (below/Size 2)"
-msgstr "con percentuale (sotto/dimensione  2)"
+msgstr "con percentuale (sotto/dimensione 2)"
 
 msgid "with Percent Minutes / Total (above)"
 msgstr "con percentuale minuti / totale (sopra)"
@@ -2832,7 +2834,7 @@ msgid "yes (32bit)"
 msgstr "sì (32 bit)"
 
 msgid "yes + %"
-msgstr "si + %"
+msgstr "sì + %"
 
 msgid "yes +25%"
 msgstr "sì + 25%"
