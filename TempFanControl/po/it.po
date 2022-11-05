@@ -1,24 +1,25 @@
 # Italian translations for Enigma2.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:06+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"PO-Revision-Date: 2022-11-04 19:39+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Lokalize 22.08.2\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
 #
 msgid "Cancel"
-msgstr "Annull."
+msgstr "Annulla"
 
 #, python-format
 msgid "Fan %d PWM"
@@ -26,25 +27,25 @@ msgstr "PWM ventola %d"
 
 #, python-format
 msgid "Fan %d voltage"
-msgstr ""
+msgstr "Tensione ventola %d"
 
 msgid "Fan Control"
-msgstr ""
+msgstr "Controllo ventola"
 
 #
 msgid "OK"
-msgstr "Ok"
+msgstr "OK"
 
 #, python-format
 msgid "Standby fan %d PWM"
-msgstr ""
+msgstr "PWM ventola in standby %d"
 
 #, python-format
 msgid "Standby fan %d voltage"
-msgstr ""
+msgstr "Tensione ventola in standby %d"
 
 msgid "Temperature and Fan control"
-msgstr ""
+msgstr "Controllo temperatura e ventola"
 
 msgid "Temperature and fan control"
-msgstr ""
+msgstr "Controllo temperatura e ventola"

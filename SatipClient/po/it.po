@@ -2,111 +2,113 @@
 # Traduzioni italiane per il pacchetto PACKAGE..
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#  <massimo@portatile.localdomain>, 2022.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:55+0100\n"
-"PO-Revision-Date: 2022-11-03 14:34+0100\n"
-"Last-Translator:  <massimo@portatile.localdomain>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2022-11-04 19:16+0100\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid " "
-msgstr ""
+msgstr " "
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 msgid "DVB-S"
-msgstr ""
+msgstr "DVB-S"
 
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 msgid "Disable"
-msgstr ""
+msgstr "Disattiva"
 
 msgid "Discover"
-msgstr ""
+msgstr "Scopri"
 
 #, python-format
 msgid "IP : %s"
-msgstr ""
+msgstr "IP: %s"
 
 msgid "Manufacturer"
-msgstr ""
+msgstr "Produttore"
 
 msgid "No vtuner found."
-msgstr ""
+msgstr "Nessun vtuner trovato."
 
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 msgid "Really close without saving settings?"
-msgstr ""
+msgstr "Chiudere davvero senza salvare le impostazioni?"
 
 msgid "SAT>IP Client"
-msgstr ""
+msgstr "SAT>IP Client"
 
 msgid "SAT>IP Client Setup"
-msgstr ""
+msgstr "SAT>IP Configurazione client"
 
 msgid "SAT>IP Client Tuner Setup"
-msgstr ""
+msgstr "SAT>IP Configurazione sintonizzatore client"
 
 msgid "SAT>IP Client attached to vtuner."
-msgstr ""
+msgstr "SAT>IP Client collegato a vtuner"
 
 #, python-format
 msgid "SAT>IP SERVER : %s"
-msgstr ""
+msgstr "SAT>IP Server: %s"
 
 msgid "SAT>IP Server : "
-msgstr ""
+msgstr "SAT>IP Server: "
 
 msgid "SAT>IP Tuner Type : "
-msgstr ""
+msgstr "SAT>IP Tipo di sintonizzatore: "
 
 #, python-format
 msgid "SAT>IP server discovering for %d seconds..."
-msgstr ""
+msgstr "SAT>IP Rilevamento server per %d secondi..."
 
 msgid "SAT>IP server is not detected."
-msgstr ""
+msgstr "SAT>IP Server non rilevato"
 
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 msgid "Select"
-msgstr ""
+msgstr "Seleziona"
 
 msgid "Select tuner and press setup key (Yellow)"
 msgstr ""
+"Seleziona il sintonizzatore e premi il tasto di configurazione (GIALLO)"
 
 msgid "Server capacity is fulled."
-msgstr ""
+msgstr "La capacità del server è esaurita."
 
 msgid "Setup"
-msgstr ""
+msgstr "Impostazioni"
 
 msgid "Starting..."
-msgstr ""
+msgstr "Avviando..."
 
 #, python-format
 msgid "TUNER TYPE : %s"
-msgstr ""
+msgstr "TIPO DI SINTONIZZATORE: %s"
 
 #, python-format
 msgid "TYPE : %s"
-msgstr ""
+msgstr "TIPO: %s"
 
 #, python-format
 msgid "VIRTUAL TUNER %s"
-msgstr ""
+msgstr "SINTONIZZATORE VIRTUALE %s"

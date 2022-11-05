@@ -2,44 +2,47 @@
 # Traduzioni italiane per il pacchetto PACKAGE..
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#  <massimo@portatile.localdomain>, 2022.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:55+0100\n"
-"PO-Revision-Date: 2022-11-03 14:35+0100\n"
-"Last-Translator:  <massimo@portatile.localdomain>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2022-11-04 19:29+0100\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid ""
 "Are you sure to save the current configuration and reboot your receiver?\n"
 "\n"
 msgstr ""
+"Sei sicuro di salvare la configurazione corrente e riavviare il"
+" ricevitore?\n\n"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Spark7162 select tuner mode"
-msgstr ""
+msgstr "Spark7162 seleziona modalità sintonizzatore"
 
 msgid "UnionTunerType"
-msgstr ""
+msgstr "UnionTunerType"
 
 msgid "UnionTunerType config"
-msgstr ""
+msgstr "UnionTunerType configurazione"
 
 msgid "cable"
-msgstr ""
+msgstr "cavo"
 
 msgid "terrestrial"
-msgstr ""
+msgstr "terrestre"

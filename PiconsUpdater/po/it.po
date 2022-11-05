@@ -2,97 +2,105 @@
 # Traduzioni italiane per il pacchetto PACKAGE..
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#  <massimo@portatile.localdomain>, 2022.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:55+0100\n"
-"PO-Revision-Date: 2022-11-03 14:32+0100\n"
-"Last-Translator:  <massimo@portatile.localdomain>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2022-11-04 18:42+0100\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
-msgid "Background Image not downloaded yet, please wait some seconds and try again."
+msgid ""
+"Background Image not downloaded yet, please wait some seconds and try again."
 msgstr ""
+"Immagine di sfondo non ancora scaricata, attendere alcuni secondi e riprovare."
 
 msgid "Choose Picons"
-msgstr ""
+msgstr "Scegli Picon"
 
 msgid "Choose folder"
-msgstr ""
+msgstr "Scegli cartella"
 
 msgid "Download Picons for your channellist (favourites)"
-msgstr ""
+msgstr "Scarica Picon per la tua lista canali (preferiti)"
 
 #, python-format
 msgid "Downloading %d of %d Picons"
-msgstr ""
+msgstr "Download di %d di %d Picon"
 
 msgid "Exclude IPTV"
-msgstr ""
+msgstr "Escludi IPTV"
 
 msgid "Exclude Radio"
-msgstr ""
+msgstr "Escludi Radio"
 
 #, python-format
 msgid "Merge %d of %d Picons"
-msgstr ""
+msgstr "Unisci %d di %d Picon"
 
 msgid "Merge Picons"
-msgstr ""
+msgstr "Unisci Picon"
 
 msgid "Mirror Effect"
-msgstr ""
+msgstr "Effetto specchio"
 
 #, python-format
 msgid "Optimize %d of %d Picons"
-msgstr ""
+msgstr "Ottimizza %d di %d Picon"
 
 msgid "Optimize Picons Progress"
-msgstr ""
+msgstr "Avanzamento ottimizzazione Picon"
 
 msgid ""
 "Optimize Picons file size?\n"
 "\n"
 "Be aware, this function is maybe very slow and reduces the quality!!"
 msgstr ""
+"Ottimizzare la dimensione dei Picon?\n\nAttenzione, questa funzione è forse"
+" molto lenta e riduce la qualità!!"
 
 msgid "Picon Style"
-msgstr ""
+msgstr "Stile Picon"
 
 msgid "Picons Folder"
-msgstr ""
+msgstr "Cartella Picon"
 
 msgid "Picons background/foreground image"
-msgstr ""
+msgstr "Picons immagine di sfondo/primo piano"
 
 msgid ""
 "Picons folder\n"
 "\n"
 "Press 'Ok' to open path selection view"
 msgstr ""
+"Cartella Picon\n\nPremi 'Ok' per aprire la vista di selezione del percorso"
 
 msgid "Picons size"
-msgstr ""
+msgstr "Dimensioni Picon"
 
 #, python-format
 msgid ""
 "Process Finished.\n"
 "%s Picons downloaded\n"
 "%s Picons not found"
-msgstr ""
+msgstr "Processo terminato.\n%s Picon scaricati\n%s Picon non trovati"
 
 msgid "Size"
-msgstr ""
+msgstr "Dimensioni"
 
 #, python-format
 msgid ""
 "The directory %s is not writable.\n"
 "Make sure you select a writable directory instead."
 msgstr ""
+"La cartella %s non è scrivibile.\nAssicurati di selezionare invece una"
+" directory scrivibile."

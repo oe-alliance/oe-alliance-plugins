@@ -2,70 +2,71 @@
 # Traduzioni italiane per il pacchetto PACKAGE..
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#  <massimo@portatile.localdomain>, 2022.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:55+0100\n"
-"PO-Revision-Date: 2022-11-03 14:36+0100\n"
-"Last-Translator:  <massimo@portatile.localdomain>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2022-11-05 07:45+0100\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid "Allow Streaming From Box Tuners"
-msgstr ""
+msgstr "Consenti streaming dal sintonizzatore del ricevitore"
 
 msgid "Build Complete!"
-msgstr ""
+msgstr "Costruzione completa!"
 
 msgid "Build Server"
-msgstr ""
+msgstr "Costruisci server"
 
 msgid "Close"
-msgstr ""
+msgstr "Chiudi"
 
 msgid "Current Status:"
-msgstr ""
+msgstr "Stato attuale:"
 
 msgid "Disable Server"
-msgstr ""
+msgstr "Disabilita server"
 
 msgid "Info"
-msgstr ""
+msgstr "Informazioni"
 
 msgid "Server Disabled"
-msgstr ""
+msgstr "Server disabilitato"
 
 msgid "Server Enabled"
-msgstr ""
+msgstr "Server abilitato"
 
 msgid "Server now disabled!"
-msgstr ""
+msgstr "Server ora disabilitato!"
 
 msgid "Sorry, but you need to have a device mounted at '/media/hd'"
-msgstr ""
+msgstr "Spiacenti, ma devi avere un dispositivo montato su '/media/hd'"
 
 msgid "Tuner Server"
-msgstr ""
+msgstr "Sintonizzatore server"
 
 msgid "Tuner Server Disabled."
-msgstr ""
+msgstr "Sintonizzatore server disabilitato"
 
 msgid "Tuner Server setup"
-msgstr ""
+msgstr "Impostazioni sintonizzatore server"
 
 msgid ""
 "Your server is now being deleted\n"
 "Please Wait ..."
-msgstr ""
+msgstr "Il tuo server è ora in fase di eliminazione\nAttendere prego..."
 
 msgid ""
 "Your server is now building\n"
 "Please wait ..."
-msgstr ""
+msgstr "Il tuo server è ora in costruzione\nAttendere prego..."

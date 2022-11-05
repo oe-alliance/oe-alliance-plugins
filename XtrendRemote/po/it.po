@@ -3,69 +3,72 @@
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:56+0100\n"
-"PO-Revision-Date: 2022-11-03 14:42+0100\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2022-11-05 08:34+0100\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 msgid "DMM/DMM ADV"
-msgstr ""
+msgstr "DMM/DMM ADV"
 
 msgid "ET4000"
-msgstr ""
+msgstr "ET4000"
 
 msgid "ET5000/ET6000"
-msgstr ""
+msgstr "ET5000/ET6000"
 
 msgid "ET6500/ET9500"
-msgstr ""
+msgstr "ET6500/ET9500"
 
 msgid "ET9000/ET9100"
-msgstr ""
+msgstr "ET9000/ET9100"
 
 msgid "ET9200/ET9500"
-msgstr ""
+msgstr "ET9200/ET9500"
 
 msgid "F1/F3"
-msgstr ""
+msgstr "F1/F3"
 
 msgid "HD1100"
-msgstr ""
+msgstr "HD1100"
 
 msgid "HD2400"
-msgstr ""
+msgstr "HD2400"
 
 msgid "Is this remote ok?"
-msgstr ""
+msgstr "Va bene questo telecomando?"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "OdinM9"
-msgstr ""
+msgstr "OdinM9"
 
 msgid "Remote"
-msgstr ""
+msgstr "Telecomando"
 
 msgid "Remote Control Code"
-msgstr ""
+msgstr "Codice telecomando"
 
 msgid "Vu"
-msgstr ""
+msgstr "Vu"
 
 msgid "XP1000"
-msgstr ""
+msgstr "XP1000"
 
 msgid "XP3000"
-msgstr ""
+msgstr "XP3000"

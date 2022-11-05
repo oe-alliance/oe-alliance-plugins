@@ -2,159 +2,160 @@
 # Traduzioni italiane per il pacchetto PACKAGE..
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#  <massimo@portatile.localdomain>, 2022.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:55+0100\n"
-"PO-Revision-Date: 2022-11-03 14:27+0100\n"
-"Last-Translator:  <massimo@portatile.localdomain>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2022-11-04 19:50+0100\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid " "
-msgstr ""
+msgstr " "
 
 msgid "Author:"
-msgstr ""
+msgstr "Autore:"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 msgid "Countries:"
-msgstr ""
+msgstr "Paesi:"
 
 msgid "Cover resolution:"
-msgstr ""
+msgstr "Risoluzione copertina:"
 
 msgid "Crew"
-msgstr ""
+msgstr "Persone"
 
 msgid "Delete EIT file?"
-msgstr ""
+msgstr "Eliminare il file EIT?"
 
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 msgid "Details down"
-msgstr ""
+msgstr "Dettagli giù"
 
 msgid "Details up"
-msgstr ""
+msgstr "Dettagli su"
 
 msgid "Director:"
-msgstr ""
+msgstr "Regista:"
 
 msgid "EIT file deleted!"
-msgstr ""
+msgstr "File EIT eliminato!"
 
 msgid "Edit search"
-msgstr ""
+msgstr "Modifica ricerca"
 
 msgid "Episodes"
-msgstr ""
+msgstr "Episodi"
 
 msgid "Exit"
-msgstr ""
+msgstr "Esci"
 
 msgid "Genre:"
-msgstr ""
+msgstr "Genere:"
 
 msgid "Language:"
-msgstr ""
+msgstr "Lingua:"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Caricamento in corso..."
 
 msgid "Movie"
-msgstr ""
+msgstr "Film"
 
 #, python-format
 msgid "No Movie information found for %s"
-msgstr ""
+msgstr "Nessuna informazione trovata sul film %s"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "Page down"
-msgstr ""
+msgstr "Pagina giù"
 
 msgid "Page up"
-msgstr ""
+msgstr "Pagina su"
 
 msgid "Runtime:"
-msgstr ""
+msgstr "Tempo di esecuzione:"
 
 msgid "Save TMDb movie infos to file"
-msgstr ""
+msgstr "Salva le informazioni TMDb del film su file"
 
 msgid "Search for Movie:"
-msgstr ""
+msgstr "Cerca film:"
 
 msgid "Season"
-msgstr ""
+msgstr "Stagione"
 
 msgid "Seasons"
-msgstr ""
+msgstr "Stagioni"
 
 msgid "Selection down"
-msgstr ""
+msgstr "Selezione giù"
 
 msgid "Selection up"
-msgstr ""
+msgstr "Selezione su"
 
 msgid "Series"
-msgstr ""
+msgstr "Serie"
 
 msgid "Setup"
-msgstr ""
+msgstr "Impostazioni"
 
 msgid "Show details"
-msgstr ""
+msgstr "Mostra dettagli"
 
 msgid "Show details if single result:"
-msgstr ""
+msgstr "Mostra dettagli se singolo risultato:"
 
 msgid "Studio:"
-msgstr ""
+msgstr "Studio:"
 
 #, python-format
 msgid "TMDB: Results for %s"
-msgstr ""
+msgstr "TMDB: risultati per %s"
 
 msgid "TMDb"
-msgstr ""
+msgstr "TMDb"
 
 msgid "TMDb ... function for Movielist"
-msgstr ""
+msgstr "TMDb... funzione per Movielist"
 
 msgid "TMDb Infos ..."
-msgstr ""
+msgstr "Informazioni TMDb..."
 
 msgid "TMDb information created!"
-msgstr ""
+msgstr "Informazioni TMDb create!"
 
 msgid "TMDb: No results found, or does not respond!"
-msgstr ""
+msgstr "TMDb: nessun risultato trovato o non risponde!"
 
 #, python-format
 msgid "Try to find %s in tmdb ..."
-msgstr ""
+msgstr "Provo a trovare %s in tmdb..."
 
 msgid "Various"
-msgstr ""
+msgstr "Vari"
 
 msgid "Votes:"
-msgstr ""
+msgstr "Voti:"
 
 msgid "Write TMDb Information?"
-msgstr ""
+msgstr "Scrivere informazioni su TMDb?"
 
 msgid "Year:"
-msgstr ""
+msgstr "Anno:"

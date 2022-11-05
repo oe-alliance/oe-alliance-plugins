@@ -2,21 +2,22 @@
 # Traduzioni italiane per il pacchetto PACKAGE..
 # Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-#  <massimo@portatile.localdomain>, 2022.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:55+0100\n"
-"PO-Revision-Date: 2022-11-03 14:32+0100\n"
-"Last-Translator:  <massimo@portatile.localdomain>\n"
-"Language-Team: Italian <tp@lists.linux.it>\n"
+"PO-Revision-Date: 2022-11-04 18:55+0100\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid " "
 msgstr ""
@@ -53,154 +54,154 @@ msgid "Creator"
 msgstr ""
 
 msgid "Creator: "
-msgstr ""
+msgstr "Creatore: "
 
 msgid "Download finished !"
-msgstr ""
+msgstr "Download terminato!"
 
 msgid "Download picons"
-msgstr ""
+msgstr "Scarica Picon"
 
 msgid "Download progress: "
-msgstr ""
+msgstr "Avanzamento download: "
 
 msgid "Enter Picon Dir:"
-msgstr ""
+msgstr "Inserisci cartella Picon:"
 
 msgid "Exit"
-msgstr ""
+msgstr "Esci"
 
 msgid "FreeSpace:"
-msgstr ""
+msgstr "Spazio libero:"
 
 msgid "FreeSpace: Drive Not Found !"
-msgstr ""
+msgstr "Spazio libero: unità non trovata!"
 
 msgid "Loaded Picons:"
-msgstr ""
+msgstr "Picons caricati:"
 
 msgid "Loading, please wait..."
-msgstr ""
+msgstr "Attendere il caricamento prego..."
 
 msgid "Manage your Picons"
-msgstr ""
+msgstr "Gestisci i tuoi Picon"
 
 msgid "More selections"
-msgstr ""
+msgstr "Più selezioni"
 
 msgid "Next Group"
-msgstr ""
+msgstr "Gruppo successivo"
 
 msgid "Next color depth"
-msgstr ""
+msgstr "Profondità colore successiva"
 
 msgid "Next picon creator"
-msgstr ""
+msgstr "Creatore Picon successivo"
 
 msgid "Next picon size"
-msgstr ""
+msgstr "Dimensione Picon successiva"
 
 msgid "No search results, please change filter options ..."
-msgstr ""
+msgstr "Nessun risultato di ricerca, cambia le opzioni del filtro..."
 
 msgid "Not found Picons:"
-msgstr ""
+msgstr "Picon non trovate:"
 
 msgid "Not older than X days:"
-msgstr ""
+msgstr "Non più vecchie di X giorni:"
 
 msgid "Not older than X days: "
-msgstr ""
+msgstr "Non più vecchie di X giorni: "
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "OK and exit"
-msgstr ""
+msgstr "OK e esci"
 
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 msgid "Option:"
-msgstr ""
+msgstr "Opzioni:"
 
 msgid "Picon folder: "
-msgstr ""
+msgstr "Cartella Picon: "
 
 msgid "PiconManager (mod)"
-msgstr ""
+msgstr "PiconManager (mod)"
 
 msgid "PiconManagerMod - Settings"
-msgstr ""
+msgstr "PiconManagerMod - Impostazioni"
 
 msgid "Picons loaded: "
-msgstr ""
+msgstr "Picon caricati: "
 
 msgid "Picons not found: "
-msgstr ""
+msgstr "Picon non trovati: "
 
 msgid "Previous Group"
-msgstr ""
+msgstr "Gruppo precedente"
 
 msgid "Previous color depth"
-msgstr ""
+msgstr "Profondità colore precedente"
 
 msgid "Previous picon creator"
-msgstr ""
+msgstr "Creatore Picon precedente"
 
 msgid "Previous picon size"
-msgstr ""
+msgstr "Dimensione Picon precedente"
 
 msgid "Reading Channels..."
-msgstr ""
+msgstr "Lettura dei canali..."
 
 msgid "Remember permanently?"
-msgstr ""
+msgstr "Ricordare per sempre?"
 
 msgid "Select Server:"
-msgstr ""
+msgstr "Seleziona server:"
 
 msgid "Select drive"
-msgstr ""
+msgstr "Seleziona unità"
 
 msgid "Select path"
-msgstr ""
+msgstr "Seleziona percorso"
 
 msgid "Select service for preferred picon"
-msgstr ""
+msgstr "Seleziona servizio per il Picon preferito"
 
 msgid "Server temporarily unavailable"
-msgstr ""
+msgstr "Server temporaneamente non disponibile"
 
 msgid "Set / clear standard Picon"
-msgstr ""
+msgstr "Imposta/cancella Picon standard"
 
 msgid "Set Filter:"
-msgstr ""
+msgstr "Imposta filtro:"
 
 msgid "Show group: "
-msgstr ""
+msgstr "Mostra gruppo: "
 
 msgid "Show random Picon"
-msgstr ""
+msgstr "Mostra Picon casuali"
 
 msgid "Size"
-msgstr ""
+msgstr "Dimensioni"
 
 msgid "Size: "
-msgstr ""
+msgstr "Dimensioni: "
 
 msgid "Sorry, service is temporarily unavailable"
-msgstr ""
+msgstr "Siamo spiacenti, il servizio è temporaneamente non disponibile"
 
 msgid "Standard picon: "
-msgstr ""
+msgstr "Picon standard: "
 
 msgid "V"
-msgstr ""
+msgstr "V"
 
 msgid "is not installed."
-msgstr ""
+msgstr "non è installato."
 
 msgid "loading"
-msgstr ""
+msgstr "caricamento in corso"
