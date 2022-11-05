@@ -8,260 +8,198 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:50+0100\n"
+"POT-Creation-Date: 2022-11-03 14:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: plugin.py:189
 msgid " "
 msgstr ""
 
-#: plugin.py:496
 #, python-format
 msgid "%s"
 msgstr ""
 
-#: plugin.py:855
 msgid "Activate debug logging?"
 msgstr ""
 
-#: plugin.py:415 plugin.py:458 plugin.py:471 plugin.py:477 plugin.py:483
 msgid "All"
 msgstr ""
 
-#: plugin.py:767 plugin.py:829 plugin.py:833 plugin.py:840
 msgid "Cancel"
 msgstr ""
 
-#: plugin.py:401
 msgid "Channels:"
 msgstr ""
 
-#: plugin.py:762
 msgid "Choose Picon folder"
 msgstr ""
 
-#: plugin.py:677
 msgid "Clean up the directory"
 msgstr ""
 
-#: plugin.py:200 plugin.py:851
 msgid "Color depth: "
 msgstr ""
 
-#: plugin.py:214 plugin.py:241
 msgid "Create folder"
 msgstr ""
 
-#: plugin.py:850
 msgid "Creator"
 msgstr ""
 
-#: plugin.py:196
 msgid "Creator: "
 msgstr ""
 
-#: plugin.py:697
 msgid "Download finished !"
 msgstr ""
 
-#: plugin.py:212 plugin.py:239
 msgid "Download picons"
 msgstr ""
 
-#: plugin.py:193
 msgid "Download progress: "
 msgstr ""
 
-#: plugin.py:589
 msgid "Enter Picon Dir:"
 msgstr ""
 
-#: plugin.py:219
 msgid "Exit"
 msgstr ""
 
-#: plugin.py:378
 msgid "FreeSpace:"
 msgstr ""
 
-#: plugin.py:380
 msgid "FreeSpace: Drive Not Found !"
 msgstr ""
 
-#: plugin.py:663
 msgid "Loaded Picons:"
 msgstr ""
 
-#: plugin.py:418
 msgid "Loading, please wait..."
 msgstr ""
 
-#: plugin.py:55
 msgid "Manage your Picons"
 msgstr ""
 
-#: plugin.py:234
 msgid "More selections"
 msgstr ""
 
-#: plugin.py:235
 msgid "Next Group"
 msgstr ""
 
-#: plugin.py:229
 msgid "Next color depth"
 msgstr ""
 
-#: plugin.py:225
 msgid "Next picon creator"
 msgstr ""
 
-#: plugin.py:227
 msgid "Next picon size"
 msgstr ""
 
-#: plugin.py:525
 msgid "No search results, please change filter options ..."
 msgstr ""
 
-#: plugin.py:655
 msgid "Not found Picons:"
 msgstr ""
 
-#: plugin.py:852
 msgid "Not older than X days:"
 msgstr ""
 
-#: plugin.py:202
 msgid "Not older than X days: "
 msgstr ""
 
-#: plugin.py:828
 msgid "OK"
 msgstr ""
 
-#: plugin.py:834 plugin.py:839
 msgid "OK and exit"
 msgstr ""
 
-#: plugin.py:768
 msgid "Ok"
 msgstr ""
 
-#: plugin.py:853
 msgid "Option:"
 msgstr ""
 
-#: plugin.py:187
 msgid "Picon folder: "
 msgstr ""
 
-#: plugin.py:54
 msgid "PiconManager (mod)"
 msgstr ""
 
-#: plugin.py:827
 msgid "PiconManagerMod - Settings"
 msgstr ""
 
-#: plugin.py:191
 msgid "Picons loaded: "
 msgstr ""
 
-#: plugin.py:192
 msgid "Picons not found: "
 msgstr ""
 
-#: plugin.py:236
 msgid "Previous Group"
 msgstr ""
 
-#: plugin.py:228
 msgid "Previous color depth"
 msgstr ""
 
-#: plugin.py:224
 msgid "Previous picon creator"
 msgstr ""
 
-#: plugin.py:226
 msgid "Previous picon size"
 msgstr ""
 
-#: plugin.py:190
 msgid "Reading Channels..."
 msgstr ""
 
-#: plugin.py:854
 msgid "Remember permanently?"
 msgstr ""
 
-#: plugin.py:847
 msgid "Select Server:"
 msgstr ""
 
-#: plugin.py:211 plugin.py:238
 msgid "Select drive"
 msgstr ""
 
-#: plugin.py:213 plugin.py:240
 msgid "Select path"
 msgstr ""
 
-#: plugin.py:262
 msgid "Select service for preferred picon"
 msgstr ""
 
-#: plugin.py:718
 msgid "Server temporarily unavailable"
 msgstr ""
 
-#: plugin.py:237
 msgid "Set / clear standard Picon"
 msgstr ""
 
-#: plugin.py:848
 msgid "Set Filter:"
 msgstr ""
 
-#: plugin.py:194
 msgid "Show group: "
 msgstr ""
 
-#: plugin.py:218
 msgid "Show random Picon"
 msgstr ""
 
-#: plugin.py:849
 msgid "Size"
 msgstr ""
 
-#: plugin.py:198
 msgid "Size: "
 msgstr ""
 
-#: plugin.py:710
 msgid "Sorry, service is temporarily unavailable"
 msgstr ""
 
-#: plugin.py:204
 msgid "Standard picon: "
 msgstr ""
 
-#: plugin.py:247
 msgid "V"
 msgstr ""
 
-#: plugin.py:602
 msgid "is not installed."
 msgstr ""
 
-#: plugin.py:617
 msgid "loading"
 msgstr ""

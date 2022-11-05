@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
 "PO-Revision-Date: 2020-04-07 21:30+0200\n"
 "Last-Translator: esmos\n"
 "Language-Team: CÜNEYT OCAKLILAR <ocaklilar@gmail.com>\n"
@@ -31,6 +31,9 @@ msgstr "Parlaklık Seviyesi"
 
 msgid "Cancel"
 msgstr "İptal"
+
+msgid "Change LED display settings"
+msgstr ""
 
 msgid "Channelnumber in Standby Clock"
 msgstr "Bekleme Saatindeki Kanal Numarası"

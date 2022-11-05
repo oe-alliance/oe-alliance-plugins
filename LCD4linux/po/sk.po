@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2021-10-10 23:17+0200\n"
 "Last-Translator: 9000peter <9000peter @ OpenA.TV>\n"
 "Language-Team: \n"
@@ -992,9 +992,6 @@ msgstr "Len Vzdialenosť"
 msgid "Distance+Illumination"
 msgstr "Vzdialenosť+Osvetlenie"
 
-msgid "Illumination+Moonphase"
-msgstr "Osvetlenie+Fáza mesačná"
-
 msgid "Distance+Moonphase"
 msgstr "Vzdialenosť+Fáza mesiaca"
 
@@ -1007,9 +1004,6 @@ msgstr "Stiahnuť log súbor"
 msgid "E"
 msgstr "V"
 
-msgid "Element"
-msgstr "Nastavenia"
-
 msgid "ENE"
 msgstr "VSV"
 
@@ -1018,6 +1012,9 @@ msgstr "EPG"
 
 msgid "ESE"
 msgstr "VJV"
+
+msgid "Element"
+msgstr "Nastavenia"
 
 msgid "Event Icon Bar"
 msgstr "Stĺpec ikon udalosti"
@@ -1037,11 +1034,11 @@ msgstr "Rozšírený popis"
 msgid "External IP Address"
 msgstr "Externá adresa IP"
 
-msgid "Filename"
-msgstr "Názov súboru"
-
 msgid "Fastmode (2s)"
 msgstr "Rýchly mód (2s)"
+
+msgid "Filename"
+msgstr "Názov súboru"
 
 msgid "First Quarter"
 msgstr "Prvá štvrtina"
@@ -1146,9 +1143,6 @@ msgstr "Spád"
 msgid "HDD"
 msgstr "HDD"
 
-msgid "Illumination only"
-msgstr "Len Osvetlenie"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1160,6 +1154,12 @@ msgstr "IP zabezpečenie nie je podporované v box-e"
 
 msgid "Idle"
 msgstr "Nečinný"
+
+msgid "Illumination only"
+msgstr "Len Osvetlenie"
+
+msgid "Illumination+Moonphase"
+msgstr "Osvetlenie+Fáza mesačná"
 
 msgid "Indoor"
 msgstr "Vnútorné"
@@ -1369,9 +1369,6 @@ msgstr "MJPEG stream pre LCD 2 Virtuálny jas"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG stream pre LCD 3 povoliť"
 
-msgid "Moonphase only"
-msgstr "Len Fáza Mesiaca"
-
 msgid "MSN"
 msgstr "MSN"
 
@@ -1474,6 +1471,9 @@ msgstr "Meteo stanica"
 msgid "Mini-EPG"
 msgstr "Mini-EPG"
 
+msgid "Mode"
+msgstr "Režim"
+
 msgid "Module 1"
 msgstr "Modul 1"
 
@@ -1543,9 +1543,6 @@ msgstr "Modul 5-6"
 msgid "Module 6"
 msgstr "Modul 6"
 
-msgid "Mode"
-msgstr "Režim"
-
 msgid "Mon"
 msgstr "Po"
 
@@ -1560,6 +1557,9 @@ msgstr "Cesta k ikone mesiaca [ok]>"
 
 msgid "Moonphase"
 msgstr "Fáza mesiaca"
+
+msgid "Moonphase only"
+msgstr "Len Fáza Mesiaca"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2312,11 +2312,11 @@ msgstr "Počasie pravdepodobnosť dažďa"
 msgid "Weather Transparency"
 msgstr "Počasie priehľadnosť"
 
-msgid "Weather Wind speed unit"
-msgstr "Počasie jednotky rýchlosti vetra"
-
 msgid "Weather Wind Info Lines"
 msgstr "Počasie smer a rýchlosť vetra"
+
+msgid "Weather Wind speed unit"
+msgstr "Počasie jednotky rýchlosti vetra"
 
 msgid "Weather-Icon Zoom"
 msgstr "Počasie-Ikona zväčšenie"

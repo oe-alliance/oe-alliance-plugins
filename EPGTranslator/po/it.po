@@ -1,246 +1,268 @@
 # Italian translations for PACKAGE package.
 # Copyright (C) 2021 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Automatically generated, 2021.
 #
+# Automatically generated, 2021.
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2021-02-17 00:23+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-04 08:14+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid "Afrikaans"
-msgstr ""
+msgstr "Africano"
 
 msgid "Albanian"
-msgstr ""
+msgstr "Albanese"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabo"
 
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbaigiano"
 
 msgid "Basque"
-msgstr ""
+msgstr "Basco"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Bielorusso"
 
 msgid "Bosnian"
-msgstr ""
+msgstr "Bosniaco"
 
 msgid "Bulgarian"
-msgstr ""
+msgstr "Bulgaro"
 
 msgid "Cache cleared"
-msgstr ""
+msgstr "Cache cancellata"
 
 msgid "Cache timeout hours (0 == while valid):"
-msgstr ""
+msgstr "Ore timeout cache (0 == mentre è valido):"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Catalano"
 
 msgid "Cebuano"
-msgstr ""
+msgstr "Cebuano"
 
 msgid "Clear cache"
-msgstr ""
+msgstr "Svuota la cache"
 
 msgid "Croatian"
-msgstr ""
+msgstr "Croato"
 
 msgid "Czech"
-msgstr ""
+msgstr "Ceco"
 
 msgid "Danish"
-msgstr ""
+msgstr "Danese"
 
 msgid "Destination Language:"
-msgstr ""
+msgstr "Lingua di destinazione:"
 
 msgid "Detect Language"
-msgstr ""
+msgstr "Rileva lingua"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Olandese"
 
 msgid "English"
-msgstr ""
+msgstr "Inglese"
 
 msgid "Estonian"
-msgstr ""
+msgstr "Estone"
 
 msgid "EventViews open translated:"
-msgstr ""
+msgstr "EventViews open tradotto:"
 
 msgid "Exit"
-msgstr ""
+msgstr "Esci"
 
 msgid "Filipino"
-msgstr ""
+msgstr "Filippino"
 
 msgid "Finnish"
-msgstr ""
+msgstr "Finlandese"
 
 msgid "French"
-msgstr ""
+msgstr "Francese"
 
 msgid "Galician"
-msgstr ""
+msgstr "Galiziano"
 
 msgid "German"
-msgstr ""
+msgstr "Tedesco"
 
 msgid "Greek"
-msgstr ""
+msgstr "Greco"
 
 msgid "Haitian Creole"
-msgstr ""
+msgstr "Creolo haitiano"
 
 msgid "Hide"
-msgstr ""
+msgstr "Nascondi"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Ungherese"
 
 msgid "Icelandic"
-msgstr ""
+msgstr "Islandese"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesiano"
 
 msgid "Info"
-msgstr ""
+msgstr "Informazioni"
 
 msgid "Irish"
-msgstr ""
+msgstr "Irlandese"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italiano"
 
 msgid "Javanese"
-msgstr ""
+msgstr "Giavanese"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Lettone"
 
 msgid "Lithuanian"
-msgstr ""
+msgstr "Lituano"
 
 msgid "MENU"
-msgstr ""
+msgstr "MENU"
 
 msgid "Macedonian"
-msgstr ""
+msgstr "Macedone"
 
 msgid "Malay"
-msgstr ""
+msgstr "Malese"
 
 msgid "Maltese"
-msgstr ""
+msgstr "Maltese"
 
 msgid "No"
-msgstr ""
+msgstr "No"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norvegese"
 
 msgid "Persian"
-msgstr ""
+msgstr "Persiano"
 
 msgid "Polish"
-msgstr ""
+msgstr "Polacco"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portoghese"
 
 msgid "Refresh EPG"
-msgstr ""
+msgstr "Aggiorna EPG"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Rumeno"
 
 msgid "Russian"
-msgstr ""
+msgstr "Russo"
 
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
-msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgid ""
+"Selct this option to show the source text as well as the translated text in"
+" EPG Translator main screen show."
 msgstr ""
+"Seleziona questa opzione per mostrare il testo sorgente e il testo tradotto"
+" nella schermata principale di EPG Translator."
 
-msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
+msgid ""
+"Select the source langauge to be translated, or select 'Detect Langauge' and"
+" the translator will attempt to automatically detect the source language."
 msgstr ""
+"Seleziona la lingua di origine da tradurre o seleziona \"Rileva lingua\" e il"
+" traduttore tenterà di rilevare automaticamente la lingua di origine."
 
 msgid "Serbian"
-msgstr ""
+msgstr "Serbo"
 
 msgid "Show Source EPG:"
-msgstr ""
+msgstr "Mostra EPG sorgente:"
 
 msgid "Show traceback in errors:"
-msgstr ""
+msgstr "Mostra traceback negli errori:"
 
 msgid "Slovak"
-msgstr ""
+msgstr "Slovacco"
 
 msgid "Slovenian"
-msgstr ""
+msgstr "Sloveno"
 
 msgid "Source Language:"
-msgstr ""
+msgstr "Lingua di origine:"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Spagnolo"
 
 msgid "Swahili"
-msgstr ""
+msgstr "Swahili"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Svedese"
 
 msgid "TEXT"
-msgstr ""
+msgstr "TESTO"
 
-msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
+msgid ""
+"This is a development feature. On a translation failure, if enabled, extra"
+" debug information will be logged."
 msgstr ""
+"Questa è una caratteristica di sviluppo. In caso di errore di traduzione, se"
+" abilitato, verranno registrate informazioni di debug aggiuntive."
 
 msgid "This is the language the source text will be translated into."
-msgstr ""
+msgstr "Questa è la lingua in cui verrà tradotto il testo di partenza."
 
 msgid "Translate text"
-msgstr ""
+msgstr "Traduci testo"
 
-msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
+msgid ""
+"Translations are cached to avoid unnecessary re-translation. This is the"
+" number of hours the translation will survive in the cache before deletion."
+" Select '0' for the cache entry to expire once the program has completed."
 msgstr ""
+"Le traduzioni vengono memorizzate nella cache per evitare inutili"
+" ritraduzioni. Questo è il numero di ore in cui la traduzione sopravvive"
+" nella cache prima dell'eliminazione. Seleziona '0' per far scadere la voce"
+" della cache una volta completato il programma."
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turco"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ucraino"
 
 msgid "Urdu"
-msgstr ""
+msgstr "Urdu"
 
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnamita"
 
 msgid "Welsh"
-msgstr ""
+msgstr "Gallese"
 
 msgid "When an EventView window is opened, start with the translated text."
 msgstr ""
+"Quando viene aperta una finestra EventView, inizia con il testo tradotto."
 
 msgid "Yes"
-msgstr ""
+msgstr "Sì"

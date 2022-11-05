@@ -1,67 +1,71 @@
 # Italian translations for Enigma2.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:16+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
+"PO-Revision-Date: 2022-11-04 08:40+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Lokalize 22.08.2\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
 msgid "15 sec"
-msgstr ""
+msgstr "15 sec"
 
 msgid "30 sec"
-msgstr ""
+msgstr "30 sec"
 
 msgid "45 sec"
-msgstr ""
+msgstr "45 sec"
 
 msgid "60 sec"
-msgstr ""
+msgstr "60 sec"
 
 msgid "Always off"
-msgstr ""
+msgstr "Sempre spento"
 
 #
 msgid "Cancel"
-msgstr "Annull."
+msgstr "Annulla"
+
+msgid "Change LED display settings"
+msgstr "Modifica impostazioni del display a LED"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Numero canale in standby orologio"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Numero canale in standby disattivato"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Numero canale/Orologio in standby orologio"
 
 msgid "Clock always"
-msgstr ""
+msgstr "Orologio sempre"
 
 msgid "LED Display Setup"
-msgstr ""
+msgstr "Configurazione display a LED"
 
 #
 msgid "Save"
-msgstr "Salvare"
+msgstr "Salva"
 
 msgid "Show on LED"
-msgstr ""
+msgstr "Mostra sul LED"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Modalità orario"
 
 msgid "Time to show Clock in Display"
-msgstr ""
+msgstr "È ora di visualizzare l'orologio sul display"
 
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Aggiorna data/ora"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ChannelsImporter - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2017-07-19 13:55+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: \n"
@@ -106,9 +106,6 @@ msgstr "kas 6 val."
 msgid "Every hour"
 msgstr "kas valandą"
 
-msgid "Exit"
-msgstr "Uždaryti"
-
 msgid "FTP Password"
 msgstr "FTP slaptažodis"
 
@@ -157,17 +154,11 @@ msgstr "įkeliamas epg.dat..."
 msgid "Loading new channel list..."
 msgstr "Įkeliamas naujas kanalų sąrašas..."
 
-msgid "Main menu"
-msgstr "Pagrindinis meniu"
-
 msgid "Passive mode"
 msgstr "Pasyvus režimas"
 
 msgid "Push error messages to the screen. Switch on for debugging only."
 msgstr "Rodyti ekrane iškylančius klaidų pranešimus. Įjunkite tik klaidų taisymui."
-
-msgid "Really close without saving settings?"
-msgstr "Ar tikrai uždaryti langą, neišsaugant nuostatų?"
 
 # setup.xml
 msgid "Remote receiver IP"
@@ -182,26 +173,17 @@ msgstr "Kas kiek laiko kartoti"
 msgid "Run at restart"
 msgstr "Vykdyti, paleidžiant sistemą iš naujo"
 
-msgid "Save"
-msgstr "Įrašyti"
-
 msgid "Schedule import"
 msgstr "Importo tvarkaraštis"
 
 msgid "Searching for epg.dat"
 msgstr "Ieškoma epg.dat"
 
-msgid "Service searching"
-msgstr "Kanalų paieška"
-
 msgid "Set the repeat interval of the schedule."
 msgstr "Nustatykite kartojimų intervalą tvarkaraštyje."
 
 msgid "Set the time of day to perform the scan."
 msgstr "Nustatykite paros laiką paieškai atlikti."
-
-msgid "Setup"
-msgstr "Sąranka"
 
 msgid "Should the FTP connection to the remote receiver be established in passive mode?"
 msgstr "Ar jungtis prie nutolusio imtuvo FTP pasyviu režimu?"

@@ -1,17 +1,18 @@
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2017-12-02 22:12+0100\n"
-"Last-Translator: insanity@\n"
-"Language-Team: vuplus-community.net <insanity@>\n"
+"PO-Revision-Date: 2022-11-04 07:29+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Lokalize 22.08.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
@@ -19,11 +20,10 @@ msgid "(Re)Scan"
 msgstr "Ripeti scansione"
 
 msgid "Audio Address"
-msgstr ""
+msgstr "Indirizzo audio"
 
-#, fuzzy
 msgid "Audio Connect"
-msgstr "Connettere"
+msgstr "Collegamento audio"
 
 msgid "Autostart"
 msgstr "Avvio automatico"
@@ -32,26 +32,25 @@ msgid "Bluetooth Devices Manager"
 msgstr "Gestione dispositivi Bluetooth"
 
 msgid "Bluetooth Devices Manager Setup"
-msgstr "Impostazioni gestione dispositivi Bluetooth"
+msgstr "Configurazione di Gestione dispositivi Bluetooth"
 
 msgid "Can't not pair with selected device!"
-msgstr "Impossibile associare il dispositivo selezionato!"
+msgstr "Impossibile accoppiare con il dispositivo selezionato!"
 
 msgid "Config"
 msgstr "Config"
 
 msgid "Connect"
-msgstr "Connettere"
+msgstr "Connetti"
 
 msgid "Connection with:\n"
-msgstr "Connesso con:\n"
+msgstr "Connessione con:\n"
 
 msgid "Disconnect"
-msgstr "Disconnesso"
+msgstr "Disconnetti"
 
-#, fuzzy
 msgid "Disconnect with:\n"
-msgstr "Connesso con:\n"
+msgstr "Disconnessione da:\n"
 
 msgid "Exit"
 msgstr "Esci"
@@ -60,31 +59,31 @@ msgid "MAC:\t\tDevice name:"
 msgstr "MAC:\t\tNome dispositivo:"
 
 msgid "No BT devices found!"
-msgstr "Nessun dispositivo BT rilevato!"
+msgstr "Nessun dispositivo BT trovato!"
 
 msgid "No connected to any device"
 msgstr "Non connesso a nessun dispositivo"
 
 msgid "Not detected devices around STB"
-msgstr "Nessun dispositivo rilevato nei dintorni"
+msgstr "Nessun dispositivo rilevato intorno al ricevitore"
 
 msgid "Please Enter Passkey: \n"
-msgstr ""
+msgstr "Inserisci la chiave di accesso: \n"
 
 msgid "Please load BT driver by pressing BLUE button."
-msgstr "Premere  tasto BLU per caricare il driver BT."
+msgstr "Carica il driver BT premendo BLU."
 
 msgid "Save"
 msgstr "Salva"
 
 msgid "Scanning for devices..."
-msgstr "Scansione per dispositivi..."
+msgstr "Ricerca dispositivi in ​​corso..."
 
 msgid "Scanning..."
-msgstr "Scansione in corso..."
+msgstr "Scansione..."
 
 msgid "This is bt devices manager"
-msgstr "Configurazioni Bluetooth"
+msgstr "Questo è Gestione dispositivi Bluetooth"
 
 msgid "Trying to pair with:"
 msgstr "Tentativo di accoppiamento con:"

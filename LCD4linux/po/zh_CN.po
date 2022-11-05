@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2021-10-10 23:20+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@163.com>\n"
@@ -994,9 +994,6 @@ msgstr "仅距离"
 msgid "Distance+Illumination"
 msgstr "距离+照度"
 
-msgid "Illumination+Moonphase"
-msgstr "照明+月相"
-
 msgid "Distance+Moonphase"
 msgstr "距离+月相"
 
@@ -1009,9 +1006,6 @@ msgstr "下载日志文件"
 msgid "E"
 msgstr "Ε"
 
-msgid "Element"
-msgstr "元素"
-
 msgid "ENE"
 msgstr "东北偏东"
 
@@ -1020,6 +1014,9 @@ msgstr "EPG"
 
 msgid "ESE"
 msgstr "东南偏东"
+
+msgid "Element"
+msgstr "元素"
 
 msgid "Event Icon Bar"
 msgstr "事件图标栏"
@@ -1039,11 +1036,11 @@ msgstr "扩展描述"
 msgid "External IP Address"
 msgstr "外部 IP 地址"
 
-msgid "Filename"
-msgstr "文档名称"
-
 msgid "Fastmode (2s)"
 msgstr "快速模式（2秒）"
+
+msgid "Filename"
+msgstr "文档名称"
 
 msgid "First Quarter"
 msgstr "第一季度"
@@ -1148,9 +1145,6 @@ msgstr "渐变色"
 msgid "HDD"
 msgstr "HDD"
 
-msgid "Illumination only"
-msgstr "仅照明"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1162,6 +1156,12 @@ msgstr "设备不支持IP验证"
 
 msgid "Idle"
 msgstr "空闲"
+
+msgid "Illumination only"
+msgstr "仅照明"
+
+msgid "Illumination+Moonphase"
+msgstr "照明+月相"
 
 msgid "Indoor"
 msgstr "室内"
@@ -1371,9 +1371,6 @@ msgstr "MJPEG流LCD 3虚拟亮度"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG流LCD 3启用"
 
-msgid "Moonphase only"
-msgstr "仅月相"
-
 msgid "MSN"
 msgstr "MSN"
 
@@ -1476,6 +1473,9 @@ msgstr "气象站"
 msgid "Mini-EPG"
 msgstr "迷你EPG"
 
+msgid "Mode"
+msgstr "模式"
+
 msgid "Module 1"
 msgstr "模块1"
 
@@ -1545,9 +1545,6 @@ msgstr "模块5-6"
 msgid "Module 6"
 msgstr "模块6"
 
-msgid "Mode"
-msgstr "模式"
-
 msgid "Mon"
 msgstr "周一"
 
@@ -1562,6 +1559,9 @@ msgstr "月亮图标路径 [ok]>"
 
 msgid "Moonphase"
 msgstr "月相"
+
+msgid "Moonphase only"
+msgstr "仅月相"
 
 msgid "MusicCast"
 msgstr "音乐广播"
@@ -2314,11 +2314,11 @@ msgstr "天气雨"
 msgid "Weather Transparency"
 msgstr "天气透明度"
 
-msgid "Weather Wind speed unit"
-msgstr "天气风速单位"
-
 msgid "Weather Wind Info Lines"
 msgstr "天气线"
+
+msgid "Weather Wind speed unit"
+msgstr "天气风速单位"
 
 msgid "Weather-Icon Zoom"
 msgstr "天气图标放大"
@@ -2845,60 +2845,3 @@ msgstr "是,很长"
 
 msgid "yes, short"
 msgstr "是,简短"
-
-#~ msgid "April"
-#~ msgstr "四月"
-
-#~ msgid "August"
-#~ msgstr "八月"
-
-#~ msgid "December"
-#~ msgstr "十二月"
-
-#~ msgid "February"
-#~ msgstr "二月"
-
-#~ msgid "Friday"
-#~ msgstr "星期五"
-
-#~ msgid "January"
-#~ msgstr "一月"
-
-#~ msgid "July"
-#~ msgstr "七月"
-
-#~ msgid "June"
-#~ msgstr "六月"
-
-#~ msgid "March"
-#~ msgstr "三月"
-
-#~ msgid "May"
-#~ msgstr "五月"
-
-#~ msgid "Monday"
-#~ msgstr "星期一"
-
-#~ msgid "November"
-#~ msgstr "十一月"
-
-#~ msgid "October"
-#~ msgstr "十月"
-
-#~ msgid "Saturday"
-#~ msgstr "星期六"
-
-#~ msgid "September"
-#~ msgstr "九月"
-
-#~ msgid "Sunday"
-#~ msgstr "星期日"
-
-#~ msgid "Thursday"
-#~ msgstr "星期四"
-
-#~ msgid "Tuesday"
-#~ msgstr "星期二"
-
-#~ msgid "Wednesday"
-#~ msgstr "星期三"

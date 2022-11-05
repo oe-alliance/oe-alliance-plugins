@@ -1,76 +1,79 @@
 # Italian translations for Enigma2.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:43+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"PO-Revision-Date: 2022-11-04 17:26+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Lokalize 22.08.2\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
 msgid "Can't find /usr/bin/md5sum"
-msgstr ""
+msgstr "Impossibile trovare /usr/bin/md5sum"
 
 msgid "Can't found MD5 file."
-msgstr ""
+msgstr "Impossibile trovare il file MD5."
 
 msgid "Can't found binary file."
-msgstr ""
+msgstr "Impossibile trovare il file binario."
 
 msgid "Can't found device file!!"
-msgstr ""
+msgstr "Impossibile trovare il file del dispositivo!!"
 
 msgid "Can't found model name."
-msgstr ""
+msgstr "Impossibile trovare il nome del modello."
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #
 msgid "Close"
-msgstr "Chiudere"
+msgstr "Chiudi"
 
 msgid "Current version:"
-msgstr ""
+msgstr "Versione attuale:"
 
 msgid "Download the firmware (latest)"
-msgstr ""
+msgstr "Scarica il firmware (ultimo)"
 
 #, python-format
 msgid ""
 "Fail to verify data file. \n"
 "file[%s]\n"
 "md5[%s]"
-msgstr ""
+msgstr "Impossibile verificare il file di dati.\nfile[%s]\nmd5[%s]"
 
 msgid "Front Panel"
-msgstr ""
+msgstr "Pannello frontale"
 
 msgid "Front Panel Update"
-msgstr ""
+msgstr "Aggiornamento pannello frontale"
 
 msgid "New version:"
-msgstr ""
+msgstr "Nuova versione:"
 
 msgid "No selected binary data!!"
-msgstr ""
+msgstr "Nessun dato binario selezionato!!"
 
 msgid "This plugin is supported only the INI-Series."
-msgstr ""
+msgstr "Questo plugin è supportato solo dalla serie INI."
 
 msgid "Upgrade"
-msgstr ""
+msgstr "Aggiornamento"
 
 msgid "You can not upgrade to the same or lower version !"
 msgstr ""
+"Non è possibile eseguire l'aggiornamento alla stessa versione oa una versione"
+" precedente!"
 
 msgid "You chose the incorrect file."
-msgstr ""
+msgstr "Hai scelto il file sbagliato."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-17 09:16+0200\n"
+"POT-Creation-Date: 2022-11-03 14:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,9 +92,6 @@ msgstr ""
 msgid "Every hour"
 msgstr ""
 
-msgid "Exit"
-msgstr ""
-
 msgid "Fetch channels from the server."
 msgstr ""
 
@@ -113,25 +110,10 @@ msgstr ""
 msgid "Loading new channel list..."
 msgstr ""
 
-msgid "Main menu"
-msgstr ""
-
-msgid "Really close without saving settings?"
-msgstr ""
-
 msgid "Removing current channel list..."
 msgstr ""
 
-msgid "Save"
-msgstr ""
-
 msgid "Searching for epg.dat"
-msgstr ""
-
-msgid "Service searching"
-msgstr ""
-
-msgid "Setup"
 msgstr ""
 
 msgid "Starting importer"

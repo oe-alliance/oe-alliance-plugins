@@ -1,18 +1,20 @@
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2017-11-29 18:42+0100\n"
-"Last-Translator: insanity\n"
-"Language-Team: www.vuplus-community <insanity@>\n"
+"PO-Revision-Date: 2022-11-05 07:38+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: pygettext.py 1.5\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Lokalize 22.08.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #, python-format
 msgid "%s"
@@ -88,7 +90,7 @@ msgid "Audio codec"
 msgstr "Codec audio"
 
 msgid "Auto set Framerate / Bitrate"
-msgstr "Set automatico Framerate / Bitrate"
+msgstr "Imposta Framerate/Bitrate automatico"
 
 msgid "Bitrate"
 msgstr "Bitrate"
@@ -100,89 +102,73 @@ msgid "Default"
 msgstr "Predefinito"
 
 msgid "Encoder"
-msgstr "Codificatore"
+msgstr "Encoder"
 
-#, fuzzy
 msgid "Encoder 0: Aspect Ratio"
-msgstr "Rapporto di aspetto"
+msgstr "Encoder 0: Proporzioni"
 
-#, fuzzy
 msgid "Encoder 0: Audio codec"
-msgstr "Codec audio"
+msgstr "Encoder 0: Audio codec"
 
 msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
-msgstr ""
+msgstr "Encoder 0: Bitrate/Framerate automatico"
 
 msgid "Encoder 0: Bitrate"
-msgstr ""
+msgstr "Encoder 0: Bitrate"
 
-#, fuzzy
 msgid "Encoder 0: Framerate"
-msgstr "Framerate"
+msgstr "Encoder 0: Framerate"
 
-#, fuzzy
 msgid "Encoder 0: GOP Frame B"
-msgstr "GOP Frame B"
+msgstr "Encoder 0: GOP Frame B"
 
-#, fuzzy
 msgid "Encoder 0: GOP Frame P"
-msgstr "GOP Frame P"
+msgstr "Encoder 0: GOP Frame P"
 
-#, fuzzy
 msgid "Encoder 0: Level"
-msgstr "Codificatore"
+msgstr "Encoder 0: Livello"
 
 msgid "Encoder 0: Profile"
-msgstr ""
+msgstr "Encoder 0: Profilo"
 
-#, fuzzy
 msgid "Encoder 0: Resolution"
-msgstr "Risoluzione"
+msgstr "Encoder 0: Risoluzione"
 
-#, fuzzy
 msgid "Encoder 0: Video codec"
-msgstr "Codec video"
+msgstr "Encoder 0: Video codec"
 
-#, fuzzy
 msgid "Encoder 1: Aspect Ratio"
-msgstr "Rapporto di aspetto"
+msgstr "Encoder 1: Proporzioni"
 
-#, fuzzy
 msgid "Encoder 1: Audio codec"
-msgstr "Codec audio"
+msgstr "Encoder 1: Audio codec"
 
 msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
-msgstr ""
+msgstr "Encoder 1: Bitrate/Framerate automatico"
 
 msgid "Encoder 1: Bitrate"
-msgstr ""
+msgstr "Encoder 1: Bitrate"
 
-#, fuzzy
 msgid "Encoder 1: Framerate"
-msgstr "Framerate"
+msgstr "Encoder 1: Framerate"
 
-#, fuzzy
 msgid "Encoder 1: GOP Frame B"
-msgstr "GOP Frame B"
+msgstr "Encoder 1: GOP Frame B"
 
-#, fuzzy
 msgid "Encoder 1: GOP Frame P"
-msgstr "GOP Frame P"
+msgstr "Encoder 1: GOP Frame P"
 
-#, fuzzy
 msgid "Encoder 1: Level"
-msgstr "Codificatore"
+msgstr "Encoder 1: Livello"
 
 msgid "Encoder 1: Profile"
-msgstr ""
+msgstr "Encoder 1: Profilo"
 
-#, fuzzy
 msgid "Encoder 1: Resolution"
-msgstr "Risoluzione"
+msgstr "Encoder 1: Risoluzione"
 
-#, fuzzy
 msgid "Encoder 1: Video codec"
-msgstr "Codec video"
+msgstr "Encoder 1: Video codec"
 
 msgid "Framerate"
 msgstr "Framerate"
@@ -218,7 +204,7 @@ msgid "Profile"
 msgstr "Profilo"
 
 msgid "Really close without saving settings?"
-msgstr "Chiudere senza salvare le impostazioni?"
+msgstr "Chiudere davvero senza salvare le impostazioni?"
 
 msgid "Resolution"
 msgstr "Risoluzione"
@@ -233,13 +219,13 @@ msgid "Transcoding Setup"
 msgstr "Impostazioni Transcoding"
 
 msgid "Transcoding and PIP are mutually exclusive."
-msgstr "Transcoding e PIP si escludono a vicenda."
+msgstr "Transcodifica e PIP si escludono a vicenda."
 
 msgid "TranscodingSetup"
-msgstr "Impostazioni Transcoding"
+msgstr "TranscodingSetup"
 
 msgid "Video codec"
-msgstr "Codec video"
+msgstr "Video codec"
 
 msgid "aac"
 msgstr "aac"
@@ -257,19 +243,19 @@ msgid "ac3"
 msgstr "ac3"
 
 msgid "advancedsimple"
-msgstr "semplice_avanzato"
+msgstr "avanzato_semplice"
 
 msgid "auto"
 msgstr "auto"
 
 msgid "baseline"
-msgstr "linea base"
+msgstr "linea_base"
 
 msgid "disable"
-msgstr "disattivare"
+msgstr "disabilita"
 
 msgid "enable"
-msgstr "abilitare"
+msgstr "abilita"
 
 msgid "h264"
 msgstr "h264"

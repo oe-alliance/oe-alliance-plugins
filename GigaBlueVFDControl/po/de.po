@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 19:41+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2022-07-07 19:44+0200\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,77 +14,14 @@ msgstr ""
 "X-Generator: Poedit 3.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "Channelnumber in Standby off"
-msgstr "Kanalnummer im Standby aus"
-
-msgid "Channelnumber in Standby Clock"
-msgstr "Kanalnummer im Standby Uhr"
-
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr "Kanalnummer/Uhr im Standby Uhr"
-
-msgid "Clock always"
-msgstr "Uhr immer anzeigen"
-
 msgid "Always off"
 msgstr "Immer aus"
-
-msgid "No"
-msgstr "Nein"
-
-msgid "Yes"
-msgstr "Ja"
-
-msgid "None"
-msgstr "Keine"
-
-msgid "Blue"
-msgstr "Blau"
-
-msgid "Red"
-msgstr "Rot"
-
-msgid "Purple"
-msgstr "Violett"
-
-msgid "GigaBlue Setup"
-msgstr "GigaBlue Einstellungen"
-
-msgid "Cancel"
-msgstr "Abbrechen"
-
-msgid "Save"
-msgstr "Speichern"
-
-msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktuallisieren"
-
-msgid "Enable led"
-msgstr "Led aktivieren"
-
-msgid "Led Deep Standby"
-msgstr "Led im Deep-Standby"
-
-msgid "Led state RUN"
-msgstr "Led-Farbe wenn Eingeschaltet"
-
-msgid "Led state Standby"
-msgstr "Led-Farbe im Standby"
-
-msgid "Led state Deep Standby"
-msgstr "Led-Farbe im Deep-Standby"
-
-msgid "Led state Record"
-msgstr "Led-Farbe bei Aufnahme"
 
 msgid "Blink Record Led"
 msgstr "Blinkende Aufnahme-Led"
 
-msgid "Led state HDD /dev/sda active"
-msgstr "Led-Farbe wenn HDD /dev/sda aktiv ist"
-
-msgid "Led state HDD /dev/sdb active"
-msgstr "Led-Farbe wenn HDD /dev/sdb aktiv ist"
+msgid "Blue"
+msgstr "Blau"
 
 msgid "Brightness"
 msgstr "Helligkeit"
@@ -92,23 +29,86 @@ msgstr "Helligkeit"
 msgid "Brightness Standby"
 msgstr "Helligkeit im Standby"
 
-msgid "Show on VFD"
-msgstr "Im VFD anzeigen"
+msgid "Cancel"
+msgstr "Abbrechen"
 
-msgid "Show clock in Deep Standby"
-msgstr "Zeige Uhr im Deep Standby"
-
-msgid "Time mode"
-msgstr "Zeit Modus"
+msgid "Change LED display settings"
+msgstr "LED-Anzeige konfigurieren."
 
 msgid "Channel number with leading zeros"
 msgstr "Kanalnummer mit führenden Nullen"
 
+msgid "Channelnumber in Standby Clock"
+msgstr "Kanalnummer im Standby Uhr"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalnummer im Standby aus"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "Kanalnummer/Uhr im Standby Uhr"
+
+msgid "Clock always"
+msgstr "Uhr immer anzeigen"
+
 msgid "Display/LED"
 msgstr "Display/LED"
+
+msgid "Enable led"
+msgstr "Led aktivieren"
+
+msgid "GigaBlue Setup"
+msgstr "GigaBlue Einstellungen"
 
 msgid "LED"
 msgstr "LED"
 
-msgid "Change LED display settings"
-msgstr "LED-Anzeige konfigurieren."
+msgid "Led Deep Standby"
+msgstr "Led im Deep-Standby"
+
+msgid "Led state Deep Standby"
+msgstr "Led-Farbe im Deep-Standby"
+
+msgid "Led state HDD /dev/sda active"
+msgstr "Led-Farbe wenn HDD /dev/sda aktiv ist"
+
+msgid "Led state HDD /dev/sdb active"
+msgstr "Led-Farbe wenn HDD /dev/sdb aktiv ist"
+
+msgid "Led state RUN"
+msgstr "Led-Farbe wenn Eingeschaltet"
+
+msgid "Led state Record"
+msgstr "Led-Farbe bei Aufnahme"
+
+msgid "Led state Standby"
+msgstr "Led-Farbe im Standby"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "None"
+msgstr "Keine"
+
+msgid "Purple"
+msgstr "Violett"
+
+msgid "Red"
+msgstr "Rot"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Show clock in Deep Standby"
+msgstr "Zeige Uhr im Deep Standby"
+
+msgid "Show on VFD"
+msgstr "Im VFD anzeigen"
+
+msgid "Time mode"
+msgstr "Zeit Modus"
+
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktuallisieren"
+
+msgid "Yes"
+msgstr "Ja"

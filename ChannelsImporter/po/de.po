@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2018-11-05 14:38+0100\n"
 "Last-Translator: Ralf Biedermann <ralf.biedermann@rbsoft.de>\n"
 "Language-Team: none\n"
@@ -104,9 +104,6 @@ msgstr "Alle 6 Stunden"
 msgid "Every hour"
 msgstr "Jede Stunde"
 
-msgid "Exit"
-msgstr "Ende"
-
 msgid "FTP Password"
 msgstr "FTP Passwort"
 
@@ -155,17 +152,11 @@ msgstr "Lade epg.dat..."
 msgid "Loading new channel list..."
 msgstr "Lade neue Kanalliste..."
 
-msgid "Main menu"
-msgstr "Hauptmenü"
-
 msgid "Passive mode"
 msgstr "Passiver Modus"
 
 msgid "Push error messages to the screen. Switch on for debugging only."
 msgstr "Zeige Fehler am Bildschirm an. Nur zu debuggen aktivieren."
-
-msgid "Really close without saving settings?"
-msgstr "Ohne Sichern beenden. Sicher?"
 
 msgid "Remote receiver IP"
 msgstr "Server IP?"
@@ -179,26 +170,17 @@ msgstr "Wie oft wiederholen"
 msgid "Run at restart"
 msgstr "Starte beim Start"
 
-msgid "Save"
-msgstr "Sichern"
-
 msgid "Schedule import"
 msgstr "Plane Import"
 
 msgid "Searching for epg.dat"
 msgstr "Suche epg.dat"
 
-msgid "Service searching"
-msgstr "Suche Kanal"
-
 msgid "Set the repeat interval of the schedule."
 msgstr "Stelle das Intervall für den Zeitplan ein."
 
 msgid "Set the time of day to perform the scan."
 msgstr "Stelle die Zeit ein zu der ein Scan erfolgen soll."
-
-msgid "Setup"
-msgstr "Konfiguration"
 
 msgid "Should the FTP connection to the remote receiver be established in passive mode?"
 msgstr "Soll die FTP-Verbindung zum Server im passiven Modus aufgebaut werden?"

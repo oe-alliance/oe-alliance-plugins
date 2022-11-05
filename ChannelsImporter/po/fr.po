@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-23 15:20+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2019-07-23 15:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -104,9 +104,6 @@ msgstr "Toutes les 6 heures"
 msgid "Every hour"
 msgstr "Chaque heure"
 
-msgid "Exit"
-msgstr "Quitter"
-
 msgid "FTP Password"
 msgstr "Mot de passe FTP"
 
@@ -155,17 +152,11 @@ msgstr "Chargement de epg.dat......"
 msgid "Loading new channel list..."
 msgstr "Chargement d'une nouvelle liste de chaînes....."
 
-msgid "Main menu"
-msgstr "Menu principal"
-
 msgid "Passive mode"
 msgstr "Mode passif"
 
 msgid "Push error messages to the screen. Switch on for debugging only."
 msgstr "Pousser les messages d'erreur à l'écran. Activer pour le débogage uniquement."
-
-msgid "Really close without saving settings?"
-msgstr "Vraiment fermer sans sauver les paramètres?"
 
 msgid "Remote receiver IP"
 msgstr "IP du récepteur à distance"
@@ -179,26 +170,17 @@ msgstr "Répéter à quelle fréquence"
 msgid "Run at restart"
 msgstr "Exécuter au redémarrage"
 
-msgid "Save"
-msgstr "Sauver"
-
 msgid "Schedule import"
 msgstr "Planifier l'importation"
 
 msgid "Searching for epg.dat"
 msgstr "Recherche de epg.dat"
 
-msgid "Service searching"
-msgstr "Recherche des services"
-
 msgid "Set the repeat interval of the schedule."
 msgstr "Définissez l'intervalle de répétition du programme."
 
 msgid "Set the time of day to perform the scan."
 msgstr "Réglez l'heure de la journée pour effectuer le scan."
-
-msgid "Setup"
-msgstr "Paramétrer"
 
 msgid "Should the FTP connection to the remote receiver be established in passive mode?"
 msgstr "La connexion FTP vers le récepteur distant doit-elle être établie en mode passif ?"

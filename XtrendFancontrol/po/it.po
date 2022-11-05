@@ -1,86 +1,88 @@
 # Italian translations for Enigma2.
 #
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:25+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"PO-Revision-Date: 2022-11-05 08:32+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Lokalize 22.08.2\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
 msgid " ver. 3.2"
-msgstr ""
+msgstr " ver. 3.2"
 
 msgid "All"
-msgstr ""
+msgstr "Tutto"
 
 #
 msgid "Cancel"
-msgstr "Annull."
+msgstr "Annulla"
 
 msgid "End time"
-msgstr ""
+msgstr "Orario di fine"
 
 msgid "Fan - Auto"
-msgstr ""
+msgstr "Ventola - Auto"
 
 msgid "Fan - Off"
-msgstr ""
+msgstr "Ventola - Off"
 
 msgid "Fan - Off in standby"
-msgstr ""
+msgstr "Ventola - Off in standby"
 
 msgid "Fan - On"
-msgstr ""
+msgstr "Ventola - On"
 
 msgid "Fan Control"
-msgstr ""
+msgstr "Controllo ventola"
 
 msgid "Fan Setup"
-msgstr ""
+msgstr "Configurazione ventola"
 
 msgid "Fan mode"
-msgstr ""
+msgstr "Modalità ventola"
 
 msgid "Fan setup:"
-msgstr ""
+msgstr "Configurazione ventola:"
 
 msgid "HDD Sleeping"
-msgstr ""
+msgstr "Sospensione HDD"
 
 msgid "HDD Temperature"
-msgstr ""
+msgstr "Temperatura HDD"
 
 msgid ""
 "Harddisk standby after - no standby\n"
 "You may not use this mode!"
 msgstr ""
+"Hard disk in standby dopo - nessun standby\nNon puoi usare questa modalità!"
 
 msgid "Harddisk temperature"
-msgstr ""
+msgstr "Temperatura harddisk"
 
 msgid "Harddisks:"
-msgstr ""
+msgstr "Harddisk:"
 
 msgid "Initial fan speed"
-msgstr ""
+msgstr "Velocità iniziale ventola"
 
 msgid "No harddisk with temperature sensor found!"
-msgstr ""
+msgstr "Nessun harddisk con sensore di temperatura trovato!"
 
 msgid "No system temperature sensor found!"
-msgstr ""
+msgstr "Nessun sensore di temperatura del sistema trovato!"
 
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 #
 msgid "Off"
@@ -91,56 +93,59 @@ msgid "On"
 msgstr "On"
 
 msgid "Power status"
-msgstr ""
+msgstr "Stato di alimentazione"
 
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 msgid "Select internal HDD device"
-msgstr ""
+msgstr "Seleziona il dispositivo HDD interno"
 
 msgid "Show Temp"
-msgstr ""
+msgstr "Mostra Temp"
 
 msgid "Show temp. HDD to extensions menu"
-msgstr ""
+msgstr "Mostra temperatura HDD nel menu estensioni"
 
 msgid "Start time"
-msgstr ""
+msgstr "Ora di inizio"
 
 msgid ""
 "Start time OFF mode equal End time OFF mode\n"
 "You may not use this time settings!"
 msgstr ""
+"Ora di inizio modalità OFF uguale Ora di fine modalità OFF\nNon puoi usare"
+" questa impostazione dell'ora!"
 
 msgid "Switch Fan mode on time setting"
-msgstr ""
+msgstr "Attiva la modalità ventola sull'impostazione dell'ora"
 
 msgid "Switch OFF mode on HDD sleep"
-msgstr ""
+msgstr "Cambia in OFF se HDD è in modalità sospensione"
 
 msgid "Switch ON mode on HDD max.temp. (0 - disable)"
-msgstr ""
+msgstr "Cambia in ON se HDD raggiunge la max temp (0=disabilita)"
 
 msgid "Switch ON on system temp"
-msgstr ""
+msgstr "Cambia in ON su temperatura di sistema"
 
 msgid "System temperature"
-msgstr ""
+msgstr "Temperatura di sistema"
 
 msgid "Watch HDD state"
-msgstr ""
+msgstr "Guarda lo stato dell'HDD"
 
 msgid "Watch system temp"
-msgstr ""
+msgstr "Guarda la temperatura di sistema"
 
 msgid ""
 "You may not use this mode!\n"
 "Not found an internal hard drive!"
 msgstr ""
+"Non puoi usare questa modalità!\nNon è stato trovato un harddisk interno!"
 
 msgid "n.a."
-msgstr ""
+msgstr "n.a."
 
 msgid "switch Fan On/Off"
-msgstr ""
+msgstr "accendi/spegni ventola"
