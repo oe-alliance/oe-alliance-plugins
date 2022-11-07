@@ -14,63 +14,38 @@
 from __future__ import print_function
 from __future__ import absolute_import
 
-from Plugins.Plugin import PluginDescriptor
-from Components.ActionMap import *
+from os import remove
+from re import search, sub, I
+from skin import parameters
+from requests import get, exceptions
+from six import ensure_binary, PY2
+from six.moves.urllib.parse import quote_plus
+from Components.ActionMap import ActionMap, HelpableActionMap
+from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigYesNo
 from Components.Label import Label
 from Components.Sources.StaticText import StaticText
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
 from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
-from Components.PluginComponent import plugins
-from Components.config import *
-from Components.ConfigList import ConfigList, ConfigListScreen
+from Components.ConfigList import ConfigListScreen
 from Components.ScrollLabel import ScrollLabel
-# from Components.FileList import FileList
-from re import compile as re_compile
-from os import path as os_path, listdir
-from Components.MenuList import MenuList
-from Components.Harddisk import harddiskmanager
-from Tools.Directories import SCOPE_CURRENT_SKIN, resolveFilename, fileExists
-from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, eServiceReference, eServiceCenter, gFont
-from Tools.LoadPixmap import LoadPixmap
-from Screens.EpgSelection import EPGSelection
-from Screens.ChannelSelection import SimpleChannelSelection
-from ServiceReference import ServiceReference
-from Screens.Screen import Screen
-from Screens.InfoBar import MoviePlayer
+from Components.GUIComponent import GUIComponent
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.HelpMenu import HelpableScreen
-from Components.GUIComponent import GUIComponent
-from Components.Sources.List import List
-from Tools.LoadPixmap import LoadPixmap
-from Tools.BoundFunction import boundFunction
-from Tools.Directories import pathExists, fileExists, SCOPE_SKIN_IMAGE, resolveFilename
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
-from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, loadPNG, RT_WRAP, eConsoleAppContainer, eServiceCenter, eServiceReference, getDesktop, loadPic, loadJPG, RT_VALIGN_CENTER, gPixmapPtr, ePicLoad, eTimer
-import sys
-import os
-import re
-import shutil
-import json
-import skin
-from os import path, remove
-from twisted.web.client import downloadPage
-from twisted.web import client, error as weberror
-from twisted.internet import reactor
-from twisted.internet import defer
-import six
-from six.moves.urllib.parse import urlencode
+from Tools.Directories import fileExists
+from twisted.internet.reactor import callInThread
+from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, eServiceCenter, gFont
+from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, eConsoleAppContainer, eServiceCenter, gPixmapPtr, ePicLoad
+
 from .__init__ import _
-
 from . import tmdbsimple as tmdb
+
 tmdb.API_KEY = 'd42e6b820a1541cc69ce789671feba39'
-
-
 pname = _("TMDb")
 pdesc = _("TMDb ... function for Movielist")
-pversion = "0.7-r2"
-pdate = "20171215"
+pversion = "0.7-r3"
+pdate = "20221107"
 
 config.plugins.tmdb = ConfigSubsection()
 config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
@@ -85,7 +60,7 @@ def cleanFile(text):
 	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '')
 
 	for word in cutlist:
-		text = re.sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)', '+', text, flags=re.I)
+		text = sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)', '+', text, flags=I)
 	text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '')
 
 	return text
@@ -104,7 +79,7 @@ class createList(GUIComponent, object):
 		self.mode = mode
 		self.l = eListboxPythonMultiContent()
 		#self.l.setFont(0, gFont('Regular', 22))
-		font, size = skin.parameters.get("TMDbListFont", ('Regular', 23))
+		font, size = parameters.get("TMDbListFont", ('Regular', 23))
 		self.l.setFont(0, gFont(font, size))
 		self.l.setItemHeight(30)
 		self.l.setBuildFunc(self.buildList)
@@ -114,7 +89,7 @@ class createList(GUIComponent, object):
 			width = self.l.getItemSize().width()
 			(title, coverUrl, media, id) = entry
 			res = [None]
-			x, y, w, h = skin.parameters.get("TMDbListName", (5, 1, 1920, 30))
+			x, y, w, h = parameters.get("TMDbListName", (5, 1, 1920, 30))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, str(title)))
 			#res.append((eListboxPythonMultiContent.TYPE_TEXT, 10, 0, 800, 30, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(title)))
 			return res
@@ -288,8 +263,8 @@ class tmdbScreen(Screen, HelpableScreen):
 
 	def onFinish(self):
 		if not self.text == "":
-			if re.search('[Ss][0-9]+[Ee][0-9]+', self.text):
-				self.text = re.sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+', '', self.text, flags=re.S | re.I)
+			if search('[Ss][0-9]+[Ee][0-9]+', self.text):
+				self.text = sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+', '', self.text, flags=re.S | I)
 			#self.text="xyzabc"
 			self.tmdbSearch()
 		else:
@@ -349,7 +324,6 @@ class tmdbScreen(Screen, HelpableScreen):
 				except:
 					pass
 
-				cover = self.tempDir + id + ".jpg"
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 
 				if not id == "" or not title == "" or not media == "":
@@ -369,11 +343,25 @@ class tmdbScreen(Screen, HelpableScreen):
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
 			if not fileExists(self.tempDir + id + ".jpg"):
-				downloadPage(six.ensure_binary(url_cover), self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
+#				downloadPage(ensure_binary(url_cover), self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback()
+				callInThread(self.threadDownloadPage, url_cover, "%sid.jpg" % self.tempDir, self.getData, self.dataError)
 			else:
 				self.showCover(self.tempDir + id + ".jpg")
 
-	def getData(self, data, coverSaved):
+	def threadDownloadPage(self, link, file, success, fail=None):
+		link = ensure_binary(quote_plus(link))
+#		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		try:
+			response = get(link)
+			response.raise_for_status()
+			with open(file, "wb") as f:
+				f.write(response.content)
+			success(file)
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
+
+	def getData(self, coverSaved):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
@@ -475,7 +463,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		while count < len(list):
 			id = list[count][0][3]
 			try:
-				os.remove(self.tempDir + id + ".jpg")
+				remove(self.tempDir + id + ".jpg")
 			except:
 				pass
 			count += 1
@@ -797,13 +785,13 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		try:
 			description = json_data['overview']
 			description = description + "\n\n" + cast_string + "\n" + crew_string
-			if six.PY2:
+			if PY2:
 				description = description.encode('utf_8', 'ignore')
 			self['description'].setText("%s" % description)
 
 			movieinfo = "%s%s %s %s" % (str(genre_string), str(country_string), str(year), str(runtime))
 			fulldescription = subtitle + movieinfo + "\n\n" + description + "\n" + season
-			if six.PY2:
+			if PY2:
 				fulldescription = fulldescription.encode('utf_8', 'ignore')
 			self['fulldescription'].setText("%s" % fulldescription)
 			self.text = fulldescription
@@ -1001,7 +989,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
 			if not fileExists(self.tempDir + id + ".jpg"):
-				downloadPage(six.ensure_binary(url_cover), self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
+				downloadPage(ensure_binary(url_cover), self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
 			else:
 				self.showCover(self.tempDir + id + ".jpg")
 
@@ -1115,7 +1103,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		while count < len(list):
 			id = list[count][0][3]
 			try:
-				os.remove(self.tempDir + id + ".jpg")
+				remove(self.tempDir + id + ".jpg")
 			except:
 				pass
 			count += 1
@@ -1237,7 +1225,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
 			if not fileExists(self.tempDir + id + ".jpg"):
-				downloadPage(six.ensure_binary(url_cover), self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
+				downloadPage(ensure_binary(url_cover), self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
 			else:
 				self.showCover(self.tempDir + id + ".jpg")
 
@@ -1325,7 +1313,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		while count < len(list):
 			id = list[count][0][3]
 			try:
-				os.remove(self.tempDir + id + ".jpg")
+				remove(self.tempDir + id + ".jpg")
 			except:
 				pass
 			count += 1
