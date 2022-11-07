@@ -1,0 +1,74 @@
+# Italian translations for PACKAGE package
+# Traduzioni italiane per il pacchetto PACKAGE..
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
+"PO-Revision-Date: 2022-11-04 18:58+0100\n"
+"Language-Team: Italian <>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
+
+msgid "AB IPBox 9900/99/55 HD RCU"
+msgstr "AB IPBox 9900/99/55 HD RCU"
+
+msgid "Alien1 old RCU"
+msgstr "Alien1 vecchia RCU"
+
+msgid "Alien2/1 RCU"
+msgstr "Alien2/1 RCU"
+
+msgid "Apply"
+msgstr "Applica"
+
+msgid "Are you sure?"
+msgstr "Sei sicuro?"
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "GI LX3 RCU"
+msgstr "GI LX3 RCU"
+
+msgid "Gigablue 800 UE Plus RCU"
+msgstr "Gigablue 800 UE Plus RCU"
+
+msgid "Mutant HD2400 RCU"
+msgstr "Mutant HD2400 RCU"
+
+msgid "Octagon SF8 RCU"
+msgstr "Octagon SF8 RCU"
+
+msgid "RCU Select"
+msgstr "Seleziona RCU"
+
+msgid "Technomate Nano RCU"
+msgstr "Technomate Nano RCU"
+
+msgid "WeTek Play (Classic) RCU"
+msgstr "WeTek Play (Classico) RCU"
+
+msgid "WeTek Play Enigma2 RCU"
+msgstr "WeTek Play Enigma2 RCU"
+
+msgid "WeTek Play OpenElec RCU"
+msgstr "WeTek Play OpenElec RCU"
+
+msgid "WeTek Play2 RCU"
+msgstr "WeTek Play2 RCU"
+
+msgid "Zgemma Star RCU"
+msgstr "Zgemma Star RCU"
+
+msgid "xtrend ET10000 RCU"
+msgstr "xtrend ET10000 RCU"

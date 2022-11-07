@@ -1,0 +1,64 @@
+# Italian translations for PACKAGE package
+# Traduzioni italiane per il pacchetto PACKAGE..
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
+"PO-Revision-Date: 2022-11-05 07:53+0100\n"
+"Language-Team: Italian <>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
+
+msgid "/"
+msgstr "/"
+
+msgid "Alpha Value"
+msgstr "Valore alfa"
+
+msgid "Enter your input data"
+msgstr "Inserisci i tuoi dati"
+
+msgid "Exit"
+msgstr "Esci"
+
+msgid ""
+"If you want to quit the Browser,\n"
+"Press RED -> EXIT."
+msgstr "Se vuoi uscire dal browser,\npremi ROSSO -> ESCI."
+
+msgid "Keyboard"
+msgstr "Tastiera"
+
+msgid "Language"
+msgstr "Lingua"
+
+msgid "Mouse"
+msgstr "Mouse"
+
+msgid "No, but play video again"
+msgstr "No, ma riproduci di nuovo il video"
+
+msgid "Sorry, video is not available!"
+msgstr "Spiacenti, il video non è disponibile!"
+
+msgid "Start"
+msgstr "Avvia"
+
+msgid "Stop playing this movie?"
+msgstr "Smettere di riprodurre questo film?"
+
+msgid "Web Browser"
+msgstr "Web Browser"
+
+msgid "Yes"
+msgstr "Sì"

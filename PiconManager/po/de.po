@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PiconManagerMod\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-01-07 16:50+0100\n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: NaseDC\n"
 "Language-Team: NaseDC+shadowrider <plugins@fselbig.de>\n"
@@ -18,6 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
 "X-Generator: Poedit 3.0.1\n"
+
+msgid " "
+msgstr ""
+
+#, python-format
+msgid "%s"
+msgstr ""
 
 msgid "Activate debug logging?"
 msgstr "Debug-Protokollierung aktivieren?"

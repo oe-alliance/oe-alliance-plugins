@@ -1,11 +1,12 @@
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: RemoteChannelStream\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 13:07+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: Diamondear <diavar@tin.it>\n"
+"PO-Revision-Date: 2022-11-04 19:05+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,67 +14,67 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Lokalize 22.08.2\n"
 "X-Poedit-SearchPath-0: ../../..\n"
 
 msgid "Adress:"
 msgstr "Indirizzo:"
 
 msgid "Checking for alternatives"
-msgstr ""
+msgstr "Verifica delle alternative"
 
 msgid "Close"
 msgstr "Chiudi"
 
 msgid "Connection to remote IP ok"
-msgstr "Collegamento  IP Remoto OK"
+msgstr "Connessione a IP remoto ok"
 
 msgid "Convert remote channel list for streaming"
-msgstr "Convertire l'elenco Remoto dei canali per lo streaming"
+msgstr "Converti l'elenco dei canali remoti per lo streaming"
 
 msgid "Could not connect to remote IP"
-msgstr "Impossibile connettersi all' IP Remoto"
+msgstr "Impossibile connettersi all'IP remoto"
 
 msgid "Download"
-msgstr "Scarica"
+msgstr "Download"
 
 msgid "Download from remote failed"
-msgstr "Scaricamento Remoto non riuscito"
+msgstr "Download da remoto non riuscito"
 
 msgid "Downloading remote services"
-msgstr "Scaricamento dei Servizi Remoti"
+msgstr "Download di servizi remoti"
 
 msgid "Enter address"
-msgstr "Inserire l'indirizzo"
+msgstr "Inserisci indirizzo"
 
 msgid "Enter password"
-msgstr "Inserire la Password"
+msgstr "Inserisci password"
 
 msgid "Enter username"
-msgstr "Inserire Utente"
+msgstr "Inserisci nome utente"
 
 msgid "Exit"
 msgstr "Esci"
 
 msgid "FTP Server Editor"
-msgstr "FTP Server Editor"
+msgstr "Editor server FTP"
 
 #, python-format
 msgid "FTP reading alternatives %d of %d"
-msgstr ""
+msgstr "Lettura alternativa FTP %d di %d"
 
 #, python-format
 msgid "FTP reading bouquets %d of %d"
-msgstr ""
+msgstr "Lettura bouquet FTP %d di %d"
 
 msgid "FTPport:"
-msgstr "FTP Port:"
+msgstr "Porta FTP:"
 
 msgid "IP:"
 msgstr "IP:"
 
 msgid "Invert"
-msgstr "Invertire"
+msgstr "Inverti"
 
 msgid "Keyboard"
 msgstr "Tastiera"
@@ -82,7 +83,7 @@ msgid "Make your selection"
 msgstr "Fai la tua scelta"
 
 msgid "No bouquets selected"
-msgstr "Nessun Bouquet Selezionato"
+msgstr "Nessun bouquet selezionato"
 
 msgid "OK"
 msgstr "OK"
@@ -94,31 +95,31 @@ msgid "Password:"
 msgstr "Password:"
 
 msgid "Remote channel stream converter"
-msgstr "Convertitore flusso Canale remoto"
+msgstr "Convertitore di stream di canali remoti"
 
 msgid "Select a remote server IP first"
-msgstr "Selezionare prima l'IP del Server Remoto"
+msgstr "Seleziona prima un IP del server remoto"
 
 msgid "Select bouquets to convert"
-msgstr "Selezionare il Bouquet da Convertire"
+msgstr "Seleziona i bouquet da convertire"
 
 msgid "Set server IP"
-msgstr "Set IP Server"
+msgstr "Imposta IP del server"
 
 msgid "Telnetport:"
-msgstr "Telnet Port:"
+msgstr "Porta Telnet:"
 
 msgid "Testing remote connection"
-msgstr "Test della Connessione Remota"
+msgstr "Test della connessione remota"
 
 msgid "Use IP"
 msgstr "Usa IP"
 
 msgid "Use address"
-msgstr "Usa Indirizzo"
+msgstr "Usa indirizzo"
 
 msgid "Username:"
-msgstr "Utente:"
+msgstr "Nome utente:"
 
 msgid "remote of"
-msgstr ""
+msgstr "remoto di"

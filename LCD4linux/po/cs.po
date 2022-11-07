@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD 4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2021-10-10 23:06+0200\n"
 "Last-Translator: Bakussa <bakuss @ OpenA.TV>\n"
 "Language-Team: none\n"
@@ -992,9 +992,6 @@ msgstr "Pouze vzdálenost"
 msgid "Distance+Illumination"
 msgstr "Vzdálenost + osvětlení"
 
-msgid "Illumination+Moonphase"
-msgstr "Osvětlení+Fáze měsíce"
-
 msgid "Distance+Moonphase"
 msgstr "Vzdálenost + fáze měsíce"
 
@@ -1007,9 +1004,6 @@ msgstr "Stáhnout log soubor"
 msgid "E"
 msgstr "V"
 
-msgid "Element"
-msgstr "Nastavení"
-
 msgid "ENE"
 msgstr "VSV"
 
@@ -1018,6 +1012,9 @@ msgstr "EPG"
 
 msgid "ESE"
 msgstr "VJV"
+
+msgid "Element"
+msgstr "Nastavení"
 
 msgid "Event Icon Bar"
 msgstr "Panel ikon události"
@@ -1037,11 +1034,11 @@ msgstr "Rozšířený popis"
 msgid "External IP Address"
 msgstr "Externí IP adresa"
 
-msgid "Filename"
-msgstr "Název souboru"
-
 msgid "Fastmode (2s)"
 msgstr "Rychlý mód (2s)"
+
+msgid "Filename"
+msgstr "Název souboru"
 
 msgid "First Quarter"
 msgstr "První čtvrtina"
@@ -1146,9 +1143,6 @@ msgstr "Spád"
 msgid "HDD"
 msgstr "HDD"
 
-msgid "Illumination only"
-msgstr "Pouze osvětlení"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1160,6 +1154,12 @@ msgstr "Zabezpečení IP není podporováno Boxem"
 
 msgid "Idle"
 msgstr "Nečinný"
+
+msgid "Illumination only"
+msgstr "Pouze osvětlení"
+
+msgid "Illumination+Moonphase"
+msgstr "Osvětlení+Fáze měsíce"
 
 msgid "Indoor"
 msgstr "Vnitřní"
@@ -1369,9 +1369,6 @@ msgstr "MJPEG Stream LCD 3 Virtuální jas"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 povolit"
 
-msgid "Moonphase only"
-msgstr "Pouze měsíční fáze"
-
 msgid "MSN"
 msgstr "MSN"
 
@@ -1474,6 +1471,9 @@ msgstr "Meteorologická stanice"
 msgid "Mini-EPG"
 msgstr "Mini-EPG"
 
+msgid "Mode"
+msgstr "Režim"
+
 msgid "Module 1"
 msgstr "Modul 1"
 
@@ -1543,9 +1543,6 @@ msgstr "Modul 5-6"
 msgid "Module 6"
 msgstr "Modul 6"
 
-msgid "Mode"
-msgstr "Režim"
-
 msgid "Mon"
 msgstr "Po"
 
@@ -1560,6 +1557,9 @@ msgstr "Měsíc - cesta k ikoně [ok]>"
 
 msgid "Moonphase"
 msgstr "Fáze měsíce"
+
+msgid "Moonphase only"
+msgstr "Pouze měsíční fáze"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2312,11 +2312,11 @@ msgstr "Počasí možnost deště"
 msgid "Weather Transparency"
 msgstr "Počasí průhlednost"
 
-msgid "Weather Wind speed unit"
-msgstr "Počasí jednotka rychlosti větru"
-
 msgid "Weather Wind Info Lines"
 msgstr "Počasí směr a rychlost větru"
+
+msgid "Weather Wind speed unit"
+msgstr "Počasí jednotka rychlosti větru"
 
 msgid "Weather-Icon Zoom"
 msgstr "Počasí- Ikona zvětšení"

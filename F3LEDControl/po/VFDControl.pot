@@ -8,29 +8,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 19:34+0200\n"
+"POT-Creation-Date: 2022-11-03 14:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-msgid "Clock always"
-msgstr ""
-
-msgid "Always off"
-msgstr ""
 
 msgid "15 sec"
 msgstr ""
@@ -44,26 +29,41 @@ msgstr ""
 msgid "60 sec"
 msgstr ""
 
-msgid "LED Display Setup"
+msgid "Always off"
 msgstr ""
 
 msgid "Cancel"
 msgstr ""
 
-msgid "Save"
+msgid "Change LED display settings"
 msgstr ""
 
-msgid "Update Date/Time"
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
+msgid "LED Display Setup"
+msgstr ""
+
+msgid "Save"
 msgstr ""
 
 msgid "Show on LED"
 msgstr ""
 
-msgid "Time to show Clock in Display"
-msgstr ""
-
 msgid "Time mode"
 msgstr ""
 
-msgid "Change LED display settings"
+msgid "Time to show Clock in Display"
+msgstr ""
+
+msgid "Update Date/Time"
 msgstr ""

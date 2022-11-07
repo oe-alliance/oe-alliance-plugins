@@ -1,0 +1,161 @@
+# Italian translations for PACKAGE package
+# Traduzioni italiane per il pacchetto PACKAGE..
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
+"PO-Revision-Date: 2022-11-04 19:50+0100\n"
+"Language-Team: Italian <>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
+
+msgid " "
+msgstr " "
+
+msgid "Author:"
+msgstr "Autore:"
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Countries:"
+msgstr "Paesi:"
+
+msgid "Cover resolution:"
+msgstr "Risoluzione copertina:"
+
+msgid "Crew"
+msgstr "Persone"
+
+msgid "Delete EIT file?"
+msgstr "Eliminare il file EIT?"
+
+msgid "Details"
+msgstr "Dettagli"
+
+msgid "Details down"
+msgstr "Dettagli giù"
+
+msgid "Details up"
+msgstr "Dettagli su"
+
+msgid "Director:"
+msgstr "Regista:"
+
+msgid "EIT file deleted!"
+msgstr "File EIT eliminato!"
+
+msgid "Edit search"
+msgstr "Modifica ricerca"
+
+msgid "Episodes"
+msgstr "Episodi"
+
+msgid "Exit"
+msgstr "Esci"
+
+msgid "Genre:"
+msgstr "Genere:"
+
+msgid "Language:"
+msgstr "Lingua:"
+
+msgid "Loading..."
+msgstr "Caricamento in corso..."
+
+msgid "Movie"
+msgstr "Film"
+
+#, python-format
+msgid "No Movie information found for %s"
+msgstr "Nessuna informazione trovata sul film %s"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Page down"
+msgstr "Pagina giù"
+
+msgid "Page up"
+msgstr "Pagina su"
+
+msgid "Runtime:"
+msgstr "Tempo di esecuzione:"
+
+msgid "Save TMDb movie infos to file"
+msgstr "Salva le informazioni TMDb del film su file"
+
+msgid "Search for Movie:"
+msgstr "Cerca film:"
+
+msgid "Season"
+msgstr "Stagione"
+
+msgid "Seasons"
+msgstr "Stagioni"
+
+msgid "Selection down"
+msgstr "Selezione giù"
+
+msgid "Selection up"
+msgstr "Selezione su"
+
+msgid "Series"
+msgstr "Serie"
+
+msgid "Setup"
+msgstr "Impostazioni"
+
+msgid "Show details"
+msgstr "Mostra dettagli"
+
+msgid "Show details if single result:"
+msgstr "Mostra dettagli se singolo risultato:"
+
+msgid "Studio:"
+msgstr "Studio:"
+
+#, python-format
+msgid "TMDB: Results for %s"
+msgstr "TMDB: risultati per %s"
+
+msgid "TMDb"
+msgstr "TMDb"
+
+msgid "TMDb ... function for Movielist"
+msgstr "TMDb... funzione per Movielist"
+
+msgid "TMDb Infos ..."
+msgstr "Informazioni TMDb..."
+
+msgid "TMDb information created!"
+msgstr "Informazioni TMDb create!"
+
+msgid "TMDb: No results found, or does not respond!"
+msgstr "TMDb: nessun risultato trovato o non risponde!"
+
+#, python-format
+msgid "Try to find %s in tmdb ..."
+msgstr "Provo a trovare %s in tmdb..."
+
+msgid "Various"
+msgstr "Vari"
+
+msgid "Votes:"
+msgstr "Voti:"
+
+msgid "Write TMDb Information?"
+msgstr "Scrivere informazioni su TMDb?"
+
+msgid "Year:"
+msgstr "Anno:"

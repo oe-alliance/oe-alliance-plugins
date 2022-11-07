@@ -1,0 +1,108 @@
+# Italian translations for PACKAGE package
+# Traduzioni italiane per il pacchetto PACKAGE..
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 14:48+0100\n"
+"PO-Revision-Date: 2022-11-04 06:41+0100\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"X-Generator: Lokalize 22.08.2\n"
+
+msgid "1 minute"
+msgstr "1 minuto"
+
+msgid "10 minutes"
+msgstr "10 minuti"
+
+msgid "2 minutes"
+msgstr "2 minuti"
+
+msgid "20 minutes"
+msgstr "20 minuti"
+
+msgid "3 minutes"
+msgstr "3 minuti"
+
+msgid "30 minutes"
+msgstr "30 minuti"
+
+msgid "5 minutes"
+msgstr "5 minuti"
+
+msgid "ABM CustomMix"
+msgstr "ABM CustomMix"
+
+msgid "ABM CustomMix Importer"
+msgstr "Importatore ABM CustomMix"
+
+msgid "ABMCustomMixImporter"
+msgstr "ABMCustomMixImporter"
+
+msgid "Allows you automatically fetch the CustomMix file."
+msgstr "Consente di recuperare automaticamente il file CustomMix."
+
+msgid "Delete file"
+msgstr "Elimina file"
+
+msgid "Enable autofetch"
+msgstr "Abilita recupero automatico"
+
+msgid "Exit"
+msgstr "Esci"
+
+msgid "Fetch file"
+msgstr "Recupera file"
+
+msgid "Fetching from github"
+msgstr "Recupera da github"
+
+msgid "File fetched and saved OK"
+msgstr "File recuperato e salvato OK"
+
+msgid "Import"
+msgstr "Importa"
+
+msgid "Lead time"
+msgstr "Tempi di consegna"
+
+msgid "Main menu"
+msgstr "Menu principale"
+
+msgid ""
+"Number of minutes prior to the ABM scan that the CustomMix file should be"
+" fetched"
+msgstr ""
+"Numero di minuti prima della scansione ABM durante i quali il file CustomMix"
+" deve essere recuperato"
+
+msgid "Really close without saving settings?"
+msgstr "Chiudere davvero senza salvare le impostazioni?"
+
+msgid "Save setup"
+msgstr "Salva configurazione"
+
+msgid "Saving CustomMix file"
+msgstr "Salvataggio del file CustomMix"
+
+msgid "Select the CustomMix you want to import"
+msgstr "Seleziona il CustomMix che desideri importare"
+
+msgid "Service searching"
+msgstr "Ricerca di servizi"
+
+msgid "Setup"
+msgstr "Imposta"
+
+msgid "Starting importer..."
+msgstr "Importatore iniziale..."

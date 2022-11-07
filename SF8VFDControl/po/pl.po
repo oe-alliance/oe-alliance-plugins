@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-15 13:10+0200\n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
 "PO-Revision-Date: 2019-02-15 13:10+0200\n"
 "Last-Translator: zukon\n"
 "Language-Team: \n"
@@ -20,6 +20,9 @@ msgstr "Zawsze wyłaczony"
 #
 msgid "Cancel"
 msgstr "Anuluj"
+
+msgid "Change LED display settings"
+msgstr ""
 
 msgid "Channelnumber in Standby Clock"
 msgstr "Numer kanału w Czuwaniu Zegar"

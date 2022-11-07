@@ -1,0 +1,241 @@
+# Italian translations for PACKAGE package
+# Traduzioni italiane per il pacchetto PACKAGE..
+# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
+"PO-Revision-Date: 2022-11-03 14:32+0100\n"
+"Language-Team: Italian <tp@lists.linux.it>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid ""
+" Media Info\n"
+"Name = "
+msgstr ""
+
+msgid "101 TV"
+msgstr ""
+
+msgid "3FM Alternative"
+msgstr ""
+
+msgid "538 Hitzone"
+msgstr ""
+
+msgid "538 NonStop40"
+msgstr ""
+
+msgid "538 Party"
+msgstr ""
+
+msgid "Best 24"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Cultura 24"
+msgstr ""
+
+msgid "Decibel"
+msgstr ""
+
+msgid "Dumpert.nl"
+msgstr ""
+
+msgid "Error..."
+msgstr ""
+
+msgid "Exit movie player?"
+msgstr ""
+
+msgid "Font Size in List"
+msgstr ""
+
+msgid "Holland Doc 24"
+msgstr ""
+
+msgid "Humor TV 24"
+msgstr ""
+
+msgid "Internet radio"
+msgstr ""
+
+msgid "InternetTV"
+msgstr ""
+
+msgid "Journaal 24"
+msgstr ""
+
+msgid "Livestreams"
+msgstr ""
+
+msgid "Modern layout"
+msgstr ""
+
+msgid "NERadio Hardstyle"
+msgstr ""
+
+msgid "NERadio Sweden - Best of Techno & Trance"
+msgstr ""
+
+msgid "NET5 Gemist"
+msgstr ""
+
+msgid "NPO Gemist"
+msgstr ""
+
+msgid "NPO Popular"
+msgstr ""
+
+msgid "NPO Uitgelicht"
+msgstr ""
+
+msgid "Nederland 1"
+msgstr ""
+
+msgid "Nederland 2"
+msgstr ""
+
+msgid "Nederland 3"
+msgstr ""
+
+msgid "Nieuw"
+msgstr ""
+
+msgid "No items matching your search criteria were found"
+msgstr ""
+
+msgid "No streams avaible"
+msgstr ""
+
+msgid "OK"
+msgstr ""
+
+msgid ""
+"Open Uitzending Gemist\n"
+"\n"
+"Based on Xtrend code"
+msgstr ""
+
+msgid "Open Uitzending Gemist options"
+msgstr ""
+
+msgid "Podcasts"
+msgstr ""
+
+msgid "Politiek 24"
+msgstr ""
+
+msgid "Q-Music Het Foute Non Stop"
+msgstr ""
+
+msgid "RTL XL A-Z"
+msgstr ""
+
+msgid "RTL XL Gemist"
+msgstr ""
+
+msgid "RTL XL Zoeken"
+msgstr ""
+
+msgid "Radio 1 Webcam"
+msgstr ""
+
+msgid "Radio 2 In Concert"
+msgstr ""
+
+msgid "Radio 2 Top 2000"
+msgstr ""
+
+msgid "Radio 2 Webcam"
+msgstr ""
+
+msgid "Radio 3 Webcam"
+msgstr ""
+
+msgid "Radio 53L8"
+msgstr ""
+
+msgid "Radio Gemist"
+msgstr ""
+
+msgid "SBS Zoeken"
+msgstr ""
+
+msgid "SBS6 Gemist"
+msgstr ""
+
+msgid "Save settings?"
+msgstr ""
+
+msgid "Search term"
+msgstr ""
+
+msgid "Setup"
+msgstr ""
+
+msgid "Show INTERNETTV"
+msgstr ""
+
+msgid "Show NPO"
+msgstr ""
+
+msgid "Show NPO livestreams"
+msgstr ""
+
+msgid "Show RADIO"
+msgstr ""
+
+msgid "Show RTL"
+msgstr ""
+
+msgid "Show SBS"
+msgstr ""
+
+msgid "Show pictures"
+msgstr ""
+
+msgid "Slam! Hardstyle"
+msgstr ""
+
+msgid "There was a problem retrieving the media list"
+msgstr ""
+
+msgid "Today"
+msgstr ""
+
+msgid "Toppers"
+msgstr ""
+
+msgid "VKMag.com"
+msgstr ""
+
+msgid "Veronica Gemist"
+msgstr ""
+
+msgid "Video's"
+msgstr ""
+
+msgid "Voor deze aflevering moet waarschijnlijk betaald worden."
+msgstr ""
+
+msgid "Watch uitzending gemist"
+msgstr ""
+
+msgid "Z@ppelin/ Zapp"
+msgstr ""
+
+msgid "highlights"
+msgstr ""
+
+msgid "luckytv.nl"
+msgstr ""

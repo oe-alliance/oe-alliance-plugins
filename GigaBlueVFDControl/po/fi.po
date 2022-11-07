@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2021-06-01 04:02+0300\n"
 "Last-Translator: tomppaa <www.huoltovalikko.com>\n"
 "Language-Team: Tomppaa\n"
@@ -30,6 +30,9 @@ msgstr "Kirkkaus Valmiustila"
 
 msgid "Cancel"
 msgstr "Peruuta"
+
+msgid "Change LED display settings"
+msgstr ""
 
 msgid "Channel number with leading zeros"
 msgstr "Kanavanumero etu nollilla"

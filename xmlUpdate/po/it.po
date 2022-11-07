@@ -1,78 +1,90 @@
 # Italian translations for PACKAGE package.
 # Copyright (C) 2018 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Automatically generated, 2018.
 #
+# Automatically generated, 2018.
+# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2018-04-10 11:56+0200\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-11-05 08:06+0100\n"
+"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
+"Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.08.2\n"
 
 msgid "/etc/enigma2"
-msgstr ""
+msgstr "/etc/enigma2"
 
 msgid "/etc/tuxbox (default)"
-msgstr ""
+msgstr "/etc/tuxbox (predefinito)"
 
 msgid "Exit"
-msgstr ""
+msgstr "Esci"
 
 msgid "Fetch"
-msgstr ""
+msgstr "Recupero"
 
 #, python-format
 msgid ""
 "Fetching and saving %s.xml succeeded.\n"
 "Restart now for changes to take immediate effect?"
 msgstr ""
+"Recupero e salvataggio di %s.xml riusciti.\nRiavviare ora per rendere"
+" effettive le modifiche?"
 
-msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
+msgid ""
+"File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
 msgstr ""
+"File in aggiornamento, ad es. satellites.xml, cables.xml o terrestrial.xml."
 
-msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
+msgid ""
+"Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the"
+" default location. Files stored in \"/etc/enigma2\" override the default file"
+" and are not updated on a software update."
 msgstr ""
+"Cartella in cui verrà salvato il file scaricato. \"/etc/tuxbox\" è la"
+" posizione predefinita. I file archiviati in \"/etc/enigma2\" sovrascrivono"
+" il file predefinito e non vengono aggiornati con un aggiornamento software."
 
 msgid "OE-Alliance"
-msgstr ""
+msgstr "OE-Alliance"
 
 msgid "Online source where the transponder xml file is being retrieved from."
-msgstr ""
+msgstr "Fonte online da cui viene recuperato il file xml del transponder."
 
 msgid "Save to"
-msgstr ""
+msgstr "Salva in"
 
 #, python-format
 msgid "Saving the %s.xml file failed"
-msgstr ""
+msgstr "Salvataggio del file %s.xml non riuscito"
 
 msgid "Source"
-msgstr ""
+msgstr "Sorgente"
 
 #, python-format
 msgid "The %s.xml download was corrupt."
-msgstr ""
+msgstr "Il download di %s.xml era danneggiato."
 
 #, python-format
 msgid "The %s.xml file could not be fetched"
-msgstr ""
+msgstr "Impossibile recuperare il file %s.xml"
 
 msgid "XML update"
-msgstr ""
+msgstr "Aggiornamento XML"
 
 msgid "cable"
-msgstr ""
+msgstr "cavo"
 
 msgid "satellite"
-msgstr ""
+msgstr "satellite"
 
 msgid "terrestrial"
-msgstr ""
+msgstr "terrestre"

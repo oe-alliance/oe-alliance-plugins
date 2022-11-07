@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 19:47+0200\n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
 "PO-Revision-Date: 2022-07-07 19:48+0200\n"
 "Last-Translator: mike99 <mike99@mail.to>\n"
 "Language-Team: Deutsch <> j-ot&Trial\n"
@@ -14,11 +14,20 @@ msgstr ""
 "X-Generator: Poedit 3.1\n"
 "X-Poedit-SourceCharset: iso-8859-15\n"
 
-msgid "Channelnumber in Standby off"
-msgstr "Kanalnummer im Standby aus"
+msgid "Always off"
+msgstr "Immer aus"
+
+msgid "Cancel"
+msgstr "Schließen"
+
+msgid "Change LED display settings"
+msgstr "LED-Anzeige konfigurieren."
 
 msgid "Channelnumber in Standby Clock"
 msgstr "Kanalnummer im Standby Uhr"
+
+msgid "Channelnumber in Standby off"
+msgstr "Kanalnummer im Standby aus"
 
 msgid "Channelnumber/Clock in Standby Clock"
 msgstr "Kanalnummer/Uhr im Standby Uhr"
@@ -26,17 +35,8 @@ msgstr "Kanalnummer/Uhr im Standby Uhr"
 msgid "Clock always"
 msgstr "Uhr immer anzeigen"
 
-msgid "Always off"
-msgstr "Immer aus"
-
-msgid "Cancel"
-msgstr "Schließen"
-
 msgid "Save"
 msgstr "Speichern"
-
-msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktualisieren"
 
 msgid "Show on VFD"
 msgstr "Auf VFD anzeigen"
@@ -44,8 +44,8 @@ msgstr "Auf VFD anzeigen"
 msgid "Time mode"
 msgstr "Zeit Modus"
 
+msgid "Update Date/Time"
+msgstr "Datum/Uhrzeit aktualisieren"
+
 msgid "VFD_SF8"
 msgstr "VFD_SF8"
-
-msgid "Change LED display settings"
-msgstr "LED-Anzeige konfigurieren."

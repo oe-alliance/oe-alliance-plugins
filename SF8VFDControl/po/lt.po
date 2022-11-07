@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SF8VFDControl\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
 "PO-Revision-Date: 2017-07-06 07:07+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P.\n"
@@ -20,6 +20,9 @@ msgstr "Visada išjungtas"
 
 msgid "Cancel"
 msgstr "Atšaukti"
+
+msgid "Change LED display settings"
+msgstr ""
 
 msgid "Channelnumber in Standby Clock"
 msgstr "Kanalo numeris budėjimo metu"

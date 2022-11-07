@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-10 21:04+0200\n"
+"POT-Creation-Date: 2022-11-03 07:54+0100\n"
 "PO-Revision-Date: 2021-10-10 23:46+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
@@ -994,9 +994,6 @@ msgstr "nur Abstand"
 msgid "Distance+Illumination"
 msgstr "Abstand+Ausleuchtung"
 
-msgid "Illumination+Moonphase"
-msgstr "Ausleuchtung+Mondphase"
-
 msgid "Distance+Moonphase"
 msgstr "Abstand+Mondphase"
 
@@ -1009,9 +1006,6 @@ msgstr "Download Logdatei"
 msgid "E"
 msgstr "O"
 
-msgid "Element"
-msgstr "Element"
-
 msgid "ENE"
 msgstr "ONO"
 
@@ -1020,6 +1014,9 @@ msgstr "EPG"
 
 msgid "ESE"
 msgstr "OSO"
+
+msgid "Element"
+msgstr "Element"
 
 msgid "Event Icon Bar"
 msgstr "Ereignis Icon Bar"
@@ -1039,11 +1036,11 @@ msgstr "Erweiterte Beschreibung"
 msgid "External IP Address"
 msgstr "Externe IP Adresse"
 
-msgid "Filename"
-msgstr "Dateiname"
-
 msgid "Fastmode (2s)"
 msgstr "Fastmode (2s)"
+
+msgid "Filename"
+msgstr "Dateiname"
 
 msgid "First Quarter"
 msgstr "Erstes Viertel"
@@ -1148,9 +1145,6 @@ msgstr "Verlauf"
 msgid "HDD"
 msgstr "HDD"
 
-msgid "Illumination only"
-msgstr "nur Ausleuchtung"
-
 msgid "IMAP"
 msgstr "IMAP"
 
@@ -1162,6 +1156,12 @@ msgstr "IP Sicherheit durch Box nicht unterstützt"
 
 msgid "Idle"
 msgstr "Leerlauf"
+
+msgid "Illumination only"
+msgstr "nur Ausleuchtung"
+
+msgid "Illumination+Moonphase"
+msgstr "Ausleuchtung+Mondphase"
 
 msgid "Indoor"
 msgstr "Indoor"
@@ -1371,9 +1371,6 @@ msgstr "MJPEG Stream LCD 3 virtuelle Helligkeit"
 msgid "MJPEG Stream LCD 3 enable"
 msgstr "MJPEG Stream LCD 3 aktiv"
 
-msgid "Moonphase only"
-msgstr "nur Mondphase"
-
 msgid "MSN"
 msgstr "MSN"
 
@@ -1476,6 +1473,9 @@ msgstr "Meteo-Wetter Station"
 msgid "Mini-EPG"
 msgstr "Mini-EPG"
 
+msgid "Mode"
+msgstr "Modus"
+
 msgid "Module 1"
 msgstr "Modul 1"
 
@@ -1545,9 +1545,6 @@ msgstr "Module 5-6"
 msgid "Module 6"
 msgstr "Modul 6"
 
-msgid "Mode"
-msgstr "Modus"
-
 msgid "Mon"
 msgstr "Mo"
 
@@ -1562,6 +1559,9 @@ msgstr "Mond-Icon-Verz. [ok]>"
 
 msgid "Moonphase"
 msgstr "Mondphase"
+
+msgid "Moonphase only"
+msgstr "nur Mondphase"
 
 msgid "MusicCast"
 msgstr "MusicCast"
@@ -2314,11 +2314,11 @@ msgstr "Wetter Regen Wahrscheinlichkeit"
 msgid "Weather Transparency"
 msgstr "Wetter Transparenz"
 
-msgid "Weather Wind speed unit"
-msgstr "Wetter Wind Einheit"
-
 msgid "Weather Wind Info Lines"
 msgstr "Wetter Wind Infozeilen"
+
+msgid "Weather Wind speed unit"
+msgstr "Wetter Wind Einheit"
 
 msgid "Weather-Icon Zoom"
 msgstr "Wetter-Icon Zoom"

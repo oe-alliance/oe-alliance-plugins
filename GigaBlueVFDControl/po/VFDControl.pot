@@ -8,85 +8,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-07 19:41+0200\n"
+"POT-Creation-Date: 2022-11-03 14:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Channelnumber in Standby off"
-msgstr ""
-
-msgid "Channelnumber in Standby Clock"
-msgstr ""
-
-msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
-
-msgid "Clock always"
-msgstr ""
-
 msgid "Always off"
-msgstr ""
-
-msgid "No"
-msgstr ""
-
-msgid "Yes"
-msgstr ""
-
-msgid "None"
-msgstr ""
-
-msgid "Blue"
-msgstr ""
-
-msgid "Red"
-msgstr ""
-
-msgid "Purple"
-msgstr ""
-
-msgid "GigaBlue Setup"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Update Date/Time"
-msgstr ""
-
-msgid "Enable led"
-msgstr ""
-
-msgid "Led Deep Standby"
-msgstr ""
-
-msgid "Led state RUN"
-msgstr ""
-
-msgid "Led state Standby"
-msgstr ""
-
-msgid "Led state Deep Standby"
-msgstr ""
-
-msgid "Led state Record"
 msgstr ""
 
 msgid "Blink Record Led"
 msgstr ""
 
-msgid "Led state HDD /dev/sda active"
-msgstr ""
-
-msgid "Led state HDD /dev/sdb active"
+msgid "Blue"
 msgstr ""
 
 msgid "Brightness"
@@ -95,23 +32,86 @@ msgstr ""
 msgid "Brightness Standby"
 msgstr ""
 
-msgid "Show on VFD"
+msgid "Cancel"
 msgstr ""
 
-msgid "Show clock in Deep Standby"
-msgstr ""
-
-msgid "Time mode"
+msgid "Change LED display settings"
 msgstr ""
 
 msgid "Channel number with leading zeros"
 msgstr ""
 
+msgid "Channelnumber in Standby Clock"
+msgstr ""
+
+msgid "Channelnumber in Standby off"
+msgstr ""
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr ""
+
+msgid "Clock always"
+msgstr ""
+
 msgid "Display/LED"
+msgstr ""
+
+msgid "Enable led"
+msgstr ""
+
+msgid "GigaBlue Setup"
 msgstr ""
 
 msgid "LED"
 msgstr ""
 
-msgid "Change LED display settings"
+msgid "Led Deep Standby"
+msgstr ""
+
+msgid "Led state Deep Standby"
+msgstr ""
+
+msgid "Led state HDD /dev/sda active"
+msgstr ""
+
+msgid "Led state HDD /dev/sdb active"
+msgstr ""
+
+msgid "Led state RUN"
+msgstr ""
+
+msgid "Led state Record"
+msgstr ""
+
+msgid "Led state Standby"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "None"
+msgstr ""
+
+msgid "Purple"
+msgstr ""
+
+msgid "Red"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Show clock in Deep Standby"
+msgstr ""
+
+msgid "Show on VFD"
+msgstr ""
+
+msgid "Time mode"
+msgstr ""
+
+msgid "Update Date/Time"
+msgstr ""
+
+msgid "Yes"
 msgstr ""
