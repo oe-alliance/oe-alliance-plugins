@@ -19,7 +19,7 @@ class download:
 		return
 
 	def threadDownloadPage(self, link, file, success, fail=None):
-		link = ensure_binary(quote_plus(link))
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 		try:
 			response = get(link)
 			response.raise_for_status()
