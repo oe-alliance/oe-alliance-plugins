@@ -321,7 +321,5 @@ class ChannelsImporter(Screen):
 			print('[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:', err)
 		except URLError as err:
 			print('[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:', err.reason[0])
-		#except urllib2 as err:
-		#	print('[ChannelsImporter][saveEPGonRemoteReceiver] ERROR:', err)
 		except:
 			print('[ChannelsImporter][saveEPGonRemoteReceiver] undefined error')

@@ -100,8 +100,6 @@ class xmlUpdate(ConfigListScreen, Screen):
 			print('[xmlUpdate][fetchURL] ERROR:', err)
 		except URLError as err:
 			print('[xmlUpdate][fetchURL] ERROR:', err.reason[0])
-		#except urllib2 as err:
-		#	print('[xmlUpdate][fetchURL] ERROR:', err)
 		except:
 			import sys
 			print('[xmlUpdate][fetchURL] undefined error', sys.exc_info()[0])
