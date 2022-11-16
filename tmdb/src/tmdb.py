@@ -11,11 +11,10 @@
 #source code of your modifications.
 #######################################################################
 
-from __future__ import print_function
-from __future__ import absolute_import
+from __future__ import print_function, absolute_import
 
 from os import remove
-from re import search, sub, I
+from re import search, sub, S, I
 from skin import parameters
 from requests import get, exceptions
 from six import ensure_binary, PY2
@@ -182,7 +181,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 	def keyOK(self):
 		for x in self["config"].list:
 			x[1].save()
-		configfile.save()
+#		configfile.save()
 		self.close()
 
 
@@ -264,7 +263,7 @@ class tmdbScreen(Screen, HelpableScreen):
 	def onFinish(self):
 		if not self.text == "":
 			if search('[Ss][0-9]+[Ee][0-9]+', self.text):
-				self.text = sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+', '', self.text, flags=re.S | I)
+				self.text = sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+', '', self.text, flags=S | I)
 			#self.text="xyzabc"
 			self.tmdbSearch()
 		else:
@@ -342,15 +341,13 @@ class tmdbScreen(Screen, HelpableScreen):
 		if url_cover[-4:] == "None":
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
-			if not fileExists(self.tempDir + id + ".jpg"):
-#				downloadPage(ensure_binary(url_cover), self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback()
-				callInThread(self.threadDownloadPage, url_cover, "%sid.jpg" % self.tempDir, self.getData, self.dataError)
+			if not fileExists("%s%s.jpg" % (self.tempDir, id)):
+				callInThread(self.threadDownloadPage, url_cover, "%s%s.jpg" % (self.tempDir, id), boundFunction(getData, "%s%s.jpg" % (self.tempDir, id)), self.dataError)
 			else:
-				self.showCover(self.tempDir + id + ".jpg")
+				self.showCover("%s%s.jpg" % (self.tempDir, id))
 
 	def threadDownloadPage(self, link, file, success, fail=None):
-		link = ensure_binary(quote_plus(link))
-#		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 		try:
 			response = get(link)
 			response.raise_for_status()
@@ -402,7 +399,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		title = self['list'].getCurrent()[0]
 		media = self['list'].getCurrent()[2]
 		id = self['list'].getCurrent()[3]
-		cover = self.tempDir + id + ".jpg"
+		cover = "%s%s.jpg" % (self.tempDir, id)
 
 		self.session.open(tmdbScreenMovie, title, media, cover, id, self.saveFilename)
 
@@ -463,7 +460,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		while count < len(list):
 			id = list[count][0][3]
 			try:
-				remove(self.tempDir + id + ".jpg")
+				remove("%s%s.jpg" % (self.tempDir, id))
 			except:
 				pass
 			count += 1
@@ -968,7 +965,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 				id = str(casts['id'])
 				title = str(casts['name']) + " (" + str(casts['character']) + ")"
 				coverPath = str(casts['profile_path'])
-				cover = self.tempDir + id + ".jpg"
+				cover = "%s%s.jpg" % (self.tempDir, id)
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 
 				if not id == "" or not title == "":
@@ -988,10 +985,22 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		if url_cover[-4:] == "None":
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
-			if not fileExists(self.tempDir + id + ".jpg"):
-				downloadPage(ensure_binary(url_cover), self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
+			if not fileExists("%s%s.jpg" % (self.tempDir, id)):
+				callInThread(self.threadDownloadPage, url_cover, "%s%s.jpg" % (self.tempDir, id), boundFunction(self.getData, "%s%s.jpg" % (self.tempDir, id)), self.dataError)
 			else:
-				self.showCover(self.tempDir + id + ".jpg")
+				self.showCover("%s%s.jpg" % (self.tempDir, id))
+
+	def threadDownloadPage(self, link, file, success, fail=None):
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		try:
+			response = get(link)
+			response.raise_for_status()
+			with open(file, "wb") as f:
+				f.write(response.content)
+			success(file)
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def getData(self, data, coverSaved):
 		self.showCover(coverSaved)
@@ -1103,7 +1112,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		while count < len(list):
 			id = list[count][0][3]
 			try:
-				remove(self.tempDir + id + ".jpg")
+				remove("%s%s.jpg" % (self.tempDir, id))
 			except:
 				pass
 			count += 1
@@ -1193,7 +1202,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				title = "%s %s" % (title, titledate)
 				overview = str(json_data_episodes['overview'])
 				coverPath = str(json_data_episodes['poster_path'])
-				cover = self.tempDir + id + ".jpg"
+				cover = "%s%s.jpg" % (self.tempDir, id)
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 				if not id == "" or not title == "":
 					res.append(((title, url_cover, overview, id),))
@@ -1205,7 +1214,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 					title = "%+6s %s" % (title, name)
 					overview = str(names['overview'])
 					coverPath = str(names['still_path'])
-					cover = self.tempDir + id + ".jpg"
+					cover = "%s%s.jpg" % (self.tempDir, id)
 					url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 					if not id == "" or not title == "":
 						res.append(((title, url_cover, overview, id),))
@@ -1224,10 +1233,22 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		if url_cover[-4:] == "None":
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
-			if not fileExists(self.tempDir + id + ".jpg"):
-				downloadPage(ensure_binary(url_cover), self.tempDir + id + ".jpg").addCallback(self.getData, self.tempDir + id + ".jpg").addErrback(self.dataError)
+			if not fileExists("%s%s.jpg" % (self.tempDir, id)):
+				callInThread(self.threadDownloadPage, url_cover, "%s%s.jpg" % (self.tempDir, id), boundFunction(self.getData, "%s%s.jpg" % (self.tempDir, id)), self.dataError)
 			else:
-				self.showCover(self.tempDir + id + ".jpg")
+				self.showCover("%s%s.jpg" % (self.tempDir, id))
+
+	def threadDownloadPage(self, link, file, success, fail=None):
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		try:
+			response = get(link)
+			response.raise_for_status()
+			with open(file, "wb") as f:
+				f.write(response.content)
+			success(file)
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def getData(self, data, coverSaved):
 		self.showCover(coverSaved)
@@ -1313,7 +1334,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		while count < len(list):
 			id = list[count][0][3]
 			try:
-				remove(self.tempDir + id + ".jpg")
+				remove("%s%s.jpg" % (self.tempDir, id))
 			except:
 				pass
 			count += 1
