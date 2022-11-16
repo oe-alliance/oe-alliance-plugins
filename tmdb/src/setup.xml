@@ -1,0 +1,7 @@
+<setupxml>
+	<setup key="TMDB" title="TMDB Settings">
+		<item level="0" text="Cover resolution:" description="Cover resolution:">config.plugins.tmdb.themoviedb_coversize</item>
+		<item level="0" text="Language:" description="Language:">config.plugins.tmdb.lang</item>
+		<item level="0" text="Show details if single result:" description="Show details if single result:">config.plugins.tmdb.firsthit</item>
+	</setup>
+</setupxml>

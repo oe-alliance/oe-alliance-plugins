@@ -18,21 +18,20 @@ from re import search, sub, S, I
 from skin import parameters
 from requests import get, exceptions
 from six import ensure_binary, PY2
-from six.moves.urllib.parse import quote_plus
-from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.config import config, getConfigListEntry, ConfigSubsection, ConfigSelection, ConfigYesNo
+from Components.ActionMap import HelpableActionMap
+from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo
 from Components.Label import Label
-from Components.Sources.StaticText import StaticText
 from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
-from Components.ConfigList import ConfigListScreen
 from Components.ScrollLabel import ScrollLabel
 from Components.GUIComponent import GUIComponent
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.HelpMenu import HelpableScreen
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 from Screens.MessageBox import MessageBox
 from Tools.Directories import fileExists
+from Tools.BoundFunction import boundFunction
 from twisted.internet.reactor import callInThread
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, eServiceCenter, gFont
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, eConsoleAppContainer, eServiceCenter, gPixmapPtr, ePicLoad
@@ -137,52 +136,10 @@ class createList(GUIComponent, object):
 			self.instance.moveSelection(self.instance.moveDown)
 
 
-class tmdbConfigScreen(Screen, ConfigListScreen):
+class tmdbConfigScreen(Setup):
 	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.skinName = ["tmdbConfigScreen", "Setup"]
-		self.setup_title = _("Setup")
-
-		self.onChangedEntry = []
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
-
-		self["actions"] = ActionMap(["TMDbActions"],
-			{
-				"cancel": self.keyCancel,
-				"save": self.keyOK,
-				"red": self.keyCancel,
-				"green": self.keyOK,
-			}, -2)
-
-		self["key_green"] = StaticText(_("OK"))
-		self["key_red"] = StaticText(_("Cancel"))
-
-		self.list = []
-		self.createConfigList()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(pname + " (" + pversion + ")")
-
-	def createConfigList(self):
+		Setup.__init__(self, session, "TMDB", plugin="Extensions/tmdb", PluginLanguageDomain="tmdb")
 		self.setTitle("TMDb - The Movie Database v" + pversion)
-		self.list = []
-		self.list.append(getConfigListEntry(_("Cover resolution:"), config.plugins.tmdb.themoviedb_coversize))
-		self.list.append(getConfigListEntry(_("Language:"), config.plugins.tmdb.lang))
-		self.list.append(getConfigListEntry(_("Show details if single result:"), config.plugins.tmdb.firsthit))
-		self["config"].list = self.list
-		self["config"].setList(self.list)
-
-	def changedEntry(self):
-		for x in self.onChangedEntry:
-			x()
-
-	def keyOK(self):
-		for x in self["config"].list:
-			x[1].save()
-#		configfile.save()
-		self.close()
 
 
 class tmdbScreen(Screen, HelpableScreen):
@@ -342,7 +299,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
 			if not fileExists("%s%s.jpg" % (self.tempDir, id)):
-				callInThread(self.threadDownloadPage, url_cover, "%s%s.jpg" % (self.tempDir, id), boundFunction(getData, "%s%s.jpg" % (self.tempDir, id)), self.dataError)
+				callInThread(self.threadDownloadPage, url_cover, "%s%s.jpg" % (self.tempDir, id), boundFunction(self.getData, "%s%s.jpg" % (self.tempDir, id)), self.dataError)
 			else:
 				self.showCover("%s%s.jpg" % (self.tempDir, id))
 
@@ -387,9 +344,8 @@ class tmdbScreen(Screen, HelpableScreen):
 			self.coverName = coverName
 
 		# Only one result launch details
-		if config.plugins.tmdb.firsthit.value:
-			if self.count == 1:
-				self.ok()
+		if config.plugins.tmdb.firsthit.value and self.count == 1:
+			self.ok()
 
 	def ok(self):
 		check = self['list'].getCurrent()
