@@ -362,6 +362,7 @@ class CKview(AllScreen):
 		for i in range(LINESPERPAGE):
 			self['pic%d' % i].hide()
 			self['vid%d' % i].hide()
+		self['postpic'].hide()
 		self['menu'].hide()
 		self['button_green'].hide()
 		self['button_yellow'].hide()
@@ -385,6 +386,11 @@ class CKview(AllScreen):
 		self['textpage'].setText('')
 		self['textpage'].show()
 		self.REZ = self.getREZ(self.currId)
+		if self.REZ['hasImage']:
+			picurl = PICURLBASE + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
+		else:
+			picurl = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
+		callInThread(self.threadedGetPage, picurl, self.getPostPic, self.downloadError)
 		if self.REZ['rating']:
 			score = self.REZ['rating']['rating'] * 20
 			scoretext = str('%1.1f' % self.REZ['rating']['rating']) + ' (' + str(self.REZ['rating']['numVotes']) + ' Bewertungen)'
@@ -441,13 +447,7 @@ class CKview(AllScreen):
 		self['recipetext'].setText(str(recipetext))
 		self['recipetext'].show()
 		self['Line_Bottom'].show()
-		if self.REZ['hasImage']:
-			picurl = PICURLBASE + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
-		else:
-			picurl = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
-		callInThread(self.threadedGetPage, picurl, self.getPostPic, self.downloadError)
 		self.postpicload.PictureData.get().append(self.showPostPic)
-		self['postpic'].show()
 		self.IMG = self.getIMG(self.currId)
 		if self.picCount == 1:
 			self['label_ok'].setText('Vollbild')
@@ -458,6 +458,7 @@ class CKview(AllScreen):
 			self['button_ok'].hide()
 		self.KOM = self.getKOM(self.currId)
 		self.makeRezept()
+		self['postpic'].show()
 		self.postviewready = True
 
 	def getREZ(self, id):  # hole den jeweiligen Rezeptdatensatz
@@ -703,13 +704,23 @@ class CKview(AllScreen):
 				server = SMTP_SSL(mailServer, mailPort)
 			else:
 				server = SMTP(mailServer, mailPort)
+		except Exception as err:
+			self.CKlog('SMTP_Response_Exception Error:', str(err))
+			self.session.open(MessageBox, 'E-mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAngaben (mailServer oder mailPort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
+			return
+		try:
 			server.login(mailLogin, mailPassword)
+		except SMTPResponseException as err:
+			self.CKlog('SMTP_Response_Exception Error:', str(err))
+			self.session.open(MessageBox, 'E-mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAnmeldedaten (Login oder Passwort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
+			return
+		try:
 			server.sendmail(mailFrom, mailTo, msgRoot.as_string())
 			server.quit()
 			self.session.open(MessageBox, 'E-mail erfolgreich gesendet an: %s' % mailTo, MessageBox.TYPE_INFO, close_on_any_key=True)
 		except SMTPResponseException as err:
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-mail konnte aufgrund eines Serverproblems nicht gesendet werden: \n%s' % str(err), MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-mail konnte aufgrund eines Serverproblems oder fehlerhafter\nMailadressen (Absender oder Empfänger) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
 
 	def nextPage(self):
 		if self.current == 'menu':
@@ -1346,7 +1357,7 @@ class CKfavoriten(AllScreen):
 				titel = ''
 				self.session.openWithCallback(self.searchReturn, VirtualKeyBoard, title='Chefkoch - Suche Rezepte:', text=titel)
 			else:
-				self.session.openWithCallback(self.exit, CKview, titel, 'mit "' + titel + '" gefundene Rezepte', 0, False, False)
+				self.session.open(CKview, titel, 'mit "' + titel + '" gefundene Rezepte', 0, False, False)
 
 	def searchReturn(self, search):
 		if search and search != '':
