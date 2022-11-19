@@ -41,7 +41,8 @@ MODULE_NAME = __name__.split(".")[-1]
 LINESPERPAGE = 8
 PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte/'
 APIURIBASE = 'https://api.chefkoch.de/v2/'
-
+# orderBy-Codes: 0= unbekannt, 1= = unbekannt, 2= unbekannt, 3= rating, 4= unbekannt, 5= unbekannt, 6= createdAt, 7= isPremium, 8= unbekannt
+# folgende nicht: numVotes, preparationTime
 config.plugins.chefkoch = ConfigSubsection()
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
 if getDesktop(0).size().width() >= 1920:
@@ -500,7 +501,7 @@ class CKview(AllScreen):
 			limit = int(config.plugins.chefkoch.maxrecipes.value)
 			videocount = 0
 			for i in range(max((limit) // 100, 1)):
-				content, resp = self.getAPIdata('recipes?query=%s&offset=%d&limit=%d' % (self.query, i * 100, min(limit, 100)))
+				content, resp = self.getAPIdata('recipes?query=%s&offset=%d&limit=%d&orderBy=3' % (self.query, i * 100, min(limit, 100)))  # 3= sort by 'rating'
 				if resp != 200:
 					self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 					self.close()
@@ -1560,7 +1561,8 @@ class CKmain(AllScreen):
 					callInThread(self.makeSecondMenu, mainId)
 				else:
 					sort = 4 if mainId == '999' else 1  # Datumsortierung für "Das perfekte Dinner"
-					self.session.openWithCallback(self.selectMainMenu, CKview, self.mainmenuquery[self.currItem], '"' + self.mainmenutitle[self.currItem] + '"', sort, False, False)
+					query = '%s%s' % (self.mainmenuquery[self.currItem], '&orderBy=6')  # 6= sort by 'createdAt'
+					self.session.openWithCallback(self.selectMainMenu, CKview, query, '"' + self.mainmenutitle[self.currItem] + '"', sort, False, False)
 
 		elif self.actmenu == 'secondmenu':
 			secondId = self.secondId[self.currItem]
@@ -1568,11 +1570,13 @@ class CKmain(AllScreen):
 				callInThread(self.makeThirdMenu, secondId)
 			else:
 				sort = 3 if self.CKvideo else 1  # Videosortierung für "Chefkoch Video"
-				self.session.openWithCallback(self.selectSecondMenu, CKview, self.secondmenuquery[self.currItem], '"' + self.secondmenutitle[self.currItem] + '"', sort, False, False)
+				query = '%s%s' % (self.secondmenuquery[self.currItem], '&orderBy=3')  # 3= sort by 'rating'
+				self.session.openWithCallback(self.selectSecondMenu, CKview, query, '"' + self.secondmenutitle[self.currItem] + '"', sort, False, False)
 
 		elif self.actmenu == 'thirdmenu':
 			sort = 3 if self.CKvideo else 1  # Videosortierung für "Chefkoch Video"
-			self.session.openWithCallback(self.selectThirdMenu, CKview, self.thirdmenuquery[self.currItem], '"' + self.thirdmenutitle[self.currItem] + '"', sort, False, False)
+			query = '%s%s' % (self.thirdmenuquery[self.currItem], '&orderBy=3')  # 3= sort by 'rating'
+			self.session.openWithCallback(self.selectThirdMenu, CKview, query, '"' + self.thirdmenutitle[self.currItem] + '"', sort, False, False)
 
 	def makeMainMenu(self):
 		global totalrecipes
