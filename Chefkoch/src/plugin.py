@@ -42,7 +42,7 @@ LINESPERPAGE = 8
 PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte/'
 APIURIBASE = 'https://api.chefkoch.de/v2/'
 NOPICURL = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
-
+PICFILE = '/tmp/chefkoch.jpg'
 
 config.plugins.chefkoch = ConfigSubsection()
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
@@ -147,7 +147,6 @@ class CKview(AllScreen):
 		self.sortname = ['{keine}', 'Anzahl Bewertungen', 'Anzahl Sterne', 'mit Video', 'Erstelldatum']
 		self.orgGRP = []
 		self.KOM = []
-		self.picfile = '/tmp/chefkoch.jpg'
 		self.currItem = 0
 		self.rezept = 'https://www.chefkoch.de/rezepte/'
 		self.rezeptfile = '/tmp/Rezept.html'
@@ -673,8 +672,8 @@ class CKview(AllScreen):
 				msgText += self.REZ['ingredientGroups'][i]['ingredients'][j]['usageInfo']
 		msgText += '\n\nZUBEREITUNG\n' + self.REZ['instructions']
 		msgText += '\n' + '_' * 30 + '\nChefkoch.de'
-		Image.open('/tmp/chefkoch.jpg').resize((320, 240), Image.ANTIALIAS).save('/tmp/emailpic.jpg')
-
+		if fileExists(PICFILE):
+			Image.open(PICFILE).resize((320, 240), Image.ANTIALIAS).save('/tmp/emailpic.jpg')
 		mailFrom = ensure_str(config.plugins.chefkoch.mailfrom.value.encode('ascii', 'xmlcharrefreplace'))
 		mailTo = ensure_str(mailTo.encode('ascii', 'xmlcharrefreplace'))
 		mailLogin = ensure_str(config.plugins.chefkoch.login.value.encode('ascii', 'xmlcharrefreplace'))
@@ -943,9 +942,9 @@ class CKview(AllScreen):
 				self['pic%d' % i].instance.setPixmap(ptr.__deref__())
 
 	def getPostPic(self, picdata):
-		with open(self.picfile, 'wb') as f:
+		with open(PICFILE, 'wb') as f:
 			f.write(picdata)
-		self.postpicload.startDecode(self.picfile)
+		self.postpicload.startDecode(PICFILE)
 
 	def showPostPic(self, picInfo=None):
 		ptr = self.postpicload.getData()
@@ -1122,7 +1121,6 @@ class CKpicshow(AllScreen):
 		self.titel = titel
 		self.currId = str(recipe['id'])
 		self.setTitle(titel)
-		self.picfile = '/tmp/chefkoch.jpg'
 		self.pixlist = []
 		self.picmax = 0
 		self.count = 0
@@ -1233,9 +1231,9 @@ class CKpicshow(AllScreen):
 		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
 
 	def getPic(self, output):
-		with open(self.picfile, 'wb') as f:
+		with open(PICFILE, 'wb') as f:
 			f.write(output)
-		self.picload.startDecode(self.picfile)
+		self.picload.startDecode(PICFILE)
 
 	def showPic(self, picInfo=None):
 		ptr = self.picload.getData()
@@ -1271,7 +1269,6 @@ class CKfullscreen(AllScreen):
 		HIDEFLAG = True
 		self.skin = self.readSkin("CKfullscreen")
 		Screen.__init__(self, session, self.skin)
-		self.picfile = '/tmp/chefkoch.jpg'
 		self.hideflag = True
 		self['picture'] = Pixmap()
 		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
@@ -1286,7 +1283,7 @@ class CKfullscreen(AllScreen):
 
 	def onLayoutFinished(self):
 		self.picload.setPara((self['picture'].instance.size().width(), self['picture'].instance.size().height(), 1.0, 1, False, 1, "#00000000"))
-		self.picload.startDecode(self.picfile)
+		self.picload.startDecode(PICFILE)
 
 	def showPic(self, picInfo=None):
 		ptr = self.picload.getData()
@@ -1516,7 +1513,6 @@ class CKmain(AllScreen):
 		Screen.__init__(self, session, skin)
 		self.apidata = None
 		self.mainId = None
-		self.picfile = '/tmp/chefkoch.jpg'
 		self.rezeptfile = '/tmp/Rezept.html'
 		self.actmenu = 'mainmenu'
 		self['mainmenu'] = ItemList([])
@@ -1835,8 +1831,8 @@ class CKmain(AllScreen):
 				pic = '/tmp/chefkoch%d.jpg' % i
 				if fileExists(pic):
 					remove(pic)
-			if fileExists(self.picfile):
-				remove(self.picfile)
+			if fileExists(PICFILE):
+				remove(PICFILE)
 			if fileExists(self.rezeptfile):
 				remove(self.rezeptfile)
 			self.close()
