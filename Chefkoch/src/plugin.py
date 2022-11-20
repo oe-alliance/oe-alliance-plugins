@@ -41,8 +41,9 @@ MODULE_NAME = __name__.split(".")[-1]
 LINESPERPAGE = 8
 PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte/'
 APIURIBASE = 'https://api.chefkoch.de/v2/'
-# orderBy-Codes: 0= unbekannt, 1= = unbekannt, 2= unbekannt, 3= rating, 4= unbekannt, 5= unbekannt, 6= createdAt, 7= isPremium, 8= unbekannt
-# folgende nicht: numVotes, preparationTime
+NOPICURL = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
+
+
 config.plugins.chefkoch = ConfigSubsection()
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
 if getDesktop(0).size().width() >= 1920:
@@ -314,10 +315,7 @@ class CKview(AllScreen):
 			else:
 				count = 'keine'
 				score = '0'
-			if self.GRP[i]['previewImageId']:
-				picurl = PICURLBASE + id + '/bilder/' + str(self.GRP[i]['previewImageId']) + '/crop-160x120/' + titel.replace(' ', '-') + '.jpg'
-			else:
-				picurl = 'http://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
+			picurl = PICURLBASE + id + '/bilder/' + str(self.GRP[i]['previewImageId']) + '/crop-160x120/' + titel.replace(' ', '-') + '.jpg' if self.GRP[i]['previewImageId'] else NOPICURL
 			text = self.GRP[i]['subtitle']
 			if len(text) > 155:
 				text = text[:155] + '…'
@@ -377,9 +375,8 @@ class CKview(AllScreen):
 		self['label_1-0'].setText('')
 		self['button_1-0'].hide()
 		self['pageinfo'].hide()
-		self['label_ok'].setText('zum Rezept')
-		self['label_ok'].show()
-		self['button_ok'].show()
+		self['label_ok'].setText('')
+		self['button_ok'].hide()
 		self['postvid'].hide()
 		self['label_play'].hide()
 		self['button_play'].hide()
@@ -387,10 +384,7 @@ class CKview(AllScreen):
 		self['textpage'].setText('')
 		self['textpage'].show()
 		self.REZ = self.getREZ(self.currId)
-		if self.REZ['hasImage']:
-			picurl = PICURLBASE + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
-		else:
-			picurl = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
+		picurl = PICURLBASE + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg' if self.REZ['hasImage'] else NOPICURL
 		callInThread(self.threadedGetPage, picurl, self.getPostPic, self.downloadError)
 		if self.REZ['rating']:
 			score = self.REZ['rating']['rating'] * 20
@@ -452,8 +446,10 @@ class CKview(AllScreen):
 		self.IMG = self.getIMG(self.currId)
 		if self.picCount == 1:
 			self['label_ok'].setText('Vollbild')
+			self['button_ok'].show()
 		elif self.picCount > 1:
 			self['label_ok'].setText('%d Rezeptbilder' % (self.IMGlen))
+			self['button_ok'].show()
 		else:
 			self['label_ok'].setText('')
 			self['button_ok'].hide()
@@ -853,8 +849,15 @@ class CKview(AllScreen):
 		self['label_1-0'].setText('Erster/Letzer Kommentar')
 		self['label_1-0'].show()
 		self['button_1-0'].show()
-		self['label_ok'].setText('%d Rezeptbilder' % (self.IMGlen))
-		self['button_ok'].show()
+		if self.picCount == 1:
+			self['label_ok'].setText('Vollbild')
+			self['button_ok'].show()
+		elif self.picCount > 1:
+			self['label_ok'].setText('%d Rezeptbilder' % (self.IMGlen))
+			self['button_ok'].show()
+		else:
+			self['label_ok'].setText('')
+			self['button_ok'].hide()
 		self['pageinfo'].hide()
 		self['textpage'].setText('')
 		text = ''
@@ -887,8 +890,15 @@ class CKview(AllScreen):
 			self['label_yellow'].setText('')
 			self['button_yellow'].hide()
 		self['label_rezeptnr'].setText('')
-		self['label_ok'].setText('%d Rezeptbilder' % (self.IMGlen))
-		self['button_ok'].show()
+		if self.picCount == 1:
+			self['label_ok'].setText('Vollbild')
+			self['button_ok'].show()
+		elif self.picCount > 1:
+			self['label_ok'].setText('%d Rezeptbilder' % (self.IMGlen))
+			self['button_ok'].show()
+		else:
+			self['label_ok'].setText('')
+			self['button_ok'].hide()
 		self['textpage'].setText('')
 		if self.REZ['hasVideo']:
 			self['postvid'].show()
@@ -1023,6 +1033,8 @@ class CKview(AllScreen):
 			self.close()
 		elif self.current == 'postview' and not self.zufall:
 			self['label_ok'].setText('zum Rezept')
+			self['label_ok'].show()
+			self['button_ok'].show()
 			self['label_1-0'].setText('')
 			self['button_1-0'].hide()
 			self['postvid'].hide()
@@ -1156,7 +1168,6 @@ class CKpicshow(AllScreen):
 
 	def onLayoutFinished(self):
 		self['label_ok'].setText('Vollbild')
-		self['label_ok'].show()
 		self['button_ok'].show()
 		self['label_left-right'].setText('Zurück / Vorwärts')
 		self['label_left-right'].show()
@@ -1516,6 +1527,7 @@ class CKmain(AllScreen):
 		self['label_yellow'] = Label('Suche')
 		self['label_blue'] = Label('Ein-/Ausblenden')
 		self['release'] = Label(RELEASE)
+		self['totalrecipes'] = Label('')
 		self['helpactions'] = ActionMap(['HelpActions'], {'displayHelp': self.infoScreen}, -1)
 		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'MovieSelectionActions'], {
 			'ok': self.ok,
@@ -1579,13 +1591,13 @@ class CKmain(AllScreen):
 			self.session.openWithCallback(self.selectThirdMenu, CKview, query, '"' + self.thirdmenutitle[self.currItem] + '"', sort, False, False)
 
 	def makeMainMenu(self):
-		global totalrecipes
-		content, resp = self.getAPIdata('recipes')
+		content, resp = self.getAPIdata('recipes?limit=1')
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nDer XChefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 			self.close()
 			return
-		totalrecipes = loads(content)['count']
+		self.setTitle('Hauptmenü')
+		self['totalrecipes'].setText('%s%s' % (loads(content)['count'], ' Rezepte'))
 		self.NKAT = []  # Normalkategorien
 		self.VKAT = []  # Videokategorien
 		self.MKAT = []  # Magazinkategorien
@@ -1594,7 +1606,6 @@ class CKmain(AllScreen):
 		self.mainmenutitle = []
 		self.mainId = []
 		self.currKAT = self.getNKAT()
-		self.setTitle('Hauptmenü')
 		for i in range(len(self.currKAT)):
 			res = ['']
 			if self.currKAT[i]['level'] == 1:
