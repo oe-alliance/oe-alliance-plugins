@@ -28,8 +28,8 @@
 		<widget name="postvid" position="center,145" size="50,50" pixmap="{picpath}HD/videoiconHD.png" alphatest="blend" zPosition="1" />
 		<widget name="starsbg" position="53,75" size="228,40" pixmap="{picpath}HD/starsbar_empty_HD.png" transparent="1" zPosition="0" alphatest="blend" />
 		<widget name="stars" position="53,75" size="228,40" pixmap="{picpath}HD/starsbar_filled_HD.png" transparent="1" />
-		<widget name="scoretext" position="53,130" size="440,120" font="Regular; 20" halign="left" zPosition="1" transparent="1" />
-		<widget name="recipetext" position="790,70" size="438,180" font="Regular; 20" halign="left" zPosition="1" transparent="1" />
+		<widget name="scoretext" position="53,130" size="440,130" font="Regular; 20" halign="left" zPosition="1" transparent="1" />
+		<widget name="recipetext" position="790,70" size="438,190" font="Regular; 20" halign="left" zPosition="1" transparent="1" />
 		<widget name="textpage" position="50,300" size="1178,375" font="Regular;{fontsize}" scrollbarMode="showOnDemand" scrollbarBorderWidth="2" scrollbarWidth="10" scrollbarForegroundColor="#b5d7bb" scrollbarBorderColor="#336F3D" halign="left" zPosition="0" transparent="1" />
 		<widget name="pageinfo" position="1112,36" size="120,19" font="Regular; 16" foregroundColor="white" backgroundColor="#336f3d" halign="center" transparent="0" zPosition="2" />
 		<widget name="label_red" position="25,690" size="180,24" font="Regular;18" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
@@ -140,6 +140,7 @@
 		<eLabel name="Rahmen_grün" position="292,668" size="28,24" backgroundColor="#3B8047" zPosition="1" />
 		<eLabel name="Füllung" position="294,670" size="24,20" backgroundColor="#c1d2c7" zPosition="2" />
 		<eLabel text="OK" position="293,670" size="26,20" zPosition="5" font="Regular; 14" halign="center" valign="center" foregroundColor="black" backgroundColor="grey" transparent="1" />
+		<eLabel position="11,610" size="569,20" font="Regular; 18" text="* = Diese Änderungen werden erst nach einem GUI-Neustart aktiv!" foregroundColor="white" backgroundColor="black" halign="center" valign="center" transparent="0" zPosition="4" />
 		<eLabel position="11,633" size="569,20" font="Regular; 14" text="***  Authors: Kashmir(†), Mr.Servo, jbleyel - skinned by stein17  ***" foregroundColor="#336f3d" backgroundColor="#40ffffff" halign="center" valign="center" transparent="0" zPosition="4" />
 		<eLabel name="Line_Bottom" position="9,631" size="572,1" backgroundColor="#3B8047" zPosition="3" />
 	</screen>
