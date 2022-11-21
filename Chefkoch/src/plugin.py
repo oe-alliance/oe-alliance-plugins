@@ -597,9 +597,9 @@ class CKview(AllScreen):
 			if config.plugins.chefkoch.mail.value:
 				mailto = config.plugins.chefkoch.mailto.value.split(",")
 				mailto = [(i.strip(),) for i in mailto]
-				self.session.openWithCallback(self.green_return, ChoiceBox, title='Rezept an folgende E-mail Adresse senden:', list=mailto)
+				self.session.openWithCallback(self.green_return, ChoiceBox, title='Rezept an folgende E-Mail Adresse senden:', list=mailto)
 			else:
-				self.session.open(MessageBox, '\nDie E-mail Funktion ist nicht aktiviert. Aktivieren Sie die E-mail Funktion im Setup des Plugins.', MessageBox.TYPE_INFO, close_on_any_key=True)
+				self.session.open(MessageBox, '\nDie E-Mail Funktion ist nicht aktiviert. Aktivieren Sie die E-Mail Funktion im Setup des Plugins.', MessageBox.TYPE_INFO, close_on_any_key=True)
 		if self.current == 'menu':
 			self.sort = self.sort + 1 if self.sort < len(self.sortname) - 1 else 0
 			self.currItem = 0
@@ -702,21 +702,21 @@ class CKview(AllScreen):
 				server = SMTP(mailServer, mailPort)
 		except Exception as err:
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAngaben (mailServer oder mailPort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAngaben (mailServer oder mailPort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
 			return
 		try:
 			server.login(mailLogin, mailPassword)
 		except SMTPResponseException as err:
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAnmeldedaten (Login oder Passwort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAnmeldedaten (Login oder Passwort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
 			return
 		try:
 			server.sendmail(mailFrom, mailTo, msgRoot.as_string())
 			server.quit()
-			self.session.open(MessageBox, 'E-mail erfolgreich gesendet an: %s' % mailTo, MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail erfolgreich gesendet an: %s' % mailTo, MessageBox.TYPE_INFO, close_on_any_key=True)
 		except SMTPResponseException as err:
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-mail konnte aufgrund eines Serverproblems oder fehlerhafter\nMailadressen (Absender oder Empfänger) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nMailadressen (Absender oder Empfänger) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
 
 	def nextPage(self):
 		if self.current == 'menu':
@@ -1863,14 +1863,14 @@ class CKconfig(ConfigListScreen, AllScreen):
 		list.append(getConfigListEntry('Maximale Anzahl Rezepte:', config.plugins.chefkoch.maxrecipes, "Maximale Anzahl Rezepte"))
 		list.append(getConfigListEntry('Maximale Anzahl Kommentare:', config.plugins.chefkoch.maxcomments, "Maximale Anzahl Kommentare"))
 		list.append(getConfigListEntry('Maximale Anzahl Rezeptbilder:', config.plugins.chefkoch.maxpictures, "Maximale Anzahl Rezeptbilder"))
-		list.append(getConfigListEntry('Versende Rezepte per E-mail:', config.plugins.chefkoch.mail, "Versende Rezepte per E-mail"))
-		list.append(getConfigListEntry('E-mail Absender:', config.plugins.chefkoch.mailfrom, "E-mail Absender"))
-		list.append(getConfigListEntry('E-mail Empfänger:', config.plugins.chefkoch.mailto, "E-mail Empfänger"))
-		list.append(getConfigListEntry('E-mail Login:', config.plugins.chefkoch.login, "E-mail Login"))
-		list.append(getConfigListEntry('E-mail Passwort:', config.plugins.chefkoch.password, "E-mail Passwort"))
-		list.append(getConfigListEntry('E-mail Server:', config.plugins.chefkoch.server, "E-mail Server"))
-		list.append(getConfigListEntry('E-mail Server Port:', config.plugins.chefkoch.port, "E-mail Server Port"))
-		list.append(getConfigListEntry('E-mail Server SSL:', config.plugins.chefkoch.ssl, "E-mail Server SSL"))
+		list.append(getConfigListEntry('Versende Rezepte per E-Mail:', config.plugins.chefkoch.mail, "Versende Rezepte per E-Mail"))
+		list.append(getConfigListEntry('*E-Mail Absender:', config.plugins.chefkoch.mailfrom, "E-Mail Absender"))
+		list.append(getConfigListEntry('*E-Mail Empfänger:', config.plugins.chefkoch.mailto, "E-Mail Empfänger"))
+		list.append(getConfigListEntry('*E-Mail Login:', config.plugins.chefkoch.login, "E-Mail Login"))
+		list.append(getConfigListEntry('*E-Mail Passwort:', config.plugins.chefkoch.password, "E-Mail Passwort"))
+		list.append(getConfigListEntry('*E-Mail Server:', config.plugins.chefkoch.server, "E-Mail Server"))
+		list.append(getConfigListEntry('*E-Mail Server Port:', config.plugins.chefkoch.port, "E-Mail Server Port"))
+		list.append(getConfigListEntry('*E-Mail Server SSL:', config.plugins.chefkoch.ssl, "E-Mail Server SSL"))
 		list.append(getConfigListEntry('DebugLog', config.plugins.chefkoch.debuglog, "Debug Logging aktivieren"))
 		list.append(getConfigListEntry('Log in Datei', config.plugins.chefkoch.logtofile, "Log in Datei '/home/root/logs'"))
 
