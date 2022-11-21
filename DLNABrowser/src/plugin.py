@@ -643,7 +643,7 @@ class TaskManager:
 		print("clear task!!")
 
 	def index(self):
-		self.taskIdx
+		return self.taskIdx
 
 	def setStatusCB(self, cbfunc):
 		self.cbSetStatusCB = cbfunc
@@ -870,7 +870,7 @@ class DLNADeviceBrowser(Screen):
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbPrintClose)
 			cmd = 'djmount -o allow_other -o iocharset=utf8 %s' % (DLNA_CONFIG_ROOT_DIR)
 			self.taskManager.append(cmd, self.cbPrintAvail, self.cbStartDone)
-		next(self.taskManager)
+		self.taskManager.next()
 
 	def keyCancel(self):
 		self.close()
@@ -953,7 +953,7 @@ class DLNADeviceBrowser(Screen):
 		print(data)
 
 	def cbPrintClose(self, ret):
-		next(self.taskManager)
+		self.taskManager.next()
 
 	def cbStopDone(self, ret):
 		self.taskManager.clean()
