@@ -5,7 +5,7 @@ from six import ensure_str
 from twisted.internet import reactor
 
 NEXTPage1 = 'class="js-track-link pagination__link pagination__link--next"'
-NEXTPage2 = '<a href="(.*?)"\n\\s+class="js-track-link pagination__link pagination__link--next"'
+NEXTPage2 = '<a\ href="(.*?)"'
 
 
 def shortenChannel(text):

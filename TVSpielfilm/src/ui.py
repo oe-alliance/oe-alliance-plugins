@@ -4,7 +4,7 @@ import datetime
 from json import dumps, loads
 from os import linesep, remove, rename
 from os.path import isdir, isfile
-from re import S, compile, findall, search, sub
+from re import S, findall, search, sub
 from requests import get, exceptions
 from socket import error as SocketError
 from six import ensure_binary, ensure_str
@@ -57,7 +57,7 @@ def findPicon(sref, folder):
 	sref = sref.replace(':', '_')
 	sref = sref.replace('_FIN', '')
 	sref = sref.replace('FIN', '')
-	pngname = folder + sref + '.png'
+	pngname = "%s%s.png" % (folder, sref)
 	if isfile(pngname):
 		return pngname
 
@@ -947,9 +947,11 @@ class TVSBaseScreen(TVSAllScreen):
 					self.filter = False
 					self.searchref.append(sref)
 				if config.plugins.tvspielfilm.picon.value == "plugin":
-					png = self.piconfolder + '%s.png' % LOGO
+					png = '%s%s.png' % (self.piconfolder, LOGO)
 				else:
-					png = findPicon(sref, self.piconfolder)
+					png = findPicon(LOGO, self.piconfolder)
+					if not png:
+						png = findPicon(sref, self.piconfolder)
 					if not png:  # Fallback from '1:0:*:...' to '1:0:1:...'
 						sref = sref.split(':')
 						sref[2] = '1'
@@ -2403,9 +2405,8 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 															'red': self.makeTimer,
 															'blue': self.hideScreen}, -1)
 		self.service_db = serviceDB(self.servicefile)
-		f = open(self.servicefile, 'r')
-		lines = f.readlines()
-		f.close()
+		with open(self.servicefile, 'r') as f:
+			lines = f.readlines()
 		ordertext = ['"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines)]
 		self.order = '{' + str(''.join(ordertext)) + '}'
 		self.date = datetime.date.today()
@@ -2594,14 +2595,18 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self.tventries = sorted(self.tventries, key=lambda x: order[x[0]])
 		self['menu'].l.setItemHeight(mh)
 		self['menu'].l.setList(self.tventries)
+		startpos = output.find('<ul class="pagination__items">')
+		endpos = output.find('class="js-track-link pagination__link pagination__link--next"')
+		bereich = output[startpos:endpos]  # begrenze den Auswertebereich
+		nextpage = search(NEXTPage2, bereich)
+		nextpage = nextpage.group(1) if nextpage else ""
 		if self.jetzt:
 			self['CHANNELkey'].hide()
 			self['CHANNELtext'].hide()
 			self['BOUQUETkey'].hide()
 			self['BOUQUETtext'].hide()
-			nextpage = search(NEXTPage2, bereich)
-			if nextpage:
-				self.downloadFull(nextpage.group(1), self.makeTVJetztView)
+			if search("[2-4]+", nextpage):  # nur Folgeseiten 2-4
+				self.downloadFull(nextpage, self.makeTVJetztView)
 			else:
 				self['menu'].moveToIndex(self.index)
 				self.ready = True
@@ -2610,11 +2615,9 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 				self['INFOkey'].show()
 				self['release'].show()
 				self['waiting'].stopBlinking()
-		elif self.gleich:
-			if search('<a href=".*?tvspielfilm.de/tv-programm/sendungen/.*?page=[2-9]', bereich):
-				nextpage = search(NEXTPage2, bereich)
-				if nextpage:
-					self.downloadFull(nextpage.group(1), self.makeTVJetztView)
+		else:
+			if search("[2-9]+", nextpage):  # nur FolgeSeiten 2-9
+				self.downloadFull(nextpage, self.makeTVJetztView)
 			else:
 				self['menu'].moveToIndex(self.index)
 				self.ready = True
@@ -2626,21 +2629,6 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 				self['INFOtext'].show()
 				self['release'].show()
 				self['waiting'].stopBlinking()
-		elif search('<a href=".*?tvspielfilm.de/tv-programm/sendungen/.*?page=[2-9]', bereich):
-			nextpage = search(NEXTPage2, bereich)
-			if nextpage:
-				self.downloadFull(nextpage.group(1), self.makeTVJetztView)
-		else:
-			self['menu'].moveToIndex(self.index)
-			self.ready = True
-			self['INFOkey'].show()
-			self['TEXTkey'].show()
-			self['TEXTtext'].setText('Sender')
-			self['TEXTtext'].show()
-			self['INFOtext'].setText('Jetzt/Gleich im TV')
-			self['INFOtext'].show()
-			self['release'].show()
-			self['waiting'].stopBlinking()
 
 	def makePostviewPage(self, string):
 		self['menu'].hide()
@@ -2874,6 +2862,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 	def _downloadFull(self, link, name):
 		try:
 			response = get(link)
+			response.close()
 			response.raise_for_status()
 		except exceptions.RequestException as error:
 			self.downloadFullError(error)
