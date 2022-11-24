@@ -4,7 +4,7 @@
 	<screen name="TVSMain" position="742,165" size="495,810" backgroundColor="transparent" flags="wfNoBorder" title="TV Spielfilm">
 		<ePixmap position="0,0" size="495,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="waiting" position="305,34" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="waiting" position="305,21" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
 		<widget name="mainmenu" position="15,105" size="465,645" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" scrollbarMode="showOnDemand" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" />
 		<widget name="secondmenu" position="15,105" size="465,645" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" scrollbarMode="showOnDemand" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" />
 		<widget name="thirdmenu" position="15,105" size="465,645" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" scrollbarMode="showOnDemand" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" />
@@ -77,7 +77,7 @@
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="-5" />
 		<ePixmap position="0,0" size="1860,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="waiting" position="305,34" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="waiting" position="305,21" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
 		<widget name="seitennr" position="1717,66" size="157,21" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
 		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
@@ -104,7 +104,7 @@
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="-5" transparent="0" />
 		<ePixmap position="0,0" size="1860,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="waiting" position="305,34" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="waiting" position="305,21" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
 		<widget name="seitennr" position="1717,66" size="157,21" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
 		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
@@ -188,7 +188,7 @@
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#00000000" foregroundColor="#00000000" zPosition="-1" />
 		<ePixmap position="15,0" size="1890,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="320,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="waiting" position="320,34" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="waiting" position="320,21" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
 		<widget name="seitennr" position="1717,66" size="157,21" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
 		<widget render="Label" source="global.CurrentTime" position="1683,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
