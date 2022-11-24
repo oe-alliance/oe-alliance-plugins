@@ -1,0 +1,13 @@
+#!/bin/sh
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/autoBLchanger
+if [ -f /usr/share/bootlogo.mvi.org ] && [ -L /usr/share/bootlogo.mvi ]; then
+    rm -rf /usr/share/bootlogo.mvi
+    mv /usr/share/bootlogo.mvi.org /usr/share/bootlogo.mvi
+    echo "                                                          "
+    echo "         ...orgiginal BootLogo found and reset...         "
+    echo "                                                          "
+    echo " ........................................................."
+fi 
+echo "                                                          "
+echo "          ...autoBLchanger successfully removed.          "
+echo "                                                          "

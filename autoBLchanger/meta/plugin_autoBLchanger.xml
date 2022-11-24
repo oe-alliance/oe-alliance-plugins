@@ -1,0 +1,15 @@
+<default>
+	  <prerequisites>
+        <tag type="extra" />
+	  </prerequisites>
+          <info>
+                    <name>autoBLchanger</name>
+                    <packagename>enigma2-plugin-extensions-autoblchanger</packagename>
+                    <shortdescription>autoBLchanger</shortdescription>
+                    <description>autoBLchanger</description>
+          </info>
+
+	  <files type="package"> <!-- without version, without .ipk -->
+		<file type="package" name="enigma2-plugin-extensions-autoblchanger" />
+	</files>
+</default>

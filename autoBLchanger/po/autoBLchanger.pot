@@ -1,0 +1,111 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-24 20:06+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#, python-format
+msgid "---- found %02d BootLogo%s to select ----"
+msgstr ""
+
+msgid "---- no BootLogos found :'( ----"
+msgstr ""
+
+#, python-format
+msgid "... '%s' is currently set as BootLogo"
+msgstr ""
+
+#, python-format
+msgid "... press 'OK' to select '%s' as new BootLogo"
+msgstr ""
+
+#, python-format
+msgid "... there %s %02d BootLogo%s available"
+msgstr ""
+
+#, python-format
+msgid ""
+"... unfortunately no BootLogo available, please check:\n"
+"'%s'"
+msgstr ""
+
+msgid "BootLogo ChangeMode :"
+msgstr ""
+
+msgid "BootLogo SelectMode :"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Error setting BootLogo!"
+msgstr ""
+
+msgid "Error setting back original BootLogo!"
+msgstr ""
+
+msgid "Restart STB"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "The original BootLogo was successfully reset..."
+msgstr ""
+
+msgid ""
+"Your STB needs a restart to apply the new bootlogo.\n"
+"Do you want to Restart you STB now?"
+msgstr ""
+
+msgid "are"
+msgstr ""
+
+msgid "ascending"
+msgstr ""
+
+msgid "change the BootLogo manually or at system startup"
+msgstr ""
+
+msgid "descending"
+msgstr ""
+
+msgid "is only"
+msgstr ""
+
+msgid "manual"
+msgstr ""
+
+msgid ""
+"order to choose the new BootLogo\n"
+"(only effective if 'ChangeMode = startup')"
+msgstr ""
+
+msgid "random"
+msgstr ""
+
+msgid ""
+"reset orig.\n"
+"BootLogo"
+msgstr ""
+
+msgid ""
+"show current\n"
+"BootLogo"
+msgstr ""
+
+msgid "startup"
+msgstr ""

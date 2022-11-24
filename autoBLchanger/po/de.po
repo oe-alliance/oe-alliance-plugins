@@ -1,0 +1,129 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: autoBLchanger v1.2\n"
+"PO-Revision-Date: 2021-02-11 15:12+0100\n"
+"Language-Team: nobody, just me\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
+"X-Generator: Poedit 2.2.4\n"
+"Last-Translator: pain2000\n"
+"Language: de\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+msgid "---- found %02d BootLogo%s to select ----"
+msgstr "---- %02d BootLogo%s zum Auswählen gefunden ----"
+
+msgid "---- no BootLogos found :'( ----"
+msgstr "---- keine BootLogos gefunden :'( ----"
+
+msgid "... '%s' is currently set as %s"
+msgstr "... momentan ist '%s' als %s ausgewählt"
+
+msgid "... '%s' is currently set as BootLogo"
+msgstr "... momentan ist '%s' als BootLogo ausgewählt"
+
+msgid "... press 'OK' to select '%s' as new %s"
+msgstr "... drücke 'OK', um '%s' als neues %s auszuwählen"
+
+msgid "... press 'OK' to select '%s' as new BootLogo"
+msgstr "... drücke 'OK', um '%s' als neues BootLogo auszuwählen"
+
+msgid "... there %s %02d BootLogo%s available"
+msgstr "... es %s %02d BootLogo%s verfügbar"
+
+msgid ""
+"... unfortunately no BootLogo available, please check:\n"
+"'%s'"
+msgstr ""
+"... leider ist kein BootLogo verfügbar, bitte überprüfe:\n"
+"'%s'"
+
+msgid "BootLogo ChangeMode :"
+msgstr "BootLogo ÄnderungsModus :"
+
+msgid "BootLogo ChangeType :"
+msgstr "BootLogo ÄnderungsTyp :"
+
+msgid "BootLogo SelectMode :"
+msgstr "BootLogo AuswahlModus :"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Error setting BootLogo!"
+msgstr "Fehler beim Setzen des BootLogos!"
+
+msgid "Error setting back original BootLogo!"
+msgstr "Fehler beim Zurücksetzen vom originalen BootLogo!"
+
+msgid "Restart STB"
+msgstr "STB neu starten"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "The original BootLogo was successfully reset..."
+msgstr "Das originale BootLogo wurde erfolgreich zurückgesetzt..."
+
+msgid ""
+"Your STB needs a restart to apply the new bootlogo.\n"
+"Do you want to Restart you STB now?"
+msgstr ""
+"Deine STB benötigt einen Neustart, um das neue Bootlogo anzuwenden.\n"
+"Möchtest du jetzt deine STB neu starten?"
+
+msgid "are"
+msgstr "sind"
+
+msgid "ascending"
+msgstr "absteigend"
+
+msgid "both Logos"
+msgstr "beide Logos"
+
+msgid "change the BootLogo manually or at system startup"
+msgstr "BootLogo manuell oder beim SystemStart ändern"
+
+msgid "change the BootLogo, the RestoreLogo or both Logos"
+msgstr "BootLogo, WiederherstellungsLogo oder beide Logos ändern"
+
+msgid "change your BootLogo manually or at system startup (%s)"
+msgstr "ändere dein BootLogo manuell oder beim SystemStart (%s)"
+
+msgid "descending"
+msgstr "aufsteigend"
+
+msgid "is only"
+msgstr "ist nur"
+
+msgid "manual"
+msgstr "manuell"
+
+msgid ""
+"order to choose the new BootLogo\n"
+"(only effective if 'ChangeMode = startup')"
+msgstr ""
+"Reihenfolge um das neue BootLogo zu wählen\n"
+"(nur gültig, wenn 'ÄnderungsModus = SystemStart')"
+
+msgid "random"
+msgstr "zufällig"
+
+msgid ""
+"reset orig.\n"
+"BootLogo"
+msgstr ""
+"org. BootLogo\n"
+"zurücksetzen"
+
+msgid ""
+"show current\n"
+"BootLogo"
+msgstr ""
+"zeige aktuelles\n"
+"BootLogo"
+
+msgid "startup"
+msgstr "SystemStart"
