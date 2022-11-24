@@ -201,13 +201,13 @@ class StalkerClient_SetupScreen(Screen, ConfigListScreen):
 		if not stalker.isAuthenticated():
 			info += (_("offline"))
 			info += "\n"
-			info += stalker.getStatusMsg().decode("utf-8") is not None and stalker.getStatusMsg() or ""
+			info += stalker.getStatusMsg().decode("utf-8") is not None and stalker.getStatusMsg().decode("utf-8") or ""
 		else:
 			info += (_("online"))
 
 		if stalker.isBlocked():
 			info += "\n"
-			info += stalker.getStatusMsg().decode("utf-8") is not None and stalker.getStatusMsg() or ""
+			info += stalker.getStatusMsg().decode("utf-8") is not None and stalker.getStatusMsg().decode("utf-8") or ""
 
 		self["description"].setText(info)
 
