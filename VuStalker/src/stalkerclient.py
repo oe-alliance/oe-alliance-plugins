@@ -122,7 +122,7 @@ class SCAPI(object):
 	def GetStatusMessage(self):
 		self.ResetString()
 		self.m_str = self.m_clib.GetStatusMessage(self.m_obj)
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def Authenticate(self):
 		return self.m_clib.Authenticate(self.m_obj)
@@ -130,42 +130,42 @@ class SCAPI(object):
 	def ITV_CreateLink(self, cmd):
 		self.ResetString()
 		self.m_str = self.m_clib.ITV_CreateLink(self.m_obj, str(cmd).encode())
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def ITV_GetAllChannels(self):
 		self.ResetString()
 		self.m_str = self.m_clib.getAllChannels(self.m_obj)
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def ITV_GetGenres(self):
 		self.ResetString()
 		self.m_str = self.m_clib.ITV_GetGenres(self.m_obj)
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def ITV_GetOrderedList(self, genre_id, idx):
 		self.ResetString()
 		self.m_str = self.m_clib.ITV_GetOrderedList(self.m_obj, str(genre_id).encode(), str(idx).encode())
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def ITV_GetEpgInfo(self, period):
 		self.ResetString()
 		self.m_str = self.m_clib.ITV_GetEpgInfo(self.m_obj, str(period))
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def ITV_GetShortEpg(self, ch_id):
 		self.ResetString()
 		self.m_str = self.m_clib.ITV_GetShortEpg(self.m_obj, str(ch_id))
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def EPG_GetWeek(self):
 		self.ResetString()
 		self.m_str = self.m_clib.EPG_GetWeek(self.m_obj)
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def EPG_GetSimpleDataTable(self, ch_id, date, page):
 		self.ResetString()
 		self.m_str = self.m_clib.EPG_GetSimpleDataTable(self.m_obj, str(ch_id).encode(), str(date).encode(), str(page).encode())
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def EPG_GetDataTable(self, from_ts, to_ts, fav, ch_id, page):
 		self.ResetString()
@@ -174,12 +174,12 @@ class SCAPI(object):
 		t_to = urlencode(strftime('%Y-%m-%d %H:%M:%S', localtime(float(to_ts))))
 
 		self.m_str = self.m_clib.EPG_GetDataTable(self.m_obj, "", "", str(t_from).encode(), str(t_to).encode(), str(fav).encode(), str(ch_id).encode(), str(page).encode())
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 	def OTHER_GetAccountInfo(self):
 		self.ResetString()
 		self.m_str = self.m_clib.OTHER_GetAccountInfo(self.m_obj)
-		return cast(self.m_str, c_char_p).value.decode('utf-8')
+		return cast(self.m_str, c_char_p).value
 
 
 class SCAsyncCall(object):
