@@ -90,17 +90,6 @@ def getPiconfolder():
 		return PICONPATH
 
 
-def Bouquetlog(info, wert='', debug=False):
-	if debug and not config.plugins.tvspielfilm.debuglog.value:
-		return
-	if config.plugins.tvspielfilm.logtofile.value:
-		try:
-			with open('/home/root/logs/Bouquetimport.log', 'a') as f:
-				f.write(info)
-		except IOError:
-			TVSlog("Logging-Error in 'globals:Bouquetlog':", IOError)
-
-
 def TVSlog(info, wert='', debug=False):
 	if debug and not config.plugins.tvspielfilm.debuglog.value:
 		return
@@ -1074,7 +1063,6 @@ class TVSTippsView(TVSBaseScreen):
 		global HIDEFLAG
 		skin = readSkin("TVSTippsView")
 		TVSBaseScreen.__init__(self, session, skin)
-		self.skinName = "TVTippsView"
 		if sparte == 'neu':
 			self.titel = 'TV Neuerscheinungen - TV Spielfilm'
 		else:
@@ -1763,7 +1751,6 @@ class TVSGenreJetztProgrammView(TVSBaseScreen):
 		global HIDEFLAG
 		skin = readSkin("TVSProgrammView")
 		TVSBaseScreen.__init__(self, session, skin)
-		self.skinName = "TVSProgrammView"
 		self.tventries = []
 		self.tvlink = []
 		self.tvtitel = []
@@ -1789,8 +1776,7 @@ class TVSGenreJetztProgrammView(TVSBaseScreen):
 		self['menu'] = ItemList([])
 		self['release'] = Label(RELEASE)
 		self['waiting'] = BlinkingLabel('Bitte warten...')
-		self['waiting'].startBlinking()
-		self['waiting'].show()
+		self['ready'] = Label("OK")
 		self['seitennr'] = Label()
 		self['CHANNELkey'] = Pixmap()
 		self['CHANNELtext'] = Label()
@@ -1898,6 +1884,10 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
+		self['waiting'].startBlinking()
+		self['waiting'].show()
+		self['ready'].hide()
+		self['seitennr'].hide()
 		self['CHANNELkey'].hide()
 		self['CHANNELtext'].hide()
 		self['BOUQUETkey'].hide()
@@ -1907,7 +1897,6 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self['TEXTtext'].show()
 		self['INFOtext'].setText('Jetzt/Gleich im TV')
 		self['INFOtext'].show()
-		self['seitennr'].hide()
 
 	def makeTVJetztView(self, output):
 		output = ensure_str(output)
@@ -2067,25 +2056,32 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 			if search("[2-4]+", nextpage):  # nur Folgeseiten 2-4
 				self.downloadFull(nextpage, self.makeTVJetztView)
 			else:
-				self['menu'].moveToIndex(self.index)
-				self.ready = True
-				self['INFOkey'].hide()
-				self['TEXTkey'].show()
-				self['INFOkey'].show()
-				self['waiting'].stopBlinking()
+				self.showready()
 		else:
 			if search("[2-9]+", nextpage):  # nur FolgeSeiten 2-9
 				self.downloadFull(nextpage, self.makeTVJetztView)
 			else:
-				self['menu'].moveToIndex(self.index)
-				self.ready = True
-				self['INFOkey'].show()
-				self['TEXTkey'].show()
 				self['TEXTtext'].setText('Sender')
 				self['TEXTtext'].show()
 				self['INFOtext'].setText('Jetzt/Gleich im TV')
 				self['INFOtext'].show()
-				self['waiting'].stopBlinking()
+				self.showready()
+
+	def showready(self):
+		self['menu'].moveToIndex(self.index)
+		self.ready = True
+		self['TEXTkey'].show()
+		self['INFOkey'].show()
+		self['waiting'].stopBlinking()
+		self['waiting'].hide()
+		self['ready'].show()
+		self.readyTimer = eTimer()
+		self.readyTimer.callback.append(self.hideready)
+		self.readyTimer.start(3000, False)
+
+	def hideready(self):
+		self.readyTimer.stop()
+		self['ready'].hide()
 
 	def makePostviewPage(self, string):
 		self['menu'].hide()
@@ -2535,6 +2531,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self.hideInfotext()
 		self.hideRatingInfos()
 		self.showMenubar()
+		self['ready'].hide()
 		self['seitennr'].hide()
 		self['INFOkey'].hide()
 		self['INFOtext'].hide()
@@ -2748,7 +2745,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			else:
 				self['1_zapup'].show()
 				self['2_zapdown'].show()
-			self['waiting'].stopBlinking()
+			self.showready()
 		if self.eventview and config.plugins.tvspielfilm.eventview.value == 'info':
 			self.postlink = self.tvlink[1]
 			if search('www.tvspielfilm.de', self.postlink):
@@ -2766,6 +2763,18 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 
 	def makeSearchView(self, url):
 		self._makeSearchView(url)
+
+	def showready(self):
+		self['waiting'].stopBlinking()
+		self['waiting'].hide()
+		self['ready'].show()
+		self.readyTimer = eTimer()
+		self.readyTimer.callback.append(self.hideready)
+		self.readyTimer.start(3000, False)
+
+	def hideready(self):
+		self.readyTimer.stop()
+		self['ready'].hide()
 
 	def ok(self):
 		self._ok()
@@ -3268,14 +3277,11 @@ class TVSNews(TVSBaseScreen):
 		self.postviewready = False
 		self['release'] = Label(RELEASE)
 		self['waiting'] = BlinkingLabel('Bitte warten...')
-		self['waiting'].startBlinking()
-		self['waiting'].show()
+		self['ready'] = Label('OK')
 		self['picture'] = Pixmap()
 		self['picpost'] = Pixmap()
 		self['playlogo'] = Pixmap()
-		self['playlogo'].hide()
 		self['statuslabel'] = Label()
-		self['statuslabel'].hide()
 		self['picturetext'] = Label()
 		self['seitennr'] = Label()
 		self['textpage'] = ScrollLabel()
@@ -3299,6 +3305,14 @@ class TVSNews(TVSBaseScreen):
 																   'prevBouquet': self.zap,
 																   'blue': self.hideScreen}, -1)
 		self.downloadFullPage(link, self.makeTVSNews)
+		self.onLayoutFinish.append(self.onLayoutFinished)
+
+	def onLayoutFinished(self):
+		self['waiting'].startBlinking()
+		self['waiting'].show()
+		self['ready'].hide()
+		self['playlogo'].hide()
+		self['statuslabel'].hide()
 
 	def makeTVSNews(self, string):
 		output = ensure_str(open(self.localhtml, 'r').read())
@@ -3495,7 +3509,7 @@ class TVSNews(TVSBaseScreen):
 
 	def showTVSNews(self):
 		self.current = 'menu'
-		self['waiting'].stopBlinking()
+		self.showready()
 		self['menu'].show()
 		self['OKkey'].show()
 		self['OKtext'].setText('Zum Artikel')
@@ -3507,6 +3521,18 @@ class TVSNews(TVSBaseScreen):
 		self['playlogo'].hide()
 		self['statuslabel'].hide()
 		self.setBlueButton('Aus-/Einblenden')
+
+	def showready(self):
+		self['waiting'].stopBlinking()
+		self['waiting'].hide()
+		self['ready'].show()
+		self.readyTimer = eTimer()
+		self.readyTimer.callback.append(self.hideready)
+		self.readyTimer.start(3000, False)
+
+	def hideready(self):
+		self.readyTimer.stop()
+		self['ready'].hide()
 
 	def down(self):
 		if self.current == 'menu':
@@ -3579,7 +3605,6 @@ class TVSPicShow(TVSBaseScreen):
 		self.link = link
 		self.picmode = picmode
 		HIDEFLAG = True
-		self.link = link
 		self.pixlist = []
 		self.topline = []
 		self.titel = ''
@@ -4872,10 +4897,10 @@ class TVSmakeServiceFile(Screen):
 			logdatei = '/home/root/logs/Bouquetimport.log'
 			if isfile(logdatei):
 				remove(logdatei)
-			Bouquetlog('%i verfügbare Sendernamen aus Bouquets:\n' % avail + '-' * 70 + '\n')
-			Bouquetlog(fdata)
-			Bouquetlog('\n\n%i importierte Sendernamen als Piconname:\n' % count + '-' * 70 + '\n')
-			Bouquetlog(imported)
+			self.Bouquetlog('%i verfügbare Sendernamen aus Bouquets:\n' % avail + '-' * 70 + '\n')
+			self.Bouquetlog(fdata)
+			self.Bouquetlog('\n\n%i importierte Sendernamen als Piconname:\n' % count + '-' * 70 + '\n')
+			self.Bouquetlog(imported)
 ######################################################################
 			if newdata == '':
 				self.session.openWithCallback(self.noBouquet, MessageBox, '\nKeine TV Spielfilm Sender gefunden.\nBitte wählen Sie ein anderes TV Bouquet.', MessageBox.TYPE_YESNO)
@@ -4883,15 +4908,26 @@ class TVSmakeServiceFile(Screen):
 				self.session.openWithCallback(self.otherBouquet, MessageBox, '\nInsgesamt %s TV Spielfilm Sender importiert.\nMöchten Sie ein weiteres TV Bouquet importieren?' %
 											  str(count), MessageBox.TYPE_YESNO, default=False)
 
+
+def Bouquetlog(self, info, wert='', debug=False):
+	if debug and not config.plugins.tvspielfilm.debuglog.value:
+		return
+	if config.plugins.tvspielfilm.logtofile.value:
+		try:
+			with open('/home/root/logs/Bouquetimport.log', 'a') as f:
+				f.write(info)
+		except IOError:
+			TVSlog("Logging-Error in 'globals:Bouquetlog':", IOError)
+
 	def otherBouquet(self, answer):
 		if answer is True:
-			self.bouquetsTimer.callback.append(self.getBouquets)
+			self.getBouquets()
 		else:
 			self.close(True)
 
 	def noBouquet(self, answer):
 		if answer is True:
-			self.bouquetsTimer.callback.append(self.getBouquets)
+			self.getBouquets()
 		else:
 			if isfile(self.servicefile):
 				remove(self.servicefile)
@@ -5429,7 +5465,7 @@ class TVSEvent(TVSAllScreenFull):
 
 	def returnServiceFile(self, result):
 		if result:
-			self.EventTimer.callback.append(self.makeChannelLink)
+			self.makeChannelLink()
 		else:
 			self.close()
 
@@ -5491,8 +5527,7 @@ class TVSHeuteView(TVSBaseScreen):
 		self.localhtml = '/tmp/tvspielfilm.html'
 		self['release'] = Label(RELEASE)
 		self['waiting'] = BlinkingLabel('Bitte warten...')
-		self['waiting'].startBlinking()
-		self['waiting'].show()
+		self['ready'] = Label("OK")
 		self['CHANNELkey'] = Pixmap()
 		self['CHANNELtext'] = Label()
 		self['BOUQUETkey'] = Pixmap()
@@ -5598,6 +5633,9 @@ class TVSHeuteView(TVSBaseScreen):
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
+		self['waiting'].startBlinking()
+		self['waiting'].show()
+		self['ready'].hide()
 		self['MENUkey'].show()
 		self['MENUtext'].show()
 		self['waiting'].startBlinking()
@@ -5648,7 +5686,7 @@ class TVSHeuteView(TVSBaseScreen):
 		bereichtop = sub('<wbr/>', '', bereichtop)
 		bereichtop = sub('<div class="first-program block-1">\n.*?</div>', '<div class="first-program block-1"><img src="http://a2.tvspielfilm.de/imedia/8461/5218461,qfQElNSTpxAGvxxuSsPkPjQRIrO6vJjPQCu3KaA_RQPfIknB77GUEYh_MB053lNvumg7bMd+vkJk3F+_CzBZSQ==.jpg" width="149" height="99" border="0" /><span class="time"> </span><strong class="title"> </strong></div>', bereichtop)
 		picons = findall('"sendericon","channel":"(.*?)","broadcastChannelGroup"', bereichtop)
-		self['waiting'].stopBlinking()
+		self.showready()
 		self.zaps = [True for _ in range(6)]
 		if picons:
 			for i in range(6):
@@ -5884,6 +5922,18 @@ class TVSHeuteView(TVSBaseScreen):
 		self['MENUkey'].hide()
 		self['MENUtext'].hide()
 		self._makePostviewPage()
+
+	def showready(self):
+		self['waiting'].stopBlinking()
+		self['waiting'].hide()
+		self['ready'].show()
+		self.readyTimer = eTimer()
+		self.readyTimer.callback.append(self.hideready)
+		self.readyTimer.start(3000, False)
+
+	def hideready(self):
+		self.readyTimer.stop()
+		self['ready'].hide()
 
 	def ok(self):
 		self._ok()
