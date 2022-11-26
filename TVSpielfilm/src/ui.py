@@ -1909,7 +1909,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 			self.titel = '20:15'
 		else:
 			self.titel = '22:00'
-		self.titel = self.titel + ' im TV - Heute, ' + str(self.weekday) + ', ' + datum
+		self.titel = '%s im TV - Heute, %s, %s' % (self.titel, self.weekday, datum)
 		self.setTitle(self.titel)
 		items, bereich = parseNow(output)
 		nowhour = datetime.now().hour
@@ -2077,7 +2077,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self['ready'].show()
 		self.readyTimer = eTimer()
 		self.readyTimer.callback.append(self.hideready)
-		self.readyTimer.start(3000, False)
+		self.readyTimer.start(1500, False)
 
 	def hideready(self):
 		self.readyTimer.stop()
@@ -2188,14 +2188,13 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 				self.jetzt = False
 				self.gleich = True
 				link = self.baseurl + '/tv-programm/sendungen/?page=1&order=time&time=shortly'
-				self.downloadFull(link, self.makeTVJetztView)
 			else:
 				self.jetzt = True
 				self.gleich = False
 				self.abends = False
 				self.nachts = False
 				link = self.baseurl + '/tv-programm/sendungen/jetzt.html'
-				self.downloadFull(link, self.makeTVJetztView)
+			self.downloadFull(link, self.makeTVJetztView)
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
@@ -2770,7 +2769,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self['ready'].show()
 		self.readyTimer = eTimer()
 		self.readyTimer.callback.append(self.hideready)
-		self.readyTimer.start(3000, False)
+		self.readyTimer.start(1000, False)
 
 	def hideready(self):
 		self.readyTimer.stop()
@@ -3528,7 +3527,7 @@ class TVSNews(TVSBaseScreen):
 		self['ready'].show()
 		self.readyTimer = eTimer()
 		self.readyTimer.callback.append(self.hideready)
-		self.readyTimer.start(3000, False)
+		self.readyTimer.start(1500, False)
 
 	def hideready(self):
 		self.readyTimer.stop()
@@ -3600,9 +3599,9 @@ class TVSPicShow(TVSBaseScreen):
 
 	def __init__(self, session, link, picmode=0):
 		global HIDEFLAG
+		self.link = link
 		skin = readSkin("TVSPicShow")
 		TVSBaseScreen.__init__(self, session, skin)
-		self.link = link
 		self.picmode = picmode
 		HIDEFLAG = True
 		self.pixlist = []
@@ -4646,7 +4645,7 @@ class TVSMain(TVSBaseScreen):
 		self[self.actmenu].pageDown()
 
 	def _downloadError(self, output):
-		TVSlog("Downloaderror in module 'TVSMain:_downloadError':", output)
+		TVSlog(output)
 		try:
 			error = output.getErrorMessage()
 			self.session.open(MessageBox, 'Der TV Spielfilm Server ist zurzeit nicht erreichbar:\n%s' % error, MessageBox.TYPE_ERROR)
@@ -5005,6 +5004,7 @@ class TVSgotoPageMenu(TVSAllScreen):
 		self.pagenumber = []
 		self.pagemenulist = []
 		self['release'] = Label(RELEASE)
+		self['release'].hide()
 		self['waiting'] = BlinkingLabel('Bitte warten...')
 		self['waiting'].startBlinking()
 		self['waiting'].show()
@@ -5420,8 +5420,10 @@ class TVSJetzt(TVSAllScreenFull):
 		self.link = link
 		TVSAllScreenFull.__init__(self, session)
 		self.channel_db = channelDB(self.servicefile)
-		self.makeTimerDB()
-		self.makeCheck()
+		self.JetztTimer = eTimer()  # Timeraufruf darf nicht verändert werden
+		self.JetztTimer.callback.append(self.makeTimerDB)
+		self.JetztTimer.callback.append(self.makeCheck)
+		self.JetztTimer.start(200, True)
 
 	def makeCheck(self):
 		if isfile(self.servicefile):
@@ -5444,8 +5446,10 @@ class TVSEvent(TVSAllScreenFull):
 	def __init__(self, session):
 		TVSAllScreenFull.__init__(self, session)
 		self.channel_db = channelDB(self.servicefile, self.dupesfile)
-		self.makeTimerDB
-		self.makeChannelLink
+		self.EventTimer = eTimer()  # Timeraufruf darf nicht verändert werden
+		self.EventTimer.callback.append(self.makeTimerDB)
+		self.EventTimer.callback.append(self.makeChannelLink)
+		self.EventTimer.start(200, True)
 
 	def makeChannelLink(self):
 		if isfile(self.servicefile):
@@ -5678,7 +5682,7 @@ class TVSHeuteView(TVSBaseScreen):
 			self['seitennr'].show()
 			self['seitennr'].setText('Seite %s von %s' % (self.count, self.maxpages))
 		datum = str(self.date.strftime('%d.%m.%Y'))
-		self.titel = 'Heute im TV  - ' + str(self.weekday) + ', ' + datum
+		self.titel = 'Heute im TV  - %s, %s' % (self.weekday, datum)
 		self.setTitle(self.titel)
 		startpostop = output.find('<div class="gallery-area">')
 		endpostop = output.find('<div class="info-block">')
@@ -5929,7 +5933,7 @@ class TVSHeuteView(TVSBaseScreen):
 		self['ready'].show()
 		self.readyTimer = eTimer()
 		self.readyTimer.callback.append(self.hideready)
-		self.readyTimer.start(3000, False)
+		self.readyTimer.start(1500, False)
 
 	def hideready(self):
 		self.readyTimer.stop()
@@ -6459,9 +6463,9 @@ class TVSHeuteView(TVSBaseScreen):
 			try:
 				response = self.opener.open(link, timeout=60)
 				data = response.read()
+				response.close()
 				with open(self.localhtml, 'wb') as f:
 					f.write(data)
-				response.close()
 			except HTTPException as e:
 				self.error = "HTTP Exception Error %s" % e
 			except HTTPError as e:
