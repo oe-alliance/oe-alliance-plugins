@@ -48,6 +48,7 @@ RELEASE = 'V6.9'
 NOTIMER = '\nTimer nicht möglich:\nKeine Service Reference vorhanden, der ausgewählte Sender wurde nicht importiert.'
 NOEPG = 'Keine EPG Informationen verfügbar'
 ALPHA = '/proc/stb/video/alpha' if isfile('/proc/stb/video/alpha') else None
+SERVICEFILE = PLUGINPATH + 'db/service.references'
 
 
 def findPicon(sref, folder):
@@ -119,7 +120,6 @@ class TVSAllScreen(Screen):
 		self.fontlarge = True if config.plugins.tvspielfilm.font_size.value == 'large' else False
 		self.fontsmall = True if config.plugins.tvspielfilm.font_size.value == 'small' else False
 		self.baseurl = 'https://www.tvspielfilm.de'
-		self.servicefile = PLUGINPATH + 'db/service.references'
 		self.dupesfile = PLUGINPATH + 'db/dupes.references'
 
 	def zap(self):
@@ -1135,13 +1135,13 @@ class TVSTippsView(TVSBaseScreen):
 															'yellow': self.yellow,
 															'red': self.makeTimer,
 															'blue': self.hideScreen}, -1)
-		self.service_db = serviceDB(self.servicefile)
+		self.service_db = serviceDB(SERVICEFILE)
 		if isfile(PLUGINPATH + 'db/timer.db'):
 			self.timer = open(PLUGINPATH + 'db/timer.db').read().split('\n')
 		else:
 			self.timer = ''
-		self.date = datetime.date.today()
-		one_day = datetime.timedelta(days=1)
+		self.date = date.today()
+		one_day = timedelta(days=1)
 		self.nextdate = self.date + one_day
 		self.weekday = makeWeekDay(self.date.weekday())
 		self.downloadFullPage(link, self.makeTVTipps)
@@ -1155,7 +1155,7 @@ class TVSTippsView(TVSBaseScreen):
 		for i in range(6):
 			self['pic%s' % i].hide()
 		items = buildTVTippsArray(self.sparte, output)
-		date = str(self.date.strftime('%d.%m.%Y'))
+		date = str(strftime('%d.%m.%Y'))
 		self.titel = 'TV-Tipps - ' + str(self.sparte) + ' - ' + str(self.weekday) + ', ' + date
 		if self.sparte == 'neu':
 			self.titel = 'TV Neuerscheinungen - ' + str(self.weekday) + ', ' + date
@@ -1226,7 +1226,7 @@ class TVSTippsView(TVSBaseScreen):
 				elif self.new:
 					hour = sub(':..', '', start)
 					if int(hour) < 5:
-						one_day = datetime.timedelta(days=1)
+						one_day = timedelta(days=1)
 						date = self.date + one_day
 					else:
 						date = self.date
@@ -1317,7 +1317,7 @@ class TVSTippsView(TVSBaseScreen):
 							start = str(self.date) + ' ' + start
 						else:
 							start = date + ' ' + start
-						start = datetime.datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
+						start = datetime.strptime(start, '%Y-%m-%d %H:%M:%S')
 						start = int(mktime(start.timetuple()))
 						epgcache = eEPGCache.getInstance()
 						event = epgcache.startTimeQuery(eServiceReference(sref), start)
@@ -1447,24 +1447,24 @@ class TVSTippsView(TVSBaseScreen):
 				try:
 					today = datetime.date(int(date1[0]), int(date2[0]), int(date3[0]))
 				except IndexError:
-					today = datetime.date.today()
+					today = date.today()
 
-				one_day = datetime.timedelta(days=1)
+				one_day = timedelta(days=1)
 				tomorrow = today + one_day
 				self.weekday = makeWeekDay(tomorrow.weekday())
 				nextday = sub('date=(.*?FIN)', 'date=', self.link)
 				nextday = nextday + str(tomorrow)
 				self.date = tomorrow
-				one_day = datetime.timedelta(days=1)
+				one_day = timedelta(days=1)
 				self.nextdate = self.date + one_day
 			else:
-				today = datetime.date.today()
-				one_day = datetime.timedelta(days=1)
+				today = date.today()
+				one_day = timedelta(days=1)
 				tomorrow = today + one_day
 				self.weekday = makeWeekDay(tomorrow.weekday())
 				nextday = self.link + '?date=' + str(tomorrow)
 				self.date = tomorrow
-				one_day = datetime.timedelta(days=1)
+				one_day = timedelta(days=1)
 				self.nextdate = self.date + one_day
 			self.link = nextday
 			self.oldindex = 0
@@ -1484,24 +1484,24 @@ class TVSTippsView(TVSBaseScreen):
 				try:
 					today = datetime.date(int(date1[0]), int(date2[0]), int(date3[0]))
 				except IndexError:
-					today = datetime.date.today()
+					today = date.today()
 
-				one_day = datetime.timedelta(days=1)
+				one_day = timedelta(days=1)
 				yesterday = today - one_day
 				self.weekday = makeWeekDay(yesterday.weekday())
 				prevday = sub('date=(.*?FIN)', 'date=', self.link)
 				prevday = prevday + str(yesterday)
 				self.date = yesterday
-				one_day = datetime.timedelta(days=1)
+				one_day = timedelta(days=1)
 				self.nextdate = self.date + one_day
 			else:
-				today = datetime.date.today()
-				one_day = datetime.timedelta(days=1)
+				today = date.today()
+				one_day = timedelta(days=1)
 				yesterday = today - one_day
 				self.weekday = makeWeekDay(yesterday.weekday())
 				prevday = self.link + '?date=' + str(yesterday)
 				self.date = yesterday
-				one_day = datetime.timedelta(days=1)
+				one_day = timedelta(days=1)
 				self.nextdate = self.date + one_day
 			self.link = prevday
 			self.oldindex = 0
@@ -1521,24 +1521,24 @@ class TVSTippsView(TVSBaseScreen):
 				try:
 					today = datetime.date(int(date1[0]), int(date2[0]), int(date3[0]))
 				except IndexError:
-					today = datetime.date.today()
+					today = date.today()
 
-				one_week = datetime.timedelta(days=7)
+				one_week = timedelta(days=7)
 				tomorrow = today + one_week
 				self.weekday = makeWeekDay(tomorrow.weekday())
 				nextweek = sub('date=(.*?FIN)', 'date=', self.link)
 				nextweek = nextweek + str(tomorrow)
 				self.date = tomorrow
-				one_week = datetime.timedelta(days=7)
+				one_week = timedelta(days=7)
 				self.nextdate = self.date + one_week
 			else:
-				today = datetime.date.today()
-				one_week = datetime.timedelta(days=7)
+				today = date.today()
+				one_week = timedelta(days=7)
 				tomorrow = today + one_week
 				self.weekday = makeWeekDay(tomorrow.weekday())
 				nextweek = self.link + '?date=' + str(tomorrow)
 				self.date = tomorrow
-				one_week = datetime.timedelta(days=7)
+				one_week = timedelta(days=7)
 				self.nextdate = self.date + one_week
 			self.link = nextweek
 			self.oldindex = 0
@@ -1555,24 +1555,24 @@ class TVSTippsView(TVSBaseScreen):
 				try:
 					today = datetime.date(int(date1[0]), int(date2[0]), int(date3[0]))
 				except IndexError:
-					today = datetime.date.today()
+					today = date.today()
 
-				one_week = datetime.timedelta(days=7)
+				one_week = timedelta(days=7)
 				yesterday = today - one_week
 				self.weekday = makeWeekDay(yesterday.weekday())
 				prevweek = sub('date=(.*?FIN)', 'date=', self.link)
 				prevweek = prevweek + str(yesterday)
 				self.date = yesterday
-				one_week = datetime.timedelta(days=7)
+				one_week = timedelta(days=7)
 				self.nextdate = self.date + one_week
 			else:
-				today = datetime.date.today()
-				one_week = datetime.timedelta(days=7)
+				today = date.today()
+				one_week = timedelta(days=7)
 				yesterday = today - one_week
 				self.weekday = makeWeekDay(yesterday.weekday())
 				prevweek = self.link + '?date=' + str(yesterday)
 				self.date = yesterday
-				one_week = datetime.timedelta(days=7)
+				one_week = timedelta(days=7)
 				self.nextdate = self.date + one_week
 			self.link = prevweek
 			self.oldindex = 0
@@ -1805,7 +1805,7 @@ class TVSGenreJetztProgrammView(TVSBaseScreen):
 
 class TVSJetztView(TVSGenreJetztProgrammView):
 
-	def __init__(self, session, link, standalone):
+	def __init__(self, session, link, standalone=True):
 		TVSGenreJetztProgrammView.__init__(self, session, link)
 		self.sref = []
 		self.link1 = link
@@ -1851,37 +1851,38 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 															'yellow': self.yellow,
 															'red': self.makeTimer,
 															'blue': self.hideScreen}, -1)
-		self.service_db = serviceDB(self.servicefile)
-		with open(self.servicefile, 'r') as f:
-			lines = f.readlines()
-		ordertext = ['"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines)]
-		self.order = '{' + str(''.join(ordertext)) + '}'
-		self.date = date.today()
-		if self.standalone:
-			self.movie_stop = config.usage.on_movie_stop.value
-			self.movie_eof = config.usage.on_movie_eof.value
-			config.usage.on_movie_stop.value = 'quit'
-			config.usage.on_movie_eof.value = 'quit'
-			self.makeTimerDB()
-		else:
-			if isfile(PLUGINPATH + 'db/timer.db'):
-				self.timer = open(PLUGINPATH + 'db/timer.db').read().split('\n')
+		self.service_db = serviceDB(SERVICEFILE)
+		if isfile(SERVICEFILE):
+			with open(SERVICEFILE, 'r') as f:
+				lines = f.readlines()
+			ordertext = ['"%s": %d, ' % (line.partition(' ')[0], i) for i, line in enumerate(lines)]
+			self.order = '{' + str(''.join(ordertext)) + '}'
+			self.date = date.today()
+			if self.standalone:
+				self.movie_stop = config.usage.on_movie_stop.value
+				self.movie_eof = config.usage.on_movie_eof.value
+				config.usage.on_movie_stop.value = 'quit'
+				config.usage.on_movie_eof.value = 'quit'
+				self.makeTimerDB()
 			else:
-				self.timer = ''
-		one_day = timedelta(days=1)
-		self.nextdate = self.date + one_day
-		self.weekday = makeWeekDay(self.date.weekday())
-		self.piconfolder = getPiconfolder()
-		if search('/sendungen/jetzt.html', link):
-			self.jetzt = True
-		elif search('time=shortly', link):
-			self.gleich = True
-		elif search('/sendungen/abends.html', link):
-			self.abends = True
-		elif search('/sendungen/fernsehprogramm-nachts.html', link):
-			self.nachts = True
-		self.downloadFull(link, self.makeTVJetztView)
-		self.onLayoutFinish.append(self.onLayoutFinished)
+				if isfile(PLUGINPATH + 'db/timer.db'):
+					self.timer = open(PLUGINPATH + 'db/timer.db').read().split('\n')
+				else:
+					self.timer = ''
+			one_day = timedelta(days=1)
+			self.nextdate = self.date + one_day
+			self.weekday = makeWeekDay(self.date.weekday())
+			self.piconfolder = getPiconfolder()
+			if search('/sendungen/jetzt.html', link):
+				self.jetzt = True
+			elif search('time=shortly', link):
+				self.gleich = True
+			elif search('/sendungen/abends.html', link):
+				self.abends = True
+			elif search('/sendungen/fernsehprogramm-nachts.html', link):
+				self.nachts = True
+			self.downloadFull(link, self.makeTVJetztView)
+			self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
 		self['waiting'].startBlinking()
@@ -1900,7 +1901,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 
 	def makeTVJetztView(self, output):
 		output = ensure_str(output)
-		datum = str(self.date.strftime('%d.%m.%Y'))
+		datum = str(strftime('%d.%m.%Y'))
 		if self.jetzt:
 			self.titel = 'Jetzt'
 		elif self.gleich:
@@ -2508,7 +2509,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self.link = link
 		self.eventview = eventview
 		self.tagestipp = tagestipp
-		self.service_db = serviceDB(self.servicefile)
+		self.service_db = serviceDB(SERVICEFILE)
 		self.localhtml = '/tmp/tvspielfilm.html'
 		if not self.tagestipp:
 			channel = findall(',(.*?).html', link)
@@ -2582,7 +2583,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			from Components.ServiceEventTracker import ServiceEventTracker
 			from enigma import iPlayableService
 			self.event_tracker = ServiceEventTracker(screen=self, eventmap={iPlayableService.evUpdatedEventInfo: self.zapRefresh})
-			self.channel_db = channelDB(self.servicefile)
+			self.channel_db = channelDB(SERVICEFILE)
 		elif not self.tagestipp:
 			self.link = "%s%s&tips=0&time=day&channel=%s" % (sub('/sendungen/.*?html', '/sendungen/?page=1&order=time&date=', self.link), self.date, channel[0])
 		if not self.tagestipp:
@@ -2601,7 +2602,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self['BOUQUETtext'].show()
 		output = ensure_str(open(self.localhtml, 'r').read())
 		titel = search('<title>(.*?)von', output)
-		datum = str(self.date.strftime('%d.%m.%Y'))
+		datum = str(strftime('%d.%m.%Y'))
 		self.titel = "%s%s, %s" % (titel.group(1), self.weekday, datum)
 		self.setTitle(self.titel)
 		items, bereich = parseNow(output)
@@ -2769,7 +2770,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self['ready'].show()
 		self.readyTimer = eTimer()
 		self.readyTimer.callback.append(self.hideready)
-		self.readyTimer.start(1000, False)
+		self.readyTimer.start(1500, False)
 
 	def hideready(self):
 		self.readyTimer.stop()
@@ -4238,11 +4239,14 @@ class TVSMain(TVSBaseScreen):
 																   'green': self.green,
 																   'blue': self.hideScreen,
 																   'contextMenu': self.config}, -1)
+		self.onShown.append(self.onShownFinished)
+
+	def onShownFinished(self):
 		self.movie_stop = config.usage.on_movie_stop.value
 		self.movie_eof = config.usage.on_movie_eof.value
 		config.usage.on_movie_stop.value = 'quit'
 		config.usage.on_movie_eof.value = 'quit'
-		if self.tipps:
+		if self.tipps and isfile(SERVICEFILE):
 			self.TagesTipps = self.session.instantiateDialog(TVSTipps)
 			if not self.hidetipps:
 				self.startTipps()
@@ -4340,7 +4344,6 @@ class TVSMain(TVSBaseScreen):
 						self.session.openWithCallback(self.selectMainMenu, TVSHeuteView, self.mainmenulink[c], self.opener)
 					elif search('/bilder', self.mainmenulink[c]):
 						self.session.openWithCallback(self.selectMainMenu, TVSNews, self.mainmenulink[c])
-#						self.session.openWithCallback(self.selectMainMenu, TVTrailerBilder, self.mainmenulink[c], '_pic')
 					elif search('/news-und-specials', self.mainmenulink[c]):
 						self.session.openWithCallback(self.selectMainMenu, TVSNews, self.mainmenulink[c])
 					elif search('/tv-tipps|/tv-genre|/trailer-und-clips', self.mainmenulink[c]):
@@ -4470,7 +4473,7 @@ class TVSMain(TVSBaseScreen):
 			self.makeSecondMenuItem3('Erstmals im Free-TV', '/tv-tipps/galerien/freetvpremieren/')
 			self.makeSecondMenuItem3('Programmänderungen', '/tv-programm/programmaenderung/')
 		elif search('/serien/', link):
-			#			self.makeSecondMenuItem2('Serien', '/serien/')
+#			self.makeSecondMenuItem2('Serien', '/serien/')
 			self.makeSecondMenuItem2('Serien-News', '/news/serien/')
 			self.makeSecondMenuItem2('Quizze', '/news/quizze/')
 			self.makeSecondMenuItem2('Serien-Trailer', '/serien/serien-trailer/')
@@ -4654,7 +4657,7 @@ class TVSMain(TVSBaseScreen):
 			self.ready = True
 
 	def checkMainMenu(self):
-		if isfile(self.servicefile):
+		if isfile(SERVICEFILE):
 			self.makeMainMenu()
 		else:
 			self.session.openWithCallback(self.returnFirstRun, TVSmakeServiceFile)
@@ -4708,8 +4711,8 @@ class TVSMain(TVSBaseScreen):
 
 	def returnRed(self, answer):
 		if answer is True:
-			if isfile(self.servicefile):
-				remove(self.servicefile)
+			if isfile(SERVICEFILE):
+				remove(SERVICEFILE)
 			self.session.openWithCallback(self.returnServiceFile, TVSmakeServiceFile)
 
 	def returnServiceFile(self, result):
@@ -4814,10 +4817,9 @@ class TVSmakeServiceFile(Screen):
 		self['list'] = MenuList([])
 		self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.ok,
 														  'cancel': self.exit}, -1)
-		self.servicefile = PLUGINPATH + 'db/service.references'
 		self.dupesfile = PLUGINPATH + 'db/dupes.references'
 		self.ready = False
-		self.onLayoutFinish.append(self.getBouquets)
+		self.onShown.append(self.getBouquets)
 
 	def getBouquets(self):
 		bouquets = []
@@ -4866,14 +4868,14 @@ class TVSmakeServiceFile(Screen):
 					fdata += '{0:<40} {1:<0}'.format(service[1], service[0]) + '\n'
 					avail += 1
 			data = transCHANNEL(data)
-			with open(self.servicefile, 'a') as f:
+			with open(SERVICEFILE, 'a') as f:
 				f.write(data)
-			fnew = open(self.servicefile + '.new', 'w')
+			fnew = open(SERVICEFILE + '.new', 'w')
 			dnew = open(self.dupesfile + '.new', 'w')
 			count = 0
 			newdata = ''
 			imported = ''
-			for line in open(self.servicefile):
+			for line in open(SERVICEFILE):
 				line = line.strip()
 				channel = line[: line.find(' ')].strip()
 				sref = line[line.find(' '):].strip()
@@ -4890,7 +4892,7 @@ class TVSmakeServiceFile(Screen):
 			dnew.close()
 			fnew.close()
 			rename(self.dupesfile + '.new', self.dupesfile)
-			rename(self.servicefile + '.new', self.servicefile)
+			rename(SERVICEFILE + '.new', SERVICEFILE)
 			self.ready = True
 ### Bouquetlog for analysis purposes, e.g. when picons are missing ###
 			logdatei = '/home/root/logs/Bouquetimport.log'
@@ -4907,16 +4909,15 @@ class TVSmakeServiceFile(Screen):
 				self.session.openWithCallback(self.otherBouquet, MessageBox, '\nInsgesamt %s TV Spielfilm Sender importiert.\nMöchten Sie ein weiteres TV Bouquet importieren?' %
 											  str(count), MessageBox.TYPE_YESNO, default=False)
 
-
-def Bouquetlog(self, info, wert='', debug=False):
-	if debug and not config.plugins.tvspielfilm.debuglog.value:
-		return
-	if config.plugins.tvspielfilm.logtofile.value:
-		try:
-			with open('/home/root/logs/Bouquetimport.log', 'a') as f:
-				f.write(info)
-		except IOError:
-			TVSlog("Logging-Error in 'globals:Bouquetlog':", IOError)
+	def Bouquetlog(self, info, wert='', debug=False):
+		if debug and not config.plugins.tvspielfilm.debuglog.value:
+			return
+		if config.plugins.tvspielfilm.logtofile.value:
+			try:
+				with open('/home/root/logs/Bouquetimport.log', 'a') as f:
+					f.write(info)
+			except IOError:
+				TVSlog("Logging-Error in 'globals:Bouquetlog':", IOError)
 
 	def otherBouquet(self, answer):
 		if answer is True:
@@ -4928,8 +4929,8 @@ def Bouquetlog(self, info, wert='', debug=False):
 		if answer is True:
 			self.getBouquets()
 		else:
-			if isfile(self.servicefile):
-				remove(self.servicefile)
+			if isfile(SERVICEFILE):
+				remove(SERVICEFILE)
 			self.close(False)
 
 	def getCurrent(self):
@@ -5336,7 +5337,6 @@ class TVSConfig(ConfigListScreen, TVSAllScreen):
 		list = []
 		if config.plugins.tvspielfilm.plugin_size == 'FHD':
 			list.append(getConfigListEntry('Plugin Größe:', config.plugins.tvspielfilm.plugin_size))
-#        list.append(getConfigListEntry('Plugin Position:', config.plugins.tvspielfilm.position))
 		list.append(getConfigListEntry('Verwende Plugin-eigene Schrift:', config.plugins.tvspielfilm.font))
 		list.append(getConfigListEntry('Schriftgröße Auswahlzeilen:', config.plugins.tvspielfilm.font_size))
 		list.append(getConfigListEntry('Farbe des Auswahlbalkens:', config.plugins.tvspielfilm.selectorcolor))
@@ -5414,45 +5414,19 @@ class TVSConfig(ConfigListScreen, TVSAllScreen):
 			self.session.openWithCallback(self.close, TVSMain)
 
 
-class TVSJetzt(TVSAllScreenFull):
-
-	def __init__(self, session, link):
-		self.link = link
-		TVSAllScreenFull.__init__(self, session)
-		self.channel_db = channelDB(self.servicefile)
-		self.JetztTimer = eTimer()  # Timeraufruf darf nicht verändert werden
-		self.JetztTimer.callback.append(self.makeTimerDB)
-		self.JetztTimer.callback.append(self.makeCheck)
-		self.JetztTimer.start(200, True)
-
-	def makeCheck(self):
-		if isfile(self.servicefile):
-			self.session.openWithCallback(self.exit, TVSJetztView, self.link, True)
-		else:
-			self.session.openWithCallback(self.returnServiceFile, TVSmakeServiceFile)
-
-	def returnServiceFile(self, result):
-		if result:
-			self.session.openWithCallback(self.exit, TVSJetztView, self.link, True)
-		else:
-			self.close()
-
-	def exit(self):
-		self.close()
-
-
 class TVSEvent(TVSAllScreenFull):
 
 	def __init__(self, session):
 		TVSAllScreenFull.__init__(self, session)
-		self.channel_db = channelDB(self.servicefile, self.dupesfile)
-		self.EventTimer = eTimer()  # Timeraufruf darf nicht verändert werden
-		self.EventTimer.callback.append(self.makeTimerDB)
-		self.EventTimer.callback.append(self.makeChannelLink)
-		self.EventTimer.start(200, True)
+		self.channel_db = channelDB(SERVICEFILE, self.dupesfile)
+		self.onShown.append(self.onShownFinished)
+
+	def onShownFinished(self):
+		self.makeTimerDB()
+		self.makeChannelLink()
 
 	def makeChannelLink(self):
-		if isfile(self.servicefile):
+		if isfile(SERVICEFILE):
 			sref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
 			sref = str(sref) + 'FIN'
 			sref = sub(':0:0:0:.*?FIN', ':0:0:0:', sref)
@@ -5607,7 +5581,7 @@ class TVSHeuteView(TVSBaseScreen):
 															'yellow': self.yellow,
 															'red': self.makeTimer,
 															'blue': self.hideScreen}, -1)
-		self.service_db = serviceDB(self.servicefile)
+		self.service_db = serviceDB(SERVICEFILE)
 		if isfile(PLUGINPATH + 'db/timer.db'):
 			self.timer = open(PLUGINPATH + 'db/timer.db').read().split('\n')
 		else:
@@ -5681,7 +5655,7 @@ class TVSHeuteView(TVSBaseScreen):
 				self.maxpages += 1
 			self['seitennr'].show()
 			self['seitennr'].setText('Seite %s von %s' % (self.count, self.maxpages))
-		datum = str(self.date.strftime('%d.%m.%Y'))
+		datum = str(strftime('%d.%m.%Y'))
 		self.titel = 'Heute im TV  - %s, %s' % (self.weekday, datum)
 		self.setTitle(self.titel)
 		startpostop = output.find('<div class="gallery-area">')
@@ -5718,7 +5692,7 @@ class TVSHeuteView(TVSBaseScreen):
 		if sender:
 			for i in range(6):
 				if i < self.spalten:
-					self.srefs[i].append(serviceDB(self.servicefile).lookup(transCHANNEL(sender[i]).strip()))
+					self.srefs[i].append(serviceDB(SERVICEFILE).lookup(transCHANNEL(sender[i]).strip()))
 					self.srefs[i].append(sender[i])
 					self['sender%s' % i].setText(sender[i])
 					self['sender%s' % i].show()

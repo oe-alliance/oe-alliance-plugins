@@ -6,8 +6,8 @@ from os.path import isfile
 
 from Components.config import config, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo
 from Plugins.Plugin import PluginDescriptor
-
-from .ui import TVSEvent, TVSJetzt, TVSMain, TVSlog
+from Screens.MessageBox import MessageBox
+from .ui import TVSEvent, TVSJetztView, TVSMain, TVSlog, SERVICEFILE
 from .util import DESKTOP_WIDTH, PLUGINPATH, PICONPATH
 
 config.plugins.tvspielfilm = ConfigSubsection()
@@ -45,6 +45,7 @@ config.plugins.tvspielfilm.ytresolution = ConfigSelection(default='best', choice
 config.plugins.tvspielfilm.debuglog = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.logtofile = ConfigYesNo(default=False)
 HIDEFLAG = True
+ERRORMSG = 'Keine Bouquets gefunden! Zwecks Bouquetimport starte zuerst das TVS-Hauptplugin.'
 ALPHA = '/proc/stb/video/alpha' if isfile('/proc/stb/video/alpha') else None
 if not ALPHA:
 	print('Alphachannel not found! Hide/show-function (=blue button) is disabled')
@@ -56,19 +57,31 @@ def main(session, **kwargs):
 
 
 def mainjetzt(session, **kwargs):
-	session.open(TVSJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
+	if isfile(SERVICEFILE):
+	    session.open(TVSJetztView, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
+	else:
+		session.open(MessageBox, ERRORMSG, MessageBox.TYPE_ERROR)
 
 
 def mainprime(session, **kwargs):
-	session.open(TVSJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
+	if isfile(SERVICEFILE):
+		session.open(TVSJetztView, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
+	else:
+		session.open(MessageBox, ERRORMSG, MessageBox.TYPE_ERROR)
 
 
 def mainlate(session, **kwargs):
-	session.open(TVSJetzt, 'https://www.tvspielfilm.de/tv-programm/sendungen/fernsehprogramm-nachts.html')
+	if isfile(SERVICEFILE):
+		session.open(TVSJetztView, 'https://www.tvspielfilm.de/tv-programm/sendungen/fernsehprogramm-nachts.html')
+	else:
+		session.open(MessageBox, ERRORMSG, MessageBox.TYPE_ERROR)
 
 
 def mainevent(session, **kwargs):
-	session.open(TVSEvent)
+	if isfile(SERVICEFILE):
+		session.open(TVSEvent)
+	else:
+		session.open(MessageBox, ERRORMSG, MessageBox.TYPE_ERROR)
 
 
 def Plugins(**kwargs):
