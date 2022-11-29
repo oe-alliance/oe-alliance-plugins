@@ -4648,7 +4648,7 @@ class TVSMain(TVSBaseScreen):
 		self[self.actmenu].pageDown()
 
 	def _downloadError(self, output):
-		TVSlog(output)
+		TVSlog("Downloaderror in module 'TVSMain:_downloadError':", output)
 		try:
 			error = output.getErrorMessage()
 			self.session.open(MessageBox, 'Der TV Spielfilm Server ist zurzeit nicht erreichbar:\n%s' % error, MessageBox.TYPE_ERROR)
@@ -5686,8 +5686,8 @@ class TVSHeuteView(TVSBaseScreen):
 		else:
 			for i in range(6):
 				self['picon%s' % i].hide()
-		sender = findall('<h3>(.*?)</h3>', bereichtop)
-		self.spalten = len(sender)
+		sender = findall(' <h3>(.*?)</h3>', bereichtop)
+		self.spalten = min(len(sender), 6)  # begrenze auf max 6 Spalten
 		self.srefs = [[] for _ in range(6)]
 		if sender:
 			for i in range(6):
