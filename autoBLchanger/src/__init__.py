@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
-# Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/autoBLchanger/__init__.py
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Components.config import config, ConfigSubsection, ConfigSelection
-from os import environ
 from gettext import gettext, dgettext, bindtextdomain
 
 PluginLanguageDomain = 'autoBLchanger'
@@ -11,8 +9,6 @@ myPluginPath = resolveFilename(SCOPE_PLUGINS, 'Extensions/' + PluginLanguageDoma
 
 
 def localeInit():
-	lang = language.getLanguage()[:2]
-	environ["LANGUAGE"] = lang
 	bindtextdomain(PluginLanguageDomain, myPluginPath + '/locale')
 
 

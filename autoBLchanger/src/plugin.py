@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/autoBLchanger/plugin.py
 #######################################
 # coded by pain2000 - v1.4 (Nov 2022) #
 #  modyfied for py3 usage by Mr.Servo #
