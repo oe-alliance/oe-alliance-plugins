@@ -631,5 +631,12 @@ PiconManager/src/Makefile
 PiconManager/src/pic/Makefile
 PiconManager/po/Makefile
 
+autoBLchanger/Makefile
+autoBLchanger/meta/Makefile
+autoBLchanger/po/Makefile
+autoBLchanger/src/Makefile
+autoBLchanger/src/images/Makefile
+autoBLchanger/src/logos/Makefile
+
 ])
 AC_OUTPUT

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+# Embedded file name: /usr/lib/enigma2/python/Plugins/Extensions/autoBLchanger/plugin.py
 #######################################
-# coded by pain2000 - v1.3 (Nov 2022) #
+# coded by pain2000 - v1.4 (Nov 2022) #
 #  modyfied for py3 usage by Mr.Servo #
 #######################################
 
@@ -16,22 +17,23 @@ from Components.Pixmap import Pixmap
 from Components.AVSwitch import AVSwitch
 from enigma import ePicLoad
 from os import curdir, walk, sep, rename, remove, symlink, system
-from os.path import normpath, abspath, realpath, join, islink, exists, lexists, dirname
+from os.path import normpath, abspath, realpath, join, islink, exists, lexists, dirname, splitext
 from random import randrange
 
 strPluginName = 'autoBLchanger'
-strVersionIdx = 'v1.3'
-strSearchPath = normpath(myPluginPath + '/logos') + '/'
+strVersionIdx = 'v1.4'
+strSearchPath = normpath(myPluginPath + '/logos') + sep
 strTargetPath = '/usr/share/bootlogo.mvi'
 strChangeMode = config.plugins.autoBLchanger.changeMode.value  # 'man', 'aut'
 strSelectMode = config.plugins.autoBLchanger.selectMode.value  # 0: random, 1: ascending, 2: descending
 
 
-def searchForFiles(directory=curdir, depth=-1, extensions=('.mvi')):
+def searchForFiles(directory=curdir, depth=-1, extensions=('.mvi'), prefix=''):
 	foundFiles = []
+	checkBegin = lambda swFileName: True if not prefix or directory.rstrip(sep) != strSearchPath.rstrip(sep) else swFileName.startswith(prefix)  # check beginning of file name if a specific prefix is given (by call of 'setPicture')
 	for root, dirs, files in walk(abspath(directory)):
 		if root[len(directory):].count(sep) < depth or depth < 0:  # check the directory depth to search in
-			foundFiles.extend(join(root, fileName) for fileName in files if fileName.lower().endswith(extensions))  # check files with given extensions
+			foundFiles.extend(join(root, fileName) for fileName in files if fileName.lower().endswith(extensions) and checkBegin(fileName))  # check files with given extension(s) and/or beginning)
 	return foundFiles
 
 
@@ -82,8 +84,8 @@ class autoBLchanger(Screen, ConfigListScreen):  # /usr/lib/enigma2/python/Plugin
 	skin = """
 	<screen name="autoBLchanger" position="center,center" size="650,715" title="{title_ver}" flags="wfNoBorder" backgroundColor="#00000000">
 		<ePixmap pixmap="{path}images/back.png" position="0,0" size="650,715" alphatest="off" transparent="0" zPosition="-1" />
-		<eLabel name="myTitle" position="25,6" size="220,30" text="{title}" halign="right" valign="center" font="Console; 25" foregroundColor="#00c8c8c8" transparent="1" zPosition="1" />
-		<eLabel name="myVersion" position="255,6" size="100,30" text="({version})" halign="left" valign="bottom" font="Console; 18" foregroundColor="#00c8c8c8" transparent="1" zPosition="1" />
+		<eLabel name="myTitle" position="25,12" size="220,30" text="{title}" halign="right" valign="center" font="Console; 25" foregroundColor="#00c8c8c8" transparent="1" zPosition="1" />
+		<eLabel name="myVersion" position="255,12" size="100,30" text="({version})" halign="left" valign="bottom" font="Console; 18" foregroundColor="#00c8c8c8" transparent="1" zPosition="1" />
 		<widget name="config" position="25,60" size="600,480" enableWrapAround="1" scrollbarMode="showNever" font="Regular; 24" foregroundColor="#00c8c8c8" foregroundColorSelected="#00c8c8c8" backgroundColorSelected="#005a5a5a" itemHeight="30" transparent="1" zPosition="1" />
 		<widget name="LogosInfo" position="25,550" size="600,80" halign="left" valign="top" font="Console; 22" foregroundColor="#00c8c8c8" transparent="1" zPosition="1" />
 		<widget name="LogosPict" position="325,371" size="300,169" alphatest="on" zPosition="2" borderWidth="1" borderColor="#005a5a5a" />
@@ -145,7 +147,7 @@ class autoBLchanger(Screen, ConfigListScreen):  # /usr/lib/enigma2/python/Plugin
 			if self.changeMode == 'man':
 				iLogoCount = 1
 				for x in self.Logos:
-					strEntry = '%02d: %s' % (iLogoCount, str(dirname(x.replace(strSearchPath, ''))))
+					strEntry = '%02d: %s' % (iLogoCount, str(splitext(x.replace(strSearchPath, ''))[0].split(sep)[0]))
 					self.list.append(getConfigListEntry(strEntry, self.set_fake_entry, x))
 					iLogoCount += 1
 		else:  # no BootLogos found
@@ -190,7 +192,7 @@ class autoBLchanger(Screen, ConfigListScreen):  # /usr/lib/enigma2/python/Plugin
 
 	def setPicture(self, logoIdx, logoPath):
 		if logoIdx > self.conOff and self.SelByUser:
-			pix = searchForFiles(dirname(logoPath), 1, ('.jpg', '.jpeg', '.png'))
+			pix = searchForFiles(dirname(logoPath), 1, ('.jpg', '.jpeg', '.png'), splitext(logoPath.replace(strSearchPath, ''))[0].split(sep)[0])
 			if not pix:
 				pix = ['/tmp/nothing.found']
 			pix.sort(key=str.lower)
