@@ -7,4 +7,4 @@ install_PYTHON =	\
 	tmdb.py \
 	plugin.py
 
-install_DATA = keymap.xml
+install_DATA = keymap.xml setup.xml
