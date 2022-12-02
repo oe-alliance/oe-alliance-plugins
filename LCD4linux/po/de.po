@@ -193,6 +193,9 @@ msgstr "- HTTP-Breite"
 msgid "- Infolines"
 msgstr "- Infozeilen"
 
+msgid "- Trendarrows"
+msgstr "- Trendpfeile"
+
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 Hintergrundfarbe"
 
@@ -2304,6 +2307,9 @@ msgstr "Wetter Hohe Temperatur Farbe"
 
 msgid "Weather Lines"
 msgstr "Wetter Linien"
+
+msgid "Weather Trendarrows"
+msgstr "Wetter Trendpfeile"
 
 msgid "Weather Low Temperature Color"
 msgstr "Wetter Niedrige Temperatur Farbe"

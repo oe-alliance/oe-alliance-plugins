@@ -196,6 +196,9 @@ msgstr "- HTTP Leveys"
 msgid "- Infolines"
 msgstr "- Tietorivit"
 
+msgid "- Trendarrows"
+msgstr "- Trendinuolet"
+
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 Taustaväri"
 
@@ -2307,6 +2310,9 @@ msgstr "Sää: Korkean lämpötilan väri"
 
 msgid "Weather Lines"
 msgstr "Sää: Erotin"
+
+msgid "Weather Trendarrows"
+msgstr "Sään: Trendinuolet"
 
 msgid "Weather Low Temperature Color"
 msgstr "Sää: Alhaisen lämpötilan väri"
