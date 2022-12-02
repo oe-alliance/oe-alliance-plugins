@@ -2314,9 +2314,6 @@ msgstr "Weather Lines"
 msgid "Weather Trendarrows"
 msgstr "Weather Trendarrows"
 
-msgid "Weather Trendarrows"
-msgstr "Weather Trendarrows"
-
 msgid "Weather Low Temperature Color"
 msgstr "Weather Low Temperature Color"
 
