@@ -190,6 +190,9 @@ msgstr "- HTTP Ширина"
 msgid "- Infolines"
 msgstr "- Информационные строки"
 
+msgid "- Trendarrows"
+msgstr "- стрелки тренда"
+
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 Цвет фона"
 
@@ -2301,6 +2304,9 @@ msgstr "Высокая температура(погода)-Цвет"
 
 msgid "Weather Lines"
 msgstr "Погода-Линии"
+
+msgid "Weather Trendarrows"
+msgstr "трендов стрелки погодных"
 
 msgid "Weather Low Temperature Color"
 msgstr "Низкая температура(погода)-Цвет"

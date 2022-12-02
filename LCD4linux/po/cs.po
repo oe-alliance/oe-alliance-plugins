@@ -191,6 +191,9 @@ msgstr "- HTTP šířka"
 msgid "- Infolines"
 msgstr "- Informační linky"
 
+msgid "- Trendarrows"
+msgstr "- Šípky trendov"
+
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 barva pozadí"
 
@@ -2303,8 +2306,11 @@ msgstr "Počasí barva vysoké (+) teploty"
 msgid "Weather Lines"
 msgstr "Počasí linky"
 
+msgid "Weather Trendarrows"
+msgstr "Počasí sípky trendov"
+
 msgid "Weather Low Temperature Color"
-msgstr "Počasí Barva nízké (-) teploty"
+msgstr "Počasí barva nízké (-) teploty"
 
 msgid "Weather Rain Chance"
 msgstr "Počasí možnost deště"

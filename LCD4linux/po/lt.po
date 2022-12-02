@@ -191,6 +191,9 @@ msgstr "- HTTP plotis"
 msgid "- Infolines"
 msgstr "- Informacijos eilutės"
 
+msgid "- Trendarrows"
+msgstr "- Tendencijų rodyklės"
+
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1 fono spalva"
 
@@ -2302,6 +2305,9 @@ msgstr "Teigiamos temperatūros spalva"
 
 msgid "Weather Lines"
 msgstr "Orų linijos"
+
+msgid "Weather Trendarrows"
+msgstr "Orų tendencijų rodyklės"
 
 msgid "Weather Low Temperature Color"
 msgstr "Neigiamos temperatūros spalva"

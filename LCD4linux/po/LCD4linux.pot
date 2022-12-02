@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 14:49+0100\n"
+"POT-Creation-Date: 2022-11-30 18:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
+"Language-Team: \n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -193,6 +193,9 @@ msgid "- HTTP Width"
 msgstr ""
 
 msgid "- Infolines"
+msgstr ""
+
+msgid "- Trendarrows"
 msgstr ""
 
 msgid "- LCD 1 Background Color"
@@ -2303,6 +2306,9 @@ msgid "Weather High Temperature Color"
 msgstr ""
 
 msgid "Weather Lines"
+msgstr ""
+
+msgid "Weather Trendarrows"
 msgstr ""
 
 msgid "Weather Low Temperature Color"

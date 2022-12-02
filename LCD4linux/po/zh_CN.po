@@ -193,6 +193,9 @@ msgstr "- HTTP宽度"
 msgid "- Infolines"
 msgstr "- 线"
 
+msgid "- Trendarrows"
+msgstr "- 趋势箭头"
+
 msgid "- LCD 1 Background Color"
 msgstr "- LCD 1背景色"
 
@@ -2304,6 +2307,9 @@ msgstr "天气高温色"
 
 msgid "Weather Lines"
 msgstr "天气线"
+
+msgid "Weather Trendarrows"
+msgstr "天气趋势箭头"
 
 msgid "Weather Low Temperature Color"
 msgstr "天气低温色"
