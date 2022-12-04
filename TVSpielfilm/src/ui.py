@@ -5446,7 +5446,7 @@ class TVSEvent(TVSAllScreenFull):
 				self.close()
 			else:
 				link = self.baseurl + '/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
-				self.session.openWithCallback(self.exit, TVSProgrammView, link, False, True, False)
+				self.session.openWithCallback(self.exit, TVSProgrammView, link, True, False)
 		else:
 			self.session.openWithCallback(self.returnServiceFile, TVSmakeServiceFile)
 
