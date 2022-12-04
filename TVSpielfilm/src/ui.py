@@ -2504,7 +2504,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 
 class TVSProgrammView(TVSGenreJetztProgrammView):
 
-	def __init__(self, session, link, eventview, tagestipp):
+	def __init__(self, session, link, eventview, tagestipp, standalone=False):
 		TVSGenreJetztProgrammView.__init__(self, session, link)
 		self.link = link
 		self.eventview = eventview
@@ -2567,6 +2567,8 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 															'yellow': self.yellow,
 															'red': self.makeTimer,
 															'blue': self.hideScreen}, -1)
+		if standalone:
+			self.makeTimerDB()
 		if isfile(PLUGINPATH + 'db/timer.db'):
 			self.timer = open(PLUGINPATH + 'db/timer.db').read().split('\n')
 		else:
@@ -2586,6 +2588,20 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			self.channel_db = channelDB(SERVICEFILE)
 		elif not self.tagestipp:
 			self.link = "%s%s&tips=0&time=day&channel=%s" % (sub('/sendungen/.*?html', '/sendungen/?page=1&order=time&date=', self.link), self.date, channel[0])
+
+		if standalone:
+			self.makeTimerDB()
+			sref = ServiceReference(self.session.nav.getCurrentlyPlayingServiceReference())
+			sref = str(sref) + 'FIN'
+			sref = sub(':0:0:0:.*?FIN', ':0:0:0:', sref)
+			self.sref = sref
+			channel = self.channel_db.lookup(sref)
+			if channel == 'nope':
+				self.session.open(MessageBox, 'Service nicht gefunden:\nKein Eintrag für aktuelle Servicereferenz\n%s' % str(sref), MessageBox.TYPE_INFO, close_on_any_key=True)
+				self.close()
+			else:
+				self.link = self.baseurl + '/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
+
 		if not self.tagestipp:
 			self.downloadFullPage(self.link, self.makeTVSProgrammView)
 		else:
@@ -5196,16 +5212,10 @@ class TVSTipps(TVSAllScreen):
 	def getTagesTipps(self, output):
 		self.ready = False
 		output = ensure_str(output)
-		startpos = output.find('teaser-top">')
-		endpos = output.find('<div class="block-rotation">')
+		startpos = output.find('<div class="content-teaser sub-navigation-teaser teaser-m sub-navigation-teaser teaser-m-standard">')
+		endpos = output.find('<div id="nav-r" class="navigation-display-table">')
 		bereich = output[startpos:endpos]
-		bereich = sub('<ul.*?</ul>', '', bereich, flags=S)
-		if search('/news-und-specials/', bereich):
-			bereich = sub('<a href="https://my.tvspielfilm.de/news-und-specials/.*?</a>', '', bereich, flags=S)
-			bereich = sub('<a href="https://www.tvspielfilm.de/news-und-specials/.*?</a>', '', bereich, flags=S)
-		if search('pdf.tvspielfilm.de', bereich):
-			bereich = sub('<a href="https://pdf.tvspielfilm.de/.*?</a>', '', bereich, flags=S)
-		self.tippspicture = findall('<img src="(.*?)"', bereich, flags=S)
+		self.tippspicture = findall('data-src="(.*?)"', bereich, flags=S)
 		for idx, link in enumerate(self.tippspicture):
 			callInThread(self.idownload, idx, link)
 		self.tippschannel = findall('<span class="subline .*?">(.*?)</span>', bereich)
@@ -5269,10 +5279,9 @@ class TVSTipps(TVSAllScreen):
 		self.getNextTimer.start(5000, False)
 
 	def nextTipp(self):
-		if self.ready:
+		if self.ready and len(self.tippspicture) > 0:
 			self.count += 1
-			if self.tippspicture:
-				self.count = self.count % len(self.tippspicture)
+			self.count = self.count % len(self.tippspicture)
 			if isfile(self.pics[self.count]):
 				showPic(self['picture'], self.pics[self.count])
 			self.infolink = self.tippslink[self.count]
@@ -5437,7 +5446,7 @@ class TVSEvent(TVSAllScreenFull):
 				self.close()
 			else:
 				link = self.baseurl + '/tv-programm/sendungen/&page=0,' + str(channel) + '.html'
-				self.session.openWithCallback(self.exit, TVSProgrammView, link, True, False)
+				self.session.openWithCallback(self.exit, TVSProgrammView, link, False, True, False)
 		else:
 			self.session.openWithCallback(self.returnServiceFile, TVSmakeServiceFile)
 
