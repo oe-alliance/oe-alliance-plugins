@@ -6,8 +6,7 @@ from os.path import isfile
 
 from Components.config import config, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo
 from Plugins.Plugin import PluginDescriptor
-from Screens.MessageBox import MessageBox
-from .ui import TVSEvent, TVSJetztView, TVSMain, TVSlog, SERVICEFILE
+from .ui import TVSmakeServiceFile, TVSProgrammView, TVSJetztView, TVSEvent, TVSMain, TVSlog, SERVICEFILE
 from .util import DESKTOP_WIDTH, PLUGINPATH, PICONPATH
 
 config.plugins.tvspielfilm = ConfigSubsection()
@@ -52,36 +51,40 @@ if not ALPHA:
 	TVSlog('Alphachannel not found! Hide/show-function (=blue button) is disabled')
 
 
+def checkService(session, screen, link=None):
+	def callback():
+		if link:
+			if link == "MAIN":
+				session.open(TVSEvent)
+			else:
+				session.open(screen, link)
+		else:
+			session.open(screen)
+
+	if isfile(SERVICEFILE):
+		callback()
+	else:
+		session.openWithCallback(callback, TVSmakeServiceFile)
+
+
 def main(session, **kwargs):
-	session.open(TVSMain)
+	checkService(session, TVSMain)
 
 
 def mainjetzt(session, **kwargs):
-	if isfile(SERVICEFILE):
-	    session.open(TVSJetztView, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
-	else:
-		session.open(MessageBox, ERRORMSG, MessageBox.TYPE_ERROR)
+	checkService(session, TVSJetztView, 'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html')
 
 
 def mainprime(session, **kwargs):
-	if isfile(SERVICEFILE):
-		session.open(TVSJetztView, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
-	else:
-		session.open(MessageBox, ERRORMSG, MessageBox.TYPE_ERROR)
+	checkService(session, TVSJetztView, 'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html')
 
 
 def mainlate(session, **kwargs):
-	if isfile(SERVICEFILE):
-		session.open(TVSJetztView, 'https://www.tvspielfilm.de/tv-programm/sendungen/fernsehprogramm-nachts.html')
-	else:
-		session.open(MessageBox, ERRORMSG, MessageBox.TYPE_ERROR)
+	checkService(session, TVSJetztView, 'https://www.tvspielfilm.de/tv-programm/sendungen/fernsehprogramm-nachts.html')
 
 
 def mainevent(session, **kwargs):
-	if isfile(SERVICEFILE):
-		session.open(TVSEvent)
-	else:
-		session.open(MessageBox, ERRORMSG, MessageBox.TYPE_ERROR)
+	checkService(session, TVSProgrammView, "MAIN")
 
 
 def Plugins(**kwargs):
