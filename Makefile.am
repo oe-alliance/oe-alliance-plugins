@@ -386,6 +386,10 @@ if MULTIBOXSE
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if MULTIBOXPRO
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if GIGABLUE
 SUBDIRS += GigaBlueVFDControl AudioEffect GigaBlueRemote
 endif
