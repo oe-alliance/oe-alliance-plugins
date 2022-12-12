@@ -12,7 +12,6 @@
 #######################################################################
 
 from __future__ import print_function, absolute_import
-
 from os import remove
 from re import search, sub, S, I
 from skin import parameters
@@ -35,15 +34,14 @@ from Tools.BoundFunction import boundFunction
 from twisted.internet.reactor import callInThread
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, eServiceCenter, gFont
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, eConsoleAppContainer, eServiceCenter, gPixmapPtr, ePicLoad
-
 from .__init__ import _
 from . import tmdbsimple as tmdb
 
 tmdb.API_KEY = 'd42e6b820a1541cc69ce789671feba39'
 pname = _("TMDb")
 pdesc = _("TMDb ... function for Movielist")
-pversion = "0.7-r3"
-pdate = "20221107"
+pversion = "0.7-r4"
+pdate = "20221212"
 
 config.plugins.tmdb = ConfigSubsection()
 config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
@@ -60,13 +58,25 @@ def cleanFile(text):
 	for word in cutlist:
 		text = sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)', '+', text, flags=I)
 	text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '')
-
 	return text
 
 
 def cleanEnd(text):
 	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '').replace('.mp4', '')
 	return text
+
+
+def threadDownloadPage(link, file, success, fail=None):
+	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+	try:
+		response = get(link)
+		response.raise_for_status()
+		with open(file, "wb") as f:
+			f.write(response.content)
+		success(file)
+	except exceptions.RequestException as error:
+		if fail is not None:
+			fail(error)
 
 
 class createList(GUIComponent, object):
@@ -147,7 +157,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		<screen position="40,80" size="1200,600" title="TMDb - The Movie Database" >
 			<widget name="searchinfo" position="20,10" size="1180,30" font="Regular;24" foregroundColor="#00fff000"/>
 			<widget name="list" position="10,60" size="800,480" scrollbarMode="showOnDemand"/>
-			<widget name="cover" position="840,90" size="300,450" alphatest="blend"/>
+			<widget name="cover" position="840,60" size="300,450" alphatest="blend"/>
 			<widget name="key_red" position="100,570" size="260,25" transparent="1" font="Regular;20"/>
 			<widget name="key_green" position="395,570" size="260,25"  transparent="1" font="Regular;20"/>
 			<widget name="key_yellow" position="690,570" size="260,25" transparent="1" font="Regular;20"/>
@@ -232,12 +242,9 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.lang = config.plugins.tmdb.lang.value
 		res = []
 		self.count = 0
-
 		try:
 			search = tmdb.Search()
 			json_data = search.multi(query=self.text, language=self.lang)
-			#print json_data
-
 			for IDs in json_data['results']:
 				self.count += 1
 				try:
@@ -294,28 +301,16 @@ class tmdbScreen(Screen, HelpableScreen):
 	def getInfo(self):
 		url_cover = self['list'].getCurrent()[1]
 		id = self['list'].getCurrent()[3]
-
 		if url_cover[-4:] == "None":
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
-			if not fileExists("%s%s.jpg" % (self.tempDir, id)):
-				callInThread(self.threadDownloadPage, url_cover, "%s%s.jpg" % (self.tempDir, id), boundFunction(self.getData, "%s%s.jpg" % (self.tempDir, id)), self.dataError)
+			coverFile = "%s%s.jpg" % (self.tempDir, id)
+			if not fileExists(coverFile):
+				callInThread(threadDownloadPage, url_cover, coverFile, boundFunction(self.getData, coverFile), self.dataError)
 			else:
-				self.showCover("%s%s.jpg" % (self.tempDir, id))
+				self.showCover(coverFile)
 
-	def threadDownloadPage(self, link, file, success, fail=None):
-		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		try:
-			response = get(link)
-			response.raise_for_status()
-			with open(file, "wb") as f:
-				f.write(response.content)
-			success(file)
-		except exceptions.RequestException as error:
-			if fail is not None:
-				fail(error)
-
-	def getData(self, coverSaved):
+	def getData(self, dummy, coverSaved):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
@@ -329,7 +324,6 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.picload = ePicLoad()
 		if not fileExists(coverName):
 			coverName = "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png"
-
 		if fileExists(coverName):
 			self['cover'].instance.setPixmap(gPixmapPtr())
 			scale = AVSwitch().getFramebufferScale()
@@ -342,7 +336,6 @@ class tmdbScreen(Screen, HelpableScreen):
 					self['cover'].show()
 			del self.picload
 			self.coverName = coverName
-
 		# Only one result launch details
 		if config.plugins.tmdb.firsthit.value and self.count == 1:
 			self.ok()
@@ -355,9 +348,8 @@ class tmdbScreen(Screen, HelpableScreen):
 		title = self['list'].getCurrent()[0]
 		media = self['list'].getCurrent()[2]
 		id = self['list'].getCurrent()[3]
-		cover = "%s%s.jpg" % (self.tempDir, id)
-
-		self.session.open(tmdbScreenMovie, title, media, cover, id, self.saveFilename)
+		coverFile = "%s%s.jpg" % (self.tempDir, id)
+		self.session.open(tmdbScreenMovie, title, media, coverFile, id, self.saveFilename)
 
 	def keyLeft(self):
 		check = self['list'].getCurrent()
@@ -411,7 +403,6 @@ class tmdbScreen(Screen, HelpableScreen):
 		list = self.piclist
 		if list == None:
 			return
-
 		count = 0
 		while count < len(list):
 			id = list[count][0][3]
@@ -429,27 +420,27 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			<widget name="fulldescription" position="10,60" size="620,490" font="Regular;22" transparent="1"/>
 			<widget name="cover" position="950,30" size="200,300" alphatest="blend"/>
 			<ePixmap position="705,45" size="100,100" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/star.png" transparent="1" alphatest="blend"/>
-			<widget name="rating" position="680,85" size="150,25" zPosition="2" font="Regular;22" halign="center" foregroundColor="black" backgroundColor="#00ffba00" transparent="1"/>
+			<widget name="rating" position="600,85" size="150,25" zPosition="2" font="Regular;22" halign="center" foregroundColor="black" backgroundColor="#00ffba00" transparent="1"/>
 			<widget name="votes_brackets" position="680,145" size="150,25" zPosition="2" font="Regular;22" halign="center" transparent="1"/>
 			<widget name="fsk" position="0,0" size="0,0" zPosition="2" font="Regular;22" halign="center" transparent="1"/>
 			<widget name="fsklogo" position="825,60" size="100,100" zPosition="2" alphatest="blend"/>
 
-			<widget name="year_txt" position="650,220" size="400,25" zPosition="2" font="Regular;22"  transparent="1"/>
-			<widget name="year" position="780,220" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="country_txt" position="650,250" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="country" position="780,250" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="runtime_txt" position="650,280" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="runtime" position="780,280" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="votes_txt" position="650,310" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="votes" position="780,310" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="director_txt" position="650,340" size="400,25" zPosition="2" font="Regular;22"  transparent="1"/>
-			<widget name="director" position="780,340" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="author_txt" position="650,370" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="author" position="780,370" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="genre_txt" position="650,400" size="100,30" font="Regular; 22" transparent="1"/>
-			<widget name="genre" position="780,400" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
-			<widget name="studio_txt" position="650,430" size="100,30" font="Regular; 22" transparent="1"/>
-			<widget name="studio" position="780,430" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="year_txt" position="650,320" size="400,25" zPosition="2" font="Regular;22"  transparent="1"/>
+			<widget name="year" position="780,320" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="country_txt" position="650,350" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="country" position="780,350" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="runtime_txt" position="650,380" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="runtime" position="780,380" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="votes_txt" position="650,410" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="votes" position="780,410" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="director_txt" position="650,440" size="400,25" zPosition="2" font="Regular;22"  transparent="1"/>
+			<widget name="director" position="780,440" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="author_txt" position="650,470" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="author" position="780,470" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="genre_txt" position="650,500" size="100,30" font="Regular; 22" transparent="1"/>
+			<widget name="genre" position="780,500" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
+			<widget name="studio_txt" position="650,530" size="100,30" font="Regular; 22" transparent="1"/>
+			<widget name="studio" position="780,530" size="400,25" zPosition="2" font="Regular;22" transparent="1"/>
 			<widget name="subtitle" position="0,0" size="0,0" zPosition="2" transparent="1" font="Regular;22" foregroundColor="#00fff000"/>
 			<widget name="description" position="0,0" size="0,0" zPosition="2" transparent="1" font="Regular;22"/>
 
@@ -476,7 +467,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self.trailer = None
 		self.id = id
 		self.saveFilename = saveFilename
-
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
@@ -493,7 +483,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				"menu": (self.keyBlue, _("Setup")),
 				"eventview": (self.writeTofile, _("Save TMDb movie infos to file"))
 			}, -1)
-
 		self['searchinfo'] = Label(_("Loading..."))
 		self['genre'] = Label("-")
 		self['genre_txt'] = Label(_("Genre:"))
@@ -523,7 +512,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self['key_blue'] = Label(_("Setup"))
 		self['cover'] = Pixmap()
 		self['fsklogo'] = Pixmap()
-
 		self.onLayoutFinish.append(self.onFinish)
 
 	def onFinish(self):
@@ -533,41 +521,22 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		print("[TMDb] Selected: %s" % self.mname)
 		self['searchinfo'].setText("%s" % self.mname)
 		self.showCover(self.coverName)
-		self.getData()
-
-	def keyLeft(self):
-		self['description'].pageUp()
-		self['fulldescription'].pageUp()
-
-	def keyRight(self):
-		self['description'].pageDown()
-		self['fulldescription'].pageDown()
-
-	def getData(self):
 		self.lang = config.plugins.tmdb.lang.value
 		print("[TMDb] ID: ", self.id)
-
 		try:
 			if self.movie:
 				json_data = tmdb.Movies(self.id).info(language=self.lang)
-				#print json_data
 				json_data_cast = tmdb.Movies(self.id).credits(language=self.lang)
-				#print json_data_cast
 				json_data_fsk = tmdb.Movies(self.id).releases(language=self.lang)
-				#print json_data_fsk
 			elif not self.movie:
 				json_data = tmdb.TV(self.id).info(language=self.lang)
-				#print json_data
 				json_data_cast = tmdb.TV(self.id).credits(language=self.lang)
-				#print json_data_cast
 				json_data_fsk = tmdb.TV(self.id).content_ratings(language=self.lang)
-				#print json_data_fsk
 			else:
 				return
 		except:
 			self['searchinfo'].setText(_("TMDb: No results found, or does not respond!"))
 			return
-
 		## Year
 		year = ""
 		try:
@@ -575,7 +544,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['year'].setText("%s" % str(year))
 		except:
 			year = ""
-
 		## Rating
 		vote_average = ""
 		try:
@@ -583,7 +551,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['rating'].setText("%s" % str(vote_average))
 		except:
 			vote_average = ""
-
 		## Votes
 		vote_count = ""
 		try:
@@ -592,7 +559,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['votes_brackets'].setText("(%s)" % str(vote_count))
 		except:
 			vote_count = ""
-
 		## Runtime
 		runtime = ""
 		try:
@@ -601,7 +567,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			runtime = ", " + str(runtime) + " min."
 		except:
 			runtime = "-"
-
 		## Country
 		country_string = ""
 		try:
@@ -611,7 +576,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['country'].setText("%s" % str(country_string))
 		except:
 			country_string = ""
-
 		## Genre"
 		genre_string = ""
 		try:
@@ -621,7 +585,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['genre'].setText("%s" % str(genre_string[:-2]))
 		except:
 			genre_string = ""
-
 		## Subtitle
 		subtitle = ""
 		try:
@@ -630,7 +593,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			subtitle = str(subtitle) + "\n"
 		except:
 			subtitle = ""
-
 		## Cast
 		cast_string = ""
 		try:
@@ -638,7 +600,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				cast_string += cast['name'] + " (" + cast['character'] + ")\n"
 		except:
 			cast_string = ""
-
 		## Crew
 		crew_string = ""
 		director = ""
@@ -659,7 +620,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			crew_string = ""
 			director = ""
 			author = ""
-
 		## Studio/Production Company
 		studio_string = ""
 		try:
@@ -669,7 +629,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['studio'].setText("%s" % str(studio_string))
 		except:
 			studio_string = ""
-
 		#
 		# modify Data for TV/Series
 		#
@@ -682,7 +641,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				self['year'].setText("%s" % str(year))
 			except:
 				year = ""
-
 			## Country
 			country_string = ""
 			try:
@@ -692,7 +650,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				self['country'].setText("%s" % str(country_string))
 			except:
 				country_string = ""
-
 			## Crew Director
 			director = ""
 			try:
@@ -703,7 +660,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				self['author'].setText("%s" % str(director))
 			except:
 				director = ""
-
 			## Studio/Production Company
 			try:
 				for studio in json_data['networks']:
@@ -712,7 +668,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				self['studio'].setText("%s" % str(studio_string))
 			except:
 				studio_string = ""
-
 			## Runtime
 			runtime = ""
 			try:
@@ -723,7 +678,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				runtime = ", " + runtime
 			except:
 				runtime = ""
-
 			# Series Description
 			season = ""
 			try:
@@ -732,7 +686,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 						season += _("Season") + " " + str(seasons['season_number']) + "/" + str(seasons['episode_count']) + " (" + str(seasons['air_date'])[:4] + ")\n"
 			except:
 				season = ""
-
 		## Description
 		description = ""
 		try:
@@ -750,7 +703,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self.text = fulldescription
 		except:
 			description = "-"
-
 		## FSK
 		fsk = "100"
 		if self.movie:
@@ -767,8 +719,15 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 						fsk = str(country['rating'])
 			except:
 				pass
-
 		self.showFSK(fsk)
+
+	def keyLeft(self):
+		self['description'].pageUp()
+		self['fulldescription'].pageUp()
+
+	def keyRight(self):
+		self['description'].pageDown()
+		self['fulldescription'].pageDown()
 
 	def dataError(self, error):
 		print(error)
@@ -777,7 +736,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self.picload = ePicLoad()
 		if not fileExists(coverName):
 			coverName = "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png"
-
 		if fileExists(coverName):
 			self['cover'].instance.setPixmap(gPixmapPtr())
 			scale = AVSwitch().getFramebufferScale()
@@ -868,7 +826,6 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 			self.movie = True
 		else:
 			self.movie = False
-
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
@@ -886,16 +843,13 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 				"blue": (self.keyBlue, _("Setup")),
 				"menu": (self.keyBlue, _("Setup"))
 			}, -1)
-
 		self['searchinfo'] = Label(_("Loading..."))
 		self['data'] = ScrollLabel("...")
 		self['key_red'] = Label(_("Exit"))
 		self['key_green'] = Label(_("Details"))
 		self['key_blue'] = Label(_("Setup"))
 		self['list'] = createList(0)
-
 		self['cover'] = Pixmap()
-
 		self.tempDir = "/var/volatile/tmp/"
 		self.onLayoutFinish.append(self.onFinish)
 
@@ -912,21 +866,16 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		try:
 			if self.movie:
 				json_data_cast = tmdb.Movies(self.id).credits(language=self.lang)
-				#print json_data_cast
 			else:
 				json_data_cast = tmdb.TV(self.id).credits(language=self.lang)
-				#print json_data_cast
-
 			for casts in json_data_cast['cast']:
 				id = str(casts['id'])
 				title = str(casts['name']) + " (" + str(casts['character']) + ")"
 				coverPath = str(casts['profile_path'])
-				cover = "%s%s.jpg" % (self.tempDir, id)
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 
 				if not id == "" or not title == "":
 					res.append(((title, url_cover, "", id),))
-
 			self['list'].setList(res)
 			self.piclist = res
 			self.getInfo()
@@ -937,28 +886,16 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		self['data'].setText("...")
 		url_cover = self['list'].getCurrent()[1]
 		id = self['list'].getCurrent()[3]
-
 		if url_cover[-4:] == "None":
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
-			if not fileExists("%s%s.jpg" % (self.tempDir, id)):
-				callInThread(self.threadDownloadPage, url_cover, "%s%s.jpg" % (self.tempDir, id), boundFunction(self.getData, "%s%s.jpg" % (self.tempDir, id)), self.dataError)
+			coverFile = "%s%s.jpg" % (self.tempDir, id)
+			if not fileExists(coverFile):
+				callInThread(threadDownloadPage, url_cover, coverFile, boundFunction(self.getData, coverFile), self.dataError)
 			else:
-				self.showCover("%s%s.jpg" % (self.tempDir, id))
+				self.showCover(coverFile)
 
-	def threadDownloadPage(self, link, file, success, fail=None):
-		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		try:
-			response = get(link)
-			response.raise_for_status()
-			with open(file, "wb") as f:
-				f.write(response.content)
-			success(file)
-		except exceptions.RequestException as error:
-			if fail is not None:
-				fail(error)
-
-	def getData(self, data, coverSaved):
+	def getData(self, dummy, coverSaved):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
@@ -990,10 +927,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		if check == None:
 			return
 		id = self['list'].getCurrent()[3]
-
 		json_data_person = tmdb.People(id).info(language=self.lang)
-		#print json_data_person
-
 		## Personal data
 		birthday = ""
 		try:
@@ -1079,8 +1013,8 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		<screen position="40,80" size="1200,600" title="TMDb - The Movie Database" >
 			<widget name="searchinfo" zPosition="10" position="20,10" size="1180,40" font="Regular;24" foregroundColor="#00fff000"/>
 			<widget name="list" position="10,60" size="480,240" scrollbarMode="showOnDemand"/>
-			<widget name="cover" position="550,60" size="530,300" zPosition="10" alphatest="blend"/>
-			<widget name="data" position="10,310" size="1180,250" font="Regular;21" />
+			<widget name="cover" position="550,10" size="530,300" zPosition="10" alphatest="blend"/>
+			<widget name="data" position="10,340" size="1180,250" font="Regular;21" />
 			<widget name="key_red" position="100,570" size="260,25" font="Regular;20" transparent="1"/>
 			<widget name="key_green" position="395,570" size="260,25" font="Regular;20" transparent="1"/>
 			<widget name="key_blue" position="985,570" size="260,25" font="Regular;20" transparent="1"/>
@@ -1092,7 +1026,6 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 
 	def __init__(self, session, mname, id, media):
 		Screen.__init__(self, session)
-		#self.skinName = [ "tmdbScreenSeason", "tmdbScreenPeople" ]
 		self.session = session
 		self.mname = mname
 		self.id = id
@@ -1102,7 +1035,6 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		else:
 			self.movie = False
 		self.piclist = ""
-
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
@@ -1120,16 +1052,13 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				"blue": (self.keyBlue, _("Setup")),
 				"menu": (self.keyBlue, _("Setup"))
 			}, -1)
-
 		self['searchinfo'] = Label(_("Loading..."))
 		self['data'] = ScrollLabel("...")
 		self['key_red'] = Label(_("Exit"))
 		self['key_green'] = Label(_(" "))
 		self['key_blue'] = Label(_("Setup"))
 		self['list'] = createList(0)
-
 		self['cover'] = Pixmap()
-
 		self.tempDir = "/var/volatile/tmp/"
 		self.onLayoutFinish.append(self.onFinish)
 
@@ -1150,7 +1079,6 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				print("[TMDb] Seasons: %s" % seasons['season_number'])
 				id = str(seasons['id'])
 				season = seasons['season_number']
-
 				#Episodes
 				json_data_episodes = tmdb.TV_Seasons(self.id, season).info(language=self.lang)
 				titledate = "(" + str(json_data_episodes['air_date'])[:4] + ")"
@@ -1158,11 +1086,9 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				title = "%s %s" % (title, titledate)
 				overview = str(json_data_episodes['overview'])
 				coverPath = str(json_data_episodes['poster_path'])
-				cover = "%s%s.jpg" % (self.tempDir, id)
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 				if not id == "" or not title == "":
 					res.append(((title, url_cover, overview, id),))
-
 				for names in json_data_episodes['episodes']:
 					id = str(names['id'])
 					title = str(names['episode_number'])
@@ -1170,14 +1096,12 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 					title = "%+6s %s" % (title, name)
 					overview = str(names['overview'])
 					coverPath = str(names['still_path'])
-					cover = "%s%s.jpg" % (self.tempDir, id)
 					url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 					if not id == "" or not title == "":
 						res.append(((title, url_cover, overview, id),))
 			self['list'].setList(res)
 			self.piclist = res
 			self.getInfo()
-
 		except:
 			self['searchinfo'].setText(_("TMDb: No results found, or does not respond!"))
 
@@ -1185,28 +1109,16 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self['data'].setText("...")
 		url_cover = self['list'].getCurrent()[1]
 		id = self['list'].getCurrent()[3]
-
 		if url_cover[-4:] == "None":
 			self.showCover("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png")
 		else:
-			if not fileExists("%s%s.jpg" % (self.tempDir, id)):
-				callInThread(self.threadDownloadPage, url_cover, "%s%s.jpg" % (self.tempDir, id), boundFunction(self.getData, "%s%s.jpg" % (self.tempDir, id)), self.dataError)
+			coverFile = "%s%s.jpg" % (self.tempDir, id)
+			if not fileExists(coverFile):
+				callInThread(threadDownloadPage, url_cover, coverFile, boundFunction(self.getData, coverFile), self.dataError)
 			else:
-				self.showCover("%s%s.jpg" % (self.tempDir, id))
+				self.showCover(coverFile)
 
-	def threadDownloadPage(self, link, file, success, fail=None):
-		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		try:
-			response = get(link)
-			response.raise_for_status()
-			with open(file, "wb") as f:
-				f.write(response.content)
-			success(file)
-		except exceptions.RequestException as error:
-			if fail is not None:
-				fail(error)
-
-	def getData(self, data, coverSaved):
+	def getData(self, dummy, coverSaved):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
@@ -1220,7 +1132,6 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self.picload = ePicLoad()
 		if not fileExists(coverName):
 			coverName = "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png"
-
 		if fileExists(coverName):
 			self['cover'].instance.setPixmap(gPixmapPtr())
 			scale = AVSwitch().getFramebufferScale()
