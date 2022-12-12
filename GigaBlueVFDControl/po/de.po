@@ -108,7 +108,7 @@ msgid "Time mode"
 msgstr "Zeit Modus"
 
 msgid "Update Date/Time"
-msgstr "Datum/Uhrzeit aktuallisieren"
+msgstr "Update Datum/Uhrzeit"
 
 msgid "Yes"
 msgstr "Ja"
