@@ -167,9 +167,7 @@ class CKview(AllScreen):
 		self.videolist = []
 		self.rezeptelist = []
 		self.rezeptelinks = []
-		self.pic = []
 		for i in range(LINESPERPAGE):
-			self.pic.append('/tmp/chefkoch%d.jpg' % i)
 			self['pic%d' % i] = Pixmap()
 			self['vid%d' % i] = Pixmap()
 			self['pic%d' % i].hide()
@@ -952,12 +950,10 @@ class CKview(AllScreen):
 		except exceptions.RequestException as error:
 			self.downloadError(error)
 		else:
-			self.getPrevPic(response.content, i)
-
-	def getPrevPic(self, picdata, i):
-		with open(self.pic[i], 'wb') as f:
-			f.write(picdata)
-		self.prevpicload[i].startDecode(self.pic[i])
+			picFile = '/tmp/chefkoch%d.jpg' % i
+			with open(picFile, 'wb') as f:
+				f.write(response.content)
+			self.prevpicload[i].startDecode(picFile)
 
 	def downloadError(self, output):
 		self.CKlog(output)
