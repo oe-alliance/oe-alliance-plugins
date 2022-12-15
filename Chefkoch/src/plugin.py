@@ -43,7 +43,8 @@ PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte/'
 APIURIBASE = 'https://api.chefkoch.de/v2/'
 NOPICURL = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
 PICFILE = '/tmp/chefkoch.jpg'
-
+# orderBy-Codes: 0= unbekannt, 1= = unbekannt, 2= unbekannt, 3= rating, 4= unbekannt, 5= unbekannt, 6= createdAt, 7= isPremium, 8= unbekannt
+# folgende nicht: numVotes, preparationTime
 config.plugins.chefkoch = ConfigSubsection()
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
 if getDesktop(0).size().width() >= 1920:
@@ -133,7 +134,7 @@ class CKview(AllScreen):
 		global HIDEFLAG
 		HIDEFLAG = True
 		fontsize = '%d' % int(22 * SCALE) if config.plugins.chefkoch.font_size.value == 'large' else '%d' % int(20 * SCALE)
-		self.dict = {'picpath': PLUGINPATH + 'pic/', 'fontsize': fontsize}
+		self.dict = {'picpath': '%spic/' % PLUGINPATH, 'fontsize': fontsize}
 		skin = self.readSkin("CKview")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session, skin)
@@ -166,19 +167,17 @@ class CKview(AllScreen):
 		self.videolist = []
 		self.rezeptelist = []
 		self.rezeptelinks = []
-		self.pic = []
 		for i in range(LINESPERPAGE):
 			self['pic%d' % i] = Pixmap()
 			self['vid%d' % i] = Pixmap()
 			self['pic%d' % i].hide()
 			self['vid%d' % i].hide()
-			self.pic.append('/tmp/chefkoch%d.jpg' % i)
 		self['postpic'] = Pixmap()
 		self['postvid'] = Pixmap()
-		self["stars"] = ProgressBar()
-		self["starsbg"] = Pixmap()
-		self["stars"].hide()
-		self["starsbg"].hide()
+		self['stars'] = ProgressBar()
+		self['starsbg'] = Pixmap()
+		self['stars'].hide()
+		self['starsbg'].hide()
 		self['scoretext'] = Label('')
 		self['scoretext'].hide()
 		self['recipetext'] = Label('')
@@ -244,11 +243,11 @@ class CKview(AllScreen):
 			'8': self.gotoPage,
 			'9': self.gotoPage,
 		}, -1)
-		self.onLayoutFinish.append(self.onLayoutFinished)
 		self.postpicload = ePicLoad()
 		self.prevpicload = []
 		for i in range(LINESPERPAGE):
 			self.prevpicload.append(ePicLoad())
+		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
 		self.postpicload.setPara((self['postpic'].instance.size().width(), self['postpic'].instance.size().height(), 1.0, 0, False, 1, "#00000000"))
@@ -314,7 +313,7 @@ class CKview(AllScreen):
 			else:
 				count = 'keine'
 				score = '0'
-			picurl = PICURLBASE + id + '/bilder/' + str(self.GRP[i]['previewImageId']) + '/crop-160x120/' + titel.replace(' ', '-') + '.jpg' if self.GRP[i]['previewImageId'] else NOPICURL
+			picurl = "%s%s/bilder/%s/crop-160x120/%s.jpg" % (PICURLBASE, id, self.GRP[i]['previewImageId'], titel.replace(' ', '-')) if self.GRP[i]['previewImageId'] else NOPICURL
 			text = self.GRP[i]['subtitle']
 			if len(text) > 155:
 				text = text[:155] + '…'
@@ -383,7 +382,7 @@ class CKview(AllScreen):
 		self['textpage'].setText('')
 		self['textpage'].show()
 		self.REZ = self.getREZ(self.currId)
-		picurl = PICURLBASE + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg' if self.REZ['hasImage'] else NOPICURL
+		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.REZ['previewImageId'], self.titel) if self.REZ['hasImage'] else NOPICURL
 		callInThread(self.threadedGetPage, picurl, self.getPostPic, self.downloadError)
 		if self.REZ['rating']:
 			score = self.REZ['rating']['rating'] * 20
@@ -405,9 +404,9 @@ class CKview(AllScreen):
 			scoretext += '\nRuhezeit\t: %s' % self.getTimeString(resttime)
 		if totaltime != 0:
 			scoretext += '\nGesamtzeit\t: %s' % self.getTimeString(totaltime)
-		self["starsbg"].show()
-		self["stars"].show()
-		self["stars"].setValue(score)
+		self['starsbg'].show()
+		self['stars'].show()
+		self['stars'].setValue(score)
 		self['scoretext'].setText(scoretext)
 		self['scoretext'].show()
 		effort = ['keiner', 'simpel', 'normal', 'pfiffig']
@@ -567,7 +566,6 @@ class CKview(AllScreen):
 		if self.ready:
 			self.current = 'postview'
 			self.currItem = self['menu'].getSelectedIndex()
-			self.currId = '%s%s' % ('recipes/', self.kochId[self.currItem])
 			callInThread(self.makePostviewPage, self.kochId[self.currItem])
 
 	def red(self):
@@ -791,7 +789,7 @@ class CKview(AllScreen):
 
 	def gotoPage(self, number):
 		if self.current != 'postview' and self.ready:
-			self.session.openWithCallback(self.numberEntered, getNumber, number, 5)
+			self.session.openWithCallback(self.numberEntered, CKgetNumber, number, self.maxPics)
 		elif self.current == 'postview':
 			if number == 0:
 				self['textpage'].lastPage()
@@ -814,12 +812,10 @@ class CKview(AllScreen):
 			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
 
 	def setPrevIcons(self, toppos):
-		self.pic = []
 		for i in range(LINESPERPAGE):
-			self.pic.append('/tmp/chefkoch%d.jpg' % i)
 			if len(self.picurllist) > toppos + i:
 				self.prevpicload[i].PictureData.get().append(self.showPrevPic)
-				self.Idownload(i, self.picurllist[toppos + i], self.getPrevPic)
+				callInThread(self.Idownload, self.picurllist[toppos + i], i)
 				self['pic%d' % i].show()
 				if self.videolist[toppos + i]:
 					self['vid%d' % i].show()
@@ -929,11 +925,6 @@ class CKview(AllScreen):
 		self['textpage'].setText(str(text))
 		self.postviewready = True
 
-	def getPrevPic(self, picdata, i):
-		with open(self.pic[i], 'wb') as f:
-			f.write(picdata)
-		self.prevpicload[i].startDecode(self.pic[i])
-
 	def showPrevPic(self, picInfo=None):
 		if picInfo:
 			i = int(match('/tmp/chefkoch(\d.*).jpg', picInfo).groups()[0])
@@ -951,18 +942,21 @@ class CKview(AllScreen):
 		if ptr:
 			self['postpic'].instance.setPixmap(ptr.__deref__())
 
-	def Idownload(self, idx, link, success):  # PrevPic-Download
+	def Idownload(self, link, i):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		callInThread(self._Idownload, idx, link, success)
-
-	def _Idownload(self, idx, link, success):
 		try:
 			response = get(link)
 			response.raise_for_status()
 		except exceptions.RequestException as error:
 			self.downloadError(error)
 		else:
-			success(response.content, idx)
+			picFile = '/tmp/chefkoch%d.jpg' % i
+			with open(picFile, 'wb') as f:
+				f.write(response.content)
+			self.prevpicload[i].startDecode(picFile)
+
+	def downloadError(self, output):
+		self.CKlog(output)
 
 	def threadedGetPage(self, link, success, fail=None):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
@@ -973,9 +967,6 @@ class CKview(AllScreen):
 		except exceptions.RequestException as error:
 			if fail is not None:
 				fail(error)
-
-	def downloadError(self, output):
-		self.CKlog(output)
 
 	def showProgrammPage(self):  # zeige Rezeptliste
 		self.current = 'menu'
@@ -1041,8 +1032,8 @@ class CKview(AllScreen):
 			self['button_play'].hide()
 			self['Line_Bottom'].hide()
 			self['pageinfo'].show()
-			self["starsbg"].hide()
-			self["stars"].hide()
+			self['starsbg'].hide()
+			self['stars'].hide()
 			self.postviewready = False
 			self.setTitle(str(self.headline))
 			self.showProgrammPage()
@@ -1067,35 +1058,33 @@ class CKview(AllScreen):
 
 
 class CKgetNumber(AllScreen):
-	def __init__(self, session, number, max):
+	def __init__(self, session, number, maxPics):
 		self.skin = self.readSkin("CKgetNumber")
 		Screen.__init__(self, session, self.skin)
 		self.field = str(number)
+		self.maxPics = maxPics
 		self['number'] = Label(self.field)
-		self.max = max
-		self['actions'] = NumberActionMap(['NumberActions', 'OkCancelActions'], {
-			'cancel': self.quit,
-			'ok': self.keyOK,
-			'1': self.keyNumber,
-			'2': self.keyNumber,
-			'3': self.keyNumber,
-			'4': self.keyNumber,
-			'5': self.keyNumber,
-			'6': self.keyNumber,
-			'7': self.keyNumber,
-			'8': self.keyNumber,
-			'9': self.keyNumber,
-			'0': self.keyNumber
-		}, -2)
+		self['actions'] = NumberActionMap(['SetupActions'], {'cancel': self.quit,
+															'ok': self.keyOK,
+															'1': self.keyNumber,
+															'2': self.keyNumber,
+															'3': self.keyNumber,
+															'4': self.keyNumber,
+															'5': self.keyNumber,
+															'6': self.keyNumber,
+															'7': self.keyNumber,
+															'8': self.keyNumber,
+															'9': self.keyNumber,
+															'0': self.keyNumber})
 		self.Timer = eTimer()
 		self.Timer.callback.append(self.keyOK)
-		self.Timer.start(2000, True)
+		self.Timer.start(2500, True)
 
 	def keyNumber(self, number):
 		self.Timer.start(2000, True)
 		self.field = self.field + str(number)
 		self['number'].setText(self.field)
-		if len(self.field) >= self.max:
+		if len(self.field) >= self.maxPics:
 			self.keyOK()
 
 	def keyOK(self):
@@ -1111,7 +1100,7 @@ class CKpicshow(AllScreen):
 	def __init__(self, session, titel, recipe, images):
 		global HIDEFLAG
 		HIDEFLAG = True
-		self.dict = {'picpath': PLUGINPATH + 'pic/'}
+		self.dict = {'picpath': '%spic/' % PLUGINPATH}
 		skin = self.readSkin("CKpicshow")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session, skin)
@@ -1122,12 +1111,12 @@ class CKpicshow(AllScreen):
 		self.currId = str(recipe['id'])
 		self.setTitle(titel)
 		self.pixlist = []
-		self.picmax = 0
+		self.maxPics = 0
 		self.count = 0
-		self["stars"] = ProgressBar()
-		self["starsbg"] = Pixmap()
-		self["stars"].hide()
-		self["starsbg"].hide()
+		self['stars'] = ProgressBar()
+		self['starsbg'] = Pixmap()
+		self['stars'].hide()
+		self['starsbg'].hide()
 		self['scoretext'] = Label('')
 		self['scoretext'].hide()
 		self['picture'] = Pixmap()
@@ -1137,6 +1126,7 @@ class CKpicshow(AllScreen):
 		self['button_ok'] = Pixmap()
 		self['label_left-right'] = Label('')
 		self['button_left-right'] = Pixmap()
+		self['release'] = Label(RELEASE)
 		self['NumberActions'] = NumberActionMap(['NumberActions', 'OkCancelActions', 'DirectionActions', 'ColorActions', 'HelpActions'], {
 			'ok': self.ok,
 			'cancel': self.exit,
@@ -1181,19 +1171,19 @@ class CKpicshow(AllScreen):
 		else:
 			score = 0.0
 			scoretext = '(ohne Bewertung)'
-		self["starsbg"].show()
-		self["stars"].show()
-		self["stars"].setValue(score)
+		self['starsbg'].show()
+		self['stars'].show()
+		self['stars'].setValue(score)
 		self['scoretext'].setText(scoretext)
 		self['scoretext'].show()
 		if self.IMG['count'] > 0:
 			for i in range(len(self.IMG['results'])):
 				self.pixlist.append(self.IMG['results'][i]['id'])
-			picurl = PICURLBASE + self.currId + '/bilder/' + self.REZ['previewImageId'] + '/crop-960x720/' + self.titel + '.jpg'
+			picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.REZ['previewImageId'], self.titel)
 			callInThread(self.threadedGetPage, picurl, self.getPic, self.downloadError)
-			self.picmax = len(self.pixlist) - 1
+			self.maxPics = len(self.pixlist) - 1
 			username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
-			self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
+			self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.maxPics + 1) + '\nvon ' + username)
 		else:
 			self.session.open(MessageBox, '\nKein Foto vorhanden', MessageBox.TYPE_INFO, close_on_any_key=True)
 
@@ -1204,31 +1194,31 @@ class CKpicshow(AllScreen):
 		self.session.openWithCallback(self.showPic, CKfullscreen)
 
 	def picup(self):
-		self.count += 1 if self.count < self.picmax else - self.count
-		picurl = PICURLBASE + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
+		self.count += 1 if self.count < self.maxPics else - self.count
+		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.IMG['results'][self.count]['id'], self.titel) if self.REZ['hasImage'] else NOPICURL
 		callInThread(self.threadedGetPage, picurl, self.getPic, self.downloadError)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
-		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
+		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.maxPics + 1) + '\nvon ' + username)
 
 	def picdown(self):
-		self.count -= 1 if self.count > 0 else - self.picmax
-		picurl = PICURLBASE + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
+		self.count -= 1 if self.count > 0 else - self.maxPics
+		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.IMG['results'][self.count]['id'], self.titel) if self.REZ['hasImage'] else NOPICURL
 		callInThread(self.threadedGetPage, picurl, self.getPic, self.downloadError)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
-		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
+		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.maxPics + 1) + '\nvon ' + username)
 
 	def gotoPic(self, number):
-		self.session.openWithCallback(self.numberEntered, getNumber, number, 2)
+		self.session.openWithCallback(self.numberEntered, CKgetNumber, number, self.maxPics)
 
 	def numberEntered(self, number):
-		if number > self.picmax:
-			number = self.picmax
+		if number > self.maxPics + 1:
+			number = self.maxPics + 1
 		self.count = number - 1
-		picurl = picuribase + '/' + self.currId + '/bilder/' + str(self.IMG['results'][self.count]['id']) + '/crop-960x720/' + self.titel + '.jpg'
+		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.IMG['results'][self.count]['id'], self.titel) if self.REZ['hasImage'] else NOPICURL
 		self.pixlist[self.count]
 		callInThread(self.threadedGetPage, picurl, self.getPic, self.downloadError)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
-		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.picmax + 1) + '\nvon ' + username)
+		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.maxPics + 1) + '\nvon ' + username)
 
 	def getPic(self, output):
 		with open(PICFILE, 'wb') as f:
@@ -1267,8 +1257,11 @@ class CKfullscreen(AllScreen):
 	def __init__(self, session):
 		global HIDEFLAG
 		HIDEFLAG = True
-		self.skin = self.readSkin("CKfullscreen")
-		Screen.__init__(self, session, self.skin)
+		self.dict = {'picpath': '%spic/' % PLUGINPATH}
+		skin = self.readSkin("CKfullscreen")
+		self.skin = self.applySkinVars(skin, self.dict)
+		Screen.__init__(self, session, skin)
+		self.session = session
 		self.hideflag = True
 		self['picture'] = Pixmap()
 		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
@@ -1301,7 +1294,7 @@ class CKfavoriten(AllScreen):
 	def __init__(self, session, favmode=True):
 		global HIDEFLAG
 		HIDEFLAG = True
-		self.dict = {'picpath': PLUGINPATH + 'pic/'}
+		self.dict = {'picpath': '%spic/' % PLUGINPATH}
 		skin = self.readSkin("CKfavoriten")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session, skin)
@@ -1507,7 +1500,7 @@ class CKmain(AllScreen):
 		ALPHA = '/proc/stb/video/alpha' if fileExists('/proc/stb/video/alpha') else None
 		if not ALPHA:
 			self.CKlog('Alphachannel not found! Hide/Show-Function (=blue button) disabled')
-		self.dict = {'picpath': PLUGINPATH + 'pic/'}
+		self.dict = {'picpath': '%spic/' % PLUGINPATH}
 		skin = self.readSkin("CKmain")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session, skin)
@@ -1850,7 +1843,7 @@ class CKmain(AllScreen):
 
 class CKconfig(ConfigListScreen, AllScreen):
 	def __init__(self, session):
-		self.dict = {'picpath': PLUGINPATH + 'pic/'}
+		self.dict = {'picpath': '%spic/' % PLUGINPATH}
 		skin = self.readSkin("CKconfig")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session)
