@@ -56,7 +56,7 @@
 	</screen>
 
 	<screen name="CKpicshow" position="center,center" size="1920,1080" title="" flags="wfNoBorder" backgroundColor="background">
-	<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
+		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
 		<widget source="Title" render="Label" position="center,19" size="1500,48" font="Regular; 36" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="1920,90" pixmap="{picpath}FHD/chefkochFHD.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="64,37" size="60,21" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
@@ -74,13 +74,13 @@
 	</screen>
 
 	<screen name="CKfullscreen" position="center,center" size="1920,1080" flags="wfNoBorder" title="" >
-	<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
+		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
 		<eLabel position="center,center" size="1440,1080" backgroundColor="#000000" zPosition="1" />
 		<widget name="picture" position="center,center" size="1440,1080" alphatest="blend" zPosition="2" />
 	</screen>
 
 	<screen name="CKfavoriten" position="517,15" size="885,1050" title="" flags="wfNoBorder" backgroundColor="background">
-	<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
+		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
 		<widget source="Title" render="Label" position="15,21" size="855,48" font="Regular; 36" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="885,90" pixmap="{picpath}FHD/chefkochFHD.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="64,37" size="60,21" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
@@ -94,7 +94,7 @@
 	</screen>
 
 	<screen name="CKmain" position="517,15" size="885,1050" title="kontaktiere den Server..." flags="wfNoBorder" backgroundColor="background">
-	<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
+		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
 		<widget source="Title" render="Label" position="90,21" size="735,48" font="Regular; 36" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="885,90" pixmap="{picpath}FHD/chefkochFHD.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="64,37" size="60,24" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
@@ -119,8 +119,12 @@
 		<eLabel name="Line_Bottom" position="13,981" size="858,1" backgroundColor="#3B8047" zPosition="3" />
 	</screen>
 
+	<screen name="CKgetNumber" position="center,center" size="262,105" backgroundColor="#20000000" flags="wfNoBorder" title=" ">
+		<widget name="number" position="0,0" size="262,105" font="Regular;60" halign="center" valign="center" transparent="1" zPosition="1" />
+	</screen>
+
 	<screen name="CKconfig" position="517,15" size="885,1050" title="Chefkoch Setup" flags="wfNoBorder" backgroundColor="background">
-	<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
+		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
 		<widget source="Title" render="Label" position="210,21" size="450,48" font="Regular; 36" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="885,90" pixmap="{picpath}FHD/chefkochFHD.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="64,37" size="60,21" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
