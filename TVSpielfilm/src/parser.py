@@ -3,312 +3,320 @@
 from re import sub, findall, S as RES, search
 from six import ensure_str
 from twisted.internet import reactor
-
 NEXTPage1 = 'class="js-track-link pagination__link pagination__link--next"'
 NEXTPage2 = '<a\ href="(.*?)"'
 
 
 def shortenChannel(text):
-	text = text.replace('ProSieben ', 'Pro7 ').replace('kabel eins CLASSICS', 'k1CLASSICS').replace('Sky Family', 'SkyFamily').replace('Sky Cinema+', 'SkyCine+')
-	text = text.replace('Sky Comedy', 'SkyComedy').replace('Sky Emotion', 'SkyEmotion').replace('Sky Sport HD', 'SkySport').replace('Eurosport ', 'Eurosport')
-	text = text.replace('EXTREME SPORTS', 'EXTREME').replace('NAT GEO WILD', 'NatGeoWild').replace('Romance TV', 'RomanceTV').replace('13th Street', '13thStreet')
-	text = text.replace('VH1 Classic', 'VH1Classic').replace('COMEDY CENTRAL', 'COMEDY C').replace('Cartoon Network', 'CartoonNet')
-	text = text.replace('Disney Cinemagic', 'DisneyCine').replace('HISTORY HD', 'History HD').replace('DELUXE MUSIC', 'DeluxMusic')
-	return text
-
-
-def transWIKI(text):
-	text = text.replace('\xc3\x84', '\xc4').replace('\xc3\x96', '\xd6').replace('\xc3\x9c', '\xdc').replace('\xc3\x9f', '\xdf').replace(
-		'\xc3\xa4', '\xe4').replace('\xc3\xb6', '\xf6').replace('\xc3\xbc', '\xfc').replace('&', '%26').replace('\xe2\x80', '-')
-	return text
+	text = text.strip()
+	map = {"ProSieben": "Pro7 ", "kabel eins CLASSICS": "k1CLASSICS", "Sky Family": "SkyFamily", "Sky Cinema+": "SkyCine+",
+			"Sky Comedy": "SkyComedy", "Sky Emotion": "SkyEmotion", "Sky Sport HD": "SkySport", "Eurosport ": "Eurosport",
+			"EXTREME SPORTS": "EXTREME", "NAT GEO WILD": "NatGeoWild", "Romance TV": "RomanceTV", "13th Street": "13thStreet",
+			"VH1 Classic": "VH1Classic", "COMEDY CENTRAL": "COMEDY C", "Cartoon Network": "CartoonNet", "Beate-Uhse": "Beate Uhse",
+			"Disney Cinemagic": "DisneyCine", "HISTORY HD": "History HD", "DELUXE MUSIC": "DeluxMusic"
+			}
+	return map[text] if text in map else text
 
 
 def transHTML(text):
-	text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ß').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"')
-	text = text.replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '').replace('&copy;.*', ' ')
-	text = text.replace('&copy;', '').replace('&amp;', '&').replace('&uuml;', 'ü').replace('&auml;', 'ä').replace('&ouml;', 'ö')
-	text = text.replace('&eacute;', 'é').replace('&hellip;', '...').replace('&egrave;', 'è').replace('&agrave;', 'à').replace('&aacute;', 'á').replace('&mdash;', '-')
-	text = text.replace('&Uuml;', 'Ü').replace('&Auml;', 'Ä').replace('&Ouml;', 'Ö').replace('&#034;', '"').replace('&#039;', "'").replace('&#34;', '"')
-	text = text.replace('&#38;', 'und').replace('&#39;', "'").replace('&#133;', '...').replace('&#196;', 'Ä').replace('&#214;', 'Ö')
-	text = text.replace('&#223;', 'ß').replace('&#228;', 'ä').replace('&#246;', 'ö').replace('&#220;', 'Ü').replace('&#252;', 'ü')
-	text = text.replace('&#287;', 'c').replace('&#324;', 'n').replace('&#351;', 's').replace('&#8211;', '-').replace('&#8212;', '\x97').replace('&#8216;', "'")
-	text = text.replace('&#8217;', "'").replace('&#8220;', '"').replace('&#8221;', '"').replace('&#8230;', '...').replace('&#8242;', "'").replace('&#8243;', '"')
-	return text
+	map = {"&nbsp;": " ", "&szlig;": "ß", "&quot;": ""","&ndash;": "-","&Oslash;": "","&bdquo;": """, "&ldquo;": """,
+			"&rsquo;": """, "&gt;": ">", "&lt;": "<", "&shy;": "", "&copy;.*": " ", "&copy;": "", "&amp;": "&", "&uuml;": "ü",
+			"&auml;": "ä", "&ouml;": "ö", "&eacute;": "é", "&hellip;": "...", "&egrave;": "è", "&agrave;": "à", "&aacute;": "á",
+			"&mdash;": "-", "&Uuml;": "Ü", "&Auml;": "Ä", "&Ouml;": "Ö", "&#034;": ""","&#039;": """, "&#34;": """, "&#38;": "und",
+			"&#39;": """, "&#133;": "...", "&#196;": "Ä", "&#214;": "Ö", "&#223;": "ß", "&#228;": "ä", "&#246;": "ö", "&#220;": "Ü",
+			"&#252;": "ü", "&#287;": "c", "&#324;": "n", "&#351;": "s", "&#8211;": "-", "&#8212;": "\x97", "&#8216;": """,
+			"&#8217;": """, "&#8220;": ""","&#8221;": """, "&#8230;": "...", "&#8242;": ""","&#8243;": """
+			}
+	return map[text] if text in map else text
 
 
-def transCHANNEL(data):
-	neu = ''
-	for x in data.split('\n'):
-		sref = search(' \d+:\d+:\w+:\w+:\w+:\w+:\w+:\d+:\w+:\w+:.*', x)
-		if sref is None:
-			neu += x.lower() + '\t\n'
-		else:
-			neu += x[:sref.start(0)].lower() + '\t' + sref.group(0) + '\n'
-	data = neu
-	data = sub('das erste.*?\t', 'ard', data)
-	data = sub('zdf_neo.*?\t', '2neo', data)
-	data = sub('zdfinfo.*?\t', 'zinfo', data)
-	data = sub('zdf.*?\t', 'zdf', data)
-	data = sub('tagesschau.*?\t', 'tag24', data)
-	data = sub('3sat.*?\t', '3sat', data)
-	data = sub('phoenix.*?\t', 'phoen', data)
-	data = sub('pro.*?fun.*?\t', 'pro7f', data)
-	data = sub('pro.*?maxx.*?\t', 'pro7m', data)
-	data = sub('pro.*?\t', 'pro7', data)
-	data = sub('sat.*?e.*?\t', 'sat1e', data)
-	data = sub('sat.*?g.*?\t', 'sat1g', data)
-	data = sub('sat.*?\t', 'sat1', data)
-	data = sub('rtl c.*?\t', 'rtl-c', data)
-	data = sub('rtl l.*?\t', 'rtl-l', data)
-	data = sub('nitro.*?\t', 'rtl-n', data)
-	data = sub('rtl n.*?\t', 'rtl-n', data)
-	data = sub('rtln.*?\t', 'rtl-n', data)
-	data = sub('rtl p.*?\t', 'pass', data)
-	data = sub('rtlzwei.*?\t', 'rtl2', data)
-	data = sub('rtl.*?2.*?\t', 'rtl2', data)
-	data = sub('rtlup.*?\t', 'rtlpl', data)
-	data = sub('super rtl.*?\t', 'super', data)
-	data = sub('rtl.*?\t', 'rtl', data)
-	data = sub('voxup.*?\t', 'voxup', data)
-	data = sub('vox.*?\t', 'vox', data)
-	data = sub('sixx.*?\t', 'sixx', data)
-	data = sub('kabel.*? c.*?\t', 'k1cla', data)
-	data = sub('kabel.*? d.*?\t', 'k1doku', data)
-	data = sub('kabel.*?\t', 'k1', data)
-	data = sub('sky 1.*?\t', 'sky1', data)
-	data = sub('sky one.*?\t', 'sky1', data)
-	data = sub('sky .*?action.*?\t', 'sky-a', data)
-	data = sub('sky .*?atlantic.*?\t', 'skyat', data)
-	data = sub('sky .*?fun.*?\t', 'sky-c', data)
-	data = sub('sky .*?special.*?\t', 'skycs', data)
-	data = sub('sky .*?family.*?\t', 'sky-f', data)
-	data = sub('sky .*?007.*?\t', 'sky-h', data)
-	data = sub('sky .*?best of.*?\t', 'sky-h', data)
-	data = sub('sky .*?nature.*?\t', 'sky-na', data)
-	data = sub('sky .*?documentaries.*?\t', 'sky-d', data)
-	data = sub('sky .*?star.*?\t', 'sky-h', data)
-	data = sub('sky .*?krimi.*?\t', 'sky-k', data)
-	data = sub('sky .*?classics.*?\t', 'sky-n', data)
-	data = sub('sky .*?select.*?\t', 'sky-s', data)
-	data = sub('sky .*?premieren.*?24.*?\t', 'cin24', data)
-	data = sub('sky .*?premieren.*?\t', 'cin', data)
-	data = sub('sky .*?thriller.*?\t', 'skyth', data)
-	data = sub('sky .*?special.*?\t', 'skycs', data)
-	data = sub('sky .*?xmas.*?\t', 'xmas', data)
-	data = sub('sky .*?christmas.*?\t', 'xmas', data)
-	data = sub('sky .*?comedy.*?\t', 'sky-co', data)
-	data = sub('sky .*?sport.*? golf.*?\t', 'skysg', data)
-	data = sub('sky .*?sport.*? mix.*?\t', 'skysm', data)
-	data = sub('sky .*?sport.*? golf.*?\t', 'skysg', data)
-	data = sub('sky .*?sport.*? top.*?event.*?\t', 'skyste', data)
-	data = sub('sky .*?sport.*? premier.*?league.*?\t', 'skyspl', data)
-	data = sub('sky .*?sport.*? tennis.*?\t', 'skyst', data)
-	data = sub('sky .*?sport.*? f1.*?\t', 'skyf1', data)
-	data = sub('sky .*?sport.*? austria.*?\t', 'spo-a', data)
-	data = sub('sky .*?sport.*? hd 1.*?\t', 'hdspo', data)
-	data = sub('sky .*?sport.*? 1.*?\t', 'hdspo', data)
-	data = sub('sky .*?buli.*? bundesliga*?\t', 'buli', data)
-	data = sub('sky .*?sport.*? hd 2.*?\t', 'shd2', data)
-	data = sub('sky .*?sport.*? 2.*?\t', 'shd2', data)
-	data = sub('sky .*?sport.*? news.*?\t', 'snhd', data)
-	data = sub('sky .*?bundesliga.*?\t', 'buli', data)
-	data = sub('sky.bundesliga.*?\t', 'buli', data)
-	data = sub('bundesliga.*?\t', 'buli', data)
-	data = sub('sky. bundesliga.*?\t', 'buli', data)
-	data = sub('eurosport 1.*?\t', 'euro', data)
-	data = sub('eurosport 2.*?\t', 'euro2', data)
-	data = sub('sport1\\+.*?\t', 's1plu', data)
-	data = sub('sport1.*?\t', 'sport', data)
-	data = sub('sport 1.*?\t', 'sport', data)
-	data = sub('dazn 2.*?\t', 'dazn', data)
-	data = sub('esports1.*?\t', 'es1', data)
-	data = sub('motorvision tv.*?\t', 'movtv', data)
-	data = sub('auto.*?motor.*?sport.*?\t', 'ams', data)
-	data = sub('sportdigital.*?fussball.*?\t', 'spo-d', data)
-	data = sub('magenta.*?sport.*?\t', 'maspo', data)
-	data = sub('extreme.*? sports.*?\t', 'ex-sp', data)
-	data = sub('kinowelt.*?\t', 'kinow', data)
-	data = sub('fox.*?\t', 'fox', data)
-	data = sub('syfy.*?\t', 'scifi', data)
-	data = sub('universal.*?\t', 'unive', data)
-	data = sub('toggo.*?\t', 'toggo', data)
-	data = sub('romance tv.*?\t', 'rom', data)
-	data = sub('heimatkanal.*?\t', 'heima', data)
-	data = sub('biography.*?\t', 'bio', data)
-	data = sub('bio channel\t', 'bio', data)
-	data = sub('tele 5.*?\t', 'tele5', data)
-	data = sub('anixe.*?\t', 'anixe', data)
-	data = sub('13th.*?\t', '13th', data)
-	data = sub('axn.*?\t', 'axn', data)
-	data = sub('silverline.*?\t', 'silve', data)
-	data = sub('welt der wunder.*?\t', 'wdwtv', data)
-	data = sub('arte.*?\t', 'arte', data)
-	data = sub('ntv.*?\t', 'ntv', data)
-	data = sub('n24 d.*?\t', 'n24doku', data)
-	data = sub('n24.*?\t', 'welt', data)
-	data = sub('cnn.*?\t', 'cnn', data)
-	data = sub('bbc w.*?\t', 'bbc', data)
-	data = sub('bbc e.*?\t', 'bbc-e', data)
-	data = sub('dmax.*?\t', 'dmax', data)
-	data = sub('spiegel .*?geschichte.*?\t', 'sp-ge', data)
-	data = sub('spiegel .*?history.*?\t', 'sp-ge', data)
-	data = sub('spiegel .*?wissen.*?\t', 'sptvw', data)
-	data = sub('curiosity channel.*?\t', 'sptvw', data)
-	data = sub('the history.*?\t', 'hishd', data)
-	data = sub('history.*?\t', 'hishd', data)
-	data = sub('animal planet.*?\t', 'aplan', data)
-	data = sub('crime \\+ investigation.*?\t', 'crin', data)
-	data = sub('planet.*?\t', 'plane', data)
-	data = sub('discovery.*?\t', 'hddis', data)
-	data = sub('discovery channel.*?\t', 'disco', data)
-	data = sub('natgeo wild.*?\t', 'n-gw', data)
-	data = sub('nat geo wild.*?\t', 'n-gw', data)
-	data = sub('natgeo people.*?\t', 'n-gp', data)
-	data = sub('nat geo people.*?\t', 'n-gp', data)
-	data = sub('natgeo.*?\t', 'n-ghd', data)
-	data = sub('nat geo.*?\t', 'n-ghd', data)
-	data = sub('national geographic.*?\t', 'n-ghd', data)
-	data = sub('bongusto.*?\t', 'gusto', data)
-	data = sub('bon gusto.*?\t', 'gusto', data)
-	data = sub('servus.*?\t', 'servu', data)
-	data = sub('sr fernsehen.*?\t', 'swr', data)
-	data = sub('bayerisches.*?\t', 'br', data)
-	data = sub('br m.*?\t', 'br', data)
-	data = sub('br n.*?\t', 'br', data)
-	data = sub('br s.*?\t', 'br', data)
-	data = sub('br fern.*?\t', 'br', data)
-	data = sub('one.*?\t', 'fes', data)
-	data = sub('ard alpha.*?\t', 'alpha', data)
-	data = sub('ard-alpha.*?\t', 'alpha', data)
-	data = sub('srf1.*?\t', 'sf1', data)
-	data = sub('srf 1.*?\t', 'sf1', data)
-	data = sub('srf.*?\t', 'sf2', data)
-	data = sub('srf2.*?\t', 'sf2', data)
-	data = sub('srf 2.*?\t', 'sf2', data)
-	data = sub('srf zwei.*?\t', 'sf2', data)
-	data = sub('hamburg 1\t', 'hh1', data)
-	data = sub('m.*?nchen2\t', 'mue2', data)
-	data = sub('m.*?nchen.tv\t', 'tvm', data)
-	data = sub('tv.berlin\t', 'tvb', data)
-	data = sub('leipzig fernsehen.*?\t', 'leitv', data)
-	data = sub('nrw.tv.*?\t', 'nrwtv', data)
-	data = sub('rheinmain tv.*?\t', 'rmtv', data)
-	data = sub('rnf.*?\t', 'rnf', data)
-	data = sub('sachsen fernsehen.*?\t', 'sach', data)
-	data = sub('orf 1.*?\t', 'orf1', data)
-	data = sub('orf1.*?\t', 'orf1', data)
-	data = sub('orf eins.*?\t', 'orf1', data)
-	data = sub('orf 2.*?\t', 'orf2', data)
-	data = sub('orf2.*?\t', 'orf2', data)
-	data = sub('orf iii.*?\t', 'orf3', data)
-	data = sub('orf.sport.*?\t', 'orfsp', data)
-	data = sub('sf1.*?\t', 'sf1', data)
-	data = sub('sf 1.*?\t', 'sf1', data)
-	data = sub('sf 2.*?\t', 'sf2', data)
-	data = sub('sf zwei.*?\t', 'sf2', data)
-	data = sub('atv\t', 'atv', data)
-	data = sub('atv hd\t', 'atv', data)
-	data = sub('atv2.*?\t', 'atv2', data)
-	data = sub('atv 2.*?\t', 'atv2', data)
-	data = sub('atv ii\t', 'atv2', data)
-	data = sub('puls 4.*?\t', 'puls4', data)
-	data = sub('boomerang.*?\t', 'boom', data)
-	data = sub('nick jr.*?\t', 'nickj', data)
-	data = sub('nick.*?\t', 'nick', data)
-	data = sub('nicktoons.*?\t', 'nickt', data)
-	data = sub('comedy central.*?\t', 'cc', data)
-	data = sub('cartoon net.*?\t', 'c-net', data)
-	data = sub('disney cinema.*?\t', 'dcm', data)
-	data = sub('disney channel.*?\t', 'disne', data)
-	data = sub('disney junior.*?\t', 'djun', data)
-	data = sub('disney xd.*?\t', 'dxd', data)
-	data = sub('disney hd\t', 'disne', data)
-	data = sub('junior.*?\t', 'junio', data)
-	data = sub('kika.*?\t', 'kika', data)
-	data = sub('vh1 classic.*?\t', 'vh1', data)
-	data = sub('deluxe music.*?\t', 'dmc', data)
-	data = sub('mtv\t', 'mtv', data)
-	data = sub('mtv hd\t', 'mtv', data)
-	data = sub('mtv g.*?\t', 'mtv', data)
-	data = sub('mtv ba.*?\t', 'mtv-b', data)
-	data = sub('mtv da.*?.*?\t', 'mtv-d', data)
-	data = sub('mtv hi.*?.*?\t', 'mtv-h', data)
-	data = sub('mtv li.*?\t', 'mtv-l', data)
-	data = sub('viva.*?\t', 'viva', data)
-	data = sub('im1\t', 'imt', data)
-	data = sub('rock tv.*?\t', 'rck', data)
-	data = sub('jukebox.*?\t', 'juke', data)
-	data = sub('trace.*?\t', 'trace', data)
-	data = sub('classica.*?\t', 'class', data)
-	data = sub('gute laune.*?\t', 'laune', data)
-	data = sub('beate-uhse.*?\t', 'butv', data)
-	data = sub('lust pur.*?\t', 'lustp', data)
-	data = sub('playboy tv\t', 'pboy', data)
-	data = sub('al jazeera.*?\t', 'aljaz', data)
-	data = sub('bloomberg.*?\t', 'blm', data)
-	data = sub('euronews.*?\t', 'euron', data)
-	data = sub('bibel tv.*?\t', 'bibel', data)
-	data = sub('kirchen tv.*?\t', 'ktv', data)
-	data = sub('timm.*?\t', 'timm', data)
-	data = sub('sonnenklar.*?\t', 'sklar', data)
-	data = sub('goldstar tv\t', 'gold', data)
-	data = sub('animax\t', 'amax', data)
-	data = sub('adult channel.*?\t', 'adult', data)
-	data = sub('das neue tv.*?\t', 'dntv', data)
-	data = sub('deutsches wetter.*?\t', 'dwf', data)
-	data = sub('e!.*?\t', 'e!', data)
-	data = sub('fashion tv.*?\t', 'fatv', data)
-	data = sub('family tv.*?\t', 'famtv', data)
-	data = sub('mezzo.*?\t', 'mezzo', data)
-	data = sub('nautical.*?\t', 'nauch', data)
-	data = sub('nl 1.*?\t', 'nl1', data)
-	data = sub('nl 2.*?\t', 'nl2', data)
-	data = sub('nl 3.*?\t', 'nl3', data)
-	data = sub('dr1.*?\t', 'dr1', data)
-	data = sub('belgien.*?\t', 'be1', data)
-	data = sub('france24.*?fr.*?\t', 'fr24f', data)
-	data = sub('france24.*?en.*?\t', 'fr24e', data)
-	data = sub('france 2.*?\t', 'fra2', data)
-	data = sub('france 3.*?\t', 'fra3', data)
-	data = sub('france 5.*?\t', 'fra5', data)
-	data = sub('tv 2.*?\t', 'tv5', data)
-	data = sub('tv 5.*?\t', 'tv5', data)
-	data = sub('ric.*?\t', 'ric', data)
-	data = sub('tlc.*?\t', 'tlc', data)
-	data = sub('star tv.*?\t', 'sttv', data)
-	data = sub('center.tv.*?\t', 'cente', data)
-	data = sub('sony.*?\t', 'sony', data)
-	data = sub('3 plus.*?\t', '3plus', data)
-	data = sub('3\\+.*?\t', '3plus', data)
-	data = sub('marco polo.*?\t', 'mapo', data)
-	data = sub('travel channel.*?\t', 'trch', data)
-	data = sub('home.*?garden.*?\t', 'hgtv', data)
-	data = sub('channel21.*?\t', 'ch21', data)
-	data = sub('geo television.*?\t', 'geo', data)
-	data = sub('geo tv.*?\t', 'geo', data)
-	data = sub('fix.*?foxi.*?\t', 'fftv', data)
-	data = sub('welt.*?\t', 'welt', data)
-	data = sub('uhd1.*?\t', 'uhd1', data)
-	data = sub('dw.*?\t', 'dwtv', data)
-	data = sub('deutsches musik fernsehen.*?\t', 'dmf', data)
-	data = sub('rbb.*?\t', 'rbb', data)
-	data = sub('ndr.*?\t', 'n3', data)
-	data = sub('mdr.*?\t', 'mdr', data)
-	data = sub('wdr.*?\t', 'wdr', data)
-	data = sub('hr.*?\t', 'hr', data)
-	data = sub('swr.*?\t', 'swr', data)
-	data = sub('br.*?\t', 'swr', data)
-	data = sub('tele 5.*?\t', 'TELE5', data)
-	data = sub('bild hd\t', 'bild', data)
-	data = sub('warner .*?comedy.*?\t', 'tnt-c', data)
-	data = sub('warner .*?film.*?\t', 'tnt-f', data)
-	data = sub('warner .*?serie.*?\t', 'tnt-s', data)
-	data = sub('tnt .*?comedy.*?\t', 'tnt-c', data)
-	data = sub('tnt .*?film.*?\t', 'tnt-f', data)
-	data = sub('tnt .*?serie.*?\t', 'tnt-s', data)
-	data = sub('hse.*?\t', 'hse', data)
-	data = sub('qvc.*?\t', 'qvc', data)
-	return data
+def transCHANNEL(data, separate=False):
+	map = {"das erste.*?": "ard",
+			"zdf_neo.*?": "2neo",
+			"zdfinfo.*?": "zinfo",
+			"zdf.*?": "zdf",
+			"tagesschau.*?": "tag24",
+			"phoenix.*?": "phoen",
+			"pro.*?fun.*?": "pro7f",
+			"pro.*?maxx.*?": "pro7m",
+			"pro.*?": "pro7",
+			"sat.*?e.*?": "sat1e",
+			"sat.*?g.*?": "sat1g",
+			"sat.*?": "sat1",
+			"3sat.*?": "3sat",
+			"rtl c.*?": "rtl-c",
+			"rtl l.*?": "rtl-l",
+			"nitro.*?": "rtl-n",
+			"rtl n.*?": "rtl-n",
+			"rtln.*?": "rtl-n",
+			"rtl p.*?": "pass",
+			"rtlzwei.*?": "rtl2",
+			"rtl.*?2.*?": "rtl2",
+			"rtlup.*?": "rtlpl",
+			"super rtl.*?": "super",
+			"rtl.*?": "rtl",
+			"voxup.*?": "voxup",
+			"vox.*?": "vox",
+			"sixx.*?": "sixx",
+			"kabel.*? c.*?": "k1cla",
+			"kabel.*? d.*?": "k1doku",
+			"kabel.*?": "k1",
+			"sky 1.*?": "sky1",
+			"sky one.*?": "sky1",
+			"sky .*?action.*?": "sky-a",
+			"sky .*?atlantic.*?": "skyat",
+			"sky .*?fun.*?": "sky-c",
+			"sky .*?special.*?": "skycs",
+			"sky .*?family.*?": "sky-f",
+			"sky .*?007.*?": "sky-h",
+			"sky .*?best of.*?": "sky-h",
+			"sky .*?nature.*?": "sky-na",
+			"sky .*?documentaries.*?": "sky-d",
+			"sky .*?star.*?": "sky-h",
+			"sky .*?krimi.*?": "sky-k",
+			"sky .*?crime.*?": "sky-cr",
+			"sky .*?classics.*?": "sky-n",
+			"sky .*?select.*?": "sky-s",
+			"sky .*?replay.*?": "skyrp",
+			"sky .*?premieren.*?24.*?": "cin24",
+			"sky .*?premieren.*?": "cin",
+			"sky .*?thriller.*?": "skyth",
+			"sky .*?special.*?": "skycs",
+			"sky .*?showcase.*?": "skysh",
+			"sky .*?xmas.*?": "xmas",
+			"sky .*?christmas.*?": "xmas",
+			"sky .*?comedy.*?": "sky-co",
+			"sky .*?sport.*? golf.*?": "skysg",
+			"sky .*?sport.*? mix.*?": "skysm",
+			"sky .*?sport.*? golf.*?": "skysg",
+			"sky .*?sport.*? top.*?event.*?": "skyste",
+			"sky .*?sport.*? premier.*?league.*?": "skyspl",
+			"sky .*?sport.*? tennis.*?": "skyst",
+			"sky .*?sport.*? f1.*?": "skyf1",
+			"sky .*?sport.*? austria.*?": "spo-a",
+			"sky .*?sport.*? hd 1.*?": "hdspo",
+			"sky .*?sport.*? 1.*?": "hdspo",
+			"sky .*?buli.*? bundesliga*?": "buli",
+			"sky .*?sport.*? hd 2.*?": "shd2",
+			"sky .*?sport.*? 2.*?": "shd2",
+			"sky .*?sport.*? news.*?": "snhd",
+			"sky .*?bundesliga.*?": "buli",
+			"sky.bundesliga.*?": "buli",
+			"bundesliga.*?": "buli",
+			"sky. bundesliga.*?": "buli",
+			"eurosport 1.*?": "euro",
+			"eurosport 2.*?": "euro2",
+			"sport1\\+.*?": "s1plu",
+			"sport1.*?": "sport",
+			"sport 1.*?": "sport",
+			"dazn 2.*?": "dazn",
+			"esports1.*?": "es1",
+			"motorvision tv.*?": "movtv",
+			"auto.*?motor.*?sport.*?": "ams",
+			"sportdigital.*?fussball.*?": "spo-d",
+			"magenta.*?sport.*?": "maspo",
+			"extreme.*? sports.*?": "ex-sp",
+			"kinowelt.*?": "kinow",
+			"fox.*?": "fox",
+			"syfy.*?": "scifi",
+			"universal.*?": "unive",
+			"toggo.*?": "toggo",
+			"romance tv.*?": "rom",
+			"heimatkanal.*?": "heima",
+			"biography.*?": "bio",
+			"bio channel": "bio",
+			"tele 5.*?": "tele5",
+			"anixe.*?": "anixe",
+			"13th.*?": "13th",
+			"axn.*?": "axn",
+			"silverline.*?": "silve",
+			"welt der wunder.*?": "wdwtv",
+			"arte.*?": "arte",
+			"ntv.*?": "ntv",
+			"n24 d.*?": "n24doku",
+			"n24.*?": "welt",
+			"cnn.*?": "cnn",
+			"bbc w.*?": "bbc",
+			"bbc e.*?": "bbc-e",
+			"dmax.*?": "dmax",
+			"spiegel .*?geschichte.*?": "sp-ge",
+			"spiegel .*?history.*?": "sp-ge",
+			"spiegel .*?wissen.*?": "sptvw",
+			"curiosity channel.*?": "sptvw",
+			"the history.*?": "hishd",
+			"history.*?": "hishd",
+			"animal planet.*?": "aplan",
+			"crime \\+ investigation.*?": "crin",  # Suchstrings zuerst mit re.escape wandeln (z.B. siehe hier '\\+' = '+')
+			"planet.*?": "plane",
+			"discovery.*?": "hddis",
+			"discovery channel.*?": "disco",
+			"natgeo wild.*?": "n-gw",
+			"nat geo wild.*?": "n-gw",
+			"natgeo people.*?": "n-gp",
+			"nat geo people.*?": "n-gp",
+			"natgeo.*?": "n-ghd",
+			"nat geo.*?": "n-ghd",
+			"national geographic.*?": "n-ghd",
+			"bongusto.*?": "gusto",
+			"bon gusto.*?": "gusto",
+			"servus.*?": "servu",
+			"one.*?": "fes",
+			"ard alpha.*?": "alpha",
+			"ard-alpha.*?": "alpha",
+			"srf1.*?": "sf1",
+			"srf 1.*?": "sf1",
+			"srf.*?": "sf2",
+			"srf2.*?": "sf2",
+			"srf 2.*?": "sf2",
+			"srf zwei.*?": "sf2",
+			"hamburg 1": "hh1",
+			"m.*?nchen2": "mue2",
+			"m.*?nchen.tv": "tvm",
+			"tv.berlin": "tvb",
+			"leipzig fernsehen.*?": "leitv",
+			"nrw.tv.*?": "nrwtv",
+			"rheinmain tv.*?": "rmtv",
+			"rnf.*?": "rnf",
+			"sachsen fernsehen.*?": "sach",
+			"orf 1.*?": "orf1",
+			"orf1.*?": "orf1",
+			"orf eins.*?": "orf1",
+			"orf 2.*?": "orf2",
+			"orf2.*?": "orf2",
+			"orf 3.*?": "orf3",
+			"orf.sport.*?": "orfsp",
+			"orf.*?": "orf1",
+			"sf1.*?": "sf1",
+			"sf 1.*?": "sf1",
+			"sf 2.*?": "sf2",
+			"sf zwei.*?": "sf2",
+			"atv": "atv",
+			"atv hd": "atv",
+			"atv2.*?": "atv2",
+			"atv 2.*?": "atv2",
+			"atv ii": "atv2",
+			"puls 4.*?": "puls4",
+			"boomerang.*?": "boom",
+			"nick jr.*?": "nickj",
+			"nick.*?": "nick",
+			"nicktoons.*?": "nickt",
+			"comedy central.*?": "cc",
+			"cartoon net.*?": "c-net",
+			"disney cinema.*?": "dcm",
+			"disney channel.*?": "disne",
+			"disney junior.*?": "djun",
+			"disney xd.*?": "dxd",
+			"disney hd": "disne",
+			"junior.*?": "junio",
+			"kika.*?": "kika",
+			"vh1 classic.*?": "vh1",
+			"deluxe music.*?": "dmc",
+			"mtv": "mtv",
+			"mtv hd": "mtv",
+			"mtv g.*?": "mtv",
+			"mtv ba.*?": "mtv-b",
+			"mtv da.*?.*?": "mtv-d",
+			"mtv hi.*?.*?": "mtv-h",
+			"mtv li.*?": "mtv-l",
+			"viva.*?": "viva",
+			"im1": "imt",
+			"rock tv.*?": "rck",
+			"jukebox.*?": "juke",
+			"trace.*?": "trace",
+			"classica.*?": "class",
+			"gute laune.*?": "laune",
+			"beate uhse.*?": "butv",
+			"lust pur.*?": "lustp",
+			"playboy tv": "pboy",
+			"al jazeera.*?": "aljaz",
+			"bloomberg.*?": "blm",
+			"euronews.*?": "euron",
+			"bibel tv.*?": "bibel",
+			"kirchen tv.*?": "ktv",
+			"timm.*?": "timm",
+			"sonnenklar.*?": "sklar",
+			"goldstar tv": "gold",
+			"animax": "amax",
+			"adult channel.*?": "adult",
+			"das neue tv.*?": "dntv",
+			"deutsches wetter.*?": "dwf",
+			"e!.*?": "e!",
+			"fashion tv.*?": "fatv",
+			"family tv.*?": "famtv",
+			"mezzo.*?": "mezzo",
+			"nautical.*?": "nauch",
+			"nl 1.*?": "nl1",
+			"nl 2.*?": "nl2",
+			"nl 3.*?": "nl3",
+			"dr1.*?": "dr1",
+			"belgien.*?": "be1",
+			"france24.*?fr.*?": "fr24f",
+			"france24.*?en.*?": "fr24e",
+			"france 2.*?": "fra2",
+			"france 3.*?": "fra3",
+			"france 5.*?": "fra5",
+			"tv 2.*?": "tv5",
+			"tv 5.*?": "tv5",
+			"ric.*?": "ric",
+			"tlc.*?": "tlc",
+			"star tv.*?": "sttv",
+			"center.tv.*?": "cente",
+			"sony.*?": "sony",
+			"3 plus.*?": "3plus",
+			"3\\+.*?": "3plus",
+			"marco polo.*?": "mapo",
+			"travel channel.*?": "trch",
+			"home.*?garden.*?": "hgtv",
+			'hgtv.*?': 'hgtv',
+			"channel21.*?": "ch21",
+			"geo television.*?": "geo",
+			"geo tv.*?": "geo",
+			"fix.*?foxi.*?": "fftv",
+			"welt.*?": "welt",
+			"uhd1.*?": "uhd1",
+			"dw.*?": "dwtv",
+			"deutsches musik fernsehen.*?": "dmf",
+			"rbb.*?": "rbb",
+			"ndr.*?": "n3",
+			"mdr.*?": "mdr",
+			"wdr.*?": "wdr",
+			"hr.*?": "hr",
+			"swr.*?": "swr",
+			"sr fernsehen.*?": "swr",
+			"br.*?": "br",
+			"bayerisches.*?": "br",
+			"tele 5.*?": "TELE5",
+			"bild hd": "bild",
+			"warner .*?comedy.*?": "tnt-c",
+			"warner .*?film.*?": "tnt-f",
+			"warner .*?serie.*?": "tnt-s",
+			"tnt .*?comedy.*?": "tnt-c",
+			"tnt .*?film.*?": "tnt-f",
+			"tnt .*?serie.*?": "tnt-s",
+			"hse.*?": "hse",
+			"qvc.*?": "qvc",
+			"health.*?": "health"
+			}
+	new = []
+	for item in data.strip().split("\n"):  # Trenner '\t' und Return '\n' geeignet einfügen
+		sref = search(" \d+:\d+:\w+:\w+:\w+:\w+:\w+:\d+:\w+:\w+:.*", item)
+		new.append("%s\t\n" % item.lower() if sref is None else "%s\t%s\n" % (item[:sref.start(0)].strip().lower(), sref.group(0)))
+	new = "".join(new)
+	for pattern, shortcut in map.items():  # alle Sendernamen austauschen
+		new = "%s\n" % sub("%s\t" % pattern, "%s\t" % shortcut, new).strip()
+	if separate:
+		supported = []
+		unsupported = []
+		for item in new.rstrip().split("\n"):  # separieren
+			if item.split("\t")[0] in list(map.values()):
+				supported.append(item.replace("\t", ""))
+			else:
+				unsupported.append(item.replace("\t", ""))
+		supported = "\n".join(supported)
+		unsupported = "\n".join(unsupported)
+		return supported, unsupported
+	else:
+		return new.replace("\t", "")
 
 
 def parsedetail(bereich, debug=None):
@@ -347,16 +355,13 @@ def parsedetail(bereich, debug=None):
 	if debug != None:
 		print("[DEBUG] parsedetail %s\n" % debug)
 		print(text)
-
 	text = sub('<[^>]*>', '', text)
 	text = sub('</p<<p<', '\n\n', text)
 	text = sub('\n\\s+\n*', '\n\n', text)
 	text = sub('#sub#', '\n  ', text)
-
 	if debug != None:
 		print("[DEBUG] parsedetail %s\n" % debug)
 		print(text)
-
 	return text
 
 
@@ -380,8 +385,7 @@ def fiximgLink(link):
 def parsePrimeTimeTable(output, debug=None):
 	startpos = output.find('<table class="primetime-table">')
 	endpos = output.find('</table>')
-	bereich = output[startpos:endpos]
-	bereich = transHTML(bereich)
+	bereich = transHTML(output[startpos:endpos])
 	items = findall('<tr>(.*?)</tr>', bereich, RES)
 	entries = []
 	for item in items:
@@ -477,9 +481,8 @@ def parseNow(output):
 	endpos = output.find('<div class="block-in">')
 	if endpos == -1:
 		endpos = output.find('<div class="two-blocks">')
-	bereich = output[startpos:endpos]
-	output = transHTML(bereich)
-	items = findall('<tr class="hover">(.*?)</tr>', output, RES)
+	bereich = transHTML(output[startpos:endpos])
+	items = findall('<tr class="hover">(.*?)</tr>', bereich, RES)
 	entries = []
 	for item in items:
 		b = findall('<img src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png.*?<div>\n\\s+<strong>(.*?)</strong>\n\\s+<span>(.*?)</span>', item, RES)
@@ -573,14 +576,14 @@ def testparseInfo(output):
 
 
 def test():
-	# from twisted.web.client import getPage
-	#    link = b'https://www.tvspielfilm.de/tv-tipps/'
-	link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
+#	from twisted.web.client import getPage
+#	link = b'https://www.tvspielfilm.de/tv-tipps/'
+#	link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&date=2021-05-06&tips=0&time=day&channel=3SAT'
 #    link = b'https://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&ext=1&q=&cat%5B0%5D=SP&genreSP=Abenteuer&time=day&date=&channel='
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&date=2021-05-07&tips=0&time=day&channel=ARD'
 #    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html'
-	link = b'https://www.tvspielfilm.de/tv-programm/sendung/wasserball,60f06a338189652e9978032c.html'
+#	link = b'https://www.tvspielfilm.de/tv-programm/sendung/wasserball,60f06a338189652e9978032c.html'
 #    getPage(link).addCallback(savefile).addErrback(saveerr)
 #    reactor.run()
 	output = open('tmp.html', 'rb').read()
