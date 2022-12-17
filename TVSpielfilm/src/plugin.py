@@ -1949,12 +1949,12 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		pagenumber = search("\d+", nextpage)
 		pagenumber = int(pagenumber.group()) if pagenumber is not None else 888
 		if self.jetzt:
-			if pagenumber < min(config.plugins.tvspielfilm.maxlist.value + 1, 10):
+			if pagenumber < min(int(config.plugins.tvspielfilm.maxlist.value) + 1, 10):
 				callInThread(self.downloadFull, nextpage, self.makeTVJetztView)
 			else:
 				self.showready()
 		else:
-			if pagenumber < config.plugins.tvspielfilm.maxlist.value + 1:
+			if pagenumber < int(config.plugins.tvspielfilm.maxlist.value) + 1:
 				callInThread(self.downloadFull, nextpage, self.makeTVJetztView)
 			else:
 				self.showready()
