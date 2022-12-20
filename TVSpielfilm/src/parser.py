@@ -8,26 +8,22 @@ NEXTPage2 = '<a\ href="(.*?)"'
 
 
 def shortenChannel(text):
-	text = text.strip()
-	map = {"ProSieben": "Pro7 ", "kabel eins CLASSICS": "k1CLASSICS", "Sky Family": "SkyFamily", "Sky Cinema+": "SkyCine+",
-			"Sky Comedy": "SkyComedy", "Sky Emotion": "SkyEmotion", "Sky Sport HD": "SkySport", "Eurosport ": "Eurosport",
-			"EXTREME SPORTS": "EXTREME", "NAT GEO WILD": "NatGeoWild", "Romance TV": "RomanceTV", "13th Street": "13thStreet",
-			"VH1 Classic": "VH1Classic", "COMEDY CENTRAL": "COMEDY C", "Cartoon Network": "CartoonNet", "Beate-Uhse": "Beate Uhse",
-			"Disney Cinemagic": "DisneyCine", "HISTORY HD": "History HD", "DELUXE MUSIC": "DeluxMusic"
-			}
-	return map[text] if text in map else text
+	text = text.replace('ProSieben', 'Pro7').replace('EXTREME SPORTS', 'EXTREME').replace('NatGeo Wild', 'NatGeoWild').replace('Nat Geo Wild', 'NatGeoWild')
+	text = text.replace("National Geographic", "NatGeo").replace("SRF 1", "SRF1").replace("SRF 2", "SRF2").replace("ATV 2", "ATV2")
+	return text.rstrip()
 
 
 def transHTML(text):
-	map = {"&nbsp;": " ", "&szlig;": "ß", "&quot;": ""","&ndash;": "-","&Oslash;": "","&bdquo;": """, "&ldquo;": """,
-			"&rsquo;": """, "&gt;": ">", "&lt;": "<", "&shy;": "", "&copy;.*": " ", "&copy;": "", "&amp;": "&", "&uuml;": "ü",
-			"&auml;": "ä", "&ouml;": "ö", "&eacute;": "é", "&hellip;": "...", "&egrave;": "è", "&agrave;": "à", "&aacute;": "á",
-			"&mdash;": "-", "&Uuml;": "Ü", "&Auml;": "Ä", "&Ouml;": "Ö", "&#034;": ""","&#039;": """, "&#34;": """, "&#38;": "und",
-			"&#39;": """, "&#133;": "...", "&#196;": "Ä", "&#214;": "Ö", "&#223;": "ß", "&#228;": "ä", "&#246;": "ö", "&#220;": "Ü",
-			"&#252;": "ü", "&#287;": "c", "&#324;": "n", "&#351;": "s", "&#8211;": "-", "&#8212;": "\x97", "&#8216;": """,
-			"&#8217;": """, "&#8220;": ""","&#8221;": """, "&#8230;": "...", "&#8242;": ""","&#8243;": """
-			}
-	return map[text] if text in map else text
+	text = text.replace('&nbsp;', ' ').replace('&szlig;', 'ß').replace('&quot;', '"').replace('&ndash;', '-').replace('&Oslash;', '').replace('&bdquo;', '"')
+	text = text.replace('&ldquo;', '"').replace('&rsquo;', "'").replace('&gt;', '>').replace('&lt;', '<').replace('&shy;', '').replace('&copy;.*', ' ')
+	text = text.replace('&copy;', '').replace('&amp;', '&').replace('&uuml;', 'ü').replace('&auml;', 'ä').replace('&ouml;', 'ö')
+	text = text.replace('&eacute;', 'é').replace('&hellip;', '...').replace('&egrave;', 'è').replace('&agrave;', 'à').replace('&aacute;', 'á').replace('&mdash;', '-')
+	text = text.replace('&Uuml;', 'Ü').replace('&Auml;', 'Ä').replace('&Ouml;', 'Ö').replace('&#034;', '"').replace('&#039;', "'").replace('&#34;', '"')
+	text = text.replace('&#38;', 'und').replace('&#39;', "'").replace('&#133;', '...').replace('&#196;', 'Ä').replace('&#214;', 'Ö')
+	text = text.replace('&#223;', 'ß').replace('&#228;', 'ä').replace('&#246;', 'ö').replace('&#220;', 'Ü').replace('&#252;', 'ü')
+	text = text.replace('&#287;', 'c').replace('&#324;', 'n').replace('&#351;', 's').replace('&#8211;', '-').replace('&#8212;', '\x97').replace('&#8216;', "'")
+	text = text.replace('&#8217;', "'").replace('&#8220;', '"').replace('&#8221;', '"').replace('&#8230;', '...').replace('&#8242;', "'").replace('&#8243;', '"')
+	return text.rstrip()
 
 
 def transCHANNEL(data, separate=False):
@@ -37,12 +33,12 @@ def transCHANNEL(data, separate=False):
 			"zdf.*?": "zdf",
 			"tagesschau.*?": "tag24",
 			"phoenix.*?": "phoen",
-			"pro.*?fun.*?": "pro7f",
-			"pro.*?maxx.*?": "pro7m",
-			"pro.*?": "pro7",
+			"prosieben.*?fun.*?": "pro7f",
+			"prosieben.*?maxx.*?": "pro7m",
+			"prosieben.*?": "pro7",
 			"sat.*?e.*?": "sat1e",
 			"sat.*?g.*?": "sat1g",
-			"sat.*?": "sat1",
+			"sat.1.*?": "sat1",
 			"3sat.*?": "3sat",
 			"rtl c.*?": "rtl-c",
 			"rtl l.*?": "rtl-l",
@@ -54,13 +50,15 @@ def transCHANNEL(data, separate=False):
 			"rtl.*?2.*?": "rtl2",
 			"rtlup.*?": "rtlpl",
 			"super rtl.*?": "super",
-			"rtl.*?": "rtl",
+			"rtl .*?": "rtl",
 			"voxup.*?": "voxup",
 			"vox.*?": "vox",
 			"sixx.*?": "sixx",
 			"kabel.*? c.*?": "k1cla",
 			"kabel.*? d.*?": "k1doku",
 			"kabel.*?": "k1",
+			"n24 d.*?": "n24doku",
+			"n24.*?": "welt",
 			"sky 1.*?": "sky1",
 			"sky one.*?": "sky1",
 			"sky .*?action.*?": "sky-a",
@@ -101,27 +99,24 @@ def transCHANNEL(data, separate=False):
 			"sky .*?sport.*? 2.*?": "shd2",
 			"sky .*?sport.*? news.*?": "snhd",
 			"sky .*?bundesliga.*?": "buli",
-			"sky.bundesliga.*?": "buli",
-			"bundesliga.*?": "buli",
-			"sky. bundesliga.*?": "buli",
 			"eurosport 1.*?": "euro",
 			"eurosport 2.*?": "euro2",
 			"sport1\\+.*?": "s1plu",
-			"sport1.*?": "sport",
 			"sport 1.*?": "sport",
+			"sport1.*?": "sport",
 			"dazn 2.*?": "dazn",
 			"esports1.*?": "es1",
 			"motorvision tv.*?": "movtv",
 			"auto.*?motor.*?sport.*?": "ams",
 			"sportdigital.*?fussball.*?": "spo-d",
 			"magenta.*?sport.*?": "maspo",
-			"extreme.*? sports.*?": "ex-sp",
+			"extreme.*?": "ex-sp",
 			"kinowelt.*?": "kinow",
 			"fox.*?": "fox",
 			"syfy.*?": "scifi",
 			"universal.*?": "unive",
 			"toggo.*?": "toggo",
-			"romance tv.*?": "rom",
+			"romance.*?tv.*?": "rom",
 			"heimatkanal.*?": "heima",
 			"biography.*?": "bio",
 			"bio channel": "bio",
@@ -133,8 +128,6 @@ def transCHANNEL(data, separate=False):
 			"welt der wunder.*?": "wdwtv",
 			"arte.*?": "arte",
 			"ntv.*?": "ntv",
-			"n24 d.*?": "n24doku",
-			"n24.*?": "welt",
 			"cnn.*?": "cnn",
 			"bbc w.*?": "bbc",
 			"bbc e.*?": "bbc-e",
@@ -151,23 +144,14 @@ def transCHANNEL(data, separate=False):
 			"discovery.*?": "hddis",
 			"discovery channel.*?": "disco",
 			"natgeo wild.*?": "n-gw",
-			"nat geo wild.*?": "n-gw",
-			"natgeo people.*?": "n-gp",
-			"nat geo people.*?": "n-gp",
 			"natgeo.*?": "n-ghd",
-			"nat geo.*?": "n-ghd",
-			"national geographic.*?": "n-ghd",
-			"bongusto.*?": "gusto",
-			"bon gusto.*?": "gusto",
+			"bon.*?gusto.*?": "gusto",
 			"servus.*?": "servu",
 			"one.*?": "fes",
-			"ard alpha.*?": "alpha",
 			"ard-alpha.*?": "alpha",
 			"srf1.*?": "sf1",
-			"srf 1.*?": "sf1",
 			"srf.*?": "sf2",
 			"srf2.*?": "sf2",
-			"srf 2.*?": "sf2",
 			"srf zwei.*?": "sf2",
 			"hamburg 1": "hh1",
 			"m.*?nchen2": "mue2",
@@ -184,23 +168,22 @@ def transCHANNEL(data, separate=False):
 			"orf 2.*?": "orf2",
 			"orf2.*?": "orf2",
 			"orf 3.*?": "orf3",
+			"orf iii.*?": "orf3",
 			"orf.sport.*?": "orfsp",
-			"orf.*?": "orf1",
 			"sf1.*?": "sf1",
 			"sf 1.*?": "sf1",
 			"sf 2.*?": "sf2",
 			"sf zwei.*?": "sf2",
-			"atv": "atv",
-			"atv hd": "atv",
 			"atv2.*?": "atv2",
-			"atv 2.*?": "atv2",
-			"atv ii": "atv2",
+			"atv ii.*?": "atv2",
+			"atv .*?": "atv",
 			"puls 4.*?": "puls4",
 			"boomerang.*?": "boom",
 			"nick jr.*?": "nickj",
 			"nick.*?": "nick",
 			"nicktoons.*?": "nickt",
 			"comedy central.*?": "cc",
+			"cartoonnet.*?": "c-net",
 			"cartoon net.*?": "c-net",
 			"disney cinema.*?": "dcm",
 			"disney channel.*?": "disne",
@@ -209,13 +192,14 @@ def transCHANNEL(data, separate=False):
 			"disney hd": "disne",
 			"junior.*?": "junio",
 			"kika.*?": "kika",
-			"vh1 classic.*?": "vh1",
+			"vh1.*?classic.*?": "vh1",
 			"deluxe music.*?": "dmc",
 			"mtv": "mtv",
 			"mtv hd": "mtv",
 			"mtv g.*?": "mtv",
 			"mtv ba.*?": "mtv-b",
 			"mtv da.*?.*?": "mtv-d",
+			"club mtv.*?": "mtv-d",
 			"mtv hi.*?.*?": "mtv-h",
 			"mtv li.*?": "mtv-l",
 			"viva.*?": "viva",
@@ -285,8 +269,7 @@ def transCHANNEL(data, separate=False):
 			"sr fernsehen.*?": "swr",
 			"br.*?": "br",
 			"bayerisches.*?": "br",
-			"tele 5.*?": "TELE5",
-			"bild hd": "bild",
+			"bild.*?": "bild",
 			"warner .*?comedy.*?": "tnt-c",
 			"warner .*?film.*?": "tnt-f",
 			"warner .*?serie.*?": "tnt-s",
@@ -297,26 +280,24 @@ def transCHANNEL(data, separate=False):
 			"qvc.*?": "qvc",
 			"health.*?": "health"
 			}
-	new = []
+	new = ''
+	data = data.replace('Pro7', 'ProSieben').replace("ARD alpha", "ARD-alpha").replace("Nat Geo", "NatGeo")
 	for item in data.strip().split("\n"):  # Trenner '\t' und Return '\n' geeignet einfügen
 		sref = search(" \d+:\d+:\w+:\w+:\w+:\w+:\w+:\d+:\w+:\w+:.*", item)
-		new.append("%s\t\n" % item.lower() if sref is None else "%s\t%s\n" % (item[:sref.start(0)].strip().lower(), sref.group(0)))
-	new = "".join(new)
+		new += "%s\t\n" % item.lower() if sref is None else "%s\t%s\n" % (item[:sref.start(0)].strip().lower(), sref.group(0))
 	for pattern, shortcut in map.items():  # alle Sendernamen austauschen
 		new = "%s\n" % sub("%s\t" % pattern, "%s\t" % shortcut, new).strip()
 	if separate:
-		supported = []
-		unsupported = []
+		supported = ''
+		unsupported = ''
 		for item in new.rstrip().split("\n"):  # separieren
 			if item.split("\t")[0] in list(map.values()):
-				supported.append(item.replace("\t", ""))
+				supported += "%s\n" % item.strip()
 			else:
-				unsupported.append(item.replace("\t", ""))
-		supported = "\n".join(supported)
-		unsupported = "\n".join(unsupported)
-		return supported, unsupported
+				unsupported += "%s\n" % item.strip()
+		return supported.replace("\t", "").rstrip(), unsupported.replace("\t", "").rstrip()
 	else:
-		return new.replace("\t", "")
+		return new.replace("\t", "").rstrip()
 
 
 def parsedetail(bereich, debug=None):
