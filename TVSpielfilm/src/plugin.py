@@ -217,9 +217,6 @@ class TVSAllScreen(Screen):
 		if InfoBar and InfoBar.instance:
 			InfoBar.zapDown(InfoBar.instance)
 
-	def picReturn(self):
-		pass
-
 	def makeTimerDB(self):
 		e2timer = '/etc/enigma2/timers.xml'
 		if isfile(e2timer):
@@ -811,7 +808,7 @@ class TVSBaseScreen(TVSAllScreen):
 	def _pressText(self):
 		if self.current == 'postview' and self.postviewready:
 			if self.mehrbilder:
-				self.session.openWithCallback(self.picReturn, TVSPicShow, self.postlink)
+				self.session.open(TVSPicShow, self.postlink)
 			else:
 				self.session.openWithCallback(self.showPicPost, TVSFullScreen)
 
@@ -1036,7 +1033,7 @@ class TVSBaseScreen(TVSAllScreen):
 				sref.setName(self.name)
 				self.session.open(MoviePlayer, sref)
 			elif self.mehrbilder:
-				self.session.openWithCallback(self.picReturn, TVSPicShow, self.postlink)
+				self.session.open(TVSPicShow, self.postlink)
 			else:
 				self.session.openWithCallback(self.showPicPost, TVSFullScreen)
 		else:
@@ -1847,10 +1844,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 					end = sub('..:.. - ', '', TIME)
 					endparts = end.split(':')
 					endsec = int(endparts[0]) * 3600 + int(endparts[1]) * 60
-					if endsec >= startsec:
-						length = endsec - startsec
-					else:
-						length = 86400 - startsec + endsec
+					length = endsec - startsec if endsec >= startsec else 86400 - startsec + endsec
 					if nowsec < startsec and endsec - nowsec > 43200:
 						percent = 100
 					elif nowsec < startsec and endsec > startsec:
@@ -1886,10 +1880,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 				res_link.append(LINK)
 				self.tvlink.append(res_link)
 				if title:
-					if self.showgenre and genre:
-						x = "%s %s" % (title, genre)
-					else:
-						x = title
+					x = "%s %s" % (title, genre) if self.showgenre and genre else title
 					res_titel = []
 					res_titel.append(LOGO)
 					res_titel.append(title)
@@ -1912,6 +1903,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 						ypos = 4
 						ysize = int(20 * SCALE)
 						valign = RT_HALIGN_RIGHT
+						sparte = sparte.split("\n")[0]
 					else:
 						ypos = 0
 						ysize = mh
@@ -3259,7 +3251,7 @@ class TVSNews(TVSBaseScreen):
 					sref.setName(self.title)
 					self.session.open(MoviePlayer, sref)
 				elif self.mehrbilder:
-					self.session.openWithCallback(self.picReturn, TVSPicShow, self.postlink, 1)
+					self.session.open(TVSPicShow, self.postlink, 1)
 				else:
 					self.session.openWithCallback(self.showPicPost, TVSFullScreen)
 
