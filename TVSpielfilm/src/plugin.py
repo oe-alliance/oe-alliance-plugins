@@ -5011,7 +5011,6 @@ class TVSTipps(TVSAllScreen):
 			self.session.openWithCallback(self.returnInfo, TVSProgrammView, self.infolink, False, True)
 
 	def returnInfo(self):
-		self.show()
 		self.getNextTimer.start(5000, False)
 
 	def nextTipp(self):
