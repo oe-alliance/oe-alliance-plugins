@@ -6,7 +6,7 @@ from Components.ActionMap import ActionMap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
 
-from Screens.Screen import Screen
+from Screens.Screen import Screen, ScreenSummary
 
 
 class AboutBoxBranding(Screen):
@@ -34,6 +34,16 @@ class AboutBoxBranding(Screen):
 
 	def pageDown(self):
 		self["AboutScrollLabel"].pageDown()
+
+	def createSummary(self):
+		return AboutBoxBrandingSummary
+
+
+class AboutBoxBrandingSummary(ScreenSummary):
+	def __init__(self, session, parent):
+		Screen.__init__(self, session, parent=parent)
+		self["AboutText"] = StaticText(parent.title)
+		self.skinName = "AboutSummary"
 
 
 def getBoxbranding():
