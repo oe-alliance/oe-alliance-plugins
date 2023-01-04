@@ -51,7 +51,7 @@ from . import _
 
 pname = _("PiconManager (mod)")
 pdesc = _("Manage your Picons")
-pversion = "2.5-r1"
+pversion = "2.5-r2"
 pdate = "20220816"
 
 picon_tmp_dir = "/tmp/piconmanager/"
@@ -84,14 +84,14 @@ def errorWrite(error):
 			f = open(picon_debug_file, "w")
 		else:
 			f = open(picon_debug_file, "a")
-		f.write(error + "\n")
+		f.write("%s\n" % error)
 		f.close()
 
 
 def notfoundWrite(picon):
 	if config.plugins.piconmanager.debug.value:
 			f = open("/tmp/picon_dl_err", "a")
-			f.write(picon + "\n")
+			f.write("%s\n" % picon)
 			f.close()
 
 
@@ -388,14 +388,13 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				self.auswahl = self.auswahl.replace(picon_name, picon_sname)
 			self.downloadPiconPath = join(self.piconTempDir, self['list'].getCurrent()[0][4] + ".png")
 			if not exists(self.downloadPiconPath):
-				self.auswahl = self.cleanupURL(self.auswahl)
 				callInThread(self.threadDownloadPage, self.auswahl, self.downloadPiconPath, self.showPiconFile, self.dataError)
 			else:
 				self.showPiconFile(self.downloadPiconPath, None)
 
 	def getPiconList(self):
 		print("[PiconManager] started ...")
-		self['piconcount'].setText(_("Channels:") + " %s" % str(self.countchlist))
+		self['piconcount'].setText(_("Channels:") + " %s" % self.countchlist)
 		self['selected'].setText(_(str(config.plugins.piconmanager.selected.value).replace("_", ", ").replace("+", " ").replace("-", " ")))
 		if config.plugins.piconmanager.spicon.value != "":
 			txt = config.plugins.piconmanager.spicon.value.split('|')
@@ -406,16 +405,13 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		else:
 			txt = ""
 		self['spicon'].setText(txt)
-		url = self.cleanupURL(self.server_url + picon_info_file)
+		url = "%s%s" % (self.server_url, picon_info_file)
 		print("[PiconManager] Server: %s" % self.server_url)
 		if config.plugins.piconmanager.selected.value == _("All"):
 			config.plugins.piconmanager.selected.setValue("All")
 			config.plugins.piconmanager.selected.save()
 		self.channelMenuList.setList(list(map(ListEntry, [(_("Loading, please wait..."),)])))
 		callInThread(self.threadGetPage, url, self.parsePiconList, self.dataError2)
-
-	def cleanupURL(self, url):
-		return ensure_binary(url.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 
 	def threadGetPage(self, link, success, fail):
 		try:
@@ -538,11 +534,11 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				if len(self['list'].getCurrent()[0]) >= 6:
 					self.auswahl = self['list'].getCurrent()[0][4]
 					self.cur_selected_dir = self['list'].getCurrent()[0][5]
-					self.picon_list_file = self.piconTempDir + self.auswahl + "_list"
+					self.picon_list_file = "%s%s_list" % (self.piconTempDir, self.auswahl)
 					if exists(self.picon_list_file):
 						self.getPiconFiles()
 					else:
-						url = self.cleanupURL(self.server_url + self.cur_selected_dir + "/" + picon_list_file)
+						url = "%s%s/%s" % (self.server_url, self.cur_selected_dir, picon_list_file)
 						callInThread(self.threadDownloadPage, url, self.picon_list_file, self.getPiconFiles, self.dataError)
 
 	def getPiconFiles(self, data=None):
@@ -552,22 +548,23 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				with open(self.picon_list_file) as f:
 					self.picon_files = f.readlines()
 			self.picon_name = choice(self.picon_files)
-			downloadPiconUrl = self.server_url + self.cur_selected_dir + "/" + self.picon_name
-			self.downloadPiconPath = self.piconTempDir + self.auswahl + ".png"
+			downloadPiconUrl = "%s%s/%s" % (self.server_url, self.cur_selected_dir, self.picon_name)
+			self.downloadPiconPath = "%s%s.png" % (self.piconTempDir, self.auswahl)
 			self.keyLocked = False
-			downloadPiconUrl = self.cleanupURL(downloadPiconUrl)
+			downloadPiconUrl = downloadPiconUrl
 			callInThread(self.threadDownloadPage, downloadPiconUrl, self.downloadPiconPath, self.showPiconFile, self.dataError)
 
-	def threadDownloadPage(self, link, file, success, fail):
+	def threadDownloadPage(self, link, file, success, fail=None):
+		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 		try:
 			response = get(link)
 			response.raise_for_status()
-		except exceptions.RequestException as error:
-			fail(error)
-		else:
 			with open(file, "wb") as f:
 				f.write(response.content)
 			success(file)
+		except exceptions.RequestException as error:
+			if fail is not None:
+				fail(error)
 
 	def keyCancel(self):
 		config.plugins.piconmanager.savetopath.value = self.picondir
@@ -691,16 +688,16 @@ class PiconManagerScreen(Screen, HelpableScreen):
 							#downloadPiconUrl = quote(channel[1] + ".png")     #### OH #####
 							#downloadPiconPath = self.piconfolder + channel[1] + ".png"     #### OH #####
 							downloadPiconUrl = quote(self.comparableChannelName(channel[1]) + ".png")  #### OH #####
-							downloadPiconPath = self.piconfolder + self.primaryByName(channel[1]) + ".png"  #### OH #####
+							downloadPiconPath = "%s.png" % (self.piconfolder + self.primaryByName(channel[1]))  #### OH #####
 						else:
-							downloadPiconUrl = channel[0]
-							downloadPiconUrl = str(downloadPiconUrl).split("http")[0]
-							downloadPiconUrl = str(downloadPiconUrl).split("rtmp")[0]
-							downloadPiconUrl = (str(downloadPiconUrl).split("::")[0]).rstrip(':') + ':'  #### OH #####
+							downloadPiconUrl = str(channel[0])
+							downloadPiconUrl = downloadPiconUrl.split("http")[0]
+							downloadPiconUrl = downloadPiconUrl.split("rtmp")[0]
+							downloadPiconUrl = "%s:" % downloadPiconUrl.split("::")[0].rstrip(':')  #### OH #####
 							if downloadPiconUrl.startswith('4097:'):
-								downloadPiconUrl = '1' + downloadPiconUrl[4:]  #### OH #####
+								downloadPiconUrl = '1%s' % downloadPiconUrl[4:]  #### OH #####
 							downloadPiconUrl = downloadPiconUrl.replace(':', '_')
-							downloadPiconUrl = downloadPiconUrl[:-1] + ".png"
+							downloadPiconUrl = "%s.png" % downloadPiconUrl[:-1]
 							downloadPiconPath = self.piconfolder + downloadPiconUrl  # .replace("%20"," ")
 						if downloadPiconUrl:
 							downloadPiconUrl = self.auswahl + downloadPiconUrl
@@ -714,7 +711,6 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				finished = defer.DeferredList(downloads).addErrback(self.dataError)
 
 	def download(self, downloadPiconUrl, downloadPiconPath):
-		downloadPiconUrl = self.cleanupURL(downloadPiconUrl)
 		self.aktdl_pico = splitext(basename(downloadPiconPath))[0]
 #		return downloadPage(downloadPiconUrl, downloadPiconPath)
 		return callInThread(self.threadDownloadPage, downloadPiconUrl, downloadPiconPath, None, None)
@@ -727,7 +723,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 						self.aktdl_pico = self.aktdl_pico + " = " + channel[1] + " / " + channel[0]
 						notfoundWrite(self.aktdl_pico)
 		self.counterrors += 1
-		self['piconerror'].setText(_("Not found Picons:") + " %s" % str(self.counterrors))
+		self['piconerror'].setText(_("Not found Picons:") + " %s" % self.counterrors)
 		total = self.countload + self.counterrors
 		self["piconslider"].setValue(total)
 		if self.countchlist == total:
@@ -735,7 +731,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def downloadDone(self, data):
 		self.countload += 1
-		self['picondownload'].setText(_("Loaded Picons:") + " %s" % str(self.countload))
+		self['picondownload'].setText(_("Loaded Picons:") + " %s" % self.countload)
 		total = self.countload + self.counterrors
 		self["piconslider"].setValue(total)
 		if self.countchlist == total:
@@ -769,6 +765,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				if lena < len(self.chlist):
 					lena += 1
 				else:
+					self['piconerror'].setText(_("Not found Picons:") + " %s" % self.counterrors)
 					self['piconpath2'].setText(_("Download finished !"))
 
 	def dataError2(self, error=None):
@@ -787,7 +784,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				self.getPiconList()
 
 	def dataError(self, error):
-		print("[PiconManager] ERROR:%s" % str(error))
+		print("[PiconManager] ERROR:%s" % error)
 		try:
 			if "500 Internal Server Error" in error:
 				self.session.open(MessageBox, _("Server temporarily unavailable"), MessageBox.TYPE_ERROR, timeout=10)
