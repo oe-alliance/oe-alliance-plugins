@@ -10595,8 +10595,8 @@ def LCD4linuxPIC(self, session):
 				D = 1
 			elif D > 3:
 				D = 3
-			if not PY3:  # for equal result, .draw_bitmap() needs an y-offset under Python 3
-				ty += round(h / 6.)  # only estimated & tested value
+			if PY3:  # for equal result, .draw_bitmap() needs an y-offset under Python 3
+				ty += round(h / 7.)  # only estimated & tested value
 			tx1 = tx + D
 			tx0 = tx - D
 			ty1 = ty + D
@@ -11238,7 +11238,7 @@ def LCD4linuxPIC(self, session):
 				Temparrow = ""
 				if LCD4linux.WetterTrendArrows.value:
 					if OldTemp_c != -88:
-						Temparrow = "▼" if OldTemp_c < float(Temp_c) else "▲"
+						Temparrow = "▲" if OldTemp_c < float(Temp_c) else "▼"
 					else:
 						Temparrow = "●"
 				OldTemp_c = float(cleanTemp_c)
@@ -12438,7 +12438,7 @@ def LCD4linuxPIC(self, session):
 								if ConfigBorder == "off":
 									ProgressBar = MinusProgress = 0
 									POSX = getSplit(ConfigSplit, ConfigAlign, MAX_W, w + 10)
-								ShadowText(draw, ProgressBar - MinusProgress + 15 + POSX, ConfigPos + 1 - Minus - int((h - ConfigSize) / 2), remaining, font, ConfigColorText, ConfigShadow)
+								ShadowText(draw, ProgressBar - MinusProgress + 15 + POSX, ConfigPos + 80 - Minus - int((h - ConfigSize) / 2), remaining, font, ConfigColorText, ConfigShadow)
 							elif ConfigType[0] in ["3", "5", "7"]:
 								remaining = "%d%s" % (int(position[1] * 100 / length[1]), Prozent)
 								w, h = getFsize(remaining, font)
