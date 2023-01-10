@@ -447,8 +447,8 @@ class TVSBaseScreen(TVSAllScreen):
 		extensions = [item.replace("Folge ", " F") if "Folge" in item else item for item in extensions]
 		extensions = [item.replace("Episode ", " E") if "Folge" in item else item for item in extensions]
 		self.name = "".join(names + extensions)
-		shortdesc = findall('<span class="text-row">(.*?)</span>', bereich)[0]
-		self.shortdesc = shortdesc if shortdesc else ""
+		shortdesc = findall('<span class="text-row">(.*?)</span>', bereich)
+		self.shortdesc = shortdesc[0] if shortdesc else ""
 
 	def makePostTimer(self, output):
 		output = ensure_str(output)
@@ -649,14 +649,16 @@ class TVSBaseScreen(TVSAllScreen):
 			endpos = bereich.find('<div class="schedule-widget__tabs">')
 			extract = bereich[startpos:endpos]
 			infotext = findall('<li>(.*?)</li>', extract)
-			infotext.extend(text[1].strip().split(' | '))
+			index = 1 if len(text) > 1 else 0
+			infotext.extend(text[index].strip().split(' | '))
 			self.start = infotext[1]
 		else:  # manche Sendungen (z.B. Tagesschau) benötigen eine andere Auswertung
 			channel = findall("data-tracking-point='(.*?)'", bereich)
 			if len(text):
 				infotext = text[0].strip().split(' | ')
 				infotext[2] = loads(channel[0])['channel']
-				infotext.extend(text[1].strip().split(' | '))
+				index = 1 if len(text) > 1 else 0
+				infotext.extend(text[index].strip().split(' | '))
 				self.start = infotext[1][0:5]
 			else:
 				self.start = ''
