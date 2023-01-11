@@ -92,7 +92,7 @@ class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 				self.restoreCode()
 				self.session.openWithCallback(self.close, MessageBox, _("FILE DOES NOT EXIST : /proc/stb/ir/rc/customcode"), MessageBox.TYPE_ERROR)
 			else:
-				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change now the mode on your RCU.") + '\n\n' + _("Press and hold 'GIGA' & '5' for 5 seconds.") + "\n" + _("Then choose 'Confirm' "), MessageBox.TYPE_YESNO, timeout=60, default=False)
+				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change now the mode on your RCU.") + '\n\n' + _("Press and hold 'GIGA' & '5' for 5 seconds.") + "\n" + _("Then choose 'Confirm' "))
 		else:
 			self.close()
 
@@ -110,31 +110,10 @@ class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 
 
 class MessageBoxConfirmCode(MessageBox):
-	def __init__(self, session, text, type=MessageBox.TYPE_YESNO, timeout=-1, close_on_any_key=False, default=False, enable_input=True, msgBoxID=None):
-		MessageBox.__init__(self, session, text, type, timeout, close_on_any_key, default, enable_input, msgBoxID)
-		self.skinName = "MessageBox"
-		if type == MessageBox.TYPE_YESNO:
-			self.list = [(_("Confirm"), True), (_("Cancel"), False)]
-			self["list"].setList(self.list)
-
-	def timerTick(self):
-		if self.execing:
-			self.timeout -= 1
-			self["text"].setText(self.text + (_(" within %d seconds.")) % self.timeout)
-			if self.timeout == 0:
-				self.timer.stop()
-				self.timeoutCallback()
-
-	def move(self, direction):
-		if self.close_on_any_key:
-			self.close(True)
-		self["list"].instance.moveSelection(direction)
-		if self.list:
-			self["selectedChoice"].setText(self["list"].getCurrent()[0])
-#		self.stopTimer()
-
-	def timeoutCallback(self):
-		self.close(False)
+	def __init__(self, session, text):
+		MessageBox.__init__(self, session, text, MessageBox.TYPE_YESNO, timeout=60, default=False)
+		self.list = [(_("Confirm"), True), (_("Cancel"), False)]
+		self["list"].setList(self.list)
 
 
 remotecontrolcodeinit = RemoteControlCodeInit()

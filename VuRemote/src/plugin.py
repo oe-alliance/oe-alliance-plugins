@@ -112,10 +112,13 @@ class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 				self.restoreCode()
 				self.session.openWithCallback(self.close, MessageBox, _("FILE NOT EXIST : /proc/stb/fp/remote_code"), MessageBox.TYPE_ERROR)
 			else:
+				msg = _("Please change your remote mode") + '\n'
 				if config.plugins.remotecontrolcode.rcuType.value == "legacy":
-					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000") + config.plugins.remotecontrolcode.systemcode.value + "'\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout=60, default=False)
+					msg += _("Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000") + config.plugins.remotecontrolcode.systemcode.value + "'\n"
 				else:
-					self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, _("Please change your remote mode") + '\n' + _("Press and hold <OK> and <STB> until red LED is solid, then press '0000") + config.plugins.remotecontrolcode.systemcode.value + "', then press <OK>\n" + _("Then choose 'Keep' within seconds"), MessageBox.TYPE_YESNO, timeout=60, default=False)
+					msg += _("Press and hold <OK> and <STB> until red LED is solid, then press '0000") + config.plugins.remotecontrolcode.systemcode.value + "', then press <OK>\n"
+				msg += _("Then choose 'Keep' within seconds")
+				self.session.openWithCallback(self.MessageBoxConfirmCodeCallback, MessageBoxConfirmCode, msg)
 		else:
 			self.close()
 
@@ -133,31 +136,10 @@ class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 
 
 class MessageBoxConfirmCode(MessageBox):
-	def __init__(self, session, text, type=MessageBox.TYPE_YESNO, timeout=-1, close_on_any_key=False, default=True, enable_input=True, msgBoxID=None):
-		MessageBox.__init__(self, session, text, type, timeout, close_on_any_key, default, enable_input, msgBoxID)
-		self.skinName = "MessageBox"
-		if type == MessageBox.TYPE_YESNO:
-			self.list = [(_("Keep"), True), (_("Restore"), False)]
-			self["list"].setList(self.list)
-
-	def timerTick(self):
-		if self.execing:
-			self.timeout -= 1
-			self["text"].setText(self.text + (_(" in %d seconds.")) % self.timeout)
-			if self.timeout == 0:
-				self.timer.stop()
-				self.timeoutCallback()
-
-	def move(self, direction):
-		if self.close_on_any_key:
-			self.close(True)
-		self["list"].instance.moveSelection(direction)
-		if self.list:
-			self["selectedChoice"].setText(self["list"].getCurrent()[0])
-#		self.stopTimer()
-
-	def timeoutCallback(self):
-		self.close(False)
+	def __init__(self, session, text):
+		MessageBox.__init__(self, session, text, MessageBox.TYPE_YESNO, timeout=60, default=False)
+		self.list = [(_("Keep"), True), (_("Restore"), False)]
+		self["list"].setList(self.list)
 
 
 remotecontrolcodeinit = RemoteControlCodeInit()
