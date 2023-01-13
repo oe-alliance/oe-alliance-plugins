@@ -2721,17 +2721,19 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
-			if self.search:  # if self.zap and self.search:
+			if self.zap and not self.search:
+				c = self['menu'].getSelectedIndex()
+				self.oldindex = c
+				sref = self.sref
+				self.redTimer(False, sref)
+			elif self.search:
 				c = self['searchmenu'].getSelectedIndex()
 				self.oldsearchindex = c
 				sref = self.searchref[c]
 				self.redTimer(False, sref)
 			else:
-				c = self['menu'].getSelectedIndex()
-				self.oldindex = c
-				sref = self.sref
-				self.redTimer(False, sref)
-		elif self.current == 'menu' and self.ready:  # and self.zap:
+				self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
+		elif self.current == 'menu' and self.ready and self.zap:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
 			self.postlink = self.tvlink[c]
@@ -5645,7 +5647,7 @@ class TVSHeuteView(TVSBaseScreen):
 				channel = ''
 				if not self.search:
 					for i in range(6):
-						if self.oldcurrent == 'menu%s' % i:  # and self.zaps[i]:
+						if self.oldcurrent == 'menu%s' % i and self.zaps[i]:
 							try:
 								c = self['menu%s' % i].getSelectedIndex()
 								sref = self.srefs[i][0]
@@ -5737,7 +5739,7 @@ class TVSHeuteView(TVSBaseScreen):
 			else:
 				sref = None
 				for i in range(6):
-					if self.oldcurrent == 'menu%s' % i:  # and self.zaps[i]:
+					if self.oldcurrent == 'menu%s' % i and self.zaps[i]:
 						c = self['menu%s' % i].getSelectedIndex()
 						self.oldindex = c
 						sref = self.srefs[i][0]
