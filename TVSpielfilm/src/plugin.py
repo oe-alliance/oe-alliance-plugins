@@ -654,8 +654,10 @@ class TVSBaseScreen(TVSAllScreen):
 			infotext.extend(text[index].strip().split(' | '))
 			self.start = infotext[1]
 		else:  # manche Sendungen benötigen eine andere Auswertung
-			channel = findall("data-layer-categories='(.*?)'\s*", bereich, flags=S)
-			channel = loads(channel[0])['channel']
+			channel = findall(r"data-layer-categories='(.*?)'\s*", bereich, flags=S)
+			if not channel:  # Fallback
+				channel = findall(r"data-tracking-point='(.*?)'\s*", bereich, flags=S)
+			channel = loads(channel[0])['channel'] if channel else "{unbekannt}"
 			zeit = search('<span\s*class="stage-underline gray">(.*?)</span>', bereich, flags=S)
 			zeit = zeit.group(1) if zeit else "{unbekannt}"
 			zeit = sub(r"(\d+:\d+)\s*\-\s*(\d+:\d+)", "\g<1> Uhr - \g<2> Uhr", zeit)
@@ -2719,18 +2721,16 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
-			if not self.search:  # if self.zap and not self.search:
-				c = self['menu'].getSelectedIndex()
-				self.oldindex = c
-				sref = self.sref
-				self.redTimer(False, sref)
-			elif self.search:
+			if self.search:  # if self.zap and self.search:
 				c = self['searchmenu'].getSelectedIndex()
 				self.oldsearchindex = c
 				sref = self.searchref[c]
 				self.redTimer(False, sref)
 			else:
-				self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
+				c = self['menu'].getSelectedIndex()
+				self.oldindex = c
+				sref = self.sref
+				self.redTimer(False, sref)
 		elif self.current == 'menu' and self.ready:  # and self.zap:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
