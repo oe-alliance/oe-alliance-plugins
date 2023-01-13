@@ -2022,7 +2022,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 						s1 = sub(':..', '', start)
 						datum = '%sFIN' % self.postdate
 						datum = sub('..FIN', '', date)
-						datum = "%s%s" & (datum, self.day)
+						datum = "%s%s" % (datum, self.day)
 						parts = start.split(':')
 						seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
 						start = strftime('%H:%M:%S', gmtime(seconds))

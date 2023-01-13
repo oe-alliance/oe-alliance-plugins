@@ -114,8 +114,6 @@ class SimpleConfigParser:
 	def init(self, _fileName):
 		self.mFileName = _fileName
 		self.mConfig = configparser.RawConfigParser()
-		if self.mConfig is None:
-			return False
 		self._read()
 		return True
 

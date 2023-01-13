@@ -551,7 +551,6 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			downloadPiconUrl = "%s%s/%s" % (self.server_url, self.cur_selected_dir, self.picon_name)
 			self.downloadPiconPath = "%s%s.png" % (self.piconTempDir, self.auswahl)
 			self.keyLocked = False
-			downloadPiconUrl = downloadPiconUrl
 			callInThread(self.threadDownloadPage, downloadPiconUrl, self.downloadPiconPath, self.showPiconFile, self.dataError)
 
 	def threadDownloadPage(self, link, file, success, fail=None):
