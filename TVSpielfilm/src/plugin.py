@@ -380,8 +380,9 @@ class TVSBaseScreen(TVSAllScreen):
 		month = sub('.. ..[.]', '', part)
 		month = sub('[.]', '', month)
 		datum = '%sFIN' % self.date
-		year = sub('......FIN', '', datum)
-		self.postdate = year + '-' + month + '-' + self.day
+		year = search('\d+', sub('......FIN', '', datum))
+		year = year.group(0) if year else self.date[:4]
+		self.postdate = "%s-%s-%s" % (year, month, self.day)
 		today = date(int(year), int(month), int(self.day))
 		one_day = timedelta(days=1)
 		self.nextdate = today + one_day
@@ -641,7 +642,7 @@ class TVSBaseScreen(TVSAllScreen):
 		startpos = bereich.find('<div class="text-wrapper">')
 		endpos = bereich.find('<section class="broadcast-detail__stage')
 		extract = bereich[startpos:endpos]
-		text = findall('span\ class="text\-row">(.*?)</span>', extract, S)  # Suchstring voher mit re.escape wandeln
+		text = findall('<span\s*class="text\-row">(.*?)</span>', extract, S)  # Suchstring voher mit re.escape wandeln
 		# Sendezeit & Sender
 		startpos = bereich.find('<div class="schedule-widget__header__attributes">')
 		infotext = []
@@ -652,11 +653,18 @@ class TVSBaseScreen(TVSAllScreen):
 			index = 1 if len(text) > 1 else 0
 			infotext.extend(text[index].strip().split(' | '))
 			self.start = infotext[1]
-		else:  # manche Sendungen (z.B. Tagesschau) benötigen eine andere Auswertung
-			channel = findall("data-tracking-point='(.*?)'", bereich)
+		else:  # manche Sendungen benötigen eine andere Auswertung
+			channel = findall("data-layer-categories='(.*?)'\s*", bereich, flags=S)
+			channel = loads(channel[0])['channel']
+			zeit = search('<span\s*class="stage-underline gray">(.*?)</span>', bereich, flags=S)
+			zeit = zeit.group(1) if zeit else "{unbekannt}"
+			zeit = sub(r"(\d+:\d+)\s*\-\s*(\d+:\d+)", "\g<1> Uhr - \g<2> Uhr", zeit)
+			infotext = zeit.strip().split(' | ')
+			if len(infotext) > 2:
+				infotext[2] = channel
+			else:
+				infotext.append(channel)
 			if len(text):
-				infotext = text[0].strip().split(' | ')
-				infotext[2] = loads(channel[0])['channel']
 				index = 1 if len(text) > 1 else 0
 				infotext.extend(text[index].strip().split(' | '))
 				self.start = infotext[1][0:5]
