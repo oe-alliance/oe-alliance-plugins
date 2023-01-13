@@ -654,8 +654,10 @@ class TVSBaseScreen(TVSAllScreen):
 			infotext.extend(text[index].strip().split(' | '))
 			self.start = infotext[1]
 		else:  # manche Sendungen benötigen eine andere Auswertung
-			channel = findall("data-layer-categories='(.*?)'\s*", bereich, flags=S)
-			channel = loads(channel[0])['channel']
+			channel = findall(r"data-layer-categories='(.*?)'\s*", bereich, flags=S)
+			if not channel:  # Fallback
+				channel = findall(r"data-tracking-point='(.*?)'\s*", bereich, flags=S)
+			channel = loads(channel[0])['channel'] if channel else "{unbekannt}"
 			zeit = search('<span\s*class="stage-underline gray">(.*?)</span>', bereich, flags=S)
 			zeit = zeit.group(1) if zeit else "{unbekannt}"
 			zeit = sub(r"(\d+:\d+)\s*\-\s*(\d+:\d+)", "\g<1> Uhr - \g<2> Uhr", zeit)
@@ -2719,7 +2721,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
-			if not self.search:  # if self.zap and not self.search:
+			if self.zap and not self.search:
 				c = self['menu'].getSelectedIndex()
 				self.oldindex = c
 				sref = self.sref
@@ -2731,7 +2733,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 				self.redTimer(False, sref)
 			else:
 				self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
-		elif self.current == 'menu' and self.ready:  # and self.zap:
+		elif self.current == 'menu' and self.ready and self.zap:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
 			self.postlink = self.tvlink[c]
@@ -5645,7 +5647,7 @@ class TVSHeuteView(TVSBaseScreen):
 				channel = ''
 				if not self.search:
 					for i in range(6):
-						if self.oldcurrent == 'menu%s' % i:  # and self.zaps[i]:
+						if self.oldcurrent == 'menu%s' % i and self.zaps[i]:
 							try:
 								c = self['menu%s' % i].getSelectedIndex()
 								sref = self.srefs[i][0]
@@ -5737,7 +5739,7 @@ class TVSHeuteView(TVSBaseScreen):
 			else:
 				sref = None
 				for i in range(6):
-					if self.oldcurrent == 'menu%s' % i:  # and self.zaps[i]:
+					if self.oldcurrent == 'menu%s' % i and self.zaps[i]:
 						c = self['menu%s' % i].getSelectedIndex()
 						self.oldindex = c
 						sref = self.srefs[i][0]
