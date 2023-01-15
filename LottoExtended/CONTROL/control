@@ -1,0 +1,8 @@
+Package: enigma2-plugin-extensions-lottoextended
+Version: 1.0
+Description: Eigene Lottotipps bequem auf dem TV abrufen und auswerten
+Architecture: all
+Section: extra
+Priority: optional
+Maintainer: apostrophe and Mr.Servo
+Source: https://github.com/oe-alliance/oe-alliance-plugins

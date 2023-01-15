@@ -1,0 +1,87 @@
+LottoExtended Plugin
+Verwalten mehrerer Spielscheine; Gewinnauswertung; Auslosung Sa, Mi, Sa+Mi
+Lottozahlen, Jackpot und Quoten von http://www.lotto-rlp.de
+
+Enigma2 Plugin
+
+Autor: apostrophe
+Idee und Grundgerüst von barabas  - vielen dank
+
+090921	aktJackpot: lastpos jetzt auf TOTO-13
+091002	starten download von jackpot und quoten bei erstmaliger cursor-auswahl (ohne ok-taste)
+		  refresh nur mit ok-taste
+091016	LottoTipp: fehlerhafter vergleich tag == "Mittoch" statt "Mittwoch" bereinigt
+		  erweiterung um systemtipps (max 12 zahlen/tipp) mit gewwinnauswertung 6 aus 7 bis 6 aus 12
+091104	errechnen gewinnsumme
+100105	anpassen an geänderte urls; jackpot-abfrage deaktiviert
+100106	ausgabe der lottoquoten 'formatiert', sowie super6 und spiel77 zusammengefasst
+100112	LottoMain auf coloractions umgestellt
+100119	Gewinnzahlen, Quoten und Gewinnauswertung jetzt für laufende und vorhergehende Ziehung möglich
+100124	GewinnDetailScreen/List: Coloractions previous/next in GewinnDetailScreen;
+		LottoTippConfigScreen: Aufruf von validateSpiel in keySave;
+		GewinnDetailScreen/List: Anzeige der Spiel77/Super6-Treffer an losnummer statt an gezogenen Zahlen
+100409 Umlaute
+100502 Feldgrößen etwas verändert um auch mit hd-skins alles anzuzeigen
+100506 wenn spiel77 und/oder super6 der aktuellen ziehung nicht ermittelt werden können, werden sie mit ? in entsprechender Länge angezeigt
+100508 nochmals Anpassung der Spiel77+Super6-Feldgrößen
+100509 nochmals Anpassung einiger Feldgrößen. danke an fosgate@ihad
+100524 eigene screen-definitionen (gewinn- und detail-list) je nach Auflösung < 1024 >
+100625 neue url und anpassung an geänderten aufbau
+100629 regexp für spiel77 angepasst
+100711 Ziehungstage Sonntag+Donnerstag für verspätete Ziehungen eingebaut
+100730 versehentlich auskommentierten except-zweig in [downloadok] wieder aktiviert
+		abgleich ziehungsdatum lotto, spiel77 und super6 um mix verschiedener ziehungen auszuschließen (nicht alle werte der linken
+		bzw. rechten spalte der webpage gehören zum selben zeihungsdatum - meistens samstags).
+		kleinere fehlerberichtigungen(setText für falschen label)
+100818 geänderte gewinnquoten bei spiel77 ab 1.9.2010
+100912 Regexpr für ermittlung spiel77 angepasst
+100918 neue url
+		Regexpr angepasst (auf webseite kein leerzeichen zwischen quote und folgendem text)
+110913 geänderte URL
+111025 screen LottoMain auf fixed font (Console) umgestellt und die ziehungs- und quotenanzeige auf formatierte ausgabe umgestellt.
+       steuerung quotenanzeige modifiziert
+       download-steuerung geändert
+111104 abfrage auf Components.config callNotifiersOnSaveAndCancel ausgebaut, da nicht mehr unterstützt und abfrage auch unnötig war.
+111122 auf wunsch von MvM wird im GewinnListScreen+GewinnDetailScreen statuslabel immer mit entsprechendem text gefällt
+120621 fehler beim parsen der quotenseite, weil statt "unbesetzt" "Jackpot" angegeben wurde. quick'n'dirty Lösung indem ich Jackpot in unbesetzt ändere.
+120704 Änderung der regexp wegen geändertem seitenaufbau (eurojackpot)
+121012 umstellung auf www.lotto-brandenburg.de; ziehungshistorie
+121205 geänderte url
+130117 anpassung an geänderten web-inhalt: die quote bei unbesetzten klassen wird jetzt mit "unbesetzt" angezeigt (bisher 0,00)
+		bugfix im LottoTippConfigScreen: Text für blaue ColorAction wurde bisher auf yellow angezeigt
+130128 bugfix: sicherstellen, das die gewinnauswertung erst nach dem ersten download aufgerufen werden kann
+130322 GewinnList: funktion gewinnAuswertung umgebaut
+		GewinnListScreen: funktion computeGewinnSumme umgebaut
+130224 vorbereitungen für neues lotto ab mai (ohne zusatzzahl) und dann 9 statt bisher 8 gewinnklassen
+		in der hoffnung, dass sich dass webseiten-layout nicht ändert und nur die entsprechenden Zeilen weggelassen bzw.
+		hinzugefügt werden, ermittelt regexpr die quoten+gewinner für 9 gewinnklassen
+		class Ziehung geändert:
+			datumsabfrage > 8 oder 9 gewinnklassen
+			class variable version: 0 vor 4.5.2013; 1 ab 4.5.2013
+130326 gewinnnzeige und gewinnermittlung an neues lotto angepasst
+130327 die werte für SYSTEMTAB der neuen lottoversion eingefügt
+130328 anpassung gewinnlist-screen
+130529 gewinnermittlung der zusatzlotterien erfolgt nur, wenn diese vorliegen
+130602 gewinndetaillist: gewinntext bei 2+superzahl war nicht in rot
+140427 LottoTippConfig: tippscheinverlängerung abgelaufener scheine über gelben button um die anzahl der teilnahmewochen
+140508 gewinnlistscreen und gewinndetailscreen definitionsÄnderungen und big vergrößert
+150711 umstellung auf https, da http nicht mehr funktioniert
+150801 umstellung auf neue url
+		damit verbunden:
+			geänderte ermittlung der letzten auslosung
+			download to json (kein regexp mehr)
+		und weitere Änderungen (z.b. callback, errback > callbacks)
+150801a da bei einigen anwendern fehler bei setText in dispDraw fehler auftraten, wird text mit str(text) �bergeben. ob es hilft?
+150801c umstellung auf utf-8 (danke @cimikula)
+		teilweise gezielte konvertierung auf str()
+160329 die gewinnklasse 2 bei spiel77 kann höher als 77.777 € ausfallen, wenn der jackpot aufgelöst wird. das wurde bisher nicht
+		berücksichtigt.
+		gewinndetaillist: text berichtigt(zusatzzahl > superzahl); 2er+sz wurde nicht in rot dargestellt
+160525 URL-Änderung
+161002 weiterer Parameter beim Abholen der Ziehungstage ist jetzt notwendig: &locale=de
+170405 geändertes downloadverfahren an ziehungstagen
+201008 umstellung aller screens von Listbox (außer LottoTippConfig) auf TemplatedMultiContent
+		diverse screen-anpassungen
+201011 bugfix: funktionen up/down werden in Component.Sources.List nur auf VU+-boxen unterstützt - durch selectPrevious/selectNext ersetzt
+       vielen dank an highpriest für die unterstützung
+230115 Anpassung an Python3 und Auslagerung von skin_FHD.xml sowie skin_HD.xml

@@ -640,5 +640,9 @@ autoBLchanger/src/Makefile
 autoBLchanger/src/images/Makefile
 autoBLchanger/src/logos/Makefile
 
+LottoExtended/Makefile
+LottoExtended/src/Makefile
+
+
 ])
 AC_OUTPUT

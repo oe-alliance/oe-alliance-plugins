@@ -1,0 +1,219 @@
+<skin>
+
+  <screen name="GewinnListScreen" position="center,center" size="970,520" title="LottoExtended - Gewinnauswertung  -- ohne Gewähr --" >
+    <eLabel name="button_red" position="40,5" size="8,40" backgroundColor="red" zPosition="1" />
+    <eLabel name="button_green" position="240,5" size="8,40" backgroundColor="green" zPosition="1" />
+    <eLabel name="button_yellow" position="440,5" size="8,40" backgroundColor="yellow" zPosition="1" />
+    <eLabel name="button_blue" position="640,5" size="8,40" backgroundColor="blue" zPosition="1" />
+    <widget name="key_red" position="56,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#009f1313" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <widget name="key_green" position="256,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#001f771f" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <widget name="key_yellow" position="456,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#00a08500" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <widget name="key_blue" position="656,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#0018188b" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <ePixmap position="860,5" size="100,40" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LottoExtended/plugin.png" alphatest="on" />
+    <eLabel backgroundColor="#00f2f2f9" position="10,50" size="950,1" zPosition="0" />
+    <eLabel backgroundColor="#00f2f2f9" position="10,147" size="950,2" zPosition="0" />
+    <widget name="auslosung" position="10,60" size="631,26" font="Regular;24" halign="left" valign="center"/>
+    <eLabel name="text0" text=" Gewinnzahlen:" position="10,90" size="150,24" foregroundColor="#00E5B243" font="Regular;20" halign="left" valign="center" />
+    <widget name="displotto" position="165,90" size="300,24" font="Regular;22" halign="center" valign="center"/>
+    <eLabel name="text2" text=" Superzahl:" position="10,120" size="150,24" foregroundColor="#00E5B243" font="Regular;20" halign="left" valign="center" />
+    <widget name="dispsuper" position="165,120" size="30,24" font="Regular;22" halign="center" valign="center" />
+    <widget name="spiel77" position="261,120" size="110,24" font="Regular;22" halign="center" valign="center" />
+    <widget name="super6" position="376,120" size="89,24" font="Regular;22" halign="center" valign="center" />
+    <eLabel name="gewinntxt" text="#Gewinne mit n Treffern" position="469,120" size="490,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="tipptitle" text=" Tipp" position="10,150" size="150,24" foregroundColor="#00E5B243" font="Regular;20" halign="left"  valign="center" />
+    <eLabel name="ziehungtitle" text=" Teiln." position="165,150" size="91,24" foregroundColor="#00E5B243" font="Regular;20" halign="left"  valign="center" />
+    <eLabel name="spiel77title" text="Spiel77" position="261,150" size="110,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="super6title" text="Super6" position="376,150" size="89,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="2+" text="2+" position="469,150" size="50,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="3" text="3" position="524,150" size="50,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="3+" text="3+" position="579,150" size="50,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="4" text="4" position="634,150" size="50,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="4+" text="4+" position="689,150" size="50,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="5" text="5" position="744,150" size="50,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="5+" text="5+" position="799,150" size="50,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="6" text="6" position="854,150" size="50,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="6+" text="6+" position="909,150" size="50,24" foregroundColor="#00E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel backgroundColor="#00f2f2f9" position="466,147" size="2,333" />
+    <eLabel backgroundColor="#00f2f2f9" position="521,147" size="2,333" />
+    <eLabel backgroundColor="#00f2f2f9" position="576,147" size="2,333" />
+    <eLabel backgroundColor="#00f2f2f9" position="631,147" size="2,333" />
+    <eLabel backgroundColor="#00f2f2f9" position="686,147" size="2,333" />
+    <eLabel backgroundColor="#00f2f2f9" position="741,147" size="2,333" />
+    <eLabel backgroundColor="#00f2f2f9" position="796,147" size="2,333" />
+    <eLabel backgroundColor="#00f2f2f9" position="851,147" size="2,333" />
+    <eLabel backgroundColor="#00f2f2f9" position="906,147" size="2,333" />
+    <eLabel backgroundColor="#00f2f2f9" position="10,480" size="950,2" />
+    <widget name="statuslabel" position="10,488" size="950,25" font="Regular;22" halign="center" valign="center"/>
+    <widget source="tipplist" render="Listbox" position="10,180" size="950,300" scrollbarMode="showNever">
+      <convert type="TemplatedMultiContent">
+        {"template": [
+          MultiContentEntryText(pos = (0,0), size = (150, 25), font=0, flags = RT_HALIGN_LEFT, text = 1), 		# tippname
+          MultiContentEntryText(pos = (155,0), size = (300, 25), font=0, flags = RT_HALIGN_LEFT, text = 2), 		# teilnahme datum
+          MultiContentEntryText(pos = (251,0), size = (110, 25), font=0, flags = RT_HALIGN_CENTER, text = 3), 	# spiel77
+          MultiContentEntryText(pos = (366,0), size = (89, 25), font=0, flags = RT_HALIGN_CENTER, text = 4), 		# super6
+          MultiContentEntryText(pos = (459,0), size = (50, 25), font=0, flags = RT_HALIGN_CENTER, text = 5),		# gewinnklasse 1
+          MultiContentEntryText(pos = (514,0), size = (50, 25), font=0, flags = RT_HALIGN_CENTER, text = 6),		# gewinnklasse 2
+          MultiContentEntryText(pos = (569,0), size = (50, 25), font=0, flags = RT_HALIGN_CENTER, text = 7),		# gewinnklasse 3
+          MultiContentEntryText(pos = (624,0), size = (50, 25), font=0, flags = RT_HALIGN_CENTER, text = 8),		# gewinnklasse 4
+          MultiContentEntryText(pos = (679,0), size = (50, 25), font=0, flags = RT_HALIGN_CENTER, text = 9),		# gewinnklasse 5
+          MultiContentEntryText(pos = (734,0), size = (50, 25), font=0, flags = RT_HALIGN_CENTER, text = 10),		# gewinnklasse 6
+          MultiContentEntryText(pos = (789,0), size = (50, 25), font=0, flags = RT_HALIGN_CENTER, text = 11),		# gewinnklasse 7
+          MultiContentEntryText(pos = (844,0), size = (50, 25), font=0, flags = RT_HALIGN_CENTER, text = 12),		# gewinnklasse 8
+          MultiContentEntryText(pos = (899,0), size = (50, 25), font=0, flags = RT_HALIGN_CENTER, text = 13),		# gewinnklasse 9
+          ],
+        "fonts": [gFont("Regular", 22)],
+        "itemHeight": 26
+        }
+      </convert>
+    </widget>
+  </screen>
+
+  <screen name="GewinnDetailScreen" position="center,120" size="820,520" title="LottoExtended - Gewinndetails  -- ohne Gewähr --" >
+    <eLabel name="button_green" position="40,5" size="8,40" backgroundColor="green" zPosition="1" />
+    <eLabel name="button_yellow" position="240,5" size="8,40" backgroundColor="yellow" zPosition="1" />
+    <eLabel name="button_blue" position="440,5" size="8,40" backgroundColor="blue" zPosition="1" />
+    <widget name="key_green" position="56,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#001f771f" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
+    <widget name="key_yellow" position="256,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#00a08500" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
+    <widget name="key_blue" position="456,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#0018188b" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
+    <ePixmap position="710,5" size="100,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LottoExtended/plugin.png" alphatest="on" />
+    <eLabel backgroundColor="#00f2f2f9" position="10,50" size="800,1" />
+    <widget name="auslosung" position="10,60" size="651,24" font="Regular;22" zPosition="1" halign="left" valign="center" />
+    <eLabel name="text0" text=" Gewinnzahlen:" position="10,90" size="150,24" foregroundColor="#00E5B243" font="Regular;20" zPosition="1" halign="left" valign="center" />
+    <widget name="displotto" position="165,90" size="321,24" font="Regular;22" halign="center" valign="center" />
+    <eLabel name="text2" text=" Superzahl:" position="10,120" size="150,24" foregroundColor="#00E5B243" font="Regular;20" halign="left" valign="center" />
+    <widget name="dispsuper" position="165,120" size="30,24" font="Regular;22" halign="center" valign="center" />
+    <eLabel name="text3" text=" Spiel77:" position="200,120" size="100,24" foregroundColor="#00E5B243" font="Regular;20" halign="left" valign="center" />
+    <widget name="spiel77" position="305,120" size="133,24" font="Regular;22" halign="center" valign="center" />
+    <eLabel name="text4" text=" Super6:" position="443,120" size="100,24" foregroundColor="#00E5B243" font="Regular;20" halign="left" valign="center" />
+    <widget name="super6" position="548,120" size="113,24" font="Regular;22" halign="center" valign="center" />
+    <eLabel backgroundColor="#00f2f2f9" position="10,148" size="800,1" />
+    <widget source="detaillist" render="Listbox" position="10,150" size="800,330" scrollbarMode="showNever">
+      <convert type="TemplatedMultiContent">
+        {"template": [
+          MultiContentEntryText(pos = (0,0), size = (135, 26), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 0, color = 0xe5b243, color_sel = 0xe5b243), 	# tippname, teilnahme, spiel77, spieln etc.
+          MultiContentEntryText(pos = (145,0), size = (625, 26), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 1, color = 0xffffff, color_sel = 0xffffff),	# werte
+          MultiContentEntryText(pos = (145,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 2, color = 0xffffff, color_sel = 0xffffff), 	# zahl weiß
+          MultiContentEntryText(pos = (145,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 3, color = 0xf41405, color_sel = 0xf41405), 	# zahl rot
+          MultiContentEntryText(pos = (190,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 4, color = 0xffffff, color_sel = 0xffffff), 	# zahl weiß
+          MultiContentEntryText(pos = (190,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 5, color = 0xf41405, color_sel = 0xf41405), 	# zahl rot
+          MultiContentEntryText(pos = (235,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 6, color = 0xffffff, color_sel = 0xffffff), 	# zahl weiß
+          MultiContentEntryText(pos = (235,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 7, color = 0xf41405, color_sel = 0xf41405), 	# zahl rot
+          MultiContentEntryText(pos = (280,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 8, color = 0xffffff, color_sel = 0xffffff), 	# zahl weiß
+          MultiContentEntryText(pos = (280,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 9, color = 0xf41405, color_sel = 0xf41405), 	# zahl rot
+          MultiContentEntryText(pos = (325,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 10, color = 0xffffff, color_sel = 0xffffff), # zahl weiß
+          MultiContentEntryText(pos = (325,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 11, color = 0xf41405, color_sel = 0xf41405), # zahl rot
+          MultiContentEntryText(pos = (370,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 12, color = 0xffffff, color_sel = 0xffffff), # zahl weiß
+          MultiContentEntryText(pos = (370,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 13, color = 0xf41405, color_sel = 0xf41405), # zahl rot
+          MultiContentEntryText(pos = (415,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 14, color = 0xffffff, color_sel = 0xffffff), # zahl weiß
+          MultiContentEntryText(pos = (415,0), size = (40, 26), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 15, color = 0xf41405, color_sel = 0xf41405), # zahl rot
+          MultiContentEntryText(pos = (465,0), size = (300, 26), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 16, color = 0xffffff, color_sel = 0xffffff), 	# text weiß
+          MultiContentEntryText(pos = (465,0), size = (300, 26), font=0, flags = RT_HALIGN_LEFT | RT_VALIGN_CENTER, text = 17, color = 0xf41405, color_sel = 0xf41405) 	# text rot
+          ],
+        "fonts": [gFont("Regular", 22)],
+        "itemHeight": 26
+        }
+      </convert>
+    </widget>
+    <eLabel backgroundColor="#00f2f2f9" position="10,480" size="800,1" />
+    <widget name="statuslabel" position="10,488" size="800,25" font="Regular;22" halign="center" valign="center" />
+  </screen>
+
+  <screen name="LottoMain" position="center,center" size="970,520" title="LottoExtended" >
+    <eLabel name="button_red" position="40,5" size="8,40" backgroundColor="red" zPosition="1" />
+    <eLabel name="button_green" position="240,5" size="8,40" backgroundColor="green" zPosition="1" />
+    <eLabel name="button_yellow" position="440,5" size="8,40" backgroundColor="yellow" zPosition="1" />
+    <eLabel name="button_blue" position="640,5" size="8,40" backgroundColor="blue" zPosition="1" />
+    <widget name="key_red" position="56,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#009f1313" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
+    <widget name="key_green" position="256,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#001f771f" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
+    <widget name="key_yellow" position="456,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#00a08500" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
+    <widget name="key_blue" position="656,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#0018188b" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
+    <ePixmap position="860,5" size="100,40" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LottoExtended/plugin.png" alphatest="on" />
+    <widget name="version" position="840,50" size="120,15" zPosition="0" font="Regular;13" foregroundColor="#E5B243" halign="right" valign="center" />
+    <eLabel backgroundColor="#00f2f2f9" position="10,50" size="950,1" zPosition="0" />
+    <widget name="auslosung" position="95,60" size="585,26" zPosition="0" font="Regular;24" halign="center" valign="center" />
+    <eLabel name="tit6aus49" position="95,94" size="290,24" zPosition="0" text="Lotto 6 aus 49 / Superzahl" foregroundColor="#E5B243" font="Regular;20" halign="center" valign="center" />
+    <widget name="displotto" position="95,120" size="290,24" zPosition="0" font="Regular;22" halign="center" valign="center" />
+    <eLabel name="titspiel77" position="415,94" size="260,24" zPosition="0" text="Spiel77" foregroundColor="#E5B243" font="Regular;20" halign="center" valign="center" />
+    <widget name="spiel77" position="415,120" size="260,24" zPosition="0" font="Regular;22" halign="center" valign="center" />
+    <eLabel name="titsuper6" position="705,94" size="260,24" zPosition="0" text="Super6" foregroundColor="#E5B243" font="Regular;20" halign="center" valign="center" />
+    <widget name="super6" position="705,120" size="260,24" zPosition="0" font="Regular;22" halign="center" valign="center" />
+    <eLabel name="lClass" position="10,170" size="80,24" zPosition="0" text="Klasse" foregroundColor="#E5B243" font="Regular;20" halign="center" valign="center" />
+    <eLabel name="lWinners49" position="95,170" size="110,24" zPosition="0" text="Gewinne" foregroundColor="#E5B243" font="Regular;20" halign="right" valign="center" />
+    <eLabel name="lQuota49" position="210,170" size="175,24" zPosition="0" text="Quote" foregroundColor="#E5B243" font="Regular;20" halign="right" valign="center" />
+    <eLabel name="lWinnersS77" position="415,170" size="95,24" zPosition="0" text="Gewinne" foregroundColor="#E5B243" font="Regular;20" halign="right" valign="center" />
+    <eLabel name="lQuuotaS77" position="515,170" size="160,24" zPosition="0" text="Quote" foregroundColor="#E5B243" font="Regular;20" halign="right" valign="center" />
+    <eLabel name="lWinnersS6" position="705,170" size="95,24" zPosition="0" text="Gewinne" foregroundColor="#E5B243" font="Regular;20" halign="right" valign="center" />
+    <eLabel name="lQuotaS6" position="805,170" size="160,24" zPosition="0" text="Quote" foregroundColor="#E5B243" font="Regular;20" halign="right" valign="center" />
+    <widget name="statuslabel" position="10,488" size="950,25" zPosition="0" font="Regular;22" halign="center"/>
+    <eLabel backgroundColor="#00f2f2f9" position="85,88" size="879,2" zPosition="5" />
+    <eLabel backgroundColor="#00f2f2f9" position="85,148" size="879,2" zPosition="5" />
+    <eLabel backgroundColor="#00f2f2f9" position="400,88" size="2,392" zPosition="5" />
+    <eLabel backgroundColor="#00f2f2f9" position="690,88" size="2,392" zPosition="5" />
+    <widget source="quotlist" render="Listbox" position="0,200" size="970,285" scrollbarMode="showNever">
+      <convert type="TemplatedMultiContent">
+        {"template": [
+          MultiContentEntryText(pos = (10,0), size = (80, 22), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 0, color = 0xff0000), # klasse
+          MultiContentEntryText(pos = (95,0), size = (110, 22), font=0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 1, color = 0xffffff), # gewinne49
+          MultiContentEntryText(pos = (210,0), size = (175, 22), font=0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 2, color = 0xffffff), # quote49
+          MultiContentEntryText(pos = (415,0), size = (95, 22), font=0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 3, color = 0xffffff), # gewinne77
+          MultiContentEntryText(pos = (515,0), size = (160, 22), font=0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 4, color = 0xffffff), # quote77
+          MultiContentEntryText(pos = (705,0), size = (95, 22), font=0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 5, color = 0xffffff), # gewinne6
+          MultiContentEntryText(pos = (805,0), size = (160, 22), font=0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 6, color = 0xffffff), # quote6
+          MultiContentEntryText(pos = (95,0), size = (290, 22), font=0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 7, color = 0xffffff), # einsatz49
+          MultiContentEntryText(pos = (415,0), size = (260, 22), font=0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 8, color = 0xffffff), # einsatz77
+          MultiContentEntryText(pos = (705,0), size = (260, 22), font=0, flags = RT_HALIGN_RIGHT | RT_VALIGN_CENTER, text = 9, color = 0xffffff), # einsatz6
+          MultiContentEntryText(pos = (10,0), size = (950, 22), font=0, flags = RT_HALIGN_CENTER | RT_VALIGN_CENTER, text = 10, color = 0xffffff) #
+          ], "fonts": [gFont("Regular", 19)], "itemHeight": 24
+        }
+      </convert>
+    </widget>
+    <eLabel backgroundColor="#00f2f2f9" position="10,480" size="950,1" zPosition="0" />
+  </screen>
+
+  <screen name="LottoTippConfigScreen" position="center,120" size="820,520" title="LottoExtended - Spielschein ändern">
+    <eLabel name="button_red" position="40,5" size="8,40" backgroundColor="red" zPosition="1" />
+    <eLabel name="button_green" position="240,5" size="8,40" backgroundColor="green" zPosition="1" />
+    <eLabel name="button_yellow" position="440,5" size="8,40" backgroundColor="yellow" zPosition="1" />
+    <eLabel name="button_blue" position="640,5" size="8,40" backgroundColor="blue" zPosition="1" />
+    <widget name="key_red" position="56,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#009f1313" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <widget name="key_green" position="256,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#001f771f" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <widget name="key_yellow" position="456,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#00a08500" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <widget name="key_blue" position="656,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#0018188b" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <eLabel backgroundColor="grey" position="10,50" size="800,1" />
+    <widget name="config" position="10,55" size="800,420" enableWrapAround="1" scrollbarMode="showOnDemand"/>
+    <eLabel backgroundColor="grey" position="10,480" size="800,1"  />
+    <widget name="statuslabel" position="10,488" size="800,25" font="Regular;22" halign="center"/>
+  </screen>
+
+  <screen name="LottoTippListScreen" position="center,120" size="820,520" title="LottoExtended - Wähle einen Spielschein" >
+    <eLabel name="button_red" position="40,5" size="8,40" backgroundColor="red" zPosition="1" />
+    <eLabel name="button_green" position="240,5" size="8,40" backgroundColor="green" zPosition="1" />
+    <eLabel name="button_yellow" position="440,5" size="8,40" backgroundColor="yellow" zPosition="1" />
+    <eLabel name="button_blue" position="640,5" size="8,40" backgroundColor="blue" zPosition="1" />
+    <widget name="key_red" position="56,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#009f1313" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <widget name="key_green" position="256,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#001f771f" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <widget name="key_yellow" position="456,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#00a08500" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <widget name="key_blue" position="656,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#0018188b" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
+    <eLabel backgroundColor="#00f2f2f9" position="10,50" size="800,1" />
+    <widget name="tipptitle" position="20,55" size="175,25" foregroundColor="#00E5B243" font="Regular;20" halign="left"/>
+    <widget name="datetitle" position="200,55" size="255,25" foregroundColor="#00E5B243" font="Regular;20" halign="left" />
+    <widget name="ziehungtitle" position="460,55" size="145,25" foregroundColor="#00E5B243" font="Regular;20" halign="center" />
+    <widget name="spiel77title" position="610,55" size="95,25" foregroundColor="#00E5B243" font="Regular;20" halign="center" />
+    <widget name="super6title" position="710,55" size="100,25" foregroundColor="#00E5B243" font="Regular;20" halign="center" />
+    <eLabel backgroundColor="#00f2f2f9" position="10,85" size="800,1" />
+    <widget source="tipplist" render="Listbox" position="10,90" size="800,420" scrollbarMode="showOnDemand">
+    <convert type="TemplatedMultiContent">
+      {"template": [
+        MultiContentEntryText(pos = (10,0), size = (175, 22), font=0, flags = RT_HALIGN_LEFT, text = 1), 	# tipp.getName()
+        MultiContentEntryText(pos = (190,0), size = (125, 22), font=0, flags = RT_HALIGN_LEFT, text = 2),	# tipp.getFirstDrawFormat()
+        MultiContentEntryText(pos = (320,0), size = (125, 22), font=0, flags = RT_HALIGN_LEFT, text = 3),	# tipp.getLasttDrawFormat()
+        MultiContentEntryText(pos = (450,0), size = (145, 22), font=0, flags = RT_HALIGN_CENTER, text = 4),	# tipp.getZiehungTag()
+        MultiContentEntryText(pos = (600,0), size = (95, 22), font=0, flags = RT_HALIGN_CENTER, text = 5), # tipp.getSpiel77JaNein()
+        MultiContentEntryText(pos = (700,0), size = (100, 22), font=0, flags = RT_HALIGN_CENTER, text = 6)	# tipp.getSuper6JaNein()
+        ], "fonts": [gFont("Regular", 18)], "itemHeight": 23
+      }
+    </convert>
+  </widget>
+  </screen>
+
+</skin>
