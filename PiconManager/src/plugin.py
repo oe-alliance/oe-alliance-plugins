@@ -814,7 +814,7 @@ class PiconManagerFolderScreen(Screen):
 	def __init__(self, session, initDir, plugin_path=None):
 		Screen.__init__(self, session)
 
-		if not isdir(initDir):
+		if not initDir or not isdir(initDir):
 			initDir = "/usr/share/enigma2/"
 
 		self["folderlist"] = FileList(initDir, inhibitMounts=False, inhibitDirs=False, showMountpoints=False, showFiles=False)
