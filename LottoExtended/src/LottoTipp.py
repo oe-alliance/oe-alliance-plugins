@@ -164,7 +164,7 @@ class LottoTipp(object):
 
 	def participation(self, datum):
 		""" prüft spielscheinteilnahme zum übergebenen datum
-			rückgabewerte: 
+			rückgabewerte:
 			-3	keine teilnahme - wochentag trifft nicht zu
 			-2	keine teilnahme - letzte teilnahme vor datum
 			-1	keine teilnahme - erste teilnahme nach datum
