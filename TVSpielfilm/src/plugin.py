@@ -50,6 +50,7 @@ except Exception:
 RELEASE = 'V6.9'
 NOTIMER = '\nTimer nicht möglich:\nKeine Service Reference vorhanden, der ausgewählte Sender wurde nicht importiert.'
 NOEPG = 'Keine EPG Informationen verfügbar'
+HIDEFLAG = True
 ALPHA = '/proc/stb/video/alpha' if isfile('/proc/stb/video/alpha') else None
 SERVICEFILE = join(PLUGINPATH, 'db/service.references')
 DUPESFILE = join(PLUGINPATH, 'db/dupes.references')
@@ -89,8 +90,6 @@ config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[(
 config.plugins.tvspielfilm.ytresolution = ConfigSelection(default='best', choices=[('best', 'bestmöglich'), ('best[height<=?480]', 'max. 480p')])
 config.plugins.tvspielfilm.debuglog = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.logtofile = ConfigYesNo(default=False)
-HIDEFLAG = True
-ALPHA = '/proc/stb/video/alpha' if isfile('/proc/stb/video/alpha') else None
 
 
 def TVSlog(info, wert='', debug=False):
