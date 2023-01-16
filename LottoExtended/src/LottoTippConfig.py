@@ -156,9 +156,9 @@ class LottoConfigSequence(ConfigSequence):
 		else:
 			self.value.sort()
 			try:
-				self.saved_value = self.toString(self.value)  # Py3
+				self.saved_value = self.toString(self.value)  # bei openATV 7.x
 			except:
-				self.saved_value = self.tostring(self.value)  # Py2
+				self.saved_value = self.tostring(self.value)  # bei openATV 6.x
 			self.marked_pos = 0
 
 	def validate(self):
@@ -187,9 +187,9 @@ class LottoConfigSequence(ConfigSequence):
 	def load(self):
 		sv = self.saved_value
 		try:
-			self.value = [0 for i in range(6)] if sv is None else self.fromString(sv)  # Py3
+			self.value = [0 for i in range(6)] if sv is None else self.fromString(sv)  # bei openATV 7.x
 		except:
-			self.value = [0 for i in range(6)] if sv is None else self.fromstring(sv)  # Py2
+			self.value = [0 for i in range(6)] if sv is None else self.fromstring(sv)  # bei openATV 6.x
 		count = len(self.value)
 		self.setLimitDefault(count)
 		self.system.value = str(count)

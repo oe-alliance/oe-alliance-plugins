@@ -75,7 +75,7 @@
     <widget name="key_green" position="56,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#001f771f" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
     <widget name="key_yellow" position="256,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#00a08500" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
     <widget name="key_blue" position="456,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#0018188b" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2" />
-    <ePixmap position="710,5" size="100,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LottoExtended/plugin.png" alphatest="on" />
+    <ePixmap position="713,5" size="100,40" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/LottoExtended/plugin.png" alphatest="on" />
     <eLabel backgroundColor="#00f2f2f9" position="10,50" size="800,1" />
     <widget name="auslosung" position="10,60" size="651,24" font="Regular;22" zPosition="1" halign="left" valign="center" />
     <eLabel name="text0" text=" Gewinnzahlen:" position="10,90" size="150,24" foregroundColor="#00E5B243" font="Regular;20" zPosition="1" halign="left" valign="center" />
@@ -180,7 +180,7 @@
     <widget name="key_yellow" position="456,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#00a08500" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
     <widget name="key_blue" position="656,5" size="164,40" zPosition="1" font="Regular;20" halign="left" valign="center" backgroundColor="#0018188b" transparent="1" foregroundColor="#00fdfdfd" shadowColor="#000E0A01" shadowOffset="-2,-2"/>
     <eLabel backgroundColor="grey" position="10,50" size="800,1" />
-    <widget name="config" position="10,55" size="800,420" enableWrapAround="1" scrollbarMode="showOnDemand"/>
+    <widget name="config" position="10,55" size="800,420" font="Regular;20" itemHeight="24" valign="center" enableWrapAround="1" scrollbarMode="showOnDemand"/>
     <eLabel backgroundColor="grey" position="10,480" size="800,1"  />
     <widget name="statuslabel" position="10,488" size="800,25" font="Regular;22" halign="center"/>
   </screen>

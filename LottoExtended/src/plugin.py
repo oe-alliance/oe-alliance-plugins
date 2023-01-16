@@ -23,7 +23,7 @@ from .LottoTippList import LottoTippListScreen
 from .GewinnList import GewinnListScreen, num2FormStr
 from .LottoTipp import readSkin
 
-lotto_pluginversion = '15.01.2023'
+lotto_pluginversion = '16.01.2023'
 
 
 def str2floatQuotes(strList):

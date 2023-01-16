@@ -92,11 +92,11 @@ class ItemList(MenuList):
 	def __init__(self, items, enableWrapAround=True):
 		MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
 		if config.plugins.tvspielfilm.font_size.value == "large":
-			basesize = 18
+			basesize = 20
 		elif config.plugins.tvspielfilm.font_size.value == "small":
-			basesize = 14
-		else:
 			basesize = 16
+		else:
+			basesize = 18
 		self.l.setFont(-2, gFont('Regular', int(16 * SCALE)))
 		self.l.setFont(-1, gFont('Regular', int((basesize - 2) * SCALE)))
 		self.l.setFont(0, gFont('Regular', int(basesize * SCALE)))
