@@ -2,7 +2,6 @@
 from __future__ import absolute_import
 from base64 import b64decode, b64encode
 from datetime import date, datetime, timedelta
-from html import unescape
 from json import dumps, loads
 from glob import glob
 from os import linesep, remove, rename
@@ -17,6 +16,7 @@ from six.moves.urllib.parse import quote
 from six.moves.urllib.request import HTTPCookieProcessor, HTTPHandler, HTTPRedirectHandler, build_opener
 from time import gmtime, localtime, mktime, strftime
 from twisted.internet.reactor import callInThread
+from xml.sax.saxutils import unescape
 from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, RT_WRAP, eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, ConfigSelectionNumber, configfile, getConfigListEntry
