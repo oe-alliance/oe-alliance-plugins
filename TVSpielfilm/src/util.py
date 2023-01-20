@@ -2,30 +2,28 @@
 # -*- coding: utf-8 -*-
 from six import ensure_str
 from xml.etree.ElementTree import fromstring, tostring, parse
-from os.path import isfile
+from os.path import join, isfile
 from enigma import eListboxPythonMultiContent, gFont, getDesktop
-
 from Components.config import config
 from Components.ConditionalWidget import BlinkingWidget
 from Components.Label import Label
 from Components.MenuList import MenuList
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE
 
-
-PICONPATH = resolveFilename(SCOPE_SKIN_IMAGE) + 'picon/'
-PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/TVSpielfilm/'
-PICPATH = PLUGINPATH + "pics/"
+PLUGINPATH = join(resolveFilename(SCOPE_PLUGINS), 'Extensions/TVSpielfilm/')
+PICONPATH = join(resolveFilename(SCOPE_SKIN_IMAGE), 'picon/')
+PICPATH = join(PLUGINPATH, "pics/")
 DESKTOP_WIDTH = getDesktop(0).size().width()
 DESKTOP_HEIGHT = getDesktop(0).size().height()
 
 if DESKTOP_HEIGHT > 720:
 	SCALE = 1.5
-	ICONPATH = PICPATH + "FHD/icons/"
-	SKINFILE = PLUGINPATH + "skin_FHD.xml"
+	ICONPATH = join(PICPATH, "FHD/icons/")
+	SKINFILE = join(PLUGINPATH, "skin_FHD.xml")
 else:
 	SCALE = 1.0
-	ICONPATH = PICPATH + "HD/icons/"
-	SKINFILE = PLUGINPATH + "skin_HD.xml"
+	ICONPATH = join(PICPATH, "HD/icons/")
+	SKINFILE = join(PLUGINPATH, "skin_HD.xml")
 
 
 class channelDB():
@@ -107,7 +105,7 @@ class ItemList(MenuList):
 def applySkinVars(skin, dict):
 	for key in dict.keys():
 		try:
-			skin = skin.replace('{' + key + '}', dict[key])
+			skin = skin.replace('{%s}' % key, dict[key])
 		except Exception as e:
 			print("%s@key=%s" % (str(e), key))
 	return skin
