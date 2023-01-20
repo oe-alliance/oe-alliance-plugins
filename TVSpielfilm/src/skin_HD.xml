@@ -5,19 +5,19 @@
 		<ePixmap position="0,0" size="330,60" pixmap="{picpath}HD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="190,32" size="70,20" font="Regular;16" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
 		<widget name="waiting" position="190,15" size="130,20" font="Regular;16" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="mainmenu" position="10,70" size="310,430" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#20000000" foregroundColorSelected="#00ffffff" scrollbarMode="showOnDemand" selectionPixmap="{picpath}HD/selectors/selector_840_32_{selbg}.png" />
-		<widget name="secondmenu" position="10,70" size="310,430" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#20000000" foregroundColorSelected="#00ffffff" scrollbarMode="showOnDemand" selectionPixmap="{picpath}HD/selectors/selector_840_32_{selbg}.png" />
-		<widget name="thirdmenu" position="10,70" size="310,430" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#20000000" foregroundColorSelected="#00ffffff" scrollbarMode="showOnDemand" selectionPixmap="{picpath}HD/selectors/selector_840_32_{selbg}.png" />
-		<widget name="label" position="25,509" size="65,24" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="2" />
-		<eLabel name="Menu" text="Menu" position="185,509" size="60,24" font="Regular; 18" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" />
-		<widget name="label2" position="110,509" size="55,24" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label5" position="265,508" size="60,24" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<eLabel name="button_red" position="10,505" size="8,30" backgroundColor="red" zPosition="1" />
-		<eLabel name="button_green" position="95,505" size="8,30" backgroundColor="green" zPosition="1" />
-		<eLabel name="button_yellow" position="170,505" size="8,30" backgroundColor="yellow" zPosition="1" />
-		<widget name="bluebutton" position="250,505" size="8,30" backgroundColor="blue" zPosition="2" />
-		<eLabel name="Background_Grey" position="9,69" size="312,432" backgroundColor="#00c0c0c0" zPosition="-5" />
-		<eLabel name="Background_Metrixbackground" position="10,70" size="310,430" backgroundColor="#20000000" zPosition="0" />
+		<widget name="mainmenu" position="10,70" size="310,423" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#20000000" foregroundColorSelected="#00ffffff" scrollbarMode="showOnDemand" selectionPixmap="{picpath}HD/selectors/selector_840_32_{selbg}.png" />
+		<widget name="secondmenu" position="10,70" size="310,423" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#20000000" foregroundColorSelected="#00ffffff" scrollbarMode="showOnDemand" selectionPixmap="{picpath}HD/selectors/selector_840_32_{selbg}.png" />
+		<widget name="thirdmenu" position="10,70" size="310,423" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" backgroundColor="#20000000" foregroundColorSelected="#00ffffff" scrollbarMode="showOnDemand" selectionPixmap="{picpath}HD/selectors/selector_840_32_{selbg}.png" />
+		<widget name="label" position="25,507" size="65,24" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="2" />
+		<eLabel name="Menu" text="Menu" position="185,507" size="60,24" font="Regular; 18" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" />
+		<widget name="label2" position="110,507" size="55,24" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label5" position="265,507" size="60,24" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<eLabel name="button_red" position="10,503" size="8,30" backgroundColor="red" zPosition="1" />
+		<eLabel name="button_green" position="95,503" size="8,30" backgroundColor="green" zPosition="1" />
+		<eLabel name="button_yellow" position="170,503" size="8,30" backgroundColor="yellow" zPosition="1" />
+		<widget name="bluebutton" position="250,503" size="8,30" backgroundColor="blue" zPosition="2" />
+		<eLabel name="Background_Grey" position="9,69" size="312,425" backgroundColor="#00c0c0c0" zPosition="-5" />
+		<eLabel name="Background_Metrixbackground" position="10,70" size="310,423" backgroundColor="#20000000" zPosition="0" />
 	    <eLabel name="Background" position="0,0" size="330,540" backgroundColor="#20000000" zPosition="-10" />
 	</screen>
 
