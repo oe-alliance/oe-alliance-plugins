@@ -2669,7 +2669,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			self.postlink = self.tvlink[c]
 			if search(r'www.tvspielfilm.de', self.postlink):
 				self.oldcurrent = self.current
-				callInThread(self.threadGetPage, self.postlink, self.makePostTimer, self.DownloadError)
+				callInThread(self.threadGetPage, self.postlink, self.makePostTimer, self.downloadError)
 		elif self.current == 'searchmenu':
 			c = self['searchmenu'].getSelectedIndex()
 			self.oldsearchindex = c
