@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-from __future__ import division
-from __future__ import absolute_import
-from twisted.web import resource, http
+from __future__ import division, absolute_import
+from os.path import isfile, getmtime
+from six import ensure_str, ensure_binary
+from twisted.web import resource
 from .plugin import *
-import os
-import time
-import six
-########################################################
 
 
 class LCD4linuxweb(resource.Resource):
@@ -25,11 +22,11 @@ class LCD4linuxweb(resource.Resource):
 		w = ""
 		command = req.args.get(b"width", None)
 		if command is not None:
-			cmd = six.ensure_str(command[0])
+			cmd = ensure_str(command[0])
 			w += " width=\"%s\"" % cmd
 		command = req.args.get(b"hight", None)
 		if command is not None:
-			cmd = six.ensure_str(command[0])
+			cmd = ensure_str(command[0])
 			w += " height=\"%s\"" % cmd
 		html = "<html>"
 		html += "<head>\n"
@@ -53,32 +50,32 @@ class LCD4linuxweb(resource.Resource):
 		datei = req.args.get(b"file", None)
 		if datei is not None:
 			datei[0] = datei[0].decode("utf-8")
-			if os.path.isfile("%s%s" % (getTMPL(), datei[0])):
-				t = os.path.getmtime("%s%s" % (getTMPL(), datei[0]))
+			if isfile("%s%s" % (getTMPL(), datei[0])):
+				t = getmtime("%s%s" % (getTMPL(), datei[0]))
 				JR = "" if JavaRefresh == "" else JavaRefresh % (1, 1, datei[0])
 				html += "<a %s><img border=\"0\" src=\"/lcd4linux/%s?%d\" %s %s></a> \n" % (self.HREF, datei[0], t, JR, w)
-		elif os.path.isfile("%sdpf.jpg" % getTMPL()):
-			t = os.path.getmtime("%sdpf.jpg" % getTMPL())
+		elif isfile("%sdpf.jpg" % getTMPL()):
+			t = getmtime("%sdpf.jpg" % getTMPL())
 			JR = "" if JavaRefresh == "" else JavaRefresh % (2, 2, "dpf.jpg")
 			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf.jpg?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
-		elif os.path.isfile("%sdpf.png" % getTMPL()):
-			t = os.path.getmtime("%sdpf.png" % getTMPL())
+		elif isfile("%sdpf.png" % getTMPL()):
+			t = getmtime("%sdpf.png" % getTMPL())
 			JR = "" if JavaRefresh == "" else JavaRefresh % (3, 3, "dpf.png")
 			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf.png?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
-		elif os.path.isfile("%sdpf2.jpg" % getTMPL()):
-			t = os.path.getmtime("%sdpf2.jpg" % getTMPL())
+		elif isfile("%sdpf2.jpg" % getTMPL()):
+			t = getmtime("%sdpf2.jpg" % getTMPL())
 			JR = "" if JavaRefresh == "" else JavaRefresh % (4, 4, "dpf2.jpg")
 			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.jpg?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
-		elif os.path.isfile("%sdpf2.png" % getTMPL()):
-			t = os.path.getmtime("%sdpf2.png" % getTMPL())
+		elif isfile("%sdpf2.png" % getTMPL()):
+			t = getmtime("%sdpf2.png" % getTMPL())
 			JR = "" if JavaRefresh == "" else JavaRefresh % (5, 5, "dpf2.png")
 			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf2.png?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
-		elif os.path.isfile("%sdpf3.jpg" % getTMPL()):
-			t = os.path.getmtime("%sdpf3.jpg" % getTMPL())
+		elif isfile("%sdpf3.jpg" % getTMPL()):
+			t = getmtime("%sdpf3.jpg" % getTMPL())
 			JR = "" if JavaRefresh == "" else JavaRefresh % (6, 6, "dpf3.jpg")
 			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf3.jpg?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
-		elif os.path.isfile("%sdpf3.png" % getTMPL()):
-			t = os.path.getmtime("%sdpf3.png" % getTMPL())
+		elif isfile("%sdpf3.png" % getTMPL()):
+			t = getmtime("%sdpf3.png" % getTMPL())
 			JR = "" if JavaRefresh == "" else JavaRefresh % (7, 7, "dpf3.png")
 			html += "<a %s><img border=\"0\" src=\"/lcd4linux/dpf3.png?%d\" %s %s></a> \n" % (self.HREF, t, JR, w)
 		else:
@@ -88,7 +85,7 @@ class LCD4linuxweb(resource.Resource):
 
 		html += "</form>\n"
 
-		return six.ensure_binary(html)
+		return ensure_binary(html)
 
 
 class LCD4linuxwebView(LCD4linuxweb):
