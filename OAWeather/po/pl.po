@@ -1,0 +1,173 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OAWeather\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-26 12:23+0100\n"
+"PO-Revision-Date: 2022-11-09 19:48+0000\n"
+"Last-Translator: pololoko111 <peciek83@gmail.com>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/openatv/metrixhd/pl/>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.15-dev\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#, python-format
+msgid "%d Minutes"
+msgstr "%d Minuty"
+
+msgid "Cache data"
+msgstr "Dane podręczne"
+
+msgid "Celsius"
+msgstr "Celsjusz"
+
+msgid "Choose whether the 'night switch' should be activated or not. Some icons are then displayed as night icons with moon."
+msgstr ""
+
+#, python-format
+msgid "City '%s' not found! Please try another wording."
+msgstr "Miasto '%s' nie znaleziono! Proszę spróbować innego sformułowania."
+
+#, fuzzy
+msgid "Configuration tool for OAWeather"
+msgstr "narzędzie openATV do konfiguracji MetrixHD"
+
+msgid "Defaults"
+msgstr "Domyślne"
+
+msgid "Disabled"
+msgstr "Wyłączone"
+
+msgid "East"
+msgstr "Wschód"
+
+#, fuzzy
+msgid "Enable Debug"
+msgstr "Włączone"
+
+msgid "Enabled"
+msgstr "Włączone"
+
+msgid "Enter a personalized API key for use with OpenWeatherMap (https://openweathermap.org/)."
+msgstr "Wprowadź spersonalizowany klucz API do użytku z OpenWeatherMap (https://openweathermap.org/)."
+
+msgid "Enter the location for your weather forecasts."
+msgstr "Wprowadź lokalizację prognozy pogody."
+
+msgid "Error getting City ID"
+msgstr "Błąd uzyskania identyfikatora miasta"
+
+msgid "Error in Weatherinfo"
+msgstr "Błąd w Weatherinfo"
+
+msgid "Fahrenheit"
+msgstr "Fahrenheita"
+
+msgid "Location Selection"
+msgstr "Wybór lokalizacji"
+
+msgid "MSN weather"
+msgstr "Pogoda MSN"
+
+msgid "North"
+msgstr "Północ"
+
+msgid "Northeast"
+msgstr "Północny wschód"
+
+msgid "Northwest"
+msgstr "Północny zachód"
+
+msgid "Open-Meteo Wetter"
+msgstr "Pogoda Open-Meteo"
+
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+msgid "Refresh interval"
+msgstr "Częstotliwość odświeżania"
+
+msgid "Search for City ID please wait..."
+msgstr "Wyszukaj ID miasta, proszę czekać..."
+
+msgid "Search for your City"
+msgstr "Wyszukaj swoje miasto"
+
+#, fuzzy
+msgid "Select 'Yes' to enable add debug output to log."
+msgstr "Wybierz „Tak”, aby włączyć dodawanie MetrixWeather do ekranu InfoBar."
+
+#, fuzzy
+msgid "Select 'Yes' to enable the addition of Weather."
+msgstr "Wybierz „Tak”, aby włączyć dodawanie MetrixWeather do ekranu InfoBar."
+
+msgid "Select Your Location"
+msgstr "Wybierz Swoją Lokalizację"
+
+msgid "Select the preferred weather service to supply the weather information."
+msgstr "Wybierz preferowaną usługę pogodową, aby dostarczyć informacje o pogodzie."
+
+msgid "Select the temperature unit to be used for temperature displays."
+msgstr "Wybierz jednostkę temperatury, która będzie używana do wyświetlania temperatury."
+
+msgid "Select this option to save that last obtained weather data locally. This is used to initialize the data immediately after restart while updated data is being fetched."
+msgstr "Wybierz tę opcję, aby zapisać ostatnio uzyskane dane pogodowe lokalnie. Jest to używane do inicjalizacji danych natychmiast po ponownym uruchomieniu, podczas gdy aktualizowane dane są pobierane."
+
+msgid "Set default values"
+msgstr "Ustaw wartości domyślne"
+
+msgid "South"
+msgstr "Południe"
+
+msgid "Southeast"
+msgstr "Południowy wschód"
+
+msgid "Southwest"
+msgstr "Południowy zachód"
+
+#, fuzzy
+msgid "Specify how often Weather retrieves its data from the server. 'Once' means the data will loaded only once after a GUI or system start."
+msgstr "Określ jak często MetrixWeather pobiera swoje dane z serwera. 'Raz' oznacza, że dane będą ładowane tylko raz po uruchomieniu GUI lub systemu."
+
+msgid "Temperature unit"
+msgstr "Jednostka temperatury"
+
+msgid ""
+"The API key for OpenWeatherMap is not defined or invalid.\n"
+"Please verify your input data.\n"
+"Otherwise your settings won't be saved."
+msgstr ""
+"Klucz API dla OpenWeatherMap nie jest zdefiniowany lub nieprawidłowy.\n"
+"Zweryfikuj wprowadzone dane.\n"
+"W przeciwnym razie ustawienia nie zostaną zapisane."
+
+msgid "The city name is too short. More than 2 characters are needed for search."
+msgstr "Nazwa miasta jest zbyt krótka. Do wyszukiwania potrzebne są więcej niż 2 znaki."
+
+msgid "Weather API key"
+msgstr "Klucz API MetrixWeather"
+
+msgid "Weather Settings Actions"
+msgstr "Akcje ustawień pogodowych"
+
+msgid "Weather city name"
+msgstr "Nazwa miasta MetrixWeather"
+
+#, fuzzy
+msgid "Weather icon night switch"
+msgstr "Ścieżka ikony MetrixWeather"
+
+msgid "Weather service"
+msgstr "Usługa MetrixWeather"
+
+msgid "Weather settings"
+msgstr "Ustawienia pogody"
+
+msgid "West"
+msgstr "Zachód"
+
+msgid "n/a"
+msgstr ""

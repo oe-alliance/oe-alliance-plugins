@@ -1,0 +1,168 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OAWeather\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-26 12:23+0100\n"
+"PO-Revision-Date: 2022-11-19 22:47+0000\n"
+"Last-Translator: Mr.Servo <mrservo@gmx.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/openatv/metrixhd/de/>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15-dev\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#, python-format
+msgid "%d Minutes"
+msgstr "%d Minuten"
+
+msgid "Cache data"
+msgstr "Daten zwischenspeichern"
+
+msgid "Celsius"
+msgstr "Celsius"
+
+msgid "Choose whether the 'night switch' should be activated or not. Some icons are then displayed as night icons with moon."
+msgstr "Wählen Sie, ob der Nachtschalter aktiviert werden soll oder nicht. Einige Symbole werden dann als Nachtsymbole mit Mond angezeigt."
+
+#, python-format
+msgid "City '%s' not found! Please try another wording."
+msgstr "Stadt '%s' wurde nicht gefunden! Bitte versuchen Sie eine andere Formulierung."
+
+msgid "Configuration tool for OAWeather"
+msgstr "Konfigurationstool für OAWeather"
+
+msgid "Defaults"
+msgstr "Standard"
+
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+msgid "East"
+msgstr "Ost"
+
+#, fuzzy
+msgid "Enable Debug"
+msgstr "Aktiviert"
+
+msgid "Enabled"
+msgstr "Aktiviert"
+
+msgid "Enter a personalized API key for use with OpenWeatherMap (https://openweathermap.org/)."
+msgstr "Geben Sie einen personalisierten API-Schlüssel für die Verwendung mit OpenWeatherMap ein (https://openweathermap.org/)."
+
+msgid "Enter the location for your weather forecasts."
+msgstr "Geben Sie den Standort für Ihre Wettervorhersage ein."
+
+msgid "Error getting City ID"
+msgstr "Fehler beim Abrufen der City ID"
+
+msgid "Error in Weatherinfo"
+msgstr "Fehler in Weatherinfo"
+
+msgid "Fahrenheit"
+msgstr "Fahrenheit"
+
+msgid "Location Selection"
+msgstr "Standortauswahl"
+
+msgid "MSN weather"
+msgstr "MSN-Wetter"
+
+msgid "North"
+msgstr "Nord"
+
+msgid "Northeast"
+msgstr "Nordost"
+
+msgid "Northwest"
+msgstr "Nordwest"
+
+msgid "Open-Meteo Wetter"
+msgstr "Open-Meteo Wetter"
+
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+msgid "Refresh interval"
+msgstr "Aktualisierungsintervall"
+
+msgid "Search for City ID please wait..."
+msgstr "Suche nach City-ID. Bitte warten..."
+
+msgid "Search for your City"
+msgstr "Suche nach Ihrer Stadt"
+
+msgid "Select 'Yes' to enable add debug output to log."
+msgstr "Wählen Sie \"Ja\", um das OAWeather debug log zu aktivieren."
+
+msgid "Select 'Yes' to enable the addition of Weather."
+msgstr "Wählen Sie \"Ja\", um das OAWeather zu aktivieren."
+
+msgid "Select Your Location"
+msgstr "Wählen Sie Ihren Standort"
+
+msgid "Select the preferred weather service to supply the weather information."
+msgstr "Wählen Sie den bevorzugten Wetterdienst aus, um die Wetterinformationen zu erhalten."
+
+msgid "Select the temperature unit to be used for temperature displays."
+msgstr "Wählen Sie die Temperatureinheit, die für die Temperaturanzeige verwendet werden soll."
+
+msgid "Select this option to save that last obtained weather data locally. This is used to initialize the data immediately after restart while updated data is being fetched."
+msgstr "Wählen Sie diese Option, um die zuletzt abgerufenen Wetterdaten lokal zu speichern. Dies wird verwendet, um die Daten sofort nach dem Neustart zu initialisieren, während die aktualisierten Daten abgerufen werden."
+
+msgid "Set default values"
+msgstr "Setze Standardeinstellung"
+
+msgid "South"
+msgstr "Süd"
+
+msgid "Southeast"
+msgstr "Südost"
+
+msgid "Southwest"
+msgstr "Südwest"
+
+msgid "Specify how often Weather retrieves its data from the server. 'Once' means the data will loaded only once after a GUI or system start."
+msgstr "Geben Sie an, wie oft OAWeather seine Daten vom Server abruft. 'Einmal' bedeutet, dass die Daten nur einmal nach einem GUI- oder Systemstart geladen werden."
+
+msgid "Temperature unit"
+msgstr "Temperatureinheit"
+
+msgid ""
+"The API key for OpenWeatherMap is not defined or invalid.\n"
+"Please verify your input data.\n"
+"Otherwise your settings won't be saved."
+msgstr ""
+"Der API-Key für OpenWeatherMap ist nicht definiert oder ungültig.\n"
+"Bitte überprüfen Sie Ihre Eingabedaten.\n"
+"Andernfalls werden Ihre Einstellungen nicht gespeichert."
+
+msgid "The city name is too short. More than 2 characters are needed for search."
+msgstr "Der Stadtname ist zu kurz. Es werden mehr als 2 Zeichen für die Suche benötigt."
+
+msgid "Weather API key"
+msgstr "Weather-API-Schlüssel"
+
+msgid "Weather Settings Actions"
+msgstr "Wettereinstellungen Aktionen"
+
+msgid "Weather city name"
+msgstr "Wetter Stadtname"
+
+msgid "Weather icon night switch"
+msgstr "Wetter Nacht-Icons"
+
+msgid "Weather service"
+msgstr "Wetterdienst"
+
+msgid "Weather settings"
+msgstr "Wettereinstellungen"
+
+msgid "West"
+msgstr "West"
+
+msgid "n/a"
+msgstr "n/a"

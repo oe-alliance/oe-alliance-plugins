@@ -1,0 +1,94 @@
+Description: OAWeather Converter and Renderer to display Weather in Skin...
+
+
+Usage example 1:
+	<widget alphatest="blend" render="OAWeatherPixmap" position="850,30" size="128,128" source="session.OAWeather" transparent="1" zPosition="5" >
+		<convert type="OAWeather">weathericon,current</convert>
+	</widget>
+	<widget alphatest="blend" render="OAWeatherPixmap" position="910,203" size="62,62" source="session.OAWeather" transparent="1" zPosition="5" >
+		<convert type="OAWeather">weathericon,day2</convert>
+	</widget>
+	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;22" foregroundColor="black" render="Label" position="855,40" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
+		<convert type="OAWeather">temperature_current</convert>
+	</widget>
+	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;18" foregroundColor="black" render="Label" position="855,70" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
+		<convert type="OAWeather">temperature_text,current</convert>
+	</widget>
+	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;18" foregroundColor="black" render="Label" position="855,100" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
+		<convert type="OAWeather">temperature_heigh_low,current</convert>
+	</widget>
+	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;16" foregroundColor="black" render="Label" position="855,120" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
+		<convert type="OAWeather">observationtime</convert>
+	</widget>
+	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;20" foregroundColor="black" render="Label" position="855,140" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
+		<convert type="OAWeather">city</convert>
+	</widget>
+	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;16" foregroundColor="black" render="Label" position="855,176" size="120,20" source="session.OAWeather" zPosition="3" halign="center">
+		<convert type="OAWeather">weekday,day2</convert>
+	</widget>
+	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;16" foregroundColor="black" render="Label" position="865,210" size="40,20" source="session.OAWeather" zPosition="3" halign="left">
+		<convert type="OAWeather">temperature_high,day2</convert>
+	</widget>
+	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;16" foregroundColor="black" render="Label" position="865,235" size="40,20" source="session.OAWeather" zPosition="3" halign="left">
+		<convert type="OAWeather">temperature_low,day2</convert>
+	</widget>
+
+
+Description:
+
+Displaying icons with OAWeatherPixmap Renderer:
+
+"weathericon,current" --> current weather icon
+"weathericon,dayX" --> X = 1 to 5, 0 = current day
+
+Displaying Info-data with Label Renderer:
+weathersource          # Example: "MSN Weather"
+city                   # Example: "Hamburg, Germany"
+longitude              # Example: "53.5573"
+latitude               # Example: "9.996"
+sunrise                # Example: "08:30"
+sunset                 # Example: "16:27"
+isnight                # Example: "False" oder "True"
+observationtime        # Example: "16:17"
+observationpoint       # is no longer supported by the weather services, is now identical with 'CITY'.
+tempunit               # Example: "°C"
+windunit               # Example: "km/h"
+temperature_current    # Example: "8 °C"
+feelslike              # Example: "4 °C"
+humidity               # Example: "81 %"
+winddisplay            # Example: "12 km/h Southwest"
+windspeed              # Example: "12 km/h"
+winddir                # Example: "230 °"
+winddirsign            # Example: "↗ SW"
+winddirarrow           # Example: "↗"
+winddirname            # Example: "Southwest"
+winddirshort           # Example: "SW"
+yahoocode              # Example: "9" (matching the extended weather icon code: YAHOO+)
+meteocode              # Example: "Q" (matching the character set: MetrixIcons.ttf)
+--> these arguments do not need any further arguments
+
+These arguments are depending of the day argument:
+temperature_heigh      # Example: "9 °C"
+temperature_low        # Example: "6 °C"
+temperature_heigh_low  # Example: "6 - 9 °C"
+temperature_text       # Example: "rain showers", HINT: OpenMeteo doesn't deliver descriptions, therefore "N/A" comes up
+weekday                # Example: "Friday"
+weekshortday           # Example: "Fr"
+date                   # Example: "2023-01-13"
+--> to use in combination with current or dayX (X = 1 to 5) (look for the examples)
+
+usage example 2:
+	<widget alphatest="blend" render="OAWeatherPixmap" position="20,553" size="200,122" source="session.OAWeather" transparent="1" zPosition="5" >
+		<convert type="OAWeather">weathericon,current,/etc/enigma2/weather_icons_special/</convert>
+	</widget>
+
+--> weathericon, current --> current weather icon
+--> /etc/enigma2/weather_icons_special/ --> folder for weather icons
+
+usage example 3:
+
+Meteofont
+
+	<widget font="Meteo" render="Label" position="20,553" size="200,122" source="session.OAWeather" transparent="1" zPosition="5" >
+		<convert type="OAWeather">meteocode</convert>
+	</widget>
