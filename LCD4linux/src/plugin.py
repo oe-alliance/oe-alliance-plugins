@@ -18,7 +18,7 @@
 #  For other uses, permission from the author is necessary.
 #
 from __future__ import print_function, absolute_import, division
-Version = "V5.0-r11"
+Version = "V5.0-r11b"
 from . import _
 from calendar import Calendar, mdays, weekday, month_name, weekheader
 from codecs import decode
@@ -11858,7 +11858,6 @@ def LCD4linuxPIC(self, session):
 				self.CoverName[1] = "wait"
 				try:
 					pil_image = Image.open(ShowPicture)
-
 					if ConfigTrim:
 						xx, yy = pil_image.size
 						pix = pil_image.load()
@@ -11890,7 +11889,6 @@ def LCD4linuxPIC(self, session):
 						if l > 1 or o > 1:
 							pil_image = pil_image.crop((l, o, r, u))
 						L4logE("Cover Trim", (l, o, r, u))
-
 					xx, yy = pil_image.size
 					L4log("CoverSize", pil_image.size)
 					y = int(float(x) / xx * yy)
@@ -12403,8 +12401,8 @@ def LCD4linuxPIC(self, session):
 			else:
 				ms = 1
 			font = ImageFont.truetype(ConfigFont, int(ConfigSize * ms) + 8, encoding='unic')  # 5
-#			if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath: # Movie
-			if self.Llength is not None and self.Llength[0] != -1:
+#			if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath:
+			if self.Llength is not None and self.Llength[0] != -1:  # Movie
 				isVideoPlaying = 1
 				try:
 					length = self.Llength
@@ -12414,16 +12412,10 @@ def LCD4linuxPIC(self, session):
 							if ConfigType[0] in ["2", "4", "6", "8", "9", "A"]:
 								if ConfigType[0] in ["8", "9", "A"] or length[0] == 1:
 									dur = int(position[1] / 90000)
-									if dur > 3600:
-										remaining = "%02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60)
-									else:
-										remaining = "%02d:%02d" % (dur / 60, dur % 60)
+									remaining = "%02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60) if dur > 3600 else "%02d:%02d" % (dur / 60, dur % 60)
 								else:
 									rem = int((length[1] - position[1]) / 90000)
-									if length[1] / 90000 < 600:
-										remaining = "+%02d:%02d" % (rem / 60, rem % 60)
-									else:
-										remaining = "%+d%s" % ((rem / 60), Minutes)
+									remaining = "+%02d:%02d" % (rem / 60, rem % 60) if length[1] / 90000 < 600 else "%+d%s" % ((rem / 60), Minutes)
 								w, h = getFsize(remaining, font)
 								if ConfigType[0] in ["2", "8"]:
 									ProgressBar -= (w + 10)
@@ -12438,7 +12430,7 @@ def LCD4linuxPIC(self, session):
 								if ConfigBorder == "off":
 									ProgressBar = MinusProgress = 0
 									POSX = getSplit(ConfigSplit, ConfigAlign, MAX_W, w + 10)
-								ShadowText(draw, ProgressBar - MinusProgress + 15 + POSX, ConfigPos + 80 - Minus - int((h - ConfigSize) / 2), remaining, font, ConfigColorText, ConfigShadow)
+								ShadowText(draw, ProgressBar - MinusProgress + 15 + POSX, ConfigPos + 1 - Minus - int((h - ConfigSize) / 2), remaining, font, ConfigColorText, ConfigShadow)
 							elif ConfigType[0] in ["3", "5", "7"]:
 								remaining = "%d%s" % (int(position[1] * 100 / length[1]), Prozent)
 								w, h = getFsize(remaining, font)
@@ -12458,15 +12450,9 @@ def LCD4linuxPIC(self, session):
 								ShadowText(draw, ProgressBar - MinusProgress + 15 + POSX, ConfigPos + 1 - Minus - int((h - ConfigSize) / 2), remaining, font, ConfigColorText, ConfigShadow)
 							elif ConfigType[0] in ["B"]:
 								dur = int(position[1] / 90000)
-								if dur > 3600:
-									remaining = "%02d:%02d" % (dur / 3600, dur % 3600 / 60)
-								else:
-									remaining = "%02d:%02d" % (dur / 60, dur % 60)
+								remaining = "%02d:%02d" % (dur / 3600, dur % 3600 / 60) if dur > 3600 else "%02d:%02d" % (dur / 60, dur % 60)
 								dur = int((length[1]) / 90000)
-								if dur > 3600:
-									remaining += " / %02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60)
-								else:
-									remaining += " / %02d:%02d" % (dur / 60, dur % 60)
+								remaining += " / %02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60) if dur > 3600 else " / %02d:%02d" % (dur / 60, dur % 60)
 								w, h = getFsize(remaining, font)
 								Minus = int(h / 1.5) + 2
 								MinusProgress = (w + 10)
@@ -12509,10 +12495,7 @@ def LCD4linuxPIC(self, session):
 					if ConfigType[0] in ["2", "4", "6", "8", "9", "A"]:
 						dur = int(event_run / 60)
 						if ConfigType[0] in ["8", "9", "A"]:
-							if dur > 3600:
-								remaining = "%02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60)
-							else:
-								remaining = "%02d:%02d" % (dur / 60, dur % 60)
+							remaining = "%02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60) if dur > 3600 else "%02d:%02d" % (dur / 60, dur % 60)
 						else:
 							remaining = "%+d%s" % (int((event_end - now) / 60), Minutes)
 						w, h = getFsize(remaining, font)
@@ -12549,15 +12532,9 @@ def LCD4linuxPIC(self, session):
 						ShadowText(draw, ProgressBar - MinusProgress + 15 + POSX, ConfigPos + 1 - Minus - int((h - ConfigSize) / 2), remaining, font, ConfigColorText, ConfigShadow)
 					elif ConfigType[0] in ["B"]:
 						dur = int(event_run / 60)
-						if dur > 3600:
-							remaining = "%02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60)
-						else:
-							remaining = "%02d:%02d" % (dur / 60, dur % 60)
+						remaining = "%02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60) if dur > 3600 else "%02d:%02d" % (dur / 60, dur % 60)
 						dur = int(duration / 60)
-						if dur > 3600:
-							remaining += " / %02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60)
-						else:
-							remaining += " / %02d:%02d" % (dur / 60, dur % 60)
+						remaining += " / %02d:%02d:%02d" % (dur / 3600, dur % 3600 / 60, dur % 3600 % 60) if dur > 3600 else " / %02d:%02d" % (dur / 60, dur % 60)
 						w, h = getFsize(remaining, font)
 						Minus = int(h / 1.5) + 2
 						MinusProgress = (w + 10)
@@ -13042,7 +13019,7 @@ def LCD4linuxPIC(self, session):
 				i += " %d%%%s" % (self.LsignalQuality * 100 / 65536, NL(ConfigLines))
 			if "C" in ConfigInfo:
 				i += " %d%s" % (self.LbitErrorRate, NL(ConfigLines))
-#			print3("%d" % (feinfo.getFrontendInfo(iFrontendInformation.signalPower)))
+#			print("%d" % (feinfo.getFrontendInfo(iFrontendInformation.signalPower)))
 		if "T" in ConfigInfo and self.Temp != "":
 			i += " %d%sC%s" % (SensorRead(self.Temp, True), SIGN, NL(ConfigLines))
 		if "R" in ConfigInfo:
@@ -13060,10 +13037,7 @@ def LCD4linuxPIC(self, session):
 					w = int(v[1]) + int(v[2]) + int(v[3]) + int(v[4])
 					wa = w - CPUtotal
 					wi = int(v[4]) - CPUidle
-					if wa * wi > 0:
-						x = 100 - 100.0 / wa * wi
-					else:
-						x = 0
+					x = 100 - 100.0 / wa * wi if wa * wi > 0 else 0
 					i += " %d%%%s" % (round(x), NL(ConfigLines))
 					CPUtotal = w
 					CPUidle = int(v[4])
