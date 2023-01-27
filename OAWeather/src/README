@@ -2,37 +2,101 @@ Description: OAWeather Converter and Renderer to display Weather in Skin...
 
 
 Usage example 1:
-	<widget alphatest="blend" render="OAWeatherPixmap" position="850,30" size="128,128" source="session.OAWeather" transparent="1" zPosition="5" >
-		<convert type="OAWeather">weathericon,current</convert>
+
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">humidity</convert>
 	</widget>
-	<widget alphatest="blend" render="OAWeatherPixmap" position="910,203" size="62,62" source="session.OAWeather" transparent="1" zPosition="5" >
-		<convert type="OAWeather">weathericon,day2</convert>
+	<widget noWrap="1" render="Label" position="1740,245" source="session.OAWeather">
+		<convert type="OAWeather">winddisplay</convert>
 	</widget>
-	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;22" foregroundColor="black" render="Label" position="855,40" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">feelslike</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">weekday,current</convert>
+	</widget>
+	<widget noWrap="1"  render="Label" position="1775,150"  source="session.OAWeather">
 		<convert type="OAWeather">temperature_current</convert>
 	</widget>
-	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;18" foregroundColor="black" render="Label" position="855,70" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
+	<widget noWrap="1"  render="Label" position="1600,148" size="240,24" font="Regular; 18" source="session.OAWeather">
 		<convert type="OAWeather">temperature_text,current</convert>
 	</widget>
-	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;18" foregroundColor="black" render="Label" position="855,100" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
-		<convert type="OAWeather">temperature_heigh_low,current</convert>
+	<widget alphatest="blend" render="OAWeatherPixmap" position="1581,363" size="78,78" source="session.OAWeather">
+		<convert type="OAWeather">weathericon,day1,/usr/share/enigma2/Skin?????/Wettericons/,png</convert>
 	</widget>
-	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;16" foregroundColor="black" render="Label" position="855,120" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
-		<convert type="OAWeather">observationtime</convert>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_text,day1</convert>
 	</widget>
-	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;20" foregroundColor="black" render="Label" position="855,140" size="385,24" source="session.OAWeather" zPosition="3" halign="right">
-		<convert type="OAWeather">city</convert>
+	<widget noWrap="1"   source="session.OAWeather">
+		<convert type="OAWeather">temperature_high,day1</convert>
 	</widget>
-	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;16" foregroundColor="black" render="Label" position="855,176" size="120,20" source="session.OAWeather" zPosition="3" halign="center">
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_low,day1</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
 		<convert type="OAWeather">weekday,day2</convert>
 	</widget>
-	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;16" foregroundColor="black" render="Label" position="865,210" size="40,20" source="session.OAWeather" zPosition="3" halign="left">
+	<widget noWrap="1" alphatest="blend" render="OAWeatherPixmap"  source="session.OAWeather">
+		<convert type="OAWeather">weathericon,day2,/usr/share/enigma2/Skin?????/Wettericons/,png</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
 		<convert type="OAWeather">temperature_high,day2</convert>
 	</widget>
-	<widget noWrap="1" backgroundColor="#1273B7" font="Regular;16" foregroundColor="black" render="Label" position="865,235" size="40,20" source="session.OAWeather" zPosition="3" halign="left">
+	<widget noWrap="1" render="Label"  source="session.OAWeather">
 		<convert type="OAWeather">temperature_low,day2</convert>
 	</widget>
-
+	<widget noWrap="1"render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_text,day2</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">weekday,day3</convert>
+	</widget>
+	<widget noWrap="1" alphatest="blend" render="OAWeatherPixmap"  source="session.OAWeather">
+		<convert type="OAWeather">weathericon,day3,/usr/share/enigma2/Skin?????/Wettericons/,png</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_high,day3</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_low,day3</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_text,day3</convert>
+	</widget>
+	<widget noWrap="1" render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">weekday,day4</convert>
+	</widget>
+	<widget noWrap="1" alphatest="blend" render="OAWeatherPixmap"  source="session.OAWeather">
+		<convert type="OAWeather">weathericon,day4,/usr/share/enigma2/Skin?????/Wettericons/,png</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_high,day4</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_low,day4</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_text,day4</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">weekday,day5</convert>
+	</widget>
+	<widget noWrap="1" alphatest="blend" render="OAWeatherPixmap"  source="session.OAWeather">
+		<convert type="OAWeather">weathericon,day5,/usr/share/enigma2/Skin?????/Wettericons/,png</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_high,day5</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_low,day5</convert>
+	</widget>
+	<widget noWrap="1"  render="Label"  source="session.OAWeather">
+		<convert type="OAWeather">temperature_text,day5</convert>
+	</widget>
+or
+	<widget render="Label"  source="session.OAWeather"  noWrap="1">
+		<convert type="OAWeather">temperature_high_low,day5</convert>
+	</widget>
 
 Description:
 
@@ -78,17 +142,18 @@ date                   # Example: "2023-01-13"
 --> to use in combination with current or dayX (X = 1 to 5) (look for the examples)
 
 usage example 2:
-	<widget alphatest="blend" render="OAWeatherPixmap" position="20,553" size="200,122" source="session.OAWeather" transparent="1" zPosition="5" >
+	<widget alphatest="blend" render="OAWeatherPixmap" position="20,553" size="200,122" source="session.OAWeather" transparent="1" zPosition="5">
 		<convert type="OAWeather">weathericon,current,/etc/enigma2/weather_icons_special/</convert>
 	</widget>
 
 --> weathericon, current --> current weather icon
 --> /etc/enigma2/weather_icons_special/ --> folder for weather icons
+--> png --> file extensions (optional)
 
 usage example 3:
 
 Meteofont
 
-	<widget font="Meteo" render="Label" position="20,553" size="200,122" source="session.OAWeather" transparent="1" zPosition="5" >
+	<widget font="Meteo" render="Label" position="20,553" size="200,122" source="session.OAWeather" transparent="1" zPosition="5">
 		<convert type="OAWeather">meteocode</convert>
 	</widget>
