@@ -1,6 +1,4 @@
 from __future__ import print_function
-#import Image
-from PIL import Image
 from six import PY2
 try:
 	from . import dpflib
@@ -40,7 +38,7 @@ def showImage(dev, image):
 def open(usb):
 	try:
 		d = dpflib.open(usb)
-#		d.setProperty(PROPERTY_ORIENTATION, 1)
+		d.setProperty(PROPERTY_ORIENTATION, 1)
 		print("[LCD4linux] open", usb)
 	except:
 		d = None

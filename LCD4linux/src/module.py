@@ -4,7 +4,8 @@
 # for documentation look at IHAD Support Thread
 #
 from __future__ import print_function
-import os
+from os import popen
+from os.path import isfile, exists
 
 
 class L4Lelement:
@@ -89,7 +90,7 @@ class L4Lelement:
 		L4Lelement.HoldKey = H
 
 	def getFont(self, F="0"):
-		if L4Lelement.Font[int(F)].endswith(".ttf") and os.path.isfile(L4Lelement.Font[int(F)]):
+		if L4Lelement.Font[int(F)].endswith(".ttf") and isfile(L4Lelement.Font[int(F)]):
 			return L4Lelement.Font[int(F)]
 		else:
 			return L4Lelement.Font[0]
@@ -139,7 +140,7 @@ class L4Lelement:
 
 def getstatusoutput(cmd):
 	try:
-		pipe = os.popen('{ ' + cmd + '; } 2>&1', 'r')
+		pipe = popen('{ ' + cmd + '; } 2>&1', 'r')
 		text = pipe.read()
 		sts = pipe.close()
 		if sts is None:
@@ -150,7 +151,8 @@ def getstatusoutput(cmd):
 		sts = 1
 		text = "- -"
 		print("[LCD4linux] Error on os-call")
-	return sts, text
+	finally:
+		return sts, text
 
 
 def L4LVtest(VV):
@@ -158,12 +160,12 @@ def L4LVtest(VV):
 	O = ""
 	OO = False
 	P = "opkg"
-	if os.path.exists(L4Linfo % ("var", "opkg")):
+	if exists(L4Linfo % ("var", "opkg")):
 		O = "var"
-	elif os.path.exists(L4Linfo % ("var", "dpkg")):
+	elif exists(L4Linfo % ("var", "dpkg")):
 		O = "var"
 		P = "dpkg"
-	elif os.path.exists("/var/lib/dpkg/status"):
+	elif exists("/var/lib/dpkg/status"):
 		(r1, r2) = getstatusoutput("dpkg -s enigma2-plugin-extensions-lcd4linux | grep Version")
 		if r1 == 0:
 			OO = r2.strip().split()[1].startswith(VV[1:])
