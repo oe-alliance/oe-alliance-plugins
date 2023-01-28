@@ -643,14 +643,5 @@ autoBLchanger/src/logos/Makefile
 LottoExtended/Makefile
 LottoExtended/src/Makefile
 
-OAWeather/Makefile
-OAWeather/src/Makefile
-OAWeather/src/Components/Makefile
-OAWeather/src/Components/Converter/Makefile
-OAWeather/src/Components/Renderer/Makefile
-OAWeather/src/Components/Sources/Makefile
-OAWeather/po/Makefile
-
-
 ])
 AC_OUTPUT
