@@ -1,6 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4
 
-SUBDIRS = ABMCustomMixImporter AboutBoxBranding autoBLchanger Blindscan BTDevicesManager ChannelsImporter DLNABrowser DLNAServer EPGTranslator Fempa LCD4linux OnDemand RemoteChannelStreamConverter SatipClient StreamTV tmdb TunerServer xmlUpdate 3GModemManager Chefkoch PiconsUpdater TVSpielfilm LottoExtended OAWeather
+SUBDIRS = ABMCustomMixImporter AboutBoxBranding autoBLchanger Blindscan BTDevicesManager ChannelsImporter DLNABrowser DLNAServer EPGTranslator Fempa LCD4linux OnDemand RemoteChannelStreamConverter SatipClient StreamTV tmdb TunerServer xmlUpdate 3GModemManager Chefkoch PiconsUpdater TVSpielfilm LottoExtended
 
 if MIPSEL
 SUBDIRS += WirelessAccessPoint
