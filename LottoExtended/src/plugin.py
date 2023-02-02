@@ -37,7 +37,7 @@ def str2floatQuotes(strList):
 			q = sub('\.', '', q)
 		quotes.append(sub(',', '.', q))
 	quotes.reverse()
-	return map(float, quotes)
+	return list(map(float, quotes))
 
 
 def date2ymd(date):
@@ -88,7 +88,7 @@ class Ziehung():
 		else:
 			self.lottoquote = str2floatQuotes(self.strLottoQuote)
 			self.strS77Quote[0:2] = drawing["qs77"][0:2]
-		self.lotto = map(int, self.strLotto)
+		self.lotto = list(map(int, self.strLotto))
 		self.s77quote = str2floatQuotes(self.strS77Quote)
 		self.s6quote = str2floatQuotes(self.strS6Quote)
 
