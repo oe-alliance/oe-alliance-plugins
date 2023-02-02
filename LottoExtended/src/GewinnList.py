@@ -158,7 +158,7 @@ class GewinnListScreen(Screen):
 		if datum != None:
 			self.currDate = datum
 		self.ziehung = self.ziehungen.drawings[self.currDate]
-		self.gezogen = map(int, self.ziehung.strLotto)
+		self.gezogen = list(map(int, self.ziehung.strLotto))
 		if self.ziehung.datum.weekday() == 5:
 			tag = "Samstag"
 		else:
@@ -244,7 +244,7 @@ class GewinnListScreen(Screen):
 						elif richtigeSpiel == 6:
 							pos = 7 + gotSZ
 						if systemtipp >= 0:
-							tipp.lottotreffer = map(lambda x, y: x + y, tipp.lottotreffer, SYSTEMTAB[systemtipp][pos])
+							tipp.lottotreffer = list(map(lambda x, y: x + y, tipp.lottotreffer, SYSTEMTAB[systemtipp][pos]))
 						else:
 							tipp.lottotreffer[pos] += 1
 			if self.gewinne and self.ziehung.lottoquote != None:
@@ -296,7 +296,7 @@ class GewinnListScreen(Screen):
 	def computeGewinnSumme(self, tipp):
 		summe = 0
 		if tipp.participation(self.ziehung.datum) == 1:
-			summe += sum(map(lambda x, y: x * y, tipp.lottotreffer, self.ziehung.lottoquote))
+			summe += sum(list(map(lambda x, y: x * y, tipp.lottotreffer, self.ziehung.lottoquote)))
 			if tipp.spiel77treffer > 0:
 				summe += self.ziehung.s77quote[tipp.spiel77treffer - 1]
 			if tipp.super6treffer > 0:
@@ -525,7 +525,7 @@ class GewinnDetailScreen(Screen):
 		else:
 			tag = "Mittwoch"
 		self["auslosung"] = Label(" Auslosung vom %s, %s" % (tag, self.ziehung.datum.strftime("%d. %B %Y")))
-		self["displotto"] = Label(" - ".join(map(str, self.ziehung.strLotto)))
+		self["displotto"] = Label(" - ".join(list(map(str, self.ziehung.strLotto))))
 		self["dispsuper"] = Label(self.ziehung.strSuperzahl)
 		self["detaillist"] = self.detaillist
 		self["key_green"] = Button("vorheriger Tipp")
