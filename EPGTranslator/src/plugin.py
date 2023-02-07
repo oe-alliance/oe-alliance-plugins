@@ -1116,10 +1116,7 @@ def My_setEvent(self, event):
 # A playback of a recording will, and has valid getEventId() and
 # getServiceName() results.
 #
-    if hasattr(self, 'currentService'):
-        uref = make_uref(event.getEventId(), self.currentService.getServiceName())
-    else:
-        uref = make_uref(event.getEventId(), self.serviceRef.getServiceName())
+    uref = make_uref(event.getEventId(), self.currentService.getServiceName())
     (t_title, t_descr) = AfCache.fetch(uref)
     if t_descr == None:  # Not there...
 
