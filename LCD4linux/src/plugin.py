@@ -9921,7 +9921,7 @@ class UpdateStatus(Screen):
 					self.WDay[ConfigWWW]["Hum"] = "%s%%" % current["humidity"].replace("%", "").strip()
 					self.WDay[ConfigWWW]["Wind"] = "%s %s" % (current["windSpeed"], getDirection(current["windDir"]))
 					self.WDay[ConfigWWW]["Cond"] = current["shortCap"]
-					self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap[svgname] if svgname in iconmap else "na"
+					self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap[svgname] if svgname in iconmap else ""
 					self.WDay[ConfigWWW]["Feel"] = current["feels"].replace("°", "").strip()
 					self.WDay[ConfigWWW]["Rain"] = current["precipitation"]["children"]
 					forecast = jsonData["forecast"]  # collect forecast of today and next 5 days
@@ -9967,7 +9967,7 @@ class UpdateStatus(Screen):
 				High = Code_utf8("%d" % round(curr.get("temp", {}).get("max", "")))
 				Low = Code_utf8("%d" % round(curr.get("temp", {}).get("min", "")))
 				Day = Code_utf8(WeekDays[localtime(curr["dt"]).tm_wday])
-				Icon = curr.get("weather", [{}])[0].get("icon", "") + ".png"
+				Icon = "%s.png" % curr.get("weather", [{}])[0].get("icon", "")
 				Cond = curr.get("weather", [{}])[0].get("description", "")
 				Regen = "%.1f" % (curr.get("rain", 0) + curr.get("snow", 0))
 				IconID = curr.get("weather", [{}])[0].get("id", "0")
@@ -9987,7 +9987,7 @@ class UpdateStatus(Screen):
 					self.WDay[ConfigWWW]["Wind"] = "%d km/h" % (int(float(x[0]) * 3.6))
 			self.WDay[ConfigWWW]["Wind"] += " " + getDirection(r.get("wind", {}).get("deg", 0))
 			self.WDay[ConfigWWW]["Cond"] = r.get("weather", [{}])[0].get("description", "")
-			self.WDay[ConfigWWW]["Icon"] = r.get("weather", [{}])[0].get("icon", "") + ".png"
+			self.WDay[ConfigWWW]["Icon"] = "%s.png" % r.get("weather", [{}])[0].get("icon", "")
 			self.WDay[ConfigWWW]["Feel"] = Code_utf8(str(int(round(getFeel(r.get("main", {}).get("temp", 0), r.get("wind", {}).get("speed", 0) * 3.6))))) if r.get("wind", {}).get("speed", 0) > 1.34 else self.WDay[ConfigWWW]["Temp_c"]
 			self.WDay[ConfigWWW]["Rain"] = r.get("rain", {}).get("3h", 0) + r.get("snow", {}).get("3h", 0) + r.get("main", {}).get("rain", 0)
 			self.WDay[ConfigWWW]["Wtime"] = strftime("%H:%M", localtime(r["dt"]))
@@ -10844,7 +10844,7 @@ def LCD4linuxPIC(self, session):
 							rr = rr.split("::")[0]
 							if rr[-1] != ":":
 								rr += ":"
-							picon = str(rr.replace(":", "_")[:-1]) + ".png"
+							picon = "%s.png" % rr.replace(":", "_")[:-1]
 							L4logE("Picon", picon)
 							cover = join(LCD4linux.PiconPath.value, picon)
 						except Exception as e:
@@ -10858,7 +10858,7 @@ def LCD4linuxPIC(self, session):
 					pos = rr.rfind(':')
 					if pos != -1:
 						rr = rr[:pos]
-					picon = str(rr.rstrip(":").replace(":", "_")) + ".png"
+					picon = "%s.png" % rr.rstrip(":").replace(":", "_")
 					P2 = LCD4linux.PiconPath.value
 					P2A = LCD4linux.PiconPathAlt.value
 					P2C = LCD4linux.PiconCache.value
@@ -13455,33 +13455,24 @@ def LCD4linuxPIC(self, session):
 				d = line.split(':', 1)
 				if len(d) > 1:
 					info[d[0].strip()] = d[1].strip()
-			t = "Caid,Pid,Reader,From,Protocol,Hops,Ecm Time"
-			p = [160, 9.00, 4.60, 2.90, 1.64, 1.28, 1.16, 1.01]
-			font = ImageFont.truetype(FONT, ConfigSize, encoding='unic')
-			w, h = getFsize(t, font)
-			if w > MAX_W * 0.64:  # reduce infoset if font size is too large
-				t = "Caid,Pid,Protocol,Ecm Time"
-				p = [160, 4.80, 2.30, 1.45, 1.01]
+			for idx, t in enumerate(["Caid,Pid,Reader,From,Protocol,Hops,Ecm Time", "Caid,Pid,Protocol,Ecm Time", "Caid,Pid,Ecm Time", "Ecm Time"]):
 				font = ImageFont.truetype(FONT, ConfigSize, encoding='unic')
-				w, h = getFsize(t, font)
-			if w > MAX_W * 0.75:  # reduce infoset if font size is still too large
-				t = "Caid,Pid,Ecm Time"
-				p = [160, 3.10, 1.55, 1.01]
-				font = ImageFont.truetype(FONT, ConfigSize, encoding='unic')
-				w, h = getFsize(t, font)
-			tl = t.split(",")
+				w, h = getFsize(t.split(" ")[0], font)
+				if w < MAX_W * [0.58, 0.71, 0.67, 1.00][idx]:
+					p = [[160, 8.60, 4.40, 2.53, 1.45, 1.18, 1.07], [160, 4.00, 2.00, 1.17], [160, 2.60, 1.30], [150]][idx]
+					break  # font size is small enough for current infoset
 			if ConfigBackColor != "0":
 				self.draw[draw].rectangle((POSX, ConfigPos, POSX + MAX_W, ConfigPos + h), fill=ConfigColor)
-			for x in range(len(tl)):
+			for idx, text in enumerate(t.split(" ")[0].split(",")):
 				if ConfigBackColor != "0":
-					self.draw[draw].text((POSX + int(MAX_W / p[x]), ConfigPos), tl[x], font=font, fill=ConfigBackColor)
+					self.draw[draw].text((POSX + int(MAX_W / p[idx]), ConfigPos), text, font=font, fill=ConfigBackColor)
 				else:
-					self.draw[draw].text((POSX + int(MAX_W / p[x]), ConfigPos), tl[x], font=font, fill=ConfigColor)
+					self.draw[draw].text((POSX + int(MAX_W / p[idx]), ConfigPos), text, font=font, fill=ConfigColor)
 			ConfigPos += h
 			if ConfigBackColor != "0":
 				self.draw[draw].rectangle((POSX, ConfigPos, POSX + MAX_W, ConfigPos + h), fill=ConfigBackColor)
-			for x in range(len(tl)):
-				self.draw[draw].text((POSX + int(MAX_W / p[x]), ConfigPos), info.get(tl[x].lower().split(":")[0], ""), font=font, fill=ConfigColor)
+			for idx, data in enumerate(t.split(",")):
+				self.draw[draw].text((POSX + int(MAX_W / p[idx]), ConfigPos), info.get(data.lower(), ""), font=font, fill=ConfigColor)
 
 # show Title
 	def putTitle(workaround, draw, im):
