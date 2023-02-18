@@ -84,8 +84,12 @@ class AllScreen(Screen):
 		return skin
 
 	def getAPIdata(self, apiuri, fail=None):
-		f = get('%s%s' % (APIURIBASE, apiuri), timeout=(3.05, 6))
-		return (f.text, f.status_code)
+		try:
+			response = get('%s%s' % (APIURIBASE, apiuri), timeout=(3.05, 6))
+			response.raise_for_status()
+			return (response.text, response.status_code)
+		except exceptions.RequestException as error:
+			return("", error)
 
 	def CKlog(self, info, wert="", debug=False):
 		if debug and not config.plugins.chefkoch.debuglog.value:
@@ -1543,7 +1547,7 @@ class CKmain(AllScreen):
 	def makeMainMenu(self):
 		content, resp = self.getAPIdata('recipes?limit=1')
 		if resp != 200:
-			self.session.openWithCallback(self.eject, MessageBox, '\nDer XChefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
 			self.close()
 			return
 		self.setTitle('Hauptmenü')
