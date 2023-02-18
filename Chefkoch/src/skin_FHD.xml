@@ -24,7 +24,7 @@
 		<widget name="pic5" position="1672,675" size="169,112" alphatest="blend" zPosition="1" />
 		<widget name="pic6" position="1672,787" size="169,112" alphatest="blend" zPosition="1" />
 		<widget name="pic7" position="1672,900" size="169,112" alphatest="blend" zPosition="1" />
-		<widget name="postpic" position="center,105" size="420,315" zPosition="1" />
+		<widget name="picture" position="center,105" size="420,315" zPosition="1" />
 		<widget name="postvid" position="center,217" size="75,75" pixmap="{picpath}FHD/videoiconFHD.png" alphatest="blend" zPosition="1" />
 		<widget name="starsbg" position="79,112" size="342,60" pixmap="{picpath}FHD/starsbar_empty_FHD.png" transparent="1" zPosition="0" alphatest="blend" />
 		<widget name="stars" position="79,112" size="342,60" pixmap="{picpath}FHD/starsbar_filled_FHD.png" transparent="1" />
