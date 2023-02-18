@@ -89,7 +89,7 @@ class AllScreen(Screen):
 			response.raise_for_status()
 			return (response.text, response.status_code)
 		except exceptions.RequestException as error:
-			return("", error)
+			return ("", error)
 
 	def CKlog(self, info, wert="", debug=False):
 		if debug and not config.plugins.chefkoch.debuglog.value:
