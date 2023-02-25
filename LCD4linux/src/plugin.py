@@ -4,7 +4,7 @@
 #
 # written by joergm6 @ IHAD
 # (Meteo-Station @ compilator)
-# (dynamic scaling for rectangle analog clockfaces and -hands and tested by Mr.Servo @ OpenA.TV + Turbohai @ IHAD)
+# (dynamic scaling for rectangle analog clockfaces and -hands and tested by Mr.Servo @ OpenA.TV + Turbohai @ IHAD & OpenA.TV)
 # (moon distance and moon illumination-ratio by Mr.Servo @ OpenA.TV)
 # (new MSN-Weather forecast by Mr.Servo @ OpenA.TV)
 #
@@ -39,7 +39,7 @@ from os import remove, statvfs, mkdir, rename, system, stat, symlink
 from os.path import exists, islink, isdir, realpath, isfile, join, normpath, basename, getmtime, dirname, splitext
 from PIL import Image, ImageFont, ImageDraw, ImageColor, ImageEnhance
 from random import shuffle
-from re import findall, search, sub
+from re import findall, sub
 from requests import post, get, exceptions
 from simplejson import loads
 from xml.dom.minidom import parseString
@@ -4076,7 +4076,7 @@ def Urlget(url, params, method, API):
 		headers["Content-type"] = "application/json"
 		f = post(url, headers=headers, params=params)
 	else:
-		f = get(url, headers=headers, params=params)
+		f = get(url, headers=headers, params=params, timeout=(3.05, 6))
 	return (f.text, f.status_code)
 
 
@@ -4685,7 +4685,7 @@ from .bluesound import BlueSound
 def threadGetPage(link, success, fail=None):
 	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 	try:
-		response = get(ensure_binary(link))
+		response = get(link, timeout=(3.05, 6))
 		response.raise_for_status()
 		success(response.content)
 	except exceptions.RequestException as error:
@@ -4696,7 +4696,7 @@ def threadGetPage(link, success, fail=None):
 def threadDownloadPage(link, file, success, fail=None):
 	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 	try:
-		response = get(link)
+		response = get(link, timeout=(3.05, 6))
 		response.raise_for_status()
 		with open(file, "wb") as f:
 			f.write(response.content)
@@ -9805,7 +9805,7 @@ class UpdateStatus(Screen):
 	def downloadWetter(self, ort, wetter):
 		if self.NetworkConnectionAvailable or self.NetworkConnectionAvailable is None:
 			la = language.getLanguage().replace("_", "-").lower()
-
+			city = ""
 			if LCD4linux.WetterApi.value == "MSN":
 				localisation = {"de-de": "de-de/wetter/vorhersage/", "it-it": "it-it/meteo/previsioni/", "cs-cz": "cs-cz/pocasi/predpoved/",
 								"pl-pl": "pl-pl/pogoda/prognoza/", "pt-pt": "pt-pt/meteorologia/previsao/", "es-es": "es-es/eltiempo/prevision/",
@@ -9873,27 +9873,23 @@ class UpdateStatus(Screen):
 			L4log("Wetterdownload Error", str(error))
 		self.WetterOK = False
 
-	def downloadMSNListCallback(self, ConfigWWW, page=""):
-		iconmap = {"SunnyDayV3": 32, "MostlySunnyDay": 34, "PartlyCloudyDayV3": 30, "MostlyCloudyDayV2": 28, "CloudyV3": 26,
-					"BlowingHailV2": 17, "HeavyDrizzle": 9, "BlowingSnowV2": 13, "LightRainV2": 12, "FogV2": 20, "FreezingRainV2": 10,
-					"HazySmokeV2": 21, "ModerateRainV2": 12, "HeavySnowV2": 15, "HailDayV2": 17, "LightRainV3": 9, "LightRainShowerDay": 11,
-					"LightSnowV2": 14, "RainShowersDayV2": 39, "RainSnowV2": 5, "SnowShowersDayV2": 16, "ThunderstormsV2": 4, "ClearNightV3": 31,
-					"MostlyClearNight": 33, "PartlyCloudyNightV2": 29, "MostlyCloudyNightV2": 27, "HazeSmokeNightV2_106": 21, "HailNightV2": 17,
-					"LightRainShowerNight": 45, "RainShowersNightV2": 45, "N422Snow": 14, "RainSnowShowersNightV2": 5, "SnowShowersNightV2": 46,
-					"Haze": ("21", "K")}  # {"MSN-Iconname": "Yahoo+-Iconcode"}
+	def downloadMSNListCallback(self, ConfigWWW, page=b""):
+		iconmap = {"d000": "32", "d100": "34", "d200": "30", "d210": "12", "d211": "5", "d212": "14", "d220": "11", "d221": "42",
+					"d222": "16", "d240": "4", "d300": "28", "d310": "11", "d311": "5", "d312": "14", "d320": "39", "d321": "5",
+					"d322": "16", "d340": "4", "d400": "26", "d410": "9", "d411": "5", "d412": "14", "d420": "9", "d421": "5",
+					"d422": "16", "d430": "12", "d431": "5", "d432": "15", "d440": "4", "d500": "28", "d600": "20", "d605": "17",
+					"d705": "17", "d900": "21", "d905": "17", "d907": "21", "n000": "31", "n100": "33", "n200": "29", "n210": "45",
+					"n211": "5", "n212": "46", "n220": "45", "n221": "5", "n222": "46", "n240": "47", "n300": "27", "n310": "45",
+					"n311": "11", "n312": "46", "n320": "45", "n321": "5", "n322": "46", "n340": "47", "n400": "26", "n410": "9",
+					"n411": "5", "n412": "14", "n420": "9", "n421": "5", "n422": "14", "n430": "12", "n431": "5", "n432": "15",
+					"n440": "4", "n500": "29", "n600": "20", "n605": "17", "n705": "17", "n900": "21", "n905": "17", "n907": "21"
+					}  # {"MSN-Iconname": "Yahoo+ Iconcode"}
 		global wwwWetter
 		self.WetterOK = True
 		L4log("Wetter%sdownload OK" % ConfigWWW)
 		try:
 			L4log("parse Wetter %s" % ConfigWWW)
 			page = page.decode("utf-8", "ignore")
-			startpos = page.find('</style>')
-			endpos = page.find('</script></div>')
-			bereich = page[startpos:endpos]
-			svgdata = findall(r'<img class="iconTempPartIcon-E1_1"\s*src="(.*?)" title="(.*?)"/></div>', bereich)
-			todayData = search(r'class="summaryLineGroupCompact-E1_1">(.*?)"\s*title="(.*?)<a data-t=', bereich)
-			svgsrc = "N/A" if todayData is None else search(r'src="(.*?)"/><a data-t=', todayData.group(0)).group(1)
-			svgname = "na" if todayData is None else svgsrc[svgsrc.rfind("/") + 1:svgsrc.rfind(".")]
 			start = '<script id="redux-data" type="application/json">'
 			startpos = page.find(start)
 			endpos = page.find("</script>", startpos)
@@ -9921,7 +9917,7 @@ class UpdateStatus(Screen):
 					self.WDay[ConfigWWW]["Hum"] = "%s%%" % current["humidity"].replace("%", "").strip()
 					self.WDay[ConfigWWW]["Wind"] = "%s %s" % (current["windSpeed"], getDirection(current["windDir"]))
 					self.WDay[ConfigWWW]["Cond"] = current["shortCap"]
-					self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap[svgname] if svgname in iconmap else ""
+					self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(current["symbol"], "")
 					self.WDay[ConfigWWW]["Feel"] = current["feels"].replace("°", "").strip()
 					self.WDay[ConfigWWW]["Rain"] = current["precipitation"]["children"]
 					forecast = jsonData["forecast"]  # collect forecast of today and next 5 days
@@ -9931,9 +9927,7 @@ class UpdateStatus(Screen):
 						Low = str(forecast[idx]["lowTemp"])
 						date = (currdate + timedelta(days=idx)).strftime("%Y-%m-%d")
 						Day = datetime(int(date[:4]), int(date[5:7]), int(date[8:])).strftime("%a")
-						svgsrc = svgdata[idx][0]
-						svgname = svgsrc[svgsrc.rfind("/") + 1:svgsrc.rfind(".")]
-						Icon = "%s.png" % iconmap[svgname] if svgname in iconmap else "na"
+						Icon = "%s.png" % iconmap.get(forecast[idx]["symbol"], "")
 						Cond = forecast[idx]["cap"]
 						Regen = forecast[idx]["precipitation"]
 						self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
@@ -9993,8 +9987,8 @@ class UpdateStatus(Screen):
 			self.WDay[ConfigWWW]["Wtime"] = strftime("%H:%M", localtime(r["dt"]))
 			self.WDay[ConfigWWW]["IconID"] = r.get("weather", [{}])[0].get("id", "0")
 			self.TimeZone[ConfigWWW] = 0
-			self.Long[ConfigWWW] = r.get("coord", {}).get("lon", 0)
-			self.Lat[ConfigWWW] = r.get("coord", {}).get("lat", 0)
+			self.Long[ConfigWWW] = str(r.get("coord", {}).get("lon", 0))
+			self.Lat[ConfigWWW] = str(r.get("coord", {}).get("lat", 0))
 			self.downloadSunrise()
 			PICwetter[ConfigWWW] = None
 		else:
