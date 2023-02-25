@@ -1460,7 +1460,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 	def setBlueText(self):
 		for key in defaults.keys():
 			if getattr(config.blindscan, key).value != defaults[key]:
-				self["key_blue"].setText("Restore defaults")
+				self["key_blue"].setText(_("Restore defaults"))
 				return
 		if self.blindscan_Ku_band_start_frequency.value != self.Ku_band_freq_limits["low"] or \
 			self.blindscan_Ku_band_stop_frequency.value != self.Ku_band_freq_limits["high"] or \
@@ -1470,7 +1470,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_stop_frequency.value != self.user_defined_lnb_lo_freq + self.tunerIfLimits["high"] or \
 			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_inverted_start_frequency.value != self.user_defined_lnb_lo_freq - self.tunerIfLimits["high"] or \
 			self.user_defined_lnb_scan and self.blindscan_user_defined_lnb_inverted_stop_frequency.value != self.user_defined_lnb_lo_freq - self.tunerIfLimits["low"]:
-			self["key_blue"].setText("Restore defaults")
+			self["key_blue"].setText(_("Restore defaults"))
 		else:
 			self["key_blue"].setText("")
 
