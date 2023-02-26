@@ -46,7 +46,7 @@ mixes = Mixes().read()
 choices = sorted([(mixes[x]["key"], mixes[x]["name"]) for x in mixes], key=lambda listItem: listItem[1])
 
 default_mix = "dsayers_skyuk"
-ABMpath = "/usr/lib/enigma2/python/Plugins/SystemPlugins/AutoBouquetsMaker/custom/"
+ABMpath = "/etc/enigma2/AutoBouquetsMaker/custom/"
 
 config.plugins.abmImporter = ConfigSubsection()
 config.plugins.abmImporter.mix = ConfigSelection(default=default_mix, choices=choices)
