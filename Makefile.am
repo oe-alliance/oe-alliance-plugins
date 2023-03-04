@@ -250,6 +250,10 @@ if USTYM4KOTTPREMIUM
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if USTYM4K2OTTX
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if BEYONWIZV2
 SUBDIRS += MultiTransCodingSetup
 endif
