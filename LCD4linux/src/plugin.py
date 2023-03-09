@@ -8088,9 +8088,14 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		if LCD4linux.Picon2Size.isChanged() or LCD4linux.Picon2FullScreen.isChanged() or LCD4linux.PiconTransparenz.isChanged():
 			if len(LCD4linux.Picon2Cache.value) > 2:
 				rmFiles(join(LCD4linux.Picon2Cache.value, "*.png"))
+		if LCD4linux.WetterApi.isChanged():
+			L4log("Weather API was changed to %s" % LCD4linux.WetterApi.value)
+			resetWetter()
 		if self.SaveWetter != LCD4linux.WetterCity.value or self.SaveWetter2 != LCD4linux.Wetter2City.value:
 			self.SaveWetter = LCD4linux.WetterCity.value
 			self.SaveWetter2 = LCD4linux.Wetter2City.value
+			L4log("Weather City was changed from '%s' to '%s'" % (self.SaveWetter, LCD4linux.WetterCity.value))
+			L4log("Weather2 City was changed from '%s' to '%s'" % (self.SaveWetter2, LCD4linux.Wetter2City.value))
 			resetWetter()
 		if LCD4linux.WetterIconZoom.isChanged() or LCD4linux.WetterRain.isChanged() or LCD4linux.WetterRainZoom.isChanged() or LCD4linux.WetterRainColor.isChanged() or LCD4linux.WetterRainColor2.isChanged() or LCD4linux.WetterRainColor2use.isChanged() or LCD4linux.WetterLine.isChanged() or LCD4linux.WetterTrendArrows.isChanged() or LCD4linux.WetterExtra.isChanged() or LCD4linux.WetterExtraColorFeel.isChanged() or LCD4linux.WetterExtraColorCity.isChanged() or LCD4linux.WetterExtraZoom.isChanged() or LCD4linux.WetterExtraFeel.isChanged() or LCD4linux.WetterWind.isChanged() or LCD4linux.WetterWindLines.isChanged() or LCD4linux.WetterLowColor.isChanged() or LCD4linux.WetterHighColor.isChanged() or LCD4linux.WetterTransparenz.isChanged():
 			PICwetter = [None, None]
@@ -9802,41 +9807,39 @@ class UpdateStatus(Screen):
 			if LCD4linux.WetterApi.value == "MSN":
 				if float(self.Long[wetter]) == 0 and float(self.Lat[wetter]) == 0:
 					self.feedurl = "https://geocoding-api.open-meteo.com/v1/search?language=%s&count=10&name=%s" % (la[:2], city)
-					L4log("MSN%s-citysearch: %s" % (wetter, self.feedurl))
+					L4log("MSN-citysearch%s: %s" % (wetter, self.feedurl))
 					callInThread(getPage, self.feedurl, boundFunction(self.getCityCoordinates, wetter), self.downloadListError)
 				else:
 					feed = "68747470733A2F2F6170692E6D736E2E636F6D2F7765617468657266616C636F6E2F776561746865722F6F766572766965773F266C6F6E3D2573266C61743D2573266C6F63616C653D257326756E6974733D25732661707049643D39653231333830632D666631392D346337382D623465612D313935353865393361356433266170694B65793D6A356934674471484C366E47597778357769356B5268586A74663263357167465839667A666B30544F6F266F6369643D73757065726170702D6D696E692D7765617468657226777261704F446174613D66616C736526696E636C7564656E6F7763617374696E673D7472756526666561747572653D6C696665646179266C696665446179733D363"
-					L4log("MSN%s-getweather: starting..." % wetter)
+					L4log("MSN-getweather%s: starting..." % wetter)
 					self.feedurl = bytes.fromhex(feed[:-1]).decode('utf-8') % (float(self.Long[wetter]), float(self.Lat[wetter]), la, "C") if PY3 else bytearray.fromhex(link[:-1]).decode('utf-8') % (float(self.Long[wetter]), float(self.Lat[wetter]), la, "C")
-					callInThread(getPage, self.feedurl, boundFunction(self.downloadMSNListCallback, wetter), self.downloadListError)
+					callInThread(getPage, self.feedurl, boundFunction(self.downloadMSNcallback, wetter), self.downloadListError)
 
 			elif LCD4linux.WetterApi.value == "OPENWEATHER":
 				apkey = "&appid=%s" % LCD4linux.WetterApiKeyOpenWeatherMap.value if len(LCD4linux.WetterApiKeyOpenWeatherMap.value) > 5 else ""
 				if float(self.Long[wetter]) == 0 and float(self.Lat[wetter]) == 0:
 					city = "id=%s" % quote(ort[3:]) if ort.startswith("wc:") else "q=%s" % quote(ort)
 					self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city, la[:2], apkey)
-					L4log("OWM%s-citysearch: %s" % (wetter, self.feedurl))
-					callInThread(getPage, self.feedurl, boundFunction(self.downloadOpenListCallback, wetter), self.downloadListError)
+					L4log("OWM-citysearch%s: %s" % (wetter, self.feedurl))
+					callInThread(getPage, self.feedurl, boundFunction(self.downloadOWMcallback, wetter), self.downloadListError)
 				else:
 					self.feedurl = "https://api.openweathermap.org/data/2.5/onecall?&lon=%s&lat=%s&units=metric&exclude=hourly,minutely,current&lang=%s%s" % (self.Long[wetter], self.Lat[wetter], la[:2], apkey)
-					L4log("OWM%s-getweather: %s" % (wetter, self.feedurl))
-					callInThread(getPage, self.feedurl, boundFunction(self.downloadOpenListCallback, wetter), self.downloadListError)
+					L4log("OWM-getweather%s: %s" % (wetter, self.feedurl))
+					callInThread(getPage, self.feedurl, boundFunction(self.downloadOWMcallback, wetter), self.downloadListError)
 
 			elif LCD4linux.WetterApi.value == "WEATHERUNLOCKED":
 				apkey = "?app_id=%s&app_key=%s" % (LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[0], LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[1]) if len(LCD4linux.WetterApiKeyWeatherUnlocked.value.split()) == 2 else ""
 				lang = "&lang=%s" % ort.split(".")[0] if "." in ort else ""
-				if float(self.Long[wetter]) == 0 and float(self.Lat[wetter]) == 0:
-					self.feedurl = "http://api.weatherunlocked.com/api/current/%s%s%s" % (city, apkey, lang)
-					L4log("WU%s-citysearch: %s" % (wetter, self.feedurl))
-					callInThread(getPage, self.feedurl, boundFunction(self.downloadUnlockedListCallback, wetter), self.downloadListError)
-				else:
-					self.feedurl = "http://api.weatherunlocked.com/api/forecast/%s%s%s" % (city, apkey, lang)
-					L4log("WU%s-getweather: %s" % (wetter, self.feedurl))
-					callInThread(getPage, self.feedurl, boundFunction(self.downloadUnlockedListCallback, wetter), self.downloadListError)
-			L4log("Wetter%sdownloadstart %s:%s %s %s" % (wetter, LCD4linux.WetterApi.value, ort, language.getLanguage(), la))
+				self.feedurl = "http://api.weatherunlocked.com/api/current/%s%s%s" % (city, apkey, lang)
+				L4log("WU-getcurrentweather%s: %s" % (wetter, self.feedurl))
+				callInThread(getPage, self.feedurl, boundFunction(self.downloadWUcallback, wetter), self.downloadListError)
+				self.feedurl = "http://api.weatherunlocked.com/api/forecast/%s%s%s" % (city, apkey, lang)
+				L4log("WU-getforecastweather%s: %s" % (wetter, self.feedurl))
+				callInThread(getPage, self.feedurl, boundFunction(self.downloadWUcallback, wetter), self.downloadListError)
+			L4log("Wetter%s: Downloadstart %s:%s %s %s" % (wetter, LCD4linux.WetterApi.value, ort, language.getLanguage(), la))
 		else:
 			if self.NetworkConnectionAvailable is not None:
-				L4log("Wetter%s check Network..." % wetter)
+				L4log("Wetter%s: check Network..." % wetter)
 				if DPKG:
 					self.NetworkConnectionAvailable = iNetworkInfo.isConnected()
 				else:
@@ -9853,10 +9856,7 @@ class UpdateStatus(Screen):
 		rmFile(PICmeteo)
 
 	def downloadListError(self, error=""):
-		if error == "":
-			L4log("Wetterdownload Error ?")
-		else:
-			L4log("Wetterdownload Error", str(error))
+		L4log("Wetterdownload Error: %s" % error)
 		self.WetterOK = False
 
 	def getCityCoordinates(self, ConfigWWW, jsonData):
@@ -9864,7 +9864,7 @@ class UpdateStatus(Screen):
 			results = loads(jsonData).get("results", [None])[0]
 		except Exception as err:
 			self.WetterOK = False
-			L4log("MSN-Wetter%s invalid json data from MSN-server: %s" % ConfigWWW, str(err))
+			L4log("Wetter%s-citysearch: invalid json data from MSN-server: %s" % ConfigWWW, str(err))
 			return
 		if results:
 			cityname = results["name"] if "name" in results else ""
@@ -9874,11 +9874,11 @@ class UpdateStatus(Screen):
 			admin3 = ", %s" % results["admin3"] if "admin3" in results else ""
 			self.Long[ConfigWWW] = str(results["longitude"])
 			self.Lat[ConfigWWW] = str(results["latitude"])
-			L4log("Wetter%s lon: %s, lat: %s for %s" % (ConfigWWW, self.Long[ConfigWWW], self.Lat[ConfigWWW], "%s%s%s%s%s" % (cityname, admin1, admin2, admin3, country)))
+			L4log("Wetter%s-citysearch: lon= %s, lat= %s for %s" % (ConfigWWW, self.Long[ConfigWWW], self.Lat[ConfigWWW], "%s%s%s%s%s" % (cityname, admin1, admin2, admin3, country)))
 		else:
-			L4log("Wetter%s citysearch error: no data found." % ConfigWWW)
+			L4log("Wetter%s-citysearch Error: no data found." % ConfigWWW)
 
-	def downloadMSNListCallback(self, ConfigWWW, jsonData):
+	def downloadMSNcallback(self, ConfigWWW, jsonData):
 		iconmap = {"d000": "32", "d100": "34", "d200": "30", "d210": "12", "d211": "5", "d212": "14", "d220": "11", "d221": "42",
 					"d222": "16", "d240": "4", "d300": "28", "d310": "11", "d311": "5", "d312": "14", "d320": "39", "d321": "5",
 					"d322": "16", "d340": "4", "d400": "26", "d410": "9", "d411": "5", "d412": "14", "d420": "9", "d421": "5",
@@ -9892,17 +9892,17 @@ class UpdateStatus(Screen):
 		global wwwWetter
 		self.WetterOK = True
 		wwwWetter[ConfigWWW] = ""
-		L4log("Wetter%sdownload OK" % ConfigWWW)
+		L4log("MSN-Wetter%s: Download OK" % ConfigWWW)
 		r = None
 		try:
 			r = loads(jsonData).get("responses", [None])[0]
 		except Exception as err:
 			self.WetterOK = False
-			L4log("MSN-Wetter%s invalid json data from MSN-server: %s" % ConfigWWW, str(err))
+			L4log("MSN-Wetter%s: invalid json data from MSN-server: %s" % (ConfigWWW, err))
 			return
 		if r:
-			L4log("analysiere MSN-Wetter%s" % ConfigWWW)
-			wwwWetter[ConfigWWW] = "MSN Weather is available"
+			L4log("MSN-Wetter%s: analysing..." % ConfigWWW)
+			wwwWetter[ConfigWWW] = r
 			try:
 				self.WDay[ConfigWWW] = {}
 				source = r["source"]
@@ -9910,7 +9910,7 @@ class UpdateStatus(Screen):
 				forecast = r["weather"][0]["forecast"]["days"]
 				currdate = datetime.fromisoformat(current["created"]) if PY3 else parser.parse(current["created"])
 				self.WDay[ConfigWWW]["Wtime"] = currdate.strftime("%H:%M")
-				self.WDay[ConfigWWW]["Locname"] = source["location"]["Name"].split(",")[0]
+				self.WDay[ConfigWWW]["Locname"] = LCD4linux.WetterCity.value if ConfigWWW == 0 else LCD4linux.Wetter2City.value
 				self.downloadSunrise()
 				self.WDay[ConfigWWW]["Temp_c"] = str(int(round(current["temp"])))
 				self.WDay[ConfigWWW]["Hum"] = "%s%%" % str(int(round(current["rh"])))
@@ -9932,11 +9932,11 @@ class UpdateStatus(Screen):
 					self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
 				PICwetter[ConfigWWW] = None
 			except Exception as err:
-				L4log("MSN-Wetter%sdownload unavailable data. Error:" % ConfigWWW, "%s" % err)
+				L4log("MSN-Wetter%s: Download unavailable data. Error:" % ConfigWWW, "%s" % err)
 		else:
-				L4log("MSN-Wetter%sdownload Error: no data found." % ConfigWWW)
+				L4log("MSN-Wetter%s Download Error: no data found." % ConfigWWW)
 
-	def downloadOpenListCallback(self, ConfigWWW, page=""):
+	def downloadOWMcallback(self, ConfigWWW, page=""):
 		iconmap = {"200": "37", "201": "4", "202": "3", "210": "37", "211": "4", "212": "3", "221": "3", "230": "37",
 					"231": "38", "232": "38", "300": "9", "301": "9", "302": "9", "310": "9", "311": "9", "312": "9",
 					"313": "11", "314": "12", "321": "11", "500": "9", "501": "11", "502": "11", "503": "12", "504": "12",
@@ -9952,22 +9952,22 @@ class UpdateStatus(Screen):
 			r = loads(Code_utf8(page))
 		except Exception as e:
 			wwwWetter[ConfigWWW] = ""
-			L4log("Wetter%sdownload JSON-Error" % ConfigWWW)
-		L4log("Wetter Ready:", "%s" % r)
+			L4log("OWM-Wetter%s: Download JSON-Error" % ConfigWWW)
+		L4log("OWM-Wetter%s Ready: %s" % (ConfigWWW, r))
 
 		if r.get("daily", None) is not None:
 			self.WetterOK = True
-			L4log("Wetter%sdownload OK" % ConfigWWW)
+			L4log("OWM-Wetter%s: Download OK" % ConfigWWW)
 			wwwWetter[ConfigWWW] = r
-			L4log("parse Wetter %s" % ConfigWWW)
+			L4log("OWM-Wetter%s: analysing..." % ConfigWWW)
 			self.WWeek[ConfigWWW] = []
 			for curr in r.get("daily", []):
-				High = Code_utf8("%d" % round(curr.get("temp", {}).get("max", "")))
-				Low = Code_utf8("%d" % round(curr.get("temp", {}).get("min", "")))
+				High = "%d" % round(curr.get("temp", {}).get("max", ""))
+				Low = "%d" % round(curr.get("temp", {}).get("min", ""))
 				Day = Code_utf8(WeekDays[localtime(curr["dt"]).tm_wday])
 				Icon = "%s.png" % iconmap.get(str(curr.get("weather", [{}])[0].get("id", "NA")), "NA")
 				Cond = curr.get("weather", [{}])[0].get("description", "")
-				Regen = "%.1f" % (curr.get("rain", 0) + curr.get("snow", 0))
+				Regen = str(int(float(curr.get("pop", 0) * 100)))
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
 			PICwetter[ConfigWWW] = None
 
@@ -9986,7 +9986,7 @@ class UpdateStatus(Screen):
 			self.WDay[ConfigWWW]["Cond"] = r.get("weather", [{}])[0].get("description", "")
 			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(str(r.get("weather", [{}])[0].get("id", "NA")), "NA")
 			self.WDay[ConfigWWW]["Feel"] = Code_utf8(str(int(round(getFeel(r.get("main", {}).get("temp", 0), r.get("wind", {}).get("speed", 0) * 3.6))))) if r.get("wind", {}).get("speed", 0) > 1.34 else self.WDay[ConfigWWW]["Temp_c"]
-			self.WDay[ConfigWWW]["Rain"] = r.get("rain", {}).get("3h", 0) + r.get("snow", {}).get("3h", 0) + r.get("main", {}).get("rain", 0)
+			self.WDay[ConfigWWW]["Rain"] = str(int(r.get("pop", 0) * 100))
 			self.WDay[ConfigWWW]["Wtime"] = strftime("%H:%M", localtime(r["dt"]))
 			self.Long[ConfigWWW] = str(r.get("coord", {}).get("lon", 0))
 			self.Lat[ConfigWWW] = str(r.get("coord", {}).get("lat", 0))
@@ -9995,9 +9995,9 @@ class UpdateStatus(Screen):
 		else:
 			wwwWetter[ConfigWWW] = ""
 			self.WetterOK = False
-			L4log("Wetter%sdownload Error" % ConfigWWW)
+			L4log("OWM-Wetter%s Download Error: no data found" % ConfigWWW)
 
-	def downloadUnlockedListCallback(self, ConfigWWW, page=""):
+	def downloadWUcallback(self, ConfigWWW, page=""):
 		iconmap = {"0": "32", "1": "34", "2": "30", "3": "28", "10": "21", "21": "40", "22": "42", "23": "18",
 					"24": "8", "29": "38", "38": "15", "39": "41", "45": "20", "49": "20", "50": "9", "51": "9",
 					"56": "8", "57": "8", "60": "40", "61": "11", "62": "40", "63": "12", "64": "40", "65": "12",
@@ -10012,43 +10012,47 @@ class UpdateStatus(Screen):
 			r = loads(Code_utf8(page))
 		except Exception as e:
 			wwwWetter[ConfigWWW] = ""
-			L4log("Wetter%sdownload JSON-Error" % ConfigWWW)
-		L4log("Wetter Ready:", "%s" % r)
+			L4log("WU-Wetter%s: Download JSON-Error" % ConfigWWW)
+		L4log("Wetter%s Ready: %s" % (ConfigWWW, r))
 
 		if r.get("Days", None) is not None:
 			self.WetterOK = True
-			L4log("Wetter%sdownloadForcast OK" % ConfigWWW)
+			L4log("WU-Wetter%s: DownloadForcast OK" % ConfigWWW)
 			wwwWetter[ConfigWWW] = r
-			L4log("parse Wetter %s" % ConfigWWW)
+			L4log("WU-Wetter%s: analysing..." % ConfigWWW)
 			self.WWeek[ConfigWWW] = []
-			for curr in r.get("Days", []):
-				L4logE(curr)
-				High = Code_utf8("%d" % round(curr.get("temp_max_c", 0)))
-				Low = Code_utf8("%d" % round(curr.get("temp_min_c", 0)))
-				d = curr.get("date")
-				dd = d.split("/")
-				Day = Code_utf8(WeekDays[weekday(int(dd[2]), int(dd[1]), int(dd[0]))])
-				Icon = "%s.png" % iconmap.get(str(curr["Timeframes"][4]["wx_code"]), "NA")
-				Cond = curr["Timeframes"][4]["wx_desc"]
-				Regen = "%.1f" % (curr["Timeframes"][4]["rain_mm"])
+			for idx, curr in enumerate(r.get("Days", [])):
+				if idx > 5:  # some keys are missing in day 6
+					break
+				High = str(round(curr.get("temp_max_c", 0)))
+				Low = str(round(curr.get("temp_min_c", 0)))
+				date = curr.get("date", "").split("/")
+				Day = Code_utf8(WeekDays[weekday(int(date[2]), int(date[1]), int(date[0]))])
+				if "Timeframes" in curr:
+					Icon = "%s.png" % iconmap.get(str(curr["Timeframes"][4]["wx_code"]), "NA")
+					Cond = Code_utf8(curr["Timeframes"][4]["wx_desc"])
+					rain = str(curr["Timeframes"][4]["prob_precip_pct"])
+					Regen = rain if rain.isdigit() else "0"  # could be: "< 1"
+				else:
+					Icon, Cond, Regen = ("", "", "")
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
 			PICwetter[ConfigWWW] = None
 
 		elif r.get("lat", None) is not None:
 			self.WetterOK = True
-			L4log("Wetter%sdownloadCurrent OK" % ConfigWWW)
+			L4log("WU-Wetter%s: DownloadCurrent OK" % ConfigWWW)
 			self.WDay[ConfigWWW] = {}
 			self.WDay[ConfigWWW]["Locname"] = ""
-			self.WDay[ConfigWWW]["Temp_c"] = Code_utf8(str(int(r.get("temp_c", 0))))
-			self.WDay[ConfigWWW]["Hum"] = "%s%%" % r.get("humid_pct", 0)
-			self.WDay[ConfigWWW]["Wind"] = "%.1f m/s" % r.get("windspd_ms", 0)
+			self.WDay[ConfigWWW]["Temp_c"] = str(int(r.get("temp_c", 0)))
+			self.WDay[ConfigWWW]["Hum"] = "%s%%" % int(r.get("humid_pct", 0))
 			if LCD4linux.WetterWind.value == "0":
-				self.WDay[ConfigWWW]["Wind"] = "%.1f km/h" % r.get("windspd_kmh", 0)
+				self.WDay[ConfigWWW]["Wind"] = "%s km/h" % int(round(r.get("windspd_kmh", 0)))
 				self.WDay[ConfigWWW]["Wind"] += " " + getDirection(r.get("winddir_deg", 0))
+			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(str(r.get("wx_code", "")), "NA")
 			self.WDay[ConfigWWW]["Cond"] = r.get("wx_desc", "")
-			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(r.get("wx_code", "NA"), "NA")
-			self.WDay[ConfigWWW]["Feel"] = Code_utf8(str(int(round(r.get("feelslike_c", 0)))))
-			self.WDay[ConfigWWW]["Rain"] = r.get("cloudtotal_pct", 0)
+			self.WDay[ConfigWWW]["Feel"] = str(int(round(r.get("feelslike_c", 0))))
+			rain = str(r.get("prob_precip_pct", 0))
+			self.WDay[ConfigWWW]["Rain"] = rain if rain.isdigit() else "0"  # could be: "< 1"
 			self.WDay[ConfigWWW]["Wtime"] = strftime("%H:%M", localtime())
 			self.Long[ConfigWWW] = str(r.get("lon", 0))
 			self.Lat[ConfigWWW] = str(r.get("lat", 0))
@@ -10057,7 +10061,7 @@ class UpdateStatus(Screen):
 		else:
 			wwwWetter[ConfigWWW] = ""
 			self.WetterOK = False
-			L4log("Wetter%sdownload Error" % ConfigWWW)
+			L4log("WU-Wetter%s Download Error: no data found" % ConfigWWW)
 
 	def downloadSunrise(self):
 		L4log("Sunrise...")
@@ -10859,8 +10863,6 @@ def LCD4linuxPIC(self, session):
 					picon = "%s.png" % rr.rstrip(":").replace(":", "_")
 					P2 = LCD4linux.PiconPath.value
 					P2A = LCD4linux.PiconPathAlt.value
-					P2C = LCD4linux.PiconCache.value
-					ret = ""
 					PIC = []
 					PIC.append(join(P2, picon))
 					if not PY3:
@@ -11227,10 +11229,7 @@ def LCD4linuxPIC(self, session):
 					fontS = ImageFont.truetype(ConfigFont, int(((int(LCD4linux.WetterExtraZoom.value) - 100) / 20.0 + 8) * Wmulti), encoding='unic')
 					ShadowText(Wim, POSXs - minus5, POSYs, "%s %s" % (Locname, Wtime), fontS, LCD4linux.WetterExtraColorCity.value, ConfigShadow)
 					font = ImageFont.truetype(ConfigFont, int(15 * Wmulti), encoding='unic')
-					if int(sub(r'[^0-9]+', '', Hum)) < LCD4linux.WetterRainColor2use.value:
-						HumColor = LCD4linux.WetterRainColor.value
-					else:
-						HumColor = LCD4linux.WetterRainColor2.value
+					HumColor = LCD4linux.WetterRainColor.value if float(cleanHum) < LCD4linux.WetterRainColor2use.value else LCD4linux.WetterRainColor2.value
 					Humarrow = ""
 					if LCD4linux.WetterTrendArrows.value:
 						if OldHum != -88:
