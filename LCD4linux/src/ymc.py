@@ -2,9 +2,8 @@
 from __future__ import print_function, absolute_import
 try:
 	import simplejson
-except:
+except Exception as e:
 	import json as simplejson
-
 from six.moves.urllib.request import urlopen
 from .plugin import L4logE
 
@@ -23,23 +22,16 @@ class YMC:
 	def getPlayInfo(self):
 		try:
 			content, resp = self.Urlget("http://%s/YamahaExtendedControl/v1/netusb/getPlayInfo" % self.IP)
-			if resp == 200:
-				r = simplejson.loads(content)
-				return r
-			else:
-				return {}
-		except:
-			L4logE("YMC Error")
+			return simplejson.loads(content) if resp == 200 else {}
+
+		except Exception as e:
+			L4logE("YMC Error: %s" % e)
 			return {}
 
 	def getStatus(self):
 		try:
 			content, resp = self.Urlget("http://%s/YamahaExtendedControl/v1/main/getStatus" % self.IP)
-			if resp == 200:
-				r = simplejson.loads(content)
-				return r
-			else:
-				return {}
-		except:
-			L4logE("YMC Error")
+			return simplejson.loads(content) if resp == 200 else {}
+		except Exception as e:
+			L4logE("YMC Error: %s" % e)
 			return {}
