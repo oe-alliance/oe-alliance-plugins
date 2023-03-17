@@ -2,8 +2,7 @@
 # external interface for LCD4linux
 # by joergm6 @ IHAD
 # for documentation look at IHAD Support Thread
-#
-from __future__ import print_function
+
 from os import popen
 from os.path import isfile, exists
 
@@ -26,7 +25,7 @@ class L4Lelement:
 		self.session = None
 
 	def add(self, element, para):
-		print("[LCD4linuxE] Add", element, para)
+		print("[LCD4linuxE] Add: %s %s" % (element, para))
 		if "%" in para.get("Align", ""):
 			para["Align"] = ("0000" + para["Align"].replace("%", "00"))[-4:]
 		if para.get("Value", None) is not None:
@@ -34,7 +33,7 @@ class L4Lelement:
 		L4Lelement.List[element] = para
 
 	def delete(self, element):
-		print("[LCD4linuxE] Del", element)
+		print("[LCD4linuxE] Del: %s" % element)
 		if L4Lelement.List.get(element, None) is not None:
 			del L4Lelement.List[element]
 		else:
@@ -79,14 +78,14 @@ class L4Lelement:
 		return L4Lelement.Hold
 
 	def setHold(self, H):
-		print("[LCD4linuxE] Hold", H)
+		print("[LCD4linuxE] Hold: %s" % H)
 		L4Lelement.Hold = H
 
 	def getHoldKey(self):
 		return L4Lelement.HoldKey
 
 	def setHoldKey(self, H=False):
-		print("[LCD4linuxE] HoldKey", H)
+		print("[LCD4linuxE] HoldKey: %s" % H)
 		L4Lelement.HoldKey = H
 
 	def getFont(self, F="0"):
@@ -172,7 +171,6 @@ def L4LVtest(VV):
 	if O != "":
 		try:
 			f = open(L4Linfo % (O, P))
-			B = f.readline()
 			OO = f.readline().strip().split()[1].startswith(VV[1:])
 			f.close()
 		except:

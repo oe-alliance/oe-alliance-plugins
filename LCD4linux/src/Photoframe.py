@@ -1,13 +1,10 @@
-#!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
-from __future__ import print_function
-import time
-import usb.core
-import usb.util
-#import Image
+from time import time, sleep
+from usb.core import find
+from usb.util import get_string
 from PIL import Image
-import struct
+from struct import pack
 from six.moves import cStringIO as StringIO
 
 
@@ -15,7 +12,7 @@ def write_jpg2frame(dev, pic):
 	"""Attach header to picture, pad with zeros if necessary, and send to frame"""
 	# create header and stack before picture
 	# middle 4 bytes have size of picture
-	rawdata = b"\xa5\x5a\x18\x04" + struct.pack('<I', len(pic) + 14) + b"\x48\x00\x00\x00" + pic
+	rawdata = b"\xa5\x5a\x18\x04" + pack('<I', len(pic) + 14) + b"\x48\x00\x00\x00" + pic
 	# total transfers must be complete chunks of = 2^16. Complete by padding with zeros
 	pad = (0x10000 - ((len(rawdata) + 2) % 0x10000)) % 0x10000
 	tdata = rawdata + b'\xff\x00' + pad * b'\x00'
@@ -93,7 +90,7 @@ def find_device(Anzahl, device, device2):
 	try:
 		print("[LCD4linux] looking for frame", Anzahl, device['name'], device['idVendor'], device['idProduct'], device2['idProduct'])
 		if Anzahl == 2:
-			d = list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True)) + list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True))
+			d = list(find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True)) + list(find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True))
 			if isinstance(d, list):
 				if len(d) >= 2:
 					d = d[1]
@@ -102,11 +99,11 @@ def find_device(Anzahl, device, device2):
 			else:
 				d = None
 		else:
-			d = list(list(usb.core.find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True)) + list(usb.core.find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True)))[0]
+			d = list(list(find(idVendor=device['idVendor'], idProduct=device['idProduct'], find_all=True)) + list(find(idVendor=device2['idVendor'], idProduct=device2['idProduct'], find_all=True)))[0]
 	except:
 		from traceback import format_exc
 		print("[LCD4linux] find exception")
-		print("Error:", format_exc())
+		print("Error: %s" % format_exc())
 		d = None
 	return d
 
@@ -117,21 +114,21 @@ def init_device(Anzahl, device0, device1):
 
 	if dev is not None:
 		## found it, trying to init it
-		print("[LCD4linux] Find frame device", dev)
+		print("[LCD4linux] Find frame device: %s" % dev)
 		if dev.idProduct == device0["idProduct"]:
 			print("[LCD4linux] init Device")
 			frame_init(dev)
 		else:
 			print("[LCD4linux] Find frame device in Mass Storage Mode")
 			frame_switch(dev)
-			ts = time.time()
+			ts = time()
 			while True:
 				# may need to burn some time
 				dev = find_device(Anzahl, device0, device1)
 				if dev is not None and dev.idProduct == device0["idProduct"]:
 					#switching successful
 					break
-				elif time.time() - ts > 3:
+				elif time() - ts > 3:
 					print("[LCD4linux] switching failed. Ending program")
 					return None
 			frame_init(dev)
@@ -152,37 +149,21 @@ def frame_init(dev):
 
 def frame_switch(dev):
 	"""Switch device from Mass Storage to Mini Monitor"""
-	CTRL_TYPE_VENDOR = (2 << 5)
-	CTRL_IN = 0x80
-	CTRL_RECIPIENT_DEVICE = 0
 	try:
-		time.sleep(0.5)
-		s = "\x00" * 251
+		sleep(0.5)
 		dev.ctrl_transfer(0x00 | 0x80, 0x06, 0xfe, 0xfe, 0xfe)
-#		dev.ctrl_transfer(0x00|0x80,  0x06, 0xfe, 0xfe, s, 0xfe )
-#		dev.ctrl_transfer(CTRL_TYPE_VENDOR | CTRL_IN | CTRL_RECIPIENT_DEVICE, 0x04, 0x00, 0x00, 1)
-#		result = dev.ctrl_transfer(CTRL_TYPE_VENDOR | CTRL_IN | CTRL_RECIPIENT_DEVICE, 0x04, 0x00, 0x00, 1)
-#		expect(result, [ 0x03 ])
-#		result = dev.ctrl_transfer(CTRL_TYPE_VENDOR | CTRL_IN | CTRL_RECIPIENT_DEVICE, 0x01, 0x00, 0x00, 2)
-#		expect(result, [ 0x09, 0x04 ])
-#		result = dev.ctrl_transfer(CTRL_TYPE_VENDOR | CTRL_IN | CTRL_RECIPIENT_DEVICE, 0x02, 0x00, 0x00, 1)
-#		expect(result, [ 0x46 ])
-	# settling of the bus and frame takes about 0.42 sec
-	# give it some extra time, but then still make sure it has settled
 	except:
 		print("[LCD4linux] switching ERROR")
-#		from traceback import format_exc
-#		print(format_exc())
 	finally:
-		time.sleep(2)
+		sleep(2)
 
 
 def name(dev):
 	try:
-		return usb.util.get_string(dev, 1)
+		return get_string(dev, 1)
 	except:
 		try:
-			return usb.util.get_string(dev, 256, 2)
+			return get_string(dev, 256, 2)
 		except:
 			return None
 

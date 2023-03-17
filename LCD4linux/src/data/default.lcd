@@ -1,4 +1,4 @@
-config.Enable=false
+config.Enable=true
 config.L4LVersion=0.0r0
 config.FastMode=5
 config.SwitchToFB2=true

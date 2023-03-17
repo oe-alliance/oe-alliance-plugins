@@ -17,8 +17,7 @@ class LCD4linuxweb(resource.Resource):
 	def render(self, req):
 		req.setHeader('Content-type', 'text/html')
 		req.setHeader('charset', 'UTF-8')
-
-		""" rendering server response """
+#		rendering server response
 		w = ""
 		command = req.args.get(b"width", None)
 		if command is not None:
@@ -82,13 +81,10 @@ class LCD4linuxweb(resource.Resource):
 			html += "<a style=\"color:#FFCC00\" %s>no Picture .... Config-WebIF</a>" % self.HREF
 		html += "</body>\n"
 		html += "</html>\n"
-
 		html += "</form>\n"
-
 		return ensure_binary(html)
 
 
 class LCD4linuxwebView(LCD4linuxweb):
-
 	def __init__(self):
 		self.HREF = ""

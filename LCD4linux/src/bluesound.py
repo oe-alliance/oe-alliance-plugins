@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-from __future__ import print_function
 from six.moves.urllib.request import urlopen
-from xml.etree import ElementTree as ET
+from xml.etree.ElementTree import fromstring
 
 
 def parseXmlToJson(xml):
@@ -30,7 +29,7 @@ class BlueSound:
 		try:
 			content, resp = self.Urlget(self.baseUrl + "Status")
 			if resp == 200:
-				xml = ET.fromstring(content)
+				xml = fromstring(content)
 				r = parseXmlToJson(xml)
 				return r
 			else:
@@ -38,5 +37,5 @@ class BlueSound:
 		except:
 			print("Bluesound Error")
 			from traceback import format_exc
-			print("Error:", format_exc())
+			print("Error: %s" % format_exc())
 			return {}
