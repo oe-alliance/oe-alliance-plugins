@@ -11374,13 +11374,12 @@ def LCD4linuxPIC(self, session):
 						ShadowText(Wim, TempPosX, TempPosY, Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(((14 if LCD4linux.WetterTrendArrows.value else 16)) * Wmulti), encoding='unic')
 						wH, hH = getFsize(Hum, font)
-						HumPosY = POSY + int((12 if LCD4linux.WetterWindLines.value == "2" and ConfigType[0] != "3" else 18) * Wmulti) + h
+						HumPosY = POSY + int((12 if LCD4linux.WetterWindLines.value == "2" and ConfigType[0] != "3" else 20) * Wmulti) + h
 						ShadowText(Wim, TempPosX, HumPosY, Hum, font, HumColor, ConfigShadow)
 						if not PY3:  # for equal results, wH needs an correction under Python 2
 							wH = int(wH * 0.8)
 						font = ImageFont.truetype(ConfigFont, int(int(LCD4linux.WetterExtraZoom.value) / (16.0 if LCD4linux.WetterTrendArrows.value else 13.0) * Wmulti), encoding='unic')
-						ShadowText(Wim, TempPosX + int(wH * 0.8), HumPosY - int(hH * 0.5), Feel, font, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
-						L4log("----------------------")
+						ShadowText(Wim, TempPosX + int(wH * 0.8), HumPosY - int(hH * 0.6), Feel, font, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
 			PICwetter[ConfigWWW] = False
 		counter = 20
 		while PICwetter[ConfigWWW] is True and counter > 0:
