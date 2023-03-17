@@ -11317,12 +11317,9 @@ def LCD4linuxPIC(self, session):
 								pil_image = pil_image.resize((int(int(LCD4linux.WetterIconZoom.value) * Wmulti) + 2, y), Image.ANTIALIAS)
 							PY = int(POSY + (int(40 * Wmulti) - y) / 2)
 							self.im[Wim].paste(pil_image, (POSX, PY + int(20 * Wmulti)))
-					if ConfigType == "3":
-						POSXs, POSYs = POSX, POSY + int(89 * Wmulti)
-					else:
-						POSXs, POSYs = POSX, POSY
+					POSXs, POSYs = (POSX, POSY + int(79 * Wmulti)) if ConfigType == "3" else (POSX, POSY)
 					minus5 = -3
-					font = ImageFont.truetype(ConfigFont, int(((int(LCD4linux.WetterExtraZoom.value) - 100) / 20.0 + 6) * Wmulti), encoding='unic')
+					font = ImageFont.truetype(ConfigFont, int(((int(LCD4linux.WetterExtraZoom.value) - 100) / 20.0 + 8) * Wmulti), encoding='unic')
 					ShadowText(Wim, POSXs - minus5, POSYs, "%s %s" % (Locname, Wtime), font, LCD4linux.WetterExtraColorCity.value, ConfigShadow)
 					HumColor = LCD4linux.WetterRainColor.value if float(cleanHum) < LCD4linux.WetterRainColor2use.value else LCD4linux.WetterRainColor2.value
 					Humarrow = ""
@@ -11366,14 +11363,10 @@ def LCD4linuxPIC(self, session):
 							Wind = (Wind.split(" ", 2))
 							if len(Wind) < 3:
 								Wind = ["N/A", "N/A", "N/A"]
-							if ConfigType[0] == "3":
-								ShadowText(Wim, POSX - minus5, POSY + int(60 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow)
-								ShadowText(Wim, POSX - minus5, POSY + int(72 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
-							else:
-								ShadowText(Wim, POSX - minus5, POSY + int(55 * Wmulti), Wind[0] + " " + Wind[1], font, ConfigColor, ConfigShadow)
-								ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
+							ShadowText(Wim, POSX - minus5, POSY + int(56 * Wmulti), "%s %s" % (Wind[0], Wind[1]), font, ConfigColor, ConfigShadow)
+							ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
 						elif LCD4linux.WetterWindLines.value != "off":
-							ShadowText(Wim, POSX - minus5, POSY + int(64 * Wmulti), Wind, font, ConfigColor, ConfigShadow)
+							ShadowText(Wim, POSX - minus5, POSY + int(62 * Wmulti), Wind, font, ConfigColor, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(((20 if LCD4linux.WetterTrendArrows.value else 25)) * Wmulti), encoding='unic')
 						w, h = getFsize(Temp_c, font)
 						TempPosX = POSX + int(45 * Wmulti)
@@ -11381,7 +11374,7 @@ def LCD4linuxPIC(self, session):
 						ShadowText(Wim, TempPosX, TempPosY, Temp_c, font, LCD4linux.WetterHighColor.value, ConfigShadow)
 						font = ImageFont.truetype(ConfigFont, int(((14 if LCD4linux.WetterTrendArrows.value else 16)) * Wmulti), encoding='unic')
 						wH, hH = getFsize(Hum, font)
-						HumPosY = POSY + int((12 if LCD4linux.WetterWindLines.value == "2" and ConfigType[0] != "3" else 16) * Wmulti) + h
+						HumPosY = POSY + int((12 if LCD4linux.WetterWindLines.value == "2" and ConfigType[0] != "3" else 18) * Wmulti) + h
 						ShadowText(Wim, TempPosX, HumPosY, Hum, font, HumColor, ConfigShadow)
 						if not PY3:  # for equal results, wH needs an correction under Python 2
 							wH = int(wH * 0.8)
