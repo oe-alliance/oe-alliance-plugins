@@ -68,6 +68,7 @@ def vfd_write(text):
 
 
 def setvfdBrightness(value):
+	value = int(value)
 	if BOX in ('gbtrio4kpro', 'gbtrio4k', 'gbip4kled'):
 		value *= 255
 		value /= 10
