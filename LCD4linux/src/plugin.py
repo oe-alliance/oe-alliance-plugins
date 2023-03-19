@@ -4687,8 +4687,6 @@ def getPage(link, success, fail=None, headers={}, timeout=(3.05, 6)):
 			]
 	if "User-Agent" not in headers:
 		headers["User-Agent"] = choice(agents)
-	if "Accept" not in headers:
-		headers["Accept"] = "application/json"
 	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 	try:
 		response = get(link, headers=headers, timeout=timeout)
