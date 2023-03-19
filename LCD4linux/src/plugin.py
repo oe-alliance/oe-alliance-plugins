@@ -4676,7 +4676,7 @@ from .ymc import YMC
 from .bluesound import BlueSound
 
 
-def getPage(link, success, fail=None):
+def getPage(link, success, fail=None, headers={}, timeout=(3.05, 6)):
 	agents = [
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
 			"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
@@ -4685,10 +4685,13 @@ def getPage(link, success, fail=None):
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75"
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
 			]
-	headers = {"User-Agent": choice(agents), 'Accept': 'application/json'}
+	if "User-Agent" not in headers:
+		headers["User-Agent"] = choice(agents)
+	if "Accept" not in headers:
+		headers["Accept"] = "application/json"
 	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 	try:
-		response = get(link, headers=headers, timeout=(3.05, 6))
+		response = get(link, headers=headers, timeout=timeout)
 		response.raise_for_status()
 		success(response.content)
 	except exceptions.RequestException as error:
@@ -9696,7 +9699,7 @@ class UpdateStatus(Screen):
 						feedurl = "http://%s/web/subservices" % URL
 					else:
 						feedurl = "http://%s/web/getcurrent" % URL
-					callInThread(getPage, boundFunction(feedurl, headers=Header, timeout=10), boundFunction(self.downloadwwwBoxCallback, i), boundFunction(self.downloadwwwBoxError, i))
+					callInThread(getPage, feedurl, boundFunction(self.downloadwwwBoxCallback, i), boundFunction(self.downloadwwwBoxError, i), headers=Header)
 					L4log("wwwBox %d" % i, URL)
 			except Exception as e:
 				L4log("wwwBox Syntax Error", wwwURL)
@@ -9751,7 +9754,7 @@ class UpdateStatus(Screen):
 						Header = {"Authorization": "Basic %s" % basicAuth}
 					feedurl = "http://%s/web/timerlist" % URL
 					L4log("wwwBoxTimer %d" % i, feedurl)
-					callInThread(getPage, boundFunction(feedurl, headers=Header, timeout=10), (self.downloadwwwBoxTimerCallback, i), (self.downloadwwwBoxTimerError, i))
+					callInThread(getPage, feedurl, boundFunction(self.downloadwwwBoxTimerCallback, i), boundFunction(self.downloadwwwBoxTimerError, i), headers=Header)
 					L4log("wwwBoxTimer %d" % i, URL)
 			except Exception as e:
 				L4log("wwwBoxTimer Syntax Error", wwwURL)
@@ -10164,11 +10167,11 @@ class UpdateStatus(Screen):
 		apkey = ""
 		if len(LCD4linux.WetterApiKeyOpenWeatherMap.value) > 599:
 			apkey = "&appid=%s" % LCD4linux.WetterApiKeyOpenWeatherMap.value
-			self.feedurl = str("http://api.openweathermap.org/data/2.5/weather?lat=%.2f&lon=%.2f&mode=xml&cnt=1%s" % (float(self.Lat[0].replace(",", ".")), float(self.Long[0].replace(",", ".")), apkey))
+			self.feedurl = "http://api.openweathermap.org/data/2.5/weather?lat=%.2f&lon=%.2f&mode=xml&cnt=1%s" % (float(self.Lat[0].replace(",", ".")), float(self.Long[0].replace(",", ".")), apkey)
 			L4log("Sunrise downloadstart:", self.feedurl)
 			callInThread(getPage, self.feedurl, self.downloadSunriseCallback, self.downloadSunriseError)
 		else:
-			self.feedurl = str("http://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (self.Lat[0], self.Long[0])).replace(",", ".")
+			self.feedurl = ("http://api.sunrise-sunset.org/json?lat=%s&lng=%s&formatted=0" % (self.Lat[0], self.Long[0])).replace(",", ".")
 			L4log("Sunrise2 downloadstart:", self.feedurl)
 			callInThread(getPage, self.feedurl, self.downloadSunriseCallback2, self.downloadSunriseError)
 
@@ -10283,13 +10286,9 @@ class UpdateStatus(Screen):
 			self.LgetGoogleCover = "wait"
 			self.CoverError = ""
 			if LCD4linux.MPCoverType.value == "0":
-				if isVid == False:
-					hq = "music"
-				else:
-					hq = "movie"
+				hq = "music" if isVid == False else "movie"
 				try:
-					url = "https://itunes.apple.com/search?term=%s&limit=2&media=%s" % (quote(Code_utf8(aUmlaute(artist)).encode("latin", "ignore")), hq)
-					url = url.replace("%26", "&")
+					url = ("https://itunes.apple.com/search?term=%s&limit=2&media=%s" % (quote(Code_utf8(aUmlaute(artist)).encode("latin", "ignore")), hq)).replace("%26", "&")
 					L4log("Cover Search", url)
 					callInThread(getPage, url, self.appleImageCallback, self.coverDownloadFailed)
 				except Exception as e:
@@ -10302,10 +10301,7 @@ class UpdateStatus(Screen):
 					self.CoverError = "Google API Key is required"
 					L4log("Error:", self.CoverError)
 				else:
-					if isVid == False:
-						hq = "cd%20cover"
-					else:
-						hq = "dvd%20cover"
+					hq = "cd%20cover" if isVid == False else "dvd%20cover"
 					try:
 						url = "https://www.googleapis.com/customsearch/v1?q=%s&hq=%s&num=10&searchType=image&fileType=png,jpg&safe=medium&imgSize=large&key=%s&cx=001378528959810143413:qx3tznt9mfa" % (quote(Code_utf8(artist).encode("latin", "ignore")), hq, LCD4linux.MPCoverApiGoogle.value)
 						L4log("Cover Search", url)
