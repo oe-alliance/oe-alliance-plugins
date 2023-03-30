@@ -101,7 +101,7 @@ def TVSlog(info, wert='', debug=False):
 			with open('/home/root/logs/tvspielfilm.log', 'a') as f:
 				f.write('%s %s %s\r\n' % (strftime('%H:%M:%S'), info, wert))
 		except IOError:
-			TVSlog("Logging-Error in 'globals:TVSlog':", IOError)
+			TVSlog("Logging-Error in 'globals:TVSlog': %s" % IOError)
 	else:
 		print('[TVSpielfilm] %s %s' % (info, wert))
 
@@ -332,7 +332,7 @@ class TVSBaseScreen(TVSAllScreen):
 
 	def setTVTitle(self, output):
 		title = search(r'<title>(.*?)</title>', output)
-		title = title.group(1).replace('&amp;', '&')
+		title = title.group(1).replace('&amp;', '&') if title is not None else ""
 		title = sub(r' - TV Spielfilm', '', title)
 		self.setTitle(title)
 
@@ -403,13 +403,13 @@ class TVSBaseScreen(TVSAllScreen):
 		self.end = part[1].replace(' Uhr', '').strip()
 
 	def showInfotext(self, infotexts):
-		try:
 			for i, infotext in enumerate(infotexts):
 				if i < 9:
-					self['infotext%s' % i].setText(infotext)
-					self['infotext%s' % i].show()
-		except IndexError:
-			self['infotext%s' % i].hide()
+					try:
+						self['infotext%s' % i].setText(infotext)
+						self['infotext%s' % i].show()
+					except IndexError:
+						self['infotext%s' % i].hide()
 
 	def showRatinginfos(self, output):
 		startpos = output.find('<section class="broadcast-detail__rating">')
@@ -467,7 +467,7 @@ class TVSBaseScreen(TVSAllScreen):
 		output = ensure_str(output)
 		startpos = output.find('<div class="content-area">')
 		endpos = output.find('<h2 class="broadcast-info">')
-		bereich = unescape(output[startpos:endpos])
+		bereich = unescape(output[startpos:endpos]).replace("&shy;", "-")
 		infotext = self.getInfotext(bereich)
 		self.infotextStartEnd(infotext)
 		self.getShortdesc(bereich)
@@ -555,7 +555,7 @@ class TVSBaseScreen(TVSAllScreen):
 		if not self.search:
 			title = search(r'<title>(.*?)</title>', output)
 			if title:
-				title = unescape(title.group(1))
+				title = unescape(title.group(1)).replace("&shy;", "-")
 			self.setTitle(title)
 		if search(r'<ul class="rating-dots">', bereich):
 			self.movie = True
@@ -625,7 +625,7 @@ class TVSBaseScreen(TVSAllScreen):
 			if len(channel):
 				self.sref = self.service_db.lookup(channel[0].lower())
 				if self.sref != "nope":
-					self.zap = True
+					self.zapflag = True
 		picons = findall(r'<img src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png.*?', bereich)
 		picon = getPiconname(picons[0], self.service_db.lookup(picons[0]))
 		if isfile(picon):
@@ -873,8 +873,11 @@ class TVSBaseScreen(TVSAllScreen):
 		shortdesc = self.shortdesc
 		if shortdesc != '' and search(r'Staffel [0-9]+, Episode [0-9]+', shortdesc):
 			episode = search(r'(Staffel [0-9]+, Episode [0-9]+)', shortdesc)
-			episode = sub(r'Staffel ', 'S', episode.group(1))
-			episode = sub(r', Episode ', 'E', episode)
+			if episode is not None:
+				episode = sub(r'Staffel ', 'S', episode.group(1))
+				episode = sub(r', Episode ', 'E', episode)
+			else:
+				episode = ""
 			name = "%s %s" % (name, episode)
 		data = (int(mktime(start.timetuple())), int(mktime(end.timetuple())), name, shortdesc, None)
 		newEntry = RecordTimerEntry(serviceref, checkOldTimers=True, *data)
@@ -938,14 +941,15 @@ class TVSBaseScreen(TVSAllScreen):
 
 	def makeSearchView(self, url):
 		self.hideMenubar()
+		response = None
 		try:
 			response = get(url)
 			response.close()
 			response.raise_for_status()
 		except exceptions.RequestException as error:
 			self.showDownloadError(error)
-			close()
-		output = ensure_str(response.content)
+			self.close()
+		output = ensure_str(response.content) if response is not None else ""
 		title = search(r'<title>(.*?)</title>', output[:300])
 		if title:
 			self['searchtext'].setText(title.group(1))
@@ -957,6 +961,7 @@ class TVSBaseScreen(TVSAllScreen):
 		items, bereich = parsePrimeTimeTable(output)
 		mh = int(47 * SCALE + 0.5)
 		for DATUM, START, TITLE, GENRE, LOGO, LINK, RATING in items:
+			datum_string = ""
 			if DATUM:
 				datum_string = DATUM
 				res_datum = [DATUM]
@@ -975,7 +980,7 @@ class TVSBaseScreen(TVSAllScreen):
 					self.searchref.append(sref)
 				png = getPiconname(LOGO, sref)
 				if png:
- 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
+					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), png=loadPNG(png), flags=BT_SCALE))
 				else:
 					res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2, color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
 				start = sub(r' - ..:..', '', start)
@@ -1155,6 +1160,7 @@ class TVSTippsView(TVSBaseScreen):
 		self.tvtitel = []
 		self.picurllist = []
 		mh = int(47 * SCALE + 0.5)
+		icount = 0
 		for LINK, PIC, TIME, INFOS, NAME, GENRE, LOGO in items:
 			sref = self.service_db.lookup(LOGO)
 			self.new = False
@@ -1173,7 +1179,6 @@ class TVSTippsView(TVSBaseScreen):
 				res.append(MultiContentEntryText(pos=(int(70 * SCALE), 0), size=(int(60 * SCALE), mh), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=TIME))
 			else:
 				start = ''
-			icount = 0
 			for INFO in INFOS:
 				if search(r'neu|new', INFO) or self.sparte != "neu":
 					self.new = True
@@ -1182,6 +1187,7 @@ class TVSTippsView(TVSBaseScreen):
 					yoffset = int((mh - 14 * SCALE * len(INFOS)) / 2 + 14 * SCALE * icount)
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), yoffset), size=(int(40 * SCALE), int(14 * SCALE)), png=loadPNG(png)))
 					icount += 1
+			titelfilter = ""
 			if NAME:
 				titelfilter = NAME
 				res.append(MultiContentEntryText(pos=(int(160 * SCALE), 0), size=(int(580 * SCALE), mh), font=1, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER, text=NAME))
@@ -1789,10 +1795,10 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self.setTitle(self.titel)
 		items, bereich = parseNow(output)
 		nowhour = datetime.now().hour
+		nowminute = datetime.now().minute
+		nowsec = int(nowhour) * 3600 + int(nowminute) * 60
 		if self.jetzt or self.gleich or self.abends and nowhour == 20 or self.abends and nowhour == 21 or self.nachts and nowhour == 22:
 			self.progress = True
-			nowminute = datetime.now().minute
-			nowsec = int(nowhour) * 3600 + int(nowminute) * 60
 		else:
 			self.progress = False
 #20:15#########################################################################################
@@ -1986,7 +1992,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 						start = self.start
 						s1 = sub(r':..', '', start)
 						datum = '%sFIN' % self.postdate
-						datum = sub(r'..FIN', '', date)
+						datum = sub(r'..FIN', '', str(date))
 						datum = "%s%s" % (datum, self.day)
 						parts = start.split(':')
 						seconds = int(parts[0]) * 3600 + int(parts[1]) * 60
@@ -2320,15 +2326,16 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self.tagestipp = tagestipp
 		self.service_db = serviceDB(SERVICEFILE)
 		self.localhtml = '/tmp/tvspielfilm.html'
+		channel = []
 		if not self.tagestipp:
 			channel = findall(r',(.*?).html', link)
 			service = channel[0].lower()
 			self.sref = self.service_db.lookup(service)
 			if self.sref == 'nope':
-				self.zap = False
+				self.zapflag = False
 				self.picon = False
 			else:
-				self.zap = True
+				self.zapflag = True
 		self.primetime = False
 		self.finishedTimerMode = 1
 		if not self.eventview:
@@ -2436,6 +2443,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			else:
 				res.append(MultiContentEntryText(pos=(int(3 * SCALE), int(4 * SCALE)), size=(int(67 * SCALE), int(40 * SCALE)), font=-2,
 						   color=10857646, color_sel=16777215, flags=RT_HALIGN_LEFT | RT_VALIGN_CENTER | RT_WRAP, text='Picon not found'))
+			percent = 0
 			if self.progress:
 				start = sub(r' - ..:..', '', TIME)
 				startparts = start.split(':')
@@ -2448,7 +2456,6 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 				else:
 					length = 86400 - startsec + endsec
 				if nowsec < startsec and endsec > startsec:
-					percent = 0
 					self.percent = False
 				elif endsec < startsec:
 					if nowsec > startsec:
@@ -2463,7 +2470,6 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 						percent = 100
 						self.percent = False
 					else:
-						percent = 0
 						self.percent = False
 				elif nowsec > endsec:
 					percent = 100
@@ -2592,7 +2598,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		if self.current == 'postview' and self.postviewready:
 			if not self.showEPG:
 				self.showEPG = True
-				if self.zap and not self.search:
+				if self.zapflag and not self.search:
 					sref = self.sref
 					channel = ServiceReference(eServiceReference(sref)).getServiceName()
 				elif self.search:
@@ -2651,7 +2657,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 
 	def red(self):
 		if self.current == 'postview' and self.postviewready:
-			if self.zap and not self.search:
+			if self.zapflag and not self.search:
 				c = self['menu'].getSelectedIndex()
 				self.oldindex = c
 				sref = self.sref
@@ -2663,7 +2669,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 				self.redTimer(False, sref)
 			else:
 				self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
-		elif self.current == 'menu' and self.ready and self.zap:
+		elif self.current == 'menu' and self.ready and self.zapflag:
 			c = self['menu'].getSelectedIndex()
 			self.oldindex = c
 			self.postlink = self.tvlink[c]
@@ -2681,7 +2687,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			self.session.open(MessageBox, NOTIMER, MessageBox.TYPE_ERROR, close_on_any_key=True)
 
 	def green(self):
-		if self.current == 'menu' and self.zap and not self.eventview and not self.search:
+		if self.current == 'menu' and self.zapflag and not self.eventview and not self.search:
 			c = self['menu'].getSelectedIndex()
 			try:
 				sref = self.sref
@@ -3033,7 +3039,7 @@ class TVSNews(TVSBaseScreen):
 		if endpos == -1 or endpos < startpos:  # andere Endekennung bei TV-Tipps
 			endpos = output.find('class="desktop_rectangle_any "')
 		bereich = output[startpos:endpos]
-		bereich = unescape(bereich)
+		bereich = unescape(bereich).replace("&shy;", "-")
 		sektionen = bereich.split('</a>')
 		sektionen.pop(-1)
 		for sektion in sektionen:
@@ -3354,7 +3360,7 @@ class TVSPicShow(TVSBaseScreen):
 			callInThread(self.threadGetPage, self.link, self.getPicPage, self.downloadError)
 
 	def getPicPage(self, output):
-		output = unescape(ensure_str(output))
+		output = unescape(ensure_str(output)).replace("&shy;", "-")
 		self.setTVTitle(output)
 		startpos = output.find('<div class="film-gallery">')
 		endpos = output.find('<div class="swiper-slide more-galleries">')
@@ -3634,15 +3640,14 @@ class TVSFullScreen(TVSAllScreen):
 
 class TVSsearchYouTube(TVSAllScreen):
 	def __init__(self, session, name, movie):
-		name = ensure_str(name)
 		global HIDEFLAG
+		self.name = ensure_str(name)
 		self.LinesPerPage = 6
 		skin = readSkin("TVSsearchYouTube")
 		TVSAllScreen.__init__(self, session, skin)
 		if movie:
 			name = "%s Trailer" % name
-		name = str(name.encode('ascii', 'xmlcharrefreplace')).replace(' ', '+')
-		self.name = name
+		name = ensure_str(name.encode('ascii', 'xmlcharrefreplace')).replace(' ', '+')
 		self.link = 'https://www.youtube.com/results?filters=video&search_query=%s' % name
 		self.titel = 'YouTube Trailer Suche'
 		self.localposter = []
@@ -3687,7 +3692,7 @@ class TVSsearchYouTube(TVSAllScreen):
 		self.setTitle(self.titel)
 		startpos = output.find('class="masthead-skeleton-icon">')
 		endpos = output.find(';/*')
-		bereich = unescape(output[startpos:endpos])
+		bereich = unescape(output[startpos:endpos]).replace("&shy;", "-")
 		# für Analysezwecke, wenn z.B. der YouTube-Zugang nicht ordentlich läuft
 		if config.plugins.tvspielfilm.debuglog.value and config.plugins.tvspielfilm.logtofile.value:
 			analyse = bereich.replace('a><a', 'a>\n<a').replace('script><script', 'script>\n<script').replace('},{', '},\n{').replace('}}}]},"publishedTimeText"', '}}}]},\n"publishedTimeText"')
@@ -3751,7 +3756,7 @@ class TVSsearchYouTube(TVSAllScreen):
 			self.count = 1
 			self.trailer_id = []
 			self.trailer_list = []
-			callInThread(self.threadGetPage, self.link, self.makeTrailerList, self.downloadError)
+			callInThread(self.threadGetPage, self.link, self.makeTrailerList, self.YTdownloadError)
 
 	def down(self):
 		if self.ready:
@@ -3951,7 +3956,7 @@ class TVSMain(TVSBaseScreen):
 			self.loginToTVSpielfilm()
 		else:
 			self.MeinTVS = False
-			self.opener = False
+			self.opener = None
 			self.makeTimerDB()
 			self.checkMainMenu()
 
@@ -3959,19 +3964,21 @@ class TVSMain(TVSBaseScreen):
 		values = {'email': self.login, 'pw': self.password, 'perma_login': '1', 'done': '1', 'checkErrors': '1'}
 		values = ensure_binary(dumps(values))
 		error = None
+		loginerror = False
 		try:
 			# https://member.tvspielfilm.de/login/70.html?email=myNutzername%40gmx.de&pw=myPasswort&perma_login=1&done=1&checkErrors=1
-			response = self.opener.open("https://member.tvspielfilm.de/login/70.html", data=values, timeout=60)
-			result = ensure_str(response.read())
-			if search(r'"error":"', result):
-				error = search(r'"error":"(.*?)\\.', result)
-				error = 'Mein TV SPIELFILM: %s!' % error.group(1)
-				loginerror = True
-				if isfile(self.cookiefile):
-					remove(self.cookiefile)
-			else:
-				self.cookie.save()
-			response.close()
+			if self.opener is not None:
+				response = self.opener.open("https://member.tvspielfilm.de/login/70.html", data=values, timeout=60)
+				result = ensure_str(response.read())
+				if search(r'"error":"', result):
+					error = search(r'"error":"(.*?)\\.', result)
+					error = 'Mein TV SPIELFILM: %s!' % error.group(1) if error is not None else ""
+					loginerror = True
+					if isfile(self.cookiefile):
+						remove(self.cookiefile)
+				else:
+					self.cookie.save()
+				response.close()
 		except HTTPException as e:
 			error = 'HTTP Exception Error: %s' % e
 		except HTTPError as e:
@@ -4121,7 +4128,7 @@ class TVSMain(TVSBaseScreen):
 			startpos = output.find('<option value="" label="Alle Sender">Alle Sender</option>')
 			endpos = output.find('<div class="button-toggle">')
 			bereich = output[startpos: endpos]
-			bereich = unescape(bereich)
+			bereich = unescape(bereich).replace("&shy;", "-")
 			name = findall(r'<optgroup label="(.*?)">', bereich)
 			for ni in name:
 				self.makeSecondMenuItem(ni)
@@ -4192,7 +4199,7 @@ class TVSMain(TVSBaseScreen):
 	def makeThirdMenuItem(self, output, start):
 		startpos = output.find('<optgroup label="%s"' % start)
 		endpos = output.find('</optgroup>', startpos)
-		bereich = unescape(output[startpos: endpos])
+		bereich = unescape(output[startpos: endpos]).replace("&shy;", "-")
 		lnk = findall(r"value='(.*?)'", bereich)
 		name = findall(r"<option label='(.*?)'", bereich)
 		for i, ni in enumerate(name):
@@ -4216,7 +4223,7 @@ class TVSMain(TVSBaseScreen):
 			output = ensure_str(open(self.senderhtml, 'r').read())
 			startpos = output.find('<option value="" label="Alle Sender">Alle Sender</option>')
 			endpos = output.find('<div class="button-toggle">')
-			string = unescape(output[startpos: endpos])
+			string = unescape(output[startpos: endpos]).replace("&shy;", "-")
 			self.makeThirdMenuItem(string, sender)
 			self['thirdmenu'].l.setList(self.thirdmenulist)
 			self['thirdmenu'].l.setItemHeight(int(30 * SCALE))
@@ -4311,12 +4318,14 @@ class TVSMain(TVSBaseScreen):
 
 	def downloadSender(self, link):
 		if self.MeinTVS:
+			error = None
 			try:
-				response = self.opener.open(link, timeout=60)
-				data = response.read()
-				with open(self.senderhtml, 'wb') as f:
-					f.write(data)
-				response.close()
+				if self.opener is not None:
+					response = self.opener.open(link, timeout=60)
+					data = response.read()
+					with open(self.senderhtml, 'wb') as f:
+						f.write(data)
+					response.close()
 			except HTTPException as e:
 				error = 'HTTP Exception Error: %s' % e
 			except HTTPError as e:
@@ -4326,7 +4335,7 @@ class TVSMain(TVSBaseScreen):
 			except SocketError as e:
 				error = 'Socket Error: %s' % e
 			except AttributeError as e:
-				error = 'Attribute Error: %s' % e.message
+				error = 'Attribute Error: %s' % e
 			if not error:
 				self.makeSecondMenu(link)
 			else:
@@ -4560,7 +4569,7 @@ class TVSmakeServiceFile(Screen):
 				with open('/home/root/logs/Bouquetimport.log', 'a') as f:
 					f.write(info)
 			except IOError:
-				TVSlog("Logging-Error in 'globals:Bouquetlog':", IOError)
+				TVSlog("Logging-Error in 'globals:Bouquetlog': %s" % IOError)
 
 	def otherBouquet(self, answer):
 		if answer is True:
@@ -4706,6 +4715,7 @@ class TVSgotoPageMenu(TVSAllScreen):
 			ff = open('/home/root/logs/komplette_Senderliste.log', 'w')
 			ff.write('vollständige Liste der unterstützten Sender:\n')
 			ff.write('%s\n' % ('-' * 78))
+			i = -1
 			for i, sendung in enumerate(sender):
 				ff.write('%s\n' % '{0:<30} {1:<2} {2:10}'.format(fullnames[i], '=', sendung.lower()))
 			ff.write('%s\n' % ('-' * 78))
@@ -4895,7 +4905,7 @@ class TVSTipps(TVSAllScreen):
 			response.close()
 			response.raise_for_status()
 		except exceptions.RequestException as error:
-			TVSlog("Downloaderror in module 'TVSTipps:idownload':", output)
+			TVSlog("Downloaderror in module 'TVSTipps:idownload': %s" % link)
 			self.showDownloadError(error)
 		else:
 			with open(self.pics[idx], 'wb') as f:
@@ -5012,7 +5022,7 @@ class TVSConfig(ConfigListScreen, TVSAllScreen):
 
 	def keySelect(self):
 		if self["config"].getCurrent()[1] is config.plugins.tvspielfilm.piconfolder:
-			self.session.openWithCallback(self.folderSelected, LocationBox, text=_("Select target folder"))
+			self.session.openWithCallback(self.folderSelected, LocationBox, text="Wähle Zielordner")
 		else:
 			ConfigListScreen.keySelect(self)
 
@@ -5250,7 +5260,7 @@ class TVSHeuteView(TVSBaseScreen):
 		self.setTitle(self.titel)
 		startpostop = output.find('<div class="gallery-area">')
 		endpostop = output.find('<div class="info-block">')
-		bereichtop = unescape(output[startpostop:endpostop])
+		bereichtop = unescape(output[startpostop:endpostop]).replace("&shy;", "-")
 		bereichtop = sub(r'<wbr/>', '', bereichtop)
 		bereichtop = sub(r'<div class="first-program block-1">\n.*?</div>', '<div class="first-program block-1"><img src="http://a2.tvspielfilm.de/imedia/8461/5218461,qfQElNSTpxAGvxxuSsPkPjQRIrO6vJjPQCu3KaA_RQPfIknB77GUEYh_MB053lNvumg7bMd+vkJk3F+_CzBZSQ==.jpg" width="149" height="99" border="0" /><span class="time"> </span><strong class="title"> </strong></div>', bereichtop)
 		picons = findall(r'"sendericon","channel":"(.*?)","broadcastChannelGroup"', bereichtop)
@@ -5298,9 +5308,11 @@ class TVSHeuteView(TVSBaseScreen):
 				try:
 					picdata, dummy = pic
 					if picdata[-4:] == '.jpg':
-						picurl = ('https://%s.jpg' % search(r'https://(.*).jpg', picdata).group(1)).replace('159', '300')
-						callInThread(self.idownload, idx, picurl)
-						idx += 1
+						picsearch = search(r'https://(.*).jpg', picdata)
+						if picsearch is not None:
+							picurl = ('https://%s.jpg' % picsearch.group(1)).replace('159', '300')
+							callInThread(self.idownload, idx, picurl)
+							idx += 1
 				except IndexError:
 					pass
 			for i in range(idx, 6):  # hide column in case column is unused
@@ -5334,6 +5346,8 @@ class TVSHeuteView(TVSBaseScreen):
 			for i in range(6):
 				self['pictext%s' % i].hide()
 				self['pictext%s_bg' % i].hide()
+		startpos = 0
+		endpos = 0
 		if self.abends:
 			startpos = output.find('<div id="toggleslot-20-p"')
 			endpos = output.find('<div id="toggleslot-0-p"')
@@ -5349,7 +5363,7 @@ class TVSHeuteView(TVSBaseScreen):
 		elif self.vorabend:
 			startpos = output.find('<div id="toggleslot-18-p"')
 			endpos = output.find('<div id="toggleslot-20-p"')
-		bereich = unescape(output[startpos:endpos])
+		bereich = unescape(output[startpos:endpos]).replace("&shy;", "-")
 		bereich = sub(r'<a href="javascript://".*?\n', '', bereich)
 		bereich = sub(r'<a title="Sendung jetzt.*?\n', '', bereich)
 		bereich = sub(r'<span class="add-info icon-livetv"></span>', '', bereich)
@@ -5391,6 +5405,7 @@ class TVSHeuteView(TVSBaseScreen):
 		currentlink = 'na'
 		currenttitle = ''
 		mh = int(86 * SCALE)
+		icount = 0
 		for mi in menuitems:
 			self.menu = 'menu%s' % midx
 			for x in mi:
@@ -5407,7 +5422,6 @@ class TVSHeuteView(TVSBaseScreen):
 					currentlink = 'na'
 					currenttitle = ''
 					hour = sub(r':..', '', x)
-					icount = 0
 					if int(hour) < 5:
 						one_day = timedelta(days=1)
 						datum = "%s%s" % (self.date, one_day)
