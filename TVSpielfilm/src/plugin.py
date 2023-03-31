@@ -1160,7 +1160,6 @@ class TVSTippsView(TVSBaseScreen):
 		self.tvtitel = []
 		self.picurllist = []
 		mh = int(47 * SCALE + 0.5)
-		icount = 0
 		for LINK, PIC, TIME, INFOS, NAME, GENRE, LOGO in items:
 			sref = self.service_db.lookup(LOGO)
 			self.new = False
@@ -1179,6 +1178,7 @@ class TVSTippsView(TVSBaseScreen):
 				res.append(MultiContentEntryText(pos=(int(70 * SCALE), 0), size=(int(60 * SCALE), mh), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=TIME))
 			else:
 				start = ''
+			icount = 0
 			for INFO in INFOS:
 				if search(r'neu|new', INFO) or self.sparte != "neu":
 					self.new = True
@@ -5422,6 +5422,7 @@ class TVSHeuteView(TVSBaseScreen):
 					currentlink = 'na'
 					currenttitle = ''
 					hour = sub(r':..', '', x)
+					icount = 0
 					if int(hour) < 5:
 						one_day = timedelta(days=1)
 						datum = "%s%s" % (self.date, one_day)
