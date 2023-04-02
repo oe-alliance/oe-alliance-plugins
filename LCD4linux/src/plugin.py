@@ -54,7 +54,7 @@ from six import PY3, text_type, BytesIO, ensure_binary, ensure_str
 from struct import unpack
 from textwrap import TextWrapper, wrap
 from threading import Thread
-from time import strftime, strptime, localtime, mktime, time, sleep, timezone, altzone, daylight
+from time import strftime, strptime, localtime, mktime, time, sleep, timezone, altzone, daylight, gmtime
 from twisted.internet.reactor import callInThread
 from unicodedata import normalize
 from boxbranding import getImageDistro, getBoxType, getImageArch
@@ -9865,7 +9865,7 @@ class UpdateStatus(Screen):
 					timezones = {"-06": "America/Anchorage", "-05": "America/Los_Angeles", "-04": "America/Denver", "-03": "America/Chicago", "-02": "America/New_York",
 				  				"-01": "America/Sao_Paulo", "+00": "Europe/London", "+01": "Europe/Berlin", "+02": "Europe/Moscow", "+03": "Africa/Cairo",
 		  						"+04": "Asia/Bangkok", "+05": "Asia/Singapore", "+06": "Asia/Tokyo", "+07": "Australia/Sydney", "+08": "Pacific/Auckland"}
-					currzone = timezones.get(strftime("%z", localtime())[:3], "Europe/Berlin")
+					currzone = timezones.get(strftime("%z", gmtime())[:3], "Europe/Berlin")
 					self.feedurl = "https://api.open-meteo.com/v1/forecast?longitude=%s&latitude=%s&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m,winddirection_10m,precipitation_probability&daily=sunrise,sunset,weathercode,precipitation_probability_max,temperature_2m_max,temperature_2m_min&timezone=%s&windspeed_unit=kmh&temperature_unit=celsius" % (float(self.Long[wetter]), float(self.Lat[wetter]), currzone)
 					L4logE("OM-getweather%s: %s" % (wetter, self.feedurl))
 					callInThread(getPage, self.feedurl, boundFunction(self.downloadOMcallback, wetter), self.downloadListError)
