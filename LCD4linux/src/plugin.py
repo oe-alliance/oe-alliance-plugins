@@ -11617,10 +11617,11 @@ def LCD4linuxPIC(self, session):
 		(ConfigPos, ConfigSize, ConfigFont, ConfigAlign, ConfigSplit, ConfigColor, ConfigBackColor, ConfigShadow, ConfigText) = workaround
 		ConfigPos = int(ConfigPos)
 		ConfigSize = int(ConfigSize)
+		ConfigText = ensure_str(ConfigText)
 		MAX_W, MAX_H = self.im[im].size
 		current_h = ConfigPos
 		font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
-		line = Code_utf8(ConfigText.decode().replace('\n', ''))
+		line = Code_utf8(ConfigText.replace('\n', ''))
 		w, h = getFsize(line, font)
 		POSX = getSplit(ConfigSplit, ConfigAlign, MAX_W, w)
 		if ConfigBackColor != "0":
