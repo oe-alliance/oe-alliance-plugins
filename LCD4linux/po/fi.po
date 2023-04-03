@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-27 17:58+0100\n"
-"PO-Revision-Date: 2023-02-27 18:06+0100\n"
-"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
+"PO-Revision-Date: 2023-04-03 13:16+0300\n"
+"Last-Translator: Orlandox\n"
 "Language-Team: Kojo/Orlandox\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -24,11 +24,11 @@ msgstr "Pe"
 
 #: plugin.py:263
 msgid "Mon"
-msgstr "Maa"
+msgstr "Ma"
 
 #: plugin.py:263
 msgid "Sat"
-msgstr "Sat"
+msgstr "La"
 
 #: plugin.py:263
 msgid "Sun"
@@ -40,11 +40,11 @@ msgstr "To"
 
 #: plugin.py:263
 msgid "Tue"
-msgstr "Tii"
+msgstr "Ti"
 
 #: plugin.py:263
 msgid "Wed"
-msgstr "Kes"
+msgstr "Ke"
 
 #: plugin.py:288
 msgid "black"
@@ -64,11 +64,11 @@ msgstr "hopea"
 
 #: plugin.py:289
 msgid "slategray"
-msgstr "slategray"
+msgstr "liuskeenharmaa"
 
 #: plugin.py:290
 msgid "aquamarine"
-msgstr "vedensininen"
+msgstr "akvamariini"
 
 #: plugin.py:291
 msgid "gold"
@@ -76,7 +76,7 @@ msgstr "kulta"
 
 #: plugin.py:291
 msgid "greenyellow"
-msgstr "viherkeltainen"
+msgstr "vihreäkeltainen"
 
 #: plugin.py:291
 msgid "yellow"
@@ -84,7 +84,7 @@ msgstr "keltainen"
 
 #: plugin.py:292
 msgid "darkorange"
-msgstr "tumma oranssi"
+msgstr "tummanoranssi"
 
 #: plugin.py:292
 msgid "darkred"
@@ -92,7 +92,7 @@ msgstr "tummanpunainen"
 
 #: plugin.py:292
 msgid "indianred"
-msgstr "intianpunainen"
+msgstr "intianpuna"
 
 #: plugin.py:292
 msgid "orange"
@@ -120,7 +120,7 @@ msgstr "vihreä"
 
 #: plugin.py:293
 msgid "lawngreen"
-msgstr "ruohonvihreä"
+msgstr "nurmikonvihreä"
 
 #: plugin.py:293
 msgid "lightgreen"
@@ -128,7 +128,7 @@ msgstr "vaaleanvihreä"
 
 #: plugin.py:293
 msgid "lime"
-msgstr "lime"
+msgstr "limetti"
 
 #: plugin.py:294
 msgid "blue"
@@ -140,11 +140,11 @@ msgstr "sinivioletti"
 
 #: plugin.py:294
 msgid "cadetblue"
-msgstr "cadetblue"
+msgstr "kadetinsininen"
 
 #: plugin.py:294
 msgid "cornflowerblue"
-msgstr "cornflowerblue"
+msgstr "ruiskaunokinsininen"
 
 #: plugin.py:294
 msgid "darkblue"
@@ -160,15 +160,15 @@ msgstr "vaaleansininen"
 
 #: plugin.py:295
 msgid "cyan"
-msgstr "sinivihreä"
+msgstr "syaani"
 
 #: plugin.py:295
 msgid "darkorchid"
-msgstr "darkorchid"
+msgstr "tumma orkidea"
 
 #: plugin.py:295
 msgid "deeppink"
-msgstr "tumma vaaleanpunainen"
+msgstr "syväpinkki"
 
 #: plugin.py:295
 msgid "magenta"
@@ -184,7 +184,7 @@ msgstr "ruskea"
 
 #: plugin.py:296
 msgid "moccasin"
-msgstr "ruskeahko"
+msgstr "mokkasiini"
 
 #: plugin.py:296
 msgid "olive"
@@ -192,7 +192,7 @@ msgstr "oliivi"
 
 #: plugin.py:296
 msgid "rosybrown"
-msgstr "punaruskea"
+msgstr "ruusunruskea"
 
 #: plugin.py:296
 msgid "sandybrown"
@@ -232,51 +232,51 @@ msgstr "Näytöt 1+4"
 
 #: plugin.py:298
 msgid "Screen 2+3"
-msgstr "Näyttö 2+3"
+msgstr "Näytöt 2+3"
 
 #: plugin.py:298
 msgid "Screen 2+3+4"
-msgstr "Näyttö 2+3+4"
+msgstr "Näytöt 2+3+4"
 
 #: plugin.py:298
 msgid "Screen 2+4"
-msgstr "Näyttö 2+4"
+msgstr "Näytöt 2+4"
 
 #: plugin.py:298
 msgid "Screen 2+4+6+8"
-msgstr "Näyttö 2+4+6+8"
+msgstr "Näytöt 2+4+6+8"
 
 #: plugin.py:298
 msgid "Screen 3+4"
-msgstr "Näyttö 3+4"
+msgstr "Näytöt 3+4"
 
 #: plugin.py:298
 msgid "Screen 5-8"
-msgstr "Näyttö 5-8"
+msgstr "Näytöt 5-8"
 
 #: plugin.py:298
 msgid "Screen 5-9"
-msgstr "Näyttö 5-9"
+msgstr "Näytöt 5-9"
 
 #: plugin.py:298 plugin.py:299
 msgid "Screen 1-5"
-msgstr "Näyttö 1-5"
+msgstr "Näytöt 1-5"
 
 #: plugin.py:298 plugin.py:299
 msgid "Screen 1-6"
-msgstr "Näyttö 1-6"
+msgstr "Näytöt 1-6"
 
 #: plugin.py:298 plugin.py:299
 msgid "Screen 1-7"
-msgstr "Näyttö 1-7"
+msgstr "Näytöt 1-7"
 
 #: plugin.py:298 plugin.py:299
 msgid "Screen 1-8"
-msgstr "Näyttö 1-8"
+msgstr "Näytöt 1-8"
 
 #: plugin.py:298 plugin.py:299
 msgid "Screen 1-9"
-msgstr "Näyttö 1-9"
+msgstr "Näytöt 1-9"
 
 #: plugin.py:298 plugin.py:299 plugin.py:300
 msgid "Screen 1"
@@ -332,15 +332,15 @@ msgstr "pois päältä"
 
 #: plugin.py:299
 msgid "Screen 1-2"
-msgstr "Näyttö 1-2"
+msgstr "Näytöt 1-2"
 
 #: plugin.py:299
 msgid "Screen 1-3"
-msgstr "Näyttö 1-3"
+msgstr "Näytöt 1-3"
 
 #: plugin.py:299
 msgid "Screen 1-4"
-msgstr "Näyttö 1-4"
+msgstr "Näytöt 1-4"
 
 #: plugin.py:301 plugin.py:1838
 msgid "on"
@@ -532,7 +532,7 @@ msgstr "Sisäinen TFT-LCD 400x240"
 
 #: plugin.py:310
 msgid "Internal Box-Skin-LCD"
-msgstr "Sisäinen VDF-näyttö"
+msgstr "Sisäinen LCD-näyttö"
 
 #: plugin.py:311
 msgid "only Picture 1024x600"
@@ -636,11 +636,11 @@ msgstr "5 päivää, vertikaalinen näkymä"
 
 #: plugin.py:315
 msgid "Current Temperature (+C)"
-msgstr "Nykyinen lämpötila [+C]"
+msgstr "Nykyinen lämpötila (+C)"
 
 #: plugin.py:315
 msgid "Current Temperature (-C)"
-msgstr "Nykyinen lämpötila [-C]"
+msgstr "Nykyinen lämpötila (-C)"
 
 #: plugin.py:315 plugin.py:316
 msgid "Current"
@@ -672,99 +672,99 @@ msgstr "Lämpötila+Kosteus"
 
 #: plugin.py:318
 msgid "Module 1"
-msgstr "Moduli 1"
+msgstr "Moduuli 1"
 
 #: plugin.py:318
 msgid "Module 1+2"
-msgstr "Moduli 1+2"
+msgstr "Moduulit 1+2"
 
 #: plugin.py:318
 msgid "Module 1+2+3"
-msgstr "Moduli 1+2+3"
+msgstr "Moduulit 1+2+3"
 
 #: plugin.py:318
 msgid "Module 1+2+4"
-msgstr "Moduli 1+2+4"
+msgstr "Moduulit 1+2+4"
 
 #: plugin.py:318
 msgid "Module 1+3"
-msgstr "Moduli 1+3"
+msgstr "Moduulit 1+3"
 
 #: plugin.py:318
 msgid "Module 1+3+4"
-msgstr "Moduli 1+3+4"
+msgstr "Moduulit 1+3+4"
 
 #: plugin.py:318
 msgid "Module 1+4"
-msgstr "Moduli 1+4"
+msgstr "Moduulit 1+4"
 
 #: plugin.py:318
 msgid "Module 1-4"
-msgstr "Moduli 1-4"
+msgstr "Moduulit 1-4"
 
 #: plugin.py:318
 msgid "Module 1-5"
-msgstr "Moduli 1-5"
+msgstr "Moduulit 1-5"
 
 #: plugin.py:318
 msgid "Module 1-6"
-msgstr "Moduli 1-6"
+msgstr "Moduulit 1-6"
 
 #: plugin.py:318
 msgid "Module 2"
-msgstr "Moduli 2"
+msgstr "Moduuli 2"
 
 #: plugin.py:318
 msgid "Module 2+3"
-msgstr "Moduli 2+3"
+msgstr "Moduulit 2+3"
 
 #: plugin.py:318
 msgid "Module 2+3+4"
-msgstr "Moduli 2+3+4"
+msgstr "Moduulit 2+3+4"
 
 #: plugin.py:318
 msgid "Module 2+4"
-msgstr "Moduli 2+4"
+msgstr "Moduulit 2+4"
 
 #: plugin.py:318
 msgid "Module 2-6"
-msgstr "Moduli 2+6"
+msgstr "Moduulit 2+6"
 
 #: plugin.py:318
 msgid "Module 3"
-msgstr "Moduli 3"
+msgstr "Moduuli 3"
 
 #: plugin.py:318
 msgid "Module 3+4"
-msgstr "Moduli 3+4"
+msgstr "Moduulit 3+4"
 
 #: plugin.py:318
 msgid "Module 3-6"
-msgstr "Moduli 3-6"
+msgstr "Moduulit 3-6"
 
 #: plugin.py:318
 msgid "Module 4"
-msgstr "Moduli 4"
+msgstr "Moduuli 4"
 
 #: plugin.py:318
 msgid "Module 4-6"
-msgstr "Moduli 4-6"
+msgstr "Moduulit 4-6"
 
 #: plugin.py:318
 msgid "Module 5"
-msgstr "Moduli 5"
+msgstr "Moduuli 5"
 
 #: plugin.py:318
 msgid "Module 5-6"
-msgstr "Moduli 5-6"
+msgstr "Moduulit 5-6"
 
 #: plugin.py:318
 msgid "Module 6"
-msgstr "Moduli 6"
+msgstr "Moduuli 6"
 
 #: plugin.py:318
 msgid "userdefined"
-msgstr "käyttäjän valitsema"
+msgstr "käyttäjän määrittelemä"
 
 #: plugin.py:320
 msgid "Bar"
@@ -812,11 +812,11 @@ msgstr "Päivämäärä+Aika+Viikonpäivä"
 
 #: plugin.py:321
 msgid "Flaps Design Date"
-msgstr "\"Läppä\"-mallinen päivämäärä"
+msgstr "Läppä-mallinen päivämäärä"
 
 #: plugin.py:321
 msgid "Flaps Design Weekday"
-msgstr "\"Läppä\"-mallinen viikonpäivä"
+msgstr "Läppä-mallinen viikonpäivä"
 
 #: plugin.py:321
 msgid "Time"
@@ -994,11 +994,11 @@ msgstr "Päivämäärät: 9 riviä"
 
 #: plugin.py:325
 msgid "Dates compact 2 Lines"
-msgstr "Päivämäärät: suppea, 2 riviä"
+msgstr "Päivämäärät: kompakti, 2 riviä"
 
 #: plugin.py:325
 msgid "Dates compact 3 Lines"
-msgstr "Päivämäärät: suppea, 3 riviä"
+msgstr "Päivämäärät: kompakti, 3 riviä"
 
 #: plugin.py:325 plugin.py:14353
 msgid "no Dates"
@@ -1006,11 +1006,11 @@ msgstr "ei Päivämääriä"
 
 #: plugin.py:326
 msgid "Underline"
-msgstr "Alleviiva"
+msgstr "Alleviivaus"
 
 #: plugin.py:326
 msgid "Underline 2"
-msgstr "Alleviiva 2"
+msgstr "Alleviivaus 2"
 
 #: plugin.py:326 plugin.py:806 plugin.py:1365
 msgid "Frame"
@@ -1022,11 +1022,11 @@ msgstr "Päivämäärät"
 
 #: plugin.py:327
 msgid "Dates compact"
-msgstr "Päivämäärät: suppea"
+msgstr "Päivämäärät: kompakti"
 
 #: plugin.py:327
 msgid "Dates compact no Icon"
-msgstr "Päivämäärät: suppea, ei ikonia"
+msgstr "Päivämäärät: kompakti, ei ikonia"
 
 #: plugin.py:327
 msgid "Dates no Icon"
@@ -1038,7 +1038,7 @@ msgstr "ei Ikonia"
 
 #: plugin.py:328
 msgid "no Icon, with Targetnumber"
-msgstr "ei ikonia, kohdenumeroiden kanssa"
+msgstr "ei ikonia, kohdenumeron kanssa"
 
 #: plugin.py:328
 msgid "with Icon"
@@ -1101,11 +1101,11 @@ msgstr "%"
 
 #: plugin.py:331
 msgid "% + Load@1min"
-msgstr "% + Load@1min"
+msgstr "% + Kuorma@1min"
 
 #: plugin.py:331
 msgid "% + Load@5min"
-msgstr "% + Load@5min"
+msgstr "% + Kuorma@5min"
 
 #: plugin.py:331
 msgid "Load@1min"
@@ -1145,11 +1145,11 @@ msgstr "Vain etäisyys"
 
 #: plugin.py:334
 msgid "Distance+Illumination"
-msgstr "Etäisyys + valaistu %"
+msgstr "Etäisyys+valaistu %"
 
 #: plugin.py:334
 msgid "Distance+Moonphase"
-msgstr "Etäisyys + kuuvaihe"
+msgstr "Etäisyys+kuuvaihe"
 
 #: plugin.py:334
 msgid "Illumination only"
@@ -1157,7 +1157,7 @@ msgstr "Vain valaistu %"
 
 #: plugin.py:334
 msgid "Illumination+Moonphase"
-msgstr "Valaistu % + kuuvaihe"
+msgstr "Valaistu %+kuuvaihe"
 
 #: plugin.py:334
 msgid "Moonphase only"
@@ -1214,15 +1214,15 @@ msgstr "Kanava+Otsikko"
 
 #: plugin.py:339
 msgid "Picon+Channel"
-msgstr "Picon+Kanava"
+msgstr "Piconi+Kanava"
 
 #: plugin.py:339
 msgid "Picon+Channel+Title"
-msgstr "Picon+Kanava+Otsikko"
+msgstr "Piconi+Kanava+Otsikko"
 
 #: plugin.py:339 plugin.py:345 plugin.py:817 plugin.py:828 plugin.py:5969
 msgid "Picon"
-msgstr "Picon"
+msgstr "Piconi"
 
 #: plugin.py:340
 msgid "same color"
@@ -1239,11 +1239,11 @@ msgstr "kyllä"
 
 #: plugin.py:342
 msgid "vertically"
-msgstr "vertikaalinen"
+msgstr "pystysuorasti"
 
 #: plugin.py:342 plugin.py:875 plugin.py:1463 plugin.py:1909
 msgid "horizontally"
-msgstr "horisontaalinen"
+msgstr "vaakasuorasti"
 
 #: plugin.py:343
 msgid "4"
@@ -1293,7 +1293,7 @@ msgstr "Kulma+Ajansiirto"
 
 #: plugin.py:345
 msgid "Picon+Timeshift"
-msgstr "Picon+Ajansiirto"
+msgstr "Piconi+Ajansiirto"
 
 #: plugin.py:346
 msgid "only Progress Bar"
@@ -1301,15 +1301,15 @@ msgstr "vain etenemispalkki"
 
 #: plugin.py:347
 msgid "with Remaining Minutes"
-msgstr "jäljellä oleva aika minuutteina"
+msgstr "jäljellä olevien minuuttien kanssa"
 
 #: plugin.py:347
 msgid "with Remaining Minutes (Size 1.5)"
-msgstr "jäljellä oleva aika minuutteina (Koko 1,5)"
+msgstr "jäljellä olevien minuuttien kanssa (Koko 1,5)"
 
 #: plugin.py:347
 msgid "with Remaining Minutes (Size 2)"
-msgstr "jäljellä oleva aika minuutteina (Koko 2)"
+msgstr "jäljellä olevien minuuttien kanssa (Koko 2)"
 
 #: plugin.py:348
 msgid "with Percent"
@@ -1329,11 +1329,11 @@ msgstr "jäljellä oleva aika minuutteina (yläpuolella)"
 
 #: plugin.py:349
 msgid "with Remaining Minutes (above/Size 1.5)"
-msgstr "jäljellä oleva aika minuutteina (Koko 1,5/yläpuolella)"
+msgstr "jäljellä olevien minuuttien kanssa (yläpuolella/Koko 1,5)"
 
 #: plugin.py:349
 msgid "with Remaining Minutes (above/Size 2)"
-msgstr "jäljellä oleva aika minuutteina (Koko 2/yläpuolella)"
+msgstr "jäljellä olevien minuuttien kanssa (yläpuolella/Koko 2)"
 
 #: plugin.py:350
 msgid "with Percent (above)"
@@ -1349,15 +1349,15 @@ msgstr "prosentteina (yläpuolella/Koko 2)"
 
 #: plugin.py:351
 msgid "with Remaining Minutes (below)"
-msgstr "jäljellä oleva aika minuutteina (alapuolella)"
+msgstr "jäljellä olevien minuuttien kanssa (alapuolella)"
 
 #: plugin.py:351
 msgid "with Remaining Minutes (below/Size 1.5)"
-msgstr "jäljellä oleva aika minuutteina (Koko 1,5/alapuolella)"
+msgstr "jäljellä olevien minuuttien kanssa (alapuolella/Koko 1,5)"
 
 #: plugin.py:351
 msgid "with Remaining Minutes (below/Size 2)"
-msgstr "jäljellä oleva aika minuutteina (Koko 2/alapuolella)"
+msgstr "jäljellä olevien minuuttien kanssa (alapuolella/Koko 2)"
 
 #: plugin.py:352
 msgid "with Percent (below)"
@@ -1453,11 +1453,11 @@ msgstr "Normaali (5s)"
 
 #: plugin.py:386
 msgid "alphabetic"
-msgstr "alphabetic"
+msgstr "aakkosellinen"
 
 #: plugin.py:386
 msgid "random"
-msgstr "sekalainen"
+msgstr "satunnainen"
 
 #: plugin.py:387
 msgid "better/slow"
@@ -1589,7 +1589,7 @@ msgstr "60"
 
 #: plugin.py:477
 msgid "Coversearch"
-msgstr "Coversearch"
+msgstr "Kansihaku"
 
 #: plugin.py:477
 msgid "MusicCast"
@@ -1646,19 +1646,19 @@ msgstr "8bit - harmaasävy/väri"
 
 #: plugin.py:508
 msgid "2 x FastForwardKey"
-msgstr "2 x eteenpäinkelaus"
+msgstr "2 x eteenpäinkelaus-näppäin"
 
 #: plugin.py:508
 msgid "2 x FastForwardKey Type 2"
-msgstr "2 x eteenpäinkelaus, tyyppi 2"
+msgstr "2 x eteenpäinkelaus-näppäin, tyyppi 2"
 
 #: plugin.py:508
 msgid "Long FastForwardKey"
-msgstr "Pitkä eteenpäinkelaus"
+msgstr "Pitkä eteenpäinkelaus-näppäin"
 
 #: plugin.py:508
 msgid "Long FastForwardKey Type 2"
-msgstr "Pitkä eteenpäinkelaus tyyppi 2"
+msgstr "Pitkä eteenpäinkelaus-näppäin tyyppi 2"
 
 #: plugin.py:508 plugin.py:509
 msgid "2 x InfoKey"
@@ -1670,23 +1670,23 @@ msgstr "2 x Mykistys"
 
 #: plugin.py:508 plugin.py:509
 msgid "Long InfoKey"
-msgstr "Pitkä Info-painike"
+msgstr "Pitkä Info-näppäin"
 
 #: plugin.py:509
 msgid "2 x FastBackwardKey"
-msgstr "2 x taaksepäinkelaus"
+msgstr "2 x taaksepäinkelaus-näppäin"
 
 #: plugin.py:509
 msgid "2 x FastBackwardKey Type 2"
-msgstr "2 x taaksepäinkelaus, tyyppi 2"
+msgstr "2 x taaksepäinkelaus-näppäin, tyyppi 2"
 
 #: plugin.py:509
 msgid "Long FastBackwardKey"
-msgstr "Pitkä taaksepäinkelaus"
+msgstr "Pitkä taaksepäinkelaus-näppäin"
 
 #: plugin.py:509
 msgid "Long FastBackwardKey Type 2"
-msgstr "Pitkä taaksepäinkelaus tyyppi 2"
+msgstr "Pitkä taaksepäinkelaus-näppäin tyyppi 2"
 
 #: plugin.py:530 plugin.py:579
 msgid "15min"
@@ -1750,11 +1750,11 @@ msgstr "säädetty (läpinäkyvä)"
 
 #: plugin.py:625
 msgid "MUTE or defined Keys"
-msgstr "Mykistä, tai määritelty painike"
+msgstr "MUTE tai määritellyt näppäimet"
 
 #: plugin.py:625
 msgid "any Key"
-msgstr "mikä tahansa painike"
+msgstr "mikä tahansa näppäin"
 
 #: plugin.py:762 plugin.py:774 plugin.py:786 plugin.py:1333 plugin.py:1345
 msgid "Info"
@@ -1778,11 +1778,11 @@ msgstr "Aika+Pituus+Info"
 
 #: plugin.py:801 plugin.py:1361
 msgid "half left"
-msgstr "half left"
+msgstr "puolet vasen"
 
 #: plugin.py:801 plugin.py:1361
 msgid "half right"
-msgstr "half right"
+msgstr "puolet oikea"
 
 #: plugin.py:806 plugin.py:1365
 msgid "Frame x2"
@@ -1790,7 +1790,7 @@ msgstr "Kehys x2"
 
 #: plugin.py:806 plugin.py:1365
 msgid "Line"
-msgstr "Line"
+msgstr "Rivi"
 
 #: plugin.py:806 plugin.py:1365
 msgid "no Bar"
@@ -1814,15 +1814,15 @@ msgstr "Normaali"
 
 #: plugin.py:817
 msgid "Picon+Position below"
-msgstr "Picon+Positio alla"
+msgstr "Piconi+Sijainti alla"
 
 #: plugin.py:817
 msgid "Picon+Position left"
-msgstr "Picon+Positio vasemmalla"
+msgstr "Piconi+Sijainti vasemmalla"
 
 #: plugin.py:817
 msgid "Picon+Position right"
-msgstr "Picon+Positio oikealla"
+msgstr "Piconi+Sijainti oikealla"
 
 #: plugin.py:817
 msgid "Position"
@@ -2140,27 +2140,27 @@ msgstr "- LCD 3 Virkistys"
 
 #: plugin.py:5743
 msgid "Box-Skin-LCD Dimension"
-msgstr "VDF-näytön mitat"
+msgstr "VFD-näytön mitat"
 
 #: plugin.py:5744
 msgid "Box-Skin-LCD Offset"
-msgstr "VDF-näyttön  poikkeama"
+msgstr "VFD-näyttön poikkeama"
 
 #: plugin.py:5745
 msgid "Box-Skin-LCD Color"
-msgstr "VDF-näytön väri"
+msgstr "VFD-näytön väri"
 
 #: plugin.py:5746
 msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "VDF-näyttö, aktivoi Käynnissä -tilassa"
+msgstr "VFD-näyttö, aktivoi Käynnissä-tilassa"
 
 #: plugin.py:5747
 msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "VDF-näyttö, aktivoi Media -tilassa"
+msgstr "VFD-näyttö, aktivoi Media-tilassa"
 
 #: plugin.py:5748
 msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "VDF-näyttö, aktivoi valmiustilassa"
+msgstr "VFD-näyttö, aktivoi Valmiustilassa"
 
 #: plugin.py:5749
 msgid "OSD [display time]"
@@ -2202,7 +2202,7 @@ msgstr "- mikä LCD-näyttö"
 
 #: plugin.py:5753
 msgid "- Show in Mode"
-msgstr "- Näytä tilassa"
+msgstr "- Näytä Tilassa"
 
 #: plugin.py:5754
 msgid "- OSD Size"
@@ -2214,7 +2214,7 @@ msgstr "- Tausta/Läpinäkyvyys"
 
 #: plugin.py:5756
 msgid "- Fast Grab lower quality"
-msgstr "- Fast Grab lower quality"
+msgstr "- Fast Grab huonompi laatu"
 
 #: plugin.py:5757
 msgid "Popup Text"
@@ -2222,7 +2222,7 @@ msgstr "Popup-Teksti"
 
 #: plugin.py:5760
 msgid "- Clear Key"
-msgstr "- Poistu-painike"
+msgstr "- Poistu-näppäin"
 
 #: plugin.py:5761 plugin.py:6027 plugin.py:6039 plugin.py:6050 plugin.py:6063
 #: plugin.py:6076 plugin.py:6089 plugin.py:6157 plugin.py:6169 plugin.py:6181
@@ -2274,7 +2274,7 @@ msgstr "- Fontin koko"
 #: plugin.py:7753 plugin.py:7766 plugin.py:7782 plugin.py:7795 plugin.py:7806
 #: plugin.py:7818 plugin.py:7849
 msgid "- Position"
-msgstr "- Positio"
+msgstr "- Sijainti"
 
 #: plugin.py:5763 plugin.py:5974 plugin.py:5987 plugin.py:6004 plugin.py:6019
 #: plugin.py:6030 plugin.py:6041 plugin.py:6053 plugin.py:6066 plugin.py:6079
@@ -2534,7 +2534,7 @@ msgstr "- Extra Zoom"
 
 #: plugin.py:5815
 msgid "- Show chill temperature from difference"
-msgstr "- Näytä viileän lämpötilan ero paikasta"
+msgstr "- Näytä jäähdytyslämpötila erosta"
 
 #: plugin.py:5816
 msgid "- Extra Color City"
@@ -2542,7 +2542,7 @@ msgstr "- Kaupungin lisäväri"
 
 #: plugin.py:5817
 msgid "- Extra Color Chill"
-msgstr "- Viileän lisäväri"
+msgstr "- Jäähtymislämpötilan lisäväri"
 
 #: plugin.py:5818
 msgid "Netatmo CO2 Min Range"
@@ -2570,11 +2570,11 @@ msgstr "Kaksoispainallus vaihtaa näyttöä"
 
 #: plugin.py:5824
 msgid "Key for Screen Change"
-msgstr "Painike näytön vaihtamiseen"
+msgstr "Näppäin näytön vaihtamiseen"
 
 #: plugin.py:5825
 msgid "Key for Screen On/Off"
-msgstr "Painike, näyttö päälle/pois"
+msgstr "Näppäin, näyttö päälle/pois"
 
 #: plugin.py:5826
 msgid "FritzCall Picture Path [ok]>"
@@ -2594,7 +2594,7 @@ msgstr "FritzCall: Kuvien määrä"
 
 #: plugin.py:5830
 msgid "FritzCall Picture Orientation"
-msgstr "FritzCall: Kuvien asettelu"
+msgstr "FritzCall: Kuvan asettelu"
 
 #: plugin.py:5831
 msgid "FritzCall Picture Transparency"
@@ -2678,7 +2678,7 @@ msgstr "Viritin: Väri, kun laite päällä"
 
 #: plugin.py:5858
 msgid "Service search first"
-msgstr "Palvelunhaku ensin"
+msgstr "Kanavanhaku ensin"
 
 #: plugin.py:5859
 msgid "DVB-T Signal-Quality Correction"
@@ -2798,7 +2798,7 @@ msgstr "Posti: IMAP-rajan kesto päivissä"
 
 #: plugin.py:5888
 msgid "Mail Show Empty Mailboxes"
-msgstr "Posti: Näytä \"Tyhjennä postilaatikot\""
+msgstr "Posti: Näytä 'Tyhjennä postilaatikot'"
 
 #: plugin.py:5889
 msgid "Mail Show Date"
@@ -3010,7 +3010,7 @@ msgstr "LCD: pois päältä kun sammutettuna"
 
 #: plugin.py:5942
 msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr "Timing ! calc all Times to Time/5*2 in Fastmode"
+msgstr "Ajoitus! laske kaikki ajat aikaan/5*2 Nopea-tilassa"
 
 #: plugin.py:5943
 msgid "Display Delay [ms]"
@@ -3022,7 +3022,7 @@ msgstr "Ketjut per LCD"
 
 #: plugin.py:5945
 msgid "Show Crash Corner"
-msgstr "Show Crash Corner"
+msgstr "Näytä kaatumiskulma"
 
 #: plugin.py:5946
 msgid "Show 'no ....' Messages"
@@ -3054,7 +3054,7 @@ msgstr "Vaihda ruutubufferia [jos mahdollista]"
 
 #: plugin.py:5953
 msgid "Config Backup Path [ok]>"
-msgstr "Asetukset: Varmuuskopion polku [ok]"
+msgstr "Asetukset: Varmuuskopion polku [ok]>"
 
 #: plugin.py:5954
 msgid "Config Restore All Settings"
@@ -3062,11 +3062,11 @@ msgstr "Asetukset: Palauta kaikki asetukset"
 
 #: plugin.py:5955
 msgid "Debug-Logging > /tmp/L4log.txt"
-msgstr "Debug-Lokit > /tmp/L4log.txt"
+msgstr "Debug-Lokitus > /tmp/L4log.txt"
 
 #: plugin.py:5959 plugin.py:7310
 msgid "- Backlight Off [disable set Off=On]"
-msgstr "- Ei taustavaloa"
+msgstr "- Ei taustavaloa [pois käytöstä asetettu Off=Päällä]"
 
 #: plugin.py:5960 plugin.py:7311
 msgid "- Backlight On"
@@ -3074,7 +3074,7 @@ msgstr "- Taustavalo päällä"
 
 #: plugin.py:5961 plugin.py:7312
 msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- Ei taustavaloa viikonloppuisin"
+msgstr "- Ei taustavaloa viikonloppuisin [pois käytöstä asetettu Off=Päällä]"
 
 #: plugin.py:5962 plugin.py:7313
 msgid "- Backlight Weekend On"
@@ -3149,7 +3149,7 @@ msgstr "- Piconien cachen polku [ok]>"
 
 #: plugin.py:5982
 msgid "Picon 2"
-msgstr "Picon 2"
+msgstr "Piconi 2"
 
 #: plugin.py:5994 plugin.py:6814 plugin.py:7343
 msgid "Clock"
@@ -3231,7 +3231,7 @@ msgstr "- Pituus"
 
 #: plugin.py:6036
 msgid "Program Number"
-msgstr "Ohjelman numero"
+msgstr "Kanavan numero"
 
 #: plugin.py:6046 plugin.py:6756
 msgid "Program Info"
@@ -3452,17 +3452,17 @@ msgstr "- Asema"
 #: plugin.py:6335 plugin.py:6358 plugin.py:7009 plugin.py:7032 plugin.py:7517
 #: plugin.py:7540
 msgid "- Module"
-msgstr "- Moduli"
+msgstr "- Moduuli"
 
 #: plugin.py:6336 plugin.py:6359 plugin.py:7010 plugin.py:7033 plugin.py:7518
 #: plugin.py:7541
 msgid "- Module userdefined"
-msgstr "- Käyttäjän asettama moduli"
+msgstr "- Käyttäjän asettama moduuli"
 
 #: plugin.py:6337 plugin.py:6360 plugin.py:7011 plugin.py:7034 plugin.py:7519
 #: plugin.py:7542
 msgid "- Base"
-msgstr "- Base"
+msgstr "- Perus"
 
 #: plugin.py:6338 plugin.py:6361 plugin.py:7012 plugin.py:7035 plugin.py:7520
 #: plugin.py:7543
@@ -3514,7 +3514,7 @@ msgstr "- Palkin pituus"
 
 #: plugin.py:6383 plugin.py:7057 plugin.py:7565
 msgid "Netatmo Comfort Indicator"
-msgstr "Netatmo \"Tuntuu kuin\""
+msgstr "Netatmo 'Tuntuu kuin'"
 
 #: plugin.py:6393 plugin.py:7067 plugin.py:7575
 msgid "Moonphase"
@@ -3636,7 +3636,7 @@ msgstr "- Rajat"
 
 #: plugin.py:6544 plugin.py:7170 plugin.py:7716
 msgid "- Mail Konto"
-msgstr "- S-posti tilit"
+msgstr "- S-postitilit"
 
 #: plugin.py:6546 plugin.py:6555 plugin.py:6614 plugin.py:7172 plugin.py:7181
 #: plugin.py:7240 plugin.py:7718 plugin.py:7727 plugin.py:7786
@@ -3689,7 +3689,7 @@ msgstr "Päivämäärät: Lista"
 
 #: plugin.py:6619 plugin.py:7245 plugin.py:7791
 msgid "Event Icon Bar"
-msgstr "Tapatumapalkki"
+msgstr "Tapahtumapalkki"
 
 #: plugin.py:6627 plugin.py:7253 plugin.py:7799
 msgid "- Popup Screen"
@@ -3714,7 +3714,7 @@ msgstr "Näytä Teksti 2"
 
 #: plugin.py:6653 plugin.py:7279 plugin.py:7825
 msgid "Rectangle 1"
-msgstr "Rectangle 1"
+msgstr "Suorakulmio 1"
 
 #: plugin.py:6656 plugin.py:6665 plugin.py:7282 plugin.py:7291 plugin.py:7828
 #: plugin.py:7837
@@ -3738,7 +3738,7 @@ msgstr "- Koko y"
 
 #: plugin.py:6662 plugin.py:7288 plugin.py:7834
 msgid "Rectangle 2"
-msgstr "Rectangle 2"
+msgstr "Suorakulmio 2"
 
 #: plugin.py:6671 plugin.py:7297 plugin.py:7843
 msgid "Recording"
@@ -3746,7 +3746,7 @@ msgstr "Tallentaa"
 
 #: plugin.py:6680
 msgid "Stutter TV"
-msgstr "Stutter TV"
+msgstr "Nykivä TV-kuva"
 
 #: plugin.py:6700 plugin.py:7327
 msgid "- Screens used for Changing"
@@ -3778,7 +3778,7 @@ msgstr "- Oletus Kansikuva [ok]>"
 
 #: plugin.py:7145
 msgid "- Picon First"
-msgstr "- Picon ensin"
+msgstr "- Piconi ensin"
 
 #: plugin.py:7147
 msgid "- Trimmed"
@@ -3794,7 +3794,7 @@ msgstr "- Lataa tyyppi"
 
 #: plugin.py:7150
 msgid "- Google API-Key console.developers.google.com/apis"
-msgstr "- Google API-Key console.developers.google.com/apis"
+msgstr "- Google API-Avain console.developers.google.com/apis"
 
 #: plugin.py:7309
 msgid "LCD Display"
@@ -3845,12 +3845,12 @@ msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
 msgstr ""
-"Käyttöliittymä pitää käynnistää uudelleen jotta asetukset astuvat voimaan.\n"
-"Haluatko uudelleenkäynnistää?"
+"Käyttöliittymä pitää käynnistää uudelleen, jotta asetukset astuvat voimaan.\n"
+"Haluatko uudelleenkäynnistää nyt?"
 
 #: plugin.py:8198
 msgid "Restart GUI now?"
-msgstr "Käyttöliittymän uudelleenkäynnisty nyt?"
+msgstr "Käyttöliittymän uudelleenkäynnistys nyt?"
 
 #: plugin.py:8780
 msgid "Indoor"
