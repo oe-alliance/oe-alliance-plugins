@@ -11367,8 +11367,8 @@ def LCD4linuxPIC(self, session):
 						font = ImageFont.truetype(ConfigFont, int(13 * Wmulti), encoding='unic')
 						if LCD4linux.WetterWindLines.value == "2":
 							Wind = (Wind.split(" ", 2))
-							if len(Wind) < 3:
-								Wind = ["N/A", "N/A", "N/A"]
+							for i in range(len(Wind), 3):
+								Wind.append("N/A")
 							ShadowText(Wim, POSX - minus5, POSY + int(56 * Wmulti), "%s %s" % (Wind[0], Wind[1]), font, ConfigColor, ConfigShadow)
 							ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
 						elif LCD4linux.WetterWindLines.value != "off":
