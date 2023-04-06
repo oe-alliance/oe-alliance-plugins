@@ -3307,7 +3307,7 @@ def writeLCD1(s, im, quality, SAVE=True):
 				Photoframe.write_jpg2frame(SamsungDevice, pic)
 			except Exception as e:
 				SamsungDevice = None
-				L4log("Samsung 1 write error")
+				L4log("Samsung 1 write Error")
 		if "1" in LCD4linux.SavePicture.value and SAVE == True:
 			try:
 				if str(LCD4linux.LCDRotate1.value) != "0":
@@ -3424,7 +3424,7 @@ def writeLCD2(s, im, quality, SAVE=True):
 				Photoframe.write_jpg2frame(SamsungDevice2, pic)
 			except Exception as e:
 				SamsungDevice2 = None
-				L4log("Samsung 2 write error")
+				L4log("Samsung 2 write Error")
 		if "2" in LCD4linux.SavePicture.value and SAVE == True:
 			try:
 				if str(LCD4linux.LCDRotate2.value) != "0":
@@ -3541,7 +3541,7 @@ def writeLCD3(s, im, quality, SAVE=True):
 				Photoframe.write_jpg2frame(SamsungDevice3, pic)
 			except Exception as e:
 				SamsungDevice3 = None
-				L4log("Samsung 3 write error")
+				L4log("Samsung 3 write Error")
 		if "3" in LCD4linux.SavePicture.value and SAVE == True:
 			try:
 				if str(LCD4linux.LCDRotate3.value) != "0":
@@ -9889,7 +9889,7 @@ class UpdateStatus(Screen):
 				self.feedurl = "http://api.weatherunlocked.com/api/forecast/%s%s%s" % (city, apkey, lang)
 				L4logE("WU-getforecastweather%s: %s" % (wetter, self.feedurl))
 				callInThread(getPage, self.feedurl, boundFunction(self.downloadWUcallback, wetter), self.downloadListError)
-			L4log("Wetter%s: Downloadstart %s:%s %s %s" % (wetter, LCD4linux.WetterApi.value, ort, language.getLanguage(), la))
+			L4log("Wetter%s: downloadstart %s:%s %s %s" % (wetter, LCD4linux.WetterApi.value, ort, language.getLanguage(), la))
 		else:
 			if self.NetworkConnectionAvailable is not None:
 				L4log("Wetter%s: check Network..." % wetter)
@@ -9919,7 +9919,7 @@ class UpdateStatus(Screen):
 				LCD4linux.saveToFile(LCD4config)
 				L4log("Wetter%s-saveGeodata: successful" % wetter)
 			except Exception as e:
-				L4log("Wetter%s-saveGeodata error: 'lcd4config' is in use by other process, retrying next time..." % wetter)
+				L4log("Wetter%s-saveGeodata Error: 'lcd4config' is in use by other process, retrying next time..." % wetter)
 
 	def getCityCoords(self, ConfigWWW, jsonData):
 		try:
@@ -9953,17 +9953,17 @@ class UpdateStatus(Screen):
 		global wwwWetter
 		self.WetterOK = False
 		wwwWetter[ConfigWWW] = ""
-		L4log("MSN-Wetter%s: Download OK" % ConfigWWW)
+		L4log("MSN-weather%s: download OK" % ConfigWWW)
 		r = {}
 		try:
 			r = loads(jsonData).get("responses", [None])[0]
 		except Exception as e:
-			L4log("MSN-Wetter%s: json-download error: %s" % (ConfigWWW, e))
+			L4log("MSN-weather%s: json-download Error: %s" % (ConfigWWW, e))
 			return
-		L4log("MSN-Wetter%s data ready" % ConfigWWW)
-		L4logE("MSN-Wetter%s data: {placeholder for a large json-string}" % ConfigWWW)
+		L4log("MSN-weather%s data ready" % ConfigWWW)
+		L4logE("MSN-weather%s data: {placeholder for a large json-string}" % ConfigWWW)
 		if r is not None:
-			L4log("MSN-Wetter%s: analysing current & forecasts..." % ConfigWWW)
+			L4log("MSN-weather%s: analysing current & forecasts..." % ConfigWWW)
 			self.WetterOK = True
 			wwwWetter[ConfigWWW] = r
 			self.WDay[ConfigWWW] = {}
@@ -9991,32 +9991,32 @@ class UpdateStatus(Screen):
 				Cond = forecast[idx].get("daily", {}).get("pvdrCap", "")
 				Regen = str(int(round(forecast[idx].get("daily", {}).get("day", {}).get("precip", {}), 0)))
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
-			L4log("MSN-Wetter%s: completed!" % ConfigWWW)
+			L4log("MSN-weather%s: completed!" % ConfigWWW)
 			self.downloadSunrise()
 			PICwetter[ConfigWWW] = False
 		else:
-			L4log("MSN-Wetter%s Download Error: no data found." % ConfigWWW)
+			L4log("MSN-weather%s download Error: no data found." % ConfigWWW)
 
 	def downloadOMcallback(self, ConfigWWW, jsonData):
 		iconmap = {0: "32", 1: "34", 2: "30", 3: "28", 45: "20", 48: "21", 51: "9", 53: "9", 55: "9", 56: "8",
 					57: "10", 61: "9", 63: "11", 65: "12", 66: "8", 67: "7", 71: "42", 73: "14", 75: "41",
 					77: "35", 80: "9", 81: "11", 82: "12", 85: "42", 86: "43", 95: "38", 96: "4", 99: "4"
-					}  # mapping mapping: om -> yahoo+
+					}  # mapping: om -> yahoo+
 		global wwwWetter
 		self.WetterOK = False
 		wwwWetter[ConfigWWW] = ""
-		L4log("OM-Wetter%s: Download OK" % ConfigWWW)
+		L4log("OM-weather%s: download OK" % ConfigWWW)
 		r = {}
 		try:
 			r = loads(jsonData)
 		except Exception as e:
-			L4log("OM-Wetter%s: json-download error: %s" % (ConfigWWW, e))
+			L4log("OM-weather%s: json-download Error: %s" % (ConfigWWW, e))
 			return
-		L4log("OM-Wetter%s data ready" % ConfigWWW)
-		L4logE("OM-Wetter%s data: %s" % (ConfigWWW, r))
+		L4log("OM-weather%s data ready" % ConfigWWW)
+		L4logE("OM-weather%s data: %s" % (ConfigWWW, r))
 
 		if r.get("hourly", None) is not None and r.get("daily", None) is not None:
-			L4log("OM-Wetter%s: analysing current & forecasts..." % ConfigWWW)
+			L4log("OM-weather%s: analysing current & forecasts..." % ConfigWWW)
 			self.WetterOK = True
 			wwwWetter[ConfigWWW] = r
 			isotime = datetime.now().strftime("%FT%H:00")
@@ -10044,11 +10044,11 @@ class UpdateStatus(Screen):
 				Cond = ""
 				Regen = str(int(round(forecast.get("precipitation_probability_max", {})[idx])))
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
-			L4log("OM-Wetter%s: completed!" % ConfigWWW)
+			L4log("OM-weather%s: completed!" % ConfigWWW)
 			self.downloadSunrise()
 			PICwetter[ConfigWWW] = False
 		else:
-			L4log("OM-Wetter%s Download Error: no data found." % ConfigWWW)
+			L4log("OM-weather%s download Error: no data found." % ConfigWWW)
 
 	def downloadOWMcallback(self, ConfigWWW, jsonData):
 		iconmap = {200: "37", 201: "4", 202: "3", 210: "37", 211: "4", 212: "3", 221: "3", 230: "37", 231: "38", 232: "38",
@@ -10057,22 +10057,22 @@ class UpdateStatus(Screen):
 					600: "42", 601: "16", 602: "15", 611: "18", 612: "10", 613: "17", 615: "6", 616: "5", 620: "14",
 					621: "42", 622: "13", 701: "20", 711: "22", 721: "21", 731: "19", 741: "20", 751: "19", 761: "19",
 					762: "22", 771: "23", 781: "0", 800: "32", 801: "34", 802: "30", 803: "26", 804: "28"
-					}  # mapping mapping: owm -> yahoo+
+					}  # mapping: owm -> yahoo+
 		global wwwWetter
 		self.WetterOK = False
 		wwwWetter[ConfigWWW] = ""
-		L4log("OWM-Wetter%s: Download OK" % ConfigWWW)
+		L4log("OWM-weather%s: download OK" % ConfigWWW)
 		r = {}
 		try:
 			r = loads(jsonData)
 		except Exception as e:
-			L4log("OWM-Wetter%s: json-download error: %s" % (ConfigWWW, e))
+			L4log("OWM-weather%s: json-download Error: %s" % (ConfigWWW, e))
 			return
-		L4log("OMW-Wetter%s data ready" % ConfigWWW)
-		L4logE("OMW-Wetter%s data: %s" % (ConfigWWW, r))
+		L4log("OMW-weather%s data ready" % ConfigWWW)
+		L4logE("OMW-weather%s data: %s" % (ConfigWWW, r))
 
 		if r.get("name", None) is not None:
-			L4log("OWM-Wetter%s: analysing coordinates & current..." % ConfigWWW)
+			L4log("OWM-weather%s: analysing coordinates & current..." % ConfigWWW)
 			cityname = LCD4linux.WetterCity.value if ConfigWWW == 0 else LCD4linux.Wetter2City.value
 			self.saveGeodata(ConfigWWW, cityname, r.get("coord", {}).get("lon", 0), r.get("coord", {}).get("lat", 0))
 			self.WDay[ConfigWWW] = {}
@@ -10089,7 +10089,7 @@ class UpdateStatus(Screen):
 			PICwetter[ConfigWWW] = False
 		elif r.get("daily", None) is not None:
 			self.WetterOK = True
-			L4log("OWM-Wetter%s: analysing forecasts..." % ConfigWWW)
+			L4log("OWM-weather%s: analysing forecasts..." % ConfigWWW)
 			wwwWetter[ConfigWWW] = r
 			self.WWeek[ConfigWWW] = []
 			for current in r.get("daily", []):
@@ -10101,10 +10101,10 @@ class UpdateStatus(Screen):
 				Regen = str(int(float(current.get("pop", 0) * 100)))
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
 			PICwetter[ConfigWWW] = False
-			L4log("OWM-Wetter%s: completed!" % ConfigWWW)
+			L4log("OWM-weather%s: completed!" % ConfigWWW)
 			self.downloadSunrise()
 		else:
-			L4log("OWM-Wetter%s Download Error: no data found." % ConfigWWW)
+			L4log("OWM-weather%s download Error: no data found." % ConfigWWW)
 
 	def downloadWUcallback(self, ConfigWWW, jsonData):
 		iconmap = {0: "32", 1: "34", 2: "30", 3: "28", 10: "21", 21: "40", 22: "42", 23: "18",
@@ -10113,7 +10113,7 @@ class UpdateStatus(Screen):
 					66: "10", 67: "10", 68: "6", 69: "18", 70: "14", 71: "14", 72: "16", 73: "16",
 					74: "41", 75: "41", 79: "17", 80: "11", 81: "12", 82: "12", 83: "18", 84: "18",
 					85: "14", 86: "16", 87: "7", 88: "18", 91: "37", 92: "38", 93: "16", 94: "41"
-					}  # mapping wu -> yahoo+
+					}  # mapping: wu -> yahoo+
 		global wwwWetter
 		self.WetterOK = False
 		wwwWetter[ConfigWWW] = ""
@@ -10121,14 +10121,14 @@ class UpdateStatus(Screen):
 		try:
 			r = loads(jsonData)
 		except Exception as e:
-			L4log("WU-Wetter%s: json-download error" % ConfigWWW)
+			L4log("WU-weather%s: json-download Error" % ConfigWWW)
 			return
-		L4log("WU-Wetter%s data ready" % ConfigWWW)
-		L4logE("WU-Wetter%s data: %s" % (ConfigWWW, r))
+		L4log("WU-weather%s data ready" % ConfigWWW)
+		L4logE("WU-weather%s data: %s" % (ConfigWWW, r))
 
 		if r.get("lat", None) is not None:
 			self.WetterOK = True
-			L4log("WU-Wetter%s: analysing coordinates & current..." % ConfigWWW)
+			L4log("WU-weather%s: analysing coordinates & current..." % ConfigWWW)
 			cityname = LCD4linux.WetterCity.value if ConfigWWW == 0 else LCD4linux.Wetter2City.value
 			self.saveGeodata(ConfigWWW, cityname, r.get("lon", 0), r.get("lat", 0))
 			self.WDay[ConfigWWW] = {}
@@ -10147,7 +10147,7 @@ class UpdateStatus(Screen):
 
 		elif r.get("Days", None) is not None:
 			self.WetterOK = True
-			L4log("WU-Wetter%s: analysing forecasts..." % ConfigWWW)
+			L4log("WU-weather%s: analysing forecasts..." % ConfigWWW)
 			wwwWetter[ConfigWWW] = r
 			self.WWeek[ConfigWWW] = []
 			for idx, curr in enumerate(r.get("Days", [])):
@@ -10165,12 +10165,12 @@ class UpdateStatus(Screen):
 				else:
 					Icon, Cond, Regen = ("", "", "")
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
-			L4log("WU-Wetter%s: completed!" % ConfigWWW)
+			L4log("WU-weather%s: completed!" % ConfigWWW)
 			self.downloadSunrise()
 			PICwetter[ConfigWWW] = False
 		else:
 			wwwWetter[ConfigWWW] = ""
-			L4log("WU-Wetter%s Download Error: no data found" % ConfigWWW)
+			L4log("WU-weather%s download Error: no data found" % ConfigWWW)
 
 	def downloadSunrise(self):
 		L4log("Sunrise...")
