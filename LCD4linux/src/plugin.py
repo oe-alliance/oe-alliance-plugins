@@ -9973,23 +9973,25 @@ class UpdateStatus(Screen):
 			currdate = datetime.fromisoformat(current.get("created", datenow)) if PY3 else parser.parse(current.get("created", datenow))
 			self.WDay[ConfigWWW]["Wtime"] = currdate.strftime("%H:%M")
 			self.WDay[ConfigWWW]["Locname"] = LCD4linux.WetterCity.value if ConfigWWW == 0 else LCD4linux.Wetter2City.value
-			self.WDay[ConfigWWW]["Temp_c"] = str(int(round(current.get("temp", 0))))
-			self.WDay[ConfigWWW]["Hum"] = "%s%%" % str(int(round(current.get("rh", 0))))
+			self.WDay[ConfigWWW]["Temp_c"] = "%.0f" % current.get("temp", 0)
+			self.WDay[ConfigWWW]["Hum"] = "%.0f%%" % current.get("rh", 0)
 			if LCD4linux.WetterWind.value == "0":
-				self.WDay[ConfigWWW]["Wind"] = "%s km/h %s" % (str(int(round(current.get("windSpd", 0)))), getDirection(current.get("windDir", 0)))
+				self.WDay[ConfigWWW]["Wind"] = "%.0f km/h %s" % (current.get("windSpd", 0), getDirection(current.get("windDir", "na")))
+			else:
+				self.WDay[ConfigWWW]["Wind"] = "%.1f m/s %s" % (current.get("windSpd", 0) / 3.6, getDirection(current.get("windDir", "na")))
 			self.WDay[ConfigWWW]["Cond"] = current.get("pvdrCap", "")
 			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(current.get("symbol", {}), "NA")
-			self.WDay[ConfigWWW]["Feel"] = str(int(round(current.get("feels", 0))))
-			self.WDay[ConfigWWW]["Rain"] = str(int(round(forecast[0].get("daily", {}).get("day", {}).get("precip", 0))))
+			self.WDay[ConfigWWW]["Feel"] = "%.0f" % current.get("feels", 0)
+			self.WDay[ConfigWWW]["Rain"] = "%.0f" % forecast[0].get("daily", {}).get("day", {}).get("precip", 0)
 			self.WWeek[ConfigWWW] = []
 			for idx in range(6):
-				High = str(int(round(forecast[idx].get("daily", {}).get("tempHi", 0))))
-				Low = str(int(round(forecast[idx].get("daily", {}).get("tempLo", 0))))
+				High = "%.0f" % forecast[idx].get("daily", {}).get("tempHi", 0)
+				Low = "%.0f" % forecast[idx].get("daily", {}).get("tempLo", 0)
 				date = (currdate + timedelta(days=idx)).strftime("%Y-%m-%d")
 				Day = datetime(int(date[:4]), int(date[5:7]), int(date[8:])).strftime("%a")
 				Icon = "%s.png" % iconmap.get(forecast[idx].get("daily", {}).get("symbol", {}), "NA")
 				Cond = forecast[idx].get("daily", {}).get("pvdrCap", "")
-				Regen = str(int(round(forecast[idx].get("daily", {}).get("day", {}).get("precip", {}), 0)))
+				Regen = "%.0f" % forecast[idx].get("daily", {}).get("day", {}).get("precip", 0)
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
 			L4log("MSN-weather%s: completed!" % ConfigWWW)
 			self.downloadSunrise()
@@ -10014,6 +10016,8 @@ class UpdateStatus(Screen):
 			return
 		L4log("OM-weather%s data ready" % ConfigWWW)
 		L4logE("OM-weather%s data: %s" % (ConfigWWW, r))
+		zerolist = [0] * 24
+		nalist = ["na"] * 24
 
 		if r.get("hourly", None) is not None and r.get("daily", None) is not None:
 			L4log("OM-weather%s: analysing current & forecasts..." % ConfigWWW)
@@ -10025,24 +10029,26 @@ class UpdateStatus(Screen):
 			current = r.get("hourly", {})
 			for idx, time in enumerate(current.get("time", [])):  # collect current
 				if isotime in time:
-					self.WDay[ConfigWWW]["Temp_c"] = str(int(round(current.get("temperature_2m", {})[idx], 0)))
-					self.WDay[ConfigWWW]["Hum"] = "%s%%" % str(int(round(current.get("relativehumidity_2m", {})[idx], 0)))
+					self.WDay[ConfigWWW]["Temp_c"] = "%.0f" % current.get("temperature_2m", zerolist)[idx]
+					self.WDay[ConfigWWW]["Hum"] = "%.0f%%" % current.get("relativehumidity_2m", zerolist)[idx]
 					if LCD4linux.WetterWind.value == "0":
-						self.WDay[ConfigWWW]["Wind"] = "%d km/h %s" % (int(round(current.get("windspeed_10m", {})[idx], 0)), getDirection(current.get("winddirection_10m", {})[idx]))
-					self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(current.get("weathercode", [{}])[idx], "NA")
-					self.WDay[ConfigWWW]["Feel"] = str(int(round(current.get("apparent_temperature", {})[idx], 0)))
-					self.WDay[ConfigWWW]["Rain"] = str(int(round(current.get("precipitation_probability", {})[idx], 0)))
+						self.WDay[ConfigWWW]["Wind"] = "%.0f km/h %s" % (current.get("windspeed_10m", zerolist)[idx], getDirection(current.get("winddirection_10m", nalist)[idx]))
+					else:
+						self.WDay[ConfigWWW]["Wind"] = "%.1f m/s %s" % (current.get("windspeed_10m", zerolist)[idx] / 3.6, getDirection(current.get("winddirection_10m", nalist)[idx]))
+					self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(current.get("weathercode", nalist)[idx], "na")
+					self.WDay[ConfigWWW]["Feel"] = "%.0f" % current.get("apparent_temperature", zerolist)[idx]
+					self.WDay[ConfigWWW]["Rain"] = "%.0f" % current.get("precipitation_probability", zerolist)[idx]
 					self.WDay[ConfigWWW]["Wtime"] = datetime.now().strftime("%H:%M")
 					break
 			forecast = r["daily"]
 			self.WWeek[ConfigWWW] = []
 			for idx in range(6):  # collect forecast of today and next 5 days
-				High = "%s" % int(round(forecast.get("temperature_2m_min", {})[idx]))
-				Low = "%s" % int(round(forecast.get("temperature_2m_max", {})[idx]))
-				Day = Code_utf8(WeekDays[strptime(forecast.get("time", {})[idx], "%Y-%m-%d").tm_wday])
-				Icon = "%s.png" % iconmap.get(forecast.get("weathercode", {})[idx], "NA")
+				High = "%.0f" % forecast.get("temperature_2m_min", zerolist)[idx]
+				Low = "%.0f" % forecast.get("temperature_2m_max", zerolist)[idx]
+				Day = Code_utf8(WeekDays[strptime(forecast.get("time", zerolist)[idx], "%Y-%m-%d").tm_wday])
+				Icon = "%s.png" % iconmap.get(forecast.get("weathercode", zerolist)[idx], "NA")
 				Cond = ""
-				Regen = str(int(round(forecast.get("precipitation_probability_max", {})[idx])))
+				Regen = "%.0f" % forecast.get("precipitation_probability_max", zerolist)[idx]
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
 			L4log("OM-weather%s: completed!" % ConfigWWW)
 			self.downloadSunrise()
@@ -10077,14 +10083,16 @@ class UpdateStatus(Screen):
 			self.saveGeodata(ConfigWWW, cityname, r.get("coord", {}).get("lon", 0), r.get("coord", {}).get("lat", 0))
 			self.WDay[ConfigWWW] = {}
 			self.WDay[ConfigWWW]["Locname"] = cityname
-			self.WDay[ConfigWWW]["Temp_c"] = str(int(round(r.get("main", {}).get("temp", 0))))
-			self.WDay[ConfigWWW]["Hum"] = "%s%%" % r.get("main", {}).get("humidity", 0)
+			self.WDay[ConfigWWW]["Temp_c"] = "%.0f" % r.get("main", {}).get("temp", 0)
+			self.WDay[ConfigWWW]["Hum"] = "%.0f%%" % r.get("main", {}).get("humidity", 0)
 			if LCD4linux.WetterWind.value == "0":
-				self.WDay[ConfigWWW]["Wind"] = "%d km/h %s" % (int(round(r.get("wind", {}).get("speed", 0) * 3.6)), getDirection(r.get("wind", {}).get("deg", 0)))
+				self.WDay[ConfigWWW]["Wind"] = "%.0f km/h %s" % (r.get("wind", {}).get("speed", 0) * 3.6, getDirection(r.get("wind", {}).get("deg", 0)))
+			else:
+				self.WDay[ConfigWWW]["Wind"] = "%.1f m/s %s" % (r.get("wind", {}).get("speed", 0), getDirection(r.get("wind", {}).get("deg", 0)))
 			self.WDay[ConfigWWW]["Cond"] = r.get("weather", [{}])[0].get("description", "")
 			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(r.get("weather", [{}])[0].get("id", {}), "NA")
-			self.WDay[ConfigWWW]["Feel"] = str(int(round(r.get("main", {}).get("feels_like", 0))))
-			self.WDay[ConfigWWW]["Rain"] = str(int(r.get("pop", 0) * 100))
+			self.WDay[ConfigWWW]["Feel"] = "%.0f" % r.get("main", {}).get("feels_like", 0)
+			self.WDay[ConfigWWW]["Rain"] = "%.0f" % (r.get("pop", 0) * 100)
 			self.WDay[ConfigWWW]["Wtime"] = strftime("%H:%M"), localtime(r.get("dt", time()))
 			PICwetter[ConfigWWW] = False
 		elif r.get("daily", None) is not None:
@@ -10093,12 +10101,12 @@ class UpdateStatus(Screen):
 			wwwWetter[ConfigWWW] = r
 			self.WWeek[ConfigWWW] = []
 			for current in r.get("daily", []):
-				High = "%s" % int(round(current.get("temp", {}).get("max", ""), 0))
-				Low = "%s" % int(round(current.get("temp", {}).get("min", ""), 0))
+				High = "%.0f" % current.get("temp", {}).get("max", 0)
+				Low = "%.0f" % current.get("temp", {}).get("min", 0)
 				Day = Code_utf8(WeekDays[localtime(current.get("dt", time())).tm_wday])
 				Icon = "%s.png" % iconmap.get(current.get("weather", [{}])[0].get("id", "NA"), "NA")
 				Cond = current.get("weather", [{}])[0].get("description", "")
-				Regen = str(int(float(current.get("pop", 0) * 100)))
+				Regen = "%.0f" % (current.get("pop", 0) * 100)
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
 			PICwetter[ConfigWWW] = False
 			L4log("OWM-weather%s: completed!" % ConfigWWW)
@@ -10133,14 +10141,16 @@ class UpdateStatus(Screen):
 			self.saveGeodata(ConfigWWW, cityname, r.get("lon", 0), r.get("lat", 0))
 			self.WDay[ConfigWWW] = {}
 			self.WDay[ConfigWWW]["Locname"] = cityname
-			self.WDay[ConfigWWW]["Temp_c"] = str(int(r.get("temp_c", 0)))
-			self.WDay[ConfigWWW]["Hum"] = "%s%%" % int(r.get("humid_pct", 0))
+			self.WDay[ConfigWWW]["Temp_c"] = "%.0f" % r.get("temp_c", 0)
+			self.WDay[ConfigWWW]["Hum"] = "%.0f%%" % r.get("humid_pct", 0)
 			if LCD4linux.WetterWind.value == "0":
-				self.WDay[ConfigWWW]["Wind"] = "%s km/h %s" % (int(round(r.get("windspd_kmh", 0))), getDirection(r.get("winddir_deg", 0)))
+				self.WDay[ConfigWWW]["Wind"] = "%.0f km/h %s" % (r.get("windspd_kmh", 0), getDirection(r.get("winddir_deg", 0)))
+			else:
+				self.WDay[ConfigWWW]["Wind"] = "%.1f m/s %s" % (r.get("windspd_kmh", 0) / 3.6, getDirection(r.get("winddir_deg", 0)))
 			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(r.get("wx_code", {}), "NA")
 			self.WDay[ConfigWWW]["Cond"] = r.get("wx_desc", "")
-			self.WDay[ConfigWWW]["Feel"] = str(int(round(r.get("feelslike_c", 0))))
-			rain = str(r.get("prob_precip_pct", 0))
+			self.WDay[ConfigWWW]["Feel"] = "%.0f" % r.get("feelslike_c", 0)
+			rain = "%.0f" % r.get("prob_precip_pct", 0)
 			self.WDay[ConfigWWW]["Rain"] = rain if rain.isdigit() else "0"  # could be: "< 1"
 			self.WDay[ConfigWWW]["Wtime"] = strftime("%H:%M", localtime())
 			PICwetter[ConfigWWW] = False
@@ -10153,8 +10163,8 @@ class UpdateStatus(Screen):
 			for idx, curr in enumerate(r.get("Days", [])):
 				if idx > 5:  # some keys are missing in day 6
 					break
-				High = str(round(curr.get("temp_max_c", 0)))
-				Low = str(round(curr.get("temp_min_c", 0)))
+				High = "%.0f" % curr.get("temp_max_c", 0)
+				Low = "%.0f" % curr.get("temp_min_c", 0)
 				date = curr.get("date", "").split("/")
 				Day = Code_utf8(WeekDays[weekday(int(date[2]), int(date[1]), int(date[0]))])
 				if "Timeframes" in curr:
@@ -11368,7 +11378,7 @@ def LCD4linuxPIC(self, session):
 						if LCD4linux.WetterWindLines.value == "2":
 							Wind = (Wind.split(" ", 2))
 							for i in range(len(Wind), 3):
-								Wind.append("N/A")
+								Wind.append("na")
 							ShadowText(Wim, POSX - minus5, POSY + int(56 * Wmulti), "%s %s" % (Wind[0], Wind[1]), font, ConfigColor, ConfigShadow)
 							ShadowText(Wim, POSX - minus5, POSY + int(67 * Wmulti), Wind[2], font, ConfigColor, ConfigShadow)
 						elif LCD4linux.WetterWindLines.value != "off":
@@ -11385,7 +11395,7 @@ def LCD4linuxPIC(self, session):
 						if not PY3:  # for equal results, wH needs an correction under Python 2
 							wH = int(wH * 0.8)
 						font = ImageFont.truetype(ConfigFont, int(int(LCD4linux.WetterExtraZoom.value) / (16.0 if LCD4linux.WetterTrendArrows.value else 13.0) * Wmulti), encoding='unic')
-						ShadowText(Wim, TempPosX + int(wH * 0.8), HumPosY - int(hH * 0.6), Feel, font, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
+						ShadowText(Wim, TempPosX + int(wH * 0.8), HumPosY - int(hH * (0.57 if ConfigType[0] == "3" else 0.5)), Feel, font, LCD4linux.WetterExtraColorFeel.value, ConfigShadow)
 			PICwetter[ConfigWWW] = False
 		counter = 20
 		while PICwetter[ConfigWWW] is True and counter > 0:
