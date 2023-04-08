@@ -343,7 +343,7 @@ msgstr "Actualizar ahora"
 
 msgid "VUPLUS-BLE-RCU is disconnected. Please connect and select again."
 msgstr ""
-"Se ha descontado el VUPLUS-BLE-RCU. Por favor, conéctalo y selecciónalo de "
+"Se ha desconectado el VUPLUS-BLE-RCU. Por favor, conéctalo y selecciónalo de "
 "nuevo"
 
 msgid "Voice event handler"
@@ -364,7 +364,7 @@ msgstr ""
 #, python-format
 msgid "Wrong pin number for %s. Please try again and check pin number."
 msgstr ""
-"Número PIN erróneo para el %s. Por favol, inténtelo de nuevo y compruebe el "
+"Número PIN erróneo para el %s. Por favor, inténtelo de nuevo y compruebe el "
 "número PIN."
 
 #, python-format
