@@ -1,0 +1,388 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BluetoothSetup\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2023-04-08 17:08+0200\n"
+"Last-Translator: JR <openspateam@gmail.com>\n"
+"Language-Team: OpenSPA Team (openspateam@gmail.com)\n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2.2\n"
+
+msgid ""
+"\n"
+"Please repair Vu+ RCU. (by AUDIO+MENU)"
+msgstr ""
+"\n"
+"Por favor, repare mando a distancia Vu+ (a través de AUDIO+MENU)"
+
+#, python-format
+msgid "%d event"
+msgstr "%d evento"
+
+#, python-format
+msgid "%s"
+msgstr "%s"
+
+#, python-format
+msgid "%s Pairing fail"
+msgstr "%s emparejamiento erróneo"
+
+#, python-format
+msgid "%s is connected."
+msgstr "%s está conectado."
+
+#, python-format
+msgid "%s is disconnected."
+msgstr "%s está desconectado."
+
+#, python-format
+msgid "%s is not found."
+msgstr "No se encuentra %s."
+
+msgid ""
+"1. Move to Bluetooth Setup Options.\n"
+"(press MENU key in BluetoothSetup)\n"
+msgstr ""
+"1. Mover a Opciones de configuración Bluetooth,\n"
+"(pulsa botón MENU en Configuración de Bluetooth)\n"
+
+msgid "2. Change \"Skip firmware update of VUPLUS-BLE-RCU\" option to \"no\"\n"
+msgstr ""
+"2. Cambiar la opción \"Saltar actualización de firmware del VUPLUS-BLE-RCU\" "
+"a \"no\"\n"
+
+msgid ""
+"3. Reconnect the VUPLUS-BLE-RCU.\n"
+"\n"
+msgstr "3. Reconectar el VUPLUS-BLE-RCU.\n"
+
+msgid "BT dongle has been inserted."
+msgstr "Se ha insertado el dongle BT."
+
+msgid "BT dongle has been removed."
+msgstr "Se ha retirado el dongle BT."
+
+#, python-format
+msgid ""
+"Battery is low. Suggest to prepare replacement batteries for using properly "
+"%s."
+msgstr ""
+"Batería baja. Se sugiere cambiar las baterías para un uso adecuado del %s."
+
+#, python-format
+msgid "Battery level for OTA : %s"
+msgstr "Nivel de batería por OTA : %s"
+
+msgid "Bluetooth Scan"
+msgstr "Búsqueda Bluetooth"
+
+msgid "Bluetooth Setup"
+msgstr "Configuración de Bluetooth"
+
+msgid "Bluetooth Setup Options"
+msgstr "Opciones de configuración Bluetooth"
+
+msgid "BluetoothSetup"
+msgstr "Configuración de Bluetooth"
+
+#, python-format
+msgid "Can't communicate with %s"
+msgstr "No se puede comunicar con %s"
+
+#, python-format
+msgid "Can't communicate with %s."
+msgstr "No se puede comunicar con %s."
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Connect"
+msgstr "Conectar"
+
+msgid "Connect/Disconnect selected device"
+msgstr "Conectar/Desconectar el dispositivo seleccionado"
+
+#, python-format
+msgid ""
+"Connection failed.\n"
+"Another audio device is connected. (%s)"
+msgstr ""
+"Conexión fallida.\n"
+"Se ha conectado otro dispositivo de audio. (%s)"
+
+#, python-format
+msgid "Current FW version : %d"
+msgstr "Versión de firmware actual : %d"
+
+#, python-format
+msgid ""
+"Current FW version : %d\n"
+"New FW version : %d"
+msgstr ""
+"Versión actual de firmware : %d\n"
+"Nueva versión de firmware : %d"
+
+msgid "Device is disabling..."
+msgstr "Desactivando el dispositivo..."
+
+msgid "Device is enabled."
+msgstr "Dispositivo activado."
+
+msgid "Device is enabling..."
+msgstr "Activando el dispositivo..."
+
+msgid "Disable"
+msgstr "Desactivar"
+
+msgid "Disconnect"
+msgstr "Desconectar"
+
+#, python-format
+msgid "Disconnect %s failed!!"
+msgstr "Desconexión de %s fallida!!"
+
+#, python-format
+msgid "Disconnecting %s"
+msgstr "Desconectando %s"
+
+msgid "Enable"
+msgstr "Activar"
+
+msgid "Enable/Disable bluetooth"
+msgstr "Activar/Desactivar bluetooth"
+
+msgid "Exit"
+msgstr "Salir"
+
+msgid "Exit bluetooth setup"
+msgstr "Salir de la configuración bluetooth"
+
+msgid ""
+"If you want to update this firmware version, follow belows.\n"
+"\n"
+msgstr ""
+"Si quiere actualizar esta versión del firmware, siga los pasos a "
+"continuación.\n"
+"\n"
+
+msgid "MENU"
+msgstr "MENÚ"
+
+#, python-format
+msgid "New FW version : %d"
+msgstr "Nueva versión de firmware : %d"
+
+msgid ""
+"New firmware detected for VUPLUS-BLE-RCU.\n"
+"\n"
+msgstr ""
+"Nuevo firmware detectado del VUPLUS-BLE-RCU.\n"
+"\n"
+
+msgid "No nearby bluetooth devices were found."
+msgstr "No se encontraron dispositivos bluetooth cercanos."
+
+msgid ""
+"Not enough battery level for OTA update.\n"
+"Press exit and change battery of VUPLUS-BLE-RCU."
+msgstr ""
+"No hay suficiente nivel de batería para la actualización OTA.\n"
+"Presione salir y cambie la batería del VUPLUS-BLE-RCU."
+
+#, python-format
+msgid ""
+"OTA Failed.\n"
+"%s is disconnected."
+msgstr ""
+"Error de actualización OTA.\n"
+"El %s está desconectado."
+
+msgid "Ok"
+msgstr "Ok"
+
+#, python-format
+msgid "Pairing %s"
+msgstr "Emparejando %s"
+
+#, python-format
+msgid "Pairing %s failed!!"
+msgstr "El emparejamiento del %s ha fallado!!"
+
+#, python-format
+msgid ""
+"Pairing Failed.\n"
+"Another audio device is connected. (%s)"
+msgstr ""
+"Emparejamiento erróneo.\n"
+"Se ha conectado otro dispositivo de audio. (%s)"
+
+msgid "Playing Voice data..."
+msgstr "Reproduciendo datos de voz..."
+
+msgid ""
+"Please enable bluetooth \n"
+"before pairing the VUPLUS-BLE-RCU."
+msgstr ""
+"Por favor, active bluetooth \n"
+"antes de emparejar el VUPLUS-BLE-RCU."
+
+msgid "Please select scan mode."
+msgstr "Por favor, seleccione el modo de búsqueda."
+
+msgid ""
+"Press and hold the buttons <MENU+AUDIO>\n"
+" for five seconds to start."
+msgstr ""
+"Pulsa y mantiene pulsados los botones <MENU+AUDIO>\n"
+"durante 5 segundos para iniciar."
+
+msgid "Press green key to connect device."
+msgstr "Pulsa botón verde para conectar dispositivo."
+
+msgid "Press red key to enable bluetooth."
+msgstr "Pulsa botón rojo para activar bluetooth."
+
+msgid "Put your voice close to the remote control..."
+msgstr "Acerca tu voz al mando a distancia..."
+
+msgid "Remind Me later"
+msgstr "Recuérdemelo más tarde"
+
+msgid "Remove"
+msgstr "Retirar"
+
+msgid "Remove selected device"
+msgstr "Retirar dispositivo seleccionado"
+
+msgid "Removing VUPLUS-BLE-RCU..."
+msgstr "Retirando VUPLUS-BLE-RCU..."
+
+msgid "Scan"
+msgstr "Buscar"
+
+msgid "Scan and setup Vu+ Bluetooth RCU"
+msgstr "Buscar y configurar el mando a distancia Bluetooth del Vu+"
+
+msgid "Scan failed! try again."
+msgstr "Ha fallado la búsqueda! Inténtalo de nuevo."
+
+msgid ""
+"Scan failed. Please try again VUPLUS BLE RCU setup.\n"
+"(AUDIO+MENU buttons)"
+msgstr ""
+"Búsqueda fallida. Por favor, intenta configurar de nuevo el VUPLUS BLE RCU.\n"
+"(botones AUDIO+MENU)"
+
+msgid "Scan other bluetooth 3.0 device (A2DP, HID)"
+msgstr "Buscar otro dispositivo bluetooth 3.0 (A2DP, HID)"
+
+msgid "Scanning VUPLUS BLE RCU"
+msgstr "Buscando VUPLUS BLE RCU"
+
+msgid "Scanning bluetooth devices"
+msgstr "Buscando dispositivos bluetooth"
+
+msgid "Set bluetooth audio delay (msec)"
+msgstr "Configura retardo de audio bluetooth (mseg)"
+
+msgid "Setup bluetooth options"
+msgstr "Configura opciones bluetooth"
+
+msgid "Show battery low message on infobar notification"
+msgstr "Mostrar mensaje de batería baja en notificación de infobar"
+
+msgid "Show state message on infobar notification"
+msgstr "Mostrar mensaje de estado en notificación de infobar"
+
+#, python-format
+msgid "Skip firmware update of VUPLUS-BLE-RCU (version : %d)"
+msgstr "Saltar actualización de firmware del VUPLUS-BLE-RCU (versión : %d)"
+
+msgid "Skip this version"
+msgstr "Saltar esta versión"
+
+msgid "Start Scan / Setup VUPLUS BLE RCU"
+msgstr "Iniciar búsqueda / Configurar del VUPLUS BLE RCU"
+
+msgid "Start scan"
+msgstr "Iniciar búsqueda"
+
+msgid "Starting..."
+msgstr "Iniciando..."
+
+msgid "Stop scan"
+msgstr "Detener búsqueda"
+
+msgid ""
+"The BT dongle has been removed. It takes 10 seconds from when the BT dongle "
+"is removed until the remote control operates in IR mode."
+msgstr ""
+"Se ha retirado el dongle BT. Se tarda 10 segundos desde que se retira el "
+"dongle BT hasta que el mando a distancia opera en modo IR."
+
+msgid "There is no voice input."
+msgstr "No hay entrada de voz."
+
+msgid "Try connect to last audio device on start enable"
+msgstr ""
+"Intente conectarse al último dispositivo de audio al habilitar el inicio"
+
+#, python-format
+msgid "Type %s on %s to connect, then press Enter or Return."
+msgstr "Escriba %s en %s para conectarse, luego presione Entrar o Retorno."
+
+#, python-format
+msgid "Updateing %d %%"
+msgstr "Actualizando %d %%"
+
+msgid "Upgrade now"
+msgstr "Actualizar ahora"
+
+msgid "VUPLUS-BLE-RCU is disconnected. Please connect and select again."
+msgstr ""
+"Se ha descontado el VUPLUS-BLE-RCU. Por favor, conéctalo y selecciónalo de "
+"nuevo"
+
+msgid "Voice event handler"
+msgstr "Controlador de eventos de voz"
+
+msgid "Vu+ Bluetooth RCU Setup"
+msgstr "Configuración mando a distancia Vu+ Bluetooth"
+
+msgid ""
+"While the update is progress, RCU can not be used and other bluetooth device "
+"must be disconnected.\n"
+"\n"
+msgstr ""
+"Mientras dure la actualización, no se podrá usar el mando a distancia y se "
+"deben desconectar otros dispositivos bluetooth.\n"
+"\n"
+
+#, python-format
+msgid "Wrong pin number for %s. Please try again and check pin number."
+msgstr ""
+"Número PIN erróneo para el %s. Por favol, inténtelo de nuevo y compruebe el "
+"número PIN."
+
+#, python-format
+msgid "connect to %s failed!!"
+msgstr "conexión a %s fallida!!"
+
+#, python-format
+msgid "connecting %s"
+msgstr "Conectando el %s"
+
+#, python-format
+msgid "disconnect to %s failed!!"
+msgstr "Desconexión de %s fallida!!"
+
+#, python-format
+msgid "disconnecting %s"
+msgstr "Desconectando el %s"
+
+#, python-format
+msgid "remove %s failed!!"
+msgstr "Retirada del %s fallida!!"
