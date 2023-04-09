@@ -1139,15 +1139,15 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 					if getBrandOEM() == 'azbox':
 						parm.polarisation = self.polsave
 					else:
-						parm.polarisation = pol[data[1]]
+						parm.polarisation = pol.get(data[1], parm.Polarisation_Horizontal)
 					parm.frequency = int(data[2])
 					parm.symbol_rate = int(data[3])
-					parm.system = sys[data[4]]
-					parm.inversion = inv[data[5]]
-					parm.pilot = pilot[data[6]]
-					parm.fec = fec.get(data[7], eDVBFrontendParametersSatellite.FEC_Auto)
-					parm.modulation = qam[data[8]]
-					parm.rolloff = roll[data[9]]
+					parm.system = sys.get(data[4], parm.System_DVB_S)
+					parm.inversion = inv.get(data[5], parm.Inversion_Off)
+					parm.pilot = pilot.get(data[6], parm.Pilot_On)
+					parm.fec = fec.get(data[7], parm.FEC_Auto)
+					parm.modulation = qam.get(data[8], parm.Modulation_QPSK)
+					parm.rolloff = roll.get(data[9], parm.RollOff_alpha_0_35)
 					if parm.system == parm.System_DVB_S:
 						data = data[:10]  # "DVB-S" does not support MIS/PLS or T2MI so remove any values from the output of the binary file
 					parm.pls_mode = getMisPlsValue(data, 10, eDVBFrontendParametersSatellite.PLS_Gold)
