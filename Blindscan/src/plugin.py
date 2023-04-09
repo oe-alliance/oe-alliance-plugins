@@ -1106,7 +1106,8 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 					sys = {"DVB-S": parm.System_DVB_S,
 						"DVB-S2": parm.System_DVB_S2,
 						"DVB-S2X": parm.System_DVB_S2}
-					qam = {"QPSK": parm.Modulation_QPSK,
+					qam = {"AUTO": parm.Modulation_Auto,
+						"QPSK": parm.Modulation_QPSK,
 						"8PSK": parm.Modulation_8PSK,
 						"16APSK": parm.Modulation_16APSK,
 						"32APSK": parm.Modulation_32APSK}
@@ -1264,11 +1265,12 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 						p.FEC_None: "None"}
 					sys = {p.System_DVB_S: "DVB-S",
 						p.System_DVB_S2: "DVB-S2"}
-					qam = {p.Modulation_QPSK: "QPSK",
+					qam = {p.Modulation_Auto: "Auto",
+						p.Modulation_QPSK: "QPSK",
 						p.Modulation_8PSK: "8PSK",
 						p.Modulation_16APSK: "16APSK",
 						p.Modulation_32APSK: "32APSK"}
-					tp_str = "%g%s %d FEC %s %s %s" % (p.frequency / 1000.0, pol[p.polarisation], p.symbol_rate // 1000, fec[p.fec], sys[p.system], qam[p.modulation])
+					tp_str = "%g%s %d FEC %s %s %s" % (p.frequency / 1000.0, pol.get(p.polarisation, ""), p.symbol_rate // 1000, fec.get(p.fec, ""), sys.get(p.system, ""), qam.get(p.modulation, ""))
 					if p.is_id > eDVBFrontendParametersSatellite.No_Stream_Id_Filter:
 						tp_str += " MIS %d" % p.is_id
 					if p.pls_code > 0:
