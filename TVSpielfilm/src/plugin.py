@@ -2,8 +2,9 @@
 from __future__ import absolute_import
 from base64 import b64decode, b64encode
 from datetime import date, datetime, timedelta
-from json import dumps, loads
 from glob import glob
+from html import unescape
+from json import dumps, loads
 from os import linesep, remove, rename
 from os.path import join, isdir, isfile
 from re import S, findall, search, sub
@@ -16,7 +17,6 @@ from six.moves.urllib.parse import quote
 from six.moves.urllib.request import HTTPCookieProcessor, HTTPHandler, HTTPRedirectHandler, build_opener
 from time import gmtime, localtime, mktime, strftime
 from twisted.internet.reactor import callInThread
-from xml.sax.saxutils import unescape
 from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, RT_WRAP, eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, ConfigSelectionNumber, configfile, getConfigListEntry
@@ -1018,10 +1018,8 @@ class TVSBaseScreen(TVSAllScreen):
 		self['searchmenu'].l.setList(self.searchentries)
 		self['searchmenu'].show()
 		self.searchcount += 1
-		searchtext1 = NEXTPage1
-		searchtext2 = NEXTPage2
-		if self.searchcount <= config.plugins.tvspielfilm.maxsearch.value and search(searchtext1, bereich):
-			nextpage = search(searchtext2, bereich)
+		if self.searchcount <= config.plugins.tvspielfilm.maxsearch.value and search(NEXTPage1, bereich):
+			nextpage = search(NEXTPage2, bereich)
 			if nextpage:
 				self.makeSearchView(nextpage.group(1))
 			else:
@@ -1758,6 +1756,12 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 			self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
+		self['label_OK'].hide()
+		self['label_TEXT'].hide()
+		self['label_INFO'].hide()
+		self['button_OK'].hide()
+		self['button_TEXT'].hide()
+		self['button_INFO'].hide()
 		self['waiting'].startBlinking()
 		self['waiting'].show()
 		self['ready'].hide()
@@ -2352,6 +2356,12 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self['INFOtext'].hide()
 		self['TEXTkey'].hide()
 		self['TEXTtext'].hide()
+		self['button_OK'].hide()
+		self['label_OK'].hide()
+		self['button_TEXT'].hide()
+		self['label_TEXT'].hide()
+		self['button_INFO'].hide()
+		self['label_INFO'].hide()
 		self['actions'] = ActionMap(['OkCancelActions',
 									 'ChannelSelectBaseActions',
 									 'DirectionActions',
@@ -5220,6 +5230,10 @@ class TVSHeuteView(TVSBaseScreen):
 		self['MENUtext'].show()
 		self['waiting'].startBlinking()
 		self['waiting'].show()
+		self['label_OK'].hide()
+		self['label_TEXT'].hide()
+		self['label_INFO'].hide()
+		self['button_TEXT'].hide()
 		self['button_OK'].hide()
 		self['button_INFO'].hide()
 		self['button_7_8_9'].hide()
