@@ -60,7 +60,7 @@ class PLogger:
 		print('[' + _LVSTR[level] + ']', format % argv)
 
 
-def INIT(level = _ERROR):
+def INIT(level=_ERROR):
 	PLogger.GetInstance().Init(level)
 
 
