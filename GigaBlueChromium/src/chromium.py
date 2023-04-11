@@ -9,6 +9,7 @@ from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText,
 from enigma import eTimer
 from . import cbcfg
 
+
 class ChromiumOSSettings(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="600,220" title="ChromiumOS Settings">
