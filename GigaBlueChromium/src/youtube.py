@@ -9,7 +9,7 @@ from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText,
 from . import cbcfg
 
 class YoutubeTVSettings(ConfigListScreen, Screen):
-	skin= """
+	skin = """
 		<screen position="center,center" size="600,180" title="YouTube TV Settings">
 			<widget name="config" position="0,0" size="600,140" scrollbarMode="showOnDemand" />
 			<ePixmap pixmap="skin_default/buttons/red.png" position="310,140" size="140,40" alphatest="on" />
