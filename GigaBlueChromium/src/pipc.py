@@ -1,5 +1,10 @@
 
-import os, threading, time, socket, select, struct
+import os
+import threading
+import time
+import socket
+import select
+import struct
 from . import cbcfg
 _OPCODE = {}
 _BUFSIZE = 4096
