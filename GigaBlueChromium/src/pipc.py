@@ -10,6 +10,7 @@ _OPCODE = {}
 _BUFSIZE = 4096
 _SOCKETFILE = None
 
+
 def SetHandler(opcode, handler):
 	global _OPCODE
 	print('SetHandler')

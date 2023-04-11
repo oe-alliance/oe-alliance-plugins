@@ -20,6 +20,7 @@ config.plugins.browser.youtube_mainmenu = ConfigYesNo(default=True)
 config.plugins.browser.youtube_extmenu = ConfigYesNo(default=False)
 g_browser_cfg = config.plugins.browser
 
+
 class PSingleton:
 
 	def __init__(self, decorated):
@@ -44,8 +45,8 @@ _LVSTR = {_DEBUG: '  DEBUG',
  _WARNING: 'WARNING',
  _ERROR: '  ERROR'}
 
-@PSingleton
 
+@PSingleton
 class PLogger:
 
 	def __init__(self):
