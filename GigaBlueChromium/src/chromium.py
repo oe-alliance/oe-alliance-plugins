@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
 from Components.ActionMap import ActionMap, HelpableActionMap
@@ -8,7 +8,6 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText, getConfigListEntry, ConfigInteger, ConfigSelection
 from enigma import eTimer
 from . import cbcfg
-
 
 class ChromiumOSSettings(ConfigListScreen, Screen):
 	skin = """
@@ -127,7 +126,7 @@ class ChromiumOSHelpWindow(Screen, HelpableScreen):
 		self.showHelpTimer.stop()
 		self.setHelpModeActions(self.MODE_GLOBAL)
 
-	def setHelpModeActions(self, _mode=0):
+	def setHelpModeActions(self, _mode = 0):
 		self.helpList = []
 		if _mode == self.MODE_GLOBAL:
 			self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions', {'cancel': (self.keyPass, _('Exit the Browser.'))})

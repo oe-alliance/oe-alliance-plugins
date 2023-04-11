@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText, ConfigInteger, ConfigSelection
 g_main = None
 g_browser = None
@@ -17,7 +17,6 @@ config.plugins.browser.youtube_uri = ConfigText(default='http://www.youtube.com/
 config.plugins.browser.youtube_enable_ntpd = ConfigYesNo(default=False)
 config.plugins.browser.youtube_ntpd_url = ConfigText(default='0.rhel.pool.ntp.org', visible_width=50, fixed_size=False)
 g_browser_cfg = config.plugins.browser
-
 
 class PSingleton:
 
@@ -43,8 +42,8 @@ _LVSTR = {_DEBUG: '  DEBUG',
  _WARNING: 'WARNING',
  _ERROR: '  ERROR'}
 
-
 @PSingleton
+
 class PLogger:
 
 	def __init__(self):
@@ -61,7 +60,7 @@ class PLogger:
 		print('[' + _LVSTR[level] + ']', format % argv)
 
 
-def INIT(level=_ERROR):
+def INIT(level = _ERROR):
 	PLogger.GetInstance().Init(level)
 
 

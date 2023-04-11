@@ -1,26 +1,26 @@
-from __future__ import print_function
-from __future__ import absolute_import
+
+
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.config import config
 from Components.ActionMap import ActionMap
 from Components.VolumeControl import VolumeControl
-import os
-import pipc
-import time
-import subprocess
+
+import os, time, subprocess
+from . import cbcfg
+from . import pipc
+
 from enigma import eTimer, fbClass, eRCInput, eDVBResourceManager
 from Tools.Transponder import ConvertToHumanReadable
 from .pipc import PServerThread, PServerHandlers
 from .youtube import YoutubeTVWindow, YoutubeTVSettings
 from .chromium import ChromiumOSWindow, ChromiumOSSettings
-from . import cbcfg
+
 _g_launcher_handler = None
 pipc._SOCKETFILE = '/tmp/.chromium.sock'
 cbcfg.INIT(cbcfg._ERROR)
 _g_locked = False
-
 
 def enigma2_lock():
 	global _g_locked
@@ -38,7 +38,6 @@ def enigma2_unlock():
 
 _OPCODES = ['CONTROL_EXIT', 'VIRTUAL_KEYBOARD', 'OPCODE_END']
 
-
 class BrowserHandlers(PServerHandlers):
 
 	def __init__(self):
@@ -46,7 +45,7 @@ class BrowserHandlers(PServerHandlers):
 		PServerHandlers.__init__(self, _OPCODES, '_CBH_')
 		self._player_exit_cb()
 
-	def _player_exit_cb(self, ret=None):
+	def _player_exit_cb(self, ret = None):
 		print('BrowserHandlers:_player_exit_cb')
 		try:
 			self.playerHandle.playlist.clear()
@@ -89,11 +88,10 @@ class BrowserHandlers(PServerHandlers):
 
 _HANDLER = BrowserHandlers()
 
-
 class BBrowserLauncher(Screen):
 	skin = '<screen name="BBrowserLauncher" position="0,0" size="0,0" backgroundColor="transparent" flags="wfNoBorder" title=" "></screen>'
 
-	def __init__(self, session, mode=None, url='http://gigablue.de'):
+	def __init__(self, session, mode = None, url = 'http://gigablue.de'):
 		global _g_launcher_handler
 		print('BBrowserLauncher:__init__')
 		self.session = session
@@ -229,7 +227,7 @@ class BBrowserLauncher(Screen):
 			return ''
 		return self.virtual_keyboard_data
 
-	def ShowVirtualKeyborad(self, default_data='http://'):
+	def ShowVirtualKeyborad(self, default_data = 'http://'):
 		print('BBrowserLauncher:ShowVirtualKeyborad')
 		eRCInput.getInstance().unlock()
 		self.virtual_keyboard_data = None
@@ -238,7 +236,6 @@ class BBrowserLauncher(Screen):
 
 
 global_session = None
-
 
 def stt_event_callback(text):
 	global global_session

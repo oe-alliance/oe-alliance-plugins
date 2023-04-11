@@ -1,15 +1,9 @@
-from __future__ import print_function
-import os
-import threading
-import time
-import socket
-import select
-import struct
+
+import os, threading, time, socket, select, struct
 from . import cbcfg
 _OPCODE = {}
 _BUFSIZE = 4096
 _SOCKETFILE = None
-
 
 def SetHandler(opcode, handler):
 	global _OPCODE
@@ -25,7 +19,7 @@ def SetHandler(opcode, handler):
 
 def GetHandler(opcode):
 	print('GetHandler')
-	for key, value in _OPCODE.items():
+	for key, value in list(_OPCODE.items()):
 		if value[0] == opcode:
 			cbcfg.DEBUG('recv socket: [%s]', key)
 			return value[1]
@@ -69,7 +63,7 @@ class PServerThread(threading.Thread):
 		self.mFlag = False
 		self.mTimeout = 5
 
-	def open(self, timeout=5):
+	def open(self, timeout = 5):
 		print('PServerThread:open')
 		addr = _SOCKETFILE
 		self.mTimeout = timeout
@@ -154,7 +148,7 @@ class PServerThread(threading.Thread):
 		cbcfg.DEBUG('PServerThread Stop')
 
 	@staticmethod
-	def close(self=None):
+	def close(self = None):
 		print('PServerThread:close')
 		if _SOCKETFILE is not None and os.path.exists(_SOCKETFILE):
 			os.unlink(_SOCKETFILE)
