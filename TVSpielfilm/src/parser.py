@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from re import sub, findall, search, S
+from html import unescape
+from re import sub, findall, S, search
 from six import ensure_str
 from twisted.internet import reactor
-from xml.sax.saxutils import unescape
-NEXTPage1 = 'class="js-track-link pagination__link pagination__link--next"'
-NEXTPage2 = '<a\ href="(.*?)"'
+NEXTPage1 = r'class="js-track-link pagination__link pagination__link--next"'
+NEXTPage2 = r'<a\ href="(.*?)"'
 
 
 def shortenChannel(text):
@@ -14,7 +14,7 @@ def shortenChannel(text):
 
 
 def transCHANNEL(data, separate=False):
-	map = {r"das erste.*?": "ard",
+	mapping = {r"das erste.*?": "ard",
 			r"zdf_neo.*?": "2neo",
 			r"zdfinfo.*?": "zinfo",
 			r"zdf .*?": "zdf",
@@ -238,7 +238,7 @@ def transCHANNEL(data, separate=False):
 			r"marco polo.*?": "mapo",
 			r"travel channel.*?": "trch",
 			r"home.*?garden.*?": "hgtv",
-			r"hgtv.*?": 'hgtv',
+			r"hgtv.*?": "hgtv",
 			r"channel21.*?": "ch21",
 			r"geo television.*?": "geo",
 			r"geo tv.*?": "geo",
@@ -273,13 +273,13 @@ def transCHANNEL(data, separate=False):
 	for item in data.strip().split("\n"):  # Trenner '\t' und Return '\n' geeignet einfügen
 		sref = search(" \d+:\d+:\w+:\w+:\w+:\w+:\w+:\d+:\w+:\w+:.*", item)
 		new += "%s\t\n" % item.lower() if sref is None else "%s\t%s\n" % (item[:sref.start(0)].strip().lower(), sref.group(0))
-	for pattern, shortcut in map.items():  # alle Sendernamen austauschen
+	for pattern, shortcut in mapping.items():  # alle Sendernamen austauschen
 		new = "%s\n" % sub(r"%s\t" % pattern, "%s\t" % shortcut, new).strip()
 	if separate:
 		supported = ''
 		unsupported = ''
 		for item in new.rstrip().split("\n"):  # separieren
-			if item.split("\t")[0] in list(map.values()):
+			if item.split("\t")[0] in list(mapping.values()):
 				supported += "%s\n" % item.strip()
 			else:
 				unsupported += "%s\n" % item.strip()
@@ -299,33 +299,26 @@ def searchTwoValues(regex, text, fallback1, fallback2, flags=None):
 
 
 def parsedetail(bereich, debug=None):
-	bereich = sub(r'<blockquote class="broadcast-detail__quote">\n\\s+<p>', '<p>>> ', bereich)
-	bereich = sub(r'</p>\n[ ]+</blockquote>', ' <<</p>', bereich)
-	bereich = sub(r'<section class="serial-info">\n\\s+', '<p>', bereich)
-	bereich = sub(r'</section>', '</p>', bereich)
-	bereich = sub(r'</span>\\s+', '</span>, ', bereich)
-	bereich = sub(r'<li class="titleName">', '</p><p> \xc2\xb7 ', bereich)
-	bereich = sub(r'<li class="subtitleName">', '#sub#', bereich)
+	bereich = sub(r'<blockquote class="broadcast-detail__quote">\s*<p>', '<p>>> ', bereich)
+	bereich = sub(r'</p>\s*[\s]+</blockquote>', ' <<</p>', bereich)
+	bereich = sub(r'<section class="serial-info">\s*', '<p>', bereich)
+	bereich = sub(r'</span>\s*', '</span>, ', bereich)
+	bereich = sub(r'<li\sclass="titleName">', '</p><p> \xc2\xb7 ', bereich)
+	bereich = sub(r'<li\sclass="subtitleName">', '#sub#', bereich)
 	bereich = sub(r'ShowView [0-9-]+', '', bereich)
 	bereich = sub(r'<a href=".*?">', '', bereich)
-	bereich = sub(r'<h1.*?>', '<p>', bereich)
-	bereich = sub(r'</h1>', '</p>', bereich)
-	bereich = sub(r'<h3.*?>', '<p>', bereich)
-	bereich = sub(r'</h3>', '</p>', bereich)
-	bereich = sub(r'<br/>', '</p><p>', bereich)
-	bereich = sub(r'<p>\n', '<p>', bereich)
-	bereich = sub(r'<dt>', '<p>', bereich)
-	bereich = sub(r'<dt class="role">', '<p>', bereich)
-	bereich = sub(r'</dt>\n\\s+<dd>\n\\s+', ' ', bereich)
-	bereich = sub(r'</dt>\n\\s+<dd>', ' ', bereich)
-	bereich = sub(r'</dt>\n\\s+<dd class="name">', ': ', bereich)
-	bereich = sub(r'\n[ ]+,', ',', bereich)
-	bereich = sub(r', [ ]+', ', ', bereich)
-	bereich = sub(r'</a>', '</p>', bereich)
-	bereich = sub(r'\n\\s+</dd>', '</p>', bereich)
-	bereich = sub(r'</a></dd>', '</p>', bereich)
-	bereich = sub(r'</dd>', '</p>', bereich)
-	bereich = sub(r'</dt>', '</p>', bereich)
+	bereich = sub(r'<h1[^>]>', '<p>', bereich)
+	bereich = sub(r'<h3[^>]>', '<p>', bereich)
+	bereich = sub(r'<p>\s*', '<p>', bereich)
+	bereich = sub(r'</dt>\s*<dd>\s*', ' ', bereich)
+	bereich = sub(r'</dt>\s*<dd>', ' ', bereich)
+	bereich = sub(r'</dt>\s*<dd class="name">', ': ', bereich)
+	bereich = sub(r'\s*[\s]+,', ',', bereich)
+	bereich = sub(r',\s[\s]+', ', ', bereich)
+	bereich = sub(r'\s*</dd>', '</p>', bereich)
+	bereich = bereich.replace('</section>', '</p>').replace('&nbsp;', '').replace('</h1>', '</p>').replace('</h3>', '</p>')
+	bereich = bereich.replace('<br/>', '</p><p>').replace('<dt>', '<p>').replace('<dt class="role">', '<p>').replace('</a>', '</p>')
+	bereich = bereich.replace('</a></dd>', '</p>').replace('</dd>', '</p>').replace('</dt>', '</p>')
 	text = ''
 	for x in findall(r'<p.*?>(.*?)</p>', bereich):
 		if x != '':
@@ -334,9 +327,8 @@ def parsedetail(bereich, debug=None):
 		print("[DEBUG] parsedetail %s\n" % debug)
 		print(text)
 	text = sub(r'<[^>]*>', '', text)
-	text = sub(r'</p<<p<', '\n\n', text)
 	text = sub(r'\n\\s+\n*', '\n\n', text)
-	text = sub(r'#sub#', '\n  ', text)
+	text = text.replace("</p<<p<", "\n\n").replace("#sub#", "\n  ")
 	if debug != None:
 		print("[DEBUG] parsedetail %s\n" % debug)
 		print(text)
@@ -344,8 +336,7 @@ def parsedetail(bereich, debug=None):
 
 
 def cleanHTML(bereich):
-	bereich = unescape(bereich)
-	bereich = sub(r'\r', '', bereich)
+	bereich = unescape(bereich).replace('\r', '')
 	bereich = sub(r'<ul class="slidelist">.*?</ul>', '', bereich, flags=S)
 	bereich = sub(r'<div class="vod".*?<script>', '<script>', bereich, flags=S)
 	bereich = sub(r'<script.*?</script>', '', bereich, flags=S)
@@ -387,12 +378,14 @@ def parseTrailerUrl(output, videoformat='.mp4'):
 	output = ensure_str(output)
 	if search('https://video.tvspielfilm.de/.*?' + videoformat, output) is not None:
 		trailerurl = search('https://video.tvspielfilm.de/(.*?)' + videoformat, output)
-		return 'https://video.tvspielfilm.de/' + trailerurl.group(1) + videoformat
+		return 'https://video.tvspielfilm.de/%s%s' % (trailerurl.group(1), videoformat) if trailerurl else None
 	else:
-		return None
+		return
 
 
 def buildTVTippsArray(sparte, output):
+	startpos = 0
+	endpos = 0
 	if sparte == 'neu':
 		startpos = output.find('id="c-sp-opener"><span>Spielfilm</span></a>')
 		endpos = output.find('id="c-spo-opener"><span>Sport</span></a>')
@@ -438,12 +431,13 @@ def parseNow(output):
 	if endpos == -1:
 		endpos = output.find('<div class="two-blocks">')
 	bereich = unescape(output[startpos:endpos])
-	items = findall(r'<tr class="hover">(.*?)</tr>', bereich, S)
+	items = findall('<tr class="hover">(.*?)</tr>', bereich, S)
 	entries = []
 	for item in items:
 		LOGO = searchOneValue(r'<img\s*src="https://a2.tvspielfilm.de/images/tv/sender/mini/(.*?).png"', item, None, S)
 		TIME = searchOneValue(r'<div>\s*<strong>(.*?)</strong>', item, "00:00", S)
-		title = searchOneValue(r"}'>\s*<strong>(.*?)</strong>", item, "{kein Titel gefunden}", S)
+		title = findall(r'link" title="(.*?)" data', item, S)
+		title = title[-1] if title else "- keine Sendungsinformation gefunden -"
 		genre = searchOneValue(r'<td class="col-4">\s*<span>(.*?)</span>', item, None, S)
 		sparte = searchOneValue(r'<td class="col-5">\s*<span>(.*?)\s*</span>', item, "", S).replace('<br/>', '')
 		if search('<em>', sparte):
@@ -475,8 +469,9 @@ def parseInfo(output):
 	print(bereich)
 	print(trailerurl)
 	bereich = sub(r'" alt=".*?" width="', '" width="', bereich)
-	picurl = search('<img src="(.*?)" data-src="(.*?)" width="', bereich)
-	print(picurl.group(2))
+	picurl = search(r'<img src="(.*?)" data-src="(.*?)" width="', bereich)
+	if picurl:
+		print(picurl.group(2))
 
 
 def testtvtipps(output):
