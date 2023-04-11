@@ -310,6 +310,6 @@ def Plugins(**kwargs):
 		l.append(PluginDescriptor(name=_('YouTubeTV'), where=PluginDescriptor.WHERE_MENU, icon='youtubetv.png', fnc=menu_start_youtube))
 	if config.plugins.browser.youtube_extmenu.getValue():
 		l.append(PluginDescriptor(name=_('YouTubeTV'), where=PluginDescriptor.WHERE_PLUGINMENU, icon='youtubetv.png', fnc=start_youtubetv_main))
-	l.append(PluginDescriptor(name=_('YouTubeTV Settings') , where=PluginDescriptor.WHERE_PLUGINMENU, icon='youtubetv.png',fnc=plugin_setting_youtube))
+	l.append(PluginDescriptor(name=_('YouTubeTV Settings'), where=PluginDescriptor.WHERE_PLUGINMENU, icon='youtubetv.png',fnc=plugin_setting_youtube))
 	l.append(PluginDescriptor(name=_('ChromiumOS'), description=_('Start ChromiumOS'), where=PluginDescriptor.WHERE_PLUGINMENU, icon="chromium.png", needsRestart=True, fnc=plugin_start_chromiumos))
 	return l
