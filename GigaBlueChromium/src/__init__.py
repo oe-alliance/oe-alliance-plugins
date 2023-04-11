@@ -1,7 +1,5 @@
-import os
-import gettext
+import os, gettext
 PluginLanguageDomain = 'BROWSER'
-
 
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)

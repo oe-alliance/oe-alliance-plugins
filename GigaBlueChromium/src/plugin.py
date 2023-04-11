@@ -7,9 +7,7 @@ from Components.config import config
 from Components.ActionMap import ActionMap
 from Components.VolumeControl import VolumeControl
 
-import os
-import time
-import subprocess
+import os, time, subprocess
 from . import cbcfg
 from . import pipc
 
@@ -23,7 +21,6 @@ _g_launcher_handler = None
 pipc._SOCKETFILE = '/tmp/.chromium.sock'
 cbcfg.INIT(cbcfg._ERROR)
 _g_locked = False
-
 
 def enigma2_lock():
 	global _g_locked
@@ -41,7 +38,6 @@ def enigma2_unlock():
 
 _OPCODES = ['CONTROL_EXIT', 'VIRTUAL_KEYBOARD', 'OPCODE_END']
 
-
 class BrowserHandlers(PServerHandlers):
 
 	def __init__(self):
@@ -49,7 +45,7 @@ class BrowserHandlers(PServerHandlers):
 		PServerHandlers.__init__(self, _OPCODES, '_CBH_')
 		self._player_exit_cb()
 
-	def _player_exit_cb(self, ret=None):
+	def _player_exit_cb(self, ret = None):
 		print('BrowserHandlers:_player_exit_cb')
 		try:
 			self.playerHandle.playlist.clear()
@@ -92,11 +88,10 @@ class BrowserHandlers(PServerHandlers):
 
 _HANDLER = BrowserHandlers()
 
-
 class BBrowserLauncher(Screen):
 	skin = '<screen name="BBrowserLauncher" position="0,0" size="0,0" backgroundColor="transparent" flags="wfNoBorder" title=" "></screen>'
 
-	def __init__(self, session, mode=None, url='http://gigablue.de'):
+	def __init__(self, session, mode = None, url = 'http://gigablue.de'):
 		global _g_launcher_handler
 		print('BBrowserLauncher:__init__')
 		self.session = session
@@ -232,7 +227,7 @@ class BBrowserLauncher(Screen):
 			return ''
 		return self.virtual_keyboard_data
 
-	def ShowVirtualKeyborad(self, default_data='http://'):
+	def ShowVirtualKeyborad(self, default_data = 'http://'):
 		print('BBrowserLauncher:ShowVirtualKeyborad')
 		eRCInput.getInstance().unlock()
 		self.virtual_keyboard_data = None
@@ -241,7 +236,6 @@ class BBrowserLauncher(Screen):
 
 
 global_session = None
-
 
 def stt_event_callback(text):
 	global global_session
@@ -310,7 +304,10 @@ def session_start_main(session, reason, **kwargs):
 def Plugins(**kwargs):
 	l = []
 	l.append(PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, fnc=session_start_main))
-	l.append(PluginDescriptor(name=_('YouTubeTV'), where=PluginDescriptor.WHERE_MENU, fnc=menu_start_youtube))
-	l.append(PluginDescriptor(name=_('YouTubeTV Settings'), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=plugin_setting_youtube))
-	l.append(PluginDescriptor(name=_('ChromiumOS'), description=_('Start ChromiumOS'), where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=True, fnc=plugin_start_chromiumos))
+	if config.plugins.browser.youtube_mainmenu.getValue():
+		l.append(PluginDescriptor(name=_('YouTubeTV'), where=PluginDescriptor.WHERE_MENU, icon='youtubetv.png', fnc=menu_start_youtube))
+	if config.plugins.browser.youtube_extmenu.getValue():
+		l.append(PluginDescriptor(name=_('YouTubeTV'), where=PluginDescriptor.WHERE_PLUGINMENU, icon='youtubetv.png', fnc=start_youtubetv_main))
+	l.append(PluginDescriptor(name=_('YouTubeTV Settings') , where=PluginDescriptor.WHERE_PLUGINMENU, icon='youtubetv.png',fnc=plugin_setting_youtube))
+	l.append(PluginDescriptor(name=_('ChromiumOS'), description=_('Start ChromiumOS'), where=PluginDescriptor.WHERE_PLUGINMENU, icon="chromium.png", needsRestart=True, fnc=plugin_start_chromiumos))
 	return l

@@ -9,7 +9,6 @@ from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText,
 from enigma import eTimer
 from . import cbcfg
 
-
 class ChromiumOSSettings(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="600,220" title="ChromiumOS Settings">
@@ -127,7 +126,7 @@ class ChromiumOSHelpWindow(Screen, HelpableScreen):
 		self.showHelpTimer.stop()
 		self.setHelpModeActions(self.MODE_GLOBAL)
 
-	def setHelpModeActions(self, _mode=0):
+	def setHelpModeActions(self, _mode = 0):
 		self.helpList = []
 		if _mode == self.MODE_GLOBAL:
 			self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions', {'cancel': (self.keyPass, _('Exit the Browser.'))})

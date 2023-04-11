@@ -8,9 +8,8 @@ from Components.Sources.StaticText import StaticText
 from Components.config import config, ConfigSubsection, ConfigYesNo, ConfigText, getConfigListEntry
 from . import cbcfg
 
-
 class YoutubeTVSettings(ConfigListScreen, Screen):
-	skin = """
+	skin= """
 		<screen position="center,center" size="600,180" title="YouTube TV Settings">
 			<widget name="config" position="0,0" size="600,140" scrollbarMode="showOnDemand" />
 			<ePixmap pixmap="skin_default/buttons/red.png" position="310,140" size="140,40" alphatest="on" />
@@ -42,6 +41,8 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		config.plugins.browser.youtube_uri.save()
 		config.plugins.browser.youtube_enable_ntpd.save()
 		config.plugins.browser.youtube_ntpd_url.save()
+		config.plugins.browser.youtube_mainmenu.save()
+		config.plugins.browser.youtube_extmenu.save()
 		config.plugins.browser.save()
 		config.plugins.save()
 		cbcfg.g_browser_cfg = config.plugins.browser
@@ -52,6 +53,8 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		config.plugins.browser.youtube_uri.cancel()
 		config.plugins.browser.youtube_enable_ntpd.cancel()
 		config.plugins.browser.youtube_ntpd_url.cancel()
+		config.plugins.browser.youtube_mainmenu.cancel()
+		config.plugins.browser.youtube_extmenu.cancel()
 		self.close()
 
 	def keyLeft(self):
@@ -68,11 +71,15 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		entryShowHelp = getConfigListEntry(_('Do not show YouTube TV Starter again'), config.plugins.browser.youtube_showhelp)
 		entryEnableNtpd = getConfigListEntry(_('Enable Ntpd when start YoutubeTV'), config.plugins.browser.youtube_enable_ntpd)
 		entryNtpdUri = getConfigListEntry(_('Ntpd URL'), config.plugins.browser.youtube_ntpd_url)
+		showInMainmenu = getConfigListEntry(_('Show in mainmenu'), config.plugins.browser.youtube_mainmenu)
+		showInExtmenu = getConfigListEntry(_('Show in extensions'), config.plugins.browser.youtube_extmenu)
 #		self.menulist.append(entryUri)
 		self.menulist.append(entryShowHelp)
 		self.menulist.append(entryEnableNtpd)
 		if config.plugins.browser.youtube_enable_ntpd.value == True:
 			self.menulist.append(entryNtpdUri)
+		self.menulist.append(showInMainmenu)
+		self.menulist.append(showInExtmenu)
 		self['config'].list = self.menulist
 		self['config'].l.setList(self.menulist)
 

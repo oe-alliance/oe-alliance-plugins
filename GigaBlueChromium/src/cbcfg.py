@@ -16,8 +16,9 @@ config.plugins.browser.youtube_showhelp = ConfigYesNo(default=False)
 config.plugins.browser.youtube_uri = ConfigText(default='http://www.youtube.com/tv', visible_width=50, fixed_size=False)
 config.plugins.browser.youtube_enable_ntpd = ConfigYesNo(default=False)
 config.plugins.browser.youtube_ntpd_url = ConfigText(default='0.rhel.pool.ntp.org', visible_width=50, fixed_size=False)
+config.plugins.browser.youtube_mainmenu = ConfigYesNo(default=True)
+config.plugins.browser.youtube_extmenu = ConfigYesNo(default=False)
 g_browser_cfg = config.plugins.browser
-
 
 class PSingleton:
 
@@ -43,8 +44,8 @@ _LVSTR = {_DEBUG: '  DEBUG',
  _WARNING: 'WARNING',
  _ERROR: '  ERROR'}
 
-
 @PSingleton
+
 class PLogger:
 
 	def __init__(self):
@@ -61,7 +62,7 @@ class PLogger:
 		print('[' + _LVSTR[level] + ']', format % argv)
 
 
-def INIT(level=_ERROR):
+def INIT(level = _ERROR):
 	PLogger.GetInstance().Init(level)
 
 
