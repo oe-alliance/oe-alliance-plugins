@@ -4496,10 +4496,10 @@ class TVSmakeServiceFile(Screen):
 		bouquet_root = eServiceReference(bouquet_rootstr)
 		serviceHandler = eServiceCenter.getInstance()
 		if config.usage.multibouquet.value:
-			list = serviceHandler.list(bouquet_root)
-			if list:
+			lists = serviceHandler.list(bouquet_root)
+			if lists:
 				while True:
-					s = list.getNext()
+					s = lists.getNext()
 					if not s.valid():
 						break
 					if s.flags & eServiceReference.isDirectory:
@@ -4527,7 +4527,7 @@ class TVSmakeServiceFile(Screen):
 			services = slist.getServicesAsList(format='SN')
 			data = ''
 			for service in services:
-				sref = service[0].split('http')[0].replace("4097:", "1:").replace(":21:", ":C00000:") if "http" in service[0].lower() else service[0]
+				sref = service[0].split('http')[0].replace("4097:", "1:") if "http" in service[0].lower() else service[0]  # .replace(":21:", ":C00000:") entfernt
 				data += '%s %s\n' % (service[1], sref)
 				self.fdata += '%s\n' % '{0:<40} {1:<0}'.format(service[1], sref)
 			supported, unsupported = transCHANNEL(data, separate=True)
