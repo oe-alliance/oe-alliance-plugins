@@ -57,7 +57,7 @@ class FileList(MenuList):
 			se = directory
 		else:
 			se = os_path.basename(directory)
-			direct = directory + "/"
+			direct = "%s/" % directory
 		self.changeDir(direct, se)
 		self.l.setFont(0, gFont("Regular", 18))
 		self.l.setItemHeight(26)
@@ -90,7 +90,7 @@ class FileList(MenuList):
 
 	def getSelection(self):
 		if self.l.getCurrentSelection() is None:
-			return None
+			return ""
 		return self.l.getCurrentSelection()[0]
 
 	def getCurrentEvent(self):
@@ -125,7 +125,7 @@ class FileList(MenuList):
 			files = []
 			directories = []
 		elif self.useServiceRef:
-			root = eServiceReference("2:0:1:0:0:0:0:0:0:0:" + directory)
+			root = eServiceReference("2:0:1:0:0:0:0:0:0:0:%s" % directory)
 			if self.additional_extensions:
 				root.setName(self.additional_extensions)
 			serviceHandler = eServiceCenter.getInstance()
@@ -145,19 +145,19 @@ class FileList(MenuList):
 			if os_path.exists(directory):
 				try:
 					files = listdir(directory)
-				except:
+				except Exception:
 					files = []
 				files.sort()
 				tmpfiles = files[:]
 				for x in tmpfiles:
-					if os_path.isdir(directory + x):
-						directories.append(directory + x + "/")
+					if os_path.isdir("%s%s" % (directory, x)):
+						directories.append("%s%s/" % (directory, x))
 						files.remove(x)
 		if directory is not None and self.showDirectories and not self.isTop:
-			if directory == self.current_mountpoint and self.showMountpoints:
-				self.list.append(FileEntryComponent(name="<" + _("List of Storage Devices") + ">", absolute=None, isDir=True))
+			if directory == self.current_mountpoint is not None and self.showMountpoints is not None:
+				self.list.append(FileEntryComponent(name="<%s>" % _("List of Storage Devices"), absolute=None, isDir=True))
 			elif (directory != "/") and not (self.inhibitMounts and self.getMountpoint(directory) in self.inhibitMounts):
-				self.list.append(FileEntryComponent(name="<" + _("Parent Directory") + ">", absolute='/'.join(directory.split('/')[:-2]) + '/', isDir=True))
+				self.list.append(FileEntryComponent(name="<%s>" % _("Parent Directory"), absolute='/'.join(directory.split('/')[:-2]) + '/', isDir=True))
 		if self.showDirectories:
 			for x in directories:
 				if not (self.inhibitMounts and self.getMountpoint(x) in self.inhibitMounts) and not self.inParentDirs(x, self.inhibitDirs):
@@ -170,7 +170,7 @@ class FileList(MenuList):
 					path = x.getPath()
 					name = path.split('/')[-1]
 				else:
-					path = directory + x
+					path = "%s%s" % (directory, x)
 					name = x
 					nx = None
 				EXext = os_path.splitext(path)[1]
@@ -183,7 +183,7 @@ class FileList(MenuList):
 						self.list.append(FileEntryComponent(name=name, absolute=x, isDir=False))
 					else:
 						res = [(x, False)]
-						res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name + " [" + self.getTSLength(path) + "]"))
+						res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, "%s [%s]" % (name, self.getTSLength(path))))
 						self.list.append(res)
 		self.l.setList(self.list)
 		if select is not None:
@@ -204,24 +204,23 @@ class FileList(MenuList):
 		return self.current_directory
 
 	def canDescent(self):
-		return False if self.getSelection() is None else self.getSelection()[1]
+		return False if self.getSelection() == "" else self.getSelection()[1]
 
 	def descent(self):
-		if self.getSelection() is None:
-			return
-		se = self.current_directory if self.current_directory.endswith("/") else os_path.basename(self.current_directory) if self.current_directory is not None else ""
-		self.changeDir(self.getSelection()[0], select=se)
+		if self.getSelection() != "" and self.current_directory is not None:
+			se = self.current_directory if self.current_directory.endswith("/") else os_path.basename(self.current_directory)
+			self.changeDir(self.getSelection()[0], select=se)
 
 	def getFilename(self):
-		if self.getSelection() is None:
-			return None
+		if self.getSelection() == "":
+			return ""
 		x = self.getSelection()[0]
 		if isinstance(x, eServiceReference):
 			x = x.getPath()
 		return x
 
 	def getServiceRef(self):
-		if self.getSelection() is None:
+		if self.getSelection() == "":
 			return None
 		x = self.getSelection()[0]
 		return x if isinstance(x, eServiceReference) else None
@@ -234,7 +233,7 @@ class FileList(MenuList):
 
 	def refresh(self):
 		se = ""
-		if self.getFilename() is not None:
+		if self.getFilename() != "":
 			se = self.getFilename() if self.getFilename().endswith("/") else os_path.basename(self.getFilename())
 		self.changeDir(self.current_directory, se)
 
@@ -245,7 +244,7 @@ class FileList(MenuList):
 
 	def getTSInfo(self, path):
 		if path.endswith(".ts"):
-			serviceref = eServiceReference("1:0:0:0:0:0:0:0:0:0:" + path)
+			serviceref = eServiceReference("1:0:0:0:0:0:0:0:0:0:%s" % path)
 			if not serviceref.valid():
 				return None
 			serviceHandler = eServiceCenter.getInstance()
@@ -262,7 +261,7 @@ class FileList(MenuList):
 	def getTSLength(self, path):
 		tslen = ""
 		if path.endswith(".ts"):
-			serviceref = eServiceReference("1:0:0:0:0:0:0:0:0:0:" + path)
+			serviceref = eServiceReference("1:0:0:0:0:0:0:0:0:0:%s" % path)
 			serviceHandler = eServiceCenter.getInstance()
 			info = serviceHandler.info(serviceref)
 			tslen = info.getLength(serviceref)
@@ -273,7 +272,6 @@ class FileList(MenuList):
 
 	def sortName(self):
 		self.list.sort(self.byNameFunc)
-		#self.l.invalidate()
 		self.l.setList(self.list)
 		self.moveToIndex(0)
 
@@ -281,12 +279,11 @@ class FileList(MenuList):
 		try:
 			stat1 = os_stat(self.current_directory + a[0][0])
 			stat2 = os_stat(self.current_directory + b[0][0])
-		except:
+		except Exception:
 			return 0
 		return cmp(b[0][1], a[0][1]) or cmp(stat2.st_ctime, stat1.st_ctime)
 
 	def sortDate(self):
 		self.list.sort(self.byDateFunc)
-		#self.l.invalidate()
 		self.l.setList(self.list)
 		self.moveToIndex(0)
