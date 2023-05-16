@@ -169,7 +169,7 @@ class Channelnumber:
 
 	def __eventInfoChanged(self):
 		self.RecordingLed()
-		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4kpro', 'gbtrio4k', 'gbip4kled'):
+		if BOX not in ('gb800se', 'gb800solo', 'gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4k', 'gbip4kled'):
 			return
 		if config.plugins.VFD_Giga.showClock.value == 'Off' or config.plugins.VFD_Giga.showClock.value == 'True_All':
 			return
