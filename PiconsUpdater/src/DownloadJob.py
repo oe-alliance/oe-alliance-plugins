@@ -1,11 +1,7 @@
-# -*- coding: utf-8 -*-
 from os import path
 from requests import get, exceptions
 from twisted.internet.reactor import callInThread
-from six import ensure_binary
-from six.moves.urllib.parse import quote_plus
-from . import _, printToConsole
-
+from . import printToConsole, _ # for localized messages
 
 class download:
 	def __init__(self, url, outputfile):
@@ -13,13 +9,13 @@ class download:
 		self.file = outputfile
 
 	def start(self, success, fail=None):
-		return callInThread(self.threadDownloadPage, self.url, self.file, success, fail)
+		return callInThread(self.downloadPage, self.url, self.file, success, fail)
 
 	def stop(self):
 		return
 
-	def threadDownloadPage(self, link, file, success, fail=None):
-		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+	def downloadPage(self, link, file, success, fail=None):
+		link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '').encode('utf-8')
 		try:
 			response = get(link)
 			response.raise_for_status()
@@ -30,9 +26,7 @@ class download:
 			if fail is not None:
 				fail(err)
 
-
 class DownloadJob:
-
 	def __init__(self, downloadUrl, targetFileName, callbackFinished=None, callbackFailed=None, override=False):
 		self.downloadUrl = downloadUrl
 		self.targetFileName = targetFileName
@@ -80,5 +74,6 @@ class DownloadJob:
 			callback = self.callbackFailed
 			self.clean()
 			callback(self)
-		self.download.stop()
+		if self.download:
+			self.download.stop()
 		self.download = None
