@@ -11,8 +11,10 @@ PLUGIN_PATH = resolveFilename(SCOPE_PLUGINS, 'Extensions/PiconsUpdater')
 CONFIG_FILE = 'https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/config.json'
 PluginLanguageDomain = 'PiconsUpdater'
 
+
 def localeInit():
 	bindtextdomain(PluginLanguageDomain, '%s/locale' % PLUGIN_PATH)
+
 
 def _(txt):
 	if dgettext(PluginLanguageDomain, txt):
@@ -20,13 +22,16 @@ def _(txt):
 	else:
 		return gettext(txt)
 
+
 localeInit()
 language.addCallback(localeInit)
 basicConfig(level=DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 getLogger("PIL").setLevel(WARNING)
 
+
 def printToConsole(msg):
 	info('[PiconsUpdater] %s' % msg)
+
 
 PICON_TYPE_NAME = 0
 PICON_TYPE_KEY = 1
@@ -39,6 +44,7 @@ TMP_PREVIEW_IMAGE_PATH = TMP_PICON_PATH + '/preview'
 PREVIEW_IMAGE_PATH = PLUGIN_PATH + '/previewimage/default.png'
 DEFAULT_PICON_PATH = '/usr/share/enigma2/picon'
 
+
 def byteify(input):
 	if isinstance(input, dict):
 		return {byteify(key): byteify(value) for key, value in input.items()}
@@ -46,6 +52,7 @@ def byteify(input):
 		return [byteify(element) for element in input]
 	else:
 		return input
+
 
 def getBackgroundList():
 	if not hasattr(getBackgroundList, 'config'):
@@ -63,6 +70,7 @@ def getBackgroundList():
 			configFile.close()
 	return getBackgroundList.config
 
+
 def getPiconUrls():
 	if not hasattr(getPiconUrls, 'piconsUrls'):
 		getPiconUrls.piconUrls = {'picons-all': {'title': 'Picons for DVB-C/S/T - different styles',
@@ -73,8 +81,10 @@ def getPiconUrls():
 						'nameType': PICON_TYPE_NAME}}
 	return getPiconUrls.piconUrls
 
+
 def getCurrentPicon():
 	return getPiconUrls()['picons-all']
+
 
 def getConfigSizeList():
 	piconsUrls = getCurrentPicon()
@@ -84,6 +94,7 @@ def getConfigSizeList():
 			sizeChoices.append((size, size))
 	return sizeChoices
 
+
 def getConfigBackgroundList():
 	piconsUrls = getCurrentPicon()
 	backgroundChoices = []
@@ -92,13 +103,17 @@ def getConfigBackgroundList():
 			backgroundChoices.append((background['key'], background['key']))
 	return backgroundChoices
 
+
 def getPiconsPath():
 	return config.plugins.PiconsUpdater.piconsPath
+
 
 def getPiconsTypeValue():
 	return 'picons-all'
 
+
 def getTmpLocalPicon(piconName):
 	return TMP_PICON_PATH + '/' + getPiconsTypeValue() + '/' + piconName + '.png'
+
 
 __all__ = ['_', 'printToConsole', 'getPiconsPath']

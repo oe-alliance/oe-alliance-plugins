@@ -3,6 +3,7 @@ from requests import get, exceptions
 from twisted.internet.reactor import callInThread
 from . import printToConsole, _  # for localized messages
 
+
 class download:
 	def __init__(self, url, outputfile):
 		self.url = url
@@ -25,6 +26,7 @@ class download:
 		except exceptions.RequestException as err:
 			if fail is not None:
 				fail(err)
+
 
 class DownloadJob:
 	def __init__(self, downloadUrl, targetFileName, callbackFinished=None, callbackFailed=None, override=False):

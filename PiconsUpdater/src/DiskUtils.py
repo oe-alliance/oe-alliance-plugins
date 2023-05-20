@@ -3,6 +3,7 @@ from os.path import getmtime, join, basename, isfile, dirname, isdir, realpath, 
 from re import sub
 from unicodedata import normalize
 
+
 def getCleanFileName(value):
 #   Converts to lowercase, removes non-word characters (alphanumerics and underscores) and converts spaces to hyphens.
 #	Also strips leading and trailing whitespace. Function is from django
@@ -13,6 +14,7 @@ def getCleanFileName(value):
 	value = sub('[^\\w\\s-]', '', value).strip().lower()
 	value = sub('[-\\s]+', '-', value)
 	return value.encode('utf-8')
+
 
 def getOldestFile(path, fileExtensions=None):
 #	get oldest file from folder
@@ -35,8 +37,10 @@ def getFiles(path, fileExtensions=None):
 	files.sort(key=lambda s: getmtime(join(path, s)))
 	return files
 
+
 def getFilesFromPath(path):
 	return [join(path, fname) for fname in listdir(path)]
+
 
 def getFilesWithNameKey(path, excludedDirNames=None, excludeDirs=None):
 #	get recursive all files from given path
@@ -58,13 +62,16 @@ def getFilesWithNameKey(path, excludedDirNames=None, excludeDirs=None):
 			rs[join(dirPath.replace(path, ''), fileName)] = fullFilePath
 	return rs
 
+
 def pathIsWriteable(path):
 	if isfile(path):
 		path = dirname(path)
 	return True if isdir(path) and is_mount(path) and access(path, W_OK) else False
 
+
 def is_mount(path):
 	return isdir(mountpoint(path))
+
 
 def mountpoint(path, first=True):
 	if first:
@@ -73,12 +80,14 @@ def mountpoint(path, first=True):
 		return path
 	return mountpoint(dirname(path), False)
 
+
 def removeSymbolicLinks(pathList):
 	tmpExcludedDirs = []
 	for folder in pathList:
 		if islink(folder) == False:
 			tmpExcludedDirs.append(folder)
 	return tmpExcludedDirs
+
 
 def getFreeDiskspace(path):
 	if exists(path):
@@ -87,13 +96,16 @@ def getFreeDiskspace(path):
 		return free
 	return 0
 
+
 def getFreeDiskspaceText(path):
 	free = getFreeDiskspace(path)
 	return '%d GB' % (free / 1024) if free >= 10240 else '%d MB' % free
 
+
 def reachedLimit(path, limit):
 	free = getFreeDiskspace(path)
 	return True if limit > free / 1024 else False
+
 
 def __filterFileListByFileExtension(files, fileExtensions):
 #	fileExtensions as tuple. example: ('.txt', '.png')

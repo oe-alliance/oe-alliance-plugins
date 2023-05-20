@@ -11,6 +11,7 @@ DOWNLOAD_ALL_FINISHED = 'downloadAllFinished'
 DOWNLOAD_FINISHED = 'downloadFinished'
 CONCURRENT_DOWNLOADS = 5
 
+
 class DownloadPicons:
 	def __init__(self, serviceList, piconsUrl, targetPath, piconNameType):
 		self.serviceList = serviceList

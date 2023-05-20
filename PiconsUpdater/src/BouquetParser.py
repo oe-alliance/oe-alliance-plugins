@@ -6,6 +6,7 @@ from ServiceReference import ServiceReference
 
 SKIP_BOUQUET_NAMES = 'userbouquet.lastscanned'
 
+
 def getChannelKey(service):
 	channelKeyMatch = match('([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):', str(service))
 	channelKey = '_'.join(map(str, channelKeyMatch.groups()))
@@ -13,6 +14,7 @@ def getChannelKey(service):
 		return normalize('NFKD', channelKey)
 	except Exception:
 		return channelKey
+
 
 class BouquetParser:
 	def __init__(self, bouquetPath):

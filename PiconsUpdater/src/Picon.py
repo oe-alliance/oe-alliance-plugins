@@ -14,10 +14,12 @@ from . import printToConsole, getPiconsPath, getTmpLocalPicon, _  # for localize
 MERGE_PICONS_FINISHED = 'mergePiconsFinished'
 OPTIMIZE_PICONS_FINISHED = 'optimizePiconsFinished'
 
+
 class MergeVO:
 	def __init__(self, channelPicon, targetPicon):
 		self.channelPicon = channelPicon
 		self.targetPicon = targetPicon
+
 
 class MergePiconJob:
 	def __init__(self, session, serviceList, bgPath, fgPath, factor, size):
@@ -109,6 +111,7 @@ class MergePiconJob:
 			background.thumbnail(self.size)
 		background.save(targetPicon)
 		self.__runFinished()
+
 
 class OptimizePiconsFileSize:
 	def __init__(self, session):
