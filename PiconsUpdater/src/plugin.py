@@ -1,7 +1,7 @@
 from Plugins.Plugin import PluginDescriptor
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigText, ConfigYesNo
 from .PiconsUpdaterView import PiconsUpdaterView
-from . import getConfigSizeList, getConfigBackgroundList, DEFAULT_PICON_PATH, _ # for localized messages
+from . import getConfigSizeList, getConfigBackgroundList, DEFAULT_PICON_PATH, _  # for localized messages
 
 def main(session, **kwargs):
 	config.plugins.PiconsUpdater = ConfigSubsection()

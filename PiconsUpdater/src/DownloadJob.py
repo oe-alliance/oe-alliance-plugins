@@ -1,7 +1,7 @@
 from os import path
 from requests import get, exceptions
 from twisted.internet.reactor import callInThread
-from . import printToConsole, _ # for localized messages
+from . import printToConsole, _  # for localized messages
 
 class download:
 	def __init__(self, url, outputfile):

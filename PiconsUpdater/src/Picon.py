@@ -9,7 +9,7 @@ from .BouquetParser import getChannelKey
 from .DiskUtils import getFiles, getCleanFileName
 from .EventDispatcher import dispatchEvent
 from .JobProgressView import JobProgressView
-from . import printToConsole, getPiconsPath, getTmpLocalPicon, _ # for localized messages
+from . import printToConsole, getPiconsPath, getTmpLocalPicon, _  # for localized messages
 
 MERGE_PICONS_FINISHED = 'mergePiconsFinished'
 OPTIMIZE_PICONS_FINISHED = 'optimizePiconsFinished'
