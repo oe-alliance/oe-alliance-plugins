@@ -87,7 +87,7 @@ from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_FONTS, SCOPE_LIBDIR, SCOPE_SYSETC, resolveFilename
 
 # PLUGIN IMPORTS
-from . import _ # for localized messages
+from . import _  # for localized messages
 from .ping import quiet_ping
 from .module import L4Lelement
 from .myFileList import FileList as myFileList
