@@ -6,7 +6,7 @@
 # (Meteo-Station @ compilator)
 # (dynamic scaling for rectangle analog clockfaces and -hands and tested by Mr.Servo @ OpenA.TV + Turbohai @ IHAD & OpenA.TV)
 # (moon distance and moon illumination-ratio by Mr.Servo @ OpenA.TV)
-# (new MSN-Weather and Open-Meteo forecast by Mr.Servo @ OpenA.TV)
+# (new MSN-Weather and Open-Meteo forecasts by Mr.Servo @ OpenA.TV)
 # the Yahoo+ system is uniformly valid for the weather iconssets of all weather services (by Mr.Servo @ OpenA.TV)
 #
 #  This plugin is licensed under the The Non-Profit Open Software License version 3.0 (NPOSL-3.0)
@@ -18,9 +18,8 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 
+# PYTHON IMPORTS
 from __future__ import print_function, absolute_import, division
-Version = "V5.0-r14"
-from . import _
 from calendar import Calendar, mdays, weekday, month_name, weekheader
 from codecs import decode
 from colorsys import rgb_to_hls, hls_to_rgb
@@ -43,20 +42,22 @@ from random import shuffle, choice
 from re import findall, sub
 from requests import post, get, exceptions
 from simplejson import loads
-from xml.dom.minidom import parseString
-from xml.etree.cElementTree import parse as parseE
 from six.moves import queue
 from six.moves.socketserver import ThreadingMixIn
 from six.moves.urllib.parse import quote, urlparse, urlunparse
 from six.moves.urllib.request import urlopen, Request, urlretrieve
 from six.moves.BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
-from six import PY3, text_type, BytesIO, ensure_binary, ensure_str
+from six import PY3, BytesIO, ensure_binary, ensure_str
 from struct import unpack
 from textwrap import TextWrapper, wrap
 from threading import Thread
 from time import strftime, strptime, localtime, mktime, time, sleep, timezone, altzone, daylight, gmtime
 from twisted.internet.reactor import callInThread
 from unicodedata import normalize
+from xml.dom.minidom import parseString
+from xml.etree.cElementTree import parse
+
+# ENIGMA IMPORTS
 from boxbranding import getImageDistro, getBoxType, getImageArch
 from enigma import eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol, eTimer
 from enigma import eEPGCache, eServiceReference, eServiceCenter, getDesktop, getEnigmaVersionString, eEnv, ePicLoad
@@ -84,29 +85,35 @@ from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_FONTS, SCOPE_LIBDIR, SCOPE_SYSETC, resolveFilename
+
+# PLUGIN IMPORTS
+from . import _ # for localized messages
 from .ping import quiet_ping
 from .module import L4Lelement
 from .myFileList import FileList as myFileList
-import ssl
-CrashFile = "/tmp/L4Lcrash.txt"
 
+# DEPENDENDING IMPORTS & GLOBALS & INITIALIZATION
+import ssl
 try:
 	_create_unverified_https_context = ssl._create_unverified_context
 except AttributeError:
 	pass
 else:
 	ssl._create_default_https_context = _create_unverified_https_context
+
 if not PY3:
 	from HTMLParser import HTMLParser
 	_unescape = HTMLParser().unescape
 else:
 	from html import unescape as _unescape
+
 try:
 	DPKG = True
 	from Components.Network import iNetworkInfo
 except Exception as e:
 	DPKG = False
 	from Components.Network import iNetwork
+
 try:
 	from enigma import iDVBFrontend
 	feCable = iDVBFrontend.feCable
@@ -118,6 +125,8 @@ except Exception as e:
 	feSatellite = 1
 	feTerrestrial = 4
 	feok = False
+
+CrashFile = "/tmp/L4Lcrash.txt"
 try:
 	if exists("/dev/lcd2"):
 		from fcntl import ioctl
@@ -141,7 +150,24 @@ try:
 except Exception as e:
 	PNGutilOK = False
 
-# globals
+USBok = False
+if find_library("usb-0.1") is not None or find_library("usb-1.0") is not None:
+	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
+	from . import Photoframe
+	import usb.util
+	from . import dpf
+	USBok = True
+elif getImageArch() in ("aarch64"):
+	import usb.core
+	import usb.backend.libusb1
+	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
+	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
+	from . import Photoframe
+	import usb.util
+	from . import dpf
+	USBok = True
+
+Version = "V5.0-r14"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -261,22 +287,6 @@ L4LSun = (7, 0)
 L4LMoon = (19, 0)
 INFO = ""
 WeekDays = [_("Mon"), _("Tue"), _("Wed"), _("Thur"), _("Fri"), _("Sat"), _("Sun")]
-USBok = False
-if find_library("usb-0.1") is not None or find_library("usb-1.0") is not None:
-	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
-	from . import Photoframe
-	import usb.util
-	from . import dpf
-	USBok = True
-elif getImageArch() in ("aarch64"):
-	import usb.core
-	import usb.backend.libusb1
-	usb.backend.libusb1.get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
-	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
-	from . import Photoframe
-	import usb.util
-	from . import dpf
-	USBok = True
 Farbe = [("black", _("black")), ("white", _("white")),
  ("gray", _("gray")), ("silver", _("silver")), ("slategray", _("slategray")),
  ("aquamarine", _("aquamarine")),
@@ -306,7 +316,6 @@ WetterType = [("12", _("2 Days 1 Line")), ("22", _("2 Days 2 Line")), ("1", _("4
 MeteoType = [("1", _("Current")), ("2", _("Current Temperature"))]
 NetatmoType = [("THCPN", _("All")), ("T", _("Temperature")), ("TH", _("Temperature+Humidity")), ("TC", _("Temperature+Co2")), ("TCP", _("Temperature+Co2+Pressure"))]
 NetatmoSelect = [("0", _("userdefined")), ("1", _("Module 1")), ("2", _("Module 2")), ("3", _("Module 3")), ("12", _("Module 1+2")), ("13", _("Module 1+3")), ("23", _("Module 2+3")), ("123", _("Module 1+2+3")), ("4", _("Module 4")), ("14", _("Module 1+4")), ("24", _("Module 2+4")), ("34", _("Module 3+4")), ("124", _("Module 1+2+4")), ("134", _("Module 1+3+4")), ("234", _("Module 2+3+4")), ("1234", _("Module 1-4")), ("5", _("Module 5")), ("12345", _("Module 1-5")), ("6", _("Module 6")), ("56", _("Module 5-6")), ("456", _("Module 4-6")), ("3456", _("Module 3-6")), ("23456", _("Module 2-6")), ("123456", _("Module 1-6"))]
-#("125", _("Module 1+2+5")), ("1235", _("Module 1+2+3+5")), ("135", _("Module 1+3+5")), ("145", _("Module 1+4+5")), ("1345", _("Module 1+3+4+5")), ("15", _("Module 1+5")), ("25", _("Module 2+5")), ("25", _("Module 2+5")), ("235", _("Module 2+3+5")), ("245", _("Module 2+4+5")), ("2345", _("Module 2++3+4+5")), ("35", _("Module 3+5")), ("45", _("Module 4+5"))
 CO2Type = [("0", _("Bar")), ("09", _("Bar+Value")), ("1", _("Knob")), ("19", _("Knob+Value"))]
 ClockType = [("12", _("Time")), ("112", _("Date+Time")), ("1123", _("Date+Time+Weekday")), ("11", _("Date")), ("123", _("Time+Weekday")), ("13", _("Weekday")), ("4", _("Flaps Design Date")), ("41", _("Flaps Design Weekday")), ("51", _("Analog")), ("52", _("Analog+Date")), ("521", _("Analog+Date+Weekday")), ("521+", _("Analog+Date+Weekday 2"))]
 AlignType = [("0", _("left")), ("1", _("center")), ("2", _("right")), ("0200", _("2%")), ("0300", _("3%")), ("0500", _("5%")), ("1000", _("10%")), ("1500", _("15%")), ("2000", _("20%")), ("2500", _("25%")), ("3000", _("30%")), ("3500", _("35%")), ("4000", _("40%")), ("4500", _("45%")), ("5000", _("50%")), ("5500", _("55%")), ("6000", _("60%")), ("6500", _("65%")), ("7000", _("70%")), ("7500", _("75%")), ("8000", _("80%")), ("8500", _("85%")), ("9000", _("90%")), ("9500", _("95%")), ("9700", _("97%")), ("9800", _("98%"))]
@@ -2375,8 +2384,7 @@ def Code_utf8(wert):
 		wert = wert.replace('\xc2\x86', '').replace('\xc2\x87', '').decode("utf-8", "ignore").encode("utf-8") or ""
 		return decode(wert, 'UTF-8')
 	else:
-		wert.replace('\x86', '').replace('\x87', '')
-		return wert
+		return wert.replace('\x86', '').replace('\x87', '')
 
 
 def L4log(nfo, wert=""):
@@ -2456,10 +2464,7 @@ def setSaveEventListChanged(w):
 
 def setFONT(f):
 	global FONT
-	if f.endswith(".ttf") and isfile(f):
-		FONT = f
-	else:
-		FONT = FONTdefault
+	FONT = f if f.endswith(".ttf") and isfile(f) else FONTdefault
 	LCD4linux.Font.value = FONT
 
 
@@ -2508,7 +2513,7 @@ def getMJPEGreader(w):
 
 def setPopText(w):
 	global PopText
-	PopText[0] = Code_utf8(_(strftime("%A"))) + strftime(" %H:%M")
+	PopText[0] = "%s%s" % (Code_utf8(_(strftime("%A"))), strftime(" %H:%M"))
 	PopText[1] = Code_utf8(w)
 
 
@@ -2996,18 +3001,17 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 			PIC = []
 			PIC.append(join(P2, picon))
 			if not PY3:
-				name2 = channelname.decode("utf-8").encode("latin-1", "ignore") + ".png"
-				name4 = channelname.decode("utf-8").encode("utf-8", "ignore") + ".png"
-				name = normalize('NFKD', text_type(channelname, 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+				name2 = "%s.png" % channelname.decode("utf-8").encode("latin-1", "ignore")
+				name4 = "%s.png" % channelname.decode("utf-8").encode("utf-8", "ignore")
 			else:
-				name2 = channelname + ".png"
-				name4 = channelname + ".png"
-				name = normalize('NFKD', channelname)
-			name = sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
+				name2 = "%s.png" % channelname
+				name4 = "%s.png" % channelname
+			name = normalize('NFKD', channelname)
+			name = sub(r'[^a-z0-9]', '', "%s.png" % str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 			if not PY3:
-				name3 = channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+				name3 = "%s.png" % channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
 			else:
-				name3 = channelname2.replace('\x87', '').replace('\x86', '') + ".png"
+				name3 = "%s.png" % channelname2.replace('\x87', '').replace('\x86', '')
 			PIC.append(join(P2, name3))
 			PIC.append(join(P2, name2))
 			PIC.append(join(P2, name))
@@ -3231,9 +3235,9 @@ def writeLCD1(s, im, quality, SAVE=True):
 			if str(LCD4linux.LCDRotate1.value) != "0":
 				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
 			try:
-				s.im[im].save(PICtmp + ".png", "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile(PICtmp + ".png"):
-					rename(PICtmp + ".png", PIC + ".png")
+				s.im[im].save("%s.png" % PICtmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile("%s.png" % PICtmp):
+					rename("%s.png" % PICtmp, "%s.png" % PIC)
 			except Exception as e:
 				L4log("Error write Picture")
 	elif LCD4linux.LCDType1.value[0] == "3":
@@ -3251,9 +3255,9 @@ def writeLCD1(s, im, quality, SAVE=True):
 			if "1" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate1.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
-				s.im[im].save(PICtmp + ".png", "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile(PICtmp + ".png"):
-					rename(PICtmp + ".png", PIC + ".png")
+				s.im[im].save("%s.png" % PICtmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile("%s.png" % PICtmp):
+					rename("%s.png" % PICtmp, "%s.png" % PIC)
 		except Exception as e:
 			L4log("Error write Picture")
 	elif LCD4linux.LCDType1.value[0] == "5":
@@ -3262,9 +3266,9 @@ def writeLCD1(s, im, quality, SAVE=True):
 			if "1" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate1.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
-				s.im[im].save(PICtmp + ".png", "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile(PICtmp + ".png"):
-					rename(PICtmp + ".png", PIC + ".png")
+				s.im[im].save("%s.png" % PICtmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile("%s.png" % PICtmp):
+					rename("%s.png" % PICtmp, "%s.png" % PIC)
 			if int(LCD4linux.xmlOffset.value) != 0:
 				MAX_W, MAX_H = s.im[im].size
 				MAX_W += (int(LCD4linux.xmlOffset.value) * 2)
@@ -3288,7 +3292,7 @@ def writeLCD1(s, im, quality, SAVE=True):
 		L4log("writing to Vu+ LCD")
 		try:
 			s.im[im].save("%s.png" % PICtmp, "PNG")
-			if isfile(PICtmp + ".png"):
+			if isfile("%s.png" % PICtmp):
 				rename("%s.png" % PICtmp, "%s.png" % PIC)
 		except Exception as e:
 			L4log("Error write Picture")
@@ -3348,9 +3352,9 @@ def writeLCD2(s, im, quality, SAVE=True):
 			if str(LCD4linux.LCDRotate2.value) != "0":
 				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
 			try:
-				s.im[im].save(PIC2tmp + ".png", "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile(PIC2tmp + ".png"):
-					rename(PIC2tmp + ".png", PIC2 + ".png")
+				s.im[im].save("%s.png" % PIC2tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile("%s.png" % PIC2tmp):
+					rename("%s.png" % PIC2tmp, "%s.png" % PIC2)
 			except Exception as e:
 				L4log("Error write Picture2")
 	elif LCD4linux.LCDType2.value[0] == "3":
@@ -3368,9 +3372,9 @@ def writeLCD2(s, im, quality, SAVE=True):
 			if "2" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate2.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
-				s.im[im].save(PIC2tmp + ".png", "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile(PIC2tmp + ".png"):
-					rename(PIC2tmp + ".png", PIC2 + ".png")
+				s.im[im].save("%s.png" % PIC2tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile("%s.png" % PIC2tmp):
+					rename("%s.png" % PIC2tmp, "%s.png" % PIC2)
 		except Exception as e:
 			L4log("Error write Picture2")
 	elif LCD4linux.LCDType2.value[0] == "5":
@@ -3379,9 +3383,9 @@ def writeLCD2(s, im, quality, SAVE=True):
 			if "2" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate2.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
-				s.im[im].save(PIC2tmp + ".png", "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile(PIC2tmp + ".png"):
-					rename(PIC2tmp + ".png", PIC2 + ".png")
+				s.im[im].save("%s.png" % PIC2tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile("%s.png" % PIC2tmp):
+					rename("%s.png" % PIC2tmp, "%s.png" % PIC2)
 			if int(LCD4linux.xmlOffset.value) != 0:
 				MAX_W, MAX_H = s.im[im].size
 				MAX_W += (int(LCD4linux.xmlOffset.value) * 2)
@@ -3404,13 +3408,13 @@ def writeLCD2(s, im, quality, SAVE=True):
 	elif LCD4linux.LCDType2.value[0] == "9":
 		L4log("writing to Vu+ LCD2")
 		try:
-			s.im[im].save(PIC2tmp + ".png", "PNG")
-			if isfile(PIC2tmp + ".png"):
-				rename(PIC2tmp + ".png", PIC2 + ".png")
+			s.im[im].save("%s.png" % PIC2tmp, "PNG")
+			if isfile("%s.png" % PIC2tmp):
+				rename("%s.png" % PIC2tmp, "%s.png" % PIC2)
 		except Exception as e:
 			L4log("Error write Picture2")
 		if pngutilconnect != 0:
-			pngutil.send(PIC2 + ".png")
+			pngutil.send("%s.png" % PIC2)
 		else:
 			L4log("Error no Vu+ connect")
 	else:
@@ -3465,9 +3469,9 @@ def writeLCD3(s, im, quality, SAVE=True):
 			if str(LCD4linux.LCDRotate3.value) != "0":
 				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
 			try:
-				s.im[im].save(PIC3tmp + ".png", "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile(PIC3tmp + ".png"):
-					rename(PIC3tmp + ".png", PIC3 + ".png")
+				s.im[im].save("%s.png" % PIC3tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile("%s.png" % PIC3tmp):
+					rename("%s.png" % PIC3tmp, "%s.png" % PIC3)
 			except Exception as e:
 				L4log("Error write Picture3")
 	elif LCD4linux.LCDType3.value[0] == "3":
@@ -3485,9 +3489,9 @@ def writeLCD3(s, im, quality, SAVE=True):
 			if "3" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate3.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
-				s.im[im].save(PIC3tmp + ".png", "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile(PIC3tmp + ".png"):
-					rename(PIC3tmp + ".png", PIC3 + ".png")
+				s.im[im].save("%s.png" % PIC3tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile("%s.png" % PIC3tmp):
+					rename("%s.png" % PIC3tmp, "%s.png" % PIC3)
 		except Exception as e:
 			L4log("Error write Picture3")
 	elif LCD4linux.LCDType3.value[0] == "5":
@@ -3496,9 +3500,9 @@ def writeLCD3(s, im, quality, SAVE=True):
 			if "3" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate3.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
-				s.im[im].save(PIC3tmp + ".png", "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile(PIC3tmp + ".png"):
-					rename(PIC3tmp + ".png", PIC3 + ".png")
+				s.im[im].save("%s.png" % PIC3tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile("%s.png" % PIC3tmp):
+					rename("%s.png" % PIC3tmp, "%s.png" % PIC3)
 			if int(LCD4linux.xmlOffset.value) != 0:
 				MAX_W, MAX_H = s.im[im].size
 				MAX_W += (int(LCD4linux.xmlOffset.value) * 2)
@@ -3521,13 +3525,13 @@ def writeLCD3(s, im, quality, SAVE=True):
 	elif LCD4linux.LCDType3.value[0] == "9":
 		L4log("writing to Vu+ LCD3")
 		try:
-			s.im[im].save(PIC3tmp + ".png", "PNG")
-			if isfile(PIC3tmp + ".png"):
-				rename(PIC3tmp + ".png", PIC3 + ".png")
+			s.im[im].save("%s.png" % PIC3tmp, "PNG")
+			if isfile("%s.png" % PIC3tmp):
+				rename("%s.png" % PIC3tmp, "%s.png" % PIC3)
 		except Exception as e:
 			L4log("Error write Picture3")
 		if pngutilconnect != 0:
-			pngutil.send(PIC3 + ".png")
+			pngutil.send("%s.png" % PIC3)
 		else:
 			L4log("Error no Vu+ connect")
 	else:
@@ -5627,7 +5631,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 					self.picload.startDecode(fn)
 					self.mtime1 = ft
 			else:
-				fn = PIC + ".png"
+				fn = "%s.png" % PIC
 				ft = 0.0
 				if isfile(fn):
 					ft = stat(fn).st_mtime
@@ -5652,7 +5656,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 					self.picload2.startDecode(fn)
 					self.mtime2 = ft
 			else:
-				fn = PIC2 + ".png"
+				fn = "%s.png" % PIC2
 				ft = 0.0
 				if isfile(fn):
 					ft = stat(fn).st_mtime
@@ -5678,7 +5682,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 						self.picload3.startDecode(fn)
 						self.mtime3 = ft
 				else:
-					fn = PIC3 + ".png"
+					fn = "%s.png" % PIC3
 					ft = 0.0
 					if isfile(fn):
 						ft = stat(fn).st_mtime
@@ -10977,21 +10981,18 @@ def LCD4linuxPIC(self, session):
 					P2A = LCD4linux.PiconPathAlt.value
 					PIC = []
 					PIC.append(join(P2, picon))
+					name = normalize('NFKD', self.Lchannel_name)
+					name = sub(r'[^a-z0-9]', '', "%s.png" % str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 					if not PY3:
-						name = normalize('NFKD', text_type(self.Lchannel_name, 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
-					else:
-						name = normalize('NFKD', self.Lchannel_name)
-					name = sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
-					if not PY3:
-						name2 = self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
-						name4 = self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore") + ".png"
-						name3 = self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
+						name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
+						name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore")
+						name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
 					else:
 						# TODO : fixme if needed
-						# name2=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8") + ".png"
-						name2 = self.Lchannel_name + ".png"
-						name4 = self.Lchannel_name + ".png"
-						name3 = self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
+						# "%s.png" % name2=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8")
+						name2 = "%s.png" % self.Lchannel_name
+						name4 = "%s.png" % self.Lchannel_name
+						name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
 					PIC.append(join(P2, name3))
 					PIC.append(join(P2, name2))
 					PIC.append(join(P2, name))
@@ -12134,6 +12135,7 @@ def LCD4linuxPIC(self, session):
 		Progess = getProgess(MAX_W, ConfigProzent)
 		POSY = ConfigPos
 		POSX = getSplit(ConfigSplit, ConfigAlign, MAX_W, Progess)
+		h = 0
 		timercount = 0
 		TL = self.Ltimer_list if ConfigBox == 0 else self.wwwBoxTimer
 		TL = sorted(TL, key=lambda x: x.begin, reverse=False)
@@ -12160,7 +12162,6 @@ def LCD4linuxPIC(self, session):
 							ShadowText(draw, POSX + hk, POSY, tx, font, ConfigColor, ConfigShadow)
 					POSY += h
 				timercount += 1
-		h = 0
 		if timercount == 0:
 			if LCD4linux.ShowNoMsg.value == True:
 				w, h = getFsize(_("no Timer"), font)
@@ -12200,7 +12201,7 @@ def LCD4linuxPIC(self, session):
 			pos = rr.rfind(':')
 			if pos != -1:
 				rr = rr[:pos]
-			picon = str(rr.rstrip(":").replace(":", "_")) + ".png"
+			picon = "%s.png" % rr.rstrip(":").replace(":", "_")
 			if Picon2 == 0:
 				P2 = LCD4linux.PiconPath.value
 				P2A = LCD4linux.PiconPathAlt.value
@@ -12217,19 +12218,16 @@ def LCD4linuxPIC(self, session):
 				useCache = False
 				PIC = []
 				PIC.append(join(P2, picon))
+				name = normalize('NFKD', self.Lchannel_name)
+				name = sub(r'[^a-z0-9]', '', "%s.png" % str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 				if not PY3:
-					name = normalize('NFKD', text_type(self.Lchannel_name, 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
+					name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
+					name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
+					name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
 				else:
-					name = normalize('NFKD', self.Lchannel_name)
-				name = sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower()) + ".png"
-				if not PY3:
-					name2 = self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
-					name4 = self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore") + ".png"
-					name3 = self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8") + ".png"
-				else:
-					name2 = self.Lchannel_name + ".png"
-					name4 = self.Lchannel_name + ".png"
-					name3 = self.Lchannel_name2.replace('\x87', '').replace('\x86', '') + ".png"
+					name2 = "%s.png" % self.Lchannel_name
+					name4 = "%s.png" % self.Lchannel_name
+					name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
 				name5 = getPiconName(self.LsreftoString)
 				PIC.append(join(P2, name3))
 				PIC.append(join(P2, name2))
@@ -12680,8 +12678,8 @@ def LCD4linuxPIC(self, session):
 			provider = self.Lprovider
 			L4logE("Provider", provider)
 			if ConfigType == "2":
-				if isfile(join(LCD4linux.ProvPath.value, provider.upper() + ".png")):
-					pic = join(LCD4linux.ProvPath.value, provider.upper() + ".png")
+				if isfile(join(LCD4linux.ProvPath.value, provider.upper(), ".png")):
+					pic = join(LCD4linux.ProvPath.value, provider.upper(), ".png")
 				elif isfile(join(LCD4linux.ProvPath.value, "picon_default.png")):
 					pic = join(LCD4linux.ProvPath.value, "picon_default.png")
 				else:
@@ -12737,7 +12735,7 @@ def LCD4linuxPIC(self, session):
 						orbital = str((float(orbital)) / 10.0) + "E"
 					if ConfigType == "1":
 						if len(SAT) == 0 and isfile(LCD4etc + "tuxbox/satellites.xml"):
-							satXml = parseE(LCD4etc + "tuxbox/satellites.xml").getroot()
+							satXml = parse(LCD4etc + "tuxbox/satellites.xml").getroot()
 							if satXml is not None:
 								L4log("parsing satellites...")
 								for sat in satXml.findall("sat"):
@@ -12763,9 +12761,9 @@ def LCD4linuxPIC(self, session):
 					L4logE("Orbital3", orbital)
 				font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 				w, h = getFsize(Code_utf8(orbital), font)
-				if ConfigType[0] == "2" and isfile(join(LCD4linux.SatPath.value, str(orbital).replace(".", "") + ".png")):
+				if ConfigType[0] == "2" and isfile(join(LCD4linux.SatPath.value, str(orbital).replace(".", ""), ".png")):
 					try:
-						imW = Image.open(join(LCD4linux.SatPath.value, str(orbital).replace(".", "") + ".png"))
+						imW = Image.open(join(LCD4linux.SatPath.value, str(orbital).replace(".", ""), ".png"))
 						xx, yy = imW.size
 						CS = int(ConfigSize * 1.5)
 						x = int(float(CS) / yy * xx)
@@ -13206,7 +13204,7 @@ def LCD4linuxPIC(self, session):
 				CS = int(ConfigSize * 3)
 				x = 0
 				if "P" in ConfigShow:
-					picon = str(rr.rstrip(":")) + ".png"
+					picon = "%s.png" % rr.rstrip(":")
 					if isfile(join(LCD4linux.PiconPath.value, picon)):
 						piconP = join(LCD4linux.PiconPath.value, picon)
 					elif isfile(join(LCD4linux.PiconPathAlt.value, picon)):
@@ -13628,16 +13626,16 @@ def LCD4linuxPIC(self, session):
 					Bildname = ""
 					Rufname = Fx[3].split("\n")[0].split(",")[0].strip()
 					if "1" in str(LCD4linux.FritzPictureSearch.value):
-						if isfile(join(LCD4linux.FritzPath.value, Fx[2] + ".png")):
-							Bildname = join(LCD4linux.FritzPath.value, Fx[2] + ".png")
-						elif isfile(join(LCD4linux.FritzPath.value, Rufname + ".png")):
-							Bildname = join(LCD4linux.FritzPath.value, Rufname + ".png")
-						elif isfile(join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip() + ".png")):
-							Bildname = join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip() + ".png")
+						if isfile(join(LCD4linux.FritzPath.value, Fx[2], ".png")):
+							Bildname = join(LCD4linux.FritzPath.value, Fx[2], ".png")
+						elif isfile(join(LCD4linux.FritzPath.value, Rufname, ".png")):
+							Bildname = join(LCD4linux.FritzPath.value, Rufname, ".png")
+						elif isfile(join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip(), ".png")):
+							Bildname = join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip(), ".png")
 					if Bildname == "" and "2" in LCD4linux.FritzPictureSearch.value:
 						for k in range(len(Fx[2]), 0, -1):
-							if isfile(join(LCD4linux.FritzPath.value, Fx[2][:k] + ".png")):
-								Bildname = join(LCD4linux.FritzPath.value, Fx[2][:k] + ".png")
+							if isfile(join(LCD4linux.FritzPath.value, Fx[2][:k], ".png")):
+								Bildname = join(LCD4linux.FritzPath.value, Fx[2][:k], ".png")
 								break
 					if Bildname == "":
 						if isfile(join(LCD4linux.FritzPath.value, "default.png")):
@@ -13698,16 +13696,16 @@ def LCD4linuxPIC(self, session):
 				Bildname = ""
 				Rufname = FL[3].split("\n")[0].split(",")[0].strip()
 				if "1" in str(LCD4linux.FritzPictureSearch.value):
-					if isfile(join(LCD4linux.FritzPath.value, FL[2] + ".png")):
-						Bildname = join(LCD4linux.FritzPath.value, FL[2] + ".png")
-					elif isfile(join(LCD4linux.FritzPath.value, Rufname + ".png")):
-						Bildname = join(LCD4linux.FritzPath.value, Rufname + ".png")
-					elif isfile(join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip() + ".png")):
-						Bildname = join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip() + ".png")
+					if isfile(join(LCD4linux.FritzPath.value, FL[2], ".png")):
+						Bildname = join(LCD4linux.FritzPath.value, FL[2], ".png")
+					elif isfile(join(LCD4linux.FritzPath.value, Rufname, ".png")):
+						Bildname = join(LCD4linux.FritzPath.value, Rufname, ".png")
+					elif isfile(join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip(), ".png")):
+						Bildname = join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip(), ".png")
 				if Bildname == "" and "2" in LCD4linux.FritzPictureSearch.value:
 					for k in range(len(FL[2]), 0, -1):
-						if isfile(join(LCD4linux.FritzPath.value, FL[2][:k] + ".png")):
-							Bildname = join(LCD4linux.FritzPath.value, FL[2][:k] + ".png")
+						if isfile(join(LCD4linux.FritzPath.value, FL[2][:k], ".png")):
+							Bildname = join(LCD4linux.FritzPath.value, FL[2][:k], ".png")
 							break
 				if Bildname == "":
 					if isfile(join(LCD4linux.FritzPath.value, "default.png")):
