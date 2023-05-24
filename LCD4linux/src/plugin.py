@@ -25,7 +25,7 @@ from codecs import decode
 from colorsys import rgb_to_hls, hls_to_rgb
 from ctypes.util import find_library
 from datetime import datetime, timedelta, date
-from dateutil import parser
+from dateutil.parser import parser
 from email import message_from_string
 from email.header import decode_header
 from gc import enable, disable
@@ -42,7 +42,7 @@ from random import shuffle, choice
 from re import findall, sub
 from requests import post, get, exceptions
 from simplejson import loads
-from six.moves import queue
+from six.moves.queue import Queue
 from six.moves.socketserver import ThreadingMixIn
 from six.moves.urllib.parse import quote, urlparse, urlunparse
 from six.moves.urllib.request import urlopen, Request, urlretrieve
@@ -271,13 +271,13 @@ isMediaPlayer = ""
 GrabRunning = False
 GrabTVRunning = False
 TVrunning = False
-BriefLCD = queue.Queue()
-Briefkasten = queue.Queue()
-BriefRes = queue.Queue()
-Brief1 = queue.Queue()
-Brief2 = queue.Queue()
-Brief3 = queue.Queue()
-MJPEG = ["0123", queue.Queue(), queue.Queue(), queue.Queue()]
+BriefLCD = Queue()
+Briefkasten = Queue()
+BriefRes = Queue()
+Brief1 = Queue()
+Brief2 = Queue()
+Brief3 = Queue()
+MJPEG = ["0123", Queue(), Queue(), Queue()]
 MJPEGserver = [None, None, None, None]
 MJPEGreader = [0, 0, 0, 0]
 MJPEGrun = [0, 0, 0, 0]
@@ -3143,7 +3143,7 @@ def writeHelligkeit(hell, night, STOP):
 		if dpf.setBacklight(SamsungDevice3, h3 if h3 < 8 else 7) == False:
 			dpf.close(SamsungDevice3)
 			SamsungDevice3 = None
-	if isfile(LCD4etc + "grautec/settings/takeownership") and STOP == False:
+	if isfile("%sgrautec/settings/takeownership" % LCD4etc) and STOP == False:
 		try:
 			if LCD4linux.LCDType1.value[0] == "4":
 				if isfile("/tmp/usbtft-brightness"):
@@ -3227,6 +3227,7 @@ def writeLCD1(s, im, quality, SAVE=True):
 	if LCD4linux.LCDType1.value[0] in ["2", "3"] and virtBRI(1) not in [0, 10] and SAVE == True and LCD4linux.MJPEGvirtbri1.value == True:
 		s.tmp[im] = ImageEnhance.Brightness(s.im[im]).enhance(virtBRI(1))
 		s.im[im] = s.tmp[im]
+	bild = "%s.png" % PICtmp
 	if LCD4linux.LCDType1.value[0] == "1":
 		if SamsungDevice is not None:
 			L4log("writing to DPF Device")
@@ -3235,17 +3236,18 @@ def writeLCD1(s, im, quality, SAVE=True):
 			if str(LCD4linux.LCDRotate1.value) != "0":
 				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
 			try:
-				s.im[im].save("%s.png" % PICtmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile("%s.png" % PICtmp):
-					rename("%s.png" % PICtmp, "%s.png" % PIC)
+				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile(bild):
+					rename(bild, "%s.png" % PIC)
 			except Exception as e:
 				L4log("Error write Picture")
 	elif LCD4linux.LCDType1.value[0] == "3":
 		L4log("writing Picture")
 		try:
-			s.im[im].save(PICtmp + "." + LCD4linux.BilderTyp.value, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-			if isfile(PICtmp + "." + LCD4linux.BilderTyp.value):
-				rename(PICtmp + "." + LCD4linux.BilderTyp.value, PIC + "." + LCD4linux.BilderTyp.value)
+			datei = "%s.%s" % (PICtmp, LCD4linux.BilderTyp.value)
+			s.im[im].save(datei, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+			if isfile(datei):
+				rename(datei, "%s.%s" % (PIC, LCD4linux.BilderTyp.value))
 		except Exception as e:
 			L4log("Error write Picture")
 	elif LCD4linux.LCDType1.value[0] == "4":
@@ -3255,9 +3257,9 @@ def writeLCD1(s, im, quality, SAVE=True):
 			if "1" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate1.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
-				s.im[im].save("%s.png" % PICtmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile("%s.png" % PICtmp):
-					rename("%s.png" % PICtmp, "%s.png" % PIC)
+				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile(bild):
+					rename(bild, "%s.png" % PIC)
 		except Exception as e:
 			L4log("Error write Picture")
 	elif LCD4linux.LCDType1.value[0] == "5":
@@ -3266,9 +3268,9 @@ def writeLCD1(s, im, quality, SAVE=True):
 			if "1" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate1.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
-				s.im[im].save("%s.png" % PICtmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile("%s.png" % PICtmp):
-					rename("%s.png" % PICtmp, "%s.png" % PIC)
+				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile(bild):
+					rename(bild, "%s.png" % PIC)
 			if int(LCD4linux.xmlOffset.value) != 0:
 				MAX_W, MAX_H = s.im[im].size
 				MAX_W += (int(LCD4linux.xmlOffset.value) * 2)
@@ -3291,9 +3293,9 @@ def writeLCD1(s, im, quality, SAVE=True):
 	elif LCD4linux.LCDType1.value[0] == "9":
 		L4log("writing to Vu+ LCD")
 		try:
-			s.im[im].save("%s.png" % PICtmp, "PNG")
-			if isfile("%s.png" % PICtmp):
-				rename("%s.png" % PICtmp, "%s.png" % PIC)
+			s.im[im].save(bild, "PNG")
+			if isfile(bild):
+				rename(bild, "%s.png" % PIC)
 		except Exception as e:
 			L4log("Error write Picture")
 		if pngutilconnect != 0:
@@ -3314,13 +3316,14 @@ def writeLCD1(s, im, quality, SAVE=True):
 				L4log("Samsung 1 write Error")
 		if "1" in LCD4linux.SavePicture.value and SAVE == True:
 			try:
+				datei = "%s.jpg" % PICtmp
 				if str(LCD4linux.LCDRotate1.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
-					s.im[im].save(PICtmp + ".jpg", "JPEG")
+					s.im[im].save(datei, "JPEG")
 				elif pic is not None:
-					open(PICtmp + ".jpg", "wb").write(pic)
-				if isfile(PICtmp + ".jpg"):
-					rename(PICtmp + ".jpg", PIC + ".jpg")
+					open(datei, "wb").write(pic)
+				if isfile(datei):
+					rename(datei, "%s.jpg" % PIC)
 			except Exception as e:
 				L4log("Error write Picture")
 	if LCD4linux.MJPEGenable1.value == True:
@@ -3344,6 +3347,7 @@ def writeLCD2(s, im, quality, SAVE=True):
 	if LCD4linux.LCDType2.value[0] in ["2", "3"] and virtBRI(2) not in [0, 10] and SAVE == True and LCD4linux.MJPEGvirtbri2.value == True:
 		s.tmp[im] = ImageEnhance.Brightness(s.im[im]).enhance(virtBRI(2))
 		s.im[im] = s.tmp[im]
+	bild = "%s.png" % PIC2tmp
 	if LCD4linux.LCDType2.value[0] == "1":
 		if SamsungDevice2 is not None:
 			L4log("writing to DPF2 Device")
@@ -3352,17 +3356,18 @@ def writeLCD2(s, im, quality, SAVE=True):
 			if str(LCD4linux.LCDRotate2.value) != "0":
 				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
 			try:
-				s.im[im].save("%s.png" % PIC2tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile("%s.png" % PIC2tmp):
-					rename("%s.png" % PIC2tmp, "%s.png" % PIC2)
+				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile(bild):
+					rename(bild, "%s.png" % PIC2)
 			except Exception as e:
 				L4log("Error write Picture2")
 	elif LCD4linux.LCDType2.value[0] == "3":
 		L4log("writing Picture2")
 		try:
-			s.im[im].save(PIC2tmp + "." + LCD4linux.BilderTyp.value, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-			if isfile(PIC2tmp + "." + LCD4linux.BilderTyp.value):
-				rename(PIC2tmp + "." + LCD4linux.BilderTyp.value, PIC2 + "." + LCD4linux.BilderTyp.value)
+			datei = "%s.%s" % (PIC2tmp, LCD4linux.BilderTyp.value)
+			s.im[im].save(datei, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+			if isfile(datei):
+				rename(datei, "%s.%s" % (PIC2, LCD4linux.BilderTyp.value))
 		except Exception as e:
 			L4log("Error write Picture2")
 	elif LCD4linux.LCDType2.value[0] == "4":
@@ -3372,9 +3377,9 @@ def writeLCD2(s, im, quality, SAVE=True):
 			if "2" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate2.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
-				s.im[im].save("%s.png" % PIC2tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile("%s.png" % PIC2tmp):
-					rename("%s.png" % PIC2tmp, "%s.png" % PIC2)
+				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile(bild):
+					rename(bild, "%s.png" % PIC2)
 		except Exception as e:
 			L4log("Error write Picture2")
 	elif LCD4linux.LCDType2.value[0] == "5":
@@ -3383,9 +3388,9 @@ def writeLCD2(s, im, quality, SAVE=True):
 			if "2" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate2.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
-				s.im[im].save("%s.png" % PIC2tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile("%s.png" % PIC2tmp):
-					rename("%s.png" % PIC2tmp, "%s.png" % PIC2)
+				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile(bild):
+					rename(bild, "%s.png" % PIC2)
 			if int(LCD4linux.xmlOffset.value) != 0:
 				MAX_W, MAX_H = s.im[im].size
 				MAX_W += (int(LCD4linux.xmlOffset.value) * 2)
@@ -3408,9 +3413,9 @@ def writeLCD2(s, im, quality, SAVE=True):
 	elif LCD4linux.LCDType2.value[0] == "9":
 		L4log("writing to Vu+ LCD2")
 		try:
-			s.im[im].save("%s.png" % PIC2tmp, "PNG")
-			if isfile("%s.png" % PIC2tmp):
-				rename("%s.png" % PIC2tmp, "%s.png" % PIC2)
+			s.im[im].save(bild, "PNG")
+			if isfile(bild):
+				rename(bild, "%s.png" % PIC2)
 		except Exception as e:
 			L4log("Error write Picture2")
 		if pngutilconnect != 0:
@@ -3431,13 +3436,14 @@ def writeLCD2(s, im, quality, SAVE=True):
 				L4log("Samsung 2 write Error")
 		if "2" in LCD4linux.SavePicture.value and SAVE == True:
 			try:
+				datei = "%s.jpg" % PIC2tmp
 				if str(LCD4linux.LCDRotate2.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
-					s.im[im].save(PIC2tmp + ".jpg", "JPEG")
+					s.im[im].save(datei, "JPEG")
 				elif pic is not None:
-					open(PIC2tmp + ".jpg", "wb").write(pic)
-				if isfile(PIC2tmp + ".jpg"):
-					rename(PIC2tmp + ".jpg", PIC2 + ".jpg")
+					open(datei, "wb").write(pic)
+				if isfile(datei):
+					rename(datei, "%s.jpg" % PIC2)
 			except Exception as e:
 				L4log("Error write Picture2")
 	if LCD4linux.MJPEGenable2.value == True:
@@ -3461,6 +3467,7 @@ def writeLCD3(s, im, quality, SAVE=True):
 	if LCD4linux.LCDType3.value[0] in ["2", "3"] and virtBRI(3) not in [0, 10] and SAVE == True and LCD4linux.MJPEGvirtbri3.value == True:
 		s.tmp[im] = ImageEnhance.Brightness(s.im[im]).enhance(virtBRI(3))
 		s.im[im] = s.tmp[im]
+	bild = "%s.png" % PIC3tmp
 	if LCD4linux.LCDType3.value[0] == "1":
 		if SamsungDevice3 is not None:
 			L4log("writing to DPF3 Device")
@@ -3469,17 +3476,18 @@ def writeLCD3(s, im, quality, SAVE=True):
 			if str(LCD4linux.LCDRotate3.value) != "0":
 				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
 			try:
-				s.im[im].save("%s.png" % PIC3tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile("%s.png" % PIC3tmp):
-					rename("%s.png" % PIC3tmp, "%s.png" % PIC3)
+				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile(bild):
+					rename(bild, "%s.png" % PIC3)
 			except Exception as e:
 				L4log("Error write Picture3")
 	elif LCD4linux.LCDType3.value[0] == "3":
 		L4log("writing Picture3")
 		try:
-			s.im[im].save(PIC3tmp + "." + LCD4linux.BilderTyp.value, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-			if isfile(PIC3tmp + "." + LCD4linux.BilderTyp.value):
-				rename(PIC3tmp + "." + LCD4linux.BilderTyp.value, PIC3 + "." + LCD4linux.BilderTyp.value)
+			datei = "%s.%s" % (PIC3tmp, LCD4linux.BilderTyp.value)
+			s.im[im].save(datei, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+			if isfile(datei):
+				rename(datei, "%s.%s" % (PIC3, LCD4linux.BilderTyp.value))
 		except Exception as e:
 			L4log("Error write Picture3")
 	elif LCD4linux.LCDType3.value[0] == "4":
@@ -3489,9 +3497,9 @@ def writeLCD3(s, im, quality, SAVE=True):
 			if "3" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate3.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
-				s.im[im].save("%s.png" % PIC3tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile("%s.png" % PIC3tmp):
-					rename("%s.png" % PIC3tmp, "%s.png" % PIC3)
+				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile(bild):
+					rename(bild, "%s.png" % PIC3)
 		except Exception as e:
 			L4log("Error write Picture3")
 	elif LCD4linux.LCDType3.value[0] == "5":
@@ -3500,9 +3508,9 @@ def writeLCD3(s, im, quality, SAVE=True):
 			if "3" in LCD4linux.SavePicture.value and SAVE == True:
 				if str(LCD4linux.LCDRotate3.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
-				s.im[im].save("%s.png" % PIC3tmp, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
-				if isfile("%s.png" % PIC3tmp):
-					rename("%s.png" % PIC3tmp, "%s.png" % PIC3)
+				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
+				if isfile(bild):
+					rename(bild, "%s.png" % PIC3)
 			if int(LCD4linux.xmlOffset.value) != 0:
 				MAX_W, MAX_H = s.im[im].size
 				MAX_W += (int(LCD4linux.xmlOffset.value) * 2)
@@ -3525,9 +3533,9 @@ def writeLCD3(s, im, quality, SAVE=True):
 	elif LCD4linux.LCDType3.value[0] == "9":
 		L4log("writing to Vu+ LCD3")
 		try:
-			s.im[im].save("%s.png" % PIC3tmp, "PNG")
-			if isfile("%s.png" % PIC3tmp):
-				rename("%s.png" % PIC3tmp, "%s.png" % PIC3)
+			s.im[im].save(bild, "PNG")
+			if isfile(bild):
+				rename(bild, "%s.png" % PIC3)
 		except Exception as e:
 			L4log("Error write Picture3")
 		if pngutilconnect != 0:
@@ -3548,13 +3556,14 @@ def writeLCD3(s, im, quality, SAVE=True):
 				L4log("Samsung 3 write Error")
 		if "3" in LCD4linux.SavePicture.value and SAVE == True:
 			try:
+				datei = "%s.jpg" % PIC3tmp
 				if str(LCD4linux.LCDRotate3.value) != "0":
 					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
-					s.im[im].save(PIC3tmp + ".jpg", "JPEG")
+					s.im[im].save(datei, "JPEG")
 				elif pic is not None:
-					open(PIC3tmp + ".jpg", "wb").write(pic)
-				if isfile(PIC3tmp + ".jpg"):
-					rename(PIC3tmp + ".jpg", PIC3 + ".jpg")
+					open(datei, "wb").write(pic)
+				if isfile(datei):
+					rename(datei, "%s.jpg" % PIC3)
 			except Exception as e:
 				L4log("Error write Picture3")
 	if LCD4linux.MJPEGenable3.value == True:
@@ -4303,8 +4312,8 @@ class RunShell:
 
 def TFTCheck(Force, SetMode=""):
 	global AktTFT
-	if isfile(LCD4bin + "tft-bmp-mode.sh") == True and isfile(LCD4bin + "tft-dream-mode.sh") == True:
-		CurTFT = isfile(LCD4etc + "grautec/settings/takeownership")
+	if isfile("%stft-bmp-mode.sh" % LCD4bin) == True and isfile("%stft-dream-mode.sh" % LCD4bin) == True:
+		CurTFT = isfile("%sgrautec/settings/takeownership" % LCD4etc)
 		L4logE("TFT mode... %s" % CurTFT)
 		if LCD4linux.LCDType1.value[0] == "4" or LCD4linux.LCDType2.value[0] == "4" or LCD4linux.LCDType3.value[0] == "4" and SetMode != "DREAM":
 			L4logE("TFT enabled")
@@ -4313,7 +4322,7 @@ def TFTCheck(Force, SetMode=""):
 				while ShellRunning == True and i > 0:
 					sleep(0.5)
 					i -= 1
-				RunShell(LCD4bin + "tft-bmp-mode.sh")
+				RunShell("%stft-bmp-mode.sh" % LCD4bin)
 				AktTFT = "BMP"
 		else:
 			L4logE("TFT not")
@@ -4322,7 +4331,7 @@ def TFTCheck(Force, SetMode=""):
 				while ShellRunning == True and i > 0:
 					sleep(0.5)
 					i -= 1
-				RunShell(LCD4bin + "tft-dream-mode.sh")
+				RunShell("%stft-dream-mode.sh" % LCD4bin)
 				AktTFT = "DREAM"
 
 
@@ -4559,8 +4568,8 @@ def Exchange():
 
 
 def CheckFstab():
-	if isfile(LCD4etc + "fstab"):
-		if open(LCD4etc + "fstab", "r").read().lower().find("usbfs") == -1:
+	if isfile("%sfstab" % LCD4etc):
+		if open("%sfstab" % LCD4etc, "r").read().lower().find("usbfs") == -1:
 			L4log("Info: no usbfs-Line in fstab")
 
 
@@ -4743,7 +4752,7 @@ def doGrab(i, ConfigFast, ConfigSize):
 		setFB2("0")
 	else:
 		CF = "" if ConfigFast == True else "-b"
-		GrabOSD(LCD4bin + "grab -o -p -j 95 %s -r %d %sdpfgrab.jpg" % (CF, ConfigSize, TMPL))
+		GrabOSD("%sgrab -o -p -j 95 %s -r %d %sdpfgrab.jpg" % (LCD4bin, CF, ConfigSize, TMPL))
 
 
 def InitWebIF():
@@ -5131,8 +5140,9 @@ class L4LWorker(Thread):
 						L4log("Error:", format_exc())
 						continue
 					try:
-						mailserver.quit()
-						del mailserver
+						if mailserver:
+							mailserver.quit()
+							del mailserver
 					except Exception as e:
 						L4log("Mail-Error Quit")
 				elif C[i] in ["2", "3"]:
@@ -5339,8 +5349,8 @@ class LCDdisplayMenu(Screen):
 	def askForConfigName(self, name):
 		if name is not None and isdir(LCD4linux.ConfigPath.value):
 			LCD4linux.save()
-			LCD4linux.saveToFile(join(LCD4linux.ConfigPath.value, name + ".lcd"))
-			self.list.append((_("Load File : %s") % (name + ".lcd"), "LoadFile", join(LCD4linux.ConfigPath.value, name + ".lcd")))
+			LCD4linux.saveToFile(join(LCD4linux.ConfigPath.value, "%s.lcd" % name))
+			self.list.append((_("Load File : %s") % ("%s.lcd" % name), "LoadFile", join(LCD4linux.ConfigPath.value, "%s.lcd" % name)))
 
 	def askForDelete(self, retval):
 		if (retval):
@@ -5622,7 +5632,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 	def showpic(self):
 		self.PicTimer.stop()
 		ff = False
-		fn = PIC + ".jpg"
+		fn = "%s.jpg" % PIC
 		try:
 			if isfile(fn):
 				ft = stat(fn).st_mtime
@@ -5647,7 +5657,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		else:
 			self["LCD1text"].setText("")
 		ff = False
-		fn = PIC2 + ".jpg"
+		fn = "%s.jpg" % PIC2
 		try:
 			if isfile(fn):
 				ft = stat(fn).st_mtime
@@ -5673,7 +5683,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self["LCD2text"].setText("")
 		if LCD4linux.LCDType3.value != "00":
 			ff = False
-			fn = PIC3 + ".jpg"
+			fn = "%s.jpg" % PIC3
 			try:
 				if isfile(fn):
 					ft = stat(fn).st_mtime
@@ -8800,7 +8810,7 @@ class UpdateStatus(Screen):
 					Modulenames = {'NAModule1': _("Outdoor"), 'NAModule2': _("Wind"), 'NAModule3': _("Rain"), 'NAModule4': _("Indoor")}
 					for na in netatmo.stations:
 						self.iName.append(na.module_name)
-						self.iT.append(str(na.measure.temperature) + ".0")
+						self.iT.append("%s.0" % str(na.measure.temperature))
 						if len(self.iT[len(self.iT) - 1].split(".")[0]) < 2:
 							self.iT[len(self.iT) - 1] = " " + self.iT[len(self.iT) - 1]
 						self.iH.append(str(na.measure.humidity))
@@ -8833,7 +8843,7 @@ class UpdateStatus(Screen):
 							if Mod.measure.has_co2:
 								oC = str(Mod.measure.co2)
 							if Mod.module_type == "NAModule3":
-								oT = str(Mod.measure.getSensor("sum_rain_1")) + ".0"
+								oT = "%s.0" % str(Mod.measure.getSensor("sum_rain_1"))
 								if len(oT.split(".")[0]) < 2:
 									oT = " " + oT
 								self.oM[len(self.oM) - 1].append([oT, str(Mod.measure.getSensor("sum_rain_24")), oC, oCA, oName, Mod.module_type, Battery])
@@ -8844,7 +8854,7 @@ class UpdateStatus(Screen):
 								oCA = str(Mod.measure.gust_angle)
 								self.oM[len(self.oM) - 1].append([oT, oTA, oC, oCA, oName, Mod.module_type, Battery])
 							else:
-								oT = str(Mod.measure.temperature) + ".0"
+								oT = "%s.0" % str(Mod.measure.temperature)
 								if len(oT.split(".")[0]) < 2:
 									oT = " " + oT
 								self.oM[len(self.oM) - 1].append([oT, str(Mod.measure.humidity), oC, oCA, oName, Mod.module_type, Battery])
@@ -9223,9 +9233,9 @@ class UpdateStatus(Screen):
 				self.Lchannel_name = info and Code_utf8(info.getName(ref))
 				self.Lchannel_name2 = info and info.getName(ref)
 			self.Lcommand = ""
-			if self.LsrefFile[:1] == "/" and isfile(self.LsrefFile + ".meta"):
+			if self.LsrefFile[:1] == "/" and isfile("%s.meta" % self.LsrefFile):
 				try:
-					f = open(self.LsrefFile + ".meta", "r")
+					f = open("%s.meta" % self.LsrefFile, "r")
 					service_name = f.readline().strip()
 					self.Lcommand = f.readline().strip()
 					self.Lcommand = f.readline().strip()
@@ -9565,7 +9575,7 @@ class UpdateStatus(Screen):
 			ScreenTime = 0
 			self.Refresh = "1"
 			self.restartTimer()
-		L4logE("Key", str(key) + " " + str(flag))  # Long: flag=3
+		L4logE("Key", "%s %s" % (key, flag))  # Long: flag=3
 		self.k = int(LCD4linux.KeyScreen.value[:3])
 		self.ko = int(LCD4linux.KeyOff.value[:3])
 		if self.AutoOFF == -1:
@@ -9974,7 +9984,7 @@ class UpdateStatus(Screen):
 			current = r.get("weather", {})[0].get("current", {})
 			forecast = r.get("weather", {})[0].get("forecast", {}).get("days", {})
 			datenow = datetime.now().strftime("%Y-%m-%d")
-			currdate = datetime.fromisoformat(current.get("created", datenow)) if PY3 else parser.parse(current.get("created", datenow))
+			currdate = datetime.fromisoformat(current.get("created", datenow)) if PY3 else parse(current.get("created", datenow))
 			self.WDay[ConfigWWW]["Wtime"] = currdate.strftime("%H:%M")
 			self.WDay[ConfigWWW]["Locname"] = LCD4linux.WetterCity.value if ConfigWWW == 0 else LCD4linux.Wetter2City.value
 			self.WDay[ConfigWWW]["Temp_c"] = "%.0f" % current.get("temp", 0)
@@ -10907,7 +10917,7 @@ def LCD4linuxPIC(self, session):
 				else:
 					Album = self.LsTagAlbum
 					if Album is not None and Album != "":
-						tmp = glob(join(srefdir, Album + ".[jp][pn]g"))
+						tmp = glob(join(srefdir, "%s.[jp][pn]g" % Album))
 						if len(tmp) > 0:
 							cover = tmp[0]
 						else:
@@ -10946,8 +10956,9 @@ def LCD4linuxPIC(self, session):
 					selection = "jpg,png"
 				selection = selection.split(",")
 				for extension in selection:
-					if cover == "" and isfile(covername + "." + extension):
-						cover = covername + "." + extension
+					datei = "%s.%s" % (covername, extension)
+					if cover == "" and isfile(datei):
+						cover = datei
 						break
 			if cover == "" and LCD4linux.MPCoverPiconFirst.value == True:
 				if WebRadioFSok == True and isfile(self.l4l_info.get("Logo", "")):
@@ -10955,11 +10966,11 @@ def LCD4linuxPIC(self, session):
 				L4log("cover", cover)
 				L4log("isMediaPlayer", isMediaPlayer)
 				if isMediaPlayer == "record":
-					if isfile(sreffile + ".meta"):
+					datei = "%s.meta" % sreffile
+					if isfile(datei):
 						try:
-							ref = open(sreffile + ".meta", "r").readline().strip()
-							rr = str(ref)
-							rr = rr.split("::")[0]
+							ref = open(datei, "r").readline().strip()
+							rr = str(ref).split("::")[0]
 							if rr[-1] != ":":
 								rr += ":"
 							picon = "%s.png" % rr.replace(":", "_")[:-1]
@@ -10988,8 +10999,6 @@ def LCD4linuxPIC(self, session):
 						name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore")
 						name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
 					else:
-						# TODO : fixme if needed
-						# "%s.png" % name2=self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8")
 						name2 = "%s.png" % self.Lchannel_name
 						name4 = "%s.png" % self.Lchannel_name
 						name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
@@ -12010,7 +12019,7 @@ def LCD4linuxPIC(self, session):
 			if LCD4linux.ShowNoMsg.value == True:
 				POSX = getSplit(False, ConfigAlign, MAX_W, ConfigSize)
 				font = ImageFont.truetype(FONT, 15, encoding='unic')
-				ShadowText(draw, POSX, ConfigPos, Code_utf8(_("Picture not available") + " " + basename(ConfigFile)), font, "red", True)
+				ShadowText(draw, POSX, ConfigPos, Code_utf8("%s %s" % (_("Picture not available"), basename(ConfigFile))), font, "red", True)
 
 # Grab TV
 	def doGrabTV(x, y, lcd, vidosd):
@@ -12054,7 +12063,7 @@ def LCD4linuxPIC(self, session):
 		else:
 			self.im[0] = Image.new('RGB', (int(x), int(y)), (0, 0, 0, 0))
 			while TVrunning == True and getSA(int(lcd)) in LCD4linux.TV.value:
-				GrabTV(LCD4bin + "grab %s -j 40 -r %s %stvgrab.jpg" % (vt, x, TMPL))
+				GrabTV("%sgrab %s -j 40 -r %s %stvgrab.jpg" % (LCD4bin,vt, x, TMPL))
 				i = 0
 				while GrabTVRunning == True and i < 500:
 					sleep(0.01)
@@ -12155,7 +12164,7 @@ def LCD4linuxPIC(self, session):
 						ShadowText(draw, POSX + hk, POSY, tx, font, ConfigColor, ConfigShadow)
 						ShadowText(draw, POSX + hk, POSY + h, tx2, font, ConfigColor, ConfigShadow)
 					else:
-						tx = cutText(begin + " " + timer_name, draw, font, Progess - h - 5)
+						tx = cutText("%s %s" % (begin, timer_name), draw, font, Progess - h - 5)
 						if timerlist.state == 2:
 							ShadowText(draw, POSX + hk, POSY, tx, font, "red", ConfigShadow)
 						else:
@@ -12678,8 +12687,9 @@ def LCD4linuxPIC(self, session):
 			provider = self.Lprovider
 			L4logE("Provider", provider)
 			if ConfigType == "2":
-				if isfile(join(LCD4linux.ProvPath.value, provider.upper(), ".png")):
-					pic = join(LCD4linux.ProvPath.value, provider.upper(), ".png")
+				picon = join(LCD4linux.ProvPath.value, "%s.png" % provider.upper())
+				if isfile(picon):
+					pic = picon
 				elif isfile(join(LCD4linux.ProvPath.value, "picon_default.png")):
 					pic = join(LCD4linux.ProvPath.value, "picon_default.png")
 				else:
@@ -12734,23 +12744,22 @@ def LCD4linuxPIC(self, session):
 					else:
 						orbital = str((float(orbital)) / 10.0) + "E"
 					if ConfigType == "1":
-						if len(SAT) == 0 and isfile(LCD4etc + "tuxbox/satellites.xml"):
-							satXml = parse(LCD4etc + "tuxbox/satellites.xml").getroot()
-							if satXml is not None:
-								L4log("parsing satellites...")
-								for sat in satXml.findall("sat"):
-									name = sat.get("name") or None
-									position = sat.get("position") or None
-									if name is not None and position is not None:
-										position = "%s.%s" % (position[:-1], position[-1:])
-										if position.startswith("-"):
-											position = "%sW" % position[1:]
-										else:
-											position = "%sE" % position
-										if position.startswith("."):
-											position = "0%s" % position
-										SAT[position] = name
-										L4logE(position, name)
+						if len(SAT) == 0 and isfile("%stuxbox/satellites.xml" % LCD4etc):
+							satXml = parse("%stuxbox/satellites.xml" % LCD4etc).getroot()
+							L4log("parsing satellites...")
+							for sat in satXml.findall("sat"):
+								name = sat.get("name") or None
+								position = sat.get("position") or None
+								if name is not None and position is not None:
+									position = "%s.%s" % (position[:-1], position[-1:])
+									if position.startswith("-"):
+										position = "%sW" % position[1:]
+									else:
+										position = "%sE" % position
+									if position.startswith("."):
+										position = "0%s" % position
+									SAT[position] = name
+									L4logE(position, name)
 						orbital = SAT.get(orbital, orbital)
 						L4logE("Orbital2", orbital)
 				else:
@@ -12761,9 +12770,10 @@ def LCD4linuxPIC(self, session):
 					L4logE("Orbital3", orbital)
 				font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 				w, h = getFsize(Code_utf8(orbital), font)
-				if ConfigType[0] == "2" and isfile(join(LCD4linux.SatPath.value, str(orbital).replace(".", ""), ".png")):
+				piconfile = join(LCD4linux.SatPath.value, "%s.png" % str(orbital).replace(".", ""))
+				if ConfigType[0] == "2" and isfile(piconfile):
 					try:
-						imW = Image.open(join(LCD4linux.SatPath.value, str(orbital).replace(".", ""), ".png"))
+						imW = Image.open(piconfile)
 						xx, yy = imW.size
 						CS = int(ConfigSize * 1.5)
 						x = int(float(CS) / yy * xx)
@@ -12780,7 +12790,8 @@ def LCD4linuxPIC(self, session):
 							self.im[im].paste(imW, (POSX, ConfigPos), imW)
 						else:
 							self.im[im].paste(imW, (POSX, ConfigPos))
-						POSX += x
+						if not PY3:  # no correction for PY3
+							POSX += x
 						if ConfigType[1:] == "C":
 							ShadowText(draw, POSX, ConfigPos + int(ConfigSize / 4), Code_utf8(orbital), font, ConfigColor, ConfigShadow)
 						if ConfigType[1:] == "B":
@@ -12886,7 +12897,7 @@ def LCD4linuxPIC(self, session):
 						event_name = Code_utf8(self.LEventsNext[lines][4])
 						event_begin = t
 						begin = strftime("%H:%M", localtime(event_begin))
-						sts = begin + " " + event_name
+						sts = "%s %s" % (begin, event_name)
 						w, h = getFsize(sts, font)
 						ShadowText(draw, POSX, POSY, cutText(sts, draw, font, Progess), font, ConfigColor, ConfigShadow)
 						POSY += h
@@ -12930,9 +12941,10 @@ def LCD4linuxPIC(self, session):
 						event_name += self.LExtendedDescription
 		if self.LsreftoString is not None and event_name == "":
 			sreffile = self.LsrefFile
-			if sreffile[:1] == "/" and isfile(splitext(sreffile)[0] + ".txt"):
+			datei = "%s.txt" % splitext(sreffile)[0]
+			if sreffile[:1] == "/" and isfile(datei):
 				try:
-					event_name = open(splitext(sreffile)[0] + ".txt", "r").readline().strip()
+					event_name = open(datei, "r").readline().strip()
 				except Exception as e:
 					L4logE("Error Desc txt file")
 		if ConfigMode == True and event_name == "":
@@ -13086,7 +13098,7 @@ def LCD4linuxPIC(self, session):
 				cl += w
 			lx = getSplit(ConfigSplit, ConfigAlign, MAX_W, cl)
 			pil_image = None
-			if isfile(join(LCD4data + dat)):
+			if isfile(join(LCD4data, dat)):
 				pil_image = Image.open(LCD4data + dat)
 				pil_image = pil_image.resize((int(200 / px), ConfigSize))
 				self.im[im].paste(pil_image, (lx, ConfigPos))
@@ -13204,7 +13216,7 @@ def LCD4linuxPIC(self, session):
 				CS = int(ConfigSize * 3)
 				x = 0
 				if "P" in ConfigShow:
-					picon = "%s.png" % rr.rstrip(":")
+					picon = "%s.png" % str(rr).rstrip(":")
 					if isfile(join(LCD4linux.PiconPath.value, picon)):
 						piconP = join(LCD4linux.PiconPath.value, picon)
 					elif isfile(join(LCD4linux.PiconPathAlt.value, picon)):
@@ -13355,10 +13367,7 @@ def LCD4linuxPIC(self, session):
 						hddsleep = False
 			try:
 				if ConfigType == "0" or (ConfigType == "1" and hddsleep == False):
-					if hddsleep == True:
-						imW = Image.open(join(LCD4data, "HDDs.png"))
-					else:
-						imW = Image.open(join(LCD4data, "HDDa.png"))
+					imW = Image.open(join(LCD4data, "HDDs.png")) if hddsleep == True else Image.open(join(LCD4data, "HDDa.png"))
 					xx, yy = imW.size
 					x = int(float(ConfigSize) / yy * xx)
 					imW = imW.resize((x, ConfigSize))
@@ -13626,16 +13635,17 @@ def LCD4linuxPIC(self, session):
 					Bildname = ""
 					Rufname = Fx[3].split("\n")[0].split(",")[0].strip()
 					if "1" in str(LCD4linux.FritzPictureSearch.value):
-						if isfile(join(LCD4linux.FritzPath.value, Fx[2], ".png")):
-							Bildname = join(LCD4linux.FritzPath.value, Fx[2], ".png")
-						elif isfile(join(LCD4linux.FritzPath.value, Rufname, ".png")):
-							Bildname = join(LCD4linux.FritzPath.value, Rufname, ".png")
-						elif isfile(join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip(), ".png")):
-							Bildname = join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip(), ".png")
+						if isfile(join(LCD4linux.FritzPath.value, "%s.png" % Fx[2])):
+							Bildname = join(LCD4linux.FritzPath.value, "%s.png" % Fx[2])
+						elif isfile(join(LCD4linux.FritzPath.value, "%s.png" % Rufname)):
+							Bildname = join(LCD4linux.FritzPath.value, "%s.png" % Rufname)
+						elif isfile(join(LCD4linux.FritzPath.value, "%s.png" % Rufname.split("(")[0].strip())):
+							Bildname = join(LCD4linux.FritzPath.value, "%s.png" % Rufname.split("(")[0].strip())
 					if Bildname == "" and "2" in LCD4linux.FritzPictureSearch.value:
 						for k in range(len(Fx[2]), 0, -1):
-							if isfile(join(LCD4linux.FritzPath.value, Fx[2][:k], ".png")):
-								Bildname = join(LCD4linux.FritzPath.value, Fx[2][:k], ".png")
+							picon = join(LCD4linux.FritzPath.value, "%s.png" % Fx[2][:k])
+							if isfile(picon):
+								Bildname = picon
 								break
 					if Bildname == "":
 						if isfile(join(LCD4linux.FritzPath.value, "default.png")):
@@ -13696,16 +13706,17 @@ def LCD4linuxPIC(self, session):
 				Bildname = ""
 				Rufname = FL[3].split("\n")[0].split(",")[0].strip()
 				if "1" in str(LCD4linux.FritzPictureSearch.value):
-					if isfile(join(LCD4linux.FritzPath.value, FL[2], ".png")):
-						Bildname = join(LCD4linux.FritzPath.value, FL[2], ".png")
-					elif isfile(join(LCD4linux.FritzPath.value, Rufname, ".png")):
-						Bildname = join(LCD4linux.FritzPath.value, Rufname, ".png")
-					elif isfile(join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip(), ".png")):
-						Bildname = join(LCD4linux.FritzPath.value, Rufname.split("(")[0].strip(), ".png")
+					if isfile(join(LCD4linux.FritzPath.value, "%s.png" % FL[2])):
+						Bildname = join(LCD4linux.FritzPath.value, "%s.png" % FL[2])
+					elif isfile(join(LCD4linux.FritzPath.value, "%s.png" % Rufname)):
+						Bildname = join(LCD4linux.FritzPath.value, "%s.png" % Rufname)
+					elif isfile(join(LCD4linux.FritzPath.value, "%s.png" % Rufname.split("(")[0].strip())):
+						Bildname = join(LCD4linux.FritzPath.value, "%s.png" % Rufname.split("(")[0].strip(), )
 				if Bildname == "" and "2" in LCD4linux.FritzPictureSearch.value:
 					for k in range(len(FL[2]), 0, -1):
-						if isfile(join(LCD4linux.FritzPath.value, FL[2][:k], ".png")):
-							Bildname = join(LCD4linux.FritzPath.value, FL[2][:k], ".png")
+						picon = join(LCD4linux.FritzPath.value, "%s.png" % FL[2][:k])
+						if isfile(picon):
+							Bildname = picon
 							break
 				if Bildname == "":
 					if isfile(join(LCD4linux.FritzPath.value, "default.png")):
@@ -13854,7 +13865,7 @@ def LCD4linuxPIC(self, session):
 						break
 					i += 1
 					self.draw[draw].ellipse((POSX, POSY + int(ConfigSize / 2) - c, POSX + (2 * c), POSY + int(ConfigSize / 2) + c), fill=ConfigColor)
-					tx = cutText(Code_utf8(M[0] + " " + M[3]), draw, font, CW - ConfigSize)
+					tx = cutText(Code_utf8("%s %s" % (M[0], M[3])), draw, font, CW - ConfigSize)
 					if ConfigBackColor != "0":
 						w, h = getFsize(tx, font)
 						self.draw[draw].rectangle((POSX + ConfigSize, POSY, POSX + ConfigSize + w, POSY + h), fill=ConfigBackColor)
@@ -14314,7 +14325,7 @@ def LCD4linuxPIC(self, session):
 			self.draw[4] = ImageDraw.Draw(self.im[4])
 			font = ImageFont.truetype(ConfigFont, int(ConfigSize * 0.8), encoding='unic')
 			if "A" in ConfigType:
-				M = Code_utf8(_(month_name[datetime.now().month]) + " " + str(datetime.now().year))
+				M = Code_utf8("%s %s" % (_(month_name[datetime.now().month]), datetime.now().year))
 				w, h = getFsize(M, font)
 				ShadowText(4, POSX + int(MAX_W / 2) - int(w / 2), POSY, M, font, ConfigColor, ConfigShadow)
 				POSY += h + int(ConfigSize * 0.2)
@@ -15610,8 +15621,8 @@ def autostart(reason, **kwargs):
 					xmlWrite()
 			xmlClear()
 		UpdateStatus(session)
-		if isfile(LCD4bin + "lcd4linux-start.sh"):
-			RunShell(LCD4bin + "lcd4linux-start.sh")
+		if isfile("%slcd4linux-start.sh" % LCD4bin):
+			RunShell("%slcd4linux-start.sh" % LCD4bin)
 		try:
 			if isfile(LCD4enigma2config + "lcd4fritz"):
 				L4logE("read Fritzlist")
@@ -15634,8 +15645,8 @@ def autostart(reason, **kwargs):
 			except Exception as e:
 				L4log("Error save Fritzlist")
 		TFTCheck(False, SetMode="DREAM")
-		if isfile(LCD4bin + "lcd4linux-stop.sh"):
-			RunShell(LCD4bin + "lcd4linux-stop.sh")
+		if isfile("%slcd4linux-stop.sh" % LCD4bin):
+			RunShell("%slcd4linux-stop.sh" % LCD4bin)
 		if LCD4linux.LCDshutdown.value == True:
 			try:
 				Dunkel = writeHelligkeit([0, 0, 0], [0, 0, 0], True)
@@ -15718,7 +15729,6 @@ def Plugins(**kwargs):
 	where=PluginDescriptor.WHERE_PLUGINMENU,
 	fnc=main,
 	icon="plugin.png"))
-
 	list.append(PluginDescriptor(name=_("LCD4linux Screen Switch"),
 	description=_("LCD4linux Screen Switch"),
 	where=PluginDescriptor.WHERE_EXTENSIONSMENU,

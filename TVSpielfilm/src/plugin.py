@@ -116,7 +116,7 @@ def showPic(pixmap, picpath):
 		try:
 			pixmap.instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
 			pixmap.instance.setPixmapFromFile(picpath)
-		except:
+		except Exception:
 			currPic = loadJPG(picpath)
 			pixmap.instance.setScale(1)
 			pixmap.instance.setPixmap(currPic)
@@ -723,7 +723,7 @@ class TVSBaseScreen(TVSAllScreen):
 			try:
 				self['picpost'].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
 				self['picpost'].instance.setPixmapFromFile(self.picfile)
-			except:
+			except Exception:
 				currPic = loadJPG(self.picfile)
 				self['picpost'].instance.setScale(1)
 				self['picpost'].instance.setPixmap(currPic)
@@ -1263,7 +1263,7 @@ class TVSTippsView(TVSBaseScreen):
 			self['pic%s' % i].hide()
 		try:
 			self._makePostviewPage()
-		except:
+		except Exception:
 			printStackTrace()
 
 	def getEPG(self):
@@ -1316,7 +1316,7 @@ class TVSTippsView(TVSBaseScreen):
 								self.EPGtext += '\n\n%' % ext
 							if dur:
 								self.EPGtext += '\n\n%' % dur
-					except:
+					except Exception:
 						self.EPGText = getEPGText()
 				else:
 					self.EPGtext = NOEPG
@@ -1949,7 +1949,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self['menu'].hide()
 		try:
 			self._makePostviewPage()
-		except:
+		except Exception:
 			printStackTrace()
 
 	def ok(self):
@@ -2025,7 +2025,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 								self.EPGtext += '\n\n%s' % ext
 							if dur:
 								self.EPGtext += '\n\n%s' % dur
-					except:
+					except Exception:
 						self.EPGText = getEPGText()
 
 				else:
@@ -2572,7 +2572,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self['menu'].hide()
 		try:
 			self._makePostviewPage()
-		except:
+		except Exception:
 			printStackTrace()
 
 	def showready(self):
@@ -2652,7 +2652,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 								self.EPGtext += '\n\n%s' % ext
 							if dur:
 								self.EPGtext += '\n\n%s' % dur
-					except:
+					except Exception:
 						self.EPGText = getEPGText()
 				else:
 					self.EPGtext = NOEPG
@@ -3635,7 +3635,7 @@ class TVSFullScreen(TVSAllScreen):
 			try:
 				self['picture'].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
 				self['picture'].instance.setPixmapFromFile(self.picfile)
-			except:
+			except Exception:
 				currPic = loadJPG(self.picfile)
 				self['picture'].instance.setScale(1)
 				self['picture'].instance.setPixmap(currPic)
@@ -3737,9 +3737,9 @@ class TVSsearchYouTube(TVSAllScreen):
 	def ok(self):
 		if self.ready:
 			try:
-				from youtube_dl import YoutubeDL
-			except:
-				self.session.open(MessageBox, 'Plugin "youtube-dl" nicht gefunden! Bitte installieren!', MessageBox.TYPE_ERROR)
+				from yt_dlp import YoutubeDL
+			except Exception:
+				self.session.open(MessageBox, 'Plugin "yt_dlp" nicht gefunden!\n\nBitte im Forum nachfragen wie genau und dann installieren!', MessageBox.TYPE_ERROR)
 				return
 			c = self['list'].getSelectedIndex()
 			trailer_id = self.trailer_id[c]
@@ -3833,7 +3833,7 @@ class TVSsearchYouTube(TVSAllScreen):
 			try:
 				self['poster%s' % i].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
 				self['poster%s' % i].instance.setPixmapFromFile(self.localposter[i])
-			except:
+			except Exception:
 				currPic = loadJPG(self.localposter[i])
 				self['poster%s' % i].instance.setScale(1)
 				self['poster%s' % i].instance.setPixmap(currPic)
@@ -5519,7 +5519,7 @@ class TVSHeuteView(TVSBaseScreen):
 		self['MENUtext'].hide()
 		try:
 			self._makePostviewPage()
-		except:
+		except Exception:
 			printStackTrace()
 
 	def showready(self):
@@ -5610,7 +5610,7 @@ class TVSHeuteView(TVSBaseScreen):
 								self.EPGtext += '\n\n%s' % ext
 							if dur:
 								self.EPGtext += '\n\n%s' % dur
-					except:
+					except Exception:
 						self.EPGText = getEPGText()
 
 				else:
@@ -5931,7 +5931,7 @@ class TVSHeuteView(TVSBaseScreen):
 				try:
 					self['pic%s' % idx].instance.setPixmapScaleFlags(BT_SCALE | BT_KEEP_ASPECT_RATIO | BT_HALIGN_CENTER | BT_VALIGN_CENTER)
 					self['pic%s' % idx].instance.setPixmapFromFile(self.pics[idx])
-				except:
+				except Exception:
 					currPic = loadJPG(self.pics[idx])
 					self['pic%s' % idx].instance.setScale(1)
 					self['pic%s' % idx].instance.setPixmap(currPic)
