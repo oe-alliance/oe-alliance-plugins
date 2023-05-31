@@ -299,7 +299,13 @@ def searchTwoValues(regex, text, fallback1, fallback2, flags=None):
 
 
 def parsedetail(bereich, debug=None):
-	bereich = sub(r'<blockquote class="broadcast-detail__quote">\s*<p>', '<p>>> ', bereich)
+	quelle = search(r'<p\s*class="title">(.*?)</p>', bereich)
+	quelle = quelle.group(1) if quelle else ""
+	bewertung = search(r'<blockquote class="broadcast-detail__quote">\s*<p>(.*?)</p>\s*</blockquote>', bereich, flags=S)
+	bewertung = bewertung.group(1) if bewertung else ""
+	# entferne alle Tags
+	bereich = sub(r'<p\s*class="title">(.*?)</p>', '', bereich)
+	bereich = sub(r'<blockquote class="broadcast-detail__quote">\s*<p>(.*?)</p>\s*</blockquote>', '', bereich, flags=S)
 	bereich = sub(r'</p>\s*[\s]+</blockquote>', ' <<</p>', bereich)
 	bereich = sub(r'<section class="serial-info">\s*', '<p>', bereich)
 	bereich = sub(r'</span>\s*', '</span>, ', bereich)
@@ -332,7 +338,7 @@ def parsedetail(bereich, debug=None):
 	if debug != None:
 		print("[DEBUG] parsedetail %s\n" % debug)
 		print(text)
-	return text
+	return quelle, bewertung, text
 
 
 def cleanHTML(bereich):
