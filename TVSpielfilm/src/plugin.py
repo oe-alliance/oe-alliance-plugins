@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# PYTHON IMPORTS
 from __future__ import absolute_import
 from base64 import b64decode, b64encode
 from datetime import date, datetime, timedelta
@@ -7,6 +8,7 @@ from html import unescape
 from json import dumps, loads
 from os import linesep, remove, rename
 from os.path import join, isdir, isfile
+from random import choice
 from re import S, findall, search, sub
 from requests import get, exceptions
 from socket import error as SocketError
@@ -17,6 +19,8 @@ from six.moves.urllib.parse import quote
 from six.moves.urllib.request import HTTPCookieProcessor, HTTPHandler, HTTPRedirectHandler, build_opener
 from time import gmtime, localtime, mktime, strftime
 from twisted.internet.reactor import callInThread
+
+# ENIGMA IMPORTS
 from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, RT_WRAP, eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, ConfigSelectionNumber, configfile, getConfigListEntry
@@ -40,6 +44,8 @@ from Screens.TimerEntry import TimerEntry
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from ServiceReference import ServiceReference
 from Tools.Directories import isPluginInstalled
+
+# PLUGIN IMPORTS
 from .parser import NEXTPage1, NEXTPage2, buildTVTippsArray, cleanHTML, parsedetail, parseNow, parsePrimeTimeTable, parseTrailerUrl, shortenChannel, transCHANNEL
 from .util import DESKTOP_HEIGHT, DESKTOP_WIDTH, ICONPATH, PICONPATH, PICPATH, PLUGINPATH, SCALE, BlinkingLabel, ItemList, applySkinVars, channelDB, makeWeekDay, printStackTrace, readSkin, serviceDB
 
@@ -179,8 +185,17 @@ class TVSAllScreen(Screen):
 		self.session.execDialog(servicelist)
 
 	def getPage(self, link, success, fail=None):
+		agents = [
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
+				"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0"
+				"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)"
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75"
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
+				]
+		headers = {"User-Agent": choice(agents), 'Accept': 'application/json'}
 		try:
-			response = get(ensure_binary(link))
+			response = get(ensure_binary(link), headers=headers, timeout=(3.05, 6))
 			response.close()
 			response.raise_for_status()
 			success(response.content)
@@ -190,8 +205,17 @@ class TVSAllScreen(Screen):
 				fail(error)
 
 	def downloadPage(self, link, file, success, fail=None):
+		agents = [
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
+				"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0"
+				"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)"
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75"
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
+				]
+		headers = {"User-Agent": choice(agents), 'Accept': 'application/json'}
 		try:
-			response = get(link)
+			response = get(ensure_binary(link), headers=headers, timeout=(3.05, 6))
 			response.close()
 			response.raise_for_status()
 			with open(file, 'wb') as f:
@@ -4833,14 +4857,13 @@ class TVSTipps(TVSAllScreen):
 		self['2_zapdown'] = Pixmap()
 		self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.ok,
 														  'cancel': self.exit}, -1)
-#		self.onLayoutFinish.append(self.start)  Holger
-		self.onShown.append(self.start)
+		self.onLayoutFinish.append(self.start)
 
 	def start(self):
-		callInThread(self.downloadFirst, self.baseurl)
 		self.getNextTimer = eTimer()
 		self.getNextTimer.callback.append(self.nextTipp)
 		self.getNextTimer.start(5000, False)
+		callInThread(self.downloadFirst, self.baseurl)
 
 	def stop(self):
 		self.getNextTimer.stop()
