@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
+# PYTHON IMPORTS
 from base64 import b64encode, b64decode
 from datetime import datetime
 from json import loads
 from operator import itemgetter
 from os import linesep, rename, remove
-from random import randrange
+from random import randrange, choice
 from requests import get, exceptions
 from PIL import Image
 from smtplib import SMTP, SMTP_SSL, SMTPResponseException
-from time import strftime
-from twisted.internet.reactor import callInThread
-from xml.etree.ElementTree import tostring, parse
 from six import ensure_str, ensure_binary
 from six.moves.email_mime_multipart import MIMEMultipart
 from six.moves.email_mime_text import MIMEText
 from six.moves.email_mime_image import MIMEImage
+from time import strftime
+from twisted.internet.reactor import callInThread
+from xml.etree.ElementTree import tostring, parse
+
+# ENIGMA IMPORTS
 from enigma import eListboxPythonMultiContent, eServiceReference, ePicLoad, eTimer, getDesktop, gFont, loadPNG, RT_HALIGN_LEFT, RT_HALIGN_CENTER, RT_VALIGN_CENTER, RT_WRAP
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigSubsection, ConfigInteger, ConfigPassword, ConfigSelection, ConfigText, getConfigListEntry, ConfigYesNo
@@ -35,6 +38,7 @@ from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
+# GLOBALS
 RELEASE = 'V2.1'
 MODULE_NAME = __name__.split(".")[-1]
 LINESPERPAGE = 8
@@ -42,6 +46,14 @@ PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte/'
 APIURIBASE = 'https://api.chefkoch.de/v2/'
 NOPICURL = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
 PICFILE = '/tmp/chefkoch.jpg'
+AGENTS = [
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
+		"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0"
+		"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)"
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75"
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
+		]
 
 # orderBy-Codes: 0= unbekannt, 1= = unbekannt, 2= unbekannt, 3= rating, 4= unbekannt, 5= unbekannt, 6= createdAt, 7= isPremium, 8= unbekannt
 # nicht unterstüzte orderBy-Queries: numVotes, preparationTime
@@ -83,9 +95,10 @@ class AllScreen(Screen):
 			skin = skin.replace('{' + key + '}', dict[key])
 		return skin
 
-	def getAPIdata(self, apiuri, fail=None):
+	def getAPIdata(self, apiuri):
+		headers = {"User-Agent": choice(AGENTS), 'Accept': 'application/json'}
 		try:
-			response = get('%s%s' % (APIURIBASE, apiuri), timeout=(3.05, 6))
+			response = get('%s%s' % (APIURIBASE, apiuri), headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
 			return (response.text, response.status_code)
 		except exceptions.RequestException as error:
@@ -135,8 +148,9 @@ class AllScreen(Screen):
 
 	def Pdownload(self, link):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		headers = {"User-Agent": choice(AGENTS), 'Accept': 'application/json'}
 		try:
-			response = get(link, timeout=(3.05, 6))
+			response = get(link, headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
 		except exceptions.RequestException as error:
 			self.downloadError(error)
@@ -949,8 +963,9 @@ class CKview(AllScreen):
 
 	def Idownload(self, link, i):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		headers = {"User-Agent": choice(AGENTS), 'Accept': 'application/json'}
 		try:
-			response = get(link, timeout=(3.05, 6))
+			response = get(link, headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
 		except exceptions.RequestException as error:
 			self.downloadError(error)
