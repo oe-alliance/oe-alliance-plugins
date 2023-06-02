@@ -83,10 +83,11 @@ class Bluetoothctl:
             else:
                 if device_position > -1:
                     attribute_list = info_string[device_position:].split(" ", 2)
-                    device = {
-                        "mac_address": attribute_list[1],
-                        "name": attribute_list[2]
-                    }
+                    if len(attribute_list) == 3:
+                        device = {
+                            "mac_address": attribute_list[1],
+                            "name": attribute_list[2]
+                        }
 
         return device
 
