@@ -47,6 +47,7 @@ from datetime import datetime, timedelta
 brandoem = getBrandOEM()
 machinebuild = getMachineBuild()
 
+
 class TaskManager:
 	def __init__(self):
 		self.taskIdx = 0
@@ -485,6 +486,8 @@ def autostart(reason, **kwargs):
 			os.system("hciattach_sprd /dev/ttyBT0 sprd")
 			if config.btdevicesmanager.audioconnect.getValue():
 				os.system("%s %s" % (commandconnect, config.btdevicesmanager.audioaddress.getValue()))
+
+
 iBluetoothDevicesTask = None
 
 
