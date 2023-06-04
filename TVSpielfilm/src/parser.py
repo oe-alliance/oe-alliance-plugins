@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from html import unescape
 from re import sub, findall, S, search
 from six import ensure_str
 from twisted.internet import reactor
+from xml.sax.saxutils import unescape
+
 NEXTPage1 = r'class="js-track-link pagination__link pagination__link--next"'
 NEXTPage2 = r'<a\ href="(.*?)"'
 

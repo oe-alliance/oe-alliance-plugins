@@ -4,7 +4,6 @@ from __future__ import absolute_import
 from base64 import b64decode, b64encode
 from datetime import date, datetime, timedelta
 from glob import glob
-from html import unescape
 from json import dumps, loads
 from os import linesep, remove, rename
 from os.path import join, isdir, isfile
@@ -19,6 +18,7 @@ from six.moves.urllib.parse import quote
 from six.moves.urllib.request import HTTPCookieProcessor, HTTPHandler, HTTPRedirectHandler, build_opener
 from time import gmtime, localtime, mktime, strftime
 from twisted.internet.reactor import callInThread
+from xml.sax.saxutils import unescape
 
 # ENIGMA IMPORTS
 from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, RT_WRAP, eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG
@@ -5005,7 +5005,7 @@ class TVSConfig(ConfigListScreen, TVSAllScreen):
 			liste.append(getConfigListEntry('Eigener Picon Ordner:', config.plugins.tvspielfilm.piconfolder))
 			piconfolder = config.plugins.tvspielfilm.piconfolder.value
 			if not isdir(piconfolder):
-				liste.append(getConfigListEntry('>>> Eigener Picon Ordner nicht vorhanden, nutze Plugin-eigene Picons <<<'))
+				liste.append(getConfigListEntry('>>> Eigener Picon Ordner nicht gefunden, nutze Plugin-eigene Picons <<<'))
 				piconfolder = PICONPATH
 		elif config.plugins.tvspielfilm.picon.value == "plugin":
 			piconfolder = "%spicons/" % PICPATH
@@ -5022,7 +5022,7 @@ class TVSConfig(ConfigListScreen, TVSAllScreen):
 		liste.append(getConfigListEntry('Maximale YouTube-Auflösung:', config.plugins.tvspielfilm.ytresolution))
 		liste.append(getConfigListEntry('DebugLog', config.plugins.tvspielfilm.debuglog, "Debug Logging aktivieren"))
 		liste.append(getConfigListEntry('Log in Datei', config.plugins.tvspielfilm.logtofile, "Log in Datei '/home/root/logs'"))
-		self["config"].setList(list)
+		self["config"].setList(liste)
 
 	def UpdateComponents(self):
 		self['waiting'].stopBlinking()
