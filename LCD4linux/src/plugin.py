@@ -2367,12 +2367,14 @@ class MyTimer:  # only for debug
 		return self.timer.callback
 	callback = property(getCallback)
 
+
 def getFsize(text, f):
 	m1, m2 = f.getmetrics()
 	(w1, h1), (o1, o2) = f.font.getsize(text)
 	h1 = m1 + m2
 	h = h1 + int(round(h1 / 33.))
 	return w1, h
+
 
 def Code_utf8(wert):
 	wert = "" if wert is None else _unescape(wert)
@@ -2381,6 +2383,7 @@ def Code_utf8(wert):
 		return decode(wert, 'UTF-8')
 	else:
 		return wert.replace('\x86', '').replace('\x87', '')
+
 
 def L4log(nfo, wert=""):
 	if str(LCD4linux.EnableEventLog.value) != "0":
@@ -2392,9 +2395,11 @@ def L4log(nfo, wert=""):
 			except IOError:
 				print("[LCD4linux] %s Logging-Error" % strftime("%H:%M:%S"))
 
+
 def L4logE(nfo, wert=""):
 	if str(LCD4linux.EnableEventLog.value) == "2":
 		L4log(nfo, wert)
+
 
 def GetBox():
 	B = ""
@@ -2404,20 +2409,25 @@ def GetBox():
 		L4logE("Boxtype", B)
 	return B
 
+
 def getMJPEGrun(lcd):
 	return MJPEGrun[lcd]
+
 
 def setConfigMode(w):
 	global ConfigMode
 	ConfigMode = w
 
+
 def setConfigStandby(w):
 	global ConfigStandby
 	ConfigStandby = w
 
+
 def setisMediaPlayer(w):
 	global isMediaPlayer
 	isMediaPlayer = w
+
 
 def setScreenActive(w, lcd=""):
 	global ScreenActive
@@ -2435,21 +2445,26 @@ def setScreenActive(w, lcd=""):
 	LCD4linux.ScreenActive.value = ScreenActive[0]
 	ScreenTime = 0
 
+
 def setLCDon(w):
 	global LCDon
 	LCDon = w
 
+
 def setSaveEventListChanged(w):
 	global SaveEventListChanged
 	SaveEventListChanged = w
+
 
 def setFONT(f):
 	global FONT
 	FONT = f if f.endswith(".ttf") and isfile(f) else FONTdefault
 	LCD4linux.Font.value = FONT
 
+
 def execexec(w):
 	exec(w)
+
 
 def getScreenActive(All=False):
 	if All:
@@ -2457,34 +2472,44 @@ def getScreenActive(All=False):
 	else:
 		return ScreenActive[0]
 
+
 def getConfigStandby():
 	return ConfigStandby
+
 
 def getConfigMode():
 	return ConfigMode
 
+
 def getisMediaPlayer():
 	return isMediaPlayer
+
 
 def getTMP():
 	return TMP
 
+
 def getTMPL():
 	return TMPL
+
 
 def getINFO():
 	return INFO
 
+
 def getSaveEventListChanged():
 	return SaveEventListChanged
 
+
 def getMJPEGreader(w):
 	return MJPEGreader[int(w)]
+
 
 def setPopText(w):
 	global PopText
 	PopText[0] = "%s%s" % (Code_utf8(_(strftime("%A"))), strftime(" %H:%M"))
 	PopText[1] = Code_utf8(w)
+
 
 def resetWetter(wetter):
 	global wwwWetter
@@ -2496,9 +2521,11 @@ def resetWetter(wetter):
 		wwwWetter[wetter] = ""
 		PICwetter[wetter] = False
 
+
 def resetCal():
 	global PICcal
 	PICcal = None
+
 
 def L4LoadNewConfig(cfg):
 	P1 = LCD4linux.ConfigPath.value
@@ -2521,10 +2548,12 @@ def L4LoadNewConfig(cfg):
 		LCD4linux.PiconCache.value = P4
 		LCD4linux.WetterPath.value = P5
 
+
 def getSA(w):
 	if w < 0 or w > 3:
 		return ScreenActive[0]
 	return ScreenActive[0] if ScreenActive[w] == "" else ScreenActive[w]
+
 
 def rmFile(fn):
 	if isfile(fn):
@@ -2533,6 +2562,7 @@ def rmFile(fn):
 			remove(fn)
 		except Exception:
 			L4logE("Error delete", fn)
+
 
 def rmFiles(fn):
 	try:
@@ -2543,17 +2573,21 @@ def rmFiles(fn):
 	except Exception:
 		L4logE("Error delete*", fn)
 
+
 def getTimeDiff():
 	offset = timezone if (localtime().tm_isdst == 0) else altzone
 	return offset / -3600
+
 
 def getTimeDiffUTC():
 	t = datetime.now() - datetime.utcnow()
 	return int(t.days * 24 + round(t.seconds / 3600.0))
 
+
 def getTimeDiffUTC2():
 	is_dst = daylight and localtime().tm_isdst > 0
 	return -((altzone if is_dst else timezone) / 3600)
+
 
 def ConfTime(F, W):
 	try:
@@ -2565,6 +2599,7 @@ def ConfTime(F, W):
 	except Exception:
 		L4log("Errot: write alternate TimeConfig " + F, W)
 
+
 def ConfTimeCheck():
 	ConfTime("LCDoff", LCD4linux.LCDoff.value)
 	ConfTime("LCDon", LCD4linux.LCDon.value)
@@ -2575,6 +2610,7 @@ def ConfTimeCheck():
 	ConfTime("StandbyLCDWEoff", LCD4linux.StandbyLCDWEoff.value)
 	ConfTime("StandbyLCDWEon", LCD4linux.StandbyLCDWEon.value)
 
+
 def ScaleGtoR(PROZ):
 	if PROZ < 50:
 		R = max((255 * PROZ) / 50, 0)
@@ -2584,6 +2620,7 @@ def ScaleGtoR(PROZ):
 		G = max((255 * (100 - PROZ)) / 50, 0)
 	B = 0
 	return "#%02x%02x%02x" % (R, G, B)
+
 
 def getDirection(angle):
 	def normalize_angle(angle):
@@ -2597,8 +2634,10 @@ def getDirection(angle):
 	index %= directions_num
 	return direction_names[index]
 
+
 def getFeel(T, W):
 	return 13.12 + 0.6215 * T - 11.37 * (W**0.16) + 0.3965 * T * (W**0.16)
+
 
 def getExternalIP():
 	try:
@@ -2609,14 +2648,18 @@ def getExternalIP():
 		L4logE("Error: getExternalIP", format_exc())
 		return "Error"
 
+
 def setFB2(value):
 	open("/proc/stb/fb/sd_detach", "w").write(value)
+
 
 def getFB2(check):
 	return isfile("/proc/stb/fb/sd_detach") and (LCD4linux.SwitchToFB2.value == True) if check else isfile("/proc/stb/fb/sd_detach")
 
+
 def BRI(w1, w2):
 	return int(w1) if L4LElist.getBrightness(w2, False) == -1 else int(L4LElist.getBrightness(w2, False))
+
 
 def virtBRI(LCD):
 	global AktNight
@@ -2627,6 +2670,7 @@ def virtBRI(LCD):
 		return 10
 	else:
 		return ((0.08 * vb) + 0.2)
+
 
 def SensorRead(dat, isTemp=False):
 	line = ""
@@ -2645,6 +2689,7 @@ def SensorRead(dat, isTemp=False):
 		if isTemp and T > 1000.:
 			T /= 1000.
 	return T
+
 
 def GetTempSensor():
 	d = []
@@ -2666,6 +2711,7 @@ def GetTempSensor():
 		except Exception:
 			L4logE("Error Temp: ", ts)
 	return ""
+
 
 def ICSdownloads():
 	global ICS
@@ -2791,6 +2837,7 @@ def ICSdownloads():
 	ICSdownrun = False
 	PICcal = None
 
+
 def getResolution(t, r):
 	MAX_H, MAX_W = (0, 0)
 	if t[:1] == "5":
@@ -2831,6 +2878,7 @@ def getResolution(t, r):
 		MAX_W, MAX_H = MAX_H, MAX_W
 	return MAX_W, MAX_H
 
+
 def OSDclose():
 	global OSDon
 	OSDon = 0
@@ -2840,8 +2888,10 @@ def OSDclose():
 		setFB2("1")
 	return
 
+
 def Umlaute(wert):
 	return wert.replace("Ä", "A").replace("ä", "a").replace("Ö", "O").replace("ö", "o").replace("Ü", "u").replace("ü", "u").replace("ß", "ss")
+
 
 def L4L_replacement_Screen_show(self):
 	global OSDon
@@ -2884,6 +2934,7 @@ def L4L_replacement_Screen_show(self):
 					setFB2("1")
 	Screen.L4L_show_old(self)
 
+
 def find_dev(Anzahl, idVendor, idProduct):
 	gefunden = False
 	if isfile("/proc/bus/usb/devices"):
@@ -2907,6 +2958,7 @@ def find_dev(Anzahl, idVendor, idProduct):
 	L4log("%d. Vendor=%04x ProdID=%04x %s" % (Anzahl, idVendor, idProduct, gefunden))
 	return gefunden
 
+
 def find_dev2(idVendor, idProduct, idVendor2, idProduct2):
 	gefunden = False
 	try:
@@ -2918,6 +2970,8 @@ def find_dev2(idVendor, idProduct, idVendor2, idProduct2):
 	return gefunden
 
 # get picon path
+
+
 def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 	if len(P2C) < 3:
 		return ""
@@ -3010,6 +3064,7 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 				L4log("Error: create Picon-Cache-Dir")
 		return ""
 
+
 def isOffTime(b, e, bw, ew):
 	t = localtime()
 	tt = time()
@@ -3028,6 +3083,7 @@ def isOffTime(b, e, bw, ew):
 	if eT < bT and tt < eT:
 		bT -= 86400
 	return (bT < tt < eT)
+
 
 def writeHelligkeit(hell, night, STOP):
 	global SamsungDevice
@@ -3119,6 +3175,7 @@ def writeHelligkeit(hell, night, STOP):
 				L4log("Error LCD Communication")
 	return R
 
+
 def doDPF(dev, im, s):
 	global SamsungDevice
 	global SamsungDevice2
@@ -3138,6 +3195,7 @@ def doDPF(dev, im, s):
 			L4log("Error writing DPF3 Device")
 			dpf.close(SamsungDevice3)
 			SamsungDevice3 = None
+
 
 def writeLCD1(s, im, quality, SAVE=True):
 	global SamsungDevice
@@ -3258,6 +3316,7 @@ def writeLCD1(s, im, quality, SAVE=True):
 		MJPEGreader[1] += 1 if MJPEGreader[1] < 100 else 0
 	s.imWrite[im] = False
 
+
 def writeLCD2(s, im, quality, SAVE=True):
 	global SamsungDevice2
 	global MJPEGreader
@@ -3376,6 +3435,7 @@ def writeLCD2(s, im, quality, SAVE=True):
 		MJPEG[2].put([im, s])
 		MJPEGreader[2] += 1 if MJPEGreader[2] < 100 else 0
 	s.imWrite[im] = False
+
 
 def writeLCD3(s, im, quality, SAVE=True):
 	global SamsungDevice3
@@ -3496,8 +3556,10 @@ def writeLCD3(s, im, quality, SAVE=True):
 		MJPEGreader[3] += 1 if MJPEGreader[3] < 100 else 0
 	s.imWrite[im] = False
 
+
 def isMediaDisplay(player):
 	return player in ["sonos", "ymc", "blue"]
+
 
 def NextScreen(PRESS):
 	global ScreenActive
@@ -3562,8 +3624,10 @@ def NextScreen(PRESS):
 	if int(LCD4linux.StandbyScreenTime.value) > 0 or int(LCD4linux.ScreenTime.value) > 0:
 		ScreenTime += 1
 
+
 def _getDirs(base):
 	return [x for x in iglob(join(base, '*')) if isdir(x)]
+
 
 def rglob(base, pattern):
 	list = []
@@ -3574,6 +3638,7 @@ def rglob(base, pattern):
 		for d in dirs:
 			list.extend(rglob(join(base, d), pattern))
 	return list
+
 
 def getBilder():
 	global Bilder
@@ -3645,6 +3710,7 @@ def getBilder():
 			Bilder[2].sort()
 		L4logE("Pictures %s" % Bilder[2])
 
+
 def request_headers(boundary):
 	return {
 		'Cache-Control': 'no-store, no-cache, must-revalidate, pre-check=0, post-check=0, max-age=0',
@@ -3654,11 +3720,14 @@ def request_headers(boundary):
 		'Pragma': 'no-cache',
 	}
 
+
 def image_headers(size):
 	return {'X-Timestamp': time(), 'Content-Type': 'image/jpeg', 'Content-Length': size, } if str(LCD4linux.MJPEGHeader.value) == "0" else {'Content-Type': 'image/jpeg', }
 
+
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
 	pass
+
 
 class MJPEGHandler1(BaseHTTPRequestHandler):
 	def do_GET(self):
@@ -3704,6 +3773,7 @@ class MJPEGHandler1(BaseHTTPRequestHandler):
 
 	def log_message(self, format, *args):
 		return
+
 
 def MJPEG_serve1(port):
 	global MJPEGserver
@@ -3765,6 +3835,7 @@ class MJPEGHandler2(BaseHTTPRequestHandler):
 	def log_message(self, format, *args):
 		return
 
+
 def MJPEG_serve2(port):
 	global MJPEGserver
 	global MJPEGrun
@@ -3825,6 +3896,7 @@ class MJPEGHandler3(BaseHTTPRequestHandler):
 	def log_message(self, format, *args):
 		return
 
+
 def MJPEG_serve3(port):
 	global MJPEGserver
 	global MJPEGrun
@@ -3838,6 +3910,7 @@ def MJPEG_serve3(port):
 		except Exception:
 			L4logE("Error: Server 3 Reg")
 	L4log("exit Server 3")
+
 
 def MJPEG_start():
 	global MJPEGreader
@@ -3859,6 +3932,7 @@ def MJPEG_start():
 		th3 = Thread(target=MJPEG_serve3, args=[int(LCD4linux.MJPEGport3.value)])
 		th3.setDaemon(True)
 		th3.start()
+
 
 def MJPEG_stop(force):
 	global MJPEGrun
@@ -3920,6 +3994,7 @@ def MJPEG_stop(force):
 	if stop:
 		sleep(5)
 
+
 def getWWW():
 	if (str(LCD4linux.WWW1.value) != "0" and len(LCD4linux.WWW1url.value) > 10) and (not Standby.inStandby or isMediaDisplay(isMediaPlayer)):
 		L4log("WWW Converter check on")
@@ -3946,14 +4021,17 @@ def HTMLwwwConvertapiDownloadFinished(filename, result):
 	else:
 		L4log("HTMLwww download finished, no file found")
 
+
 def getHTMLwwwConvertapi(fn, www, pw, ph):
 	filename = WWWpic % str(fn)
 	url = "http://do.convertapi.com/web2image?curl=%s&PageWidth=%d&PageHight=%d&outputformat=jpg&ApiKex=%s" % (www, pw, ph, LCD4linux.WwwApiKeyConvertapi.value)
 	L4log("downloading HTMLwww from", url)
 	callInThread(downloadPage, url, filename, boundFunction(HTMLwwwConvertapiDownloadFinished, filename), HTMLwwwConvertapiDownloadFailed)
 
+
 def HTMLwwwDownloadFailed(result):
 	L4log("HTMLwww download failed:", result)
+
 
 def HTMLwwwDownloadFinished(filename, result):
 	if isfile(filename):
@@ -3962,10 +4040,12 @@ def HTMLwwwDownloadFinished(filename, result):
 	else:
 		L4log("HTMLwww download finished, no file found")
 
+
 def getHTMLwww(fn, url):
 	filename = WWWpic % str(fn)
 	L4log("downloading HTMLwww from", url)
 	callInThread(downloadPage, url, filename, boundFunction(HTMLwwwDownloadFinished, filename), HTMLwwwDownloadFailed)
+
 
 def Urlget(url, params, method, API):
 	headers = {}
@@ -3976,6 +4056,7 @@ def Urlget(url, params, method, API):
 	else:
 		f = get(url, headers=headers, params=params, timeout=(3.05, 6))
 	return (f.text, f.status_code)
+
 
 def getHTMLwwwCloudconvert(fn, www):
 	if len(LCD4linux.WwwApiKeyCloudconvert.value.split()) == 0:
@@ -4031,11 +4112,13 @@ def getHTMLwwwCloudconvert(fn, www):
 	except Exception:
 		L4log("WWW Crash-Error")
 
+
 def xmlFind(Num):
 	for i in xmlList:
 		if i.startswith("<!--L4L%02d" % Num):
 			return 0
 	return -1
+
 
 def xmlScreens(Lis2):
 	sl = []
@@ -4044,6 +4127,7 @@ def xmlScreens(Lis2):
 			b = i.replace("\"", "").split("name=")
 			sl.append(b[1].split()[0])
 	return sl
+
 
 def xmlInsert(Lis2):
 	global xmlList
@@ -4060,6 +4144,7 @@ def xmlInsert(Lis2):
 	L4log("insert Skindata")
 	for i in Lis2:
 		xmlList.insert(-1, i)
+
 
 def xmlDelete(Num):
 	global xmlList
@@ -4088,9 +4173,11 @@ def xmlDelete(Num):
 			i += 1
 	return isDelete
 
+
 def xmlClear():
 	global xmlList
 	xmlList = []
+
 
 def xmlRead():
 	global xmlList
@@ -4116,6 +4203,7 @@ def xmlRead():
 				aw, ah = 10, 171
 		xmlList = ["\n".join(sli[0]).replace("$w$", str(int(ttt[0]) + aw)).replace("$h$", str(int(ttt[1]) + ah)), "</skin>"]
 
+
 def xmlReadData():
 	sld = [[], [], [], []]
 	if isfile(join(LCD4data, "skin_data.xml")):
@@ -4128,12 +4216,14 @@ def xmlReadData():
 			sld[aa].append(i)
 	return sld
 
+
 def xmlWrite():
 	if len(xmlList) > 1:
 		L4log("write SkinData")
 		with open(join(LCD4enigma2config, "skin_user.xml"), "w") as fw:
 			for i in xmlList:
 				fw.write(i + "\n")
+
 
 def xmlSkin():
 	if LCD4linux.xmlType01.value == False and LCD4linux.xmlType02.value == False and LCD4linux.xmlType03.value == False:
@@ -4168,6 +4258,7 @@ def xmlSkin():
 		ok = xmlDelete(3)
 	return change
 
+
 class RunShell:
 	def __init__(self, cmd):
 		global ShellRunning
@@ -4185,6 +4276,7 @@ class RunShell:
 		global ShellRunning
 		ShellRunning = False
 		L4log("Shell Data")
+
 
 def TFTCheck(Force, SetMode=""):
 	global AktTFT
@@ -4209,6 +4301,7 @@ def TFTCheck(Force, SetMode=""):
 					i -= 1
 				RunShell("%stft-dream-mode.sh" % LCD4bin)
 				AktTFT = "DREAM"
+
 
 def SamsungCheck():
 	global SamsungDevice
@@ -4252,6 +4345,7 @@ def SamsungCheck():
 			SamsungDevice3 = None
 			return True
 	return False
+
 
 def getSamsungDevice():
 	global SamsungDevice
@@ -4308,6 +4402,7 @@ def getSamsungDevice():
 						except Exception:
 							pass
 
+
 def DpfCheck():
 	global SamsungDevice
 	global SamsungDevice2
@@ -4335,6 +4430,7 @@ def DpfCheck():
 			SamsungDevice3 = None
 			return True
 	return False
+
 
 def getDpfDevice():
 	global SamsungDevice
@@ -4403,6 +4499,7 @@ def getDpfDevice():
 				else:
 					L4log("DPF3 Device0 not found")
 
+
 def DpfCheckSerial():
 	global SamsungDevice
 	global SamsungDevice2
@@ -4429,6 +4526,7 @@ def DpfCheckSerial():
 				if s1 > s2:
 					Exchange()
 
+
 def Exchange():
 	global SamsungDevice
 	global SamsungDevice2
@@ -4441,6 +4539,7 @@ def CheckFstab():
 	if isfile("%sfstab" % LCD4etc):
 		if open("%sfstab" % LCD4etc, "r").read().lower().find("usbfs") == -1:
 			L4log("Info: no usbfs-Line in fstab")
+
 
 def FritzCallLCD4Linux(event, Date, number, caller, phone):
 	global FritzTime
@@ -4458,6 +4557,7 @@ def FritzCallLCD4Linux(event, Date, number, caller, phone):
 		if BriefLCD.qsize() <= 2:
 			BriefLCD.put(1)
 
+
 def NcidLCD4Linux(Date, number, caller):
 	global FritzTime
 	if (str(LCD4linux.Fritz.value) != "0" or str(LCD4linux.MPFritz.value) != "0" or str(LCD4linux.StandbyFritz.value) != "0"):
@@ -4471,6 +4571,8 @@ def NcidLCD4Linux(Date, number, caller):
 			del FritzList[0]
 		if BriefLCD.qsize() <= 2:
 			BriefLCD.put(1)
+
+
 # Load Config
 if isfile(LCD4config):
 	L = open(LCD4config, "r").read()
@@ -4545,6 +4647,7 @@ except Exception:
 	SonosOK = False
 	L4log("Sonos not registered")
 
+
 def getPage(link, success, fail=None, headers=None, timeout=(3.05, 6)):
 	agents = [
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
@@ -4567,6 +4670,7 @@ def getPage(link, success, fail=None, headers=None, timeout=(3.05, 6)):
 		if fail is not None:
 			fail(error)
 
+
 def downloadPage(link, file, success, fail=None):
 	link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 	try:
@@ -4578,6 +4682,7 @@ def downloadPage(link, file, success, fail=None):
 	except exceptions.RequestException as error:
 		if fail is not None:
 			fail(error)
+
 
 class GrabOSD:
 	def __init__(self, cmd):
@@ -4597,12 +4702,15 @@ class GrabOSD:
 		pass
 
 # Grab
+
+
 def doGrab(i, ConfigFast, ConfigSize):
 	if getFB2(True):
 		setFB2("0")
 	else:
 		CF = "" if ConfigFast == True else "-b"
 		GrabOSD("%sgrab -o -p -j 95 %s -r %d %sdpfgrab.jpg" % (LCD4bin, CF, ConfigSize, TMPL))
+
 
 def InitWebIF():
 	L4log("WebIf-Init...")
@@ -4643,6 +4751,7 @@ def InitWebIF():
 	else:
 		L4log("no WebIf found")
 
+
 class L4LWorkerRes(Thread):
 	def __init__(self, index, s, session):
 		Thread.__init__(self)
@@ -4673,6 +4782,7 @@ class L4LWorkerRes(Thread):
 				except Exception:
 					pass
 			BriefRes.task_done()
+
 
 class L4LWorker1(Thread):
 	def __init__(self, index, s, session):
@@ -4705,6 +4815,7 @@ class L4LWorker1(Thread):
 					pass
 			Brief1.task_done()
 
+
 class L4LWorker2(Thread):
 	def __init__(self, index, s, session):
 		Thread.__init__(self)
@@ -4735,6 +4846,7 @@ class L4LWorker2(Thread):
 				except Exception:
 					pass
 			Brief2.task_done()
+
 
 class L4LWorker3(Thread):
 	def __init__(self, index, s, session):
@@ -4767,6 +4879,7 @@ class L4LWorker3(Thread):
 					pass
 			Brief3.task_done()
 
+
 class L4LWorkerLCD(Thread):
 	def __init__(self, index, s, session):
 		Thread.__init__(self)
@@ -4790,6 +4903,7 @@ class L4LWorkerLCD(Thread):
 		enable()
 		L4logE("Done Worker Pic", i)
 		return "ok"
+
 
 class L4LWorker(Thread):
 	QuickRunning = False
@@ -10385,6 +10499,7 @@ class myE2Timer(object):
 	def values(self):
 		return self.name, self.begin, self.end, self.disabled, self.justplay, self.ice_timer_id, self.service_ref, self.state
 
+
 def url_parse(url, defaultPort=None):
 	parsed = urlparse(url)
 	scheme = parsed[0]
@@ -10399,6 +10514,7 @@ def url_parse(url, defaultPort=None):
 		host, port = host.split(':')
 		port = int(port)
 	return scheme, host, port, path
+
 
 def getShowPicture(BildFile, idx):
 	global OSDon
@@ -10459,10 +10575,12 @@ def getShowPicture(BildFile, idx):
 				OSDon = 1
 	return ShowPicture
 
+
 """
 Author: Sean B. Palmer, inamidst.com
 http://inamidst.com/code/moonphase.py
 """
+
 
 def MoonPosition(now=None):
 	if now is None:
@@ -10471,6 +10589,7 @@ def MoonPosition(now=None):
 	days = diff.days + diff.seconds / 86400
 	lunations = 0.20439731 + days * 0.03386319269
 	return lunations % float(1)
+
 
 def MoonPhase(pos):
 	index = (pos * float(8)) + float("0.5")
@@ -10486,11 +10605,13 @@ def MoonPhase(pos):
 		7: _("Last Quarter")
 		}[int(index) & 7]
 
+
 """
 series expansion of the moon orbital elements from Chapront und Chapront-Touzé
 Quelle: htps://de.wikipedia.org/wiki/Mondbahn
 http://articles.adsabs.harvard.edu/full/1994A%26A...282..663S
 """
+
 
 def MoonDistance(now=None):
 	if now is None:
@@ -10500,6 +10621,7 @@ def MoonDistance(now=None):
 	GM = (134.96341138 + 13.064992953630 * t) * pi / 180
 	DD = (297.85020420 + 12.190749117502 * t) * pi / 90
 	return 385000.5584 - 20905.3550 * cos(GM) - 3699.1109 * cos(DD - GM) - 2955.9676 * cos(DD) - 569.9251 * cos(2 * GM)
+
 
 def LCD4linuxPIC(self, session):
 	global wwwWetter
@@ -15311,11 +15433,14 @@ def LCD4linuxPIC(self, session):
 	INFO = PUSH + "   " + INFO
 	return
 
+
 def main(session, **kwargs):
 	session.open(LCDdisplayConfig)
 
+
 def screenswitch(session, **kwargs):
 	session.open(LCDscreenSwitch)
+
 
 def autostart(reason, **kwargs):
 	global session
@@ -15441,6 +15566,7 @@ def autostart(reason, **kwargs):
 					pass
 		MJPEG_stop(9)
 
+
 def setup(menuid, **kwargs):
 	if getImageDistro() in ("openvix", "openatv", "egami", "openhdf", "openbh", "openspa", "opendroid"):
 		if menuid == "display" and SystemInfo["Display"]:
@@ -15451,6 +15577,7 @@ def setup(menuid, **kwargs):
 			return []
 	else:
 		return [("LCD4Linux", main, "lcd4linux", None)] if menuid == "setup" else []
+
 
 def Plugins(**kwargs):
 	list = [PluginDescriptor(name="LCD4linux", description=_("LCD4linux"), where=[PluginDescriptor.WHERE_SESSIONSTART, PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
