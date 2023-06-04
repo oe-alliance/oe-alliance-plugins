@@ -3655,7 +3655,7 @@ def request_headers(boundary):
 	}
 
 def image_headers(size):
-	return {'X-Timestamp': time(), 'Content-Type': 'image/jpeg', 'Content-Length': size,} if str(LCD4linux.MJPEGHeader.value) == "0" else {'Content-Type': 'image/jpeg',}
+	return {'X-Timestamp': time(), 'Content-Type': 'image/jpeg', 'Content-Length': size, } if str(LCD4linux.MJPEGHeader.value) == "0" else {'Content-Type': 'image/jpeg', }
 
 class ThreadingHTTPServer(ThreadingMixIn, HTTPServer):
 	pass
@@ -11829,7 +11829,7 @@ def LCD4linuxPIC(self, session):
 		else:
 			self.im[0] = Image.new('RGB', (int(x), int(y)), (0, 0, 0, 0))
 			while TVrunning == True and getSA(int(lcd)) in LCD4linux.TV.value:
-				GrabTV("%sgrab %s -j 40 -r %s %stvgrab.jpg" % (LCD4bin,vt, x, TMPL))
+				GrabTV("%sgrab %s -j 40 -r %s %stvgrab.jpg" % (LCD4bin, vt, x, TMPL))
 				i = 0
 				while GrabTVRunning == True and i < 500:
 					sleep(0.01)
