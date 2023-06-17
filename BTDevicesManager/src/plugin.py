@@ -345,7 +345,7 @@ class BluetoothDevicesManager(Screen):
 			self.devicelist = []
 			self.devicelist.append((_("MAC:\t\tDevice name:"), _("entry")))
 			for d in available_devices:
-				if d['mac_address'] != d['name'].replace('-',':'):
+				if d['mac_address'] != d['name'].replace('-', ':'):
 					self.devicelist.append((d['mac_address'] + "\t" + d['name'], d['mac_address']))
 
 			self["devicelist"].setList(self.devicelist)
