@@ -341,7 +341,7 @@ class BluetoothDevicesManager(Screen):
 		except:
 			msg = _("Can't not pair with selected device!")
 			self["ConnStatus"].setText(msg)
-			
+
 	def cbRefreshScanStatus(self):
 		available_devices = iBluetoothctl.get_available_devices()
 		if available_devices is not None:
