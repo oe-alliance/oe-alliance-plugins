@@ -109,12 +109,14 @@ class TaskManager:
 		self.taskIdx += 1
 		return True
 
+
 config.btdevicesmanager = ConfigSubsection()
 config.btdevicesmanager.autostart = ConfigYesNo(default=False)
 config.btdevicesmanager.audioconnect = ConfigYesNo(default=False)
 config.btdevicesmanager.audioaddress = ConfigText(default="", fixed_size=False)
 
 commandconnect = resolveFilename(SCOPE_CURRENT_PLUGIN, "Extensions/BTDevicesManager/BTAudioConnect")
+
 
 class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 	__module__ = __name__
@@ -167,6 +169,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 		    x[1].cancel()
 
 		self.close()
+
 
 class BluetoothDevicesManager(Screen):
 	skin = """
@@ -477,14 +480,17 @@ class BluetoothDevicesManager(Screen):
 	def setListOnView(self):
 		return self.devicelist
 
+
 def start_menu_main(menuid, **kwargs):
 	if menuid == "system":
 		return [(_("Bluetooth Devices Manager"), main, "bt_control", None)]
 	else:
 		return []
 
+
 def main(session, **kwargs):
 	session.open(BluetoothDevicesManager)
+
 
 def autostart(reason, **kwargs):
 	if reason == 0:
@@ -502,7 +508,9 @@ def autostart(reason, **kwargs):
 		if machinebuild in ("gbmv200",):
 			os.system("hciattach_sprd /dev/ttyBT0 sprd")
 
+
 iBluetoothDevicesTask = None
+
 
 class BluetoothDevicesTask:
 	def __init__(self, session):
@@ -536,6 +544,7 @@ class BluetoothDevicesTask:
 			pass
 		self.timestamp = datetime.now()
 
+
 def sessionstart(session, reason, **kwargs):
 	global iBluetoothDevicesTask
 
@@ -543,6 +552,7 @@ def sessionstart(session, reason, **kwargs):
 		if brandoem in ("xcore", "edision"):
 			if iBluetoothDevicesTask is None:
 				iBluetoothDevicesTask = BluetoothDevicesTask(session)
+
 
 def Plugins(**kwargs):
 	ShowPlugin = True
