@@ -416,7 +416,7 @@ class TVSBaseScreen(TVSAllScreen):
 		self.nextdate = today + one_day
 		part = infotext[1].split(' - ')
 		self.start = part[0].replace(' Uhr', '').strip()
-		self.end = part[1].replace(' Uhr', '').strip()
+		self.end = sub(r"\([^>]+\)", "", part[1].replace(' Uhr', '')).strip()
 
 	def showInfotext(self, infotexts):
 			for i, infotext in enumerate(infotexts):
@@ -696,7 +696,7 @@ class TVSBaseScreen(TVSAllScreen):
 				channel = channel.group(1).upper() if channel else "{Sender unbekannt}"
 			zeit = search(r'<span\s*class="stage\-underline\s*gray">(.*?)</span>', bereich, flags=S)
 			zeit = zeit.group(1) if zeit else "{Zeit unbekannt}"
-			zeit = sub(r"(\d+:\d+)\s*\-\s*(\d+:\d+)", r"\g<1> Uhr - \g<2> Uhr", zeit)
+			zeit = sub(r'(\d+:\d+)\s*\-\s*(\d+:\d+)', r'\g<1> Uhr - \g<2> Uhr', zeit)
 			infotext = zeit.strip().split(' | ')
 			if len(infotext) > 2:
 				infotext[1] = "%s (%s)" % (infotext[1], infotext[2])
