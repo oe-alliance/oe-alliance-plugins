@@ -51,7 +51,7 @@ AGENTS = [
 		"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0"
 		"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)"
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75"
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edge/87.0.664.75"
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
 		]
 
@@ -60,10 +60,7 @@ AGENTS = [
 
 config.plugins.chefkoch = ConfigSubsection()
 PLUGINPATH = resolveFilename(SCOPE_PLUGINS) + 'Extensions/Chefkoch/'
-if getDesktop(0).size().width() >= 1920:
-	config.plugins.chefkoch.plugin_size = ConfigSelection(default='FHD', choices=[('FHD', 'FullHD (1920x1080)'), ('HD', 'HD (1280x720)')])
-else:
-	config.plugins.chefkoch.plugin_size = ConfigSelection(default='HD', choices=[('HD', 'HD (1280x720)')])
+config.plugins.chefkoch.plugin_size = ConfigSelection(default='FHD', choices=[('FHD', 'FullHD (1920x1080)'), ('HD', 'HD (1280x720)')]) if getDesktop(0).size().width() >= 1920 else ConfigSelection(default='HD', choices=[('HD', 'HD (1280x720)')])
 config.plugins.chefkoch.font_size = ConfigSelection(default='large', choices=[('large', 'Groß'), ('normal', 'Normal')])
 config.plugins.chefkoch.maxrecipes = ConfigSelection(default='100', choices=['10', '20', '50', '100', '200', '500', '1000'])
 config.plugins.chefkoch.maxcomments = ConfigSelection(default='100', choices=['10', '20', '50', '100', '200', '500'])
@@ -189,7 +186,7 @@ class CKview(AllScreen):
 		self.zufall = zufall
 		self.sortname = ['{keine}', 'Anzahl Bewertungen', 'Anzahl Sterne', 'mit Video', 'Erstelldatum']
 		self.orgGRP = []
-		self.KOM = []
+		self.KOM = {}
 		self.currItem = 0
 		self.rezept = 'https://www.chefkoch.de/rezepte/'
 		self.rezeptfile = '/tmp/Rezept.html'
@@ -363,7 +360,7 @@ class CKview(AllScreen):
 			if fileExists(png):
 				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(14 * SCALE), int(36 * SCALE)), size=(int(75 * SCALE), int(15 * SCALE)), png=loadPNG(png)))  # STARS
 			res.append(MultiContentEntryText(pos=(int(11 * SCALE), int(52 * SCALE)), size=(int(75 * SCALE), int(30 * SCALE)), font=1, color=16777215, color_sel=16777215,
-                                    		 flags=RT_HALIGN_CENTER, text='(' + count + ')'))  # COUNT
+											 flags=RT_HALIGN_CENTER, text='(' + count + ')'))  # COUNT
 			res.append(MultiContentEntryText(pos=(int(111 * SCALE), int(45 * SCALE)), size=(int(965 * SCALE), int(70 * SCALE)),
 											 font=-1, color=10857646, color_sel=13817818, flags=RT_HALIGN_LEFT | RT_WRAP, text=text))  # TEXT
 			res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(6 * SCALE)), size=(int(75 * SCALE), int(26 * SCALE)), font=0, backcolor=3899463,
@@ -509,10 +506,10 @@ class CKview(AllScreen):
 		else:
 			result = loads(content)
 			self.IMGlen = int(config.plugins.chefkoch.maxpictures.value) if result['count'] > int(config.plugins.chefkoch.maxpictures.value) else result['count']
-			dict = {}
-			dict['count'] = self.IMGlen
-			dict['results'] = result['results']
-			return dict
+			img = {}
+			img['count'] = self.IMGlen
+			img['results'] = result['results']
+			return img
 
 	def getKOM(self, id):  # hole die jeweilige Rezeptkommentarliste
 		content, resp = self.getAPIdata('recipes/' + id + '/comments?&offset=0&limit=' + config.plugins.chefkoch.maxcomments.value)
@@ -539,27 +536,27 @@ class CKview(AllScreen):
 				for j in range(len(result['results'])):
 					if result['results'][j]['recipe']['isRejected']:
 						continue
-					dict = {}
-					dict['id'] = result['results'][j]['recipe']['id']
-					dict['createdAt'] = result['results'][j]['recipe']['createdAt']
-					dict['preparationTime'] = result['results'][j]['recipe']['preparationTime']
+					grp = {}
+					grp['id'] = result['results'][j]['recipe']['id']
+					grp['createdAt'] = result['results'][j]['recipe']['createdAt']
+					grp['preparationTime'] = result['results'][j]['recipe']['preparationTime']
 					if result['results'][j]['recipe']['rating']:
-						dict['rating'] = result['results'][j]['recipe']['rating']['rating']
-						dict['numVotes'] = result['results'][j]['recipe']['rating']['numVotes']
+						grp['rating'] = result['results'][j]['recipe']['rating']['rating']
+						grp['numVotes'] = result['results'][j]['recipe']['rating']['numVotes']
 					else:
-						dict['rating'] = 0
-						dict['numVotes'] = False
+						grp['rating'] = 0
+						grp['numVotes'] = False
 					if result['results'][j]['recipe']['hasImage']:
-						dict['previewImageId'] = result['results'][j]['recipe']['previewImageId']
+						grp['previewImageId'] = result['results'][j]['recipe']['previewImageId']
 					else:
-						dict['previewImageId'] = False
-					dict['hasVideo'] = result['results'][j]['recipe']['hasVideo']
+						grp['previewImageId'] = False
+					grp['hasVideo'] = result['results'][j]['recipe']['hasVideo']
 					titel = str(result['results'][j]['recipe']['title'])
-					dict['title'] = titel
-					dict['subtitle'] = str(result['results'][j]['recipe']['subtitle'])
+					grp['title'] = titel
+					grp['subtitle'] = str(result['results'][j]['recipe']['subtitle'])
 					if result['results'][j]['recipe']['hasVideo']:
 						videocount += 1
-					self.orgGRP.append(dict)
+					self.orgGRP.append(grp)
 			self.videocount = videocount
 		if self.sort == 0:
 			return self.orgGRP
@@ -571,6 +568,8 @@ class CKview(AllScreen):
 			return sorted(self.orgGRP, key=itemgetter('hasVideo', 'numVotes'), reverse=True)
 		elif self.sort == 4:
 			return sorted(self.orgGRP, key=itemgetter('createdAt'), reverse=True)
+		else:
+			return []
 
 	def getTimeString(self, duration):
 		days = duration // 1440
@@ -605,21 +604,21 @@ class CKview(AllScreen):
 
 	def red(self):
 		if self.ready or self.postviewready:
-			if not self.zufall:
+			if self.zufall:
+				name = self.name
+			else:
 				self.currItem = self['menu'].getSelectedIndex()
 				name = self.titellist[self.currItem]
-			else:
-				name = self.name
 			self.session.openWithCallback(self.red_return, MessageBox, "\nRezept '%s' zu den Favoriten hinzufügen?" % name, MessageBox.TYPE_YESNO)
 
 	def red_return(self, answer):
 		if answer is True:
 			favoriten = PLUGINPATH + 'db/favoriten'
-			if not self.zufall:
+			if self.zufall:
+				data = self.name + ':::' + self.kochId[self.currItem]
+			else:
 				self.currItem = self['menu'].getSelectedIndex()
 				data = self.titellist[self.currItem] + ':::' + self.kochId[self.currItem]
-			else:
-				data = self.name + ':::' + self.kochId[self.currItem]
 			with open(favoriten, 'a') as f:
 				f.write(data)
 				f.write(linesep)
@@ -646,14 +645,11 @@ class CKview(AllScreen):
 		effort = ['keine', 'simpel', 'normal', 'pfiffig']
 		msgText = '\n'
 		msgText = '<p>Linkadresse: <a href="' + self.rezept + self.currId + '">' + self.rezept + self.currId + '</a></p>'
-		if self.REZ['rating']:
-			scoretext = str('%1.1f' % self.REZ['rating']['rating']) + ' (' + str(self.REZ['rating']['numVotes']) + ' Bewertungen)'
-		else:
-			scoretext = '(ohne Bewertung)'
-		preptime = self.REZ['preparationTime']
-		cooktime = self.REZ['cookingTime']
-		resttime = self.REZ['restingTime']
-		totaltime = self.REZ['totalTime']
+		scoretext = str('%1.1f' % self.REZ['rating']['rating']) + ' (' + str(self.REZ['rating']['numVotes']) + ' Bewertungen)' if self.REZ and self.REZ['rating'] else '(ohne Bewertung)'
+		preptime = self.REZ['preparationTime'] if self.REZ else ""
+		cooktime = self.REZ['cookingTime'] if self.REZ else ""
+		resttime = self.REZ['restingTime'] if self.REZ else ""
+		totaltime = self.REZ['totalTime'] if self.REZ else ""
 		if preptime != 0:
 			scoretext += '\nArbeitszeit   : %s' % self.getTimeString(preptime)
 		if cooktime != 0:
@@ -664,10 +660,10 @@ class CKview(AllScreen):
 			scoretext += '\nGesamtzeit    : %s' % self.getTimeString(totaltime)
 		msgText += scoretext
 		recipetext = '\n\nRezept-Identnr.: ' + str(self.currId)
-		recipetext += '\nAufwand: ' + effort[self.REZ['difficulty']]
-		recipetext += '\nErstellername: ' + self.formatUsername(self.REZ['owner']['username'], self.REZ['owner']['rank'], 22)
-		recipetext += '\nErstelldatum: ' + self.formatDatum(self.REZ['createdAt'])
-		if self.REZ['nutrition']:
+		recipetext += '\nAufwand: ' + effort[self.REZ['difficulty']] if self.REZ else ""
+		recipetext += '\nErstellername: ' + self.formatUsername(self.REZ['owner']['username'], self.REZ['owner']['rank'], 22) if self.REZ else ""
+		recipetext += '\nErstelldatum: ' + self.formatDatum(self.REZ['createdAt']) if self.REZ else ""
+		if self.REZ and self.REZ['nutrition']:
 			kcalori = self.REZ['nutrition']['kCalories']
 			if kcalori:
 				kcalori = str(kcalori)
@@ -691,19 +687,19 @@ class CKview(AllScreen):
 			recipetext += '\n\nkcal  Eiweiß  Fett  Kohlenhydr.'
 			recipetext += '\n' + str(kcalori) + ' ' + str(protein) + ' ' + str(fatcont) + ' ' + str(carbohyd)
 		msgText += recipetext + '\n\n'
-		if self.REZ['subtitle']:
+		if self.REZ and self.REZ['subtitle']:
 			msgText += 'BESCHREIBUNG: ' + self.REZ['subtitle'] + '\n\n'
 		msgText += 'ZUTATEN\n'
-		for i in range(len(self.REZ['ingredientGroups'])):
-			for j in range(len(self.REZ['ingredientGroups'][i]['ingredients'])):
+		for i in range(len(self.REZ['ingredientGroups']) if self.REZ else 0):
+			for j in range(len(self.REZ['ingredientGroups'][i]['ingredients']) if self.REZ else 0):
 				if not (i == 0 and j == 0):
 					msgText += '; '
-				if self.REZ['ingredientGroups'][i]['ingredients'][j]['amount'] != 0:
+				if self.REZ and self.REZ['ingredientGroups'][i]['ingredients'][j]['amount'] != 0:
 					msgText += str(self.REZ['ingredientGroups'][i]['ingredients'][j]['amount']).replace('.0', '') + ' '
 					msgText += self.REZ['ingredientGroups'][i]['ingredients'][j]['unit'] + ' '
-				msgText += self.REZ['ingredientGroups'][i]['ingredients'][j]['name']
-				msgText += self.REZ['ingredientGroups'][i]['ingredients'][j]['usageInfo']
-		msgText += '\n\nZUBEREITUNG\n' + self.REZ['instructions']
+				msgText += self.REZ['ingredientGroups'][i]['ingredients'][j]['name'] if self.REZ else ""
+				msgText += self.REZ['ingredientGroups'][i]['ingredients'][j]['usageInfo'] if self.REZ else ""
+		msgText += '\n\nZUBEREITUNG\n' + self.REZ['instructions'] if self.REZ else ""
 		msgText += '\n' + '_' * 30 + '\nChefkoch.de'
 		if fileExists(PICFILE):
 			Image.open(PICFILE).resize((320, 240), Image.ANTIALIAS).save('/tmp/emailpic.jpg')
@@ -863,14 +859,13 @@ class CKview(AllScreen):
 		if self.current == 'menu':
 			self.currItem = self['menu'].getSelectedIndex()
 			self.session.open(CKfavoriten, False)
-		elif self.current == 'postview' and self.postviewready:
-			if self.KOMlen > 0:
-				if self.comment:
-					self.comment = False
-					self.makeRezept()
-				else:
-					self.comment = True
-					self.makeKommentar()
+		elif self.current == 'postview' and self.postviewready and self.KOMlen > 0:
+			if self.comment:
+				self.comment = False
+				self.makeRezept()
+			else:
+				self.comment = True
+				self.makeKommentar()
 
 	def makeKommentar(self):
 		self.postviewready = False
@@ -890,11 +885,11 @@ class CKview(AllScreen):
 		self['pageinfo'].hide()
 		self['textpage'].setText('')
 		text = ''
-		for i in range(self.KOMlen):
-			text += 'Kommentar %s/%s' % (i + 1, self.KOMlen) + ' von '
-			text += self.formatUsername(self.KOM['results'][i]['owner']['username'], self.KOM['results'][i]['owner']['rank'], 0)
-			text += ' %s Uhr\n' % self.formatDatumZeit(self.KOM['results'][i]['createdAt'])
-			text += self.KOM['results'][i]['text']
+		for idx, kom in enumerate(self.KOM['results']):
+			text += 'Kommentar %s/%s' % (idx + 1, self.KOMlen) + ' von '
+			text += self.formatUsername(kom['owner']['username'], kom['owner']['rank'], 0)
+			text += ' %s Uhr\n' % self.formatDatumZeit(kom['createdAt'])
+			text += kom['text']
 			if config.plugins.chefkoch.plugin_size.value == 'FHD':
 				repeat = 102 if config.plugins.chefkoch.font_size.value == 'large' else 109
 				text += '\n%s\n' % ('_' * repeat)
@@ -902,7 +897,7 @@ class CKview(AllScreen):
 				repeat = 96 if config.plugins.chefkoch.font_size.value == 'large' else 105
 				text += '\n%s\n' % ('_' * repeat)
 		text += '\nChefkoch.de'
-		self['textpage'].setText(str(text))
+		self['textpage'].setText(text)
 		self.postviewready = True
 
 	def makeRezept(self):  # bereite die eigentliche Rezeptseite vor
@@ -929,7 +924,7 @@ class CKview(AllScreen):
 			self['label_ok'].setText('')
 			self['button_ok'].hide()
 		self['textpage'].setText('')
-		if self.REZ['hasVideo']:
+		if self.REZ and self.REZ['hasVideo']:
 			self['postvid'].show()
 			self['label_play'].setText('Video abspielen')
 			self['label_play'].show()
@@ -939,19 +934,19 @@ class CKview(AllScreen):
 			self['label_play'].hide()
 			self['button_play'].hide()
 		text = ''
-		if self.REZ['subtitle']:
+		if self.REZ and self.REZ['subtitle']:
 			text += 'BESCHREIBUNG: ' + self.REZ['subtitle'] + '\n\n'
 		text += 'ZUTATEN\n'
-		for i in range(len(self.REZ['ingredientGroups'])):
-			for j in range(len(self.REZ['ingredientGroups'][i]['ingredients'])):
+		for i in range(len(self.REZ['ingredientGroups']) if self.REZ else 0):
+			for j in range(len(self.REZ['ingredientGroups'][i]['ingredients']) if self.REZ else 0):
 				if not (i == 0 and j == 0):
 					text += '; '
-				if self.REZ['ingredientGroups'][i]['ingredients'][j]['amount'] != 0:
+				if self.REZ and self.REZ['ingredientGroups'][i]['ingredients'][j]['amount'] != 0:
 					text += str(self.REZ['ingredientGroups'][i]['ingredients'][j]['amount']).replace('.0', '') + ' '
 					text += self.REZ['ingredientGroups'][i]['ingredients'][j]['unit'] + ' '
-				text += self.REZ['ingredientGroups'][i]['ingredients'][j]['name']
-				text += self.REZ['ingredientGroups'][i]['ingredients'][j]['usageInfo']
-		text += '\n\nZUBEREITUNG\n' + self.REZ['instructions']
+				text += self.REZ['ingredientGroups'][i]['ingredients'][j]['name'] if self.REZ else ""
+				text += self.REZ['ingredientGroups'][i]['ingredients'][j]['usageInfo'] if self.REZ else ""
+		text += '\n\nZUBEREITUNG\n' + self.REZ['instructions'] if self.REZ else ""
 		if config.plugins.chefkoch.plugin_size.value == 'FHD':
 			repeat = 102 if config.plugins.chefkoch.font_size.value == 'large' else 109
 		else:
@@ -1053,7 +1048,7 @@ class CKview(AllScreen):
 	def playVideo(self):
 		if self.current == 'menu':
 			self.REZ = self.getREZ(self.kochId[self.currItem])
-		if self.REZ['recipeVideoId']:
+		if self.REZ and self.REZ['recipeVideoId']:
 			content, resp = self.getAPIdata('videos/' + self.REZ['recipeVideoId'])
 			if resp != 200:
 				self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
@@ -1439,9 +1434,6 @@ class CKfavoriten(AllScreen):
 	def up(self):
 		self['favmenu'].up()
 
-	def infoScreen(self):
-		pass
-
 	def exit(self):
 		if ALPHA and not HIDEFLAG:
 			with open(ALPHA, 'w') as f:
@@ -1547,7 +1539,7 @@ class CKmain(AllScreen):
 
 		elif self.actmenu == 'secondmenu':
 			secondId = self.secondId[self.currItem]
-			if list(filter(lambda i: i['parentId'] == secondId, self.currKAT)):
+			if self.currKAT and list(filter(lambda i: i['parentId'] == secondId, self.currKAT)):
 				callInThread(self.makeThirdMenu, secondId)
 			else:
 				sort = 3 if self.CKvideo else 1  # Videosortierung für "Chefkoch Video"
@@ -1567,7 +1559,7 @@ class CKmain(AllScreen):
 			return
 		self.setTitle('Hauptmenü')
 		self['totalrecipes'].setText('%s%s' % (loads(content)['count'], ' Rezepte'))
-		self.NKAT = []  # Normalkategorien
+		self.NKAT = {}  # Normalkategorien
 		self.VKAT = []  # Videokategorien
 		self.MKAT = []  # Magazinkategorien
 		self.mainmenulist = []
@@ -1593,42 +1585,44 @@ class CKmain(AllScreen):
 		self.secondmenutitle = []
 		self.secondId = []
 		self.parentId = parentId
-		for i in range(len(self.currKAT)):
-			res = ['']
-			if self.currKAT[i]['level'] == 2 and self.currKAT[i]['parentId'] == parentId:
-				res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
-				self.secondmenulist.append(res)
-				self.secondmenuquery.append(self.currKAT[i]['descriptionText'])
-				self.secondmenutitle.append(self.currKAT[i]['descriptionText'])
-				self.secondId.append(self.currKAT[i]['id'])
-		self['secondmenu'].l.setList(self.secondmenulist)
-		self['secondmenu'].l.setItemHeight(int(34 * SCALE))
-		self['secondmenu'].moveToIndex(0)
-		for i in range(len(self.currKAT)):
-			if self.currKAT[i]['id'] == parentId:
-				break
-		self.setTitle(str(self.currKAT[i]['title']))
-		self.selectSecondMenu()
+		if self.currKAT:
+			for i in range(len(self.currKAT)):
+				res = ['']
+				if self.currKAT[i]['level'] == 2 and self.currKAT[i]['parentId'] == parentId:
+					res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
+					self.secondmenulist.append(res)
+					self.secondmenuquery.append(self.currKAT[i]['descriptionText'])
+					self.secondmenutitle.append(self.currKAT[i]['descriptionText'])
+					self.secondId.append(self.currKAT[i]['id'])
+			self['secondmenu'].l.setList(self.secondmenulist)
+			self['secondmenu'].l.setItemHeight(int(34 * SCALE))
+			self['secondmenu'].moveToIndex(0)
+			for currkat in self.currKAT:
+				if currkat['id'] == parentId:
+					self.setTitle(currkat['title'])
+					break
+			self.selectSecondMenu()
 
 	def makeThirdMenu(self, parentId):
 		self.thirdmenulist = []
 		self.thirdmenuquery = []
 		self.thirdmenutitle = []
-		for i in range(len(self.currKAT)):
-			res = ['']
-			if self.currKAT[i]['level'] == 3 and self.currKAT[i]['parentId'] == parentId:
-				res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
-				self.thirdmenulist.append(res)
-				self.thirdmenuquery.append(self.currKAT[i]['descriptionText'])
-				self.thirdmenutitle.append(self.currKAT[i]['descriptionText'])
-		self['thirdmenu'].l.setList(self.thirdmenulist)
-		self['thirdmenu'].l.setItemHeight(int(34 * SCALE))
-		self['thirdmenu'].moveToIndex(0)
-		for i in range(len(self.currKAT)):
-			if self.currKAT[i]['id'] == parentId:
-				break
-		self.setTitle(str(self.currKAT[i]['title']))
-		self.selectThirdMenu()
+		if self.currKAT:
+			for currkat in self.currKAT:
+				res = ['']
+				if currkat['level'] == 3 and currkat['parentId'] == parentId:
+					res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=currkat['descriptionText']))
+					self.thirdmenulist.append(res)
+					self.thirdmenuquery.append(currkat['descriptionText'])
+					self.thirdmenutitle.append(currkat['descriptionText'])
+			self['thirdmenu'].l.setList(self.thirdmenulist)
+			self['thirdmenu'].l.setItemHeight(int(34 * SCALE))
+			self['thirdmenu'].moveToIndex(0)
+			for currkat in self.currKAT:
+				if currkat['id'] == parentId:
+					self.setTitle(currkat['title'])
+					break
+			self.selectThirdMenu()
 
 	def makeVKATdb(self):  # hole alle verfügbaren Videokategorien
 		content, resp = self.getAPIdata('videos?&offset=0&limit=10000')
@@ -1810,14 +1804,15 @@ class CKmain(AllScreen):
 				remove(self.rezeptfile)
 			self.close()
 		elif self.actmenu == 'secondmenu':
-			self.CurrKAT = self.getNKAT()
+			self.currKAT = self.getNKAT()
 			self.setTitle('Hauptmenü')
 			self.selectMainMenu()
 		elif self.actmenu == 'thirdmenu':
-			for i in range(len(self.currKAT)):
-				if self.currKAT[i]['id'] == self.parentId:
-					break
-			self.setTitle(str(self.currKAT[i]['title']))
+			if self.currKAT:
+				for currkat in self.currKAT:
+					if currkat['id'] == self.parentId:
+						self.setTitle(currkat['title'])
+						break
 			self.selectSecondMenu()
 
 
@@ -1830,29 +1825,29 @@ class CKconfig(ConfigListScreen, AllScreen):
 		self['VKeyIcon'] = Boolean(False)
 		self.password = config.plugins.chefkoch.password.value
 		self['plugin'] = Pixmap()
-		list = []
-		list.append(getConfigListEntry('Plugin Auflösung:', config.plugins.chefkoch.plugin_size, "Plugin Auflösung"))
-		list.append(getConfigListEntry('Schriftgröße Rezepte/Kommentare:', config.plugins.chefkoch.font_size, "Schriftgröße Langtexte"))
-		list.append(getConfigListEntry('Maximale Anzahl Rezepte:', config.plugins.chefkoch.maxrecipes, "Maximale Anzahl Rezepte"))
-		list.append(getConfigListEntry('Maximale Anzahl Kommentare:', config.plugins.chefkoch.maxcomments, "Maximale Anzahl Kommentare"))
-		list.append(getConfigListEntry('Maximale Anzahl Rezeptbilder:', config.plugins.chefkoch.maxpictures, "Maximale Anzahl Rezeptbilder"))
-		list.append(getConfigListEntry('Versende Rezepte per E-Mail:', config.plugins.chefkoch.mail, "Versende Rezepte per E-Mail"))
-		list.append(getConfigListEntry('*E-Mail Absender:', config.plugins.chefkoch.mailfrom, "E-Mail Absender"))
-		list.append(getConfigListEntry('*E-Mail Empfänger:', config.plugins.chefkoch.mailto, "E-Mail Empfänger"))
-		list.append(getConfigListEntry('*E-Mail Login:', config.plugins.chefkoch.login, "E-Mail Login"))
-		list.append(getConfigListEntry('*E-Mail Passwort:', config.plugins.chefkoch.password, "E-Mail Passwort"))
-		list.append(getConfigListEntry('*E-Mail Server:', config.plugins.chefkoch.server, "E-Mail Server"))
-		list.append(getConfigListEntry('*E-Mail Server Port:', config.plugins.chefkoch.port, "E-Mail Server Port"))
-		list.append(getConfigListEntry('*E-Mail Server SSL:', config.plugins.chefkoch.ssl, "E-Mail Server SSL"))
-		list.append(getConfigListEntry('DebugLog', config.plugins.chefkoch.debuglog, "Debug Logging aktivieren"))
-		list.append(getConfigListEntry('Log in Datei', config.plugins.chefkoch.logtofile, "Log in Datei '/home/root/logs'"))
+		clist = []
+		clist.append(getConfigListEntry('Plugin Auflösung:', config.plugins.chefkoch.plugin_size, "Plugin Auflösung"))
+		clist.append(getConfigListEntry('Schriftgröße Rezepte/Kommentare:', config.plugins.chefkoch.font_size, "Schriftgröße Langtexte"))
+		clist.append(getConfigListEntry('Maximale Anzahl Rezepte:', config.plugins.chefkoch.maxrecipes, "Maximale Anzahl Rezepte"))
+		clist.append(getConfigListEntry('Maximale Anzahl Kommentare:', config.plugins.chefkoch.maxcomments, "Maximale Anzahl Kommentare"))
+		clist.append(getConfigListEntry('Maximale Anzahl Rezeptbilder:', config.plugins.chefkoch.maxpictures, "Maximale Anzahl Rezeptbilder"))
+		clist.append(getConfigListEntry('Versende Rezepte per E-Mail:', config.plugins.chefkoch.mail, "Versende Rezepte per E-Mail"))
+		clist.append(getConfigListEntry('*E-Mail Absender:', config.plugins.chefkoch.mailfrom, "E-Mail Absender"))
+		clist.append(getConfigListEntry('*E-Mail Empfänger:', config.plugins.chefkoch.mailto, "E-Mail Empfänger"))
+		clist.append(getConfigListEntry('*E-Mail Login:', config.plugins.chefkoch.login, "E-Mail Login"))
+		clist.append(getConfigListEntry('*E-Mail Passwort:', config.plugins.chefkoch.password, "E-Mail Passwort"))
+		clist.append(getConfigListEntry('*E-Mail Server:', config.plugins.chefkoch.server, "E-Mail Server"))
+		clist.append(getConfigListEntry('*E-Mail Server Port:', config.plugins.chefkoch.port, "E-Mail Server Port"))
+		clist.append(getConfigListEntry('*E-Mail Server SSL:', config.plugins.chefkoch.ssl, "E-Mail Server SSL"))
+		clist.append(getConfigListEntry('DebugLog', config.plugins.chefkoch.debuglog, "Debug Logging aktivieren"))
+		clist.append(getConfigListEntry('Log in Datei', config.plugins.chefkoch.logtofile, "Log in Datei '/home/root/logs'"))
 
 		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {
 			'cancel': self.keyCancel,
 			'red': self.keyCancel,
 			'green': self.keySave
 		}, -2)
-		ConfigListScreen.__init__(self, list, on_change=self.UpdateComponents)
+		ConfigListScreen.__init__(self, clist, on_change=self.UpdateComponents)
 		self.onLayoutFinish.append(self.UpdateComponents)
 
 	def UpdateComponents(self):
