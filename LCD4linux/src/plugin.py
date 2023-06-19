@@ -2673,22 +2673,27 @@ def virtBRI(LCD):
 
 
 def SensorRead(dat, isTemp=False):
-	line = ""
 	T = 0
 	if isfile(dat) == True:
-		line = open(dat).readline().strip()
+		lines = ""
 		i = 0
-		while len(line) < 1 and i < 10:
+		with open(dat) as f:
 			L4log("Sensor-Wait")
-			i += 1
-			sleep(0.01)
-			line = open(dat).readline().strip()
-		if line.find("temperature") >= 0:
-			line = line[line.find("temperature"):]
-		T = float("0" + sub(r"[^0-9^.]", "", line))
+			while i < 10:
+				i += 1
+				sleep(0.01)
+				curr = f.readline().strip()
+				if len(curr) > 0:
+					lines += "%s\n" % curr
+				else:
+					break
+		if lines.find("temperature") >= 0:
+			lines = lines[lines.find("temperature"):]
+		hisitemp = findall(r"temperature\s*=\s*(\d+)", lines)
+		T = float(hisitemp[0]) if hisitemp else float("0" + sub(r"[^0-9^.]", "", lines))
 		if isTemp and T > 1000.:
 			T /= 1000.
-	return T
+	return round(T)
 
 
 def GetTempSensor():
@@ -4438,66 +4443,63 @@ def getDpfDevice():
 	global SamsungDevice3
 	if USBok == False:
 		return
-	if LCD4linux.LCDType1.value[0] == "1":
-		if SamsungDevice is None:
-			L4log("get DPF Device...")
+	if LCD4linux.LCDType1.value[0] == "1" and SamsungDevice is None:
+		L4log("get DPF Device...")
+		if find_dev(1, 0x1908, 0x0102) == True:
+			try:
+				L4log("open DPF Device0...")
+				SamsungDevice = dpf.open("usb0")
+			except Exception:
+				L4log("open Error DPF1 Device0")
+				SamsungDevice = None
+		else:
+			L4log("DPF1 Device0 not found")
+	if LCD4linux.LCDType2.value[0] == "1" and SamsungDevice2 is None:
+		L4log("get DPF2 Device...")
+		Anz = 2 if LCD4linux.LCDType1.value[0] == LCD4linux.LCDType2.value[0] else 1
+		if Anz == 2:
+			if find_dev(2, 0x1908, 0x0102) == True:
+				try:
+					L4log("open DPF2 Device1...")
+					SamsungDevice2 = dpf.open("usb1")
+				except Exception:
+					L4log("open Error DPF2 Device1")
+					SamsungDevice2 = None
+			else:
+				L4log("DPF2 Device1 not found")
+		else:
 			if find_dev(1, 0x1908, 0x0102) == True:
 				try:
-					L4log("open DPF Device0...")
-					SamsungDevice = dpf.open("usb0")
+					L4log("open DPF2 Device0...")
+					SamsungDevice2 = dpf.open("usb0")
 				except Exception:
-					L4log("open Error DPF1 Device0")
-					SamsungDevice = None
+					L4log("open Error DPF2 Device0")
+					SamsungDevice2 = None
 			else:
-				L4log("DPF1 Device0 not found")
-	if LCD4linux.LCDType2.value[0] == "1":
-		if SamsungDevice2 is None:
-			L4log("get DPF2 Device...")
-			Anz = 2 if LCD4linux.LCDType1.value[0] == LCD4linux.LCDType2.value[0] else 1
-			if Anz == 2:
-				if find_dev(2, 0x1908, 0x0102) == True:
-					try:
-						L4log("open DPF2 Device1...")
-						SamsungDevice2 = dpf.open("usb1")
-					except Exception:
-						L4log("open Error DPF2 Device1")
-						SamsungDevice2 = None
-				else:
-					L4log("DPF2 Device1 not found")
+				L4log("DPF2 Device0 not found")
+	if LCD4linux.LCDType3.value[0] == "1" and SamsungDevice3 is None:
+		L4log("get DPF3 Device...")
+		Anz = 2 if LCD4linux.LCDType1.value[0] == LCD4linux.LCDType3.value[0] else 1
+		if Anz == 2:
+			if find_dev(2, 0x1908, 0x0102) == True:
+				try:
+					L4log("open DPF3 Device1...")
+					SamsungDevice3 = dpf.open("usb1")
+				except Exception:
+					L4log("open Error DPF3 Device1")
+					SamsungDevice3 = None
 			else:
-				if find_dev(1, 0x1908, 0x0102) == True:
-					try:
-						L4log("open DPF2 Device0...")
-						SamsungDevice2 = dpf.open("usb0")
-					except Exception:
-						L4log("open Error DPF2 Device0")
-						SamsungDevice2 = None
-				else:
-					L4log("DPF2 Device0 not found")
-	if LCD4linux.LCDType3.value[0] == "1":
-		if SamsungDevice3 is None:
-			L4log("get DPF3 Device...")
-			Anz = 2 if LCD4linux.LCDType1.value[0] == LCD4linux.LCDType3.value[0] else 1
-			if Anz == 2:
-				if find_dev(2, 0x1908, 0x0102) == True:
-					try:
-						L4log("open DPF3 Device1...")
-						SamsungDevice3 = dpf.open("usb1")
-					except Exception:
-						L4log("open Error DPF3 Device1")
-						SamsungDevice3 = None
-				else:
-					L4log("DPF2 Device1 not found")
+				L4log("DPF2 Device1 not found")
+		else:
+			if find_dev(1, 0x1908, 0x0102) == True:
+				try:
+					L4log("open DPF3 Device0...")
+					SamsungDevice3 = dpf.open("usb0")
+				except Exception:
+					L4log("open Error DPF3 Device0")
+					SamsungDevice3 = None
 			else:
-				if find_dev(1, 0x1908, 0x0102) == True:
-					try:
-						L4log("open DPF3 Device0...")
-						SamsungDevice3 = dpf.open("usb0")
-					except Exception:
-						L4log("open Error DPF3 Device0")
-						SamsungDevice3 = None
-				else:
-					L4log("DPF3 Device0 not found")
+				L4log("DPF3 Device0 not found")
 
 
 def DpfCheckSerial():
@@ -4545,10 +4547,9 @@ def FritzCallLCD4Linux(event, Date, number, caller, phone):
 	global FritzTime
 	if (str(LCD4linux.Fritz.value) != "0" or str(LCD4linux.MPFritz.value) != "0" or str(LCD4linux.StandbyFritz.value) != "0"):
 		L4log("FritzCall %s" % [event, Date, number, caller, phone])
-		if len(FritzList) > 0:
-			if Date == FritzList[-1][1]:
-				L4log("FritzCall ignore")
-				return
+		if len(FritzList) > 0 and Date == FritzList[-1][1]:
+			L4log("FritzCall ignore")
+			return
 		rmFile(PICfritz)
 		FritzList.append([event, Date, number.replace("#", ""), caller, phone])
 		FritzTime = int(LCD4linux.FritzTime.value) + 2
@@ -4723,7 +4724,6 @@ def InitWebIF():
 		if i < 20:
 			L4log("WebIf-Wait %d s" % int((20 - i) / 2))
 			sleep(5)
-#		Holger
 		from .WebConfigSite import LCD4linuxConfigweb
 		from .WebSite import LCD4linuxweb, LCD4linuxwebView
 		L4log("Child to WebIf...")
