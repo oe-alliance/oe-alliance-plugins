@@ -311,7 +311,6 @@ class TVSBaseScreen(TVSAllScreen):
 				for x in simulTimerList:
 					if x.setAutoincreaseEnd(entry):
 						self.session.nav.RecordTimer.timeChanged(x)
-
 				simulTimerList = self.session.nav.RecordTimer.record(entry)
 				if simulTimerList:
 					self.session.openWithCallback(self.finishSanityCorrection, TimerSanityConflict, simulTimerList)
@@ -501,12 +500,8 @@ class TVSBaseScreen(TVSAllScreen):
 
 	def choiceTimer(self, choice):
 		choice = choice and choice[1]
-		if choice == 'autotimer':
-			self.autotimer = True
-			self.red()
-		else:
-			self.autotimer = False
-			self.red()
+		self.autotimer = True if choice == 'autotimer' else False
+		self.red()
 
 	def finishSanityCorrection(self, answer):
 		self.finishedTimer(answer)
@@ -2210,7 +2205,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 			link = "%s/tv-programm/sendungen/abends.html" % self.baseurl
 		else:
 			link = "%s/tv-programm/sendungen/fernsehprogramm-nachts.html" % self.baseurl
-		callInThread(self.downloadFull, link, self.makeTVJetztView)
+		callInThread(self.getPage, link, self.makeTVJetztView)
 
 	def showProgrammPage(self):
 		self['CHANNELkey'].hide()
@@ -5500,6 +5495,9 @@ class TVSHeuteView(TVSBaseScreen):
 		self['INFOtext'].setText('Tageszeit +/-')
 		self['MENUtext'].setText('Senderliste')
 		self.ready = True
+		self['editorial'].hide()
+		self['ranking'].hide()
+		self.hideRatingInfos()
 
 	def makePostviewPage(self):
 		for i in range(6):
@@ -5767,7 +5765,7 @@ class TVSHeuteView(TVSBaseScreen):
 
 	def numberEntered(self, number):
 		if self.current != 'postview' and self.ready and not self.search:
-			if number is None or number != 0:
+			if number is not None or number != 0:
 				if number >= self.maxpages:
 					number = self.maxpages
 				self.count = number
