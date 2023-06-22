@@ -1,8 +1,10 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*-
+# PYTHON IMPORTS
+from os.path import join, isfile
 from six import ensure_str
 from xml.etree.ElementTree import fromstring, tostring, parse
-from os.path import join, isfile
+
+# ENIGMA IMPORTS
 from enigma import eListboxPythonMultiContent, gFont, getDesktop
 from Components.config import config
 from Components.ConditionalWidget import BlinkingWidget
@@ -59,7 +61,6 @@ class channelDB():
 
 
 class serviceDB():
-
 	def __init__(self, servicefile):
 		self.servicefile = servicefile
 		self.d = dict()
