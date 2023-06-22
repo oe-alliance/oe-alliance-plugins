@@ -276,7 +276,7 @@ def transCHANNEL(data, separate=False):
 		sref = search(" \d+:\d+:\w+:\w+:\w+:\w+:\w+:\d+:\w+:\w+:.*", item)
 		new += "%s\t\n" % item.lower() if sref is None else "%s\t%s\n" % (item[:sref.start(0)].strip().lower(), sref.group(0))
 	for pattern, shortcut in mapping.items():  # alle Sendernamen austauschen
-		if search(r"%s" % pattern, new):
+		if search(pattern, new):
 			new = new.replace(data.split("\t")[0].lower(), shortcut)
 	if separate:
 		supported = ''
