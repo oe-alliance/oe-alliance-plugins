@@ -60,7 +60,6 @@ from textwrap import TextWrapper, wrap
 from threading import Thread
 from time import strftime, strptime, localtime, mktime, time, sleep, timezone, altzone, daylight, gmtime
 from traceback import format_exc, print_stack
-from twisted.web import static
 from twisted.internet.reactor import callInThread
 from unicodedata import normalize
 from usb import core
@@ -88,7 +87,6 @@ from Components.Pixmap import Pixmap
 from Components.Renderer.Picon import getPiconName
 from Components.SystemInfo import SystemInfo
 from Components.Sources.StaticText import StaticText
-from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
 from Plugins.Plugin import PluginDescriptor
 from Screens import Standby
 from Screens.InfoBar import InfoBar
@@ -4724,8 +4722,10 @@ def InitWebIF():
 		if i < 20:
 			L4log("WebIf-Wait %d s" % int((20 - i) / 2))
 			sleep(5)
-		from .WebConfigSite import LCD4linuxConfigweb
+		from Plugins.Extensions.WebInterface.WebChilds.Toplevel import addExternalChild
+		from twisted.web import static
 		from .WebSite import LCD4linuxweb, LCD4linuxwebView
+		from .WebConfigSite import LCD4linuxConfigweb
 		L4log("Child to WebIf...")
 		root = static.File(ensure_binary("%slcd4linux" % TMP))
 		root.putChild(b"", LCD4linuxweb())
