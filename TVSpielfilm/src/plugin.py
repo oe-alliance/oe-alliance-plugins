@@ -63,6 +63,7 @@ ALPHA = '/proc/stb/video/alpha' if isfile('/proc/stb/video/alpha') else None
 SERVICEFILE = join(PLUGINPATH, 'db/service.references')
 DUPESFILE = join(PLUGINPATH, 'db/dupes.references')
 TIMERFILE = join(PLUGINPATH, 'db/timer.db')
+LOCALHTML = '/tmp/tvspielfilm.html'
 
 config.plugins.tvspielfilm = ConfigSubsection()
 if DESKTOP_WIDTH > 1280:
@@ -297,7 +298,7 @@ class TVSBaseScreen(TVSAllScreen):
 		self.pics = []
 		for i in range(6):
 			self.pics.append('/tmp/tvspielfilm%s.jpg' % i)
-		self.localhtml = '/tmp/tvspielfilm.html'
+		self.localhtml = LOCALHTML
 		self.localhtml2 = '/tmp/tvspielfilm2.html'
 		self.tagestipp = False
 		self.finishedTimerMode = 0
@@ -2339,18 +2340,18 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self.eventview = eventview
 		self.tagestipp = tagestipp
 		self.service_db = serviceDB(SERVICEFILE)
-		self.localhtml = '/tmp/tvspielfilm.html'
+		self.localhtml = LOCALHTML
 		channel = []
+		self.picon = False
+		self.zapflag = False
+		self.primetime = False
 		if not self.tagestipp:
 			channel = findall(r',(.*?).html', link)
 			service = channel[0].lower()
 			self.sref = self.service_db.lookup(service)
-			if self.sref == 'nope':
-				self.zapflag = False
-				self.picon = False
-			else:
+			if self.sref != 'nope':
+				self.picon = True
 				self.zapflag = True
-		self.primetime = False
 		self.finishedTimerMode = 1
 		if not self.eventview:
 			self._commonInit()
@@ -4626,10 +4627,6 @@ class TVSgetNumber(Screen):
 		self.skin = readSkin("TVSgetNumber")
 		Screen.__init__(self, session)
 		self.field = str(number)
-		self['release'] = Label(RELEASE)
-		self['waiting'] = BlinkingLabel('Bitte warten...')
-		self['waiting'].startBlinking()
-		self['waiting'].show()
 		self['number'] = Label(self.field)
 		self['actions'] = NumberActionMap(['SetupActions'], {'cancel': self.quit,
 															 'ok': self.keyOK,
@@ -4655,7 +4652,6 @@ class TVSgetNumber(Screen):
 			self.keyOK()
 
 	def keyOK(self):
-		self['waiting'].stopBlinking()
 		self.Timer.stop()
 		self.close(int(self['number'].getText()))
 
@@ -4669,7 +4665,7 @@ class TVSgotoPageMenu(TVSAllScreen):
 		global HIDEFLAG
 		self.skin = readSkin("TVSgotoPageMenu")
 		TVSAllScreen.__init__(self, session)
-		self.localhtml = '/tmp/tvspielfilm.html'
+		self.localhtml = LOCALHTML
 		HIDEFLAG = True
 		self.index = count - 1
 		self.maxpages = maxpages
@@ -4813,7 +4809,7 @@ class TVSTipps(TVSAllScreen):
 		self.skin = applySkinVars(skin, self.dict)
 		TVSAllScreen.__init__(self, session)
 		self.baseurl = 'http://www.tvspielfilm.de'
-		self.localhtml = '/tmp/tvspielfilm.html'
+		self.localhtml = LOCALHTML
 		self.count = 0
 		self.ready = False
 		HIDEFLAG = True
@@ -5104,7 +5100,7 @@ class TVSHeuteView(TVSBaseScreen):
 		self.oldindex = 0
 		self.oldsearchindex = 1
 		self.finishedTimerMode = 2
-		self.localhtml = '/tmp/tvspielfilm.html'
+		self.localhtml = LOCALHTML
 		self['release'] = Label(RELEASE)
 		self['waiting'] = BlinkingLabel('Bitte warten...')
 		self['ready'] = Label("OK")
