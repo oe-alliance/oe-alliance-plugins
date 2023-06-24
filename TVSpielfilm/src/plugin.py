@@ -230,7 +230,6 @@ class TVSAllScreen(Screen):
 			self.session.open(MessageBox, 'Download Fehler:\n%s' % output.getErrorMessage(), MessageBox.TYPE_ERROR)
 		except AttributeError:
 			self.session.open(MessageBox, 'Download Fehler:\n%s' % output, MessageBox.TYPE_ERROR)
-		self.close()
 
 	def hideScreen(self):
 		global HIDEFLAG
@@ -4524,10 +4523,10 @@ class TVSmakeServiceFile(Screen):
 			services = slist.getServicesAsList(format='SN')
 			data = ''
 			for service in services:
-				sref = service[0].split('http')[0].replace("4097:", "1:") if "http" in service[0].lower() else service[0]  # .replace(":21:", ":C00000:") entfernt
+				sref = service[0].split('http')[0].replace("4097:", "1:") if "http" in service[0].lower() else service[0]
 				data += '%s %s\n' % (service[1], sref)
 				self.fdata += '%s\n' % '{0:<40} {1:<0}'.format(service[1], sref)
-			supported, unsupported = transCHANNEL(data, separate=True)
+			supported, unsupported = transCHANNEL(data)
 			newfound = 0
 			for line in supported.split("\n"):
 				channel = line[: line.find(' ')].strip()
@@ -4591,7 +4590,7 @@ class TVSmakeServiceFile(Screen):
 			self.Bouquetlog('%i gefundene Sender aus den Bouquets (inklusive Doppelte):\n%s\n' % (len(self.fdata.split("\n")), '-' * 78))
 			self.Bouquetlog(self.fdata)
 			self.Bouquetlog('%s\ndavon %i unterschiedliche TV Spielfilm Sender (ohne Doppelte)\n' % ('-' * 78, imported + unsupported))
-			self.Bouquetlog('\n%i importierte Sender als Küzel/Piconname (ohne Doppelte):\n%s\n' % (imported, '-' * 78))
+			self.Bouquetlog('\n%i importierte TV Spielfilm Sender als Küzel/Piconname (ohne Doppelte):\n%s\n' % (imported, '-' * 78))
 			self.Bouquetlog(self.imported)
 			self.Bouquetlog('\n%i nicht unterstützte TV Spielfilm Sender als Küzel/Piconname (ohne Doppelte):\n%s\n' % (unsupported, '-' * 78))
 			self.Bouquetlog(self.unsupported)
@@ -5293,7 +5292,7 @@ class TVSHeuteView(TVSBaseScreen):
 		if sender:
 			for i in range(6):
 				if i < self.spalten:
-					self.srefs[i].append(serviceDB(SERVICEFILE).lookup(transCHANNEL(sender[i])))
+					self.srefs[i].append(serviceDB(SERVICEFILE).lookup(transCHANNEL(sender[i])[0]))  # [0] = supported services
 					self.srefs[i].append(sender[i])
 					self['sender%s' % i].setText(sender[i])
 					self['sender%s' % i].show()
@@ -5432,7 +5431,7 @@ class TVSHeuteView(TVSBaseScreen):
 					timer = "%s:::%s:::%s" % (datum, x, self.srefs[midx][0])
 					boxtimers = ''
 					for item in self.timer:
-						boxtimers += '%s\n' % item   # [:21] + transCHANNEL(ServiceReference(eServiceReference(item[21:].strip())).getServiceName())
+						boxtimers += '%s\n' % item   # [:21] + transCHANNEL(ServiceReference(eServiceReference(item[21:].strip())).getServiceName())[0] # [0] = supported services
 					if timer in boxtimers:
 						self.rec = True
 						png = '%srec.png' % ICONPATH
