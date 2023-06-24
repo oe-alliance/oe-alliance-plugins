@@ -14,7 +14,7 @@ def shortenChannel(text):
 	return text.rstrip()
 
 
-def transCHANNEL(data, separate=False):
+def transCHANNEL(data):
 	mapping = {r"das erste.*?": "ard",
 			r"zdf_neo.*?": "2neo",
 			r"zdfinfo.*?": "zinfo",
@@ -136,7 +136,7 @@ def transCHANNEL(data, separate=False):
 			r"bon.*?gusto.*?": "gusto",
 			r"servus.*?": "servu",
 			r"one.*?": "fes",
-			r"ard-alpha.*?": "alpha",
+			r"ard.*?alpha.*?": "alpha",
 			r"srf1.*?": "sf1",
 			r"srf.*?": "sf2",
 			r"srf2.*?": "sf2",
@@ -269,24 +269,21 @@ def transCHANNEL(data, separate=False):
 			r"qvc.*?": "qvc",
 			r"health.*?": "health"
 			}
-	new = ''
-	data = data.replace('Pro7', 'ProSieben').replace("ARD alpha", "ARD-alpha").replace("Nat Geo", "NatGeo")
-	for item in data.strip().split("\n"):  # Trenner '\t' und Return '\n' geeignet einfügen
-		sref = search(" \d+:\d+:\w+:\w+:\w+:\w+:\w+:\d+:\w+:\w+:.*", item)
-		new += "%s\t\n" % item.lower() if sref is None else "%s\t%s\n" % (item[:sref.start(0)].strip().lower(), sref.group(0))
-	for pattern, shortcut in mapping.items():  # alle Sendernamen austauschen
-		new = "%s\n" % sub(r"%s\t" % pattern, "%s\t" % shortcut, new).strip()
-	if separate:
-		supported = ''
-		unsupported = ''
-		for item in new.rstrip().split("\n"):  # separieren
-			if item.split("\t")[0] in list(mapping.values()):
-				supported += "%s\n" % item.strip()
-			else:
-				unsupported += "%s\n" % item.strip()
-		return supported.replace("\t", "").rstrip(), unsupported.replace("\t", "").rstrip()
-	else:
-		return new.replace("\t", "").rstrip()
+	supported = ''
+	unsupported = ''
+	for item in data.strip().split("\n"):
+		sref = search(r" \d+:\d+:\w+:\w+:\w+:\w+:\w+:\d+:\w+:\w+:.*", item)
+		name = item[:sref.start(0)].strip().lower() if sref else item.lower()
+		sref = item[sref.start(0):].strip() if sref else ""
+		for pattern, shortcut in mapping.items():  # Sendernamen in Kürzel austauschen
+			if search(pattern, name):
+				name = name.replace(name, shortcut)
+				break
+		if name in list(mapping.values()):
+			supported += "%s %s\n" % (name, sref)
+		else:
+			unsupported += "%s %s\n" % (name, sref)
+	return supported.rstrip(), unsupported.rstrip()
 
 
 def searchOneValue(regex, text, fallback, flags=None):
@@ -515,21 +512,24 @@ def testparseInfo(output):
 
 
 def test():
-#	from twisted.web.client import getPage
-#	link = b'https://www.tvspielfilm.de/tv-tipps/'
-#	link = b'https://www.tvspielfilm.de/tv-programm/sendungen/jetzt.html'
-#    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&date=2021-05-06&tips=0&time=day&channel=3SAT'
-#    link = b'https://www.tvspielfilm.de/suche/tvs-suche,,ApplicationSearch.html?tab=TV-Sendungen&ext=1&q=&cat%5B0%5D=SP&genreSP=Abenteuer&time=day&date=&channel='
-#    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/?page=1&order=time&date=2021-05-07&tips=0&time=day&channel=ARD'
-#    link = b'https://www.tvspielfilm.de/tv-programm/sendungen/abends.html'
-#	link = b'https://www.tvspielfilm.de/tv-programm/sendung/wasserball,60f06a338189652e9978032c.html'
-#    getPage(link).addCallback(savefile).addErrback(saveerr)
-#    reactor.run()
-	output = open('tmp.html', 'rb').read()
-#    testtvsuche(output)
-#    testparseNow(output)
-#    testparseNow(output)
-	testparseInfo(output)
+	datalong = """Das Erste HD 1:0:19:283D:41B:1:FFFF0000:0:0:0:
+ZDF HD 1:0:19:2B66:437:1:FFFF0000:0:0:0:
+SAT.1 HD 1:0:19:C362:2723:F001:FFFF0000:0:0:0:
+SAT.1 Gold HD 1:0:19:C39A:2724:F001:FFFF0000:0:0:0:
+ServusTV HD 1:0:19:C365:2716:F001:FFFF0000:0:0:0:
+unbekannt hd 1:0:19:CBCB:432:1:FFFF0000:0:0:0:"""
+
+	datashort = """Das Erste
+ZDF HD
+SAT.1 HD
+SAT.1 Gold HD
+ServusTV HD
+unbekannt hd"""
+
+	results = transCHANNEL(datalong)
+	print(results[0])  # [0] = supported services
+	print("-----------------------------------------------")
+	print(results[1])  # [1] = unsupported services
 
 
 if __name__ == '__main__':
