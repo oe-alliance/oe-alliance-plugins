@@ -1,7 +1,12 @@
 <setupxml>
-	<setup key="TMDB" title="TMDB Settings">
+	<setup key="TMDB" showOpenWebIF="1" title="TMDB Settings">
 		<item level="0" text="Cover resolution:" description="Cover resolution:">config.plugins.tmdb.themoviedb_coversize</item>
 		<item level="0" text="Language:" description="Language:">config.plugins.tmdb.lang</item>
 		<item level="0" text="Show details if single result:" description="Show details if single result:">config.plugins.tmdb.firsthit</item>
+		<item level="0" text="Override Yellow button for TMDb info in EPGs:" description="Override Yellow button for TMDb info in EPGs:">config.plugins.tmdb.keyyellow</item>
+		<item level="0" text="Cover Resolution:" description="Cover Resolution:">config.plugins.tmdb.coverQuality</item>
+		<item level="0" text="Backdrop Resolution:" description="Backdrop Resolution:">config.plugins.tmdb.backdropQuality</item>
+		<item level="0" text="Check SSL certificate:" description="Check SSL certificate:">config.plugins.tmdb.firsthit</item>
+		<item level="0" text="TMDb API Key:" description="TMDb API Key:">config.plugins.tmdb.apiKey</item>
 	</setup>
 </setupxml>

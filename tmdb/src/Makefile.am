@@ -1,4 +1,4 @@
-SUBDIRS = pic tmdbsimple
+SUBDIRS = pic
 
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/tmdb
 
