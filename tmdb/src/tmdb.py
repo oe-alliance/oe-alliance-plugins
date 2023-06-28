@@ -39,7 +39,13 @@ from Tools.BoundFunction import boundFunction
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, loadPNG, RT_WRAP, eConsoleAppContainer, eServiceCenter, eServiceReference, getDesktop, loadPic, loadJPG, RT_VALIGN_CENTER, gPixmapPtr, ePicLoad, eTimer
-import sys, os, re, shutil, json, string, base64
+import sys
+import os
+import re
+import shutil
+import json
+import string
+import base64
 import skin
 from twisted.web.client import downloadPage
 from twisted.internet import reactor
