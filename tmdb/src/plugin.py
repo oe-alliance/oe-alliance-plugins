@@ -96,5 +96,5 @@ def Plugins(**kwargs):
 	return [
 			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False),
 			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),
-			PluginDescriptor(name="TMDb" ,description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
+			PluginDescriptor(name="TMDb",description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
 			]

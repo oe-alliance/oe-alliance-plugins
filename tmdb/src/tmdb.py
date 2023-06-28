@@ -80,9 +80,9 @@ try:
 except:
 	pass
 	
-def debug(s, flag="a" ): #pass
-	f=open( "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/debug.txt", flag)
-	f.write( str(s)+'\n')
+def debug(s, flag="a"): #pass
+	f=open("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/debug.txt", flag)
+	f.write(str(s)+'\n')
 	f.close()
 
 def asBinary(s):
@@ -130,7 +130,7 @@ class createList(GUIComponent, object):
 		if self.mode == 0:
 			width = self.l.getItemSize().width()
 			(title, coverUrl, media, id, backdropUrl) = entry
-			res = [ None ]
+			res = [None]
 			x,y,w,h = skin.parameters.get("TMDbListName", (5,1,1920,40))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(title)))
 			return res
@@ -184,8 +184,8 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 		self.skinName = ["tmdbConfigScreen", "Setup"]
 		self.setup_title = _("Setup")
 
-		self.onChangedEntry = [ ]
-		self.list = [ ]
+		self.onChangedEntry = []
+		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		
 		self["actions"] = ActionMap(["TMDbActions"],
@@ -274,7 +274,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		tmdb.API_KEY = base64.b64decode('ZDQyZTZiODIwYTE1NDFjYzY5Y2U3ODk2NzFmZWJhMzk=')
 		if not config.plugins.tmdb.apiKey.value == "intern":
 			tmdb.API_KEY = config.plugins.tmdb.apiKey.value
-			print ("[TMDb] API Key User: " + str(tmdb.API_KEY))
+			print("[TMDb] API Key User: " + str(tmdb.API_KEY))
 		self.cert = config.plugins.tmdb.cert.value
 		self.mode = mode
 		self.saveFilename = ""
@@ -309,7 +309,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			self.text = service
 			self.text = cleanFile(service)
 		
-		print ("[TMDb] Search for" + str(self.text))
+		print("[TMDb] Search for" + str(self.text))
 		
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self,"TMDbActions",
@@ -359,7 +359,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			else:  
 				start_new_thread(self.tmdbSearch, ())
 		else:
-			print ("[TMDb] no movie found.")
+			print("[TMDb] no movie found.")
 			self['searchinfo'].setText(_("TMDb: ") + _("No results for %s") % self.text)
 
 	def menu(self):
@@ -502,13 +502,13 @@ class tmdbScreen(Screen, HelpableScreen):
 		if url_cover[-4:] == "None":
 			self.showCover(noCover)
 		else:
-			downloadPage( asBinary(url_cover), tempDir+id+".jpg", timeout=5).addCallback(self.gotData, tempDir+id+".jpg").addErrback(self.dataError)
+			downloadPage(asBinary(url_cover), tempDir+id+".jpg", timeout=5).addCallback(self.gotData, tempDir+id+".jpg").addErrback(self.dataError)
 
 	def gotData(self, data, coverSaved):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
-		print ("[TMDb] Error: %s" % error) 
+		print("[TMDb] Error: %s" % error) 
 			
 	def showCover(self, coverName):
 		if not fileExists(coverName):
@@ -610,7 +610,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			pass
 		else:
 			self.text = newTitle
-			print ("[TMDb] Manual search for: %s" % str(self.text))
+			print("[TMDb] Manual search for: %s" % str(self.text))
 			if noThread:
 				self.tmdbSearch()
 			else: 
@@ -790,7 +790,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		if self.saveFilename == "":
 			self['key_blue'].setText(" ")
 		# TMDb read
-		print ("[TMDb] Selected: %s" % self.mname) 
+		print("[TMDb] Selected: %s" % self.mname) 
 		self.showCover(self.coverName)
 		self.getBackdrop(self.url_backdrop)
 		#self.getData()
@@ -860,7 +860,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
-		print ("[TMDb] ID: " + str(self.id) ) 
+		print("[TMDb] ID: " + str(self.id)) 
 				
 		try:
 			if self.movie:
@@ -1095,7 +1095,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self.showFSK(fsk)
 			
 	def dataError(self, error):
-		print ("[TMDb] Error: %s" % error) 
+		print("[TMDb] Error: %s" % error) 
 
 	def showCover(self, coverName):
 		if not fileExists(coverName):
@@ -1120,7 +1120,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		if fileExists(backdropSaved):
 			os.remove(backdropSaved)
 		if url_backdrop[-4:] == "None":
-			print ("[TMDb] No backdrop found") 
+			print("[TMDb] No backdrop found") 
 			pass
 		else:
 			#print"###", url_backdrop
@@ -1188,9 +1188,9 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			
 				shutil.copy(self.coverName, saveFile + ".jpg")
 				self.session.open(MessageBox, _("Cover saved!"), type=1, timeout=3)
-				print ("[TMDb] Cover %s.jpg created" % saveFile) 
+				print("[TMDb] Cover %s.jpg created" % saveFile) 
 			except:
-				print ("[TMDb] Error saving cover!") 
+				print("[TMDb] Error saving cover!") 
 
 	def saveBackdrop(self):
 		saveFile = cleanEnd(self.saveFilename)
@@ -1206,9 +1206,9 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			
 				shutil.copy(backdropName, saveFile + ".bdp.jpg")
 				self.session.open(MessageBox, _("Backdrop saved!"), type=1, timeout=3)
-				print ("[TMDb] Backdrop %s.bdp.jpg created" % saveFile) 
+				print("[TMDb] Backdrop %s.bdp.jpg created" % saveFile) 
 			except:
-				print ("[TMDb] Error saving backdrop!") 
+				print("[TMDb] Error saving backdrop!") 
 			
 	def createTXT(self):
 		saveFile = cleanEnd(self.saveFilename)
@@ -1217,19 +1217,19 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				wFile = open(saveFile+".txt","w") 
 				wFile.write(self.text)
 				wFile.close()
-				print ("[TMDb] %s.txt created" % saveFile) 
+				print("[TMDb] %s.txt created" % saveFile) 
 				self.session.open(MessageBox, _("Movie description saved!"), type=1, timeout=3)
 			except:
-				print ("[TMDb] Error saving TXT file!") 
+				print("[TMDb] Error saving TXT file!") 
 			
 	def deleteEIT(self):
 		eitFile = cleanEnd(self.saveFilename)+".eit"
 		try:
 			os.remove(eitFile)
-			print ("[TMDb] %s deleted" % eitFile) 
+			print("[TMDb] %s deleted" % eitFile) 
 			self.session.open(MessageBox, _("EIT file deleted!"), type=1, timeout=3)
 		except:
-			print ("[TMDb] Error deleting EIT file!") 
+			print("[TMDb] Error deleting EIT file!") 
 
 class tmdbScreenPeople(Screen, HelpableScreen):
 	if getDesktop(0).size().width() >= 1920:
@@ -1315,7 +1315,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		
 	def onFinish(self):
 		# TMDb read
-		print ("[TMDb] Selected: %s" % self.mname) 
+		print("[TMDb] Selected: %s" % self.mname) 
 		self['searchinfo'].setText("%s" % self.mname)	
 		self.showBackdrop()
 		if noThread:
@@ -1394,7 +1394,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
-		print ("[TMDb] Error: %s" % error) 
+		print("[TMDb] Error: %s" % error) 
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
@@ -1557,7 +1557,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
-		print ("[TMDb] ID: ", self.id) 
+		print("[TMDb] ID: ", self.id) 
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
 		
 		try:	
@@ -1767,7 +1767,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		
 	def onFinish(self):
 		# TMDb read
-		print ("[TMDb] Selected: %s" % self.mname) 
+		print("[TMDb] Selected: %s" % self.mname) 
 		self['searchinfo'].setText("%s" % self.mname)	
 		self.showBackdrop()
 		if noThread: 
@@ -1784,7 +1784,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			# Seasons
 			json_data_seasons = tmdb.TV(self.id).info(language=self.lang)
 			for seasons in json_data_seasons['seasons']:
-				print ("[TMDb] Season: %s" % seasons['season_number']) 
+				print("[TMDb] Season: %s" % seasons['season_number']) 
 				id = str(seasons['id'])
 				season = seasons['season_number']
 				
@@ -1835,7 +1835,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
-		print ("[TMDb] Error: %s" % error) 
+		print("[TMDb] Error: %s" % error) 
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
