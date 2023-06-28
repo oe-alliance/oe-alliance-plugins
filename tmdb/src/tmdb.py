@@ -55,7 +55,7 @@ from PIL import Image
 
 noThread = sys.version_info[0] >= 3
 if noThread:
-	from twisted.internet.reactor import callInThread 
+	from twisted.internet.reactor import callInThread
 else:
 	from thread import start_new_thread
 
@@ -78,7 +78,7 @@ try:
 	os.mkdir(tempDir)
 except:
 	pass
-	
+
 
 def debug(s, flag="a"):  # pass
 	f = open("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/debug.txt", flag)
@@ -90,7 +90,7 @@ def asBinary(s):
 	try:
 		from six import ensure_binary
 		return (ensure_binary(s))
-	except: 
+	except:
 		return s
 
 
@@ -99,27 +99,27 @@ def cleanFile(text):
 				'AC3MD', 'AC3', 'AC3D', 'TS', 'DVDSCR', 'COMPLETE', 'INTERNAL', 'DTSD', 'XViD', 'DIVX', 'DUBBED', 'LINE.DUBBED', 'DD51', 'DVDR9', 'DVDR5', 'h264', 'AVC',
 				'WEBHDTVRiP', 'WEBHDRiP', 'WEBRiP', 'WEBHDTV', 'WebHD', 'HDTVRiP', 'HDRiP', 'HDTV', 'ITUNESHD', 'REPACK', 'SYNC']
 	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '').replace('.mp4', '')
-	
+
 	for word in cutlist:
 		text = re.sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)', '+', text, flags=re.I)
 	text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '').replace(" Director's Cut", "").replace(" director's cut", "").replace("[Uncut]", "").replace("Uncut", "")
 	text = " ".join(text.split())
-	
+
 	if re.search('[Ss][0-9]+[Ee][0-9]+', text):
 		text = re.sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+', '', text, flags=re.S | re.I)
 	text = re.sub(r'\(.*\)', '', text).rstrip()  # remove episode number from series, like "series name (234)"
-	
+
 	return text
-	
+
 
 def cleanEnd(text):
 	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '').replace('.mp4', '')
 	return text
-	
+
 
 class createList(GUIComponent, object):
 	GUI_WIDGET = eListbox
-	
+
 	def __init__(self, mode):
 		GUIComponent.__init__(self)
 		self.mode = mode
@@ -181,7 +181,7 @@ class createList(GUIComponent, object):
 	def down(self):
 		if self.instance is not None:
 			self.instance.moveSelection(self.instance.moveDown)
-		
+
 
 class tmdbConfigScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
@@ -192,7 +192,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 		self.onChangedEntry = []
 		self.list = []
 		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
-		
+
 		self["actions"] = ActionMap(["TMDbActions"],
 			{
 				"cancel": self.keyCancel,
@@ -205,7 +205,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 		self["key_red"] = StaticText(_("Cancel"))
 
 		self.list = []
-		self.createConfigList()	
+		self.createConfigList()
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -216,7 +216,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Cover and Backdrop resolution:"), config.plugins.tmdb.themoviedb_coversize))
 		self.list.append(getConfigListEntry(_("Language:"), config.plugins.tmdb.lang))
 		self.list.append(getConfigListEntry(_("Show details if single result:"), config.plugins.tmdb.firsthit))
-		self.list.append(getConfigListEntry(_("Overwrite key yellow for TMDb infos in EPGs:"), config.plugins.tmdb.keyyellow))			
+		self.list.append(getConfigListEntry(_("Overwrite key yellow for TMDb infos in EPGs:"), config.plugins.tmdb.keyyellow))
 		self.list.append(getConfigListEntry(_("Save Cover resolution:"), config.plugins.tmdb.coverQuality))
 		self.list.append(getConfigListEntry(_("Save Backdrop resolution:"), config.plugins.tmdb.backdropQuality))
 		self.list.append(getConfigListEntry(_("Check SSL certificate:"), config.plugins.tmdb.cert))
@@ -231,7 +231,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 	def keyOK(self):
 		for x in self["config"].list:
 			x[1].save()
-		configfile.save()			
+		configfile.save()
 		self.close()
 
 
@@ -245,7 +245,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/backdrop.jpg" position="0,0" size="1920,1080" zPosition="-5" scale="1" alphatest="blend" />
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/backdrop_dark.png" position="0,0" size="1920,1080" zPosition="-4" alphatest="blend" />
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/tmdb.png" position="1585,800" size="150,155" alphatest="blend" />
-				
+
 				<widget name="key_red" position="225,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_green" position="565,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_yellow" position="905,920" size="280,30" font="Regular; 25" transparent="1" />
@@ -293,7 +293,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.id = 1
 		if os.path.exists(tempDir) is False:
 			os.mkdir(tempDir)
-		
+
 		if self.mode == 1:
 			self.isDirectory = False
 			serviceHandler = eServiceCenter.getInstance()
@@ -314,9 +314,9 @@ class tmdbScreen(Screen, HelpableScreen):
 		else:
 			self.text = service
 			self.text = cleanFile(service)
-		
+
 		print("[TMDb] Search for" + str(self.text))
-		
+
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
@@ -325,7 +325,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				"up": (self.keyUp, _("Selection up")),
 				"down": (self.keyDown, _("Selection down")),
 				"nextBouquet": (self.chDown, _("Details down")),
-				"prevBouquet": (self.chUp, _("Details up")),				
+				"prevBouquet": (self.chUp, _("Details up")),
 				"left": (self.keyLeft, _("Page up")),
 				"right": (self.keyRight, _("Page down")),
 				"red": (self.cancel, _("Exit")),
@@ -334,19 +334,19 @@ class tmdbScreen(Screen, HelpableScreen):
 				"blue": (self.menu, _("more ...")),
 				"menu": (self.setup, _("Setup")),
 				"eventview": (self.searchString, _("Edit search"))
-			}, -1)		
-		
+			}, -1)
+
 		self['searchinfo'] = Label(_("TMDb: ") + _("Loading..."))
 		self['key_red'] = Label(_("Exit"))
 		self['key_green'] = Label(_("Details"))
 		self['key_yellow'] = Label(_("Edit search"))
 		self['key_blue'] = Label(_("more ..."))
 		self['list'] = createList(0)
-		
+
 		self['cover'] = Pixmap()
-		
+
 		self.onLayoutFinish.append(self.onFinish)
-		
+
 	def onFinish(self):
 		if not self.text == "":
 			#self.text = self.text.replace("- Director's Cut","").replace("- director's cut","")
@@ -360,9 +360,9 @@ class tmdbScreen(Screen, HelpableScreen):
 			#self.text="Navy CIS"
 			#self.text="Obi wan Kenobi"
 			self.timer = eTimer()
-			if noThread: 
+			if noThread:
 				self.tmdbSearch()
-			else:  
+			else:
 				start_new_thread(self.tmdbSearch, ())
 		else:
 			print("[TMDb] no movie found.")
@@ -376,7 +376,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			(_("Popular movies"), 3),
 			(_("Similar movies"), 4),
 			(_("Recommendations"), 5),
-			(_("Best rated movies"), 6)			
+			(_("Best rated movies"), 6)
 		]
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, list=options)
 
@@ -394,15 +394,15 @@ class tmdbScreen(Screen, HelpableScreen):
 				self.title = self['list'].getCurrent()[0]
 		except:
 			pass
-		if noThread: 
+		if noThread:
 			self.tmdbSearch()
-		else: 
+		else:
 			start_new_thread(self.tmdbSearch, ())
-			
+
 	def tmdbSearch(self):
 		self['searchinfo'].setText(_("TMDb: ") + _("Search for %s ...") % self.text)
 		self.lang = config.plugins.tmdb.lang.value
-		res = []	
+		res = []
 		self.count = 0
 		json_data = {}
 		try:
@@ -423,10 +423,10 @@ class tmdbScreen(Screen, HelpableScreen):
 				json_data = search.multi(query=self.text, language=self.lang)
 			#{u'total_results': 0, u'total_pages': 0, u'page': 1, u'results': []}
 			#{u'total_results': 0, u'total_pages': 1, u'page': 1, u'results': []}
-			#print"######\n", json_data			
-			
+			#print"######\n", json_data
+
 			self.totalpages = json_data['total_pages']
-			
+
 			for IDs in json_data['results']:
 				self.count += 1
 				media = ""
@@ -449,7 +449,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				try:
 					title = str(IDs['name'])
 				except:
-					pass			
+					pass
 				date = ""
 				try:
 					date = ", " + str(IDs['release_date'])[:4]
@@ -459,15 +459,15 @@ class tmdbScreen(Screen, HelpableScreen):
 					date = ", " + str(IDs['first_air_date'])[:4]
 				except:
 					pass
-					
+
 				if date == ", ":
 					date = ""
-				
+
 				if media == "movie":
 					mediasubst = _("Movie")
 				else:
 					mediasubst = _("Series")
-				
+
 				title = "%s (%s%s)" % (title, mediasubst, date)
 				coverPath = ""
 				try:
@@ -477,11 +477,11 @@ class tmdbScreen(Screen, HelpableScreen):
 				try:
 					backdropPath = str(IDs['backdrop_path'])
 				except:
-					pass					
-				
+					pass
+
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 				url_backdrop = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, backdropPath)
-				
+
 				if not id == "" or not title == "" or not media == "":
 					res.append(((title, url_cover, media, id, url_backdrop),))
 			self['list'].setList(res)
@@ -492,18 +492,18 @@ class tmdbScreen(Screen, HelpableScreen):
 			else:
 				self['searchinfo'].setText(_("TMDb: ") + _("Results for %s") % self.text)
 			self.getInfo()
-			self['list'].pageUp()			
+			self['list'].pageUp()
 		except:
 			self['searchinfo'].setText(_("TMDb: ") + _("Server does not respond!"))
 			if self.count == 1:
 				self['searchinfo'].setText(_("TMDb: ") + _("Results for %s") % self.text)
 			if json_data['total_results'] == 0:
 				self['searchinfo'].setText(_("TMDb: ") + _("No results for %s") % self.text)
-				
+
 	def getInfo(self):
 		url_cover = self['list'].getCurrent()[1]
 		id = self['list'].getCurrent()[3]
-		
+
 		if url_cover[-4:] == "None":
 			self.showCover(noCover)
 		else:
@@ -513,8 +513,8 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
-		print("[TMDb] Error: %s" % error) 
-			
+		print("[TMDb] Error: %s" % error)
+
 	def showCover(self, coverName):
 		if not fileExists(coverName):
 			coverName = noCover
@@ -531,7 +531,7 @@ class tmdbScreen(Screen, HelpableScreen):
 					self['cover'].instance.setPixmap(ptr)
 					self['cover'].show()
 			del self.picload
-		self.covername = coverName	
+		self.covername = coverName
 		# Only one result, launch details
 		if config.plugins.tmdb.firsthit.value:
 			if self.count == 1:
@@ -578,30 +578,30 @@ class tmdbScreen(Screen, HelpableScreen):
 			return
 		self['list'].up()
 		self.getInfo()
-		
+
 	def chDown(self):
 		if self.actcinema >= 1:
 			self.page += 1
 			if self.page > self.totalpages:
 				self.page = 1
-			if noThread: 
+			if noThread:
 				self.tmdbSearch()
-			else: 
+			else:
 				start_new_thread(self.tmdbSearch, ())
-	
+
 	def chUp(self):
 		if self.actcinema >= 1:
 			self.page -= 1
 			if self.page <= 0:
 				self.page = 1
-			if noThread: 
+			if noThread:
 				self.tmdbSearch()
-			else: 
+			else:
 				start_new_thread(self.tmdbSearch, ())
-			
+
 	def keyYellow(self):
 		return
-		
+
 	def setup(self):
 		self.session.open(tmdbConfigScreen)
 
@@ -617,7 +617,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			print("[TMDb] Manual search for: %s" % str(self.text))
 			if noThread:
 				self.tmdbSearch()
-			else: 
+			else:
 				start_new_thread(self.tmdbSearch, ())
 
 	def cancel(self):
@@ -626,7 +626,7 @@ class tmdbScreen(Screen, HelpableScreen):
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
-		return name		
+		return name
 
 	def delCover(self):
 		try:
@@ -651,7 +651,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				<ePixmap position="1025,45" size="100,100" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/star.png" transparent="1" alphatest="blend"/>
 				<widget name="fsk" position="0,0" size="0,0" zPosition="2" font="Regular;27" halign="center" transparent="1"/>
 				<widget name="fsklogo" position="1200,60" size="100,100" zPosition="2" alphatest="blend"/>
-				
+
 				<widget name="year_txt" position="1000,300" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="year" position="1130,300" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="country_txt" position="1000,330" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
@@ -668,9 +668,9 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				<widget name="genre" position="1130,480" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="studio_txt" position="1000,510" size="100,30" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="studio" position="1130,510" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="subtitle" position="0,0" size="0,0" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>			
+				<widget name="subtitle" position="0,0" size="0,0" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="description" position="0,0" size="0,0" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				
+
 				<widget name="key_red" position="225,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_green" position="565,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_yellow" position="905,920" size="280,30" font="Regular; 25" transparent="1" />
@@ -695,7 +695,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				<ePixmap position="665,45" size="100,100" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/star.png" transparent="1" alphatest="blend"/>
 				<widget name="fsk" position="0,0" size="0,0" zPosition="2" font="Regular;22" halign="center" transparent="1"/>
 				<widget name="fsklogo" position="805,60" size="100,100" zPosition="2" alphatest="blend"/>
-				
+
 				<widget name="year_txt" position="650,300" size="400,25" zPosition="2" font="Regular;22" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="year" position="780,300" size="400,25" zPosition="2" font="Regular;22" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="country_txt" position="650,330" size="400,25" zPosition="2" font="Regular;22" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
@@ -712,9 +712,9 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				<widget name="genre" position="780,480" size="400,25" zPosition="2" font="Regular;22" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="studio_txt" position="650,510" size="100,30" font="Regular; 22" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="studio" position="780,510" size="400,25" zPosition="2" font="Regular;22" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="subtitle" position="0,0" size="0,0" zPosition="2" font="Regular;22" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>			
+				<widget name="subtitle" position="0,0" size="0,0" zPosition="2" font="Regular;22" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="description" position="0,0" size="0,0" zPosition="2" font="Regular;22" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				
+
 				<widget name="key_red" position="100,570" size="260,25" font="Regular;20" transparent="1"/>
 				<widget name="key_green" position="395,570" size="260,25" font="Regular;20" transparent="1"/>
 				<widget name="key_yellow" position="690,570" size="260,25" font="Regular;20" transparent="1"/>
@@ -723,7 +723,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				<ePixmap position="365,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
 				<ePixmap position="660,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
 				<ePixmap position="955,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
-			</screen>"""	
+			</screen>"""
 
 	def __init__(self, session, mname, media, coverName, id, saveFilename, url_backdrop):
 		Screen.__init__(self, session)
@@ -753,8 +753,8 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				"yellow": (self.keyYellow, _("Seasons")),
 				"blue": (self.menu, _("more ...")),
 				"menu": (self.setup, _("Setup")),
-				"eventview": (self.menu, _("more ..."))				
-			}, -1)	
+				"eventview": (self.menu, _("more ..."))
+			}, -1)
 
 		self['searchinfo'] = Label(_("TMDb: ") + _("Loading..."))
 		self['genre'] = Label("-")
@@ -766,7 +766,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self['votes_brackets'] = Label("")
 		self['votes_txt'] = Label(_("Votes:"))
 		self['runtime'] = Label("-")
-		self['runtime_txt'] = Label(_("Runtime:"))		
+		self['runtime_txt'] = Label(_("Runtime:"))
 		self['fsk'] = Label("FSK: ?")
 		self['subtitle'] = Label("-")
 		self['year'] = Label("-")
@@ -786,24 +786,24 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
 		self['fsklogo'] = Pixmap()
-		
+
 		self.onLayoutFinish.append(self.onFinish)
-		
+
 	def onFinish(self):
 		if self.movie:
 			self['key_yellow'].setText(" ")
 		if self.saveFilename == "":
 			self['key_blue'].setText(" ")
 		# TMDb read
-		print("[TMDb] Selected: %s" % self.mname) 
+		print("[TMDb] Selected: %s" % self.mname)
 		self.showCover(self.coverName)
 		self.getBackdrop(self.url_backdrop)
 		#self.getData()
-		if noThread: 
+		if noThread:
 			self.tmdbSearch()
-		else: 
+		else:
 			start_new_thread(self.tmdbSearch, ())
-		
+
 	def menu(self):
 		if self.saveFilename == "":
 			pass
@@ -852,11 +852,11 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self.saveBackdrop()
 		else:
 			pass
-		
+
 	def keyLeft(self):
 		self['description'].pageUp()
 		self['fulldescription'].pageUp()
-	
+
 	def keyRight(self):
 		self['description'].pageDown()
 		self['fulldescription'].pageDown()
@@ -864,14 +864,14 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
-		print("[TMDb] ID: " + str(self.id)) 
-				
+		print("[TMDb] ID: " + str(self.id))
+
 		try:
 			if self.movie:
 				json_data = tmdb.Movies(self.id).info(language=self.lang)
 				#print json_data
 				if json_data['overview'] == "":
-					json_data = tmdb.Movies(self.id).info(language="en")			
+					json_data = tmdb.Movies(self.id).info(language="en")
 				json_data_cast = tmdb.Movies(self.id).credits(language=self.lang)
 				#print json_data_cast
 				json_data_fsk = tmdb.Movies(self.id).releases(language=self.lang)
@@ -891,7 +891,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		except:
 			self['searchinfo'].setText(_("TMDb: ") + _("No results found, or does not respond!"))
 			return
-		
+
 		## Year
 		year = ""
 		try:
@@ -899,7 +899,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['year'].setText("%s" % str(year))
 		except:
 			year = ""
-			
+
 		## Rating
 		vote_average = ""
 		try:
@@ -908,7 +908,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['rating'].setText("%.1f" % vote_average)
 		except:
 			vote_average = ""
-		
+
 		## Votes
 		vote_count = ""
 		try:
@@ -917,7 +917,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['votes_brackets'].setText("(%s)" % str(vote_count))
 		except:
 			vote_count = ""
-		
+
 		## Runtime
 		runtime = ""
 		try:
@@ -926,7 +926,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			runtime = ", " + str(runtime) + " min."
 		except:
 			runtime = "-"
-		
+
 		## Country
 		country_string = ""
 		try:
@@ -936,7 +936,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['country'].setText("%s" % str(country_string))
 		except:
 			country_string = ""
-			
+
 		## Genre"
 		genre_string = ""
 		try:
@@ -946,19 +946,19 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['genre'].setText("%s" % str(genre_string[:-2]))
 		except:
 			genre_string = ""
-		
+
 		## Subtitle
 		subtitle = ""
 		try:
 			subtitle = json_data['tagline']
 			if json_data['tagline'] == "":
 				subtitle = ""
-			else:	
+			else:
 				self['subtitle'].setText("%s" % str(subtitle))
 				subtitle = str(subtitle) + "\n"
 		except:
 			subtitle = ""
-			
+
 		## Cast
 		cast_string = ""
 		try:
@@ -966,7 +966,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				cast_string += cast['name'] + " (" + cast['character'] + ")\n"
 		except:
 			cast_string = ""
-			
+
 		## Crew
 		crew_string = ""
 		director = ""
@@ -974,7 +974,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		try:
 			for crew in json_data_cast['crew']:
 				crew_string += crew['name'] + " (" + crew['job'] + ")\n"
-				
+
 				if crew['job'] == "Director":
 					director += crew['name'] + ", "
 				if crew['job'] == "Screenplay" or crew['job'] == "Writer":
@@ -987,7 +987,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			crew_string = ""
 			director = ""
 			author = ""
-			
+
 		## Studio/Production Company
 		studio_string = ""
 		try:
@@ -1010,7 +1010,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				self['year'].setText("%s" % str(year))
 			except:
 				year = ""
-			
+
 			## Country
 			country_string = ""
 			try:
@@ -1021,7 +1021,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			except:
 				country_string = ""
 
-			## Crew Director 
+			## Crew Director
 			director = ""
 			try:
 				for directors in json_data['created_by']:
@@ -1031,7 +1031,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				self['author'].setText("%s" % str(director))
 			except:
 				director = ""
-				
+
 			## Studio/Production Company
 			try:
 				for studio in json_data['networks']:
@@ -1039,8 +1039,8 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				studio_string = studio_string[:-2]
 				self['studio'].setText("%s" % str(studio_string))
 			except:
-				studio_string = ""		
-		
+				studio_string = ""
+
 			## Runtime
 			runtime = ""
 			try:
@@ -1060,7 +1060,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 						season += _("Season") + " " + str(seasons['season_number']) + "/" + str(seasons['episode_count']) + " (" + str(seasons['air_date'])[:4] + ")\n"
 			except:
 				season = ""
-			
+
 		## Description
 		description = ""
 		try:
@@ -1068,7 +1068,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			description = description + "\n\n" + cast_string + "\n" + crew_string
 			#self['description'].setText("%s" % description.encode('utf_8','ignore'))
 			self['description'].setText("%s" % str(description))
-			
+
 			movieinfo = "%s%s %s %s" % (str(genre_string), str(country_string), str(year), str(runtime))
 			fulldescription = subtitle + movieinfo + "\n\n" + description + "\n" + season
 			#self['fulldescription'].setText("%s" % fulldescription.encode('utf_8','ignore'))
@@ -1086,18 +1086,18 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 						fsk = str(country['certification'])
 			except:
 				pass
-		if not self.movie:			
+		if not self.movie:
 			try:
 				for country in json_data_fsk['results']:
 					if str(country['iso_3166_1']) == "DE":
 						fsk = str(country['rating'])
 			except:
 				pass
-				
+
 		self.showFSK(fsk)
-			
+
 	def dataError(self, error):
-		print("[TMDb] Error: %s" % error) 
+		print("[TMDb] Error: %s" % error)
 
 	def showCover(self, coverName):
 		if not fileExists(coverName):
@@ -1121,7 +1121,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		if fileExists(backdropSaved):
 			os.remove(backdropSaved)
 		if url_backdrop[-4:] == "None":
-			print("[TMDb] No backdrop found") 
+			print("[TMDb] No backdrop found")
 			pass
 		else:
 			#print"###", url_backdrop
@@ -1159,10 +1159,10 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				self['fsklogo'].instance.setPixmap(ptr)
 				self['fsklogo'].show()
 		del self.picload
-			
+
 	def ok(self):
 		self.keyGreen()
-		
+
 	def setup(self):
 		self.session.open(tmdbConfigScreen)
 
@@ -1186,12 +1186,12 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 					img = img.convert('RGBA', colors=256)
 					img = img.resize((int(width), int(height)), Image.ANTIALIAS)
 					img.save(self.coverName)  # img.save(f, quality=75)
-			
+
 				shutil.copy(self.coverName, saveFile + ".jpg")
 				self.session.open(MessageBox, _("Cover saved!"), type=1, timeout=3)
-				print("[TMDb] Cover %s.jpg created" % saveFile) 
+				print("[TMDb] Cover %s.jpg created" % saveFile)
 			except:
-				print("[TMDb] Error saving cover!") 
+				print("[TMDb] Error saving cover!")
 
 	def saveBackdrop(self):
 		saveFile = cleanEnd(self.saveFilename)
@@ -1204,33 +1204,33 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 					img = img.convert('RGBA', colors=256)
 					img = img.resize((int(width), int(height)), Image.ANTIALIAS)
 					img.save(backdropName)  # img.save(f, quality=75)
-			
+
 				shutil.copy(backdropName, saveFile + ".bdp.jpg")
 				self.session.open(MessageBox, _("Backdrop saved!"), type=1, timeout=3)
-				print("[TMDb] Backdrop %s.bdp.jpg created" % saveFile) 
+				print("[TMDb] Backdrop %s.bdp.jpg created" % saveFile)
 			except:
-				print("[TMDb] Error saving backdrop!") 
-			
+				print("[TMDb] Error saving backdrop!")
+
 	def createTXT(self):
 		saveFile = cleanEnd(self.saveFilename)
 		if fileExists(self.saveFilename):
 			try:
-				wFile = open(saveFile + ".txt", "w") 
+				wFile = open(saveFile + ".txt", "w")
 				wFile.write(self.text)
 				wFile.close()
-				print("[TMDb] %s.txt created" % saveFile) 
+				print("[TMDb] %s.txt created" % saveFile)
 				self.session.open(MessageBox, _("Movie description saved!"), type=1, timeout=3)
 			except:
-				print("[TMDb] Error saving TXT file!") 
-			
+				print("[TMDb] Error saving TXT file!")
+
 	def deleteEIT(self):
 		eitFile = cleanEnd(self.saveFilename) + ".eit"
 		try:
 			os.remove(eitFile)
-			print("[TMDb] %s deleted" % eitFile) 
+			print("[TMDb] %s deleted" % eitFile)
 			self.session.open(MessageBox, _("EIT file deleted!"), type=1, timeout=3)
 		except:
-			print("[TMDb] Error deleting EIT file!") 
+			print("[TMDb] Error deleting EIT file!")
 
 
 class tmdbScreenPeople(Screen, HelpableScreen):
@@ -1240,12 +1240,12 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 				<widget name="searchinfo" position="20,30" size="1350,40" font="Regular; 32" foregroundColor="#00fff000" transparent="1" />
 				<widget name="list" position="20,90" size="1350,800" itemHeight="40" transparent="1" scrollbarMode="showNever"/>
 				<widget name="cover" position="1500,250" size="320,480" alphatest="blend" />
-				<widget name="data" position="0,0" size="0,0" font="Regular;21" />	
+				<widget name="data" position="0,0" size="0,0" font="Regular;21" />
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/backdrop.jpg" position="0,0" size="1920,1080" zPosition="-6" scale="1" alphatest="blend" />
 				<widget name="backdrop" position="0,0" size="1920,1080" zPosition="-5" alphatest="blend"/>
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/tmdb.png" position="1585,800" size="150,155" alphatest="blend" />
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/backdrop_dark.png" position="0,0" size="1920,1080" zPosition="-4" alphatest="blend" />
-				
+
 				<widget name="key_red" position="225,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_green" position="565,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_blue" position="1245,920" size="280,30" font="Regular; 25" transparent="1" />
@@ -1272,7 +1272,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 					<ePixmap position="365,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
 					<ePixmap position="660,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
 					<ePixmap position="955,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
-				</screen>"""	
+				</screen>"""
 
 	def __init__(self, session, mname, id, media):
 		Screen.__init__(self, session)
@@ -1285,7 +1285,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		else:
 			self.movie = False
 		self.covername = noCover
-		
+
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
@@ -1302,7 +1302,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 				"green": (self.ok, _("Show details")),
 				"blue": (self.keyBlue),
 				"menu": (self.keyBlue, _("Setup"))
-			}, -1)	
+			}, -1)
 
 		self['searchinfo'] = Label(_("TMDb: ") + _("Loading..."))
 		self['data'] = ScrollLabel("")
@@ -1312,19 +1312,19 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		self['list'] = createList(0)
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
-		
+
 		self.onLayoutFinish.append(self.onFinish)
-		
+
 	def onFinish(self):
 		# TMDb read
-		print("[TMDb] Selected: %s" % self.mname) 
-		self['searchinfo'].setText("%s" % self.mname)	
+		print("[TMDb] Selected: %s" % self.mname)
+		self['searchinfo'].setText("%s" % self.mname)
 		self.showBackdrop()
 		if noThread:
 			self.tmdbSearch()
 		else:
 			start_new_thread(self.tmdbSearch, ())
-		
+
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
@@ -1345,7 +1345,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 				coverPath = str(casts['profile_path'])
 				cover = tempDir + id + ".jpg"
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
-				
+
 				if not id == "" or not title == "":
 					res.append(((title, url_cover, "", id, None),))
 
@@ -1360,29 +1360,29 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 					date = "(" + str(season['air_date'])[:4] + ")"
 					res.append(((title + " " + date, "None", "", None, None),))
 					json_data_season = tmdb.TV_Seasons(self.id, seasoncnt).credits(language=self.lang)
-					
+
 					for casts in json_data_season['cast']:
 						id = str(casts['id'])
 						title = str(casts['name']) + " (" + str(casts['character']) + ")"
 						coverPath = str(casts['profile_path'])
 						cover = tempDir + id + ".jpg"
 						url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
-						
+
 						if not id == "" or not title == "":
 							res.append((("    " + title, url_cover, "", id, None),))
-			
+
 			self['list'].setList(res)
 			self.piclist = res
 			self.getInfo()
 			self['searchinfo'].setText("%s" % self.mname)
 		except:
 			self['searchinfo'].setText(_("TMDb: ") + _("No results found, or does not respond!"))
-			
+
 	def getInfo(self):
 		self['data'].setText("")
 		url_cover = self['list'].getCurrent()[1]
 		id = self['list'].getCurrent()[3]
-		
+
 		if url_cover[-4:] == "None":
 			self.showCover(noCover)
 		else:
@@ -1390,17 +1390,17 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 				downloadPage(asBinary(url_cover), tempDir + id + ".jpg", timeout=5).addCallback(self.getData, tempDir + id + ".jpg").addErrback(self.dataError)
 			else:
 				self.showCover(tempDir + id + ".jpg")
-		
+
 	def getData(self, data, coverSaved):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
-		print("[TMDb] Error: %s" % error) 
+		print("[TMDb] Error: %s" % error)
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
 		return name
-			
+
 	def showCover(self, coverName):
 		self.picload = ePicLoad()
 		if not fileExists(coverName):
@@ -1440,7 +1440,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 			return
 		id = self['list'].getCurrent()[3]
 		self.session.open(tmdbScreenPerson, self.covername, id)
-			
+
 	def keyLeft(self):
 		check = self['list'].getCurrent()
 		if check == None:
@@ -1454,7 +1454,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 			return
 		self['list'].pageDown()
 		self.getInfo()
-		
+
 	def keyDown(self):
 		check = self['list'].getCurrent()
 		if check == None:
@@ -1468,19 +1468,19 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 			return
 		self['list'].up()
 		self.getInfo()
-	
+
 	def chDown(self):
 		self['data'].pageUp()
-	
+
 	def chUp(self):
 		self['data'].pageDown()
 
 	def keyBlue(self):
 		self.session.open(tmdbConfigScreen)
-		
+
 	def cancel(self):
 		self.close()
-			
+
 
 class tmdbScreenPerson(Screen, HelpableScreen):
 	if getDesktop(0).size().width() >= 1920:
@@ -1493,7 +1493,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 				<widget name="backdrop" position="0,0" size="1920,1080" zPosition="-5" alphatest="blend"/>
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/tmdb.png" position="1585,800" size="150,155" alphatest="blend" />
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/backdrop_dark.png" position="0,0" size="1920,1080" zPosition="-4" alphatest="blend" />
-				
+
 				<widget name="key_red" position="225,920" size="280,30" font="Regular; 25" transparent="1" />
 				<ePixmap position="190,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
 				<ePixmap position="530,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
@@ -1514,7 +1514,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 				<ePixmap position="365,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
 				<ePixmap position="660,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
 				<ePixmap position="955,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
-			</screen>"""	
+			</screen>"""
 
 	def __init__(self, session, coverName, id):
 		Screen.__init__(self, session)
@@ -1530,38 +1530,38 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 				"down": (self.keyRight, _("Selection down")),
 				"left": (self.keyLeft, _("Page up")),
 				"right": (self.keyRight, _("Page down")),
-				"red": (self.cancel, _("Exit")),		
-			}, -1)	
+				"red": (self.cancel, _("Exit")),
+			}, -1)
 
 		self['searchinfo'] = Label(_("TMDb: ") + _("Loading..."))
 		self['fulldescription'] = ScrollLabel("")
 		self['key_red'] = Label(_("Exit"))
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
-		
+
 		self.onLayoutFinish.append(self.onFinish)
-		
+
 	def onFinish(self):
 		self.showBackdrop()
 		self.showCover(self.coverName)
-		#self.getData()	
-		if noThread: 
+		#self.getData()
+		if noThread:
 			self.tmdbSearch()
-		else: 
+		else:
 			start_new_thread(self.tmdbSearch, ())
-		
+
 	def keyLeft(self):
 		self['fulldescription'].pageUp()
-	
+
 	def keyRight(self):
 		self['fulldescription'].pageDown()
 
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
-		print("[TMDb] ID: ", self.id) 
+		print("[TMDb] ID: ", self.id)
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
-		
-		try:	
+
+		try:
 			json_data_person = tmdb.People(self.id).info(language=self.lang)
 			#print json_data_person
 			self.mname = str(json_data_person['name'])
@@ -1588,7 +1588,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 				else:
 					gender = _("divers")
 			except:
-				gender = ""	
+				gender = ""
 
 			## Personal data
 			altname = ""
@@ -1608,7 +1608,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 				rank = "\n" + _("Popularity") + ": " + str(json_data_person['popularity'])
 			except:
 				rank = ""
-				
+
 			biography = ""
 			try:
 				biography = str(json_data_person['biography'])
@@ -1619,7 +1619,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 				biography = ""
 
 			data = birthday + ", " + birthplace + ", " + gender + altname + altname1 + rank + "\n\n" + biography + "\n\n"
-			
+
 			## Participated data
 			#json_data_person = tmdb.People(self.id).combined_credits(language=self.lang)
 			json_data_person = tmdb.People(self.id).movie_credits(language=self.lang)
@@ -1639,7 +1639,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 					data_movies.append((cast['first_air_date']) + " " + str(cast['name']) + "  (" + str(cast['character']) + ") - TV")
 			except:
 				pass
-				
+
 			data_movies.sort(reverse=True)
 			cast_movies = ""
 			for cast in data_movies:
@@ -1650,7 +1650,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 			self['searchinfo'].setText("%s" % self.mname)
 		except:
 			self['searchinfo'].setText(_("TMDb: ") + _("No results found, or does not respond!"))
-			
+
 	def showCover(self, coverName):
 		self.picload = ePicLoad()
 		self['cover'].instance.setPixmap(gPixmapPtr())
@@ -1678,7 +1678,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 					self['backdrop'].instance.setPixmap(ptr)
 					self['backdrop'].show()
 			del self.picload
-			
+
 	def ok(self):
 		self.cancel()
 
@@ -1693,12 +1693,12 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				<widget name="searchinfo" position="20,30" size="1350,40" font="Regular; 32" foregroundColor="#00fff000" transparent="1" />
 				<widget name="list" position="20,90" size="950,400" itemHeight="40" transparent="1" scrollbarMode="showNever"/>
 				<widget name="cover" position="1000,90" size="848,480" alphatest="blend" />
-				<widget name="data" position="20,510" size="950,400" font="Regular;28" transparent="1" />	
+				<widget name="data" position="20,510" size="950,400" font="Regular;28" transparent="1" />
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/backdrop.jpg" position="0,0" size="1920,1080" zPosition="-6" scale="1" alphatest="blend" />
 				<widget name="backdrop" position="0,0" size="1920,1080" zPosition="-5" alphatest="blend"/>
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/tmdb.png" position="1585,800" size="150,155" alphatest="blend" />
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/backdrop_dark.png" position="0,0" size="1920,1080" zPosition="-4" alphatest="blend" />
-				
+
 				<widget name="key_red" position="225,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_green" position="565,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_blue" position="1245,920" size="280,30" font="Regular; 25" transparent="1" />
@@ -1724,7 +1724,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				<ePixmap position="365,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
 				<ePixmap position="660,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
 				<ePixmap position="955,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
-			</screen>"""	
+			</screen>"""
 
 	def __init__(self, session, mname, id, media):
 		Screen.__init__(self, session)
@@ -1737,7 +1737,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		else:
 			self.movie = False
 		self.piclist = ""
-		
+
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
@@ -1754,7 +1754,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				"green": (self.ok, _(" ")),
 				"blue": (self.keyBlue),
 				"menu": (self.keyBlue, _("Setup"))
-			}, -1)	
+			}, -1)
 
 		self['searchinfo'] = Label(_("TMDb: ") + _("Loading..."))
 		self['data'] = ScrollLabel("")
@@ -1762,22 +1762,22 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self['key_green'] = Label()
 		self['key_blue'] = Label()
 		self['list'] = createList(0)
-		
+
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
-		
+
 		self.onLayoutFinish.append(self.onFinish)
-		
+
 	def onFinish(self):
 		# TMDb read
-		print("[TMDb] Selected: %s" % self.mname) 
-		self['searchinfo'].setText("%s" % self.mname)	
+		print("[TMDb] Selected: %s" % self.mname)
+		self['searchinfo'].setText("%s" % self.mname)
 		self.showBackdrop()
-		if noThread: 
+		if noThread:
 			self.tmdbSearch()
-		else: 
+		else:
 			start_new_thread(self.tmdbSearch, ())
-		
+
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
@@ -1786,10 +1786,10 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			# Seasons
 			json_data_seasons = tmdb.TV(self.id).info(language=self.lang)
 			for seasons in json_data_seasons['seasons']:
-				print("[TMDb] Season: %s" % seasons['season_number']) 
+				print("[TMDb] Season: %s" % seasons['season_number'])
 				id = str(seasons['id'])
 				season = seasons['season_number']
-				
+
 				#Episodes
 				json_data_episodes = tmdb.TV_Seasons(self.id, season).info(language=self.lang)
 				titledate = "(" + str(json_data_episodes['air_date'])[:4] + ")"
@@ -1816,15 +1816,15 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			self['list'].setList(res)
 			self.piclist = res
 			self.getInfo()
-			self['searchinfo'].setText("%s" % self.mname)		
+			self['searchinfo'].setText("%s" % self.mname)
 		except:
 			self['searchinfo'].setText(_("TMDb: ") + _("No results found, or does not respond!"))
-			
+
 	def getInfo(self):
 		self['data'].setText("...")
 		url_cover = self['list'].getCurrent()[1]
 		id = self['list'].getCurrent()[3]
-		
+
 		if url_cover[-4:] == "None":
 			self.showCover(noCover)
 		else:
@@ -1832,17 +1832,17 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				downloadPage(asBinary(url_cover), tempDir + id + ".jpg", timeout=5).addCallback(self.getData, tempDir + id + ".jpg").addErrback(self.dataError)
 			else:
 				self.showCover(tempDir + id + ".jpg")
-		
+
 	def getData(self, data, coverSaved):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
-		print("[TMDb] Error: %s" % error) 
+		print("[TMDb] Error: %s" % error)
 
 	def baseName(self, str):
 		name = str.split('/')[-1]
 		return name
-			
+
 	def showCover(self, coverName):
 		self.picload = ePicLoad()
 		if not fileExists(coverName):
@@ -1875,14 +1875,14 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 					self['backdrop'].instance.setPixmap(ptr)
 					self['backdrop'].show()
 			del self.picload
-		
+
 	def ok(self):
 		check = self['list'].getCurrent()
 		if check == None:
 			return
 		data = self['list'].getCurrent()[2]
 		self['data'].setText(data)
-			
+
 	def keyLeft(self):
 		check = self['list'].getCurrent()
 		if check == None:
@@ -1896,7 +1896,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			return
 		self['list'].pageDown()
 		self.getInfo()
-		
+
 	def keyDown(self):
 		check = self['list'].getCurrent()
 		if check == None:
@@ -1910,15 +1910,15 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			return
 		self['list'].up()
 		self.getInfo()
-	
+
 	def chDown(self):
 		self['data'].pageUp()
-	
+
 	def chUp(self):
 		self['data'].pageDown()
 
 	def keyBlue(self):
 		self.session.open(tmdbConfigScreen)
-		
+
 	def cancel(self):
 		self.close()

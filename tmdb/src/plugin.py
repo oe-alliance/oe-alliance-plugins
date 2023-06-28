@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #######################################################################
-# maintainer: <schomi@vuplus-support.org> 
+# maintainer: <schomi@vuplus-support.org>
 # This plugin is free software, you are allowed to
 # modify it (if you keep the license),
 # but you are not allowed to distribute/publish
@@ -78,7 +78,7 @@ def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bou
 					"yellow": yellowClicked,
 				})
 		self["key_yellow"].text = _("TMDb Infos ...")
-		
+
 
 def main(session, service, **kwargs):
     reload_module(tmdb)
@@ -87,7 +87,7 @@ def main(session, service, **kwargs):
 	except:
 		import traceback
 		traceback.print_exc()
-		
+
 
 def eventinfo(session, eventName="", **kwargs):
     reload_module(tmdb)
@@ -100,7 +100,7 @@ def eventinfo(session, eventName="", **kwargs):
 	except:
 		import traceback
 		traceback.print_exc()
-		
+
 
 def Plugins(**kwargs):
 	return [
