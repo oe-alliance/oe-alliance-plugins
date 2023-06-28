@@ -28,14 +28,14 @@ pversion = "1.0.0"
 pdate = "20230225"
 
 config.plugins.tmdb = ConfigSubsection()
-config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choices = ["w92", "w185", "w500", "original"])
-config.plugins.tmdb.lang = ConfigSelection(default="de", choices = ["de", "en", "fr", "es", "pl", "ru"])
-config.plugins.tmdb.firsthit = ConfigYesNo(default = True)
-config.plugins.tmdb.keyyellow = ConfigYesNo(default = True)
-config.plugins.tmdb.backdropQuality = ConfigSelection(default="1280x720", choices = ["300x169", "780x439", "1280x720", "1920x1080", "original"])
-config.plugins.tmdb.coverQuality = ConfigSelection(default="500x750", choices = ["185x280", "342x513", "500x750", "780x1170", "original"])
-config.plugins.tmdb.cert = ConfigYesNo(default = True)
-config.plugins.tmdb.apiKey = ConfigText(default = 'intern')
+config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
+config.plugins.tmdb.lang = ConfigSelection(default="de", choices=["de", "en", "fr", "es", "pl", "ru"])
+config.plugins.tmdb.firsthit = ConfigYesNo(default=True)
+config.plugins.tmdb.keyyellow = ConfigYesNo(default=True)
+config.plugins.tmdb.backdropQuality = ConfigSelection(default="1280x720", choices=["300x169", "780x439", "1280x720", "1920x1080", "original"])
+config.plugins.tmdb.coverQuality = ConfigSelection(default="500x750", choices=["185x280", "342x513", "500x750", "780x1170", "original"])
+config.plugins.tmdb.cert = ConfigYesNo(default=True)
+config.plugins.tmdb.apiKey = ConfigText(default='intern')
 
 # Autostart
 def autostart(reason, **kwargs):
@@ -94,7 +94,7 @@ def eventinfo(session, eventName="", **kwargs):
 		
 def Plugins(**kwargs):
 	return [
-			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where = PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart = False),
-			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where = PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart = False),
-			PluginDescriptor(name="TMDb" ,description=_("TMDb Infos ..."), where = PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart = False)
+			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False),
+			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),
+			PluginDescriptor(name="TMDb" ,description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
 			]

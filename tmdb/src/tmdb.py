@@ -186,7 +186,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 
 		self.onChangedEntry = [ ]
 		self.list = [ ]
-		ConfigListScreen.__init__(self, self.list, session = session, on_change = self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
 		
 		self["actions"] = ActionMap(["TMDbActions"],
 			{
@@ -372,7 +372,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			(_("Recommendations"),5),
 			(_("Best rated movies"),6)			
 		]
-		self.session.openWithCallback(self.menuCallback,ChoiceBox,list = options)
+		self.session.openWithCallback(self.menuCallback,ChoiceBox,list=options)
 
 	def menuCallback(self, ret):
 		self.id = 1
@@ -603,7 +603,7 @@ class tmdbScreen(Screen, HelpableScreen):
 
 	def searchString(self):
 		self.actcinema = 0
-		self.session.openWithCallback(self.goSearch, VirtualKeyBoard, title = (_("Search for Movie:")), text = self.text)
+		self.session.openWithCallback(self.goSearch, VirtualKeyBoard, title=(_("Search for Movie:")), text=self.text)
 
 	def goSearch(self, newTitle):
 		if newTitle is "" or newTitle is None:
@@ -815,7 +815,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				("1+2+3+4",8),
 				("3+4",9)
 			]
-			self.session.openWithCallback(self.menuCallback,ChoiceBox,list = options)
+			self.session.openWithCallback(self.menuCallback,ChoiceBox,list=options)
 
 	def menuCallback(self, ret):
 		if ret is None:
@@ -1187,7 +1187,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 					img.save(self.coverName) # img.save(f, quality=75)
 			
 				shutil.copy(self.coverName, saveFile + ".jpg")
-				self.session.open(MessageBox, _("Cover saved!"), type = 1, timeout = 3)
+				self.session.open(MessageBox, _("Cover saved!"), type=1, timeout=3)
 				print ("[TMDb] Cover %s.jpg created" % saveFile) 
 			except:
 				print ("[TMDb] Error saving cover!") 
@@ -1205,7 +1205,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 					img.save(backdropName) # img.save(f, quality=75)
 			
 				shutil.copy(backdropName, saveFile + ".bdp.jpg")
-				self.session.open(MessageBox, _("Backdrop saved!"), type = 1, timeout = 3)
+				self.session.open(MessageBox, _("Backdrop saved!"), type=1, timeout=3)
 				print ("[TMDb] Backdrop %s.bdp.jpg created" % saveFile) 
 			except:
 				print ("[TMDb] Error saving backdrop!") 
@@ -1218,7 +1218,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				wFile.write(self.text)
 				wFile.close()
 				print ("[TMDb] %s.txt created" % saveFile) 
-				self.session.open(MessageBox, _("Movie description saved!"), type = 1, timeout = 3)
+				self.session.open(MessageBox, _("Movie description saved!"), type=1, timeout=3)
 			except:
 				print ("[TMDb] Error saving TXT file!") 
 			
@@ -1227,7 +1227,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		try:
 			os.remove(eitFile)
 			print ("[TMDb] %s deleted" % eitFile) 
-			self.session.open(MessageBox, _("EIT file deleted!"), type = 1, timeout = 3)
+			self.session.open(MessageBox, _("EIT file deleted!"), type=1, timeout=3)
 		except:
 			print ("[TMDb] Error deleting EIT file!") 
 
