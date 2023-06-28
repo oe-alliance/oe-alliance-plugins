@@ -85,7 +85,7 @@ def eventinfo(session, eventName="", **kwargs):
 	try:
 		s = session.nav.getCurrentService()
 		info = s.info()
-		event = info.getEvent(0) # 0 = now, 1 = next
+		event = info.getEvent(0)  # 0 = now, 1 = next
 		name = event and event.getEventName() or info.getName() or ''
 		session.open(tmdb.tmdbScreen, name, 2)
 	except:
@@ -96,5 +96,5 @@ def Plugins(**kwargs):
 	return [
 			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False),
 			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),
-			PluginDescriptor(name="TMDb",description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
+			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
 			]

@@ -80,7 +80,7 @@ try:
 except:
 	pass
 	
-def debug(s, flag="a"): #pass
+def debug(s, flag="a"):  # pass
 	f = open("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/debug.txt", flag)
 	f.write(str(s) + '\n')
 	f.close()
@@ -93,24 +93,24 @@ def asBinary(s):
 		return s
 
 def cleanFile(text):
-	cutlist = ['x264','720p','1080p','1080i','PAL','GERMAN','ENGLiSH','WS','DVDRiP','UNRATED','RETAIL','Web-DL','DL','LD','MiC','MD','DVDR','BDRiP','BLURAY','DTS','UNCUT','ANiME',
-				'AC3MD','AC3','AC3D','TS','DVDSCR','COMPLETE','INTERNAL','DTSD','XViD','DIVX','DUBBED','LINE.DUBBED','DD51','DVDR9','DVDR5','h264','AVC',
-				'WEBHDTVRiP','WEBHDRiP','WEBRiP','WEBHDTV','WebHD','HDTVRiP','HDRiP','HDTV','ITUNESHD','REPACK','SYNC']
-	text = text.replace('.wmv','').replace('.flv','').replace('.ts','').replace('.m2ts','').replace('.mkv','').replace('.avi','').replace('.mpeg','').replace('.mpg','').replace('.iso','').replace('.mp4','')
+	cutlist = ['x264', '720p', '1080p', '1080i', 'PAL', 'GERMAN', 'ENGLiSH', 'WS', 'DVDRiP', 'UNRATED', 'RETAIL', 'Web-DL', 'DL', 'LD', 'MiC', 'MD', 'DVDR', 'BDRiP', 'BLURAY', 'DTS', 'UNCUT', 'ANiME',
+				'AC3MD', 'AC3', 'AC3D', 'TS', 'DVDSCR', 'COMPLETE', 'INTERNAL', 'DTSD', 'XViD', 'DIVX', 'DUBBED', 'LINE.DUBBED', 'DD51', 'DVDR9', 'DVDR5', 'h264', 'AVC',
+				'WEBHDTVRiP', 'WEBHDRiP', 'WEBRiP', 'WEBHDTV', 'WebHD', 'HDTVRiP', 'HDRiP', 'HDTV', 'ITUNESHD', 'REPACK', 'SYNC']
+	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '').replace('.mp4', '')
 	
 	for word in cutlist:
-		text = re.sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)','+', text, flags=re.I)
-	text = text.replace('.',' ').replace('-',' ').replace('_',' ').replace('+','').replace(" Director's Cut","").replace(" director's cut","").replace("[Uncut]","").replace("Uncut","")
+		text = re.sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)', '+', text, flags=re.I)
+	text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '').replace(" Director's Cut", "").replace(" director's cut", "").replace("[Uncut]", "").replace("Uncut", "")
 	text = " ".join(text.split())
 	
 	if re.search('[Ss][0-9]+[Ee][0-9]+', text):
-		text = re.sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+','', text, flags=re.S | re.I)
-	text = re.sub(r'\(.*\)', '', text).rstrip() # remove episode number from series, like "series name (234)"
+		text = re.sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+', '', text, flags=re.S | re.I)
+	text = re.sub(r'\(.*\)', '', text).rstrip()  # remove episode number from series, like "series name (234)"
 	
 	return text
 	
 def cleanEnd(text):
-	text = text.replace('.wmv','').replace('.flv','').replace('.ts','').replace('.m2ts','').replace('.mkv','').replace('.avi','').replace('.mpeg','').replace('.mpg','').replace('.iso','').replace('.mp4','')
+	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '').replace('.mp4', '')
 	return text
 	
 class createList(GUIComponent, object):
@@ -131,7 +131,7 @@ class createList(GUIComponent, object):
 			width = self.l.getItemSize().width()
 			(title, coverUrl, media, id, backdropUrl) = entry
 			res = [None]
-			x,y,w,h = skin.parameters.get("TMDbListName", (5,1,1920,40))
+			x, y, w, h = skin.parameters.get("TMDbListName", (5, 1, 1920, 40))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(title)))
 			return res
 
@@ -312,10 +312,10 @@ class tmdbScreen(Screen, HelpableScreen):
 		print("[TMDb] Search for" + str(self.text))
 		
 		HelpableScreen.__init__(self)
-		self["actions"] = HelpableActionMap(self,"TMDbActions",
+		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
 				"ok": (self.ok, _("Show details")),
-				"cancel": (self.cancel,_("Exit")),
+				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyUp, _("Selection up")),
 				"down": (self.keyDown, _("Selection down")),
 				"nextBouquet": (self.chDown, _("Details down")),
@@ -364,15 +364,15 @@ class tmdbScreen(Screen, HelpableScreen):
 
 	def menu(self):
 		options = [
-			(_("Exit"),0),
-			(_("Current movies in cinemas"),1),
-			(_("Upcoming movies"),2),
-			(_("Popular movies"),3),
-			(_("Similar movies"),4),
-			(_("Recommendations"),5),
-			(_("Best rated movies"),6)			
+			(_("Exit"), 0),
+			(_("Current movies in cinemas"), 1),
+			(_("Upcoming movies"), 2),
+			(_("Popular movies"), 3),
+			(_("Similar movies"), 4),
+			(_("Recommendations"), 5),
+			(_("Best rated movies"), 6)			
 		]
-		self.session.openWithCallback(self.menuCallback,ChoiceBox,list=options)
+		self.session.openWithCallback(self.menuCallback, ChoiceBox, list=options)
 
 	def menuCallback(self, ret):
 		self.id = 1
@@ -462,7 +462,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				else:
 					mediasubst = _("Series")
 				
-				title = "%s (%s%s)" % (title,mediasubst,date)
+				title = "%s (%s%s)" % (title, mediasubst, date)
 				coverPath = ""
 				try:
 					coverPath = str(IDs['poster_path'])
@@ -735,10 +735,10 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self.saveFilename = saveFilename
 
 		HelpableScreen.__init__(self)
-		self["actions"] = HelpableActionMap(self,"TMDbActions",
+		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
 				"ok": (self.ok, _("Crew")),
-				"cancel": (self.cancel,_("Exit")),
+				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyLeft, _("Selection up")),
 				"down": (self.keyRight, _("Selection down")),
 				"left": (self.keyLeft, _("Page up")),
@@ -805,17 +805,17 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			pass
 		else:
 			options = [
-				(_("Save movie description"),1),
-				(_("Delete movie EIT file"),2),
-				(_("Save movie cover"),3),
-				(_("Save movie backdrop"),4),
-				("1+2",5),
-				("1+3",6),
-				("1+2+3",7),
-				("1+2+3+4",8),
-				("3+4",9)
+				(_("Save movie description"), 1),
+				(_("Delete movie EIT file"), 2),
+				(_("Save movie cover"), 3),
+				(_("Save movie backdrop"), 4),
+				("1+2", 5),
+				("1+3", 6),
+				("1+2+3", 7),
+				("1+2+3+4", 8),
+				("3+4", 9)
 			]
-			self.session.openWithCallback(self.menuCallback,ChoiceBox,list=options)
+			self.session.openWithCallback(self.menuCallback, ChoiceBox, list=options)
 
 	def menuCallback(self, ret):
 		if ret is None:
@@ -1180,11 +1180,11 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		if fileExists(self.saveFilename):
 			try:
 				if not config.plugins.tmdb.coverQuality.value == "original":
-					width, height = config.plugins.tmdb.coverQuality.value.split("x",1)
+					width, height = config.plugins.tmdb.coverQuality.value.split("x", 1)
 					img = Image.open(self.coverName)
 					img = img.convert('RGBA', colors=256)
-					img = img.resize((int(width),int(height)), Image.ANTIALIAS)
-					img.save(self.coverName) # img.save(f, quality=75)
+					img = img.resize((int(width), int(height)), Image.ANTIALIAS)
+					img.save(self.coverName)  # img.save(f, quality=75)
 			
 				shutil.copy(self.coverName, saveFile + ".jpg")
 				self.session.open(MessageBox, _("Cover saved!"), type=1, timeout=3)
@@ -1198,11 +1198,11 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			try:
 				backdropName = tempDir + "backdrop.jpg"
 				if not config.plugins.tmdb.backdropQuality.value == "original":
-					width, height = config.plugins.tmdb.backdropQuality.value.split("x",1)
+					width, height = config.plugins.tmdb.backdropQuality.value.split("x", 1)
 					img = Image.open(backdropName)
 					img = img.convert('RGBA', colors=256)
-					img = img.resize((int(width),int(height)), Image.ANTIALIAS)
-					img.save(backdropName) # img.save(f, quality=75)
+					img = img.resize((int(width), int(height)), Image.ANTIALIAS)
+					img.save(backdropName)  # img.save(f, quality=75)
 			
 				shutil.copy(backdropName, saveFile + ".bdp.jpg")
 				self.session.open(MessageBox, _("Backdrop saved!"), type=1, timeout=3)
@@ -1214,7 +1214,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		saveFile = cleanEnd(self.saveFilename)
 		if fileExists(self.saveFilename):
 			try:
-				wFile = open(saveFile + ".txt","w") 
+				wFile = open(saveFile + ".txt", "w") 
 				wFile.write(self.text)
 				wFile.close()
 				print("[TMDb] %s.txt created" % saveFile) 
@@ -1285,10 +1285,10 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		self.covername = noCover
 		
 		HelpableScreen.__init__(self)
-		self["actions"] = HelpableActionMap(self,"TMDbActions",
+		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
 				"ok": (self.ok, _("Show details")),
-				"cancel": (self.cancel,_("Exit")),
+				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyUp, _("Selection up")),
 				"down": (self.keyDown, _("Selection down")),
 				"up": (self.keyUp, _("Selection up")),
@@ -1358,7 +1358,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 					title = str(season['name'])
 					date = "(" + str(season['air_date'])[:4] + ")"
 					res.append(((title + " " + date, "None", "", None, None),))
-					json_data_season = tmdb.TV_Seasons(self.id,seasoncnt).credits(language=self.lang)
+					json_data_season = tmdb.TV_Seasons(self.id, seasoncnt).credits(language=self.lang)
 					
 					for casts in json_data_season['cast']:
 						id = str(casts['id'])
@@ -1521,9 +1521,9 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 		self.id = id
 
 		HelpableScreen.__init__(self)
-		self["actions"] = HelpableActionMap(self,"TMDbActions",
+		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
-				"cancel": (self.cancel,_("Exit")),
+				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyLeft, _("Selection up")),
 				"down": (self.keyRight, _("Selection down")),
 				"left": (self.keyLeft, _("Page up")),
@@ -1736,10 +1736,10 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self.piclist = ""
 		
 		HelpableScreen.__init__(self)
-		self["actions"] = HelpableActionMap(self,"TMDbActions",
+		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
 				"ok": (self.ok, _("Show details")),
-				"cancel": (self.cancel,_("Exit")),
+				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyUp, _("Selection up")),
 				"down": (self.keyDown, _("Selection down")),
 				"up": (self.keyUp, _("Selection up")),
@@ -1804,7 +1804,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 					id = str(names['id'])
 					title = str(names['episode_number'])
 					name = str(names['name'])
-					title = "%+6s %s" % (title,name)
+					title = "%+6s %s" % (title, name)
 					overview = str(names['overview'])
 					coverPath = str(names['still_path'])
 					cover = tempDir + id + ".jpg"
@@ -1857,7 +1857,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 					self['cover'].instance.setPixmap(ptr)
 					self['cover'].show()
 			del self.picload
-		self.ok() # Shortcut
+		self.ok()  # Shortcut
 
 	def showBackdrop(self):
 		backdropSaved = tempDir + "backdrop.jpg"
