@@ -81,11 +81,13 @@ except:
 	pass
 	
 def debug(s, flag="a" ): #pass
-	f=open( "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/debug.txt", flag);  f.write( str(s)+'\n'); f.close()
+	f=open( "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/debug.txt", flag)
+	f.write( str(s)+'\n')
+	f.close()
 
 def asBinary(s):
 	try:
-		from six import ensure_binary; 
+		from six import ensure_binary
 		return(ensure_binary(s))
 	except: 
 		return s
@@ -1316,8 +1318,10 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		print ("[TMDb] Selected: %s" % self.mname) 
 		self['searchinfo'].setText("%s" % self.mname)	
 		self.showBackdrop()
-		if noThread: self.tmdbSearch()
-		else: start_new_thread(self.tmdbSearch, ())
+		if noThread:
+			self.tmdbSearch()
+		else:
+			start_new_thread(self.tmdbSearch, ())
 		
 			
 	def tmdbSearch(self):
