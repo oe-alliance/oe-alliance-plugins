@@ -38,6 +38,8 @@ config.plugins.tmdb.cert = ConfigYesNo(default=True)
 config.plugins.tmdb.apiKey = ConfigText(default='intern')
 
 # Autostart
+
+
 def autostart(reason, **kwargs):
 	if reason == 0:
 		try:
@@ -47,8 +49,11 @@ def autostart(reason, **kwargs):
 		except Exception:
 			pass
 
+
 # Overwrite EPGSelection.__init__ with our modified one
 baseEPGSelection__init__ = None
+
+
 def EPGSelectionInit():
 	global baseEPGSelection__init__
 	if baseEPGSelection__init__ is None:
@@ -56,6 +61,8 @@ def EPGSelectionInit():
 	EPGSelection.__init__ = EPGSelection__init__
 
 # Modified EPGSelection __init__
+
+
 def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, isEPGBar=None, switchBouquet=None, EPGNumberZap=None, togglePiP=None):
 	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, isEPGBar, switchBouquet, EPGNumberZap, togglePiP)
 	if self.type != EPG_TYPE_MULTI:
@@ -72,6 +79,7 @@ def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bou
 				})
 		self["key_yellow"].text = _("TMDb Infos ...")
 		
+
 def main(session, service, **kwargs):
     reload_module(tmdb)
 	try:
@@ -80,6 +88,7 @@ def main(session, service, **kwargs):
 		import traceback
 		traceback.print_exc()
 		
+
 def eventinfo(session, eventName="", **kwargs):
     reload_module(tmdb)
 	try:
@@ -92,6 +101,7 @@ def eventinfo(session, eventName="", **kwargs):
 		import traceback
 		traceback.print_exc()
 		
+
 def Plugins(**kwargs):
 	return [
 			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False),

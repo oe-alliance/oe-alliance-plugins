@@ -63,7 +63,6 @@ import tmdbsimple as tmdb
 from .__init__ import _
 
 
-
 pname = "TMDb"
 pdesc = _("Show movie details from TMDb")
 pversion = "1.0.1"
@@ -80,10 +79,12 @@ try:
 except:
 	pass
 	
+
 def debug(s, flag="a"):  # pass
 	f = open("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/debug.txt", flag)
 	f.write(str(s) + '\n')
 	f.close()
+
 
 def asBinary(s):
 	try:
@@ -91,6 +92,7 @@ def asBinary(s):
 		return (ensure_binary(s))
 	except: 
 		return s
+
 
 def cleanFile(text):
 	cutlist = ['x264', '720p', '1080p', '1080i', 'PAL', 'GERMAN', 'ENGLiSH', 'WS', 'DVDRiP', 'UNRATED', 'RETAIL', 'Web-DL', 'DL', 'LD', 'MiC', 'MD', 'DVDR', 'BDRiP', 'BLURAY', 'DTS', 'UNCUT', 'ANiME',
@@ -109,10 +111,12 @@ def cleanFile(text):
 	
 	return text
 	
+
 def cleanEnd(text):
 	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '').replace('.mp4', '')
 	return text
 	
+
 class createList(GUIComponent, object):
 	GUI_WIDGET = eListbox
 	
@@ -178,6 +182,7 @@ class createList(GUIComponent, object):
 		if self.instance is not None:
 			self.instance.moveSelection(self.instance.moveDown)
 		
+
 class tmdbConfigScreen(Screen, ConfigListScreen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -228,6 +233,7 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 			x[1].save()
 		configfile.save()			
 		self.close()
+
 
 class tmdbScreen(Screen, HelpableScreen):
 	if getDesktop(0).size().width() >= 1920:
@@ -494,7 +500,6 @@ class tmdbScreen(Screen, HelpableScreen):
 			if json_data['total_results'] == 0:
 				self['searchinfo'].setText(_("TMDb: ") + _("No results for %s") % self.text)
 				
-
 	def getInfo(self):
 		url_cover = self['list'].getCurrent()[1]
 		id = self['list'].getCurrent()[3]
@@ -594,7 +599,6 @@ class tmdbScreen(Screen, HelpableScreen):
 			else: 
 				start_new_thread(self.tmdbSearch, ())
 			
-
 	def keyYellow(self):
 		return
 		
@@ -629,6 +633,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			shutil.rmtree(tempDir)
 		except:
 			pass
+
 
 class tmdbScreenMovie(Screen, HelpableScreen):
 	if getDesktop(0).size().width() >= 1920:
@@ -798,7 +803,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self.tmdbSearch()
 		else: 
 			start_new_thread(self.tmdbSearch, ())
-		
 		
 	def menu(self):
 		if self.saveFilename == "":
@@ -994,7 +998,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		except:
 			studio_string = ""
 
-		
 		#
 		# modify Data for TV/Series
 		#
@@ -1018,7 +1021,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			except:
 				country_string = ""
 
-		
 			## Crew Director 
 			director = ""
 			try:
@@ -1113,7 +1115,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 					self['cover'].instance.setPixmap(ptr)
 					self['cover'].show()
 			del self.picload
-
 
 	def getBackdrop(self, url_backdrop):
 		backdropSaved = tempDir + "backdrop.jpg"
@@ -1231,6 +1232,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		except:
 			print("[TMDb] Error deleting EIT file!") 
 
+
 class tmdbScreenPeople(Screen, HelpableScreen):
 	if getDesktop(0).size().width() >= 1920:
 		skin = """
@@ -1323,7 +1325,6 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		else:
 			start_new_thread(self.tmdbSearch, ())
 		
-			
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
@@ -1480,6 +1481,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 	def cancel(self):
 		self.close()
 			
+
 class tmdbScreenPerson(Screen, HelpableScreen):
 	if getDesktop(0).size().width() >= 1920:
 		skin = """
@@ -1547,7 +1549,6 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 			self.tmdbSearch()
 		else: 
 			start_new_thread(self.tmdbSearch, ())
-		
 		
 	def keyLeft(self):
 		self['fulldescription'].pageUp()
@@ -1684,6 +1685,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 	def cancel(self):
 		self.close(True)
 
+
 class tmdbScreenSeason(Screen, HelpableScreen):
 	if getDesktop(0).size().width() >= 1920:
 		skin = """
@@ -1723,6 +1725,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 				<ePixmap position="660,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
 				<ePixmap position="955,570" size="260,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
 			</screen>"""	
+
 	def __init__(self, session, mname, id, media):
 		Screen.__init__(self, session)
 		self.session = session
@@ -1775,7 +1778,6 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		else: 
 			start_new_thread(self.tmdbSearch, ())
 		
-			
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
