@@ -377,12 +377,12 @@
 		<eLabel name="Background" position="0,0" size="1279,1080" backgroundColor="#20000000" zPosition="-10" />
 		<eLabel name="Background_Grey" position="14,90" size="801,978" backgroundColor="#00c0c0c0" zPosition="-5" />
 		<eLabel name="Background_Metrixbackground" position="15,90" size="799,977" backgroundColor="#20000000" zPosition="-1" />
-		<ePixmap pixmap="{picpath}FHD/logos/TV2015.png" position="1012,360" size="100,40" alphatest="blend" zPosition="1" />
-		<ePixmap pixmap="{picpath}FHD/logos/TVevent.png" position="849,702" size="100,40" alphatest="blend" zPosition="1" />
-		<ePixmap pixmap="{picpath}FHD/logos/TVjetzt.png" position="849,360" size="100,40" alphatest="blend" zPosition="1" />
-		<ePixmap pixmap="{picpath}FHD/logos/TVlate.png" position="1170,360" size="100,40" alphatest="blend" zPosition="1" />
-		<ePixmap pixmap="{picpath}FHD/logos/TVmain.png" position="849,109" size="100,40" alphatest="blend" zPosition="1" />
-		<ePixmap pixmap="{picpath}FHD/logos/TVsender.png" position="849,531" size="100,40" alphatest="blend" zPosition="1" />
+		<ePixmap pixmap="{picpath}FHD/logos/TV2015.png" position="1012,360" size="100,40" alphatest="blend" zPosition="1" scale="1" />
+		<ePixmap pixmap="{picpath}FHD/logos/TVevent.png" position="849,702" size="100,40" alphatest="blend" zPosition="1" scale="1" />
+		<ePixmap pixmap="{picpath}FHD/logos/TVjetzt.png" position="849,360" size="100,40" alphatest="blend" zPosition="1" scale="1" />
+		<ePixmap pixmap="{picpath}FHD/logos/TVlate.png" position="1170,360" size="100,40" alphatest="blend" zPosition="1" scale="1" />
+		<ePixmap pixmap="{picpath}FHD/logos/TVmain.png" position="849,109" size="100,40" alphatest="blend" zPosition="1" scale="1" />
+		<ePixmap pixmap="{picpath}FHD/logos/TVsender.png" position="849,531" size="100,40" alphatest="blend" zPosition="1" scale="1" />
 		<ePixmap pixmap="{picpath}FHD/buttons/button_text.png" position="862,409" size="84,36" alphatest="blend" zPosition="1" />
 		<ePixmap pixmap="{picpath}FHD/buttons/button_ok.png" position="862,751" size="84,36" alphatest="blend" zPosition="1" />
 		<ePixmap pixmap="{picpath}FHD/buttons/button_info.png" position="862,834" size="84,36" alphatest="blend" zPosition="1" />
