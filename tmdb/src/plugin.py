@@ -81,7 +81,7 @@ def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bou
 
 
 def main(session, service, **kwargs):
-    reload_module(tmdb)
+	reload_module(tmdb)
 	try:
 		session.open(tmdb.tmdbScreen, service, 1)
 	except:
@@ -90,7 +90,7 @@ def main(session, service, **kwargs):
 
 
 def eventinfo(session, eventName="", **kwargs):
-    reload_module(tmdb)
+	reload_module(tmdb)
 	try:
 		s = session.nav.getCurrentService()
 		info = s.info()
