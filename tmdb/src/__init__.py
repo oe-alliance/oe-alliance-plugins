@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-from __future__ import print_function
 from Components.Language import language
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 import gettext
@@ -16,7 +14,7 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
-		print("[TMDb] fallback to default Enigma2 Translation for", txt)
+		print("[TMDb] fallback to default Enigma2 Translation for %s" % txt)
 		t = gettext.gettext(txt)
 	return t
 
