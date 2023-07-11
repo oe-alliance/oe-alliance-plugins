@@ -7,15 +7,6 @@ PluginLanguageDomain = "tmdb"
 PluginLanguagePath = "Extensions/tmdb/locale"
 
 
-oldWay = True
-try:
-	from Components.SystemInfo import BoxInfo
-	if BoxInfo.getItem("distro") in ("openatv",):
-		oldWay = False
-except Exception:
-	pass
-
-
 def localeInit():
 	gettext.bindtextdomain(PluginLanguageDomain, resolveFilename(SCOPE_PLUGINS, PluginLanguagePath))
 

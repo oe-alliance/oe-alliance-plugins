@@ -60,7 +60,7 @@ else:
 	from thread import start_new_thread
 
 import tmdbsimple as tmdb
-from .__init__ import _, oldWay
+from .__init__ import _
 
 
 pname = "TMDb"
@@ -216,8 +216,6 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Cover and Backdrop resolution:"), config.plugins.tmdb.themoviedb_coversize))
 		self.list.append(getConfigListEntry(_("Language:"), config.plugins.tmdb.lang))
 		self.list.append(getConfigListEntry(_("Show details if single result:"), config.plugins.tmdb.firsthit))
-		if oldWay:
-			self.list.append(getConfigListEntry(_("Overwrite key yellow for TMDb infos in EPGs:"), config.plugins.tmdb.keyyellow))
 		self.list.append(getConfigListEntry(_("Save Cover resolution:"), config.plugins.tmdb.coverQuality))
 		self.list.append(getConfigListEntry(_("Save Backdrop resolution:"), config.plugins.tmdb.backdropQuality))
 		self.list.append(getConfigListEntry(_("Check SSL certificate:"), config.plugins.tmdb.cert))
