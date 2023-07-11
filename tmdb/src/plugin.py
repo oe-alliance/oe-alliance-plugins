@@ -18,14 +18,14 @@ from Components.Sources.StaticText import StaticText
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.config import *
 from Components.ConfigList import ConfigList, ConfigListScreen
-from .__init__ import _
+from .__init__ import _, oldWay
 from . import tmdb
 
 
 pname = "TMDb"
 pdesc = _("Show movie details from TMDb")
-pversion = "1.0.0"
-pdate = "20230225"
+pversion = "1.0.1"
+pdate = "20230711"
 
 config.plugins.tmdb = ConfigSubsection()
 config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
@@ -37,47 +37,45 @@ config.plugins.tmdb.coverQuality = ConfigSelection(default="500x750", choices=["
 config.plugins.tmdb.cert = ConfigYesNo(default=True)
 config.plugins.tmdb.apiKey = ConfigText(default='intern')
 
-# Autostart
-
-
-def autostart(reason, **kwargs):
-	if reason == 0:
-		try:
-			# for menu key activating in EPGSelection
-			if config.plugins.tmdb.keyyellow.value:
-				EPGSelectionInit()
-		except Exception:
-			pass
-
 
 # Overwrite EPGSelection.__init__ with our modified one
 baseEPGSelection__init__ = None
 
 
-def EPGSelectionInit():
-	global baseEPGSelection__init__
-	if baseEPGSelection__init__ is None:
-		baseEPGSelection__init__ = EPGSelection.__init__
-	EPGSelection.__init__ = EPGSelection__init__
+if oldWay:
 
-# Modified EPGSelection __init__
+	# Autostart
+	def autostart(reason, **kwargs):
+		if reason == 0:
+			try:
+				# for menu key activating in EPGSelection
+				if config.plugins.tmdb.keyyellow.value:
+					EPGSelectionInit()
+			except Exception:
+				pass
 
+	def EPGSelectionInit():
+		global baseEPGSelection__init__
+		if baseEPGSelection__init__ is None:
+			baseEPGSelection__init__ = EPGSelection.__init__
+		EPGSelection.__init__ = EPGSelection__init__
 
-def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, isEPGBar=None, switchBouquet=None, EPGNumberZap=None, togglePiP=None):
-	baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, isEPGBar, switchBouquet, EPGNumberZap, togglePiP)
-	if self.type != EPG_TYPE_MULTI:
-		def yellowClicked():
-			cur = self["list"].getCurrent()
-			if cur[0] is not None:
-				name = cur[0].getEventName()
-			else:
-				name = ''
-			session.open(tmdb.tmdbScreen, name, 2)
-		self["tmdb_actions"] = ActionMap(["EPGSelectActions"],
-				{
-					"yellow": yellowClicked,
-				})
-		self["key_yellow"].text = _("TMDb Infos ...")
+	# Modified EPGSelection __init__
+	def EPGSelection__init__(self, session, service, zapFunc=None, eventid=None, bouquetChangeCB=None, serviceChangeCB=None, isEPGBar=None, switchBouquet=None, EPGNumberZap=None, togglePiP=None):
+		baseEPGSelection__init__(self, session, service, zapFunc, eventid, bouquetChangeCB, serviceChangeCB, isEPGBar, switchBouquet, EPGNumberZap, togglePiP)
+		if self.type != EPG_TYPE_MULTI:
+			def yellowClicked():
+				cur = self["list"].getCurrent()
+				if cur[0] is not None:
+					name = cur[0].getEventName()
+				else:
+					name = ''
+				session.open(tmdb.tmdbScreen, name, 2)
+			self["tmdb_actions"] = ActionMap(["EPGSelectActions"],
+					{
+						"yellow": yellowClicked,
+					})
+			self["key_yellow"].text = _("TMDb Infos ...")
 
 
 def main(session, service, **kwargs):
@@ -103,8 +101,14 @@ def eventinfo(session, eventName="", **kwargs):
 
 
 def Plugins(**kwargs):
-	return [
-			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False),
-			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),
-			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
-			]
+	if oldWay:
+		return [
+				PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_AUTOSTART, fnc=autostart, needsRestart=False),
+				PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),
+				PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
+				]
+	else:
+		return [
+				PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),
+				PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
+				]

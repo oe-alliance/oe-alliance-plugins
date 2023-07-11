@@ -60,13 +60,13 @@ else:
 	from thread import start_new_thread
 
 import tmdbsimple as tmdb
-from .__init__ import _
+from .__init__ import _, oldWay
 
 
 pname = "TMDb"
 pdesc = _("Show movie details from TMDb")
 pversion = "1.0.1"
-pdate = "20230226"
+pdate = "20230711"
 
 tmdb.REQUESTS_SESSION = requests.Session()
 tmdb.REQUESTS_TIMEOUT = (5, 30)
@@ -216,7 +216,8 @@ class tmdbConfigScreen(Screen, ConfigListScreen):
 		self.list.append(getConfigListEntry(_("Cover and Backdrop resolution:"), config.plugins.tmdb.themoviedb_coversize))
 		self.list.append(getConfigListEntry(_("Language:"), config.plugins.tmdb.lang))
 		self.list.append(getConfigListEntry(_("Show details if single result:"), config.plugins.tmdb.firsthit))
-		self.list.append(getConfigListEntry(_("Overwrite key yellow for TMDb infos in EPGs:"), config.plugins.tmdb.keyyellow))
+		if oldWay:
+			self.list.append(getConfigListEntry(_("Overwrite key yellow for TMDb infos in EPGs:"), config.plugins.tmdb.keyyellow))
 		self.list.append(getConfigListEntry(_("Save Cover resolution:"), config.plugins.tmdb.coverQuality))
 		self.list.append(getConfigListEntry(_("Save Backdrop resolution:"), config.plugins.tmdb.backdropQuality))
 		self.list.append(getConfigListEntry(_("Check SSL certificate:"), config.plugins.tmdb.cert))
