@@ -921,6 +921,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 							getMachineBuild() == 'sfx6008' and "octagon-blindscan" or \
 							getMachineBuild() == 'sx88v2' and "octagon-blindscan" or \
 							getBrandOEM() == 'uclan' and "uclan-blindscan" or \
+							getBrandOEM() == 'qviart' and "qviart-blindscan" or \
 							getBrandOEM() == 'vuplus' and self.binName or \
 							getBrandOEM() == 'xtrend' and "avl_xtrend_blindscan" or \
 							getMachineBuild() == 'dags72604' and "dags_blindscan" or \
