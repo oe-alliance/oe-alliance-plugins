@@ -33,10 +33,6 @@ config.plugins.tmdb.cert = ConfigYesNo(default=True)
 config.plugins.tmdb.apiKey = ConfigText(default='intern')
 
 
-# Overwrite EPGSelection.__init__ with our modified one
-baseEPGSelection__init__ = None
-
-
 def main(session, service, **kwargs):
 	reload_module(tmdb)
 	try:
