@@ -10,34 +10,28 @@
 #source code of your modifications.
 #######################################################################
 
-from Plugins.Plugin import PluginDescriptor
-from Components.ActionMap import *
+from Components.ActionMap import HelpableActionMap
 from Components.Label import Label
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
 from Components.Pixmap import Pixmap
-from Components.PluginComponent import plugins
 from Components.config import *
-from Components.ConfigList import ConfigList, ConfigListScreen
 from Components.ScrollLabel import ScrollLabel
 from Components.MenuList import MenuList
 from Components.GUIComponent import GUIComponent
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, eServiceReference, eServiceCenter, gFont, getDesktop
-from Screens.EpgSelection import EPGSelection
-from Screens.ChannelSelection import SimpleChannelSelection
-from ServiceReference import ServiceReference
 from Screens.Screen import Screen
-from Screens.InfoBar import MoviePlayer
+from Screens.Setup import Setup
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Screens.HelpMenu import HelpableScreen
 from Screens.ChoiceBox import ChoiceBox
-from Tools.Directories import pathExists, fileExists, resolveFilename
-from Tools.LoadPixmap import LoadPixmap
-from Tools.BoundFunction import boundFunction
+from Tools.Directories import fileExists, resolveFilename
 from Screens.Screen import Screen
 from Screens.MessageBox import MessageBox
 from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, loadPNG, RT_WRAP, eConsoleAppContainer, eServiceCenter, eServiceReference, getDesktop, loadPic, loadJPG, RT_VALIGN_CENTER, gPixmapPtr, ePicLoad, eTimer
+
+from skin import parameters
 import sys
 import os
 import re
@@ -45,7 +39,6 @@ import shutil
 import json
 import string
 import base64
-import skin
 from twisted.web.client import downloadPage
 from twisted.internet import reactor
 from twisted.internet import defer
@@ -124,7 +117,7 @@ class createList(GUIComponent, object):
 		self.mode = mode
 		self.l = eListboxPythonMultiContent()
 		#self.l.setFont(0, gFont('Regular', 22))
-		font, size = skin.parameters.get("TMDbListFont", ('Regular', 25))
+		font, size = parameters.get("TMDbListFont", ('Regular', 25))
 		self.l.setFont(0, gFont(font, size))
 		self.l.setItemHeight(30)
 		self.l.setBuildFunc(self.buildList)
@@ -134,7 +127,7 @@ class createList(GUIComponent, object):
 			width = self.l.getItemSize().width()
 			(title, coverUrl, media, id, backdropUrl) = entry
 			res = [None]
-			x, y, w, h = skin.parameters.get("TMDbListName", (5, 1, 1920, 40))
+			x, y, w, h = parameters.get("TMDbListName", (5, 1, 1920, 40))
 			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(title)))
 			return res
 
@@ -182,55 +175,10 @@ class createList(GUIComponent, object):
 			self.instance.moveSelection(self.instance.moveDown)
 
 
-class tmdbConfigScreen(Screen, ConfigListScreen):
+class tmdbConfigScreen(Setup):
 	def __init__(self, session):
-		Screen.__init__(self, session)
-		self.skinName = ["tmdbConfigScreen", "Setup"]
-		self.setup_title = _("Setup")
-
-		self.onChangedEntry = []
-		self.list = []
-		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
-
-		self["actions"] = ActionMap(["TMDbActions"],
-			{
-				"cancel": self.keyCancel,
-				"save": self.keyOK,
-				"red": self.keyCancel,
-				"green": self.keyOK,
-			}, -2)
-
-		self["key_green"] = StaticText(_("OK"))
-		self["key_red"] = StaticText(_("Cancel"))
-
-		self.list = []
-		self.createConfigList()
-		self.onLayoutFinish.append(self.layoutFinished)
-
-	def layoutFinished(self):
-		self.setTitle(pname + " (" + pversion + " - " + pdate + ")")
-
-	def createConfigList(self):
-		self.list = []
-		self.list.append(getConfigListEntry(_("Cover and Backdrop resolution:"), config.plugins.tmdb.themoviedb_coversize))
-		self.list.append(getConfigListEntry(_("Language:"), config.plugins.tmdb.lang))
-		self.list.append(getConfigListEntry(_("Show details if single result:"), config.plugins.tmdb.firsthit))
-		self.list.append(getConfigListEntry(_("Save Cover resolution:"), config.plugins.tmdb.coverQuality))
-		self.list.append(getConfigListEntry(_("Save Backdrop resolution:"), config.plugins.tmdb.backdropQuality))
-		self.list.append(getConfigListEntry(_("Check SSL certificate:"), config.plugins.tmdb.cert))
-		self.list.append(getConfigListEntry("TMDb API Key:", config.plugins.tmdb.apiKey))
-		self["config"].list = self.list
-		self["config"].setList(self.list)
-
-	def changedEntry(self):
-		for x in self.onChangedEntry:
-			x()
-
-	def keyOK(self):
-		for x in self["config"].list:
-			x[1].save()
-		configfile.save()
-		self.close()
+		Setup.__init__(self, session, "TMDB", plugin="Extensions/tmdb", PluginLanguageDomain="tmdb")
+		self.setTitle("TMDb - The Movie Database v" + pversion)
 
 
 class tmdbScreen(Screen, HelpableScreen):
