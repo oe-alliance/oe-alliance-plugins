@@ -15,7 +15,7 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import *
 from .__init__ import _
 from . import tmdb
-from imp import reload
+from importlib import reload
 
 
 pname = "TMDb"
