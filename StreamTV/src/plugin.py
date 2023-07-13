@@ -16,7 +16,6 @@ from Components.Label import Label
 from Components.ActionMap import ActionMap
 from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
-from Components.AVSwitch import AVSwitch
 from Components.ServiceEventTracker import ServiceEventTracker
 
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
@@ -84,11 +83,8 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		self['channel_uri'] = Label(chURL)
 
 		self.picload = ePicLoad()
-		self.scale = AVSwitch().getFramebufferScale()
 		self.picload.PictureData.get().append(self.cbDrawChannelIcon)
-		print(self.scale[0])
-		print(self.scale[1])
-		self.picload.setPara((35, 35, self.scale[0], self.scale[1], False, 0, "#00000000"))
+		self.picload.setPara((35, 35, 1, 1, False, 0, "#00000000"))
 		self.picload.startDecode(chIcon)
 
 		self.bypassExit = False

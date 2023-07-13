@@ -15,7 +15,6 @@ from Components.ActionMap import *
 from Components.Label import Label
 from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
 from Components.Pixmap import Pixmap
-from Components.AVSwitch import AVSwitch
 from Components.PluginComponent import plugins
 from Components.config import *
 from Components.ConfigList import ConfigList, ConfigListScreen
@@ -521,9 +520,8 @@ class tmdbScreen(Screen, HelpableScreen):
 		if fileExists(coverName):
 			self.picload = ePicLoad()
 			self['cover'].instance.setPixmap(gPixmapPtr())
-			scale = AVSwitch().getFramebufferScale()
 			size = self['cover'].instance.size()
-			self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 			if self.picload.startDecode(coverName, 0, 0, False) == 0:
 				ptr = self.picload.getData()
 				if ptr != None:
@@ -1105,9 +1103,8 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		if fileExists(coverName):
 			self.picload = ePicLoad()
 			self['cover'].instance.setPixmap(gPixmapPtr())
-			scale = AVSwitch().getFramebufferScale()
 			size = self['cover'].instance.size()
-			self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 			if self.picload.startDecode(coverName, 0, 0, False) == 0:
 				ptr = self.picload.getData()
 				if ptr != None:
@@ -1135,9 +1132,8 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		if fileExists(tempDir + "backdrop.jpg"):
 			self.picload = ePicLoad()
 			self['backdrop'].instance.setPixmap(gPixmapPtr())
-			scale = AVSwitch().getFramebufferScale()
 			size = self['backdrop'].instance.size()
-			self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 			if self.picload.startDecode(backdropSaved, 0, 0, False) == 0:
 				ptr = self.picload.getData()
 				if ptr != None:
@@ -1149,9 +1145,8 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self.fsklogo = "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/fsk_" + fsk + ".png"
 		self.picload = ePicLoad()
 		self['fsklogo'].instance.setPixmap(gPixmapPtr())
-		scale = AVSwitch().getFramebufferScale()
 		size = self['fsklogo'].instance.size()
-		self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+		self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 		if self.picload.startDecode(self.fsklogo, 0, 0, False) == 0:
 			ptr = self.picload.getData()
 			if ptr != None:
@@ -1407,9 +1402,8 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 
 		if fileExists(coverName):
 			self['cover'].instance.setPixmap(gPixmapPtr())
-			scale = AVSwitch().getFramebufferScale()
 			size = self['cover'].instance.size()
-			self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 			if self.picload.startDecode(coverName, 0, 0, False) == 0:
 				ptr = self.picload.getData()
 				if ptr != None:
@@ -1423,9 +1417,8 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		if fileExists(backdropSaved):
 			self.picload = ePicLoad()
 			self['backdrop'].instance.setPixmap(gPixmapPtr())
-			scale = AVSwitch().getFramebufferScale()
 			size = self['backdrop'].instance.size()
-			self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 			if self.picload.startDecode(backdropSaved, 0, 0, False) == 0:
 				ptr = self.picload.getData()
 				if ptr != None:
@@ -1653,9 +1646,8 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 	def showCover(self, coverName):
 		self.picload = ePicLoad()
 		self['cover'].instance.setPixmap(gPixmapPtr())
-		scale = AVSwitch().getFramebufferScale()
 		size = self['cover'].instance.size()
-		self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+		self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 		if self.picload.startDecode(coverName, 0, 0, False) == 0:
 			ptr = self.picload.getData()
 			if ptr != None:
@@ -1668,9 +1660,8 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 		if fileExists(backdropSaved):
 			self.picload = ePicLoad()
 			self['backdrop'].instance.setPixmap(gPixmapPtr())
-			scale = AVSwitch().getFramebufferScale()
 			size = self['backdrop'].instance.size()
-			self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 			if self.picload.startDecode(backdropSaved, 0, 0, False) == 0:
 				ptr = self.picload.getData()
 				if ptr != None:
@@ -1849,9 +1840,8 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 
 		if fileExists(coverName):
 			self['cover'].instance.setPixmap(gPixmapPtr())
-			scale = AVSwitch().getFramebufferScale()
 			size = self['cover'].instance.size()
-			self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 			if self.picload.startDecode(coverName, 0, 0, False) == 0:
 				ptr = self.picload.getData()
 				if ptr != None:
@@ -1865,9 +1855,8 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		if fileExists(backdropSaved):
 			self.picload = ePicLoad()
 			self['backdrop'].instance.setPixmap(gPixmapPtr())
-			scale = AVSwitch().getFramebufferScale()
 			size = self['backdrop'].instance.size()
-			self.picload.setPara((size.width(), size.height(), scale[0], scale[1], False, 1, ""))
+			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
 			if self.picload.startDecode(backdropSaved, 0, 0, False) == 0:
 				ptr = self.picload.getData()
 				if ptr != None:

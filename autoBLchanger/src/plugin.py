@@ -13,7 +13,6 @@ from Components.config import config, getConfigListEntry, NoSave, ConfigNothing
 from Components.ConfigList import ConfigListScreen
 from Components.Label import Label
 from Components.Pixmap import Pixmap
-from Components.AVSwitch import AVSwitch
 from enigma import ePicLoad
 from os import curdir, walk, sep, rename, remove, symlink, system
 from os.path import normpath, abspath, realpath, join, islink, exists, lexists, dirname, splitext
@@ -118,7 +117,6 @@ class autoBLchanger(Screen, ConfigListScreen):  # /usr/lib/enigma2/python/Plugin
 		self.CurLogoIdx = -2
 		self.SelByUser = True
 		self.isOrigLogo = False
-		self.Scale = AVSwitch().getFramebufferScale()
 		self.PicLoad = ePicLoad()
 		self.populateConfigList()  # search for BootLogos and fill/show list
 		self.CurLogoIdx = getBootLogoIdx(self.Logos)
@@ -196,7 +194,7 @@ class autoBLchanger(Screen, ConfigListScreen):  # /usr/lib/enigma2/python/Plugin
 				pix = ['/tmp/nothing.found']
 			pix.sort(key=str.lower)
 			if exists(pix[0]):
-				self.PicLoad.setPara([self["LogosPict"].instance.size().width(), self["LogosPict"].instance.size().height(), self.Scale[0], self.Scale[1], 0, 1, '#00000000'])
+				self.PicLoad.setPara([self["LogosPict"].instance.size().width(), self["LogosPict"].instance.size().height(), 1, 1, 0, 1, '#00000000'])
 				self.PicLoad.startDecode(pix[0])
 				#self['LogosPict'].show()
 				# move pixmap if necessary (to not mask the selection)

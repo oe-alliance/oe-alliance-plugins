@@ -72,7 +72,6 @@ from boxbranding import getImageDistro, getBoxType, getImageArch
 from enigma import eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol, eTimer
 from enigma import eEPGCache, eServiceReference, eServiceCenter, getDesktop, getEnigmaVersionString, eEnv, ePicLoad
 from Components.ActionMap import ActionMap
-from Components.AVSwitch import AVSwitch
 from Components.Button import Button
 from Components.config import configfile, getConfigListEntry, ConfigPassword, ConfigYesNo, ConfigText, ConfigClock, ConfigSlider
 from Components.config import config, Config, ConfigSelectionNumber, ConfigSelection, ConfigText
@@ -5466,23 +5465,20 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.picload_conn = self.picload.PictureData.connect(self.setPictureCB)
 		else:
 			self.picload.PictureData.get().append(self.setPictureCB)
-		sc = AVSwitch().getFramebufferScale()
-		self.picload.setPara((pic_w, pic_h, sc[0], sc[1], False, 1, '#00000000'))
+		self.picload.setPara((pic_w, pic_h, 1, 1, False, 1, '#00000000'))
 		self.picload2 = ePicLoad()
 		if DPKG:
 			self.picload2_conn = self.picload2.PictureData.connect(self.setPictureCB2)
 		else:
 			self.picload2.PictureData.get().append(self.setPictureCB2)
-		sc = AVSwitch().getFramebufferScale()
-		self.picload2.setPara((pic_w, pic_h, sc[0], sc[1], False, 1, '#00000000'))
+		self.picload2.setPara((pic_w, pic_h, 1, 1, False, 1, '#00000000'))
 
 		self.picload3 = ePicLoad()
 		if DPKG:
 			self.picload3_conn = self.picload3.PictureData.connect(self.setPictureCB3)
 		else:
 			self.picload3.PictureData.get().append(self.setPictureCB3)
-		sc = AVSwitch().getFramebufferScale()
-		self.picload3.setPara((pic_w, pic_h, sc[0], sc[1], False, 1, '#00000000'))
+		self.picload3.setPara((pic_w, pic_h, 1, 1, False, 1, '#00000000'))
 		ConfigListScreen.__init__(self, self.list, on_change=self.selectionChanged)
 		self.PicTimer = eTimer()
 		if DPKG:

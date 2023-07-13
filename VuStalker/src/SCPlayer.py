@@ -2,7 +2,6 @@ from Screens.Screen import Screen
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 from Components.ActionMap import ActionMap
-from Components.AVSwitch import AVSwitch
 from Components.EpgList import EPG_TYPE_SINGLE, EPG_TYPE_MULTI
 from Components.Label import Label
 from Components.Pixmap import Pixmap
@@ -159,7 +158,6 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 		self['eventProgressbar'].hide()
 
 		self.picload = ePicLoad()
-		self.scale = AVSwitch().getFramebufferScale()
 		self.picload.PictureData.get().append(self.cbDrawChannelIcon)
 
 		self.event_timer = eTimer()
@@ -170,7 +168,7 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 		self.setServiceInfo(self.service)
 
 		chIcon = '%s/%s' % (PLUGIN_PATH, 'default.png')
-		self.picload.setPara((35, 35, self.scale[0], self.scale[1], False, 0, "#00000000"))
+		self.picload.setPara((35, 35, 1, 1, False, 0, "#00000000"))
 		self.picload.startDecode(chIcon)
 
 	def setServiceInfo(self, info):

@@ -5,7 +5,6 @@ from Components.MenuList import MenuList
 from Components.Label import Label
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.Pixmap import Pixmap
-from Components.AVSwitch import AVSwitch
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.StaticText import StaticText
 from Components.ConfigList import ConfigListScreen
@@ -1237,7 +1236,6 @@ class OpenUg(Screen):
 			return
 		else:
 			thumbnailFile = self.imagedir + str(picture_id)
-		sc = AVSwitch().getFramebufferScale()
 		if (os_path.exists(thumbnailFile) == True):
 			start = self.page * self.MAX_PIC_PAGE
 			end = (self.page * self.MAX_PIC_PAGE) + self.MAX_PIC_PAGE
@@ -1247,7 +1245,7 @@ class OpenUg(Screen):
 					if self.getThumbnailName(idx) == picture_id:
 						self.picloads[picture_id] = ePicLoad()
 						self.picloads[picture_id].PictureData.get().append(boundFunction(self.finish_decode, picture_id))
-						self.picloads[picture_id].setPara((150, 150, sc[0], sc[1], False, 1, "#00000000"))
+						self.picloads[picture_id].setPara((150, 150, 1, 1, False, 1, "#00000000"))
 						self.picloads[picture_id].startDecode(thumbnailFile)
 				count += 1
 				if count > end:

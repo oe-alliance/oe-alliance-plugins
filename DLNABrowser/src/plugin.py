@@ -17,7 +17,6 @@ from Components.config import config, ConfigSelection, getConfigListEntry, Confi
 from Components.FileList import FileList
 from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
-from Components.AVSwitch import AVSwitch
 from Components.ServiceEventTracker import ServiceEventTracker
 
 from . import _
@@ -533,11 +532,10 @@ class DLNAImageViewer(Screen):
 		self.close(self.lsatIndex + self.directoryCount)
 
 	def setPictureLoadPara(self):
-		sc = AVSwitch().getFramebufferScale()
 		self.pictureLoad.setPara([self["image"].instance.size().width(),
 					  self["image"].instance.size().height(),
-					  sc[0],
-					  sc[1],
+					  1,
+					  1,
 					  0,
 					  int(config.pic.resize.value),
 					  '#00000000'])
