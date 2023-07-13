@@ -15,6 +15,7 @@ from Plugins.Plugin import PluginDescriptor
 from Components.config import *
 from .__init__ import _
 from . import tmdb
+from imp import reload
 
 
 pname = "TMDb"
@@ -34,7 +35,7 @@ config.plugins.tmdb.apiKey = ConfigText(default='intern')
 
 
 def main(session, service, **kwargs):
-	reload_module(tmdb)
+	reload(tmdb)
 	try:
 		session.open(tmdb.tmdbScreen, service, 1)
 	except:
@@ -43,7 +44,7 @@ def main(session, service, **kwargs):
 
 
 def eventinfo(session, eventName="", **kwargs):
-	reload_module(tmdb)
+	reload(tmdb)
 	try:
 		s = session.nav.getCurrentService()
 		info = s.info()
