@@ -287,7 +287,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		self['key_green'] = Label(_("Details"))
 		self['key_yellow'] = Label(_("Edit search"))
 		self['key_blue'] = Label(_("more ..."))
-		self["key_menu"] = StaticText(_("MENU")) # auto menu button
+		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
 		self['list'] = createList(0)
 
 		self['cover'] = Pixmap()
@@ -729,7 +729,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self['key_green'] = Label(_("Crew"))
 		self['key_yellow'] = Label(_("Seasons"))
 		self['key_blue'] = Label(_("more ..."))
-		self["key_menu"] = StaticText(_("MENU")) # auto menu button
+		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
 		self['fsklogo'] = Pixmap()
@@ -1253,7 +1253,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		self['key_red'] = Label(_("Exit"))
 		self['key_green'] = Label(_("Details"))
 		self['key_blue'] = Label()
-		self["key_menu"] = StaticText(_("MENU")) # auto menu button
+		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
 		self['list'] = createList(0)
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
