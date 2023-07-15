@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tmdb\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2023-07-15 20:54+0000\n"
 "PO-Revision-Date: 2017-12-15 16:44+0100\n"
 "Last-Translator: schomi <schomi@vuplus-support.org>\n"
 "Language-Team: schomi <schomi@vuplus-support.org>\n"
@@ -22,20 +22,38 @@ msgstr ""
 msgid "Author:"
 msgstr "Author:"
 
-msgid "Cancel"
-msgstr "Abbruch"
+msgid "Backdrop Resolution:"
+msgstr ""
+
+msgid "Backdrop saved!"
+msgstr ""
+
+msgid "Best rated movies"
+msgstr ""
+
+msgid "Check SSL certificate:"
+msgstr ""
 
 msgid "Countries:"
 msgstr "Länder:"
 
-msgid "Cover resolution:"
-msgstr "Cover Auflösung:"
+msgid "Cover Resolution:"
+msgstr ""
+
+msgid "Cover and Backdrop Resolution:"
+msgstr ""
+
+msgid "Cover saved!"
+msgstr ""
 
 msgid "Crew"
 msgstr "Besetzung"
 
-msgid "Delete EIT file?"
-msgstr "Lösche EIT Datei?"
+msgid "Current movies in cinemas"
+msgstr ""
+
+msgid "Delete movie EIT file"
+msgstr ""
 
 msgid "Details"
 msgstr "Details"
@@ -64,21 +82,30 @@ msgstr "Verlassen"
 msgid "Genre:"
 msgstr "Genre:"
 
+msgid "Known for:"
+msgstr ""
+
 msgid "Language:"
 msgstr "Sprache:"
 
 msgid "Loading..."
 msgstr "Lade ..."
 
+msgid "MENU"
+msgstr ""
+
 msgid "Movie"
 msgstr "Film"
 
-#, python-format
-msgid "No Movie information found for %s"
-msgstr "Keine Filminformationen für %s"
+msgid "Movie description saved!"
+msgstr ""
 
-msgid "OK"
-msgstr "Ok"
+#, python-format
+msgid "No results for %s"
+msgstr ""
+
+msgid "No results found, or does not respond!"
+msgstr ""
 
 msgid "Page down"
 msgstr "Seite runter"
@@ -86,11 +113,34 @@ msgstr "Seite runter"
 msgid "Page up"
 msgstr "Seite hoch"
 
+msgid "Popular movies"
+msgstr ""
+
+msgid "Popularity"
+msgstr ""
+
+msgid "Recommendations"
+msgstr ""
+
+#, python-format
+msgid "Results for %s"
+msgstr ""
+
 msgid "Runtime:"
 msgstr "Dauer:"
 
-msgid "Save TMDb movie infos to file"
-msgstr "Schreibe TMDB Film Information in Datei"
+msgid "Save movie backdrop"
+msgstr ""
+
+msgid "Save movie cover"
+msgstr ""
+
+msgid "Save movie description"
+msgstr ""
+
+#, python-format
+msgid "Search for %s ..."
+msgstr ""
 
 msgid "Search for Movie:"
 msgstr "Suche nach Film:"
@@ -110,6 +160,9 @@ msgstr "Auswahl hoch"
 msgid "Series"
 msgstr "Serie"
 
+msgid "Server does not respond!"
+msgstr ""
+
 msgid "Setup"
 msgstr "Einstellungen"
 
@@ -119,31 +172,29 @@ msgstr "Zeige Details"
 msgid "Show details if single result:"
 msgstr "Zeige Details bei nur einem Suchergebnis an:"
 
+msgid "Show movie details from TMDb"
+msgstr ""
+
+msgid "Similar movies"
+msgstr ""
+
 msgid "Studio:"
 msgstr "Studio:"
 
-#, python-format
-msgid "TMDB: Results for %s"
-msgstr "TMDb: Ergebnisse für %s"
+msgid "TMDB Settings"
+msgstr ""
 
-msgid "TMDb"
-msgstr "TMDb"
-
-msgid "TMDb ... function for Movielist"
-msgstr "TMDb ... Funktion für die Aufnahmenliste"
+msgid "TMDb API Key:"
+msgstr ""
 
 msgid "TMDb Infos ..."
 msgstr "TMDb Infos ..."
 
-msgid "TMDb information created!"
-msgstr "TMDb Informationen erstellt!"
+msgid "TMDb: "
+msgstr ""
 
-msgid "TMDb: No results found, or does not respond!"
-msgstr "TMDb: Keine Ergebnisse gefunden, oder antwortet nicht!"
-
-#, python-format
-msgid "Try to find %s in tmdb ..."
-msgstr "Versuche %s in tmdb zu finden ..."
+msgid "Upcoming movies"
+msgstr ""
 
 msgid "Various"
 msgstr "Verschiedenes"
@@ -151,8 +202,62 @@ msgstr "Verschiedenes"
 msgid "Votes:"
 msgstr "Stimmen:"
 
-msgid "Write TMDb Information?"
-msgstr "Schreibe TMDb Informationen?"
-
 msgid "Year:"
 msgstr "Jahr:"
+
+msgid "divers"
+msgstr ""
+
+msgid "female"
+msgstr ""
+
+msgid "male"
+msgstr ""
+
+msgid "more ..."
+msgstr ""
+
+msgid "page "
+msgstr ""
+
+#~ msgid "Cancel"
+#~ msgstr "Abbruch"
+
+#~ msgid "Cover resolution:"
+#~ msgstr "Cover Auflösung:"
+
+#~ msgid "Delete EIT file?"
+#~ msgstr "Lösche EIT Datei?"
+
+#, python-format
+#~ msgid "No Movie information found for %s"
+#~ msgstr "Keine Filminformationen für %s"
+
+#~ msgid "OK"
+#~ msgstr "Ok"
+
+#~ msgid "Save TMDb movie infos to file"
+#~ msgstr "Schreibe TMDB Film Information in Datei"
+
+#, python-format
+#~ msgid "TMDB: Results for %s"
+#~ msgstr "TMDb: Ergebnisse für %s"
+
+#~ msgid "TMDb"
+#~ msgstr "TMDb"
+
+#~ msgid "TMDb ... function for Movielist"
+#~ msgstr "TMDb ... Funktion für die Aufnahmenliste"
+
+#~ msgid "TMDb information created!"
+#~ msgstr "TMDb Informationen erstellt!"
+
+#~ msgid "TMDb: No results found, or does not respond!"
+#~ msgstr "TMDb: Keine Ergebnisse gefunden, oder antwortet nicht!"
+
+#, python-format
+#~ msgid "Try to find %s in tmdb ..."
+#~ msgstr "Versuche %s in tmdb zu finden ..."
+
+#~ msgid "Write TMDb Information?"
+#~ msgstr "Schreibe TMDb Informationen?"
