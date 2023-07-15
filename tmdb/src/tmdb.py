@@ -63,7 +63,7 @@ pdate = "20230711"
 tmdb.REQUESTS_SESSION = requests.Session()
 tmdb.REQUESTS_TIMEOUT = (5, 30)
 
-noCover = "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.png"
+noCover = "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.jpg"
 tempDir = "/var/volatile/tmp/tmdb/"
 
 try:
