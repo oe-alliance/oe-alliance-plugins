@@ -23,9 +23,18 @@ pdesc = _("Show movie details from TMDb")
 pversion = "1.0.1"
 pdate = "20230711"
 
+defaultLang = "en"
+try:
+	from Components.SystemInfo import BoxInfo
+	distro = BoxInfo.getItem("distro").lower()
+	if distro in ("openatv",):
+		defaultLang = "de"
+except:
+	pass
+
 config.plugins.tmdb = ConfigSubsection()
 config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
-config.plugins.tmdb.lang = ConfigSelection(default="de", choices=["de", "en", "fr", "es", "pl", "ru"])
+config.plugins.tmdb.lang = ConfigSelection(default=defaultLang, choices=["de", "en", "es", "fr", "nl", "pl", "ru"])
 config.plugins.tmdb.firsthit = ConfigYesNo(default=True)
 config.plugins.tmdb.keyyellow = ConfigYesNo(default=True)
 config.plugins.tmdb.backdropQuality = ConfigSelection(default="1280x720", choices=["300x169", "780x439", "1280x720", "1920x1080", "original"])
