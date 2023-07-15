@@ -440,11 +440,12 @@ class tmdbScreen(Screen, HelpableScreen):
 				self['searchinfo'].setText(_("TMDb: ") + _("Results for %s") % self.text)
 			self.getInfo()
 			self['list'].pageUp()
-		except:
+		except Exception as e:
+			print("[TMDb fetch failure", type(e).__name__, e)
 			self['searchinfo'].setText(_("TMDb: ") + _("Server does not respond!"))
 			if self.count == 1:
 				self['searchinfo'].setText(_("TMDb: ") + _("Results for %s") % self.text)
-			if json_data['total_results'] == 0:
+			if "total_results" not in json_data or json_data['total_results'] == 0:
 				self['searchinfo'].setText(_("TMDb: ") + _("No results for %s") % self.text)
 
 	def getInfo(self):
