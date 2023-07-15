@@ -72,6 +72,7 @@ from boxbranding import getImageDistro, getBoxType, getImageArch
 from enigma import eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol, eTimer
 from enigma import eEPGCache, eServiceReference, eServiceCenter, getDesktop, getEnigmaVersionString, eEnv, ePicLoad
 from Components.ActionMap import ActionMap
+from Components.AVSwitch import AVSwitch
 from Components.Button import Button
 from Components.config import configfile, getConfigListEntry, ConfigPassword, ConfigYesNo, ConfigText, ConfigClock, ConfigSlider
 from Components.config import config, Config, ConfigSelectionNumber, ConfigSelection, ConfigText
@@ -5465,20 +5466,23 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.picload_conn = self.picload.PictureData.connect(self.setPictureCB)
 		else:
 			self.picload.PictureData.get().append(self.setPictureCB)
-		self.picload.setPara((pic_w, pic_h, 1, 1, False, 1, '#00000000'))
+		sc = AVSwitch().getFramebufferScale()
+		self.picload.setPara((pic_w, pic_h, sc[0], sc[1], False, 1, '#00000000'))
 		self.picload2 = ePicLoad()
 		if DPKG:
 			self.picload2_conn = self.picload2.PictureData.connect(self.setPictureCB2)
 		else:
 			self.picload2.PictureData.get().append(self.setPictureCB2)
-		self.picload2.setPara((pic_w, pic_h, 1, 1, False, 1, '#00000000'))
+		sc = AVSwitch().getFramebufferScale()
+		self.picload2.setPara((pic_w, pic_h, sc[0], sc[1], False, 1, '#00000000'))
 
 		self.picload3 = ePicLoad()
 		if DPKG:
 			self.picload3_conn = self.picload3.PictureData.connect(self.setPictureCB3)
 		else:
 			self.picload3.PictureData.get().append(self.setPictureCB3)
-		self.picload3.setPara((pic_w, pic_h, 1, 1, False, 1, '#00000000'))
+		sc = AVSwitch().getFramebufferScale()
+		self.picload3.setPara((pic_w, pic_h, sc[0], sc[1], False, 1, '#00000000'))
 		ConfigListScreen.__init__(self, self.list, on_change=self.selectionChanged)
 		self.PicTimer = eTimer()
 		if DPKG:
@@ -9869,15 +9873,16 @@ class UpdateStatus(Screen):
 			L4log("Wetter%s-citysearch Error: no data found." % ConfigWWW)
 
 	def downloadMSNcallback(self, ConfigWWW, jsonData):
-		iconmap = {"d0000": "32", "d1000": "34", "d2000": "30", "d2100": "12", "d2110": "5", "d2120": "14", "d2200": "11", "d2210": "42",
-					"d2220": "16", "d2400": "4", "d3000": "28", "d3100": "11", "d3110": "5", "d3120": "14", "d3200": "39", "d3210": "5",
-					"d3220": "16", "d3400": "4", "d4000": "26", "d4100": "9", "d4110": "5", "d4120": "14", "d4200": "9", "d4210": "5",
-					"d4220": "16", "d4300": "12", "d4310": "5", "d4320": "15", "d4400": "4", "d5000": "28", "d6000": "20", "d6050": "17",
-					"d7050": "17", "d9000": "21", "d9050": "17", "d9070": "21", "n0000": "31", "n1000": "33", "n2000": "29", "n2100": "45",
-					"n2110": "5", "n2120": "46", "n2200": "45", "n2210": "5", "n2220": "46", "n2400": "47", "n3000": "27", "n3100": "45",
-					"n3110": "11", "n3120": "46", "n3200": "45", "n3210": "5", "n3220": "46", "n3400": "47", "n4000": "26", "n4100": "9",
-					"n4110": "5", "n4120": "14", "n4200": "9", "n4210": "5", "n4220": "14", "n4300": "12", "n4310": "5", "n4320": "15",
-					"n4400": "4", "n5000": "29", "n6000": "20", "n6050": "17", "n7050": "17", "n9000": "21", "n9050": "17", "n9070": "21"
+		iconmap = {"d000": "32", "d100": "34", "d200": "30", "d210": "12", "d211": "5", "d212": "14", "d220": "11", "d221": "42",
+	     			"d222": "16",	"d240": "4", "d300": "28", "d310": "11", "d311": "5", "d312": "14", "d320": "39", "d321": "5",
+					"d322": "16", "d340": "4", "d400": "26", "d410": "9", "d411": "5", "d412": "14", "d420": "9", "d421": "5",
+					"d422": "16", "d430": "12", "d431": "5", "d432": "15", "d440": "4", "d500": "28", "d600": "20", "d603": "10",
+					"d605": "17", "d705": "17", "d900": "21", "d905": "17", "d907": "21", "n000": "31", "n100": "33", "n200": "29",
+					"n210": "45", "n211": "5", "n212": "46", "n220": "45", "n221": "5", "n222": "46", "n240": "47", "n300": "27",
+					"n310": "45", "n311": "11", "n312": "46", "n320": "45", "n321": "5", "n322": "46", "n340": "47", "n400": "26",
+					"n410": "9", "n411": "5", "n412": "14", "n420": "9", "n421": "5", "n422": "14", "n430": "12", "n431": "5",
+					"n432": "15", "n440": "4", "n500": "29", "n600": "20", "n603": "10", "n605": "17", "n705": "17", "n900": "21",
+					"n905": "17", "n907": "21"
 					}  # mapping: msn -> yahoo+
 		global wwwWetter
 		self.WetterOK = False
@@ -9909,7 +9914,7 @@ class UpdateStatus(Screen):
 			else:
 				self.WDay[ConfigWWW]["Wind"] = "%.1f m/s %s" % (current.get("windSpd", 0) / 3.6, getDirection(current.get("windDir", "na")))
 			self.WDay[ConfigWWW]["Cond"] = current.get("pvdrCap", "")
-			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(current.get("symbol", {}), "NA")
+			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(current.get("symbol", "")[:-1], "NA")  # reduce MSN-code by 'windy'-flag
 			self.WDay[ConfigWWW]["Feel"] = "%.0f" % current.get("feels", 0)
 			self.WDay[ConfigWWW]["Rain"] = "%.0f" % forecast[0].get("daily", {}).get("day", {}).get("precip", 0)
 			self.WWeek[ConfigWWW] = []
@@ -9918,7 +9923,7 @@ class UpdateStatus(Screen):
 				Low = "%.0f" % forecast[idx].get("daily", {}).get("tempLo", 0)
 				date = (currdate + timedelta(days=idx)).strftime("%Y-%m-%d")
 				Day = datetime(int(date[:4]), int(date[5:7]), int(date[8:])).strftime("%a")
-				Icon = "%s.png" % iconmap.get(forecast[idx].get("daily", {}).get("symbol", {}), "NA")
+				Icon = "%s.png" % iconmap.get(forecast[idx].get("daily", {}).get("symbol", "")[:-1], "NA")  # reduce MSN-code by 'windy'-flag
 				Cond = forecast[idx].get("daily", {}).get("pvdrCap", "")
 				Regen = "%.0f" % forecast[idx].get("daily", {}).get("day", {}).get("precip", 0)
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
