@@ -1,0 +1,193 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: tmdb\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 14:49+0100\n"
+"PO-Revision-Date: 2023-07-15 21:19+0300\n"
+"Last-Translator: orlandox\n"
+"Language-Team: orlandox\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.2.2\n"
+
+msgid " "
+msgstr " "
+
+msgid "Author:"
+msgstr "Tekijä:"
+
+msgid "Backdrop saved!"
+msgstr "Tausta tallennettu!"
+
+msgid "Best rated movies"
+msgstr "Parhaiksi arvioidut elokuvat"
+
+msgid "Countries:"
+msgstr "Maat:"
+
+msgid "Cover saved!"
+msgstr "Kansi tallennettu!"
+
+msgid "Crew"
+msgstr "Näyttelijät"
+
+msgid "Current movies in cinemas"
+msgstr "Tämänhetkiset elokuvat elokuvateattereissa"
+
+msgid "Delete movie EIT file"
+msgstr "Poista elokuvan EIT-tiedosto"
+
+msgid "Details"
+msgstr "Yksityiskohdat"
+
+msgid "Details down"
+msgstr "Yksityiskohdat alas"
+
+msgid "Details up"
+msgstr "Yksityiskohdat ylös"
+
+msgid "Director:"
+msgstr "Ohjaaja:"
+
+msgid "EIT file deleted!"
+msgstr "EIT-tiedosto poistettu!"
+
+msgid "Edit search"
+msgstr "Muokkaa hakua"
+
+msgid "Episodes"
+msgstr "Jaksot"
+
+msgid "Exit"
+msgstr "Poistu"
+
+msgid "Genre:"
+msgstr "Laji:"
+
+msgid "Known for:"
+msgstr "Tunnettu:"
+
+msgid "Loading..."
+msgstr "Lataan..."
+
+msgid "MENU"
+msgstr "MENU"
+
+msgid "Movie"
+msgstr "Elokuva"
+
+msgid "Movie description saved!"
+msgstr "Elokuvan kuvaus tallennettu!"
+
+#, python-format
+msgid "No results for %s"
+msgstr "Ei tuloksia haulle %s"
+
+msgid "No results found, or does not respond!"
+msgstr "Ei tuloksia tai ei vastaa!"
+
+msgid "Page down"
+msgstr "Sivu alas"
+
+msgid "Page up"
+msgstr "Sivu ylös"
+
+msgid "Popular movies"
+msgstr "Suosittuja elokuvia"
+
+msgid "Popularity"
+msgstr "Suosio"
+
+msgid "Recommendations"
+msgstr "Suositukset"
+
+#, python-format
+msgid "Results for %s"
+msgstr "Tulokset %s"
+
+msgid "Runtime:"
+msgstr "Kesto:"
+
+msgid "Save movie backdrop"
+msgstr "Tallenna elokuvan tausta"
+
+msgid "Save movie cover"
+msgstr "Tallenna elokuvan kansi"
+
+msgid "Save movie description"
+msgstr "Tallenna elokuvan kuvaus"
+
+#, python-format
+msgid "Search for %s ..."
+msgstr "Etsi %s ..."
+
+msgid "Search for Movie:"
+msgstr "Etsi elokuva:"
+
+msgid "Season"
+msgstr "Kausi"
+
+msgid "Seasons"
+msgstr "Kaudet"
+
+msgid "Selection down"
+msgstr "Valinta alas"
+
+msgid "Selection up"
+msgstr "Valinta ylös"
+
+msgid "Series"
+msgstr "Sarja"
+
+msgid "Server does not respond!"
+msgstr "Serveri ei vastaa!"
+
+msgid "Setup"
+msgstr "Asetukset"
+
+msgid "Show details"
+msgstr "Näytä yksityiskohdat"
+
+msgid "Show movie details from TMDb"
+msgstr "Näytä elokuvan tiedot TMDb:stä"
+
+msgid "Similar movies"
+msgstr "Samanlaisia elokuvia"
+
+msgid "Studio:"
+msgstr "Studio:"
+
+msgid "TMDb Infos ..."
+msgstr "TMDb tiedot ..."
+
+msgid "TMDb: "
+msgstr "TMDb: "
+
+msgid "Upcoming movies"
+msgstr "Tulevia elokuvia"
+
+msgid "Various"
+msgstr "Useita"
+
+msgid "Votes:"
+msgstr "Äänet:"
+
+msgid "Year:"
+msgstr "Vuosi:"
+
+msgid "divers"
+msgstr "erilaiset"
+
+msgid "female"
+msgstr "nainen"
+
+msgid "male"
+msgstr "mies"
+
+msgid "more ..."
+msgstr "lisää..."
+
+msgid "page "
+msgstr "sivu "
