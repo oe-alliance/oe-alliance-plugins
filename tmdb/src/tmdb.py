@@ -323,7 +323,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			self.searchtitle = ret[0]
 			self.actcinema = ret[1]
 		try:
-			if self.actcinema == 4 or self.actcinema == 5:
+			if self.actcinema in (4, 5):
 				self.id = self['list'].getCurrent()[3]
 				self.title = self['list'].getCurrent()[0]
 		except:
@@ -472,43 +472,38 @@ class tmdbScreen(Screen, HelpableScreen):
 	def ok(self):
 		self.timer.stop()
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		# title, url_cover, media, id, url_backdrop
-		title = self['list'].getCurrent()[0]
-		media = self['list'].getCurrent()[2]
-		id = self['list'].getCurrent()[3]
-		self.covername = tempDir + id + ".jpg"
-		self.url_backdrop = self['list'].getCurrent()[4]
-		self.session.open(tmdbScreenMovie, title, media, self.covername, id, self.saveFilename, self.url_backdrop)
+		if check is not None:
+			# title, url_cover, media, id, url_backdrop
+			title = self['list'].getCurrent()[0]
+			media = self['list'].getCurrent()[2]
+			id = self['list'].getCurrent()[3]
+			self.covername = tempDir + id + ".jpg"
+			self.url_backdrop = self['list'].getCurrent()[4]
+			self.session.open(tmdbScreenMovie, title, media, self.covername, id, self.saveFilename, self.url_backdrop)
 
 	def keyLeft(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].pageUp()
-		self.getInfo()
+		if check is not None:
+			self['list'].pageUp()
+			self.getInfo()
 
 	def keyRight(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].pageDown()
-		self.getInfo()
+		if check is not None:
+			self['list'].pageDown()
+			self.getInfo()
 
 	def keyDown(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].down()
-		self.getInfo()
+		if check is not None:
+			self['list'].down()
+			self.getInfo()
 
 	def keyUp(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].up()
-		self.getInfo()
+		if check is not None:
+			self['list'].up()
+			self.getInfo()
 
 	def chDown(self):
 		if self.actcinema >= 1:
@@ -1349,38 +1344,33 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 
 	def ok(self):
 		check = self['list'].getCurrent()
-		if check == None or check[3] == None:
-			return
-		id = self['list'].getCurrent()[3]
-		self.session.open(tmdbScreenPerson, self.covername, id)
+		if check is not None and check[3] is not None:
+			id = self['list'].getCurrent()[3]
+			self.session.open(tmdbScreenPerson, self.covername, id)
 
 	def keyLeft(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].pageUp()
-		self.getInfo()
+		if check is not None:
+			self['list'].pageUp()
+			self.getInfo()
 
 	def keyRight(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].pageDown()
-		self.getInfo()
+		if check is not None:
+			self['list'].pageDown()
+			self.getInfo()
 
 	def keyDown(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].down()
-		self.getInfo()
+		if check is not None:
+			self['list'].down()
+			self.getInfo()
 
 	def keyUp(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].up()
-		self.getInfo()
+		if check is not None:
+			self['list'].up()
+			self.getInfo()
 
 	def chDown(self):
 		self['data'].pageUp()
@@ -1781,38 +1771,33 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 
 	def ok(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		data = self['list'].getCurrent()[2]
-		self['data'].setText(data)
+		if check is not None:
+			data = self['list'].getCurrent()[2]
+			self['data'].setText(data)
 
 	def keyLeft(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].pageUp()
-		self.getInfo()
+		if check is not None:
+			self['list'].pageUp()
+			self.getInfo()
 
 	def keyRight(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].pageDown()
-		self.getInfo()
+		if check is not None:
+			self['list'].pageDown()
+			self.getInfo()
 
 	def keyDown(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].down()
-		self.getInfo()
+		if check is not None:
+			self['list'].down()
+			self.getInfo()
 
 	def keyUp(self):
 		check = self['list'].getCurrent()
-		if check == None:
-			return
-		self['list'].up()
-		self.getInfo()
+		if check is not None:
+			self['list'].up()
+			self.getInfo()
 
 	def chDown(self):
 		self['data'].pageUp()
