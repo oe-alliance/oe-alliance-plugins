@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-15 20:54+0000\n"
-"PO-Revision-Date: 2023-07-15 12:32+0200\n"
+"PO-Revision-Date: 2023-07-16 07:29+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: none\n"
 "Language: nl\n"
@@ -25,7 +25,7 @@ msgid "Author:"
 msgstr "Auteur:"
 
 msgid "Backdrop Resolution:"
-msgstr ""
+msgstr "Achtergrond resolutie:"
 
 msgid "Backdrop saved!"
 msgstr "Achtergrond opgeslagen!"
@@ -34,16 +34,16 @@ msgid "Best rated movies"
 msgstr "Best gewaardeerde films"
 
 msgid "Check SSL certificate:"
-msgstr ""
+msgstr "Controleer SSL-certificaat:"
 
 msgid "Countries:"
 msgstr "Landen:"
 
 msgid "Cover Resolution:"
-msgstr ""
+msgstr "Omslag resolutie:"
 
 msgid "Cover and Backdrop Resolution:"
-msgstr ""
+msgstr "Omslag en achtergrond resolutie:"
 
 msgid "Cover saved!"
 msgstr "Omslag opgeslagen!"
@@ -88,7 +88,7 @@ msgid "Known for:"
 msgstr "Bekend door:"
 
 msgid "Language:"
-msgstr ""
+msgstr "Taal:"
 
 msgid "Loading..."
 msgstr "aan het laden..."
@@ -172,7 +172,7 @@ msgid "Show details"
 msgstr "Toon details"
 
 msgid "Show details if single result:"
-msgstr ""
+msgstr "Toon details direct bij elkel resultaat:"
 
 msgid "Show movie details from TMDb"
 msgstr "Toon filmdetails van TMDb"
@@ -184,10 +184,10 @@ msgid "Studio:"
 msgstr "Studio:"
 
 msgid "TMDB Settings"
-msgstr ""
+msgstr "TMDb instellingen:"
 
 msgid "TMDb API Key:"
-msgstr ""
+msgstr "TMDb API Key:"
 
 msgid "TMDb Infos ..."
 msgstr "TMDb Info ..."
