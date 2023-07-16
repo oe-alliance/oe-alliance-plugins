@@ -34,7 +34,7 @@ except:
 
 config.plugins.tmdb = ConfigSubsection()
 config.plugins.tmdb.themoviedb_coversize = ConfigSelection(default="w185", choices=["w92", "w185", "w500", "original"])
-config.plugins.tmdb.lang = ConfigSelection(default=defaultLang, choices=["de", "en", "es", "fr", "nl", "pl", "ru"])
+config.plugins.tmdb.lang = ConfigSelection(default=defaultLang, choices=["de", "en", "es", "fr", "nl", "pl", "ru", "fi"])
 config.plugins.tmdb.firsthit = ConfigYesNo(default=True)
 config.plugins.tmdb.keyyellow = ConfigYesNo(default=True)
 config.plugins.tmdb.backdropQuality = ConfigSelection(default="1280x720", choices=["300x169", "780x439", "1280x720", "1920x1080", "original"])
