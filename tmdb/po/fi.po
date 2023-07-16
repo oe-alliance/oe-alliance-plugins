@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: tmdb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 14:49+0100\n"
-"PO-Revision-Date: 2023-07-15 21:19+0300\n"
+"PO-Revision-Date: 2023-07-16 08:48+0300\n"
 "Last-Translator: orlandox\n"
 "Language-Team: orlandox\n"
 "Language: fi\n"
@@ -58,7 +58,7 @@ msgid "Edit search"
 msgstr "Muokkaa hakua"
 
 msgid "Episodes"
-msgstr "Jaksot"
+msgstr "Jaksoa"
 
 msgid "Exit"
 msgstr "Poistu"
@@ -191,3 +191,27 @@ msgstr "lisää..."
 
 msgid "page "
 msgstr "sivu "
+
+msgid "Backdrop Resolution:"
+msgstr "Taustan resoluutio:"
+
+msgid "Check SSL certificate:"
+msgstr "Tarkista SSL-sertifikaatti:"
+
+msgid "Cover Resolution:"
+msgstr "Kannen resoluutio:"
+
+msgid "Cover and Backdrop Resolution:"
+msgstr "Kannen ja taustan resoluutio:"
+
+msgid "Language:"
+msgstr "Kieli:"
+
+msgid "Show details if single result:"
+msgstr "Näytä yksityiskohdat, jos yksittäinen tulos:"
+
+msgid "TMDB Settings"
+msgstr "TMDB asetukset"
+
+msgid "TMDb API Key:"
+msgstr "TMDb API-avain:"
