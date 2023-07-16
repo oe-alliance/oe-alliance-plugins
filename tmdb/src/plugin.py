@@ -43,7 +43,7 @@ config.plugins.tmdb.cert = ConfigYesNo(default=True)
 config.plugins.tmdb.apiKey = ConfigText(default='intern')
 
 
-def main(session, service, **kwargs):
+def movielist(session, service, **kwargs):
 	reload(tmdb)
 	try:
 		session.open(tmdb.tmdbScreen, service, 1)
@@ -67,7 +67,7 @@ def eventinfo(session, eventName="", **kwargs):
 
 def Plugins(**kwargs):
 	pList = [
-			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=main, needsRestart=False),
+			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_MOVIELIST, fnc=movielist, needsRestart=False),
 			PluginDescriptor(name="TMDb", description=_("TMDb Infos ..."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
 			]
 	if hasattr(PluginDescriptor, "WHERE_BUTTONSETUP"):
