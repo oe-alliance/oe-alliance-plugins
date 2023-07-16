@@ -95,7 +95,11 @@ def cleanFile(text):
 	for word in cutlist:
 		text = re.sub('(\_|\-|\.|\+)' + word + '(\_|\-|\.|\+)', '+', text, flags=re.I)
 	text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '').replace(" Director's Cut", "").replace(" director's cut", "").replace("[Uncut]", "").replace("Uncut", "")
-	text = " ".join(text.split())
+
+	text_split = text.split()
+	if text_split and text_split[0].lower() in ("new:", "live:"):
+		text_split.pop(0)  # remove annoying prefixes
+	text = " ".join(text_split)
 
 	if re.search('[Ss][0-9]+[Ee][0-9]+', text):
 		text = re.sub('[Ss][0-9]+[Ee][0-9]+.*[a-zA-Z0-9_]+', '', text, flags=re.S | re.I)
