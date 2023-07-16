@@ -171,7 +171,6 @@ class tmdbScreen(Screen, HelpableScreen):
 
 	def __init__(self, session, service, mode):
 		Screen.__init__(self, session)
-		self.session = session
 		tmdb.API_KEY = base64.b64decode('ZDQyZTZiODIwYTE1NDFjYzY5Y2U3ODk2NzFmZWJhMzk=')
 		if not config.plugins.tmdb.apiKey.value == "intern":
 			tmdb.API_KEY = config.plugins.tmdb.apiKey.value
@@ -600,7 +599,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 
 	def __init__(self, session, mname, media, coverName, id, saveFilename, url_backdrop):
 		Screen.__init__(self, session)
-		self.session = session
 		self.mname = mname
 		self.media = media
 		if self.media == "movie":
@@ -1144,7 +1142,6 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 
 	def __init__(self, session, mname, id, media):
 		Screen.__init__(self, session)
-		self.session = session
 		self.mname = mname
 		self.id = id
 		self.media = media
@@ -1377,7 +1374,6 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 
 	def __init__(self, session, coverName, id):
 		Screen.__init__(self, session)
-		self.session = session
 		self.coverName = coverName
 		self.id = id
 
@@ -1582,7 +1578,6 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 
 	def __init__(self, session, mname, id, media):
 		Screen.__init__(self, session)
-		self.session = session
 		self.mname = mname
 		self.id = id
 		self.media = media
