@@ -54,15 +54,13 @@ def movielist(session, service, **kwargs):
 
 def eventinfo(session, eventName="", **kwargs):
 	reload(tmdb)
-	try:
+	if not eventName:
 		s = session.nav.getCurrentService()
-		info = s.info()
-		event = info.getEvent(0)  # 0 = now, 1 = next
-		name = event and event.getEventName() or info.getName() or ''
-		session.open(tmdb.tmdbScreen, name, 2)
-	except:
-		import traceback
-		traceback.print_exc()
+		if s:
+			info = s.info()
+			event = info.getEvent(0)  # 0 = now, 1 = next
+			eventName = event and event.getEventName() or ''
+	session.open(tmdb.tmdbScreen, eventName, 2)
 
 
 def Plugins(**kwargs):
