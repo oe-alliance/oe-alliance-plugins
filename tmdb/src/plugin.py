@@ -45,11 +45,7 @@ config.plugins.tmdb.apiKey = ConfigText(default='intern')
 
 def movielist(session, service, **kwargs):
 	reload(tmdb)
-	try:
-		session.open(tmdb.tmdbScreen, service, 1)
-	except:
-		import traceback
-		traceback.print_exc()
+	session.open(tmdb.tmdbScreen, service, 1)
 
 
 def eventinfo(session, eventName="", **kwargs):
