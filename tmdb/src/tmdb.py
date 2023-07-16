@@ -39,11 +39,8 @@ from twisted.web.client import downloadPage
 import requests
 from PIL import Image
 
-noThread = sys.version_info[0] >= 3
-if noThread:
-	from twisted.internet.reactor import callInThread
-else:
-	from thread import start_new_thread
+from _thread import start_new_thread
+
 
 import tmdbsimple as tmdb
 from .__init__ import _
@@ -300,10 +297,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			#self.text="Navy CIS"
 			#self.text="Obi wan Kenobi"
 			self.timer = eTimer()
-			if noThread:
-				self.tmdbSearch()
-			else:
-				start_new_thread(self.tmdbSearch, ())
+			start_new_thread(self.tmdbSearch, ())
 		else:
 			print("[TMDb] no movie found.")
 			self['searchinfo'].setText(_("TMDb: ") + _("No results for %s") % self.text)
@@ -334,10 +328,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				self.title = self['list'].getCurrent()[0]
 		except:
 			pass
-		if noThread:
-			self.tmdbSearch()
-		else:
-			start_new_thread(self.tmdbSearch, ())
+		start_new_thread(self.tmdbSearch, ())
 
 	def tmdbSearch(self):
 		self['searchinfo'].setText(_("TMDb: ") + _("Search for %s ...") % self.text)
@@ -524,20 +515,14 @@ class tmdbScreen(Screen, HelpableScreen):
 			self.page += 1
 			if self.page > self.totalpages:
 				self.page = 1
-			if noThread:
-				self.tmdbSearch()
-			else:
-				start_new_thread(self.tmdbSearch, ())
+			start_new_thread(self.tmdbSearch, ())
 
 	def chUp(self):
 		if self.actcinema >= 1:
 			self.page -= 1
 			if self.page <= 0:
 				self.page = 1
-			if noThread:
-				self.tmdbSearch()
-			else:
-				start_new_thread(self.tmdbSearch, ())
+			start_new_thread(self.tmdbSearch, ())
 
 	def keyYellow(self):
 		return
@@ -555,10 +540,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		else:
 			self.text = newTitle
 			print("[TMDb] Manual search for: %s" % str(self.text))
-			if noThread:
-				self.tmdbSearch()
-			else:
-				start_new_thread(self.tmdbSearch, ())
+			start_new_thread(self.tmdbSearch, ())
 
 	def cancel(self):
 		self.delCover()
@@ -740,10 +722,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self.showCover(self.coverName)
 		self.getBackdrop(self.url_backdrop)
 		#self.getData()
-		if noThread:
-			self.tmdbSearch()
-		else:
-			start_new_thread(self.tmdbSearch, ())
+		start_new_thread(self.tmdbSearch, ())
 
 	def menu(self):
 		if self.saveFilename == "":
@@ -1259,10 +1238,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		print("[TMDb] Selected: %s" % self.mname)
 		self['searchinfo'].setText("%s" % self.mname)
 		self.showBackdrop()
-		if noThread:
-			self.tmdbSearch()
-		else:
-			start_new_thread(self.tmdbSearch, ())
+		start_new_thread(self.tmdbSearch, ())
 
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
@@ -1482,10 +1458,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 		self.showBackdrop()
 		self.showCover(self.coverName)
 		#self.getData()
-		if noThread:
-			self.tmdbSearch()
-		else:
-			start_new_thread(self.tmdbSearch, ())
+		start_new_thread(self.tmdbSearch, ())
 
 	def keyLeft(self):
 		self['fulldescription'].pageUp()
@@ -1708,10 +1681,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		print("[TMDb] Selected: %s" % self.mname)
 		self['searchinfo'].setText("%s" % self.mname)
 		self.showBackdrop()
-		if noThread:
-			self.tmdbSearch()
-		else:
-			start_new_thread(self.tmdbSearch, ())
+		start_new_thread(self.tmdbSearch, ())
 
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
