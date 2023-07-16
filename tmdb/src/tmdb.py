@@ -13,7 +13,7 @@
 from Components.ActionMap import HelpableActionMap
 from Components.Label import Label
 from Components.config import *
-from Components.GUIComponent import GUIComponent
+from Components.MenuList import MenuList
 from Components.Pixmap import Pixmap
 from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
@@ -27,7 +27,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from Tools.Directories import fileExists
 
-from enigma import eListbox, eListboxPythonMultiContent, ePicLoad, eServiceCenter, eTimer, gFont, gPixmapPtr, getDesktop, RT_HALIGN_LEFT, RT_VALIGN_CENTER
+from enigma import eListboxPythonMultiContent, ePicLoad, eServiceCenter, eTimer, gFont, gPixmapPtr, getDesktop, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 
 from skin import parameters
 import sys
@@ -104,13 +104,9 @@ def cleanEnd(text):
 	return text
 
 
-class createList(GUIComponent, object):
-	GUI_WIDGET = eListbox
-
+class createList(MenuList):
 	def __init__(self):
-		GUIComponent.__init__(self)
-		self.l = eListboxPythonMultiContent()
-		#self.l.setFont(0, gFont('Regular', 22))
+		MenuList.__init__(self, [], content=eListboxPythonMultiContent)
 		font, size = parameters.get("TMDbListFont", ('Regular', 25))
 		self.l.setFont(0, gFont(font, size))
 		self.l.setItemHeight(30)
@@ -118,54 +114,14 @@ class createList(GUIComponent, object):
 
 	def buildList(self, entry):
 		width = self.l.getItemSize().width()
-		(title, coverUrl, media, id, backdropUrl) = entry
 		res = [None]
 		x, y, w, h = parameters.get("TMDbListName", (5, 1, 1920, 40))
-		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(title)))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, entry[0]))
 		return res
 
 	def getCurrent(self):
 		cur = self.l.getCurrentSelection()
 		return cur and cur[0]
-
-	def postWidgetCreate(self, instance):
-		instance.setContent(self.l)
-		self.instance.setWrapAround(True)
-
-	def preWidgetRemove(self, instance):
-		instance.setContent(None)
-
-	def setList(self, list):
-		self.l.setList(list)
-
-	def moveToIndex(self, idx):
-		self.instance.moveSelectionTo(idx)
-
-	def getSelectionIndex(self):
-		return self.l.getCurrentSelectionIndex()
-
-	def getSelectedIndex(self):
-		return self.l.getCurrentSelectionIndex()
-
-	def selectionEnabled(self, enabled):
-		if self.instance is not None:
-			self.instance.setSelectionEnable(enabled)
-
-	def pageUp(self):
-		if self.instance is not None:
-			self.instance.moveSelection(self.instance.pageUp)
-
-	def pageDown(self):
-		if self.instance is not None:
-			self.instance.moveSelection(self.instance.pageDown)
-
-	def up(self):
-		if self.instance is not None:
-			self.instance.moveSelection(self.instance.moveUp)
-
-	def down(self):
-		if self.instance is not None:
-			self.instance.moveSelection(self.instance.moveDown)
 
 
 class tmdbConfigScreen(Setup):
