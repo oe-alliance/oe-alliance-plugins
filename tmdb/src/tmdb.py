@@ -116,9 +116,8 @@ def cleanEnd(text):
 class createList(GUIComponent, object):
 	GUI_WIDGET = eListbox
 
-	def __init__(self, mode):
+	def __init__(self):
 		GUIComponent.__init__(self)
-		self.mode = mode
 		self.l = eListboxPythonMultiContent()
 		#self.l.setFont(0, gFont('Regular', 22))
 		font, size = parameters.get("TMDbListFont", ('Regular', 25))
@@ -127,13 +126,12 @@ class createList(GUIComponent, object):
 		self.l.setBuildFunc(self.buildList)
 
 	def buildList(self, entry):
-		if self.mode == 0:
-			width = self.l.getItemSize().width()
-			(title, coverUrl, media, id, backdropUrl) = entry
-			res = [None]
-			x, y, w, h = parameters.get("TMDbListName", (5, 1, 1920, 40))
-			res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(title)))
-			return res
+		width = self.l.getItemSize().width()
+		(title, coverUrl, media, id, backdropUrl) = entry
+		res = [None]
+		x, y, w, h = parameters.get("TMDbListName", (5, 1, 1920, 40))
+		res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT | RT_VALIGN_CENTER, str(title)))
+		return res
 
 	def getCurrent(self):
 		cur = self.l.getCurrentSelection()
@@ -245,7 +243,6 @@ class tmdbScreen(Screen, HelpableScreen):
 			os.mkdir(tempDir)
 
 		if self.mode == 1:
-			self.isDirectory = False
 			serviceHandler = eServiceCenter.getInstance()
 			info = serviceHandler.info(service)
 			path = service.getPath()
@@ -256,11 +253,9 @@ class tmdbScreen(Screen, HelpableScreen):
 				path = path[:-1]
 				self.file = self.baseName(path)
 				self.text = self.baseName(path)
-				self.isDirectory = True
 			else:
 				self.text = cleanFile(info.getName(service))
 				self.saveFilename = path
-				self.isDirectory = False
 		else:
 			self.text = service
 			self.text = cleanFile(service)
@@ -292,7 +287,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		self['key_yellow'] = Label(_("Edit search"))
 		self['key_blue'] = Label(_("more ..."))
 		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
-		self['list'] = createList(0)
+		self['list'] = createList()
 
 		self['cover'] = Pixmap()
 
@@ -1259,7 +1254,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		self['key_green'] = Label(_("Details"))
 		self['key_blue'] = Label()
 		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
-		self['list'] = createList(0)
+		self['list'] = createList()
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
 
@@ -1707,7 +1702,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self['key_red'] = Label(_("Exit"))
 		self['key_green'] = Label()
 		self['key_blue'] = Label()
-		self['list'] = createList(0)
+		self['list'] = createList()
 
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
