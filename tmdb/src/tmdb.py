@@ -12,36 +12,30 @@
 
 from Components.ActionMap import HelpableActionMap
 from Components.Label import Label
-from Components.MultiContent import MultiContentEntryText, MultiContentEntryPixmap, MultiContentEntryPixmapAlphaTest
-from Components.Pixmap import Pixmap
 from Components.config import *
-from Components.ScrollLabel import ScrollLabel
-from Components.MenuList import MenuList
 from Components.GUIComponent import GUIComponent
-from Components.Sources.List import List
+from Components.Pixmap import Pixmap
+from Components.ScrollLabel import ScrollLabel
 from Components.Sources.StaticText import StaticText
-from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, eServiceReference, eServiceCenter, gFont, getDesktop
+
+from Screens.ChoiceBox import ChoiceBox
+from Screens.HelpMenu import HelpableScreen
+from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Setup import Setup
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Screens.HelpMenu import HelpableScreen
-from Screens.ChoiceBox import ChoiceBox
-from Tools.Directories import fileExists, resolveFilename
-from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from enigma import eListboxPythonMultiContent, eListbox, gFont, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, loadPNG, RT_WRAP, eConsoleAppContainer, eServiceCenter, eServiceReference, getDesktop, loadPic, loadJPG, RT_VALIGN_CENTER, gPixmapPtr, ePicLoad, eTimer
+
+from Tools.Directories import fileExists
+
+from enigma import eListbox, eListboxPythonMultiContent, ePicLoad, eServiceCenter, eTimer, gFont, gPixmapPtr, getDesktop, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 
 from skin import parameters
 import sys
 import os
 import re
 import shutil
-import json
-import string
 import base64
 from twisted.web.client import downloadPage
-from twisted.internet import reactor
-from twisted.internet import defer
 import requests
 from PIL import Image
 
