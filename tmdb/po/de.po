@@ -187,7 +187,7 @@ msgstr ""
 msgid "TMDb API Key:"
 msgstr ""
 
-msgid "TMDb Infos ..."
+msgid "TMDb Search"
 msgstr "TMDb Infos ..."
 
 msgid "TMDb: "

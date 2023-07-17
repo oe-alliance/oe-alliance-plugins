@@ -190,7 +190,7 @@ msgstr ""
 msgid "TMDb API Key:"
 msgstr ""
 
-msgid "TMDb Infos ..."
+msgid "TMDb Search"
 msgstr "Informazioni TMDb..."
 
 msgid "TMDb: "

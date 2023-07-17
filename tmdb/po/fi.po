@@ -159,7 +159,7 @@ msgstr "Samanlaisia elokuvia"
 msgid "Studio:"
 msgstr "Studio:"
 
-msgid "TMDb Infos ..."
+msgid "TMDb Search"
 msgstr "TMDb tiedot ..."
 
 msgid "TMDb: "
