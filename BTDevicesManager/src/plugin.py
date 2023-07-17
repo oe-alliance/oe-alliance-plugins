@@ -83,7 +83,7 @@ class TaskManager:
 		print("clear task!!")
 
 	def index(self):
-		self.taskIdx
+		return self.taskIdx
 
 	def setStatusCB(self, cbfunc):
 		self.cbSetStatusCB = cbfunc

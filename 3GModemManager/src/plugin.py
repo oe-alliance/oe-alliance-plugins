@@ -117,7 +117,7 @@ class TaskManager:
 		print("clear task!!")
 
 	def index(self):
-		self.taskIdx
+		return self.taskIdx
 
 	def setStatusCB(self, cbfunc):
 		self.cbSetStatusCB = cbfunc
@@ -922,7 +922,7 @@ class ModemManager(Screen):
 			self.taskManager.append(cmd, self.cbRunWvDialAvail, self.cbPrintClose)
 			self.taskManager.setStatusCB(self.setConnectStatus)
 
-		next(self.taskManager)
+		self.taskManager.next()
 
 	def printStatus(self, idx, STATUS):
 		message = ''
@@ -968,7 +968,7 @@ class ModemManager(Screen):
 			message = "Occur error during connection...\nPlease, Check your setting!!"
 			self.session.open(MessageBox, _(message), MessageBox.TYPE_INFO)
 			return
-		next(self.taskManager)
+		self.taskManager.next()
 
 	def cbUnloadClose(self, ret):
 		self.taskManager.clean()
@@ -1028,7 +1028,7 @@ class ModemManager(Screen):
 			info['phone'] = self.phone
 
 		self.makeWvDialConf(info)
-		next(self.taskManager)
+		self.taskManager.next()
 
 	def writeConf(self, data, oper='>>'):
 		confFile = '/etc/wvdial.conf'
