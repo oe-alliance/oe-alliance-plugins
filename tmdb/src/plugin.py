@@ -54,6 +54,8 @@ def movielist(session, service, **kwargs):
 		path = ""
 	else:
 		eventName = info.getName(service)
+	print("[TMDb] eventName", eventName)
+	print("[TMDb] path", path)
 	session.open(tmdb.tmdbScreen, eventName, path)
 
 
@@ -65,6 +67,7 @@ def eventinfo(session, eventName="", **kwargs):
 			info = s.info()
 			event = info.getEvent(0)  # 0 = now, 1 = next
 			eventName = event and event.getEventName() or ''
+	print("[TMDb] eventName", eventName)
 	session.open(tmdb.tmdbScreen, eventName)
 
 
