@@ -47,7 +47,6 @@ from .__init__ import _
 from .skins import tmdbScreenSkin, tmdbScreenMovieSkin, tmdbScreenPeopleSkin, tmdbScreenPersonSkin, tmdbScreenSeasonSkin
 
 
-
 pname = "TMDb"
 pdesc = _("Show movie details from TMDb")
 pversion = "1.0.1"
