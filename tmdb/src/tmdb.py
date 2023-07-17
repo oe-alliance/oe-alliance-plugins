@@ -1100,10 +1100,6 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 	def dataError(self, error):
 		print("[TMDb] Error: %s" % error)
 
-	def baseName(self, str):
-		name = str.split('/')[-1]
-		return name
-
 	def showCover(self, coverName):
 		self.picload = ePicLoad()
 		if not fileExists(coverName):
@@ -1456,10 +1452,6 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 
 	def dataError(self, error):
 		print("[TMDb] Error: %s" % error)
-
-	def baseName(self, str):
-		name = str.split('/')[-1]
-		return name
 
 	def showCover(self, coverName):
 		self.picload = ePicLoad()
