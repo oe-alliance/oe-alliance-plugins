@@ -141,8 +141,8 @@ class tmdbScreen(Screen, HelpableScreen):
 			tmdb.API_KEY = config.plugins.tmdb.apiKey.value
 			print("[TMDb] API Key User: " + str(tmdb.API_KEY))
 		self.cert = config.plugins.tmdb.cert.value
-		self.text = cleanText(text)
-		self.saveFilename = path
+		self.text = cleanText(str(text))
+		self.saveFilename = str(path)
 		self.piclist = ""
 		self.covername = noCover
 		self.actcinema = 0
