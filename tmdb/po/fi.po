@@ -186,8 +186,8 @@ msgstr "nainen"
 msgid "male"
 msgstr "mies"
 
-msgid "more ..."
-msgstr "lisää..."
+msgid "More"
+msgstr "Lisää"
 
 msgid "page "
 msgstr "sivu "

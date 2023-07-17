@@ -169,7 +169,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				"red": (self.cancel, _("Exit")),
 				"green": (self.ok, _("Show details")),
 				"yellow": (self.searchString, _("Edit search")),
-				"blue": (self.menu, _("more ...")),
+				"blue": (self.menu, _("More")),
 				"menu": (self.setup, _("Setup")),
 				"eventview": (self.searchString, _("Edit search"))
 			}, -1)
@@ -178,7 +178,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		self['key_red'] = Label(_("Exit"))
 		self['key_green'] = Label(_("Details"))
 		self['key_yellow'] = Label(_("Edit search"))
-		self['key_blue'] = Label(_("more ..."))
+		self['key_blue'] = Label(_("More"))
 		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
 		self['list'] = createList()
 
@@ -478,9 +478,9 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				"red": (self.cancel, _("Exit")),
 				"green": (self.keyGreen, _("Crew")),
 				"yellow": (self.keyYellow, _("Seasons")),
-				"blue": (self.menu, _("more ...")),
+				"blue": (self.menu, _("More")),
 				"menu": (self.setup, _("Setup")),
-				"eventview": (self.menu, _("more ..."))
+				"eventview": (self.menu, _("More"))
 			}, -1)
 
 		self['searchinfo'] = Label(_("TMDb: ") + _("Loading..."))
@@ -509,7 +509,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self['key_red'] = Label(_("Exit"))
 		self['key_green'] = Label(_("Crew"))
 		self['key_yellow'] = Label(_("Seasons"))
-		self['key_blue'] = Label(_("more ..."))
+		self['key_blue'] = Label(_("More"))
 		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
@@ -1413,7 +1413,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			self['searchinfo'].setText(_("TMDb: ") + _("No results found, or does not respond!"))
 
 	def getInfo(self):
-		self['data'].setText("...")
+		self['data'].setText("")
 		url_cover = self['list'].getCurrent()[1]
 		id = self['list'].getCurrent()[3]
 

@@ -216,8 +216,8 @@ msgstr "veouwelijk"
 msgid "male"
 msgstr "mannelijk"
 
-msgid "more ..."
-msgstr "meer..."
+msgid "More"
+msgstr "Meer"
 
 msgid "page "
 msgstr "pagina"

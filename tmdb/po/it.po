@@ -217,7 +217,7 @@ msgstr ""
 msgid "male"
 msgstr ""
 
-msgid "more ..."
+msgid "More"
 msgstr ""
 
 msgid "page "
