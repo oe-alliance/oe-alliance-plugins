@@ -45,7 +45,16 @@ config.plugins.tmdb.apiKey = ConfigText(default='intern')
 
 def movielist(session, service, **kwargs):
 	reload(tmdb)
-	session.open(tmdb.tmdbScreen, service, 1)
+	from enigma import eServiceCenter
+	serviceHandler = eServiceCenter.getInstance()
+	info = serviceHandler.info(service)
+	path = service.getPath()
+	if path.endswith("/"):
+		eventName = path[:-1].split('/')[-1]
+		path = ""
+	else:
+		eventName = info.getName(service)
+	session.open(tmdb.tmdbScreen, eventName, path)
 
 
 def eventinfo(session, eventName="", **kwargs):
@@ -56,7 +65,7 @@ def eventinfo(session, eventName="", **kwargs):
 			info = s.info()
 			event = info.getEvent(0)  # 0 = now, 1 = next
 			eventName = event and event.getEventName() or ''
-	session.open(tmdb.tmdbScreen, eventName, 2)
+	session.open(tmdb.tmdbScreen, eventName)
 
 
 def Plugins(**kwargs):

@@ -27,7 +27,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 
 from Tools.Directories import fileExists
 
-from enigma import eListboxPythonMultiContent, ePicLoad, eServiceCenter, eTimer, gFont, gPixmapPtr, getDesktop, RT_HALIGN_LEFT, RT_VALIGN_CENTER
+from enigma import eListboxPythonMultiContent, ePicLoad, eTimer, gFont, gPixmapPtr, getDesktop, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 
 from skin import parameters
 import sys
@@ -78,7 +78,7 @@ def asBinary(s):
 		return s
 
 
-def cleanFile(text):
+def cleanText(text):
 	cutlist = ['x264', '720p', '1080p', '1080i', 'PAL', 'GERMAN', 'ENGLiSH', 'WS', 'DVDRiP', 'UNRATED', 'RETAIL', 'Web-DL', 'DL', 'LD', 'MiC', 'MD', 'DVDR', 'BDRiP', 'BLURAY', 'DTS', 'UNCUT', 'ANiME',
 				'AC3MD', 'AC3', 'AC3D', 'TS', 'DVDSCR', 'COMPLETE', 'INTERNAL', 'DTSD', 'XViD', 'DIVX', 'DUBBED', 'LINE.DUBBED', 'DD51', 'DVDR9', 'DVDR5', 'h264', 'AVC',
 				'WEBHDTVRiP', 'WEBHDRiP', 'WEBRiP', 'WEBHDTV', 'WebHD', 'HDTVRiP', 'HDRiP', 'HDTV', 'ITUNESHD', 'REPACK', 'SYNC']
@@ -134,15 +134,15 @@ class tmdbConfigScreen(Setup):
 class tmdbScreen(Screen, HelpableScreen):
 	skin = tmdbScreenSkin
 
-	def __init__(self, session, service, mode):
+	def __init__(self, session, text, path=""):
 		Screen.__init__(self, session)
 		tmdb.API_KEY = base64.b64decode('ZDQyZTZiODIwYTE1NDFjYzY5Y2U3ODk2NzFmZWJhMzk=')
 		if not config.plugins.tmdb.apiKey.value == "intern":
 			tmdb.API_KEY = config.plugins.tmdb.apiKey.value
 			print("[TMDb] API Key User: " + str(tmdb.API_KEY))
 		self.cert = config.plugins.tmdb.cert.value
-		self.mode = mode
-		self.saveFilename = ""
+		self.text = cleanText(text)
+		self.saveFilename = path
 		self.piclist = ""
 		self.covername = noCover
 		self.actcinema = 0
@@ -153,25 +153,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		if os.path.exists(tempDir) is False:
 			os.mkdir(tempDir)
 
-		if self.mode == 1:
-			serviceHandler = eServiceCenter.getInstance()
-			info = serviceHandler.info(service)
-			path = service.getPath()
-			self.savePath = path
-			self.dir = '/'.join(path.split('/')[:-1]) + '/'
-			self.file = self.baseName(path)
-			if path.endswith("/") is True:
-				path = path[:-1]
-				self.file = self.baseName(path)
-				self.text = self.baseName(path)
-			else:
-				self.text = cleanFile(info.getName(service))
-				self.saveFilename = path
-		else:
-			self.text = service
-			self.text = cleanFile(service)
-
-		print("[TMDb] Search for" + str(self.text))
+		print("[TMDb] Search for" + self.text)
 
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self, "TMDbActions",
@@ -460,10 +442,6 @@ class tmdbScreen(Screen, HelpableScreen):
 	def cancel(self):
 		self.delCover()
 		self.close()
-
-	def baseName(self, str):
-		name = str.split('/')[-1]
-		return name
 
 	def delCover(self):
 		try:
