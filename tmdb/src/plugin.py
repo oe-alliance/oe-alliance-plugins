@@ -73,9 +73,7 @@ def eventinfo(session, eventName="", **kwargs):
 
 def Plugins(**kwargs):
 	pList = [
-			PluginDescriptor(name="TMDb", description=_("TMDb Search"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=movielist, needsRestart=False),
-			PluginDescriptor(name="TMDb", description=_("TMDb Search"), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
+			PluginDescriptor(name="TMDb", description=_("TMDb search"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=movielist, needsRestart=False),
+			PluginDescriptor(name="TMDb search", description=_("The Movie Database gives detailed information about the selected program or movie."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
 			]
-	if hasattr(PluginDescriptor, "WHERE_BUTTONSETUP"):
-		pList.append(PluginDescriptor(name="TMDb search", description=_("TMDb Search"), where=PluginDescriptor.WHERE_BUTTONSETUP, fnc=eventinfo, needsRestart=False))
 	return pList
