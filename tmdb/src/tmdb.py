@@ -30,7 +30,6 @@ from Tools.Directories import fileExists
 from enigma import eListboxPythonMultiContent, ePicLoad, eTimer, gFont, gPixmapPtr, getDesktop, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 
 from skin import parameters
-import sys
 import os
 import re
 import shutil
@@ -58,24 +57,22 @@ tmdb.REQUESTS_TIMEOUT = (5, 30)
 noCover = "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.jpg"
 tempDir = "/var/volatile/tmp/tmdb/"
 
-try:
+if not os.path.isdir(tempDir):
 	os.mkdir(tempDir)
-except:
-	pass
+	
+DEFAULT = 0
+CURRENT_MOVIES = 1
+UPCOMING_MOVIES = 2
+POPULAR_MOVIES = 3
+SIMILAR_MOVIES = 4
+RECOMENDED_MOVIES = 5
+BEST_RATED_MOVIES = 6
 
 
 def debug(s, flag="a"):  # pass
 	f = open("/usr/lib/enigma2/python/Plugins/Extensions/tmdb/debug.txt", flag)
 	f.write(str(s) + '\n')
 	f.close()
-
-
-def asBinary(s):
-	try:
-		from six import ensure_binary
-		return (ensure_binary(s))
-	except:
-		return s
 
 
 def cleanText(text):
@@ -139,13 +136,13 @@ class tmdbScreen(Screen, HelpableScreen):
 		tmdb.API_KEY = base64.b64decode('ZDQyZTZiODIwYTE1NDFjYzY5Y2U3ODk2NzFmZWJhMzk=')
 		if not config.plugins.tmdb.apiKey.value == "intern":
 			tmdb.API_KEY = config.plugins.tmdb.apiKey.value
-			print("[TMDb] API Key User: " + str(tmdb.API_KEY))
+#		print("[TMDb][tmdbScreen] API Key User: " + str(tmdb.API_KEY))
 		self.cert = config.plugins.tmdb.cert.value
 		self.text = cleanText(str(text))
 		self.saveFilename = str(path)
 		self.piclist = ""
 		self.covername = noCover
-		self.actcinema = 0
+		self.actcinema = DEFAULT
 		self.searchtitle = (_("TMDb: ") + _("Results for %s"))
 		#self.title = " "
 		self.page = 1
@@ -153,7 +150,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		if os.path.exists(tempDir) is False:
 			os.mkdir(tempDir)
 
-		print("[TMDb] Search for" + self.text)
+		print("[TMDb][tmdbScreen] Search for" + self.text)
 
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self, "TMDbActions",
@@ -187,32 +184,22 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.onLayoutFinish.append(self.onFinish)
 
 	def onFinish(self):
-		if not self.text == "":
-			#self.text = self.text.replace("- Director's Cut","").replace("- director's cut","")
-			#self.text="xyz123"
-			#self.text="Verstehen sie spass"
-			#self.text="x-men"
-			#self.text="markus lanz"
-			#self.text="Live nach Neun"
-			#self.text="Two and a half men"
-			#self.text="Tatort"
-			#self.text="Navy CIS"
-			#self.text="Obi wan Kenobi"
+		if self.text:
 			self.timer = eTimer()
 			start_new_thread(self.tmdbSearch, ())
 		else:
-			print("[TMDb] no movie found.")
+			print("[TMDb][tmdbScreen] no movie found.")
 			self['searchinfo'].setText(_("TMDb: ") + _("No results for %s") % self.text)
 
 	def menu(self):
 		options = [
-			(_("Exit"), 0),
-			(_("Current movies in cinemas"), 1),
-			(_("Upcoming movies"), 2),
-			(_("Popular movies"), 3),
-			(_("Similar movies"), 4),
-			(_("Recommendations"), 5),
-			(_("Best rated movies"), 6)
+			(_("Exit"), DEFAULT),
+			(_("Current movies in cinemas"), CURRENT_MOVIES),
+			(_("Upcoming movies"), UPCOMING_MOVIES),
+			(_("Popular movies"), POPULAR_MOVIES),
+			(_("Similar movies"), SIMILAR_MOVIES),
+			(_("Recommendations"), RECOMENDED_MOVIES),
+			(_("Best rated movies"), BEST_RATED_MOVIES)
 		]
 		self.session.openWithCallback(self.menuCallback, ChoiceBox, list=options)
 
@@ -239,78 +226,50 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.count = 0
 		json_data = {}
 		try:
-			if self.actcinema == 1:
-				json_data = tmdb.Movies().now_playing(page=self.page, language=self.lang)
-			elif self.actcinema == 2:
-				json_data = tmdb.Movies().upcoming(page=self.page, language=self.lang)
-			elif self.actcinema == 3:
-				json_data = tmdb.Movies().popular(page=self.page, language=self.lang)
-			elif self.actcinema == 4:
-				json_data = tmdb.Movies(self.id).similar_movies(page=self.page, language=self.lang)
-			elif self.actcinema == 5:
-				json_data = tmdb.Movies(self.id).recommendations(page=self.page, language=self.lang)
-			elif self.actcinema == 6:
-				json_data = tmdb.Movies().top_rated(page=self.page, language=self.lang)
-			else:
+			if self.actcinema not in (CURRENT_MOVIES, UPCOMING_MOVIES, POPULAR_MOVIES, SIMILAR_MOVIES, RECOMENDED_MOVIES, BEST_RATED_MOVIES):
 				search = tmdb.Search()
 				json_data = search.multi(query=self.text, language=self.lang)
-			#{u'total_results': 0, u'total_pages': 0, u'page': 1, u'results': []}
-			#{u'total_results': 0, u'total_pages': 1, u'page': 1, u'results': []}
-			#print"######\n", json_data
+			elif self.actcinema == CURRENT_MOVIES:
+				json_data = tmdb.Movies().now_playing(page=self.page, language=self.lang)
+			elif self.actcinema == UPCOMING_MOVIES:
+				json_data = tmdb.Movies().upcoming(page=self.page, language=self.lang)
+			elif self.actcinema == POPULAR_MOVIES:
+				json_data = tmdb.Movies().popular(page=self.page, language=self.lang)
+			elif self.actcinema == SIMILAR_MOVIES:
+				json_data = tmdb.Movies(self.id).similar_movies(page=self.page, language=self.lang)
+			elif self.actcinema == RECOMENDED_MOVIES:
+				json_data = tmdb.Movies(self.id).recommendations(page=self.page, language=self.lang)
+			elif  self.actcinema == BEST_RATED_MOVIES:
+				json_data = tmdb.Movies().top_rated(page=self.page, language=self.lang)
+#			print("[TMDb][tmdbSearch] json output\n", json_data)
 
 			self.totalpages = json_data['total_pages']
 
 			for IDs in json_data['results']:
 				self.count += 1
-				media = ""
-				try:
-					media = str(IDs['media_type'])
-				except:
-					pass
-				if self.actcinema >= 1:
-					media = "movie"
-				id = ""
-				try:
+				media = id = title = date = coverPath = backdropPath = ""
+				if 'media_type' in IDs:
+					media = IDs['media_type']
+				if 'id' in IDs:
 					id = str(IDs['id'])
-				except:
-					pass
-				title = ""
-				try:
-					title = str(IDs['title'])
-				except:
-					pass
-				try:
-					title = str(IDs['name'])
-				except:
-					pass
-				date = ""
-				try:
-					date = ", " + str(IDs['release_date'])[:4]
-				except:
-					pass
-				try:
-					date = ", " + str(IDs['first_air_date'])[:4]
-				except:
-					pass
-
+				if 'title' in IDs:
+					title = IDs['title']
+				if 'name' in IDs:
+					title = IDs['name']
+				if 'release_date' in IDs:
+					date = ", " + IDs['release_date'][:4]
+				if 'first_air_date' in IDs:
+					date = ", " + IDs['first_air_date'][:4]
 				if date == ", ":
 					date = ""
 
-				if media == "movie":
-					mediasubst = _("Movie")
-				else:
-					mediasubst = _("Series")
+				mediasubst = _("Movie") if media == "movie" else _("Series")
 
 				title = "%s (%s%s)" % (title, mediasubst, date)
-				coverPath = ""
-				try:
-					coverPath = str(IDs['poster_path'])
-				except:
-					pass
-				try:
-					backdropPath = str(IDs['backdrop_path'])
-				except:
-					pass
+				if 'poster_path' in IDs:
+					coverPath = IDs['poster_path']
+				if 'backdrop_path' in IDs:
+					backdropPath = IDs['backdrop_path']
 
 				url_cover = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, coverPath)
 				url_backdrop = "http://image.tmdb.org/t/p/%s/%s" % (config.plugins.tmdb.themoviedb_coversize.value, backdropPath)
@@ -320,7 +279,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			self['list'].setList(res)
 			#res.sort() #sorts actual page only
 			self.piclist = res
-			if self.actcinema >= 1:
+			if self.actcinema != DEFAULT:
 				self['searchinfo'].setText(_("TMDb: ") + str(self.searchtitle) + " (" + _("page ") + str(self.page) + "/" + str(self.totalpages) + ") " + str(self.title))
 			else:
 				self['searchinfo'].setText(_("TMDb: ") + _("Results for %s") % self.text)
@@ -341,7 +300,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		if url_cover[-4:] == "None":
 			self.showCover(noCover)
 		else:
-			downloadPage(asBinary(url_cover), tempDir + id + ".jpg", timeout=5).addCallback(self.gotData, tempDir + id + ".jpg").addErrback(self.dataError)
+			downloadPage(url_cover.encode(), tempDir + id + ".jpg", timeout=5).addCallback(self.gotData, tempDir + id + ".jpg").addErrback(self.dataError)
 
 	def gotData(self, data, coverSaved):
 		self.showCover(coverSaved)
@@ -369,7 +328,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		if config.plugins.tmdb.firsthit.value:
 			if self.count == 1:
 				self.timer.callback.append(self.ok)
-				self.timer.start(1000, False)
+				self.timer.start(100, False)
 
 	def ok(self):
 		self.timer.stop()
@@ -408,14 +367,14 @@ class tmdbScreen(Screen, HelpableScreen):
 			self.getInfo()
 
 	def chDown(self):
-		if self.actcinema >= 1:
+		if self.actcinema != DEFAULT:
 			self.page += 1
 			if self.page > self.totalpages:
 				self.page = 1
 			start_new_thread(self.tmdbSearch, ())
 
 	def chUp(self):
-		if self.actcinema >= 1:
+		if self.actcinema != DEFAULT:
 			self.page -= 1
 			if self.page <= 0:
 				self.page = 1
@@ -428,13 +387,11 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.session.open(tmdbConfigScreen)
 
 	def searchString(self):
-		self.actcinema = 0
+		self.actcinema = DEFAULT
 		self.session.openWithCallback(self.goSearch, VirtualKeyBoard, title=(_("Search for Movie:")), text=self.text)
 
 	def goSearch(self, newTitle):
-		if newTitle is "" or newTitle is None:
-			pass
-		else:
+		if newTitle:
 			self.text = newTitle
 			print("[TMDb] Manual search for: %s" % str(self.text))
 			start_new_thread(self.tmdbSearch, ())
@@ -444,10 +401,8 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.close()
 
 	def delCover(self):
-		try:
+		if os.path.isdir(tempDir):	
 			shutil.rmtree(tempDir)
-		except:
-			pass
 
 
 class tmdbScreenMovie(Screen, HelpableScreen):
@@ -469,7 +424,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		HelpableScreen.__init__(self)
 		self["actions"] = HelpableActionMap(self, "TMDbActions",
 			{
-				"ok": (self.ok, _("Crew")),
+				"ok": (self.ok, _("Cast")),
 				"cancel": (self.cancel, _("Exit")),
 				"up": (self.keyLeft, _("Selection up")),
 				"down": (self.keyRight, _("Selection down")),
@@ -507,14 +462,14 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self['studio'] = Label("-")
 		self['studio_txt'] = Label(_("Studio:"))
 		self['key_red'] = Label(_("Exit"))
-		self['key_green'] = Label(_("Crew"))
+		self['key_green'] = Label(_("Cast"))
 		self['key_yellow'] = Label(_("Seasons"))
 		self['key_blue'] = Label(_("More"))
 		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
 		self['cover'] = Pixmap()
 		self['backdrop'] = Pixmap()
 		self['fsklogo'] = Pixmap()
-
+		print("[TMDb][tmdbScreenMovie] entered")
 		self.onLayoutFinish.append(self.onFinish)
 
 	def onFinish(self):
@@ -589,114 +544,91 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 	def tmdbSearch(self):
 		self.lang = config.plugins.tmdb.lang.value
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
-		print("[TMDb] ID: " + str(self.id))
+		print("[TMDb][tmdbScreenMovie]1 ID, self.movie: ", self.id, "   ", self.movie)
 
 		try:
 			if self.movie:
 				json_data = tmdb.Movies(self.id).info(language=self.lang)
-				#print json_data
+#				print("[TMDb][tmdbScreenMovie] Movie json_data", json_data)
 				if json_data['overview'] == "":
 					json_data = tmdb.Movies(self.id).info(language="en")
 				json_data_cast = tmdb.Movies(self.id).credits(language=self.lang)
-				#print json_data_cast
+#				print("[TMDb][tmdbScreenMovie] Movie json_data_cast", json_data_cast)
 				json_data_fsk = tmdb.Movies(self.id).releases(language=self.lang)
-				#print json_data_fsk
-			elif not self.movie:
+#				print("[TMDb][tmdbScreenMovie] Movie json_fsk", json_data_fsk)
+			else:
 				json_data = tmdb.TV(self.id).info(language=self.lang)
 				if json_data['overview'] == "":
 					json_data = tmdb.TV(self.id).info(language="en")
-				#print json_data
+#				print("[TMDb][tmdbScreenMovie] TV json_data", json_data)
 				json_data_cast = tmdb.TV(self.id).credits(language=self.lang)
-				#print json_data_cast
+#				print("[TMDb][tmdbScreenMovie] TV json_data_cast", json_data_cast)
 				json_data_fsk = tmdb.TV(self.id).content_ratings(language=self.lang)
-				#print json_data_fsk
-			else:
-				return
+#				print("[TMDb][tmdbScreenMovie] TV json_fsk", json_data_fsk)
 			self['searchinfo'].setText("%s" % self.mname)
 		except:
 			self['searchinfo'].setText(_("TMDb: ") + _("No results found, or does not respond!"))
 			return
+		year = vote_average = vote_count = runtime = country_string = genre_string = subtitle = cast_string = ""
+		crew_string = director = author = studio_string = ""
 
 		## Year
-		year = ""
-		try:
+
+		if 'release_date' in json_data:
 			year = json_data['release_date'][:+4]
 			self['year'].setText("%s" % str(year))
-		except:
-			year = ""
 
 		## Rating
-		vote_average = ""
-		try:
+		if 'vote_average' in json_data:
 			vote_average = json_data['vote_average']
-			#self['rating'].setText("%s" % str(vote_average))
 			self['rating'].setText("%.1f" % vote_average)
-		except:
-			vote_average = ""
 
 		## Votes
-		vote_count = ""
-		try:
+		if 'vote_count' in json_data:
 			vote_count = json_data['vote_count']
 			self['votes'].setText("%s" % str(vote_count))
 			self['votes_brackets'].setText("(%s)" % str(vote_count))
-		except:
-			vote_count = ""
+
 
 		## Runtime
-		runtime = ""
-		try:
+		if 'runtime' in json_data:
 			runtime = json_data['runtime']
 			self['runtime'].setText("%s min." % str(runtime))
 			runtime = ", " + str(runtime) + " min."
-		except:
-			runtime = "-"
 
 		## Country
-		country_string = ""
-		try:
+		if 'production_countries' in json_data:
 			for country in json_data['production_countries']:
 				country_string += country['iso_3166_1'] + "/"
 			country_string = country_string[:-1]
 			self['country'].setText("%s" % str(country_string))
-		except:
-			country_string = ""
+
 
 		## Genre"
-		genre_string = ""
-		try:
+		if 'genres' in json_data:
 			genre_count = len(json_data['genres'])
 			for genre in json_data['genres']:
 				genre_string += genre['name'] + ", "
 			self['genre'].setText("%s" % str(genre_string[:-2]))
-		except:
-			genre_string = ""
 
 		## Subtitle
-		subtitle = ""
-		try:
+		if 'tagline' in json_data:
 			subtitle = json_data['tagline']
 			if json_data['tagline'] == "":
 				subtitle = ""
 			else:
 				self['subtitle'].setText("%s" % str(subtitle))
 				subtitle = str(subtitle) + "\n"
-		except:
-			subtitle = ""
 
 		## Cast
-		cast_string = ""
-		try:
+		if 'cast' in json_data_cast:
 			for cast in json_data_cast['cast']:
 				cast_string += cast['name'] + " (" + cast['character'] + ")\n"
-		except:
-			cast_string = ""
+
 
 		## Crew
-		crew_string = ""
-		director = ""
-		author = ""
-		try:
+
+		if 'crew' in json_data_cast:
 			for crew in json_data_cast['crew']:
 				crew_string += crew['name'] + " (" + crew['job'] + ")\n"
 
@@ -708,87 +640,68 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			author = author[:-2]
 			self['director'].setText("%s" % str(director))
 			self['author'].setText("%s" % str(author))
-		except:
-			crew_string = ""
-			director = ""
-			author = ""
+
 
 		## Studio/Production Company
-		studio_string = ""
-		try:
+		if 'production_companies' in json_data:
 			for studio in json_data['production_companies']:
 				studio_string += studio['name'] + ", "
 			studio_string = studio_string[:-2]
 			self['studio'].setText("%s" % str(studio_string))
-		except:
-			studio_string = ""
 
 		#
 		# modify Data for TV/Series
 		#
-		season = ""
+		season = year = country_string = director = studio_string = runtime = episodes = ""
+
 		if not self.movie:
 			## Year
-			year = ""
-			try:
+			if 'first_air_date' in json_data:
 				year = json_data['first_air_date'][:+4]
 				self['year'].setText("%s" % str(year))
-			except:
-				year = ""
 
 			## Country
-			country_string = ""
-			try:
+			if 'origin_country' in json_data:
 				for country in json_data['origin_country']:
 					country_string += country + "/"
 				country_string = country_string[:-1]
 				self['country'].setText("%s" % str(country_string))
-			except:
-				country_string = ""
+
 
 			## Crew Director
-			director = ""
-			try:
+			if 'created_by' in json_data:
 				for directors in json_data['created_by']:
 					director += directors['name'] + ", "
 				director = director[:-2]
 				self['director'].setText(_("Various"))
 				self['author'].setText("%s" % str(director))
-			except:
-				director = ""
+
 
 			## Studio/Production Company
-			try:
+			if 'networks' in json_data:
 				for studio in json_data['networks']:
 					studio_string += studio['name'] + ", "
 				studio_string = studio_string[:-2]
 				self['studio'].setText("%s" % str(studio_string))
-			except:
-				studio_string = ""
 
 			## Runtime
-			runtime = ""
-			try:
+			if 'number_of_seasons' in json_data:
 				seasons = json_data['number_of_seasons']
+			if 'number_of_episodes' in json_data:
 				episodes = json_data['number_of_episodes']
-				runtime = str(seasons) + " " + _("Seasons") + " / " + str(episodes) + " " + _("Episodes")
-				self['runtime'].setText("%s" % runtime)
-				runtime = ", " + runtime
-			except:
-				runtime = ""
+			runtime = str(seasons) + " " + _("Seasons") + " / " + str(episodes) + " " + _("Episodes")
+			self['runtime'].setText("%s" % runtime)
+			runtime = ", " + runtime
 
 			# Series Description
-			season = ""
-			try:
+			if 'seasons' in json_data:
 				for seasons in json_data['seasons']:
 					if seasons['season_number'] >= 1:
 						season += _("Season") + " " + str(seasons['season_number']) + "/" + str(seasons['episode_count']) + " (" + str(seasons['air_date'])[:4] + ")\n"
-			except:
-				season = ""
 
 		## Description
 		description = ""
-		try:
+		if 'overview' in json_data:
 			description = json_data['overview']
 			description = description + "\n\n" + cast_string + "\n" + crew_string
 			#self['description'].setText("%s" % description.encode('utf_8','ignore'))
@@ -799,25 +712,19 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			#self['fulldescription'].setText("%s" % fulldescription.encode('utf_8','ignore'))
 			self['fulldescription'].setText("%s" % str(fulldescription))
 			self.text = fulldescription
-		except:
-			description = "-"
 
 		## FSK
 		fsk = "100"
 		if self.movie:
-			try:
+			if 'countries' in json_data_fsk:
 				for country in json_data_fsk['countries']:
 					if str(country['iso_3166_1']) == "DE":
 						fsk = str(country['certification'])
-			except:
-				pass
-		if not self.movie:
-			try:
+		else:
+			if 'results' in json_data_fsk:
 				for country in json_data_fsk['results']:
 					if str(country['iso_3166_1']) == "DE":
 						fsk = str(country['rating'])
-			except:
-				pass
 
 		self.showFSK(fsk)
 
@@ -849,10 +756,10 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			pass
 		else:
 			#print"###", url_backdrop
-			downloadPage(asBinary(url_backdrop), tempDir + "backdrop.jpg", timeout=5).addCallback(self.gotBackdrop, url_backdrop).addErrback(self.dataError)
+			downloadPage(url_backdrop.encode(), tempDir + "backdrop.jpg", timeout=5).addCallback(self.gotBackdrop, url_backdrop).addErrback(self.dataError)
 
 	def gotBackdrop(self, res, backdrop):
-		#print ("Backdrop download returned", backdrop)
+		#print("Backdrop download returned", backdrop)
 		backdropSaved = tempDir + "backdrop.jpg"
 		if not fileExists(backdropSaved):
 			pass
@@ -1013,12 +920,11 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		try:
 			if self.movie:
 				json_data_cast = tmdb.Movies(self.id).credits(language=self.lang)
-				#print json_data_cast
+				#print(json_data_cast)
 			else:
 				json_data_cast = tmdb.TV(self.id).credits(language=self.lang)
-				#json_data_cast = tmdb.TV_Seasons(self.id,1).credits(language=self.lang)
 				json_data_seasons = tmdb.TV(self.id).info(language=self.lang)
-				#print json_data_seasons
+				#print(json_data_seasons)
 
 			for casts in json_data_cast['cast']:
 				id = str(casts['id'])
@@ -1068,7 +974,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 			self.showCover(noCover)
 		else:
 			if not fileExists(tempDir + id + ".jpg"):
-				downloadPage(asBinary(url_cover), tempDir + id + ".jpg", timeout=5).addCallback(self.getData, tempDir + id + ".jpg").addErrback(self.dataError)
+				downloadPage(url_cover.encode(), tempDir + id + ".jpg", timeout=5).addCallback(self.getData, tempDir + id + ".jpg").addErrback(self.dataError)
 			else:
 				self.showCover(tempDir + id + ".jpg")
 
@@ -1198,82 +1104,73 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 
 		try:
 			json_data_person = tmdb.People(self.id).info(language=self.lang)
-			#print json_data_person
+			#print(json_data_person)
 			self.mname = str(json_data_person['name'])
 
 			## Personal data
-			birthday = ""
-			try:
+			birthday = birthplace = gender = altname = altname1 = rank = biography = ""
+			if "birthday" in json_data_person:
 				birthday = str(json_data_person['birthday'])
-			except:
-				birthday = ""
 
-			birthplace = ""
-			try:
+			if "place_of_birth" in json_data_person:
 				birthplace = str(json_data_person['place_of_birth'])
-			except:
-				birthplace = ""
-			gender = ""
-			try:
+			if "gender" in json_data_person:
 				gender = str(json_data_person['gender'])
 				if gender == "1":
 					gender = _("female")
 				elif gender == "2":
 					gender = _("male")
 				else:
-					gender = _("divers")
-			except:
-				gender = ""
+					gender = _("not specified")
+			if "also_known_as" in json_data_person and json_data_person["also_known_as"]:
+				altname = "\n" + str(json_data_person['also_known_as'][0])
+				if len(json_data_person['also_known_as']) > 1:
+					altname = altname + ", " + str(json_data_person['also_known_as'][1])
 
-			## Personal data
-			altname = ""
-			try:
-				altname = "\n" + str(json_data_person['also_known_as'][0]) + ", "
-			except:
-				altname = ""
-
-			altname1 = ""
-			try:
-				altname1 = str(json_data_person['also_known_as'][1])
-			except:
-				altname1 = ""
-
-			rank = ""
-			try:
+			if "popularity'" in json_data_person:
 				rank = "\n" + _("Popularity") + ": " + str(json_data_person['popularity'])
-			except:
-				rank = ""
 
-			biography = ""
-			try:
+			if "biography" in json_data_person:
 				biography = str(json_data_person['biography'])
-				if biography == "":
+			if biography == "":
 					json_data_person = tmdb.People(self.id).info(language='en')
+			if "biography" in json_data_person:
 					biography = str(json_data_person['biography'])
-			except:
-				biography = ""
 
-			data = birthday + ", " + birthplace + ", " + gender + altname + altname1 + rank + "\n\n" + biography + "\n\n"
-
+			data = birthday + ", " + birthplace + ", " + gender + altname + rank + "\n\n" + biography + "\n\n"
+#			print("[tmdbScreenPerson][tmdbsearch] data", data)
 			## Participated data
 			#json_data_person = tmdb.People(self.id).combined_credits(language=self.lang)
 			json_data_person = tmdb.People(self.id).movie_credits(language=self.lang)
 			json_data_person_tv = tmdb.People(self.id).tv_credits(language=self.lang)
-			#print str(json_data_person)
+#			print("[tmdbScreenPerson][tmdbsearch] str(json_data_person", json_data_person)
+#			print("[tmdbScreenPerson][tmdbsearch] str(json_data_person_tv", json_data_person_tv)
 
 			data_movies = []
 			# Participated in movies
-			try:
+			release_date = title = character = first_air_date = name = ""
+			if "cast" in json_data_person:
 				for cast in json_data_person['cast']:
-					data_movies.append((cast['release_date']) + " " + str(cast['title']) + "  (" + str(cast['character']) + ")")
-			except:
-				pass
+					if "release_date" in cast:
+						release_date = cast['release_date']
+					if "title" in cast:
+						title= cast['title']
+					if "character" in cast:
+						character = cast['character']
+					data_movies.append(release_date + " " + title + "  (" + character + ")")
+#				print("[tmdbScreenPerson][tmdbsearch]data_movies]", data_movies)
 			# Participated in TV
-			try:
+			if "cast" in json_data_person_tv:
 				for cast in json_data_person_tv['cast']:
-					data_movies.append((cast['first_air_date']) + " " + str(cast['name']) + "  (" + str(cast['character']) + ") - TV")
-			except:
-				pass
+					if "first_air_date" in cast:
+						first_air_date = cast['first_air_date']
+					if "name" in cast:
+						name = cast['name']
+					if "character" in cast:
+						character = cast['character']
+					data_movies.append(first_air_date + " " + name + "  (" + character + ") - TV")
+#				print("[tmdbScreenPerson][tmdbsearch]data_movies+TV]", data_movies)
+
 
 			data_movies.sort(reverse=True)
 			cast_movies = ""
@@ -1421,7 +1318,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			self.showCover(noCover)
 		else:
 			if not fileExists(tempDir + id + ".jpg"):
-				downloadPage(asBinary(url_cover), tempDir + id + ".jpg", timeout=5).addCallback(self.getData, tempDir + id + ".jpg").addErrback(self.dataError)
+				downloadPage(url_cover.encode(), tempDir + id + ".jpg", timeout=5).addCallback(self.getData, tempDir + id + ".jpg").addErrback(self.dataError)
 			else:
 				self.showCover(tempDir + id + ".jpg")
 
