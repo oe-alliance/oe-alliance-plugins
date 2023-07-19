@@ -239,7 +239,7 @@ class tmdbScreen(Screen, HelpableScreen):
 				json_data = tmdb.Movies(self.id).similar_movies(page=self.page, language=self.lang)
 			elif self.actcinema == RECOMENDED_MOVIES:
 				json_data = tmdb.Movies(self.id).recommendations(page=self.page, language=self.lang)
-			elif  self.actcinema == BEST_RATED_MOVIES:
+			elif self.actcinema == BEST_RATED_MOVIES:
 				json_data = tmdb.Movies().top_rated(page=self.page, language=self.lang)
 #			print("[TMDb][tmdbSearch] json output\n", json_data)
 
@@ -1154,7 +1154,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 					if "release_date" in cast:
 						release_date = cast['release_date']
 					if "title" in cast:
-						title= cast['title']
+						title = cast['title']
 					if "character" in cast:
 						character = cast['character']
 					data_movies.append(release_date + " " + title + "  (" + character + ")")
