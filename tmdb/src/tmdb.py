@@ -589,7 +589,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			self['votes'].setText("%s" % str(vote_count))
 			self['votes_brackets'].setText("(%s)" % str(vote_count))
 
-
 		## Runtime
 		if 'runtime' in json_data:
 			runtime = json_data['runtime']
@@ -602,7 +601,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				country_string += country['iso_3166_1'] + "/"
 			country_string = country_string[:-1]
 			self['country'].setText("%s" % str(country_string))
-
 
 		## Genre"
 		if 'genres' in json_data:
@@ -625,7 +623,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			for cast in json_data_cast['cast']:
 				cast_string += cast['name'] + " (" + cast['character'] + ")\n"
 
-
 		## Crew
 
 		if 'crew' in json_data_cast:
@@ -640,7 +637,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			author = author[:-2]
 			self['director'].setText("%s" % str(director))
 			self['author'].setText("%s" % str(author))
-
 
 		## Studio/Production Company
 		if 'production_companies' in json_data:
@@ -667,7 +663,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				country_string = country_string[:-1]
 				self['country'].setText("%s" % str(country_string))
 
-
 			## Crew Director
 			if 'created_by' in json_data:
 				for directors in json_data['created_by']:
@@ -675,7 +670,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 				director = director[:-2]
 				self['director'].setText(_("Various"))
 				self['author'].setText("%s" % str(director))
-
 
 			## Studio/Production Company
 			if 'networks' in json_data:
@@ -1170,7 +1164,6 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 						character = cast['character']
 					data_movies.append(first_air_date + " " + name + "  (" + character + ") - TV")
 #				print("[tmdbScreenPerson][tmdbsearch]data_movies+TV]", data_movies)
-
 
 			data_movies.sort(reverse=True)
 			cast_movies = ""
