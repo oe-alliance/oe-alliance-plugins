@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: tmdb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 14:49+0100\n"
-"PO-Revision-Date: 2023-07-17 13:23+0300\n"
+"PO-Revision-Date: 2023-07-19 20:31+0300\n"
 "Last-Translator: orlandox\n"
 "Language-Team: orlandox\n"
 "Language: fi\n"
@@ -30,7 +30,7 @@ msgstr "Maat:"
 msgid "Cover saved!"
 msgstr "Kansi tallennettu!"
 
-msgid "Crew"
+msgid "Cast"
 msgstr "Näyttelijät"
 
 msgid "Current movies in cinemas"
@@ -162,6 +162,9 @@ msgstr "Studio:"
 msgid "TMDb Search"
 msgstr "TMDb-haku"
 
+msgid "TMDb search"
+msgstr "TMDb-haku"
+
 msgid "TMDb: "
 msgstr "TMDb: "
 
@@ -215,3 +218,9 @@ msgstr "TMDB asetukset"
 
 msgid "TMDb API Key:"
 msgstr "TMDb API-avain:"
+
+msgid "The Movie Database gives detailed information about the selected program or movie."
+msgstr "Elokuvatietokanta antaa yksityiskohtaisia tietoja valitusta ohjelmasta tai elokuvasta."
+
+msgid "not specified"
+msgstr "ei määritelty"
