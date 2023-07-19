@@ -59,7 +59,7 @@ tempDir = "/var/volatile/tmp/tmdb/"
 
 if not os.path.isdir(tempDir):
 	os.mkdir(tempDir)
-	
+
 DEFAULT = 0
 CURRENT_MOVIES = 1
 UPCOMING_MOVIES = 2
@@ -401,7 +401,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		self.close()
 
 	def delCover(self):
-		if os.path.isdir(tempDir):	
+		if os.path.isdir(tempDir):
 			shutil.rmtree(tempDir)
 
 
