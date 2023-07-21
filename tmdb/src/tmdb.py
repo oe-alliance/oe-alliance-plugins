@@ -24,7 +24,7 @@ from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.Setup import Setup
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-
+from Tools.BoundFunction import boundFunction
 from Tools.Directories import fileExists
 
 from enigma import eListboxPythonMultiContent, ePicLoad, eTimer, gFont, gPixmapPtr, getDesktop, RT_HALIGN_LEFT, RT_VALIGN_CENTER
@@ -34,8 +34,7 @@ import os
 import re
 import shutil
 import base64
-from twisted.web.client import downloadPage
-import requests
+from requests import get, exceptions, Session
 from PIL import Image
 
 from _thread import start_new_thread
@@ -51,7 +50,7 @@ pdesc = _("Show movie details from TMDb")
 pversion = "1.0.1"
 pdate = "20230711"
 
-tmdb.REQUESTS_SESSION = requests.Session()
+tmdb.REQUESTS_SESSION = Session()
 tmdb.REQUESTS_TIMEOUT = (5, 30)
 
 noCover = "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/no_cover.jpg"
@@ -100,6 +99,18 @@ def cleanText(text):
 def cleanEnd(text):
 	text = text.replace('.wmv', '').replace('.flv', '').replace('.ts', '').replace('.m2ts', '').replace('.mkv', '').replace('.avi', '').replace('.mpeg', '').replace('.mpg', '').replace('.iso', '').replace('.mp4', '')
 	return text
+
+def threadDownloadPage(link, file, success, fail=None):
+	link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '')
+	try:
+		response = get(link)
+		response.raise_for_status()
+		with open(file, "wb") as f:
+			f.write(response.content)
+		success(file)
+	except exceptions.RequestException as error:
+		if fail is not None:
+			fail(error)
 
 
 class createList(MenuList):
@@ -300,9 +311,12 @@ class tmdbScreen(Screen, HelpableScreen):
 		if url_cover[-4:] == "None":
 			self.showCover(noCover)
 		else:
-			downloadPage(url_cover.encode(), tempDir + id + ".jpg", timeout=5).addCallback(self.gotData, tempDir + id + ".jpg").addErrback(self.dataError)
+			if not fileExists(tempDir + id + ".jpg"):
+				start_new_thread(threadDownloadPage, (url_cover, tempDir + id + ".jpg", boundFunction(self.getData, tempDir + id + ".jpg"), self.dataError))
+			else:
+				self.showCover(tempDir + id + ".jpg")
 
-	def gotData(self, data, coverSaved):
+	def getData(self, coverSaved, *args, **kwargs):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
@@ -481,7 +495,6 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		print("[TMDb] Selected: %s" % self.mname)
 		self.showCover(self.coverName)
 		self.getBackdrop(self.url_backdrop)
-		#self.getData()
 		start_new_thread(self.tmdbSearch, ())
 
 	def menu(self):
@@ -749,10 +762,9 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			print("[TMDb] No backdrop found")
 			pass
 		else:
-			#print"###", url_backdrop
-			downloadPage(url_backdrop.encode(), tempDir + "backdrop.jpg", timeout=5).addCallback(self.gotBackdrop, url_backdrop).addErrback(self.dataError)
+			start_new_thread(threadDownloadPage, (url_backdrop, tempDir + "backdrop.jpg", boundFunction(self.gotBackdrop, tempDir + "backdrop.jpg"), self.dataError))
 
-	def gotBackdrop(self, res, backdrop):
+	def gotBackdrop(self, backdrop, *args, **kwargs):
 		#print("Backdrop download returned", backdrop)
 		backdropSaved = tempDir + "backdrop.jpg"
 		if not fileExists(backdropSaved):
@@ -968,11 +980,11 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 			self.showCover(noCover)
 		else:
 			if not fileExists(tempDir + id + ".jpg"):
-				downloadPage(url_cover.encode(), tempDir + id + ".jpg", timeout=5).addCallback(self.getData, tempDir + id + ".jpg").addErrback(self.dataError)
+				start_new_thread(threadDownloadPage, (url_cover, tempDir + id + ".jpg", boundFunction(self.getData, tempDir + id + ".jpg"), self.dataError))
 			else:
 				self.showCover(tempDir + id + ".jpg")
 
-	def getData(self, data, coverSaved):
+	def getData(self, coverSaved, *args, **kwargs):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
@@ -1306,16 +1318,15 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self['data'].setText("")
 		url_cover = self['list'].getCurrent()[1]
 		id = self['list'].getCurrent()[3]
-
 		if url_cover[-4:] == "None":
 			self.showCover(noCover)
 		else:
 			if not fileExists(tempDir + id + ".jpg"):
-				downloadPage(url_cover.encode(), tempDir + id + ".jpg", timeout=5).addCallback(self.getData, tempDir + id + ".jpg").addErrback(self.dataError)
+				start_new_thread(threadDownloadPage, (url_cover, tempDir + id + ".jpg", boundFunction(self.getData, tempDir + id + ".jpg"), self.dataError))
 			else:
 				self.showCover(tempDir + id + ".jpg")
 
-	def getData(self, data, coverSaved):
+	def getData(self, coverSaved, *args, **kwargs):
 		self.showCover(coverSaved)
 
 	def dataError(self, error):
@@ -1325,7 +1336,6 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self.picload = ePicLoad()
 		if not fileExists(coverName):
 			coverName = noCover
-
 		if fileExists(coverName):
 			self['cover'].instance.setPixmap(gPixmapPtr())
 			size = self['cover'].instance.size()
