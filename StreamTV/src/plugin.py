@@ -55,7 +55,7 @@ class StreamTVPlayer(Screen, InfoBarNotifications):
 		self.session = session
 		self.service = service
 		self.cbServiceCommand = cbServiceCommand
-		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions"], {
 			"ok": self.doInfoAction,
 			"cancel": self.doExit,
 			"stop": self.doExit,

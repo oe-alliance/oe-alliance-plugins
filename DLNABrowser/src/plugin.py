@@ -347,7 +347,7 @@ class DLNAStreamPlayer(Screen, InfoBarNotifications):
 		self.session = session
 		self.service = service
 		self.lastservice = lastservice
-		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions"], {
 			"ok": self.doInfoAction,
 			"cancel": self.doExit,
 			"stop": self.doExit,
@@ -461,7 +461,7 @@ class DLNAImageViewer(Screen):
 
 	def __init__(self, session, fileList, index, path):
 		Screen.__init__(self, session)
-		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions", "MovieSelectionActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "ColorActions", "DirectionActions"], {
 			"cancel": self.keyCancel,
 			"left": self.keyLeft,
 			"right": self.keyRight,

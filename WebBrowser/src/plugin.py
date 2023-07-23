@@ -148,7 +148,7 @@ class Player(Screen, InfoBarNotifications):
 		self.session = session
 		self.service = service
 		self.lastservice = lastservice
-		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions"],
 		{
 			"ok": self.doInfoAction,
 			"cancel": self.doExit,

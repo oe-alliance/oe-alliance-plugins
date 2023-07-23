@@ -1490,7 +1490,7 @@ class CKmain(AllScreen):
 		self['release'] = Label(RELEASE)
 		self['totalrecipes'] = Label('')
 		self['helpactions'] = ActionMap(['HelpActions'], {'displayHelp': self.infoScreen}, -1)
-		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'MovieSelectionActions'], {
+		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'InfoActions', 'MenuActions'], {
 			'ok': self.ok,
 			'cancel': self.exit,
 			'right': self.rightDown,
@@ -1503,8 +1503,8 @@ class CKmain(AllScreen):
 			'yellow': self.yellow,
 			'green': self.zufall,
 			'blue': self.hideScreen,
-			'showEventInfo': self.infoScreen,
-			'contextMenu': self.config
+			'info': self.infoScreen,
+			'menu': self.config
 		}, -1)
 		self.movie_stop = config.usage.on_movie_stop.value
 		self.movie_eof = config.usage.on_movie_eof.value

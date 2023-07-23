@@ -683,7 +683,6 @@ Red: Refresh EPG
              'DirectionActions',
              'ChannelSelectBaseActions',
              'ColorActions',
-             'MovieSelectionActions',
              'HelpActions'],
              AMbindings, -1)
         self.onLayoutFinish.append(self.onLayoutFinished)

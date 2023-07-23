@@ -3677,7 +3677,7 @@ class TVSsearchYouTube(TVSAllScreen):
 									 'ColorActions',
 									 'ChannelSelectBaseActions',
 									 'NumberActions',
-									 'MovieSelectionActions'], {'ok': self.ok,
+									 'InfoActions'], {'ok': self.ok,
 																'cancel': self.exit,
 																'right': self.rightDown,
 																'left': self.leftUp,
@@ -3689,7 +3689,7 @@ class TVSsearchYouTube(TVSAllScreen):
 																'blue': self.hideScreen,
 																'0': self.gotoEnd,
 																'bluelong': self.showHelp,
-																'showEventInfo': self.showHelp}, -1)
+																'info': self.showHelp}, -1)
 		callInThread(self.getPage, self.link, self.makeTrailerList, self.YTdownloadError)
 		self['Line_down'].show()
 
@@ -3910,7 +3910,7 @@ class TVSMain(TVSBaseScreen):
 									 'DirectionActions',
 									 'ColorActions',
 									 'NumberActions',
-									 'MovieSelectionActions',
+									 'MenuActions',
 									 'ChannelSelectBaseActions'], {'ok': self.ok,
 																   'cancel': self.exit,
 																   'right': self.rightDown,
@@ -3925,7 +3925,7 @@ class TVSMain(TVSBaseScreen):
 																   'red': self.red,
 																   'green': self.green,
 																   'blue': self.hideScreen,
-																   'contextMenu': self.config}, -1)
+																   'menu': self.config}, -1)
 		self.onShown.append(self.onShownFinished)
 
 	def onShownFinished(self):
@@ -5149,7 +5149,7 @@ class TVSHeuteView(TVSBaseScreen):
 												 'EPGSelectActions',
 												 'InfobarTeletextActions',
 												 'MoviePlayerActions',
-												 'MovieSelectionActions'], {'ok': self.ok,
+												 'MenuActions'], {'ok': self.ok,
 																			'cancel': self.exit,
 																			'right': self.rightDown,
 																			'left': self.leftUp,
@@ -5169,7 +5169,7 @@ class TVSHeuteView(TVSBaseScreen):
 																			'7': self.gotoPage,
 																			'8': self.gotoPage,
 																			'9': self.gotoPage,
-																			'contextMenu': self.gotoPageMenu,
+																			'menu': self.gotoPageMenu,
 																			'info': self.getEPG,
 																			'epg': self.getEPG,
 																			'leavePlayer': self.youTube,

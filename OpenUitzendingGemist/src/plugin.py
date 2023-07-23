@@ -165,12 +165,12 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 				iPlayableService.evSeekableStatusChanged: self.__seekableStatusChanged,
 				iPlayableService.evEOF: self.__evEOF,
 			})
-		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "MovieSelectionActions"],
+		self["actions"] = ActionMap(["OkCancelActions", "InfobarSeekActions", "MediaPlayerActions", "InfoActions"],
 		{
 				"ok": self.ok,
 				"cancel": self.leavePlayer,
 				"stop": self.handleLeave,
-				"showEventInfo": self.showVideoInfo,
+				"info": self.showVideoInfo,
 				"playpauseService": self.playpauseService,
 			}, -2)
 		self.hidetimer = eTimer()
@@ -814,7 +814,7 @@ class OpenUg(Screen):
 		self["list"] = MPanelList(list=self.tmplist, selection=0)
 		self.list = self["list"]
 		self.updateMenu()
-		self["actions"] = ActionMap(["WizardActions", "MovieSelectionActions", "DirectionActions"],
+		self["actions"] = ActionMap(["WizardActions", "DirectionActions"],
 		{
 			"up": self.key_up,
 			"down": self.key_down,
