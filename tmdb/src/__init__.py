@@ -14,7 +14,7 @@ def localeInit():
 def _(txt):
 	t = gettext.dgettext(PluginLanguageDomain, txt)
 	if t == txt:
-		print("[TMDb] fallback to default Enigma2 Translation for %s" % txt)
+#		print("[TMDb] fallback to default Enigma2 Translation for %s" % txt)
 		t = gettext.gettext(txt)
 	return t
 
