@@ -924,7 +924,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 	def tmdbSearch(self):
 		json_data_cast = []
 		json_data_seasons = []
-		json_data_season = []	
+		json_data_season = []
 		self.lang = config.plugins.tmdb.lang.value
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
 		res = []
@@ -942,7 +942,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 #			print("json_data_cast", json_data_cast)
 			for casts in json_data_cast['cast']:
 				title = date = air_date = ""
-#				print("json_data_cast - casts", casts)	
+#				print("json_data_cast - casts", casts)
 				id = str(casts['id'])
 				title = casts['name'] if casts['character'] == "" else casts['name'] + " (" + casts['character'] + ")"
 				coverPath = casts['profile_path']
@@ -1179,7 +1179,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 			json_data_person_tv = tmdb.People(self.id).tv_credits(language=self.lang)
 			data_movies = []
 			# Participated in movies
-#			print("[tmdbScreenPerson][tmdbsearch]json_data_person, json_data_person_tv]", json_data_person, "   ", json_data_person_tv)			
+#			print("[tmdbScreenPerson][tmdbsearch]json_data_person, json_data_person_tv]", json_data_person, "   ", json_data_person_tv)
 			release_date = title = character = first_air_date = name = ""
 			if "cast" in json_data_person:
 				for cast in json_data_person['cast']:
@@ -1201,7 +1201,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 						name = cast['name']
 					if "character" in cast:
 						character = cast['character']
-					datactv = first_air_date + " " + name + "  (" + character + ") - TV" if character != '' else first_air_date + " " + name + " - TV" 	
+					datactv = first_air_date + " " + name + "  (" + character + ") - TV" if character != '' else first_air_date + " " + name + " - TV"
 					data_movies.append(datactv)
 #				print("[tmdbScreenPerson][tmdbsearch]data_movies+TV]", data_movies)
 
