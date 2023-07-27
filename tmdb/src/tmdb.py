@@ -247,7 +247,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			json_data = tmdb.Movies(self.id).similar_movies(page=self.page, language=self.lang)
 		elif self.actcinema == RECOMENDED_MOVIES:
 			json_data = tmdb.Movies(self.id).recommendations(page=self.page, language=self.lang)
-		elif  self.actcinema == BEST_RATED_MOVIES:
+		elif self.actcinema == BEST_RATED_MOVIES:
 			json_data = tmdb.Movies().top_rated(page=self.page, language=self.lang)
 #			print("[TMDb][tmdbSearch] json output\n", json_data)
 		if json_data and json_data['results']:
@@ -1311,7 +1311,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 			print("[TMDb] 5 Selectedtmdb.TV(self.id).info", e)
 			self['searchinfo'].setText(_("TMDb: ") + _("No results found, or does not respond!"))
 			return
-		if 	json_data_seasons:
+		if json_data_seasons:
 			for seasons in json_data_seasons['seasons']:
 				print("[TMDb] Season: %s" % seasons['season_number'])
 				id = str(seasons['id'])
