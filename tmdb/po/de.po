@@ -3,57 +3,57 @@ msgstr ""
 "Project-Id-Version: tmdb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-07-15 20:54+0000\n"
-"PO-Revision-Date: 2017-12-15 16:44+0100\n"
+"PO-Revision-Date: 2023-07-29 21:48+0200\n"
 "Last-Translator: schomi <schomi@vuplus-support.org>\n"
 "Language-Team: schomi <schomi@vuplus-support.org>\n"
-"Language: DE\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-SearchPath-0: C:\\Users\\michael\\Desktop\\Plugins\\Plugin tmdb\\tmdb\n"
+"X-Poedit-SearchPath-0: C:/Users/michael/Desktop/Plugins/Plugin tmdb/tmdb\n"
 
 msgid " "
 msgstr ""
 
 msgid "Author:"
-msgstr "Author:"
+msgstr "Autor:"
 
 msgid "Backdrop Resolution:"
-msgstr ""
+msgstr "Backdrop Auflösung:"
 
 msgid "Backdrop saved!"
-msgstr ""
+msgstr "Backdrop gespeichert!"
 
 msgid "Best rated movies"
-msgstr ""
+msgstr "Am besten bewertete Filme"
 
 msgid "Check SSL certificate:"
-msgstr ""
+msgstr "Prüfe SSL Zertifikat:"
 
 msgid "Countries:"
 msgstr "Länder:"
 
 msgid "Cover Resolution:"
-msgstr ""
+msgstr "Cover Auflösung:"
 
 msgid "Cover and Backdrop Resolution:"
-msgstr ""
+msgstr "Cover und Backdrop Auflösung:"
 
 msgid "Cover saved!"
-msgstr ""
+msgstr "Cover gespeichert!"
 
 msgid "Crew"
 msgstr "Besetzung"
 
 msgid "Current movies in cinemas"
-msgstr ""
+msgstr "Aktuelle Filme im Kino"
 
 msgid "Delete movie EIT file"
-msgstr ""
+msgstr "Lösche EIT Datei"
 
 msgid "Details"
 msgstr "Details"
@@ -83,7 +83,7 @@ msgid "Genre:"
 msgstr "Genre:"
 
 msgid "Known for:"
-msgstr ""
+msgstr "Bekannt aus:"
 
 msgid "Language:"
 msgstr "Sprache:"
@@ -98,14 +98,14 @@ msgid "Movie"
 msgstr "Film"
 
 msgid "Movie description saved!"
-msgstr ""
+msgstr "Filmbeschreibung gespeichert!"
 
 #, python-format
 msgid "No results for %s"
-msgstr ""
+msgstr "Keine Ergebnisse für %s"
 
 msgid "No results found, or does not respond!"
-msgstr ""
+msgstr "Keine Ergebnisse, oder keine Antwort!"
 
 msgid "Page down"
 msgstr "Seite runter"
@@ -114,13 +114,13 @@ msgid "Page up"
 msgstr "Seite hoch"
 
 msgid "Popular movies"
-msgstr ""
+msgstr "Beliebte Filme"
 
 msgid "Popularity"
-msgstr ""
+msgstr "Beliebtheit"
 
 msgid "Recommendations"
-msgstr ""
+msgstr "Empfehlungen"
 
 #, python-format
 msgid "Results for %s"
@@ -176,16 +176,16 @@ msgid "Show movie details from TMDb"
 msgstr ""
 
 msgid "Similar movies"
-msgstr ""
+msgstr "Ähnliche Filme"
 
 msgid "Studio:"
 msgstr "Studio:"
 
 msgid "TMDB Settings"
-msgstr ""
+msgstr "TMDB Einstellungen"
 
 msgid "TMDb API Key:"
-msgstr ""
+msgstr "TMDb API-Schlüssel:"
 
 msgid "TMDb Search"
 msgstr "TMDb Infos ..."
@@ -194,7 +194,7 @@ msgid "TMDb: "
 msgstr ""
 
 msgid "Upcoming movies"
-msgstr ""
+msgstr "Kommende Filme"
 
 msgid "Various"
 msgstr "Verschiedenes"
