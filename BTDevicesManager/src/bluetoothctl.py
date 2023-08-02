@@ -214,6 +214,14 @@ class Bluetoothctl:
             print(e)
             return None
 
+    def agent_off(self):
+        """Stop agent"""
+        try:
+            out = self.get_output("agent off")
+        except BluetoothctlError as e:
+            print(e)
+            return None
+			
     def default_agent(self):
         """Start default agent"""
         try:

@@ -146,7 +146,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 		for x in self['config'].list:
 			x[1].save()
 
-		if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200",):
+		if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200","sf8008"):
 			if config.btdevicesmanager.autostart.getValue():
 				print("[BluetoothManager] Autostart: Loading driver")
 				os.system("modprobe rtk_btusb")
@@ -154,7 +154,7 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 				print("[BluetoothManager] Autostart: Unloading driver")
 				os.system("rmmod rtk_btusb")
 
-		if brandoem in ("xcore", "edision") or machinebuild in ("gbmv200",):
+		if brandoem in ("xcore", "edision") or machinebuild in ("gbmv200","sf8008"):
 			if config.btdevicesmanager.audioconnect.getValue():
 				os.system("%s %s" % (commandconnect, config.btdevicesmanager.audioaddress.getValue()))
 			else:
@@ -216,7 +216,7 @@ class BluetoothDevicesManager(Screen):
 
 		if config.btdevicesmanager.autostart.getValue():
 			self.initDevice()
-		if brandoem in ("xcore", "edision") or machinebuild in ("gbmv200",):
+		if brandoem in ("xcore", "edision") or machinebuild in ("gbmv200","sf8008"):
 			self.initDevice()
 			self.showConnections()
 
@@ -247,7 +247,7 @@ class BluetoothDevicesManager(Screen):
 
 	def keyGreen(self):
 		print("[BluetoothManager] keyGreen")
-		if machinebuild in ("gbmv200",):
+		if machinebuild in ("gbmv200","sf8008"):
 			self.refreshScanedTimer.start(5000, False)
 		else:
 			if config.btdevicesmanager.autostart.getValue() or brandoem in ("xcore", "edision"):
@@ -264,7 +264,7 @@ class BluetoothDevicesManager(Screen):
 		self.devicelist.append((_("Scanning for devices..."), _("Scanning...")))
 		self["devicelist"].setList(self.devicelist)
 
-		if machinebuild in ("gbmv200",):
+		if machinebuild in ("gbmv200","sf8008"):
 			iBluetoothctl.start_scan()
 			self.refreshScanedTimer.start(5000, False)
 		else:
@@ -281,7 +281,7 @@ class BluetoothDevicesManager(Screen):
 		data = six.ensure_str(data)
 		data = data.splitlines()
 		i = 1
-		if machinebuild in ("gbmv200",):
+		if machinebuild in ("gbmv200","sf8008"):
 			delimiter = " "
 		else:
 			delimiter = "\t"
@@ -301,7 +301,7 @@ class BluetoothDevicesManager(Screen):
 
 	def showConnections(self):
 		print("[BluetoothManager] showConnections")
-		if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200",):
+		if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200","sf8008"):
 			cmd = "hidd --show"
 			self.taskManager.append(cmd, self.cbPrintCurrentConnections, self.cbStopDone)
 			self.taskManager.next()
@@ -358,7 +358,7 @@ class BluetoothDevicesManager(Screen):
 	def keyYellow(self):
 		if self["key_yellow"].getText() == _('Disconnect'):
 			print("[BluetoothManager] Disconnecting")
-			if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200",):
+			if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200","sf8008"):
 				cmd = "hidd --killall"
 				rc = os.system(cmd)
 				if not rc:
@@ -385,7 +385,7 @@ class BluetoothDevicesManager(Screen):
 							self["key_yellow"].setText(_("Connect"))
 		else:
 			print("[BluetoothManager] Connecting")
-			if machinebuild in ("gbmv200",):
+			if machinebuild in ("gbmv200","sf8008"):
 				self.refreshScanedTimer.stop()
 
 			selectedItem = self["devicelist"].getCurrent()
@@ -396,7 +396,7 @@ class BluetoothDevicesManager(Screen):
 			msg = _("Trying to pair with:") + " " + selectedItem[1]
 			self["ConnStatus"].setText(msg)
 
-			if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200",):
+			if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200","sf8008"):
 				cmd = "hidd --connect " + selectedItem[1]
 				self.taskManager.append(cmd, self.cbPrintAvailConnections, self.cbRunNextTask)
 				cmd = "hidd --show"
@@ -424,8 +424,11 @@ class BluetoothDevicesManager(Screen):
 						break
 
 				if mac_address is not None:
-					iBluetoothctl.agent_noinputnooutput()
-					iBluetoothctl.default_agent()
+					if machinebuild in ("gbmv200","sf8008"):
+						iBluetoothctl.agent_off()
+					else:
+						iBluetoothctl.agent_noinputnooutput()
+						iBluetoothctl.default_agent()
 					ret = iBluetoothctl.pair(mac_address)
 					if config.btdevicesmanager.audioaddress.getValue() == "":
 						config.btdevicesmanager.audioaddress.setValue(mac_address)
@@ -456,7 +459,7 @@ class BluetoothDevicesManager(Screen):
 
 	def keyBlue(self):
 		print("[BluetoothManager] keyBlue")
-		if machinebuild not in ("gbmv200",):
+		if machinebuild not in ("gbmv200","sf8008"):
 			self.session.openWithCallback(self.keyGreen, BluetoothDevicesManagerSetup)
 
 	def showMessage(self, msg):
@@ -494,7 +497,7 @@ def main(session, **kwargs):
 
 def autostart(reason, **kwargs):
 	if reason == 0:
-		if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200",):
+		if brandoem not in ("xcore", "edision") and machinebuild not in ("gbmv200","sf8008"):
 			if config.btdevicesmanager.autostart.getValue():
 				print("[BluetoothManager] Autostart: Loading driver")  # We have it on a blacklist because We want to have faster system loading, so We load driver while we enable it.
 				os.system("modprobe rtk_btusb")
