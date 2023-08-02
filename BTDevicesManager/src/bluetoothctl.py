@@ -221,7 +221,7 @@ class Bluetoothctl:
         except BluetoothctlError as e:
             print(e)
             return None
-			
+
     def default_agent(self):
         """Start default agent"""
         try:
