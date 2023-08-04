@@ -1,25 +1,24 @@
-# Finnish translations for Enigma2.
+# Finnish translations for RemoteControlCode.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2016-05-07 14:20+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2022-11-03 14:50+0100\n"
+"PO-Revision-Date: 2023-08-04 21:55+0300\n"
+"Last-Translator: Orlandox\n"
 "Language-Team: AndyBlac/TimoJ\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, python-format
 msgid " in %d seconds."
-msgstr ""
+msgstr " %d sekunnissa."
 
-#
 msgid "Cancel"
 msgstr "Peruuta"
 
@@ -35,9 +34,8 @@ msgstr "Vaihda kaukosäätimen lähetyskoodi"
 msgid "Press and hold '2' & '7' until red LED is solid, then press 'Help', then press '000"
 msgstr "Paina ja pidä '2' ja '7' näppäimiä pohjassa kunnes punainen valo palaa jatkuvasti, paina sitten 'Help' ja sitten '000"
 
-#, fuzzy
 msgid "Press and hold <OK> and <STB> until red LED is solid, then press '0000"
-msgstr "Paina ja pidä '2' ja '7' näppäimiä pohjassa kunnes punainen valo palaa jatkuvasti, paina sitten 'Help' ja sitten '000"
+msgstr "Paina ja pidä <OK> and <STB> näppäimiä pohjassa kunnes punainen valo palaa jatkuvasti, paina sitten '0000"
 
 msgid "Remote Control Code"
 msgstr "Kaukosäätimen koodi"
@@ -45,21 +43,18 @@ msgstr "Kaukosäätimen koodi"
 msgid "Remote Control System Code"
 msgstr "Kaukosäätimen järjestelmäkoodi"
 
-#, fuzzy
 msgid "Remote Control Type"
-msgstr "Kaukosäätimen koodi"
+msgstr "Kaukosäätimen tyyppi"
 
-#
 msgid "Restore"
 msgstr "Palauta"
 
-#
 msgid "Save"
 msgstr "Tallenna"
 
 #, python-format
 msgid "Sorry, but %s is not supported."
-msgstr ""
+msgstr "Sori, mutta %s ei ole tuettu."
 
 msgid "Text support"
 msgstr "Tekstin tuki"
