@@ -3,15 +3,15 @@
 	<!-- TV Spielfilm_tvMain -->
 	<screen name="TVSMain" position="742,165" size="495,810" backgroundColor="transparent" flags="wfNoBorder" title="TV Spielfilm">
 		<ePixmap position="0,0" size="495,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="waiting" position="305,18" size="195,30" font="Regular;24" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="release" position="305,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="waiting" position="305,18" size="195,30" font="TVS_Regular;24" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
 		<widget name="mainmenu" position="15,105" size="465,635" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" scrollbarMode="showOnDemand" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" />
 		<widget name="secondmenu" position="15,105" size="465,635" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" scrollbarMode="showOnDemand" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" />
 		<widget name="thirdmenu" position="15,105" size="465,635" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" scrollbarMode="showOnDemand" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" />
-		<widget name="label" position="37,760" size="97,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="2" />
-		<eLabel name="Menu" text="Menu" position="277,760" size="90,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" />
-		<widget name="label2" position="165,760" size="82,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label5" position="397,760" size="90,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label" position="37,760" size="97,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="2" />
+		<eLabel name="Menu" text="Menu" position="277,760" size="90,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" />
+		<widget name="label2" position="165,760" size="82,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label5" position="397,760" size="90,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
 		<eLabel name="button_red" position="15,755" size="12,45" backgroundColor="red" zPosition="1" />
 		<eLabel name="button_green" position="142,755" size="12,45" backgroundColor="green" zPosition="1" />
 		<eLabel name="button_yellow" position="255,755" size="12,45" backgroundColor="yellow" zPosition="1" />
@@ -24,12 +24,12 @@
 	<!-- TV Spielfilm_tvTipps -->
 	<screen name="TVSTipps" position="center-585,center+308" size="750,255" flags="wfNoBorder" title=" ">
 		<widget name="picture" position="8,3" size="379,249" alphatest="blend" zPosition="1" />
-		<widget name="label" position="397,80" size="342,30" font="Regular;21" foregroundColor="#00000000" backgroundColor="green" halign="left" zPosition="3" />
-		<widget name="label2" position="397,110" size="300,87" font="Regular;22" foregroundColor="blue" backgroundColor="#00ffffff" halign="left" zPosition="2" />
-		<widget name="label3" position="397,200" size="342,54" font="Regular;21" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" halign="left" zPosition="2" />
-		<widget name="label4" position="397,2" size="100,36" font="Regular;22" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
-		<widget name="label5" position="397,42" size="100,36" font="Regular;18" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
-		<widget name="label6" position="210,205" size="150,36" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;27" transparent="1" zPosition="2" />
+		<widget name="label" position="397,80" size="342,30" font="TVS_Regular;21" foregroundColor="#00000000" backgroundColor="green" halign="left" zPosition="3" />
+		<widget name="label2" position="397,110" size="300,87" font="TVS_Regular;22" foregroundColor="blue" backgroundColor="#00ffffff" halign="left" zPosition="2" />
+		<widget name="label3" position="397,200" size="342,54" font="TVS_Regular;21" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" halign="left" zPosition="2" />
+		<widget name="label4" position="397,2" size="100,36" font="TVS_Regular;22" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
+		<widget name="label5" position="397,42" size="100,36" font="TVS_Regular;18" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
+		<widget name="label6" position="210,205" size="150,36" foregroundColor="#00ffffff" backgroundColor="#00000000" font="TVS_Regular;27" transparent="1" zPosition="2" />
 		<widget name="thumb" position="699,134" size="40,40" pixmap="{picpath}FHD/icons/rating-small1.png" alphatest="blend" zPosition="2" />
 		<widget name="1_zapup" pixmap="{picpath}FHD/buttons/button_1_zap_up.png" position="575,2" size="140,36" alphatest="blend" zPosition="0" />
 		<widget name="2_zapdown" pixmap="{picpath}FHD/buttons/button_2_zap_down.png" position="575,42" size="160,36" alphatest="blend" zPosition="0" />
@@ -46,134 +46,134 @@
 	<screen name="TVSPicShowFull" position="center,center" size="1920,1080" title=" ">
 		<eLabel position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="1" />
 		<widget name="picture" position="0,0" size="1920,1080" alphatest="blend" zPosition="3" />
-		<widget name="picindex" position="center,15" size="210,24" font="Regular;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" transparent="0" zPosition="4" />
+		<widget name="picindex" position="center,15" size="210,24" font="TVS_Regular;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" transparent="0" zPosition="4" />
 	</screen>
 
 	<!-- TV Spielfilm_TVPicShow -->
 	<screen name="TVSPicShow" position="0,0" size="1920,1080" backgroundColor="#20000000" flags="wfNoBorder">
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="-5" />
-		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
+		<widget source="Title" render="Label" position="480,24" size="1170,51" font="TVS_Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_down" position="0,1020" size="1920,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<ePixmap position="0,0" size="1860,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="seitennr" position="1717,66" size="157,21" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
-		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
+		<widget name="release" position="305,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="seitennr" position="1717,66" size="157,21" font="TVS_Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
+		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
-		<widget name="textpage" position="75,172" size="1140,750" font="Regular;24" halign="left" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#20000000" transparent="1" />
+		<widget name="textpage" position="75,172" size="1140,750" font="TVS_Regular;24" halign="left" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#20000000" transparent="1" />
 		<widget name="picture" position="75,172" size="1140,750" alphatest="blend" zPosition="2" />
-		<widget name="picindex" position="532,126" size="165,36" font="Regular;30" halign="center" zPosition="1" transparent="1" />
-		<widget name="pictext" position="1275,171" size="630,750" font="Regular;30" halign="center" zPosition="1" backgroundColor="#20000000" transparent="1" />
-		<widget name="label5" position="757,1035" size="285,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="picindex" position="532,126" size="165,36" font="TVS_Regular;30" halign="center" zPosition="1" transparent="1" />
+		<widget name="pictext" position="1275,171" size="630,750" font="TVS_Regular;30" halign="center" zPosition="1" backgroundColor="#20000000" transparent="1" />
+		<widget name="label5" position="757,1035" size="285,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
 		<widget name="bluebutton" position="735,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 		<widget name="OKkey" pixmap="{picpath}FHD/buttons/button_ok.png" position="1507,1036" size="84,36" alphatest="blend" zPosition="0" />
-		<widget name="OKtext" position="1605,1038" size="300,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="OKtext" position="1605,1038" size="300,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
 	</screen>
 
 	<!-- TV Spielfilm_TVNews -->
 	<screen name="TVSNews" position="0,0" size="1920,1080" backgroundColor="#20000000" flags="wfNoBorder" title="TV-News - TV Spielfilm">
-		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
+		<widget source="Title" render="Label" position="480,24" size="1170,51" font="TVS_Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_down" position="0,1020" size="1920,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="-5" />
 		<ePixmap position="0,0" size="1860,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="waiting" position="305,18" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="ready" position="305,24" size="48,26" font="Regular;21" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" valign="center" zPosition="2" />
-		<widget name="seitennr" position="1717,66" size="157,21" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
-		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
+		<widget name="release" position="305,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="waiting" position="305,18" size="195,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="ready" position="305,24" size="48,26" font="TVS_Regular;21" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" valign="center" zPosition="2" />
+		<widget name="seitennr" position="1717,66" size="157,21" font="TVS_Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
+		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
 		<widget name="menu" position="15,112" size="1260,900" scrollbarMode="showOnDemand" zPosition="1" borderWidth="1" borderColor="#00000000" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" />
 		<widget name="picture" position="1335,142" size="525,351" alphatest="blend" zPosition="1" />
-		<widget name="picturetext" position="1335,510" size="525,360" font="Regular;30" halign="center" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#20000000" />
+		<widget name="picturetext" position="1335,510" size="525,360" font="TVS_Regular;30" halign="center" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#20000000" />
 		<widget name="picpost" position="958,238" size="948,624" alphatest="blend" zPosition="1" />
 		<widget name="playlogo" position="1411,468" size="90,90" pixmap="{picpath}FHD/icons/play.png" alphatest="blend" zPosition="2" />
-		<widget name="textpage" position="15,112" size="915,900" font="Regular;30" halign="left" zPosition="0" backgroundColor="#20000000" transparent="0" scrollbarMode="showOnDemand" foregroundColor="#00c0c0c0" foregroundColorSelected="#00ffffff" />
-		<widget name="statuslabel" position="1134,879" size="741,21" font="Regular;21" foregroundColor="#00697279" halign="center" zPosition="2" />
-		<widget name="label5" position="757,1035" size="285,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="textpage" position="15,112" size="915,900" font="TVS_Regular;30" halign="left" zPosition="0" backgroundColor="#20000000" transparent="0" scrollbarMode="showOnDemand" foregroundColor="#00c0c0c0" foregroundColorSelected="#00ffffff" />
+		<widget name="statuslabel" position="1134,879" size="741,21" font="TVS_Regular;21" foregroundColor="#00697279" halign="center" zPosition="2" />
+		<widget name="label5" position="757,1035" size="285,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
 		<widget name="bluebutton" position="735,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 		<widget name="OKkey" pixmap="{picpath}FHD/buttons/button_ok.png" position="1507,1036" size="84,36" alphatest="blend" zPosition="0" />
-		<widget name="OKtext" position="1605,1038" size="300,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="OKtext" position="1605,1038" size="300,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
 	</screen>
 
 	<!-- TV Spielfilm_TVProgrammView -->
 	<screen name="TVSProgrammView" position="0,0" size="1920,1080" backgroundColor="#20000000" flags="wfNoBorder" title=" ">
-		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
+		<widget source="Title" render="Label" position="480,24" size="1170,51" font="TVS_Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_top" position="15,405" size="1890,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<widget name="Line_mid" position="1005,952" size="900,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<widget name="Line_down" position="0,1020" size="1920,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="-5" transparent="0" />
 		<ePixmap position="0,0" size="1860,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="waiting" position="305,18" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="ready" position="305,24" size="48,26" font="Regular;21" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" valign="center" zPosition="2" />
-		<widget name="seitennr" position="1717,66" size="157,21" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
-		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
+		<widget name="release" position="305,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="waiting" position="305,18" size="195,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="ready" position="305,24" size="48,26" font="TVS_Regular;21" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" valign="center" zPosition="2" />
+		<widget name="seitennr" position="1717,66" size="157,21" font="TVS_Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
+		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
 		<!-- TVProgrammView Start-Screen -->
 		<widget name="menu" position="15,97" size="1897,923" scrollbarMode="showOnDemand" borderWidth="1" borderColor="#00000000" zPosition="2" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" selectionPixmap="{picpath}FHD/selectors/selector_1900_71_{selbg}.png" alphatest="blend" />
-		<widget name="searchtext" position="367,142" size="1432,97" font="Regular;39" valign="center" zPosition="1" />
+		<widget name="searchtext" position="367,142" size="1432,97" font="TVS_Regular;39" valign="center" zPosition="1" />
 		<widget name="searchmenu" position="15,97" size="1905,922" scrollbarMode="showOnDemand" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#20000000" />
 		<!-- TVProgrammView Event -->
 		<widget name="picpost" position="1012,420" size="870,519" alphatest="blend" zPosition="1" />
-		<widget name="infotext0" position="142,100" size="547,60" font="Regular;40" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext1" position="15,154" size="660,40" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext2" position="142,204" size="547,60" font="Regular;40" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext4" position="15,265" size="660,37" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext3" position="840,100" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext5" position="840,145" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext6" position="840,190" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext7" position="840,235" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext8" position="840,280" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext0" position="142,100" size="547,60" font="TVS_Regular;40" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext1" position="15,154" size="660,40" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext2" position="142,204" size="547,60" font="TVS_Regular;40" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext4" position="15,265" size="660,37" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext3" position="840,100" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext5" position="840,145" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext6" position="840,190" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext7" position="840,235" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext8" position="840,280" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
 		<widget name="tvinfo0" position="15,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
 		<widget name="tvinfo1" position="82,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
 		<widget name="tvinfo2" position="150,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
 		<widget name="tvinfo3" position="217,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
 		<widget name="tvinfo4" position="285,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
-		<widget name="ratinglabel0" position="2,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel0" position="2,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot0" position="23,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="ratinglabel1" position="111,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel1" position="111,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot1" position="132,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="ratinglabel2" position="220,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel2" position="220,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot2" position="241,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="ratinglabel3" position="329,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel3" position="329,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot3" position="350,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="ratinglabel4" position="438,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel4" position="438,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot4" position="459,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="starslabel" position="550,345" size="127,30" font="Regular;21" halign="center" zPosition="0" transparent="1" />
+		<widget name="starslabel" position="550,345" size="127,30" font="TVS_Regular;21" halign="center" zPosition="0" transparent="1" />
 		<widget name="starsrating" position="559,370" size="108,22" alphatest="blend" zPosition="1" />
-		<widget name="piclabel" position="15,97" size="102,51" font="Regular;40" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
-		<widget name="piclabel2" position="567,1672" size="127,60" font="Regular;21" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
+		<widget name="piclabel" position="15,97" size="102,51" font="TVS_Regular;40" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
+		<widget name="piclabel2" position="567,1672" size="127,60" font="TVS_Regular;21" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
 		<widget name="picon" position="15,199" size="102,60" alphatest="blend" zPosition="2" />
 		<widget name="playlogo" position="1431,622" size="90,90" pixmap="{picpath}FHD/icons/play.png" alphatest="blend" zPosition="2" />
-		<widget name="editorial" position="1012,330" size="915,30" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
-		<widget name="ranking" position="1012,360" size="915,36" font="Regular;30" foregroundColor="#0092cbdf" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
-		<widget name="textpage" position="15,420" size="975,585" font="Regular;33" halign="left" zPosition="0" foregroundColor="#00ffffff" backgroundColor="#20000000" />
+		<widget name="editorial" position="1012,330" size="915,30" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
+		<widget name="ranking" position="1012,360" size="915,36" font="TVS_Regular;30" foregroundColor="#0092cbdf" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
+		<widget name="textpage" position="15,420" size="975,585" font="TVS_Regular;33" halign="left" zPosition="0" foregroundColor="#00ffffff" backgroundColor="#20000000" />
 		<!-- Color-Buttons TVProgrammView Start-Screen-->
-		<widget name="label2" position="37,1035" size="202,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label3" position="517,1035" size="202,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label4" position="277,1035" size="202,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label5" position="757,1035" size="240,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label6" position="1200,1035" size="0,0" font="Regular;27" zPosition="2" transparent="1" halign="right" />
+		<widget name="label2" position="37,1035" size="202,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label3" position="517,1035" size="202,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label4" position="277,1035" size="202,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label5" position="757,1035" size="240,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label6" position="1200,1035" size="0,0" font="TVS_Regular;27" zPosition="2" transparent="1" halign="right" />
 		<eLabel name="button_red" position="15,1030" size="12,45" backgroundColor="red" zPosition="1" />
 		<eLabel name="button_green" position="255,1030" size="12,45" backgroundColor="green" zPosition="1" />
 		<eLabel name="button_yellow" position="495,1030" size="12,45" backgroundColor="yellow" zPosition="1" />
 		<widget name="bluebutton" position="735,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 		<!-- Beschriftung TVProgrammView Event-->
-		<widget name="label_OK" position="1045,974" size="184,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="label_TEXT" position="1273,974" size="178,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="label_INFO" position="1495,974" size="75,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="label_OK" position="1045,974" size="184,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="label_TEXT" position="1273,974" size="178,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="label_INFO" position="1495,974" size="75,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
 		<widget name="button_7_8_9" pixmap="{picpath}FHD/buttons/button_7_8_9.png" position="1575,969" size="340,36" alphatest="blend" transparent="1" />
 		<!--  Icons TV Heute Event-->
 		<widget name="button_OK" pixmap="{picpath}FHD/buttons/ok.png" position="1005,969" size="36,36" alphatest="blend" zPosition="0" />
 		<widget name="button_TEXT" pixmap="{picpath}FHD/buttons/text.png" position="1233,969" size="36,36" alphatest="blend" zPosition="0" />
 		<widget name="button_INFO" pixmap="{picpath}FHD/buttons/info.png" position="1455,969" size="36,36" alphatest="blend" zPosition="0" />
 		<!-- Beschriftung Buttons TVProgrammView Start-Screen-->
-		<widget name="TEXTtext" position="1425,1039" size="165,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="INFOtext" position="1680,1039" size="240,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="CHANNELtext" position="1425,1039" size="165,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="BOUQUETtext" position="1680,1039" size="240,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="TEXTtext" position="1425,1039" size="165,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="INFOtext" position="1680,1039" size="240,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="CHANNELtext" position="1425,1039" size="165,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="BOUQUETtext" position="1680,1039" size="240,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
 		<!-- Icons TVProgrammView Start-Screen-->
 		<widget name="TEXTkey" pixmap="{picpath}FHD/buttons/button_text.png" position="1335,1035" size="84,36" alphatest="blend" zPosition="0" />
 		<widget name="INFOkey" pixmap="{picpath}FHD/buttons/button_info.png" position="1590,1035" size="84,36" alphatest="blend" zPosition="0" />
@@ -185,63 +185,63 @@
 
 		<!-- TV Spielfilm_TVHeuteView -->
 	<screen name="TVSHeuteView" position="0,0" size="1920,1080" backgroundColor="#00000000" flags="wfNoBorder" title="TV Programm - TV Spielfilm">
-		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
+		<widget source="Title" render="Label" position="480,24" size="1170,51" font="TVS_Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_top" position="15,405" size="1890,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<widget name="Line_mid" position="1005,952" size="900,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<widget name="Line_down" position="0,1020" size="1920,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#00000000" foregroundColor="#00000000" zPosition="-1" />
 		<ePixmap position="15,0" size="1890,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="320,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="waiting" position="320,18" size="195,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="top" zPosition="3" />
-		<widget name="ready" position="320,24" size="48,26" font="Regular;21" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" valign="center" zPosition="2" />
-		<widget name="seitennr" position="1717,66" size="157,21" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
-		<widget render="Label" source="global.CurrentTime" position="1683,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
+		<widget name="release" position="320,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="waiting" position="320,18" size="195,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="top" zPosition="3" />
+		<widget name="ready" position="320,24" size="48,26" font="TVS_Regular;21" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" valign="center" zPosition="2" />
+		<widget name="seitennr" position="1717,66" size="157,21" font="TVS_Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
+		<widget render="Label" source="global.CurrentTime" position="1683,0" size="225,90" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
 		<!-- TV Heute Event -->
 		<widget name="picpost" position="1012,420" size="870,519" alphatest="blend" zPosition="1" />
-		<widget name="infotext0" position="142,100" size="547,60" font="Regular;40" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext1" position="15,154" size="660,40" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext2" position="142,204" size="547,60" font="Regular;40" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext4" position="15,265" size="660,37" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext3" position="840,100" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext5" position="840,145" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext6" position="840,190" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext7" position="840,235" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
-		<widget name="infotext8" position="840,280" size="1080,40" font="Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext0" position="142,100" size="547,60" font="TVS_Regular;40" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext1" position="15,154" size="660,40" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext2" position="142,204" size="547,60" font="TVS_Regular;40" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext4" position="15,265" size="660,37" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext3" position="840,100" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext5" position="840,145" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext6" position="840,190" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext7" position="840,235" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
+		<widget name="infotext8" position="840,280" size="1080,40" font="TVS_Regular;30" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" zPosition="1" transparent="1" />
 		<widget name="tvinfo0" position="15,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
 		<widget name="tvinfo1" position="82,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
 		<widget name="tvinfo2" position="150,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
 		<widget name="tvinfo3" position="217,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
 		<widget name="tvinfo4" position="285,307" size="60,24" font="Bold;21" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
-		<widget name="ratinglabel0" position="2,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel0" position="2,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot0" position="23,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="ratinglabel1" position="111,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel1" position="111,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot1" position="132,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="ratinglabel2" position="220,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel2" position="220,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot2" position="241,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="ratinglabel3" position="329,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel3" position="329,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot3" position="350,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="ratinglabel4" position="438,345" size="109,30" font="Regular;21" halign="center" zPosition="1" transparent="1" />
+		<widget name="ratinglabel4" position="438,345" size="109,30" font="TVS_Regular;21" halign="center" zPosition="1" transparent="1" />
 		<widget name="ratingdot4" position="459,371" size="67,23" alphatest="blend" zPosition="1" />
-		<widget name="starslabel" position="550,345" size="127,30" font="Regular;21" halign="center" zPosition="0" transparent="1" />
+		<widget name="starslabel" position="550,345" size="127,30" font="TVS_Regular;21" halign="center" zPosition="0" transparent="1" />
 		<widget name="starsrating" position="559,370" size="108,22" alphatest="blend" zPosition="1" />
-		<widget name="piclabel" position="15,97" size="102,51" font="Regular;40" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
-		<widget name="piclabel2" position="567,1672" size="127,60" font="Regular;21" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
+		<widget name="piclabel" position="15,97" size="102,51" font="TVS_Regular;40" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
+		<widget name="piclabel2" position="567,1672" size="127,60" font="TVS_Regular;21" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
 		<widget name="picon" position="15,199" size="102,60" alphatest="blend" zPosition="2" />
 		<widget name="playlogo" position="1431,622" size="90,90" pixmap="{picpath}FHD/icons/play.png" alphatest="blend" zPosition="2" />
-		<widget name="editorial" position="1012,330" size="915,30" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
-		<widget name="ranking" position="1012,360" size="915,36" font="Regular;30" foregroundColor="#0092cbdf" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
-		<widget name="textpage" position="15,420" size="975,585" font="Regular;33" halign="left" zPosition="0" foregroundColor="#00ffffff" backgroundColor="#00000000" />
+		<widget name="editorial" position="1012,330" size="915,30" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
+		<widget name="ranking" position="1012,360" size="915,36" font="TVS_Regular;30" foregroundColor="#0092cbdf" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
+		<widget name="textpage" position="15,420" size="975,585" font="TVS_Regular;33" halign="left" zPosition="0" foregroundColor="#00ffffff" backgroundColor="#00000000" />
 		<!-- TV Heute Start-Screen -->
-		<widget name="searchtext" position="367,142" size="1432,97" font="Regular;39" valign="center" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" />
+		<widget name="searchtext" position="367,142" size="1432,97" font="TVS_Regular;39" valign="center" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" />
 		<widget name="searchmenu" position="15,97" size="1905,922" scrollbarMode="showOnDemand" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" />
-		<widget name="sender0" position="15,96" size="313,36" font="Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
-		<widget name="sender1" position="330,96" size="313,36" font="Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
-		<widget name="sender2" position="645,96" size="313,36" font="Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
-		<widget name="sender3" position="960,96" size="313,36" font="Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
-		<widget name="sender4" position="1275,96" size="313,36" font="Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
-		<widget name="sender5" position="1590,96" size="318,36" font="Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
+		<widget name="sender0" position="15,96" size="313,36" font="TVS_Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
+		<widget name="sender1" position="330,96" size="313,36" font="TVS_Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
+		<widget name="sender2" position="645,96" size="313,36" font="TVS_Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
+		<widget name="sender3" position="960,96" size="313,36" font="TVS_Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
+		<widget name="sender4" position="1275,96" size="313,36" font="TVS_Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
+		<widget name="sender5" position="1590,96" size="318,36" font="TVS_Regular;28" halign="center" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#0027408b" zPosition="1" />
 		<widget name="picon0" position="223,135" size="100,60" alphatest="blend" zPosition="1" />
 		<widget name="picon1" position="538,135" size="100,60" alphatest="blend" zPosition="1" />
 		<widget name="picon2" position="853,135" size="100,60" alphatest="blend" zPosition="1" />
@@ -254,18 +254,18 @@
 		<widget name="pic3" position="960,135" size="201,168" alphatest="blend" zPosition="1" />
 		<widget name="pic4" position="1275,135" size="201,168" alphatest="blend" zPosition="1" />
 		<widget name="pic5" position="1590,135" size="201,168" alphatest="blend" zPosition="1" />
-		<widget name="pictime0" position="223,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
-		<widget name="pictime1" position="538,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
-		<widget name="pictime2" position="853,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
-		<widget name="pictime3" position="1168,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
-		<widget name="pictime4" position="1483,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
-		<widget name="pictime5" position="1798,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
-		<widget name="pictext0" position="19,304" size="309,66" font="Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
-		<widget name="pictext1" position="334,304" size="309,66" font="Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
-		<widget name="pictext2" position="649,304" size="309,66" font="Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
-		<widget name="pictext3" position="964,304" size="309,66" font="Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
-		<widget name="pictext4" position="1279,304" size="309,66" font="Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
-		<widget name="pictext5" position="1594,304" size="315,66" font="Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
+		<widget name="pictime0" position="223,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="TVS_Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
+		<widget name="pictime1" position="538,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="TVS_Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
+		<widget name="pictime2" position="853,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="TVS_Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
+		<widget name="pictime3" position="1168,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="TVS_Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
+		<widget name="pictime4" position="1483,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="TVS_Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
+		<widget name="pictime5" position="1798,195" size="100,37" foregroundColor="#00ffffff" backgroundColor="#00000000" font="TVS_Regular;30" valign="top" halign="center" zPosition="1" transparent="1" />
+		<widget name="pictext0" position="19,304" size="309,66" font="TVS_Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
+		<widget name="pictext1" position="334,304" size="309,66" font="TVS_Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
+		<widget name="pictext2" position="649,304" size="309,66" font="TVS_Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
+		<widget name="pictext3" position="964,304" size="309,66" font="TVS_Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
+		<widget name="pictext4" position="1279,304" size="309,66" font="TVS_Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
+		<widget name="pictext5" position="1594,304" size="315,66" font="TVS_Regular;27" valign="top" halign="left" zPosition="1" borderWidth="1" borderColor="#00192959" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" />
 		<widget name="menu0" position="15,372" size="313,645" scrollbarMode="showNever" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" backgroundColorSelected="#0027408b" foregroundColorSelected="#00000000" />
 		<widget name="menu1" position="330,372" size="313,645" scrollbarMode="showNever" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" backgroundColorSelected="#0027408b" foregroundColorSelected="#00000000" />
 		<widget name="menu2" position="645,372" size="313,645" scrollbarMode="showNever" zPosition="1" foregroundColor="#00ffffff" backgroundColor="#00000000" backgroundColorSelected="#0027408b" foregroundColorSelected="#00000000" />
@@ -280,29 +280,29 @@
 		<widget name="pictext4_bg" position="1275,304" size="313,66" backgroundColor="#0027408b" zPosition="0" />
 		<widget name="pictext5_bg" position="1590,304" size="318,66" backgroundColor="#0027408b" zPosition="0" />
 		<!-- Color-Buttons TV Heute Start-Screen-->
-		<widget name="label2" position="37,1035" size="202,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label3" position="517,1035" size="202,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label4" position="277,1035" size="202,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label5" position="757,1035" size="240,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
-		<widget name="label6" position="1200,1035" size="0,0" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" zPosition="2" transparent="1" halign="right" />
+		<widget name="label2" position="37,1035" size="202,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label3" position="517,1035" size="202,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label4" position="277,1035" size="202,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label5" position="757,1035" size="240,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
+		<widget name="label6" position="1200,1035" size="0,0" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" zPosition="2" transparent="1" halign="right" />
 		<eLabel name="button_red" position="15,1030" size="12,45" backgroundColor="red" zPosition="1" />
 		<eLabel name="button_green" position="255,1030" size="12,45" backgroundColor="green" zPosition="1" />
 		<eLabel name="button_yellow" position="495,1030" size="12,45" backgroundColor="yellow" zPosition="1" />
 		<widget name="bluebutton" position="735,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 		<!-- Beschriftung Icons TV Heute Event-->
-		<widget name="label_OK" position="1045,974" size="184,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="label_TEXT" position="1273,974" size="178,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="label_INFO" position="1495,974" size="75,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="label_OK" position="1045,974" size="184,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="label_TEXT" position="1273,974" size="178,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="label_INFO" position="1495,974" size="75,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
 		<widget name="button_7_8_9" pixmap="{picpath}FHD/buttons/button_7_8_9.png" position="1575,969" size="340,36" alphatest="blend" transparent="1" />
 		<!--  Icons TV Heute Event-->
 		<widget name="button_OK" pixmap="{picpath}FHD/buttons/ok.png" position="1005,969" size="36,36" alphatest="blend" zPosition="0" />
 		<widget name="button_TEXT" pixmap="{picpath}FHD/buttons/text.png" position="1233,969" size="36,36" alphatest="blend" zPosition="0" />
 		<widget name="button_INFO" pixmap="{picpath}FHD/buttons/info.png" position="1455,969" size="36,36" alphatest="blend" zPosition="0" />
 		<!-- Beschriftung Buttons TV Heute Start-Screen-->
-		<widget name="INFOtext" position="1095,1039" size="165,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="CHANNELtext" position="1354,1039" size="105,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="BOUQUETtext" position="1555,1039" size="135,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
-		<widget name="MENUtext" position="1782,1039" size="135,36" font="Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="INFOtext" position="1095,1039" size="165,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="CHANNELtext" position="1354,1039" size="105,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="BOUQUETtext" position="1555,1039" size="135,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
+		<widget name="MENUtext" position="1782,1039" size="135,36" font="TVS_Regular;24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="" transparent="1" zPosition="0" />
 		<!-- Icons TV Heute Start-Screen-->
 		<widget name="INFOkey" pixmap="{picpath}FHD/buttons/button_info.png" position="1005,1035" size="84,36" alphatest="blend" zPosition="0" />
 		<widget name="CHANNELkey" pixmap="{picpath}FHD/buttons/button_ch-up-down.png" position="1264,1035" size="84,36" alphatest="blend" zPosition="0" />
@@ -312,7 +312,7 @@
 
 	<!-- TV Spielfilm_getNumber -->
 	<screen name="TVSgetNumber" position="center,center" size="262,105" backgroundColor="#20000000" flags="wfNoBorder" title=" ">
-		<widget name="number" position="0,0" size="262,105" font="Regular;60" halign="center" valign="center" transparent="1" zPosition="1" />
+		<widget name="number" position="0,0" size="262,105" font="TVS_Regular;60" halign="center" valign="center" transparent="1" zPosition="1" />
 	</screen>
 
 	<!-- TV Spielfilm_gotoPageMenu -->
@@ -322,13 +322,13 @@
 
 	<!-- TV Spielfilm_searchYouTube -->
 	<screen name="TVSsearchYouTube" position="0,0" size="1920,1080" backgroundColor="transparent" flags="wfNoBorder" title="">
-		<widget source="Title" render="Label" position="480,24" size="1170,51" font="Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
+		<widget source="Title" render="Label" position="480,24" size="1170,51" font="TVS_Regular;40" transparent="1" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<widget name="Line_down" position="0,1020" size="1920,1" backgroundColor="#00c0c0c0" zPosition="0" />
 		<eLabel name="Background" position="0,0" size="1920,1080" backgroundColor="#20000000" zPosition="-5" transparent="0" />
 		<ePixmap position="0,0" size="1860,90" pixmap="{picpath}FHD/logos/Youtube.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="seitennr" position="1717,66" size="157,21" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
-		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
+		<widget name="release" position="305,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="seitennr" position="1717,66" size="157,21" font="TVS_Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
+		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
 		<widget name="poster0" position="15,105" size="267,150" alphatest="blend" zPosition="1" />
@@ -338,42 +338,42 @@
 		<widget name="poster4" position="15,705" size="267,150" alphatest="blend" zPosition="1" />
 		<widget name="poster5" position="15,855" size="267,150" alphatest="blend" zPosition="1" />
 		<widget name="list" position="300,105" size="1605,900" borderWidth="1" borderColor="#00000000" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" scrollbarMode="showOnDemand" selectionPixmap="{picpath}FHD/selectors/selector_1605_150_{selbg}.png" zPosition="1" />
-		<widget name="label2" position="37,1035" size="300,36" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;27" halign="left" transparent="1" zPosition="1" />
-		<widget name="label5" position="382,1035" size="285,36" foregroundColor="#00ffffff" backgroundColor="#00000000" font="Regular;27" halign="left" transparent="1" zPosition="1" />
+		<widget name="label2" position="37,1035" size="300,36" foregroundColor="#00ffffff" backgroundColor="#00000000" font="TVS_Regular;27" halign="left" transparent="1" zPosition="1" />
+		<widget name="label5" position="382,1035" size="285,36" foregroundColor="#00ffffff" backgroundColor="#00000000" font="TVS_Regular;27" halign="left" transparent="1" zPosition="1" />
 		<eLabel name="button_yellow" position="15,1030" size="12,45" backgroundColor="yellow" zPosition="1" />
 		<widget name="bluebutton" position="360,1030" size="12,45" backgroundColor="blue" zPosition="2" />
 	</screen>
 
 	<!-- TV Spielfilm_tvsConfig -->
 	<screen name="TVSConfig" position="center,center" size="1279,1080" backgroundColor="transparent" flags="wfNoBorder" title="TV Spielfilm Setup">
-        <widget source="Title" render="Label" position="480,24" size="525,51" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
-		<widget render="Label" source="global.CurrentTime" position="1054,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
+        <widget source="Title" render="Label" position="480,24" size="525,51" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
+		<widget render="Label" source="global.CurrentTime" position="1054,0" size="225,90" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
 		<ePixmap position="0,0" size="1279,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="config" position="15,90" size="799,943" font="Regular;27" itemHeight="47" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" scrollbarMode="showOnDemand" borderWidth="1" borderColor="#00000000" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" zPosition="1" />
+		<widget name="release" position="305,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="config" position="15,90" size="799,943" font="TVS_Regular;27" itemHeight="47" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" scrollbarMode="showOnDemand" borderWidth="1" borderColor="#00000000" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" zPosition="1" />
 		<eLabel name="button_red" position="840,1029" size="12,45" backgroundColor="red" zPosition="1" />
 		<eLabel name="button_green" position="1069,1029" size="12,45" backgroundColor="green" zPosition="1" />
-		<eLabel position="864,1036" size="199,33" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="= Abbrechen" transparent="1" zPosition="1" />
-		<eLabel position="1095,1036" size="199,33" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="= Speichern" transparent="1" zPosition="1" />
-		<eLabel position="975,282" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Senderliste" transparent="1" zPosition="1" />
-		<eLabel position="975,754" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zum Video" transparent="1" zPosition="1" />
-		<eLabel position="975,921" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Hole Infos von TMDb" transparent="1" zPosition="1" />
-		<eLabel position="975,963" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Hole Infos von TVDb" transparent="1" zPosition="1" />
-		<eLabel position="975,415" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zum Sender" transparent="1" zPosition="1" />
-		<eLabel position="975,202" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Tag vor/zurück" transparent="1" zPosition="1" />
-		<eLabel position="964,531" size="309,39" font="Regular;31" foregroundColor="#00ffffff" backgroundColor="#00000000" borderWidth="1" borderColor="#00000000" halign="left" text="gewählter Sender" transparent="1" zPosition="1" />
-		<eLabel position="975,837" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zum EPG" transparent="1" zPosition="1" />
-		<eLabel position="975,163" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zeit vor/zurück" transparent="1" zPosition="1" />
-		<eLabel position="975,795" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zur Fotostrecke" transparent="1" zPosition="1" />
-		<eLabel position="975,879" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Hole Infos von IMDb" transparent="1" zPosition="1" />
-		<eLabel position="964,109" size="309,39" font="Regular;31" foregroundColor="#00ffffff" backgroundColor="#00000000" borderWidth="1" borderColor="#00000000" halign="left" text="Heute im TV" transparent="1" zPosition="1" />
-		<eLabel position="964,702" size="315,39" font="Regular;31" foregroundColor="#00ffffff" backgroundColor="#00000000" borderWidth="1" borderColor="#00000000" halign="left" text="Sendungsinformation" transparent="1" zPosition="1" />
-		<eLabel position="975,243" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Woche vor/zurück" transparent="1" zPosition="1" />
-		<eLabel position="975,624" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Woche vor/zurück" transparent="1" zPosition="1" />
-		<eLabel position="975,583" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Tag vor/zurück" transparent="1" zPosition="1" />
-		<eLabel position="975,453" size="309,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Gleich im TV" transparent="1" zPosition="1" />
+		<eLabel position="864,1036" size="199,33" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="= Abbrechen" transparent="1" zPosition="1" />
+		<eLabel position="1095,1036" size="199,33" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="= Speichern" transparent="1" zPosition="1" />
+		<eLabel position="975,282" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Senderliste" transparent="1" zPosition="1" />
+		<eLabel position="975,754" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zum Video" transparent="1" zPosition="1" />
+		<eLabel position="975,921" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Hole Infos von TMDb" transparent="1" zPosition="1" />
+		<eLabel position="975,963" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Hole Infos von TVDb" transparent="1" zPosition="1" />
+		<eLabel position="975,415" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zum Sender" transparent="1" zPosition="1" />
+		<eLabel position="975,202" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Tag vor/zurück" transparent="1" zPosition="1" />
+		<eLabel position="964,531" size="309,39" font="TVS_Regular;31" foregroundColor="#00ffffff" backgroundColor="#00000000" borderWidth="1" borderColor="#00000000" halign="left" text="gewählter Sender" transparent="1" zPosition="1" />
+		<eLabel position="975,837" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zum EPG" transparent="1" zPosition="1" />
+		<eLabel position="975,163" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zeit vor/zurück" transparent="1" zPosition="1" />
+		<eLabel position="975,795" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Zur Fotostrecke" transparent="1" zPosition="1" />
+		<eLabel position="975,879" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Hole Infos von IMDb" transparent="1" zPosition="1" />
+		<eLabel position="964,109" size="309,39" font="TVS_Regular;31" foregroundColor="#00ffffff" backgroundColor="#00000000" borderWidth="1" borderColor="#00000000" halign="left" text="Heute im TV" transparent="1" zPosition="1" />
+		<eLabel position="964,702" size="315,39" font="TVS_Regular;31" foregroundColor="#00ffffff" backgroundColor="#00000000" borderWidth="1" borderColor="#00000000" halign="left" text="Sendungsinformation" transparent="1" zPosition="1" />
+		<eLabel position="975,243" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Woche vor/zurück" transparent="1" zPosition="1" />
+		<eLabel position="975,624" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Woche vor/zurück" transparent="1" zPosition="1" />
+		<eLabel position="975,583" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Tag vor/zurück" transparent="1" zPosition="1" />
+		<eLabel position="975,453" size="309,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Gleich im TV" transparent="1" zPosition="1" />
 		<eLabel name="Background" position="0,0" size="1279,1080" backgroundColor="#20000000" zPosition="-10" />
 		<eLabel name="Background_Grey" position="14,90" size="801,978" backgroundColor="#00c0c0c0" zPosition="-5" />
 		<eLabel name="Background_Metrixbackground" position="15,90" size="799,977" backgroundColor="#20000000" zPosition="-1" />
@@ -402,32 +402,32 @@
 		<eLabel name="Background_Grey" position="840,501" size="424,1" backgroundColor="#00c0c0c0" zPosition="5" />
 		<eLabel name="Background_Grey" position="840,330" size="424,1" backgroundColor="#00c0c0c0" zPosition="55" />
 		<eLabel name="Background_Grey" position="15,1029" size="800,1" backgroundColor="#00c0c0c0" zPosition="55" />
-		<eLabel position="15,1038" size="800,27" font="Regular; 18" text="***  Authors: Kashmir(†), Mr.Servo, jbleyel - skinned by stein17  ***" foregroundColor="#00c0c0c0" backgroundColor="#00000000" halign="center" transparent="1" zPosition="4" />
+		<eLabel position="15,1038" size="800,27" font="TVS_Regular; 18" text="***  Authors: Kashmir(†), Mr.Servo, jbleyel - skinned by stein17  ***" foregroundColor="#00c0c0c0" backgroundColor="#00000000" halign="center" transparent="1" zPosition="4" />
 	</screen>
 
 	<!-- TV Spielfilm_FolderSelection -->
 	<screen name="TVSFolderSelection" position="center,center" size="1290,1050" backgroundColor="#20000000" flags="wfNoBorder" title="TV Spielfilm Setup">
 		<eLabel name="Background" position="0,0" size="1290,1050" backgroundColor="#20000000" zPosition="-5" />
-		<widget source="Title" render="Label" position="480,24" size="660,51" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
+		<widget source="Title" render="Label" position="480,24" size="660,51" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="1065,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
-		<widget render="Label" source="global.CurrentTime" position="1080,0" size="225,90" font="Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
+		<widget render="Label" source="global.CurrentTime" position="1080,0" size="225,90" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
-		<widget name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="folderlist" position="15,142" size="1260,840" font="Regular;27" itemHeight="47" scrollbarMode="showOnDemand" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" borderWidth="1" borderColor="#00000000" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" transparent="1" />
+		<widget name="release" position="305,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="folderlist" position="15,142" size="1260,840" font="TVS_Regular;27" itemHeight="47" scrollbarMode="showOnDemand" selectionPixmap="{picpath}FHD/selectors/selector_1260_47_{selbg}.png" borderWidth="1" borderColor="#00000000" foregroundColor="#00ffffff" foregroundColorSelected="#00ffffff" backgroundColor="#20000000" backgroundColorSelected="#0027408b" transparent="1" />
 		<eLabel name="button_red" position="127,996" size="12,45" backgroundColor="red" zPosition="1" />
 		<eLabel name="button_green" position="637,996" size="12,45" backgroundColor="green" zPosition="1" />
-		<eLabel position="660,1000" size="300,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Speichern" transparent="1" zPosition="1" />
-		<eLabel position="150,1000" size="300,36" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Abbrechen" transparent="1" zPosition="1" />
+		<eLabel position="660,1000" size="300,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Speichern" transparent="1" zPosition="1" />
+		<eLabel position="150,1000" size="300,36" font="TVS_Regular;27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" text="Abbrechen" transparent="1" zPosition="1" />
 		<eLabel name="Background_Grey" position="13,141" size="1263,843" backgroundColor="#00c0c0c0" zPosition="-5" />
 		<eLabel name="Background_Metrixbackground" position="15,142" size="1260,840" backgroundColor="#20000000" zPosition="-1" />
 	</screen>
 
 	<!-- class makeServiceFile Screen -->
 	<screen name="TVSmakeServiceFile" position="center,center" size="900,930" backgroundColor="#20000000" title="Import TV Spielfilm Sender: TV Bouquet Auswahl" flags="wfNoBorder">
-		<widget source="Title" render="Label" position="300,24" size="540,51" font="Regular;39" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
+		<widget source="Title" render="Label" position="300,24" size="540,51" font="TVS_Regular;39" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="900,90" pixmap="{picpath}FHD/logos/TVspielfilm.png" alphatest="blend" zPosition="1" />
-		<eLabel name="release" position="305,46" size="105,30" font="Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
-		<widget name="list" position="15,105" size="870,810" font="Regular;30" itemHeight="47" scrollbarMode="showOnDemand" foregroundColor="#00ffffff" backgroundColor="#20000000" transparent="1" />
+		<eLabel name="release" position="305,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
+		<widget name="list" position="15,105" size="870,810" font="TVS_Regular;30" itemHeight="47" scrollbarMode="showOnDemand" foregroundColor="#00ffffff" backgroundColor="#20000000" transparent="1" />
 	</screen>
 </skin>

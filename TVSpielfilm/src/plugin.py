@@ -75,9 +75,9 @@ config.plugins.tvspielfilm.font = ConfigSelection(default='yes', choices=[('yes'
 if config.plugins.tvspielfilm.font.value == 'yes':
 	from enigma import addFont
 	try:
-		addFont(join(PLUGINPATH, 'font/Roboto-Regular.ttf'), 'Regular', 100, False)
+		addFont(join(PLUGINPATH, 'font/Roboto-Regular.ttf'), 'TVS_Regular', 100, False)
 	except Exception as ex:
-		addFont(join(PLUGINPATH, 'font/Roboto-Regular.ttf'), 'Regular', 100, False, 0)
+		addFont(join(PLUGINPATH, 'font/Roboto-Regular.ttf'), 'TVS_Regular', 100, False, 0)
 config.plugins.tvspielfilm.font_size = ConfigSelection(default='normal', choices=[('large', 'Groß'), ('normal', 'Normal'), ('small', 'Klein')])
 config.plugins.tvspielfilm.meintvs = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.tvspielfilm.login = ConfigText(default='', fixed_size=False)
