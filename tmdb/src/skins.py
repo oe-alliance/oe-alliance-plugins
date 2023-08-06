@@ -2,7 +2,7 @@ from enigma import getDesktop
 
 if getDesktop(0).size().width() >= 1920:
 	tmdbScreenSkin = """
-			<screen position="30,70" size="1860,970" title="TMDb - The Movie Database" >
+			<screen position="30,90" size="1860,970" title="TMDb - The Movie Database" >
 				<widget name="searchinfo" position="20,30" size="1350,40" font="Regular; 32" foregroundColor="#00fff000" transparent="1" />
 				<widget name="list" position="20,90" size="1350,800" itemHeight="40" transparent="1" scrollbarMode="showNever"/>
 				<widget name="cover" position="1500,250" size="320,480" alphatest="blend" />
@@ -13,14 +13,14 @@ if getDesktop(0).size().width() >= 1920:
 				<widget name="key_green" position="565,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_yellow" position="905,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_blue" position="1245,920" size="280,30" font="Regular; 25" transparent="1" />
-				<ePixmap position="190,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
-				<ePixmap position="530,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
-				<ePixmap position="870,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
-				<ePixmap position="1210,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
+				<ePixmap position="190,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
+				<ePixmap position="530,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
+				<ePixmap position="870,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
+				<ePixmap position="1210,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
 			</screen>"""
 
 	tmdbScreenMovieSkin = """
-			<screen position="30,70" size="1860,970" title="TMDb - The Movie Database" >
+			<screen position="30,90" size="1860,970" title="TMDb - The Movie Database" >
 				<widget name="searchinfo" position="20,30" size="1350,40" font="Regular; 32" foregroundColor="#00fff000" transparent="1" />
 				<widget name="fulldescription" position="20,90" size="950,800" font="Regular; 28" transparent="1"/>
 				<widget name="cover" position="1500,250" size="320,480" alphatest="blend" />
@@ -28,41 +28,41 @@ if getDesktop(0).size().width() >= 1920:
 				<widget name="backdrop" position="0,0" size="1920,1080" zPosition="-5" alphatest="blend"/>
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/tmdb.png" position="1585,800" size="150,155" alphatest="blend" />
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/backdrop_dark.png" position="0,0" size="1920,1080" zPosition="-4" alphatest="blend" />
-				<widget name="rating" position="1000,85" size="150,25" zPosition="2" font="Regular;27" halign="center" foregroundColor="black" backgroundColor="#00ffba00" transparent="1"/>
-				<widget name="votes_brackets" position="1000,145" size="150,25" zPosition="2" font="Regular;27" halign="center" transparent="1"/>
+				<widget name="rating" position="1000,83" size="150,30" zPosition="2" font="Regular;27" halign="center" foregroundColor="black" backgroundColor="#00ffba00" transparent="1"/>
+				<widget name="votes_brackets" position="1000,145" size="150,30" zPosition="2" font="Regular;27" halign="center" transparent="1"/>
 				<ePixmap position="1025,45" size="100,100" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/star.png" transparent="1" alphatest="blend"/>
 				<widget name="fsk" position="0,0" size="0,0" zPosition="2" font="Regular;27" halign="center" transparent="1"/>
 				<widget name="fsklogo" position="1200,60" size="100,100" zPosition="2" alphatest="blend"/>
-				<widget name="year_txt" position="1000,300" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="year" position="1130,300" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="country_txt" position="1000,330" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="country" position="1130,330" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="runtime_txt" position="1000,360" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="runtime" position="1130,360" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="votes_txt" position="1000,390" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="votes" position="1130,390" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="director_txt" position="1000,420" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="director" position="1130,420" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="author_txt" position="1000,450" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="author" position="1130,450" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="genre_txt" position="1000,480" size="100,30" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="genre" position="1130,480" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="studio_txt" position="1000,510" size="100,30" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
-				<widget name="studio" position="1130,510" size="400,30" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="year_txt" position="1000,300" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="year" position="1130,300" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="country_txt" position="1000,335" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="country" position="1130,335" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="runtime_txt" position="1000,365" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="runtime" position="1130,365" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="votes_txt" position="1000,395" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="votes" position="1130,395" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="director_txt" position="1000,425" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="director" position="1130,425" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="author_txt" position="1000,455" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="author" position="1130,455" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="genre_txt" position="1000,485" size="100,33" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="genre" position="1130,485" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="studio_txt" position="1000,515" size="100,33" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
+				<widget name="studio" position="1130,515" size="400,33" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="subtitle" position="0,0" size="0,0" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="description" position="0,0" size="0,0" zPosition="2" font="Regular;27" foregroundColor="#00ffffff" backgroundColor="#00303030" transparent="1"/>
 				<widget name="key_red" position="225,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_green" position="565,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_yellow" position="905,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_blue" position="1245,920" size="280,30" font="Regular; 25" transparent="1" />
-				<ePixmap position="190,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
-				<ePixmap position="530,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
-				<ePixmap position="870,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
-				<ePixmap position="1210,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
+				<ePixmap position="190,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
+				<ePixmap position="530,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
+				<ePixmap position="870,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
+				<ePixmap position="1210,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
 			</screen>"""
 
 	tmdbScreenPeopleSkin = """
-			<screen position="30,70" size="1860,970" title="TMDb - The Movie Database" >
+			<screen position="30,90" size="1860,970" title="TMDb - The Movie Database" >
 				<widget name="searchinfo" position="20,30" size="1350,40" font="Regular; 32" foregroundColor="#00fff000" transparent="1" />
 				<widget name="list" position="20,90" size="1350,800" itemHeight="40" transparent="1" scrollbarMode="showNever"/>
 				<widget name="cover" position="1500,250" size="320,480" alphatest="blend" />
@@ -74,14 +74,14 @@ if getDesktop(0).size().width() >= 1920:
 				<widget name="key_red" position="225,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_green" position="565,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_blue" position="1245,920" size="280,30" font="Regular; 25" transparent="1" />
-				<ePixmap position="190,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
-				<ePixmap position="530,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
-				<ePixmap position="870,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
-				<ePixmap position="1210,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
+				<ePixmap position="190,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
+				<ePixmap position="530,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
+				<ePixmap position="870,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
+				<ePixmap position="1210,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
 			</screen>"""
 
 	tmdbScreenPersonSkin = """
-			<screen position="30,70" size="1860,970" title="TMDb - The Movie Database" >
+			<screen position="30,90" size="1860,970" title="TMDb - The Movie Database" >
 				<widget name="searchinfo" position="20,30" size="1350,40" font="Regular; 32" foregroundColor="#00fff000" transparent="1" />
 				<widget name="fulldescription" position="20,90" size="1350,800" font="Regular;28" transparent="1"/>
 				<widget name="cover" position="1500,250" size="320,480" alphatest="blend" />
@@ -90,14 +90,14 @@ if getDesktop(0).size().width() >= 1920:
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/tmdb.png" position="1585,800" size="150,155" alphatest="blend" />
 				<ePixmap pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/backdrop_dark.png" position="0,0" size="1920,1080" zPosition="-4" alphatest="blend" />
 				<widget name="key_red" position="225,920" size="280,30" font="Regular; 25" transparent="1" />
-				<ePixmap position="190,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
-				<ePixmap position="530,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
-				<ePixmap position="870,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
-				<ePixmap position="1210,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
+				<ePixmap position="190,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
+				<ePixmap position="530,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
+				<ePixmap position="870,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
+				<ePixmap position="1210,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
 			</screen>"""
 
 	tmdbScreenSeasonSkin = """
-			<screen position="30,70" size="1860,970" title="TMDb - The Movie Database" >
+			<screen position="30,90" size="1860,970" title="TMDb - The Movie Database" >
 				<widget name="searchinfo" position="20,30" size="1350,40" font="Regular; 32" foregroundColor="#00fff000" transparent="1" />
 				<widget name="list" position="20,90" size="950,400" itemHeight="40" transparent="1" scrollbarMode="showNever"/>
 				<widget name="cover" position="1000,90" size="848,480" alphatest="blend" />
@@ -109,10 +109,10 @@ if getDesktop(0).size().width() >= 1920:
 				<widget name="key_red" position="225,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_green" position="565,920" size="280,30" font="Regular; 25" transparent="1" />
 				<widget name="key_blue" position="1245,920" size="280,30" font="Regular; 25" transparent="1" />
-				<ePixmap position="190,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
-				<ePixmap position="530,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
-				<ePixmap position="870,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
-				<ePixmap position="1210,920" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
+				<ePixmap position="190,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_red.png" transparent="1" alphatest="on"/>
+				<ePixmap position="530,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_green.png" transparent="1" alphatest="on"/>
+				<ePixmap position="870,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_yellow.png" transparent="1" alphatest="on"/>
+				<ePixmap position="1210,925" size="25,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/button_blue.png" transparent="1" alphatest="on"/>
 			</screen>"""
 
 else:
