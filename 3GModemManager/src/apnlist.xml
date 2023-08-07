@@ -1,34 +1,53 @@
 <apns version="1">
     <apn region="Azerbaijan" carrier="Azercell" apn="internet" user="guest" password="guest" phone="*99#" />
-    <apn region="Russia" carrier="BeeLine" apn="internet.beeline.ru" user="beeline" password="beeline" phone="*99#" />
-    <apn region="Ukraine" carrier="Beeline" apn="internet.beeline.ua" phone="*99#" />
     <apn region="China" carrier="China Unicom" apn="3gnet" user="card" password="card" phone="*99#" />
-    <apn region="Ukraine" carrier="Djuice" apn="www.djuice.com.ua" phone="*99#" />
     <apn region="Dubai" carrier="Etisalat" apn="internet.etisalat" phone="*99#" />
-    <apn region="None" carrier="KT-HSDPA" apn="alwayson-r6.ktfwing.com" phone="*99#" />
+    <apn region="Egypt" carrier="Mobinil" apn="mobinilweb" phone="*99#" />
+    <apn region="Egypt" carrier="Vodafone" apn="internet.vodafone.net" phone="*99#" />
+    <apn region="Germany" carrier="Dt.Telekom" apn="internet.telekom" user="t-mobile" password="tm" phone="*99#" />
+    <apn region="Germany" carrier="Dt.Telekom_APN-IPv6" apn="internet.v6.telekom" user="t-mobile" password="tm" phone="*99#" />
+    <apn region="Germany" carrier="Dt.Telekom_APN-IPv4" apn="internet.t-d1" user="t-mobile" password="t-d1" phone="*99#" />
+    <apn region="Germany" carrier="T-Mobile Xtra Prepaid" apn="internet.t-mobile" user="tmobile" password="tm" phone="*99#" />
+    <apn region="Germany" carrier="MagentaMobil" apn="internet.telekom" user="telekom" password="tm" phone="*99#" />
+    <apn region="Germany" carrier="Edeka smart" apn="internet.access" phone="*99#" />
+    <apn region="Germany" carrier="congstar (Prepaid+Vertrag)" apn="internet.telekom" user="congstar" password="cs" phone="*99#" />
+    <apn region="Germany" carrier="ja!mobile / Norma / Kaufland" apn="internet.telekom" user="telekom" password="tm" phone="*99#" />
+    <apn region="Germany" carrier="Callmobile" apn="internet.telekom" user="telekom" password="wap" phone="*99#" />
+    <apn region="Germany" carrier="klarmobile (0151)" apn="internet.telekom" user="telekom" password="tm" phone="*99#" />
+    <apn region="Germany" carrier="Vodafone (Callya+Vertrag)" apn="web.vodafone.de" phone="*99#" />
+    <apn region="Germany" carrier="Lidl Connect / FYVE / SIMon" apn="web.vodafone.de" phone="*99#" />
+    <apn region="Germany" carrier="1+1 D-Netz / Bildmobil / RTL" apn="web.vodafone.de" phone="*99#" />
+    <apn region="Germany" carrier="otelo Smartphone" apn="web.vodafone.de" phone="*99#" />
+    <apn region="Germany" carrier="otelo Datentarife" apn="data.otelo.de" phone="*99#" />
+    <apn region="Germany" carrier="klarmobile (0152)" apn="web.vodafone.de" phone="*99#" />
+    <apn region="Germany" carrier="O2 Smartphone-Tarife" apn="internet" phone="*99#" />
+    <apn region="Germany" carrier="O2 Prepaid / Fonic / Netzclub" apn="pinternet.interkom.de" phone="*99#" />
+    <apn region="Germany" carrier="Aldi Talk" apn="internet.eplus.de" user="eplus" password="eplus" phone="*99#" />
+    <apn region="Germany" carrier="Nettokom" apn="internet.eplus.de" user="nettokom" password="nettokom" phone="*99#" />
+    <apn region="Germany" carrier="Blau" apn="internet.eplus.de" phone="*99#" />
+    <apn region="Germany" carrier="klarmobile (0176)" apn="internet.mobilcom" phone="*99#" />
+    <apn region="Germany" carrier="Smartmobil / SIM.de / winSIM" apn="internet" phone="*99#" />
+    <apn region="Germany" carrier="Tchibo Prepaid" apn="webmobil1" phone="*99#" />
+    <apn region="Germany" carrier="Tchibo Vertrag" apn="surfmobil2" phone="*99#" />
+    <apn region="Iran" carrier="Irancell" apn="mtnirancell" phone="*99#" />
+    <apn region="Iran" carrier="IR-MCI" apn="mcinet" phone="*99***#" />
+    <apn region="Iran" carrier="RighTel" apn="rightel" phone="*99#" />
+    <apn region="Korea" carrier="KT-HSDPA" apn="alwayson-r6.ktfwing.com" phone="*99#" />
+    <apn region="Korea" carrier="SKT3G" apn="web.sktelecom.com" phone="*99#" />
+    <apn region="Morocco" carrier="Maroc Telecom" apn="iam" user="wac" password="1987" phone="*99#" />
+    <apn region="Poland" carrier="T-Mobile PL" apn="internet" user="internet" password="internet" phone="*99#" />
+    <apn region="Russia" carrier="BeeLine" apn="internet.beeline.ru" user="beeline" password="beeline" phone="*99#" />
+    <apn region="Russia" carrier="Megafon" apn="internet" phone="*99#" />
+    <apn region="Russia" carrier="MTS" apn="internet.mts.ru" user="mts" password="mts" phone="*99#" />
+    <apn region="Russia" carrier="NTK" apn="internet.ntc" user="ntc" password="ntc" phone="*99***1#" />
+    <apn region="Russia" carrier="Smarts" apn="internet.smarts.ru" phone="*99#" />
+    <apn region="Saudi Arabia" carrier="STC" apn="jawalnet.com.sa" user="guest" password="guest" phone="*99#" />
+    <apn region="Swiss" carrier="SUNRISE" apn="Internet" phone="*99#" />
+    <apn region="Tunis" carrier="3G++" apn="internet.tn" phone="*99#" />
+    <apn region="Ukraine" carrier="Beeline" apn="internet.beeline.ua" phone="*99#" />
+    <apn region="Ukraine" carrier="Djuice" apn="www.djuice.com.ua" phone="*99#" />
     <apn region="Ukraine" carrier="Kyivstar1" apn="www.ab.kyivstar.net" phone="*99#" />
     <apn region="Ukraine" carrier="Kyivstar2" apn="www.kyivstar.net" phone="*99#" />
     <apn region="Ukraine" carrier="Lifi" apn="internet" phone="*99#" />
-    <apn region="Morocco" carrier="Maroc Telecom" apn="iam" user="wac" password="1987" phone="*99#" />
-    <apn region="Russia" carrier="Megafon" apn="internet" phone="*99#" />
-    <apn region="Egypt" carrier="Mobinil" apn="mobinilweb" phone="*99#" />
-    <apn region="Russia" carrier="MTS" apn="internet.mts.ru" user="mts" password="mts" phone="*99#" />
-    <apn region="Russia" carrier="NTK" apn="internet.ntc" user="ntc" password="ntc" phone="*99***1#" />
-    <apn region="None" carrier="SKT3G" apn="web.sktelecom.com" phone="*99#" />
-    <apn region="Russia" carrier="Smarts" apn="internet.smarts.ru" phone="*99#" />
-    <apn region="Saudi Arabia" carrier="STC" apn="jawalnet.com.sa" user="guest" password="guest" phone="*99#" />
-    <apn region="3G++" carrier="Tunis" apn="internet.tn" user="" password="" phone="*99#" />
     <apn region="Ukraine" carrier="Utel" apn="3g.utel.ua" phone="*99#" />
-    <apn region="Egypt" carrier="Vodafone" apn="internet.vodafone.net" phone="*99#" />
-    <apn region="Poland" carrier="T-Mobile PL" apn="internet" user="internet" password="internet" pin="" phone="*99#" />
-    <apn region="Germany" carrier="Vodafone.de" apn="web.vodafone.de" user="internet" password="internet" phone="*99***1#" />
-    <apn region="Germany" carrier="T-Mobile Internet" apn="internet.t-mobile" user="t-mobile" password="tm" phone="*99#" />
-    <apn region="Germany" carrier="E plus Base" apn="internet.eplus.de" user="eplus" password="gprs" phone="*99#" />
-    <apn region="Germany" carrier="O2" apn="internet" user="" password="" phone="*99***1#" />
-    <apn region="Germany" carrier="MoobiCent" apn="volume.d2gprs.de" user="vodafone" password="vodafone" phone="*99#" />
-    <apn region="Germany" carrier="1und1" apn="mail.partner.de" user="vf" password="vf" phone="*99#" />	
-    <apn region="Swiss" carrier="SUNRISE" apn="Internet" user="" password="" phone="*99#" />
-    <apn region="Iran" carrier="RighTel" apn="rightel" user="" password="" phone="*99#" />
-    <apn region="Iran" carrier="Irancell" apn="mtnirancell" user="" password="" phone="*99#" />
-    <apn region="Iran" carrier="IR-MCI" apn="mcinet" user="" password="" phone="*99***#" />
 </apns>

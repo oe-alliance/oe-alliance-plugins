@@ -2,82 +2,261 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 3GModemManager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
+"POT-Creation-Date: 2023-08-04 14:25+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: litvcom\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
-msgid " "
-msgstr " "
+#: ..\plugin.py:35
+msgid "1. Load a Mobile Broadband Device"
+msgstr "1. Загрузите мобильное широкополосное устройство"
 
-msgid "3G / 4G Modem Manager"
-msgstr "Диспетчер 3G/4G модема"
+#: ..\plugin.py:35
+msgid "2. Set up a Mobile Broadband Device"
+msgstr "2. Настройка мобильного широкополосного устройства"
 
-msgid "APN :"
-msgstr "APN:"
+#: ..\plugin.py:36
+msgid "3. Generate a WvDial profile"
+msgstr "3. Создать профиль WvDial"
 
-msgid "Add"
-msgstr "Добавить"
+#: ..\plugin.py:36
+msgid "4. Attempt to connect"
+msgstr "4. Попытка подключения"
 
-msgid "Auto connect"
-msgstr "Автосоединение"
+#: ..\plugin.py:36
+msgid "5. Done"
+msgstr "5. Готово"
 
-msgid "Auto connect:"
-msgstr "Автосоединение:"
+#: ..\plugin.py:37
+msgid "1. Drop WvDial"
+msgstr "1. Бросить WvDial"
 
+#: ..\plugin.py:37
+msgid "2. Unload a Mobile Broadband Device"
+msgstr "2. Выгрузка мобильного широкополосного устройства"
+
+#: ..\plugin.py:37
+msgid "3. Done"
+msgstr "3. Готово"
+
+#: ..\plugin.py:44 ..\plugin.py:45 ..\plugin.py:46 ..\plugin.py:903
+#: ..\plugin.py:904 ..\plugin.py:905 ..\plugin.py:907 ..\plugin.py:908
+#: ..\plugin.py:909 ..\plugin.py:910
+msgid "{unknown}"
+msgstr "{неизвестно}"
+
+#: ..\plugin.py:229 ..\plugin.py:359
 msgid "Cancel"
 msgstr "Отменить"
 
-msgid "Disable"
-msgstr "Отключить"
-
-msgid "Edit"
-msgstr "Изменить"
-
-msgid "Enable"
-msgstr "Включить"
-
-msgid "Exit"
-msgstr "Выход"
-
-msgid "IP : "
-msgstr "IP:"
-
-msgid "IP : 0.0.0.0"
-msgstr "IP : 0.0.0.0"
-
-msgid "Manual"
-msgstr "Вручную"
-
-msgid "Name :"
-msgstr "Имя:"
-
-msgid "OK"
-msgstr "OK"
-
-msgid "PIN :"
-msgstr "PIN-код:"
-
-msgid "Password :"
-msgstr "Пароль:"
-
-msgid "Phone :"
-msgstr "Номер телефона:"
-
-msgid "Region :"
-msgstr "Регион:"
-
+#: ..\plugin.py:230
 msgid "Save"
 msgstr "Сохранить"
 
-msgid "User :"
-msgstr "Пользователь:"
+#: ..\plugin.py:232
+msgid "Config Add"
+msgstr "Добавить конфигурацию"
+
+#: ..\plugin.py:232
+msgid "Config Edit"
+msgstr "Редактировать конфигурацию"
+
+#: ..\plugin.py:243 ..\plugin.py:305
+msgid "Region"
+msgstr "Регион"
+
+#: ..\plugin.py:244 ..\plugin.py:307
+msgid "Name"
+msgstr "Название"
+
+#: ..\plugin.py:245
+msgid "User"
+msgstr "Пользователь"
+
+#: ..\plugin.py:246
+msgid "Password"
+msgstr "Пароль"
+
+#: ..\plugin.py:247 ..\plugin.py:309
+msgid "APN"
+msgstr "APN"
+
+#: ..\plugin.py:248
+msgid "PIN"
+msgstr "PIN"
+
+#: ..\plugin.py:249
+msgid "Phone"
+msgstr "Телефон"
+
+#: ..\plugin.py:285 ..\plugin.py:303
+msgid "Please input here"
+msgstr "Пожалуйста, введите здесь"
+
+#: ..\plugin.py:302
+msgid "'%s' field is empty!!"
+msgstr "Поле '%s' пусто!!!"
+
+#: ..\plugin.py:360
+msgid "OK"
+msgstr "OK"
+
+#: ..\plugin.py:361
+msgid "Edit"
+msgstr "Изменить"
+
+#: ..\plugin.py:362
+msgid "Add"
+msgstr "Добавить"
+
+#: ..\plugin.py:364
+msgid "Config"
+msgstr "Конфигурация"
+
+#: ..\plugin.py:558
+msgid "Status"
+msgstr "Статус"
+
+#: ..\plugin.py:559
+msgid "Searching for USB-devices..."
+msgstr "Поиск USB-устройств...."
+
+#: ..\plugin.py:564 ..\plugin.py:575
+msgid "Autoconnect"
+msgstr "Автоконнект"
+
+#: ..\plugin.py:565
+msgid "Disable"
+msgstr "Отключить"
+
+#: ..\plugin.py:566
+msgid "Enable"
+msgstr "Включить"
+
+#: ..\plugin.py:567
+msgid "Exit"
+msgstr "Выход"
+
+#: ..\plugin.py:569 ..\plugin.py:849
+msgid "Disconnect"
+msgstr "Отключить"
+
+#: ..\plugin.py:572 ..\plugin.py:830
+msgid "Connect"
+msgstr "Подключение"
+
+#: ..\plugin.py:574
+msgid "Manual"
+msgstr "Вручную"
+
+#: ..\plugin.py:658
+msgid "3G/4G Modem Manager will connect automatically on boot"
+msgstr "3G/4G Modem Manager будет подключаться автоматически при загрузке"
+
+#: ..\plugin.py:662 ..\plugin.py:665
+msgid ""
+"3G/4G Modem Manager is already in 'autoconnect on startup'.\n"
+"Would You like to disable 'autoconnect on startup'?"
+msgstr ""
+"3G/4G Modem Manager уже находится в режиме 'autoconnect on startup'.\n"
+"Вы хотите отключить функцию \"автоподключение при запуске\"?"
+
+#: ..\plugin.py:668
+msgid "Please connect before enable 'autoconnect on startup'."
+msgstr ""
+"Пожалуйста, подключитесь до включения функции 'автоподключение при запуске'."
+
+#: ..\plugin.py:683
+msgid ""
+"Can't disconnect during connecting..\n"
+"Do you want to forcibly exit?"
+msgstr ""
+"Невозможно отключиться во время подключения...\n"
+"Вы хотите принудительно выйти из системы?"
+
+#: ..\plugin.py:715
+msgid ""
+"No USB-device found!\n"
+"Please connect 3G or 4G modem to USB port!"
+msgstr ""
+"USB-устройство не найдено!\n"
+"Пожалуйста, подключите модем 3G или 4G к порту USB!"
+
+#: ..\plugin.py:724
+msgid "Do you want to disconnect?"
+msgstr "Вы хотите отключиться?"
+
+#: ..\plugin.py:728
+msgid ""
+"Another adapter connected has been found.\n"
+"A connection is attempted after disconnect all of other device.\n"
+"\n"
+"Do you want to?"
+msgstr ""
+"Найден другой подключенный адаптер.\n"
+"Попытка соединения будет предпринята после отключения всех других "
+"устройств.\n"
+"\n"
+"Вы хотите?"
+
+#: ..\plugin.py:746
+msgid "Accessing modem. Please wait..."
+msgstr "Доступ к модему. Пожалуйста, подождите..."
+
+#: ..\plugin.py:753
+msgid ""
+"Can't found device file!\n"
+"[%s]\n"
+"\n"
+"Is this selected USB-device really a Mobile Broadband Device?"
+msgstr ""
+"Не найден файл устройства!\n"
+"[%s]\n"
+"\n"
+"Действительно ли выбранное USB-устройство является широкополосным мобильным "
+"устройством?"
+
+#: ..\plugin.py:890
+msgid ""
+"Occur error during connection...\n"
+"\n"
+"%s\n"
+"\n"
+"Please check your settings!"
+msgstr ""
+"Возникла ошибка при подключении...\n"
+"\n"
+"%s\n"
+"\n"
+"Пожалуйста, проверьте настройки!"
+
+#: ..\plugin.py:1066
+msgid "Management of 3G/4G USB-modems"
+msgstr "Управление USB-модемами 3G/4G"
+
+#~ msgid "Can't found device file!! [%s]"
+#~ msgstr "Не найден файл устройства!!! [%s]"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "3G / 4G Modem Manager"
+#~ msgstr "Диспетчер 3G/4G модема"
+
+#~ msgid "Auto connect:"
+#~ msgstr "Автосоединение:"
+
+#~ msgid "IP : "
+#~ msgstr "IP:"
+
+#~ msgid "IP : 0.0.0.0"
+#~ msgstr "IP : 0.0.0.0"
