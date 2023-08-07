@@ -1,84 +1,220 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# Copyright (C) YEAR ORGANIZATION
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 07:54+0100\n"
+"POT-Creation-Date: 2023-08-04 14:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=cp1252\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
 
-msgid " "
+#: ..\plugin.py:35
+msgid "1. Load a Mobile Broadband Device"
 msgstr ""
 
-msgid "3G / 4G Modem Manager"
+#: ..\plugin.py:35
+msgid "2. Set up a Mobile Broadband Device"
 msgstr ""
 
-msgid "APN :"
+#: ..\plugin.py:36
+msgid "3. Generate a WvDial profile"
 msgstr ""
 
-msgid "Add"
+#: ..\plugin.py:36
+msgid "4. Attempt to connect"
 msgstr ""
 
-msgid "Auto connect"
+#: ..\plugin.py:36
+msgid "5. Done"
 msgstr ""
 
-msgid "Auto connect:"
+#: ..\plugin.py:37
+msgid "1. Drop WvDial"
 msgstr ""
 
+#: ..\plugin.py:37
+msgid "2. Unload a Mobile Broadband Device"
+msgstr ""
+
+#: ..\plugin.py:37
+msgid "3. Done"
+msgstr ""
+
+#: ..\plugin.py:44 ..\plugin.py:45 ..\plugin.py:46 ..\plugin.py:903
+#: ..\plugin.py:904 ..\plugin.py:905 ..\plugin.py:907 ..\plugin.py:908
+#: ..\plugin.py:909 ..\plugin.py:910
+msgid "{unknown}"
+msgstr ""
+
+#: ..\plugin.py:229 ..\plugin.py:359
 msgid "Cancel"
 msgstr ""
 
-msgid "Disable"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Enable"
-msgstr ""
-
-msgid "Exit"
-msgstr ""
-
-msgid "IP : "
-msgstr ""
-
-msgid "IP : 0.0.0.0"
-msgstr ""
-
-msgid "Manual"
-msgstr ""
-
-msgid "Name :"
-msgstr ""
-
-msgid "OK"
-msgstr ""
-
-msgid "PIN :"
-msgstr ""
-
-msgid "Password :"
-msgstr ""
-
-msgid "Phone :"
-msgstr ""
-
-msgid "Region :"
-msgstr ""
-
+#: ..\plugin.py:230
 msgid "Save"
 msgstr ""
 
-msgid "User :"
+#: ..\plugin.py:232
+msgid "Config Add"
+msgstr ""
+
+#: ..\plugin.py:232
+msgid "Config Edit"
+msgstr ""
+
+#: ..\plugin.py:243 ..\plugin.py:305
+msgid "Region"
+msgstr ""
+
+#: ..\plugin.py:244 ..\plugin.py:307
+msgid "Name"
+msgstr ""
+
+#: ..\plugin.py:245
+msgid "User"
+msgstr ""
+
+#: ..\plugin.py:246
+msgid "Password"
+msgstr ""
+
+#: ..\plugin.py:247 ..\plugin.py:309
+msgid "APN"
+msgstr ""
+
+#: ..\plugin.py:248
+msgid "PIN"
+msgstr ""
+
+#: ..\plugin.py:249
+msgid "Phone"
+msgstr ""
+
+#: ..\plugin.py:285 ..\plugin.py:303
+msgid "Please input here"
+msgstr ""
+
+#: ..\plugin.py:302
+msgid "'%s' field is empty!!"
+msgstr ""
+
+#: ..\plugin.py:360
+msgid "OK"
+msgstr ""
+
+#: ..\plugin.py:361
+msgid "Edit"
+msgstr ""
+
+#: ..\plugin.py:362
+msgid "Add"
+msgstr ""
+
+#: ..\plugin.py:364
+msgid "Config"
+msgstr ""
+
+#: ..\plugin.py:558
+msgid "Status"
+msgstr ""
+
+#: ..\plugin.py:559
+msgid "Searching for USB-devices..."
+msgstr ""
+
+#: ..\plugin.py:564 ..\plugin.py:575
+msgid "Autoconnect"
+msgstr ""
+
+#: ..\plugin.py:565
+msgid "Disable"
+msgstr ""
+
+#: ..\plugin.py:566
+msgid "Enable"
+msgstr ""
+
+#: ..\plugin.py:567
+msgid "Exit"
+msgstr ""
+
+#: ..\plugin.py:569 ..\plugin.py:849
+msgid "Disconnect"
+msgstr ""
+
+#: ..\plugin.py:572 ..\plugin.py:830
+msgid "Connect"
+msgstr ""
+
+#: ..\plugin.py:574
+msgid "Manual"
+msgstr ""
+
+#: ..\plugin.py:658
+msgid "3G/4G Modem Manager will connect automatically on boot"
+msgstr ""
+
+#: ..\plugin.py:662 ..\plugin.py:665
+msgid ""
+"3G/4G Modem Manager is already in 'autoconnect on startup'.\n"
+"Would You like to disable 'autoconnect on startup'?"
+msgstr ""
+
+#: ..\plugin.py:668
+msgid "Please connect before enable 'autoconnect on startup'."
+msgstr ""
+
+#: ..\plugin.py:683
+msgid ""
+"Can't disconnect during connecting..\n"
+"Do you want to forcibly exit?"
+msgstr ""
+
+#: ..\plugin.py:715
+msgid ""
+"No USB-device found!\n"
+"Please connect 3G or 4G modem to USB port!"
+msgstr ""
+
+#: ..\plugin.py:724
+msgid "Do you want to disconnect?"
+msgstr ""
+
+#: ..\plugin.py:728
+msgid ""
+"Another adapter connected has been found.\n"
+"A connection is attempted after disconnect all of other device.\n"
+"\n"
+"Do you want to?"
+msgstr ""
+
+#: ..\plugin.py:746
+msgid "Accessing modem. Please wait..."
+msgstr ""
+
+#: ..\plugin.py:753
+msgid ""
+"Can't found device file!\n"
+"[%s]\n"
+"\n"
+"Is this selected USB-device really a Mobile Broadband Device?"
+msgstr ""
+
+#: ..\plugin.py:890
+msgid ""
+"Occur error during connection...\n"
+"\n"
+"%s\n"
+"\n"
+"Please check your settings!"
+msgstr ""
+
+#: ..\plugin.py:1066
+msgid "Management of 3G/4G USB-modems"
 msgstr ""
