@@ -35,7 +35,7 @@ from twisted.internet.reactor import callInThread
 from . import _  # for localized messages
 
 # PLUGIN GLOBALS
-DEBUGMODE = True  # activate for details infos when desired
+DEBUGMODE = False  # activate for details infos when desired
 WVDIALFILE = "/etc/wvdial.conf"
 COMMANDBIN = resolveFilename(SCOPE_CURRENT_PLUGIN, "SystemPlugins/3GModemManager/3gcommand")
 ONSTATUS = {0: _("1. Load a Mobile Broadband Device"), 1: _("2. Set up a Mobile Broadband Device"),
@@ -58,7 +58,7 @@ def printDebug(msg):
 		print("[3GModemManagerDebug] %s" % msg)
 
 
-def printInfoModemMgr(msg):
+def printInfo(msg):
 	print("[3GModemManager] %s" % msg)
 
 
@@ -76,7 +76,7 @@ class DeviceEventListener:
 			self.notifier = eSocketNotifier(self.sock.fileno(), POLLIN | POLLPRI)
 			self.notifier.callback.append(self.cbEventHandler)
 		except Exception as err:
-			printInfoModemMgr("Exception in module '__init__' %s" % err)
+			printInfo("Exception in module '__init__' %s" % err)
 			self.sock.close()
 
 	def cbEventHandler(self, sockfd):
@@ -86,7 +86,7 @@ class DeviceEventListener:
 				try:
 					x(recv)
 				except Exception as err:
-					printInfoModemMgr("Exception in module 'cbEventHandler': %s" % err)
+					printInfo("Exception in module 'cbEventHandler': %s" % err)
 					self.notifyCallbackFunctionList.remove(x)
 
 	def addCallback(self, func):
@@ -102,7 +102,7 @@ class DeviceEventListener:
 			self.notifier.callback.remove(self.cbEventHandler)
 			self.sock.close()
 		except Exception as err:
-			printInfoModemMgr("Exception in module 'close': %s" % err)
+			printInfo("Exception in module 'close': %s" % err)
 
 
 class TaskManager:
@@ -159,7 +159,7 @@ class TaskManager:
 			self.gTaskInstance.appClosed.append(cbCloseFunc)
 		if self.cbSetStatusCB is not None:
 			self.cbSetStatusCB(self.taskIdx)
-		printInfoModemMgr("prepared command :%s" % command)
+		printInfo("prepared command :%s" % command)
 		sleep(1)  # give modem more time, maybe not needed?
 		self.gTaskInstance.execute(command)
 		self.taskIdx += 1
@@ -611,10 +611,8 @@ class ModemManager(Screen):
 			system("killall -9 wget")
 			cmd = 'wget -q -O - http://checkip.dyndns.org | grep "html" | cut -d" " -f6  | cut -d"<" -f1'
 			self["myip"].setText("IP : %s" % popen(cmd).read().strip())
-#			self["myip"].setText("IP : on.on.on.on")
 		else:
 			self["myip"].setText("IP : 0.0.0.0")
-#			self["myip"].setText("IP : off.off.off.off")
 
 	def cbRefreshStatus(self):
 		self.refreshStatusTimer.stop()
@@ -666,7 +664,7 @@ class ModemManager(Screen):
 				self["autostart_stop"].hide()
 				self["autostart_start"].show()
 				message = _("3G/4G Modem Manager will connect automatically on boot")
-				printInfoModemMgr(message)
+				printInfo(message)
 				self.session.open(MessageBox, message, MessageBox.TYPE_INFO, 5)
 			else:
 				message = _("3G/4G Modem Manager is already in 'autoconnect on startup'.\nWould You like to disable 'autoconnect on startup'?")
@@ -676,7 +674,7 @@ class ModemManager(Screen):
 			self.session.openWithCallback(self.disableAutoConnect, MessageBox, message, MessageBox.TYPE_YESNO)
 		else:
 			message = _("Please connect before enable 'autoconnect on startup'.")
-			printInfoModemMgr(message)
+			printInfo(message)
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO, 5)
 
 	def cb3GManualSetting(self, uid=None, pwd=None, pin=None, apn=None, phone="*99#"):
@@ -686,7 +684,7 @@ class ModemManager(Screen):
 	def keyNumber(self, num=None):
 		global DEBUGMODE
 		DEBUGMODE = not DEBUGMODE
-		printInfoModemMgr("changed log mode, debug %s" % (DEBUGMODE and "on" or "off"))
+		printInfo("changed log mode, debug %s" % (DEBUGMODE and "on" or "off"))
 
 	def keyExit(self):
 		if self.isAttemptConnect():
@@ -723,7 +721,7 @@ class ModemManager(Screen):
 	def keyOK(self):
 		if not self["menulist"].getCurrent():
 			message = _("No USB-device found!\nPlease connect 3G or 4G modem to USB port!")
-			printInfoModemMgr(message)
+			printInfo(message)
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO, 5)
 			self.close()
 		else:
@@ -751,7 +749,7 @@ class ModemManager(Screen):
 				iNetwork.deactivateInterface(x)
 		x = self["menulist"].getCurrent()[1]
 		if x is None:
-			printInfoModemMgr("no selected device..")
+			printInfo("no selected device..")
 			return
 		self["statusText"].setText(_("Accessing modem. Please wait..."))
 		self["statusText"].startBlinking()
@@ -762,7 +760,7 @@ class ModemManager(Screen):
 			self["statusText"].hide()
 			message = _("Can't found device file!\n[%s]\n\nIs this selected USB-device really a Mobile Broadband Device?") % devFile
 			printDebug(devFile)
-			printInfoModemMgr(message)
+			printInfo(message)
 			self.session.open(MessageBox, message, MessageBox.TYPE_INFO, 5)
 			return
 		if self["key_green"].getText() == "Disconnect":
@@ -827,7 +825,7 @@ class ModemManager(Screen):
 			self.forceStop = True
 
 	def cbPrintAvail(self, data):
-		printInfoModemMgr("cbPrintAvai: %s" % data.decode("utf-8", errors="ignore").strip())
+		printInfo("cbPrintAvai: %s" % data.decode("utf-8", errors="ignore").strip())
 
 	def cbPrintClose(self, ret):
 		if self.forceStop:
@@ -844,7 +842,7 @@ class ModemManager(Screen):
 	def cbRunWvDialAvail(self, data):
 		data = data.decode("utf-8", errors="ignore").strip()
 		if data:
-			printInfoModemMgr("cbRunWvDialAvail: %s" % data)
+			printInfo("cbRunWvDialAvail: %s" % data)
 		self.data = data
 		datalower = data.lower()
 		if "waiting for" in datalower or "bad init" in datalower or "invalid dial" in datalower or "no carrier" in datalower:
@@ -867,16 +865,16 @@ class ModemManager(Screen):
 		if exists(WVDIALFILE):
 			for x in open(WVDIALFILE).read().splitlines():
 				if x.lower().startswith("modem"):
-					printInfoModemMgr("Modem: '%s'" % x)
+					printInfo("Modem: '%s'" % x)
 					info["Modem"] = x[7:].strip()
 				elif x.lower().startswith("init2"):
-					printInfoModemMgr("Init2: '%s'" % x)
+					printInfo("Init2: '%s'" % x)
 					info["Init"] = x[7:].strip()
 				elif x.lower().startswith("baud"):
-					printInfoModemMgr("Baud: '%s'" % x)
+					printInfo("Baud: '%s'" % x)
 					info["Baud"] = x[6:].strip()
 		else:
-			printInfoModemMgr("WARNING in module 'cbMakeWvDialClose': File not found : %s" % WVDIALFILE)
+			printInfo("WARNING in module 'cbMakeWvDialClose': File not found : %s" % WVDIALFILE)
 		if self.apn:
 			info["apn"] = self.apn
 		if self.uid:
@@ -897,7 +895,7 @@ class ModemManager(Screen):
 		self["statusText"].stopBlinking()
 		self["statusText"].hide()
 		message = _("Occur error during connection...\n\n%s\n\nPlease check your settings!")
-		printInfoModemMgr("%s\n" % (message % self.data))
+		printInfo("%s\n" % (message % self.data))
 		self.session.open(MessageBox, message % self.data, MessageBox.TYPE_INFO)
 
 	def writeConf(self, data, oper=">>"):
@@ -905,7 +903,7 @@ class ModemManager(Screen):
 			if exists(WVDIALFILE):
 				system("mv %s %s.bak" % (WVDIALFILE, WVDIALFILE))
 			else:
-				printInfoModemMgr("WARNING in module 'writeConf': File not found : %s" % WVDIALFILE)
+				printInfo("WARNING in module 'writeConf': File not found : %s" % WVDIALFILE)
 		system("echo '%s' %s %s" % (data, oper, WVDIALFILE))
 
 	def makeWvDialConf(self, params):
@@ -961,7 +959,7 @@ class ModemManager(Screen):
 			self.ProdID = self.findDeviceInfos(x.get("ProdID", ""), "ProdID")
 			if not self.ProdID:
 				self.ProdID = self.findDeviceInfos(x.get("Vendor", ""), "ProdID")
-			printInfoModemMgr("Found Vendor '%s', ProdID '%s'" % (self.Vendor, self.ProdID))
+			printInfo("Found Vendor '%s', ProdID '%s'" % (self.Vendor, self.ProdID))
 			info = "Vendor : %s\nProdID : %s\nAPN : %s\nUser : %s\nPassword : %s\nPin : %s\nPhone : %s" % (self.Vendor, self.ProdID, self.apn, self.uid, self.pwd, self.pin, self.phone)
 			self["usbinfo"].setText(info)
 
@@ -1016,7 +1014,7 @@ class ModemManager(Screen):
 						if d != "(none)":
 							tmp_device["Interface"] = d
 			except Exception as err:
-				printInfoModemMgr("Exception in module 'getUSBList1' %s" % err)
+				printInfo("Exception in module 'getUSBList1' %s" % err)
 		if len(tmp_device):
 			parsed_usb_list.append(tmp_device)
 		printDebug("PARSED DEVICE LIST : %s" % parsed_usb_list)
@@ -1028,11 +1026,11 @@ class ModemManager(Screen):
 				if xx and xx.lower().startswith("usb"):
 					rt_usb_list.append(x)
 			except Exception as err:
-				printInfoModemMgr("Exception in module 'getUSBList2' %s" % err)
-				printInfoModemMgr("USB DEVICE LIST : %s" % rt_usb_list)
+				printInfo("Exception in module 'getUSBList2' %s" % err)
+				printInfo("USB DEVICE LIST : %s" % rt_usb_list)
 		if not rt_usb_list:
 			self.keyOK()
-			printInfoModemMgr("USB DEVICE LIST : 'No USB-device found!'")
+			printInfo("USB DEVICE LIST : 'No USB-device found!'")
 		return rt_usb_list
 
 
@@ -1048,18 +1046,18 @@ def autostart(reason, **kwargs):
 			is_running = False
 		cmd = args
 		if config.plugins.gmodemmanager.autostart.value:
-			printInfoModemMgr("AUTOSTART")
+			printInfo("AUTOSTART")
 			if is_running:
-				printInfoModemMgr("already started")
+				printInfo("already started")
 			else:
-				printInfoModemMgr("starting ...")
+				printInfo("starting ...")
 				system(cmd)
-				printInfoModemMgr("disable all others network adapters ...")
+				printInfo("disable all others network adapters ...")
 				system("ifconfig eth0 down")
 		elif config.plugins.gmodemmanager.autostart.value == False and is_running == True:
-				printInfoModemMgr("stopping ...")
+				printInfo("stopping ...")
 				system(cmd)
-				printInfoModemMgr("disable all others network adapters ...")
+				printInfo("disable all others network adapters ...")
 				system("ifconfig eth0 up")
 
 
