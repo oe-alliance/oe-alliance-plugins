@@ -328,7 +328,7 @@
 		<ePixmap position="0,0" size="1860,90" pixmap="{picpath}FHD/logos/Youtube.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="305,46" size="105,30" font="TVS_Regular;24" transparent="1" foregroundColor="#00373f43" backgroundColor="#00ffffff" halign="left" valign="center" zPosition="3" />
 		<widget name="seitennr" position="1717,66" size="157,21" font="TVS_Regular;18" foregroundColor="#00ffffff" backgroundColor="#0027408b" halign="center" zPosition="2" />
-		<widget render="Label" source="global.CurrentTime" position="1695,0" size="225,90" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
+		<widget render="Label" source="global.CurrentTime" position="1683,0" size="225,90" font="TVS_Regular;40" foregroundColor="#003a3998" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
 		<widget name="poster0" position="15,105" size="267,150" alphatest="blend" zPosition="1" />

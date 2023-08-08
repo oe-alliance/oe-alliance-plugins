@@ -2436,7 +2436,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 		self['BOUQUETtext'].setText('Woche +/-')
 		self['BOUQUETtext'].show()
 		datum = self.date.strftime('%d.%m.%Y')
-		titel = search(r'<title>(.*?)von', output[:300])
+		titel = search(r'<title>(.*?)von', output[:500])
 		self.titel = "%s%s, %s" % (titel.group(1), self.weekday, datum) if titel is not None else ""
 		self.setTitle(self.titel)
 		items, bereich = parseNow(output)
