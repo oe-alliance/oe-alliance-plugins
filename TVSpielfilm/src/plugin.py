@@ -64,6 +64,7 @@ SERVICEFILE = join(PLUGINPATH, 'db/service.references')
 DUPESFILE = join(PLUGINPATH, 'db/dupes.references')
 TIMERFILE = join(PLUGINPATH, 'db/timer.db')
 LOCALHTML = '/tmp/tvspielfilm.html'
+TVSFont = False
 
 config.plugins.tvspielfilm = ConfigSubsection()
 if DESKTOP_WIDTH > 1280:
@@ -71,13 +72,21 @@ if DESKTOP_WIDTH > 1280:
 else:
 	config.plugins.tvspielfilm.plugin_size = ConfigSelection(default='HD', choices=[('HD', 'HD (1280x720)')])
 config.plugins.tvspielfilm.position = ConfigInteger(40, (0, 160))
-config.plugins.tvspielfilm.font = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
-if config.plugins.tvspielfilm.font.value == 'yes':
-	from enigma import addFont
-	try:
-		addFont(join(PLUGINPATH, 'font/Roboto-Regular.ttf'), 'TVS_Regular', 100, False)
-	except Exception as ex:
-		addFont(join(PLUGINPATH, 'font/Roboto-Regular.ttf'), 'TVS_Regular', 100, False, 0)
+
+
+def fontCallback(configItem):
+	global TVSFont
+	if configItem.value and not TVSFont:
+		from enigma import addFont
+		try:
+			addFont(join(PLUGINPATH, 'font/Roboto-Regular.ttf'), 'TVS_Regular', 100, False)
+		except Exception as ex:
+			addFont(join(PLUGINPATH, 'font/Roboto-Regular.ttf'), 'TVS_Regular', 100, False, 0)
+		TVSFont = True
+
+
+config.plugins.tvspielfilm.font = ConfigYesNo(default=True)
+config.plugins.tvspielfilm.font.addNotifier(fontCallback)
 config.plugins.tvspielfilm.font_size = ConfigSelection(default='normal', choices=[('large', 'Groß'), ('normal', 'Normal'), ('small', 'Klein')])
 config.plugins.tvspielfilm.meintvs = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
 config.plugins.tvspielfilm.login = ConfigText(default='', fixed_size=False)
