@@ -88,10 +88,10 @@ def fontCallback(configItem):
 config.plugins.tvspielfilm.font = ConfigYesNo(default=True)
 config.plugins.tvspielfilm.font.addNotifier(fontCallback)
 config.plugins.tvspielfilm.font_size = ConfigSelection(default='normal', choices=[('large', 'Groß'), ('normal', 'Normal'), ('small', 'Klein')])
-config.plugins.tvspielfilm.meintvs = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
+config.plugins.tvspielfilm.meintvs = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.login = ConfigText(default='', fixed_size=False)
 config.plugins.tvspielfilm.password = ConfigPassword(default='', fixed_size=False)
-config.plugins.tvspielfilm.encrypt = ConfigSelection(default='no', choices=[('yes', 'Ja'), ('no', 'Nein')])
+config.plugins.tvspielfilm.encrypt = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.picon = ConfigSelection(default='image', choices=[('plugin', 'vom Plugin'), ('image', 'vom Image'), ('user', 'vom eigenen Ordner')])
 config.plugins.tvspielfilm.piconfolder = ConfigDirectory(default=PICONPATH)
 fullpaths = glob(join(PLUGINPATH, 'pics/FHD/selectors/selector_*.png')) if config.plugins.tvspielfilm.plugin_size == 'FHD' else glob(join(PLUGINPATH, 'pics/HD/selectors/selector_*.png'))
@@ -100,11 +100,11 @@ config.plugins.tvspielfilm.selectorcolor = ConfigSelection(default='Standard', c
 config.plugins.tvspielfilm.tipps = ConfigSelection(default='yes', choices=[('no', 'Gruene Taste im Startmenue'), ('yes', 'Beim Start des Plugins'), ('false', 'Deaktiviert')])
 config.plugins.tvspielfilm.primetime = ConfigSelection(default='primetime', choices=[('primetime', 'Primetime'), ('now', 'Aktuelle Zeit')])
 config.plugins.tvspielfilm.eventview = ConfigSelection(default='list', choices=[('list', 'Programmliste'), ('info', 'Sendungsinfo')])
-config.plugins.tvspielfilm.genreinfo = ConfigSelection(default='no', choices=[('no', 'Nein'), ('yes', 'Ja')])
-config.plugins.tvspielfilm.zapexit = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
+config.plugins.tvspielfilm.genreinfo = ConfigYesNo(default=False)
+config.plugins.tvspielfilm.zapexit = ConfigYesNo(default=True)
 config.plugins.tvspielfilm.maxlist = ConfigSelectionNumber(5, 40, 1, default=15)
 config.plugins.tvspielfilm.maxsearch = ConfigSelectionNumber(1, 20, 1, default=2)
-config.plugins.tvspielfilm.autotimer = ConfigSelection(default='yes', choices=[('yes', 'Ja'), ('no', 'Nein')])
+config.plugins.tvspielfilm.autotimer = ConfigYesNo(default=True)
 config.plugins.tvspielfilm.ytresolution = ConfigSelection(default='best', choices=[('best', 'bestmöglich'), ('best[height<=?480]', 'max. 480p')])
 config.plugins.tvspielfilm.debuglog = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.logtofile = ConfigYesNo(default=False)
@@ -310,7 +310,7 @@ class TVSBaseScreen(TVSAllScreen):
 		self.localhtml2 = '/tmp/tvspielfilm2.html'
 		self.tagestipp = False
 		self.finishedTimerMode = 0
-		self.showgenre = config.plugins.tvspielfilm.genreinfo.value != 'no'
+		self.showgenre = config.plugins.tvspielfilm.genreinfo.value
 
 	def finishedTimer(self, answer):
 		if answer[0]:
@@ -500,7 +500,7 @@ class TVSBaseScreen(TVSAllScreen):
 		self.red()
 
 	def makeTimer(self):
-		if config.plugins.tvspielfilm.autotimer.value == 'yes' and isPluginInstalled('AutoTimer'):
+		if config.plugins.tvspielfilm.autotimer.value and isPluginInstalled('AutoTimer'):
 			self.autotimer = True
 			self.session.openWithCallback(self.choiceTimer, ChoiceBox, title='Timer Auswahl', list=[('Timer', 'timer'), ('AutoTimer', 'autotimer')])
 		else:
@@ -2112,7 +2112,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 				sref = self.sref[c][1]
 				if sref != '':
 					self.session.nav.playService(eServiceReference(sref))
-					if config.plugins.tvspielfilm.zapexit.value == 'yes' and self.standalone:
+					if config.plugins.tvspielfilm.zapexit.value and self.standalone:
 						self.close()
 			except IndexError:
 				pass
@@ -3946,16 +3946,16 @@ class TVSMain(TVSBaseScreen):
 			self.TagesTipps = self.session.instantiateDialog(TVSTipps)
 			if not self.hidetipps:
 				self.startTipps()
-		if config.plugins.tvspielfilm.meintvs.value == 'yes':
+		if config.plugins.tvspielfilm.meintvs.value:
 			self.MeinTVS = True
 			self.baseurl = 'https://my.tvspielfilm.de'
 			self.login = config.plugins.tvspielfilm.login.value
 			self.password = config.plugins.tvspielfilm.password.value
-			if config.plugins.tvspielfilm.encrypt.value == 'yes':
+			if config.plugins.tvspielfilm.encrypt.value:
 				try:
 					self.password = b64decode(self.password)
 				except TypeError:
-					config.plugins.tvspielfilm.encrypt.value = 'no'
+					config.plugins.tvspielfilm.encrypt.value = False
 					config.plugins.tvspielfilm.encrypt.save()
 					configfile.save()
 			self.cookiefile = join(PLUGINPATH, 'db/cookie')
@@ -4710,7 +4710,7 @@ class TVSgotoPageMenu(TVSAllScreen):
 		self['waiting'].stopBlinking()
 		output = ensure_str(open(self.localhtml, 'r').read())
 		startpos = output.find('label="Alle Sender">Alle Sender</option>')
-		if config.plugins.tvspielfilm.meintvs.value == 'yes':
+		if config.plugins.tvspielfilm.meintvs.value:
 			endpos = output.find('<optgroup label="Hauptsender">')
 		else:
 			endpos = output.find('<optgroup label="alle Sender alphabetisch">')
@@ -5039,10 +5039,10 @@ class TVSConfig(ConfigListScreen, TVSAllScreen):
 
 	def save(self):
 		if config.plugins.tvspielfilm.password.value != self.password:
-			if config.plugins.tvspielfilm.encrypt.value == 'yes':
+			if config.plugins.tvspielfilm.encrypt.value:
 				config.plugins.tvspielfilm.password.value = b64encode(ensure_binary(config.plugins.tvspielfilm.password.value))
 		elif config.plugins.tvspielfilm.encrypt.value != self.encrypt:
-			if self.encrypt == 'yes':
+			if self.encrypt == True:
 				try:
 					config.plugins.tvspielfilm.password.value = b64decode(config.plugins.tvspielfilm.password.value.encode('ascii', 'xmlcharrefreplace'))
 				except TypeError:
@@ -5053,7 +5053,7 @@ class TVSConfig(ConfigListScreen, TVSAllScreen):
 		self.exit()
 
 	def exit(self):
-		if config.plugins.tvspielfilm.meintvs.value == 'yes' and config.plugins.tvspielfilm.login.value == '' or config.plugins.tvspielfilm.meintvs.value == 'yes' and config.plugins.tvspielfilm.password.value == '':
+		if config.plugins.tvspielfilm.meintvs.value and (config.plugins.tvspielfilm.login.value == '' or config.plugins.tvspielfilm.password.value == ''):
 			self.session.openWithCallback(
 				self.nologin_return, MessageBox, 'Sie haben den Mein TV SPIELFILM Login aktiviert, aber unvollständige Login-Daten angegeben.\n\nMöchten Sie die Mein TV SPIELFILM Login-Daten jetzt angeben oder Mein TV SPIELFILM deaktivieren?', MessageBox.TYPE_YESNO)
 		else:
@@ -5061,7 +5061,7 @@ class TVSConfig(ConfigListScreen, TVSAllScreen):
 
 	def nologin_return(self, answer):
 		if answer is False:
-			config.plugins.tvspielfilm.meintvs.value = 'no'
+			config.plugins.tvspielfilm.meintvs.value = False
 			config.plugins.tvspielfilm.meintvs.save()
 			configfile.save()
 			self.session.openWithCallback(self.close, TVSMain)
@@ -5072,7 +5072,7 @@ class TVSHeuteView(TVSBaseScreen):
 		global HIDEFLAG
 		skin = readSkin("TVSHeuteView")
 		TVSBaseScreen.__init__(self, session, skin)
-		if config.plugins.tvspielfilm.meintvs.value == 'yes':
+		if config.plugins.tvspielfilm.meintvs.value:
 			self.MeinTVS = True
 			self.opener = opener
 			page = sub(r'https://my.tvspielfilm.de/tv-programm/tv-sender/.page=', '', link)
