@@ -96,11 +96,11 @@ class ItemList(MenuList):
 			basesize = 16
 		else:
 			basesize = 18
-		self.l.setFont(-2, gFont('Regular', int(16 * SCALE)))
-		self.l.setFont(-1, gFont('Regular', int((basesize - 2) * SCALE)))
-		self.l.setFont(0, gFont('Regular', int(basesize * SCALE)))
-		self.l.setFont(1, gFont('Regular', int((basesize + 2) * SCALE)))
-		self.l.setFont(2, gFont('Regular', int(20 * SCALE)))
+		self.l.setFont(-2, gFont('TVS_Regular', int(16 * SCALE)))
+		self.l.setFont(-1, gFont('TVS_Regular', int((basesize - 2) * SCALE)))
+		self.l.setFont(0, gFont('TVS_Regular', int(basesize * SCALE)))
+		self.l.setFont(1, gFont('TVS_Regular', int((basesize + 2) * SCALE)))
+		self.l.setFont(2, gFont('TVS_Regular', int(20 * SCALE)))
 
 
 def applySkinVars(skin, dict):
@@ -113,21 +113,8 @@ def applySkinVars(skin, dict):
 
 
 def makeWeekDay(weekday):
-	if weekday == 0:
-		_weekday = 'Montag'
-	elif weekday == 1:
-		_weekday = 'Dienstag'
-	elif weekday == 2:
-		_weekday = 'Mittwoch'
-	elif weekday == 3:
-		_weekday = 'Donnerstag'
-	elif weekday == 4:
-		_weekday = 'Freitag'
-	elif weekday == 5:
-		_weekday = 'Samstag'
-	elif weekday == 6:
-		_weekday = 'Sonntag'
-	return _weekday
+	weekdays = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
+	return weekdays[weekday]
 
 
 def scaleskin(skin, factor):
