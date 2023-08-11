@@ -640,7 +640,7 @@ Red: Refresh EPG
          'red': self.getEPG,
          'green': self.showHelp,
          'blue': self.hideScreen,
-         'contextMenu': self.config,
+         'menu': self.config,
          'bluelong': self.showHelp,
          'showEventInfo': self.showHelp
         }
@@ -683,6 +683,7 @@ Red: Refresh EPG
              'DirectionActions',
              'ChannelSelectBaseActions',
              'ColorActions',
+             'MenuActions',
              'HelpActions'],
              AMbindings, -1)
         self.onLayoutFinish.append(self.onLayoutFinished)
