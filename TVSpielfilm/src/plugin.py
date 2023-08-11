@@ -3700,7 +3700,11 @@ class TVSsearchYouTube(TVSAllScreen):
 																'bluelong': self.showHelp,
 																'info': self.showHelp}, -1)
 		callInThread(self.getPage, self.link, self.makeTrailerList, self.YTdownloadError)
+		self.onLayoutFinish.append(self.onLayoutFinished)
+
+	def onLayoutFinished(self):
 		self['Line_down'].show()
+		self['seitennr'].hide()
 
 	def makeTrailerList(self, output):
 		output = ensure_str(output)
