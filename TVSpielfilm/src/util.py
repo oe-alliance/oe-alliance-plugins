@@ -96,14 +96,16 @@ class ItemList(MenuList):
 			basesize = 16
 		else:
 			basesize = 18
-		self.l.setFont(-2, gFont('TVS_Regular', int(16 * SCALE)))
-		self.l.setFont(-1, gFont('TVS_Regular', int((basesize - 2) * SCALE)))
-		self.l.setFont(0, gFont('TVS_Regular', int(basesize * SCALE)))
-		self.l.setFont(1, gFont('TVS_Regular', int((basesize + 2) * SCALE)))
-		self.l.setFont(2, gFont('TVS_Regular', int(20 * SCALE)))
+		font = "TVS_Regular" if config.plugins.tvspielfilm.font.value else "Regular"
+		self.l.setFont(-2, gFont(font, int(16 * SCALE)))
+		self.l.setFont(-1, gFont(font, int((basesize - 2) * SCALE)))
+		self.l.setFont(0, gFont(font, int(basesize * SCALE)))
+		self.l.setFont(1, gFont(font, int((basesize + 2) * SCALE)))
+		self.l.setFont(2, gFont(font, int(20 * SCALE)))
 
 
 def applySkinVars(skin, dict):
+	dict["tvsfont"] = "TVS_Regular" if config.plugins.tvspielfilm.font.value else "Regular"
 	for key in dict.keys():
 		try:
 			skin = skin.replace('{%s}' % key, dict[key])
@@ -113,8 +115,7 @@ def applySkinVars(skin, dict):
 
 
 def makeWeekDay(weekday):
-	weekdays = ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag']
-	return weekdays[weekday]
+	return ['Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'][weekday]
 
 
 def scaleskin(skin, factor):
