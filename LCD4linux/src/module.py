@@ -109,7 +109,7 @@ class L4Lelement:
 		L4Lelement.Hold = Hold
 		L4Lelement.Refresh = True
 
-	def resetBrightness(self, AKT=""):
+	def resetBrightness(self, AKT=[]):
 		if len(AKT) == 3:
 			L4Lelement.BrightAkt = AKT
 		else:
@@ -122,10 +122,10 @@ class L4Lelement:
 		L4Lelement.Refresh = True
 
 	def getBrightness(self, LCD=0, ORG=True):
-		if int(LCD) > 0 and int(LCD) < 4:
-			return L4Lelement.Bright[int(LCD) - 1] if ORG == False else L4Lelement.BrightAkt[int(LCD) - 1]
+		if LCD > 0 and LCD < 4:
+			return L4Lelement.Bright[LCD - 1] if ORG == False else L4Lelement.BrightAkt[LCD - 1]
 		else:
-			return L4Lelement.Bright if ORG == False else L4Lelement.BrightAkt
+			return L4Lelement.Bright[0] if ORG == False else L4Lelement.BrightAkt[0]
 
 	def getLcd(self):
 		return L4Lelement.LCD
