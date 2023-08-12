@@ -636,13 +636,12 @@ Red: Refresh EPG
          'cancel': self.exit,
          'down': self.down,
          'up': self.up,
-         'yellow': self.clear_cache,
          'red': self.getEPG,
-         'green': self.showHelp,
+         'green': self.showInfo,
+         'yellow': self.clear_cache,
          'blue': self.hideScreen,
          'menu': self.config,
-         'bluelong': self.showHelp,
-         'showEventInfo': self.showHelp
+         'info': self.showInfo
         }
 # We need to know whether we are playing a recording as, if so, we do
 # NOT want to activate the service-changing keys, nor programme text
@@ -669,8 +668,8 @@ Red: Refresh EPG
             AMbindings.update({
              'right': self.rightDown,
              'left': self.leftUp,
-             'nextBouquet': self.zapDown,
-             'prevBouquet': self.zapUp
+             'zapdown': self.zapDown,
+             'zapup': self.zapUp
             })
 # Also add the event tracker for changing service for not-in-Playback
 # This means we can call getEPG() *after* the service changes, even
@@ -679,12 +678,7 @@ Red: Refresh EPG
             self.__event_tracker = ServiceEventTracker(screen=self,
                   eventmap={iPlayableService.evTunedIn: self.__serviceTuned})
 
-        self['actions'] = ActionMap(['OkCancelActions',
-             'DirectionActions',
-             'ChannelSelectBaseActions',
-             'ColorActions',
-             'MenuActions',
-             'HelpActions'],
+        self['actions'] = ActionMap(['EPGTranslatorActions'],
              AMbindings, -1)
         self.onLayoutFinish.append(self.onLayoutFinished)
 
@@ -1020,7 +1014,7 @@ Red: Refresh EPG
             InfoBar.zapDown(InfoBar.instance)
 
 # ==================================================================
-    def showHelp(self):
+    def showInfo(self):
 # Display the help in the destination language
 # Use our translation code to get this from the English if required.
 #
