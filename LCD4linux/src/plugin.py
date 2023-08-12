@@ -5220,6 +5220,7 @@ class L4LWorker(Thread):
 			except Exception:
 				pass
 
+
 class LCDdisplayMenu(Screen):
 	skin = """
 		<screen position="center,center" size="600,380" title="LCD4linux - Config" >
