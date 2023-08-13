@@ -114,6 +114,55 @@ def threadDownloadPage(link, file, success, fail=None):
 			fail(error)
 
 
+class CoverHelper():
+	def __init__(self, backdrop=False, fskLogo=False):
+		self['cover'] = Pixmap()
+		self.picloadCover = ePicLoad()
+		self.picloadCover.PictureData.get().append(self.showCoverCallback)
+		if backdrop:
+			self['backdrop'] = Pixmap()
+			self.picloadBackdrop = ePicLoad()
+			self.picloadBackdrop.PictureData.get().append(self.showBackdropCallback)
+
+		if fskLogo:
+			self['fsklogo'] = Pixmap()
+			self.picloadFsk = ePicLoad()
+			self.picloadFsk.PictureData.get().append(self.showFskCallback)
+
+	def decodeCover(self, coverName):
+		size = self['cover'].instance.size()
+		self.picloadCover.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
+		self.picloadCover.startDecode(coverName)
+
+	def decodeBackdrop(self, coverName):
+		size = self['backdrop'].instance.size()
+		self.picloadBackdrop.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
+		self.picloadBackdrop.startDecode(coverName)
+
+	def decodeFsk(self, coverName):
+		size = self['fsklogo'].instance.size()
+		self.picloadFsk.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
+		self.picloadFsk.startDecode(coverName)
+
+	def showCoverCallback(self, picInfo=None):
+		ptr = self.picloadCover.getData()
+		if ptr is not None:
+			self["cover"].instance.setPixmap(ptr.__deref__())
+			self["cover"].show()
+
+	def showBackdropCallback(self, picInfo=None):
+		ptr = self.picloadBackdrop.getData()
+		if ptr is not None:
+			self["backdrop"].instance.setPixmap(ptr.__deref__())
+			self["backdrop"].show()
+
+	def showFskCallback(self, picInfo=None):
+		ptr = self.picloadFsk.getData()
+		if ptr is not None:
+			self["fsklogo"].instance.setPixmap(ptr.__deref__())
+			self["fsklogo"].show()
+
+
 class createList(MenuList):
 	def __init__(self):
 		MenuList.__init__(self, [], content=eListboxPythonMultiContent)
@@ -140,7 +189,7 @@ class tmdbConfigScreen(Setup):
 		self.setTitle("TMDb - The Movie Database v" + pversion)
 
 
-class tmdbScreen(Screen, HelpableScreen):
+class tmdbScreen(Screen, HelpableScreen, CoverHelper):
 	skin = tmdbScreenSkin
 
 	def __init__(self, session, text, path=""):
@@ -191,7 +240,7 @@ class tmdbScreen(Screen, HelpableScreen):
 		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
 		self['list'] = createList()
 
-		self['cover'] = Pixmap()
+		CoverHelper.__init__(self)
 
 		self.onLayoutFinish.append(self.onFinish)
 
@@ -327,16 +376,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			coverName = noCover
 
 		if fileExists(coverName):
-			self.picload = ePicLoad()
-			self['cover'].instance.setPixmap(gPixmapPtr())
-			size = self['cover'].instance.size()
-			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-			if self.picload.startDecode(coverName, 0, 0, False) == 0:
-				ptr = self.picload.getData()
-				if ptr != None:
-					self['cover'].instance.setPixmap(ptr)
-					self['cover'].show()
-			del self.picload
+			self.decodeCover(coverName)
 		self.covername = coverName
 		# Only one result, launch details
 		if config.plugins.tmdb.firsthit.value:
@@ -419,7 +459,7 @@ class tmdbScreen(Screen, HelpableScreen):
 			shutil.rmtree(tempDir)
 
 
-class tmdbScreenMovie(Screen, HelpableScreen):
+class tmdbScreenMovie(Screen, HelpableScreen, CoverHelper):
 	skin = tmdbScreenMovieSkin
 
 	def __init__(self, session, mname, media, coverName, id, saveFilename, url_backdrop):
@@ -480,9 +520,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 		self['key_yellow'] = Label(_("Seasons"))
 		self['key_blue'] = Label(_("More"))
 		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
-		self['cover'] = Pixmap()
-		self['backdrop'] = Pixmap()
-		self['fsklogo'] = Pixmap()
+		CoverHelper.__init__(self, True, True)
 		print("[TMDb][tmdbScreenMovie] entered")
 		self.onLayoutFinish.append(self.onFinish)
 
@@ -745,16 +783,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			coverName = noCover
 
 		if fileExists(coverName):
-			self.picload = ePicLoad()
-			self['cover'].instance.setPixmap(gPixmapPtr())
-			size = self['cover'].instance.size()
-			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-			if self.picload.startDecode(coverName, 0, 0, False) == 0:
-				ptr = self.picload.getData()
-				if ptr != None:
-					self['cover'].instance.setPixmap(ptr)
-					self['cover'].show()
-			del self.picload
+			self.decodeCover(coverName)
 
 	def getBackdrop(self, url_backdrop):
 		backdropSaved = tempDir + "backdrop.jpg"
@@ -773,29 +802,11 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			pass
 
 		if fileExists(tempDir + "backdrop.jpg"):
-			self.picload = ePicLoad()
-			self['backdrop'].instance.setPixmap(gPixmapPtr())
-			size = self['backdrop'].instance.size()
-			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-			if self.picload.startDecode(backdropSaved, 0, 0, False) == 0:
-				ptr = self.picload.getData()
-				if ptr != None:
-					self['backdrop'].instance.setPixmap(ptr)
-					self['backdrop'].show()
-			del self.picload
+			self.decodeBackdrop(tempDir + "backdrop.jpg")
 
 	def showFSK(self, fsk):
 		self.fsklogo = "/usr/lib/enigma2/python/Plugins/Extensions/tmdb/pic/fsk_" + fsk + ".png"
-		self.picload = ePicLoad()
-		self['fsklogo'].instance.setPixmap(gPixmapPtr())
-		size = self['fsklogo'].instance.size()
-		self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-		if self.picload.startDecode(self.fsklogo, 0, 0, False) == 0:
-			ptr = self.picload.getData()
-			if ptr != None:
-				self['fsklogo'].instance.setPixmap(ptr)
-				self['fsklogo'].show()
-		del self.picload
+		self.decodeFsk(self.fsklogo)
 
 	def ok(self):
 		self.keyGreen()
@@ -870,7 +881,7 @@ class tmdbScreenMovie(Screen, HelpableScreen):
 			print("[TMDb] Error deleting EIT file!")
 
 
-class tmdbScreenPeople(Screen, HelpableScreen):
+class tmdbScreenPeople(Screen, HelpableScreen, CoverHelper):
 	skin = tmdbScreenPeopleSkin
 
 	def __init__(self, session, mname, id, media):
@@ -909,8 +920,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		self['key_blue'] = Label()
 		self["key_menu"] = StaticText(_("MENU"))  # auto menu button
 		self['list'] = createList()
-		self['cover'] = Pixmap()
-		self['backdrop'] = Pixmap()
+		CoverHelper.__init__(self, True)
 
 		self.onLayoutFinish.append(self.onFinish)
 
@@ -1012,35 +1022,17 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		print("[TMDb] Error: %s" % error)
 
 	def showCover(self, coverName):
-		self.picload = ePicLoad()
 		if not fileExists(coverName):
 			coverName = noCover
 
 		if fileExists(coverName):
-			self['cover'].instance.setPixmap(gPixmapPtr())
-			size = self['cover'].instance.size()
-			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-			if self.picload.startDecode(coverName, 0, 0, False) == 0:
-				ptr = self.picload.getData()
-				if ptr != None:
-					self['cover'].instance.setPixmap(ptr)
-					self['cover'].show()
-			del self.picload
+			self.decodeCover(coverName)
 		self.covername = coverName
 
 	def showBackdrop(self):
 		backdropSaved = tempDir + "backdrop.jpg"
 		if fileExists(backdropSaved):
-			self.picload = ePicLoad()
-			self['backdrop'].instance.setPixmap(gPixmapPtr())
-			size = self['backdrop'].instance.size()
-			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-			if self.picload.startDecode(backdropSaved, 0, 0, False) == 0:
-				ptr = self.picload.getData()
-				if ptr != None:
-					self['backdrop'].instance.setPixmap(ptr)
-					self['backdrop'].show()
-			del self.picload
+			self.decodeBackdrop(backdropSaved)
 
 	def ok(self):
 		check = self['list'].getCurrent()
@@ -1087,7 +1079,7 @@ class tmdbScreenPeople(Screen, HelpableScreen):
 		self.close()
 
 
-class tmdbScreenPerson(Screen, HelpableScreen):
+class tmdbScreenPerson(Screen, HelpableScreen, CoverHelper):
 	skin = tmdbScreenPersonSkin
 
 	def __init__(self, session, coverName, id):
@@ -1109,8 +1101,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 		self['searchinfo'] = Label(_("TMDb: ") + _("Loading..."))
 		self['fulldescription'] = ScrollLabel("")
 		self['key_red'] = Label(_("Exit"))
-		self['cover'] = Pixmap()
-		self['backdrop'] = Pixmap()
+		CoverHelper.__init__(self, True)
 
 		self.onLayoutFinish.append(self.onFinish)
 
@@ -1217,30 +1208,12 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 			self['searchinfo'].setText(_("TMDb: ") + _("No results found, or does not respond!"))
 
 	def showCover(self, coverName):
-		self.picload = ePicLoad()
-		self['cover'].instance.setPixmap(gPixmapPtr())
-		size = self['cover'].instance.size()
-		self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-		if self.picload.startDecode(coverName, 0, 0, False) == 0:
-			ptr = self.picload.getData()
-			if ptr != None:
-				self['cover'].instance.setPixmap(ptr)
-				self['cover'].show()
-		del self.picload
+		self.decodeCover(coverName)
 
 	def showBackdrop(self):
 		backdropSaved = tempDir + "backdrop.jpg"
 		if fileExists(backdropSaved):
-			self.picload = ePicLoad()
-			self['backdrop'].instance.setPixmap(gPixmapPtr())
-			size = self['backdrop'].instance.size()
-			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-			if self.picload.startDecode(backdropSaved, 0, 0, False) == 0:
-				ptr = self.picload.getData()
-				if ptr != None:
-					self['backdrop'].instance.setPixmap(ptr)
-					self['backdrop'].show()
-			del self.picload
+			self.decodeBackdrop(backdropSaved)
 
 	def ok(self):
 		self.cancel()
@@ -1249,7 +1222,7 @@ class tmdbScreenPerson(Screen, HelpableScreen):
 		self.close(True)
 
 
-class tmdbScreenSeason(Screen, HelpableScreen):
+class tmdbScreenSeason(Screen, HelpableScreen, CoverHelper):
 	skin = tmdbScreenSeasonSkin
 
 	def __init__(self, session, mname, id, media):
@@ -1288,8 +1261,7 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		self['key_blue'] = Label()
 		self['list'] = createList()
 
-		self['cover'] = Pixmap()
-		self['backdrop'] = Pixmap()
+		CoverHelper.__init__(self, True)
 
 		self.onLayoutFinish.append(self.onFinish)
 
@@ -1370,34 +1342,16 @@ class tmdbScreenSeason(Screen, HelpableScreen):
 		print("[TMDb] Error: %s" % error)
 
 	def showCover(self, coverName):
-		self.picload = ePicLoad()
 		if not fileExists(coverName):
 			coverName = noCover
 		if fileExists(coverName):
-			self['cover'].instance.setPixmap(gPixmapPtr())
-			size = self['cover'].instance.size()
-			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-			if self.picload.startDecode(coverName, 0, 0, False) == 0:
-				ptr = self.picload.getData()
-				if ptr != None:
-					self['cover'].instance.setPixmap(ptr)
-					self['cover'].show()
-			del self.picload
+			self.decodeCover(coverName)
 		self.ok()  # Shortcut
 
 	def showBackdrop(self):
 		backdropSaved = tempDir + "backdrop.jpg"
 		if fileExists(backdropSaved):
-			self.picload = ePicLoad()
-			self['backdrop'].instance.setPixmap(gPixmapPtr())
-			size = self['backdrop'].instance.size()
-			self.picload.setPara((size.width(), size.height(), 1, 1, False, 1, ""))
-			if self.picload.startDecode(backdropSaved, 0, 0, False) == 0:
-				ptr = self.picload.getData()
-				if ptr != None:
-					self['backdrop'].instance.setPixmap(ptr)
-					self['backdrop'].show()
-			del self.picload
+			self.decodeBackdrop(backdropSaved)
 
 	def ok(self):
 		check = self['list'].getCurrent()
