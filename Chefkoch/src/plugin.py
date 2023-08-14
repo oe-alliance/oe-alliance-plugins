@@ -49,9 +49,9 @@ PICFILE = '/tmp/chefkoch.jpg'
 AGENTS = [
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
 		"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0"
-		"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)"
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edge/87.0.664.75"
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0",
+		"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edge/87.0.664.75",
 		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
 		]
 
@@ -1490,7 +1490,7 @@ class CKmain(AllScreen):
 		self['release'] = Label(RELEASE)
 		self['totalrecipes'] = Label('')
 		self['helpactions'] = ActionMap(['HelpActions'], {'displayHelp': self.infoScreen}, -1)
-		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'InfoActions', 'MenuActions'], {
+		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'MovieSelectionActions'], {
 			'ok': self.ok,
 			'cancel': self.exit,
 			'right': self.rightDown,
@@ -1503,8 +1503,8 @@ class CKmain(AllScreen):
 			'yellow': self.yellow,
 			'green': self.zufall,
 			'blue': self.hideScreen,
-			'info': self.infoScreen,
-			'menu': self.config
+			'showEventInfo': self.infoScreen,
+			'contextMenu': self.config
 		}, -1)
 		self.movie_stop = config.usage.on_movie_stop.value
 		self.movie_eof = config.usage.on_movie_eof.value
