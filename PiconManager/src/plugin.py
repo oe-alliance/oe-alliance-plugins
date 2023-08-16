@@ -34,7 +34,7 @@ from ServiceReference import ServiceReference
 from Plugins.Plugin import PluginDescriptor
 from Components.Label import Label
 from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigYesNo, ConfigSubsection, NoSave, ConfigInteger
+from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigYesNo, ConfigSubsection, ConfigInteger
 from Components.ConfigList import ConfigListScreen
 from Components.Sources.StaticText import StaticText
 from Components.Slider import Slider
@@ -44,14 +44,14 @@ from Components.Pixmap import Pixmap
 from twisted.internet import defer
 from twisted.internet.reactor import callInThread
 from six.moves.urllib.parse import quote
-from enigma import eServiceCenter, eServiceReference, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_HALIGN_CENTER, RT_VALIGN_CENTER
+from enigma import eServiceCenter, eServiceReference, gFont, eListboxPythonMultiContent, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 
 from .piconnames import reducedName, getInteroperableNames  #check for by-name-picons that dont fit with VTi Syntax (Picon Buddy Mode)
 from . import _
 
 pname = _("PiconManager (mod)")
 pdesc = _("Manage your Picons")
-pversion = "2.5-r2"
+pversion = "2.5-r3"
 pdate = "20220816"
 
 picon_tmp_dir = "/tmp/piconmanager/"
@@ -172,7 +172,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self.piconname = config.plugins.piconmanager.piconname.value
 		self.picondir = config.plugins.piconmanager.savetopath.value
 		self.alter = config.plugins.piconmanager.alter.value
-		self.piconfolder = "%s%s/" % (self.picondir, self.piconname)
+		self.piconfolder = join(self.picondir, self.piconname)
 		self.picon_name = ""
 		self.piconlist = []
 		self.tried_mirrors = []
@@ -371,7 +371,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			if free > 1024:
 				free = int(free / 1024.)
 				which = "GB"
-			self['piconspace'].setText(_("FreeSpace:") + " %s %s" % (str(free), which))
+			self['piconspace'].setText(_("FreeSpace:") + " %s %s" % (free, which))
 		else:
 			self['piconspace'].setText(_("FreeSpace: Drive Not Found !"))
 
@@ -394,7 +394,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def getPiconList(self):
 		print("[PiconManager] started ...")
-		self['piconcount'].setText(_("Channels:") + " %s" % self.countchlist)
+		self['piconcount'].setText("%s %s" % (_("Channels:"), self.countchlist))
 		self['selected'].setText(_(str(config.plugins.piconmanager.selected.value).replace("_", ", ").replace("+", " ").replace("-", " ")))
 		if config.plugins.piconmanager.spicon.value != "":
 			txt = config.plugins.piconmanager.spicon.value.split('|')
@@ -560,7 +560,8 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			response.raise_for_status()
 			with open(file, "wb") as f:
 				f.write(response.content)
-			success(file)
+			if file:
+				success(file)
 		except exceptions.RequestException as error:
 			if fail is not None:
 				fail(error)
@@ -593,7 +594,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self.picondir = "/media/hdd/"
 		elif search("/media/hdd/", self.piconfolder, S | I):
 			self.picondir = "/usr/share/enigma2/"
-		self.piconfolder = "%s%s/" % (self.picondir, self.piconname)
+		self.piconfolder = join(self.picondir, self.piconname)
 		self['piconpath2'].setText(self.piconfolder)
 		print("[PiconManager] set picon path to: %s" % self.piconfolder)
 		self.getFreeSpace()
@@ -604,7 +605,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 	def gotNewPiconName(self, name):
 		if name is not None:
 			self.piconname = name
-			self.piconfolder = "%s%s/" % (self.picondir, self.piconname)
+			self.piconfolder = join(self.picondir, self.piconname)
 			self['piconpath2'].setText(self.piconfolder)
 			print("[PiconManager] set picon path to: %s" % self.piconfolder)
 	##################################### OH #############################################
@@ -648,7 +649,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def primaryByName(self, channelName):  # if a picon-by-name already exists, use its name
 		try:
-			if exists(self.piconfolder + channelName + '.png'):
+			if exists("%s%s.png" % (self.piconfolder, channelName)):
 				return channelName
 			for c in getInteroperableNames(channelName):
 				if exists(self.piconfolder + c + '.png'):
@@ -685,9 +686,9 @@ class PiconManagerScreen(Screen, HelpableScreen):
 						downloadPiconUrl = None
 						if "by name" in self['list'].getCurrent()[0][0].lower():
 							#downloadPiconUrl = quote(channel[1] + ".png")     #### OH #####
-							#downloadPiconPath = self.piconfolder + channel[1] + ".png"     #### OH #####
+							#downloadPiconPath = "%s%s.png" % (self.piconfolder, channel[1])     #### OH #####
 							downloadPiconUrl = quote(self.comparableChannelName(channel[1]) + ".png")  #### OH #####
-							downloadPiconPath = "%s.png" % (self.piconfolder + self.primaryByName(channel[1]))  #### OH #####
+							downloadPiconPath = join(self.piconfolder, self.primaryByName(channel[1]))  #### OH #####
 						else:
 							downloadPiconUrl = str(channel[0])
 							downloadPiconUrl = downloadPiconUrl.split("http")[0]
