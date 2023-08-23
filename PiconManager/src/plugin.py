@@ -172,7 +172,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self.piconname = config.plugins.piconmanager.piconname.value
 		self.picondir = config.plugins.piconmanager.savetopath.value
 		self.alter = config.plugins.piconmanager.alter.value
-		self.piconfolder = join(self.picondir, self.piconname)
+		self.piconfolder = "%s%s/" % (self.picondir, self.piconname)
 		self.picon_name = ""
 		self.piconlist = []
 		self.tried_mirrors = []
@@ -594,7 +594,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self.picondir = "/media/hdd/"
 		elif search("/media/hdd/", self.piconfolder, S | I):
 			self.picondir = "/usr/share/enigma2/"
-		self.piconfolder = join(self.picondir, self.piconname)
+		self.piconfolder = "%s%s/" % (self.picondir, self.piconname)
 		self['piconpath2'].setText(self.piconfolder)
 		print("[PiconManager] set picon path to: %s" % self.piconfolder)
 		self.getFreeSpace()
@@ -605,7 +605,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 	def gotNewPiconName(self, name):
 		if name is not None:
 			self.piconname = name
-			self.piconfolder = join(self.picondir, self.piconname)
+			self.piconfolder = "%s%s/" % (self.picondir, self.piconname)
 			self['piconpath2'].setText(self.piconfolder)
 			print("[PiconManager] set picon path to: %s" % self.piconfolder)
 	##################################### OH #############################################
@@ -688,7 +688,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 							#downloadPiconUrl = quote(channel[1] + ".png")     #### OH #####
 							#downloadPiconPath = "%s%s.png" % (self.piconfolder, channel[1])     #### OH #####
 							downloadPiconUrl = quote(self.comparableChannelName(channel[1]) + ".png")  #### OH #####
-							downloadPiconPath = join(self.piconfolder, self.primaryByName(channel[1]))  #### OH #####
+							downloadPiconPath = "%s%s.png" % (self.piconfolder, self.primaryByName(channel[1]))  #### OH #####
 						else:
 							downloadPiconUrl = str(channel[0])
 							downloadPiconUrl = downloadPiconUrl.split("http")[0]
