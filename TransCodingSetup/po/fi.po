@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenATV\n"
+"Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2021-06-01 04:28+0300\n"
-"Last-Translator: tomppaa <http://www.huoltovalikko.com/>\n"
-"Language-Team: tomppaa\n"
+"PO-Revision-Date: 2023-09-01 19:50+0300\n"
+"Last-Translator: Orlandox <http://www.huoltovalikko.com/>\n"
+"Language-Team: tomppaa, Orlandox\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #, python-format
 msgid "%s"
@@ -39,7 +39,7 @@ msgid "2.2"
 msgstr "2.2"
 
 msgid "2nd transcoding and PIP are mutually exclusive."
-msgstr "2nd Transkoodaus ja PIP sulkevat toisensa pois."
+msgstr "Toinen transkoodaus ja PIP ovat toisensa poissulkevia."
 
 msgid "3.0"
 msgstr "3.0"
@@ -78,16 +78,16 @@ msgid "720p"
 msgstr "720p"
 
 msgid "Advanced"
-msgstr "Laajat"
+msgstr "Lisäasetukset"
 
 msgid "Aspect Ratio"
 msgstr "Kuvasuhde"
 
 msgid "Audio codec"
-msgstr "Ääni koodekki"
+msgstr "Äänikoodekki"
 
 msgid "Auto set Framerate / Bitrate"
-msgstr "Automaattinen Kuvataajuus / Bittinopeus"
+msgstr "Automaattinen Ruudunpäivitysnopeus / Bittinopeus"
 
 msgid "Bitrate"
 msgstr "Bittinopeus"
@@ -100,72 +100,6 @@ msgstr "Oletus"
 
 msgid "Encoder"
 msgstr "Enkooderi"
-
-msgid "Encoder 0: Aspect Ratio"
-msgstr "Enkooderi 0: kuvasuhde"
-
-msgid "Encoder 0: Audio codec"
-msgstr "Enkooderi 0: Ääni koodekki"
-
-msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
-msgstr "Encooderi 0: Automaattinen tila (Bittinopeus/Kuvataajuus)"
-
-msgid "Encoder 0: Bitrate"
-msgstr "Enkooderi 0: Bittinopeus"
-
-msgid "Encoder 0: Framerate"
-msgstr "Encooderi 0: Kuvataajuus"
-
-msgid "Encoder 0: GOP Frame B"
-msgstr "Encooderi 0: GOP Kehys B"
-
-msgid "Encoder 0: GOP Frame P"
-msgstr "Encooderi 0: GOP Kehys P"
-
-msgid "Encoder 0: Level"
-msgstr "Encoder 0: Taso"
-
-msgid "Encoder 0: Profile"
-msgstr "Encoder 0: Profiili"
-
-msgid "Encoder 0: Resolution"
-msgstr "Enkooderi 0: Resoluutio"
-
-msgid "Encoder 0: Video codec"
-msgstr "Enkooderi 0: Videokoodekki"
-
-msgid "Encoder 1: Aspect Ratio"
-msgstr "Enkooderi 1: kuvasuhde"
-
-msgid "Encoder 1: Audio codec"
-msgstr "Enkooderi 1: Ääni koodekki"
-
-msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
-msgstr "Encooderi 1: Automaattinen tila (Bittinopeus/Kuvataajuus)"
-
-msgid "Encoder 1: Bitrate"
-msgstr "Enkooderi 1: Bittinopeus"
-
-msgid "Encoder 1: Framerate"
-msgstr "Encooderi 1: Kuvataajuus"
-
-msgid "Encoder 1: GOP Frame B"
-msgstr "Encooderi 1: GOP Kehys B"
-
-msgid "Encoder 1: GOP Frame P"
-msgstr "Encooderi 1: GOP Kehys P"
-
-msgid "Encoder 1: Level"
-msgstr "Encoder 1: Taso"
-
-msgid "Encoder 1: Profile"
-msgstr "Encoder 1: Profiili"
-
-msgid "Encoder 1: Resolution"
-msgstr "Enkooderi 1: Resoluutio"
-
-msgid "Encoder 1: Video codec"
-msgstr "Enkooderi 1: Videokoodekki"
 
 msgid "Framerate"
 msgstr "Ruudunpäivitysnopeus"
@@ -186,7 +120,7 @@ msgid "Min"
 msgstr "Minimi"
 
 msgid "Normal"
-msgstr "Normaali"
+msgstr "Perusasetukset"
 
 msgid "Off"
 msgstr "Pois"
@@ -255,7 +189,7 @@ msgid "enable"
 msgstr "ota käyttöön"
 
 msgid "h264"
-msgstr "H264"
+msgstr "h264"
 
 msgid "high"
 msgstr "suuri"
@@ -274,3 +208,69 @@ msgstr "mpg"
 
 msgid "simple"
 msgstr "yksinkertainen"
+
+msgid "Encoder 0: Aspect Ratio"
+msgstr "Enkooderi 0: kuvasuhde"
+
+msgid "Encoder 0: Audio codec"
+msgstr "Enkooderi 0: Äänikoodekki"
+
+msgid "Encoder 0: Auto mode (Bitrate/Framerate)"
+msgstr "Encooderi 0: Automaattinen tila (Bittinopeus/Ruudunpäivitysnopeus)"
+
+msgid "Encoder 0: Bitrate"
+msgstr "Enkooderi 0: Bittinopeus"
+
+msgid "Encoder 0: Framerate"
+msgstr "Encooderi 0: Ruudunpäivitysnopeus"
+
+msgid "Encoder 0: GOP Frame B"
+msgstr "Encooderi 0: GOP Kehys B"
+
+msgid "Encoder 0: GOP Frame P"
+msgstr "Encooderi 0: GOP Kehys P"
+
+msgid "Encoder 0: Level"
+msgstr "Encoder 0: Taso"
+
+msgid "Encoder 0: Profile"
+msgstr "Encoder 0: Profiili"
+
+msgid "Encoder 0: Resolution"
+msgstr "Enkooderi 0: Resoluutio"
+
+msgid "Encoder 0: Video codec"
+msgstr "Enkooderi 0: Videokoodekki"
+
+msgid "Encoder 1: Aspect Ratio"
+msgstr "Enkooderi 1: kuvasuhde"
+
+msgid "Encoder 1: Audio codec"
+msgstr "Enkooderi 1: Äänikoodekki"
+
+msgid "Encoder 1: Auto mode (Bitrate/Framerate)"
+msgstr "Encooderi 1: Automaattinen tila (Bittinopeus/Ruudunpäivitysnopeus)"
+
+msgid "Encoder 1: Bitrate"
+msgstr "Enkooderi 1: Bittinopeus"
+
+msgid "Encoder 1: Framerate"
+msgstr "Encooderi 1: Ruudunpäivitysnopeus"
+
+msgid "Encoder 1: GOP Frame B"
+msgstr "Encooderi 1: GOP Kehys B"
+
+msgid "Encoder 1: GOP Frame P"
+msgstr "Encooderi 1: GOP Kehys P"
+
+msgid "Encoder 1: Level"
+msgstr "Encoder 1: Taso"
+
+msgid "Encoder 1: Profile"
+msgstr "Encoder 1: Profiili"
+
+msgid "Encoder 1: Resolution"
+msgstr "Enkooderi 1: Resoluutio"
+
+msgid "Encoder 1: Video codec"
+msgstr "Enkooderi 1: Videokoodekki"
