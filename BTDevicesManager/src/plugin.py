@@ -35,7 +35,7 @@ from Components.ActionMap import NumberActionMap, ActionMap
 from Components.config import config, ConfigSelection, getConfigListEntry, ConfigText, ConfigSubsection, ConfigYesNo, ConfigSelection
 from Components.MenuList import MenuList
 from Components.ServiceEventTracker import ServiceEventTracker
-from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, fileExists
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, fileExists, fileCheck
 from .bluetoothctl import iBluetoothctl, Bluetoothctl
 
 import six
@@ -566,6 +566,8 @@ def Plugins(**kwargs):
 			file.close()
 			if version in ('10'):
 				ShowPlugin = False
+	elif getBoxType().startswith('sf8008') and not fileCheck("/sys/class/bluetooth/hci0"):
+		ShowPlugin = False
 
 	if ShowPlugin:
 		l = []
