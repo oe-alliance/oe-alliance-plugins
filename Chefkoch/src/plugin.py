@@ -9,7 +9,7 @@ from random import randrange, choice
 from requests import get, exceptions
 from PIL import Image
 from smtplib import SMTP, SMTP_SSL, SMTPResponseException
-from six import ensure_str, ensure_binary
+from six import ensure_str, ensure_binary, PY3
 from six.moves.email_mime_multipart import MIMEMultipart
 from six.moves.email_mime_text import MIMEText
 from six.moves.email_mime_image import MIMEImage
@@ -39,7 +39,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 # GLOBALS
-RELEASE = 'V2.1'
+RELEASE = 'V2.2'
 MODULE_NAME = __name__.split(".")[-1]
 LINESPERPAGE = 8
 PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte/'
@@ -256,7 +256,6 @@ class CKview(AllScreen):
 		self['Line_Bottom'] = Label('')
 		self['Line_Bottom'].hide()
 		self['release'] = Label(RELEASE)
-		self['helpactions'] = ActionMap(['HelpActions'], {'displayHelp': self.infoScreen}, -1)
 		self['NumberActions'] = NumberActionMap(['NumberActions', 'OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'ButtonSetupActions'], {
 			'ok': self.ok,
 			'cancel': self.exit,
@@ -297,7 +296,7 @@ class CKview(AllScreen):
 			self.makePostviewPage(self.query)
 		else:
 			self.current = 'menu'
-			self.makeChefkoch()
+			callInThread(self.makeChefkoch)
 
 	def makeChefkoch(self):  # erzeuge Rezeptliste
 		for i in range(LINESPERPAGE):
@@ -635,7 +634,7 @@ class CKview(AllScreen):
 		if self.current == 'menu':
 			self.sort = self.sort + 1 if self.sort < len(self.sortname) - 1 else 0
 			self.currItem = 0
-			self.makeChefkoch()
+			callInThread(self.makeChefkoch)
 
 	def green_return(self, answer):
 		if answer:
@@ -702,7 +701,10 @@ class CKview(AllScreen):
 		msgText += '\n\nZUBEREITUNG\n' + self.REZ['instructions'] if self.REZ else ""
 		msgText += '\n' + '_' * 30 + '\nChefkoch.de'
 		if fileExists(PICFILE):
-			Image.open(PICFILE).resize((320, 240), Image.ANTIALIAS).save('/tmp/emailpic.jpg')
+			if PY3:
+				Image.open(PICFILE).resize((320, 240), Image.LANCZOS).save('/tmp/emailpic.jpg')
+			else:
+				Image.open(PICFILE).resize((320, 240), Image.ANTIALIAS).save('/tmp/emailpic.jpg')
 		mailFrom = ensure_str(config.plugins.chefkoch.mailfrom.value.encode('ascii', 'xmlcharrefreplace'))
 		mailTo = ensure_str(mailTo.encode('ascii', 'xmlcharrefreplace'))
 		mailLogin = ensure_str(config.plugins.chefkoch.login.value.encode('ascii', 'xmlcharrefreplace'))
@@ -1006,9 +1008,6 @@ class CKview(AllScreen):
 	def returnVideo(self):
 		self.ready = True
 
-	def infoScreen(self):
-		pass
-
 	def zap(self):
 		servicelist = self.session.instantiateDialog(ChannelSelection)
 		self.session.execDialog(servicelist)
@@ -1142,9 +1141,6 @@ class CKpicshow(AllScreen):
 			'left': self.picdown,
 			'up': self.picup,
 			'down': self.picdown,
-			'red': self.infoScreen,
-			'yellow': self.infoScreen,
-			'green': self.infoScreen,
 			'blue': self.hideScreen,
 			'0': self.gotoPic,
 			'1': self.gotoPic,
@@ -1156,7 +1152,6 @@ class CKpicshow(AllScreen):
 			'7': self.gotoPic,
 			'8': self.gotoPic,
 			'9': self.gotoPic,
-			'displayHelp': self.infoScreen
 		}, -1)
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
@@ -1225,9 +1220,6 @@ class CKpicshow(AllScreen):
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d' % (self.count + 1, self.maxPics + 1) + '\nvon ' + username)
 
-	def infoScreen(self):
-		pass
-
 	def exit(self):
 		if ALPHA and not HIDEFLAG:
 			with open(ALPHA, 'w') as f:
@@ -1287,9 +1279,6 @@ class CKfavoriten(AllScreen):
 			'down': self.down,
 			'up': self.up,
 			'red': self.red,
-			'yellow': self.infoScreen,
-			'green': self.infoScreen,
-			'blue': self.hideScreen,
 			'0': self.move2end,
 			'1': self.move2first
 		}, -1)
@@ -1448,9 +1437,6 @@ class CKfavoriten(AllScreen):
 		else:
 			self.close()
 
-	def infoScreen(self):
-		pass
-
 
 class ItemList(MenuList):
 	def __init__(self, items, enableWrapAround=True):
@@ -1489,7 +1475,6 @@ class CKmain(AllScreen):
 		self['label_blue'] = Label('Ein-/Ausblenden')
 		self['release'] = Label(RELEASE)
 		self['totalrecipes'] = Label('')
-		self['helpactions'] = ActionMap(['HelpActions'], {'displayHelp': self.infoScreen}, -1)
 		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'InfoActions', 'MenuActions'], {
 			'ok': self.ok,
 			'cancel': self.exit,
@@ -1503,7 +1488,6 @@ class CKmain(AllScreen):
 			'yellow': self.yellow,
 			'green': self.zufall,
 			'blue': self.hideScreen,
-			'info': self.infoScreen,
 			'menu': self.config
 		}, -1)
 		self.movie_stop = config.usage.on_movie_stop.value
@@ -1778,9 +1762,6 @@ class CKmain(AllScreen):
 		config.usage.on_movie_stop.value = self.movie_stop
 		config.usage.on_movie_eof.value = self.movie_eof
 		self.session.openWithCallback(self.exit, CKconfig)
-
-	def infoScreen(self):
-		pass
 
 	def eject(self, dummy):
 		self.exit()
