@@ -6,7 +6,7 @@
 		<widget render="Label" source="global.CurrentTime" position="1668,0" size="180,45" font="Regular;39" foregroundColor="#697279" backgroundColor="white" halign="center" valign="center" zPosition="2">
 			<convert type="ClockToText">Format:%H:%M:%S</convert>
 		</widget>
-		<widget name="release" position="64,37" size="60,21" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="release" position="64,37" size="60,28" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" valign="center" transparent="1" zPosition="2" />
 		<widget name="menu" position="60,112" size="1597,900" font="Regular;{fontsize}" selectionPixmap="{picpath}FHD/BG_Pixmap_Menu_FHD.png" foregroundColor="white" foregroundColorSelected="white"  backgroundColorSelected="#20336f3d" scrollbarMode="showAlways" scrollbarBorderWidth="1" scrollbarWidth="15" scrollbarForegroundColor="#b5d7bb" scrollbarBorderColor="#336F3D" zPosition="1" transparent="1"/>
 		<widget name="vid0" position="1719,132" size="75,75" pixmap="{picpath}FHD/videoiconFHD.png" alphatest="blend" zPosition="1" />
 		<widget name="vid1" position="1719,244" size="75,75" pixmap="{picpath}FHD/videoiconFHD.png" alphatest="blend" zPosition="1" />
@@ -31,7 +31,7 @@
 		<widget name="scoretext" position="79,195" size="660,195" font="Regular;30" halign="left" zPosition="1" transparent="1" />
 		<widget name="recipetext" position="1185,105" size="657,285" font="Regular;30" halign="left" zPosition="1" transparent="1" />
 		<widget name="textpage" position="75,450" size="1767,562" font="Regular;{fontsize}" scrollbarMode="showOnDemand" scrollbarBorderWidth="2" scrollbarWidth="15" scrollbarForegroundColor="#b5d7bb" scrollbarBorderColor="#336F3D" halign="left" zPosition="0" transparent="1" />
-		<widget name="pageinfo" position="1668,54" size="180,28" font="Regular; 24" foregroundColor="white" backgroundColor="#336f3d" halign="center" transparent="0" zPosition="2" />
+		<widget name="pageinfo" position="1668,54" size="180,32" font="Regular; 24" foregroundColor="white" backgroundColor="#336f3d" halign="center" valign="center" transparent="0" zPosition="2" />
 		<widget name="label_red" position="37,1035" size="270,36" font="Regular;27" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
 		<widget name="label_green" position="352,1035" size="450,36" font="Regular;27" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
 		<widget name="label_yellow" position="847,1035" size="360,36" font="Regular;27" foregroundColor="white" backgroundColor="background" halign="left" transparent="1" zPosition="2" />
@@ -59,7 +59,7 @@
 		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
 		<widget source="Title" render="Label" position="center,19" size="1500,48" font="Regular; 36" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="1920,90" pixmap="{picpath}FHD/chefkochFHD.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="64,37" size="60,21" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="release" position="64,37" size="60,28" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" valign="center" transparent="1" zPosition="2" />
 		<widget name="scoretext" position="22,195" size="390,75" font="Regular;30" foregroundColor="white" backgroundColor="background" halign="left" zPosition="1" transparent="1" />
 		<widget name="picture" position="405,105" size="1080,810" alphatest="blend" zPosition="1" />
 		<widget name="picindex" position="1500,105" size="375,390" foregroundColor="white" backgroundColor="background" font="Regular;33" halign="left" zPosition="1" transparent="1" />
@@ -83,7 +83,7 @@
 		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
 		<widget source="Title" render="Label" position="15,21" size="855,48" font="Regular; 36" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="885,90" pixmap="{picpath}FHD/chefkochFHD.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="64,37" size="60,21" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="release" position="64,37" size="60,28" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" valign="center" transparent="1" zPosition="2" />
 		<widget name="label_red" position="40,1002" size="180,36" font="Regular;27" halign="left" transparent="1" zPosition="2" />
 		<eLabel name="button_red" position="15,997" size="12,45" backgroundColor="red" zPosition="2" />
 		<widget name="favmenu" position="15,110" size="855,870" foregroundColor="white" foregroundColorSelected="white"  backgroundColorSelected="#20336f3d" font="Regular;33" itemHeight="51" selectionPixmap="{picpath}FHD/BG_Pixmap_FHD.png" scrollbarMode="showOnDemand" halign="left" zPosition="1" transparent="1"/>
@@ -97,7 +97,7 @@
 		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
 		<widget source="Title" render="Label" position="90,21" size="735,48" font="Regular; 36" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="885,90" pixmap="{picpath}FHD/chefkochFHD.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="64,37" size="60,24" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="release" position="64,37" size="60,28" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" valign="center" transparent="1" zPosition="2" />
 		<widget name="totalrecipes" position="690,64" size="180,24" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="right" transparent="1" zPosition="2" />
 		<widget name="mainmenu" position="15,110" size="855,870" font="Regular;33" itemHeight="51" selectionPixmap="{picpath}FHD/BG_Pixmap_FHD.png" scrollbarMode="showNever" foregroundColor="white" foregroundColorSelected="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="2" transparent="1"/>
 		<widget name="secondmenu" position="15,110" size="855,870" font="Regular;33" itemHeight="51" selectionPixmap="{picpath}FHD/BG_Pixmap_FHD.png" scrollbarMode="showNever" foregroundColor="white" foregroundColorSelected="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="2" transparent="1"/>
@@ -127,7 +127,7 @@
 		<ePixmap position="0,0" size="1920,1080" pixmap="{picpath}FHD/backgroundFHD.png" alphatest="blend" zPosition="-10" />
 		<widget source="Title" render="Label" position="210,21" size="450,48" font="Regular; 36" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="885,90" pixmap="{picpath}FHD/chefkochFHD.png" alphatest="blend" zPosition="1" />
-		<widget name="release" position="64,37" size="60,21" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" transparent="1" zPosition="2" />
+		<widget name="release" position="64,37" size="60,21" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" valign="center" transparent="1" zPosition="2" />
 		<widget name="plugin" position="15,110" size="855,835" font="Regular;33" itemHeight="51"  selectionPixmap="{picpath}FHD/BG_Pixmap_FHD.png" scrollbarMode="showNever" foregroundColor="white" foregroundColorSelected="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="1" transparent="1"/>
 		<widget name="config" position="15,110" size="855,835" font="Regular;33" itemHeight="51"  selectionPixmap="{picpath}FHD/BG_Pixmap_FHD.png" scrollbarMode="showNever" foregroundColor="white" foregroundColorSelected="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="1" transparent="1"/>
 		<widget source="VKeyIcon" text="" render="Label" position="0,0" size="0,0" conditional="VKeyIcon">
