@@ -1008,5 +1008,5 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name=_("DLNA/uPnP Browser"), description=_("This is dlna/upnp client using djmount."), where=PluginDescriptor.WHERE_PLUGINMENU, fnc=main),
+	return [PluginDescriptor(name=_("DLNA/uPnP Browser"), description=_("This is dlna/upnp client using djmount."), where=PluginDescriptor.WHERE_PLUGINMENU, icon="plugin.png", fnc=main),
 		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
