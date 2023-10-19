@@ -5,9 +5,9 @@ msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:54+0100\n"
-"PO-Revision-Date: 2016-05-07 13:27+0200\n"
+"PO-Revision-Date: 2023-10-19 13:27+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: WWW.LINSAT.NET <spaeleus@croci.org>\n"
+"Language-Team: www.egami-image.com <anonm4d@gmail.com>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -17,102 +17,100 @@ msgstr ""
 "X-Poedit-SourceCharset: iso-8859-1\n"
 
 msgid "Always off"
-msgstr ""
+msgstr "Sempre spento"
 
 msgid "Blink Record Led"
-msgstr ""
+msgstr "Lampeggia il LED durante la registrazione"
 
 msgid "Blue"
-msgstr ""
+msgstr "Blu"
 
 msgid "Brightness"
-msgstr ""
+msgstr "Luminosità"
 
 msgid "Brightness Standby"
-msgstr ""
+msgstr "Luminosità Standby"
 
-#
 msgid "Cancel"
-msgstr "Annull."
+msgstr "Annulla"
 
 msgid "Change LED display settings"
-msgstr ""
+msgstr "Modifica impostazioni LED al display"
 
 msgid "Channel number with leading zeros"
-msgstr ""
+msgstr "Numero del canale con zeri iniziali"
 
 msgid "Channelnumber in Standby Clock"
-msgstr ""
+msgstr "Numero canale nell'orologio in standby"
 
 msgid "Channelnumber in Standby off"
-msgstr ""
+msgstr "Numero canale in Standby disattivato"
 
 msgid "Channelnumber/Clock in Standby Clock"
-msgstr ""
+msgstr "Numero canale/Orologio in standby"
 
 msgid "Clock always"
-msgstr ""
+msgstr "Sempre orologio"
 
 msgid "Display/LED"
-msgstr ""
+msgstr "Display/LED"
 
 msgid "Enable led"
-msgstr ""
+msgstr "Abilita led"
 
 msgid "GigaBlue Setup"
-msgstr ""
+msgstr "Impostazioni GigaBlue"
 
 msgid "LED"
-msgstr ""
+msgstr "LED"
 
 msgid "Led Deep Standby"
-msgstr ""
+msgstr "Led in Deep Standby"
 
 msgid "Led state Deep Standby"
-msgstr ""
+msgstr "Stato LED Deep Standby"
 
 msgid "Led state HDD /dev/sda active"
-msgstr ""
+msgstr "Stato LED HDD /dev/sda attivo"
 
 msgid "Led state HDD /dev/sdb active"
-msgstr ""
+msgstr "Stato LED HDD /dev/sdb attivo"
 
 msgid "Led state RUN"
-msgstr ""
+msgstr "Stato led Avviato"
 
 msgid "Led state Record"
-msgstr ""
+msgstr "Stato led in Registrazione"
 
 msgid "Led state Standby"
-msgstr ""
+msgstr "Stato led Pausa"
 
 msgid "No"
-msgstr ""
+msgstr "No"
 
 msgid "None"
-msgstr ""
+msgstr "Nessuno"
 
 msgid "Purple"
-msgstr ""
+msgstr "Viola"
 
 msgid "Red"
-msgstr ""
+msgstr "Rosso"
 
-#
 msgid "Save"
-msgstr "Salvare"
+msgstr "Salva"
 
 msgid "Show clock in Deep Standby"
-msgstr ""
+msgstr "Mostra orologio in Deep Standby"
 
 msgid "Show on VFD"
-msgstr ""
+msgstr "Mostra su VFD"
 
 msgid "Time mode"
-msgstr ""
+msgstr "Modalità ora"
 
 msgid "Update Date/Time"
-msgstr ""
+msgstr "Aggiornamento Data/Ora"
 
 msgid "Yes"
-msgstr ""
+msgstr "Si"
