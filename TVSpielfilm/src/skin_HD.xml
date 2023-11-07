@@ -147,8 +147,8 @@
 		<widget name="piclabel2" position="378,1115" size="85,40" font="{tvsfont};14" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
 		<widget name="picon" position="10,133" size="68,40" alphatest="blend" zPosition="2" />
 		<widget name="playlogo" position="954,415" size="60,60" pixmap="{picpath}HD/icons/play.png" alphatest="blend" zPosition="2" />
-		<widget name="editorial" position="675,220" size="915,20" font="{tvsfont};16" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
-		<widget name="ranking" position="675,240" size="915,34" font="{tvsfont};20" foregroundColor="#0092cbdf" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
+		<widget name="editorial" position="675,220" size="915,20" font="{tvsfont};16" foregroundColor="#00ffffff" backgroundColor="#20000000" halign="left" valign="center" zPosition="0" />
+		<widget name="ranking" position="675,240" size="915,34" font="{tvsfont};20" foregroundColor="#0092cbdf" backgroundColor="#20000000" halign="left" valign="center" zPosition="0" />
 		<widget name="textpage" position="10,280" size="650,390" font="{tvsfont};22" halign="left" zPosition="0" foregroundColor="#00ffffff" backgroundColor="#20000000" />
 		<!-- Color-Buttons TVProgrammView Start-Screen-->
 		<widget name="label2" position="25,690" size="135,24" font="{tvsfont};18" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
