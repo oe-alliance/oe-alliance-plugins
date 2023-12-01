@@ -11,7 +11,6 @@ from Components.config import config, configfile, ConfigSubsection, getConfigLis
 from Components.ConfigList import ConfigListScreen
 from Tools.Directories import fileExists
 from enigma import iPlayableService, eServiceCenter, eTimer, eActionMap
-from boxbranding import getBoxType, getImageDistro
 from os import system
 from Plugins.Plugin import PluginDescriptor
 from Components.ServiceEventTracker import ServiceEventTracker
@@ -21,7 +20,16 @@ import Screens.Standby
 import Components.RecordingConfig
 from Components.Harddisk import harddiskmanager
 
-BOX = getBoxType()
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+	BOX = BoxInfo.getItem("machinebuild")
+except:
+	from boxbranding import getImageDistro, getBoxType
+	IMAGEDISTRO = getImageDistro()
+	BOX = getBoxType()
+
+
 if fileExists("/proc/stb/fp/vfd_status"):
 	file = open("/proc/stb/fp/vfd_status")
 	version = file.read().strip().lower()
@@ -551,7 +559,7 @@ class LED_Giga:
 
 
 def main(menuid, **kwargs):
-	if getImageDistro() == "openvix":
+	if IMAGEDISTRO == "openvix":
 		if BOX in ('gb800se', 'gb800solo', 'gbx1', 'gbx2', 'gbx3', 'gbx3h', 'gbx34k') and menuid == "leddisplay":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		elif BOX in ('gb800seplus', 'gbultra', 'gbultrase', 'gbtrio4kpro', 'gbtrio4k', 'gbip4kled') and menuid == "display":
@@ -560,13 +568,13 @@ def main(menuid, **kwargs):
 			return [(_("LED"), startLED, "LED_Giga", None)]
 		else:
 			return []
-	elif getImageDistro() == "openhdf":
+	elif IMAGEDISTRO == "openhdf":
 		if menuid == "fp_menu":
 			return [(_("Display/LED"), startLED, "LED_Giga", None)]
 		else:
 			return []
 	else:
-		if getImageDistro() in ('teamblue'):
+		if IMAGEDISTRO in ('teamblue'):
 			if menuid != "frontpanel_menu":
 				return []
 		else:

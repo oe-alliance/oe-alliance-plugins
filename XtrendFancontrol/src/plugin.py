@@ -33,7 +33,12 @@ import gettext
 from Components.ActionMap import ActionMap
 from Components.Button import Button
 from Components.Label import Label
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 import six
 
 SIGN = '°' if six.PY3 else str('\xc2\xb0')
@@ -502,7 +507,7 @@ def getHddTemp():
 
 
 def selSetup(menuid, **kwargs):
-	if getImageDistro() in ("openatv"):
+	if IMAGEDISTRO in ("openatv"):
 		if menuid != "extended":
 			return []
 	else:

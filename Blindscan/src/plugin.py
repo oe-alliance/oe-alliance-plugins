@@ -4,8 +4,6 @@ from __future__ import division
 # for localized messages
 from . import _
 
-from boxbranding import getBoxType, getImageVersion, getImageBuild, getBrandOEM, getMachineBuild
-
 from enigma import eComponentScan, eConsoleAppContainer, eDVBFrontendParametersSatellite, eDVBResourceManager, eTimer
 
 from Components.ActionMap import ActionMap
@@ -35,6 +33,21 @@ from . filters import TransponderFiltering  # imported from Blindscan folder
 from time import strftime, time
 
 # root2gold based on https://github.com/DigitalDevices/dddvb/blob/master/apps/pls.c
+
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+	BRAND = BoxInfo.getItem("brand")
+	MACHINEBUILD = BoxInfo.getItem("model")
+	MODEL = BoxInfo.getItem("machinebuild")
+	IMGVER = BoxInfo.getItem("imageversion")
+except:
+	from boxbranding import getImageDistro, getBrandOEM, getMachineBuild, getBoxType, getImageVersion
+	IMAGEDISTRO = getImageDistro()
+	BRAND = getBrandOEM()
+	MACHINEBUILD = getMachineBuild()
+	MODEL = getBoxType()
+	IMGVER = getImageVersion()
 
 
 def root2gold(root):
@@ -376,9 +389,9 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			return
 
 		if nimname == "AVL6222":
-			if getBoxType() == "vuuno":
+			if MODEL == "vuuno":
 				self.i2c_mapping_table = {0: 3, 1: 3, 2: 1, 3: 0}
-			elif getBoxType() == "vuduo2":
+			elif MODEL == "vuduo2":
 				nimdata = self.nimSockets['0']
 				try:
 					if nimdata[0] == "AVL6222":
@@ -547,7 +560,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		nimname = nim.friendly_full_description
 
 		self.SundtekScan = "Sundtek DVB-S/S2" in nimname
-		if getBrandOEM() == 'vuplus' and "AVL6222" in nimname:
+		if BRAND == 'vuplus' and "AVL6222" in nimname:
 			warning_text = _("\nThe second slot of this dual tuner may not support blind scan.")
 		elif self.SundtekScan:
 			warning_text = _("\nYou must use the power adapter.")
@@ -724,7 +737,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			except:
 				pass
 			return "vuplus_blindscan", ""
-		if getBrandOEM() == 'vuplus' and not self.SundtekScan:
+		if BRAND == 'vuplus' and not self.SundtekScan:
 			self.binName, nimName = GetCommand(self.scan_nims.value)
 
 			self.makeNimSocket(nimName)
@@ -909,40 +922,40 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
-		elif getBrandOEM() in ('azbox', 'ceryon', 'amiko', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or getBoxType().startswith('sf8008') or getMachineBuild() in ('dags72604', 'dagsmv200', 'sfx6008', 'sx88v2'):
-			exe_filename = getBrandOEM() == 'azbox' and "avl_azbox_blindscan" or \
-							getBrandOEM() == 'amiko' and "amiko-blindscan" or \
-							getBrandOEM() == 'ceryon' and "ceryon_blindscan" or \
-							getBrandOEM() == 'clap' and "clap_blindscan" or \
-							getBrandOEM() == 'dinobot' and "dinobot-blindscan" or \
-							getBrandOEM() == 'gigablue' and "gigablue_blindscan" or \
-							getBrandOEM() in ('ini', 'home') and "ini_blindscan" or \
-							getBoxType().startswith('sf8008') and "octagon-blindscan" or \
-							getMachineBuild() == 'sfx6008' and "octagon-blindscan" or \
-							getMachineBuild() == 'sx88v2' and "octagon-blindscan" or \
-							getBrandOEM() == 'uclan' and "uclan-blindscan" or \
-							getBrandOEM() == 'qviart' and "qviart-blindscan" or \
-							getBrandOEM() == 'vuplus' and self.binName or \
-							getBrandOEM() == 'xtrend' and "avl_xtrend_blindscan" or \
-							getMachineBuild() == 'dags72604' and "dags_blindscan" or \
-							getMachineBuild() == 'dagsmv200' and "dags_blindscan"
+		elif BRAND in ('azbox', 'ceryon', 'amiko', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or MODEL.startswith('sf8008') or MACHINEBUILD in ('dags72604', 'dagsmv200', 'sfx6008', 'sx88v2'):
+			exe_filename = BRAND == 'azbox' and "avl_azbox_blindscan" or \
+							BRAND == 'amiko' and "amiko-blindscan" or \
+							BRAND == 'ceryon' and "ceryon_blindscan" or \
+							BRAND == 'clap' and "clap_blindscan" or \
+							BRAND == 'dinobot' and "dinobot-blindscan" or \
+							BRAND == 'gigablue' and "gigablue_blindscan" or \
+							BRAND in ('ini', 'home') and "ini_blindscan" or \
+							MODEL.startswith('sf8008') and "octagon-blindscan" or \
+							MACHINEBUILD == 'sfx6008' and "octagon-blindscan" or \
+							MACHINEBUILD == 'sx88v2' and "octagon-blindscan" or \
+							BRAND == 'uclan' and "uclan-blindscan" or \
+							BRAND == 'qviart' and "qviart-blindscan" or \
+							BRAND == 'vuplus' and self.binName or \
+							BRAND == 'xtrend' and "avl_xtrend_blindscan" or \
+							MACHINEBUILD == 'dags72604' and "dags_blindscan" or \
+							MACHINEBUILD == 'dagsmv200' and "dags_blindscan"
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
 				cmd = "%s %d %d %d %d %d %d %d %d" % (exe_filename, temp_start_int_freq, temp_end_int_freq, config.blindscan.start_symbol.value, config.blindscan.stop_symbol.value, tab_pol[pol], tab_hilow[band], self.feid, self.getNimSocket(self.feid))
-				if getBrandOEM() in ('ceryon', 'clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200', 'dags72604', 'dagsmv200', 'sfx6008', 'sx88v2'):
+				if BRAND in ('ceryon', 'clap', 'dinobot', 'uclan', 'amiko') or MODEL.startswith('sf8008') or MACHINEBUILD in ('gbmv200', 'dags72604', 'dagsmv200', 'sfx6008', 'sx88v2'):
 					cmd += " %d" % self.is_c_band_scan
-				if getBrandOEM() in ('clap', 'dinobot', 'uclan', 'amiko') or getBoxType().startswith('sf8008') or getMachineBuild() in ('gbmv200', 'dags72604', 'dagsmv200', 'sfx6008', 'sx88v2'):
+				if BRAND in ('clap', 'dinobot', 'uclan', 'amiko') or MODEL.startswith('sf8008') or MACHINEBUILD in ('gbmv200', 'dags72604', 'dagsmv200', 'sfx6008', 'sx88v2'):
 					cmd += " %d" % orb[0]
-				if getBrandOEM() in ('azbox',):
+				if BRAND in ('azbox',):
 					self.polsave = tab_pol[pol]  # Data returned by the binary is not good we must save polarisation
-				if getBrandOEM() in ('clap'):
+				if BRAND in ('clap'):
 					self.frontend and self.frontend.closeFrontend()
-				if getBrandOEM() in ('uclan', 'amiko') or getMachineBuild() in ('gbmv200'):  # or getBoxType().startswith('sf8008')
+				if BRAND in ('uclan', 'amiko') or MACHINEBUILD in ('gbmv200'):  # or MODEL.startswith('sf8008')
 					self.adjust_freq = False
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
-		elif getBrandOEM() == 'odin':
+		elif BRAND == 'odin':
 			exe_filename = "odin_blindscan"
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
@@ -950,7 +963,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
-		elif getBrandOEM() == 'xcore' or getBrandOEM() == 'edision':
+		elif BRAND == 'xcore' or BRAND == 'edision':
 			exe_filename = "blindscan"
 			exe_path = "/usr/bin/%s" % exe_filename
 			if os.path.exists(exe_path):
@@ -1138,7 +1151,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 						"CIRCULARLEFT": parm.Polarisation_CircularLeft,
 						"VERTICAL": parm.Polarisation_Vertical}
 					parm.orbital_position = self.orb_position
-					if getBrandOEM() == 'azbox':
+					if BRAND == 'azbox':
 						parm.polarisation = self.polsave
 					else:
 						parm.polarisation = pol.get(data[1], parm.Polarisation_Horizontal)
@@ -1394,8 +1407,8 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		xml = ['<?xml version="1.0" encoding="iso-8859-1"?>\n\n']
 		xml.append('<!--\n')
 		xml.append('	File created on %s\n' % (strftime("%A, %d of %B %Y, %H:%M:%S")))
-		xml.append('	using %s receiver running Enigma2 image, version %s,\n' % (getBoxType(), getImageVersion()))
-		xml.append('	build %s, with the blindscan plugin \n\n' % (getImageBuild()))
+		xml.append('	using %s receiver running Enigma2 image, version %s,\n' % (MODEL, IMGVER))
+		xml.append('	build %s, with the blindscan plugin \n\n' % (()))
 		xml.append('	Search parameters:\n')
 		xml.append('		%s\n' % (tuner))
 		xml.append('		Satellite: %s\n' % (self.sat_name))
@@ -1604,7 +1617,7 @@ def BlindscanMain(session, close=None, **kwargs):
 			have_Support_Blindscan = True
 	except:
 		pass
-	if have_Support_Blindscan or getBrandOEM() == 'dreambox':
+	if have_Support_Blindscan or BRAND == 'dreambox':
 		from . import dmmBlindScan
 		session.openWithCallback(boundFunction(BlindscanCallback, close), dmmBlindScan.DmmBlindscan)
 	else:

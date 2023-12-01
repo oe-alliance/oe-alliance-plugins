@@ -37,7 +37,6 @@ from Screens.ChannelSelection import service_types_tv
 from enigma import eServiceCenter, eServiceReference, eDVBDB, getDesktop
 from Components.ConfigList import ConfigListScreen
 from Components.config import config, ConfigSubsection, ConfigPassword, ConfigYesNo, ConfigPosition, ConfigInteger, getConfigListEntry, ConfigBoolean, ConfigText, ConfigSelection, configfile, NoSave
-from boxbranding import getImageDistro
 from Components.Sources.StaticText import StaticText
 from Components.PluginComponent import plugins
 

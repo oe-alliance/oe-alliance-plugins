@@ -5,7 +5,14 @@ from __future__ import absolute_import
 import os
 import re
 from . import _
-from boxbranding import getBoxType, getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+	MODEL = BoxInfo.getItem("machinebuild")
+except:
+	from boxbranding import getImageDistro, getBoxType
+	IMAGEDISTRO = getImageDistro()
+	MODEL = getBoxType()
 
 from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
@@ -659,7 +666,7 @@ def main(session, **kwargs):
 
 
 def mainInMenu(menuid, **kwargs):
-	if getImageDistro() in ('teamblue') and getBoxType() in ('gbipbox', 'gbx2'):
+	if IMAGEDISTRO in ('teamblue') and MODEL in ('gbipbox', 'gbx2'):
 		if menuid == "setup":
 			return [(_("Remote channel stream converter"), main, "streamconvert", 20)]
 		else:

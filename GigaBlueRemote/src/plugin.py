@@ -10,7 +10,18 @@ from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists
 from enigma import eTimer
-from boxbranding import getMachineBuild, getImageDistro, getBoxType
+
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+	MACHINEBUILD = BoxInfo.getItem("model")
+	MODEL = BoxInfo.getItem("machinebuild")
+except:
+	from boxbranding import getImageDistro, getMachineBuild, getBoxType
+	IMAGEDISTRO = getImageDistro()
+	MACHINEBUILD = getMachineBuild()
+	MODEL = getBoxType()
+
 
 config.plugins.remotecontrolcode = ConfigSubsection()
 config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="50af", choices=[("50af", _("Code 1")), ("51ae", _("Code 2"))])
@@ -30,7 +41,7 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getMachineBuild() in ("gb7252", "gb7356", "gb73625", "gb7362", "gb7358", "gbmv200"):
+		if MACHINEBUILD in ("gb7252", "gb7356", "gb73625", "gb7362", "gb7358", "gbmv200"):
 			return True
 		else:
 			return False
@@ -74,7 +85,7 @@ class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 			self.checkModelTimer.start(1000, True)
 
 	def invalidmodel(self):
-		self.session.openWithCallback(self.close, MessageBox, _("Sorry, but %s is not supported.") % getBoxType(), MessageBox.TYPE_ERROR)
+		self.session.openWithCallback(self.close, MessageBox, _("Sorry, but %s is not supported.") % MODEL, MessageBox.TYPE_ERROR)
 
 	def createSetup(self):
 		self.list = []
@@ -124,7 +135,7 @@ def main(session, **kwargs):
 
 
 def RemoteControlSetup(menuid, **kwargs):
-	if getImageDistro() in ("teamblue"):
+	if IMAGEDISTRO in ("teamblue"):
 		if menuid != "devices_menu":
 			return []
 	else:

@@ -10,13 +10,20 @@ from Screens.MessageBox import MessageBox
 from Components.Sources.StaticText import StaticText
 from Tools.Directories import fileExists
 from enigma import eTimer
-from boxbranding import getImageDistro, getBoxType
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+	MODEL = BoxInfo.getItem("machinebuild")
+except:
+	from boxbranding import getImageDistro, getBoxType
+	IMAGEDISTRO = getImageDistro()
+	MODEL = getBoxType()
 
 
 def getRcuDefaultType():
-	if getBoxType() in ["vuultimo4k"]:
+	if MODEL in ["vuultimo4k"]:
 		return "type5"
-	elif getBoxType() in ["vuuno4kse", "vuzero4k", "vuduo4k", "vuduo4kse"]:
+	elif MODEL in ["vuuno4kse", "vuzero4k", "vuduo4k", "vuduo4kse"]:
 		return "type6"
 	return "legacy"
 
@@ -24,7 +31,7 @@ def getRcuDefaultType():
 config.misc.remotecontrol_text_support = ConfigYesNo(default=True)
 
 config.plugins.remotecontrolcode = ConfigSubsection()
-if getBoxType() in ("vusolo", "vuduo"):
+if MODEL in ("vusolo", "vuduo"):
 	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="1", choices=[("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ")])
 else:
 	config.plugins.remotecontrolcode.systemcode = ConfigSelection(default="2", choices=[("1", "1 "), ("2", "2 "), ("3", "3 "), ("4", "4 ")])
@@ -45,7 +52,7 @@ class RemoteControlCodeInit:
 		return 0
 
 	def getModel(self):
-		if getBoxType() in ("vuuno", "vuultimo", "vusolo2", "vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuuno4kse", "vuzero4k", "vuultimo4k", "vuduo4k", "vuduo4kse"):
+		if MODEL in ("vuuno", "vuultimo", "vusolo2", "vuduo2", "vusolose", "vuzero", "vusolo4k", "vuuno4k", "vuuno4kse", "vuzero4k", "vuultimo4k", "vuduo4k", "vuduo4kse"):
 			return True
 		else:
 			return False
@@ -89,7 +96,7 @@ class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 			self.checkModelTimer.start(1000, True)
 
 	def invalidmodel(self):
-		self.session.openWithCallback(self.close, MessageBox, _("Sorry, but %s is not supported.") % getBoxType(), MessageBox.TYPE_ERROR)
+		self.session.openWithCallback(self.close, MessageBox, _("Sorry, but %s is not supported.") % MODEL, MessageBox.TYPE_ERROR)
 
 	def createSetup(self):
 		self.list = []
@@ -97,7 +104,7 @@ class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
 		self.rcsctype = getConfigListEntry(_("Remote Control System Code"), config.plugins.remotecontrolcode.systemcode)
 		self.list.append(self.rcuTypeEntry)
 		self.list.append(self.rcsctype)
-		if getImageDistro() in ("openvix", "openatv"):
+		if IMAGEDISTRO in ("openvix", "openatv"):
 			self.list.append(getConfigListEntry(_("Text support"), config.misc.remotecontrol_text_support))
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)

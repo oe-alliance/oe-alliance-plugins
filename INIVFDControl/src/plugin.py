@@ -13,7 +13,12 @@ from enigma import eServiceCenter, eTimer, eActionMap
 from Screens.InfoBar import InfoBar
 from time import localtime, time
 
-from boxbranding import getBoxType
+try:
+	from Components.SystemInfo import BoxInfo
+	BOX = BoxInfo.getItem("machinebuild")
+except:
+	from boxbranding import getBoxType
+	BOX = getBoxType()
 
 import Screens.Standby
 
@@ -299,7 +304,7 @@ def sessionstart(reason, **kwargs):
 
 
 def Plugins(**kwargs):
-		if getBoxType() in ('xpeedlx1', 'atemio6000', 'atemio6100', 'bwidowx', 'bwidowx2', 'mbhybrid', 'opticumtt'):
+		if BOX in ('xpeedlx1', 'atemio6000', 'atemio6100', 'bwidowx', 'bwidowx2', 'mbhybrid', 'opticumtt'):
 			return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
 				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]
 		else:

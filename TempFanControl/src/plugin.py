@@ -13,7 +13,14 @@ from Screens.Screen import Screen
 from Plugins.Plugin import PluginDescriptor
 from Components.FanControl import fancontrol
 
-from boxbranding import getBrandOEM, getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+	BRAND = BoxInfo.getItem("brand")
+except:
+	from boxbranding import getImageDistro, getBrandOEM
+	IMAGEDISTRO = getImageDistro()
+	BRAND = getBrandOEM()
 
 
 class TempFanControl(Screen, ConfigListScreen):
@@ -110,10 +117,10 @@ class TempFanControl(Screen, ConfigListScreen):
 		for count in range(8):
 			if count < tempcount:
 				id = templist[count]
-				if getBrandOEM() not in ('dags', 'vuplus'):
+				if BRAND not in ('dags', 'vuplus'):
 					self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
 					self["SensorTemp%d" % count] = SensorSource(sensorid=id)
-				elif getBrandOEM() in ('dags', 'vuplus') and id < 1:
+				elif BRAND in ('dags', 'vuplus') and id < 1:
 					self["SensorTempText%d" % count] = StaticText(sensors.getSensorName(id))
 					self["SensorTemp%d" % count] = SensorSource(sensorid=id)
 				else:
@@ -133,10 +140,10 @@ class TempFanControl(Screen, ConfigListScreen):
 
 		self.list = []
 		for count in range(fancontrol.getFanCount()):
-			if getBrandOEM() not in ('dags', 'vuplus'):
+			if BRAND not in ('dags', 'vuplus'):
 				self.list.append(getConfigListEntry(_("Fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt))
 			self.list.append(getConfigListEntry(_("Fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm))
-			if getBrandOEM() not in ('dags', 'vuplus'):
+			if BRAND not in ('dags', 'vuplus'):
 				self.list.append(getConfigListEntry(_("Standby fan %d voltage") % (count + 1), fancontrol.getConfig(count).vlt_standby))
 			self.list.append(getConfigListEntry(_("Standby fan %d PWM") % (count + 1), fancontrol.getConfig(count).pwm_standby))
 
@@ -156,20 +163,20 @@ class TempFanControl(Screen, ConfigListScreen):
 
 	def save(self):
 		for count in range(fancontrol.getFanCount()):
-			if getBrandOEM() not in ('dags', 'vuplus'):
+			if BRAND not in ('dags', 'vuplus'):
 				fancontrol.getConfig(count).vlt.save()
 			fancontrol.getConfig(count).pwm.save()
-			if getBrandOEM() not in ('dags', 'vuplus'):
+			if BRAND not in ('dags', 'vuplus'):
 				fancontrol.getConfig(count).vlt_standby.save()
 			fancontrol.getConfig(count).pwm_standby.save()
 		self.close()
 
 	def revert(self):
 		for count in range(fancontrol.getFanCount()):
-			if getBrandOEM() not in ('dags', 'vuplus'):
+			if BRAND not in ('dags', 'vuplus'):
 				fancontrol.getConfig(count).vlt.load()
 			fancontrol.getConfig(count).pwm.load()
-			if getBrandOEM() not in ('dags', 'vuplus'):
+			if BRAND not in ('dags', 'vuplus'):
 				fancontrol.getConfig(count).vlt_standby.load()
 			fancontrol.getConfig(count).pwm_standby.load()
 		self.close()
@@ -180,10 +187,10 @@ def main(session, **kwargs):
 
 
 def startMenu(menuid):
-	if getImageDistro() in ('openatv'):
+	if IMAGEDISTRO in ('openatv'):
 		if menuid != "extended":
 			return []
-	elif getImageDistro() in ('openhdf'):
+	elif IMAGEDISTRO in ('openhdf'):
 		if menuid != "devices_menu":
 			return []
 	else:

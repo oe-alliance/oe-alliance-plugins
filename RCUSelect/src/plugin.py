@@ -12,9 +12,15 @@ from Components.ActionMap import ActionMap
 from Components.Label import Label
 from Components.Button import Button
 from Tools.HardwareInfo import HardwareInfo
-from boxbranding import getImageDistro
 import os
 import os.path
+
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 
 class RCUSelect(Screen):
@@ -151,7 +157,7 @@ class RCUSelect(Screen):
 				if self.rcuold == "WeTek Play OpenElec RCU" or self.rcuv == "WeTek Play OpenElec RCU":
 					if self.rcuold != self.rcuv:
 						if self.rcuv == 'WeTek Play OpenElec RCU':
-							if getImageDistro() == "openspa":
+							if IMAGEDISTRO == "openspa":
 								os.system("cp -f /usr/lib/enigma2/python/Plugins/Extensions/RCUSelect/conf/keymap_OpenELEC.xml /usr/share/enigma2/keymap.xml &")
 							else:
 								os.system("cp -f /usr/lib/enigma2/python/Plugins/Extensions/RCUSelect/conf/keymap.OE.xml /usr/share/enigma2/keymap.xml &")

@@ -42,7 +42,13 @@ from Screens.MessageBox import MessageBox
 from Screens.InfoBarGenerics import InfoBarNotifications
 
 from enigma import eTimer, eServiceReference, iPlayableService, fbClass, eRCInput, eConsoleAppContainer
-from boxbranding import getBrandOEM
+
+try:
+	from Components.SystemInfo import BoxInfo
+	BRAND = BoxInfo.getItem("brand")
+except:
+	from boxbranding import getBrandOEM
+	BRAND = getBrandOEM()
 
 import six
 from six.moves.http_client import HTTPConnection, CannotSendRequest, BadStatusLine, HTTPException
@@ -51,9 +57,9 @@ from six.moves.http_client import HTTPConnection, CannotSendRequest, BadStatusLi
 HTTPConnection.debuglevel = 1
 
 model_rc = "rc_wb_desc.png"
-if getBrandOEM() == 'gigablue':
+if BRAND == 'gigablue':
 	model_rc = "rc_wb_desc_gb.png"
-elif getBrandOEM() == 'ini':
+elif BRAND == 'ini':
 	model_rc = "rc_wb_desc_hdx.png"
 
 

@@ -14,7 +14,12 @@ from Screens.InfoBar import InfoBar
 import Screens.Standby
 from time import localtime, time
 
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 import Screens.Standby
 

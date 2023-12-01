@@ -46,7 +46,13 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Screens.InfoBar import InfoBar
 from time import localtime, time
 
-from boxbranding import getBoxType
+try:
+	from Components.SystemInfo import BoxInfo
+	MODEL = BoxInfo.getItem("machinebuild")
+except:
+	from boxbranding import getBoxType
+	MODEL = getBoxType()
+
 
 import Screens.Standby
 import subprocess
@@ -372,7 +378,7 @@ def sessionstart(reason, **kwargs):
 
 
 def Plugins(**kwargs):
-	if getBoxType() in ('sf8'):
+	if MODEL in ('sf8'):
 	 	return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
 	 		PluginDescriptor(name="LED Display Setup", description=_("Change LED display settings"), where=PluginDescriptor.WHERE_MENU, fnc=main)]
 	else:

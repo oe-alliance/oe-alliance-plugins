@@ -16,7 +16,12 @@ from time import localtime, time
 import Components.RecordingConfig
 from Tools.HardwareInfo import HardwareInfo
 
-from boxbranding import getImageDistro
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+except:
+	from boxbranding import getImageDistro
+	IMAGEDISTRO = getImageDistro()
 
 import Screens.Standby
 
@@ -335,16 +340,16 @@ class VFD_INI:
 
 
 def main(menuid):
-		if getImageDistro() in ("openatv", "openvix", "openeight", "openhdf"):
-			if menuid == "display":
-				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
-			else:
-				return []
+	if IMAGEDISTRO in ("openatv", "openvix", "openeight", "openhdf"):
+		if menuid == "display":
+			return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 		else:
-			if menuid != "system":
-				return []
-			else:
-				return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
+			return []
+	else:
+		if menuid != "system":
+			return []
+		else:
+			return [(_("LED Display Setup"), startVFD, "VFD_INI", None)]
 
 
 def startVFD(session, **kwargs):

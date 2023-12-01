@@ -15,7 +15,12 @@ from Screens.InfoBar import InfoBar
 from time import localtime, time
 import Components.RecordingConfig
 
-from boxbranding import getBoxType
+try:
+	from Components.SystemInfo import BoxInfo
+	MODEL = BoxInfo.getItem("machinebuild")
+except:
+	from boxbranding import getBoxType
+	MODEL = getBoxType()
 
 import Screens.Standby
 import NavigationInstance
@@ -416,7 +421,7 @@ def sessionstart(reason, **kwargs):
 
 
 def Plugins(**kwargs):
-		if getBoxType() in ('amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'amikomini'):
+		if MODEL in ('amiko8900', 'sognorevolution', 'arguspingulux', 'arguspinguluxmini', 'sparkreloaded', 'sabsolo', 'sparklx', 'gis8120', 'amikomini'):
 			return [PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART, PluginDescriptor.WHERE_SESSIONSTART], fnc=sessionstart),
 				PluginDescriptor(name="LED Display Setup", description="Change VFD display settings", where=PluginDescriptor.WHERE_MENU, fnc=main)]
 		else:
