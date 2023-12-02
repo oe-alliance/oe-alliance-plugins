@@ -171,7 +171,7 @@ elif getImageArch() in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r15"
+Version = "V5.0-r16"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -3106,9 +3106,9 @@ def writeHelligkeit(hell, night, STOP):
 	if h3 == 0:
 		R += "3"
 	AktNight = night
-	if AktHelligkeit == [h1, h2, h3] + [L4LElist.getBrightness(0, False) and OSDtimer >= 0]:
+	if AktHelligkeit == [h1, h2, h3] + L4LElist.getBrightness(0, False) and OSDtimer >= 0:
 		return R
-	AktHelligkeit = "%s %s" % ([h1, h2, h3], L4LElist.getBrightness(0, False))
+	AktHelligkeit = [h1, h2, h3] + L4LElist.getBrightness(0, False)
 	L4LElist.resetBrightness([h1, h2, h3])
 	L4log("write Bright", AktHelligkeit)
 	if SamsungDevice is not None and LCD4linux.LCDType1.value[0] == "1":
