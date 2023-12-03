@@ -3,6 +3,7 @@
 # by joergm6 @ IHAD
 # for documentation look at IHAD Support Thread
 
+from __future__ import print_function
 from os import popen
 from os.path import isfile, exists
 
@@ -53,7 +54,7 @@ class L4Lelement:
 	def web(self, EX):
 		try:
 			exec("self.add('%s)" % EX.replace(",", "',", 1))
-		except:
+		except Exception:
 			print("[LCD4linuxE] Error: L4L Web-Elements")
 
 	def getResolution(self, LCD):
@@ -109,7 +110,7 @@ class L4Lelement:
 		L4Lelement.Hold = Hold
 		L4Lelement.Refresh = True
 
-	def resetBrightness(self, AKT=[]):
+	def resetBrightness(self, AKT=""):
 		if len(AKT) == 3:
 			L4Lelement.BrightAkt = AKT
 		else:
@@ -122,10 +123,10 @@ class L4Lelement:
 		L4Lelement.Refresh = True
 
 	def getBrightness(self, LCD=0, ORG=True):
-		if LCD > 0 and LCD < 4:
-			return L4Lelement.Bright[LCD - 1] if ORG == False else L4Lelement.BrightAkt[LCD - 1]
+		if int(LCD) > 0 and int(LCD) < 4:
+			return L4Lelement.Bright[int(LCD) - 1] if ORG == False else L4Lelement.BrightAkt[int(LCD) - 1]
 		else:
-			return L4Lelement.Bright[0] if ORG == False else L4Lelement.BrightAkt[0]
+			return L4Lelement.Bright if ORG == False else L4Lelement.BrightAkt
 
 	def getLcd(self):
 		return L4Lelement.LCD
@@ -146,7 +147,7 @@ def getstatusoutput(cmd):
 			sts = 0
 		if text[-1:] == '\n':
 			text = text[:-1]
-	except:
+	except Exception:
 		sts = 1
 		text = "- -"
 		print("[LCD4linux] Error on os-call")
@@ -173,6 +174,6 @@ def L4LVtest(VV):
 			f = open(L4Linfo % (O, P))
 			OO = f.readline().strip().split()[1].startswith(VV[1:])
 			f.close()
-		except:
+		except Exception:
 			pass
 	return OO
