@@ -277,16 +277,16 @@ class SEG:
 
 
 def main(menuid):
-		if getImageDistro() in ("openatv", "openhdf", "openvix"):
-			if menuid == "display":
-				return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
-			else:
-				return []
+	if IMAGEDISTRO in ("openatv", "openhdf", "openvix"):
+		if menuid == "display":
+			return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
 		else:
-			if menuid != "system":
-				return []
-			else:
-				return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
+			return []
+	else:
+		if menuid != "system":
+			return []
+		else:
+			return [(_("LED Display Setup"), startSEG, "VFD_INI", None)]
 
 
 def startSEG(session, **kwargs):
