@@ -41,13 +41,15 @@ try:
 	MACHINEBUILD = BoxInfo.getItem("model")
 	MODEL = BoxInfo.getItem("machinebuild")
 	IMGVER = BoxInfo.getItem("imageversion")
+	IMGBUILD = BoxInfo.getItem("imagebuild")
 except:
-	from boxbranding import getImageDistro, getBrandOEM, getMachineBuild, getBoxType, getImageVersion
+	from boxbranding import getImageDistro, getImageBuild, getBrandOEM, getMachineBuild, getBoxType, getImageVersion
 	IMAGEDISTRO = getImageDistro()
 	BRAND = getBrandOEM()
 	MACHINEBUILD = getMachineBuild()
 	MODEL = getBoxType()
 	IMGVER = getImageVersion()
+	IMGBUILD = getImageBuild()
 
 
 def root2gold(root):
@@ -1408,7 +1410,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		xml.append('<!--\n')
 		xml.append('	File created on %s\n' % (strftime("%A, %d of %B %Y, %H:%M:%S")))
 		xml.append('	using %s receiver running Enigma2 image, version %s,\n' % (MODEL, IMGVER))
-		xml.append('	build %s, with the blindscan plugin \n\n' % (()))
+		xml.append('	build %s, with the blindscan plugin \n\n' % (IMGBUILD))
 		xml.append('	Search parameters:\n')
 		xml.append('		%s\n' % (tuner))
 		xml.append('		Satellite: %s\n' % (self.sat_name))
