@@ -68,7 +68,6 @@ from xml.dom.minidom import parseString
 from xml.etree.cElementTree import parse
 
 # ENIGMA IMPORTS
-from boxbranding import getImageDistro, getBoxType, getImageArch
 from enigma import eActionMap, iServiceInformation, iFrontendInformation, eDVBResourceManager, eDVBVolumecontrol, eTimer
 from enigma import eEPGCache, eServiceReference, eServiceCenter, getDesktop, getEnigmaVersionString, eEnv, ePicLoad, iPlayableService
 from Components.ActionMap import ActionMap
@@ -97,6 +96,19 @@ from Screens.Screen import Screen
 from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_FONTS, SCOPE_LIBDIR, SCOPE_SYSETC, resolveFilename
+
+
+try:
+	from Components.SystemInfo import BoxInfo
+	IMAGEDISTRO = BoxInfo.getItem("distro")
+	MODEL = BoxInfo.getItem("machinebuild")
+	ARCH = BoxInfo.getItem("architecture")
+except:
+	from boxbranding import getImageDistro, getBoxType, getImageArch
+	IMAGEDISTRO = getImageDistro()
+	MODEL = getBoxType()
+	ARCH = getImageArch()
+
 
 # PLUGIN IMPORTS
 from . import Photoframe, dpf, _  # for localized messages
@@ -167,7 +179,7 @@ USBok = False
 if find_library("usb-0.1") is not None or find_library("usb-1.0") is not None:
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-elif getImageArch() in ("aarch64"):
+elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
@@ -2534,7 +2546,7 @@ def L4LoadNewConfig(cfg):
 	if isfile(LCD4default):
 		LCD4linux.loadFromFile(LCD4default)
 	L4log("Config-Load", cfg)
-	if getBoxType() == 'vuduo2':  # due to 2 displays, LCD4linux is integrated in this boximage
+	if MODEL == 'vuduo2':  # due to 2 displays, LCD4linux is integrated in this boximage
 		LCD4linux.loadFromFile("%sdefault.vuduo2" % LCD4data)
 	L4log("Config-Load for 'Vu+ duo²'", cfg)
 	LCD4linux.loadFromFile(cfg)
@@ -15526,7 +15538,7 @@ def autostart(reason, **kwargs):
 
 
 def setup(menuid, **kwargs):
-	if getImageDistro() in ("openvix", "openatv", "egami", "openhdf", "openbh", "openspa", "opendroid"):
+	if IMAGEDISTRO in ("openvix", "openatv", "egami", "openhdf", "openbh", "openspa", "opendroid"):
 		if menuid == "display" and SystemInfo["Display"]:
 			return [("LCD4Linux", main, "lcd4linux", None)]
 		elif menuid == "system" and not SystemInfo["Display"]:
