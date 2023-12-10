@@ -203,6 +203,7 @@ class StreamingChannelFromServerScreen(Screen):
 		Screen.setTitle(self, _("Select bouquets to convert"))
 		self.session = session
 		self.workList = []
+		self.whitelist = []
 		self.readIndex = 0
 		self.working = False
 		self.hasFiles = False
@@ -307,6 +308,7 @@ class StreamingChannelFromServerScreen(Screen):
 		for listindex in range(len(list)):
 			self.workList.append(list[listindex])
 		self.workList.append('lamedb')
+		self.workList.append('whitelist_streamrelay')
 		self.download(self.workList[0]).addCallback(self.fetchUserBouquetsFinished).addErrback(self.fetchUserBouquetsFailed)
 
 	def fetchUserBouquetsFailed(self, string):
@@ -365,7 +367,7 @@ class StreamingChannelFromServerScreen(Screen):
 	def convertBouquets(self):
 		self.readIndex = 0
 		while True:
-			if 'lamedb' not in self.workList[self.readIndex]:
+			if 'lamedb' not in self.workList[self.readIndex] and 'whitelist_streamrelay' not in self.workList[self.readIndex]:
 				filename = DIR_TMP + self.workList[self.readIndex]
 				fp = open(DIR_ENIGMA2 + self.workList[self.readIndex], 'w')
 				try:
@@ -403,7 +405,12 @@ class StreamingChannelFromServerScreen(Screen):
 							else:
 								tag = tmp[1][1:-1]
 								service_ref = ServiceReference(tag)
-							out = '#SERVICE ' + tag + ':' + quote('http://' + self.getRemoteAdress() + ':8001/' + tag) + ':' + service_ref.getServiceName() + '\n'
+
+							if tag + ':' in self.whitelist:
+								out = '#SERVICE ' + tag + ':' + quote('http://' + self.getRemoteAdress() + ':17999/' + tag) + ':' + service_ref.getServiceName() + '\n'
+							else:
+								out = '#SERVICE ' + tag + ':' + quote('http://' + self.getRemoteAdress() + ':8001/' + tag) + ':' + service_ref.getServiceName() + '\n'
+
 						else:
 							out = line
 						fp.write(out)
@@ -520,6 +527,11 @@ class StreamingChannelFromServerScreen(Screen):
 			self.copyFile(DIR_TMP + 'lamedb', DIR_TMP + 'tmp_lamedb')
 		tv = False
 		radio = False
+		# read whitelist
+		with open(DIR_TMP + 'whitelist_streamrelay') as fd:
+			lines = fd.readlines()
+			self.whitelist = [l.strip() for l in lines]
+
 		for item in self.workList:
 			if '.tv' in item:
 				tv = True
@@ -536,6 +548,7 @@ class StreamingChannelFromServerScreen(Screen):
 			self.convertBouquets()
 			self.removeFiles(DIR_TMP, "tmp_")
 			self.removeFiles(DIR_TMP, "lamedb")
+			self.removeFiles(DIR_TMP, "whitelist_streamrelay")
 			db = eDVBDB.getInstance()
 			db.reloadServicelist()
 			db.reloadBouquets()
