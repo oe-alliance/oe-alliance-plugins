@@ -48,6 +48,10 @@
 	<screen name="SimpleSummary" position="fill" id="3">
 		<panel name="SummaryTemplate" />
 	</screen>
+<!--ScreenSummary-->
+	<screen name="ScreenSummary" position="fill" id="3">
+		<panel name="SummaryTemplate" />
+	</screen>
 <!--ChannelSelectionRadio_summary-->
 	<screen name="ChannelSelectionRadio_summary" position="fill" id="3">
 		<panel name="SummaryTemplate" />
