@@ -7,6 +7,7 @@ from Components.ActionMap import ActionMap
 # PLUGIN IMPORTS
 from . import printToConsole
 
+
 class JobProgressView(Screen):
 	skin = '''<screen name="JobProgressView" position="390,178" size="500,210" zPosition="1" title="Job Progress" backgroundColor="#1A0F0F0F">\n
 				<eLabel name="new eLabel" position="0,0" zPosition="-2" size="500,210" backgroundColor="#20000000" transparent="0" />\n
