@@ -528,9 +528,12 @@ class StreamingChannelFromServerScreen(Screen):
 		tv = False
 		radio = False
 		# read whitelist
-		with open(DIR_TMP + 'whitelist_streamrelay') as fd:
-			lines = fd.readlines()
-			self.whitelist = [l.strip() for l in lines]
+		try:
+			with open(DIR_TMP + 'whitelist_streamrelay') as fd:
+				lines = fd.readlines()
+				self.whitelist = [l.strip() for l in lines]
+		except OSError:
+			pass
 
 		for item in self.workList:
 			if '.tv' in item:
