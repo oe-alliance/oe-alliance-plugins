@@ -19,12 +19,14 @@ class download:
 		link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '').encode('utf-8')
 		try:
 			response = get(link)
+			content = response.content
 			response.raise_for_status()
 			with open(file, "wb") as f:
-				f.write(response.content)
+				f.write(content)
 			success(file)
 		except exceptions.RequestException as err:
 			if fail is not None:
+				printToConsole("Error in module 'downloadPage': %s" % err)
 				fail(err)
 
 
