@@ -223,7 +223,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 			return
 		bgimagepath = self.getBackgroundImagePath()
 		if bgimagepath and self.getCurrentBackgroundList() is not None and isfile(bgimagepath) is False:
-			self.session.open(MessageBox, _('Background Image not downloaded yet, please wait some seconds and try again.'), type=MessageBox.TYPE_INFO)
+			self.session.open(MessageBox, _('Background Image not downloaded yet, please wait some seconds and try again.'), type=MessageBox.TYPE_INFO, timeout=10)
 			return
 		addEventListener(DOWNLOAD_ALL_FINISHED, self.__downloadAllFinished)
 		self.session.open(JobProgressView, 'Download Progress', msgBoxID='startDownload')
@@ -314,7 +314,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 			return False
 
 	def __showPathIsNotWriteableWarning(self, dirName):
-		self.session.open(MessageBox, _('The directory %s is not writable.\nMake sure you select a writable directory instead.') % dirName, MessageBox.TYPE_ERROR)
+		self.session.open(MessageBox, _('The directory %s is not writable.\nMake sure you select a writable directory instead.') % dirName, MessageBox.TYPE_ERROR, timeout=10)
 
 	def __selectionChanged(self):
 		cur = self['config'].getCurrent()
@@ -385,7 +385,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		self.session.current_dialog.close(True)
 
 	def showOptimizeFileSizeMessage(self, *args):
-		self.session.openWithCallback(self.__optimizeFileSizeWindowCallback, MessageBox, _('Optimize Picons file size?\n\nBe aware, this function is maybe very slow and reduces the quality!!'), MessageBox.TYPE_YESNO, default=False)
+		self.session.openWithCallback(self.__optimizeFileSizeWindowCallback, MessageBox, _('Optimize Picons file size?\n\nBe aware, this function is maybe very slow and reduces the quality!!'), MessageBox.TYPE_YESNO, default=False, timeout=10)
 
 	def __optimizeFileSizeWindowCallback(self, result):
 		if result:

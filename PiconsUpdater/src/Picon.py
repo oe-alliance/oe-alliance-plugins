@@ -1,15 +1,17 @@
-from os.path import isfile
 from _collections import deque
-from subprocess import call
-from threading import Thread
+from os.path import isfile
 from PIL import Image
-from .reflection import add_reflection
+from subprocess import call
+from twisted.internet.reactor import callInThread
+
 from Components.config import config
+
 from .BouquetParser import getChannelKey
 from .DiskUtils import getFiles, getCleanFileName
 from .EventDispatcher import dispatchEvent
 from .JobProgressView import JobProgressView
-from . import printToConsole, getPiconsPath, getTmpLocalPicon, _  # for localized messages
+from .reflection import add_reflection
+from .import printToConsole, getPiconsPath, getTmpLocalPicon, _  # for localized messages
 
 MERGE_PICONS_FINISHED = 'mergePiconsFinished'
 OPTIMIZE_PICONS_FINISHED = 'optimizePiconsFinished'
@@ -55,8 +57,7 @@ class MergePiconJob:
 				progress = int(100 * (float(self.mergePiconsCount) / float(self.mergePiconsTotal)))
 				self.session.current_dialog.setProgress(progress, _('Merge %d of %d Picons') % (self.mergePiconsCount, self.mergePiconsTotal))
 				mergeData = self.executionQueueList.popleft()
-				t = Thread(target=self.mergePicon, args=(mergeData.channelPicon, mergeData.targetPicon))
-				t.start()
+				callInThread(self.mergePicon, mergeData.channelPicon, mergeData.targetPicon)
 		except Exception as e:
 			self.__clearExecutionQueueList()
 			printToConsole('MergePicon execQueue exception:\n' + str(e))
@@ -80,13 +81,13 @@ class MergePiconJob:
 			background = Image.open(self.bgPath)
 		except Exception:
 			printToConsole("Error: Background '%s' is corrupted!" % self.bgPath)
-			return
+			self.__runFinished()
 
 		try:
 			picon = Image.open(channelPicon)
 		except Exception:
 			printToConsole("Error: Picon '%s' is corrupted!" % channelPicon)
-			return
+			self.__runFinished()
 
 		backgroundWidth, backgroundHeight = background.size
 		piconWidth, piconHeight = picon.size
@@ -103,7 +104,7 @@ class MergePiconJob:
 				background.paste(foreground, None, foreground)
 		except Exception as e:
 			printToConsole("Error: ChannelPicon: %s '%s'" % (str(e), channelPicon))
-			return
+			self.__runFinished()
 
 		if piconWidth != self.size[0] or piconHeight != self.size[1]:
 			background.thumbnail(self.size, Image.LANCZOS)
@@ -138,8 +139,7 @@ class OptimizePiconsFileSize:
 				progress = int(100 * (float(self.optimizePiconsCount) / float(self.optimizePiconsTotal)))
 				self.session.current_dialog.setProgress(progress, _('Optimize %d of %d Picons') % (self.optimizePiconsCount, self.optimizePiconsTotal))
 				self.execCommand = self.executionQueueList.popleft()
-				t = Thread(target=self.optimizePicon)
-				t.start()
+				callInThread(self.optimizePicon)
 		except Exception as e:
 			self.__clearExecutionQueueList()
 			printToConsole('OptimizePicons execQueue exception:\n' + str(e))
