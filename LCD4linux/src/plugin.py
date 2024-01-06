@@ -22,7 +22,6 @@
 from __future__ import print_function, absolute_import, division
 from base64 import b64encode
 from calendar import Calendar, mdays, weekday, weekheader, month_name
-from codecs import decode
 from colorsys import rgb_to_hls, hls_to_rgb
 from ctypes.util import find_library
 from datetime import datetime, timedelta, date
@@ -183,7 +182,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r16"
+Version = "V5.0-r17"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -9871,7 +9870,7 @@ class UpdateStatus(Screen):
 
 	def downloadMSNcallback(self, ConfigWWW, jsonData):
 		iconmap = {"d000": "32", "d100": "34", "d200": "30", "d210": "12", "d211": "5", "d212": "14", "d220": "11", "d221": "42",
-	     			"d222": "16", "d240": "4", "d300": "28", "d310": "11", "d311": "5", "d312": "14", "d320": "39", "d321": "5",
+		 			"d222": "16", "d240": "4", "d300": "28", "d310": "11", "d311": "5", "d312": "14", "d320": "39", "d321": "5",
 					"d322": "16", "d340": "4", "d400": "26", "d410": "9", "d411": "5", "d412": "14", "d420": "9", "d421": "5",
 					"d422": "16", "d430": "12", "d431": "5", "d432": "15", "d440": "4", "d500": "28", "d600": "20", "d603": "10",
 					"d605": "17", "d705": "17", "d900": "21", "d905": "17", "d907": "21", "n000": "31", "n100": "33", "n200": "29",
@@ -9911,7 +9910,7 @@ class UpdateStatus(Screen):
 			else:
 				self.WDay[ConfigWWW]["Wind"] = "%.1f m/s %s" % (current.get("windSpd", 0) / 3.6, getDirection(current.get("windDir", "na")))
 			self.WDay[ConfigWWW]["Cond"] = current.get("pvdrCap", "")
-			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(current.get("symbol", "")[:-1], "NA")  # reduce MSN-code by 'windy'-flag
+			self.WDay[ConfigWWW]["Icon"] = "%s.png" % iconmap.get(current.get("symbol", "")[:4], "NA")  # remove 'windy-flag' if present
 			self.WDay[ConfigWWW]["Feel"] = "%.0f" % current.get("feels", 0)
 			self.WDay[ConfigWWW]["Rain"] = "%.0f" % forecast[0].get("daily", {}).get("day", {}).get("precip", 0)
 			self.WWeek[ConfigWWW] = []
@@ -9920,7 +9919,7 @@ class UpdateStatus(Screen):
 				Low = "%.0f" % forecast[idx].get("daily", {}).get("tempLo", 0)
 				date = (currdate + timedelta(days=idx)).strftime("%Y-%m-%d")
 				Day = datetime(int(date[:4]), int(date[5:7]), int(date[8:])).strftime("%a")
-				Icon = "%s.png" % iconmap.get(forecast[idx].get("daily", {}).get("symbol", "")[:-1], "NA")  # reduce MSN-code by 'windy'-flag
+				Icon = "%s.png" % iconmap.get(forecast[idx].get("daily", {}).get("symbol", "")[:4], "NA")  # remove 'windy-flag' if present
 				Cond = forecast[idx].get("daily", {}).get("pvdrCap", "")
 				Regen = "%.0f" % forecast[idx].get("daily", {}).get("day", {}).get("precip", 0)
 				self.WWeek[ConfigWWW].append({"High": High, "Low": Low, "Day": Day, "Icon": Icon, "Cond": Cond, "Regen": Regen})
@@ -14208,7 +14207,7 @@ def LCD4linuxPIC(self, session):
 							if ConfigLayout in ["0", "2"]:
 								if datetime.now().day == day[0]:
 									self.draw[4].rectangle((PX1 - w1, POSY, PX1 + w1, POSY + h), fill=ConfigBackColor)
-								ShadowText(4, PX, POSY, Tag, font, ConfigColor if day[1] < 5 else LCD4linux.CalSaColor.value, ConfigShadow)
+								ShadowText(4, PX, POSY, Tag, font, ConfigColor if day[1] < 5 else LCD4linux.CalSaColor.value if day[1] == 5 else LCD4linux.CalSuColor.value, ConfigShadow)
 							if ConfigLayout in ["0"] and ICS.get(ICStag, None) is not None:
 								self.draw[4].rectangle((PX1 - w1, POSY, PX1 + w1, POSY + h), outline=CC[int(ICS[ICStag][0][2])])
 								if int(LCD4linux.CalLine.value) > 1:
@@ -14221,7 +14220,7 @@ def LCD4linuxPIC(self, session):
 									if int(LCD4linux.CalLine.value) > 1:
 										self.draw[4].rectangle((PX1 - w1, POSY + h, PX1 + w1, POSY + h), outline=ConfigBackColor)
 								else:
-									ShadowText(4, PX, POSY, Tag, font, ConfigColor if day[1] < 5 else LCD4linux.CalSaColor.value, ConfigShadow)
+									ShadowText(4, PX, POSY, Tag, font, ConfigColor if day[1] < 5 else LCD4linux.CalSaColor.value if day[1] == 5 else LCD4linux.CalSuColor.value, ConfigShadow)
 							if ConfigLayout in ["1", "2"] and ICS.get(ICStag, None) is not None:
 								self.draw[4].rectangle((PX1 - w1, POSY + h, PX1 + w1, POSY + h), outline=CC[int(ICS[ICStag][0][2])])
 								if int(LCD4linux.CalLine.value) > 1:
