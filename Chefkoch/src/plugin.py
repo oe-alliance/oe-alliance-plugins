@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+# Plugin still runs under Pyton 2 and Python 3
+
 # PYTHON IMPORTS
 from base64 import b64encode, b64decode
 from datetime import datetime
@@ -39,7 +41,7 @@ from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
 
 # GLOBALS
-RELEASE = 'V2.2'
+RELEASE = 'V2.3'
 LINESPERPAGE = 8
 PICFILE = '/tmp/chefkoch.jpg'
 MODULE_NAME = __name__.split(".")[-1]
@@ -109,10 +111,10 @@ class AllScreen(Screen):
 			try:
 				with open('/home/root/logs/chefkoch.log', 'a') as f:
 					f.write('%s %s %s\r\n' % (strftime('%H:%M:%S'), info, wert))
-			except IOError:
-				print('[Chefkoch] Logging-Error')
+			except IOError as err:
+				print("[Chefkoch] Error writing Logfile: %s" % str(err))
 		else:
-			print('[Chefkoch] %s %s' % (str(info), str(wert)))
+			print("[Chefkoch] %s %s" % (str(info), str(wert)))
 
 	def hideScreen(self):
 		global HIDEFLAG
@@ -153,9 +155,12 @@ class AllScreen(Screen):
 		except exceptions.RequestException as error:
 			self.downloadError(error)
 		else:
-			with open(PICFILE, 'wb') as f:
-				f.write(response.content)
-			self.showPic()
+			try:
+				with open(PICFILE, 'wb') as f:
+					f.write(response.content)
+					self.showPic()
+			except IOError as logerr:
+				self.CKlog("Error writing PICFILE: %s" % str(logerr))
 
 	def showPic(self):
 		picload = ePicLoad()
@@ -466,7 +471,7 @@ class CKview(AllScreen):
 	def getREZ(self, ident):  # hole den jeweiligen Rezeptdatensatz
 		content, resp = self.getAPIdata('recipes/%s' % ident)
 		if resp != 200:
-			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
 			return {}
 		else:
@@ -475,7 +480,7 @@ class CKview(AllScreen):
 	def getIMG(self, ident):  # hole die jeweilige Rezeptbilderliste
 		content, resp = self.getAPIdata('recipes/%s/images?&offset=0&limit=%s' % (ident, config.plugins.chefkoch.maxpictures.value))
 		if resp != 200:
-			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
 			return {}
 		else:
@@ -489,7 +494,7 @@ class CKview(AllScreen):
 	def getKOM(self, ident):  # hole die jeweilige Rezeptkommentarliste
 		content, resp = self.getAPIdata('recipes/%s/comments?&offset=0&limit=%s' % (ident, config.plugins.chefkoch.maxcomments.value))
 		if resp != 200:
-			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
 			return {}
 		else:
@@ -504,7 +509,7 @@ class CKview(AllScreen):
 			for i in range(max((limit) // 100, 1)):
 				content, resp = self.getAPIdata('recipes?query=%s&offset=%d&limit=%d&orderBy=3' % (self.query, i * 100, min(limit, 100)))  # 3= sort by 'rating'
 				if resp != 200:
-					self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+					self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 					self.close()
 					return []
 				result = loads(content)
@@ -582,7 +587,7 @@ class CKview(AllScreen):
 			else:
 				self.currItem = self['menu'].getSelectedIndex()
 				name = self.titellist[self.currItem]
-			self.session.openWithCallback(self.red_return, MessageBox, "\nRezept '%s' zu den Favoriten hinzufügen?" % name, MessageBox.TYPE_YESNO)
+			self.session.openWithCallback(self.red_return, MessageBox, "\nRezept '%s' zu den Favoriten hinzufügen?" % name, MessageBox.TYPE_YESNO, timeout=2, default=True)
 
 	def red_return(self, answer):
 		if answer is True:
@@ -604,7 +609,7 @@ class CKview(AllScreen):
 				mailto = [(i.strip(),) for i in mailto]
 				self.session.openWithCallback(self.green_return, ChoiceBox, title='Rezept an folgende E-Mail Adresse senden:', list=mailto)
 			else:
-				self.session.open(MessageBox, '\nDie E-Mail Funktion ist nicht aktiviert. Aktivieren Sie die E-Mail Funktion im Setup des Plugins.', MessageBox.TYPE_INFO, close_on_any_key=True)
+				self.session.open(MessageBox, '\nDie E-Mail Funktion ist nicht aktiviert. Aktivieren Sie die E-Mail Funktion im Setup des Plugins.', MessageBox.TYPE_INFO, timeout=5, close_on_any_key=True)
 		if self.current == 'menu' and self.sortname:
 			self.sort = (self.sort + 1) % len(self.sortname)
 			self.currItem = 0
@@ -616,7 +621,7 @@ class CKview(AllScreen):
 
 	def sendRezept(self, mailTo):
 		effort = ['keine', 'simpel', 'normal', 'pfiffig']
-		msgText = '<p>Linkadresse: <a href="%s%s">' % (self.rezept, self.currId)
+		msgText = '<p>Linkadresse: <a href="%s%s">%s%s</a></p>' % (self.rezept, self.currId, self.rezept, self.currId)
 		scoretext = '%1.1f (%s' % (self.REZ['rating']['rating'], "%s Bewertungen)" % self.REZ['rating']['numVotes']) if self.REZ and self.REZ['rating'] else '(ohne Bewertung)'
 		preptime = self.REZ['preparationTime'] if self.REZ else ""
 		cooktime = self.REZ['cookingTime'] if self.REZ else ""
@@ -632,9 +637,9 @@ class CKview(AllScreen):
 			scoretext += '\nGesamtzeit    : %s' % self.getTimeString(totaltime)
 		msgText += scoretext
 		recipetext = '\n\nRezept-Identnr.: %s' % self.currId
-		recipetext += '\nAufwand: %s' % effort[self.REZ['difficulty']] if self.REZ else ""
-		recipetext += '\nErstellername: %s' % self.formatUsername(self.REZ['owner']['username'], self.REZ['owner']['rank'], 22) if self.REZ else ""
-		recipetext += '\nErstelldatum: %s' % self.formatDatum(self.REZ['createdAt']) if self.REZ else ""
+		recipetext += '\nAufwand: %s' % (effort[self.REZ['difficulty']] if self.REZ else "")
+		recipetext += '\nErstellername : %s' % (self.formatUsername(self.REZ['owner']['username'], self.REZ['owner']['rank'], 22) if self.REZ else "")
+		recipetext += '\nErstelldatum: %s' % (self.formatDatum(self.REZ['createdAt']) if self.REZ else "")
 		if self.REZ and self.REZ['nutrition']:
 			kcalori = self.REZ['nutrition']['kCalories']
 			kcalori = str(kcalori) if kcalori else 'k.A.'
@@ -682,7 +687,7 @@ class CKview(AllScreen):
 		msgAlternative.attach(MIMEText(msgText, _subtype='plain', _charset='UTF-8'))
 		msgHeader = "'%s' gesendet vom Plugin 'Chefkoch.de'" % self.titel
 		msgText = ensure_str(msgText.replace('\n', '<br>').encode('ascii', 'xmlcharrefreplace'))
-		msgAlternative.attach(MIMEText('<b>%s</b><br><br><img src="cid:0"><br>%shtml' % (msgHeader, msgText)))
+		msgAlternative.attach(MIMEText('<b>%s</b><br><br><img src="cid:0"><br>%s' % (msgHeader, msgText), 'html'))
 		with open('/tmp/emailpic.jpg', 'rb') as img:
 			msgImage = MIMEImage(img.read(), _subtype="jpeg")
 		msgImage.add_header('Content-ID', '<0>')
@@ -694,13 +699,13 @@ class CKview(AllScreen):
 				server = SMTP(mailServer, mailPort)
 		except Exception as err:
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAngaben (mailServer oder mailPort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAngaben (mailServer oder mailPort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=5, close_on_any_key=True)
 			return
 		try:
 			server.login(mailLogin, mailPassword)
 		except SMTPResponseException as err:
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAnmeldedaten (Login oder Passwort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAnmeldedaten (Login oder Passwort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=5, close_on_any_key=True)
 			return
 		try:
 			server.sendmail(mailFrom, mailTo, msgRoot.as_string())
@@ -708,7 +713,7 @@ class CKview(AllScreen):
 			self.session.open(MessageBox, 'E-Mail erfolgreich gesendet an: %s' % mailTo, MessageBox.TYPE_INFO, close_on_any_key=True)
 		except SMTPResponseException as err:
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nMailadressen (Absender oder Empfänger) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nMailadressen (Absender oder Empfänger) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=5, close_on_any_key=True)
 
 	def nextPage(self):
 		if self.current == 'menu':
@@ -798,7 +803,7 @@ class CKview(AllScreen):
 			count = int(number)
 			if count > self.maxPage:
 				count = self.maxPage
-				self.session.open(MessageBox, '\nNur %s Seiten verfügbar. Gehe zu Seite %s.' % (str(count), str(count)), MessageBox.TYPE_INFO, close_on_any_key=True)
+				self.session.open(MessageBox, '\nNur %s Seiten verfügbar. Gehe zu Seite %s.' % (count, count), MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
 			self.currItem = (count - 1) * LINESPERPAGE
 			self['menu'].moveToIndex(self.currItem)
 			self.setPrevIcons(self.currItem)
@@ -930,15 +935,19 @@ class CKview(AllScreen):
 			self.downloadError(error)
 		else:
 			picFile = '/tmp/chefkoch%d.jpg' % i
-			with open(picFile, 'wb') as f:
-				f.write(response.content)
-			picload = ePicLoad()
-			picload.setPara(self['pic%d' % i].instance.size().width(), self['pic%d' % i].instance.size().height(), 1.0, 0, False, 1, "#00000000")
-			if picload.startDecode(picFile, 0, 0, False) == 0:
-				ptr = picload.getData()
-				if self.current == 'menu' and ptr is not None:
-					self['pic%d' % i].instance.setPixmap(ptr)
-					self['pic%d' % i].show()
+			try:
+				with open(picFile, 'wb') as f:
+					f.write(response.content)
+			except IOError as err:
+				print("[Chefkoch] Error writing picFile: %s" % str(err))
+			else:
+				picload = ePicLoad()
+				picload.setPara(self['pic%d' % i].instance.size().width(), self['pic%d' % i].instance.size().height(), 1.0, 0, False, 1, "#00000000")
+				if picload.startDecode(picFile, 0, 0, False) == 0:
+					ptr = picload.getData()
+					if self.current == 'menu' and ptr is not None:
+						self['pic%d' % i].instance.setPixmap(ptr)
+						self['pic%d' % i].show()
 
 	def zap(self):
 		servicelist = self.session.instantiateDialog(ChannelSelection)
@@ -970,7 +979,7 @@ class CKview(AllScreen):
 		if self.REZ and self.REZ['recipeVideoId']:
 			content, resp = self.getAPIdata('videos/%s' % self.REZ['recipeVideoId'])
 			if resp != 200:
-				self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+				self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 				self.close()
 				return
 			result = loads(content)
@@ -1105,7 +1114,7 @@ class CKpicshow(AllScreen):
 			username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 			self['picindex'].setText('Bild %d von %d\nvon %s' % (self.count + 1, self.maxPics + 1, username))
 		else:
-			self.session.open(MessageBox, '\nKein Foto vorhanden', MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.open(MessageBox, '\nKein Foto vorhanden', MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
 
 	def formatUsername(self, username, rank, trim=100):
 		return 'Unbekannt' if "unknown" in username else "%s (%s)" % (username, rank)[:trim]
@@ -1267,7 +1276,7 @@ class CKfavoriten(AllScreen):
 				name = ''
 			if name != '>>> Neue Suche <<<' and name != '':
 				text = "\nRezept '%s' aus den Favoriten entfernen?" if self.favmode else "\nsuche '%s' aus den letzten Suchbegriffen entfernen?"
-				self.session.openWithCallback(self.red_return, MessageBox, text % name, MessageBox.TYPE_YESNO)
+				self.session.openWithCallback(self.red_return, MessageBox, text % name, MessageBox.TYPE_YESNO, timeout=2, default=False)
 
 	def red_return(self, answer):
 		if answer is True:
@@ -1343,14 +1352,6 @@ class CKfavoriten(AllScreen):
 			with open(ALPHA, 'w') as f:
 				f.write('%i' % config.av.osd_alpha.value)
 		self.close()
-
-	def playVideo(self, answer):
-		if answer is True:
-			sref = eServiceReference(4097, 0, self.filename)
-			sref.setName(self.name)
-			self.session.openWithCallback(self.exit, MoviePlayer, sref)
-		else:
-			self.close()
 
 
 class ItemList(MenuList):
@@ -1451,7 +1452,7 @@ class CKmain(AllScreen):
 	def makeMainMenu(self):
 		content, resp = self.getAPIdata('recipes?limit=1')
 		if resp != 200:
-			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
 			return
 		self.setTitle('Hauptmenü')
@@ -1524,7 +1525,7 @@ class CKmain(AllScreen):
 	def makeVKATdb(self):  # hole alle verfügbaren Videokategorien
 		content, resp = self.getAPIdata('videos?&offset=0&limit=10000')
 		if resp != 200:
-			self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
 			return
 		result = loads(content)
@@ -1541,7 +1542,7 @@ class CKmain(AllScreen):
 		if not self.NKAT:
 			content, resp = self.getAPIdata('recipes/categories')
 			if resp != 200:
-				self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+				self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 				self.close()
 				return {}
 			self.NKAT = loads(content)
@@ -1581,7 +1582,7 @@ class CKmain(AllScreen):
 		if not self.MKAT:
 			content, resp = self.getAPIdata('magazine/categories')
 			if resp != 200:
-				self.session.openWithCallback(self.eject, MessageBox, '\nDer Chefkoch.de Server ist nicht erreichbar!', MessageBox.TYPE_INFO, close_on_any_key=True)
+				self.session.openWithCallback(self.eject, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 				self.close()
 				return
 			result = loads(content)
