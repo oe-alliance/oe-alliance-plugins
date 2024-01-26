@@ -24,6 +24,8 @@ def transCHANNEL(data):
 			r"prosieben.*?fun.*?": "pro7f",
 			r"prosieben.*?maxx.*?": "pro7m",
 			r"prosieben.*?": "pro7",
+			r"pro7.*?fun.*?": "pro7f",
+			r"pro7.*?maxx.*?": "pro7m",
 			r"sat.*?e.*?": "sat1e",
 			r"sat.*?g.*?": "sat1g",
 			r"sat.1.*?": "sat1",

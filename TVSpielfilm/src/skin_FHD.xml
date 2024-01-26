@@ -22,18 +22,20 @@
 	</screen>
 
 	<!-- TV Spielfilm_tvTipps -->
-	<screen name="TVSTipps" position="center-585,center+308" size="750,255" flags="wfNoBorder" title=" ">
-		<widget name="picture" position="8,3" size="379,249" alphatest="blend" zPosition="1" />
-		<widget name="label" position="397,80" size="342,30" font="{tvsfont};21" foregroundColor="#00000000" backgroundColor="green" halign="left" zPosition="3" />
-		<widget name="label2" position="397,110" size="300,87" font="{tvsfont};22" foregroundColor="blue" backgroundColor="#00ffffff" halign="left" zPosition="2" />
-		<widget name="label3" position="397,200" size="342,54" font="{tvsfont};21" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" halign="left" zPosition="2" />
-		<widget name="label4" position="397,2" size="100,36" font="{tvsfont};22" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
-		<widget name="label5" position="397,42" size="100,36" font="{tvsfont};18" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
-		<widget name="label6" position="210,205" size="150,36" foregroundColor="#00ffffff" backgroundColor="#00000000" font="{tvsfont};27" transparent="1" zPosition="2" />
-		<widget name="thumb" position="699,134" size="40,40" pixmap="{picpath}FHD/icons/rating-small1.png" alphatest="blend" zPosition="2" />
-		<widget name="1_zapup" pixmap="{picpath}FHD/buttons/button_1_zap_up.png" position="575,2" size="140,36" alphatest="blend" zPosition="0" />
-		<widget name="2_zapdown" pixmap="{picpath}FHD/buttons/button_2_zap_down.png" position="575,42" size="160,36" alphatest="blend" zPosition="0" />
-		<eLabel name="" position="697,110" size="42,87" backgroundColor="#00ffffff" zPosition="1" />
+	<screen name="TVSTipps" position="center-585,center+325" size="750,220" flags="wfNoBorder" title=" ">
+		<widget name="picture" position="0,0" size="400,220" alphatest="blend" zPosition="1" />
+		<widget name="label" position="400,100" size="342,30" font="{tvsfont};21" foregroundColor="#00000000" backgroundColor="green" halign="left" zPosition="1" />
+		<widget name="label2" position="400,130" size="300,88" font="{tvsfont};22" foregroundColor="blue" backgroundColor="#00ffffff" halign="left" zPosition="2" />
+		<eLabel name="label2a" position="700,130" size="45,88" backgroundColor="#00ffffff" zPosition="1" />
+		<widget name="label3" position="400,195" size="342,30" font="{tvsfont};18" foregroundColor="#00333333" backgroundColor="#00ffffff" transparent="1" halign="left" zPosition="2" />
+		<widget name="label4" position="400,2" size="150,46" font="{tvsfont};22" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
+		<widget name="label5" position="400,52" size="150,46" font="{tvsfont};18" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
+		<widget name="label6" position="210,215" size="150,36" foregroundColor="#00ffffff" backgroundColor="#00000000" font="{tvsfont};18" transparent="1" zPosition="2" />
+		<widget name="thumb" position="700,150" size="40,40" pixmap="{picpath}FHD/icons/rating-small1.png" alphatest="blend" zPosition="2" />
+		<widget name="1_zapup" pixmap="{picpath}FHD/buttons/button_1_zap_up.png" position="575,10" size="140,36" alphatest="blend" zPosition="0" />
+		<widget name="2_zapdown" pixmap="{picpath}FHD/buttons/button_2_zap_down.png" position="575,55" size="160,36" alphatest="blend" zPosition="0" />
+		<widget name="icontipp" pixmap="{picpath}FHD/icons/icon-tip.png" position="615,105" size="60,20" alphatest="blend" zPosition="2" />
+		<widget name="iconnew" pixmap="{picpath}FHD/icons/icon-new.png" position="680,105" size="60,20" alphatest="blend" zPosition="2" />
 	</screen>
 
 	<!-- TV Spielfilm_FullScreen -->
@@ -147,8 +149,8 @@
 		<widget name="piclabel2" position="567,1672" size="127,60" font="{tvsfont};21" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
 		<widget name="picon" position="15,199" size="102,60" alphatest="blend" zPosition="2" />
 		<widget name="playlogo" position="1431,622" size="90,90" pixmap="{picpath}FHD/icons/play.png" alphatest="blend" zPosition="2" />
-		<widget name="editorial" position="1012,330" size="915,30" font="{tvsfont};24" foregroundColor="#00ffffff" backgroundColor="#20000000" halign="left" valign="center" zPosition="0" />
-		<widget name="ranking" position="1012,360" size="915,36" font="{tvsfont};30" foregroundColor="#0092cbdf" backgroundColor="#20000000" halign="left" valign="center" zPosition="0" />
+		<widget name="editorial" position="1012,330" size="915,30" font="{tvsfont};24" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
+		<widget name="ranking" position="1012,360" size="915,36" font="{tvsfont};30" foregroundColor="#0092cbdf" backgroundColor="#00000000" halign="left" valign="center" zPosition="0" />
 		<widget name="textpage" position="15,420" size="975,585" font="{tvsfont};33" halign="left" zPosition="0" foregroundColor="#00ffffff" backgroundColor="#20000000" />
 		<!-- Color-Buttons TVProgrammView Start-Screen-->
 		<widget name="label2" position="37,1035" size="202,36" font="{tvsfont};27" foregroundColor="#00ffffff" backgroundColor="#00000000" halign="left" transparent="1" zPosition="1" />
