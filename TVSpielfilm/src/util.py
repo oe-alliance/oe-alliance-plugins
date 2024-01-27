@@ -80,7 +80,6 @@ class serviceDB():
 
 
 class BlinkingLabel(Label, BlinkingWidget):
-
 	def __init__(self, text=''):
 		Label.__init__(self, text=text)
 		BlinkingWidget.__init__(self)
