@@ -4849,8 +4849,6 @@ class TVSTipps(TVSAllScreen):
 		self['thumb'].hide()
 		self['icontipp'].hide()
 		self['iconnew'].hide()
-		self['1_zapup'].hide()
-		self['2_zapdown'].hide()
 		self['label'].hide()
 		self['label2'].hide()
 		self['label2a'].hide()
