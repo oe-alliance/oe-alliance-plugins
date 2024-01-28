@@ -282,6 +282,8 @@ class TVSAllScreen(Screen):
 
 	def checkPath(self):
 		try:
+			if exists(TEMPPATH):
+				rmtree(TEMPPATH)
 			if not exists(TEMPPATH):
 				makedirs(TEMPPATH)
 		except OSError as error:
@@ -4932,18 +4934,20 @@ class TVSTipps(TVSAllScreen):
 
 	def tPicDownload(self, link, idx):  # TVTipps-PicsDownload
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
+		filename = None
 		try:
 			response = get(link)
 			response.raise_for_status()
 			link = ensure_str(link)
 			if exists(TEMPPATH):
-				with open(join(TEMPPATH, link[link.rfind("/") + 1:]), 'wb') as f:
+				filename = join(TEMPPATH, link[link.rfind("/") + 1:])
+				with open(filename, 'wb') as f:
 					f.write(response.content)
-			if idx == 0:  # show very first picture immediately
-				showPic(self['picture'], self.pics[idx])
 		except exceptions.RequestException as error:
 			TVSlog("Downloaderror in module 'TVSTipps:idownload': %s" % link)
 			self.showDownloadError(error)
+		if not idx and filename:  # show very first picture immediately
+			showPic(self['picture'], filename)
 
 	def ok(self):
 		if self.ready and search(r'/tv-programm/sendung/', self.infolink):
