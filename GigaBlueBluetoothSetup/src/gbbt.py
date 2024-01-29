@@ -4,39 +4,7 @@
 # Do not make changes to this file unless you know what you are doing--modify
 # the SWIG interface file instead.
 
-from sys import version_info as _swig_python_version_info
-if _swig_python_version_info >= (2, 7, 0):
-    def swig_import_helper():
-        import importlib
-        pkg = __name__.rpartition('.')[0]
-        mname = '.'.join((pkg, '_gbbt')).lstrip('.')
-        try:
-            return importlib.import_module(mname)
-        except ImportError:
-            return importlib.import_module('_gbbt')
-    _gbbt = swig_import_helper()
-    del swig_import_helper
-elif _swig_python_version_info >= (2, 6, 0):
-    def swig_import_helper():
-        from os.path import dirname
-        import imp
-        fp = None
-        try:
-            fp, pathname, description = imp.find_module('_gbbt', [dirname(__file__)])
-        except ImportError:
-            import _gbbt
-            return _gbbt
-        try:
-            _mod = imp.load_module('_gbbt', fp, pathname, description)
-        finally:
-            if fp is not None:
-                fp.close()
-        return _mod
-    _gbbt = swig_import_helper()
-    del swig_import_helper
-else:
-    import _gbbt
-del _swig_python_version_info
+from . import _gbbt
 
 try:
     _swig_property = property
