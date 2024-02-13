@@ -1,0 +1,207 @@
+# ChannelsImporter
+# Copyright (C) 2024 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 14:48+0100\n"
+"PO-Revision-Date: 2024-02-13 16:33+0200\n"
+"Last-Translator: Orlandox\n"
+"Language-Team: Orlandox\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.2\n"
+
+msgid "%a %e %b  %-H:%M"
+msgstr "%a %e %b  %-H:%M"
+
+#, python-format
+msgid "%d/%d"
+msgstr "%d/%d"
+
+msgid "Channels importer"
+msgstr "Kanavien tuoja"
+
+msgid "ChannelsImporter"
+msgstr "Kanavien tuoja"
+
+msgid "Checking FTP connection to remote receiver"
+msgstr "Tarkistetaan FTP-yhteyttä etävastaanottimeen"
+
+msgid "Checking for alternatives..."
+msgstr "Etsitään vaihtoehtoja..."
+
+msgid "Connection to remote IP ok"
+msgstr "Yhteys etä-IP:hen ok"
+
+msgid "Could not connect to the remote IP"
+msgstr "Ei saatu yhteyttä etä-IP:hen"
+
+msgid "Daily"
+msgstr "Päivittäin"
+
+#, python-format
+msgid ""
+"Download epg.dat from remote receiver failed. Check file exists on remote receiver.\n"
+"%s"
+msgstr ""
+"Epg.dat-tiedoston lataaminen etävastaanottimesta epäonnistui. Tarkista, että etävastaanottimessa on epg.dat-tiedosto.\n"
+"%s"
+
+#, python-format
+msgid "Download from remote failed %s"
+msgstr "Lataus etävastaanottimesta epäonnistui %s"
+
+#, python-format
+msgid "Download settings from remote failed %s"
+msgstr "Asetusten lataaminen etävastaanottimesta epäonnistui %s"
+
+msgid "Downloading alternatives..."
+msgstr "Ladataan vaihtoehtoja..."
+
+msgid "Downloading bouquets..."
+msgstr "Ladataan kanavalistoja..."
+
+msgid "Downloading channel indexes..."
+msgstr "Ladataan kanavahakemistoja..."
+
+msgid "Enough Retries, delaying till next schedule."
+msgstr "Tarpeeksi uudelleenyrityksiä, viivästyy seuraavaan aikatauluun."
+
+msgid "Every 12 hours"
+msgstr "12 tunnin välein"
+
+msgid "Every 2 hours"
+msgstr "2 tunnin välein"
+
+msgid "Every 2 minutes (for testing)"
+msgstr "2 minuutin välein (testausta varten)"
+
+msgid "Every 3 hours"
+msgstr "3 tunnin välein"
+
+msgid "Every 5 minutes (for testing)"
+msgstr "5 minuutin välein (testausta varten)"
+
+msgid "Every 6 hours"
+msgstr "6 tunnin välein"
+
+msgid "Every hour"
+msgstr "Tunnin välein"
+
+msgid "Fetch channels from the server."
+msgstr "Hae kanavat palvelimelta."
+
+msgid "For importing bouquets from another receiver"
+msgstr "Kanavalistojen tuontiin toisesta vastaanottimesta"
+
+msgid "Force EPG save on remote receiver"
+msgstr "Pakota EPG:n tallennus etävastaanottimeen"
+
+msgid "Import"
+msgstr "Tuo"
+
+msgid "Loading epg.dat..."
+msgstr "Ladataan epg.dat..."
+
+msgid "Loading new channel list..."
+msgstr "Ladataan uutta kanavalistaa..."
+
+msgid "Removing current channel list..."
+msgstr "Poistetaan nykyistä kanavalistaa..."
+
+msgid "Searching for epg.dat"
+msgstr "Etsitään epd.dat"
+
+msgid "Starting importer"
+msgstr "Käynnistetään tuonti"
+
+msgid "Starting importer..."
+msgstr "Käynnistetään tuonti..."
+
+msgid "epg.dat not found"
+msgstr "epg.dat ei löytynyt"
+
+msgid "'yes' and remote fallback tuner will be automatically configured to stream from the remote receiver. 'no' and fallback will not be edited."
+msgstr "'Kyllä' ja etävastaanottimen viritin määritellään automaattisesti suoratoistoa varten. 'Ei' ja etävastaanottimen viritintä ei määritellä."
+
+msgid "Allows you to set a schedule to perform an import."
+msgstr "Voit asettaa aikataulun tuonnin suorittamiselle."
+
+msgid "Auto configure remote fallback tuner"
+msgstr "Määritä etävastaanottimen viritin automaattisesti"
+
+msgid "FTP Password"
+msgstr "FTP-salasana"
+
+msgid "FTP Port"
+msgstr "FTP-portti"
+
+msgid "FTP Username"
+msgstr "FTP-käyttäjänimi"
+
+msgid "FTP password of the remote receiver the channel list is being imported from."
+msgstr "Etävastaanottimen FTP-salasana, josta kanavalista tuodaan."
+
+msgid "FTP port of the remote receiver the channel list is being imported from."
+msgstr "Etävastaanottimen FTP-portti, josta kanavalista tuodaan."
+
+msgid "FTP username of the remote receiver the channel list is being imported from."
+msgstr "Etävastaanottimen FTP-käyttäjänimi, josta kanavalista tuodaan."
+
+msgid "IP address of the remote receiver the channel list is  being imported from."
+msgstr "Etävastaanottimen IP-osoite, josta kanavalista tuodaan."
+
+msgid "If 'yes' the importer will automatically import and load EPG data from the remote receiver if the file exists."
+msgstr "Jos 'Kyllä', tuoja tuo ja lataa automaattisesti EPG-tiedot etävastaanottimesta, jos tiedosto on olemassa."
+
+msgid "If 'yes' the importer will automatically run at startup or reboot."
+msgstr "Jos 'Kyllä', tuoja käynnistyy automaattisesti käynnistyksen tai uudelleenkäynnistyksen yhteydessä."
+
+msgid "Import EPG"
+msgstr "Tuo EPG"
+
+msgid "Passive mode"
+msgstr "Passiivinen tila"
+
+msgid "Push error messages to the screen. Switch on for debugging only."
+msgstr "Pukkaa virheilmoitukset näytölle. Kytke päälle vain virheenkorjausta varten."
+
+msgid "Remote receiver IP"
+msgstr "Etävastaanottimen IP"
+
+msgid "Repeat how often"
+msgstr "Kuinka usein toistetaan"
+
+msgid "Run at restart"
+msgstr "Suorita uudelleenkäynnistettäessä"
+
+msgid "Schedule import"
+msgstr "Aikatauluta tuonti"
+
+msgid "Set the repeat interval of the schedule."
+msgstr "Aseta aikataulun toistoväli."
+
+msgid "Set the time of day to perform the scan."
+msgstr "Aseta kellonaika skannauksen suorittamiseen."
+
+msgid "Should the FTP connection to the remote receiver be established in passive mode?"
+msgstr "Pitäisikö FTP-yhteys etävastaanottimeen muodostaa passiivisessa tilassa?"
+
+msgid "Show error messages"
+msgstr "Näytä virheilmoitukset"
+
+msgid "Show in extensions"
+msgstr "Näytä laajennuksissa"
+
+msgid "Time import should start"
+msgstr "Aika tuonnin aloittamiselle"
+
+msgid "When enabled, allows you start an import from the extensions list."
+msgstr "Kun tämä on käytössä, voit aloittaa tuonnin laajennusvalikosta."
