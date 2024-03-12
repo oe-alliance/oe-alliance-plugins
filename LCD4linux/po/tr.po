@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-27 17:58+0100\n"
-"PO-Revision-Date: 2023-02-27 18:10+0100\n"
+"PO-Revision-Date: 2024-03-12 18:23+0100\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: plugin.py:263
 msgid "Fri"
@@ -637,7 +637,7 @@ msgstr ""
 
 #: plugin.py:315
 msgid "Current Temperature (-C)"
-msgstr "şuanki sıcaklık (-C)"
+msgstr "Mevcut Sıcaklık (-C)"
 
 #: plugin.py:315 plugin.py:316
 msgid "Current"
@@ -645,7 +645,7 @@ msgstr ""
 
 #: plugin.py:316
 msgid "Current Temperature"
-msgstr "şuanki sıcaklık"
+msgstr "Mevcut Sıcaklık"
 
 #: plugin.py:317
 msgid "All"
@@ -1514,7 +1514,7 @@ msgstr "EPG"
 
 #: plugin.py:413
 msgid "Now/Next"
-msgstr "şimdiki/sonraki"
+msgstr "Şimdi/Önümüzdeki"
 
 #: plugin.py:427
 msgid "normal"
@@ -1832,15 +1832,15 @@ msgstr ""
 
 #: plugin.py:896 plugin.py:1387 plugin.py:1945
 msgid "Offline"
-msgstr "çevrimdışı"
+msgstr "Çevrimdışı"
 
 #: plugin.py:896 plugin.py:1387 plugin.py:1945
 msgid "Online"
-msgstr "çevrimiçi"
+msgstr "Çevrimiçi"
 
 #: plugin.py:896 plugin.py:1387 plugin.py:1945
 msgid "Online+Offline"
-msgstr "çevrimiçi+çevrimdışı"
+msgstr "Çevrimiçi+Çevrimdışı"
 
 #: plugin.py:940 plugin.py:1004 plugin.py:1424 plugin.py:1543 plugin.py:1894
 #: plugin.py:1982
@@ -2014,7 +2014,7 @@ msgstr ""
 
 #: plugin.py:5534
 msgid "Mode"
-msgstr "mod"
+msgstr "Mod"
 
 #: plugin.py:5544
 msgid "Cancel"
@@ -3536,7 +3536,7 @@ msgstr ""
 
 #: plugin.py:6418 plugin.py:7151 plugin.py:7600
 msgid "Show oscam.lcd"
-msgstr "oscam.lcd 'yi göster"
+msgstr "oscam.lcd'yi göster"
 
 #: plugin.py:6421 plugin.py:6440 plugin.py:6451 plugin.py:6462 plugin.py:6527
 #: plugin.py:7095 plugin.py:7106 plugin.py:7612 plugin.py:7623 plugin.py:7634
@@ -3546,7 +3546,7 @@ msgstr ""
 
 #: plugin.py:6428
 msgid "Show ecm.info"
-msgstr "ecm.info 'yu göster"
+msgstr "ecm.info adresini göster"
 
 #: plugin.py:6437 plugin.py:7092 plugin.py:7609
 msgid "Show Textfile"
@@ -3853,7 +3853,7 @@ msgstr ""
 
 #: plugin.py:8198
 msgid "Restart GUI now?"
-msgstr "şimdi sistemi yeniden başlat ?"
+msgstr "GUI'yi şimdi yeniden başlatalım mı?"
 
 #: plugin.py:8780
 msgid "Indoor"

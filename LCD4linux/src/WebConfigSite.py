@@ -20,7 +20,6 @@ from .plugin import *
 from . import _
 
 Py = resolveFilename(SCOPE_PLUGINS, "Extensions/LCD4linux/plugin.py")
-DPKG = False
 L1 = []
 L2 = []
 L3 = []
@@ -124,10 +123,7 @@ class LCD4linuxConfigweb(resource.Resource):
 
 	def __init__(self):
 		self.StatusTimer = eTimer()
-		if DPKG:
-			self.StatusTimer_conn = self.StatusTimer.timeout.connect(self.resetWeb)
-		else:
-			self.StatusTimer.callback.append(self.resetWeb)
+		self.StatusTimer.callback.append(self.resetWeb)
 		self.CurrentMode = ("-", "-")
 
 	def resetWeb(self):
@@ -379,7 +375,6 @@ class LCD4linuxConfigweb(resource.Resource):
 						obja = eval(a)
 						objb = eval(b)
 						objb.value = obja.value
-
 				elif ".Standby" in _a:
 					b = _a.replace(".Standby", ".")
 					if (" " + b) in list(zip(*L2))[2]:
@@ -479,7 +474,8 @@ class LCD4linuxConfigweb(resource.Resource):
 			if Cfritz:
 				rmFile(PICfritz)
 			if Cwetter:
-				resetWetter(None)
+#				resetWetter(None)  # action after changing weather parameters
+				pass
 			if Cpicon:
 				if len(LCD4linux.PiconCache.value) > 2:
 					rmFiles(join(LCD4linux.PiconCache.value, "*.png"))
@@ -559,18 +555,14 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<input type=\"image\" name=\"save\" value=\"klick\" src=\"/lcd4linux/data/WEBsave.png\" height=\"40\" title=\"%s\" class=\"style1\" >\n" % _l(_("Save Config"))
 		html += "</form>\n"
 		html += "<form method=\"post\"><font color=\"#FFFFFF\">%s</font>\n" % _l(_("Screen"))
-
 		html += "<input type=\"hidden\" name=\"cmd\" value=\"\">\n"
 		for i in range(1, 10):
 			html += "<input type=\"button\" value=\"%d\" style=\"width:15px; text-align:center; font-size:8pt%s\" onclick=\"this.form.cmd.value = 'Screen%d'; this.form.submit();\">\n" % (i, AktiveScreen(str(i)), i)
-
 		Aktiv = "checked" if getSaveEventListChanged() else ""
 		html += "<input type=\"hidden\" name=\"hold\" value=\"%s\">" % ("unchecked")
 		html += "<input type=\"checkbox\" title=\"%s\" name=\"hold\" value=\"%s\" onclick=\"this.form.cmd.value = 'hold'; this.form.submit();\" %s>" % (_l(_("stop Screencycle")), "checked", Aktiv)
-
 		html += "</form>\n"
 		html += "</td></tr></table>\n"
-
 		html += "<form method=\"get\">"
 		html += "<fieldset style=\"width:auto\" name=\"Mode1\">"
 		html += "<legend style=\"color: #FFCC00\">%s&nbsp;</legend>\n" % _l(_("Mode"))
@@ -583,7 +575,6 @@ class LCD4linuxConfigweb(resource.Resource):
 		if str(LCD4linux.Popup.value) != "0":
 			html += "<input id=\"r5\" name=\"Mode\" type=\"radio\" value=\"5\" %s onclick=\"this.form.submit();\"><label %s for=\"r5\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("5", "Popup-Text"))
 		html += "</fieldset></form>\n"
-
 		if Mode != "5":
 			if Mode == "1":
 				L = L1
@@ -646,9 +637,7 @@ class LCD4linuxConfigweb(resource.Resource):
 			for LL in L:
 				Conf = LL[2].strip()
 				ConfObj = eval(Conf)
-
 				if (Conf.startswith(Element) and (LL[3] == AktCode or AktCode == 0)) or (Element == "other" and LL[3] == 0):
-
 					if Mode in "2":
 						if "." in Conf:
 							b = Conf.replace(".", ".MP")
