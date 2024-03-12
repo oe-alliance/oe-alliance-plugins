@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-27 17:58+0100\n"
-"PO-Revision-Date: 2023-02-27 18:11+0100\n"
+"POT-Creation-Date: 2024-03-12 18:03+0100\n"
+"PO-Revision-Date: 2024-03-12 18:24+0100\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: 孤独之剑 <haotzyy1970@163.com>\n"
 "Language: zh_CN\n"
@@ -12,3832 +12,4065 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generated: TM2TURK by thawtes\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 "X-SourceCharset: UTF-8\n"
 
-#: plugin.py:263
-msgid "Fri"
-msgstr "周五"
-
-#: plugin.py:263
-msgid "Mon"
-msgstr "周一"
-
-#: plugin.py:263
-msgid "Sat"
-msgstr "周六"
-
-#: plugin.py:263
-msgid "Sun"
-msgstr "周日"
-
-#: plugin.py:263
-msgid "Thur"
-msgstr "周四"
-
-#: plugin.py:263
-msgid "Tue"
-msgstr "周二"
-
-#: plugin.py:263
-msgid "Wed"
-msgstr "周三"
-
-#: plugin.py:288
-msgid "black"
-msgstr "黑色"
-
-#: plugin.py:288
-msgid "white"
-msgstr "白色"
-
-#: plugin.py:289
-msgid "gray"
-msgstr "灰色"
-
-#: plugin.py:289
-msgid "silver"
-msgstr "银色"
-
-#: plugin.py:289
-msgid "slategray"
-msgstr "青灰色"
-
-#: plugin.py:290
-msgid "aquamarine"
-msgstr "藍綠色"
-
-#: plugin.py:291
-msgid "gold"
-msgstr "金色"
-
-#: plugin.py:291
-msgid "greenyellow"
-msgstr "黄绿色"
-
-#: plugin.py:291
-msgid "yellow"
-msgstr "黄色"
-
-#: plugin.py:292
-msgid "darkorange"
-msgstr "深橙色"
-
-#: plugin.py:292
-msgid "darkred"
-msgstr "深红"
-
-#: plugin.py:292
-msgid "indianred"
-msgstr "印度红"
-
-#: plugin.py:292
-msgid "orange"
-msgstr "橙色"
-
-#: plugin.py:292
-msgid "orangered"
-msgstr "橘红色"
-
-#: plugin.py:292
-msgid "red"
-msgstr "红色"
-
-#: plugin.py:292
-msgid "tomato"
-msgstr "番茄"
-
-#: plugin.py:293
-msgid "darkgreen"
-msgstr "深绿色"
-
-#: plugin.py:293
-msgid "green"
-msgstr "绿色"
-
-#: plugin.py:293
-msgid "lawngreen"
-msgstr "草坪绿"
-
-#: plugin.py:293
-msgid "lightgreen"
-msgstr "浅绿色"
-
-#: plugin.py:293
-msgid "lime"
-msgstr "幸福绿"
-
-#: plugin.py:294
-msgid "blue"
-msgstr "蓝色"
-
-#: plugin.py:294
-msgid "blueviolet"
-msgstr "紫罗兰色"
-
-#: plugin.py:294
-msgid "cadetblue"
-msgstr "灰蓝色"
-
-#: plugin.py:294
-msgid "cornflowerblue"
-msgstr "浅蓝色"
-
-#: plugin.py:294
-msgid "darkblue"
-msgstr "深蓝色"
-
-#: plugin.py:294
-msgid "indigo"
-msgstr "靛藍"
-
-#: plugin.py:294
-msgid "lightblue"
-msgstr "浅蓝"
-
-#: plugin.py:295
-msgid "cyan"
-msgstr "青色"
-
-#: plugin.py:295
-msgid "darkorchid"
-msgstr "深紫色"
-
-#: plugin.py:295
-msgid "deeppink"
-msgstr "深粉红色"
-
-#: plugin.py:295
-msgid "magenta"
-msgstr "紫紅色"
-
-#: plugin.py:295
-msgid "violet"
-msgstr "紫罗兰色"
-
-#: plugin.py:296
-msgid "brown"
-msgstr "棕色"
-
-#: plugin.py:296
-msgid "moccasin"
-msgstr "鹿皮黄色"
-
-#: plugin.py:296
-msgid "olive"
-msgstr "橄榄"
-
-#: plugin.py:296
-msgid "rosybrown"
-msgstr "玫瑰棕色"
-
-#: plugin.py:296
-msgid "sandybrown"
-msgstr "沙棕色"
-
-#: plugin.py:298
-msgid "Screen 1+2"
-msgstr "屏幕1 + 2"
-
-#: plugin.py:298
-msgid "Screen 1+2+3"
-msgstr "屏幕1 + 2 + 3"
-
-#: plugin.py:298
-msgid "Screen 1+2+3+4"
-msgstr "屏幕1 + 2 + 3 + 4"
-
-#: plugin.py:298
-msgid "Screen 1+2+4"
-msgstr "屏幕1 + 2 + 4"
-
-#: plugin.py:298
-msgid "Screen 1+3"
-msgstr "屏幕1 + 3"
-
-#: plugin.py:298
-msgid "Screen 1+3+4"
-msgstr "屏幕1 + 3 + 4"
-
-#: plugin.py:298
-msgid "Screen 1+3+5+7+9"
-msgstr "屏幕1 + 3 + 5 + 7 + 9"
-
-#: plugin.py:298
-msgid "Screen 1+4"
-msgstr "屏幕1 + 4"
-
-#: plugin.py:298
-msgid "Screen 2+3"
-msgstr "屏幕2 + 3"
-
-#: plugin.py:298
-msgid "Screen 2+3+4"
-msgstr "屏幕2 + 3 + 4"
-
-#: plugin.py:298
-msgid "Screen 2+4"
-msgstr "屏幕2 + 4"
-
-#: plugin.py:298
-msgid "Screen 2+4+6+8"
-msgstr "屏幕2 + 4 + 6 + 8"
-
-#: plugin.py:298
-msgid "Screen 3+4"
-msgstr "屏幕3 + 4"
-
-#: plugin.py:298
-msgid "Screen 5-8"
-msgstr "屏幕5-8"
-
-#: plugin.py:298
-msgid "Screen 5-9"
-msgstr "屏幕5-9"
-
-#: plugin.py:298 plugin.py:299
-msgid "Screen 1-5"
-msgstr "屏幕1-5"
-
-#: plugin.py:298 plugin.py:299
-msgid "Screen 1-6"
-msgstr "屏幕1-6"
-
-#: plugin.py:298 plugin.py:299
-msgid "Screen 1-7"
-msgstr "屏幕1-7"
-
-#: plugin.py:298 plugin.py:299
-msgid "Screen 1-8"
-msgstr "屏幕1-8"
-
-#: plugin.py:298 plugin.py:299
-msgid "Screen 1-9"
-msgstr "屏幕1-9"
-
-#: plugin.py:298 plugin.py:299 plugin.py:300
-msgid "Screen 1"
-msgstr "屏幕1"
-
-#: plugin.py:298 plugin.py:300
-msgid "Screen 2"
-msgstr "屏幕2"
-
-#: plugin.py:298 plugin.py:300
-msgid "Screen 3"
-msgstr "屏幕3"
-
-#: plugin.py:298 plugin.py:300
-msgid "Screen 4"
-msgstr "屏幕4"
-
-#: plugin.py:298 plugin.py:300
-msgid "Screen 5"
-msgstr "屏幕5"
-
-#: plugin.py:298 plugin.py:300
-msgid "Screen 6"
-msgstr "屏幕6"
-
-#: plugin.py:298 plugin.py:300
-msgid "Screen 7"
-msgstr "屏幕7"
-
-#: plugin.py:298 plugin.py:300
-msgid "Screen 8"
-msgstr "屏幕8"
-
-#: plugin.py:298 plugin.py:300
-msgid "Screen 9"
-msgstr "屏幕9"
-
-#: plugin.py:298 plugin.py:301 plugin.py:334 plugin.py:336 plugin.py:376
-#: plugin.py:385 plugin.py:386 plugin.py:400 plugin.py:459 plugin.py:482
-#: plugin.py:483 plugin.py:508 plugin.py:509 plugin.py:614 plugin.py:631
-#: plugin.py:640 plugin.py:654 plugin.py:663 plugin.py:673 plugin.py:745
-#: plugin.py:914 plugin.py:1050 plugin.py:1125 plugin.py:1133 plugin.py:1144
-#: plugin.py:1155 plugin.py:1165 plugin.py:1175 plugin.py:1185 plugin.py:1193
-#: plugin.py:1258 plugin.py:1266 plugin.py:1277 plugin.py:1405 plugin.py:1589
-#: plugin.py:1682 plugin.py:1693 plugin.py:1703 plugin.py:1713 plugin.py:1737
-#: plugin.py:1745 plugin.py:1759 plugin.py:1768 plugin.py:1778 plugin.py:1818
-#: plugin.py:1826 plugin.py:1838 plugin.py:1846 plugin.py:1857 plugin.py:1963
-#: plugin.py:2052 plugin.py:2124 plugin.py:2135 plugin.py:2146 plugin.py:2156
-#: plugin.py:2166 plugin.py:2176 plugin.py:2184 plugin.py:2242 plugin.py:2256
-#: plugin.py:2265 plugin.py:2275 plugin.py:2315 plugin.py:2323
-msgid "off"
-msgstr "关闭"
-
-#: plugin.py:299
-msgid "Screen 1-2"
-msgstr "屏幕1-2"
-
-#: plugin.py:299
-msgid "Screen 1-3"
-msgstr "屏幕1-3"
-
-#: plugin.py:299
-msgid "Screen 1-4"
-msgstr "屏幕1-4"
-
-#: plugin.py:301 plugin.py:1838
-msgid "on"
-msgstr "启用"
-
-#: plugin.py:302
-msgid "2h"
-msgstr "2小时"
-
-#: plugin.py:302
-msgid "3h"
-msgstr "3小时"
-
-#: plugin.py:302
-msgid "3min"
-msgstr "3分钟"
-
-#: plugin.py:302
-msgid "40s"
-msgstr "40s"
-
-#: plugin.py:302
-msgid "4min"
-msgstr "4分钟"
-
-#: plugin.py:302
-msgid "50s"
-msgstr "50s"
-
-#: plugin.py:302
-msgid "5h"
-msgstr "5小时"
-
-#: plugin.py:302
-msgid "5s"
-msgstr "5秒"
-
-#: plugin.py:302 plugin.py:466 plugin.py:471 plugin.py:476
-msgid "10s"
-msgstr "10秒"
-
-#: plugin.py:302 plugin.py:466 plugin.py:471 plugin.py:476
-msgid "15s"
-msgstr "15秒"
-
-#: plugin.py:302 plugin.py:466 plugin.py:471 plugin.py:476
-msgid "1min"
-msgstr "1分钟"
-
-#: plugin.py:302 plugin.py:466 plugin.py:471 plugin.py:476
-msgid "20s"
-msgstr "20s"
-
-#: plugin.py:302 plugin.py:466 plugin.py:471 plugin.py:476
-msgid "2min"
-msgstr "2分钟"
-
-#: plugin.py:302 plugin.py:466 plugin.py:471 plugin.py:476
-msgid "30s"
-msgstr "30秒"
-
-#: plugin.py:302 plugin.py:530
-msgid "10min"
-msgstr "10分钟"
-
-#: plugin.py:302 plugin.py:530
-msgid "5min"
-msgstr "5分钟"
-
-#: plugin.py:302 plugin.py:530 plugin.py:579
-msgid "20min"
-msgstr "20分钟"
-
-#: plugin.py:302 plugin.py:530 plugin.py:579 plugin.py:1196
-msgid "30min"
-msgstr "30分钟"
-
-#: plugin.py:302 plugin.py:530 plugin.py:579 plugin.py:1196
-msgid "60min"
-msgstr "60分钟"
-
-#: plugin.py:303
-msgid "LCD 1+2"
-msgstr "LCD 1+2"
-
-#: plugin.py:303
-msgid "LCD 1+2+3"
-msgstr "LCD 1+2+3"
-
-#: plugin.py:303
-msgid "LCD 1+3"
-msgstr "LCD 1+3"
-
-#: plugin.py:303
-msgid "LCD 2+3"
-msgstr "LCD 2+3"
-
-#: plugin.py:303 plugin.py:304
-msgid "LCD 1"
-msgstr "LCD 1"
-
-#: plugin.py:303 plugin.py:304
-msgid "LCD 2"
-msgstr "LCD 2"
-
-#: plugin.py:303 plugin.py:304
-msgid "LCD 3"
-msgstr "LCD 3"
-
-#: plugin.py:304
-msgid "LCD 1-3"
-msgstr "LCD 1-3"
-
-#: plugin.py:305
-msgid "Corby@Pearl 128x128"
-msgstr "Corby @珍珠128x128"
-
-#: plugin.py:305
-msgid "Pearl (or compatible LCD) 240x320"
-msgstr "珍珠（或相容的LCD）240x320"
-
-#: plugin.py:305
-msgid "Pearl (or compatible LCD) 320x240"
-msgstr "珍珠（或相容的LCD）320x240"
-
-#: plugin.py:305
-msgid "Pearl (or compatible LCD) 320x480"
-msgstr "珍珠（或相容的LCD）320x480"
-
-#: plugin.py:305
-msgid "Pearl (or compatible LCD) 480x320"
-msgstr "珍珠（或相容的LCD）480x320"
-
-#: plugin.py:306
-msgid "Samsung SPF-72H 800x480"
-msgstr "三星SPF-72H 800x480"
-
-#: plugin.py:306
-msgid "Samsung SPF-75H/76H 800x480"
-msgstr "三星SPF-75H / 76H 800x480"
-
-#: plugin.py:306
-msgid "Samsung SPF-83H 800x600"
-msgstr "三星SPF-83H 800x600"
-
-#: plugin.py:306
-msgid "Samsung SPF-87H 800x480"
-msgstr "三星SPF-87H 800x480"
-
-#: plugin.py:306
-msgid "Samsung SPF-87H old 800x480"
-msgstr "三星SPF-87H旧800x480"
-
-#: plugin.py:307
-msgid "Samsung SPF-105P 1024x600"
-msgstr "三星SPF-105P 1024x600"
-
-#: plugin.py:307
-msgid "Samsung SPF-107H 1024x600"
-msgstr "三星SPF-107H 1024x600"
-
-#: plugin.py:307
-msgid "Samsung SPF-107H old 1024x600"
-msgstr "三星SPF-107H旧的1024x600"
-
-#: plugin.py:307
-msgid "Samsung SPF-85H/86H 800x600"
-msgstr "三星SPF-85H / 86H 800x600"
-
-#: plugin.py:307
-msgid "Samsung SPF-85P/86P 800x600"
-msgstr "三星SPF-85P / 86P 800x600"
-
-#: plugin.py:308
-msgid "Samsung SPF-1000P 1024x600"
-msgstr "三星SPF-1000P 1024x600"
-
-#: plugin.py:308
-msgid "Samsung SPF-700T 800x600"
-msgstr "三星SPF-700T 800x600"
-
-#: plugin.py:308
-msgid "Samsung SPF-800P 800x480"
-msgstr "三星SPF-800P 800x480"
-
-#: plugin.py:309
-msgid "Internal TFT-LCD 400x240"
-msgstr "内置TFT-LCD 400x240"
-
-#: plugin.py:310
-msgid "Internal Box-Skin-LCD"
-msgstr "内盒式皮肤液晶显示器"
-
-#: plugin.py:311
-msgid "only Picture 1024x600"
-msgstr "仅图片1024x600"
-
-#: plugin.py:311
-msgid "only Picture 320x240"
-msgstr "仅图片320x240"
-
-#: plugin.py:311
-msgid "only Picture 800x480"
-msgstr "仅图片800x480"
-
-#: plugin.py:311
-msgid "only Picture 800x600"
-msgstr "仅图片800x600"
-
-#: plugin.py:311
-msgid "only Picture Custom Size"
-msgstr "仅图片自定义尺寸"
-
-#: plugin.py:311
-msgid "only Picture Custom Size 2"
-msgstr "仅图片自定义尺寸2"
-
-#: plugin.py:313
-msgid "Internal Vu+ Duo2 LCD 400x240"
-msgstr "内置Vu + Duo2 LCD 400x240"
-
-#: plugin.py:314
-msgid "128x32"
-msgstr "128x32"
-
-#: plugin.py:314
-msgid "128x64"
-msgstr "128x64"
-
-#: plugin.py:314
-msgid "132x64"
-msgstr "132x64"
-
-#: plugin.py:314
-msgid "220x176"
-msgstr "220x176"
-
-#: plugin.py:314
-msgid "255x64"
-msgstr "255x64"
-
-#: plugin.py:314
-msgid "400x240"
-msgstr "400x240"
-
-#: plugin.py:314
-msgid "480x320"
-msgstr "480x320"
-
-#: plugin.py:314
-msgid "720x405"
-msgstr "720x405"
-
-#: plugin.py:314
-msgid "800x480"
-msgstr "800x480"
-
-#: plugin.py:314
-msgid "96x64"
-msgstr "96x64"
-
-#: plugin.py:315
-msgid "2 Days 1 Line"
-msgstr "2天1行"
-
-#: plugin.py:315
-msgid "2 Days 2 Line"
-msgstr "2天2行"
-
-#: plugin.py:315
-msgid "4 Days 1 Line"
-msgstr "4天1行"
-
-#: plugin.py:315
-msgid "4 Days 2 Lines"
-msgstr "4天2行"
-
-#: plugin.py:315
-msgid "4 Days Vertical View"
-msgstr "4天垂直视图"
-
-#: plugin.py:315
-msgid "5 Days 1 Line"
-msgstr "5天1行"
-
-#: plugin.py:315
-msgid "5 Days 2 Lines"
-msgstr "5天2行"
-
-#: plugin.py:315
-msgid "5 Days Vertical View"
-msgstr "5天垂直视图"
-
-#: plugin.py:315
-msgid "Current Temperature (+C)"
-msgstr "当前温度（+C）"
-
-#: plugin.py:315
-msgid "Current Temperature (-C)"
-msgstr "当前温度（-C）"
-
-#: plugin.py:315 plugin.py:316
-msgid "Current"
-msgstr "当前"
-
-#: plugin.py:316
-msgid "Current Temperature"
-msgstr "当前温度"
-
-#: plugin.py:317
-msgid "All"
-msgstr "全部"
-
-#: plugin.py:317
-msgid "Temperature"
-msgstr "温度"
-
-#: plugin.py:317
-msgid "Temperature+Co2"
-msgstr "温度+二氧化碳"
-
-#: plugin.py:317
-msgid "Temperature+Co2+Pressure"
-msgstr "温度+ CO2 +压力"
-
-#: plugin.py:317
-msgid "Temperature+Humidity"
-msgstr "温度+湿度"
-
-#: plugin.py:318
-msgid "Module 1"
-msgstr "模块1"
-
-#: plugin.py:318
-msgid "Module 1+2"
-msgstr "模块1 + 2"
-
-#: plugin.py:318
-msgid "Module 1+2+3"
-msgstr "模块1 + 2 + 3"
-
-#: plugin.py:318
-msgid "Module 1+2+4"
-msgstr "模块1 + 2 + 4"
-
-#: plugin.py:318
-msgid "Module 1+3"
-msgstr "模块1 + 3"
-
-#: plugin.py:318
-msgid "Module 1+3+4"
-msgstr "模块1 + 3 + 4"
-
-#: plugin.py:318
-msgid "Module 1+4"
-msgstr "模块1 + 4"
-
-#: plugin.py:318
-msgid "Module 1-4"
-msgstr "模块1-4"
-
-#: plugin.py:318
-msgid "Module 1-5"
-msgstr "模块1-5"
-
-#: plugin.py:318
-msgid "Module 1-6"
-msgstr "模块1-6"
-
-#: plugin.py:318
-msgid "Module 2"
-msgstr "模块2"
-
-#: plugin.py:318
-msgid "Module 2+3"
-msgstr "模块2 + 3"
-
-#: plugin.py:318
-msgid "Module 2+3+4"
-msgstr "模块2 + 3 + 4"
-
-#: plugin.py:318
-msgid "Module 2+4"
-msgstr "模块2 + 4"
-
-#: plugin.py:318
-msgid "Module 2-6"
-msgstr "模块2-6"
-
-#: plugin.py:318
-msgid "Module 3"
-msgstr "模块3"
-
-#: plugin.py:318
-msgid "Module 3+4"
-msgstr "模块3 + 4"
-
-#: plugin.py:318
-msgid "Module 3-6"
-msgstr "模块3-6"
-
-#: plugin.py:318
-msgid "Module 4"
-msgstr "模块4"
-
-#: plugin.py:318
-msgid "Module 4-6"
-msgstr "模块4-6"
-
-#: plugin.py:318
-msgid "Module 5"
-msgstr "模块5"
-
-#: plugin.py:318
-msgid "Module 5-6"
-msgstr "模块5-6"
-
-#: plugin.py:318
-msgid "Module 6"
-msgstr "模块6"
-
-#: plugin.py:318
-msgid "userdefined"
-msgstr "用户自定义"
-
-#: plugin.py:320
-msgid "Bar"
-msgstr "条形图"
-
-#: plugin.py:320
-msgid "Bar+Value"
-msgstr "条形+数值"
-
-#: plugin.py:320
-msgid "Knob"
-msgstr "旋钮"
-
-#: plugin.py:320
-msgid "Knob+Value"
-msgstr "旋钮+值"
-
-#: plugin.py:321
-msgid "Analog"
-msgstr "模拟"
-
-#: plugin.py:321
-msgid "Analog+Date"
-msgstr "模拟量+日期"
-
-#: plugin.py:321
-msgid "Analog+Date+Weekday"
-msgstr "模拟+日期+周"
-
-#: plugin.py:321
-msgid "Analog+Date+Weekday 2"
-msgstr "模拟+日期+周 2"
-
-#: plugin.py:321
-msgid "Date"
-msgstr "日期"
-
-#: plugin.py:321
-msgid "Date+Time"
-msgstr "日期+时间"
-
-#: plugin.py:321
-msgid "Date+Time+Weekday"
-msgstr "日期+时间+工作日"
-
-#: plugin.py:321
-msgid "Flaps Design Date"
-msgstr "襟翼设计日期"
-
-#: plugin.py:321
-msgid "Flaps Design Weekday"
-msgstr "襟翼设计工作日"
-
-#: plugin.py:321
-msgid "Time"
-msgstr "时间"
-
-#: plugin.py:321
-msgid "Time+Weekday"
-msgstr "时间+工作日"
-
-#: plugin.py:321
-msgid "Weekday"
-msgstr "周日"
-
-#: plugin.py:322 plugin.py:335
-msgid "30%"
-msgstr "30%"
-
-#: plugin.py:322 plugin.py:335
-msgid "35%"
-msgstr "35%"
-
-#: plugin.py:322 plugin.py:335
-msgid "40%"
-msgstr "40%"
-
-#: plugin.py:322 plugin.py:335
-msgid "45%"
-msgstr "45%"
-
-#: plugin.py:322 plugin.py:335
-msgid "50%"
-msgstr "50%"
-
-#: plugin.py:322 plugin.py:335
-msgid "55%"
-msgstr "55%"
-
-#: plugin.py:322 plugin.py:335
-msgid "60%"
-msgstr "60%"
-
-#: plugin.py:322 plugin.py:335
-msgid "65%"
-msgstr "65%"
-
-#: plugin.py:322 plugin.py:335
-msgid "70%"
-msgstr "70%"
-
-#: plugin.py:322 plugin.py:335
-msgid "75%"
-msgstr "75%"
-
-#: plugin.py:322 plugin.py:335
-msgid "80%"
-msgstr "80%"
-
-#: plugin.py:322 plugin.py:335
-msgid "85%"
-msgstr "85%"
-
-#: plugin.py:322 plugin.py:335
-msgid "90%"
-msgstr "90%"
-
-#: plugin.py:322 plugin.py:335
-msgid "95%"
-msgstr "95%"
-
-#: plugin.py:322 plugin.py:335
-msgid "97%"
-msgstr "97%"
-
-#: plugin.py:322 plugin.py:335
-msgid "98%"
-msgstr "98%"
-
-#: plugin.py:322 plugin.py:336
-msgid "10%"
-msgstr "10%"
-
-#: plugin.py:322 plugin.py:336
-msgid "15%"
-msgstr "15%"
-
-#: plugin.py:322 plugin.py:336
-msgid "2%"
-msgstr "2%"
-
-#: plugin.py:322 plugin.py:336
-msgid "20%"
-msgstr "20%"
-
-#: plugin.py:322 plugin.py:336
-msgid "25%"
-msgstr "25%"
-
-#: plugin.py:322 plugin.py:336
-msgid "3%"
-msgstr "3%"
-
-#: plugin.py:322 plugin.py:336
-msgid "5%"
-msgstr "5%"
-
-#: plugin.py:322 plugin.py:629
-msgid "center"
-msgstr "居中"
-
-#: plugin.py:322 plugin.py:629 plugin.py:1122 plugin.py:1130 plugin.py:1734
-#: plugin.py:2121
-msgid "left"
-msgstr "左边"
-
-#: plugin.py:322 plugin.py:629 plugin.py:1122 plugin.py:1130 plugin.py:1734
-#: plugin.py:2121
-msgid "right"
-msgstr "右边"
-
-#: plugin.py:323
-msgid "Extended"
-msgstr "扩展"
-
-#: plugin.py:323
-msgid "Extended (Short)"
-msgstr "扩展（短）"
-
-#: plugin.py:323
-msgid "Short"
-msgstr "短"
-
-#: plugin.py:323
-msgid "Short (Extended)"
-msgstr "短（扩展）"
-
-#: plugin.py:323
-msgid "Short+Extended"
-msgstr "短+扩展"
-
-#: plugin.py:324
-msgid "Month"
-msgstr "月"
-
-#: plugin.py:324
-msgid "Month+Header"
-msgstr "月+标题"
-
-#: plugin.py:324
-msgid "Week"
-msgstr "周"
-
-#: plugin.py:324
-msgid "Week+Header"
-msgstr "周+标题"
-
-#: plugin.py:324
-msgid "no Calendar"
-msgstr "没有日历"
-
-#: plugin.py:325
-msgid "Dates 1 Line"
-msgstr "日期1行"
-
-#: plugin.py:325
-msgid "Dates 3 Lines"
-msgstr "日期3行"
-
-#: plugin.py:325
-msgid "Dates 5 Lines"
-msgstr "日期5行"
-
-#: plugin.py:325
-msgid "Dates 9 Lines"
-msgstr "日期9行"
-
-#: plugin.py:325
-msgid "Dates compact 2 Lines"
-msgstr "日期紧凑2行"
-
-#: plugin.py:325
-msgid "Dates compact 3 Lines"
-msgstr "日期紧凑3行"
-
-#: plugin.py:325 plugin.py:14353
-msgid "no Dates"
-msgstr "没有日期"
-
-#: plugin.py:326
-msgid "Underline"
-msgstr "下划线"
-
-#: plugin.py:326
-msgid "Underline 2"
-msgstr "下划线2"
-
-#: plugin.py:326 plugin.py:806 plugin.py:1365
-msgid "Frame"
-msgstr "框架"
-
-#: plugin.py:327
-msgid "Dates"
-msgstr "日期"
-
-#: plugin.py:327
-msgid "Dates compact"
-msgstr "日期紧凑"
-
-#: plugin.py:327
-msgid "Dates compact no Icon"
-msgstr "日期紧凑无图标"
-
-#: plugin.py:327
-msgid "Dates no Icon"
-msgstr "日期无图标"
-
-#: plugin.py:328
-msgid "no Icon"
-msgstr "无图标"
-
-#: plugin.py:328
-msgid "no Icon, with Targetnumber"
-msgstr "没有图标,有目标编号"
-
-#: plugin.py:328
-msgid "with Icon"
-msgstr "带图标"
-
-#: plugin.py:328
-msgid "with Icon & Targetnumber"
-msgstr "带有图标和目标编号"
-
-#: plugin.py:329
-msgid "C"
-msgstr "°C"
-
-#: plugin.py:329
-msgid "C + rpm"
-msgstr "C +转速"
-
-#: plugin.py:329
-msgid "C + rpm/2"
-msgstr "C + 转速 / 2"
-
-#: plugin.py:329
-msgid "rpm"
-msgstr "每分钟转数"
-
-#: plugin.py:329
-msgid "rpm/2"
-msgstr "转速/ 2"
-
-#: plugin.py:329 plugin.py:330 plugin.py:331 plugin.py:341 plugin.py:412
-#: plugin.py:415 plugin.py:444 plugin.py:446 plugin.py:451 plugin.py:558
-#: plugin.py:560 plugin.py:563 plugin.py:580 plugin.py:690 plugin.py:981
-#: plugin.py:1520 plugin.py:1727 plugin.py:2002
-msgid "no"
-msgstr "否"
-
-#: plugin.py:330
-msgid "% + BER"
-msgstr "％+误码率"
-
-#: plugin.py:330
-msgid "db"
-msgstr "分贝"
-
-#: plugin.py:330
-msgid "db + %"
-msgstr "分贝 + %"
-
-#: plugin.py:330
-msgid "db + % + BER"
-msgstr "分贝+％+误码率"
-
-#: plugin.py:330
-msgid "db + BER"
-msgstr "分贝+误码率"
-
-#: plugin.py:330 plugin.py:331
-msgid "%"
-msgstr "%"
-
-#: plugin.py:331
-msgid "% + Load@1min"
-msgstr "% + 负载@1分钟"
-
-#: plugin.py:331
-msgid "% + Load@5min"
-msgstr "% + 负载@ 5分钟"
-
-#: plugin.py:331
-msgid "Load@1min"
-msgstr "负荷@ 1分钟"
-
-#: plugin.py:331
-msgid "Load@5min"
-msgstr "负荷@ 5分钟"
-
-#: plugin.py:332
-msgid "show run"
-msgstr "显示运行"
-
-#: plugin.py:332
-msgid "show run+sleep"
-msgstr "显示运行+睡眠"
-
-#: plugin.py:333
-msgid "Always All"
-msgstr "总是"
-
-#: plugin.py:333
-msgid "Always New"
-msgstr "总是新的"
-
-#: plugin.py:333
-msgid "Only New"
-msgstr "只有新"
-
-#: plugin.py:334
-msgid "All Informations"
-msgstr "所有信息"
-
-#: plugin.py:334
-msgid "Distance only"
-msgstr "仅距离"
-
-#: plugin.py:334
-msgid "Distance+Illumination"
-msgstr "距离+照度"
-
-#: plugin.py:334
-msgid "Distance+Moonphase"
-msgstr "距离+月相"
-
-#: plugin.py:334
-msgid "Illumination only"
-msgstr "仅照明"
-
-#: plugin.py:334
-msgid "Illumination+Moonphase"
-msgstr "照明+月相"
-
-#: plugin.py:334
-msgid "Moonphase only"
-msgstr "仅月相"
-
-#: plugin.py:335
-msgid "100%"
-msgstr "100%"
-
-#: plugin.py:337
-msgid "1-2"
-msgstr "1-2"
-
-#: plugin.py:337
-msgid "1-3"
-msgstr "1-3"
-
-#: plugin.py:337
-msgid "1-4"
-msgstr "1-4"
-
-#: plugin.py:337
-msgid "1-5"
-msgstr "1-5"
-
-#: plugin.py:337 plugin.py:343 plugin.py:344 plugin.py:389 plugin.py:459
-#: plugin.py:465 plugin.py:470 plugin.py:475
-msgid "1"
-msgstr "1"
-
-#: plugin.py:338
-msgid "IMAP"
-msgstr "IMAP"
-
-#: plugin.py:338
-msgid "IMAP-SSL"
-msgstr "IMAP-SSL"
-
-#: plugin.py:338
-msgid "Pop3"
-msgstr "Pop3"
-
-#: plugin.py:338
-msgid "Pop3-SSL"
-msgstr "Pop3-SSL"
-
-#: plugin.py:339
-msgid "Channel"
-msgstr "频道"
-
-#: plugin.py:339
-msgid "Channel+Title"
-msgstr "频道+标题"
-
-#: plugin.py:339
-msgid "Picon+Channel"
-msgstr "Picon +频道"
-
-#: plugin.py:339
-msgid "Picon+Channel+Title"
-msgstr "Picon +频道+标题"
-
-#: plugin.py:339 plugin.py:345 plugin.py:817 plugin.py:828 plugin.py:5969
-msgid "Picon"
-msgstr "皮康"
-
-#: plugin.py:340
-msgid "same color"
-msgstr "相同颜色"
-
-#: plugin.py:341
-msgid "yes +25%"
-msgstr "是+ 25％"
-
-#: plugin.py:341 plugin.py:444 plugin.py:446 plugin.py:558 plugin.py:560
-#: plugin.py:580 plugin.py:690 plugin.py:1727
-msgid "yes"
-msgstr "是"
-
-#: plugin.py:342
-msgid "vertically"
-msgstr "垂直"
-
-#: plugin.py:342 plugin.py:875 plugin.py:1463 plugin.py:1909
-msgid "horizontally"
-msgstr "水平"
-
-#: plugin.py:343
-msgid "4"
-msgstr "4"
-
-#: plugin.py:343 plugin.py:344 plugin.py:389 plugin.py:459 plugin.py:465
-#: plugin.py:470 plugin.py:475
-msgid "2"
-msgstr "2"
-
-#: plugin.py:343 plugin.py:344 plugin.py:389 plugin.py:465 plugin.py:470
-#: plugin.py:475
-msgid "3"
-msgstr "3"
-
-#: plugin.py:343 plugin.py:389 plugin.py:465 plugin.py:470 plugin.py:475
-msgid "5"
-msgstr "5"
-
-#: plugin.py:343 plugin.py:5573 plugin.py:5716 plugin.py:7861 plugin.py:7877
-msgid "Global"
-msgstr "全局"
-
-#: plugin.py:344
-msgid "14"
-msgstr "14"
-
-#: plugin.py:344
-msgid "7"
-msgstr "7"
-
-#: plugin.py:344
-msgid "all"
-msgstr "全部"
-
-#: plugin.py:344 plugin.py:389 plugin.py:465 plugin.py:470 plugin.py:475
-msgid "30"
-msgstr "30"
-
-#: plugin.py:345
-msgid "Corner"
-msgstr "转角"
-
-#: plugin.py:345
-msgid "Corner+Timeshift"
-msgstr "转角+时移"
-
-#: plugin.py:345
-msgid "Picon+Timeshift"
-msgstr "Picon +时移"
-
-#: plugin.py:346
-msgid "only Progress Bar"
-msgstr "仅进度栏"
-
-#: plugin.py:347
-msgid "with Remaining Minutes"
-msgstr "剩余分钟"
-
-#: plugin.py:347
-msgid "with Remaining Minutes (Size 1.5)"
-msgstr "剩余分钟 (尺寸1.5)"
-
-#: plugin.py:347
-msgid "with Remaining Minutes (Size 2)"
-msgstr "剩余分钟 (大于2)"
-
-#: plugin.py:348
-msgid "with Percent"
-msgstr "带百分比"
-
-#: plugin.py:348
-msgid "with Percent (Size 1.5)"
-msgstr "带百分比 (尺寸1,5)"
-
-#: plugin.py:348
-msgid "with Percent (Size 2)"
-msgstr "与百分比（尺寸2）"
-
-#: plugin.py:349
-msgid "with Remaining Minutes (above)"
-msgstr "剩余分钟 (大于)"
-
-#: plugin.py:349
-msgid "with Remaining Minutes (above/Size 1.5)"
-msgstr "剩余分钟数（大于/尺寸1.5）"
-
-#: plugin.py:349
-msgid "with Remaining Minutes (above/Size 2)"
-msgstr "剩余分钟 (大于/尺寸2)"
-
-#: plugin.py:350
-msgid "with Percent (above)"
-msgstr "与百分比（大于）"
-
-#: plugin.py:350
-msgid "with Percent (above/Size 1.5)"
-msgstr "百分比（大于/尺寸1.5）"
-
-#: plugin.py:350
-msgid "with Percent (above/Size 2)"
-msgstr "百分比（大于/尺寸2）"
-
-#: plugin.py:351
-msgid "with Remaining Minutes (below)"
-msgstr "剩下的几分钟 (低于)"
-
-#: plugin.py:351
-msgid "with Remaining Minutes (below/Size 1.5)"
-msgstr "剩余分钟数（低于/尺寸1.5）"
-
-#: plugin.py:351
-msgid "with Remaining Minutes (below/Size 2)"
-msgstr "剩余分钟数（低于/尺寸2）"
-
-#: plugin.py:352
-msgid "with Percent (below)"
-msgstr "百分比 (低于)"
-
-#: plugin.py:352
-msgid "with Percent (below/Size 1.5)"
-msgstr "百分比（低于/尺寸1.5）"
-
-#: plugin.py:352
-msgid "with Percent (below/Size 2)"
-msgstr "百分比（低于/尺寸2）"
-
-#: plugin.py:353
-msgid "with Current 00:00"
-msgstr "当前00:00"
-
-#: plugin.py:353
-msgid "with Current 00:00 (Size 1.5)"
-msgstr "当前00:00（尺寸1.5）"
-
-#: plugin.py:353
-msgid "with Current 00:00 (Size 2)"
-msgstr "当前00:00（尺寸2）"
-
-#: plugin.py:354
-msgid "with Current 00:00 (above)"
-msgstr "当前00:00（以上）"
-
-#: plugin.py:354
-msgid "with Current 00:00 (above/Size 1.5)"
-msgstr "当前00:00（高于/尺寸1.5）"
-
-#: plugin.py:354
-msgid "with Current 00:00 (above/Size 2)"
-msgstr "当前00:00（尺寸2以上）"
-
-#: plugin.py:355
-msgid "with Current 00:00 (below)"
-msgstr "当前00:00（低于）"
-
-#: plugin.py:355
-msgid "with Current 00:00 (below/Size 1.5)"
-msgstr "当前00:00（低于/尺寸1.5）"
-
-#: plugin.py:355
-msgid "with Current 00:00 (below/Size 2)"
-msgstr "当前00:00（下方/尺寸2）"
-
-#: plugin.py:356
-msgid "with Percent Minutes / Total (above)"
-msgstr "分钟/总计百分比 (大于/尺寸2)"
-
-#: plugin.py:356
-msgid "with Percent Minutes / Total (above/Size 1.5)"
-msgstr "分钟/总计百分比 (大于/尺寸1.5)"
-
-#: plugin.py:356
-msgid "with Percent Minutes / Total (above/Size 2)"
-msgstr "分钟/总计百分比 (大于/尺寸2)"
-
-#: plugin.py:357
-msgid "with absolute Endtime"
-msgstr "绝对结束时间"
-
-#: plugin.py:357
-msgid "with absolute Endtime (Size 1.5)"
-msgstr "绝对结束时间（尺寸1.5）"
-
-#: plugin.py:357
-msgid "with absolute Endtime (Size 2)"
-msgstr "带绝对结束时间 (尺寸2)"
-
-#: plugin.py:358
-msgid "with Minutes Total / Endtime (above)"
-msgstr "分钟/总计百分比 (大于/尺寸2)"
-
-#: plugin.py:358
-msgid "with Minutes Total / Endtime (above/Size 1.5)"
-msgstr "分钟/总计百分比 (大于/尺寸1.5)"
-
-#: plugin.py:358
-msgid "with Minutes Total / Endtime (above/Size 2)"
-msgstr "分钟/总计百分比 (大于/尺寸2)"
-
-#: plugin.py:370
-msgid "Fastmode (2s)"
-msgstr "快速模式（2秒）"
-
-#: plugin.py:370
-msgid "Normal (5s)"
-msgstr "正常 (5秒)"
-
-#: plugin.py:386
-msgid "alphabetic"
-msgstr "按字母顺序排列"
-
-#: plugin.py:386
-msgid "random"
-msgstr "随机"
-
-#: plugin.py:387
-msgid "better/slow"
-msgstr "较好/缓慢"
-
-#: plugin.py:387
-msgid "low/fast (Picture only)"
-msgstr "低/快（仅图片）"
-
-#: plugin.py:387
-msgid "low/fast (all)"
-msgstr "低/快（全部）"
-
-#: plugin.py:389
-msgid "0.5"
-msgstr "0.5"
-
-#: plugin.py:389 plugin.py:465 plugin.py:470 plugin.py:475
-msgid "10"
-msgstr "10"
-
-#: plugin.py:389 plugin.py:465 plugin.py:470 plugin.py:475
-msgid "20"
-msgstr "20"
-
-#: plugin.py:392
-msgid "JPG"
-msgstr "JPG"
-
-#: plugin.py:392
-msgid "PNG"
-msgstr "PNG"
-
-#: plugin.py:393
-msgid "cache + adjustment (high quality, slow)"
-msgstr "缓存+调整（高质量，慢）"
-
-#: plugin.py:393
-msgid "cache + adjustment (low quality, fast)"
-msgstr "缓存+调整（低质量，快）"
-
-#: plugin.py:393
-msgid "no cache + no adjustment"
-msgstr "没有缓存+没有调整"
-
-#: plugin.py:412
-msgid "Plug Tuner"
-msgstr "插头调谐器"
-
-#: plugin.py:412
-msgid "USB Tuner"
-msgstr "USB调谐器"
-
-#: plugin.py:413
-msgid "EPG"
-msgstr "EPG"
-
-#: plugin.py:413
-msgid "Now/Next"
-msgstr "现在/下一个"
-
-#: plugin.py:427
-msgid "normal"
-msgstr "正常"
-
-#: plugin.py:427
-msgid "reduced"
-msgstr "减少"
-
-#: plugin.py:431
-msgid "Javascript"
-msgstr "Java脚本"
-
-#: plugin.py:431
-msgid "Javascript no Refresh"
-msgstr "Java脚本无刷新"
-
-#: plugin.py:431
-msgid "Reload"
-msgstr "加载"
-
-#: plugin.py:435
-msgid "1 - normal"
-msgstr "1 - 正常"
-
-#: plugin.py:435
-msgid "2 - side by side"
-msgstr "2-并排"
-
-#: plugin.py:436
-msgid "MSN"
-msgstr "MSN"
-
-#: plugin.py:436
-msgid "OpenWeatherMap"
-msgstr "打开天气图"
-
-#: plugin.py:436
-msgid "WeatherUnlocked"
-msgstr "天气解锁"
-
-#: plugin.py:444 plugin.py:580
-msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr "备用复制模式/ DM800hd（24位）"
-
-#: plugin.py:446
-msgid "yes + %"
-msgstr "是 + %"
-
-#: plugin.py:451
-msgid "yes, long"
-msgstr "是,很长"
-
-#: plugin.py:451
-msgid "yes, short"
-msgstr "是,简短"
-
-#: plugin.py:458
-msgid "km/h"
-msgstr "公里/小时"
-
-#: plugin.py:458
-msgid "m/s"
-msgstr "米/秒"
-
-#: plugin.py:465 plugin.py:470 plugin.py:475
-msgid "60"
-msgstr "60"
-
-#: plugin.py:477
-msgid "Coversearch"
-msgstr "封面搜索"
-
-#: plugin.py:477
+#: ..\WebConfigSite.py:28
+msgid "BlueSound"
+msgstr "BlueSound"
+
+#: ..\WebConfigSite.py:28
+msgid "Box-Skin-LCD"
+msgstr "盒式液晶显示器"
+
+#: ..\WebConfigSite.py:28
+msgid "Font"
+msgstr "字体"
+
+#: ..\WebConfigSite.py:28
+msgid "Key"
+msgstr "按键"
+
+#: ..\WebConfigSite.py:28
+msgid "MJPEG Stream"
+msgstr "MJPEG流"
+
+#: ..\WebConfigSite.py:28
+msgid "OSD"
+msgstr "OSD菜单"
+
+#: ..\WebConfigSite.py:28
+msgid "Picture"
+msgstr "图片"
+
+#: ..\WebConfigSite.py:28
+msgid "Popup-Text"
+msgstr "弹出式文本"
+
+#: ..\WebConfigSite.py:28
+msgid "Sonos"
+msgstr "Sonos"
+
+#: ..\WebConfigSite.py:28
+msgid "Tuner"
+msgstr "调谐器"
+
+#: ..\WebConfigSite.py:28
+msgid "WWW Converter"
+msgstr "WWW转换器"
+
+#: ..\WebConfigSite.py:28
+msgid "WebIF"
+msgstr "WebIF"
+
+#: ..\WebConfigSite.py:28 ..\WebConfigSite.py:557
+msgid "Screen"
+msgstr "屏幕"
+
+#: ..\WebConfigSite.py:28 ..\plugin.py:486
 msgid "MusicCast"
 msgstr "音乐广播"
 
-#: plugin.py:484 plugin.py:485 plugin.py:486
-msgid "0"
-msgstr "0"
-
-#: plugin.py:484 plugin.py:485 plugin.py:486
-msgid "180"
-msgstr "180"
-
-#: plugin.py:484 plugin.py:485 plugin.py:486
-msgid "270"
-msgstr "270"
-
-#: plugin.py:484 plugin.py:485 plugin.py:486
-msgid "90"
-msgstr "90"
-
-#: plugin.py:493 plugin.py:494 plugin.py:495
-msgid "1 / min"
-msgstr "1/分钟"
-
-#: plugin.py:493 plugin.py:494 plugin.py:495 plugin.py:618
-msgid "always"
-msgstr "总是"
-
-#: plugin.py:496
-msgid "On+Media+Standby"
-msgstr "启用+多媒体+唤醒"
-
-#: plugin.py:496
-msgid "Standby"
-msgstr "待机"
-
-#: plugin.py:496 plugin.py:621 plugin.py:5567 plugin.py:6685 plugin.py:7867
-#: plugin.py:7871 plugin.py:8073
-msgid "Media"
-msgstr "媒体"
-
-#: plugin.py:496 plugin.py:5564 plugin.py:5957 plugin.py:7862 plugin.py:7866
-msgid "On"
-msgstr "打开"
-
-#: plugin.py:498
-msgid "32bit - color"
-msgstr "32位-颜色"
-
-#: plugin.py:498
-msgid "8bit - grayscale/color"
-msgstr "8位-灰度/彩色"
-
-#: plugin.py:508
-msgid "2 x FastForwardKey"
-msgstr "2 x快进键"
-
-#: plugin.py:508
-msgid "2 x FastForwardKey Type 2"
-msgstr "2 x快进键类型2"
-
-#: plugin.py:508
-msgid "Long FastForwardKey"
-msgstr "长按快进键"
-
-#: plugin.py:508
-msgid "Long FastForwardKey Type 2"
-msgstr "长按快进键 类型 2"
-
-#: plugin.py:508 plugin.py:509
-msgid "2 x InfoKey"
-msgstr "2 X信息键"
-
-#: plugin.py:508 plugin.py:509
-msgid "2 x Mute"
-msgstr "2 x静音"
-
-#: plugin.py:508 plugin.py:509
-msgid "Long InfoKey"
-msgstr "长按信息键"
-
-#: plugin.py:509
-msgid "2 x FastBackwardKey"
-msgstr "2 X快速后退键"
-
-#: plugin.py:509
-msgid "2 x FastBackwardKey Type 2"
-msgstr "2 x快退键类型2"
-
-#: plugin.py:509
-msgid "Long FastBackwardKey"
-msgstr "长按快速后退键"
-
-#: plugin.py:509
-msgid "Long FastBackwardKey Type 2"
-msgstr "长按快速后退键 类型 2"
-
-#: plugin.py:530 plugin.py:579
-msgid "15min"
-msgstr "15分钟"
-
-#: plugin.py:558
-msgid "yes, extended"
-msgstr "是,扩展"
-
-#: plugin.py:614
-msgid "Console normal"
-msgstr "控制台正常"
-
-#: plugin.py:614
-msgid "Logfile extensive"
-msgstr "日志文件扩展"
-
-#: plugin.py:614
-msgid "Logfile normal"
-msgstr "日志文件正常"
-
-#: plugin.py:618
-msgid "disabled"
-msgstr "已禁用"
-
-#: plugin.py:621
-msgid "Radio"
-msgstr "无线电"
-
-#: plugin.py:621
-msgid "Radio+Media"
-msgstr "广播+媒体"
-
-#: plugin.py:621
-msgid "TV+Radio"
-msgstr "电视/电台"
-
-#: plugin.py:621
-msgid "TV+Radio+Media"
-msgstr "电视+广播+媒体"
-
-#: plugin.py:621 plugin.py:1250
-msgid "TV"
-msgstr "电视"
-
-#: plugin.py:622
-msgid "TV (full)"
-msgstr "电视（完整）"
-
-#: plugin.py:622
-msgid "normal (full)"
-msgstr "正常（满）"
-
-#: plugin.py:622
-msgid "trimmed (black)"
-msgstr "修剪（黑色）"
-
-#: plugin.py:622
-msgid "trimmed (transparent)"
-msgstr "修剪（透明）"
-
-#: plugin.py:625
-msgid "MUTE or defined Keys"
-msgstr "静音或定义键"
-
-#: plugin.py:625
-msgid "any Key"
-msgstr "任意键"
-
-#: plugin.py:762 plugin.py:774 plugin.py:786 plugin.py:1333 plugin.py:1345
-msgid "Info"
-msgstr "信息"
-
-#: plugin.py:762 plugin.py:774 plugin.py:786 plugin.py:1333 plugin.py:1345
-msgid "Time+Info"
-msgstr "时间+信息"
-
-#: plugin.py:762 plugin.py:774 plugin.py:1333
-msgid "Time+Duration+Info"
-msgstr "时间+持续时间+信息"
-
-#: plugin.py:786 plugin.py:1345
-msgid "Mini-EPG"
-msgstr "迷你EPG"
-
-#: plugin.py:786 plugin.py:1345
-msgid "Time+Length+Info"
-msgstr "时间+长度+信息"
-
-#: plugin.py:801 plugin.py:1361
-msgid "half left"
-msgstr "半面向左转"
-
-#: plugin.py:801 plugin.py:1361
-msgid "half right"
-msgstr "半面向右转"
-
-#: plugin.py:806 plugin.py:1365
-msgid "Frame x2"
-msgstr "框架 x2"
-
-#: plugin.py:806 plugin.py:1365
-msgid "Line"
-msgstr "行"
-
-#: plugin.py:806 plugin.py:1365
-msgid "no Bar"
-msgstr "没有进度条"
-
-#: plugin.py:806 plugin.py:1365
-msgid "no Frame"
-msgstr "无框架"
-
-#: plugin.py:808 plugin.py:1367
-msgid "Gradient"
-msgstr "渐变色"
-
-#: plugin.py:808 plugin.py:1367
-msgid "Shadow Edges"
-msgstr "阴影边缘"
-
-#: plugin.py:808 plugin.py:1367 plugin.py:1728
-msgid "Normal"
-msgstr "正常"
-
-#: plugin.py:817
-msgid "Picon+Position below"
-msgstr "Picon+下方位置"
-
-#: plugin.py:817
-msgid "Picon+Position left"
-msgstr "皮康+左位置"
-
-#: plugin.py:817
-msgid "Picon+Position right"
-msgstr "皮康+位置右"
-
-#: plugin.py:817
-msgid "Position"
-msgstr "位置"
-
-#: plugin.py:817 plugin.py:828
-msgid "Name"
-msgstr "名称"
-
-#: plugin.py:896 plugin.py:1387 plugin.py:1945
-msgid "Offline"
-msgstr "离线"
-
-#: plugin.py:896 plugin.py:1387 plugin.py:1945
-msgid "Online"
-msgstr "在线"
-
-#: plugin.py:896 plugin.py:1387 plugin.py:1945
-msgid "Online+Offline"
-msgstr "在线+离线"
-
-#: plugin.py:940 plugin.py:1004 plugin.py:1424 plugin.py:1543 plugin.py:1894
-#: plugin.py:1982
-msgid "only use Timer"
-msgstr "仅使用定时器"
-
-#: plugin.py:940 plugin.py:1004 plugin.py:1424 plugin.py:1543 plugin.py:1894
-#: plugin.py:1982
-msgid "use lead-time"
-msgstr "使用提前期"
-
-#: plugin.py:941 plugin.py:1005 plugin.py:1425 plugin.py:1544 plugin.py:1895
-#: plugin.py:1983
-msgid "no total Timer"
-msgstr "没有总计时器"
-
-#: plugin.py:941 plugin.py:1005 plugin.py:1425 plugin.py:1544 plugin.py:1895
-#: plugin.py:1983
-msgid "show total Timer"
-msgstr "显示总计时器"
-
-#: plugin.py:959 plugin.py:1498
-msgid "one line"
-msgstr "一行"
-
-#: plugin.py:959 plugin.py:1498
-msgid "two lines"
-msgstr "两行"
-
-#: plugin.py:981 plugin.py:1520 plugin.py:2002
-msgid "Memory available"
-msgstr "可用内存"
-
-#: plugin.py:981 plugin.py:1520 plugin.py:2002
-msgid "Memory free"
-msgstr "内存释放"
-
-#: plugin.py:1197
-msgid "cloudconvert.org"
-msgstr "cloudconvert.org"
-
-#: plugin.py:1197
-msgid "convertapi.com"
-msgstr "convertapi.com"
-
-#: plugin.py:1218 plugin.py:1227 plugin.py:1236 plugin.py:1245 plugin.py:1660
-#: plugin.py:1669 plugin.py:2205 plugin.py:2214 plugin.py:2223 plugin.py:2232
-msgid "full Screen"
-msgstr "全屏"
-
-#: plugin.py:1250
-msgid "TV+OSD"
-msgstr "电视+ OSD"
-
-#: plugin.py:1727
-msgid "yes except records"
-msgstr "是,除了录制"
-
-#: plugin.py:1728
-msgid "Google API"
-msgstr "Google API"
-
-#: plugin.py:2639
-msgid "E"
-msgstr "Ε"
-
-#: plugin.py:2639
-msgid "ENE"
-msgstr "东北偏东"
-
-#: plugin.py:2639
-msgid "ESE"
-msgstr "东南偏东"
-
-#: plugin.py:2639
-msgid "N"
-msgstr "N"
-
-#: plugin.py:2639
-msgid "NE"
-msgstr "东北方"
-
-#: plugin.py:2639
-msgid "NNE"
-msgstr "东北偏北"
-
-#: plugin.py:2639
-msgid "NNW"
-msgstr "西北偏北"
-
-#: plugin.py:2639
-msgid "NW"
-msgstr "西北"
-
-#: plugin.py:2639
-msgid "S"
-msgstr "南"
-
-#: plugin.py:2639
-msgid "SE"
-msgstr "东南"
-
-#: plugin.py:2639
-msgid "SSE"
-msgstr "东南偏南"
-
-#: plugin.py:2639
-msgid "SSW"
-msgstr "西南偏南"
-
-#: plugin.py:2639
-msgid "SW"
-msgstr "西南"
-
-#: plugin.py:2639
-msgid "W"
-msgstr "西"
-
-#: plugin.py:2639
-msgid "WNW"
-msgstr "西北偏西"
-
-#: plugin.py:2639
-msgid "WSW"
-msgstr "西南偏西"
-
-#: plugin.py:4588
-msgid "%d.%m.%Y - %H:%M"
-msgstr "%Y.%m.%d - %H:%M"
-
-#: plugin.py:4589
-msgid "%d.%m.%y %H:%M:%S"
-msgstr "%y.%m.%d %H:%M:%S"
-
-#: plugin.py:5153
-msgid "%d-%b-%Y"
-msgstr "%Y-%b-%d"
-
-#: plugin.py:5285
-msgid "Load Active Config-File"
-msgstr "加载活动配置文件"
-
-#: plugin.py:5286
-msgid "Load Defaults / Empty Config"
-msgstr "加载默认值/清空配置"
-
-#: plugin.py:5287
-msgid "Save Config to File... (%s)"
-msgstr "将配置保存到文件... (%s)"
-
-#: plugin.py:5291 plugin.py:5328
-msgid "Load File : %s"
-msgstr "加载文件：%s"
-
-#: plugin.py:5300
-msgid "Delete File?"
-msgstr "是否删除文件?"
-
-#: plugin.py:5337
-msgid "deleted"
-msgstr "已删除"
-
-#: plugin.py:5362
-msgid "currently set : %s"
-msgstr "当前设置：%s"
-
-#: plugin.py:5475 plugin.py:7878
-msgid "LCD4linux Settings"
-msgstr "LCD4linux设置"
-
-#: plugin.py:5534
-msgid "Mode"
-msgstr "模式"
-
-#: plugin.py:5544
-msgid "Cancel"
-msgstr "取消"
-
-#: plugin.py:5545
-msgid "Save"
-msgstr "保存"
-
-#: plugin.py:5546
-msgid "Restart Displays"
-msgstr "重新启动显示"
-
-#: plugin.py:5547 plugin.py:7879
-msgid "Set On >>"
-msgstr "启用 >>"
-
-#: plugin.py:5570 plugin.py:5591 plugin.py:7307 plugin.py:7872 plugin.py:7876
-#: plugin.py:8071
-msgid "Idle"
-msgstr "空闲"
-
-#: plugin.py:5630
-msgid "no LCD1 Picture-File"
-msgstr "没有LCD1图片文件"
-
-#: plugin.py:5655
-msgid "no LCD2 Picture-File"
-msgstr "没有LCD2图片文件"
-
-#: plugin.py:5681
-msgid "no LCD3 Picture-File"
-msgstr "没有LCD3图片文件"
-
-#: plugin.py:5718
-msgid "LCD4linux enabled"
-msgstr "已启用LCD4linux"
-
-#: plugin.py:5719
-msgid "LCD 1 Type"
-msgstr "LCD 1型"
-
-#: plugin.py:5720
-msgid "- LCD 1 Rotate"
-msgstr "- LCD 1旋转"
-
-#: plugin.py:5721 plugin.py:6687 plugin.py:7315
-msgid "- LCD 1 Background Color"
-msgstr "- LCD 1背景色"
-
-#: plugin.py:5722 plugin.py:6688 plugin.py:7316
-msgid "- LCD 1 Background-Picture [ok]>"
-msgstr "- LCD 1背景图片 [ok]>"
-
-#: plugin.py:5723 plugin.py:6689 plugin.py:7317
-msgid "- LCD 1 Brightness"
-msgstr "- LCD 1亮度"
-
-#: plugin.py:5724 plugin.py:6690 plugin.py:7318
-msgid "- LCD 1 Night Reduction"
-msgstr "- LCD 1夜间还原"
-
-#: plugin.py:5725
-msgid "- LCD 1 Refresh"
-msgstr "- LCD 1刷新"
-
-#: plugin.py:5726
-msgid "LCD 2 Type"
-msgstr "LCD 2型"
-
-#: plugin.py:5728
-msgid "- LCD 2 Rotate"
-msgstr "- LCD 2旋转"
-
-#: plugin.py:5729 plugin.py:6691 plugin.py:7319
-msgid "- LCD 2 Background Color"
-msgstr "- LCD 2背景色"
-
-#: plugin.py:5730 plugin.py:6692 plugin.py:7320
-msgid "- LCD 2 Background-Picture [ok]>"
-msgstr "- LCD 2背景图片[ok]>"
-
-#: plugin.py:5731 plugin.py:6693 plugin.py:7321
-msgid "- LCD 2 Brightness"
-msgstr "- LCD 2亮度"
-
-#: plugin.py:5732 plugin.py:6694 plugin.py:7322
-msgid "- LCD 2 Night Reduction"
-msgstr "- LCD 2夜间还原"
-
-#: plugin.py:5733
-msgid "- LCD 2 Refresh"
-msgstr "- LCD 2刷新"
-
-#: plugin.py:5734
-msgid "LCD 3 Type"
-msgstr "LCD 3型"
-
-#: plugin.py:5736
-msgid "- LCD 3 Rotate"
-msgstr "- LCD 3旋转"
-
-#: plugin.py:5737 plugin.py:6695 plugin.py:7323
-msgid "- LCD 3 Background Color"
-msgstr "- LCD 3背景色"
-
-#: plugin.py:5738 plugin.py:6696 plugin.py:7324
-msgid "- LCD 3 Background-Picture [ok]>"
-msgstr "- LCD 3背景图片 [ok]>"
-
-#: plugin.py:5739 plugin.py:6697 plugin.py:7325
-msgid "- LCD 3 Brightness"
-msgstr "- LCD 3亮度"
-
-#: plugin.py:5740 plugin.py:6698 plugin.py:7326
-msgid "- LCD 3 Night Reduction"
-msgstr "- LCD 3夜间还原"
-
-#: plugin.py:5741
-msgid "- LCD 3 Refresh"
-msgstr "- LCD 3刷新"
-
-#: plugin.py:5743
-msgid "Box-Skin-LCD Dimension"
-msgstr "盒式LCD尺寸"
-
-#: plugin.py:5744
-msgid "Box-Skin-LCD Offset"
-msgstr "Box-Skin-LCD偏移"
-
-#: plugin.py:5745
-msgid "Box-Skin-LCD Color"
-msgstr "盒式液晶显示器颜色"
-
-#: plugin.py:5746
-msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Box-Skin-LCD启用开启模式"
-
-#: plugin.py:5747
-msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Box-Skin-LCD启用媒体模式"
-
-#: plugin.py:5748
-msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Box-Skin-LCD启用空闲模式"
-
-#: plugin.py:5749
-msgid "OSD [display time]"
-msgstr "OSD [显示时间]"
-
-#: plugin.py:5752 plugin.py:5759 plugin.py:5966 plugin.py:5971 plugin.py:5984
-#: plugin.py:5996 plugin.py:6011 plugin.py:6026 plugin.py:6038 plugin.py:6048
-#: plugin.py:6061 plugin.py:6074 plugin.py:6087 plugin.py:6101 plugin.py:6116
-#: plugin.py:6130 plugin.py:6144 plugin.py:6156 plugin.py:6168 plugin.py:6180
-#: plugin.py:6190 plugin.py:6204 plugin.py:6214 plugin.py:6221 plugin.py:6232
-#: plugin.py:6242 plugin.py:6260 plugin.py:6272 plugin.py:6290 plugin.py:6298
-#: plugin.py:6309 plugin.py:6320 plugin.py:6329 plugin.py:6352 plugin.py:6375
-#: plugin.py:6385 plugin.py:6395 plugin.py:6408 plugin.py:6420 plugin.py:6430
-#: plugin.py:6439 plugin.py:6450 plugin.py:6461 plugin.py:6472 plugin.py:6483
-#: plugin.py:6496 plugin.py:6506 plugin.py:6516 plugin.py:6526 plugin.py:6536
-#: plugin.py:6551 plugin.py:6566 plugin.py:6579 plugin.py:6593 plugin.py:6608
-#: plugin.py:6621 plugin.py:6631 plugin.py:6643 plugin.py:6655 plugin.py:6664
-#: plugin.py:6673 plugin.py:6682 plugin.py:6703 plugin.py:6708 plugin.py:6720
-#: plugin.py:6732 plugin.py:6746 plugin.py:6758 plugin.py:6771 plugin.py:6784
-#: plugin.py:6799 plugin.py:6809 plugin.py:6816 plugin.py:6831 plugin.py:6846
-#: plugin.py:6859 plugin.py:6872 plugin.py:6882 plugin.py:6896 plugin.py:6907
-#: plugin.py:6917 plugin.py:6935 plugin.py:6946 plugin.py:6964 plugin.py:6972
-#: plugin.py:6983 plugin.py:6994 plugin.py:7003 plugin.py:7026 plugin.py:7049
-#: plugin.py:7059 plugin.py:7069 plugin.py:7082 plugin.py:7094 plugin.py:7105
-#: plugin.py:7116 plugin.py:7126 plugin.py:7136 plugin.py:7153 plugin.py:7162
-#: plugin.py:7177 plugin.py:7192 plugin.py:7205 plugin.py:7219 plugin.py:7234
-#: plugin.py:7247 plugin.py:7257 plugin.py:7269 plugin.py:7281 plugin.py:7290
-#: plugin.py:7299 plugin.py:7330 plugin.py:7345 plugin.py:7360 plugin.py:7375
-#: plugin.py:7389 plugin.py:7402 plugin.py:7415 plugin.py:7425 plugin.py:7443
-#: plugin.py:7454 plugin.py:7472 plugin.py:7480 plugin.py:7491 plugin.py:7502
-#: plugin.py:7511 plugin.py:7534 plugin.py:7557 plugin.py:7567 plugin.py:7577
-#: plugin.py:7590 plugin.py:7602 plugin.py:7611 plugin.py:7622 plugin.py:7633
-#: plugin.py:7644 plugin.py:7655 plugin.py:7668 plugin.py:7678 plugin.py:7688
-#: plugin.py:7698 plugin.py:7708 plugin.py:7723 plugin.py:7738 plugin.py:7751
-#: plugin.py:7765 plugin.py:7780 plugin.py:7793 plugin.py:7803 plugin.py:7815
-#: plugin.py:7827 plugin.py:7836 plugin.py:7845
-msgid "- which LCD"
-msgstr "- 创建LCD"
-
-#: plugin.py:5753
-msgid "- Show in Mode"
-msgstr "- 以模式显示"
-
-#: plugin.py:5754
-msgid "- OSD Size"
-msgstr "- OSD尺寸"
-
-#: plugin.py:5755
-msgid "- Background/Transparency"
-msgstr "- 背景/透明度"
-
-#: plugin.py:5756
-msgid "- Fast Grab lower quality"
-msgstr "- 快速抓取低质量"
-
-#: plugin.py:5757
-msgid "Popup Text"
-msgstr "弹出式文本"
-
-#: plugin.py:5760
-msgid "- Clear Key"
-msgstr "- 清除键"
-
-#: plugin.py:5761 plugin.py:6027 plugin.py:6039 plugin.py:6050 plugin.py:6063
-#: plugin.py:6076 plugin.py:6089 plugin.py:6157 plugin.py:6169 plugin.py:6181
-#: plugin.py:6191 plugin.py:6215 plugin.py:6222 plugin.py:6233 plugin.py:6243
-#: plugin.py:6261 plugin.py:6273 plugin.py:6291 plugin.py:6331 plugin.py:6354
-#: plugin.py:6397 plugin.py:6409 plugin.py:6422 plugin.py:6431 plugin.py:6441
-#: plugin.py:6452 plugin.py:6463 plugin.py:6474 plugin.py:6537 plugin.py:6552
-#: plugin.py:6567 plugin.py:6580 plugin.py:6633 plugin.py:6645 plugin.py:6709
-#: plugin.py:6721 plugin.py:6734 plugin.py:6747 plugin.py:6760 plugin.py:6773
-#: plugin.py:6810 plugin.py:6873 plugin.py:6883 plugin.py:6897 plugin.py:6908
-#: plugin.py:6918 plugin.py:6936 plugin.py:6947 plugin.py:6965 plugin.py:7005
-#: plugin.py:7028 plugin.py:7071 plugin.py:7083 plugin.py:7096 plugin.py:7107
-#: plugin.py:7154 plugin.py:7163 plugin.py:7178 plugin.py:7193 plugin.py:7206
-#: plugin.py:7259 plugin.py:7271 plugin.py:7376 plugin.py:7416 plugin.py:7426
-#: plugin.py:7444 plugin.py:7455 plugin.py:7473 plugin.py:7513 plugin.py:7536
-#: plugin.py:7579 plugin.py:7591 plugin.py:7603 plugin.py:7613 plugin.py:7624
-#: plugin.py:7635 plugin.py:7646 plugin.py:7709 plugin.py:7724 plugin.py:7739
-#: plugin.py:7752 plugin.py:7805 plugin.py:7817
-msgid "- Font Size"
-msgstr "- 字体大小"
-
-#: plugin.py:5762 plugin.py:5973 plugin.py:5986 plugin.py:6003 plugin.py:6018
-#: plugin.py:6029 plugin.py:6040 plugin.py:6052 plugin.py:6065 plugin.py:6078
-#: plugin.py:6091 plugin.py:6105 plugin.py:6121 plugin.py:6135 plugin.py:6146
-#: plugin.py:6158 plugin.py:6170 plugin.py:6182 plugin.py:6195 plugin.py:6206
-#: plugin.py:6216 plugin.py:6223 plugin.py:6234 plugin.py:6244 plugin.py:6262
-#: plugin.py:6274 plugin.py:6292 plugin.py:6299 plugin.py:6310 plugin.py:6321
-#: plugin.py:6330 plugin.py:6353 plugin.py:6376 plugin.py:6386 plugin.py:6398
-#: plugin.py:6410 plugin.py:6423 plugin.py:6432 plugin.py:6442 plugin.py:6453
-#: plugin.py:6464 plugin.py:6475 plugin.py:6485 plugin.py:6500 plugin.py:6510
-#: plugin.py:6520 plugin.py:6530 plugin.py:6538 plugin.py:6553 plugin.py:6571
-#: plugin.py:6581 plugin.py:6594 plugin.py:6610 plugin.py:6623 plugin.py:6634
-#: plugin.py:6646 plugin.py:6677 plugin.py:6711 plugin.py:6723 plugin.py:6736
-#: plugin.py:6749 plugin.py:6762 plugin.py:6775 plugin.py:6788 plugin.py:6801
-#: plugin.py:6811 plugin.py:6823 plugin.py:6838 plugin.py:6850 plugin.py:6863
-#: plugin.py:6874 plugin.py:6887 plugin.py:6898 plugin.py:6909 plugin.py:6919
-#: plugin.py:6937 plugin.py:6948 plugin.py:6966 plugin.py:6973 plugin.py:6984
-#: plugin.py:6995 plugin.py:7004 plugin.py:7027 plugin.py:7050 plugin.py:7060
-#: plugin.py:7072 plugin.py:7084 plugin.py:7097 plugin.py:7108 plugin.py:7120
-#: plugin.py:7130 plugin.py:7139 plugin.py:7155 plugin.py:7164 plugin.py:7179
-#: plugin.py:7197 plugin.py:7207 plugin.py:7220 plugin.py:7236 plugin.py:7249
-#: plugin.py:7260 plugin.py:7272 plugin.py:7303 plugin.py:7352 plugin.py:7367
-#: plugin.py:7380 plugin.py:7393 plugin.py:7406 plugin.py:7417 plugin.py:7427
-#: plugin.py:7445 plugin.py:7456 plugin.py:7474 plugin.py:7481 plugin.py:7492
-#: plugin.py:7503 plugin.py:7512 plugin.py:7535 plugin.py:7558 plugin.py:7568
-#: plugin.py:7580 plugin.py:7592 plugin.py:7604 plugin.py:7614 plugin.py:7625
-#: plugin.py:7636 plugin.py:7647 plugin.py:7657 plugin.py:7672 plugin.py:7682
-#: plugin.py:7692 plugin.py:7702 plugin.py:7710 plugin.py:7725 plugin.py:7743
-#: plugin.py:7753 plugin.py:7766 plugin.py:7782 plugin.py:7795 plugin.py:7806
-#: plugin.py:7818 plugin.py:7849
-msgid "- Position"
-msgstr "- 位置"
-
-#: plugin.py:5763 plugin.py:5974 plugin.py:5987 plugin.py:6004 plugin.py:6019
-#: plugin.py:6030 plugin.py:6041 plugin.py:6053 plugin.py:6066 plugin.py:6079
-#: plugin.py:6092 plugin.py:6106 plugin.py:6122 plugin.py:6136 plugin.py:6147
-#: plugin.py:6159 plugin.py:6171 plugin.py:6183 plugin.py:6196 plugin.py:6207
-#: plugin.py:6217 plugin.py:6225 plugin.py:6235 plugin.py:6245 plugin.py:6263
-#: plugin.py:6275 plugin.py:6293 plugin.py:6301 plugin.py:6312 plugin.py:6323
-#: plugin.py:6332 plugin.py:6355 plugin.py:6378 plugin.py:6388 plugin.py:6399
-#: plugin.py:6411 plugin.py:6424 plugin.py:6433 plugin.py:6443 plugin.py:6454
-#: plugin.py:6465 plugin.py:6476 plugin.py:6486 plugin.py:6501 plugin.py:6511
-#: plugin.py:6521 plugin.py:6531 plugin.py:6539 plugin.py:6554 plugin.py:6572
-#: plugin.py:6582 plugin.py:6596 plugin.py:6611 plugin.py:6624 plugin.py:6635
-#: plugin.py:6647 plugin.py:6678 plugin.py:6712 plugin.py:6724 plugin.py:6737
-#: plugin.py:6750 plugin.py:6763 plugin.py:6776 plugin.py:6789 plugin.py:6802
-#: plugin.py:6812 plugin.py:6824 plugin.py:6839 plugin.py:6851 plugin.py:6864
-#: plugin.py:6875 plugin.py:6888 plugin.py:6900 plugin.py:6910 plugin.py:6920
-#: plugin.py:6938 plugin.py:6949 plugin.py:6967 plugin.py:6975 plugin.py:6986
-#: plugin.py:6997 plugin.py:7006 plugin.py:7029 plugin.py:7052 plugin.py:7062
-#: plugin.py:7073 plugin.py:7085 plugin.py:7098 plugin.py:7109 plugin.py:7121
-#: plugin.py:7131 plugin.py:7140 plugin.py:7156 plugin.py:7165 plugin.py:7180
-#: plugin.py:7198 plugin.py:7208 plugin.py:7222 plugin.py:7237 plugin.py:7250
-#: plugin.py:7261 plugin.py:7273 plugin.py:7304 plugin.py:7353 plugin.py:7368
-#: plugin.py:7381 plugin.py:7394 plugin.py:7407 plugin.py:7418 plugin.py:7428
-#: plugin.py:7446 plugin.py:7457 plugin.py:7475 plugin.py:7483 plugin.py:7494
-#: plugin.py:7505 plugin.py:7514 plugin.py:7537 plugin.py:7560 plugin.py:7570
-#: plugin.py:7581 plugin.py:7593 plugin.py:7605 plugin.py:7615 plugin.py:7626
-#: plugin.py:7637 plugin.py:7648 plugin.py:7658 plugin.py:7673 plugin.py:7683
-#: plugin.py:7693 plugin.py:7703 plugin.py:7711 plugin.py:7726 plugin.py:7744
-#: plugin.py:7754 plugin.py:7768 plugin.py:7783 plugin.py:7796 plugin.py:7807
-#: plugin.py:7819 plugin.py:7850
-msgid "- Alignment"
-msgstr "- 对齐"
-
-#: plugin.py:5764 plugin.py:5839 plugin.py:5841 plugin.py:5843 plugin.py:5845
-#: plugin.py:5847 plugin.py:5967 plugin.py:6006 plugin.py:6021 plugin.py:6033
-#: plugin.py:6042 plugin.py:6056 plugin.py:6069 plugin.py:6082 plugin.py:6095
-#: plugin.py:6108 plugin.py:6125 plugin.py:6139 plugin.py:6150 plugin.py:6161
-#: plugin.py:6173 plugin.py:6199 plugin.py:6210 plugin.py:6227 plugin.py:6237
-#: plugin.py:6247 plugin.py:6265 plugin.py:6277 plugin.py:6304 plugin.py:6315
-#: plugin.py:6326 plugin.py:6341 plugin.py:6364 plugin.py:6403 plugin.py:6413
-#: plugin.py:6426 plugin.py:6435 plugin.py:6444 plugin.py:6455 plugin.py:6466
-#: plugin.py:6477 plugin.py:6541 plugin.py:6583 plugin.py:6601 plugin.py:6616
-#: plugin.py:6637 plugin.py:6649 plugin.py:6660 plugin.py:6669 plugin.py:6704
-#: plugin.py:6715 plugin.py:6727 plugin.py:6740 plugin.py:6753 plugin.py:6766
-#: plugin.py:6779 plugin.py:6791 plugin.py:6805 plugin.py:6826 plugin.py:6841
-#: plugin.py:6854 plugin.py:6867 plugin.py:6891 plugin.py:6902 plugin.py:6912
-#: plugin.py:6922 plugin.py:6940 plugin.py:6951 plugin.py:6978 plugin.py:6989
-#: plugin.py:7000 plugin.py:7015 plugin.py:7038 plugin.py:7077 plugin.py:7087
-#: plugin.py:7099 plugin.py:7110 plugin.py:7158 plugin.py:7167 plugin.py:7209
-#: plugin.py:7227 plugin.py:7242 plugin.py:7263 plugin.py:7275 plugin.py:7286
-#: plugin.py:7295 plugin.py:7331 plugin.py:7355 plugin.py:7370 plugin.py:7384
-#: plugin.py:7397 plugin.py:7410 plugin.py:7430 plugin.py:7448 plugin.py:7459
-#: plugin.py:7486 plugin.py:7497 plugin.py:7508 plugin.py:7523 plugin.py:7546
-#: plugin.py:7585 plugin.py:7595 plugin.py:7607 plugin.py:7616 plugin.py:7627
-#: plugin.py:7638 plugin.py:7649 plugin.py:7713 plugin.py:7755 plugin.py:7773
-#: plugin.py:7788 plugin.py:7809 plugin.py:7821 plugin.py:7832 plugin.py:7841
-msgid "- Color"
-msgstr "- 颜色"
-
-#: plugin.py:5765 plugin.py:6043 plugin.py:6266 plugin.py:6414 plugin.py:6427
-#: plugin.py:6436 plugin.py:6445 plugin.py:6456 plugin.py:6467 plugin.py:6478
-#: plugin.py:6542 plugin.py:6584 plugin.py:6638 plugin.py:6650 plugin.py:6661
-#: plugin.py:6670 plugin.py:6941 plugin.py:7088 plugin.py:7100 plugin.py:7111
-#: plugin.py:7159 plugin.py:7168 plugin.py:7210 plugin.py:7264 plugin.py:7276
-#: plugin.py:7287 plugin.py:7296 plugin.py:7449 plugin.py:7596 plugin.py:7608
-#: plugin.py:7617 plugin.py:7628 plugin.py:7639 plugin.py:7650 plugin.py:7714
-#: plugin.py:7756 plugin.py:7810 plugin.py:7822 plugin.py:7833 plugin.py:7842
-msgid "- Background Color"
-msgstr "- 背景色"
-
-#: plugin.py:5766 plugin.py:6008 plugin.py:6023 plugin.py:6035 plugin.py:6045
-#: plugin.py:6058 plugin.py:6071 plugin.py:6084 plugin.py:6097 plugin.py:6113
-#: plugin.py:6127 plugin.py:6141 plugin.py:6165 plugin.py:6177 plugin.py:6187
-#: plugin.py:6201 plugin.py:6229 plugin.py:6239 plugin.py:6249 plugin.py:6268
-#: plugin.py:6279 plugin.py:6306 plugin.py:6317 plugin.py:6349 plugin.py:6372
-#: plugin.py:6405 plugin.py:6417 plugin.py:6447 plugin.py:6458 plugin.py:6469
-#: plugin.py:6480 plugin.py:6548 plugin.py:6563 plugin.py:6576 plugin.py:6590
-#: plugin.py:6605 plugin.py:6618 plugin.py:6640 plugin.py:6652 plugin.py:6717
-#: plugin.py:6729 plugin.py:6742 plugin.py:6755 plugin.py:6768 plugin.py:6781
-#: plugin.py:6796 plugin.py:6828 plugin.py:6843 plugin.py:6856 plugin.py:6869
-#: plugin.py:6879 plugin.py:6893 plugin.py:6904 plugin.py:6914 plugin.py:6924
-#: plugin.py:6943 plugin.py:6953 plugin.py:6980 plugin.py:6991 plugin.py:7023
-#: plugin.py:7046 plugin.py:7079 plugin.py:7091 plugin.py:7102 plugin.py:7113
-#: plugin.py:7174 plugin.py:7189 plugin.py:7202 plugin.py:7216 plugin.py:7231
-#: plugin.py:7244 plugin.py:7266 plugin.py:7278 plugin.py:7357 plugin.py:7372
-#: plugin.py:7386 plugin.py:7399 plugin.py:7412 plugin.py:7422 plugin.py:7432
-#: plugin.py:7451 plugin.py:7461 plugin.py:7488 plugin.py:7499 plugin.py:7531
-#: plugin.py:7554 plugin.py:7587 plugin.py:7599 plugin.py:7619 plugin.py:7630
-#: plugin.py:7641 plugin.py:7652 plugin.py:7720 plugin.py:7735 plugin.py:7748
-#: plugin.py:7762 plugin.py:7777 plugin.py:7790 plugin.py:7812 plugin.py:7824
-msgid "- Font"
-msgstr "- 字体"
-
-#: plugin.py:5769
-msgid "Active Screen"
-msgstr "活动画面"
-
-#: plugin.py:5770
-msgid "Screen Switch Select - Screen"
-msgstr "屏幕开关选择-屏幕"
-
-#: plugin.py:5771
-msgid "Screen Switch Select - LCD"
-msgstr "屏幕开关选择-LCD"
-
-#: plugin.py:5772
-msgid "Screens used for Changing"
-msgstr "用于更换的屏幕"
-
-#: plugin.py:5773 plugin.py:7333
-msgid "Screen 1 Changing Time"
-msgstr "屏幕1更改时间"
-
-#: plugin.py:5775 plugin.py:7335
-msgid "- Screen 2 Changing Time"
-msgstr "- 屏幕2更改时间"
-
-#: plugin.py:5776 plugin.py:7336
-msgid "- Screen 3 Changing Time"
-msgstr "- 屏幕3更改时间"
-
-#: plugin.py:5777 plugin.py:7337
-msgid "- Screen 4 Changing Time"
-msgstr "- 屏幕4更改时间"
-
-#: plugin.py:5778 plugin.py:7338
-msgid "- Screen 5 Changing Time"
-msgstr "- 屏幕5更改时间"
-
-#: plugin.py:5779 plugin.py:7339
-msgid "- Screen 6 Changing Time"
-msgstr "- 屏幕6更改时间"
-
-#: plugin.py:5780 plugin.py:7340
-msgid "- Screen 7 Changing Time"
-msgstr "- 屏幕7更改时间"
-
-#: plugin.py:5781 plugin.py:7341
-msgid "- Screen 8 Changing Time"
-msgstr "- 屏幕8更改时间"
-
-#: plugin.py:5782 plugin.py:7342
-msgid "- Screen 9 Changing Time"
-msgstr "- 屏幕9更改时间"
-
-#: plugin.py:5783
-msgid "Picture Changing Time"
-msgstr "图片更改时间"
-
-#: plugin.py:5784
-msgid "Picture Sort"
-msgstr "图片排序"
-
-#: plugin.py:5785
-msgid "Picture Directory Recursive"
-msgstr "图片目录递归"
-
-#: plugin.py:5786
-msgid "Picture Quality for Resizing"
-msgstr "调整画质的图像质量"
-
-#: plugin.py:5788
-msgid "Picture Quick Update Time [s]"
-msgstr "图片快速更新时间[s]"
-
-#: plugin.py:5790
-msgid "Picture Type [only Picture]"
-msgstr "图片类型[仅图片]"
-
-#: plugin.py:5791
-msgid "Background-Picture Type"
-msgstr "背景图片类型"
-
-#: plugin.py:5792
-msgid "Weather API"
-msgstr "天气 API"
-
-#: plugin.py:5793
-msgid "Weather API-Key OpenWeatherMap"
-msgstr "天气API键打开天气图"
-
-#: plugin.py:5794
-msgid "Weather API-ID Key WeatherUnlocked"
-msgstr "天气API-ID密钥天气解锁"
-
-#: plugin.py:5795
-msgid "Weather City"
-msgstr "天气城市"
-
-#: plugin.py:5796
-msgid "Weather City 2"
-msgstr "天气城市2"
-
-#: plugin.py:5797
-msgid "Weather-Icon-Path [ok]>"
-msgstr "天气图标路径 [ok]>"
-
-#: plugin.py:5798
-msgid "Weather-Icon Zoom"
-msgstr "天气图标放大"
-
-#: plugin.py:5799
-msgid "Weather Low Temperature Color"
-msgstr "天气低温色"
-
-#: plugin.py:5800
-msgid "Weather High Temperature Color"
-msgstr "天气高温色"
-
-#: plugin.py:5801
-msgid "Weather Transparency"
-msgstr "天气透明度"
-
-#: plugin.py:5802
-msgid "Weather Wind speed unit"
-msgstr "天气风速单位"
-
-#: plugin.py:5803
-msgid "Weather Wind Info Lines"
-msgstr "天气线"
-
-#: plugin.py:5804
-msgid "Weather Rain Chance"
-msgstr "天气雨"
-
-#: plugin.py:5806
-msgid "- Rain Zoom"
-msgstr "- 雨缩放"
-
-#: plugin.py:5807
-msgid "- Rain Color"
-msgstr "- 雨色"
-
-#: plugin.py:5808
-msgid "- Rain use Color 2 from"
-msgstr "- 从雨中使用颜色2"
-
-#: plugin.py:5809
-msgid "- Rain Color 2"
-msgstr "- 雨色2"
-
-#: plugin.py:5810
-msgid "Weather Lines"
-msgstr "天气线"
-
-#: plugin.py:5811
-msgid "Weather Trendarrows"
-msgstr "天气趋势箭头"
-
-#: plugin.py:5812
-msgid "Weather Extra Infos"
-msgstr "天气额外信息"
-
-#: plugin.py:5814
-msgid "- Extra Zoom"
-msgstr "- 额外缩放"
-
-#: plugin.py:5815
-msgid "- Show chill temperature from difference"
-msgstr "- 显示温差"
-
-#: plugin.py:5816
-msgid "- Extra Color City"
-msgstr "- 城市的附加颜色"
-
-#: plugin.py:5817
-msgid "- Extra Color Chill"
-msgstr "- 额外颜色冷色"
-
-#: plugin.py:5818
-msgid "Netatmo CO2 Min Range"
-msgstr "Netatmo CO2最小范围"
-
-#: plugin.py:5819
-msgid "Netatmo CO2 Max Range"
-msgstr "Netatmo CO2最大范围"
-
-#: plugin.py:5820
-msgid "Meteo URL"
-msgstr "气象网址"
-
-#: plugin.py:5821
-msgid "Moon-Icon-Path [ok]>"
-msgstr "月亮图标路径 [ok]>"
-
-#: plugin.py:5822
-msgid "Recording Picture [ok]>"
-msgstr "录制图片 [ok]>"
-
-#: plugin.py:5823
-msgid "Double-button switches"
-msgstr "双按钮开关"
-
-#: plugin.py:5824
-msgid "Key for Screen Change"
-msgstr "屏幕切换键"
-
-#: plugin.py:5825
-msgid "Key for Screen On/Off"
-msgstr "屏幕开/关键"
-
-#: plugin.py:5826
-msgid "FritzCall Picture Path [ok]>"
-msgstr "FritzCall图片路径 [ok]>"
-
-#: plugin.py:5827
-msgid "FritzCall Number of Lines per Entry"
-msgstr "FritzCall每个条目的行数"
-
-#: plugin.py:5828
-msgid "FritzCall Number of List Entries"
-msgstr "FritzCall列表条目数"
-
-#: plugin.py:5829
-msgid "FritzCall Number of Pictures"
-msgstr "FritzCall图片数"
-
-#: plugin.py:5830
-msgid "FritzCall Picture Orientation"
-msgstr "FritzCall图像定向"
-
-#: plugin.py:5831
-msgid "FritzCall Picture Transparency"
-msgstr "FritzCall图片透明度"
-
-#: plugin.py:5832
-msgid "FritzCall Pictures Search"
-msgstr "FritzCall图片搜索"
-
-#: plugin.py:5833
-msgid "FritzCall remove Calls after hours"
-msgstr "FritzCall在(小时)后取消呼叫"
-
-#: plugin.py:5834
-msgid "FritzCall Popup-Time"
-msgstr "FritzCall弹出时间"
-
-#: plugin.py:5835
-msgid "FritzCall Popup LCD"
-msgstr "FritzCall弹出式液晶屏"
-
-#: plugin.py:5836
-msgid "FritzCall Popup Color"
-msgstr "FritzCall弹出窗口的颜色"
-
-#: plugin.py:5837
-msgid "FritzCall Frame Picture [ok]>"
-msgstr "FritzCall相框图片 [ok]>"
-
-#: plugin.py:5838
-msgid "Calendar ics-Path [ok]>"
-msgstr "日历象形图路径[ok]>"
-
-#: plugin.py:5840 plugin.py:5842 plugin.py:5844
-msgid "Calendar ics-URL"
-msgstr "日历象形图互联网地址"
-
-#: plugin.py:5846
-msgid "Calendar planerFS"
-msgstr "日历调度程序FS"
-
-#: plugin.py:5848
-msgid "Calendar Saturday Color"
-msgstr "日历中的星期六颜色"
-
-#: plugin.py:5849
-msgid "Calendar Sunday Color"
-msgstr "日历中的星期日颜色"
-
-#: plugin.py:5850
-msgid "Calendar Line Thickness"
-msgstr "日历线条粗细"
-
-#: plugin.py:5851
-msgid "Calendar Day Event Preview"
-msgstr "日历日活动预览"
-
-#: plugin.py:5852
-msgid "Calendar Timezone Correction"
-msgstr "日历时区修正"
-
-#: plugin.py:5853
-msgid "Calendar Transparency"
-msgstr "日历透明度"
-
-#: plugin.py:5854
-msgid "Calendar Poll Interval"
-msgstr "日历轮询间隔"
-
-#: plugin.py:5855
-msgid "Tuner Color"
-msgstr "调谐器颜色"
-
-#: plugin.py:5856
-msgid "Tuner Color Active"
-msgstr "调谐器颜色有效"
-
-#: plugin.py:5857
-msgid "Tuner Color On"
-msgstr "调谐器颜色开启"
-
-#: plugin.py:5858
-msgid "Service search first"
-msgstr "服务搜索优先"
-
-#: plugin.py:5859
-msgid "DVB-T Signal-Quality Correction"
-msgstr "DVB-T信号质量校正"
-
-#: plugin.py:5860
-msgid "Font global [ok]>"
-msgstr "字体全局 [ok]>"
-
-#: plugin.py:5861
-msgid "Font 1 [ok]>"
-msgstr "字体1 [ok]>"
-
-#: plugin.py:5862
-msgid "Font 2 [ok]>"
-msgstr "字体 2 [ok]>"
-
-#: plugin.py:5863
-msgid "Font 3 [ok]>"
-msgstr "字体 3 [ok]>"
-
-#: plugin.py:5864
-msgid "Font 4 [ok]>"
-msgstr "字体 4 [ok]>"
-
-#: plugin.py:5865
-msgid "Font 5 [ok]>"
-msgstr "字体 5 [ok]>"
-
-#: plugin.py:5866
-msgid "Mail 1 Connect"
-msgstr "邮件1连接"
-
-#: plugin.py:5867
-msgid "Mail 1 Server"
-msgstr "邮件1服务器"
-
-#: plugin.py:5868
-msgid "Mail 1 [Displayname:]Username"
-msgstr "邮件1 [显示名称:]用户名"
-
-#: plugin.py:5869
-msgid "Mail 1 Password"
-msgstr "邮件1密码"
-
-#: plugin.py:5870
-msgid "Mail 2 Connect"
-msgstr "邮件2连接"
-
-#: plugin.py:5871
-msgid "Mail 2 Server"
-msgstr "邮件2服务器"
-
-#: plugin.py:5872
-msgid "Mail 2 [Displayname:]Username"
-msgstr "邮件2 [显示名称:]用户名"
-
-#: plugin.py:5873
-msgid "Mail 2 Password"
-msgstr "邮件2密码"
-
-#: plugin.py:5874
-msgid "Mail 3 Connect"
-msgstr "邮件3连接"
-
-#: plugin.py:5875
-msgid "Mail 3 Server"
-msgstr "邮件3服务器"
-
-#: plugin.py:5876
-msgid "Mail 3 [Displayname:]Username"
-msgstr "邮件3 [显示名称:]用户名"
-
-#: plugin.py:5877
-msgid "Mail 3 Password"
-msgstr "邮件3密码"
-
-#: plugin.py:5878
-msgid "Mail 4 Connect"
-msgstr "邮件4连接"
-
-#: plugin.py:5879
-msgid "Mail 4 Server"
-msgstr "邮件4服务器"
-
-#: plugin.py:5880
-msgid "Mail 4 [Displayname:]Username"
-msgstr "邮件4 [显示名称:]用户名"
-
-#: plugin.py:5881
-msgid "Mail 4 Password"
-msgstr "邮件4密码"
-
-#: plugin.py:5882
-msgid "Mail 5 Connect"
-msgstr "邮件5连接"
-
-#: plugin.py:5883
-msgid "Mail 5 Server"
-msgstr "邮件5服务器"
-
-#: plugin.py:5884
-msgid "Mail 5 [Displayname:]Username"
-msgstr "邮件5 [显示名称:]用户名"
-
-#: plugin.py:5885
-msgid "Mail 5 Password"
-msgstr "邮件5密码"
-
-#: plugin.py:5886
-msgid "Mail Poll Interval"
-msgstr "邮件轮询间隔"
-
-#: plugin.py:5887
-msgid "Mail IMAP limit to last days"
-msgstr "邮寄IMAP限制到最后几天"
-
-#: plugin.py:5888
-msgid "Mail Show Empty Mailboxes"
-msgstr "邮件显示空邮箱"
-
-#: plugin.py:5889
-msgid "Mail Show Date"
-msgstr "邮件显示日期"
-
-#: plugin.py:5890
-msgid "Mail Hide Mailadress"
-msgstr "邮件隐藏邮件地址"
-
-#: plugin.py:5891
-msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr "远程文件夹1 [显示名称:] IP /名称"
-
-#: plugin.py:5892
-msgid "Remote Box 2 [Displayname:]IP/Name"
-msgstr "Remote Box 2 [显示名称:] IP /名称"
-
-#: plugin.py:5893
-msgid "Remote Box 3 [Displayname:]IP/Name"
-msgstr "遥控器3 [显示名称:] IP /名称"
-
-#: plugin.py:5894
-msgid "Remote Box 4 [Displayname:]IP/Name"
-msgstr "Remote Box 4 [显示名称:] IP /名称"
-
-#: plugin.py:5895
-msgid "Remote Box 5 [Displayname:]IP/Name"
-msgstr "Remote Box 5 [显示名称:] IP /名称"
-
-#: plugin.py:5896
-msgid "Remote Box Poll every Minutes"
-msgstr "每分钟进行一次远程箱投票"
-
-#: plugin.py:5897
-msgid "Remote Box Timer [Displayname:]IP/Name"
-msgstr "远程盒定时器[显示名称:] IP /名称"
-
-#: plugin.py:5898
-msgid "Remote Box Timer Poll every Minutes"
-msgstr "每隔一分钟的远程Box Timer轮询"
-
-#: plugin.py:5899
-msgid "WWW Converter Poll Interval"
-msgstr "WWW转换器轮询间隔"
-
-#: plugin.py:5900
-msgid "WWW Converter Usage"
-msgstr "WWW转换器使用"
-
-#: plugin.py:5901
-msgid "WWW ApiKey from cloudconvert.org"
-msgstr "来自cloudconvert.org的WWW ApiKey"
-
-#: plugin.py:5902
-msgid "WWW ApiKey from convertapi.com"
-msgstr "来自convertapi.com的WWW ApiKey"
-
-#: plugin.py:5903
-msgid "WebIF Refresh [s]"
-msgstr "WebIF刷新[s]"
-
-#: plugin.py:5904
-msgid "WebIF Refresh Type"
-msgstr "WebIF刷新类型"
-
-#: plugin.py:5905
-msgid "WebIF Init Delay"
-msgstr "WebIF初始化延迟"
-
-#: plugin.py:5906
-msgid "WebIF IP Allow"
-msgstr "WebIF IP允许"
-
-#: plugin.py:5907
-msgid "WebIF IP Deny"
-msgstr "WebIF IP拒绝"
-
-#: plugin.py:5908
-msgid "WebIF Design"
-msgstr "WebIF设计"
-
-#: plugin.py:5909
-msgid "Save as Picture for WebIF"
-msgstr "另存为WebIF图片"
-
-#: plugin.py:5910
-msgid "MJPEG Stream LCD 1 enable"
-msgstr "MJPEG流LCD 1启用"
-
-#: plugin.py:5911
-msgid "MJPEG Stream LCD 1 Port"
-msgstr "MJPEG流LCD 1端口"
-
-#: plugin.py:5912
-msgid "MJPEG Stream LCD 1 Virtual Brightness"
-msgstr "MJPEG流LCD 1虚拟亮度"
-
-#: plugin.py:5913
-msgid "MJPEG Stream LCD 2 enable"
-msgstr "MJPEG流LCD 2启用"
-
-#: plugin.py:5914
-msgid "MJPEG Stream LCD 2 Port"
-msgstr "MJPEG流LCD 2端口"
-
-#: plugin.py:5915
-msgid "MJPEG Stream LCD 2 Virtual Brightness"
-msgstr "MJPEG Stream LCD 2虚拟亮度"
-
-#: plugin.py:5916
-msgid "MJPEG Stream LCD 3 enable"
-msgstr "MJPEG流LCD 3启用"
-
-#: plugin.py:5917
-msgid "MJPEG Stream LCD 3 Port"
-msgstr "MJPEG流LCD 3端口"
-
-#: plugin.py:5918
-msgid "MJPEG Stream LCD 3 Virtual Brightness"
-msgstr "MJPEG流LCD 3虚拟亮度"
-
-#: plugin.py:5920
-msgid "MJPEG Cycle"
-msgstr "MJPEG循环"
-
-#: plugin.py:5921
-msgid "MJPEG Restart on Error"
-msgstr "出错时MJPEG重新启动"
-
-#: plugin.py:5922
-msgid "MJPEG Header Mode"
-msgstr "MJPEG标题模式"
-
-#: plugin.py:5923
-msgid "Sonos IP"
-msgstr "Sonos IP地址"
-
-#: plugin.py:5924
-msgid "Sonos Ping Timeout [ms]"
-msgstr "休眠Ping超时[毫秒]"
-
-#: plugin.py:5925
-msgid "Sonos Play Check"
-msgstr "休眠播放检查"
-
-#: plugin.py:5926
-msgid "Sonos Refresh [s]"
-msgstr "休眠更新间隔[秒]"
-
-#: plugin.py:5927
-msgid "BlueSound IP"
-msgstr "BlueSound IP"
-
-#: plugin.py:5928
-msgid "BlueSound Ping Timeout [ms]"
-msgstr "BlueSound Ping 超时 [ms]"
-
-#: plugin.py:5929
-msgid "BlueSound Play Check"
-msgstr "BlueSound 玩检查"
-
-#: plugin.py:5930
-msgid "BlueSound Refresh [s]"
-msgstr "BlueSound刷新 [s]"
-
-#: plugin.py:5931
-msgid "MusicCast IP"
-msgstr "音乐广播IP"
-
-#: plugin.py:5932
-msgid "MusicCast Server IP [optional]"
-msgstr "MusicCast服务器IP [可选]"
-
-#: plugin.py:5933
-msgid "MusicCast Ping Timeout [ms]"
-msgstr "音乐播放Ping超时 [毫秒]"
-
-#: plugin.py:5934
-msgid "MusicCast Play Check"
-msgstr "MusicCast播放检查"
-
-#: plugin.py:5935
-msgid "MusicCast Refresh [s]"
-msgstr "MusicCast刷新[s]"
-
-#: plugin.py:5936
-msgid "MusicCast Cover"
-msgstr "音乐广告封面"
-
-#: plugin.py:5937
-msgid "LCD Custom Width"
-msgstr "LCD自定义宽度"
-
-#: plugin.py:5938
-msgid "LCD Custom Height"
-msgstr "LCD自定义高度"
-
-#: plugin.py:5939
-msgid "LCD Custom Width 2"
-msgstr "LCD自定义宽度2"
-
-#: plugin.py:5940
-msgid "LCD Custom Height 2"
-msgstr "LCD自定义高度2"
-
-#: plugin.py:5941
-msgid "LCD Off when shutdown"
-msgstr "关机时液晶屏关闭"
-
-#: plugin.py:5942
-msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr "时机！在快速模式下计算所有时间到时间/ 5 * 2"
-
-#: plugin.py:5943
-msgid "Display Delay [ms]"
-msgstr "显示延迟[毫秒]"
-
-#: plugin.py:5944
-msgid "Threads per LCD"
-msgstr "每个LCD的线程数"
-
-#: plugin.py:5945
-msgid "Show Crash Corner"
-msgstr "显示崩溃角"
-
-#: plugin.py:5946
-msgid "Show 'no ....' Messages"
-msgstr "显示“否 ....”消息"
-
-#: plugin.py:5947
-msgid "Storage-Devices: Force Read"
-msgstr "存储设备：强制读取"
-
-#: plugin.py:5948
-msgid "Storage-Devices: Color Back"
-msgstr "存储设备：彩色背"
-
-#: plugin.py:5949
-msgid "Storage-Devices: Color Bar"
-msgstr "存储设备：颜色栏"
-
-#: plugin.py:5950
-msgid "Storage-Devices: Color Full"
-msgstr "存储设备：全彩色"
-
-#: plugin.py:5951
-msgid "Network Check active"
-msgstr "网络检查处于活动状态"
-
-#: plugin.py:5952
-msgid "Switch FrameBuffer [if possible]"
-msgstr "切换帧缓冲区 [如果可能]"
-
-#: plugin.py:5953
-msgid "Config Backup Path [ok]>"
-msgstr "配置备份路径[ok]>"
-
-#: plugin.py:5954
-msgid "Config Restore All Settings"
-msgstr "配置还原所有设置"
-
-#: plugin.py:5955
-msgid "Debug-Logging > /tmp/L4log.txt"
-msgstr "调试日志 > /tmp/L4log.txt"
-
-#: plugin.py:5959 plugin.py:7310
-msgid "- Backlight Off [disable set Off=On]"
-msgstr "- 背光关闭[禁用设置关闭=打开]"
-
-#: plugin.py:5960 plugin.py:7311
-msgid "- Backlight On"
-msgstr "- 背光开启"
-
-#: plugin.py:5961 plugin.py:7312
-msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- 周末背光关闭 [禁用设置关闭=打开]"
-
-#: plugin.py:5962 plugin.py:7313
-msgid "- Backlight Weekend On"
-msgstr "- 背光周末开启"
-
-#: plugin.py:5963 plugin.py:6699 plugin.py:7314
-msgid "- LCD Auto-OFF"
-msgstr "- LCD自动关闭"
-
-#: plugin.py:5964 plugin.py:6701 plugin.py:7328
-msgid "Background"
-msgstr "背景"
-
-#: plugin.py:5968 plugin.py:6705 plugin.py:7332
-msgid "- Picture [ok]>"
-msgstr "- 图片 [ok]>"
-
-#: plugin.py:5972 plugin.py:5985
-msgid "- Picon Size"
-msgstr "- Picon大小"
-
-#: plugin.py:5975 plugin.py:5988 plugin.py:6005 plugin.py:6020 plugin.py:6032
-#: plugin.py:6055 plugin.py:6068 plugin.py:6081 plugin.py:6094 plugin.py:6123
-#: plugin.py:6137 plugin.py:6149 plugin.py:6160 plugin.py:6172 plugin.py:6184
-#: plugin.py:6198 plugin.py:6209 plugin.py:6218 plugin.py:6226 plugin.py:6236
-#: plugin.py:6246 plugin.py:6264 plugin.py:6276 plugin.py:6294 plugin.py:6302
-#: plugin.py:6313 plugin.py:6324 plugin.py:6333 plugin.py:6356 plugin.py:6380
-#: plugin.py:6390 plugin.py:6402 plugin.py:6412 plugin.py:6425 plugin.py:6434
-#: plugin.py:6540 plugin.py:6574 plugin.py:6597 plugin.py:6612 plugin.py:6625
-#: plugin.py:6636 plugin.py:6648 plugin.py:6679 plugin.py:6714 plugin.py:6726
-#: plugin.py:6739 plugin.py:6752 plugin.py:6765 plugin.py:6778 plugin.py:6804
-#: plugin.py:6813 plugin.py:6825 plugin.py:6840 plugin.py:6852 plugin.py:6865
-#: plugin.py:6876 plugin.py:6890 plugin.py:6901 plugin.py:6911 plugin.py:6921
-#: plugin.py:6939 plugin.py:6950 plugin.py:6968 plugin.py:6976 plugin.py:6987
-#: plugin.py:6998 plugin.py:7007 plugin.py:7030 plugin.py:7054 plugin.py:7064
-#: plugin.py:7076 plugin.py:7086 plugin.py:7157 plugin.py:7166 plugin.py:7200
-#: plugin.py:7223 plugin.py:7238 plugin.py:7251 plugin.py:7262 plugin.py:7274
-#: plugin.py:7305 plugin.py:7354 plugin.py:7369 plugin.py:7383 plugin.py:7395
-#: plugin.py:7408 plugin.py:7419 plugin.py:7429 plugin.py:7447 plugin.py:7458
-#: plugin.py:7476 plugin.py:7484 plugin.py:7495 plugin.py:7506 plugin.py:7515
-#: plugin.py:7538 plugin.py:7562 plugin.py:7572 plugin.py:7584 plugin.py:7594
-#: plugin.py:7606 plugin.py:7712 plugin.py:7746 plugin.py:7769 plugin.py:7784
-#: plugin.py:7797 plugin.py:7808 plugin.py:7820 plugin.py:7851
-msgid "- Split Screen"
-msgstr "- 分屏"
-
-#: plugin.py:5976 plugin.py:5989
-msgid "- Full Screen"
-msgstr "- 全屏显示"
-
-#: plugin.py:5977 plugin.py:5990
-msgid "- Text Size"
-msgstr "- 文本大小"
-
-#: plugin.py:5978 plugin.py:6503 plugin.py:6513 plugin.py:6523 plugin.py:6533
-#: plugin.py:7123 plugin.py:7133 plugin.py:7146 plugin.py:7675 plugin.py:7685
-#: plugin.py:7695 plugin.py:7705
-msgid "- Transparency"
-msgstr "- 透明度"
-
-#: plugin.py:5979 plugin.py:5991 plugin.py:6163 plugin.py:6175
-msgid "- Picon Path [ok]>"
-msgstr "- Picon路径 [ok]>"
-
-#: plugin.py:5980 plugin.py:5992
-msgid "- Picon Path 2 [ok]>"
-msgstr "- Picon路径2[ok]>"
-
-#: plugin.py:5981 plugin.py:5993
-msgid "- Picon Cache Path [ok]>"
-msgstr "- Picon缓存路径 [ok]>"
-
-#: plugin.py:5982
-msgid "Picon 2"
-msgstr "Picon 2"
-
-#: plugin.py:5994 plugin.py:6814 plugin.py:7343
-msgid "Clock"
-msgstr "时钟"
-
-#: plugin.py:5997 plugin.py:6012 plugin.py:6674 plugin.py:7300 plugin.py:7846
-msgid "-  Type"
-msgstr "-  类型"
-
-#: plugin.py:5999 plugin.py:6014 plugin.py:6819 plugin.py:6834 plugin.py:7348
-#: plugin.py:7363
-msgid "- Analog Clock"
-msgstr "- 模拟时钟"
-
-#: plugin.py:6001 plugin.py:6016 plugin.py:6821 plugin.py:6836 plugin.py:7350
-#: plugin.py:7365
-msgid "- Spacing"
-msgstr "- 间距"
-
-#: plugin.py:6002 plugin.py:6017 plugin.py:6104 plugin.py:6120 plugin.py:6134
-#: plugin.py:6145 plugin.py:6205 plugin.py:6377 plugin.py:6387 plugin.py:6396
-#: plugin.py:6484 plugin.py:6498 plugin.py:6508 plugin.py:6518 plugin.py:6528
-#: plugin.py:6609 plugin.py:6622 plugin.py:6675 plugin.py:6787 plugin.py:6800
-#: plugin.py:6822 plugin.py:6837 plugin.py:6849 plugin.py:6862 plugin.py:7051
-#: plugin.py:7061 plugin.py:7070 plugin.py:7118 plugin.py:7128 plugin.py:7137
-#: plugin.py:7235 plugin.py:7248 plugin.py:7301 plugin.py:7351 plugin.py:7366
-#: plugin.py:7392 plugin.py:7405 plugin.py:7559 plugin.py:7569 plugin.py:7578
-#: plugin.py:7656 plugin.py:7670 plugin.py:7680 plugin.py:7690 plugin.py:7700
-#: plugin.py:7781 plugin.py:7794 plugin.py:7847
-msgid "- Size"
-msgstr "- 大小"
-
-#: plugin.py:6007 plugin.py:6022 plugin.py:6034 plugin.py:6044 plugin.py:6057
-#: plugin.py:6070 plugin.py:6083 plugin.py:6096 plugin.py:6126 plugin.py:6140
-#: plugin.py:6164 plugin.py:6176 plugin.py:6200 plugin.py:6228 plugin.py:6238
-#: plugin.py:6248 plugin.py:6267 plugin.py:6278 plugin.py:6305 plugin.py:6316
-#: plugin.py:6348 plugin.py:6371 plugin.py:6404 plugin.py:6416 plugin.py:6446
-#: plugin.py:6457 plugin.py:6468 plugin.py:6479 plugin.py:6547 plugin.py:6562
-#: plugin.py:6575 plugin.py:6589 plugin.py:6604 plugin.py:6617 plugin.py:6639
-#: plugin.py:6651 plugin.py:6716 plugin.py:6728 plugin.py:6741 plugin.py:6754
-#: plugin.py:6767 plugin.py:6780 plugin.py:6827 plugin.py:6842 plugin.py:6855
-#: plugin.py:6868 plugin.py:6892 plugin.py:6903 plugin.py:6913 plugin.py:6923
-#: plugin.py:6942 plugin.py:6952 plugin.py:6979 plugin.py:6990 plugin.py:7022
-#: plugin.py:7045 plugin.py:7078 plugin.py:7090 plugin.py:7101 plugin.py:7112
-#: plugin.py:7173 plugin.py:7188 plugin.py:7201 plugin.py:7215 plugin.py:7230
-#: plugin.py:7243 plugin.py:7265 plugin.py:7277 plugin.py:7356 plugin.py:7371
-#: plugin.py:7385 plugin.py:7398 plugin.py:7411 plugin.py:7431 plugin.py:7450
-#: plugin.py:7460 plugin.py:7487 plugin.py:7498 plugin.py:7530 plugin.py:7553
-#: plugin.py:7586 plugin.py:7598 plugin.py:7618 plugin.py:7629 plugin.py:7640
-#: plugin.py:7651 plugin.py:7719 plugin.py:7734 plugin.py:7747 plugin.py:7761
-#: plugin.py:7776 plugin.py:7789 plugin.py:7811 plugin.py:7823
-msgid "- Shadow Edges"
-msgstr "- 阴影边缘"
-
-#: plugin.py:6009 plugin.py:6829 plugin.py:7358
-msgid "Clock 2"
-msgstr "时钟2"
-
-#: plugin.py:6024 plugin.py:6744
-msgid "Program Name"
-msgstr "程序名称"
-
-#: plugin.py:6028 plugin.py:6051 plugin.py:6064 plugin.py:6077 plugin.py:6090
-#: plugin.py:6124 plugin.py:6138 plugin.py:6192 plugin.py:6568 plugin.py:6613
-#: plugin.py:6710 plugin.py:6722 plugin.py:6735 plugin.py:6748 plugin.py:6761
-#: plugin.py:6774 plugin.py:6853 plugin.py:6866 plugin.py:6884 plugin.py:7194
-#: plugin.py:7239 plugin.py:7377 plugin.py:7396 plugin.py:7409 plugin.py:7740
-#: plugin.py:7785
-msgid "- maximum Lines"
-msgstr "- 最大行数"
-
-#: plugin.py:6031 plugin.py:6054 plugin.py:6067 plugin.py:6080 plugin.py:6093
-#: plugin.py:6107 plugin.py:6148 plugin.py:6197 plugin.py:6208 plugin.py:6573
-#: plugin.py:6713 plugin.py:6725 plugin.py:6738 plugin.py:6751 plugin.py:6764
-#: plugin.py:6777 plugin.py:6790 plugin.py:6803 plugin.py:6889 plugin.py:7199
-#: plugin.py:7382 plugin.py:7745
-msgid "- Length"
-msgstr "- 长度"
-
-#: plugin.py:6036
-msgid "Program Number"
-msgstr "程序号码示例"
-
-#: plugin.py:6046 plugin.py:6756
-msgid "Program Info"
-msgstr "程序信息"
-
-#: plugin.py:6049 plugin.py:6062 plugin.py:6075 plugin.py:6088 plugin.py:6102
-#: plugin.py:6103 plugin.py:6162 plugin.py:6174 plugin.py:6185 plugin.py:6193
-#: plugin.py:6194 plugin.py:6224 plugin.py:6250 plugin.py:6280 plugin.py:6295
-#: plugin.py:6339 plugin.py:6340 plugin.py:6362 plugin.py:6363 plugin.py:6382
-#: plugin.py:6392 plugin.py:6415 plugin.py:6545 plugin.py:6561 plugin.py:6569
-#: plugin.py:6570 plugin.py:6585 plugin.py:6598 plugin.py:6599 plugin.py:6615
-#: plugin.py:6626 plugin.py:6683 plugin.py:6733 plugin.py:6759 plugin.py:6772
-#: plugin.py:6785 plugin.py:6786 plugin.py:6817 plugin.py:6832 plugin.py:6877
-#: plugin.py:6885 plugin.py:6886 plugin.py:6899 plugin.py:6925 plugin.py:6954
-#: plugin.py:6969 plugin.py:7013 plugin.py:7014 plugin.py:7036 plugin.py:7037
-#: plugin.py:7056 plugin.py:7066 plugin.py:7089 plugin.py:7171 plugin.py:7187
-#: plugin.py:7195 plugin.py:7196 plugin.py:7211 plugin.py:7224 plugin.py:7225
-#: plugin.py:7241 plugin.py:7252 plugin.py:7346 plugin.py:7361 plugin.py:7378
-#: plugin.py:7379 plugin.py:7420 plugin.py:7433 plugin.py:7462 plugin.py:7477
-#: plugin.py:7521 plugin.py:7522 plugin.py:7544 plugin.py:7545 plugin.py:7564
-#: plugin.py:7574 plugin.py:7597 plugin.py:7717 plugin.py:7733 plugin.py:7741
-#: plugin.py:7742 plugin.py:7757 plugin.py:7770 plugin.py:7771 plugin.py:7787
-#: plugin.py:7798
-msgid "- Type"
-msgstr "- 类型"
-
-#: plugin.py:6059
-msgid "Program Info 2"
-msgstr "程序信息 2"
-
-#: plugin.py:6072 plugin.py:6769
-msgid "Next Program Info"
-msgstr "下一个程序信息"
-
-#: plugin.py:6085 plugin.py:6730
-msgid "Extended Description"
-msgstr "扩展描述"
-
-#: plugin.py:6098 plugin.py:6743
-msgid "- use Info when empty"
-msgstr "- 空时使用信息"
-
-#: plugin.py:6099 plugin.py:6782
-msgid "Progress Bar"
-msgstr "进度条"
-
-#: plugin.py:6109 plugin.py:6792
-msgid "- Color Text"
-msgstr "- 文本颜色"
-
-#: plugin.py:6110 plugin.py:6793
-msgid "- Border"
-msgstr "- 边界"
-
-#: plugin.py:6111 plugin.py:6211 plugin.py:6794 plugin.py:6806
-msgid "- Shaded"
-msgstr "- 阴影"
-
-#: plugin.py:6112 plugin.py:6795
-msgid "- Unit min"
-msgstr "- 单位最小值"
-
-#: plugin.py:6114 plugin.py:6844 plugin.py:7387
-msgid "Informations"
-msgstr "信息"
-
-#: plugin.py:6117 plugin.py:6131
-msgid "- Tunerinfo"
-msgstr "- 调谐器信息"
-
-#: plugin.py:6118 plugin.py:6132 plugin.py:6847 plugin.py:6860 plugin.py:7390
-#: plugin.py:7403
-msgid "- Sensors"
-msgstr "- 传感器"
-
-#: plugin.py:6119 plugin.py:6133 plugin.py:6848 plugin.py:6861 plugin.py:7391
-#: plugin.py:7404
-msgid "- CPU"
-msgstr "- 处理器"
-
-#: plugin.py:6128 plugin.py:6857 plugin.py:7400
-msgid "Informations 2"
-msgstr "信息 2"
-
-#: plugin.py:6142
-msgid "Signal Quality Bar"
-msgstr "信号质量条"
-
-#: plugin.py:6151
-msgid "- Gradient"
-msgstr "- 渐变色"
-
-#: plugin.py:6152
-msgid "- Bar Range Min"
-msgstr "- 最小范围"
-
-#: plugin.py:6153
-msgid "- Bar Range Max"
-msgstr "- 最大范围"
-
-#: plugin.py:6154
-msgid "Satellite"
-msgstr "卫星"
-
-#: plugin.py:6166
-msgid "Provider"
-msgstr "供应商"
-
-#: plugin.py:6178 plugin.py:6870 plugin.py:7413
-msgid "Used Tuner"
-msgstr "使用调谐器"
-
-#: plugin.py:6186 plugin.py:6878 plugin.py:7421
-msgid "- only active Tuner"
-msgstr "- 仅活动调谐器"
-
-#: plugin.py:6188 plugin.py:6880 plugin.py:7373
-msgid "Next Timer Event"
-msgstr "下次计时器事件"
-
-#: plugin.py:6202 plugin.py:6797
-msgid "Volume"
-msgstr "体积"
-
-#: plugin.py:6212 plugin.py:6807
-msgid "Mute"
-msgstr "静音"
-
-#: plugin.py:6219 plugin.py:6894
-msgid "Audio/Video"
-msgstr "音频/视频"
-
-#: plugin.py:6230 plugin.py:6905
-msgid "Bitrate"
-msgstr "比特率"
-
-#: plugin.py:6240 plugin.py:6915 plugin.py:7423
-msgid "Online [Ping]"
-msgstr "在线[Ping]"
-
-#: plugin.py:6251 plugin.py:6926 plugin.py:7434
-msgid "- Show State"
-msgstr "- 显示状态"
-
-#: plugin.py:6252 plugin.py:6927 plugin.py:7435
-msgid "- Timeout [ms]"
-msgstr "- 超时[毫秒]"
-
-#: plugin.py:6253 plugin.py:6254 plugin.py:6255 plugin.py:6256 plugin.py:6257
-#: plugin.py:6928 plugin.py:6929 plugin.py:6930 plugin.py:6931 plugin.py:6932
-#: plugin.py:7436 plugin.py:7437 plugin.py:7438 plugin.py:7439 plugin.py:7440
-msgid "- Online Name:Address"
-msgstr "- 在线名称:地址"
-
-#: plugin.py:6258 plugin.py:6933 plugin.py:7441
-msgid "External IP Address"
-msgstr "外部 IP 地址"
-
-#: plugin.py:6269
-msgid "- external IP URL"
-msgstr "- 外部 IP 网址"
-
-#: plugin.py:6270 plugin.py:6944 plugin.py:7452
-msgid "Storage-Devices"
-msgstr "存储设备"
-
-#: plugin.py:6281 plugin.py:6955 plugin.py:7463
-msgid "- free Warning"
-msgstr "- 免费警告"
-
-#: plugin.py:6282 plugin.py:6956 plugin.py:7464
-msgid "- extra Info"
-msgstr "- 额外信息"
-
-#: plugin.py:6283 plugin.py:6284 plugin.py:6285 plugin.py:6286 plugin.py:6287
-#: plugin.py:6957 plugin.py:6958 plugin.py:6959 plugin.py:6960 plugin.py:6961
-#: plugin.py:7465 plugin.py:7466 plugin.py:7467 plugin.py:7468 plugin.py:7469
-msgid "- Device Name"
-msgstr "- 设备名称"
-
-#: plugin.py:6288 plugin.py:6962 plugin.py:7470
-msgid "HDD"
-msgstr "HDD"
-
-#: plugin.py:6296 plugin.py:6970 plugin.py:7478
+#: ..\WebConfigSite.py:28 ..\plugin.py:6222 ..\plugin.py:6896 ..\plugin.py:7404
 msgid "Weather"
 msgstr "天气"
 
-#: plugin.py:6300 plugin.py:6311 plugin.py:6322 plugin.py:6595 plugin.py:6974
-#: plugin.py:6985 plugin.py:6996 plugin.py:7221 plugin.py:7482 plugin.py:7493
-#: plugin.py:7504 plugin.py:7767
-msgid "- Zoom"
-msgstr "- 缩小 -"
-
-#: plugin.py:6303 plugin.py:6314 plugin.py:6325 plugin.py:6977 plugin.py:6988
-#: plugin.py:6999 plugin.py:7485 plugin.py:7496 plugin.py:7507
-msgid "- Weather Type"
-msgstr "- 天气类型"
-
-#: plugin.py:6307 plugin.py:6981 plugin.py:7489
-msgid "Weather 2"
-msgstr "天气2"
-
-#: plugin.py:6318 plugin.py:6992 plugin.py:7500
-msgid "Meteo-Weather Station"
-msgstr "气象站"
-
-#: plugin.py:6327 plugin.py:7001 plugin.py:7509
+#: ..\WebConfigSite.py:28 ..\plugin.py:6253 ..\plugin.py:6927 ..\plugin.py:7435
 msgid "Netatmo"
 msgstr "Netatmo"
 
-#: plugin.py:6334 plugin.py:6357 plugin.py:6381 plugin.py:6391 plugin.py:7008
-#: plugin.py:7031 plugin.py:7055 plugin.py:7065 plugin.py:7516 plugin.py:7539
-#: plugin.py:7563 plugin.py:7573
-msgid "- Station"
-msgstr "- 站"
-
-#: plugin.py:6335 plugin.py:6358 plugin.py:7009 plugin.py:7032 plugin.py:7517
-#: plugin.py:7540
-msgid "- Module"
-msgstr "- 模块"
-
-#: plugin.py:6336 plugin.py:6359 plugin.py:7010 plugin.py:7033 plugin.py:7518
-#: plugin.py:7541
-msgid "- Module userdefined"
-msgstr "- 未指定模块"
-
-#: plugin.py:6337 plugin.py:6360 plugin.py:7011 plugin.py:7034 plugin.py:7519
-#: plugin.py:7542
-msgid "- Base"
-msgstr "- 基本"
-
-#: plugin.py:6338 plugin.py:6361 plugin.py:7012 plugin.py:7035 plugin.py:7520
-#: plugin.py:7543
-msgid "- Name"
-msgstr "- 名称"
-
-#: plugin.py:6342 plugin.py:6365 plugin.py:6556 plugin.py:7016 plugin.py:7039
-#: plugin.py:7182 plugin.py:7524 plugin.py:7547 plugin.py:7728
-msgid "- Color 1"
-msgstr "- 颜色 1"
-
-#: plugin.py:6343 plugin.py:6366 plugin.py:6557 plugin.py:7017 plugin.py:7040
-#: plugin.py:7183 plugin.py:7525 plugin.py:7548 plugin.py:7729
-msgid "- Color 2"
-msgstr "- 颜色 2"
-
-#: plugin.py:6344 plugin.py:6367 plugin.py:6558 plugin.py:7018 plugin.py:7041
-#: plugin.py:7184 plugin.py:7526 plugin.py:7549 plugin.py:7730
-msgid "- Color 3"
-msgstr "- 颜色 3"
-
-#: plugin.py:6345 plugin.py:6368 plugin.py:6559 plugin.py:7019 plugin.py:7042
-#: plugin.py:7185 plugin.py:7527 plugin.py:7550 plugin.py:7731
-msgid "- Color 4"
-msgstr "- 颜色 4"
-
-#: plugin.py:6346 plugin.py:6369 plugin.py:6560 plugin.py:7020 plugin.py:7043
-#: plugin.py:7186 plugin.py:7528 plugin.py:7551 plugin.py:7732
-msgid "- Color 5"
-msgstr "- 颜色 5"
-
-#: plugin.py:6347 plugin.py:6370 plugin.py:7021 plugin.py:7044 plugin.py:7529
-#: plugin.py:7552
-msgid "- Color 6"
-msgstr "- Spalva 6"
-
-#: plugin.py:6350 plugin.py:7024 plugin.py:7532
-msgid "Netatmo 2"
-msgstr "Netatmo 2"
-
-#: plugin.py:6373 plugin.py:7047 plugin.py:7555
-msgid "Netatmo CO2 Indicator"
-msgstr "Netatmo CO2指标"
-
-#: plugin.py:6379 plugin.py:6389 plugin.py:7053 plugin.py:7063 plugin.py:7561
-#: plugin.py:7571
-msgid "- Length [Bar]"
-msgstr "- 长度 [Bar]"
-
-#: plugin.py:6383 plugin.py:7057 plugin.py:7565
-msgid "Netatmo Comfort Indicator"
-msgstr "Netatmo舒适度指示器"
-
-#: plugin.py:6393 plugin.py:7067 plugin.py:7575
-msgid "Moonphase"
-msgstr "月相"
-
-#: plugin.py:6400 plugin.py:7074 plugin.py:7075 plugin.py:7582
-msgid "- Infolines"
-msgstr "- 线"
-
-#: plugin.py:6401 plugin.py:7583
-msgid "- Trendarrows"
-msgstr "- 趋势箭头"
-
-#: plugin.py:6406 plugin.py:7080 plugin.py:7588
-msgid "Sunrise"
-msgstr "日出"
-
-#: plugin.py:6418 plugin.py:7151 plugin.py:7600
-msgid "Show oscam.lcd"
-msgstr "显示oscam.lcd"
-
-#: plugin.py:6421 plugin.py:6440 plugin.py:6451 plugin.py:6462 plugin.py:6527
-#: plugin.py:7095 plugin.py:7106 plugin.py:7612 plugin.py:7623 plugin.py:7634
-#: plugin.py:7699
-msgid "- File [ok]>"
-msgstr "- 文件路 [ok]>"
-
-#: plugin.py:6428
-msgid "Show ecm.info"
-msgstr "显示ecm.info"
-
-#: plugin.py:6437 plugin.py:7092 plugin.py:7609
-msgid "Show Textfile"
-msgstr "显示文本文件"
-
-#: plugin.py:6448 plugin.py:7103 plugin.py:7620
-msgid "Show Textfile 2"
-msgstr "显示文本文件2"
-
-#: plugin.py:6459 plugin.py:7631
-msgid "Show Textfile 3"
-msgstr "显示文本文件3"
-
-#: plugin.py:6470 plugin.py:7642
-msgid "Show HTTP Text"
-msgstr "显示HTTP文本"
-
-#: plugin.py:6473 plugin.py:6487 plugin.py:7645 plugin.py:7659
-msgid "- URL"
-msgstr "- URL"
-
-#: plugin.py:6481 plugin.py:7653
-msgid "WWW-Internet Converter"
-msgstr "WWW网络转换器"
-
-#: plugin.py:6488 plugin.py:7660
-msgid "- HTTP Width"
-msgstr "- HTTP宽度"
-
-#: plugin.py:6489 plugin.py:7661
-msgid "- HTTP Height"
-msgstr "- HTTP高度"
-
-#: plugin.py:6490 plugin.py:7662
-msgid "- Cut from X"
-msgstr "- 从X剪切"
-
-#: plugin.py:6491 plugin.py:7663
-msgid "- Cut from Y"
-msgstr "- 从Y剪切"
-
-#: plugin.py:6492 plugin.py:7664
-msgid "- Cut Width [disable = 0]"
-msgstr "- 剪切宽度[禁用= 0]"
-
-#: plugin.py:6493 plugin.py:7665
-msgid "- Cut Height [disable = 0]"
-msgstr "- 剪切高度[禁用= 0]"
-
-#: plugin.py:6494 plugin.py:7114 plugin.py:7666
-msgid "Show Picture"
-msgstr "显示图片"
-
-#: plugin.py:6497 plugin.py:6507 plugin.py:6517 plugin.py:7117 plugin.py:7127
-#: plugin.py:7669 plugin.py:7679 plugin.py:7689
-msgid "- File or Path [ok]>"
-msgstr "- 文件或路径[ok]>"
-
-#: plugin.py:6499 plugin.py:6509 plugin.py:6519 plugin.py:6529 plugin.py:7119
-#: plugin.py:7129 plugin.py:7138 plugin.py:7671 plugin.py:7681 plugin.py:7691
-#: plugin.py:7701
-msgid "- Size max Height"
-msgstr "- 最大尺寸高度"
-
-#: plugin.py:6502 plugin.py:6512 plugin.py:6522 plugin.py:6532 plugin.py:7122
-#: plugin.py:7132 plugin.py:7674 plugin.py:7684 plugin.py:7694 plugin.py:7704
-msgid "- Quick Update"
-msgstr "- 快速更新"
-
-#: plugin.py:6504 plugin.py:7124 plugin.py:7676
-msgid "Show Picture 2"
-msgstr "显示图片2"
-
-#: plugin.py:6514 plugin.py:7686
-msgid "Show Picture 3"
-msgstr "显示图片3"
-
-#: plugin.py:6524 plugin.py:7696
-msgid "Show Picture 4"
-msgstr "显示图片4"
-
-#: plugin.py:6534 plugin.py:7160 plugin.py:7706
+#: ..\WebConfigSite.py:28 ..\plugin.py:6460 ..\plugin.py:7086 ..\plugin.py:7632
 msgid "Mail"
 msgstr "邮件"
 
-#: plugin.py:6543 plugin.py:7169 plugin.py:7715
-msgid "- Lines"
-msgstr "- 线"
-
-#: plugin.py:6544 plugin.py:7170 plugin.py:7716
-msgid "- Mail Konto"
-msgstr "- 邮件帐户"
-
-#: plugin.py:6546 plugin.py:6555 plugin.py:6614 plugin.py:7172 plugin.py:7181
-#: plugin.py:7240 plugin.py:7718 plugin.py:7727 plugin.py:7786
-msgid "- max Width"
-msgstr "- 最大宽度"
-
-#: plugin.py:6549 plugin.py:7175 plugin.py:7721
+#: ..\WebConfigSite.py:28 ..\plugin.py:6475 ..\plugin.py:7101 ..\plugin.py:7647
 msgid "Remote Box"
 msgstr "遥控器"
 
-#: plugin.py:6564 plugin.py:7190 plugin.py:7736
-msgid "Remote Box Timer"
-msgstr "遥控盒定时器"
-
-#: plugin.py:6577 plugin.py:7203 plugin.py:7749
+#: ..\WebConfigSite.py:28 ..\plugin.py:6503 ..\plugin.py:7129 ..\plugin.py:7675
 msgid "FritzCall"
 msgstr "FritzCall"
 
-#: plugin.py:6586 plugin.py:7212 plugin.py:7758
-msgid "- Picture Size"
-msgstr "- 图片尺寸"
-
-#: plugin.py:6587 plugin.py:7213 plugin.py:7759
-msgid "- Picture Position"
-msgstr "- 图片位置"
-
-#: plugin.py:6588 plugin.py:7214 plugin.py:7760
-msgid "- Picture Alignment"
-msgstr "- 图片对齐"
-
-#: plugin.py:6591 plugin.py:7217 plugin.py:7763
+#: ..\WebConfigSite.py:28 ..\plugin.py:6517 ..\plugin.py:7143 ..\plugin.py:7689
 msgid "Calendar"
 msgstr "日历"
 
-#: plugin.py:6600 plugin.py:7226 plugin.py:7772
+#: ..\WebConfigSite.py:192 ..\plugin.py:5832
+msgid "WebIF IP Allow"
+msgstr "WebIF IP允许"
+
+#: ..\WebConfigSite.py:260
+msgid "No or wrong File selected, try a correct File first !"
+msgstr "没有或选择了错误的文件，请先尝试正确的文件！"
+
+#: ..\WebConfigSite.py:525 ..\WebConfigSite.py:568 ..\plugin.py:5460
+msgid "Mode"
+msgstr "模式"
+
+#: ..\WebConfigSite.py:527
+msgid "IP seurity not supported by Box"
+msgstr "设备不支持IP验证"
+
+#: ..\WebConfigSite.py:542
+msgid "Crashlog"
+msgstr "崩溃日志"
+
+#: ..\WebConfigSite.py:544
+msgid "Show"
+msgstr "显示"
+
+#: ..\WebConfigSite.py:545
+msgid "Delete"
+msgstr "删除"
+
+#: ..\WebConfigSite.py:549
+msgid "Filename"
+msgstr "文档名称"
+
+#: ..\WebConfigSite.py:550
+msgid "Restore Config"
+msgstr "恢复配置"
+
+#: ..\WebConfigSite.py:551
+msgid "Backup Config"
+msgstr "备份配置"
+
+#: ..\WebConfigSite.py:553
+msgid "Delete Logfile"
+msgstr "删除日志文件"
+
+#: ..\WebConfigSite.py:554
+msgid "Download Logfile"
+msgstr "下载日志文件"
+
+#: ..\WebConfigSite.py:555
+msgid "Save Config"
+msgstr "保存配置"
+
+#: ..\WebConfigSite.py:563
+msgid "stop Screencycle"
+msgstr "停止屏幕循环"
+
+#: ..\WebConfigSite.py:569 ..\plugin.py:352 ..\plugin.py:5498 ..\plugin.py:5641
+#: ..\plugin.py:7787 ..\plugin.py:7803
+msgid "Global"
+msgstr "全局"
+
+#: ..\WebConfigSite.py:570 ..\plugin.py:505 ..\plugin.py:5489 ..\plugin.py:5883
+#: ..\plugin.py:7788 ..\plugin.py:7792
+msgid "On"
+msgstr "打开"
+
+#: ..\WebConfigSite.py:571 ..\plugin.py:505 ..\plugin.py:630 ..\plugin.py:5492
+#: ..\plugin.py:6611 ..\plugin.py:7793 ..\plugin.py:7797 ..\plugin.py:7998
+msgid "Media"
+msgstr "媒体"
+
+#: ..\WebConfigSite.py:572 ..\plugin.py:5495 ..\plugin.py:5516
+#: ..\plugin.py:7233 ..\plugin.py:7798 ..\plugin.py:7802 ..\plugin.py:7996
+msgid "Idle"
+msgstr "空闲"
+
+#: ..\WebConfigSite.py:574
+msgid "GUI Restart is required"
+msgstr "需要重新启动GUI"
+
+#: ..\WebConfigSite.py:596
+msgid "Element"
+msgstr "元素"
+
+#: ..\WebConfigSite.py:624 ..\WebConfigSite.py:625
+msgid "other"
+msgstr "其他"
+
+#: ..\WebConfigSite.py:711 ..\WebConfigSite.py:725
+msgid "set Settings"
+msgstr "设置设置"
+
+#: ..\WebConfigSite.py:714
+msgid "copy to On"
+msgstr "复制到"
+
+#: ..\WebConfigSite.py:716
+msgid "copy to Media"
+msgstr "复制到媒体"
+
+#: ..\WebConfigSite.py:718
+msgid "copy to Idle"
+msgstr "复制到空闲"
+
+#: ..\WebConfigSite.py:733
+msgid "Exec"
+msgstr "执行"
+
+#: ..\WebConfigSite.py:752
+msgid "Show Externals"
+msgstr "显示外观"
+
+#: ..\myFileList.py:158
+msgid "List of Storage Devices"
+msgstr "存储设备列表"
+
+#: ..\myFileList.py:160
+msgid "Parent Directory"
+msgstr "父目录"
+
+#: ..\plugin.py:299
+msgid "Fri"
+msgstr "周五"
+
+#: ..\plugin.py:299
+msgid "Mon"
+msgstr "周一"
+
+#: ..\plugin.py:299
+msgid "Sat"
+msgstr "周六"
+
+#: ..\plugin.py:299
+msgid "Sun"
+msgstr "周日"
+
+#: ..\plugin.py:299
+msgid "Thur"
+msgstr "周四"
+
+#: ..\plugin.py:299
+msgid "Tue"
+msgstr "周二"
+
+#: ..\plugin.py:299
+msgid "Wed"
+msgstr "周三"
+
+#: ..\plugin.py:300
+msgid "black"
+msgstr "黑色"
+
+#: ..\plugin.py:300
+msgid "white"
+msgstr "白色"
+
+#: ..\plugin.py:301
+msgid "gray"
+msgstr "灰色"
+
+#: ..\plugin.py:301
+msgid "silver"
+msgstr "银色"
+
+#: ..\plugin.py:301
+msgid "slategray"
+msgstr "青灰色"
+
+#: ..\plugin.py:302
+msgid "aquamarine"
+msgstr "藍綠色"
+
+#: ..\plugin.py:303
+msgid "gold"
+msgstr "金色"
+
+#: ..\plugin.py:303
+msgid "greenyellow"
+msgstr "黄绿色"
+
+#: ..\plugin.py:303
+msgid "yellow"
+msgstr "黄色"
+
+#: ..\plugin.py:304
+msgid "darkorange"
+msgstr "深橙色"
+
+#: ..\plugin.py:304
+msgid "darkred"
+msgstr "深红"
+
+#: ..\plugin.py:304
+msgid "indianred"
+msgstr "印度红"
+
+#: ..\plugin.py:304
+msgid "orange"
+msgstr "橙色"
+
+#: ..\plugin.py:304
+msgid "orangered"
+msgstr "橘红色"
+
+#: ..\plugin.py:304
+msgid "red"
+msgstr "红色"
+
+#: ..\plugin.py:304
+msgid "tomato"
+msgstr "番茄"
+
+#: ..\plugin.py:305
+msgid "darkgreen"
+msgstr "深绿色"
+
+#: ..\plugin.py:305
+msgid "green"
+msgstr "绿色"
+
+#: ..\plugin.py:305
+msgid "lawngreen"
+msgstr "草坪绿"
+
+#: ..\plugin.py:305
+msgid "lightgreen"
+msgstr "浅绿色"
+
+#: ..\plugin.py:305
+msgid "lime"
+msgstr "幸福绿"
+
+#: ..\plugin.py:306
+msgid "blue"
+msgstr "蓝色"
+
+#: ..\plugin.py:306
+msgid "blueviolet"
+msgstr "紫罗兰色"
+
+#: ..\plugin.py:306
+msgid "cadetblue"
+msgstr "灰蓝色"
+
+#: ..\plugin.py:306
+msgid "cornflowerblue"
+msgstr "浅蓝色"
+
+#: ..\plugin.py:306
+msgid "darkblue"
+msgstr "深蓝色"
+
+#: ..\plugin.py:306
+msgid "indigo"
+msgstr "靛藍"
+
+#: ..\plugin.py:306
+msgid "lightblue"
+msgstr "浅蓝"
+
+#: ..\plugin.py:307
+msgid "cyan"
+msgstr "青色"
+
+#: ..\plugin.py:307
+msgid "darkorchid"
+msgstr "深紫色"
+
+#: ..\plugin.py:307
+msgid "deeppink"
+msgstr "深粉红色"
+
+#: ..\plugin.py:307
+msgid "magenta"
+msgstr "紫紅色"
+
+#: ..\plugin.py:307
+msgid "violet"
+msgstr "紫罗兰色"
+
+#: ..\plugin.py:308
+msgid "brown"
+msgstr "棕色"
+
+#: ..\plugin.py:308
+msgid "moccasin"
+msgstr "鹿皮黄色"
+
+#: ..\plugin.py:308
+msgid "olive"
+msgstr "橄榄"
+
+#: ..\plugin.py:308
+msgid "rosybrown"
+msgstr "玫瑰棕色"
+
+#: ..\plugin.py:308
+msgid "sandybrown"
+msgstr "沙棕色"
+
+#: ..\plugin.py:310
+msgid "Screen 1+2"
+msgstr "屏幕1 + 2"
+
+#: ..\plugin.py:310
+msgid "Screen 1+2+3"
+msgstr "屏幕1 + 2 + 3"
+
+#: ..\plugin.py:310
+msgid "Screen 1+2+3+4"
+msgstr "屏幕1 + 2 + 3 + 4"
+
+#: ..\plugin.py:310
+msgid "Screen 1+2+4"
+msgstr "屏幕1 + 2 + 4"
+
+#: ..\plugin.py:310
+msgid "Screen 1+3"
+msgstr "屏幕1 + 3"
+
+#: ..\plugin.py:310
+msgid "Screen 1+3+4"
+msgstr "屏幕1 + 3 + 4"
+
+#: ..\plugin.py:310
+msgid "Screen 1+3+5+7+9"
+msgstr "屏幕1 + 3 + 5 + 7 + 9"
+
+#: ..\plugin.py:310
+msgid "Screen 1+4"
+msgstr "屏幕1 + 4"
+
+#: ..\plugin.py:310
+msgid "Screen 2+3"
+msgstr "屏幕2 + 3"
+
+#: ..\plugin.py:310
+msgid "Screen 2+3+4"
+msgstr "屏幕2 + 3 + 4"
+
+#: ..\plugin.py:310
+msgid "Screen 2+4"
+msgstr "屏幕2 + 4"
+
+#: ..\plugin.py:310
+msgid "Screen 2+4+6+8"
+msgstr "屏幕2 + 4 + 6 + 8"
+
+#: ..\plugin.py:310
+msgid "Screen 3+4"
+msgstr "屏幕3 + 4"
+
+#: ..\plugin.py:310
+msgid "Screen 5-8"
+msgstr "屏幕5-8"
+
+#: ..\plugin.py:310
+msgid "Screen 5-9"
+msgstr "屏幕5-9"
+
+#: ..\plugin.py:310 ..\plugin.py:311
+msgid "Screen 1-5"
+msgstr "屏幕1-5"
+
+#: ..\plugin.py:310 ..\plugin.py:311
+msgid "Screen 1-6"
+msgstr "屏幕1-6"
+
+#: ..\plugin.py:310 ..\plugin.py:311
+msgid "Screen 1-7"
+msgstr "屏幕1-7"
+
+#: ..\plugin.py:310 ..\plugin.py:311
+msgid "Screen 1-8"
+msgstr "屏幕1-8"
+
+#: ..\plugin.py:310 ..\plugin.py:311
+msgid "Screen 1-9"
+msgstr "屏幕1-9"
+
+#: ..\plugin.py:310 ..\plugin.py:311 ..\plugin.py:312
+msgid "Screen 1"
+msgstr "屏幕1"
+
+#: ..\plugin.py:310 ..\plugin.py:312
+msgid "Screen 2"
+msgstr "屏幕2"
+
+#: ..\plugin.py:310 ..\plugin.py:312
+msgid "Screen 3"
+msgstr "屏幕3"
+
+#: ..\plugin.py:310 ..\plugin.py:312
+msgid "Screen 4"
+msgstr "屏幕4"
+
+#: ..\plugin.py:310 ..\plugin.py:312
+msgid "Screen 5"
+msgstr "屏幕5"
+
+#: ..\plugin.py:310 ..\plugin.py:312
+msgid "Screen 6"
+msgstr "屏幕6"
+
+#: ..\plugin.py:310 ..\plugin.py:312
+msgid "Screen 7"
+msgstr "屏幕7"
+
+#: ..\plugin.py:310 ..\plugin.py:312
+msgid "Screen 8"
+msgstr "屏幕8"
+
+#: ..\plugin.py:310 ..\plugin.py:312
+msgid "Screen 9"
+msgstr "屏幕9"
+
+#: ..\plugin.py:310 ..\plugin.py:313 ..\plugin.py:343 ..\plugin.py:345
+#: ..\plugin.py:382 ..\plugin.py:391 ..\plugin.py:392 ..\plugin.py:406
+#: ..\plugin.py:468 ..\plugin.py:491 ..\plugin.py:492 ..\plugin.py:517
+#: ..\plugin.py:518 ..\plugin.py:623 ..\plugin.py:640 ..\plugin.py:649
+#: ..\plugin.py:663 ..\plugin.py:672 ..\plugin.py:682 ..\plugin.py:754
+#: ..\plugin.py:923 ..\plugin.py:1059 ..\plugin.py:1134 ..\plugin.py:1142
+#: ..\plugin.py:1153 ..\plugin.py:1164 ..\plugin.py:1174 ..\plugin.py:1184
+#: ..\plugin.py:1194 ..\plugin.py:1202 ..\plugin.py:1267 ..\plugin.py:1275
+#: ..\plugin.py:1286 ..\plugin.py:1414 ..\plugin.py:1598 ..\plugin.py:1691
+#: ..\plugin.py:1702 ..\plugin.py:1712 ..\plugin.py:1722 ..\plugin.py:1746
+#: ..\plugin.py:1754 ..\plugin.py:1768 ..\plugin.py:1777 ..\plugin.py:1787
+#: ..\plugin.py:1827 ..\plugin.py:1835 ..\plugin.py:1847 ..\plugin.py:1855
+#: ..\plugin.py:1866 ..\plugin.py:1972 ..\plugin.py:2061 ..\plugin.py:2133
+#: ..\plugin.py:2144 ..\plugin.py:2155 ..\plugin.py:2165 ..\plugin.py:2175
+#: ..\plugin.py:2185 ..\plugin.py:2193 ..\plugin.py:2251 ..\plugin.py:2265
+#: ..\plugin.py:2274 ..\plugin.py:2284 ..\plugin.py:2324 ..\plugin.py:2332
+msgid "off"
+msgstr "关闭"
+
+#: ..\plugin.py:311
+msgid "Screen 1-2"
+msgstr "屏幕1-2"
+
+#: ..\plugin.py:311
+msgid "Screen 1-3"
+msgstr "屏幕1-3"
+
+#: ..\plugin.py:311
+msgid "Screen 1-4"
+msgstr "屏幕1-4"
+
+#: ..\plugin.py:313 ..\plugin.py:1847
+msgid "on"
+msgstr "启用"
+
+#: ..\plugin.py:314
+msgid "2h"
+msgstr "2小时"
+
+#: ..\plugin.py:314
+msgid "3h"
+msgstr "3小时"
+
+#: ..\plugin.py:314
+msgid "3min"
+msgstr "3分钟"
+
+#: ..\plugin.py:314
+msgid "40s"
+msgstr "40s"
+
+#: ..\plugin.py:314
+msgid "4min"
+msgstr "4分钟"
+
+#: ..\plugin.py:314
+msgid "50s"
+msgstr "50s"
+
+#: ..\plugin.py:314
+msgid "5h"
+msgstr "5小时"
+
+#: ..\plugin.py:314
+msgid "5s"
+msgstr "5秒"
+
+#: ..\plugin.py:314 ..\plugin.py:475 ..\plugin.py:480 ..\plugin.py:485
+msgid "10s"
+msgstr "10秒"
+
+#: ..\plugin.py:314 ..\plugin.py:475 ..\plugin.py:480 ..\plugin.py:485
+msgid "15s"
+msgstr "15秒"
+
+#: ..\plugin.py:314 ..\plugin.py:475 ..\plugin.py:480 ..\plugin.py:485
+msgid "1min"
+msgstr "1分钟"
+
+#: ..\plugin.py:314 ..\plugin.py:475 ..\plugin.py:480 ..\plugin.py:485
+msgid "20s"
+msgstr "20s"
+
+#: ..\plugin.py:314 ..\plugin.py:475 ..\plugin.py:480 ..\plugin.py:485
+msgid "2min"
+msgstr "2分钟"
+
+#: ..\plugin.py:314 ..\plugin.py:475 ..\plugin.py:480 ..\plugin.py:485
+msgid "30s"
+msgstr "30秒"
+
+#: ..\plugin.py:314 ..\plugin.py:539
+msgid "10min"
+msgstr "10分钟"
+
+#: ..\plugin.py:314 ..\plugin.py:539
+msgid "5min"
+msgstr "5分钟"
+
+#: ..\plugin.py:314 ..\plugin.py:539 ..\plugin.py:588
+msgid "20min"
+msgstr "20分钟"
+
+#: ..\plugin.py:314 ..\plugin.py:539 ..\plugin.py:588 ..\plugin.py:1205
+msgid "30min"
+msgstr "30分钟"
+
+#: ..\plugin.py:314 ..\plugin.py:539 ..\plugin.py:588 ..\plugin.py:1205
+msgid "60min"
+msgstr "60分钟"
+
+#: ..\plugin.py:315
+msgid "LCD 1+2"
+msgstr "LCD 1+2"
+
+#: ..\plugin.py:315
+msgid "LCD 1+2+3"
+msgstr "LCD 1+2+3"
+
+#: ..\plugin.py:315
+msgid "LCD 1+3"
+msgstr "LCD 1+3"
+
+#: ..\plugin.py:315
+msgid "LCD 2+3"
+msgstr "LCD 2+3"
+
+#: ..\plugin.py:315 ..\plugin.py:316
+msgid "LCD 1"
+msgstr "LCD 1"
+
+#: ..\plugin.py:315 ..\plugin.py:316
+msgid "LCD 2"
+msgstr "LCD 2"
+
+#: ..\plugin.py:315 ..\plugin.py:316
+msgid "LCD 3"
+msgstr "LCD 3"
+
+#: ..\plugin.py:316
+msgid "LCD 1-3"
+msgstr "LCD 1-3"
+
+#: ..\plugin.py:317
+msgid "Corby@Pearl 128x128"
+msgstr "Corby @珍珠128x128"
+
+#: ..\plugin.py:317
+msgid "Pearl (or compatible LCD) 240x320"
+msgstr "珍珠（或相容的LCD）240x320"
+
+#: ..\plugin.py:317
+msgid "Pearl (or compatible LCD) 320x240"
+msgstr "珍珠（或相容的LCD）320x240"
+
+#: ..\plugin.py:317
+msgid "Pearl (or compatible LCD) 480x320"
+msgstr "珍珠（或相容的LCD）480x320"
+
+#: ..\plugin.py:317
+msgid "Pearl (or compatible LCD) 800x480"
+msgstr "珍珠屏（或兼容液晶屏）800x480"
+
+#: ..\plugin.py:318
+msgid "Samsung SPF-72H 800x480"
+msgstr "三星SPF-72H 800x480"
+
+#: ..\plugin.py:318
+msgid "Samsung SPF-75H/76H 800x480"
+msgstr "三星SPF-75H / 76H 800x480"
+
+#: ..\plugin.py:318
+msgid "Samsung SPF-83H 800x600"
+msgstr "三星SPF-83H 800x600"
+
+#: ..\plugin.py:318
+msgid "Samsung SPF-87H 800x480"
+msgstr "三星SPF-87H 800x480"
+
+#: ..\plugin.py:318
+msgid "Samsung SPF-87H old 800x480"
+msgstr "三星SPF-87H旧800x480"
+
+#: ..\plugin.py:319
+msgid "Samsung SPF-105P 1024x600"
+msgstr "三星SPF-105P 1024x600"
+
+#: ..\plugin.py:319
+msgid "Samsung SPF-107H 1024x600"
+msgstr "三星SPF-107H 1024x600"
+
+#: ..\plugin.py:319
+msgid "Samsung SPF-107H old 1024x600"
+msgstr "三星SPF-107H旧的1024x600"
+
+#: ..\plugin.py:319
+msgid "Samsung SPF-85H/86H 800x600"
+msgstr "三星SPF-85H / 86H 800x600"
+
+#: ..\plugin.py:319
+msgid "Samsung SPF-85P/86P 800x600"
+msgstr "三星SPF-85P / 86P 800x600"
+
+#: ..\plugin.py:320
+msgid "Internal Box-Skin-LCD"
+msgstr "内盒式皮肤液晶显示器"
+
+#: ..\plugin.py:320
+msgid "Internal TFT-LCD 400x240"
+msgstr "内置TFT-LCD 400x240"
+
+#: ..\plugin.py:320
+msgid "Samsung SPF-1000P 1024x600"
+msgstr "三星SPF-1000P 1024x600"
+
+#: ..\plugin.py:320
+msgid "Samsung SPF-700T 800x600"
+msgstr "三星SPF-700T 800x600"
+
+#: ..\plugin.py:320
+msgid "Samsung SPF-800P 800x480"
+msgstr "三星SPF-800P 800x480"
+
+#: ..\plugin.py:321
+msgid "only Picture 1024x600"
+msgstr "仅图片1024x600"
+
+#: ..\plugin.py:321
+msgid "only Picture 320x240"
+msgstr "仅图片320x240"
+
+#: ..\plugin.py:321
+msgid "only Picture 800x480"
+msgstr "仅图片800x480"
+
+#: ..\plugin.py:321
+msgid "only Picture 800x600"
+msgstr "仅图片800x600"
+
+#: ..\plugin.py:321
+msgid "only Picture Custom Size"
+msgstr "仅图片自定义尺寸"
+
+#: ..\plugin.py:321
+msgid "only Picture Custom Size 2"
+msgstr "仅图片自定义尺寸2"
+
+#: ..\plugin.py:323
+msgid "Internal Vu+ Duo2 LCD 400x240"
+msgstr "内置Vu + Duo2 LCD 400x240"
+
+#: ..\plugin.py:324
+msgid "128x32"
+msgstr "128x32"
+
+#: ..\plugin.py:324
+msgid "128x64"
+msgstr "128x64"
+
+#: ..\plugin.py:324
+msgid "132x64"
+msgstr "132x64"
+
+#: ..\plugin.py:324
+msgid "220x176"
+msgstr "220x176"
+
+#: ..\plugin.py:324
+msgid "255x64"
+msgstr "255x64"
+
+#: ..\plugin.py:324
+msgid "400x240"
+msgstr "400x240"
+
+#: ..\plugin.py:324
+msgid "480x320"
+msgstr "480x320"
+
+#: ..\plugin.py:324
+msgid "720x405"
+msgstr "720x405"
+
+#: ..\plugin.py:324
+msgid "800x480"
+msgstr "800x480"
+
+#: ..\plugin.py:324
+msgid "96x64"
+msgstr "96x64"
+
+#: ..\plugin.py:325
+msgid "2 Days 1 Line"
+msgstr "2天1行"
+
+#: ..\plugin.py:325
+msgid "2 Days 2 Line"
+msgstr "2天2行"
+
+#: ..\plugin.py:325
+msgid "4 Days 1 Line"
+msgstr "4天1行"
+
+#: ..\plugin.py:325
+msgid "4 Days 2 Lines"
+msgstr "4天2行"
+
+#: ..\plugin.py:325
+msgid "4 Days Vertical View"
+msgstr "4天垂直视图"
+
+#: ..\plugin.py:325
+msgid "5 Days 1 Line"
+msgstr "5天1行"
+
+#: ..\plugin.py:325
+msgid "5 Days 2 Lines"
+msgstr "5天2行"
+
+#: ..\plugin.py:325
+msgid "5 Days Vertical View"
+msgstr "5天垂直视图"
+
+#: ..\plugin.py:325
+msgid "Current Temperature (+C)"
+msgstr "当前温度（+C）"
+
+#: ..\plugin.py:325
+msgid "Current Temperature (-C)"
+msgstr "当前温度（-C）"
+
+#: ..\plugin.py:325 ..\plugin.py:326
+msgid "Current"
+msgstr "当前"
+
+#: ..\plugin.py:326
+msgid "Current Temperature"
+msgstr "当前温度"
+
+#: ..\plugin.py:327
+msgid "All"
+msgstr "全部"
+
+#: ..\plugin.py:327
+msgid "Temperature"
+msgstr "温度"
+
+#: ..\plugin.py:327
+msgid "Temperature+Co2"
+msgstr "温度+二氧化碳"
+
+#: ..\plugin.py:327
+msgid "Temperature+Co2+Pressure"
+msgstr "温度+ CO2 +压力"
+
+#: ..\plugin.py:327
+msgid "Temperature+Humidity"
+msgstr "温度+湿度"
+
+#: ..\plugin.py:328
+msgid "Module 1"
+msgstr "模块1"
+
+#: ..\plugin.py:328
+msgid "Module 1+2"
+msgstr "模块1 + 2"
+
+#: ..\plugin.py:328
+msgid "Module 1+2+3"
+msgstr "模块1 + 2 + 3"
+
+#: ..\plugin.py:328
+msgid "Module 1+2+4"
+msgstr "模块1 + 2 + 4"
+
+#: ..\plugin.py:328
+msgid "Module 1+3"
+msgstr "模块1 + 3"
+
+#: ..\plugin.py:328
+msgid "Module 1+3+4"
+msgstr "模块1 + 3 + 4"
+
+#: ..\plugin.py:328
+msgid "Module 1+4"
+msgstr "模块1 + 4"
+
+#: ..\plugin.py:328
+msgid "Module 1-4"
+msgstr "模块1-4"
+
+#: ..\plugin.py:328
+msgid "Module 1-5"
+msgstr "模块1-5"
+
+#: ..\plugin.py:328
+msgid "Module 1-6"
+msgstr "模块1-6"
+
+#: ..\plugin.py:328
+msgid "Module 2"
+msgstr "模块2"
+
+#: ..\plugin.py:328
+msgid "Module 2+3"
+msgstr "模块2 + 3"
+
+#: ..\plugin.py:328
+msgid "Module 2+3+4"
+msgstr "模块2 + 3 + 4"
+
+#: ..\plugin.py:328
+msgid "Module 2+4"
+msgstr "模块2 + 4"
+
+#: ..\plugin.py:328
+msgid "Module 2-6"
+msgstr "模块2-6"
+
+#: ..\plugin.py:328
+msgid "Module 3"
+msgstr "模块3"
+
+#: ..\plugin.py:328
+msgid "Module 3+4"
+msgstr "模块3 + 4"
+
+#: ..\plugin.py:328
+msgid "Module 3-6"
+msgstr "模块3-6"
+
+#: ..\plugin.py:328
+msgid "Module 4"
+msgstr "模块4"
+
+#: ..\plugin.py:328
+msgid "Module 4-6"
+msgstr "模块4-6"
+
+#: ..\plugin.py:328
+msgid "Module 5"
+msgstr "模块5"
+
+#: ..\plugin.py:328
+msgid "Module 5-6"
+msgstr "模块5-6"
+
+#: ..\plugin.py:328
+msgid "Module 6"
+msgstr "模块6"
+
+#: ..\plugin.py:328
+msgid "userdefined"
+msgstr "用户自定义"
+
+#: ..\plugin.py:329
+msgid "Bar"
+msgstr "条形图"
+
+#: ..\plugin.py:329
+msgid "Bar+Value"
+msgstr "条形+数值"
+
+#: ..\plugin.py:329
+msgid "Knob"
+msgstr "旋钮"
+
+#: ..\plugin.py:329
+msgid "Knob+Value"
+msgstr "旋钮+值"
+
+#: ..\plugin.py:330
+msgid "Analog"
+msgstr "模拟"
+
+#: ..\plugin.py:330
+msgid "Analog+Date"
+msgstr "模拟量+日期"
+
+#: ..\plugin.py:330
+msgid "Analog+Date+Weekday"
+msgstr "模拟+日期+周"
+
+#: ..\plugin.py:330
+msgid "Analog+Date+Weekday 2"
+msgstr "模拟+日期+周 2"
+
+#: ..\plugin.py:330
+msgid "Date"
+msgstr "日期"
+
+#: ..\plugin.py:330
+msgid "Date+Time"
+msgstr "日期+时间"
+
+#: ..\plugin.py:330
+msgid "Date+Time+Weekday"
+msgstr "日期+时间+工作日"
+
+#: ..\plugin.py:330
+msgid "Flaps Design Date"
+msgstr "襟翼设计日期"
+
+#: ..\plugin.py:330
+msgid "Flaps Design Weekday"
+msgstr "襟翼设计工作日"
+
+#: ..\plugin.py:330
+msgid "Time"
+msgstr "时间"
+
+#: ..\plugin.py:330
+msgid "Time+Weekday"
+msgstr "时间+工作日"
+
+#: ..\plugin.py:330
+msgid "Weekday"
+msgstr "周日"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "30%"
+msgstr "30%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "35%"
+msgstr "35%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "40%"
+msgstr "40%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "45%"
+msgstr "45%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "50%"
+msgstr "50%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "55%"
+msgstr "55%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "60%"
+msgstr "60%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "65%"
+msgstr "65%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "70%"
+msgstr "70%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "75%"
+msgstr "75%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "80%"
+msgstr "80%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "85%"
+msgstr "85%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "90%"
+msgstr "90%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "95%"
+msgstr "95%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "97%"
+msgstr "97%"
+
+#: ..\plugin.py:331 ..\plugin.py:344
+msgid "98%"
+msgstr "98%"
+
+#: ..\plugin.py:331 ..\plugin.py:345
+msgid "10%"
+msgstr "10%"
+
+#: ..\plugin.py:331 ..\plugin.py:345
+msgid "15%"
+msgstr "15%"
+
+#: ..\plugin.py:331 ..\plugin.py:345
+msgid "2%"
+msgstr "2%"
+
+#: ..\plugin.py:331 ..\plugin.py:345
+msgid "20%"
+msgstr "20%"
+
+#: ..\plugin.py:331 ..\plugin.py:345
+msgid "25%"
+msgstr "25%"
+
+#: ..\plugin.py:331 ..\plugin.py:345
+msgid "3%"
+msgstr "3%"
+
+#: ..\plugin.py:331 ..\plugin.py:345
+msgid "5%"
+msgstr "5%"
+
+#: ..\plugin.py:331 ..\plugin.py:638
+msgid "center"
+msgstr "居中"
+
+#: ..\plugin.py:331 ..\plugin.py:638 ..\plugin.py:1131 ..\plugin.py:1139
+#: ..\plugin.py:1743 ..\plugin.py:2130
+msgid "left"
+msgstr "左边"
+
+#: ..\plugin.py:331 ..\plugin.py:638 ..\plugin.py:1131 ..\plugin.py:1139
+#: ..\plugin.py:1743 ..\plugin.py:2130
+msgid "right"
+msgstr "右边"
+
+#: ..\plugin.py:332
+msgid "Extended"
+msgstr "扩展"
+
+#: ..\plugin.py:332
+msgid "Extended (Short)"
+msgstr "扩展（短）"
+
+#: ..\plugin.py:332
+msgid "Short"
+msgstr "短"
+
+#: ..\plugin.py:332
+msgid "Short (Extended)"
+msgstr "短（扩展）"
+
+#: ..\plugin.py:332
+msgid "Short+Extended"
+msgstr "短+扩展"
+
+#: ..\plugin.py:333
+msgid "Month"
+msgstr "月"
+
+#: ..\plugin.py:333
+msgid "Month+Header"
+msgstr "月+标题"
+
+#: ..\plugin.py:333
+msgid "Week"
+msgstr "周"
+
+#: ..\plugin.py:333
+msgid "Week+Header"
+msgstr "周+标题"
+
+#: ..\plugin.py:333
+msgid "no Calendar"
+msgstr "没有日历"
+
+#: ..\plugin.py:334
+msgid "Dates 1 Line"
+msgstr "日期1行"
+
+#: ..\plugin.py:334
+msgid "Dates 3 Lines"
+msgstr "日期3行"
+
+#: ..\plugin.py:334
+msgid "Dates 5 Lines"
+msgstr "日期5行"
+
+#: ..\plugin.py:334
+msgid "Dates 9 Lines"
+msgstr "日期9行"
+
+#: ..\plugin.py:334
+msgid "Dates compact 2 Lines"
+msgstr "日期紧凑2行"
+
+#: ..\plugin.py:334
+msgid "Dates compact 3 Lines"
+msgstr "日期紧凑3行"
+
+#: ..\plugin.py:334 ..\plugin.py:14220
+msgid "no Dates"
+msgstr "没有日期"
+
+#: ..\plugin.py:335
+msgid "Underline"
+msgstr "下划线"
+
+#: ..\plugin.py:335
+msgid "Underline 2"
+msgstr "下划线2"
+
+#: ..\plugin.py:335 ..\plugin.py:815 ..\plugin.py:1374
+msgid "Frame"
+msgstr "框架"
+
+#: ..\plugin.py:336
+msgid "Dates"
+msgstr "日期"
+
+#: ..\plugin.py:336
+msgid "Dates compact"
+msgstr "日期紧凑"
+
+#: ..\plugin.py:336
+msgid "Dates compact no Icon"
+msgstr "日期紧凑无图标"
+
+#: ..\plugin.py:336
+msgid "Dates no Icon"
+msgstr "日期无图标"
+
+#: ..\plugin.py:337
+msgid "no Icon"
+msgstr "无图标"
+
+#: ..\plugin.py:337
+msgid "no Icon, with Targetnumber"
+msgstr "没有图标,有目标编号"
+
+#: ..\plugin.py:337
+msgid "with Icon"
+msgstr "带图标"
+
+#: ..\plugin.py:337
+msgid "with Icon & Targetnumber"
+msgstr "带有图标和目标编号"
+
+#: ..\plugin.py:338
+msgid "C"
+msgstr "°C"
+
+#: ..\plugin.py:338
+msgid "C + rpm"
+msgstr "C +转速"
+
+#: ..\plugin.py:338
+msgid "C + rpm/2"
+msgstr "C + 转速 / 2"
+
+#: ..\plugin.py:338
+msgid "rpm"
+msgstr "每分钟转数"
+
+#: ..\plugin.py:338
+msgid "rpm/2"
+msgstr "转速/ 2"
+
+#: ..\plugin.py:338 ..\plugin.py:339 ..\plugin.py:340 ..\plugin.py:350
+#: ..\plugin.py:418 ..\plugin.py:421 ..\plugin.py:452 ..\plugin.py:454
+#: ..\plugin.py:460 ..\plugin.py:567 ..\plugin.py:569 ..\plugin.py:572
+#: ..\plugin.py:589 ..\plugin.py:699 ..\plugin.py:990 ..\plugin.py:1529
+#: ..\plugin.py:1736 ..\plugin.py:2011
+msgid "no"
+msgstr "否"
+
+#: ..\plugin.py:339
+msgid "% + BER"
+msgstr "％+误码率"
+
+#: ..\plugin.py:339
+msgid "db"
+msgstr "分贝"
+
+#: ..\plugin.py:339
+msgid "db + %"
+msgstr "分贝 + %"
+
+#: ..\plugin.py:339
+msgid "db + % + BER"
+msgstr "分贝+％+误码率"
+
+#: ..\plugin.py:339
+msgid "db + BER"
+msgstr "分贝+误码率"
+
+#: ..\plugin.py:339 ..\plugin.py:340
+msgid "%"
+msgstr "%"
+
+#: ..\plugin.py:340
+msgid "% + Load@1min"
+msgstr "% + 负载@1分钟"
+
+#: ..\plugin.py:340
+msgid "% + Load@5min"
+msgstr "% + 负载@ 5分钟"
+
+#: ..\plugin.py:340
+msgid "Load@1min"
+msgstr "负荷@ 1分钟"
+
+#: ..\plugin.py:340
+msgid "Load@5min"
+msgstr "负荷@ 5分钟"
+
+#: ..\plugin.py:341
+msgid "show run"
+msgstr "显示运行"
+
+#: ..\plugin.py:341
+msgid "show run+sleep"
+msgstr "显示运行+睡眠"
+
+#: ..\plugin.py:342
+msgid "Always All"
+msgstr "总是"
+
+#: ..\plugin.py:342
+msgid "Always New"
+msgstr "总是新的"
+
+#: ..\plugin.py:342
+msgid "Only New"
+msgstr "只有新"
+
+#: ..\plugin.py:343
+msgid "All Informations"
+msgstr "所有信息"
+
+#: ..\plugin.py:343
+msgid "Distance only"
+msgstr "仅距离"
+
+#: ..\plugin.py:343
+msgid "Distance+Illumination"
+msgstr "距离+照度"
+
+#: ..\plugin.py:343
+msgid "Distance+Moonphase"
+msgstr "距离+月相"
+
+#: ..\plugin.py:343
+msgid "Illumination only"
+msgstr "仅照明"
+
+#: ..\plugin.py:343
+msgid "Illumination+Moonphase"
+msgstr "照明+月相"
+
+#: ..\plugin.py:343
+msgid "Moonphase only"
+msgstr "仅月相"
+
+#: ..\plugin.py:344
+msgid "100%"
+msgstr "100%"
+
+#: ..\plugin.py:346
+msgid "1-2"
+msgstr "1-2"
+
+#: ..\plugin.py:346
+msgid "1-3"
+msgstr "1-3"
+
+#: ..\plugin.py:346
+msgid "1-4"
+msgstr "1-4"
+
+#: ..\plugin.py:346
+msgid "1-5"
+msgstr "1-5"
+
+#: ..\plugin.py:346 ..\plugin.py:352 ..\plugin.py:353 ..\plugin.py:395
+#: ..\plugin.py:468 ..\plugin.py:474 ..\plugin.py:479 ..\plugin.py:484
+msgid "1"
+msgstr "1"
+
+#: ..\plugin.py:347
+msgid "IMAP"
+msgstr "IMAP"
+
+#: ..\plugin.py:347
+msgid "IMAP-SSL"
+msgstr "IMAP-SSL"
+
+#: ..\plugin.py:347
+msgid "Pop3"
+msgstr "Pop3"
+
+#: ..\plugin.py:347
+msgid "Pop3-SSL"
+msgstr "Pop3-SSL"
+
+#: ..\plugin.py:348
+msgid "Channel"
+msgstr "频道"
+
+#: ..\plugin.py:348
+msgid "Channel+Title"
+msgstr "频道+标题"
+
+#: ..\plugin.py:348
+msgid "Picon+Channel"
+msgstr "Picon +频道"
+
+#: ..\plugin.py:348
+msgid "Picon+Channel+Title"
+msgstr "Picon +频道+标题"
+
+#: ..\plugin.py:348 ..\plugin.py:354 ..\plugin.py:826 ..\plugin.py:837
+#: ..\plugin.py:5895
+msgid "Picon"
+msgstr "皮康"
+
+#: ..\plugin.py:349
+msgid "same color"
+msgstr "相同颜色"
+
+#: ..\plugin.py:350
+msgid "yes +25%"
+msgstr "是+ 25％"
+
+#: ..\plugin.py:350 ..\plugin.py:452 ..\plugin.py:454 ..\plugin.py:567
+#: ..\plugin.py:569 ..\plugin.py:589 ..\plugin.py:699 ..\plugin.py:1736
+msgid "yes"
+msgstr "是"
+
+#: ..\plugin.py:351
+msgid "vertically"
+msgstr "垂直"
+
+#: ..\plugin.py:351 ..\plugin.py:884 ..\plugin.py:1472 ..\plugin.py:1918
+msgid "horizontally"
+msgstr "水平"
+
+#: ..\plugin.py:352
+msgid "4"
+msgstr "4"
+
+#: ..\plugin.py:352 ..\plugin.py:353 ..\plugin.py:395 ..\plugin.py:468
+#: ..\plugin.py:474 ..\plugin.py:479 ..\plugin.py:484
+msgid "2"
+msgstr "2"
+
+#: ..\plugin.py:352 ..\plugin.py:353 ..\plugin.py:395 ..\plugin.py:474
+#: ..\plugin.py:479 ..\plugin.py:484
+msgid "3"
+msgstr "3"
+
+#: ..\plugin.py:352 ..\plugin.py:395 ..\plugin.py:474 ..\plugin.py:479
+#: ..\plugin.py:484
+msgid "5"
+msgstr "5"
+
+#: ..\plugin.py:353
+msgid "14"
+msgstr "14"
+
+#: ..\plugin.py:353
+msgid "7"
+msgstr "7"
+
+#: ..\plugin.py:353
+msgid "all"
+msgstr "全部"
+
+#: ..\plugin.py:353 ..\plugin.py:395 ..\plugin.py:474 ..\plugin.py:479
+#: ..\plugin.py:484
+msgid "30"
+msgstr "30"
+
+#: ..\plugin.py:354
+msgid "Corner"
+msgstr "转角"
+
+#: ..\plugin.py:354
+msgid "Corner+Timeshift"
+msgstr "转角+时移"
+
+#: ..\plugin.py:354
+msgid "Picon+Timeshift"
+msgstr "Picon +时移"
+
+#: ..\plugin.py:355
+msgid "only Progress Bar"
+msgstr "仅进度栏"
+
+#: ..\plugin.py:356
+msgid "with Remaining Minutes"
+msgstr "剩余分钟"
+
+#: ..\plugin.py:356
+msgid "with Remaining Minutes (Size 1.5)"
+msgstr "剩余分钟 (尺寸1.5)"
+
+#: ..\plugin.py:356
+msgid "with Remaining Minutes (Size 2)"
+msgstr "剩余分钟 (大于2)"
+
+#: ..\plugin.py:357
+msgid "with Percent"
+msgstr "带百分比"
+
+#: ..\plugin.py:357
+msgid "with Percent (Size 1.5)"
+msgstr "带百分比 (尺寸1,5)"
+
+#: ..\plugin.py:357
+msgid "with Percent (Size 2)"
+msgstr "与百分比（尺寸2）"
+
+#: ..\plugin.py:358
+msgid "with Remaining Minutes (above)"
+msgstr "剩余分钟 (大于)"
+
+#: ..\plugin.py:358
+msgid "with Remaining Minutes (above/Size 1.5)"
+msgstr "剩余分钟数（大于/尺寸1.5）"
+
+#: ..\plugin.py:358
+msgid "with Remaining Minutes (above/Size 2)"
+msgstr "剩余分钟 (大于/尺寸2)"
+
+#: ..\plugin.py:359
+msgid "with Percent (above)"
+msgstr "与百分比（大于）"
+
+#: ..\plugin.py:359
+msgid "with Percent (above/Size 1.5)"
+msgstr "百分比（大于/尺寸1.5）"
+
+#: ..\plugin.py:359
+msgid "with Percent (above/Size 2)"
+msgstr "百分比（大于/尺寸2）"
+
+#: ..\plugin.py:360
+msgid "with Remaining Minutes (below)"
+msgstr "剩下的几分钟 (低于)"
+
+#: ..\plugin.py:360
+msgid "with Remaining Minutes (below/Size 1.5)"
+msgstr "剩余分钟数（低于/尺寸1.5）"
+
+#: ..\plugin.py:360
+msgid "with Remaining Minutes (below/Size 2)"
+msgstr "剩余分钟数（低于/尺寸2）"
+
+#: ..\plugin.py:361
+msgid "with Percent (below)"
+msgstr "百分比 (低于)"
+
+#: ..\plugin.py:361
+msgid "with Percent (below/Size 1.5)"
+msgstr "百分比（低于/尺寸1.5）"
+
+#: ..\plugin.py:361
+msgid "with Percent (below/Size 2)"
+msgstr "百分比（低于/尺寸2）"
+
+#: ..\plugin.py:362
+msgid "with Current 00:00"
+msgstr "当前00:00"
+
+#: ..\plugin.py:362
+msgid "with Current 00:00 (Size 1.5)"
+msgstr "当前00:00（尺寸1.5）"
+
+#: ..\plugin.py:362
+msgid "with Current 00:00 (Size 2)"
+msgstr "当前00:00（尺寸2）"
+
+#: ..\plugin.py:363
+msgid "with Current 00:00 (above)"
+msgstr "当前00:00（以上）"
+
+#: ..\plugin.py:363
+msgid "with Current 00:00 (above/Size 1.5)"
+msgstr "当前00:00（高于/尺寸1.5）"
+
+#: ..\plugin.py:363
+msgid "with Current 00:00 (above/Size 2)"
+msgstr "当前00:00（尺寸2以上）"
+
+#: ..\plugin.py:364
+msgid "with Current 00:00 (below)"
+msgstr "当前00:00（低于）"
+
+#: ..\plugin.py:364
+msgid "with Current 00:00 (below/Size 1.5)"
+msgstr "当前00:00（低于/尺寸1.5）"
+
+#: ..\plugin.py:364
+msgid "with Current 00:00 (below/Size 2)"
+msgstr "当前00:00（下方/尺寸2）"
+
+#: ..\plugin.py:365
+msgid "with Percent Minutes / Total (above)"
+msgstr "分钟/总计百分比 (大于/尺寸2)"
+
+#: ..\plugin.py:365
+msgid "with Percent Minutes / Total (above/Size 1.5)"
+msgstr "分钟/总计百分比 (大于/尺寸1.5)"
+
+#: ..\plugin.py:365
+msgid "with Percent Minutes / Total (above/Size 2)"
+msgstr "分钟/总计百分比 (大于/尺寸2)"
+
+#: ..\plugin.py:366
+msgid "with absolute Endtime"
+msgstr "绝对结束时间"
+
+#: ..\plugin.py:366
+msgid "with absolute Endtime (Size 1.5)"
+msgstr "绝对结束时间（尺寸1.5）"
+
+#: ..\plugin.py:366
+msgid "with absolute Endtime (Size 2)"
+msgstr "带绝对结束时间 (尺寸2)"
+
+#: ..\plugin.py:367
+msgid "with Minutes Total / Endtime (above)"
+msgstr "分钟/总计百分比 (大于/尺寸2)"
+
+#: ..\plugin.py:367
+msgid "with Minutes Total / Endtime (above/Size 1.5)"
+msgstr "分钟/总计百分比 (大于/尺寸1.5)"
+
+#: ..\plugin.py:367
+msgid "with Minutes Total / Endtime (above/Size 2)"
+msgstr "分钟/总计百分比 (大于/尺寸2)"
+
+#: ..\plugin.py:376
+msgid "Fastmode (2s)"
+msgstr "快速模式（2秒）"
+
+#: ..\plugin.py:376
+msgid "Normal (5s)"
+msgstr "正常 (5秒)"
+
+#: ..\plugin.py:392
+msgid "alphabetic"
+msgstr "按字母顺序排列"
+
+#: ..\plugin.py:392
+msgid "random"
+msgstr "随机"
+
+#: ..\plugin.py:393
+msgid "better/slow"
+msgstr "较好/缓慢"
+
+#: ..\plugin.py:393
+msgid "low/fast (Picture only)"
+msgstr "低/快（仅图片）"
+
+#: ..\plugin.py:393
+msgid "low/fast (all)"
+msgstr "低/快（全部）"
+
+#: ..\plugin.py:395
+msgid "0.5"
+msgstr "0.5"
+
+#: ..\plugin.py:395 ..\plugin.py:474 ..\plugin.py:479 ..\plugin.py:484
+msgid "10"
+msgstr "10"
+
+#: ..\plugin.py:395 ..\plugin.py:474 ..\plugin.py:479 ..\plugin.py:484
+msgid "20"
+msgstr "20"
+
+#: ..\plugin.py:398
+msgid "JPG"
+msgstr "JPG"
+
+#: ..\plugin.py:398
+msgid "PNG"
+msgstr "PNG"
+
+#: ..\plugin.py:399
+msgid "cache + adjustment (high quality, slow)"
+msgstr "缓存+调整（高质量，慢）"
+
+#: ..\plugin.py:399
+msgid "cache + adjustment (low quality, fast)"
+msgstr "缓存+调整（低质量，快）"
+
+#: ..\plugin.py:399
+msgid "no cache + no adjustment"
+msgstr "没有缓存+没有调整"
+
+#: ..\plugin.py:418
+msgid "Plug Tuner"
+msgstr "插头调谐器"
+
+#: ..\plugin.py:418
+msgid "USB Tuner"
+msgstr "USB调谐器"
+
+#: ..\plugin.py:419
+msgid "EPG"
+msgstr "EPG"
+
+#: ..\plugin.py:419
+msgid "Now/Next"
+msgstr "现在/下一个"
+
+#: ..\plugin.py:433
+msgid "normal"
+msgstr "正常"
+
+#: ..\plugin.py:433
+msgid "reduced"
+msgstr "减少"
+
+#: ..\plugin.py:437
+msgid "Javascript"
+msgstr "Java脚本"
+
+#: ..\plugin.py:437
+msgid "Javascript no Refresh"
+msgstr "Java脚本无刷新"
+
+#: ..\plugin.py:437
+msgid "Reload"
+msgstr "加载"
+
+#: ..\plugin.py:441
+msgid "1 - normal"
+msgstr "1 - 正常"
+
+#: ..\plugin.py:441
+msgid "2 - side by side"
+msgstr "2-并排"
+
+#: ..\plugin.py:442
+msgid "MSN"
+msgstr "MSN"
+
+#: ..\plugin.py:442
+msgid "Open-Meteo"
+msgstr "Open-Meteo"
+
+#: ..\plugin.py:442
+msgid "OpenWeatherMap"
+msgstr "打开天气图"
+
+#: ..\plugin.py:442
+msgid "WeatherUnlocked"
+msgstr "天气解锁"
+
+#: ..\plugin.py:452 ..\plugin.py:589
+msgid "alternative Copy-Mode/DM800hd (24bit)"
+msgstr "备用复制模式/ DM800hd（24位）"
+
+#: ..\plugin.py:454
+msgid "yes + %"
+msgstr "是 + %"
+
+#: ..\plugin.py:460
+msgid "yes, long"
+msgstr "是,很长"
+
+#: ..\plugin.py:460
+msgid "yes, short"
+msgstr "是,简短"
+
+#: ..\plugin.py:467
+msgid "km/h"
+msgstr "公里/小时"
+
+#: ..\plugin.py:467
+msgid "m/s"
+msgstr "米/秒"
+
+#: ..\plugin.py:474 ..\plugin.py:479 ..\plugin.py:484
+msgid "60"
+msgstr "60"
+
+#: ..\plugin.py:486
+msgid "Coversearch"
+msgstr "封面搜索"
+
+#: ..\plugin.py:493 ..\plugin.py:494 ..\plugin.py:495
+msgid "0"
+msgstr "0"
+
+#: ..\plugin.py:493 ..\plugin.py:494 ..\plugin.py:495
+msgid "180"
+msgstr "180"
+
+#: ..\plugin.py:493 ..\plugin.py:494 ..\plugin.py:495
+msgid "270"
+msgstr "270"
+
+#: ..\plugin.py:493 ..\plugin.py:494 ..\plugin.py:495
+msgid "90"
+msgstr "90"
+
+#: ..\plugin.py:502 ..\plugin.py:503 ..\plugin.py:504
+msgid "1 / min"
+msgstr "1/分钟"
+
+#: ..\plugin.py:502 ..\plugin.py:503 ..\plugin.py:504 ..\plugin.py:627
+msgid "always"
+msgstr "总是"
+
+#: ..\plugin.py:505
+msgid "On+Media+Standby"
+msgstr "启用+多媒体+唤醒"
+
+#: ..\plugin.py:505
+msgid "Standby"
+msgstr "待机"
+
+#: ..\plugin.py:507
+msgid "32bit - color"
+msgstr "32位-颜色"
+
+#: ..\plugin.py:507
+msgid "8bit - grayscale/color"
+msgstr "8位-灰度/彩色"
+
+#: ..\plugin.py:517
+msgid "2 x FastForwardKey"
+msgstr "2 x快进键"
+
+#: ..\plugin.py:517
+msgid "2 x FastForwardKey Type 2"
+msgstr "2 x快进键类型2"
+
+#: ..\plugin.py:517
+msgid "Long FastForwardKey"
+msgstr "长按快进键"
+
+#: ..\plugin.py:517
+msgid "Long FastForwardKey Type 2"
+msgstr "长按快进键 类型 2"
+
+#: ..\plugin.py:517 ..\plugin.py:518
+msgid "2 x InfoKey"
+msgstr "2 X信息键"
+
+#: ..\plugin.py:517 ..\plugin.py:518
+msgid "2 x Mute"
+msgstr "2 x静音"
+
+#: ..\plugin.py:517 ..\plugin.py:518
+msgid "Long InfoKey"
+msgstr "长按信息键"
+
+#: ..\plugin.py:518
+msgid "2 x FastBackwardKey"
+msgstr "2 X快速后退键"
+
+#: ..\plugin.py:518
+msgid "2 x FastBackwardKey Type 2"
+msgstr "2 x快退键类型2"
+
+#: ..\plugin.py:518
+msgid "Long FastBackwardKey"
+msgstr "长按快速后退键"
+
+#: ..\plugin.py:518
+msgid "Long FastBackwardKey Type 2"
+msgstr "长按快速后退键 类型 2"
+
+#: ..\plugin.py:539 ..\plugin.py:588
+msgid "15min"
+msgstr "15分钟"
+
+#: ..\plugin.py:567
+msgid "yes, extended"
+msgstr "是,扩展"
+
+#: ..\plugin.py:623
+msgid "Console normal"
+msgstr "控制台正常"
+
+#: ..\plugin.py:623
+msgid "Logfile extensive"
+msgstr "日志文件扩展"
+
+#: ..\plugin.py:623
+msgid "Logfile normal"
+msgstr "日志文件正常"
+
+#: ..\plugin.py:627
+msgid "disabled"
+msgstr "已禁用"
+
+#: ..\plugin.py:630
+msgid "Radio"
+msgstr "无线电"
+
+#: ..\plugin.py:630
+msgid "Radio+Media"
+msgstr "广播+媒体"
+
+#: ..\plugin.py:630
+msgid "TV+Radio"
+msgstr "电视/电台"
+
+#: ..\plugin.py:630
+msgid "TV+Radio+Media"
+msgstr "电视+广播+媒体"
+
+#: ..\plugin.py:630 ..\plugin.py:1259
+msgid "TV"
+msgstr "电视"
+
+#: ..\plugin.py:631
+msgid "TV (full)"
+msgstr "电视（完整）"
+
+#: ..\plugin.py:631
+msgid "normal (full)"
+msgstr "正常（满）"
+
+#: ..\plugin.py:631
+msgid "trimmed (black)"
+msgstr "修剪（黑色）"
+
+#: ..\plugin.py:631
+msgid "trimmed (transparent)"
+msgstr "修剪（透明）"
+
+#: ..\plugin.py:634
+msgid "MUTE or defined Keys"
+msgstr "静音或定义键"
+
+#: ..\plugin.py:634
+msgid "any Key"
+msgstr "任意键"
+
+#: ..\plugin.py:771 ..\plugin.py:783 ..\plugin.py:795 ..\plugin.py:1342
+#: ..\plugin.py:1354
+msgid "Info"
+msgstr "信息"
+
+#: ..\plugin.py:771 ..\plugin.py:783 ..\plugin.py:795 ..\plugin.py:1342
+#: ..\plugin.py:1354
+msgid "Time+Info"
+msgstr "时间+信息"
+
+#: ..\plugin.py:771 ..\plugin.py:783 ..\plugin.py:1342
+msgid "Time+Duration+Info"
+msgstr "时间+持续时间+信息"
+
+#: ..\plugin.py:795 ..\plugin.py:1354
+msgid "Mini-EPG"
+msgstr "迷你EPG"
+
+#: ..\plugin.py:795 ..\plugin.py:1354
+msgid "Time+Length+Info"
+msgstr "时间+长度+信息"
+
+#: ..\plugin.py:810 ..\plugin.py:1370
+msgid "half left"
+msgstr "半面向左转"
+
+#: ..\plugin.py:810 ..\plugin.py:1370
+msgid "half right"
+msgstr "半面向右转"
+
+#: ..\plugin.py:815 ..\plugin.py:1374
+msgid "Frame x2"
+msgstr "框架 x2"
+
+#: ..\plugin.py:815 ..\plugin.py:1374
+msgid "Line"
+msgstr "行"
+
+#: ..\plugin.py:815 ..\plugin.py:1374
+msgid "no Bar"
+msgstr "没有进度条"
+
+#: ..\plugin.py:815 ..\plugin.py:1374
+msgid "no Frame"
+msgstr "无框架"
+
+#: ..\plugin.py:817 ..\plugin.py:1376
+msgid "Gradient"
+msgstr "渐变色"
+
+#: ..\plugin.py:817 ..\plugin.py:1376
+msgid "Shadow Edges"
+msgstr "阴影边缘"
+
+#: ..\plugin.py:817 ..\plugin.py:1376 ..\plugin.py:1737
+msgid "Normal"
+msgstr "正常"
+
+#: ..\plugin.py:826
+msgid "Picon+Position below"
+msgstr "Picon+下方位置"
+
+#: ..\plugin.py:826
+msgid "Picon+Position left"
+msgstr "皮康+左位置"
+
+#: ..\plugin.py:826
+msgid "Picon+Position right"
+msgstr "皮康+位置右"
+
+#: ..\plugin.py:826
+msgid "Position"
+msgstr "位置"
+
+#: ..\plugin.py:826 ..\plugin.py:837
+msgid "Name"
+msgstr "名称"
+
+#: ..\plugin.py:905 ..\plugin.py:1396 ..\plugin.py:1954
+msgid "Offline"
+msgstr "离线"
+
+#: ..\plugin.py:905 ..\plugin.py:1396 ..\plugin.py:1954
+msgid "Online"
+msgstr "在线"
+
+#: ..\plugin.py:905 ..\plugin.py:1396 ..\plugin.py:1954
+msgid "Online+Offline"
+msgstr "在线+离线"
+
+#: ..\plugin.py:949 ..\plugin.py:1013 ..\plugin.py:1433 ..\plugin.py:1552
+#: ..\plugin.py:1903 ..\plugin.py:1991
+msgid "only use Timer"
+msgstr "仅使用定时器"
+
+#: ..\plugin.py:949 ..\plugin.py:1013 ..\plugin.py:1433 ..\plugin.py:1552
+#: ..\plugin.py:1903 ..\plugin.py:1991
+msgid "use lead-time"
+msgstr "使用提前期"
+
+#: ..\plugin.py:950 ..\plugin.py:1014 ..\plugin.py:1434 ..\plugin.py:1553
+#: ..\plugin.py:1904 ..\plugin.py:1992
+msgid "no total Timer"
+msgstr "没有总计时器"
+
+#: ..\plugin.py:950 ..\plugin.py:1014 ..\plugin.py:1434 ..\plugin.py:1553
+#: ..\plugin.py:1904 ..\plugin.py:1992
+msgid "show total Timer"
+msgstr "显示总计时器"
+
+#: ..\plugin.py:968 ..\plugin.py:1507
+msgid "one line"
+msgstr "一行"
+
+#: ..\plugin.py:968 ..\plugin.py:1507
+msgid "two lines"
+msgstr "两行"
+
+#: ..\plugin.py:990 ..\plugin.py:1529 ..\plugin.py:2011
+msgid "Memory available"
+msgstr "可用内存"
+
+#: ..\plugin.py:990 ..\plugin.py:1529 ..\plugin.py:2011
+msgid "Memory free"
+msgstr "内存释放"
+
+#: ..\plugin.py:1206
+msgid "cloudconvert.org"
+msgstr "cloudconvert.org"
+
+#: ..\plugin.py:1206
+msgid "convertapi.com"
+msgstr "convertapi.com"
+
+#: ..\plugin.py:1227 ..\plugin.py:1236 ..\plugin.py:1245 ..\plugin.py:1254
+#: ..\plugin.py:1669 ..\plugin.py:1678 ..\plugin.py:2214 ..\plugin.py:2223
+#: ..\plugin.py:2232 ..\plugin.py:2241
+msgid "full Screen"
+msgstr "全屏"
+
+#: ..\plugin.py:1259
+msgid "TV+OSD"
+msgstr "电视+ OSD"
+
+#: ..\plugin.py:1736
+msgid "yes except records"
+msgstr "是,除了录制"
+
+#: ..\plugin.py:1737
+msgid "Google API"
+msgstr "Google API"
+
+#: ..\plugin.py:2630
+msgid "E"
+msgstr "Ε"
+
+#: ..\plugin.py:2630
+msgid "ENE"
+msgstr "东北偏东"
+
+#: ..\plugin.py:2630
+msgid "ESE"
+msgstr "东南偏东"
+
+#: ..\plugin.py:2630
+msgid "N"
+msgstr "N"
+
+#: ..\plugin.py:2630
+msgid "NE"
+msgstr "东北方"
+
+#: ..\plugin.py:2630
+msgid "NNE"
+msgstr "东北偏北"
+
+#: ..\plugin.py:2630
+msgid "NNW"
+msgstr "西北偏北"
+
+#: ..\plugin.py:2630
+msgid "NW"
+msgstr "西北"
+
+#: ..\plugin.py:2630
+msgid "S"
+msgstr "南"
+
+#: ..\plugin.py:2630
+msgid "SE"
+msgstr "东南"
+
+#: ..\plugin.py:2630
+msgid "SSE"
+msgstr "东南偏南"
+
+#: ..\plugin.py:2630
+msgid "SSW"
+msgstr "西南偏南"
+
+#: ..\plugin.py:2630
+msgid "SW"
+msgstr "西南"
+
+#: ..\plugin.py:2630
+msgid "W"
+msgstr "西"
+
+#: ..\plugin.py:2630
+msgid "WNW"
+msgstr "西北偏西"
+
+#: ..\plugin.py:2630
+msgid "WSW"
+msgstr "西南偏西"
+
+#: ..\plugin.py:4544
+msgid "%d.%m.%Y - %H:%M"
+msgstr "%Y.%m.%d - %H:%M"
+
+#: ..\plugin.py:4545
+msgid "%d.%m.%y %H:%M:%S"
+msgstr "%y.%m.%d %H:%M:%S"
+
+#: ..\plugin.py:5110
+msgid "%d-%b-%Y"
+msgstr "%Y-%b-%d"
+
+#: ..\plugin.py:5236
+msgid "Load Active Config-File"
+msgstr "加载活动配置文件"
+
+#: ..\plugin.py:5237
+msgid "Load Defaults / Empty Config"
+msgstr "加载默认值/清空配置"
+
+#: ..\plugin.py:5238
+msgid "Save Config to File... (%s)"
+msgstr "将配置保存到文件... (%s)"
+
+#: ..\plugin.py:5242 ..\plugin.py:5278
+msgid "Load File : %s"
+msgstr "加载文件：%s"
+
+#: ..\plugin.py:5251
+msgid "Delete File?"
+msgstr "是否删除文件?"
+
+#: ..\plugin.py:5286
+msgid "deleted"
+msgstr "已删除"
+
+#: ..\plugin.py:5311
+msgid "currently set : %s"
+msgstr "当前设置：%s"
+
+#: ..\plugin.py:5419 ..\plugin.py:7804
+msgid "LCD4linux Settings"
+msgstr "LCD4linux设置"
+
+#: ..\plugin.py:5469
+msgid "Cancel"
+msgstr "取消"
+
+#: ..\plugin.py:5470
+msgid "Save"
+msgstr "保存"
+
+#: ..\plugin.py:5471
+msgid "Restart Displays"
+msgstr "重新启动显示"
+
+#: ..\plugin.py:5472 ..\plugin.py:7805
+msgid "Set On >>"
+msgstr "启用 >>"
+
+#: ..\plugin.py:5555
+msgid "no LCD1 Picture-File"
+msgstr "没有LCD1图片文件"
+
+#: ..\plugin.py:5580
+msgid "no LCD2 Picture-File"
+msgstr "没有LCD2图片文件"
+
+#: ..\plugin.py:5606
+msgid "no LCD3 Picture-File"
+msgstr "没有LCD3图片文件"
+
+#: ..\plugin.py:5643
+msgid "LCD4linux enabled"
+msgstr "已启用LCD4linux"
+
+#: ..\plugin.py:5644
+msgid "LCD 1 Type"
+msgstr "LCD 1型"
+
+#: ..\plugin.py:5645
+msgid "- LCD 1 Rotate"
+msgstr "- LCD 1旋转"
+
+#: ..\plugin.py:5646 ..\plugin.py:6613 ..\plugin.py:7241
+msgid "- LCD 1 Background Color"
+msgstr "- LCD 1背景色"
+
+#: ..\plugin.py:5647 ..\plugin.py:6614 ..\plugin.py:7242
+msgid "- LCD 1 Background-Picture [ok]>"
+msgstr "- LCD 1背景图片 [ok]>"
+
+#: ..\plugin.py:5648 ..\plugin.py:6615 ..\plugin.py:7243
+msgid "- LCD 1 Brightness"
+msgstr "- LCD 1亮度"
+
+#: ..\plugin.py:5649 ..\plugin.py:6616 ..\plugin.py:7244
+msgid "- LCD 1 Night Reduction"
+msgstr "- LCD 1夜间还原"
+
+#: ..\plugin.py:5650
+msgid "- LCD 1 Refresh"
+msgstr "- LCD 1刷新"
+
+#: ..\plugin.py:5651
+msgid "LCD 2 Type"
+msgstr "LCD 2型"
+
+#: ..\plugin.py:5653
+msgid "- LCD 2 Rotate"
+msgstr "- LCD 2旋转"
+
+#: ..\plugin.py:5654 ..\plugin.py:6617 ..\plugin.py:7245
+msgid "- LCD 2 Background Color"
+msgstr "- LCD 2背景色"
+
+#: ..\plugin.py:5655 ..\plugin.py:6618 ..\plugin.py:7246
+msgid "- LCD 2 Background-Picture [ok]>"
+msgstr "- LCD 2背景图片[ok]>"
+
+#: ..\plugin.py:5656 ..\plugin.py:6619 ..\plugin.py:7247
+msgid "- LCD 2 Brightness"
+msgstr "- LCD 2亮度"
+
+#: ..\plugin.py:5657 ..\plugin.py:6620 ..\plugin.py:7248
+msgid "- LCD 2 Night Reduction"
+msgstr "- LCD 2夜间还原"
+
+#: ..\plugin.py:5658
+msgid "- LCD 2 Refresh"
+msgstr "- LCD 2刷新"
+
+#: ..\plugin.py:5659
+msgid "LCD 3 Type"
+msgstr "LCD 3型"
+
+#: ..\plugin.py:5661
+msgid "- LCD 3 Rotate"
+msgstr "- LCD 3旋转"
+
+#: ..\plugin.py:5662 ..\plugin.py:6621 ..\plugin.py:7249
+msgid "- LCD 3 Background Color"
+msgstr "- LCD 3背景色"
+
+#: ..\plugin.py:5663 ..\plugin.py:6622 ..\plugin.py:7250
+msgid "- LCD 3 Background-Picture [ok]>"
+msgstr "- LCD 3背景图片 [ok]>"
+
+#: ..\plugin.py:5664 ..\plugin.py:6623 ..\plugin.py:7251
+msgid "- LCD 3 Brightness"
+msgstr "- LCD 3亮度"
+
+#: ..\plugin.py:5665 ..\plugin.py:6624 ..\plugin.py:7252
+msgid "- LCD 3 Night Reduction"
+msgstr "- LCD 3夜间还原"
+
+#: ..\plugin.py:5666
+msgid "- LCD 3 Refresh"
+msgstr "- LCD 3刷新"
+
+#: ..\plugin.py:5668
+msgid "Box-Skin-LCD Dimension"
+msgstr "盒式LCD尺寸"
+
+#: ..\plugin.py:5669
+msgid "Box-Skin-LCD Offset"
+msgstr "Box-Skin-LCD偏移"
+
+#: ..\plugin.py:5670
+msgid "Box-Skin-LCD Color"
+msgstr "盒式液晶显示器颜色"
+
+#: ..\plugin.py:5671
+msgid "Box-Skin-LCD Enable On-Mode"
+msgstr "Box-Skin-LCD启用开启模式"
+
+#: ..\plugin.py:5672
+msgid "Box-Skin-LCD Enable Media-Mode"
+msgstr "Box-Skin-LCD启用媒体模式"
+
+#: ..\plugin.py:5673
+msgid "Box-Skin-LCD Enable Idle-Mode"
+msgstr "Box-Skin-LCD启用空闲模式"
+
+#: ..\plugin.py:5674
+msgid "OSD [display time]"
+msgstr "OSD [显示时间]"
+
+#: ..\plugin.py:5677 ..\plugin.py:5684 ..\plugin.py:5892 ..\plugin.py:5897
+#: ..\plugin.py:5910 ..\plugin.py:5922 ..\plugin.py:5937 ..\plugin.py:5952
+#: ..\plugin.py:5964 ..\plugin.py:5974 ..\plugin.py:5987 ..\plugin.py:6000
+#: ..\plugin.py:6013 ..\plugin.py:6027 ..\plugin.py:6042 ..\plugin.py:6056
+#: ..\plugin.py:6070 ..\plugin.py:6082 ..\plugin.py:6094 ..\plugin.py:6106
+#: ..\plugin.py:6116 ..\plugin.py:6130 ..\plugin.py:6140 ..\plugin.py:6147
+#: ..\plugin.py:6158 ..\plugin.py:6168 ..\plugin.py:6186 ..\plugin.py:6198
+#: ..\plugin.py:6216 ..\plugin.py:6224 ..\plugin.py:6235 ..\plugin.py:6246
+#: ..\plugin.py:6255 ..\plugin.py:6278 ..\plugin.py:6301 ..\plugin.py:6311
+#: ..\plugin.py:6321 ..\plugin.py:6334 ..\plugin.py:6346 ..\plugin.py:6356
+#: ..\plugin.py:6365 ..\plugin.py:6376 ..\plugin.py:6387 ..\plugin.py:6398
+#: ..\plugin.py:6409 ..\plugin.py:6422 ..\plugin.py:6432 ..\plugin.py:6442
+#: ..\plugin.py:6452 ..\plugin.py:6462 ..\plugin.py:6477 ..\plugin.py:6492
+#: ..\plugin.py:6505 ..\plugin.py:6519 ..\plugin.py:6534 ..\plugin.py:6547
+#: ..\plugin.py:6557 ..\plugin.py:6569 ..\plugin.py:6581 ..\plugin.py:6590
+#: ..\plugin.py:6599 ..\plugin.py:6608 ..\plugin.py:6629 ..\plugin.py:6634
+#: ..\plugin.py:6646 ..\plugin.py:6658 ..\plugin.py:6672 ..\plugin.py:6684
+#: ..\plugin.py:6697 ..\plugin.py:6710 ..\plugin.py:6725 ..\plugin.py:6735
+#: ..\plugin.py:6742 ..\plugin.py:6757 ..\plugin.py:6772 ..\plugin.py:6785
+#: ..\plugin.py:6798 ..\plugin.py:6808 ..\plugin.py:6822 ..\plugin.py:6833
+#: ..\plugin.py:6843 ..\plugin.py:6861 ..\plugin.py:6872 ..\plugin.py:6890
+#: ..\plugin.py:6898 ..\plugin.py:6909 ..\plugin.py:6920 ..\plugin.py:6929
+#: ..\plugin.py:6952 ..\plugin.py:6975 ..\plugin.py:6985 ..\plugin.py:6995
+#: ..\plugin.py:7008 ..\plugin.py:7020 ..\plugin.py:7031 ..\plugin.py:7042
+#: ..\plugin.py:7052 ..\plugin.py:7062 ..\plugin.py:7079 ..\plugin.py:7088
+#: ..\plugin.py:7103 ..\plugin.py:7118 ..\plugin.py:7131 ..\plugin.py:7145
+#: ..\plugin.py:7160 ..\plugin.py:7173 ..\plugin.py:7183 ..\plugin.py:7195
+#: ..\plugin.py:7207 ..\plugin.py:7216 ..\plugin.py:7225 ..\plugin.py:7256
+#: ..\plugin.py:7271 ..\plugin.py:7286 ..\plugin.py:7301 ..\plugin.py:7315
+#: ..\plugin.py:7328 ..\plugin.py:7341 ..\plugin.py:7351 ..\plugin.py:7369
+#: ..\plugin.py:7380 ..\plugin.py:7398 ..\plugin.py:7406 ..\plugin.py:7417
+#: ..\plugin.py:7428 ..\plugin.py:7437 ..\plugin.py:7460 ..\plugin.py:7483
+#: ..\plugin.py:7493 ..\plugin.py:7503 ..\plugin.py:7516 ..\plugin.py:7528
+#: ..\plugin.py:7537 ..\plugin.py:7548 ..\plugin.py:7559 ..\plugin.py:7570
+#: ..\plugin.py:7581 ..\plugin.py:7594 ..\plugin.py:7604 ..\plugin.py:7614
+#: ..\plugin.py:7624 ..\plugin.py:7634 ..\plugin.py:7649 ..\plugin.py:7664
+#: ..\plugin.py:7677 ..\plugin.py:7691 ..\plugin.py:7706 ..\plugin.py:7719
+#: ..\plugin.py:7729 ..\plugin.py:7741 ..\plugin.py:7753 ..\plugin.py:7762
+#: ..\plugin.py:7771
+msgid "- which LCD"
+msgstr "- 创建LCD"
+
+#: ..\plugin.py:5678
+msgid "- Show in Mode"
+msgstr "- 以模式显示"
+
+#: ..\plugin.py:5679
+msgid "- OSD Size"
+msgstr "- OSD尺寸"
+
+#: ..\plugin.py:5680
+msgid "- Background/Transparency"
+msgstr "- 背景/透明度"
+
+#: ..\plugin.py:5681
+msgid "- Fast Grab lower quality"
+msgstr "- 快速抓取低质量"
+
+#: ..\plugin.py:5682
+msgid "Popup Text"
+msgstr "弹出式文本"
+
+#: ..\plugin.py:5685
+msgid "- Clear Key"
+msgstr "- 清除键"
+
+#: ..\plugin.py:5686 ..\plugin.py:5953 ..\plugin.py:5965 ..\plugin.py:5976
+#: ..\plugin.py:5989 ..\plugin.py:6002 ..\plugin.py:6015 ..\plugin.py:6083
+#: ..\plugin.py:6095 ..\plugin.py:6107 ..\plugin.py:6117 ..\plugin.py:6141
+#: ..\plugin.py:6148 ..\plugin.py:6159 ..\plugin.py:6169 ..\plugin.py:6187
+#: ..\plugin.py:6199 ..\plugin.py:6217 ..\plugin.py:6257 ..\plugin.py:6280
+#: ..\plugin.py:6323 ..\plugin.py:6335 ..\plugin.py:6348 ..\plugin.py:6357
+#: ..\plugin.py:6367 ..\plugin.py:6378 ..\plugin.py:6389 ..\plugin.py:6400
+#: ..\plugin.py:6463 ..\plugin.py:6478 ..\plugin.py:6493 ..\plugin.py:6506
+#: ..\plugin.py:6559 ..\plugin.py:6571 ..\plugin.py:6635 ..\plugin.py:6647
+#: ..\plugin.py:6660 ..\plugin.py:6673 ..\plugin.py:6686 ..\plugin.py:6699
+#: ..\plugin.py:6736 ..\plugin.py:6799 ..\plugin.py:6809 ..\plugin.py:6823
+#: ..\plugin.py:6834 ..\plugin.py:6844 ..\plugin.py:6862 ..\plugin.py:6873
+#: ..\plugin.py:6891 ..\plugin.py:6931 ..\plugin.py:6954 ..\plugin.py:6997
+#: ..\plugin.py:7009 ..\plugin.py:7022 ..\plugin.py:7033 ..\plugin.py:7080
+#: ..\plugin.py:7089 ..\plugin.py:7104 ..\plugin.py:7119 ..\plugin.py:7132
+#: ..\plugin.py:7185 ..\plugin.py:7197 ..\plugin.py:7302 ..\plugin.py:7342
+#: ..\plugin.py:7352 ..\plugin.py:7370 ..\plugin.py:7381 ..\plugin.py:7399
+#: ..\plugin.py:7439 ..\plugin.py:7462 ..\plugin.py:7505 ..\plugin.py:7517
+#: ..\plugin.py:7529 ..\plugin.py:7539 ..\plugin.py:7550 ..\plugin.py:7561
+#: ..\plugin.py:7572 ..\plugin.py:7635 ..\plugin.py:7650 ..\plugin.py:7665
+#: ..\plugin.py:7678 ..\plugin.py:7731 ..\plugin.py:7743
+msgid "- Font Size"
+msgstr "- 字体大小"
+
+#: ..\plugin.py:5687 ..\plugin.py:5899 ..\plugin.py:5912 ..\plugin.py:5929
+#: ..\plugin.py:5944 ..\plugin.py:5955 ..\plugin.py:5966 ..\plugin.py:5978
+#: ..\plugin.py:5991 ..\plugin.py:6004 ..\plugin.py:6017 ..\plugin.py:6031
+#: ..\plugin.py:6047 ..\plugin.py:6061 ..\plugin.py:6072 ..\plugin.py:6084
+#: ..\plugin.py:6096 ..\plugin.py:6108 ..\plugin.py:6121 ..\plugin.py:6132
+#: ..\plugin.py:6142 ..\plugin.py:6149 ..\plugin.py:6160 ..\plugin.py:6170
+#: ..\plugin.py:6188 ..\plugin.py:6200 ..\plugin.py:6218 ..\plugin.py:6225
+#: ..\plugin.py:6236 ..\plugin.py:6247 ..\plugin.py:6256 ..\plugin.py:6279
+#: ..\plugin.py:6302 ..\plugin.py:6312 ..\plugin.py:6324 ..\plugin.py:6336
+#: ..\plugin.py:6349 ..\plugin.py:6358 ..\plugin.py:6368 ..\plugin.py:6379
+#: ..\plugin.py:6390 ..\plugin.py:6401 ..\plugin.py:6411 ..\plugin.py:6426
+#: ..\plugin.py:6436 ..\plugin.py:6446 ..\plugin.py:6456 ..\plugin.py:6464
+#: ..\plugin.py:6479 ..\plugin.py:6497 ..\plugin.py:6507 ..\plugin.py:6520
+#: ..\plugin.py:6536 ..\plugin.py:6549 ..\plugin.py:6560 ..\plugin.py:6572
+#: ..\plugin.py:6603 ..\plugin.py:6637 ..\plugin.py:6649 ..\plugin.py:6662
+#: ..\plugin.py:6675 ..\plugin.py:6688 ..\plugin.py:6701 ..\plugin.py:6714
+#: ..\plugin.py:6727 ..\plugin.py:6737 ..\plugin.py:6749 ..\plugin.py:6764
+#: ..\plugin.py:6776 ..\plugin.py:6789 ..\plugin.py:6800 ..\plugin.py:6813
+#: ..\plugin.py:6824 ..\plugin.py:6835 ..\plugin.py:6845 ..\plugin.py:6863
+#: ..\plugin.py:6874 ..\plugin.py:6892 ..\plugin.py:6899 ..\plugin.py:6910
+#: ..\plugin.py:6921 ..\plugin.py:6930 ..\plugin.py:6953 ..\plugin.py:6976
+#: ..\plugin.py:6986 ..\plugin.py:6998 ..\plugin.py:7010 ..\plugin.py:7023
+#: ..\plugin.py:7034 ..\plugin.py:7046 ..\plugin.py:7056 ..\plugin.py:7065
+#: ..\plugin.py:7081 ..\plugin.py:7090 ..\plugin.py:7105 ..\plugin.py:7123
+#: ..\plugin.py:7133 ..\plugin.py:7146 ..\plugin.py:7162 ..\plugin.py:7175
+#: ..\plugin.py:7186 ..\plugin.py:7198 ..\plugin.py:7229 ..\plugin.py:7278
+#: ..\plugin.py:7293 ..\plugin.py:7306 ..\plugin.py:7319 ..\plugin.py:7332
+#: ..\plugin.py:7343 ..\plugin.py:7353 ..\plugin.py:7371 ..\plugin.py:7382
+#: ..\plugin.py:7400 ..\plugin.py:7407 ..\plugin.py:7418 ..\plugin.py:7429
+#: ..\plugin.py:7438 ..\plugin.py:7461 ..\plugin.py:7484 ..\plugin.py:7494
+#: ..\plugin.py:7506 ..\plugin.py:7518 ..\plugin.py:7530 ..\plugin.py:7540
+#: ..\plugin.py:7551 ..\plugin.py:7562 ..\plugin.py:7573 ..\plugin.py:7583
+#: ..\plugin.py:7598 ..\plugin.py:7608 ..\plugin.py:7618 ..\plugin.py:7628
+#: ..\plugin.py:7636 ..\plugin.py:7651 ..\plugin.py:7669 ..\plugin.py:7679
+#: ..\plugin.py:7692 ..\plugin.py:7708 ..\plugin.py:7721 ..\plugin.py:7732
+#: ..\plugin.py:7744 ..\plugin.py:7775
+msgid "- Position"
+msgstr "- 位置"
+
+#: ..\plugin.py:5688 ..\plugin.py:5900 ..\plugin.py:5913 ..\plugin.py:5930
+#: ..\plugin.py:5945 ..\plugin.py:5956 ..\plugin.py:5967 ..\plugin.py:5979
+#: ..\plugin.py:5992 ..\plugin.py:6005 ..\plugin.py:6018 ..\plugin.py:6032
+#: ..\plugin.py:6048 ..\plugin.py:6062 ..\plugin.py:6073 ..\plugin.py:6085
+#: ..\plugin.py:6097 ..\plugin.py:6109 ..\plugin.py:6122 ..\plugin.py:6133
+#: ..\plugin.py:6143 ..\plugin.py:6151 ..\plugin.py:6161 ..\plugin.py:6171
+#: ..\plugin.py:6189 ..\plugin.py:6201 ..\plugin.py:6219 ..\plugin.py:6227
+#: ..\plugin.py:6238 ..\plugin.py:6249 ..\plugin.py:6258 ..\plugin.py:6281
+#: ..\plugin.py:6304 ..\plugin.py:6314 ..\plugin.py:6325 ..\plugin.py:6337
+#: ..\plugin.py:6350 ..\plugin.py:6359 ..\plugin.py:6369 ..\plugin.py:6380
+#: ..\plugin.py:6391 ..\plugin.py:6402 ..\plugin.py:6412 ..\plugin.py:6427
+#: ..\plugin.py:6437 ..\plugin.py:6447 ..\plugin.py:6457 ..\plugin.py:6465
+#: ..\plugin.py:6480 ..\plugin.py:6498 ..\plugin.py:6508 ..\plugin.py:6522
+#: ..\plugin.py:6537 ..\plugin.py:6550 ..\plugin.py:6561 ..\plugin.py:6573
+#: ..\plugin.py:6604 ..\plugin.py:6638 ..\plugin.py:6650 ..\plugin.py:6663
+#: ..\plugin.py:6676 ..\plugin.py:6689 ..\plugin.py:6702 ..\plugin.py:6715
+#: ..\plugin.py:6728 ..\plugin.py:6738 ..\plugin.py:6750 ..\plugin.py:6765
+#: ..\plugin.py:6777 ..\plugin.py:6790 ..\plugin.py:6801 ..\plugin.py:6814
+#: ..\plugin.py:6826 ..\plugin.py:6836 ..\plugin.py:6846 ..\plugin.py:6864
+#: ..\plugin.py:6875 ..\plugin.py:6893 ..\plugin.py:6901 ..\plugin.py:6912
+#: ..\plugin.py:6923 ..\plugin.py:6932 ..\plugin.py:6955 ..\plugin.py:6978
+#: ..\plugin.py:6988 ..\plugin.py:6999 ..\plugin.py:7011 ..\plugin.py:7024
+#: ..\plugin.py:7035 ..\plugin.py:7047 ..\plugin.py:7057 ..\plugin.py:7066
+#: ..\plugin.py:7082 ..\plugin.py:7091 ..\plugin.py:7106 ..\plugin.py:7124
+#: ..\plugin.py:7134 ..\plugin.py:7148 ..\plugin.py:7163 ..\plugin.py:7176
+#: ..\plugin.py:7187 ..\plugin.py:7199 ..\plugin.py:7230 ..\plugin.py:7279
+#: ..\plugin.py:7294 ..\plugin.py:7307 ..\plugin.py:7320 ..\plugin.py:7333
+#: ..\plugin.py:7344 ..\plugin.py:7354 ..\plugin.py:7372 ..\plugin.py:7383
+#: ..\plugin.py:7401 ..\plugin.py:7409 ..\plugin.py:7420 ..\plugin.py:7431
+#: ..\plugin.py:7440 ..\plugin.py:7463 ..\plugin.py:7486 ..\plugin.py:7496
+#: ..\plugin.py:7507 ..\plugin.py:7519 ..\plugin.py:7531 ..\plugin.py:7541
+#: ..\plugin.py:7552 ..\plugin.py:7563 ..\plugin.py:7574 ..\plugin.py:7584
+#: ..\plugin.py:7599 ..\plugin.py:7609 ..\plugin.py:7619 ..\plugin.py:7629
+#: ..\plugin.py:7637 ..\plugin.py:7652 ..\plugin.py:7670 ..\plugin.py:7680
+#: ..\plugin.py:7694 ..\plugin.py:7709 ..\plugin.py:7722 ..\plugin.py:7733
+#: ..\plugin.py:7745 ..\plugin.py:7776
+msgid "- Alignment"
+msgstr "- 对齐"
+
+#: ..\plugin.py:5689 ..\plugin.py:5765 ..\plugin.py:5767 ..\plugin.py:5769
+#: ..\plugin.py:5771 ..\plugin.py:5773 ..\plugin.py:5893 ..\plugin.py:5932
+#: ..\plugin.py:5947 ..\plugin.py:5959 ..\plugin.py:5968 ..\plugin.py:5982
+#: ..\plugin.py:5995 ..\plugin.py:6008 ..\plugin.py:6021 ..\plugin.py:6034
+#: ..\plugin.py:6051 ..\plugin.py:6065 ..\plugin.py:6076 ..\plugin.py:6087
+#: ..\plugin.py:6099 ..\plugin.py:6125 ..\plugin.py:6136 ..\plugin.py:6153
+#: ..\plugin.py:6163 ..\plugin.py:6173 ..\plugin.py:6191 ..\plugin.py:6203
+#: ..\plugin.py:6230 ..\plugin.py:6241 ..\plugin.py:6252 ..\plugin.py:6267
+#: ..\plugin.py:6290 ..\plugin.py:6329 ..\plugin.py:6339 ..\plugin.py:6352
+#: ..\plugin.py:6361 ..\plugin.py:6370 ..\plugin.py:6381 ..\plugin.py:6392
+#: ..\plugin.py:6403 ..\plugin.py:6467 ..\plugin.py:6509 ..\plugin.py:6527
+#: ..\plugin.py:6542 ..\plugin.py:6563 ..\plugin.py:6575 ..\plugin.py:6586
+#: ..\plugin.py:6595 ..\plugin.py:6630 ..\plugin.py:6641 ..\plugin.py:6653
+#: ..\plugin.py:6666 ..\plugin.py:6679 ..\plugin.py:6692 ..\plugin.py:6705
+#: ..\plugin.py:6717 ..\plugin.py:6731 ..\plugin.py:6752 ..\plugin.py:6767
+#: ..\plugin.py:6780 ..\plugin.py:6793 ..\plugin.py:6817 ..\plugin.py:6828
+#: ..\plugin.py:6838 ..\plugin.py:6848 ..\plugin.py:6866 ..\plugin.py:6877
+#: ..\plugin.py:6904 ..\plugin.py:6915 ..\plugin.py:6926 ..\plugin.py:6941
+#: ..\plugin.py:6964 ..\plugin.py:7003 ..\plugin.py:7013 ..\plugin.py:7025
+#: ..\plugin.py:7036 ..\plugin.py:7084 ..\plugin.py:7093 ..\plugin.py:7135
+#: ..\plugin.py:7153 ..\plugin.py:7168 ..\plugin.py:7189 ..\plugin.py:7201
+#: ..\plugin.py:7212 ..\plugin.py:7221 ..\plugin.py:7257 ..\plugin.py:7281
+#: ..\plugin.py:7296 ..\plugin.py:7310 ..\plugin.py:7323 ..\plugin.py:7336
+#: ..\plugin.py:7356 ..\plugin.py:7374 ..\plugin.py:7385 ..\plugin.py:7412
+#: ..\plugin.py:7423 ..\plugin.py:7434 ..\plugin.py:7449 ..\plugin.py:7472
+#: ..\plugin.py:7511 ..\plugin.py:7521 ..\plugin.py:7533 ..\plugin.py:7542
+#: ..\plugin.py:7553 ..\plugin.py:7564 ..\plugin.py:7575 ..\plugin.py:7639
+#: ..\plugin.py:7681 ..\plugin.py:7699 ..\plugin.py:7714 ..\plugin.py:7735
+#: ..\plugin.py:7747 ..\plugin.py:7758 ..\plugin.py:7767
+msgid "- Color"
+msgstr "- 颜色"
+
+#: ..\plugin.py:5690 ..\plugin.py:5969 ..\plugin.py:6192 ..\plugin.py:6340
+#: ..\plugin.py:6353 ..\plugin.py:6362 ..\plugin.py:6371 ..\plugin.py:6382
+#: ..\plugin.py:6393 ..\plugin.py:6404 ..\plugin.py:6468 ..\plugin.py:6510
+#: ..\plugin.py:6564 ..\plugin.py:6576 ..\plugin.py:6587 ..\plugin.py:6596
+#: ..\plugin.py:6867 ..\plugin.py:7014 ..\plugin.py:7026 ..\plugin.py:7037
+#: ..\plugin.py:7085 ..\plugin.py:7094 ..\plugin.py:7136 ..\plugin.py:7190
+#: ..\plugin.py:7202 ..\plugin.py:7213 ..\plugin.py:7222 ..\plugin.py:7375
+#: ..\plugin.py:7522 ..\plugin.py:7534 ..\plugin.py:7543 ..\plugin.py:7554
+#: ..\plugin.py:7565 ..\plugin.py:7576 ..\plugin.py:7640 ..\plugin.py:7682
+#: ..\plugin.py:7736 ..\plugin.py:7748 ..\plugin.py:7759 ..\plugin.py:7768
+msgid "- Background Color"
+msgstr "- 背景色"
+
+#: ..\plugin.py:5691 ..\plugin.py:5934 ..\plugin.py:5949 ..\plugin.py:5961
+#: ..\plugin.py:5971 ..\plugin.py:5984 ..\plugin.py:5997 ..\plugin.py:6010
+#: ..\plugin.py:6023 ..\plugin.py:6039 ..\plugin.py:6053 ..\plugin.py:6067
+#: ..\plugin.py:6091 ..\plugin.py:6103 ..\plugin.py:6113 ..\plugin.py:6127
+#: ..\plugin.py:6155 ..\plugin.py:6165 ..\plugin.py:6175 ..\plugin.py:6194
+#: ..\plugin.py:6205 ..\plugin.py:6232 ..\plugin.py:6243 ..\plugin.py:6275
+#: ..\plugin.py:6298 ..\plugin.py:6331 ..\plugin.py:6343 ..\plugin.py:6373
+#: ..\plugin.py:6384 ..\plugin.py:6395 ..\plugin.py:6406 ..\plugin.py:6474
+#: ..\plugin.py:6489 ..\plugin.py:6502 ..\plugin.py:6516 ..\plugin.py:6531
+#: ..\plugin.py:6544 ..\plugin.py:6566 ..\plugin.py:6578 ..\plugin.py:6643
+#: ..\plugin.py:6655 ..\plugin.py:6668 ..\plugin.py:6681 ..\plugin.py:6694
+#: ..\plugin.py:6707 ..\plugin.py:6722 ..\plugin.py:6754 ..\plugin.py:6769
+#: ..\plugin.py:6782 ..\plugin.py:6795 ..\plugin.py:6805 ..\plugin.py:6819
+#: ..\plugin.py:6830 ..\plugin.py:6840 ..\plugin.py:6850 ..\plugin.py:6869
+#: ..\plugin.py:6879 ..\plugin.py:6906 ..\plugin.py:6917 ..\plugin.py:6949
+#: ..\plugin.py:6972 ..\plugin.py:7005 ..\plugin.py:7017 ..\plugin.py:7028
+#: ..\plugin.py:7039 ..\plugin.py:7100 ..\plugin.py:7115 ..\plugin.py:7128
+#: ..\plugin.py:7142 ..\plugin.py:7157 ..\plugin.py:7170 ..\plugin.py:7192
+#: ..\plugin.py:7204 ..\plugin.py:7283 ..\plugin.py:7298 ..\plugin.py:7312
+#: ..\plugin.py:7325 ..\plugin.py:7338 ..\plugin.py:7348 ..\plugin.py:7358
+#: ..\plugin.py:7377 ..\plugin.py:7387 ..\plugin.py:7414 ..\plugin.py:7425
+#: ..\plugin.py:7457 ..\plugin.py:7480 ..\plugin.py:7513 ..\plugin.py:7525
+#: ..\plugin.py:7545 ..\plugin.py:7556 ..\plugin.py:7567 ..\plugin.py:7578
+#: ..\plugin.py:7646 ..\plugin.py:7661 ..\plugin.py:7674 ..\plugin.py:7688
+#: ..\plugin.py:7703 ..\plugin.py:7716 ..\plugin.py:7738 ..\plugin.py:7750
+msgid "- Font"
+msgstr "- 字体"
+
+#: ..\plugin.py:5694
+msgid "Active Screen"
+msgstr "活动画面"
+
+#: ..\plugin.py:5695
+msgid "Screen Switch Select - Screen"
+msgstr "屏幕开关选择-屏幕"
+
+#: ..\plugin.py:5696
+msgid "Screen Switch Select - LCD"
+msgstr "屏幕开关选择-LCD"
+
+#: ..\plugin.py:5697
+msgid "Screens used for Changing"
+msgstr "用于更换的屏幕"
+
+#: ..\plugin.py:5698 ..\plugin.py:7259
+msgid "Screen 1 Changing Time"
+msgstr "屏幕1更改时间"
+
+#: ..\plugin.py:5700 ..\plugin.py:7261
+msgid "- Screen 2 Changing Time"
+msgstr "- 屏幕2更改时间"
+
+#: ..\plugin.py:5701 ..\plugin.py:7262
+msgid "- Screen 3 Changing Time"
+msgstr "- 屏幕3更改时间"
+
+#: ..\plugin.py:5702 ..\plugin.py:7263
+msgid "- Screen 4 Changing Time"
+msgstr "- 屏幕4更改时间"
+
+#: ..\plugin.py:5703 ..\plugin.py:7264
+msgid "- Screen 5 Changing Time"
+msgstr "- 屏幕5更改时间"
+
+#: ..\plugin.py:5704 ..\plugin.py:7265
+msgid "- Screen 6 Changing Time"
+msgstr "- 屏幕6更改时间"
+
+#: ..\plugin.py:5705 ..\plugin.py:7266
+msgid "- Screen 7 Changing Time"
+msgstr "- 屏幕7更改时间"
+
+#: ..\plugin.py:5706 ..\plugin.py:7267
+msgid "- Screen 8 Changing Time"
+msgstr "- 屏幕8更改时间"
+
+#: ..\plugin.py:5707 ..\plugin.py:7268
+msgid "- Screen 9 Changing Time"
+msgstr "- 屏幕9更改时间"
+
+#: ..\plugin.py:5708
+msgid "Picture Changing Time"
+msgstr "图片更改时间"
+
+#: ..\plugin.py:5709
+msgid "Picture Sort"
+msgstr "图片排序"
+
+#: ..\plugin.py:5710
+msgid "Picture Directory Recursive"
+msgstr "图片目录递归"
+
+#: ..\plugin.py:5711
+msgid "Picture Quality for Resizing"
+msgstr "调整画质的图像质量"
+
+#: ..\plugin.py:5713
+msgid "Picture Quick Update Time [s]"
+msgstr "图片快速更新时间[s]"
+
+#: ..\plugin.py:5715
+msgid "Picture Type [only Picture]"
+msgstr "图片类型[仅图片]"
+
+#: ..\plugin.py:5716
+msgid "Background-Picture Type"
+msgstr "背景图片类型"
+
+#: ..\plugin.py:5717
+msgid "Weather API"
+msgstr "天气 API"
+
+#: ..\plugin.py:5718
+msgid "Weather API-Key OpenWeatherMap"
+msgstr "天气API键打开天气图"
+
+#: ..\plugin.py:5719
+msgid "Weather API-ID Key WeatherUnlocked"
+msgstr "天气API-ID密钥天气解锁"
+
+#: ..\plugin.py:5720
+msgid "Weather City"
+msgstr "天气城市"
+
+#: ..\plugin.py:5721
+msgid "Weather City 2"
+msgstr "天气城市2"
+
+#: ..\plugin.py:5722
+msgid "Weather-Icon-Path [ok]>"
+msgstr "天气图标路径 [ok]>"
+
+#: ..\plugin.py:5723
+msgid "Weather-Icon Zoom"
+msgstr "天气图标放大"
+
+#: ..\plugin.py:5724
+msgid "Weather Low Temperature Color"
+msgstr "天气低温色"
+
+#: ..\plugin.py:5725
+msgid "Weather High Temperature Color"
+msgstr "天气高温色"
+
+#: ..\plugin.py:5726
+msgid "Weather Transparency"
+msgstr "天气透明度"
+
+#: ..\plugin.py:5727
+msgid "Weather Wind speed unit"
+msgstr "天气风速单位"
+
+#: ..\plugin.py:5728
+msgid "Weather Wind Info Lines"
+msgstr "天气线"
+
+#: ..\plugin.py:5729
+msgid "Weather Rain Chance"
+msgstr "天气雨"
+
+#: ..\plugin.py:5731
+msgid "- Rain Zoom"
+msgstr "- 雨缩放"
+
+#: ..\plugin.py:5732
+msgid "- Rain Color"
+msgstr "- 雨色"
+
+#: ..\plugin.py:5733
+msgid "- Rain use Color 2 from"
+msgstr "- 从雨中使用颜色2"
+
+#: ..\plugin.py:5734
+msgid "- Rain Color 2"
+msgstr "- 雨色2"
+
+#: ..\plugin.py:5735
+msgid "Weather Humidity Color"
+msgstr "天气 湿度 颜色"
+
+#: ..\plugin.py:5736
+msgid "Weather Lines"
+msgstr "天气线"
+
+#: ..\plugin.py:5737
+msgid "Weather Trendarrows"
+msgstr "天气趋势箭头"
+
+#: ..\plugin.py:5738
+msgid "Weather Extra Infos"
+msgstr "天气额外信息"
+
+#: ..\plugin.py:5740
+msgid "- Extra Zoom"
+msgstr "- 额外缩放"
+
+#: ..\plugin.py:5741
+msgid "- Show chill temperature from difference"
+msgstr "- 显示温差"
+
+#: ..\plugin.py:5742
+msgid "- Extra Color City"
+msgstr "- 城市的附加颜色"
+
+#: ..\plugin.py:5743
+msgid "- Extra Color Chill"
+msgstr "- 额外颜色冷色"
+
+#: ..\plugin.py:5744
+msgid "Netatmo CO2 Min Range"
+msgstr "Netatmo CO2最小范围"
+
+#: ..\plugin.py:5745
+msgid "Netatmo CO2 Max Range"
+msgstr "Netatmo CO2最大范围"
+
+#: ..\plugin.py:5746
+msgid "Meteo URL"
+msgstr "气象网址"
+
+#: ..\plugin.py:5747
+msgid "Moon-Icon-Path [ok]>"
+msgstr "月亮图标路径 [ok]>"
+
+#: ..\plugin.py:5748
+msgid "Recording Picture [ok]>"
+msgstr "录制图片 [ok]>"
+
+#: ..\plugin.py:5749
+msgid "Double-button switches"
+msgstr "双按钮开关"
+
+#: ..\plugin.py:5750
+msgid "Key for Screen Change"
+msgstr "屏幕切换键"
+
+#: ..\plugin.py:5751
+msgid "Key for Screen On/Off"
+msgstr "屏幕开/关键"
+
+#: ..\plugin.py:5752
+msgid "FritzCall Picture Path [ok]>"
+msgstr "FritzCall图片路径 [ok]>"
+
+#: ..\plugin.py:5753
+msgid "FritzCall Number of Lines per Entry"
+msgstr "FritzCall每个条目的行数"
+
+#: ..\plugin.py:5754
+msgid "FritzCall Number of List Entries"
+msgstr "FritzCall列表条目数"
+
+#: ..\plugin.py:5755
+msgid "FritzCall Number of Pictures"
+msgstr "FritzCall图片数"
+
+#: ..\plugin.py:5756
+msgid "FritzCall Picture Orientation"
+msgstr "FritzCall图像定向"
+
+#: ..\plugin.py:5757
+msgid "FritzCall Picture Transparency"
+msgstr "FritzCall图片透明度"
+
+#: ..\plugin.py:5758
+msgid "FritzCall Pictures Search"
+msgstr "FritzCall图片搜索"
+
+#: ..\plugin.py:5759
+msgid "FritzCall remove Calls after hours"
+msgstr "FritzCall在(小时)后取消呼叫"
+
+#: ..\plugin.py:5760
+msgid "FritzCall Popup-Time"
+msgstr "FritzCall弹出时间"
+
+#: ..\plugin.py:5761
+msgid "FritzCall Popup LCD"
+msgstr "FritzCall弹出式液晶屏"
+
+#: ..\plugin.py:5762
+msgid "FritzCall Popup Color"
+msgstr "FritzCall弹出窗口的颜色"
+
+#: ..\plugin.py:5763
+msgid "FritzCall Frame Picture [ok]>"
+msgstr "FritzCall相框图片 [ok]>"
+
+#: ..\plugin.py:5764
+msgid "Calendar ics-Path [ok]>"
+msgstr "日历象形图路径[ok]>"
+
+#: ..\plugin.py:5766 ..\plugin.py:5768 ..\plugin.py:5770
+msgid "Calendar ics-URL"
+msgstr "日历象形图互联网地址"
+
+#: ..\plugin.py:5772
+msgid "Calendar planerFS"
+msgstr "日历调度程序FS"
+
+#: ..\plugin.py:5774
+msgid "Calendar Saturday Color"
+msgstr "日历中的星期六颜色"
+
+#: ..\plugin.py:5775
+msgid "Calendar Sunday Color"
+msgstr "日历中的星期日颜色"
+
+#: ..\plugin.py:5776
+msgid "Calendar Line Thickness"
+msgstr "日历线条粗细"
+
+#: ..\plugin.py:5777
+msgid "Calendar Day Event Preview"
+msgstr "日历日活动预览"
+
+#: ..\plugin.py:5778
+msgid "Calendar Timezone Correction"
+msgstr "日历时区修正"
+
+#: ..\plugin.py:5779
+msgid "Calendar Transparency"
+msgstr "日历透明度"
+
+#: ..\plugin.py:5780
+msgid "Calendar Poll Interval"
+msgstr "日历轮询间隔"
+
+#: ..\plugin.py:5781
+msgid "Tuner Color"
+msgstr "调谐器颜色"
+
+#: ..\plugin.py:5782
+msgid "Tuner Color Active"
+msgstr "调谐器颜色有效"
+
+#: ..\plugin.py:5783
+msgid "Tuner Color On"
+msgstr "调谐器颜色开启"
+
+#: ..\plugin.py:5784
+msgid "Service search first"
+msgstr "服务搜索优先"
+
+#: ..\plugin.py:5785
+msgid "DVB-T Signal-Quality Correction"
+msgstr "DVB-T信号质量校正"
+
+#: ..\plugin.py:5786
+msgid "Font global [ok]>"
+msgstr "字体全局 [ok]>"
+
+#: ..\plugin.py:5787
+msgid "Font 1 [ok]>"
+msgstr "字体1 [ok]>"
+
+#: ..\plugin.py:5788
+msgid "Font 2 [ok]>"
+msgstr "字体 2 [ok]>"
+
+#: ..\plugin.py:5789
+msgid "Font 3 [ok]>"
+msgstr "字体 3 [ok]>"
+
+#: ..\plugin.py:5790
+msgid "Font 4 [ok]>"
+msgstr "字体 4 [ok]>"
+
+#: ..\plugin.py:5791
+msgid "Font 5 [ok]>"
+msgstr "字体 5 [ok]>"
+
+#: ..\plugin.py:5792
+msgid "Mail 1 Connect"
+msgstr "邮件1连接"
+
+#: ..\plugin.py:5793
+msgid "Mail 1 Server"
+msgstr "邮件1服务器"
+
+#: ..\plugin.py:5794
+msgid "Mail 1 [Displayname:]Username"
+msgstr "邮件1 [显示名称:]用户名"
+
+#: ..\plugin.py:5795
+msgid "Mail 1 Password"
+msgstr "邮件1密码"
+
+#: ..\plugin.py:5796
+msgid "Mail 2 Connect"
+msgstr "邮件2连接"
+
+#: ..\plugin.py:5797
+msgid "Mail 2 Server"
+msgstr "邮件2服务器"
+
+#: ..\plugin.py:5798
+msgid "Mail 2 [Displayname:]Username"
+msgstr "邮件2 [显示名称:]用户名"
+
+#: ..\plugin.py:5799
+msgid "Mail 2 Password"
+msgstr "邮件2密码"
+
+#: ..\plugin.py:5800
+msgid "Mail 3 Connect"
+msgstr "邮件3连接"
+
+#: ..\plugin.py:5801
+msgid "Mail 3 Server"
+msgstr "邮件3服务器"
+
+#: ..\plugin.py:5802
+msgid "Mail 3 [Displayname:]Username"
+msgstr "邮件3 [显示名称:]用户名"
+
+#: ..\plugin.py:5803
+msgid "Mail 3 Password"
+msgstr "邮件3密码"
+
+#: ..\plugin.py:5804
+msgid "Mail 4 Connect"
+msgstr "邮件4连接"
+
+#: ..\plugin.py:5805
+msgid "Mail 4 Server"
+msgstr "邮件4服务器"
+
+#: ..\plugin.py:5806
+msgid "Mail 4 [Displayname:]Username"
+msgstr "邮件4 [显示名称:]用户名"
+
+#: ..\plugin.py:5807
+msgid "Mail 4 Password"
+msgstr "邮件4密码"
+
+#: ..\plugin.py:5808
+msgid "Mail 5 Connect"
+msgstr "邮件5连接"
+
+#: ..\plugin.py:5809
+msgid "Mail 5 Server"
+msgstr "邮件5服务器"
+
+#: ..\plugin.py:5810
+msgid "Mail 5 [Displayname:]Username"
+msgstr "邮件5 [显示名称:]用户名"
+
+#: ..\plugin.py:5811
+msgid "Mail 5 Password"
+msgstr "邮件5密码"
+
+#: ..\plugin.py:5812
+msgid "Mail Poll Interval"
+msgstr "邮件轮询间隔"
+
+#: ..\plugin.py:5813
+msgid "Mail IMAP limit to last days"
+msgstr "邮寄IMAP限制到最后几天"
+
+#: ..\plugin.py:5814
+msgid "Mail Show Empty Mailboxes"
+msgstr "邮件显示空邮箱"
+
+#: ..\plugin.py:5815
+msgid "Mail Show Date"
+msgstr "邮件显示日期"
+
+#: ..\plugin.py:5816
+msgid "Mail Hide Mailadress"
+msgstr "邮件隐藏邮件地址"
+
+#: ..\plugin.py:5817
+msgid "Remote Box 1 [Displayname:]IP/Name"
+msgstr "远程文件夹1 [显示名称:] IP /名称"
+
+#: ..\plugin.py:5818
+msgid "Remote Box 2 [Displayname:]IP/Name"
+msgstr "Remote Box 2 [显示名称:] IP /名称"
+
+#: ..\plugin.py:5819
+msgid "Remote Box 3 [Displayname:]IP/Name"
+msgstr "遥控器3 [显示名称:] IP /名称"
+
+#: ..\plugin.py:5820
+msgid "Remote Box 4 [Displayname:]IP/Name"
+msgstr "Remote Box 4 [显示名称:] IP /名称"
+
+#: ..\plugin.py:5821
+msgid "Remote Box 5 [Displayname:]IP/Name"
+msgstr "Remote Box 5 [显示名称:] IP /名称"
+
+#: ..\plugin.py:5822
+msgid "Remote Box Poll every Minutes"
+msgstr "每分钟进行一次远程箱投票"
+
+#: ..\plugin.py:5823
+msgid "Remote Box Timer [Displayname:]IP/Name"
+msgstr "远程盒定时器[显示名称:] IP /名称"
+
+#: ..\plugin.py:5824
+msgid "Remote Box Timer Poll every Minutes"
+msgstr "每隔一分钟的远程Box Timer轮询"
+
+#: ..\plugin.py:5825
+msgid "WWW Converter Poll Interval"
+msgstr "WWW转换器轮询间隔"
+
+#: ..\plugin.py:5826
+msgid "WWW Converter Usage"
+msgstr "WWW转换器使用"
+
+#: ..\plugin.py:5827
+msgid "WWW ApiKey from cloudconvert.org"
+msgstr "来自cloudconvert.org的WWW ApiKey"
+
+#: ..\plugin.py:5828
+msgid "WWW ApiKey from convertapi.com"
+msgstr "来自convertapi.com的WWW ApiKey"
+
+#: ..\plugin.py:5829
+msgid "WebIF Refresh [s]"
+msgstr "WebIF刷新[s]"
+
+#: ..\plugin.py:5830
+msgid "WebIF Refresh Type"
+msgstr "WebIF刷新类型"
+
+#: ..\plugin.py:5831
+msgid "WebIF Init Delay"
+msgstr "WebIF初始化延迟"
+
+#: ..\plugin.py:5833
+msgid "WebIF IP Deny"
+msgstr "WebIF IP拒绝"
+
+#: ..\plugin.py:5834
+msgid "WebIF Design"
+msgstr "WebIF设计"
+
+#: ..\plugin.py:5835
+msgid "Save as Picture for WebIF"
+msgstr "另存为WebIF图片"
+
+#: ..\plugin.py:5836
+msgid "MJPEG Stream LCD 1 enable"
+msgstr "MJPEG流LCD 1启用"
+
+#: ..\plugin.py:5837
+msgid "MJPEG Stream LCD 1 Port"
+msgstr "MJPEG流LCD 1端口"
+
+#: ..\plugin.py:5838
+msgid "MJPEG Stream LCD 1 Virtual Brightness"
+msgstr "MJPEG流LCD 1虚拟亮度"
+
+#: ..\plugin.py:5839
+msgid "MJPEG Stream LCD 2 enable"
+msgstr "MJPEG流LCD 2启用"
+
+#: ..\plugin.py:5840
+msgid "MJPEG Stream LCD 2 Port"
+msgstr "MJPEG流LCD 2端口"
+
+#: ..\plugin.py:5841
+msgid "MJPEG Stream LCD 2 Virtual Brightness"
+msgstr "MJPEG Stream LCD 2虚拟亮度"
+
+#: ..\plugin.py:5842
+msgid "MJPEG Stream LCD 3 enable"
+msgstr "MJPEG流LCD 3启用"
+
+#: ..\plugin.py:5843
+msgid "MJPEG Stream LCD 3 Port"
+msgstr "MJPEG流LCD 3端口"
+
+#: ..\plugin.py:5844
+msgid "MJPEG Stream LCD 3 Virtual Brightness"
+msgstr "MJPEG流LCD 3虚拟亮度"
+
+#: ..\plugin.py:5846
+msgid "MJPEG Cycle"
+msgstr "MJPEG循环"
+
+#: ..\plugin.py:5847
+msgid "MJPEG Restart on Error"
+msgstr "出错时MJPEG重新启动"
+
+#: ..\plugin.py:5848
+msgid "MJPEG Header Mode"
+msgstr "MJPEG标题模式"
+
+#: ..\plugin.py:5849
+msgid "Sonos IP"
+msgstr "Sonos IP地址"
+
+#: ..\plugin.py:5850
+msgid "Sonos Ping Timeout [ms]"
+msgstr "休眠Ping超时[毫秒]"
+
+#: ..\plugin.py:5851
+msgid "Sonos Play Check"
+msgstr "休眠播放检查"
+
+#: ..\plugin.py:5852
+msgid "Sonos Refresh [s]"
+msgstr "休眠更新间隔[秒]"
+
+#: ..\plugin.py:5853
+msgid "BlueSound IP"
+msgstr "BlueSound IP"
+
+#: ..\plugin.py:5854
+msgid "BlueSound Ping Timeout [ms]"
+msgstr "BlueSound Ping 超时 [ms]"
+
+#: ..\plugin.py:5855
+msgid "BlueSound Play Check"
+msgstr "BlueSound 玩检查"
+
+#: ..\plugin.py:5856
+msgid "BlueSound Refresh [s]"
+msgstr "BlueSound刷新 [s]"
+
+#: ..\plugin.py:5857
+msgid "MusicCast IP"
+msgstr "音乐广播IP"
+
+#: ..\plugin.py:5858
+msgid "MusicCast Server IP [optional]"
+msgstr "MusicCast服务器IP [可选]"
+
+#: ..\plugin.py:5859
+msgid "MusicCast Ping Timeout [ms]"
+msgstr "音乐播放Ping超时 [毫秒]"
+
+#: ..\plugin.py:5860
+msgid "MusicCast Play Check"
+msgstr "MusicCast播放检查"
+
+#: ..\plugin.py:5861
+msgid "MusicCast Refresh [s]"
+msgstr "MusicCast刷新[s]"
+
+#: ..\plugin.py:5862
+msgid "MusicCast Cover"
+msgstr "音乐广告封面"
+
+#: ..\plugin.py:5863
+msgid "LCD Custom Width"
+msgstr "LCD自定义宽度"
+
+#: ..\plugin.py:5864
+msgid "LCD Custom Height"
+msgstr "LCD自定义高度"
+
+#: ..\plugin.py:5865
+msgid "LCD Custom Width 2"
+msgstr "LCD自定义宽度2"
+
+#: ..\plugin.py:5866
+msgid "LCD Custom Height 2"
+msgstr "LCD自定义高度2"
+
+#: ..\plugin.py:5867
+msgid "LCD Off when shutdown"
+msgstr "关机时液晶屏关闭"
+
+#: ..\plugin.py:5868
+msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
+msgstr "时机！在快速模式下计算所有时间到时间/ 5 * 2"
+
+#: ..\plugin.py:5869
+msgid "Display Delay [ms]"
+msgstr "显示延迟[毫秒]"
+
+#: ..\plugin.py:5870
+msgid "Threads per LCD"
+msgstr "每个LCD的线程数"
+
+#: ..\plugin.py:5871
+msgid "Show Crash Corner"
+msgstr "显示崩溃角"
+
+#: ..\plugin.py:5872
+msgid "Show 'no ....' Messages"
+msgstr "显示“否 ....”消息"
+
+#: ..\plugin.py:5873
+msgid "Storage-Devices: Force Read"
+msgstr "存储设备：强制读取"
+
+#: ..\plugin.py:5874
+msgid "Storage-Devices: Color Back"
+msgstr "存储设备：彩色背"
+
+#: ..\plugin.py:5875
+msgid "Storage-Devices: Color Bar"
+msgstr "存储设备：颜色栏"
+
+#: ..\plugin.py:5876
+msgid "Storage-Devices: Color Full"
+msgstr "存储设备：全彩色"
+
+#: ..\plugin.py:5877
+msgid "Network Check active"
+msgstr "网络检查处于活动状态"
+
+#: ..\plugin.py:5878
+msgid "Switch FrameBuffer [if possible]"
+msgstr "切换帧缓冲区 [如果可能]"
+
+#: ..\plugin.py:5879
+msgid "Config Backup Path [ok]>"
+msgstr "配置备份路径[ok]>"
+
+#: ..\plugin.py:5880
+msgid "Config Restore All Settings"
+msgstr "配置还原所有设置"
+
+#: ..\plugin.py:5881
+msgid "Debug-Logging > /tmp/L4log.txt"
+msgstr "调试日志 > /tmp/L4log.txt"
+
+#: ..\plugin.py:5885 ..\plugin.py:7236
+msgid "- Backlight Off [disable set Off=On]"
+msgstr "- 背光关闭[禁用设置关闭=打开]"
+
+#: ..\plugin.py:5886 ..\plugin.py:7237
+msgid "- Backlight On"
+msgstr "- 背光开启"
+
+#: ..\plugin.py:5887 ..\plugin.py:7238
+msgid "- Backlight Weekend Off [disable set Off=On]"
+msgstr "- 周末背光关闭 [禁用设置关闭=打开]"
+
+#: ..\plugin.py:5888 ..\plugin.py:7239
+msgid "- Backlight Weekend On"
+msgstr "- 背光周末开启"
+
+#: ..\plugin.py:5889 ..\plugin.py:6625 ..\plugin.py:7240
+msgid "- LCD Auto-OFF"
+msgstr "- LCD自动关闭"
+
+#: ..\plugin.py:5890 ..\plugin.py:6627 ..\plugin.py:7254
+msgid "Background"
+msgstr "背景"
+
+#: ..\plugin.py:5894 ..\plugin.py:6631 ..\plugin.py:7258
+msgid "- Picture [ok]>"
+msgstr "- 图片 [ok]>"
+
+#: ..\plugin.py:5898 ..\plugin.py:5911
+msgid "- Picon Size"
+msgstr "- Picon大小"
+
+#: ..\plugin.py:5901 ..\plugin.py:5914 ..\plugin.py:5931 ..\plugin.py:5946
+#: ..\plugin.py:5958 ..\plugin.py:5981 ..\plugin.py:5994 ..\plugin.py:6007
+#: ..\plugin.py:6020 ..\plugin.py:6049 ..\plugin.py:6063 ..\plugin.py:6075
+#: ..\plugin.py:6086 ..\plugin.py:6098 ..\plugin.py:6110 ..\plugin.py:6124
+#: ..\plugin.py:6135 ..\plugin.py:6144 ..\plugin.py:6152 ..\plugin.py:6162
+#: ..\plugin.py:6172 ..\plugin.py:6190 ..\plugin.py:6202 ..\plugin.py:6220
+#: ..\plugin.py:6228 ..\plugin.py:6239 ..\plugin.py:6250 ..\plugin.py:6259
+#: ..\plugin.py:6282 ..\plugin.py:6306 ..\plugin.py:6316 ..\plugin.py:6328
+#: ..\plugin.py:6338 ..\plugin.py:6351 ..\plugin.py:6360 ..\plugin.py:6466
+#: ..\plugin.py:6500 ..\plugin.py:6523 ..\plugin.py:6538 ..\plugin.py:6551
+#: ..\plugin.py:6562 ..\plugin.py:6574 ..\plugin.py:6605 ..\plugin.py:6640
+#: ..\plugin.py:6652 ..\plugin.py:6665 ..\plugin.py:6678 ..\plugin.py:6691
+#: ..\plugin.py:6704 ..\plugin.py:6730 ..\plugin.py:6739 ..\plugin.py:6751
+#: ..\plugin.py:6766 ..\plugin.py:6778 ..\plugin.py:6791 ..\plugin.py:6802
+#: ..\plugin.py:6816 ..\plugin.py:6827 ..\plugin.py:6837 ..\plugin.py:6847
+#: ..\plugin.py:6865 ..\plugin.py:6876 ..\plugin.py:6894 ..\plugin.py:6902
+#: ..\plugin.py:6913 ..\plugin.py:6924 ..\plugin.py:6933 ..\plugin.py:6956
+#: ..\plugin.py:6980 ..\plugin.py:6990 ..\plugin.py:7002 ..\plugin.py:7012
+#: ..\plugin.py:7083 ..\plugin.py:7092 ..\plugin.py:7126 ..\plugin.py:7149
+#: ..\plugin.py:7164 ..\plugin.py:7177 ..\plugin.py:7188 ..\plugin.py:7200
+#: ..\plugin.py:7231 ..\plugin.py:7280 ..\plugin.py:7295 ..\plugin.py:7309
+#: ..\plugin.py:7321 ..\plugin.py:7334 ..\plugin.py:7345 ..\plugin.py:7355
+#: ..\plugin.py:7373 ..\plugin.py:7384 ..\plugin.py:7402 ..\plugin.py:7410
+#: ..\plugin.py:7421 ..\plugin.py:7432 ..\plugin.py:7441 ..\plugin.py:7464
+#: ..\plugin.py:7488 ..\plugin.py:7498 ..\plugin.py:7510 ..\plugin.py:7520
+#: ..\plugin.py:7532 ..\plugin.py:7638 ..\plugin.py:7672 ..\plugin.py:7695
+#: ..\plugin.py:7710 ..\plugin.py:7723 ..\plugin.py:7734 ..\plugin.py:7746
+#: ..\plugin.py:7777
+msgid "- Split Screen"
+msgstr "- 分屏"
+
+#: ..\plugin.py:5902 ..\plugin.py:5915
+msgid "- Full Screen"
+msgstr "- 全屏显示"
+
+#: ..\plugin.py:5903 ..\plugin.py:5916
+msgid "- Text Size"
+msgstr "- 文本大小"
+
+#: ..\plugin.py:5904 ..\plugin.py:6429 ..\plugin.py:6439 ..\plugin.py:6449
+#: ..\plugin.py:6459 ..\plugin.py:7049 ..\plugin.py:7059 ..\plugin.py:7072
+#: ..\plugin.py:7601 ..\plugin.py:7611 ..\plugin.py:7621 ..\plugin.py:7631
+msgid "- Transparency"
+msgstr "- 透明度"
+
+#: ..\plugin.py:5905 ..\plugin.py:5917 ..\plugin.py:6089 ..\plugin.py:6101
+msgid "- Picon Path [ok]>"
+msgstr "- Picon路径 [ok]>"
+
+#: ..\plugin.py:5906 ..\plugin.py:5918
+msgid "- Picon Path 2 [ok]>"
+msgstr "- Picon路径2[ok]>"
+
+#: ..\plugin.py:5907 ..\plugin.py:5919
+msgid "- Picon Cache Path [ok]>"
+msgstr "- Picon缓存路径 [ok]>"
+
+#: ..\plugin.py:5908
+msgid "Picon 2"
+msgstr "Picon 2"
+
+#: ..\plugin.py:5920 ..\plugin.py:6740 ..\plugin.py:7269
+msgid "Clock"
+msgstr "时钟"
+
+#: ..\plugin.py:5923 ..\plugin.py:5938 ..\plugin.py:6600 ..\plugin.py:7226
+#: ..\plugin.py:7772
+msgid "-  Type"
+msgstr "-  类型"
+
+#: ..\plugin.py:5925 ..\plugin.py:5940 ..\plugin.py:6745 ..\plugin.py:6760
+#: ..\plugin.py:7274 ..\plugin.py:7289
+msgid "- Analog Clock"
+msgstr "- 模拟时钟"
+
+#: ..\plugin.py:5927 ..\plugin.py:5942 ..\plugin.py:6747 ..\plugin.py:6762
+#: ..\plugin.py:7276 ..\plugin.py:7291
+msgid "- Spacing"
+msgstr "- 间距"
+
+#: ..\plugin.py:5928 ..\plugin.py:5943 ..\plugin.py:6030 ..\plugin.py:6046
+#: ..\plugin.py:6060 ..\plugin.py:6071 ..\plugin.py:6131 ..\plugin.py:6303
+#: ..\plugin.py:6313 ..\plugin.py:6322 ..\plugin.py:6410 ..\plugin.py:6424
+#: ..\plugin.py:6434 ..\plugin.py:6444 ..\plugin.py:6454 ..\plugin.py:6535
+#: ..\plugin.py:6548 ..\plugin.py:6601 ..\plugin.py:6713 ..\plugin.py:6726
+#: ..\plugin.py:6748 ..\plugin.py:6763 ..\plugin.py:6775 ..\plugin.py:6788
+#: ..\plugin.py:6977 ..\plugin.py:6987 ..\plugin.py:6996 ..\plugin.py:7044
+#: ..\plugin.py:7054 ..\plugin.py:7063 ..\plugin.py:7161 ..\plugin.py:7174
+#: ..\plugin.py:7227 ..\plugin.py:7277 ..\plugin.py:7292 ..\plugin.py:7318
+#: ..\plugin.py:7331 ..\plugin.py:7485 ..\plugin.py:7495 ..\plugin.py:7504
+#: ..\plugin.py:7582 ..\plugin.py:7596 ..\plugin.py:7606 ..\plugin.py:7616
+#: ..\plugin.py:7626 ..\plugin.py:7707 ..\plugin.py:7720 ..\plugin.py:7773
+msgid "- Size"
+msgstr "- 大小"
+
+#: ..\plugin.py:5933 ..\plugin.py:5948 ..\plugin.py:5960 ..\plugin.py:5970
+#: ..\plugin.py:5983 ..\plugin.py:5996 ..\plugin.py:6009 ..\plugin.py:6022
+#: ..\plugin.py:6052 ..\plugin.py:6066 ..\plugin.py:6090 ..\plugin.py:6102
+#: ..\plugin.py:6126 ..\plugin.py:6154 ..\plugin.py:6164 ..\plugin.py:6174
+#: ..\plugin.py:6193 ..\plugin.py:6204 ..\plugin.py:6231 ..\plugin.py:6242
+#: ..\plugin.py:6274 ..\plugin.py:6297 ..\plugin.py:6330 ..\plugin.py:6342
+#: ..\plugin.py:6372 ..\plugin.py:6383 ..\plugin.py:6394 ..\plugin.py:6405
+#: ..\plugin.py:6473 ..\plugin.py:6488 ..\plugin.py:6501 ..\plugin.py:6515
+#: ..\plugin.py:6530 ..\plugin.py:6543 ..\plugin.py:6565 ..\plugin.py:6577
+#: ..\plugin.py:6642 ..\plugin.py:6654 ..\plugin.py:6667 ..\plugin.py:6680
+#: ..\plugin.py:6693 ..\plugin.py:6706 ..\plugin.py:6753 ..\plugin.py:6768
+#: ..\plugin.py:6781 ..\plugin.py:6794 ..\plugin.py:6818 ..\plugin.py:6829
+#: ..\plugin.py:6839 ..\plugin.py:6849 ..\plugin.py:6868 ..\plugin.py:6878
+#: ..\plugin.py:6905 ..\plugin.py:6916 ..\plugin.py:6948 ..\plugin.py:6971
+#: ..\plugin.py:7004 ..\plugin.py:7016 ..\plugin.py:7027 ..\plugin.py:7038
+#: ..\plugin.py:7099 ..\plugin.py:7114 ..\plugin.py:7127 ..\plugin.py:7141
+#: ..\plugin.py:7156 ..\plugin.py:7169 ..\plugin.py:7191 ..\plugin.py:7203
+#: ..\plugin.py:7282 ..\plugin.py:7297 ..\plugin.py:7311 ..\plugin.py:7324
+#: ..\plugin.py:7337 ..\plugin.py:7357 ..\plugin.py:7376 ..\plugin.py:7386
+#: ..\plugin.py:7413 ..\plugin.py:7424 ..\plugin.py:7456 ..\plugin.py:7479
+#: ..\plugin.py:7512 ..\plugin.py:7524 ..\plugin.py:7544 ..\plugin.py:7555
+#: ..\plugin.py:7566 ..\plugin.py:7577 ..\plugin.py:7645 ..\plugin.py:7660
+#: ..\plugin.py:7673 ..\plugin.py:7687 ..\plugin.py:7702 ..\plugin.py:7715
+#: ..\plugin.py:7737 ..\plugin.py:7749
+msgid "- Shadow Edges"
+msgstr "- 阴影边缘"
+
+#: ..\plugin.py:5935 ..\plugin.py:6755 ..\plugin.py:7284
+msgid "Clock 2"
+msgstr "时钟2"
+
+#: ..\plugin.py:5950 ..\plugin.py:6670
+msgid "Program Name"
+msgstr "程序名称"
+
+#: ..\plugin.py:5954 ..\plugin.py:5977 ..\plugin.py:5990 ..\plugin.py:6003
+#: ..\plugin.py:6016 ..\plugin.py:6050 ..\plugin.py:6064 ..\plugin.py:6118
+#: ..\plugin.py:6494 ..\plugin.py:6539 ..\plugin.py:6636 ..\plugin.py:6648
+#: ..\plugin.py:6661 ..\plugin.py:6674 ..\plugin.py:6687 ..\plugin.py:6700
+#: ..\plugin.py:6779 ..\plugin.py:6792 ..\plugin.py:6810 ..\plugin.py:7120
+#: ..\plugin.py:7165 ..\plugin.py:7303 ..\plugin.py:7322 ..\plugin.py:7335
+#: ..\plugin.py:7666 ..\plugin.py:7711
+msgid "- maximum Lines"
+msgstr "- 最大行数"
+
+#: ..\plugin.py:5957 ..\plugin.py:5980 ..\plugin.py:5993 ..\plugin.py:6006
+#: ..\plugin.py:6019 ..\plugin.py:6033 ..\plugin.py:6074 ..\plugin.py:6123
+#: ..\plugin.py:6134 ..\plugin.py:6499 ..\plugin.py:6639 ..\plugin.py:6651
+#: ..\plugin.py:6664 ..\plugin.py:6677 ..\plugin.py:6690 ..\plugin.py:6703
+#: ..\plugin.py:6716 ..\plugin.py:6729 ..\plugin.py:6815 ..\plugin.py:7125
+#: ..\plugin.py:7308 ..\plugin.py:7671
+msgid "- Length"
+msgstr "- 长度"
+
+#: ..\plugin.py:5962
+msgid "Program Number"
+msgstr "程序号码示例"
+
+#: ..\plugin.py:5972 ..\plugin.py:6682
+msgid "Program Info"
+msgstr "程序信息"
+
+#: ..\plugin.py:5975 ..\plugin.py:5988 ..\plugin.py:6001 ..\plugin.py:6014
+#: ..\plugin.py:6028 ..\plugin.py:6029 ..\plugin.py:6088 ..\plugin.py:6100
+#: ..\plugin.py:6111 ..\plugin.py:6119 ..\plugin.py:6120 ..\plugin.py:6150
+#: ..\plugin.py:6176 ..\plugin.py:6206 ..\plugin.py:6221 ..\plugin.py:6265
+#: ..\plugin.py:6266 ..\plugin.py:6288 ..\plugin.py:6289 ..\plugin.py:6308
+#: ..\plugin.py:6318 ..\plugin.py:6341 ..\plugin.py:6471 ..\plugin.py:6487
+#: ..\plugin.py:6495 ..\plugin.py:6496 ..\plugin.py:6511 ..\plugin.py:6524
+#: ..\plugin.py:6525 ..\plugin.py:6541 ..\plugin.py:6552 ..\plugin.py:6609
+#: ..\plugin.py:6659 ..\plugin.py:6685 ..\plugin.py:6698 ..\plugin.py:6711
+#: ..\plugin.py:6712 ..\plugin.py:6743 ..\plugin.py:6758 ..\plugin.py:6803
+#: ..\plugin.py:6811 ..\plugin.py:6812 ..\plugin.py:6825 ..\plugin.py:6851
+#: ..\plugin.py:6880 ..\plugin.py:6895 ..\plugin.py:6939 ..\plugin.py:6940
+#: ..\plugin.py:6962 ..\plugin.py:6963 ..\plugin.py:6982 ..\plugin.py:6992
+#: ..\plugin.py:7015 ..\plugin.py:7097 ..\plugin.py:7113 ..\plugin.py:7121
+#: ..\plugin.py:7122 ..\plugin.py:7137 ..\plugin.py:7150 ..\plugin.py:7151
+#: ..\plugin.py:7167 ..\plugin.py:7178 ..\plugin.py:7272 ..\plugin.py:7287
+#: ..\plugin.py:7304 ..\plugin.py:7305 ..\plugin.py:7346 ..\plugin.py:7359
+#: ..\plugin.py:7388 ..\plugin.py:7403 ..\plugin.py:7447 ..\plugin.py:7448
+#: ..\plugin.py:7470 ..\plugin.py:7471 ..\plugin.py:7490 ..\plugin.py:7500
+#: ..\plugin.py:7523 ..\plugin.py:7643 ..\plugin.py:7659 ..\plugin.py:7667
+#: ..\plugin.py:7668 ..\plugin.py:7683 ..\plugin.py:7696 ..\plugin.py:7697
+#: ..\plugin.py:7713 ..\plugin.py:7724
+msgid "- Type"
+msgstr "- 类型"
+
+#: ..\plugin.py:5985
+msgid "Program Info 2"
+msgstr "程序信息 2"
+
+#: ..\plugin.py:5998 ..\plugin.py:6695
+msgid "Next Program Info"
+msgstr "下一个程序信息"
+
+#: ..\plugin.py:6011 ..\plugin.py:6656
+msgid "Extended Description"
+msgstr "扩展描述"
+
+#: ..\plugin.py:6024 ..\plugin.py:6669
+msgid "- use Info when empty"
+msgstr "- 空时使用信息"
+
+#: ..\plugin.py:6025 ..\plugin.py:6708
+msgid "Progress Bar"
+msgstr "进度条"
+
+#: ..\plugin.py:6035 ..\plugin.py:6718
+msgid "- Color Text"
+msgstr "- 文本颜色"
+
+#: ..\plugin.py:6036 ..\plugin.py:6719
+msgid "- Border"
+msgstr "- 边界"
+
+#: ..\plugin.py:6037 ..\plugin.py:6137 ..\plugin.py:6720 ..\plugin.py:6732
+msgid "- Shaded"
+msgstr "- 阴影"
+
+#: ..\plugin.py:6038 ..\plugin.py:6721
+msgid "- Unit min"
+msgstr "- 单位最小值"
+
+#: ..\plugin.py:6040 ..\plugin.py:6770 ..\plugin.py:7313
+msgid "Informations"
+msgstr "信息"
+
+#: ..\plugin.py:6043 ..\plugin.py:6057
+msgid "- Tunerinfo"
+msgstr "- 调谐器信息"
+
+#: ..\plugin.py:6044 ..\plugin.py:6058 ..\plugin.py:6773 ..\plugin.py:6786
+#: ..\plugin.py:7316 ..\plugin.py:7329
+msgid "- Sensors"
+msgstr "- 传感器"
+
+#: ..\plugin.py:6045 ..\plugin.py:6059 ..\plugin.py:6774 ..\plugin.py:6787
+#: ..\plugin.py:7317 ..\plugin.py:7330
+msgid "- CPU"
+msgstr "- 处理器"
+
+#: ..\plugin.py:6054 ..\plugin.py:6783 ..\plugin.py:7326
+msgid "Informations 2"
+msgstr "信息 2"
+
+#: ..\plugin.py:6068
+msgid "Signal Quality Bar"
+msgstr "信号质量条"
+
+#: ..\plugin.py:6077
+msgid "- Gradient"
+msgstr "- 渐变色"
+
+#: ..\plugin.py:6078
+msgid "- Bar Range Min"
+msgstr "- 最小范围"
+
+#: ..\plugin.py:6079
+msgid "- Bar Range Max"
+msgstr "- 最大范围"
+
+#: ..\plugin.py:6080
+msgid "Satellite"
+msgstr "卫星"
+
+#: ..\plugin.py:6092
+msgid "Provider"
+msgstr "供应商"
+
+#: ..\plugin.py:6104 ..\plugin.py:6796 ..\plugin.py:7339
+msgid "Used Tuner"
+msgstr "使用调谐器"
+
+#: ..\plugin.py:6112 ..\plugin.py:6804 ..\plugin.py:7347
+msgid "- only active Tuner"
+msgstr "- 仅活动调谐器"
+
+#: ..\plugin.py:6114 ..\plugin.py:6806 ..\plugin.py:7299
+msgid "Next Timer Event"
+msgstr "下次计时器事件"
+
+#: ..\plugin.py:6128 ..\plugin.py:6723
+msgid "Volume"
+msgstr "体积"
+
+#: ..\plugin.py:6138 ..\plugin.py:6733
+msgid "Mute"
+msgstr "静音"
+
+#: ..\plugin.py:6145 ..\plugin.py:6820
+msgid "Audio/Video"
+msgstr "音频/视频"
+
+#: ..\plugin.py:6156 ..\plugin.py:6831
+msgid "Bitrate"
+msgstr "比特率"
+
+#: ..\plugin.py:6166 ..\plugin.py:6841 ..\plugin.py:7349
+msgid "Online [Ping]"
+msgstr "在线[Ping]"
+
+#: ..\plugin.py:6177 ..\plugin.py:6852 ..\plugin.py:7360
+msgid "- Show State"
+msgstr "- 显示状态"
+
+#: ..\plugin.py:6178 ..\plugin.py:6853 ..\plugin.py:7361
+msgid "- Timeout [ms]"
+msgstr "- 超时[毫秒]"
+
+#: ..\plugin.py:6179 ..\plugin.py:6180 ..\plugin.py:6181 ..\plugin.py:6182
+#: ..\plugin.py:6183 ..\plugin.py:6854 ..\plugin.py:6855 ..\plugin.py:6856
+#: ..\plugin.py:6857 ..\plugin.py:6858 ..\plugin.py:7362 ..\plugin.py:7363
+#: ..\plugin.py:7364 ..\plugin.py:7365 ..\plugin.py:7366
+msgid "- Online Name:Address"
+msgstr "- 在线名称:地址"
+
+#: ..\plugin.py:6184 ..\plugin.py:6859 ..\plugin.py:7367
+msgid "External IP Address"
+msgstr "外部 IP 地址"
+
+#: ..\plugin.py:6195
+msgid "- external IP URL"
+msgstr "- 外部 IP 网址"
+
+#: ..\plugin.py:6196 ..\plugin.py:6870 ..\plugin.py:7378
+msgid "Storage-Devices"
+msgstr "存储设备"
+
+#: ..\plugin.py:6207 ..\plugin.py:6881 ..\plugin.py:7389
+msgid "- free Warning"
+msgstr "- 免费警告"
+
+#: ..\plugin.py:6208 ..\plugin.py:6882 ..\plugin.py:7390
+msgid "- extra Info"
+msgstr "- 额外信息"
+
+#: ..\plugin.py:6209 ..\plugin.py:6210 ..\plugin.py:6211 ..\plugin.py:6212
+#: ..\plugin.py:6213 ..\plugin.py:6883 ..\plugin.py:6884 ..\plugin.py:6885
+#: ..\plugin.py:6886 ..\plugin.py:6887 ..\plugin.py:7391 ..\plugin.py:7392
+#: ..\plugin.py:7393 ..\plugin.py:7394 ..\plugin.py:7395
+msgid "- Device Name"
+msgstr "- 设备名称"
+
+#: ..\plugin.py:6214 ..\plugin.py:6888 ..\plugin.py:7396
+msgid "HDD"
+msgstr "HDD"
+
+#: ..\plugin.py:6226 ..\plugin.py:6237 ..\plugin.py:6248 ..\plugin.py:6521
+#: ..\plugin.py:6900 ..\plugin.py:6911 ..\plugin.py:6922 ..\plugin.py:7147
+#: ..\plugin.py:7408 ..\plugin.py:7419 ..\plugin.py:7430 ..\plugin.py:7693
+msgid "- Zoom"
+msgstr "- 缩小 -"
+
+#: ..\plugin.py:6229 ..\plugin.py:6240 ..\plugin.py:6251 ..\plugin.py:6903
+#: ..\plugin.py:6914 ..\plugin.py:6925 ..\plugin.py:7411 ..\plugin.py:7422
+#: ..\plugin.py:7433
+msgid "- Weather Type"
+msgstr "- 天气类型"
+
+#: ..\plugin.py:6233 ..\plugin.py:6907 ..\plugin.py:7415
+msgid "Weather 2"
+msgstr "天气2"
+
+#: ..\plugin.py:6244 ..\plugin.py:6918 ..\plugin.py:7426
+msgid "Meteo-Weather Station"
+msgstr "气象站"
+
+#: ..\plugin.py:6260 ..\plugin.py:6283 ..\plugin.py:6307 ..\plugin.py:6317
+#: ..\plugin.py:6934 ..\plugin.py:6957 ..\plugin.py:6981 ..\plugin.py:6991
+#: ..\plugin.py:7442 ..\plugin.py:7465 ..\plugin.py:7489 ..\plugin.py:7499
+msgid "- Station"
+msgstr "- 站"
+
+#: ..\plugin.py:6261 ..\plugin.py:6284 ..\plugin.py:6935 ..\plugin.py:6958
+#: ..\plugin.py:7443 ..\plugin.py:7466
+msgid "- Module"
+msgstr "- 模块"
+
+#: ..\plugin.py:6262 ..\plugin.py:6285 ..\plugin.py:6936 ..\plugin.py:6959
+#: ..\plugin.py:7444 ..\plugin.py:7467
+msgid "- Module userdefined"
+msgstr "- 未指定模块"
+
+#: ..\plugin.py:6263 ..\plugin.py:6286 ..\plugin.py:6937 ..\plugin.py:6960
+#: ..\plugin.py:7445 ..\plugin.py:7468
+msgid "- Base"
+msgstr "- 基本"
+
+#: ..\plugin.py:6264 ..\plugin.py:6287 ..\plugin.py:6938 ..\plugin.py:6961
+#: ..\plugin.py:7446 ..\plugin.py:7469
+msgid "- Name"
+msgstr "- 名称"
+
+#: ..\plugin.py:6268 ..\plugin.py:6291 ..\plugin.py:6482 ..\plugin.py:6942
+#: ..\plugin.py:6965 ..\plugin.py:7108 ..\plugin.py:7450 ..\plugin.py:7473
+#: ..\plugin.py:7654
+msgid "- Color 1"
+msgstr "- 颜色 1"
+
+#: ..\plugin.py:6269 ..\plugin.py:6292 ..\plugin.py:6483 ..\plugin.py:6943
+#: ..\plugin.py:6966 ..\plugin.py:7109 ..\plugin.py:7451 ..\plugin.py:7474
+#: ..\plugin.py:7655
+msgid "- Color 2"
+msgstr "- 颜色 2"
+
+#: ..\plugin.py:6270 ..\plugin.py:6293 ..\plugin.py:6484 ..\plugin.py:6944
+#: ..\plugin.py:6967 ..\plugin.py:7110 ..\plugin.py:7452 ..\plugin.py:7475
+#: ..\plugin.py:7656
+msgid "- Color 3"
+msgstr "- 颜色 3"
+
+#: ..\plugin.py:6271 ..\plugin.py:6294 ..\plugin.py:6485 ..\plugin.py:6945
+#: ..\plugin.py:6968 ..\plugin.py:7111 ..\plugin.py:7453 ..\plugin.py:7476
+#: ..\plugin.py:7657
+msgid "- Color 4"
+msgstr "- 颜色 4"
+
+#: ..\plugin.py:6272 ..\plugin.py:6295 ..\plugin.py:6486 ..\plugin.py:6946
+#: ..\plugin.py:6969 ..\plugin.py:7112 ..\plugin.py:7454 ..\plugin.py:7477
+#: ..\plugin.py:7658
+msgid "- Color 5"
+msgstr "- 颜色 5"
+
+#: ..\plugin.py:6273 ..\plugin.py:6296 ..\plugin.py:6947 ..\plugin.py:6970
+#: ..\plugin.py:7455 ..\plugin.py:7478
+msgid "- Color 6"
+msgstr "- Spalva 6"
+
+#: ..\plugin.py:6276 ..\plugin.py:6950 ..\plugin.py:7458
+msgid "Netatmo 2"
+msgstr "Netatmo 2"
+
+#: ..\plugin.py:6299 ..\plugin.py:6973 ..\plugin.py:7481
+msgid "Netatmo CO2 Indicator"
+msgstr "Netatmo CO2指标"
+
+#: ..\plugin.py:6305 ..\plugin.py:6315 ..\plugin.py:6979 ..\plugin.py:6989
+#: ..\plugin.py:7487 ..\plugin.py:7497
+msgid "- Length [Bar]"
+msgstr "- 长度 [Bar]"
+
+#: ..\plugin.py:6309 ..\plugin.py:6983 ..\plugin.py:7491
+msgid "Netatmo Comfort Indicator"
+msgstr "Netatmo舒适度指示器"
+
+#: ..\plugin.py:6319 ..\plugin.py:6993 ..\plugin.py:7501
+msgid "Moonphase"
+msgstr "月相"
+
+#: ..\plugin.py:6326 ..\plugin.py:7000 ..\plugin.py:7001 ..\plugin.py:7508
+msgid "- Infolines"
+msgstr "- 线"
+
+#: ..\plugin.py:6327 ..\plugin.py:7509
+msgid "- Trendarrows"
+msgstr "- 趋势箭头"
+
+#: ..\plugin.py:6332 ..\plugin.py:7006 ..\plugin.py:7514
+msgid "Sunrise"
+msgstr "日出"
+
+#: ..\plugin.py:6344 ..\plugin.py:7077 ..\plugin.py:7526
+msgid "Show oscam.lcd"
+msgstr "显示oscam.lcd"
+
+#: ..\plugin.py:6347 ..\plugin.py:6366 ..\plugin.py:6377 ..\plugin.py:6388
+#: ..\plugin.py:6453 ..\plugin.py:7021 ..\plugin.py:7032 ..\plugin.py:7538
+#: ..\plugin.py:7549 ..\plugin.py:7560 ..\plugin.py:7625
+msgid "- File [ok]>"
+msgstr "- 文件路 [ok]>"
+
+#: ..\plugin.py:6354
+msgid "Show ecm.info"
+msgstr "显示ecm.info"
+
+#: ..\plugin.py:6363 ..\plugin.py:7018 ..\plugin.py:7535
+msgid "Show Textfile"
+msgstr "显示文本文件"
+
+#: ..\plugin.py:6374 ..\plugin.py:7029 ..\plugin.py:7546
+msgid "Show Textfile 2"
+msgstr "显示文本文件2"
+
+#: ..\plugin.py:6385 ..\plugin.py:7557
+msgid "Show Textfile 3"
+msgstr "显示文本文件3"
+
+#: ..\plugin.py:6396 ..\plugin.py:7568
+msgid "Show HTTP Text"
+msgstr "显示HTTP文本"
+
+#: ..\plugin.py:6399 ..\plugin.py:6413 ..\plugin.py:7571 ..\plugin.py:7585
+msgid "- URL"
+msgstr "- URL"
+
+#: ..\plugin.py:6407 ..\plugin.py:7579
+msgid "WWW-Internet Converter"
+msgstr "WWW网络转换器"
+
+#: ..\plugin.py:6414 ..\plugin.py:7586
+msgid "- HTTP Width"
+msgstr "- HTTP宽度"
+
+#: ..\plugin.py:6415 ..\plugin.py:7587
+msgid "- HTTP Height"
+msgstr "- HTTP高度"
+
+#: ..\plugin.py:6416 ..\plugin.py:7588
+msgid "- Cut from X"
+msgstr "- 从X剪切"
+
+#: ..\plugin.py:6417 ..\plugin.py:7589
+msgid "- Cut from Y"
+msgstr "- 从Y剪切"
+
+#: ..\plugin.py:6418 ..\plugin.py:7590
+msgid "- Cut Width [disable = 0]"
+msgstr "- 剪切宽度[禁用= 0]"
+
+#: ..\plugin.py:6419 ..\plugin.py:7591
+msgid "- Cut Height [disable = 0]"
+msgstr "- 剪切高度[禁用= 0]"
+
+#: ..\plugin.py:6420 ..\plugin.py:7040 ..\plugin.py:7592
+msgid "Show Picture"
+msgstr "显示图片"
+
+#: ..\plugin.py:6423 ..\plugin.py:6433 ..\plugin.py:6443 ..\plugin.py:7043
+#: ..\plugin.py:7053 ..\plugin.py:7595 ..\plugin.py:7605 ..\plugin.py:7615
+msgid "- File or Path [ok]>"
+msgstr "- 文件或路径[ok]>"
+
+#: ..\plugin.py:6425 ..\plugin.py:6435 ..\plugin.py:6445 ..\plugin.py:6455
+#: ..\plugin.py:7045 ..\plugin.py:7055 ..\plugin.py:7064 ..\plugin.py:7597
+#: ..\plugin.py:7607 ..\plugin.py:7617 ..\plugin.py:7627
+msgid "- Size max Height"
+msgstr "- 最大尺寸高度"
+
+#: ..\plugin.py:6428 ..\plugin.py:6438 ..\plugin.py:6448 ..\plugin.py:6458
+#: ..\plugin.py:7048 ..\plugin.py:7058 ..\plugin.py:7600 ..\plugin.py:7610
+#: ..\plugin.py:7620 ..\plugin.py:7630
+msgid "- Quick Update"
+msgstr "- 快速更新"
+
+#: ..\plugin.py:6430 ..\plugin.py:7050 ..\plugin.py:7602
+msgid "Show Picture 2"
+msgstr "显示图片2"
+
+#: ..\plugin.py:6440 ..\plugin.py:7612
+msgid "Show Picture 3"
+msgstr "显示图片3"
+
+#: ..\plugin.py:6450 ..\plugin.py:7622
+msgid "Show Picture 4"
+msgstr "显示图片4"
+
+#: ..\plugin.py:6469 ..\plugin.py:7095 ..\plugin.py:7641
+msgid "- Lines"
+msgstr "- 线"
+
+#: ..\plugin.py:6470 ..\plugin.py:7096 ..\plugin.py:7642
+msgid "- Mail Konto"
+msgstr "- 邮件帐户"
+
+#: ..\plugin.py:6472 ..\plugin.py:6481 ..\plugin.py:6540 ..\plugin.py:7098
+#: ..\plugin.py:7107 ..\plugin.py:7166 ..\plugin.py:7644 ..\plugin.py:7653
+#: ..\plugin.py:7712
+msgid "- max Width"
+msgstr "- 最大宽度"
+
+#: ..\plugin.py:6490 ..\plugin.py:7116 ..\plugin.py:7662
+msgid "Remote Box Timer"
+msgstr "遥控盒定时器"
+
+#: ..\plugin.py:6512 ..\plugin.py:7138 ..\plugin.py:7684
+msgid "- Picture Size"
+msgstr "- 图片尺寸"
+
+#: ..\plugin.py:6513 ..\plugin.py:7139 ..\plugin.py:7685
+msgid "- Picture Position"
+msgstr "- 图片位置"
+
+#: ..\plugin.py:6514 ..\plugin.py:7140 ..\plugin.py:7686
+msgid "- Picture Alignment"
+msgstr "- 图片对齐"
+
+#: ..\plugin.py:6526 ..\plugin.py:7152 ..\plugin.py:7698
 msgid "- Layout"
 msgstr "- 布局"
 
-#: plugin.py:6602 plugin.py:7228 plugin.py:7774
+#: ..\plugin.py:6528 ..\plugin.py:7154 ..\plugin.py:7700
 msgid "- Current Day Background Color"
 msgstr "- 当前日期背景色"
 
-#: plugin.py:6603 plugin.py:7229 plugin.py:7775
+#: ..\plugin.py:6529 ..\plugin.py:7155 ..\plugin.py:7701
 msgid "- Caption Color"
 msgstr "- 标题颜色"
 
-#: plugin.py:6606 plugin.py:7232 plugin.py:7778
+#: ..\plugin.py:6532 ..\plugin.py:7158 ..\plugin.py:7704
 msgid "Dates List"
 msgstr "日期列表"
 
-#: plugin.py:6619 plugin.py:7245 plugin.py:7791
+#: ..\plugin.py:6545 ..\plugin.py:7171 ..\plugin.py:7717
 msgid "Event Icon Bar"
 msgstr "事件图标栏"
 
-#: plugin.py:6627 plugin.py:7253 plugin.py:7799
+#: ..\plugin.py:6553 ..\plugin.py:7179 ..\plugin.py:7725
 msgid "- Popup Screen"
 msgstr "- 弹出式屏幕"
 
-#: plugin.py:6628 plugin.py:7254 plugin.py:7800
+#: ..\plugin.py:6554 ..\plugin.py:7180 ..\plugin.py:7726
 msgid "- Popup LCD"
 msgstr "- 弹出式LCD"
 
-#: plugin.py:6629 plugin.py:7255 plugin.py:7801
+#: ..\plugin.py:6555 ..\plugin.py:7181 ..\plugin.py:7727
 msgid "Show Text 1"
 msgstr "显示文字1"
 
-#: plugin.py:6632 plugin.py:6644 plugin.py:7258 plugin.py:7270 plugin.py:7804
-#: plugin.py:7816
+#: ..\plugin.py:6558 ..\plugin.py:6570 ..\plugin.py:7184 ..\plugin.py:7196
+#: ..\plugin.py:7730 ..\plugin.py:7742
 msgid "- Text"
 msgstr "- 文本"
 
-#: plugin.py:6641 plugin.py:7267 plugin.py:7813
+#: ..\plugin.py:6567 ..\plugin.py:7193 ..\plugin.py:7739
 msgid "Show Text 2"
 msgstr "显示文字2"
 
-#: plugin.py:6653 plugin.py:7279 plugin.py:7825
+#: ..\plugin.py:6579 ..\plugin.py:7205 ..\plugin.py:7751
 msgid "Rectangle 1"
 msgstr "矩形1"
 
-#: plugin.py:6656 plugin.py:6665 plugin.py:7282 plugin.py:7291 plugin.py:7828
-#: plugin.py:7837
+#: ..\plugin.py:6582 ..\plugin.py:6591 ..\plugin.py:7208 ..\plugin.py:7217
+#: ..\plugin.py:7754 ..\plugin.py:7763
 msgid "- Position x"
 msgstr "- 位置x"
 
-#: plugin.py:6657 plugin.py:6666 plugin.py:7283 plugin.py:7292 plugin.py:7829
-#: plugin.py:7838
+#: ..\plugin.py:6583 ..\plugin.py:6592 ..\plugin.py:7209 ..\plugin.py:7218
+#: ..\plugin.py:7755 ..\plugin.py:7764
 msgid "- Position y"
 msgstr "- 位置y"
 
-#: plugin.py:6658 plugin.py:6667 plugin.py:7284 plugin.py:7293 plugin.py:7830
-#: plugin.py:7839
+#: ..\plugin.py:6584 ..\plugin.py:6593 ..\plugin.py:7210 ..\plugin.py:7219
+#: ..\plugin.py:7756 ..\plugin.py:7765
 msgid "- Size x"
 msgstr "- 尺寸x"
 
-#: plugin.py:6659 plugin.py:6668 plugin.py:7285 plugin.py:7294 plugin.py:7831
-#: plugin.py:7840
+#: ..\plugin.py:6585 ..\plugin.py:6594 ..\plugin.py:7211 ..\plugin.py:7220
+#: ..\plugin.py:7757 ..\plugin.py:7766
 msgid "- Size y"
 msgstr "- 尺寸y"
 
-#: plugin.py:6662 plugin.py:7288 plugin.py:7834
+#: ..\plugin.py:6588 ..\plugin.py:7214 ..\plugin.py:7760
 msgid "Rectangle 2"
 msgstr "矩形2"
 
-#: plugin.py:6671 plugin.py:7297 plugin.py:7843
+#: ..\plugin.py:6597 ..\plugin.py:7223 ..\plugin.py:7769
 msgid "Recording"
 msgstr "录像"
 
-#: plugin.py:6680
+#: ..\plugin.py:6606
 msgid "Stutter TV"
 msgstr "卡顿电视"
 
-#: plugin.py:6700 plugin.py:7327
+#: ..\plugin.py:6626 ..\plugin.py:7253
 msgid "- Screens used for Changing"
 msgstr "- 用于更改的屏幕"
 
-#: plugin.py:6706
+#: ..\plugin.py:6632
 msgid "Title"
 msgstr "标题"
 
-#: plugin.py:6718
+#: ..\plugin.py:6644
 msgid "Infos"
 msgstr "系统信息"
 
-#: plugin.py:7134
+#: ..\plugin.py:7060
 msgid "Show Cover"
 msgstr "显示封面"
 
-#: plugin.py:7141 plugin.py:7142
+#: ..\plugin.py:7067 ..\plugin.py:7068
 msgid "- Search Path [ok]>"
 msgstr "- 搜索路径 [ok]>"
 
-#: plugin.py:7143
+#: ..\plugin.py:7069
 msgid "- Find Cover File [ok]>"
 msgstr "- 查找封面文件[ok]>"
 
-#: plugin.py:7144
+#: ..\plugin.py:7070
 msgid "- Default Cover [ok]>"
 msgstr "- 默认封面[确定]>"
 
-#: plugin.py:7145
+#: ..\plugin.py:7071
 msgid "- Picon First"
 msgstr "- picon优先"
 
-#: plugin.py:7147
+#: ..\plugin.py:7073
 msgid "- Trimmed"
 msgstr "- 修剪"
 
-#: plugin.py:7148
+#: ..\plugin.py:7074
 msgid "- Download Cover"
 msgstr "- 下载封面"
 
-#: plugin.py:7149
+#: ..\plugin.py:7075
 msgid "- Download Type"
 msgstr "- 下载类型"
 
-#: plugin.py:7150
+#: ..\plugin.py:7076
 msgid "- Google API-Key console.developers.google.com/apis"
 msgstr "-Google API密钥console.developers.google.com/apis"
 
-#: plugin.py:7309
+#: ..\plugin.py:7235
 msgid "LCD Display"
 msgstr "液晶显示屏"
 
-#: plugin.py:7863
+#: ..\plugin.py:7789
 msgid "LCD4linux Display-Mode On"
 msgstr "LCD4linux显示模式开启"
 
-#: plugin.py:7864
+#: ..\plugin.py:7790
 msgid "Set Media >>"
 msgstr "设置媒体 >>"
 
-#: plugin.py:7868
+#: ..\plugin.py:7794
 msgid "LCD4linux Display-Mode MediaPlayer"
 msgstr "LCD4linux显示模式媒体播放器"
 
-#: plugin.py:7869
+#: ..\plugin.py:7795
 msgid "Set Idle >>"
 msgstr "设置空闲 >>"
 
-#: plugin.py:7873
+#: ..\plugin.py:7799
 msgid "LCD4linux Display-Mode Idle"
 msgstr "LCD4linux显示模式空闲"
 
-#: plugin.py:7874
+#: ..\plugin.py:7800
 msgid "Set Global >>"
 msgstr "设置全局 >>"
 
-#: plugin.py:7892
+#: ..\plugin.py:7818
 msgid "Choose dir"
 msgstr "选择目录"
 
-#: plugin.py:7895 plugin.py:7898 plugin.py:7904 plugin.py:7907
+#: ..\plugin.py:7821 ..\plugin.py:7824 ..\plugin.py:7830 ..\plugin.py:7833
 msgid "Choose file"
 msgstr "选择文件"
 
-#: plugin.py:7901
+#: ..\plugin.py:7827
 msgid "Choose font"
 msgstr "选择字体"
 
-#: plugin.py:8065
+#: ..\plugin.py:7990
 msgid "%s - Current value: %s"
 msgstr "%s - 当前值：%s"
 
-#: plugin.py:8197
+#: ..\plugin.py:8132
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
@@ -3845,95 +4078,95 @@ msgstr ""
 "需要重新启动图形用户界面以应用新的皮肤。\n"
 "是否要现在重新启动图形用户界面？"
 
-#: plugin.py:8198
+#: ..\plugin.py:8133
 msgid "Restart GUI now?"
 msgstr "重新启动GUI吗?"
 
-#: plugin.py:8780
+#: ..\plugin.py:8687
 msgid "Indoor"
 msgstr "室内"
 
-#: plugin.py:8780
+#: ..\plugin.py:8687
 msgid "Outdoor"
 msgstr "室外"
 
-#: plugin.py:8780
+#: ..\plugin.py:8687
 msgid "Rain"
 msgstr "雨"
 
-#: plugin.py:8780
+#: ..\plugin.py:8687
 msgid "Wind"
 msgstr "风向"
 
-#: plugin.py:10558
+#: ..\plugin.py:10516
 msgid "New Moon"
 msgstr "新月"
 
-#: plugin.py:10559
+#: ..\plugin.py:10517
 msgid "First Quarter"
 msgstr "第一季度"
 
-#: plugin.py:10560
+#: ..\plugin.py:10518
 msgid "Waxing Crescent"
 msgstr "娥眉月"
 
-#: plugin.py:10561
+#: ..\plugin.py:10519
 msgid "Waxing Moon"
 msgstr "月相"
 
-#: plugin.py:10562
+#: ..\plugin.py:10520
 msgid "Full Moon"
 msgstr "满月"
 
-#: plugin.py:10563
+#: ..\plugin.py:10521
 msgid "Waning Moon"
 msgstr "残月"
 
-#: plugin.py:10564
+#: ..\plugin.py:10522
 msgid "Waning Crescent"
 msgstr "残月"
 
-#: plugin.py:10565
+#: ..\plugin.py:10523
 msgid "Last Quarter"
 msgstr "第四季度"
 
-#: plugin.py:11646 plugin.py:11715 plugin.py:11732 plugin.py:11741
+#: ..\plugin.py:11554 ..\plugin.py:11623 ..\plugin.py:11640 ..\plugin.py:11649
 msgid "%d.%m.%Y"
 msgstr "%Y.%m.%d"
 
-#: plugin.py:11919
+#: ..\plugin.py:11822
 msgid "Picture not available"
 msgstr "图片不可用"
 
-#: plugin.py:12072 plugin.py:12073
+#: ..\plugin.py:11972 ..\plugin.py:11973
 msgid "no Timer"
 msgstr "没有计时器"
 
-#: plugin.py:13345 plugin.py:13348
+#: ..\plugin.py:13223 ..\plugin.py:13226
 msgid "OSCAM not running"
 msgstr "OSCAM未运行"
 
-#: plugin.py:13694
+#: ..\plugin.py:13573
 msgid "no Calls"
 msgstr "没有呼叫"
 
-#: plugin.py:13729
+#: ..\plugin.py:13609
 msgid "%d Mails  %d New  %s"
 msgstr "%d 封邮件 %d 封新邮件 %s"
 
-#: plugin.py:13936
+#: ..\plugin.py:13809
 msgid "no Netatmo-Plugin installed"
 msgstr "未安装Netatmo插件"
 
-#: plugin.py:15606 plugin.py:15611
+#: ..\plugin.py:15464 ..\plugin.py:15465
 msgid "LCD4linux"
 msgstr "LCD4linux"
 
-#: plugin.py:15614 plugin.py:15615
+#: ..\plugin.py:15466
 msgid "LCD4Linux"
 msgstr "LCD4linux"
 
-#: plugin.py:15620 plugin.py:15621
+#: ..\plugin.py:15467
 msgid "LCD4linux Screen Switch"
 msgstr "LCD4linux屏幕开关"
 
@@ -3951,111 +4184,3 @@ msgstr "LCD4linux屏幕开关"
 
 #~ msgid "Weather Wind direction"
 #~ msgstr "天气 风向"
-
-#~ msgid "Backup Config"
-#~ msgstr "备份配置"
-
-#~ msgid "BlueSound"
-#~ msgstr "BlueSound"
-
-#~ msgid "Box-Skin-LCD"
-#~ msgstr "盒式液晶显示器"
-
-#~ msgid "Crashlog"
-#~ msgstr "崩溃日志"
-
-#~ msgid "Delete"
-#~ msgstr "删除"
-
-#~ msgid "Delete Logfile"
-#~ msgstr "删除日志文件"
-
-#~ msgid "Download Logfile"
-#~ msgstr "下载日志文件"
-
-#~ msgid "Element"
-#~ msgstr "元素"
-
-#~ msgid "Exec"
-#~ msgstr "执行"
-
-#~ msgid "Filename"
-#~ msgstr "文档名称"
-
-#~ msgid "Font"
-#~ msgstr "字体"
-
-#~ msgid "GUI Restart is required"
-#~ msgstr "需要重新启动GUI"
-
-#~ msgid "IP seurity not supported by Box"
-#~ msgstr "设备不支持IP验证"
-
-#~ msgid "Key"
-#~ msgstr "按键"
-
-#~ msgid "List of Storage Devices"
-#~ msgstr "存储设备列表"
-
-#~ msgid "MJPEG Stream"
-#~ msgstr "MJPEG流"
-
-#~ msgid "No or wrong File selected, try a correct File first !"
-#~ msgstr "没有或选择了错误的文件，请先尝试正确的文件！"
-
-#~ msgid "OSD"
-#~ msgstr "OSD菜单"
-
-#~ msgid "Parent Directory"
-#~ msgstr "父目录"
-
-#~ msgid "Picture"
-#~ msgstr "图片"
-
-#~ msgid "Popup-Text"
-#~ msgstr "弹出式文本"
-
-#~ msgid "Restore Config"
-#~ msgstr "恢复配置"
-
-#~ msgid "Save Config"
-#~ msgstr "保存配置"
-
-#~ msgid "Screen"
-#~ msgstr "屏幕"
-
-#~ msgid "Show"
-#~ msgstr "显示"
-
-#~ msgid "Show Externals"
-#~ msgstr "显示外观"
-
-#~ msgid "Sonos"
-#~ msgstr "Sonos"
-
-#~ msgid "Tuner"
-#~ msgstr "调谐器"
-
-#~ msgid "WWW Converter"
-#~ msgstr "WWW转换器"
-
-#~ msgid "WebIF"
-#~ msgstr "WebIF"
-
-#~ msgid "copy to Idle"
-#~ msgstr "复制到空闲"
-
-#~ msgid "copy to Media"
-#~ msgstr "复制到媒体"
-
-#~ msgid "copy to On"
-#~ msgstr "复制到"
-
-#~ msgid "other"
-#~ msgstr "其他"
-
-#~ msgid "set Settings"
-#~ msgstr "设置设置"
-
-#~ msgid "stop Screencycle"
-#~ msgstr "停止屏幕循环"
