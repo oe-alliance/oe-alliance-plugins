@@ -2846,9 +2846,9 @@ def getResolution(t, r):
 		if int(LCD4linux.xmlOffset.value) != 0:
 			MAX_W -= (int(LCD4linux.xmlOffset.value) * 2)
 			MAX_H -= (int(LCD4linux.xmlOffset.value) * 2)
-	elif t.endswith("1"):
+	elif t[1:] == "1":
 		MAX_W, MAX_H = 320, 240
-	elif t.endswith("2"):
+	elif t[1:] == "2":
 		MAX_W, MAX_H = 240, 320
 	elif t[1:] in ["3", "4", "5", "10", "15"]:
 		MAX_W, MAX_H = 800, 480
@@ -2856,21 +2856,21 @@ def getResolution(t, r):
 		MAX_W, MAX_H = 800, 600
 	elif t[1:] in ["7", "8", "13", "14"]:
 		MAX_W, MAX_H = 1024, 600
-	elif t.endswith("17"):
+	elif t[1:] == "17":
 		MAX_W, MAX_H = 220, 176
-	elif t.endswith("18"):
+	elif t[1:] == "18":
 		MAX_W, MAX_H = 255, 64
-	elif t.endswith("22"):
+	elif t[1:] == "22":
 		MAX_W, MAX_H = 480, 320
-	elif t.endswith("23"):
+	elif t[1:] == "23":
 		MAX_W, MAX_H = 800, 480
-	elif t.endswith("30"):
+	elif t[1:] == "30":
 		MAX_W, MAX_H = 400, 240
 	elif t == "320":
 		MAX_W, MAX_H = LCD4linux.SizeW.value, LCD4linux.SizeH.value
 	elif t == "420":
 		MAX_W, MAX_H = LCD4linux.SizeW2.value, LCD4linux.SizeH2.value
-	elif t.endswith("21"):
+	elif t[1:] == "21":
 		MAX_W, MAX_H = 128, 128
 	else:
 		MAX_W, MAX_H = 132, 64
