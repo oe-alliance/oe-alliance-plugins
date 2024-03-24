@@ -587,10 +587,7 @@ class TVSBaseScreen(TVSAllScreen):
 			if title:
 				title = unescape(title.group(1)).replace("&shy;", "-")
 			self.setTitle(title)
-		if search(r'<ul class="rating-dots">', bereich):
-			self.movie = True
-		else:
-			self.movie = False
+		self.movie = True if search(r'<ul class="rating-dots">', bereich) else False
 		self.hideMenubar()
 		if search(r'<div class="film-gallery">', output):
 			self.mehrbilder = True
@@ -1018,10 +1015,7 @@ class TVSBaseScreen(TVSAllScreen):
 				start = sub(r' - ..:..', '', start)
 				daynow = sub(r'....-..-', '', str(self.date))
 				day = search(r', (/d+). ', datum_string)
-				if day:
-					day = day.group(1)
-				else:
-					day = daynow
+				day = day.group(1) if day else daynow
 				if int(day) >= int(daynow) - 1:
 					datum = '%sFIN' % self.date
 				else:
@@ -1090,10 +1084,7 @@ class TVSTippsView(TVSBaseScreen):
 		global HIDEFLAG
 		skin = readSkin("TVSTippsView")
 		TVSBaseScreen.__init__(self, session, skin)
-		if sparte == 'neu':
-			self.titel = 'TV Neuerscheinungen - TV Spielfilm'
-		else:
-			self.titel = 'TV-Tipps - TV Spielfilm'
+		self.titel = "TV Neuerscheinungen - TV Spielfilm" if sparte == "neu" else "TV-Tipps - TV Spielfilm"
 		self.menuwidth = self.menuwidth - 135
 		self.sparte = sparte
 		self.tventries = []
@@ -1162,10 +1153,8 @@ class TVSTippsView(TVSBaseScreen):
 															'red': self.makeTimer,
 															'blue': self.hideScreen}, -1)
 		self.service_db = serviceDB(SERVICEFILE)
-		if exists(TIMERFILE):
-			self.timer = open(TIMERFILE).read().split('\n')
-		else:
-			self.timer = ''
+
+		self.timer = open(TIMERFILE).read().split('\n') if exists(TIMERFILE) else ""
 		self.date = date.today()
 		one_day = timedelta(days=1)
 		self.nextdate = self.date + one_day
@@ -1193,26 +1182,18 @@ class TVSTippsView(TVSBaseScreen):
 		for LINK, PIC, TIME, INFOS, NAME, GENRE, LOGO in items:
 			sref = self.service_db.lookup(LOGO)
 			self.new = False
-			if LINK:
-				res = [LINK]
-				linkfilter = LINK
-			else:
-				res = []
-				linkfilter = ''
-			if PIC:
-				picfilter = PIC
-			else:
-				picfilter = ''
+			res, linkfilter = ([LINK], LINK) if LINK else ([], "")
+			picfilter = PIC if PIC else ""
 			if TIME:
 				start = TIME
 				res.append(MultiContentEntryText(pos=(int(70 * SCALE), 0), size=(int(60 * SCALE), mh), font=1, color=10857646, color_sel=16777215, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=TIME))
 			else:
-				start = ''
+				start = ""
 			icount = 0
-			for INFO in INFOS:
-				if search(r'neu|new', INFO) or self.sparte != "neu":
+			for info in INFOS:
+				if search(r'neu|new', info) or self.sparte != "neu":
 					self.new = True
-				png = '%s%s.png' % (ICONPATH, INFO)
+				png = '%s%s.png' % (ICONPATH, info)
 				if exists(png):  # NEU, TIPP
 					yoffset = int((mh - 14 * SCALE * len(INFOS)) / 2 + 14 * SCALE * icount)
 					res.append(MultiContentEntryPixmapAlphaTest(pos=(int(1170 * SCALE), yoffset), size=(int(40 * SCALE), int(14 * SCALE)), png=loadPNG(png)))
@@ -1361,10 +1342,7 @@ class TVSTippsView(TVSBaseScreen):
 			self['ranking'].show()
 			self['textpage'].show()
 		elif self.sparte != 'neu' and self.current == 'menu' and self.ready and not self.search:
-			if not self.newfilter:
-				self.newfilter = True
-			else:
-				self.newfilter = False
+			self.newfilter = True if not self.newfilter else False
 			self.refresh()
 
 	def redDownload(self):
@@ -2007,7 +1985,6 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 					except IndexError:
 						sref = None
 						channel = ''
-
 				else:
 					try:
 						c = self['searchmenu'].getSelectedIndex()
@@ -2016,7 +1993,6 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 					except IndexError:
 						sref = None
 						channel = ''
-
 				if sref:
 					try:
 						start = self.start
@@ -2038,7 +2014,6 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 						event = epgcache.startTimeQuery(eServiceReference(sref), start)
 						if event == -1:
 							self.EPGText = getEPGText()
-
 						else:
 							event = epgcache.getNextTimeEntry()
 							self.EPGtext = event.getEventName()
@@ -2053,7 +2028,6 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 								self.EPGtext += '\n\n%s' % dur
 					except Exception:
 						self.EPGText = getEPGText()
-
 				else:
 					self.EPGtext = NOEPG
 				self.EPGtext += '\n%s' % self.getFill(channel)
@@ -2490,10 +2464,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 				end = sub(r'..:.. - ', '', TIME)
 				endparts = end.split(':')
 				endsec = int(endparts[0]) * 3600 + int(endparts[1]) * 60
-				if endsec >= startsec:
-					length = endsec - startsec
-				else:
-					length = 86400 - startsec + endsec
+				length = endsec - startsec if endsec >= startsec else 86400 - startsec + endsec
 				if nowsec < startsec and endsec > startsec:
 					self.percent = False
 				elif endsec < startsec:
@@ -2517,10 +2488,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 					passed = nowsec - startsec
 					percent = passed * 100 / length
 					self.percent = True
-			if search(r'20:15 -', TIME) or self.percent:
-				self.primetime = True
-			else:
-				self.primetime = False
+			self.primetime = True if search(r'20:15 -', TIME) or self.percent else False
 			start = sub(r' - ..:..', '', TIME)
 			hour = sub(r':..', '', start)
 			if int(hour) < 5 and len(self.tventries) > 6 or int(hour) < 5 and self.eventview:
@@ -2531,10 +2499,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			timer = "%s:::%s:::%s" % (datum, start, sref)
 			self.tvlink.append(LINK)
 			t = TITEL
-			if self.showgenre and GENRE:
-				x = "%s %s" % (t, GENRE)
-			else:
-				x = t
+			x = "%s %s" % (t, GENRE) if self.showgenre and GENRE else t
 			self.tvtitel.append(t)
 			if self.progress and self.percent:
 				ypos = int(12 * SCALE)
@@ -3083,27 +3048,15 @@ class TVSNews(TVSBaseScreen):
 		sektionen.pop(-1)
 		for sektion in sektionen:
 			link = search(r'<a href="(.*?)" target="_self"', sektion)
-			if link is None:
-				link = ''
-			else:
-				link = link.group(1)
+			link = link.group(1) if link else ""
 			picurl = search(r'<img src="(.*?)" ', sektion)
-			if picurl is None:
-				picurl = ''
-			else:
-				picurl = picurl.group(1)
+			picurl = picurl.group(1) if picurl else ""
 			trailer = search(r'"videoIntegration": "(.*?)"', sektion)
-			if trailer is None:
-				trailer = '0'
-			else:
-				trailer = trailer.group(1)
+			trailer = trailer.group(1) if trailer else "0"
 			name = search(r'<span class="headline">(.*?)</span>', sektion)
-			if name is None:  # andere Umklammerung bei Genres
+			if not name:  # andere Umklammerung bei Genres
 				name = search(r'<p class="title">(.*?)</p>', sektion)
-			if name is None:
-				name = ''
-			else:
-				name = name.group(1)
+			name = name.group(1) if name else ""
 			subline = search(r'<span\s*class="subline icon-thumb\s*icon-thumb-1">(.*?)</span>', sektion)
 			fullname = name if subline is None else "%s | %s" % (name, subline.group(1))
 			res = ['']
@@ -3443,26 +3396,17 @@ class TVSPicShow(TVSBaseScreen):
 			if foundpara1:
 				if foundpara1[0].find('<a class="switch-paragraph" href="#">mehr...</a>'):
 					foundpara2 = findall(r'<div class="secondParagraph" style="display:none;">(.*?)</div>', daten, flags=S)
-					if foundpara2:
-						info = foundpara2[0]
-					else:
-						info = foundpara1[0]
+					info = foundpara2[0] if foundpara2 else foundpara1[0]
 				else:
 					info = foundpara1[0]
 			else:
 				foundpara2 = findall(r'<div class="secondParagraph" style="(.*?)">(.*?)</div>', daten, flags=S)
-				if foundpara2:
-					info = foundpara2[0]
-				else:
-					info = '{keine Beschreibung gefunden}\n'
+				info = foundpara2[0] if foundpara2 else "{keine Beschreibung gefunden}\n"
 			info = info.replace(', <a class="switch-paragraph" href="#">mehr...</a>', '').replace('<font size="+1">', '').replace('</font>', '')
 			info = info.replace("%s\n" % '<a class="switch-paragraph" href="#">mehr...</a>', '').replace('<br ', '').rstrip()
 			infotext.append(info)
 			foundcredit = findall(r'<span class="credit">(.*?)</span>', bereich, flags=S)
-			if foundcredit:
-				credit.append(foundcredit[0])
-			else:
-				credit.append('')
+			credit.append(foundcredit[0] if foundcredit else "")
 		self.picmax = len(self.pixlist) if self.pixlist else 0
 		self['picindex'].setText('%s von %s' % (self.count + 1, self.picmax))
 		self.topline = ["%s\n%s" % (infotext[i], credit[i]) for i in range(self.picmax)]
@@ -4145,10 +4089,7 @@ class TVSMain(TVSBaseScreen):
 		self.selectMainMenu()
 
 	def makeSecondMenu(self, link):
-		if exists(self.senderhtml):
-			output = ensure_str(open(self.senderhtml, 'r').read())
-		else:
-			output = ''
+		output = ensure_str(open(self.senderhtml, 'r').read()) if exists(self.senderhtml) else ""
 		self.secondmenulist = []
 		self.secondmenulink = []
 		self.sender = []
@@ -4498,10 +4439,7 @@ class TVSmakeServiceFile(Screen):
 
 	def getBouquets(self):
 		bouquets = []
-		if config.usage.multibouquet.value:
-			bouquet_rootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
-		else:
-			bouquet_rootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'
+		bouquet_rootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet' if config.usage.multibouquet.value else '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'
 		bouquet_root = eServiceReference(bouquet_rootstr)
 		serviceHandler = eServiceCenter.getInstance()
 		if config.usage.multibouquet.value:
@@ -4712,10 +4650,7 @@ class TVSgotoPageMenu(TVSAllScreen):
 		self['waiting'].stopBlinking()
 		output = ensure_str(open(self.localhtml, 'r').read())
 		startpos = output.find('label="Alle Sender">Alle Sender</option>')
-		if config.plugins.tvspielfilm.meintvs.value:
-			endpos = output.find('<optgroup label="Hauptsender">')
-		else:
-			endpos = output.find('<optgroup label="alle Sender alphabetisch">')
+		endpos = output.find('<optgroup label="Hauptsender">') if config.plugins.tvspielfilm.meintvs.value else output.find('<optgroup label="alle Sender alphabetisch">')
 		bereich = output[startpos:endpos]
 		sender = findall(r'"channel":"(.*?)","broadcastChannelGroup"', bereich)
 		sender = [sub.replace('&amp;', '&') for sub in sender]
@@ -4970,7 +4905,7 @@ class TVSTipps(TVSAllScreen):
 			self.showLabels(self.count)
 
 	def showLabels(self, idx=0):
-			self['label'].setText("Tipp des Tages")
+			self['label'].setText(f"Tipp des Tages ({idx + 1} / {len(self.tippstitle)})")
 			self['label'].show()
 			if self.tippstitle:
 				self['label2'].setText(self.tippstitle[idx])
@@ -5232,10 +5167,7 @@ class TVSHeuteView(TVSBaseScreen):
 															'red': self.makeTimer,
 															'blue': self.hideScreen}, -1)
 		self.service_db = serviceDB(SERVICEFILE)
-		if exists(TIMERFILE):
-			self.timer = open(TIMERFILE).read().split('\n')
-		else:
-			self.timer = ''
+		self.timer = open(TIMERFILE).read().split('\n') if exists(TIMERFILE) else ""
 		self.date = date.today()
 		one_day = timedelta(days=1)
 		self.nextdate = self.date + one_day
@@ -5298,10 +5230,7 @@ class TVSHeuteView(TVSBaseScreen):
 		if self.first:
 			self.first = False
 			startpos = output.find('label="Alle Sender">Alle Sender</option>')
-			if self.MeinTVS:
-				endpos = output.find('<optgroup label="Hauptsender">')
-			else:
-				endpos = output.find('<optgroup label="alle Sender alphabetisch">')
+			endpos = output.find('<optgroup label="Hauptsender">') if self.MeinTVS else output.find('<optgroup label="alle Sender alphabetisch">')
 			bereich = output[startpos:endpos]
 			allsender = findall(r"<option label='(.*?)' value='https", bereich)
 			self.maxpages = len(allsender) // 6
