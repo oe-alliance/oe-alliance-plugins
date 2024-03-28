@@ -12720,15 +12720,15 @@ def LCD4linuxPIC(self, session):
 		event_name = ""
 		if self.LEventsDesc is not None and len(self.LEventsDesc) > 0:
 			if self.LEventsDesc[0][4]:
-				if self.LEventsDesc[0][5] != "" and (ConfigType[0] in ["1", "2"] and self.LEventsDesc[0][6] == ""):
+				if self.LEventsDesc[0][5] != "" and (ConfigType[0] == "1" or (ConfigType[0] == "2" and self.LEventsDesc[0][6] == "")):
 					event_name += self.LEventsDesc[0][5] + "\n"
-				if self.LEventsDesc[0][6] != "" and (ConfigType[1] in ["1", "2"] and self.LEventsDesc[0][5] == ""):
+				if self.LEventsDesc[0][6] != "" and (ConfigType[1] == "1" or (ConfigType[1] == "2" and self.LEventsDesc[0][5] == "")):
 					event_name += self.LEventsDesc[0][6]
 		if event_name == "":
 			if self.LShortDescription is not None and self.LExtendedDescription is not None:
-					if self.LShortDescription != "" and (ConfigType[0] in ["1", "2"] and self.LExtendedDescription == ""):
+					if self.LShortDescription != "" and (ConfigType[0] == "1" or (ConfigType[0] == "2" and self.LExtendedDescription == "")):
 						event_name += self.LShortDescription + "\n"
-					if self.LExtendedDescription != "" and (ConfigType[1] in ["1", "2"] and self.LShortDescription == ""):
+					if self.LExtendedDescription != "" and (ConfigType[1] == "1" or (ConfigType[1] == "2" and self.LShortDescription == "")):
 						event_name += self.LExtendedDescription
 		if self.LsreftoString is not None and event_name == "":
 			sreffile = self.LsrefFile
