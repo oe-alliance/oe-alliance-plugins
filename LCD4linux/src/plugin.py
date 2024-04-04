@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r18"
+Version = "V5.0-r19"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -4186,8 +4186,19 @@ def xmlRead():
 			while len(xmlList[-1]) < 2 and len(xmlList) > 1:
 				del xmlList[-1]
 	else:
-		xmlList = ["<skin>", "</skin>"]
-
+		sli = xmlReadData()
+		aw, ah = 0, 0
+		ttt = [0]
+		for i in sli[0]:
+			ttt = LCD4linux.xmlLCDType.value.split("x")
+			aw, ah = 0, 0
+			if LCD4linux.xmlLCDType.value == "96x64":
+				i = i.replace("\">", "\" id=\"2\">")
+			if getFB2(False):
+				if "PixmapLcd4linux" in i:
+					i = i.replace("0,0", "10,13")
+				aw, ah = 10, 171
+		xmlList = ["\n".join(sli[0]).replace("$w$", str(int(ttt[0]) + aw)).replace("$h$", str(int(ttt[1]) + ah)), "</skin>"]
 
 def xmlReadData():
 	sld = [[], [], [], []]
