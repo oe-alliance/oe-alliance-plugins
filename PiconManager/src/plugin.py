@@ -51,7 +51,7 @@ from . import _
 
 pname = _("PiconManager (mod)")
 pdesc = _("Manage your Picons")
-pversion = "2.5-r3"
+pversion = "2.5-r4"
 pdate = "20220816"
 
 picon_tmp_dir = "/tmp/piconmanager/"
@@ -415,7 +415,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def threadGetPage(self, link, success, fail):
 		try:
-			response = get(link)
+			response = get(link, timeout=(3.05, 6))
 			response.raise_for_status()
 		except exceptions.RequestException as error:
 			fail(error)
@@ -556,7 +556,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 	def threadDownloadPage(self, link, file, success, fail=None):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
 		try:
-			response = get(link)
+			response = get(link, timeout=(3.05, 6))
 			response.raise_for_status()
 			with open(file, "wb") as f:
 				f.write(response.content)
