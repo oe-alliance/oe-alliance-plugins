@@ -104,7 +104,7 @@ def cleanEnd(text):
 def threadDownloadPage(link, file, success, fail=None):
 	link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '')
 	try:
-		response = get(link)
+		response = get(link, timeout=(3.05, 6))
 		response.raise_for_status()
 		with open(file, "wb") as f:
 			f.write(response.content)
