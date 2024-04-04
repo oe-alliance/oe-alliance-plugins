@@ -4200,6 +4200,7 @@ def xmlRead():
 				aw, ah = 10, 171
 		xmlList = ["\n".join(sli[0]).replace("$w$", str(int(ttt[0]) + aw)).replace("$h$", str(int(ttt[1]) + ah)), "</skin>"]
 
+
 def xmlReadData():
 	sld = [[], [], [], []]
 	if isfile(join(LCD4data, "skin_data.xml")):
