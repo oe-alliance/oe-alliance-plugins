@@ -135,7 +135,7 @@ class Ziehungen():
 	def threadGetPage(self, link, success, fail=None):
 		link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '').encode('utf-8')
 		try:
-			response = get(link)
+			response = get(link, timeout=(3.05, 6))
 			response.raise_for_status()
 			success(response.content)
 		except exceptions.RequestException as error:
