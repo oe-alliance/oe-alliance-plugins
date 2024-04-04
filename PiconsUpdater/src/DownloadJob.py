@@ -18,7 +18,7 @@ class download:
 	def downloadPage(self, link, file, success, fail=None):
 		link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '').encode('utf-8')
 		try:
-			response = get(link)
+			response = get(link, timeout=(3.05, 6))
 			content = response.content
 			response.raise_for_status()
 			with open(file, "wb") as f:
