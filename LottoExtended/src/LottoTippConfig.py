@@ -61,14 +61,14 @@ class LottoConfigDateTime(ConfigDateTime):
 		cur_day = fDate.weekday()
 		if tag == "0":
 			return 0
-		elif tag == "1":		#Samstag
+		elif tag == "1":  # Samstag
 			if cur_day < 5:
 				self.handleKey(KEY_RIGHT, "mydummy")
 				return 1
 			elif cur_day > 5:
 				self.handleKey(KEY_LEFT, "mydummy")
 				return 1
-		elif tag == "2" or tag == "3":		#Mittwoch ; Mi +Sa
+		elif tag == "2" or tag == "3":  # Mittwoch ; Mi +Sa
 			if cur_day < 2:
 				self.handleKey(KEY_RIGHT, "mydummy")
 				return 1
@@ -85,19 +85,16 @@ class LottoConfigDateTime(ConfigDateTime):
 		if tag == "0":
 			pass
 		elif key == KEY_LEFT:  # prev date
-			if tag == "1":		#Samstag
+			if tag == "1":  # Samstag
 				increment = (cur_day + 2) % 7 or 7
 			elif tag == "2":  # Mittwoch
 				increment = (cur_day + 5) % 7 or 7
 			elif tag == "3":  # Mi+Sa
-				if cur_day <= 2 or cur_day == 6:
-					increment = (cur_day + 2) % 7
-				else:
-					increment = cur_day - 2
+				increment = (cur_day + 2) % 7 if cur_day <= 2 or cur_day == 6 else cur_day - 2
 			newDate = fDate - timedelta(days=increment)
 			self.value = int(mktime(newDate.timetuple()))
 		elif key == KEY_RIGHT:  # next date
-			if tag == "1":		#Samstag
+			if tag == "1":  # Samstag
 				increment = (12 - cur_day) % 7 or 7
 			elif tag == "2":  # Mittwoch
 				increment = (9 - cur_day) % 7 or 7
@@ -108,7 +105,6 @@ class LottoConfigDateTime(ConfigDateTime):
 					increment = 5 - cur_day
 				else:
 					increment = 9 - cur_day
-
 			newDate = fDate + timedelta(days=increment)
 			self.value = int(mktime(newDate.timetuple()))
 #		elif key == KEY_HOME or key == KEY_END:
@@ -146,6 +142,9 @@ class LottoConfigSequence(ConfigSequence):
 	def setLimitDefault(self, count):
 		self.default = [0 for i in range(count)]
 		self.limits = [(1, 49) for i in range(count)]
+		self.blockLen = [len(str(x[1])) for x in self.limits]
+		self.totalLen = sum(self.blockLen) - 1
+		self.markedPos = 0
 
 	def cancel(self):
 		self.load()
@@ -157,26 +156,23 @@ class LottoConfigSequence(ConfigSequence):
 			self.value.sort()
 			try:
 				self.saved_value = self.toString(self.value)  # bei openATV 7.x
-			except:
+			except Exception:
 				self.saved_value = self.tostring(self.value)  # bei openATV 6.x
 			self.marked_pos = 0
 
 	def validate(self):
 		max_pos = 0
 		num = 0
-
 		for i in self._value:
 			max_pos += len(str(self.limits[num][1]))
 			if self._value[num] > self.limits[num][1]:
 				self._value[num] = self.limits[num][1]
 			num += 1
-
 		if self.marked_pos >= max_pos:
 			if self.endNotifier:
 				for x in self.endNotifier:
 					x(self)
 			self.marked_pos = max_pos - 1
-
 		if self.marked_pos < 0:
 			self.marked_pos = 0
 
@@ -188,7 +184,7 @@ class LottoConfigSequence(ConfigSequence):
 		sv = self.saved_value
 		try:
 			self.value = [0 for i in range(6)] if sv is None else self.fromString(sv)  # bei openATV 7.x
-		except:
+		except Exception:
 			self.value = [0 for i in range(6)] if sv is None else self.fromstring(sv)  # bei openATV 6.x
 		count = len(self.value)
 		self.setLimitDefault(count)
@@ -204,8 +200,7 @@ class __LottoTippConfig(object):
 		for tippnum in range(0, config.plugins.lotto.tippcount.value):
 			self.new()
 
-	# Add a new tipp or load a configsection if existing
-	def new(self):
+	def new(self):  # Add a new tipp or load a configsection if existing
 		newTippConfigSubsection = ConfigSubsection()
 		config.plugins.lotto.tipps.append(newTippConfigSubsection)
 		newTippConfigSubsection.name = ConfigText("Tipp %s" % self.getTippCount(), False)
@@ -376,12 +371,12 @@ class LottoTippConfigScreen(Screen, ConfigListScreen):
 			dups = []
 			for i in spiel.value:
 				if i == 0:
-					self.session.open(MessageBox, _(("Ungültige Zahl (0) in %s\n\nNur 01 - 49 erlaubt." % (name))), MessageBox.TYPE_WARNING)
+					self.session.open(MessageBox, _(("Ungültige Zahl (0) in %s\n\nNur 01 - 49 erlaubt." % (name))), MessageBox.TYPE_WARNING, timeout=3, close_on_any_key=True)
 					return False
-				if dups.count(i) == 0 and spiel.value.count(i) > 1:  # doppelte werte nicht zulassen
+				if dups.count(i) == 0 and spiel.value.count(i) > 1:  # doppelte Werte nicht zulassen
 					dups.append(i)
 			if len(dups) > 0:
-				self.session.open(MessageBox, _(("Doppelte Zahl(en) in %s:\n\n%s" % (name, str(dups)))), MessageBox.TYPE_WARNING)
+				self.session.open(MessageBox, _(("Doppelte Zahl(en) in %s:\n\n%s" % (name, str(dups)))), MessageBox.TYPE_WARNING, timeout=3, close_on_any_key=True)
 				return False
 		return True
 
@@ -390,12 +385,11 @@ class LottoTippConfigScreen(Screen, ConfigListScreen):
 		if isinstance(spiel, LottoConfigSequence):
 			if spiel._value != spiel.default:
 				name = self["config"].getCurrent()[0]
-				self.session.openWithCallback(self.deleteSpiel, MessageBox, ("Soll '%s' wirklich gelöscht werden?" % name))
+				self.session.openWithCallback(self.deleteSpiel, MessageBox, ("Soll '%s' wirklich gelöscht werden?" % name), MessageBox.TYPE_YESNO, timeout=20, default=False)
 
 	def deleteSpiel(self, result):
 		if result:
 			spiel = self.getCurrentConfigPath()
-#			ix = self["config"].getCurrentIndex()
 			spiel.toDefault()
 			self["config"].invalidateCurrent()
 
@@ -406,8 +400,8 @@ class LottoTippConfigScreen(Screen, ConfigListScreen):
 		self["statuslabel"].setText(" ")
 		txt = self["key_blue"].getText()
 		if isinstance(cfgentry, LottoConfigSequence):
-			if txt != "Delete Spiel":
-				self["key_blue"].setText("Delete Spiel")
+			if txt != "Lösche Spiel":
+				self["key_blue"].setText("Lösche Spiel")
 		else:
 			if txt != " ":
 				self["key_blue"].setText(" ")
@@ -460,7 +454,7 @@ class LottoTippConfigScreen(Screen, ConfigListScreen):
 
 	def keyCancel(self):
 		if self.isChanged():
-			self.session.openWithCallback(self.cancelCallback, MessageBox, "Sollen die Änderungen wirklich rückgängig gemacht werden?")
+			self.session.openWithCallback(self.cancelCallback, MessageBox, "Sollen die Änderungen wirklich rückgängig gemacht werden?", MessageBox.TYPE_YESNO, timeout=20, default=False)
 		else:
 			self.close(False, self.tipp)
 
