@@ -66,8 +66,24 @@ class VBHandler(VBHandlers):
 		self.onSetTitleCB = []
 		self.onCloseCB = []
 		VBHandlers.__init__(self, _OPCODE_LIST, '_CB_')
+		self.hdmi_cec = None
+		try:
+			from Components.HdmiCec import hdmi_cec
+			if hdmi_cec.instance and "keyVolUp" in hdmi_cec.instance:
+				self.hdmi_cec = hdmi_cec.instance
+		except ImportError:
+			pass
 
 	def set_volume(self, volume):
+		ret = 0
+		if self.hdmi_cec:
+			if volume == 5:
+				ret = self.hdmi_cec.keyVolUp()
+			else:
+				ret = self.hdmi_cec.keyVolDown()
+			if ret:
+				return
+
 		if self.max_volume < 0:
 			self.max_volume = VolumeControl.instance.volctrl.getVolume()
 
