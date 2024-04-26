@@ -69,7 +69,7 @@ class VBHandler(VBHandlers):
 		self.hdmi_cec = None
 		try:
 			from Components.HdmiCec import hdmi_cec
-			if hdmi_cec.instance and "keyVolUp" in hdmi_cec.instance:
+			if hdmi_cec.instance and hasattr(hdmi_cec.instance, "keyVolUp"):
 				self.hdmi_cec = hdmi_cec.instance
 		except ImportError:
 			pass
