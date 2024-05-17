@@ -29,8 +29,11 @@ fi
 
 which python
 if [ $? -eq 1 ]; then
-	printf "python not found on this system, please install it first or ensure that it is in the PATH variable.\n"
-	exit 1
+	which python3
+	if [ $? -eq 1 ]; then
+		printf "python not found on this system, please install it first or ensure that it is in the PATH variable.\n"
+		exit 1
+	fi
 fi
 
 #
@@ -59,7 +62,12 @@ for directory in */po/ ; do
 	find $findoptions .. -name "*.py" -exec xgettext --no-wrap -L Python --from-code=UTF-8 -kpgettext:1c,2 --add-comments="TRANSLATORS:" -d $plugin -s -o $plugin-py.pot {} \+
 	$localgsed --in-place $plugin-py.pot --expression=s/CHARSET/UTF-8/
 	printf "Creating temporary file $plugin-xml.pot\n"
-	find $findoptions .. -name "*.xml" -exec python $rootpath/xml2po.py {} \+ > $plugin-xml.pot
+	which python
+	if [ $? -eq 0 ]; then
+		find $findoptions .. -name "*.xml" -exec python $rootpath/xml2po.py {} \+ > $plugin-xml.pot
+	else
+		find $findoptions .. -name "*.xml" -exec python3 $rootpath/xml2po.py {} \+ > $plugin-xml.pot
+	fi
 	printf "Merging pot files to create: %s.pot\n" $plugin
 	cat $plugin-py.pot $plugin-xml.pot | msguniq --no-wrap --no-location -o $plugin.pot -
 	rm $plugin-py.pot $plugin-xml.pot
