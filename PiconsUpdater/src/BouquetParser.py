@@ -2,6 +2,7 @@ from re import match, findall, DOTALL, IGNORECASE
 from unicodedata import normalize
 from enigma import eServiceCenter, eServiceReference
 from Components.config import config
+from Components.SystemInfo import BoxInfo
 from ServiceReference import ServiceReference
 
 SKIP_BOUQUET_NAMES = 'userbouquet.lastscanned'
@@ -9,11 +10,12 @@ SKIP_BOUQUET_NAMES = 'userbouquet.lastscanned'
 
 def getChannelKey(service):
 	channelKeyMatch = match('([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):', str(service))
-	channelKey = '_'.join(map(str, channelKeyMatch.groups()))
-	try:
-		return normalize('NFKD', channelKey)
-	except Exception:
-		return channelKey
+	if channelKeyMatch:
+		channelKey = '_'.join(map(str, channelKeyMatch.groups()))
+		try:
+			return normalize('NFKD', channelKey)
+		except Exception:
+			return channelKey
 
 
 class BouquetParser:
@@ -54,19 +56,28 @@ class BouquetParser:
 		services = []
 		Servicelist = eServiceCenter.getInstance().list(bouquet)
 		if Servicelist is not None:
+			getServiceHook = BoxInfo.getItem("getServiceHook")
 			while True:
 				service = Servicelist.getNext()
 				if not service.valid():
 					break
 				if service.flags & (eServiceReference.isDirectory | eServiceReference.isMarker):
 					continue
-				if self.excludeiptv:
-					sref = service.toString()
-					fields = sref.split(':', 10)[:10]
-					if fields[0] != '1':
-						continue
-					sref = ':'.join(fields) + ':'
-					services.append(ServiceReference(sref))
+				if getServiceHook and callable(getServiceHook):
+					_service = getServiceHook(service, self.excludeiptv)
 				else:
-					services.append(ServiceReference(service))
+					_service = self.getService(service)
+				if _service:
+					services.append(_service)
 		return services
+
+	def getService(self, service):
+		if self.excludeiptv:
+			sref = service.toString()
+			fields = sref.split(':', 10)[:10]
+			if fields[0] != '1':
+				return None
+			sref = ':'.join(fields) + ':'
+			return ServiceReference(sref)
+		else:
+			return ServiceReference(service)
