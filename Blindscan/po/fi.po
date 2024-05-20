@@ -1,186 +1,176 @@
-# Finnish translations for Enigma2.
+# Finnish translations for Blindscan.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: enigma2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 07:54+0100\n"
-"PO-Revision-Date: 2016-05-07 13:06+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: Samzan\n"
+"PO-Revision-Date: 2024-05-19 21:36+0300\n"
+"Last-Translator: Orlandox\n"
+"Language-Team: Samzan, Orlandox\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Generator: Poedit 3.4.4\n"
 
 msgid ""
 "\n"
 "A recording is in progress."
 msgstr ""
+"\n"
+"Tallennus on meneillään."
 
 msgid ""
 "\n"
 "The second slot of this dual tuner may not support blind scan."
 msgstr ""
+"\n"
+"Tämän kaksoisvirittimen toinen paikka ei ehkä tue sokkoskannausta."
 
 msgid ""
 "\n"
 "You must use the power adapter."
 msgstr ""
+"\n"
+"Sinun on käytettävä virtalähdettä."
 
 msgid "   Starting Sundtek hardware blind scan."
-msgstr ""
+msgstr "   Käynnistetään Sundtek-laitteiston sokkoskannaus."
 
-#
-#, fuzzy
 msgid " tuner."
-msgstr "Viritin"
+msgstr " viritin."
 
-#, fuzzy
 msgid "\"channel scan\" searches for channels and saves them to your receiver; \"transponder scan\" does a transponder search and displays the results allowing user to select some or all transponder. Both options save the results in satellites.xml format under /tmp"
-msgstr "Kanavahaku etsii kanavia ja tallentaa ne vastaanottimeen. Tallennus XML-tiedostoon tallentaa transponderit satellites.xml tiedostoon. Molemmat vaihtoehdot tekevät transponderihaun."
+msgstr "\"kanavaskannaus\" etsii kanavia ja tallentaa ne vastaanottimeesi; \"transponderiskannaus\" etsii transpondereita ja näyttää tulokset, jolloin käyttäjä voi valita osan tai kaikki transponderit. Molemmat vaihtoehdot tallentavat tulokset satellites.xml-muodossa /tmp-kansioon"
 
-#, fuzzy
 msgid "\"scan for channels\" searches for channels and saves them to your receiver; \"Save to XML\" does a transponder search and saves the results in satellites.xml format and stores it in /tmp"
-msgstr "Kanavahaku etsii kanavia ja tallentaa ne vastaanottimeen. Tallennus XML-tiedostoon tallentaa transponderit satellites.xml tiedostoon. Molemmat vaihtoehdot tekevät transponderihaun."
+msgstr "\"skannaa kanavia\" etsii kanavia ja tallentaa ne vastaanottimeesi; \"Tallenna XML-muotoon\" tekee transponderihaun ja tallentaa tulokset satellites.xml-muotoon ja tallentaa ne /tmp-tiedostoon"
 
 #, python-format
 msgid "%d transponder(s) found"
-msgstr ""
+msgstr "%d transponderi(a) löydetty"
 
 #, python-format
 msgid "%d transponders found at %d:%02d min"
-msgstr ""
+msgstr "%d transponderia löydetty %d:%02d minuutissa"
 
 #, python-format
 msgid "%d:%02d/%d:%02dmin"
-msgstr ""
+msgstr "%d:%02d/%d:%02dmin"
 
 #, python-format
 msgid "%dMHz scanned"
-msgstr ""
+msgstr "%dMHz skannattu"
 
 msgid "Accuracy (higher is better)"
-msgstr ""
+msgstr "Tarkkuus (korkeampi on parempi)"
 
 msgid "Auto / Manual"
-msgstr ""
+msgstr "Auto / Manuaali"
 
 msgid "Blind scan"
-msgstr "Transponderihaku (blind scan)"
+msgstr "Sokkoskannaus"
 
 msgid "Blind scan for DVB-S2 tuners"
-msgstr ""
+msgstr "Sokkoskannaus DVB-S2 virittimille"
 
-#, fuzzy
 msgid "Blind scan state"
-msgstr "Transponderihaku (blind scan)"
+msgstr "Sokkoskannauksen tila"
 
 msgid "Blindscan"
-msgstr "Transponderihaku (blindscan)"
+msgstr "Sokkoskannaus"
 
 #, python-format
 msgid "Blindscan executable not found '%s'!"
-msgstr ""
+msgstr "Sokkoskannaus-suoritettavaa tiedostoa ei löydy '%s'!"
 
 msgid "Blindscan is not supported in "
-msgstr ""
+msgstr "Sokkoskannausta ei tueta "
 
 msgid "CAUTION: If you select \"yes\" the scan will not remove \"duplicated\" transponders from the list. Default is \"no\". Only change this if you understand why you are doing it."
-msgstr ""
+msgstr "VAROITUS: Jos valitset \"kyllä\", skannaus ei poista \"duplikaatteja\" transpondereita luettelosta. Oletus on \"ei\". Muuta tätä vain, jos ymmärrät miksi teet sen."
 
-#, fuzzy
 msgid "CAUTION: If you select \"yes\" the scan will not sync with transponders listed in satellites.xml. Default is \"no\". Only change this if you understand why you are doing it."
-msgstr "Jos valitset \"kyllä\" vain transponderit joita ei ole satellites.xml listalla haetaan"
+msgstr "VAROITUS: Jos valitset \"kyllä\", skannaus ei synkronoidu satellites.xml-tiedostossa lueteltujen transpondereiden kanssa. Oletus on \"ei\". Muuta tätä vain, jos ymmärrät miksi teet sen."
 
 msgid "CAUTION: Only select \"inverted\" if you are using an inverted LNB (i.e. an LNB where the local oscillator frequency is greater than the scan frequency). Default is \"normal\". Only change this if you understand why you are doing it."
-msgstr ""
+msgstr "VAROITUS: Valitse \"käänteinen\" vain, jos käytät käänteistä mikropäätä (eli mikropäätä, jossa paikallisoskillaattorin taajuus on suurempi kuin pyyhkäisytaajuus). Oletus on \"normaali\". Muuta tätä vain, jos ymmärrät miksi teet sen."
 
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
-#
-#  Ohjatun asennuksen (Startup Wizard) kutosruudun valintateksti
-#  Tekstin pitää ilmeisesti olla melko lyhyt, koska käyttäjän
-#  valittavaksi annetut vaihtoehdot lyhentävät tilaa toisesta
-#  päästä.
 msgid "Clear before scan"
-msgstr "Tyhjennä kanavalista"
+msgstr "Tyhjennä ennen skannausta"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Current Status: %d/%d\n"
 "Satellite: %s\n"
 "Polarization: %s  Frequency range: %d - %d MHz  Symbol rates: %d - %d MSym/s"
 msgstr ""
-"Tilanne : %d/%d\n"
-"   Satelliitti : %s\n"
-"   Polarisaatio : %s\n"
-"   Taajuusalue : %d - %d MHz\n"
-"   Symbolinopeudet : %d - %d MHz"
+"Tilanne: %d/%d\n"
+"Satelliitti: %s\n"
+"Polarisaatio: %s  Taajuusalue: %d - %d MHz  Symbolinopeudet: %d - %d MSym/s"
 
 msgid "DVB-S + DVB-S2"
-msgstr ""
+msgstr "DVB-S + DVB-S2"
 
 msgid "DVB-S only"
-msgstr ""
+msgstr "Vain DVB-S"
 
 msgid "Deselect all"
-msgstr ""
+msgstr "Poista kaikki valinnat"
 
 msgid "Disable remove duplicates"
-msgstr ""
+msgstr "Poista käytöstä duplikaattien poisto"
 
-#, fuzzy
 msgid "Disable sync with known transponders"
-msgstr "Vain tuntemattomat transponderit"
+msgstr "Poista synkronointi käytöstä tunnettujen transpondereiden kanssa"
 
-#
 msgid "Exit"
 msgstr "Poistu"
 
 msgid "Filter out adjacent satellites"
-msgstr "Suodata naapuri satelliitit"
+msgstr "Suodata naapuri satelliitit pois"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Frequency values must be between %d MHz and %d MHz"
-msgstr "Taajuus pitää olla välillä 10700 MHz - 12749 MHz"
+msgstr "Taajuus pitää olla välillä %d MHz ja %d MHz"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Frequency values must be between %d MHz and %d MHz (C-band)"
-msgstr "Taajuus pitää olla välillä 3000 MHz - 4199 MHz (C-band)"
+msgstr "Taajuus pitää olla välillä %d MHz ja %d MHz (C-band)"
 
 #, python-format
 msgid "Hardware blind scan is not supported by this tuner (%s)!"
-msgstr ""
+msgstr "Tämä viritin (%s) ei tue laitteiston sokkoskannausta!"
 
-#, fuzzy
 msgid "If you select \"yes\" all channels on the satellite being searched will be deleted before starting the current search, yes (keep feeds) means the same but hold all feed services/transponders."
-msgstr "Jos valitset \"kyllä\" kaikki satelliitin kanavat poistetaan ennen hakua"
+msgstr "Jos valitset \"kyllä\", kaikki etsittävän satelliitin kanavat poistetaan ennen nykyisen haun aloittamista, kyllä (säilytä syötteet) tarkoittaa samaa, mutta säilyttää kaikki syötteen kanavat/transponderit."
 
 msgid "If you select \"yes\" the scan will only save channels that are not encrypted; \"no\" will find encrypted and non-encrypted channels."
-msgstr "Jos valitset \"kyllä\" vain salaamattomat kanavat haetaan; \"ei\" kaikki kanavat haetaan"
+msgstr "Jos valitset \"kyllä\", haku tallentaa vain kanavat, joita ei ole salattu; \"ei\" löytää salattuja ja salaamattomia kanavia."
 
 msgid "If you select \"yes\" the scan will only search transponders not listed in satellites.xml"
-msgstr "Jos valitset \"kyllä\" vain transponderit joita ei ole satellites.xml listalla haetaan"
+msgstr "Jos valitset \"kyllä\", skannaus etsii vain transpondereita, joita ei ole lueteltu satelliittis.xml-tiedostossa"
 
 msgid "It seems manufacturer does not support blind scan for this tuner."
-msgstr ""
+msgstr "Näyttää siltä, että valmistaja ei tue sokkoskannausta tälle virittimelle."
 
 msgid "LNB inversion"
-msgstr ""
+msgstr "LNB-inversio"
 
 msgid "LNB of current satellite not compatible with plugin"
-msgstr ""
+msgstr "Nykyisen satelliitin LNB ei ole yhteensopiva pluginin kanssa"
 
 msgid ""
 "Looking for available transponders.\n"
 "This will take a long time, please be patient."
 msgstr ""
-"Etsitään transpondereita.\n"
-"Tämä vie pitkänaikaa, odota."
+"Etsitään saatavilla olevia transpondereita.\n"
+"Tämä kestää kauan, ole kärsivällinen."
 
 msgid ""
 "No new transponders found! \n"
@@ -188,85 +178,80 @@ msgid ""
 "Only transponders already listed in satellites.xml \n"
 "have been found for those search parameters!"
 msgstr ""
-"Ei löytynyt uusia transpondereita! \n"
+"Uusia transpondereita ei löytynyt! \n"
 "\n"
-"Vain jo listatut transponderit löytyi \n"
-"näillä hakuparametreillä!"
+"Näillä hakuparametreilla on löydetty vain \n"
+"satellits.xml-tiedostossa jo listattuja transpondereita!"
 
 msgid "No transponders were found for those search parameters!"
-msgstr "Näillä hakuparametreillä ei löytynyt transpondereita"
+msgstr "Näillä hakuparametreillä ei löytynyt transpondereita!"
 
 msgid "Nothing to scan! Press Exit!"
-msgstr ""
+msgstr "Ei mitään skannattavaa! Paina Poistu!"
 
 msgid "Only free scan"
-msgstr "Vain vapaat"
+msgstr "Skannaa vain vapaat"
 
 msgid "Only scan unknown transponders"
-msgstr "Vain tuntemattomat transponderit"
+msgstr "Skannaa vain tuntemattomat transponderit"
 
 msgid "Open xml file"
-msgstr ""
+msgstr "Avaa xml-tiedosto"
 
 msgid "Please setup your tuner configuration."
-msgstr "Aseta viritin asetukset."
+msgstr "Määritä virittimen asetukset."
 
 msgid "Polarisation"
 msgstr "Polarisaatio"
 
 msgid "Polarisation, select horizontal, vertical or both."
-msgstr ""
+msgstr "Polarisaatio, valitse horisontaali, vertikaali tai molemmat."
 
-#, fuzzy
 msgid "Polarization"
 msgstr "Polarisaatio"
 
-#, fuzzy
 msgid "Press OK to start the scan."
-msgstr "Paina vihreä/OK aloittaaksesi haun"
+msgstr "Paina OK aloittaaksesi skannauksen."
 
-#, fuzzy
 msgid "Press green to start service searching."
-msgstr "Paina vihreä/OK aloittaaksesi haun"
+msgstr "Paina vihreä aloittaaksesi kanavahaun."
 
 msgid "Restore defaults"
-msgstr ""
+msgstr "Palauta oletukset"
 
-#
 msgid "Satellite"
 msgstr "Satelliitti"
 
 msgid "Scan"
-msgstr "Haku"
+msgstr "Skannaa"
 
 msgid "Scan Step in MHz(TBS5925)"
-msgstr ""
+msgstr "Skannausaskel MHz:ssä (TBS5925)"
 
 msgid "Scan satellites for new transponders"
-msgstr "Hae uusia transpondereita satelliiteista"
+msgstr "Skannaa satelliiteista uusia transpondereita"
 
 msgid "Scan start frequency"
-msgstr "Aloitustaajuus"
+msgstr "Skannauksen aloitustaajuus"
 
 msgid "Scan start symbolrate"
-msgstr "Aloitus symbolinopeus"
+msgstr "Skannauksen aloitussymbolinopeus"
 
 msgid "Scan stop frequency"
-msgstr "Lopetustaajuus"
+msgstr "Skannauksen lopetustaajuus"
 
 msgid "Scan stop symbolrate"
-msgstr "Lopetus symbolinopeus"
+msgstr "Skannauksen lopetussymbolinopeus"
 
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Search completed\n"
 "%d transponders found in %d:%02d minutes.\n"
 "Details saved in: %s"
 msgstr ""
-"Haku valmis. %d Transpondereita löytyi.\n"
-"\n"
-"Tiedot tallennettu:\n"
-"%s"
+"Haku valmis\n"
+"%d transponderia löytyi %d:%02d minuutissa.\n"
+"Tiedot tallennettu: %s"
 
 #, python-format
 msgid ""
@@ -275,7 +260,7 @@ msgid ""
 "Details saved in:\n"
 "%s"
 msgstr ""
-"Haku valmis. %d Transpondereita löytyi.\n"
+"Haku valmis. %d transponderia löytyi.\n"
 "\n"
 "Tiedot tallennettu:\n"
 "%s"
@@ -283,156 +268,141 @@ msgstr ""
 msgid "Search type"
 msgstr "Hakutyyppi"
 
-#, fuzzy
 msgid "Searching for active satellite transponders..."
-msgstr "Hae uusia transpondereita satelliiteista"
+msgstr "Haetaan aktiivisia satelliittitranspondereita..."
 
 msgid "Select a tuner that is configured for the satellite you wish to search"
-msgstr "Valitse viritin jolle on asetettu haluamasi satelliitti"
+msgstr "Valitse viritin, joka on määritetty satelliitille, jota haluat etsiä"
 
 msgid "Select all"
-msgstr ""
+msgstr "Valitse kaikki"
 
 msgid "Select between 1 and 5. Higher numbers give more accurat search results."
-msgstr ""
+msgstr "Valitse väliltä 1 ja 5. Suuremmat luvut antavat tarkempia hakutuloksia."
 
 msgid "Select the satellite you wish to search"
-msgstr "Valitse satelliitti"
+msgstr "Valitse satelliitti, jota haluat etsiä"
 
 msgid ""
 "Select transponders and press green to scan.\n"
 "Press yellow to select all transponders and blue to deselect all."
 msgstr ""
+"Valitse transponderit ja skannaa painamalla vihreää.\n"
+"Paina keltaista valitaksesi kaikki transponderit ja sinistä poistaaksesi kaikki valinnat."
 
 msgid "Service searching to be started MANUALLY by the user. To change this press green."
-msgstr ""
+msgstr "Kanavahaku käynnistetään käyttäjän toimesta MANUAALISESTI. Voit muuttaa tätä painamalla vihreää."
 
 msgid "Service searching will start AUTOMATICALLY. To change this press green."
-msgstr ""
+msgstr "Kanavahaku alkaa AUTOMAATTISESTI. Voit muuttaa tätä painamalla vihreää."
 
 msgid "Smaller steps takes longer but scan is more thorough"
-msgstr ""
+msgstr "Pienemmät askeleet vievät kauemmin, mutta skannaus on perusteellisempaa"
 
 msgid "Sorry, this tuner is in use."
-msgstr "Viritin on käytössä!"
+msgstr "Tämä viritin on käytössä."
 
-#, fuzzy
 msgid "Start frequency"
 msgstr "Aloitustaajuus"
 
-#, fuzzy
 msgid "Start symbol rate"
 msgstr "Aloitus symbolinopeus"
 
 #, python-format
 msgid "Step %d %d:%02d min"
-msgstr ""
+msgstr "Askel %d %d:%02d min"
 
-#, fuzzy
 msgid "Stop frequency"
 msgstr "Lopetustaajuus"
 
-#, fuzzy
 msgid "Stop symbol rate"
 msgstr "Lopetus symbolinopeus"
 
-#, fuzzy, python-format
+#, python-format
 msgid "Symbol rate values are in megasymbols; enter a value between %d and %d"
-msgstr "Symbolinopeus on megoina. Syötä arvo välillä 1 - 44"
+msgstr "Symbolinopeuden arvot ovat megasymboleissa; syötä arvo välillä %d ja %d"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 1 and 44"
-msgstr "Symbolinopeus on megoina. Syötä arvo välillä 1 - 44"
+msgstr "Symbolinopeuden arvot ovat megasymboleissa; syötä arvo välillä 1 ja 44"
 
 msgid "Symbol rate values are in megasymbols; enter a value between 2 and 45"
-msgstr "Symbolinopeus on megoina. Syötä arvo välillä 2 - 45"
+msgstr "Symbolinopeuden arvot ovat megasymboleissa; syötä arvo välillä 2 ja 45"
 
 msgid "The blindscan run was cancelled by the user."
-msgstr "Transponderihaku on peruutettu käyttäjän toimesta."
+msgstr "Käyttäjä peruutti sokkoskannauksen."
 
 #, python-format
 msgid "The suggested polarisation for this satellite is \"%s\""
-msgstr ""
+msgstr "Tämän satelliitin ehdotettu polarisaatio on \"%s\""
 
 msgid "Transponder searching finished!"
-msgstr ""
+msgstr "Transponderin haku on valmis!"
 
-#
 msgid "Tuner"
 msgstr "Viritin"
 
 msgid "Use Sundtek full hardware blind scan!"
-msgstr ""
+msgstr "Käytä Sundtekin laitteiston sokkoskannausta!"
 
 msgid "When a neighbouring satellite is very strong this avoids searching transponders known to be coming from the neighbouring satellite."
-msgstr "Kun naapurisatelliitti on voimakas tämä auttaa välttämään naapurisatelliitin tunnetut transponderit"
+msgstr "Kun naapurisatelliitti on erittäin vahva, vältytään etsimästä transpondereita, joiden tiedetään tulevan naapurisatelliitista."
 
-#
 msgid "circular left"
 msgstr "kiertopolarisaatio vasen"
 
-#
-#, fuzzy
 msgid "circular left/right"
-msgstr "kiertopolarisaatio oikea"
+msgstr "kiertopolarisaatio vasen/oikea"
 
-#
 msgid "circular right"
 msgstr "kiertopolarisaatio oikea"
 
 msgid "circular right and circular left"
 msgstr "kiertopolarisaatio oikea ja vasen"
 
-#, fuzzy
 msgid "don't scan"
-msgstr "Transponderihaku (blind scan)"
+msgstr "älä skannaa"
 
-#
 msgid "horizontal"
 msgstr "horisontaali"
 
 msgid "inverted"
-msgstr ""
+msgstr "invertoitu"
 
-#
 msgid "no"
-msgstr "Ei"
+msgstr "ei"
 
 msgid "normal"
-msgstr ""
+msgstr "normaali"
 
 msgid "save to XML file"
-msgstr "Tallenna XML-tiedostoon"
+msgstr "tallenna XML-tiedostoon"
 
-#, fuzzy
 msgid "scan"
-msgstr "Transponderihaku (blindscan)"
+msgstr "skannaa"
 
 msgid "scan for channels"
-msgstr "Hae kanavia"
+msgstr "skannaa kanavia"
 
-#, fuzzy
 msgid "scan for transponders"
-msgstr "Vain tuntemattomat transponderit"
+msgstr "skannaa transpondereita"
 
 msgid "up to 1 degree"
-msgstr "Aste ylös"
+msgstr "aste ylös"
 
 msgid "up to 2 degrees"
-msgstr "Kaksi astetta ylös"
+msgstr "kaksi astetta ylös"
 
 msgid "up to 3 degrees"
-msgstr "Kolme astetta ylös"
+msgstr "kolme astetta ylös"
 
-#
 msgid "vertical"
 msgstr "vertikaali"
 
-#
 msgid "vertical and horizontal"
 msgstr "vertikaali ja horisontaali"
 
 msgid "yes"
-msgstr ""
+msgstr "kyllä"
 
 msgid "yes (keep feeds)"
-msgstr ""
+msgstr "kyllä (säilytä syötteet)"
