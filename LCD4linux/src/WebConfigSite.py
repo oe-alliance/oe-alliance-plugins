@@ -12,7 +12,12 @@ else:
 from time import time
 from twisted.web import resource, http
 from enigma import eTimer
-from boxbranding import getOEVersion
+try:
+	from Components.SystemInfo import BoxInfo
+	OE43 = BoxInfo.getItem("oe") == "OE-Alliance 4.3"
+except ImportError:
+	from boxbranding import getOEVersion
+	OE43 = getOEVersion() == "OE-Alliance 4.3"
 from Components.config import ConfigSelection
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
 from .module import L4Lelement
@@ -155,7 +160,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		global ExeMode
 		global StatusMode
 		IP = ensure_str(req.getClientIP())
-		if getOEVersion() == "OE-Alliance 4.3":
+		if OE43:
 			IP = IP.split(":")[-1]
 		L4logE("IP1:", IP)
 		if IP is None:
