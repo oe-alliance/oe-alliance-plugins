@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r20"
+Version = "V5.0-r21"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -433,6 +433,7 @@ LCD4linux.MJPEGMode = ConfigSelection(choices=[("001", "001"), ("011", "011"), (
 LCD4linux.MJPEGHeader = ConfigSelection(choices=[("0", _("normal")), ("1", _("reduced"))], default="1")
 LCD4linux.MJPEGCycle = ConfigSelectionNumber(1, 10, 1, default=2)
 LCD4linux.MJPEGRestart = ConfigYesNo(default=True)
+LCD4linux.Streaming = ConfigSelection(choices=[("0", _("Media")), ("1", _("On"))], default="0")
 LCD4linux.WebIfRefresh = ConfigSelectionNumber(1, 60, 1, default=3)
 LCD4linux.WebIfType = ConfigSelection(choices=[("0", _("Javascript")), ("01", _("Javascript no Refresh")), ("1", _("Reload"))], default="0")
 LCD4linux.WebIfInitDelay = ConfigYesNo(default=False)
@@ -5858,6 +5859,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.list1.append(getConfigListEntry(_("MJPEG Cycle"), LCD4linux.MJPEGCycle))
 			self.list1.append(getConfigListEntry(_("MJPEG Restart on Error"), LCD4linux.MJPEGRestart))
 			self.list1.append(getConfigListEntry(_("MJPEG Header Mode"), LCD4linux.MJPEGHeader))
+			self.list1.append(getConfigListEntry(_("Show Streams '4097; 5001...5003' in Mode"), LCD4linux.Streaming))
 			self.list1.append(getConfigListEntry(_("Sonos IP"), LCD4linux.SonosIP))
 			self.list1.append(getConfigListEntry(_("Sonos Ping Timeout [ms]"), LCD4linux.SonosPingTimeout))
 			self.list1.append(getConfigListEntry(_("Sonos Play Check"), LCD4linux.SonosCheckTimer))
@@ -14485,6 +14487,7 @@ def LCD4linuxPIC(self, session):
 			elif sref.startswith(("4097:0", "5001:0", "5002:0", "5003:0")):
 				if self.Lpath and self.Lpath.startswith("http") and self.Llength and self.Llength[0] == -1:
 					L4log("detected IPTV")
+					isMediaPlayer = "mp3" if LCD4linux.Streaming.value == "0" else ""
 				else:
 					L4log("detected VOD Media")
 					isMediaPlayer = "mp3"
