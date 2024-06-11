@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: LCD4linux\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-06-10 14:18+0200\n"
-"PO-Revision-Date: 2024-06-10 14:25+0200\n"
+"PO-Revision-Date: 2024-06-10 14:39+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -3820,7 +3820,7 @@ msgstr "MJPEG Header Modus"
 
 #: ..\plugin.py:5862
 msgid "Show Streams '4097; 5001...5003' in Mode"
-msgstr "Zeige Streams  '4097; 5001...5003' im Modus"
+msgstr "Zeige Streams '4097; 5001...5003' im Modus"
 
 #: ..\plugin.py:5863 ..\plugin_openweater3.py:5861
 msgid "Sonos IP"
