@@ -71,28 +71,18 @@ class ABMCustomMixImporterScreen(Setup):
 		</screen>"""
 
 	def __init__(self, session, setup, plugin=None, menu_path=None, PluginLanguageDomain=None):
-		try:
-			Setup.__init__(self, session, setup, plugin, menu_path, PluginLanguageDomain)
-		except TypeError:
-			Setup.__init__(self, session, setup, plugin)
-
-		self.skinName = ["ABMCustomMixImporterScreen", "Setup4buttons"]
-
-		self["actions2"] = ActionMap(["SetupActions", "ColorActions", "MenuActions"], {
-			"ok": self.keySave,
-			"cancel": self.keyCancel,
-			"menu": self.keyCancel,
-			"red": self.keyCancel,
-			"green": self.keySave,
+		self["actions2"] = ActionMap(["ColorActions"], {
 			"yellow": self.keyGo,
 			"blue": self.keyDelete
 		}, -2)
 
-		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText(_("Save setup"))
 		self["key_yellow"] = StaticText(_("Fetch file"))
 		self["key_blue"] = StaticText()
 
+		Setup.__init__(self, session, setup=setup, plugin=plugin, PluginLanguageDomain=PluginLanguageDomain)
+
+		self.skinName = ["ABMCustomMixImporterScreen"]
 		self.onLayoutFinish.append(self.updatebuttontext)
 
 	def updatebuttontext(self):
@@ -106,29 +96,9 @@ class ABMCustomMixImporterScreen(Setup):
 			os.remove(str(ABMpath) + str(mixes[config.plugins.abmImporter.mix.value]["provider"]) + str("_CustomMix.xml"))
 		self.updatebuttontext()
 
-	def keySave(self):
-		self.saveConfig()
-		self.close()
-
 	def keyGo(self):
-		self.saveConfig()
+		self.saveAll()
 		self.startImporter()
-
-	def saveConfig(self):
-		config.plugins.abmImporter.save()
-		configfile.save()
-
-	def keyCancel(self):
-		if self["config"].isChanged():
-			self.session.openWithCallback(self.cancelCallback, MessageBox, _("Really close without saving settings?"))
-		else:
-			self.cancelCallback(True)
-
-	def cancelCallback(self, answer):
-		if answer:
-			for x in self["config"].list:
-				x[1].cancel()
-			self.close(False)
 
 	def startImporter(self):
 		self.session.openWithCallback(self.startImporterCallback, ABMCustomMixImporter)
@@ -333,8 +303,7 @@ def pluginManualStart(menuid, **kwargs):
 
 
 def ABMCustomMixImporterMain(session, **kwargs):
-	menu_path = "%s / %s / %s" % (_('Main menu'), _('Setup'), _('Service searching'))
-	session.open(ABMCustomMixImporterScreen, 'abmcustommiximporter', 'SystemPlugins/ABMCustomMixImporter', menu_path, PluginLanguageDomain)
+	session.open(ABMCustomMixImporterScreen, 'abmcustommiximporter', 'SystemPlugins/ABMCustomMixImporter', PluginLanguageDomain)
 
 
 def Plugins(**kwargs):
