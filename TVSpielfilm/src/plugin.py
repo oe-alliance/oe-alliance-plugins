@@ -140,7 +140,7 @@ def showPic(pixmap, picpath):
 		pixmap.show()
 
 
-def getEPGText():
+def getEPGtext():
 	try:
 		NOEPGTIME = 'Noch keine EPG Informationen verfügbar\n\nEPG Vorschauzeit: %s Tage\nEPG Vorhaltezeit: %s Stunden' % (str(config.epg.maxdays), str(config.epg.histminutes))
 		return NOEPGTIME
@@ -1316,7 +1316,7 @@ class TVSTippsView(TVSBaseScreen):
 						epgcache = eEPGCache.getInstance()
 						event = epgcache.startTimeQuery(eServiceReference(sref), start)
 						if event == -1:
-							self.EPGText = getEPGText()
+							self.EPGtext = getEPGtext()
 						else:
 							event = epgcache.getNextTimeEntry()
 							self.EPGtext = event.getEventName()
@@ -1330,7 +1330,7 @@ class TVSTippsView(TVSBaseScreen):
 							if dur:
 								self.EPGtext += '\n\n%s' % dur
 					except Exception:
-						self.EPGText = getEPGText()
+						self.EPGtext = getEPGtext()
 				else:
 					self.EPGtext = NOEPG
 				self.EPGtext += '\n%s' % self.getFill(channel)
@@ -2013,7 +2013,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 						epgcache = eEPGCache.getInstance()
 						event = epgcache.startTimeQuery(eServiceReference(sref), start)
 						if event == -1:
-							self.EPGText = getEPGText()
+							self.EPGtext = getEPGtext()
 						else:
 							event = epgcache.getNextTimeEntry()
 							self.EPGtext = event.getEventName()
@@ -2027,7 +2027,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 							if dur:
 								self.EPGtext += '\n\n%s' % dur
 					except Exception:
-						self.EPGText = getEPGText()
+						self.EPGtext = getEPGtext()
 				else:
 					self.EPGtext = NOEPG
 				self.EPGtext += '\n%s' % self.getFill(channel)
@@ -2633,7 +2633,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 						epgcache = eEPGCache.getInstance()
 						event = epgcache.startTimeQuery(eServiceReference(sref), start)
 						if event == -1:
-							self.EPGText = getEPGText()
+							self.EPGtext = getEPGtext()
 						else:
 							event = epgcache.getNextTimeEntry()
 							self.EPGtext = event.getEventName()
@@ -2647,7 +2647,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 							if dur:
 								self.EPGtext += '\n\n%s' % dur
 					except Exception:
-						self.EPGText = getEPGText()
+						self.EPGtext = getEPGtext()
 				else:
 					self.EPGtext = NOEPG
 				self.EPGtext += '\n%s' % self.getFill(channel)
@@ -4905,7 +4905,7 @@ class TVSTipps(TVSAllScreen):
 			self.showLabels(self.count)
 
 	def showLabels(self, idx=0):
-			self['label'].setText(f"Tipp des Tages ({idx + 1} / {len(self.tippstitle)})")
+			self['label'].setText(f"Tipp des Tages ({idx + 1}/{len(self.tippstitle)})")
 			self['label'].show()
 			if self.tippstitle:
 				self['label2'].setText(self.tippstitle[idx])
@@ -5566,7 +5566,7 @@ class TVSHeuteView(TVSBaseScreen):
 						epgcache = eEPGCache.getInstance()
 						event = epgcache.startTimeQuery(eServiceReference(sref), start)
 						if event == -1:
-							self.EPGText = getEPGText()
+							self.EPGtext = getEPGtext()
 						else:
 							event = epgcache.getNextTimeEntry()
 							self.EPGtext = event.getEventName()
@@ -5580,7 +5580,7 @@ class TVSHeuteView(TVSBaseScreen):
 							if dur:
 								self.EPGtext += '\n\n%s' % dur
 					except Exception:
-						self.EPGText = getEPGText()
+						self.EPGtext = getEPGtext()
 
 				else:
 					self.EPGtext = NOEPG
