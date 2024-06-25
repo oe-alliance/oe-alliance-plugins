@@ -1685,10 +1685,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self.link1 = link
 		self.link2 = link
 		self.standalone = standalone
-		self.jetzt = False
-		self.gleich = False
-		self.abends = False
-		self.nachts = False
+		self.jetzt, self.gleich, self.abends, self.nachts = False, False, False, False
 		self.date = date.today()
 		self.finishedTimerMode = 1
 		self.index = 0
@@ -2047,14 +2044,10 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 			self['waiting'].startBlinking()
 			self['waiting'].show()
 			if self.jetzt:
-				self.jetzt = False
-				self.gleich = True
+				self.jetzt, self.gleich = False, True
 				link = "%s/tv-programm/sendungen/?page=1&order=time&time=shortly" % self.baseurl
 			else:
-				self.jetzt = True
-				self.gleich = False
-				self.abends = False
-				self.nachts = False
+				self.jetzt, self.gleich, self.abends, self.nachts = True, False, False, False
 				link = "%s/tv-programm/sendungen/jetzt.html" % self.baseurl
 			callInThread(self.getPage, link, self.makeTVJetztView, self.downloadError)
 
@@ -4777,7 +4770,6 @@ class TVSTipps(TVSAllScreen):
 		self['2_zapdown'] = Pixmap()
 		self['label'] = Label()
 		self['label2'] = Label()
-		self['label2a'] = Label("Hallo")
 		self['label3'] = Label()
 		self['label4'] = Label()
 		self['label5'] = Label()
@@ -4788,7 +4780,6 @@ class TVSTipps(TVSAllScreen):
 		self['iconnew'].hide()
 		self['label'].hide()
 		self['label2'].hide()
-		self['label2a'].hide()
 		self['label3'].hide()
 		self['label4'].hide()
 		self['label5'].hide()
@@ -4910,7 +4901,6 @@ class TVSTipps(TVSAllScreen):
 			if self.tippstitle:
 				self['label2'].setText(self.tippstitle[idx])
 				self['label2'].show()
-				self['label2a'].show()
 #			if self.tippsrating:  # not used for the moment
 #			self['label3'].setText(self.tippsrating[idx]) # not used for the moment
 #			self['label3'].show()
@@ -5172,11 +5162,7 @@ class TVSHeuteView(TVSBaseScreen):
 		one_day = timedelta(days=1)
 		self.nextdate = self.date + one_day
 		self.weekday = makeWeekDay(self.date.weekday())
-		self.morgens = False
-		self.mittags = False
-		self.vorabend = False
-		self.abends = True
-		self.nachts = False
+		self.morgens, self.mittags, self.vorabend, self.abends, self.nachts = False, False, False, True, False
 		if config.plugins.tvspielfilm.primetime.value == 'now':
 			self.abends = False
 			hour = datetime.now().hour
@@ -5592,25 +5578,20 @@ class TVSHeuteView(TVSBaseScreen):
 			self['textpage'].show()
 		elif self.current != 'postview' and self.ready and not self.search:
 			self.oldindex = 0
-			self.morgens = False
-			self.mittags = False
-			self.vorabend = False
-			self.abends = False
-			self.nachts = False
 			if self.abends:
-				self.nachts = True
+				self.morgens, self.mittags, self.vorabend, self.abends, self.nachts = False, False, False, False, True
 				self.makeTVHeuteView()
 			elif self.nachts:
-				self.morgens = True
+				self.morgens, self.mittags, self.vorabend, self.abends, self.nachts = True, False, False, False, False
 				self.makeTVHeuteView()
 			elif self.morgens:
-				self.mittags = True
+				self.morgens, self.mittags, self.vorabend, self.abends, self.nachts = False, True, False, False, False
 				self.makeTVHeuteView()
 			elif self.mittags:
-				self.vorabend = True
+				self.morgens, self.mittags, self.vorabend, self.abends, self.nachts = False, False, True, False, False
 				self.makeTVHeuteView()
 			elif self.vorabend:
-				self.abends = True
+				self.morgens, self.mittags, self.vorabend, self.abends, self.nachts = False, False, False, True, False
 				self.makeTVHeuteView()
 
 	def red(self):

@@ -26,7 +26,6 @@
 		<widget name="picture" position="0,0" size="400,220" alphatest="blend" zPosition="1" />
 		<widget name="label" position="400,100" size="342,30" font="{tvsfont};21" foregroundColor="#00000000" backgroundColor="green" halign="left" zPosition="1" />
 		<widget name="label2" position="400,130" size="300,88" font="{tvsfont};22" foregroundColor="blue" backgroundColor="#00ffffff" halign="left" zPosition="2" />
-		<eLabel name="label2a" position="700,130" size="45,88" backgroundColor="#00ffffff" zPosition="1" />
 		<widget name="label3" position="400,195" size="342,30" font="{tvsfont};18" foregroundColor="#00333333" backgroundColor="#00ffffff" transparent="1" halign="left" zPosition="2" />
 		<widget name="label4" position="400,2" size="150,46" font="{tvsfont};22" foregroundColor="#00ffffff" backgroundColor="#00CC4942" halign="center" valign="center" zPosition="2" />
 		<widget name="label5" position="400,52" size="150,46" font="{tvsfont};18" foregroundColor="#00CC4942" backgroundColor="#00ffffff" halign="center" valign="center" zPosition="2" />
