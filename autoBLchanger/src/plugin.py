@@ -78,7 +78,7 @@ def autoChangeBootLogo():
 		pass
 
 
-class autoBLchanger(Screen, ConfigListScreen):  # /usr/lib/enigma2/python/Plugins/Extensions/autoBLchanger/images/
+class autoBLchanger(ConfigListScreen, Screen):  # /usr/lib/enigma2/python/Plugins/Extensions/autoBLchanger/images/
 	skin = """
 	<screen name="autoBLchanger" position="center,center" size="650,715" title="{title_ver}" flags="wfNoBorder" backgroundColor="#00000000">
 		<ePixmap pixmap="{path}images/back.png" position="0,0" size="650,715" alphatest="off" transparent="0" zPosition="-1" />

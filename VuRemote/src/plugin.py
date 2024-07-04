@@ -58,7 +58,7 @@ class RemoteControlCodeInit:
 			return False
 
 
-class RemoteControlCode(Screen, ConfigListScreen, RemoteControlCodeInit):
+class RemoteControlCode(ConfigListScreen, Screen, RemoteControlCodeInit):
 	skin = """
 		<screen position="center,center" size="400,250" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />

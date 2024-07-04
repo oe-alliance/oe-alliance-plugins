@@ -22,7 +22,7 @@ config.plugins.fansetups.fanontime = ConfigInteger(default=5, limits=(1, 100))
 config.plugins.fansetups.fanofftime = ConfigInteger(default=60, limits=(1, 100))
 
 
-class FanSetupConfiguration(Screen, ConfigListScreen):
+class FanSetupConfiguration(ConfigListScreen, Screen):
 	skin = """
 		<screen name="FanSetupConfiguration" position="center,center" size="560,300" title="Standbymode FanSetup settings" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />

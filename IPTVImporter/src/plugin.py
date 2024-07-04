@@ -73,7 +73,7 @@ config.plugins.iptvimport.showinmenu = ConfigYesNo(default=True)
 #TODO : add debug setting for print output
 
 
-class IPTVImporter(Screen, ConfigListScreen):
+class IPTVImporter(ConfigListScreen, Screen):
 
     #TODO : update Metrix skin
     if getDesktop(0).size().width() >= 1280:

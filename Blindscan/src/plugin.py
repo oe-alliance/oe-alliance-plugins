@@ -139,7 +139,7 @@ config.blindscan.filter_off_adjacent_satellites = ConfigSelection(default=defaul
 	("3", _("up to 3 degrees"))])
 
 
-class BlindscanState(Screen, ConfigListScreen):
+class BlindscanState(ConfigListScreen, Screen):
 	skin = """
 	<screen position="center,center" size="820,576" title="Satellite Blindscan">
 		<widget name="progress" position="10,10" size="800,80" font="Regular;20"/>

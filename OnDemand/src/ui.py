@@ -44,7 +44,7 @@ from .CommonModules import MainMenuList
 ##########################################################################
 
 
-class OnDemandScreenSetup(Screen, ConfigListScreen):
+class OnDemandScreenSetup(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("OnDemand Configuration"))
@@ -109,7 +109,7 @@ class OnDemandScreenSetup(Screen, ConfigListScreen):
 		self.close()
 
 
-class OnDemand_Screen(Screen, ConfigListScreen):
+class OnDemand_Screen(ConfigListScreen, Screen):
 	skin = """
 		<screen position="e-203,0" size="203,e-0" backgroundColor="#ffffffff" flags="wfNoBorder" >
 			<widget name="arrowup" pixmaps="/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/top.png,/usr/lib/enigma2/python/Plugins/Extensions/OnDemand/icons/arrow-up.png" position="e-203,0" size="203,25" alphatest="on" />

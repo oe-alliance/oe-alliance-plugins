@@ -50,7 +50,7 @@ else:
 	config.plugins.transcodingsetup.interlaced = ConfigSelection(default="0", choices=[("1", _("Yes")), ("0", _("No"))])
 
 
-class TranscodingSetup(Screen, ConfigListScreen):
+class TranscodingSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen name="TranscodingSetup" position="center,center" size="900,500">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />

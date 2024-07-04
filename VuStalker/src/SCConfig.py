@@ -13,7 +13,7 @@ from .SCInfo import scthreads
 from .stalkerclient import DEFAULT_URL, DEFAULT_MAC, SCThread, stalker
 
 
-class StalkerClient_SetupScreen(Screen, ConfigListScreen):
+class StalkerClient_SetupScreen(ConfigListScreen, Screen):
 	skin_default_1080p = """
 	<screen name="stalkerclientsetup" position="center,center" size="900,470">
 		<ePixmap pixmap="skin_default/buttons/red.png" position="48,20" size="140,40" alphatest="on" />

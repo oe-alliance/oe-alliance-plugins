@@ -144,7 +144,7 @@ def setAudioEffectConfigs():
 			setConfigValue(AUDIOEFFECT_PROC_PATH["3D_SURROUND_SPEAKER_POSITION"], _3DSpeakerPosition)
 
 
-class AudioEffect(Screen, ConfigListScreen):
+class AudioEffect(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="540,300">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="30,10" size="140,40" alphatest="on" />

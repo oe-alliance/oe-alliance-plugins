@@ -306,7 +306,7 @@ satipdiscovery = SATIPDiscovery()
 SATIP_CONF_CHANGED = False
 
 
-class SATIPTuner(Screen, ConfigListScreen):
+class SATIPTuner(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="590,370">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="40,0" size="140,40" alphatest="on" />

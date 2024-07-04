@@ -120,7 +120,7 @@ def sleepDuringStandby():  #im Standby schlafen
 
 #################################  SCREEN ###################################
 
-class WarnCfg (Screen, ConfigListScreen):
+class WarnCfg (ConfigListScreen, Screen):
 	skin = """<screen position="center,center" size="*scrSize*" backgroundColor="#11111111"  flags="wfNoBorder"  title=" ">
 			<eLabel  position="*linePos1*" backgroundColor="#112233" size="*bottomBkSize*" />
 			<eLabel  position="0,0"  size="*titleSize*" backgroundColor="#112233" zPosition="10"/>

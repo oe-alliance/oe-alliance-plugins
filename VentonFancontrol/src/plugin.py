@@ -9,7 +9,7 @@ config.plugins.FanSetup = ConfigSubsection()
 config.plugins.FanSetup.mode = ConfigSelection(choices=modelist, default="3")
 
 
-class FanSetupScreen(Screen, ConfigListScreen):
+class FanSetupScreen(ConfigListScreen, Screen):
 	skin = """
 	<screen position="center,center" size="400,200" title="Fan setup">
 		<widget name="config" position="10,10" size="350,150" />

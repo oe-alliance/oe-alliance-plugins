@@ -23,7 +23,7 @@ config.plugins.witaisttsetup.serverAccessToken = ConfigText(fixed_size=False, vi
 g_session = None
 
 
-class WitAiSttSetup(Screen, ConfigListScreen):
+class WitAiSttSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="550,350">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="55,10" size="140,40" alphatest="on" />

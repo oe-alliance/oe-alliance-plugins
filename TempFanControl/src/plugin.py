@@ -23,7 +23,7 @@ except:
 	BRAND = getBrandOEM()
 
 
-class TempFanControl(Screen, ConfigListScreen):
+class TempFanControl(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="570,420" title="Fan Control" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="0,0" size="140,40" alphatest="on" />

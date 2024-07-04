@@ -876,7 +876,7 @@ class PiconManagerFolderScreen(Screen):
 		self["media"].setText(currFolder)
 
 
-class pm_conf(Screen, ConfigListScreen, HelpableScreen):
+class pm_conf(ConfigListScreen, Screen, HelpableScreen):
 	skin = """
 		<screen position="center,center" size="600,480" title="Select Color" >
 		<widget name="config" position="10,5" size="580,430" scrollbarMode="showOnDemand" />

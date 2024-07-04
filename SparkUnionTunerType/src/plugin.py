@@ -13,7 +13,7 @@ option = 'options spark7162 UnionTunerType='
 filename = '/etc/modprobe.d/_spark7162.conf'
 
 
-class UnionTunerType(Screen, ConfigListScreen):
+class UnionTunerType(ConfigListScreen, Screen):
 
     def __init__(self, session):
         self.session = session

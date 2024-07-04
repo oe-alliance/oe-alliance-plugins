@@ -345,7 +345,7 @@ class TranscodingSetupInit:
 			self.pluginsetup.showMessage(msg, msgType)
 
 
-class TranscodingSetup(Screen, ConfigListScreen):
+class TranscodingSetup(ConfigListScreen, Screen):
 	skin = """
 		<screen name="TranscodingSetup" position="center,center" size="600,450">
 			<ePixmap pixmap="skin_default/buttons/red.png" position="5,0" size="140,40" alphatest="on" />

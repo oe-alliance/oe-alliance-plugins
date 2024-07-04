@@ -124,7 +124,7 @@ class BrowserPositionSetting:
 		return (self._left, self._width, self._top, self._height)
 
 
-class BrowserPositionWindow(Screen, ConfigListScreen):
+class BrowserPositionWindow(ConfigListScreen, Screen):
 	skin = """
 		<screen position="0,0" size="%d,%d" title="Browser Position Setup" backgroundColor="#27d8dee2" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="%d,%d" size="140,40" alphatest="on" />

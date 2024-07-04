@@ -277,7 +277,7 @@ class __LottoTippConfig(object):
 lottoTippConfig = __LottoTippConfig()
 
 
-class LottoTippConfigScreen(Screen, ConfigListScreen):
+class LottoTippConfigScreen(ConfigListScreen, Screen):
 	def __init__(self, session, tipp):
 		self.skin = readSkin("LottoTippConfigScreen")
 		Screen.__init__(self, session)

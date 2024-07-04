@@ -74,7 +74,7 @@ apModeConfig.gateway = ConfigIP(default=[0, 0, 0, 0])
 apModeConfig.nameserver = ConfigIP(default=[0, 0, 0, 0])
 
 
-class WirelessAccessPoint(Screen, ConfigListScreen):
+class WirelessAccessPoint(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="590,450" title="Wireless Access Point" >
 		<ePixmap pixmap="skin_default/buttons/red.png" position="20,0" size="140,40" alphatest="on" />

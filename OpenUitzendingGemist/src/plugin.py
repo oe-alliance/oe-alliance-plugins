@@ -334,7 +334,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.session.open(MessageBox, _(" Media Info\nName = " + name + '\nService = ' + refstr), MessageBox.TYPE_INFO, timeout=20, simple=True)
 
 
-class OpenUgConfigureScreen(Screen, ConfigListScreen):
+class OpenUgConfigureScreen(ConfigListScreen, Screen):
 	def __init__(self, session):
 		self.skin = """
 				<screen position="center,center" size="400,300" title="">

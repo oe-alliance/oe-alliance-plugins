@@ -678,7 +678,7 @@ class FUFilebrowser(Screen):
 #		None
 
 
-class FirmwareUpgrade(Screen, ConfigListScreen):
+class FirmwareUpgrade(ConfigListScreen, Screen):
 	skin = """
 		<screen position="center,center" size="560,175" title="Firmware Upgrade" >
 			<ePixmap pixmap="skin_default/buttons/red.png" position="110,10" size="140,40" alphatest="blend" />

@@ -47,7 +47,7 @@ elif temp == 3:
 	config.plugins.RCSetup.mode = ConfigSelection(choices=modelist, default="3")
 
 
-class RCSetupScreen(Screen, ConfigListScreen):
+class RCSetupScreen(ConfigListScreen, Screen):
 	skin = """
 	<screen position="c-200,c-100" size="400,200" title="Remote setup">
 		<widget name="config" position="c-175,c-75" size="350,150" />

@@ -86,7 +86,7 @@ config.plugins.FanSetup.systemtemp = ConfigInteger(40, limits=(15, 80))
 config.plugins.FanSetup.systempwatch = ConfigSelection(choices=syswatchlist, default="off")
 
 
-class FanSetupScreen(Screen, ConfigListScreen):
+class FanSetupScreen(ConfigListScreen, Screen):
 	global PLUGIN_VERSION
 	skin = """
 		<screen position="center,center" size="550,335" >
