@@ -48,7 +48,7 @@ def createDroplists(output):
 	global SORTDICT
 	global SPRITDICT
 	global RADIUSDICT
-	sortliste = [("p", "€"), ("km", "km"), ("abc", "A-Z")]
+	sortliste = [("p", "\u20AC"), ("km", "km"), ("abc", "A-Z")]
 	SORTDICT = dict(sortliste)
 	startpos = output.find('<span>Spritsorte</span>')
 	endpos = output.find('<div class="dropdown radius">')
@@ -185,11 +185,11 @@ class clevertankenMain(Screen):
 		self["frameBactive"] = StaticText()
 		self["headline_A"] = StaticText()
 		self["headline_B"] = StaticText()
-		self["ukey_red"] = StaticText(f"kurz | Sortierung: {SORTDICT.get(self.sortA, "€")}")
+		self["ukey_red"] = StaticText(f"kurz | Sortierung: {SORTDICT.get(self.sortA, "\u20AC")}")
 		self["dkey_red"] = StaticText(f"lang | Sprit: {SPRITDICT.get(self.spritA, "SuperPlus")}")
 		self["ukey_green"] = StaticText(f"kurz | Radius: {RADIUSDICT.get(self.radiusA)}")
 		self["dkey_green"] = StaticText()
-		self["ukey_yellow"] = StaticText(f"kurz | Sortierung: {SORTDICT.get(self.sortB, "€")}")
+		self["ukey_yellow"] = StaticText(f"kurz | Sortierung: {SORTDICT.get(self.sortB, "\u20AC")}")
 		self["dkey_yellow"] = StaticText(f"lang | Sprit: {SPRITDICT.get(self.spritB, "SuperPlus")}")
 		self["ukey_blue"] = StaticText(f"kurz | Radius: {RADIUSDICT.get(self.radiusB)}")
 		self["dkey_blue"] = StaticText()
@@ -290,13 +290,13 @@ class clevertankenMain(Screen):
 		if frame == "A":
 			zipname = config.plugins.clevertanken.cityAzipname.value
 			self["headline_A"].setText(f"Hauptort: {zipname} | {len(identlist)} Tankstellen")
-			self["ukey_red"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortA, "€")}")
+			self["ukey_red"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortA, "\u20AC")}")
 			self["dkey_red"].setText(f"lang | Sprit: {SPRITDICT.get(self.spritA, "SuperPlus")}")
 			self["ukey_green"].setText(f"kurz | Radius: {RADIUSDICT.get(self.radiusA, "5 km")}")
 		elif frame == "B":
 			zipname = config.plugins.clevertanken.cityBzipname.value
 			self["headline_B"].setText(f"Zweitort: {zipname} | {len(identlist)} Tankstellen")
-			self["ukey_yellow"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortB, "€")}")
+			self["ukey_yellow"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortB, "\u20AC")}")
 			self["dkey_yellow"].setText(f"lang | Sprit: {SPRITDICT.get(self.spritB, "SuperPlus")}")
 			self["ukey_blue"].setText(f"kurz | Radius: {RADIUSDICT.get(self.radiusB, "SuperPlus")}")
 		self.refreshInfo()
