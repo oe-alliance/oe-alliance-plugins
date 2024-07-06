@@ -644,5 +644,9 @@ autoBLchanger/src/logos/Makefile
 LottoExtended/Makefile
 LottoExtended/src/Makefile
 
+clever-tanken/Makefile
+clever-tanken/src/Makefile
+clever-tanken/src/pic/Makefile
+
 ])
 AC_OUTPUT

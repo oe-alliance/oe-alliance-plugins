@@ -1,0 +1,12 @@
+<setupxml>
+	<setup key="clevertankenconfig" title="clever-tanken.de Setup">
+		<item level="0" text="Hauptort Name/Ortsteil:" description="Name des Hauptorts angeben, dabei UNBEDINGT über die Hauptortsuche gehen!">config.plugins.clevertanken.cityAzipname</item>
+		<item level="0" text="Hauptort Umkreis/Radius:" description="Maximale Entferung Luftlinie der Tankstellen zum Hauptort angeben.">config.plugins.clevertanken.radiusA</item>
+		<item level="0" text="Hauptort Kraftstoff:" description="Gewünschte Kraftstoffsorte des Hauptorts auswählen.">config.plugins.clevertanken.spritA</item>
+		<item level="0" text="Zweitort Name/Ortsteil:" description="Name des Zweitorts angeben, dabei UNBEDINGT über die Zweitortsuche gehen!">config.plugins.clevertanken.cityBzipname</item>
+		<item level="0" text="Zweitort Umkreis/Radius:" description="Maximale Entferung Luftlinie der Tankstellen zum Zweitort angeben.">config.plugins.clevertanken.radiusB</item>
+		<item level="0" text="Zweitort Kraftstoff" description="Gewünschte Kraftstoffsorte des Zweitorts auswählen.">config.plugins.clevertanken.spritB</item>
+		<item level="0" text="Anzahl der darzustellenden Tankstellen" description="Gewünschte Anzahl der dargestellten Tankstellen auswählen.">config.plugins.clevertanken.maxentries</item>
+		<item level="0" text="Startanzeige des rechten Rahmens" description="Gewünschte Startanzeige für den rechten Rahmem auswählen.">config.plugins.clevertanken.startframeB</item>
+	</setup>
+</setupxml>
