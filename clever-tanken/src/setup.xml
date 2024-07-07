@@ -1,5 +1,6 @@
 <setupxml>
 	<setup key="clevertankenconfig" title="clever-tanken.de Setup">
+		<item level="0" text="Anzahl der gefunden Städte" description="Gewünschte Anzahl der Städte in der Städtesuche.">config.plugins.clevertanken.maxcities</item>
 		<item level="0" text="Hauptort Name/Ortsteil:" description="Name des Hauptorts angeben, dabei UNBEDINGT über die Hauptortsuche gehen!">config.plugins.clevertanken.cityAzipname</item>
 		<item level="0" text="Hauptort Umkreis/Radius:" description="Maximale Entferung Luftlinie der Tankstellen zum Hauptort angeben.">config.plugins.clevertanken.radiusA</item>
 		<item level="0" text="Hauptort Kraftstoff:" description="Gewünschte Kraftstoffsorte des Hauptorts auswählen.">config.plugins.clevertanken.spritA</item>

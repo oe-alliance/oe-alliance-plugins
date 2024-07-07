@@ -9,7 +9,7 @@ from Tools.BoundFunction import boundFunction
 # ENIGMA IMPORTS
 from enigma import getDesktop
 from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.config import config, configfile, ConfigSelection, ConfigSubsection, ConfigText
+from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText
 from Components.Sources.StaticText import StaticText
 from Components.Sources.List import List
 from Plugins.Plugin import PluginDescriptor
@@ -59,6 +59,7 @@ def createDroplists(output):
 	radiusliste = findall(r'<a class="dropdown-item" value="(.*?)" href="#">(.*?)</a>', output[startpos:endpos])
 	RADIUSDICT = dict(radiusliste)
 	config.plugins.clevertanken = ConfigSubsection()
+	config.plugins.clevertanken.maxcities = ConfigSelection(default=10, choices=[(10, "max. 10 Städte"), (20, "max. 20 Städte"), (30, "max. 30 Städte"), (40, "max. 40 Städte"), (50, "max. 50 Städte")])
 	config.plugins.clevertanken.cityAzipname = ConfigText(default="10117 Berlin", fixed_size=False)
 	config.plugins.clevertanken.cityAgeodata = ConfigText(default=(52.5170365161785, 13.3888598914667), fixed_size=False)
 	config.plugins.clevertanken.radiusA = ConfigSelection(default="5", choices=radiusliste)
@@ -92,15 +93,15 @@ class clevertankenMain(Screen):
 		<widget source="frameAactive" render="Label" conditional="frameAactive" position="0,120" size="921,810" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="frame_A" render="Listbox" position="6,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="f5f5f5" scrollbarBorderColor="#7e7e7e">
+		<widget source="frame_A" render="Listbox" position="6,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
 				MultiContentEntryText(pos=(0,0), size=(99,114), font=0, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=1),  # price main
 				MultiContentEntryText(pos=(102,9), size=(30,60), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # price suffix
-				MultiContentEntryText(pos=(138,3), size=(120,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=3),  # changetype
-				MultiContentEntryText(pos=(138,39), size=(120,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=4),  # changedate
-				MultiContentEntryText(pos=(138,75), size=(120,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=5),  # changedurance
+				MultiContentEntryText(pos=(138,3), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=3),  # changetype
+				MultiContentEntryText(pos=(138,39), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=4),  # changedate
+				MultiContentEntryText(pos=(138,75), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=5),  # changedurance
 				MultiContentEntryText(pos=(315,0), size=(591,39), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=6),  # name
 				MultiContentEntryText(pos=(315,39), size=(540,36), font=2, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=7),  # street
 				MultiContentEntryText(pos=(315,75), size=(540,36), font=2, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=8),  # zipcode
@@ -117,15 +118,15 @@ class clevertankenMain(Screen):
 		<widget source="frameBactive" render="Label" conditional="frameBactive" position="939,120" size="921,810" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="frame_B" render="Listbox" position="945,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="f5f5f5" scrollbarBorderColor="#7e7e7e">
+		<widget source="frame_B" render="Listbox" position="945,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
 				MultiContentEntryText(pos=(0,0), size=(99,114), font=0, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=1),  # price main
 				MultiContentEntryText(pos=(102,9), size=(30,60), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # price suffix
-				MultiContentEntryText(pos=(138,3), size=(120,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=3),  # changetype
-				MultiContentEntryText(pos=(138,39), size=(120,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=4),  # changedate
-				MultiContentEntryText(pos=(138,75), size=(120,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=5),  # changedurance
+				MultiContentEntryText(pos=(138,3), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=3),  # changetype
+				MultiContentEntryText(pos=(138,39), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=4),  # changedate
+				MultiContentEntryText(pos=(138,75), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=5),  # changedurance
 				MultiContentEntryText(pos=(315,0), size=(591,39), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=6),  # name
 				MultiContentEntryText(pos=(315,39), size=(540,36), font=2, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=7),  # street
 				MultiContentEntryText(pos=(315,75), size=(540,36), font=2, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=8),  # zipcode
@@ -139,16 +140,16 @@ class clevertankenMain(Screen):
 		</widget>
 		<eLabel name="red" position="15,951" size="9,68" backgroundColor="red" zPosition="1" />
 		<eLabel name="green" position="444,951" size="9,68" backgroundColor="green" zPosition="1" />
-		<eLabel name="yellow" position="915,951" size="9,68" backgroundColor="yellow" zPosition="1" />
-		<eLabel name="blue" position="1374,951" size="9,68" backgroundColor="blue" zPosition="1" />
+		<eLabel name="yellow" position="960,951" size="9,68" backgroundColor="yellow" zPosition="1" />
+		<eLabel name="blue" position="1419,951" size="9,68" backgroundColor="blue" zPosition="1" />
 		<widget source="ukey_red" render="Label" position="36,942" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
 		<widget source="dkey_red" render="Label" position="36,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
 		<widget source="ukey_green" render="Label" position="465,942" size="471,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
 		<widget source="dkey_green" render="Label" position="465,987" size="471,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
-		<widget source="ukey_yellow" render="Label" position="936,942" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
-		<widget source="dkey_yellow" render="Label" position="936,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
-		<widget source="ukey_blue" render="Label" position="1395,942" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
-		<widget source="dkey_blue" render="Label" position="1395,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
+		<widget source="ukey_yellow" render="Label" position="975,942" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
+		<widget source="dkey_yellow" render="Label" position="975,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
+		<widget source="ukey_blue" render="Label" position="1434,942" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
+		<widget source="dkey_blue" render="Label" position="1434,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
 		<eLabel name="line" position="6,240" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="6,354" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="6,468" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
@@ -233,9 +234,12 @@ class clevertankenMain(Screen):
 		self.radiusB = config.plugins.clevertanken.radiusB.value
 
 	def refreshFrameA(self):
+		self["frame_A"].updateList([])
 		callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
 
 	def refreshFrameB(self):
+		self.refreshBbuttons()
+		self["frame_B"].updateList([])
 		if self.frameBmode == "Z":
 			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
 		else:
@@ -269,14 +273,20 @@ class clevertankenMain(Screen):
 				break
 			ident = eintrag[:eintrag.find('"')]
 			identlist.append(ident)
-			prices = self.searchOneValue(r'<div class="price-text price text-color-ct-blue">\s+(.*?)\s+</div>', eintrag, " ", flag_S=True)
-			if prices and prices[0] != " ":
+			prices = self.searchOneValue(r'<div class="price-text price text-color-ct-blue">\s+(.*?)\s+</div>', eintrag, "", flag_S=True)
+			if prices and prices[0]:
 				price = prices.replace("</sup>", "").split("<sup>") if prices and prices[0] != " " else ("nicht\ngeöffnet", "")
 				change = findall(r'<span class="price-changed">(.*?)\s*</span>', eintrag, S)
 				cnglen = len(change) if change else 0
 				pcngtype = change[0].replace("<br>", "") if cnglen > 0 else "unbekannt"
 				pcngdate = change[1].replace("<br>", "") if cnglen > 1 else "unbekannt"
 				pcngdur = change[2].replace("<br>", "") if cnglen > 2 else "unbekannt"
+				if pcngdate == "unbekannt" and pcngdur == "unbekannt":  # use alternative method for older entry dates
+					part = pcngtype.split(" ")
+					if len(part) > 3:
+						pcngtype = part[0]
+						pcngdate = part[2]
+						pcngdur = part[3].replace("&nbsp;", " ")
 			else:
 				price, pcngtype, pcngdate, pcngdur = (("zu", ""), "Tankstelle", "momentan", "geschlossen")
 			name = self.searchOneValue(r'<span class="fuel-station-location-name">(.*?)</span>', eintrag, "kein Name gefunden")
@@ -290,15 +300,11 @@ class clevertankenMain(Screen):
 		if frame == "A":
 			zipname = config.plugins.clevertanken.cityAzipname.value
 			self["headline_A"].setText(f"Hauptort: {zipname} | {len(identlist)} Tankstellen")
-			self["ukey_red"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortA, '€')}")
-			self["dkey_red"].setText(f"lang | Sprit: {SPRITDICT.get(self.spritA, 'SuperPlus')}")
-			self["ukey_green"].setText(f"kurz | Radius: {RADIUSDICT.get(self.radiusA, '5 km')}")
+			self.refreshAbuttons()
 		elif frame == "B":
 			zipname = config.plugins.clevertanken.cityBzipname.value
 			self["headline_B"].setText(f"Zweitort: {zipname} | {len(identlist)} Tankstellen")
-			self["ukey_yellow"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortB, '€')}")
-			self["dkey_yellow"].setText(f"lang | Sprit: {SPRITDICT.get(self.spritB, 'SuperPlus')}")
-			self["ukey_blue"].setText(f"kurz | Radius: {RADIUSDICT.get(self.radiusB, 'SuperPlus')}")
+			self.refreshBbuttons()
 		self.refreshInfo()
 
 	def makeTankenInfo(self, output):
@@ -377,6 +383,7 @@ class clevertankenMain(Screen):
 	def changeFavorites(self):
 		current = self[f"frame_{self.currframe}"].getCurrent()
 		if current:
+			self["frame_B"].updateList([])
 			callInThread(download, f"{BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.spritB}", boundFunction(self.makeTankenView, "B"))
 			ident = current[0]
 			if ident in self.favlist:
@@ -398,13 +405,17 @@ class clevertankenMain(Screen):
 			self.ready = False
 			keylist = list(SORTDICT.keys())
 			self.sortA = list(SORTDICT.keys())[(keylist.index(self.sortA) + 1) % len(keylist)]  # get next key in turn
+			self.refreshAbuttons()
+			self["frame_A"].updateList([])
 			callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
 
 	def turnSortB(self):
-		if self.ready:
+		if self.ready and self.frameBmode == "Z":
 			self.ready = False
 			keylist = list(SORTDICT.keys())
 			self.sortB = list(SORTDICT.keys())[(keylist.index(self.sortB) + 1) % len(keylist)]  # get next key in turn
+			self.refreshBbuttons()
+			self["frame_B"].updateList([])
 			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
 
 	def turnRadiusA(self):
@@ -412,13 +423,17 @@ class clevertankenMain(Screen):
 			self.ready = False
 			keylist = list(RADIUSDICT.keys())
 			self.radiusA = list(RADIUSDICT.keys())[(keylist.index(self.radiusA) + 1) % len(keylist)]  # get next key in turn
+			self.refreshAbuttons()
+			self["frame_A"].updateList([])
 			callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
 
 	def turnRadiusB(self):
-		if self.ready:
+		if self.ready and self.frameBmode == "Z":
 			self.ready = False
 			keylist = list(RADIUSDICT.keys())
 			self.radiusB = list(RADIUSDICT.keys())[(keylist.index(self.radiusB) + 1) % len(keylist)]  # get next key in turn
+			self.refreshBbuttons()
+			self["frame_B"].updateList([])
 			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
 
 	def turnSpritA(self):
@@ -426,14 +441,33 @@ class clevertankenMain(Screen):
 			self.ready = False
 			keylist = list(SPRITDICT.keys())
 			self.spritA = list(SPRITDICT.keys())[(keylist.index(self.spritA) + 1) % len(keylist)]  # get next key in turn
+			self.refreshAbuttons()
+			self["frame_A"].updateList([])
 			callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
 
 	def turnSpritB(self):
-		if self.ready:
+		if self.ready and self.frameBmode == "Z":
 			self.ready = False
 			keylist = list(SPRITDICT.keys())
 			self.spritB = list(SPRITDICT.keys())[(keylist.index(self.spritB) + 1) % len(keylist)]  # get next key in turn
+			self.refreshBbuttons()
+			self["frame_B"].updateList([])
 			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
+
+	def refreshAbuttons(self):
+			self["ukey_red"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortA, '€')}")
+			self["dkey_red"].setText(f"lang | Sprit: {SPRITDICT.get(self.spritA, 'SuperPlus')}")
+			self["ukey_green"].setText(f"kurz | Radius: {RADIUSDICT.get(self.radiusA, '5 km')}")
+
+	def refreshBbuttons(self):
+		if self.frameBmode == "Z":
+			self["ukey_yellow"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortB, '€')}")
+			self["dkey_yellow"].setText(f"lang | Sprit: {SPRITDICT.get(self.spritB, 'SuperPlus')}")
+			self["ukey_blue"].setText(f"kurz | Radius: {RADIUSDICT.get(self.radiusB, 'SuperPlus')}")
+		else:
+			self["ukey_yellow"].setText("")
+			self["dkey_yellow"].setText("")
+			self["ukey_blue"].setText("")
 
 	def down(self):
 		self[f"frame_{self.currframe}"].down()
@@ -504,7 +538,7 @@ class clevertankenMain(Screen):
 
 class tankenInfo(Screen):
 	skin = """
-	<screen name="tankenInfo" position="center,center" size="510,795" zPosition="2" flags="wfNoBorder" title="Tankstellendetails" >
+	<screen name="tankenInfo" position="center,center" size="510,795" zPosition="2" flags="wfNoBorder" resolution="1920,1080" title="Tankstellendetails" >
 		<eLabel position="0,0" size="510,795" backgroundColor="grey" zPosition="-1" />
 		<widget source="info" render="Label" position="5,5" size="500,785" font="Regular;27" backgroundColor="#10233d67" halign="center" valign="top" transparent="0" zPosition="1" />
 	</screen>"""
@@ -519,6 +553,10 @@ class TankenConfig(Setup):
 		Setup.__init__(self, session, "clevertankenconfig", plugin="Extensions/clever-tanken", PluginLanguageDomain="clevertanken")
 		self["key_yellow"] = StaticText("Hauptort suchen")
 		self["key_blue"] = StaticText("Zweitort suchen")
+		self.cityAzipname = config.plugins.clevertanken.cityAzipname.value
+		self.cityAgeodata = config.plugins.clevertanken.cityAgeodata.value
+		self.cityBzipname = config.plugins.clevertanken.cityBzipname.value
+		self.cityBgeodata = config.plugins.clevertanken.cityBgeodata.value
 		self["entryActions"] = HelpableActionMap(self, ["ColorActions"],
 														{
 														"yellow": (self.cityAsearch, "Hauptort suchen"),
@@ -536,36 +574,39 @@ class TankenConfig(Setup):
 	def VirtualKeyBoardCB(self, frame, answer):
 		if answer is not None:
 			cityname = answer.replace(" ", "+").replace("/", "%2F")
-			text = f"https://gcx01.123map.de/pcplace.json?thm=inforoad-ct1&zipcodecenter=1&limit=10&qa={cityname}"
-			callInThread(download, text, boundFunction(self.citysearchCB, frame))
+			limit = config.plugins.clevertanken.maxcities.value
+			text = f"https://gcx01.123map.de/pcplace.json?thm=inforoad-ct1&zipcodecenter=1&limit={limit}&qa={cityname}"
+			download(text, boundFunction(self.citysearchCB, frame))
 
 	def citysearchCB(self, frame, jsonstr):
 		citydict = dict()
 		try:
 			citydict = loads(jsonstr)
 		except Exception as error:
-			print("[%s] ERROR in module 'cityserachCB': %s" % (MODULE_NAME, str(error)))
+			print("[%s] ERROR in module 'citysearchCB': %s" % (MODULE_NAME, str(error)))
 		citylist = []
 		for city in citydict:
 			zipname, lat, lon = city.get("value", ""), city.get("lat", ""), city.get("lon", "")
 			if zipname and lat and lon:
 				citylist.append((zipname, lat, lon))
-		self.session.openWithCallback(boundFunction(self.citysearchReturn, frame), ChoiceBox, text="Wähle den gewünschten Ort / Ortsteil.", title="Städtesuche", list=tuple(citylist))
+		text = "Wähle den gewünschten Ort / Ortsteil."
+		title = f"Städtesuche ({len(citylist)} Städte)"
+		self.session.openWithCallback(boundFunction(self.citysearchReturn, frame), ChoiceBox, text=text, title=title, list=citylist, keys=[])
 
 	def citysearchReturn(self, frame, answer):
 		if answer is not None:
 			if frame == "A":
 				config.plugins.clevertanken.cityAzipname.value = answer[0].strip()
 				config.plugins.clevertanken.cityAgeodata.value = (answer[1], answer[2])
-				config.plugins.clevertanken.cityAgeodata.save()
 			else:
 				config.plugins.clevertanken.cityBzipname.value = answer[0].strip()
 				config.plugins.clevertanken.cityBgeodata.value = (answer[1], answer[2])
-				config.plugins.clevertanken.cityBgeodata.save()
-			config.plugins.clevertanken.save()
-			configfile.save()
 
 	def keyCancel(self):
+		config.plugins.clevertanken.cityAzipname.value = self.cityAzipname
+		config.plugins.clevertanken.cityAgeodata.value = self.cityAgeodata
+		config.plugins.clevertanken.cityBzipname.value = self.cityBzipname
+		config.plugins.clevertanken.cityBgeodata.value = self.cityBgeodata
 		self.close()
 
 
