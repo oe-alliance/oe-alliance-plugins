@@ -84,13 +84,13 @@ class clevertankenMain(Screen):
 	<screen name="clevertankenMain" position="center,center" size="1863,1032" resolution="1920,1080" title="" flags="wfNoBorder">
 		<eLabel position="0,0" size="1863,1032" backgroundColor="#10152e4e" zPosition="-2" />
 		<ePixmap position="9,6" size="255,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/ct_logo.png" alphatest="blend" scale="1" zPosition="1" />
-		<ePixmap position="1104,22" size="30,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/key_ok.png" alphatest="blend" scale="1" zPosition="1" />
-		<ePixmap position="1428,22" size="30,30" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/key_menu.png" alphatest="blend" scale="1" zPosition="1" />
+		<ePixmap position="1095,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/key_ok.png" alphatest="blend" scale="1" zPosition="1" />
+		<ePixmap position="1418,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/key_menu.png" alphatest="blend" scale="1" zPosition="1" />
 		<widget source="key_ok" render="Label" position="1149,15" size="249,45" font="Regular;30" foregroundColor="#10233d67" backgroundColor="#10afb9cf" halign="left" valign="center" />
 		<widget source="key_menu" render="Label" position="1473,15" size="250,45" font="Regular;30" foregroundColor="#10233d67" backgroundColor="#10afb9cf" halign="left" valign="center" />
 		<eLabel position="0,75" size="918,45" backgroundColor="#103B5AA2" zPosition="-1" />
 		<widget source="headline_A" render="Label" position="12,75" size="900,45" font="Regular;30" halign="left" valign="center" foregroundColor="white" backgroundColor="#103B5AA2" />
-		<widget source="frameAactive" render="Label" conditional="frameAactive" position="0,120" size="921,810" backgroundColor="#00c8ff12" zPosition="-1">
+		<widget source="frameAactive" render="Label" conditional="frameAactive" position="0,120" size="921,813" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget source="frame_A" render="Listbox" position="6,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
@@ -115,7 +115,7 @@ class clevertankenMain(Screen):
 		</widget>
 		<eLabel position="939,75" size="918,45" backgroundColor="#103B5AA2" zPosition="-1" />
 		<widget source="headline_B" render="Label" position="948,75" size="900,45" font="Regular;30" halign="left" valign="center" foregroundColor="white" backgroundColor="#103B5AA2" />
-		<widget source="frameBactive" render="Label" conditional="frameBactive" position="939,120" size="921,810" backgroundColor="#00c8ff12" zPosition="-1">
+		<widget source="frameBactive" render="Label" conditional="frameBactive" position="939,120" size="921,813" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
 		<widget source="frame_B" render="Listbox" position="945,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
@@ -146,10 +146,10 @@ class clevertankenMain(Screen):
 		<widget source="dkey_red" render="Label" position="36,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
 		<widget source="ukey_green" render="Label" position="465,942" size="471,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
 		<widget source="dkey_green" render="Label" position="465,987" size="471,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
-		<widget source="ukey_yellow" render="Label" position="975,942" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
-		<widget source="dkey_yellow" render="Label" position="975,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
-		<widget source="ukey_blue" render="Label" position="1434,942" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
-		<widget source="dkey_blue" render="Label" position="1434,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
+		<widget source="ukey_yellow" render="Label" position="981,942" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
+		<widget source="dkey_yellow" render="Label" position="981,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
+		<widget source="ukey_blue" render="Label" position="1440,942" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
+		<widget source="dkey_blue" render="Label" position="1440,987" size="465,45" font="Regular; 30" halign="left" foregroundColor="grey" backgroundColor="#10152e4e" transparent="1" />
 		<eLabel name="line" position="6,240" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="6,354" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="6,468" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
@@ -234,11 +234,13 @@ class clevertankenMain(Screen):
 		self.radiusB = config.plugins.clevertanken.radiusB.value
 
 	def refreshFrameA(self):
+		self["headline_A"].setText("Daten werden geladen...")
 		self["frame_A"].updateList([])
 		callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
 
 	def refreshFrameB(self):
 		self.refreshBbuttons()
+		self["headline_B"].setText("Daten werden geladen...")
 		self["frame_B"].updateList([])
 		if self.frameBmode == "Z":
 			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
@@ -406,6 +408,7 @@ class clevertankenMain(Screen):
 			keylist = list(SORTDICT.keys())
 			self.sortA = list(SORTDICT.keys())[(keylist.index(self.sortA) + 1) % len(keylist)]  # get next key in turn
 			self.refreshAbuttons()
+			self["headline_A"].setText("Daten werden geladen...")
 			self["frame_A"].updateList([])
 			callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
 
@@ -415,6 +418,7 @@ class clevertankenMain(Screen):
 			keylist = list(SORTDICT.keys())
 			self.sortB = list(SORTDICT.keys())[(keylist.index(self.sortB) + 1) % len(keylist)]  # get next key in turn
 			self.refreshBbuttons()
+			self["headline_B"].setText("Daten werden geladen...")
 			self["frame_B"].updateList([])
 			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
 
@@ -424,6 +428,7 @@ class clevertankenMain(Screen):
 			keylist = list(RADIUSDICT.keys())
 			self.radiusA = list(RADIUSDICT.keys())[(keylist.index(self.radiusA) + 1) % len(keylist)]  # get next key in turn
 			self.refreshAbuttons()
+			self["headline_A"].setText("Daten werden geladen...")
 			self["frame_A"].updateList([])
 			callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
 
@@ -433,6 +438,7 @@ class clevertankenMain(Screen):
 			keylist = list(RADIUSDICT.keys())
 			self.radiusB = list(RADIUSDICT.keys())[(keylist.index(self.radiusB) + 1) % len(keylist)]  # get next key in turn
 			self.refreshBbuttons()
+			self["headline_B"].setText("Daten werden geladen...")
 			self["frame_B"].updateList([])
 			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
 
@@ -442,6 +448,7 @@ class clevertankenMain(Screen):
 			keylist = list(SPRITDICT.keys())
 			self.spritA = list(SPRITDICT.keys())[(keylist.index(self.spritA) + 1) % len(keylist)]  # get next key in turn
 			self.refreshAbuttons()
+			self["headline_A"].setText("Daten werden geladen...")
 			self["frame_A"].updateList([])
 			callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
 
@@ -451,6 +458,7 @@ class clevertankenMain(Screen):
 			keylist = list(SPRITDICT.keys())
 			self.spritB = list(SPRITDICT.keys())[(keylist.index(self.spritB) + 1) % len(keylist)]  # get next key in turn
 			self.refreshBbuttons()
+			self["headline_B"].setText("Daten werden geladen...")
 			self["frame_B"].updateList([])
 			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
 
