@@ -83,9 +83,9 @@ class clevertankenMain(Screen):
 	skin = """
 	<screen name="clevertankenMain" position="center,center" size="1863,1032" resolution="1920,1080" title="" flags="wfNoBorder">
 		<eLabel position="0,0" size="1863,1032" backgroundColor="#10152e4e" zPosition="-2" />
-		<ePixmap position="9,6" size="255,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/ct_logo.png" alphatest="blend" scale="1" zPosition="1" />
-		<ePixmap position="1095,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/key_ok.png" alphatest="blend" scale="1" zPosition="1" />
-		<ePixmap position="1418,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/key_menu.png" alphatest="blend" scale="1" zPosition="1" />
+		<ePixmap position="9,6" size="255,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/ct_logo.png" alphatest="blend" scale="1" zPosition="1" />
+		<ePixmap position="1095,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/key_ok.png" alphatest="blend" scale="1" zPosition="1" />
+		<ePixmap position="1418,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/key_menu.png" alphatest="blend" scale="1" zPosition="1" />
 		<widget source="key_ok" render="Label" position="1149,15" size="249,45" font="Regular;30" foregroundColor="#10233d67" backgroundColor="#10afb9cf" halign="left" valign="center" />
 		<widget source="key_menu" render="Label" position="1473,15" size="250,45" font="Regular;30" foregroundColor="#10233d67" backgroundColor="#10afb9cf" halign="left" valign="center" />
 		<eLabel position="0,75" size="918,45" backgroundColor="#103B5AA2" zPosition="-1" />
@@ -93,7 +93,7 @@ class clevertankenMain(Screen):
 		<widget source="frameAactive" render="Label" conditional="frameAactive" position="0,120" size="921,813" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="frame_A" render="Listbox" position="6,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
+		<widget source="frame_A" render="Listbox" position="6,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
@@ -118,7 +118,7 @@ class clevertankenMain(Screen):
 		<widget source="frameBactive" render="Label" conditional="frameBactive" position="939,120" size="921,813" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="frame_B" render="Listbox" position="945,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clever-tanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
+		<widget source="frame_B" render="Listbox" position="945,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
@@ -558,7 +558,7 @@ class tankenInfo(Screen):
 
 class TankenConfig(Setup):
 	def __init__(self, session):
-		Setup.__init__(self, session, "clevertankenconfig", plugin="Extensions/clever-tanken", PluginLanguageDomain="clevertanken")
+		Setup.__init__(self, session, "clevertankenconfig", plugin="Extensions/clevertanken", PluginLanguageDomain="clevertanken")
 		self["key_yellow"] = StaticText("Hauptort suchen")
 		self["key_blue"] = StaticText("Zweitort suchen")
 		self.cityAzipname = config.plugins.clevertanken.cityAzipname.value
@@ -569,7 +569,7 @@ class TankenConfig(Setup):
 														{
 														"yellow": (self.cityAsearch, "Hauptort suchen"),
 														"blue": (self.cityBsearch, "Zweitort suchen")
-														}, prio=0, description="clever-tanken Eingabeaktionen")
+														}, prio=0, description="clevertanken Eingabeaktionen")
 
 	def cityAsearch(self):
 		cityname = " ".join(config.plugins.clevertanken.cityAzipname.value.split(" ")[1:])
@@ -623,4 +623,4 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="clever-tanken.de", description="Tankstellen-Preisvergleich", where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main), PluginDescriptor(name="clever-tanken.de", description="Tankstellen-Preisvergleich", where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
+	return [PluginDescriptor(name="clevertanken.de", description="Tankstellen-Preisvergleich", where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main), PluginDescriptor(name="clevertanken.de", description="Tankstellen-Preisvergleich", where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main)]
