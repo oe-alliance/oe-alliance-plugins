@@ -662,6 +662,6 @@ def sessionstart(reason, session=None, **kwargs):
 
 
 def Plugins(**kwargs):
-	return [PluginDescriptor(name="clevertanken.de", description="Tankstellen-Preisvergleich", where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main),
-		 PluginDescriptor(name="clevertanken.de", description="Tankstellen-Preisvergleich", where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main),
+	return [PluginDescriptor(name="CleverTanken.de", description="Tankstellen-Preisvergleich", where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main),
+		 PluginDescriptor(name="CleverTanken.de", description="Tankstellen-Preisvergleich mit eigenen Preisalarmen", where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main),
 		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=True, fnc=sessionstart)]
