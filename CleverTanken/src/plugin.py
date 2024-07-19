@@ -184,13 +184,13 @@ class CTmain(Screen, CTglobs):
 		self["frameBactive"] = StaticText()
 		self["headline_A"] = StaticText()
 		self["headline_B"] = StaticText()
-		self["ukey_red"] = StaticText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort["A"], '€')}")
-		self["dkey_red"] = StaticText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit["A"], 'SuperPlus')}")
-		self["ukey_green"] = StaticText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius["A"])}")
+		self["ukey_red"] = StaticText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['A'], '€')}")
+		self["dkey_red"] = StaticText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['A'], 'SuperPlus')}")
+		self["ukey_green"] = StaticText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['A'])}")
 		self["dkey_green"] = StaticText()
-		self["ukey_yellow"] = StaticText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort["B"], '€')}")
-		self["dkey_yellow"] = StaticText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit["B"], 'SuperPlus')}")
-		self["ukey_blue"] = StaticText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius["B"])}")
+		self["ukey_yellow"] = StaticText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['B'], '€')}")
+		self["dkey_yellow"] = StaticText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['B'], 'SuperPlus')}")
+		self["ukey_blue"] = StaticText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['B'])}")
 		self["dkey_blue"] = StaticText()
 		self["key_ok"] = StaticText("Details ein/aus")
 		self["key_menu"] = StaticText("Einstellungen")
@@ -396,13 +396,13 @@ class CTmain(Screen, CTglobs):
 		else:
 			current = self[f"frame_{self.currframe}"].getCurrent()
 			if current:
-				callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit["B"]}", self.makeTankenInfo)
+				callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit['B']}", self.makeTankenInfo)
 
 	def changeFavorites(self):
 		current = self[f"frame_{self.currframe}"].getCurrent()
 		if current:
 			self["frame_B"].updateList([])
-			callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit["B"]}", boundFunction(self.makeTankenView, "B"))
+			callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit['B']}", boundFunction(self.makeTankenView, "B"))
 			ident = current[0]
 			if ident in self.favlist:
 				text = "Wollen Sie diese Tankstelle wirklich aus den Favoriten entfernen?"
@@ -467,16 +467,16 @@ class CTmain(Screen, CTglobs):
 
 	def refreshButtons(self):
 		self["dkey_blue"].setText("lang | wechsle zu Favoriten" if self.frameBmode == "Z" else "lang | wechsle zu Zweitort")
-		self["ukey_red"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort["A"], '€')}")
-		self["dkey_red"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit["A"], 'SuperPlus')}")
-		self["ukey_green"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius["A"], '5 km')}")
-		self["dkey_yellow"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit["B"], 'SuperPlus')}")
+		self["ukey_red"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['A'], '€')}")
+		self["dkey_red"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['A'], 'SuperPlus')}")
+		self["ukey_green"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['A'], '5 km')}")
+		self["dkey_yellow"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['B'], 'SuperPlus')}")
 		if self.frameBmode == "F":
 			self["ukey_yellow"].setText("")
 			self["ukey_blue"].setText("")
 		else:
-			self["ukey_yellow"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort["B"], '€')}")
-			self["ukey_blue"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius["B"], 'SuperPlus')}")
+			self["ukey_yellow"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['B'], '€')}")
+			self["ukey_blue"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['B'], 'SuperPlus')}")
 
 	def down(self):
 		self[f"frame_{self.currframe}"].down()
@@ -500,7 +500,7 @@ class CTmain(Screen, CTglobs):
 				ident = current[0]
 				if ident:
 					if self.isInfo:
-						callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit["B"]}", self.makeTankenInfo)
+						callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit['B']}", self.makeTankenInfo)
 					self["dkey_green"].setText("lang | aus Favoriten entfernen" if ident in self.favlist else "lang | zu Favoriten hinzufügen")
 				else:
 					if self.isInfo:
