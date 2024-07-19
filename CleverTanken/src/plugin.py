@@ -1,5 +1,6 @@
 # PYTHON IMPORTS
 from json import loads
+from os.path import join, exists
 from re import findall, search, S
 from random import choice
 from requests import get, exceptions
@@ -7,7 +8,7 @@ from twisted.internet.reactor import callInThread
 from Tools.BoundFunction import boundFunction
 
 # ENIGMA IMPORTS
-from enigma import getDesktop
+from enigma import getDesktop, ePoint
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.config import config, ConfigSelection, ConfigSubsection, ConfigText
 from Components.Sources.StaticText import StaticText
@@ -18,41 +19,63 @@ from Screens.MessageBox import MessageBox
 from Screens.Setup import Setup
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-
-# GLOBALS
-MODULE_NAME = __name__.split(".")[-2]
-BASEURL = "http://www.clever-tanken.de"
-SORTDICT = {"p": "€", "km": "km", "abc": "A-Z"}
-RADIUSDICT = {'1': '1 km', '2': '2 km', '5': '5 km', '10': '10 km', '15': '15 km', '20': '20 km', '25': '25 km'}
-SPRITDICT = {'3': 'Diesel', '5': 'Super E10', '7': 'Super E5', '6': 'SuperPlus', '12': 'Premium Diesel',
-			 '264': 'GTL-Diesel', '2': 'LKW-Diesel', '1': 'LPG', '8': 'CNG', '262': 'LNG', '4': 'Bioethanol',
-			 '266': 'AdBlue PKW', '13': 'AdBlue LKW', '246': 'Wasserstoff', '314': 'HVO Diesel'}
+from Tools.Directories import resolveFilename, SCOPE_PLUGINS
+from Tools.LoadPixmap import LoadPixmap
 
 
-def download(url, callback):
-	AGENTS = [
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
-			"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0",
-			"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edge/87.0.664.75",
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
-			]
-	headers = {"User-Agent": choice(AGENTS)}
-	try:
-		response = get(url.encode(), headers=headers, timeout=(3.05, 6))
-		response.raise_for_status()
-	except exceptions.RequestException as error:
-		print("[%s] ERROR in module 'download': %s" % (MODULE_NAME, str(error)))
-	else:
-		callback(response.content.decode())
+class CTglobs():
+	MODULE_NAME = __name__.split(".")[-2]
+	PLUGINPATH = f"{resolveFilename(SCOPE_PLUGINS)}Extensions/{MODULE_NAME}/"
+	RESOLUTION = "fHD" if getDesktop(0).size().width() > 1300 else "HD"
+	BASEURL = "http://www.clever-tanken.de"
+	SORTDICT = {"p": "€", "km": "km", "abc": "A-Z"}
+	RADIUSDICT = {'1': '1 km', '2': '2 km', '5': '5 km', '10': '10 km', '15': '15 km', '20': '20 km', '25': '25 km'}
+	SPRITDICT = {'3': 'Diesel', '5': 'Super E10', '7': 'Super E5', '6': 'SuperPlus', '12': 'Premium Diesel',
+				 '264': 'GTL-Diesel', '2': 'LKW-Diesel', '1': 'LPG', '8': 'CNG', '262': 'LNG', '4': 'Bioethanol',
+				 '266': 'AdBlue PKW', '13': 'AdBlue LKW', '246': 'Wasserstoff', '314': 'HVO Diesel'}
+
+	def download(self, url, callback):
+		AGENTS = [
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
+				"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0",
+				"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edge/87.0.664.75",
+				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
+				]
+		headers = {"User-Agent": choice(AGENTS)}
+		try:
+			response = get(url.encode(), headers=headers, timeout=(3.05, 6))
+			response.raise_for_status()
+		except exceptions.RequestException as error:
+			print("[%s] ERROR in module 'self.download': %s" % (CTglobs.MODULE_NAME, str(error)))
+		else:
+			callback(response.content.decode())
 
 
-class clevertankenMain(Screen):
-	res = "fHD" if getDesktop(0).size().width() > 1300 else "HD"
+class CTinfo(Screen):
+	skin = """
+	<screen name="tankenInfo" position="990,150" size="510,798" zPosition="2" flags="wfNoBorder" resolution="1920,1080" title="Tankstellendetails" >
+		<eLabel position="0,0" size="510,798" backgroundColor="grey" zPosition="-1" />
+		<widget source="info" render="Label" position="5,5" size="500,788" font="Regular;27" backgroundColor="#10233d67" halign="center" valign="top" transparent="0" zPosition="1" />
+	</screen>"""
+
+	def __init__(self, session):
+		Screen.__init__(self, session)
+		self["info"] = StaticText("")
+
+	def moveInfo(self, xpos, ypos):
+		self.instance.move(ePoint(xpos, ypos))
+
+
+class CTchoicebox(Screen):
+	pass  # future option
+
+
+class CTmain(Screen, CTglobs):
 	skin = """
 	<screen name="clevertankenMain" position="center,center" size="1863,1032" resolution="1920,1080" title="" flags="wfNoBorder">
-		<eLabel position="0,0" size="1863,1032" backgroundColor="#10152e4e" zPosition="-2" />
+		<eLabel position="0,75" size="1863,1032" backgroundColor="#10152e4e" zPosition="-2" />
 		<ePixmap position="9,6" size="255,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/ct_logo.png" alphatest="blend" scale="1" zPosition="1" />
 		<ePixmap position="1095,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/key_ok.png" alphatest="blend" scale="1" zPosition="1" />
 		<ePixmap position="1418,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/key_menu.png" alphatest="blend" scale="1" zPosition="1" />
@@ -67,8 +90,8 @@ class clevertankenMain(Screen):
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
-				MultiContentEntryText(pos=(0,0), size=(99,114), font=0, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=1),  # price main
-				MultiContentEntryText(pos=(102,9), size=(30,60), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # price suffix
+				MultiContentEntryText(pos=(7,0), size=(99,90), font=0, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=1),  # price main
+				MultiContentEntryText(pos=(108,2), size=(30,60), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # price suffix
 				MultiContentEntryText(pos=(138,3), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=3),  # changetype
 				MultiContentEntryText(pos=(138,39), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=4),  # changedate
 				MultiContentEntryText(pos=(138,75), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=5),  # changedurance
@@ -76,7 +99,8 @@ class clevertankenMain(Screen):
 				MultiContentEntryText(pos=(315,39), size=(540,36), font=2, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=7),  # street
 				MultiContentEntryText(pos=(315,75), size=(540,36), font=2, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=8),  # zipcode
 				MultiContentEntryText(pos=(774,33), size=(105,45), font=1,color="#10152e4e",  backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=9),  # distance
-				MultiContentEntryText(pos=(273,36), size=(30,45), font=1, color="#103B5AA2", backcolor="#10f5f5f5", color_sel="yellow", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=10)  # favorite
+				MultiContentEntryText(pos=(273,0), size=(30,45), font=1, color="#103B5AA2", backcolor="#10f5f5f5", color_sel="yellow", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=10),  # favorite
+				MultiContentEntryPixmapAlphaBlend(pos=(60,70), size=(39,39), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE|BT_KEEP_ASPECT_RATIO, png=11)  # pricealert
 				],
 				"fonts": [gFont("Regular",42), gFont("Regular",30), gFont("Regular",27), gFont("Regular",24)],
 				"itemHeight":114
@@ -92,8 +116,8 @@ class clevertankenMain(Screen):
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
-				MultiContentEntryText(pos=(0,0), size=(99,114), font=0, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=1),  # price main
-				MultiContentEntryText(pos=(102,9), size=(30,60), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # price suffix
+				MultiContentEntryText(pos=(7,0), size=(99,90), font=0, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=1),  # price main
+				MultiContentEntryText(pos=(108,2), size=(30,60), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2),  # price suffix
 				MultiContentEntryText(pos=(138,3), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=3),  # changetype
 				MultiContentEntryText(pos=(138,39), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=4),  # changedate
 				MultiContentEntryText(pos=(138,75), size=(126,33), font=3, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=5),  # changedurance
@@ -101,7 +125,8 @@ class clevertankenMain(Screen):
 				MultiContentEntryText(pos=(315,39), size=(540,36), font=2, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=7),  # street
 				MultiContentEntryText(pos=(315,75), size=(540,36), font=2, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=8),  # zipcode
 				MultiContentEntryText(pos=(774,33), size=(105,45), font=1,color="#10152e4e",  backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=9),  # distance
-				MultiContentEntryText(pos=(273,36), size=(30,45), font=1, color="#103B5AA2", backcolor="#10f5f5f5", color_sel="yellow", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=10)  # favorite
+				MultiContentEntryText(pos=(273,0), size=(30,45), font=1, color="#103B5AA2", backcolor="#10f5f5f5", color_sel="yellow", backcolor_sel="#10152e4e", flags=RT_HALIGN_RIGHT|RT_VALIGN_CENTER, text=10),  # favorite
+				MultiContentEntryPixmapAlphaBlend(pos=(60,70), size=(39,39), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE|BT_KEEP_ASPECT_RATIO, png=11)  # pricealert
 				],
 				"fonts": [gFont("Regular",42), gFont("Regular",30), gFont("Regular",27), gFont("Regular",24)],
 				"itemHeight":114
@@ -134,36 +159,38 @@ class clevertankenMain(Screen):
 		<eLabel name="line" position="945,696" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,810" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,924" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
-	</screen>""" % (res, res)
+	</screen>""" % (CTglobs.RESOLUTION, CTglobs.RESOLUTION)
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		favorites = config.plugins.clevertanken.favorites.value
 		self.favlist = favorites.split(",") if favorites else []
 		self.ready = False
-		self.showInfo = self.session.instantiateDialog(tankenInfo)
+		self.showInfo = self.session.instantiateDialog(CTinfo)
 		self.isInfo = False
 		self.currframe = "A"
-		self.identdict = dict()
-		self.identdict["A"] = list()
-		self.identdict["B"] = list()
+		self.sort = {}
+		self.sprit = {}
+		self.radius = {}
+		self.identdict = {}
 		self.framefavs = []
 		self.frameBmode = config.plugins.clevertanken.startframeB.value
 		self.waittext = "Daten werden geladen..."
 		self.getConfigs()
+		self.setEvadePosition()
 		self["frame_A"] = List([])
 		self["frame_B"] = List([])
 		self["frameAactive"] = StaticText(" ")
 		self["frameBactive"] = StaticText()
 		self["headline_A"] = StaticText()
 		self["headline_B"] = StaticText()
-		self["ukey_red"] = StaticText(f"kurz | Sortierung: {SORTDICT.get(self.sortA, '€')}")
-		self["dkey_red"] = StaticText(f"lang | Sprit: {SPRITDICT.get(self.spritA, 'SuperPlus')}")
-		self["ukey_green"] = StaticText(f"kurz | Radius: {RADIUSDICT.get(self.radiusA)}")
+		self["ukey_red"] = StaticText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort["A"], '€')}")
+		self["dkey_red"] = StaticText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit["A"], 'SuperPlus')}")
+		self["ukey_green"] = StaticText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius["A"])}")
 		self["dkey_green"] = StaticText()
-		self["ukey_yellow"] = StaticText(f"kurz | Sortierung: {SORTDICT.get(self.sortB, '€')}")
-		self["dkey_yellow"] = StaticText(f"lang | Sprit: {SPRITDICT.get(self.spritB, 'SuperPlus')}")
-		self["ukey_blue"] = StaticText(f"kurz | Radius: {RADIUSDICT.get(self.radiusB)}")
+		self["ukey_yellow"] = StaticText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort["B"], '€')}")
+		self["dkey_yellow"] = StaticText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit["B"], 'SuperPlus')}")
+		self["ukey_blue"] = StaticText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius["B"])}")
 		self["dkey_blue"] = StaticText()
 		self["key_ok"] = StaticText("Details ein/aus")
 		self["key_menu"] = StaticText("Einstellungen")
@@ -178,62 +205,59 @@ class clevertankenMain(Screen):
 		 											"up": self.up,
 													"chplus": self.pageUp,
 													"chminus": self.pageDown,
-		 											"red": self.turnSortA,
-													"redlong": self.turnSpritA,
-		 											"green": self.turnRadiusA,
+		 											"red": boundFunction(self.selectSort, "A"),
+													"redlong": boundFunction(self.selectSprit, "A"),
+		 											"green": boundFunction(self.selectRadius, "A"),
 													"greenlong": self.changeFavorites,
-		 											"yellow": self.turnSortB,
-		 											"yellowlong": self.turnSpritB,
-		 											"blue": self.turnRadiusB,
-		 											"bluelong": self.toggleFrameB,
+		 											"yellow": boundFunction(self.selectSort, "B"),
+		 											"yellowlong": boundFunction(self.selectSprit, "B"),
+		 											"blue": boundFunction(self.selectRadius, "B"),
+		 											"bluelong": self.toggleFrame_B,
 		 											"menu": self.config
 		 											}, -1)
 		self.onLayoutFinish.append(self.refreshFrames)
 
 	def refreshFrames(self):
-		self.refreshFrameA()
-		self.refreshFrameB()
+		self.refreshFrame("A")
+		self.refreshFrame("B")
 
 	def getConfigs(self):
-		self.sortA = config.plugins.clevertanken.sortA.value
-		self.sortB = config.plugins.clevertanken.sortB.value
-		self.spritA = config.plugins.clevertanken.spritA.value
-		self.spritB = config.plugins.clevertanken.spritB.value
-		self.radiusA = config.plugins.clevertanken.radiusA.value
-		self.radiusB = config.plugins.clevertanken.radiusB.value
+		self.sort["A"] = config.plugins.clevertanken.sortA.value
+		self.sort["B"] = config.plugins.clevertanken.sortB.value
+		self.sprit["A"] = config.plugins.clevertanken.spritA.value
+		self.sprit["B"] = config.plugins.clevertanken.spritB.value
+		self.radius["A"] = config.plugins.clevertanken.radiusA.value
+		self.radius["B"] = config.plugins.clevertanken.radiusB.value
+		self.alertlist = (
+						("red", config.plugins.clevertanken.priceRed.value, config.plugins.clevertanken.spritRed.value),
+						("yellow", config.plugins.clevertanken.priceYellow.value, config.plugins.clevertanken.spritYellow.value),
+						("green", config.plugins.clevertanken.priceGreen.value, config.plugins.clevertanken.spritGreen.value)
+						)
 
-	def refreshFrameA(self):
-		self["headline_A"].setText(self.waittext)
-		self["frame_A"].updateList([])
-		callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
-
-	def refreshFrameB(self):
-		self.refreshBbuttons()
-		self["headline_B"].setText(self.waittext)
-		self["frame_B"].updateList([])
-		if self.frameBmode == "Z":
-			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
-		else:
+	def refreshFrame(self, frame):
+		self[f"headline_{frame}"].setText(self.waittext)
+		self[f"frame_{frame}"].updateList([])
+		if frame == "B" and self.frameBmode == "F":
 			if self.favlist:
 				self.ready = False
 				self.framefavs = []
 				for ident in self.favlist:
-					callInThread(download, f"{BASEURL}/tankstelle_details/{ident}?spritsorte={self.spritB}", boundFunction(self.makeFavoriteView))
+					callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit[frame]}", self.makeFavoriteView)
 			else:
-				self["frame_B"].updateList([tuple(("", "", "", "", "", "", "keine Favoriten vorhanden", "", "", "", ""))])
-			self["headline_B"].setText(f"Favoriten | {len(self.favlist)} Tankstellen")
+				self[f"frame_{frame}"].updateList([tuple(("", "", "", "", "", "", "keine Favoriten vorhanden", "", "", "", ""))])
+		else:
+			callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
 
-	def createLink(self, frame, sort, spritsorte, radius):
+	def createLink(self, frame):
 		if frame == "A":
 			zipname = config.plugins.clevertanken.cityAzipname.value.replace(" ", "+").replace("/", "%2F")
 			geodata = eval(str(config.plugins.clevertanken.cityAgeodata.value))
 		else:
 			zipname = config.plugins.clevertanken.cityBzipname.value.replace(" ", "+").replace("/", "%2F")
 			geodata = eval(str(config.plugins.clevertanken.cityBgeodata.value))
-		return f'{BASEURL}/tankstelle_liste?lat={geodata[0]}&lon={geodata[1]}&ort={zipname}&spritsorte={spritsorte}&r={radius}&sort={sort}'
+		return f'{self.BASEURL}/tankstelle_liste?lat={geodata[0]}&lon={geodata[1]}&ort={zipname}&spritsorte={self.sprit[frame]}&r={self.radius[frame]}&sort={self.sort[frame]}'
 
 	def makeTankenView(self, frame, output):
-		self.ready = True
 		startpos = output.find('<div class="background-row-container background-mat-blue">')
 		endpos = output.find('<div class="pagination d-flex justify-content-center align-items-center mt-2">')
 		identlist = []
@@ -246,7 +270,7 @@ class clevertankenMain(Screen):
 			identlist.append(ident)
 			prices = self.searchOneValue(r'<div class="price-text price text-color-ct-blue">\s+(.*?)\s+</div>', eintrag, "", flag_S=True)
 			if prices and prices[0]:
-				price = prices.replace("</sup>", "").split("<sup>") if prices and prices[0] != " " else ("nicht\ngeöffnet", "")
+				price = prices.replace("</sup>", "").split("<sup>") if prices and prices[0] != " " else ("nicht\ngeöffnet", "")  # example: ['1.75', '9']
 				change = findall(r'<span class="price-changed">(.*?)\s*</span>', eintrag, S)
 				cnglen = len(change) if change else 0
 				firstline = change[0].split("<br>")
@@ -272,36 +296,33 @@ class clevertankenMain(Screen):
 			zipcode = self.searchOneValue(r'<div class="fuel-station-location-city">(.*?)</div>', eintrag, "kein Ort gefunden").strip()
 			distance = self.searchOneValue(r'<div class="fuel-station-location-distance d-flex justify-content-end">\s+<span>(.*?)</span>\s+</div>', eintrag, "keine Distanz gefunden", flag_S=True)
 			favorite = "♥" if ident in self.favlist else ""
-			framelist.append(tuple((ident, price[0], price[1], pcngtype, pcngdate, pcngdur, name, street, zipcode, distance, favorite)))
+			pricealert = self.createPricealert(price, self.sprit[frame])
+			framelist.append(tuple((ident, price[0], price[1], pcngtype, pcngdate, pcngdur, name, street, zipcode, distance, favorite, pricealert)))
 		self.identdict[frame] = identlist
 		self[f"frame_{frame}"].updateList(framelist)
-		if frame == "A":
-			zipname = config.plugins.clevertanken.cityAzipname.value
-			self["headline_A"].setText(f"Hauptort: {zipname} | {len(identlist)} Tankstellen")
-			self.refreshAbuttons()
-		elif frame == "B":
-			zipname = config.plugins.clevertanken.cityBzipname.value
-			self["headline_B"].setText(f"Zweitort: {zipname} | {len(identlist)} Tankstellen")
-			self.refreshBbuttons()
+		zipname = config.plugins.clevertanken.cityAzipname.value if frame == "A" else config.plugins.clevertanken.cityBzipname.value
+		self[f"headline_{frame}"].setText(f"Hauptort: {zipname} | {len(identlist)} Tankstellen")
+		self.ready = True
+		self.refreshButtons()
 		self.refreshInfo()
 
 	def makeTankenInfo(self, output):
-		self.ready = True
 		name = self.searchOneValue(r'itemprop="name">(.*?)</span>', output, "")
 		street = self.searchOneValue(r'<span itemprop="streetAddress">(.*?)</span>', output, "")
 		zipcode = self.searchOneValue(r'<span itemprop="http://schema.org/postalCode">(.*?)</span>', output, "")
 		city = self.searchOneValue(r'<span itemprop="http://schema.org/addressCountry">(.*?)</span>', output, "")
 		openlist = []
 		for rawentry in findall(r'<div class="d-flex justify-content-between weak-body">(.*?)</div>', output, S):
-			opendata = rawentry.replace("<span>", "").replace("</span>", "").strip().split("\n")
-			opendata[1] = opendata[1].strip() if len(opendata) > 1 else ""
+			opendata = rawentry.replace("<span>", "").replace("</span>", "").replace("&nbsp;", "").strip().split("\n")
+			if len(opendata) > 1:
+				opendata[1] = opendata[1].strip()
 			openlist.append(" ".join(opendata))
 		openings = "\n".join(openlist)
 		rawentry = self.searchOneValue(r'<div class="price-footer row col-12 text text-color-ice-blue d-flex flex-column">(.*?)</div>', output, "", flag_S=True)
 		lastlist = []
 		for last in rawentry.replace("<span>", "").replace("</span>", "").strip().split("\n"):
 			part = last.split(": ")
-			lastlist.append(f"{part[0]}\n{part[1]}" if len(part) > 0 else "")
+			lastlist.append(f"{part[0]}\n{part[1]}" if len(part) > 1 else "")
 		lastlist[1] = lastlist[1].strip() if len(lastlist) > 1 else ""
 		lastdates = "\n".join(lastlist)
 		prices = ""
@@ -315,35 +336,54 @@ class clevertankenMain(Screen):
 		self.showInfo['info'].setText(infos)
 		self.showInfo.show()
 		self.isInfo = True
+		self.ready = True
 
 	def makeFavoriteView(self, output):
+		spritdict = self.SPRITDICT
 		ident = self.searchOneValue(r"var object_id = '(.*?)'", output, "")
 		name = self.searchOneValue(r'itemprop="name">(.*?)</span>', output, "")
 		street = self.searchOneValue(r'<span itemprop="streetAddress">(.*?)</span>', output, "")
 		zipcode = self.searchOneValue(r'<span itemprop="http://schema.org/postalCode">(.*?)</span>', output, "")
 		city = self.searchOneValue(r'<span itemprop="http://schema.org/addressCountry">(.*?)</span>', output, "")
-		price = []
+		price = ["n.v.", ""]
 		for rawentry in output.split('<div class="price-type col-6 d-flex flex-column justify-content-start headline">')[1:]:
 			sprittype = self.searchOneValue(r'<div class="price-type-name">(.*?)</div>', rawentry, "")
-			if sprittype == SPRITDICT.get(self.spritB, ""):
-				price.append(self.searchOneValue(r'<span id="current-price-.d*">(.*?)</span>', rawentry, "?.???"))
-				price.append(self.searchOneValue(r'<sup id="suffix-price-.d*">(.*?)</sup>', rawentry, "?"))
+			if sprittype == spritdict.get(self.sprit["B"]):
+				price[0] = self.searchOneValue(r'<span id="current-price-.d*">(.*?)</span>', rawentry, price[0])
+				price[1] = self.searchOneValue(r'<sup id="suffix-price-.d*">(.*?)</sup>', rawentry, price[1])
 				break
 		rawentry = self.searchOneValue(r'<div class="price-footer row col-12 text text-color-ice-blue d-flex flex-column">(.*?)</div>', output, "", flag_S=True)
 		pcngtype, pcngdate, pcngdur = ("geändert", "unbekannt", "unbekannt")
 		for last in rawentry.replace("<span>", "").replace("</span>", "").strip().split("\n"):
 			part = last.split(": ")
-			pcngdate, pcngdur = part[1].split(" ") if len(part) > 0 else ("unbekannt", "unbekannt")
-		self.framefavs.append(tuple((ident, price[0], price[1], pcngtype, pcngdate, pcngdur, name, street, f"{zipcode} {city}", "", "♥")))
-		if len(self.framefavs) == len(self.favlist):  # already downloaded all favorites?
+			pcngdate, pcngdur = part[1].split(" ") if len(part) > 1 else ("unbekannt", "unbekannt")
+		pricealert = self.createPricealert(price, self.sprit["B"])
+		self.framefavs.append(tuple((ident, price[0], price[1], pcngtype, pcngdate, pcngdur, name, street, f"{zipcode} {city}", "", "♥", pricealert)))
+		if len(self.framefavs) == len(self.favlist):  # all favorites downloaded?
+			self["headline_B"].setText(f"Favoriten | {len(self.favlist)} Tankstellen")
 			self["frame_B"].updateList(self.framefavs)
 			self.ready = True
 			self.refreshInfo()
 
-	def toggleFrameB(self):
+	def createPricealert(self, price, sprit):
+			alerttype = None
+			if price[0].replace('.', '', 1).isdigit() and price[1]:
+				centprice = float(price[0]) + int(price[1]) * .0001 if price[1].isdigit() else float(price[0])
+			else:
+				centprice = 0.0
+			if centprice:
+				for alert in self.alertlist:
+					if alert[1] != "aus" and sprit == alert[2] and centprice < float(alert[1]):
+						alerttype = alert[0]
+						break
+			picfile = join(f"{CTglobs.PLUGINPATH}pic/", f"alert-{alerttype}_{CTglobs.RESOLUTION}.png") if alerttype else join("")
+			return LoadPixmap(cached=True, path=picfile) if exists(picfile) else None
+
+	def toggleFrame_B(self):
 		self.frameBmode = "F" if self.frameBmode == "Z" else "Z"
-		self.refresh_downblue()
-		self.refreshFrameB()
+		self.refreshFrame("B")
+		self.refreshButtons()
+		self.refreshInfo()
 
 	def searchOneValue(self, regex, text, fallback, flag_S=False):
 		text = search(regex, text, flags=S) if flag_S else search(regex, text)
@@ -356,13 +396,13 @@ class clevertankenMain(Screen):
 		else:
 			current = self[f"frame_{self.currframe}"].getCurrent()
 			if current:
-				callInThread(download, f"{BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.spritB}", self.makeTankenInfo)
+				callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit["B"]}", self.makeTankenInfo)
 
 	def changeFavorites(self):
 		current = self[f"frame_{self.currframe}"].getCurrent()
 		if current:
 			self["frame_B"].updateList([])
-			callInThread(download, f"{BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.spritB}", boundFunction(self.makeTankenView, "B"))
+			callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit["B"]}", boundFunction(self.makeTankenView, "B"))
 			ident = current[0]
 			if ident in self.favlist:
 				text = "Wollen Sie diese Tankstelle wirklich aus den Favoriten entfernen?"
@@ -378,80 +418,65 @@ class clevertankenMain(Screen):
 			config.plugins.clevertanken.save()
 			self.refreshFrames()
 
-	def turnSortA(self):
+	def selectSort(self, frame):
+		if self.ready and not (frame == "B" and self.frameBmode == "F"):
+			index = list(self.SORTDICT.keys()).index(self.sort[frame]) if self.sort[frame] in self.SORTDICT else 0
+			outlist = list({v: k for k, v in self.SORTDICT.items()}.items())  # flip keys and values in dict
+			self.session.openWithCallback(boundFunction(self.selectSort_CB, frame), ChoiceBox, list=outlist, keys=[], selection=index, windowTitle="Wähle die gewünschte Sortierung:")
+
+	def selectSort_CB(self, frame, choice):
+		if choice:
+			self.sort[frame] = choice[1]
+			self[f"headline_{frame}"].setText(self.waittext)
+			self[f"frame_{frame}"].updateList([])
+			self.ready = False
+			callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
+
+	def selectRadius(self, frame):
+		if self.ready and not (frame == "B" and self.frameBmode == "F"):
+			index = list(self.RADIUSDICT.keys()).index(self.radius[frame]) if self.radius[frame] in self.RADIUSDICT else 0
+			outlist = list({v: k for k, v in self.RADIUSDICT.items()}.items())  # flip keys and values in dict
+			self.session.openWithCallback(boundFunction(self.selectRadius_CB, frame), ChoiceBox, list=outlist, keys=[], selection=index, windowTitle="Wähle den gewünschten Suchradius:")
+
+	def selectRadius_CB(self, frame, choice):
+		if choice:
+			self.radius[frame] = choice[1]
+			self[f"headline_{frame}"].setText(self.waittext)
+			self[f"frame_{frame}"].updateList([])
+			self.ready = False
+			callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
+
+	def selectSprit(self, frame):
 		if self.ready:
+			index = list(self.SPRITDICT.keys()).index(self.sprit[frame]) if self.sprit[frame] in self.SPRITDICT else 0
+			outlist = list({v: k for k, v in self.SPRITDICT.items()}.items())  # flip keys and values in dict
+			self.session.openWithCallback(boundFunction(self.selectSprit_CB, frame), ChoiceBox, list=outlist, keys=[], selection=index, windowTitle="Wähle die gewünschte Kraftstoffart:")
+
+	def selectSprit_CB(self, frame, choice):
+		if choice:
+			self.sprit[frame] = choice[1]
+			self[f"headline_{frame}"].setText(self.waittext)
+			self[f"frame_{frame}"].updateList([])
 			self.ready = False
-			keylist = list(SORTDICT.keys())
-			self.sortA = list(SORTDICT.keys())[(keylist.index(self.sortA) + 1) % len(keylist)]  # get next key in turn
-			self.refreshAbuttons()
-			self["headline_A"].setText(self.waittext)
-			self["frame_A"].updateList([])
-			callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
+			if frame == "B" and self.frameBmode == "F":
+				self.framefavs = []
+				for ident in self.favlist:
+					callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit[frame]}", boundFunction(self.makeFavoriteView))
+			else:
+				callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
 
-	def turnSortB(self):
-		if self.ready and self.frameBmode == "Z":
-			self.ready = False
-			keylist = list(SORTDICT.keys())
-			self.sortB = list(SORTDICT.keys())[(keylist.index(self.sortB) + 1) % len(keylist)]  # get next key in turn
-			self.refreshBbuttons()
-			self["headline_B"].setText(self.waittext)
-			self["frame_B"].updateList([])
-			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
-
-	def turnRadiusA(self):
-		if self.ready:
-			self.ready = False
-			keylist = list(RADIUSDICT.keys())
-			self.radiusA = list(RADIUSDICT.keys())[(keylist.index(self.radiusA) + 1) % len(keylist)]  # get next key in turn
-			self.refreshAbuttons()
-			self["headline_A"].setText(self.waittext)
-			self["frame_A"].updateList([])
-			callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
-
-	def turnRadiusB(self):
-		if self.ready and self.frameBmode == "Z":
-			self.ready = False
-			keylist = list(RADIUSDICT.keys())
-			self.radiusB = list(RADIUSDICT.keys())[(keylist.index(self.radiusB) + 1) % len(keylist)]  # get next key in turn
-			self.refreshBbuttons()
-			self["headline_B"].setText(self.waittext)
-			self["frame_B"].updateList([])
-			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
-
-	def turnSpritA(self):
-		if self.ready:
-			self.ready = False
-			keylist = list(SPRITDICT.keys())
-			self.spritA = list(SPRITDICT.keys())[(keylist.index(self.spritA) + 1) % len(keylist)]  # get next key in turn
-			self.refreshAbuttons()
-			self["headline_A"].setText(self.waittext)
-			self["frame_A"].updateList([])
-			callInThread(download, self.createLink("A", self.sortA, self.spritA, self.radiusA), boundFunction(self.makeTankenView, "A"))
-
-	def turnSpritB(self):
-		if self.ready and self.frameBmode == "Z":
-			self.ready = False
-			keylist = list(SPRITDICT.keys())
-			self.spritB = list(SPRITDICT.keys())[(keylist.index(self.spritB) + 1) % len(keylist)]  # get next key in turn
-			self.refreshBbuttons()
-			self["headline_B"].setText(self.waittext)
-			self["frame_B"].updateList([])
-			callInThread(download, self.createLink("B", self.sortB, self.spritB, self.radiusB), boundFunction(self.makeTankenView, "B"))
-
-	def refreshAbuttons(self):
-			self["ukey_red"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortA, '€')}")
-			self["dkey_red"].setText(f"lang | Sprit: {SPRITDICT.get(self.spritA, 'SuperPlus')}")
-			self["ukey_green"].setText(f"kurz | Radius: {RADIUSDICT.get(self.radiusA, '5 km')}")
-
-	def refreshBbuttons(self):
-		if self.frameBmode == "Z":
-			self["ukey_yellow"].setText(f"kurz | Sortierung: {SORTDICT.get(self.sortB, '€')}")
-			self["dkey_yellow"].setText(f"lang | Sprit: {SPRITDICT.get(self.spritB, 'SuperPlus')}")
-			self["ukey_blue"].setText(f"kurz | Radius: {RADIUSDICT.get(self.radiusB, 'SuperPlus')}")
-		else:
+	def refreshButtons(self):
+		self["dkey_blue"].setText("lang | wechsle zu Favoriten" if self.frameBmode == "Z" else "lang | wechsle zu Zweitort")
+		self["ukey_red"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort["A"], '€')}")
+		self["dkey_red"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit["A"], 'SuperPlus')}")
+		self["ukey_green"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius["A"], '5 km')}")
+		self["dkey_yellow"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit["B"], 'SuperPlus')}")
+		if self.frameBmode == "F":
 			self["ukey_yellow"].setText("")
-			self["dkey_yellow"].setText("")
 			self["ukey_blue"].setText("")
+		else:
+			self["ukey_yellow"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort["B"], '€')}")
+			self["ukey_blue"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius["B"], 'SuperPlus')}")
 
 	def down(self):
 		self[f"frame_{self.currframe}"].down()
@@ -475,16 +500,13 @@ class clevertankenMain(Screen):
 				ident = current[0]
 				if ident:
 					if self.isInfo:
-						callInThread(download, f"{BASEURL}/tankstelle_details/{ident}?spritsorte={self.spritB}", self.makeTankenInfo)
+						callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit["B"]}", self.makeTankenInfo)
 					self["dkey_green"].setText("lang | aus Favoriten entfernen" if ident in self.favlist else "lang | zu Favoriten hinzufügen")
 				else:
 					if self.isInfo:
 						self.showInfo['info'].setText("keine Favoriten vorhanden")
 					self["dkey_green"].setText("")
-			self.refresh_downblue()
-
-	def refresh_downblue(self):
-		self["dkey_blue"].setText("lang | wechsle zu Favoriten" if self.frameBmode == "Z" else "lang | wechsle zu Zweitort")
+			self.refreshButtons()
 
 	def toggleFrame(self):
 		if self.ready:
@@ -496,14 +518,23 @@ class clevertankenMain(Screen):
 				self.currframe = "A"
 				self["frameAactive"].setText(" ")
 				self["frameBactive"].setText("")
+			self.setEvadePosition()
 			self.refreshInfo()
+
+	def setEvadePosition(self):
+		ypos = int(100 * (1.5 if CTglobs.RESOLUTION == "fHD" else 1.0))
+		if self.currframe == "A":
+			xpos = int(660 * (1.5 if CTglobs.RESOLUTION == "fHD" else 1.0))
+		else:
+			xpos = int(280 * (1.5 if CTglobs.RESOLUTION == "fHD" else 1.0))
+		CTinfo.moveInfo(self.showInfo, xpos, ypos)
 
 	def config(self):
 		self.isInfo = False
 		self.showInfo.hide()
-		self.session.openWithCallback(self.refreshAfterConfig, TankenConfig)
+		self.session.openWithCallback(self.configCB, CTconfig)
 
-	def refreshAfterConfig(self):
+	def configCB(self):
 		self.getConfigs()
 		self.refreshFrames()
 
@@ -516,19 +547,7 @@ class clevertankenMain(Screen):
 			self.close()
 
 
-class tankenInfo(Screen):
-	skin = """
-	<screen name="tankenInfo" position="center,center" size="510,795" zPosition="2" flags="wfNoBorder" resolution="1920,1080" title="Tankstellendetails" >
-		<eLabel position="0,0" size="510,795" backgroundColor="grey" zPosition="-1" />
-		<widget source="info" render="Label" position="5,5" size="500,785" font="Regular;27" backgroundColor="#10233d67" halign="center" valign="top" transparent="0" zPosition="1" />
-	</screen>"""
-
-	def __init__(self, session):
-		Screen.__init__(self, session)
-		self["info"] = StaticText("")
-
-
-class TankenConfig(Setup):
+class CTconfig(Setup, CTglobs):
 	def __init__(self, session):
 		Setup.__init__(self, session, "clevertankenconfig", plugin="Extensions/clevertanken", PluginLanguageDomain="clevertanken")
 		self["key_yellow"] = StaticText("Hauptort suchen")
@@ -544,26 +563,28 @@ class TankenConfig(Setup):
 														}, prio=0, description="clevertanken Eingabeaktionen")
 
 	def cityAsearch(self):
-		cityname = " ".join(config.plugins.clevertanken.cityAzipname.value.split(" ")[1:])
+		subnames = config.plugins.clevertanken.cityAzipname.value.split(" ")
+		cityname = " ".join(subnames[1:] if (len(subnames) > 1 and subnames[0].isdigit()) else subnames)
 		self.session.openWithCallback(boundFunction(self.VirtualKeyBoardCB, "A"), VirtualKeyBoard, title="Geben Sie den gewünschen Hauptort ein.", text=cityname)
 
 	def cityBsearch(self):
-		cityname = " ".join(config.plugins.clevertanken.cityBzipname.value.split(" ")[1:])
+		subnames = config.plugins.clevertanken.cityBzipname.value.split(" ")
+		cityname = " ".join(subnames[1:] if (len(subnames) > 1 and subnames[0].isdigit()) else subnames)
 		self.session.openWithCallback(boundFunction(self.VirtualKeyBoardCB, "B"), VirtualKeyBoard, title="Geben Sie den gewünschen Zweitort ein.", text=cityname)
 
 	def VirtualKeyBoardCB(self, frame, answer):
 		if answer is not None:
 			cityname = answer.replace(" ", "+").replace("/", "%2F")
 			limit = config.plugins.clevertanken.maxcities.value
-			text = f"https://gcx01.123map.de/pcplace.json?thm=inforoad-ct1&zipcodecenter=1&limit={limit}&qa={cityname}"
-			download(text, boundFunction(self.citysearchCB, frame))
+			url = f"https://gcx01.123map.de/pcplace.json?thm=inforoad-ct1&zipcodecenter=1&limit={limit}&qa={cityname}"
+			self.download(url, boundFunction(self.citysearchCB, frame))
 
 	def citysearchCB(self, frame, jsonstr):
 		citydict = dict()
 		try:
 			citydict = loads(jsonstr)
 		except Exception as error:
-			print("[%s] ERROR in module 'citysearchCB': %s" % (MODULE_NAME, str(error)))
+			print("[%s] ERROR in module 'citysearchCB': %s" % (self.MODULE_NAME, str(error)))
 		citylist = []
 		for city in citydict:
 			zipname, lat, lon = city.get("value", ""), city.get("lat", ""), city.get("lon", "")
@@ -576,31 +597,46 @@ class TankenConfig(Setup):
 	def citysearchReturn(self, frame, answer):
 		if answer is not None:
 			if frame == "A":
-				config.plugins.clevertanken.cityAzipname.value = answer[0].strip()
+				self.cityAzipname = config.plugins.clevertanken.cityAzipname.value = answer[0].strip()
 				config.plugins.clevertanken.cityAgeodata.value = (answer[1], answer[2])
 				config.plugins.clevertanken.cityAgeodata.save()
 			elif frame == "B":
-				config.plugins.clevertanken.cityBzipname.value = answer[0].strip()
+				self.cityBzipname = config.plugins.clevertanken.cityBzipname.value = answer[0].strip()
 				config.plugins.clevertanken.cityBgeodata.value = (answer[1], answer[2])
 				config.plugins.clevertanken.cityBgeodata.save()
 
-	def keyCancel(self):
+	def keyCancel(self):  # This overrides the same class in ConfigList.py as part of Setup.py
 		config.plugins.clevertanken.cityAzipname.value = self.cityAzipname
 		config.plugins.clevertanken.cityAgeodata.value = self.cityAgeodata
 		config.plugins.clevertanken.cityBzipname.value = self.cityBzipname
 		config.plugins.clevertanken.cityBgeodata.value = self.cityBgeodata
 		self.close()
 
+	def keySave(self):  # This overrides the same class in ConfigList.py as part of Setup.py
+		newcityAzipname = config.plugins.clevertanken.cityAzipname.value
+		newcityBzipname = config.plugins.clevertanken.cityBzipname.value
+		if newcityAzipname != self.cityAzipname:
+			subnames = newcityAzipname.split(" ")
+			cityname = " ".join(subnames[1:] if (len(subnames) > 1 and subnames[0].isdigit()) else subnames)
+			self.VirtualKeyBoardCB("A", cityname)
+		elif newcityBzipname != self.cityBzipname:
+			subnames = newcityBzipname.split(" ")
+			cityname = " ".join(subnames[1:] if (len(subnames) > 1 and subnames[0].isdigit()) else subnames)
+			self.VirtualKeyBoardCB("B", cityname)
+		else:
+			self.saveAll()
+			self.close()
+
 
 def main(session, **kwargs):
-	session.open(clevertankenMain)
+	session.open(CTmain)
 
 
 def sessionstart(reason, session=None, **kwargs):
 	if reason == 0:
-		radiuslist = list(RADIUSDICT.items())
-		spritlist = list(SPRITDICT.items())
-		sortlist = list(SORTDICT.items())
+		radiuslist = list(CTglobs.RADIUSDICT.items())
+		spritlist = list(CTglobs.SPRITDICT.items())
+		sortlist = list(CTglobs.SORTDICT.items())
 		maxlist = [(0, "alle Einträge"), (7, "max. 7 Einträge"), (14, "max. 14 Einträge"), (21, "max. 21 Einträge"), (29, "max. 29 Einträge")]
 		config.plugins.clevertanken = ConfigSubsection()
 		config.plugins.clevertanken.maxcities = ConfigSelection(default=10, choices=[(10, "max. 10 Städte"), (20, "max. 20 Städte"), (30, "max. 30 Städte"), (40, "max. 40 Städte"), (50, "max. 50 Städte")])
@@ -614,9 +650,15 @@ def sessionstart(reason, session=None, **kwargs):
 		config.plugins.clevertanken.radiusB = ConfigSelection(default="5", choices=radiuslist)
 		config.plugins.clevertanken.spritB = ConfigSelection(default="6", choices=spritlist)
 		config.plugins.clevertanken.sortB = ConfigSelection(default="p", choices=sortlist)
-		config.plugins.clevertanken.maxentries = ConfigSelection(default=10, choices=maxlist)
+		config.plugins.clevertanken.maxentries = ConfigSelection(default=0, choices=maxlist)
 		config.plugins.clevertanken.startframeB = ConfigSelection(default="Z", choices=[("Z", "Zweitort"), ("F", "Favoriten")])
 		config.plugins.clevertanken.favorites = ConfigText(default="", fixed_size=False)
+		config.plugins.clevertanken.priceRed = ConfigSelection(default="aus", choices=["aus"] + ["{:.2f}".format(x / 100) for x in range(100, 300)])
+		config.plugins.clevertanken.spritRed = ConfigSelection(default="6", choices=spritlist)
+		config.plugins.clevertanken.priceYellow = ConfigSelection(default="aus", choices=["aus"] + ["{:.2f}".format(x / 100) for x in range(100, 300)])
+		config.plugins.clevertanken.spritYellow = ConfigSelection(default="6", choices=spritlist)
+		config.plugins.clevertanken.priceGreen = ConfigSelection(default="aus", choices=["aus"] + ["{:.2f}".format(x / 100) for x in range(100, 300)])
+		config.plugins.clevertanken.spritGreen = ConfigSelection(default="6", choices=spritlist)
 
 
 def Plugins(**kwargs):

@@ -9,5 +9,11 @@
 		<item level="0" text="Zweitort Kraftstoff:" description="Gewünschte Kraftstoffsorte des Zweitorts auswählen.">config.plugins.clevertanken.spritB</item>
 		<item level="0" text="Anzahl der gelisteten Tankstellen:" description="Gewünschte Anzahl der darzustellenden Tankstellen auswählen.">config.plugins.clevertanken.maxentries</item>
 		<item level="0" text="Startanzeige des rechten Rahmens:" description="Gewünschte Startanzeige für den rechten Rahmen auswählen.">config.plugins.clevertanken.startframeB</item>
+		<item level="0" text="Preisalarm rot - Preisgrenze:" description="Gewünschte Preisgrenze für den roten Preisalarm. Wenn der Tankstellenpreis diese Preisgrenze unterschreitet, wird ein Alarmsymbol dargestellt.">config.plugins.clevertanken.priceRed</item>
+		<item level="0" text="Preisalarm rot - Kraftstoff:" description="Gewünschte Kraftstoffsorte für den roten Preisalarm, für die der Alarm dann ausgelöst wird.">config.plugins.clevertanken.spritRed</item>
+		<item level="0" text="Preisalarm gelb - Preisgrenze:" description="Gewünschte Preisgrenze für den gelben Preisalarm. Wenn der Tankstellenpreis diese Preisgrenze unterschreitet, wird ein Alarmsymbol dargestellt.">config.plugins.clevertanken.priceYellow</item>
+		<item level="0" text="Preisalarm gelb - Kraftstoff:" description="Gewünschte Kraftstoffsorte für den gelben Preisalarm, für die der Alarm dann ausgelöst wird.">config.plugins.clevertanken.spritYellow</item>
+		<item level="0" text="Preisalarm grün - Preisgrenze:" description="Gewünschte Preisgrenze für den grünen Preisalarm. Wenn der Tankstellenpreis diese Preisgrenze unterschreitet, wird ein Alarmsymbol dargestellt.">config.plugins.clevertanken.priceGreen</item>
+		<item level="0" text="Preisalarm grün - Kraftstoff:" description="Gewünschte Kraftstoffsorte für den grünen Preisalarm, für die der Alarm dann ausgelöst wird.">config.plugins.clevertanken.spritGreen</item>
 	</setup>
 </setupxml>
