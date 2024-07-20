@@ -1,12 +1,16 @@
 <setupxml>
 	<setup key="clevertankenconfig" title="clever-tanken.de Setup">
 		<item level="0" text="Anzahl der Treffer in der Städtesuche:" description="Gewünschte Anzahl der dargestellten Städte in der Städtesuche.\nTIPP: Erweitere die Anzahl Wert wenn Dein Ort/Ortsteil nicht gelistet ist.">config.plugins.clevertanken.maxcities</item>
-		<item level="0" text="Hauptort Name/Ortsteil:" description="Name des Hauptorts angeben, dabei UNBEDINGT über die Hauptortsuche gehen!">config.plugins.clevertanken.cityAzipname</item>
-		<item level="0" text="Hauptort Umkreis/Radius:" description="Maximale Entfernung (Luftlinie) der Tankstellen zum Hauptort angeben.">config.plugins.clevertanken.radiusA</item>
-		<item level="0" text="Hauptort Kraftstoff:" description="Gewünschte Kraftstoffsorte des Hauptorts auswählen.">config.plugins.clevertanken.spritA</item>
-		<item level="0" text="Zweitort Name/Ortsteil:" description="Name des Zweitorts angeben, dabei UNBEDINGT über die Zweitortsuche gehen!">config.plugins.clevertanken.cityBzipname</item>
-		<item level="0" text="Zweitort Umkreis/Radius:" description="Maximale Entfernung (Luftlinie) der Tankstellen zum Zweitort angeben.">config.plugins.clevertanken.radiusB</item>
-		<item level="0" text="Zweitort Kraftstoff:" description="Gewünschte Kraftstoffsorte des Zweitorts auswählen.">config.plugins.clevertanken.spritB</item>
+		<item level="0" text="Hauptort Name/Ortsteil:" description="Name des Hauptorts (ohne Postleitzahl) angeben, dabei UNBEDINGT über die Hauptortsuche gehen!">config.plugins.clevertanken.cityAzipname</item>
+		<item level="0" text="Startvorgabe - Hauptort Umkreis/Radius:" description="Maximale Entfernung (Luftlinie) der Tankstellen zum Hauptort bei Pluginstart angeben.">config.plugins.clevertanken.radiusA</item>
+		<item level="0" text="Startvorgabe - Hauptort Kraftstoff:" description="Gewünschte Kraftstoffsorte des Hauptorts bei Pluginstart auswählen.">config.plugins.clevertanken.spritA</item>
+		<item level="0" text="Startvorgabe - Hauptort Sortierung:" description="Gewünschte Tankstellensortierung des Hauptorts  bei Pluginstart auswählen.">config.plugins.clevertanken.sortA</item>
+		<item level="0" text="Startvorgabe - Zweitort Name/Ortsteil:" description="Name des Zweitorts (ohne Postleitzahl) angeben, dabei UNBEDINGT über die Zweitortsuche gehen!">config.plugins.clevertanken.cityBzipname</item>
+		<item level="0" text="Startvorgabe - Zweitort Umkreis/Radius:" description="Maximale Entfernung (Luftlinie) der Tankstellen zum Zweitort bei Pluginstart angeben.">config.plugins.clevertanken.radiusB</item>
+		<item level="0" text="Startvorgabe - Zweitort Kraftstoff:" description="Gewünschte Kraftstoffsorte des Zweitorts bei Pluginstart auswählen.">config.plugins.clevertanken.spritB</item>
+		<item level="0" text="Startvorgabe - Zweitort Sortierung:" description="Gewünschte Tankstellensortierung des Zweitort bei Pluginstart auswählen.">config.plugins.clevertanken.sortB</item>
+		<item level="0" text="Startvorgabe - Favoriten Kraftstoff:" description="Gewünschte Kraftstoffsorte der Favoritensicht bei Pluginstart auswählen.">config.plugins.clevertanken.spritF</item>
+		<item level="0" text="Startvorgabe - Favoriten Sortierung:" description="Gewünschte Tankstellensortierung der Favoritensicht bei Pluginstart auswählen.">config.plugins.clevertanken.sortF</item>
 		<item level="0" text="Anzahl der gelisteten Tankstellen:" description="Gewünschte Anzahl der darzustellenden Tankstellen auswählen.">config.plugins.clevertanken.maxentries</item>
 		<item level="0" text="Startanzeige des rechten Rahmens:" description="Gewünschte Startanzeige für den rechten Rahmen auswählen.">config.plugins.clevertanken.startframeB</item>
 		<item level="0" text="Preisalarm rot - Preisgrenze:" description="Gewünschte Preisgrenze für den roten Preisalarm. Wenn der Tankstellenpreis diese Preisgrenze unterschreitet, wird ein Alarmsymbol dargestellt.">config.plugins.clevertanken.priceRed</item>
