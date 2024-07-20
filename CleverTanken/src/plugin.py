@@ -28,7 +28,7 @@ class CTglobs():
 	PLUGINPATH = f"{resolveFilename(SCOPE_PLUGINS)}Extensions/{MODULE_NAME}/"
 	RESOLUTION = "fHD" if getDesktop(0).size().width() > 1300 else "HD"
 	BASEURL = "http://www.clever-tanken.de"
-	SORTDICT = {"p": "€", "km": "km", "abc": "A-Z"}
+	SORTDICT = {"p": "€", "km": "km", "abc": "A-Z", "keine": "keine"}
 	RADIUSDICT = {'1': '1 km', '2': '2 km', '5': '5 km', '10': '10 km', '15': '15 km', '20': '20 km', '25': '25 km'}
 	SPRITDICT = {'3': 'Diesel', '5': 'Super E10', '7': 'Super E5', '6': 'SuperPlus', '12': 'Premium Diesel',
 				 '264': 'GTL-Diesel', '2': 'LKW-Diesel', '1': 'LPG', '8': 'CNG', '262': 'LNG', '4': 'Bioethanol',
@@ -74,19 +74,19 @@ class CTchoicebox(Screen):
 
 class CTmain(Screen, CTglobs):
 	skin = """
-	<screen name="clevertankenMain" position="center,center" size="1863,1032" resolution="1920,1080" title="" flags="wfNoBorder">
-		<eLabel position="0,75" size="1863,1032" backgroundColor="#10152e4e" zPosition="-2" />
-		<ePixmap position="9,6" size="255,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/ct_logo.png" alphatest="blend" scale="1" zPosition="1" />
-		<ePixmap position="1095,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/key_ok.png" alphatest="blend" scale="1" zPosition="1" />
-		<ePixmap position="1418,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/key_menu.png" alphatest="blend" scale="1" zPosition="1" />
+	<screen name="CleverTankenMain" position="center,center" size="1863,1032" resolution="1920,1080" title="" flags="wfNoBorder">
+		<eLabel position="0,75" size="1860,1032" backgroundColor="#10152e4e" zPosition="-2" />
+		<ePixmap position="9,6" size="255,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/CleverTanken/pic/ct_logo.png" alphatest="blend" scale="1" zPosition="1" />
+		<ePixmap position="1095,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/CleverTanken/pic/key_ok.png" alphatest="blend" scale="1" zPosition="1" />
+		<ePixmap position="1418,15" size="45,45" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/CleverTanken/pic/key_menu.png" alphatest="blend" scale="1" zPosition="1" />
 		<widget source="key_ok" render="Label" position="1149,15" size="249,45" font="Regular;30" foregroundColor="#10233d67" backgroundColor="#10afb9cf" halign="left" valign="center" />
 		<widget source="key_menu" render="Label" position="1473,15" size="250,45" font="Regular;30" foregroundColor="#10233d67" backgroundColor="#10afb9cf" halign="left" valign="center" />
-		<eLabel position="0,75" size="918,45" backgroundColor="#103B5AA2" zPosition="-1" />
+		<eLabel position="0,75" size="921,45" backgroundColor="#103B5AA2" zPosition="-1" />
 		<widget source="headline_A" render="Label" position="12,75" size="900,45" font="Regular;30" halign="left" valign="center" foregroundColor="white" backgroundColor="#103B5AA2" />
-		<widget source="frameAactive" render="Label" conditional="frameAactive" position="0,120" size="921,813" backgroundColor="#00c8ff12" zPosition="-1">
+		<widget source="frameAactive" render="Label" conditional="frameAactive" position="0,120" size="921,810" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="frame_A" render="Listbox" position="6,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
+		<widget source="frame_A" render="Listbox" position="6,126" size="909,795" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/CleverTanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
@@ -107,12 +107,12 @@ class CTmain(Screen, CTglobs):
 				}
 			</convert>
 		</widget>
-		<eLabel position="939,75" size="918,45" backgroundColor="#103B5AA2" zPosition="-1" />
+		<eLabel position="939,75" size="921,45" backgroundColor="#103B5AA2" zPosition="-1" />
 		<widget source="headline_B" render="Label" position="948,75" size="900,45" font="Regular;30" halign="left" valign="center" foregroundColor="white" backgroundColor="#103B5AA2" />
-		<widget source="frameBactive" render="Label" conditional="frameBactive" position="939,120" size="921,813" backgroundColor="#00c8ff12" zPosition="-1">
+		<widget source="frameBactive" render="Label" conditional="frameBactive" position="939,120" size="921,810" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="frame_B" render="Listbox" position="945,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/clevertanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
+		<widget source="frame_B" render="Listbox" position="945,126" size="909,795" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/CleverTanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
@@ -151,14 +151,12 @@ class CTmain(Screen, CTglobs):
 		<eLabel name="line" position="6,582" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="6,696" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="6,810" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
-		<eLabel name="line" position="6,924" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,240" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,354" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,468" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,582" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,696" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,810" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
-		<eLabel name="line" position="945,924" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 	</screen>""" % (CTglobs.RESOLUTION, CTglobs.RESOLUTION)
 
 	def __init__(self, session):
@@ -175,7 +173,8 @@ class CTmain(Screen, CTglobs):
 		self.identdict = {}
 		self.framefavs = []
 		self.frameBmode = config.plugins.clevertanken.startframeB.value
-		self.waittext = "Daten werden geladen..."
+		self.twaittext = "Tankstellen werden geladen..."
+		self.fwaittext = "Favoriten werden geladen..."
 		self.getConfigs()
 		self.setEvadePosition()
 		self["frame_A"] = List([])
@@ -184,13 +183,13 @@ class CTmain(Screen, CTglobs):
 		self["frameBactive"] = StaticText()
 		self["headline_A"] = StaticText()
 		self["headline_B"] = StaticText()
-		self["ukey_red"] = StaticText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['A'], '€')}")
-		self["dkey_red"] = StaticText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['A'], 'SuperPlus')}")
-		self["ukey_green"] = StaticText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['A'])}")
+		self["ukey_red"] = StaticText()
+		self["dkey_red"] = StaticText()
+		self["ukey_green"] = StaticText()
 		self["dkey_green"] = StaticText()
-		self["ukey_yellow"] = StaticText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['B'], '€')}")
-		self["dkey_yellow"] = StaticText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['B'], 'SuperPlus')}")
-		self["ukey_blue"] = StaticText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['B'])}")
+		self["ukey_yellow"] = StaticText()
+		self["dkey_yellow"] = StaticText()
+		self["ukey_blue"] = StaticText()
 		self["dkey_blue"] = StaticText()
 		self["key_ok"] = StaticText("Details ein/aus")
 		self["key_menu"] = StaticText("Einstellungen")
@@ -215,17 +214,33 @@ class CTmain(Screen, CTglobs):
 		 											"bluelong": self.toggleFrame_B,
 		 											"menu": self.config
 		 											}, -1)
-		self.onLayoutFinish.append(self.refreshFrames)
+		self.onLayoutFinish.append(self.onLayoutFinished)
 
-	def refreshFrames(self):
-		self.refreshFrame("A")
-		self.refreshFrame("B")
+	def onLayoutFinished(self):
+		self.refreshButtons()
+		self.refreshFrame("AB")
+
+	def refreshFrame(self, frames):
+		for frame in frames:
+			waittext = self.fwaittext if frame == "B" and self.frameBmode == "F" else self.twaittext
+			self[f"headline_{frame}"].setText(waittext)
+			self[f"frame_{frame}"].updateList([])
+			if frame == "B" and self.frameBmode == "F":
+				if self.favlist:
+					self.ready = False
+					self.framefavs = []
+					for ident in self.favlist:
+						callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit[frame]}", self.makeFavoriteView)
+				else:
+					self[f"frame_{frame}"].updateList([tuple(("", "", "", "", "", "", "keine Favoriten vorhanden", "", "", "", ""))])
+			else:
+				callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
 
 	def getConfigs(self):
 		self.sort["A"] = config.plugins.clevertanken.sortA.value
 		self.sort["B"] = config.plugins.clevertanken.sortB.value
 		self.sprit["A"] = config.plugins.clevertanken.spritA.value
-		self.sprit["B"] = config.plugins.clevertanken.spritB.value
+		self.sprit["B"] = config.plugins.clevertanken.spritB.value if self.frameBmode == "Z" else config.plugins.clevertanken.spritF.value
 		self.radius["A"] = config.plugins.clevertanken.radiusA.value
 		self.radius["B"] = config.plugins.clevertanken.radiusB.value
 		self.alertlist = (
@@ -233,20 +248,6 @@ class CTmain(Screen, CTglobs):
 						("yellow", config.plugins.clevertanken.priceYellow.value, config.plugins.clevertanken.spritYellow.value),
 						("green", config.plugins.clevertanken.priceGreen.value, config.plugins.clevertanken.spritGreen.value)
 						)
-
-	def refreshFrame(self, frame):
-		self[f"headline_{frame}"].setText(self.waittext)
-		self[f"frame_{frame}"].updateList([])
-		if frame == "B" and self.frameBmode == "F":
-			if self.favlist:
-				self.ready = False
-				self.framefavs = []
-				for ident in self.favlist:
-					callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit[frame]}", self.makeFavoriteView)
-			else:
-				self[f"frame_{frame}"].updateList([tuple(("", "", "", "", "", "", "keine Favoriten vorhanden", "", "", "", ""))])
-		else:
-			callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
 
 	def createLink(self, frame):
 		if frame == "A":
@@ -303,7 +304,6 @@ class CTmain(Screen, CTglobs):
 		zipname = config.plugins.clevertanken.cityAzipname.value if frame == "A" else config.plugins.clevertanken.cityBzipname.value
 		self[f"headline_{frame}"].setText(f"Hauptort: {zipname} | {len(identlist)} Tankstellen")
 		self.ready = True
-		self.refreshButtons()
 		self.refreshInfo()
 
 	def makeTankenInfo(self, output):
@@ -360,10 +360,19 @@ class CTmain(Screen, CTglobs):
 		pricealert = self.createPricealert(price, self.sprit["B"])
 		self.framefavs.append(tuple((ident, price[0], price[1], pcngtype, pcngdate, pcngdur, name, street, f"{zipcode} {city}", "", "♥", pricealert)))
 		if len(self.framefavs) == len(self.favlist):  # all favorites downloaded?
-			self["headline_B"].setText(f"Favoriten | {len(self.favlist)} Tankstellen")
-			self["frame_B"].updateList(self.framefavs)
-			self.ready = True
-			self.refreshInfo()
+			self.sortRefreshFavorites()
+
+	def sortRefreshFavorites(self):
+		if self.sort["B"] == "p":
+			sortedfavs = sorted(self.framefavs, key=lambda tup: tup[1])
+		elif self.sort["B"] == "abc":
+			sortedfavs = sorted(self.framefavs, key=lambda tup: tup[6].casefold())
+		else:
+			sortedfavs = self.framefavs
+		self["headline_B"].setText(f"Favoriten | {len(sortedfavs)} Tankstellen")
+		self["frame_B"].updateList(sortedfavs)
+		self.ready = True
+		self.refreshInfo()
 
 	def createPricealert(self, price, sprit):
 			alerttype = None
@@ -381,8 +390,8 @@ class CTmain(Screen, CTglobs):
 
 	def toggleFrame_B(self):
 		self.frameBmode = "F" if self.frameBmode == "Z" else "Z"
-		self.refreshFrame("B")
 		self.refreshButtons()
+		self.refreshFrame("B")
 		self.refreshInfo()
 
 	def searchOneValue(self, regex, text, fallback, flag_S=False):
@@ -401,6 +410,7 @@ class CTmain(Screen, CTglobs):
 	def changeFavorites(self):
 		current = self[f"frame_{self.currframe}"].getCurrent()
 		if current:
+			self.refreshButtons()
 			self["frame_B"].updateList([])
 			callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit['B']}", boundFunction(self.makeTankenView, "B"))
 			ident = current[0]
@@ -416,67 +426,95 @@ class CTmain(Screen, CTglobs):
 			config.plugins.clevertanken.favorites.value = ",".join(self.favlist)
 			config.plugins.clevertanken.favorites.save()
 			config.plugins.clevertanken.save()
-			self.refreshFrames()
+			self.refreshFrame("AB")
 
 	def selectSort(self, frame):
-		if self.ready and not (frame == "B" and self.frameBmode == "F"):
-			index = list(self.SORTDICT.keys()).index(self.sort[frame]) if self.sort[frame] in self.SORTDICT else 0
+		if self.ready:
 			outlist = list({v: k for k, v in self.SORTDICT.items()}.items())  # flip keys and values in dict
+			if frame == "B" and self.frameBmode == "F" and ("km", "km") in outlist:
+				outlist.remove(("km", "km"))
+			elif ("keine", "keine") in outlist:
+				outlist.remove(("keine", "keine"))
+			keylist = [x[1] for x in outlist]
+			index = keylist.index(self.sort[frame]) if self.sort[frame] in keylist else 0
 			self.session.openWithCallback(boundFunction(self.selectSort_CB, frame), ChoiceBox, list=outlist, keys=[], selection=index, windowTitle="Wähle die gewünschte Sortierung:")
 
 	def selectSort_CB(self, frame, choice):
 		if choice:
 			self.sort[frame] = choice[1]
-			self[f"headline_{frame}"].setText(self.waittext)
+			self[f"headline_{frame}"].setText(self.twaittext)
 			self[f"frame_{frame}"].updateList([])
 			self.ready = False
-			callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
+			self.refreshButtons()
+			if frame == "B" and self.frameBmode == "F":
+				self.sortRefreshFavorites()
+			else:
+				callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
 
 	def selectRadius(self, frame):
 		if self.ready and not (frame == "B" and self.frameBmode == "F"):
-			index = list(self.RADIUSDICT.keys()).index(self.radius[frame]) if self.radius[frame] in self.RADIUSDICT else 0
 			outlist = list({v: k for k, v in self.RADIUSDICT.items()}.items())  # flip keys and values in dict
+			keylist = [x[1] for x in outlist]
+			index = keylist.index(self.radius[frame]) if self.radius[frame] in keylist else 0
 			self.session.openWithCallback(boundFunction(self.selectRadius_CB, frame), ChoiceBox, list=outlist, keys=[], selection=index, windowTitle="Wähle den gewünschten Suchradius:")
 
 	def selectRadius_CB(self, frame, choice):
 		if choice:
 			self.radius[frame] = choice[1]
-			self[f"headline_{frame}"].setText(self.waittext)
+			self[f"headline_{frame}"].setText(self.twaittext)
 			self[f"frame_{frame}"].updateList([])
 			self.ready = False
+			self.refreshButtons()
 			callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
 
 	def selectSprit(self, frame):
 		if self.ready:
-			index = list(self.SPRITDICT.keys()).index(self.sprit[frame]) if self.sprit[frame] in self.SPRITDICT else 0
 			outlist = list({v: k for k, v in self.SPRITDICT.items()}.items())  # flip keys and values in dict
+			keylist = [x[1] for x in outlist]
+			index = keylist.index(self.sprit[frame]) if self.sprit[frame] in keylist else 0
 			self.session.openWithCallback(boundFunction(self.selectSprit_CB, frame), ChoiceBox, list=outlist, keys=[], selection=index, windowTitle="Wähle die gewünschte Kraftstoffart:")
 
 	def selectSprit_CB(self, frame, choice):
 		if choice:
 			self.sprit[frame] = choice[1]
-			self[f"headline_{frame}"].setText(self.waittext)
 			self[f"frame_{frame}"].updateList([])
 			self.ready = False
 			if frame == "B" and self.frameBmode == "F":
+				self[f"headline_{frame}"].setText(self.fwaittext)
 				self.framefavs = []
 				for ident in self.favlist:
 					callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit[frame]}", boundFunction(self.makeFavoriteView))
 			else:
+				self.refreshButtons()
+				self[f"headline_{frame}"].setText(self.twaittext)
 				callInThread(self.download, self.createLink(frame), boundFunction(self.makeTankenView, frame))
 
 	def refreshButtons(self):
-		self["dkey_blue"].setText("lang | wechsle zu Favoriten" if self.frameBmode == "Z" else "lang | wechsle zu Zweitort")
+		if self.frameBmode == "F" and self.sort["B"] == "km":
+			self.sort["B"] = "keine"
+		if self.frameBmode == "Z" and self.sort["B"] == "keine":
+			self.sort["B"] = "km"
 		self["ukey_red"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['A'], '€')}")
 		self["dkey_red"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['A'], 'SuperPlus')}")
 		self["ukey_green"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['A'], '5 km')}")
+		self["ukey_yellow"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['B'], '€')}")
 		self["dkey_yellow"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['B'], 'SuperPlus')}")
-		if self.frameBmode == "F":
-			self["ukey_yellow"].setText("")
-			self["ukey_blue"].setText("")
-		else:
-			self["ukey_yellow"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['B'], '€')}")
-			self["ukey_blue"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['B'], 'SuperPlus')}")
+		self["ukey_blue"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['B'], 'SuperPlus')}" if self.frameBmode == "Z" else "")
+		self["dkey_blue"].setText("lang | wechsle zu Favoriten" if self.frameBmode == "Z" else "lang | wechsle zu Zweitort")
+
+	def refreshInfo(self):
+		if self.ready:
+			current = self[f"frame_{self.currframe}"].getCurrent()
+			if current:
+				ident = current[0]
+				if ident:
+					if self.isInfo:
+						callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit['B']}", self.makeTankenInfo)
+					self["dkey_green"].setText("lang | aus Favoriten entfernen" if ident in self.favlist else "lang | zu Favoriten hinzufügen")
+				else:
+					if self.isInfo:
+						self.showInfo['info'].setText("keine Favoriten vorhanden")
+					self["dkey_green"].setText("")
 
 	def down(self):
 		self[f"frame_{self.currframe}"].down()
@@ -493,21 +531,6 @@ class CTmain(Screen, CTglobs):
 	def pageDown(self):
 		self[f"frame_{self.currframe}"].pageDown()
 
-	def refreshInfo(self):
-		if self.ready:
-			current = self[f"frame_{self.currframe}"].getCurrent()
-			if current:
-				ident = current[0]
-				if ident:
-					if self.isInfo:
-						callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit['B']}", self.makeTankenInfo)
-					self["dkey_green"].setText("lang | aus Favoriten entfernen" if ident in self.favlist else "lang | zu Favoriten hinzufügen")
-				else:
-					if self.isInfo:
-						self.showInfo['info'].setText("keine Favoriten vorhanden")
-					self["dkey_green"].setText("")
-			self.refreshButtons()
-
 	def toggleFrame(self):
 		if self.ready:
 			if self.currframe == "A":
@@ -519,6 +542,7 @@ class CTmain(Screen, CTglobs):
 				self["frameAactive"].setText(" ")
 				self["frameBactive"].setText("")
 			self.setEvadePosition()
+			self.refreshButtons()
 			self.refreshInfo()
 
 	def setEvadePosition(self):
@@ -536,7 +560,7 @@ class CTmain(Screen, CTglobs):
 
 	def configCB(self):
 		self.getConfigs()
-		self.refreshFrames()
+		self.refreshFrame("AB")
 
 	def exit(self):
 		if self.isInfo:
@@ -549,7 +573,7 @@ class CTmain(Screen, CTglobs):
 
 class CTconfig(Setup, CTglobs):
 	def __init__(self, session):
-		Setup.__init__(self, session, "clevertankenconfig", plugin="Extensions/clevertanken", PluginLanguageDomain="clevertanken")
+		Setup.__init__(self, session, "clevertankenconfig", plugin="Extensions/CleverTanken", PluginLanguageDomain="CleverTanken")
 		self["key_yellow"] = StaticText("Hauptort suchen")
 		self["key_blue"] = StaticText("Zweitort suchen")
 		self.cityAzipname = config.plugins.clevertanken.cityAzipname.value
@@ -636,7 +660,11 @@ def sessionstart(reason, session=None, **kwargs):
 	if reason == 0:
 		radiuslist = list(CTglobs.RADIUSDICT.items())
 		spritlist = list(CTglobs.SPRITDICT.items())
-		sortlist = list(CTglobs.SORTDICT.items())
+		fulllist = list(CTglobs.SORTDICT.items())
+		sortlist = fulllist[:]
+		sortlist.remove(("keine", "keine")) if ("keine", "keine") in sortlist else None
+		fsortlist = fulllist[:]
+		fsortlist.remove(("km", "km")) if ("km", "km") in fsortlist else None
 		maxlist = [(0, "alle Einträge"), (7, "max. 7 Einträge"), (14, "max. 14 Einträge"), (21, "max. 21 Einträge"), (29, "max. 29 Einträge")]
 		config.plugins.clevertanken = ConfigSubsection()
 		config.plugins.clevertanken.maxcities = ConfigSelection(default=10, choices=[(10, "max. 10 Städte"), (20, "max. 20 Städte"), (30, "max. 30 Städte"), (40, "max. 40 Städte"), (50, "max. 50 Städte")])
@@ -650,6 +678,8 @@ def sessionstart(reason, session=None, **kwargs):
 		config.plugins.clevertanken.radiusB = ConfigSelection(default="5", choices=radiuslist)
 		config.plugins.clevertanken.spritB = ConfigSelection(default="6", choices=spritlist)
 		config.plugins.clevertanken.sortB = ConfigSelection(default="p", choices=sortlist)
+		config.plugins.clevertanken.spritF = ConfigSelection(default="6", choices=spritlist)
+		config.plugins.clevertanken.sortF = ConfigSelection(default="p", choices=fsortlist)
 		config.plugins.clevertanken.maxentries = ConfigSelection(default=0, choices=maxlist)
 		config.plugins.clevertanken.startframeB = ConfigSelection(default="Z", choices=[("Z", "Zweitort"), ("F", "Favoriten")])
 		config.plugins.clevertanken.favorites = ConfigText(default="", fixed_size=False)
