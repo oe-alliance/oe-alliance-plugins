@@ -1,3 +1,3 @@
-installdir = $(libdir)/enigma2/python/Plugins/Extensions/clevertanken/pic
+installdir = $(libdir)/enigma2/python/Plugins/Extensions/CleverTanken/pic
 
 install_DATA = *.png
