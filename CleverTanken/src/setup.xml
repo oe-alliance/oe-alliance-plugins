@@ -5,7 +5,7 @@
 		<item level="0" text="Startvorgabe - Hauptort Umkreis/Radius:" description="Maximale Entfernung (Luftlinie) der Tankstellen zum Hauptort bei Pluginstart angeben.">config.plugins.clevertanken.radiusA</item>
 		<item level="0" text="Startvorgabe - Hauptort Kraftstoff:" description="Gewünschte Kraftstoffsorte des Hauptorts bei Pluginstart auswählen.">config.plugins.clevertanken.spritA</item>
 		<item level="0" text="Startvorgabe - Hauptort Sortierung:" description="Gewünschte Tankstellensortierung des Hauptorts  bei Pluginstart auswählen.">config.plugins.clevertanken.sortA</item>
-		<item level="0" text="Startvorgabe - Zweitort Name/Ortsteil:" description="Name des Zweitorts (ohne Postleitzahl) angeben, dabei UNBEDINGT über die Zweitortsuche gehen!">config.plugins.clevertanken.cityBzipname</item>
+		<item level="0" text="Zweitort Name/Ortsteil:" description="Name des Zweitorts (ohne Postleitzahl) angeben, dabei UNBEDINGT über die Zweitortsuche gehen!">config.plugins.clevertanken.cityBzipname</item>
 		<item level="0" text="Startvorgabe - Zweitort Umkreis/Radius:" description="Maximale Entfernung (Luftlinie) der Tankstellen zum Zweitort bei Pluginstart angeben.">config.plugins.clevertanken.radiusB</item>
 		<item level="0" text="Startvorgabe - Zweitort Kraftstoff:" description="Gewünschte Kraftstoffsorte des Zweitorts bei Pluginstart auswählen.">config.plugins.clevertanken.spritB</item>
 		<item level="0" text="Startvorgabe - Zweitort Sortierung:" description="Gewünschte Tankstellensortierung des Zweitort bei Pluginstart auswählen.">config.plugins.clevertanken.sortB</item>
