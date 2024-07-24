@@ -48,7 +48,7 @@ class CTglobs():
 			response = get(url.encode(), headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
 		except exceptions.RequestException as error:
-			print("[%s] ERROR in module 'self.download': %s" % (CTglobs.MODULE_NAME, str(error)))
+			print("[%s] ERROR in module 'download': %s" % (CTglobs.MODULE_NAME, str(error)))
 		else:
 			callback(response.content.decode())
 
@@ -252,10 +252,10 @@ class CTmain(Screen, CTglobs):
 	def createLink(self, frame):
 		if frame == "A":
 			zipname = config.plugins.clevertanken.cityAzipname.value.replace(" ", "+").replace("/", "%2F")
-			geodata = eval(str(config.plugins.clevertanken.cityAgeodata.value))
+			geodata = eval(config.plugins.clevertanken.cityAgeodata.value)
 		else:
 			zipname = config.plugins.clevertanken.cityBzipname.value.replace(" ", "+").replace("/", "%2F")
-			geodata = eval(str(config.plugins.clevertanken.cityBgeodata.value))
+			geodata = eval(config.plugins.clevertanken.cityBgeodata.value)
 		return f'{self.BASEURL}/tankstelle_liste?lat={geodata[0]}&lon={geodata[1]}&ort={zipname}&spritsorte={self.sprit[frame]}&r={self.radius[frame]}&sort={self.sort[frame]}'
 
 	def makeTankenView(self, frame, output):
@@ -622,11 +622,11 @@ class CTconfig(Setup, CTglobs):
 		if answer is not None:
 			if frame == "A":
 				self.cityAzipname = config.plugins.clevertanken.cityAzipname.value = answer[0].strip()
-				config.plugins.clevertanken.cityAgeodata.value = (answer[1], answer[2])
+				config.plugins.clevertanken.cityAgeodata.value = f"{answer[1]},{answer[2]}"
 				config.plugins.clevertanken.cityAgeodata.save()
 			elif frame == "B":
 				self.cityBzipname = config.plugins.clevertanken.cityBzipname.value = answer[0].strip()
-				config.plugins.clevertanken.cityBgeodata.value = (answer[1], answer[2])
+				config.plugins.clevertanken.cityBgeodata.value = f"{answer[1]},{answer[2]}"
 				config.plugins.clevertanken.cityBgeodata.save()
 
 	def keyCancel(self):  # This overrides the same class in ConfigList.py as part of Setup.py
@@ -666,15 +666,16 @@ def sessionstart(reason, session=None, **kwargs):
 		fsortlist = fulllist[:]
 		fsortlist.remove(("km", "km")) if ("km", "km") in fsortlist else None
 		maxlist = [(0, "alle Einträge"), (7, "max. 7 Einträge"), (14, "max. 14 Einträge"), (21, "max. 21 Einträge"), (29, "max. 29 Einträge")]
+		pricelist = ["aus"] + ["{:.2f}".format(x / 100) for x in range(100, 300)]
 		config.plugins.clevertanken = ConfigSubsection()
 		config.plugins.clevertanken.maxcities = ConfigSelection(default=10, choices=[(10, "max. 10 Städte"), (20, "max. 20 Städte"), (30, "max. 30 Städte"), (40, "max. 40 Städte"), (50, "max. 50 Städte")])
 		config.plugins.clevertanken.cityAzipname = ConfigText(default="10117 Berlin", fixed_size=False)
-		config.plugins.clevertanken.cityAgeodata = ConfigText(default=(52.5170365161785, 13.3888598914667), fixed_size=False)
+		config.plugins.clevertanken.cityAgeodata = ConfigText(default="52.5170365161785,13.3888598914667", fixed_size=False)
 		config.plugins.clevertanken.radiusA = ConfigSelection(default="5", choices=radiuslist)
 		config.plugins.clevertanken.spritA = ConfigSelection(default="6", choices=spritlist)
 		config.plugins.clevertanken.sortA = ConfigSelection(default="p", choices=sortlist)
 		config.plugins.clevertanken.cityBzipname = ConfigText(default="80331 München", fixed_size=False)
-		config.plugins.clevertanken.cityBgeodata = ConfigText(default=(48.1371079183914, 11.5753822176437), fixed_size=False)
+		config.plugins.clevertanken.cityBgeodata = ConfigText(default="48.1371079183914,11.5753822176437", fixed_size=False)
 		config.plugins.clevertanken.radiusB = ConfigSelection(default="5", choices=radiuslist)
 		config.plugins.clevertanken.spritB = ConfigSelection(default="6", choices=spritlist)
 		config.plugins.clevertanken.sortB = ConfigSelection(default="p", choices=sortlist)
@@ -683,11 +684,11 @@ def sessionstart(reason, session=None, **kwargs):
 		config.plugins.clevertanken.maxentries = ConfigSelection(default=0, choices=maxlist)
 		config.plugins.clevertanken.startframeB = ConfigSelection(default="Z", choices=[("Z", "Zweitort"), ("F", "Favoriten")])
 		config.plugins.clevertanken.favorites = ConfigText(default="", fixed_size=False)
-		config.plugins.clevertanken.priceRed = ConfigSelection(default="aus", choices=["aus"] + ["{:.2f}".format(x / 100) for x in range(100, 300)])
+		config.plugins.clevertanken.priceRed = ConfigSelection(default="aus", choices=pricelist)
 		config.plugins.clevertanken.spritRed = ConfigSelection(default="6", choices=spritlist)
-		config.plugins.clevertanken.priceYellow = ConfigSelection(default="aus", choices=["aus"] + ["{:.2f}".format(x / 100) for x in range(100, 300)])
+		config.plugins.clevertanken.priceYellow = ConfigSelection(default="aus", choices=pricelist)
 		config.plugins.clevertanken.spritYellow = ConfigSelection(default="6", choices=spritlist)
-		config.plugins.clevertanken.priceGreen = ConfigSelection(default="aus", choices=["aus"] + ["{:.2f}".format(x / 100) for x in range(100, 300)])
+		config.plugins.clevertanken.priceGreen = ConfigSelection(default="aus", choices=pricelist)
 		config.plugins.clevertanken.spritGreen = ConfigSelection(default="6", choices=spritlist)
 
 
