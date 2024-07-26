@@ -1,15 +1,19 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: LCD4linux\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: 2024-06-10 14:18+0200\n"
-"PO-Revision-Date: 2024-07-26 19:09+0200\n"
+"PO-Revision-Date: 2024-07-26 19:08+0200\n"
 "Last-Translator: Mr.Servo <mrservo via GitHub.com>\n"
 "Language-Team: \n"
-"Language: ru\n"
+"Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Generated-By: pygettext.py 1.5\n"
 "X-Generator: Poedit 3.4.4\n"
 
 #: ..\WebConfigSite.py:28
@@ -22,15 +26,15 @@ msgstr "Box-Skin-LCD"
 
 #: ..\WebConfigSite.py:28
 msgid "Font"
-msgstr "Шрифт"
+msgstr "Czcionka"
 
 #: ..\WebConfigSite.py:28
 msgid "Key"
-msgstr "Ключ"
+msgstr "Klawisz"
 
 #: ..\WebConfigSite.py:28
 msgid "MJPEG Stream"
-msgstr "MJPEG Ручей"
+msgstr "Strumień MJPEG"
 
 #: ..\WebConfigSite.py:28
 msgid "OSD"
@@ -38,11 +42,11 @@ msgstr "OSD"
 
 #: ..\WebConfigSite.py:28
 msgid "Picture"
-msgstr "Картинка"
+msgstr "Obrazek"
 
 #: ..\WebConfigSite.py:28
 msgid "Popup-Text"
-msgstr "Всплывающий- текст"
+msgstr "Wyskakujący tekst"
 
 #: ..\WebConfigSite.py:28
 msgid "Sonos"
@@ -50,11 +54,11 @@ msgstr "Sonos"
 
 #: ..\WebConfigSite.py:28
 msgid "Tuner"
-msgstr "Тюнер"
+msgstr "Tuner"
 
 #: ..\WebConfigSite.py:28
 msgid "WWW Converter"
-msgstr "WWW Конвертер"
+msgstr "WWW konwerter"
 
 #: ..\WebConfigSite.py:28
 msgid "WebIF"
@@ -62,7 +66,7 @@ msgstr "WebIF"
 
 #: ..\WebConfigSite.py:28 ..\WebConfigSite.py:557
 msgid "Screen"
-msgstr "Экран"
+msgstr "Ekran"
 
 #: ..\WebConfigSite.py:28 ..\plugin.py:487 ..\plugin_openweater3.py:486
 msgid "MusicCast"
@@ -72,7 +76,7 @@ msgstr "MusicCast"
 #: ..\plugin_openweater3.py:6234 ..\plugin_openweater3.py:6908
 #: ..\plugin_openweater3.py:7416
 msgid "Weather"
-msgstr "Погода"
+msgstr "Pogoda"
 
 #: ..\WebConfigSite.py:28 ..\plugin.py:6267 ..\plugin.py:6941 ..\plugin.py:7449
 #: ..\plugin_openweater3.py:6265 ..\plugin_openweater3.py:6939
@@ -84,13 +88,13 @@ msgstr "Netatmo"
 #: ..\plugin_openweater3.py:6472 ..\plugin_openweater3.py:7098
 #: ..\plugin_openweater3.py:7644
 msgid "Mail"
-msgstr "Почта"
+msgstr "Mail"
 
 #: ..\WebConfigSite.py:28 ..\plugin.py:6489 ..\plugin.py:7115 ..\plugin.py:7661
 #: ..\plugin_openweater3.py:6487 ..\plugin_openweater3.py:7113
 #: ..\plugin_openweater3.py:7659
 msgid "Remote Box"
-msgstr "Удаленный ящик"
+msgstr "Zdalny odbiornik"
 
 #: ..\WebConfigSite.py:28 ..\plugin.py:6517 ..\plugin.py:7143 ..\plugin.py:7689
 #: ..\plugin_openweater3.py:6515 ..\plugin_openweater3.py:7141
@@ -102,72 +106,73 @@ msgstr "FritzCall"
 #: ..\plugin_openweater3.py:6529 ..\plugin_openweater3.py:7155
 #: ..\plugin_openweater3.py:7701
 msgid "Calendar"
-msgstr "Календарь"
+msgstr "Kalendarz"
 
 #: ..\WebConfigSite.py:192 ..\plugin.py:5845 ..\plugin_openweater3.py:5844
 msgid "WebIF IP Allow"
-msgstr "WebIF IP Разрешать"
+msgstr "WebIF IP Dozwolone"
 
 #: ..\WebConfigSite.py:260
 msgid "No or wrong File selected, try a correct File first !"
 msgstr ""
-"Файл не выбран или выбран неверный файл, сначала попробуйте правильный файл!"
+"Nie wybrano pliku lub wybrano nieprawidłowy plik, spróbuj najpierw wybrać "
+"prawidłowy plik!"
 
 #: ..\WebConfigSite.py:525 ..\WebConfigSite.py:568 ..\plugin.py:5473
 #: ..\plugin_openweater3.py:5472
 msgid "Mode"
-msgstr "Режим"
+msgstr "Tryb"
 
 #: ..\WebConfigSite.py:527
 msgid "IP seurity not supported by Box"
-msgstr "Безопасность IP не поддерживается Box"
+msgstr "Bezpieczeństwo IP nie jest obsługiwane przez Box"
 
 #: ..\WebConfigSite.py:542
 msgid "Crashlog"
-msgstr "Креш лог"
+msgstr "Crashlog"
 
 #: ..\WebConfigSite.py:544
 msgid "Show"
-msgstr "Показать"
+msgstr "Pokaż"
 
 #: ..\WebConfigSite.py:545
 msgid "Delete"
-msgstr "Удалить"
+msgstr "Usuń"
 
 #: ..\WebConfigSite.py:549
 msgid "Filename"
-msgstr "Имя файла"
+msgstr "Nazwa pliku"
 
 #: ..\WebConfigSite.py:550
 msgid "Restore Config"
-msgstr "Восстановить конфигурацию"
+msgstr "Przywróć konfigurację"
 
 #: ..\WebConfigSite.py:551
 msgid "Backup Config"
-msgstr "Задний план Конфиг"
+msgstr "Konfiguracja kopii zapasowej"
 
 #: ..\WebConfigSite.py:553
 msgid "Delete Logfile"
-msgstr "Удалить Лог-файл"
+msgstr "Usuń plik log"
 
 #: ..\WebConfigSite.py:554
 msgid "Download Logfile"
-msgstr "Скачать Лог-файл"
+msgstr "Pobierz plik dziennika"
 
 #: ..\WebConfigSite.py:555
 msgid "Save Config"
-msgstr "Сохранить конфигурацию"
+msgstr "Zapisz konfigurację"
 
 #: ..\WebConfigSite.py:563
 msgid "stop Screencycle"
-msgstr "остановить Screencycle"
+msgstr "zatrzymaj zmianę ekranów"
 
 #: ..\WebConfigSite.py:569 ..\plugin.py:352 ..\plugin.py:5511 ..\plugin.py:5654
 #: ..\plugin.py:7801 ..\plugin.py:7817 ..\plugin_openweater3.py:352
 #: ..\plugin_openweater3.py:5510 ..\plugin_openweater3.py:5653
 #: ..\plugin_openweater3.py:7799 ..\plugin_openweater3.py:7815
 msgid "Global"
-msgstr "Глобально"
+msgstr "Globalne"
 
 #: ..\WebConfigSite.py:570 ..\plugin.py:436 ..\plugin.py:506 ..\plugin.py:5502
 #: ..\plugin.py:5897 ..\plugin.py:7802 ..\plugin.py:7806
@@ -175,7 +180,7 @@ msgstr "Глобально"
 #: ..\plugin_openweater3.py:5895 ..\plugin_openweater3.py:7800
 #: ..\plugin_openweater3.py:7804
 msgid "On"
-msgstr "Вкл"
+msgstr "Wł"
 
 #: ..\WebConfigSite.py:571 ..\plugin.py:436 ..\plugin.py:506 ..\plugin.py:631
 #: ..\plugin.py:5505 ..\plugin.py:6625 ..\plugin.py:7807 ..\plugin.py:7811
@@ -184,7 +189,7 @@ msgstr "Вкл"
 #: ..\plugin_openweater3.py:7805 ..\plugin_openweater3.py:7809
 #: ..\plugin_openweater3.py:8010
 msgid "Media"
-msgstr "Медиа"
+msgstr "Media"
 
 #: ..\WebConfigSite.py:572 ..\plugin.py:5508 ..\plugin.py:5529
 #: ..\plugin.py:7247 ..\plugin.py:7812 ..\plugin.py:7816 ..\plugin.py:8010
@@ -192,99 +197,99 @@ msgstr "Медиа"
 #: ..\plugin_openweater3.py:7245 ..\plugin_openweater3.py:7810
 #: ..\plugin_openweater3.py:7814 ..\plugin_openweater3.py:8008
 msgid "Idle"
-msgstr "Праздный"
+msgstr "Bezczynny"
 
 #: ..\WebConfigSite.py:574
 msgid "GUI Restart is required"
-msgstr "GUI необходимо перезагрузить"
+msgstr "Wymagany restart enigmy"
 
 #: ..\WebConfigSite.py:596
 msgid "Element"
-msgstr "Элемент"
+msgstr "Element"
 
 #: ..\WebConfigSite.py:624 ..\WebConfigSite.py:625
 msgid "other"
-msgstr "прочие"
+msgstr "inna"
 
 #: ..\WebConfigSite.py:711 ..\WebConfigSite.py:725
 msgid "set Settings"
-msgstr "меню Настройки"
+msgstr "zestaw ustawień"
 
 #: ..\WebConfigSite.py:714
 msgid "copy to On"
-msgstr "копировать в На"
+msgstr "kopiuj do Wł"
 
 #: ..\WebConfigSite.py:716
 msgid "copy to Media"
-msgstr "копировать в медиа"
+msgstr "kopiuj do mediów"
 
 #: ..\WebConfigSite.py:718
 msgid "copy to Idle"
-msgstr "копировать в фоне"
+msgstr "kopiowanie do stanu bezczynności"
 
 #: ..\WebConfigSite.py:733
 msgid "Exec"
-msgstr "Выполнение"
+msgstr "Wykonanie"
 
 #: ..\WebConfigSite.py:752
 msgid "Show Externals"
-msgstr "Показать Внешние"
+msgstr "Pokaż elementy zewnętrzne"
 
 #: ..\myFileList.py:158
 msgid "List of Storage Devices"
-msgstr "Список устройств хранения"
+msgstr "Lista zapamiętanych urządzeń"
 
 #: ..\myFileList.py:160
 msgid "Parent Directory"
-msgstr "Родительский каталог"
+msgstr "Katalog nadrzędny"
 
 #: ..\plugin.py:299 ..\plugin_openweater3.py:299
 msgid "Fri"
-msgstr "Пятн"
+msgstr "Pią"
 
 #: ..\plugin.py:299 ..\plugin_openweater3.py:299
 msgid "Mon"
-msgstr "Пон"
+msgstr "Pon"
 
 #: ..\plugin.py:299 ..\plugin_openweater3.py:299
 msgid "Sat"
-msgstr "Субб"
+msgstr "Sob"
 
 #: ..\plugin.py:299 ..\plugin_openweater3.py:299
 msgid "Sun"
-msgstr "Воскр"
+msgstr "Nie"
 
 #: ..\plugin.py:299 ..\plugin_openweater3.py:299
 msgid "Thur"
-msgstr "Чет"
+msgstr "Czw"
 
 #: ..\plugin.py:299 ..\plugin_openweater3.py:299
 msgid "Tue"
-msgstr "Вт"
+msgstr "Wto"
 
 #: ..\plugin.py:299 ..\plugin_openweater3.py:299
 msgid "Wed"
-msgstr "Ср"
+msgstr "Śro"
 
 #: ..\plugin.py:300 ..\plugin_openweater3.py:300
 msgid "black"
-msgstr "черный"
+msgstr "czarny"
 
 #: ..\plugin.py:300 ..\plugin_openweater3.py:300
 msgid "white"
-msgstr "белый"
+msgstr "biały"
 
 #: ..\plugin.py:301 ..\plugin_openweater3.py:301
 msgid "gray"
-msgstr "серый"
+msgstr "szary"
 
 #: ..\plugin.py:301 ..\plugin_openweater3.py:301
 msgid "silver"
-msgstr "серебро"
+msgstr "srebro"
 
 #: ..\plugin.py:301 ..\plugin_openweater3.py:301
 msgid "slategray"
-msgstr "сланец серый"
+msgstr "Niebiesko szary"
 
 #: ..\plugin.py:302 ..\plugin_openweater3.py:302
 msgid "aquamarine"
@@ -292,7 +297,7 @@ msgstr "aquamarine"
 
 #: ..\plugin.py:303 ..\plugin_openweater3.py:303
 msgid "gold"
-msgstr "золотой"
+msgstr "złoto"
 
 #: ..\plugin.py:303 ..\plugin_openweater3.py:303
 msgid "greenyellow"
@@ -300,43 +305,43 @@ msgstr "greenyellow"
 
 #: ..\plugin.py:303 ..\plugin_openweater3.py:303
 msgid "yellow"
-msgstr "желтый"
+msgstr "żółty"
 
 #: ..\plugin.py:304 ..\plugin_openweater3.py:304
 msgid "darkorange"
-msgstr "темнооранжевый"
+msgstr "Ciemno pomarańczowy"
 
 #: ..\plugin.py:304 ..\plugin_openweater3.py:304
 msgid "darkred"
-msgstr "dunkelrot"
+msgstr "Ciemno czerwony"
 
 #: ..\plugin.py:304 ..\plugin_openweater3.py:304
 msgid "indianred"
-msgstr "indianrot"
+msgstr "indianred"
 
 #: ..\plugin.py:304 ..\plugin_openweater3.py:304
 msgid "orange"
-msgstr "оранжевый"
+msgstr "pomarańczowy"
 
 #: ..\plugin.py:304 ..\plugin_openweater3.py:304
 msgid "orangered"
-msgstr "orangered"
+msgstr "pomarańczowy"
 
 #: ..\plugin.py:304 ..\plugin_openweater3.py:304
 msgid "red"
-msgstr "красный"
+msgstr "czerwony"
 
 #: ..\plugin.py:304 ..\plugin_openweater3.py:304
 msgid "tomato"
-msgstr "tomato"
+msgstr "pomidor"
 
 #: ..\plugin.py:305 ..\plugin_openweater3.py:305
 msgid "darkgreen"
-msgstr "темнозеленый"
+msgstr "ciemnozielony"
 
 #: ..\plugin.py:305 ..\plugin_openweater3.py:305
 msgid "green"
-msgstr "зеленый"
+msgstr "zielony"
 
 #: ..\plugin.py:305 ..\plugin_openweater3.py:305
 msgid "lawngreen"
@@ -344,19 +349,19 @@ msgstr "lawngreen"
 
 #: ..\plugin.py:305 ..\plugin_openweater3.py:305
 msgid "lightgreen"
-msgstr "светло-зеленый"
+msgstr "jasnozielony"
 
 #: ..\plugin.py:305 ..\plugin_openweater3.py:305
 msgid "lime"
-msgstr "лайм"
+msgstr "limonka"
 
 #: ..\plugin.py:306 ..\plugin_openweater3.py:306
 msgid "blue"
-msgstr "синий"
+msgstr "niebieski"
 
 #: ..\plugin.py:306 ..\plugin_openweater3.py:306
 msgid "blueviolet"
-msgstr "blauviolett"
+msgstr "Niebiesko fioletowy"
 
 #: ..\plugin.py:306 ..\plugin_openweater3.py:306
 msgid "cadetblue"
@@ -368,126 +373,126 @@ msgstr "cornflowerblue"
 
 #: ..\plugin.py:306 ..\plugin_openweater3.py:306
 msgid "darkblue"
-msgstr "темносиний"
+msgstr "ciemnoniebieski"
 
 #: ..\plugin.py:306 ..\plugin_openweater3.py:306
 msgid "indigo"
-msgstr "indigo"
+msgstr "indygo"
 
 #: ..\plugin.py:306 ..\plugin_openweater3.py:306
 msgid "lightblue"
-msgstr "светло-синий"
+msgstr "jasnoniebieski"
 
 #: ..\plugin.py:307 ..\plugin_openweater3.py:307
 msgid "cyan"
-msgstr "голубой"
+msgstr "cyan"
 
 #: ..\plugin.py:307 ..\plugin_openweater3.py:307
 msgid "darkorchid"
-msgstr "dunkelorchidee"
+msgstr "Ciemna orchidea"
 
 #: ..\plugin.py:307 ..\plugin_openweater3.py:307
 msgid "deeppink"
-msgstr "deeppink"
+msgstr "Głęboki róż"
 
 #: ..\plugin.py:307 ..\plugin_openweater3.py:307
 msgid "magenta"
-msgstr "пурпурный"
+msgstr "malinowy"
 
 #: ..\plugin.py:307 ..\plugin_openweater3.py:307
 msgid "violet"
-msgstr "фиолетовый"
+msgstr "fioletowy"
 
 #: ..\plugin.py:308 ..\plugin_openweater3.py:308
 msgid "brown"
-msgstr "коричневый"
+msgstr "brąz"
 
 #: ..\plugin.py:308 ..\plugin_openweater3.py:308
 msgid "moccasin"
-msgstr "moccasin"
+msgstr "mokasyn"
 
 #: ..\plugin.py:308 ..\plugin_openweater3.py:308
 msgid "olive"
-msgstr "оливковый"
+msgstr "oliwka"
 
 #: ..\plugin.py:308 ..\plugin_openweater3.py:308
 msgid "rosybrown"
-msgstr "rosigbraun"
+msgstr "Różowo brązowy"
 
 #: ..\plugin.py:308 ..\plugin_openweater3.py:308
 msgid "sandybrown"
-msgstr "sandbraun"
+msgstr "Piaskowo brązowy"
 
 #: ..\plugin.py:310 ..\plugin.py:311 ..\plugin.py:312
 #: ..\plugin_openweater3.py:310 ..\plugin_openweater3.py:311
 #: ..\plugin_openweater3.py:312
 msgid "Screen 1"
-msgstr "Экран 1"
+msgstr "Ekran 1"
 
 #: ..\plugin.py:310 ..\plugin.py:311 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:311
 msgid "Screen 1-5"
-msgstr "Экран 1-5"
+msgstr "Ekran 1-5"
 
 #: ..\plugin.py:310 ..\plugin.py:311 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:311
 msgid "Screen 1-6"
-msgstr "Экран 1-6"
+msgstr "Ekran 1-6"
 
 #: ..\plugin.py:310 ..\plugin.py:311 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:311
 msgid "Screen 1-7"
-msgstr "Экран 1-7"
+msgstr "Ekran 1-7"
 
 #: ..\plugin.py:310 ..\plugin.py:311 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:311
 msgid "Screen 1-8"
-msgstr "Экран 1-8"
+msgstr "Ekran 1-8"
 
 #: ..\plugin.py:310 ..\plugin.py:311 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:311
 msgid "Screen 1-9"
-msgstr "Экран 1-9"
+msgstr "Ekran 1-9"
 
 #: ..\plugin.py:310 ..\plugin.py:312 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:312
 msgid "Screen 2"
-msgstr "Экран 2"
+msgstr "Ekran 2"
 
 #: ..\plugin.py:310 ..\plugin.py:312 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:312
 msgid "Screen 3"
-msgstr "Экран 3"
+msgstr "Ekran 3"
 
 #: ..\plugin.py:310 ..\plugin.py:312 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:312
 msgid "Screen 4"
-msgstr "Экран 4"
+msgstr "Ekran 4"
 
 #: ..\plugin.py:310 ..\plugin.py:312 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:312
 msgid "Screen 5"
-msgstr "Экран 5"
+msgstr "Ekran 5"
 
 #: ..\plugin.py:310 ..\plugin.py:312 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:312
 msgid "Screen 6"
-msgstr "Экран 6"
+msgstr "Ekran 6"
 
 #: ..\plugin.py:310 ..\plugin.py:312 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:312
 msgid "Screen 7"
-msgstr "Экран 7"
+msgstr "Ekran 7"
 
 #: ..\plugin.py:310 ..\plugin.py:312 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:312
 msgid "Screen 8"
-msgstr "Экран 8"
+msgstr "Ekran 8"
 
 #: ..\plugin.py:310 ..\plugin.py:312 ..\plugin_openweater3.py:310
 #: ..\plugin_openweater3.py:312
 msgid "Screen 9"
-msgstr "Экран 9"
+msgstr "Ekran 9"
 
 #: ..\plugin.py:310 ..\plugin.py:313 ..\plugin.py:343 ..\plugin.py:345
 #: ..\plugin.py:382 ..\plugin.py:391 ..\plugin.py:392 ..\plugin.py:406
@@ -538,180 +543,180 @@ msgstr "Экран 9"
 #: ..\plugin_openweater3.py:2274 ..\plugin_openweater3.py:2284
 #: ..\plugin_openweater3.py:2324 ..\plugin_openweater3.py:2332
 msgid "off"
-msgstr "выкл"
+msgstr "wył"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 1+2"
-msgstr "Экран 1+2"
+msgstr "Ekran 1+2"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 1+2+3"
-msgstr "Экран 1+2+3"
+msgstr "Ekran 1+2+3"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 1+2+3+4"
-msgstr "Экран 1+2+3+4"
+msgstr "Ekran 1+2+3+4"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 1+2+4"
-msgstr "Экран 1+2+4"
+msgstr "Ekran 1+2+4"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 1+3"
-msgstr "Экран 1+3"
+msgstr "Ekran 1+3"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 1+3+4"
-msgstr "Экран 1+3+4"
+msgstr "Ekran 1+3+4"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 1+3+5+7+9"
-msgstr "Экран 1+3+5+7+9"
+msgstr "Ekran 1+3+5+7+9"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 1+4"
-msgstr "Экран 1+4"
+msgstr "Ekran 1+4"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 2+3"
-msgstr "Экран 2+3"
+msgstr "Ekran 2+3"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 2+3+4"
-msgstr "Экран 2+3+4"
+msgstr "Ekran 2+3+4"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 2+4"
-msgstr "Экран 2+4"
+msgstr "Ekran 2+4"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 2+4+6+8"
-msgstr "Экран 2+4+6+8"
+msgstr "Ekran 2+4+6+8"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 3+4"
-msgstr "Экран 3+4"
+msgstr "Ekran 3+4"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 5-8"
-msgstr "Экран 5-8"
+msgstr "Ekran 5-8"
 
 #: ..\plugin.py:310 ..\plugin_openweater3.py:310
 msgid "Screen 5-9"
-msgstr "Экран 5-9"
+msgstr "Ekran 5-9"
 
 #: ..\plugin.py:311 ..\plugin_openweater3.py:311
 msgid "Screen 1-2"
-msgstr "Экран 1-2"
+msgstr "Ekran 1-2"
 
 #: ..\plugin.py:311 ..\plugin_openweater3.py:311
 msgid "Screen 1-3"
-msgstr "Экран 1-3"
+msgstr "Ekran 1-3"
 
 #: ..\plugin.py:311 ..\plugin_openweater3.py:311
 msgid "Screen 1-4"
-msgstr "Экран 1-4"
+msgstr "Ekran 1-4"
 
 #: ..\plugin.py:313 ..\plugin.py:1848 ..\plugin_openweater3.py:313
 #: ..\plugin_openweater3.py:1847
 msgid "on"
-msgstr "вкл"
+msgstr "włączony"
 
 #: ..\plugin.py:314 ..\plugin.py:476 ..\plugin.py:481 ..\plugin.py:486
 #: ..\plugin_openweater3.py:314 ..\plugin_openweater3.py:475
 #: ..\plugin_openweater3.py:480 ..\plugin_openweater3.py:485
 msgid "10s"
-msgstr "10с"
+msgstr "10s"
 
 #: ..\plugin.py:314 ..\plugin.py:476 ..\plugin.py:481 ..\plugin.py:486
 #: ..\plugin_openweater3.py:314 ..\plugin_openweater3.py:475
 #: ..\plugin_openweater3.py:480 ..\plugin_openweater3.py:485
 msgid "15s"
-msgstr "15с"
+msgstr "15 sek."
 
 #: ..\plugin.py:314 ..\plugin.py:476 ..\plugin.py:481 ..\plugin.py:486
 #: ..\plugin_openweater3.py:314 ..\plugin_openweater3.py:475
 #: ..\plugin_openweater3.py:480 ..\plugin_openweater3.py:485
 msgid "1min"
-msgstr "1мин"
+msgstr "1 min."
 
 #: ..\plugin.py:314 ..\plugin.py:476 ..\plugin.py:481 ..\plugin.py:486
 #: ..\plugin_openweater3.py:314 ..\plugin_openweater3.py:475
 #: ..\plugin_openweater3.py:480 ..\plugin_openweater3.py:485
 msgid "20s"
-msgstr "20с"
+msgstr "20 sek."
 
 #: ..\plugin.py:314 ..\plugin.py:476 ..\plugin.py:481 ..\plugin.py:486
 #: ..\plugin_openweater3.py:314 ..\plugin_openweater3.py:475
 #: ..\plugin_openweater3.py:480 ..\plugin_openweater3.py:485
 msgid "2min"
-msgstr "2мин"
+msgstr "2 min."
 
 #: ..\plugin.py:314 ..\plugin.py:476 ..\plugin.py:481 ..\plugin.py:486
 #: ..\plugin_openweater3.py:314 ..\plugin_openweater3.py:475
 #: ..\plugin_openweater3.py:480 ..\plugin_openweater3.py:485
 msgid "30s"
-msgstr "30с"
+msgstr "30 sek."
 
 #: ..\plugin.py:314 ..\plugin.py:540 ..\plugin.py:589 ..\plugin.py:1206
 #: ..\plugin_openweater3.py:314 ..\plugin_openweater3.py:539
 #: ..\plugin_openweater3.py:588 ..\plugin_openweater3.py:1205
 msgid "30min"
-msgstr "30мин"
+msgstr "30 min"
 
 #: ..\plugin.py:314 ..\plugin.py:540 ..\plugin.py:589 ..\plugin.py:1206
 #: ..\plugin_openweater3.py:314 ..\plugin_openweater3.py:539
 #: ..\plugin_openweater3.py:588 ..\plugin_openweater3.py:1205
 msgid "60min"
-msgstr "60мин"
+msgstr "60 min."
 
 #: ..\plugin.py:314 ..\plugin.py:540 ..\plugin.py:589
 #: ..\plugin_openweater3.py:314 ..\plugin_openweater3.py:539
 #: ..\plugin_openweater3.py:588
 msgid "20min"
-msgstr "20мин"
+msgstr "20 min"
 
 #: ..\plugin.py:314 ..\plugin.py:540 ..\plugin_openweater3.py:314
 #: ..\plugin_openweater3.py:539
 msgid "10min"
-msgstr "10мин"
+msgstr "10 min."
 
 #: ..\plugin.py:314 ..\plugin.py:540 ..\plugin_openweater3.py:314
 #: ..\plugin_openweater3.py:539
 msgid "5min"
-msgstr "5мин"
+msgstr "5 min"
 
 #: ..\plugin.py:314 ..\plugin_openweater3.py:314
 msgid "2h"
-msgstr "2час"
+msgstr "2 godz"
 
 #: ..\plugin.py:314 ..\plugin_openweater3.py:314
 msgid "3h"
-msgstr "3час"
+msgstr "3 godz"
 
 #: ..\plugin.py:314 ..\plugin_openweater3.py:314
 msgid "3min"
-msgstr "3мин"
+msgstr "3 min."
 
 #: ..\plugin.py:314 ..\plugin_openweater3.py:314
 msgid "40s"
-msgstr "40с"
+msgstr "40 sek."
 
 #: ..\plugin.py:314 ..\plugin_openweater3.py:314
 msgid "4min"
-msgstr "4мин"
+msgstr "4 min."
 
 #: ..\plugin.py:314 ..\plugin_openweater3.py:314
 msgid "50s"
-msgstr "50с"
+msgstr "50 sek."
 
 #: ..\plugin.py:314 ..\plugin_openweater3.py:314
 msgid "5h"
-msgstr "5час"
+msgstr "5 godz"
 
 #: ..\plugin.py:314 ..\plugin_openweater3.py:314
 msgid "5s"
-msgstr "5с"
+msgstr "5s"
 
 #: ..\plugin.py:315 ..\plugin.py:316 ..\plugin_openweater3.py:315
 #: ..\plugin_openweater3.py:316
@@ -754,19 +759,19 @@ msgstr "Corby@Pearl 128x128"
 
 #: ..\plugin.py:317 ..\plugin_openweater3.py:317
 msgid "Pearl (or compatible LCD) 240x320"
-msgstr "Pearl (or compatible LCD) 240x320"
+msgstr "Pearl (lub kompatybilny LCD) 240x320"
 
 #: ..\plugin.py:317 ..\plugin_openweater3.py:317
 msgid "Pearl (or compatible LCD) 320x240"
-msgstr "Pearl (or compatible LCD) 320x240"
+msgstr "Pearl (lub kompatybilny LCD) 320x240"
 
 #: ..\plugin.py:317 ..\plugin_openweater3.py:317
 msgid "Pearl (or compatible LCD) 480x320"
-msgstr "Pearl (or compatible LCD) 480x320"
+msgstr "Pearl (lub kompatybilny LCD) 480x320"
 
 #: ..\plugin.py:317 ..\plugin_openweater3.py:317
 msgid "Pearl (or compatible LCD) 800x480"
-msgstr "Pearl (или совместимый ЖК-дисплей) 800x480"
+msgstr "Pearl (lub kompatybilny LCD) 800x480"
 
 #: ..\plugin.py:318 ..\plugin_openweater3.py:318
 msgid "Samsung SPF-72H 800x480"
@@ -786,7 +791,7 @@ msgstr "Samsung SPF-87H 800x480"
 
 #: ..\plugin.py:318 ..\plugin_openweater3.py:318
 msgid "Samsung SPF-87H old 800x480"
-msgstr "Samsung SPF-87H alt 800x480"
+msgstr "Samsung SPF-87H old 800x480"
 
 #: ..\plugin.py:319 ..\plugin_openweater3.py:319
 msgid "Samsung SPF-105P 1024x600"
@@ -798,7 +803,7 @@ msgstr "Samsung SPF-107H 1024x600"
 
 #: ..\plugin.py:319 ..\plugin_openweater3.py:319
 msgid "Samsung SPF-107H old 1024x600"
-msgstr "Samsung SPF-107H alt 1024x600"
+msgstr "Samsung SPF-107H old 1024x600"
 
 #: ..\plugin.py:319 ..\plugin_openweater3.py:319
 msgid "Samsung SPF-85H/86H 800x600"
@@ -810,11 +815,11 @@ msgstr "Samsung SPF-85P/86P 800x600"
 
 #: ..\plugin.py:320 ..\plugin_openweater3.py:320
 msgid "Internal Box-Skin-LCD"
-msgstr "Internal Box-Skin-LCD"
+msgstr "Wewnętrzny Box-Skin-LCD"
 
 #: ..\plugin.py:320 ..\plugin_openweater3.py:320
 msgid "Internal TFT-LCD 400x240"
-msgstr "Internal TFT-LCD 400x240"
+msgstr "Wewnętrzny TFT-LCD 400x240"
 
 #: ..\plugin.py:320 ..\plugin_openweater3.py:320
 msgid "Samsung SPF-1000P 1024x600"
@@ -830,31 +835,31 @@ msgstr "Samsung SPF-800P 800x480"
 
 #: ..\plugin.py:321 ..\plugin_openweater3.py:321
 msgid "only Picture 1024x600"
-msgstr "только фото 1024x600"
+msgstr "tylko obraz 1024x600"
 
 #: ..\plugin.py:321 ..\plugin_openweater3.py:321
 msgid "only Picture 320x240"
-msgstr "только фото 320x240"
+msgstr "tylko obraz 320x240"
 
 #: ..\plugin.py:321 ..\plugin_openweater3.py:321
 msgid "only Picture 800x480"
-msgstr "только фото 800x480"
+msgstr "tylko obraz 800x480"
 
 #: ..\plugin.py:321 ..\plugin_openweater3.py:321
 msgid "only Picture 800x600"
-msgstr "только фото 800x600"
+msgstr "tylko obraz 800x600"
 
 #: ..\plugin.py:321 ..\plugin_openweater3.py:321
 msgid "only Picture Custom Size"
-msgstr "только фото своего размера"
+msgstr "tylko obraz własny rozmiar"
 
 #: ..\plugin.py:321 ..\plugin_openweater3.py:321
 msgid "only Picture Custom Size 2"
-msgstr "только фото своего размера 2"
+msgstr "tylko obraz Rozmiar niestandardowy 2"
 
 #: ..\plugin.py:323 ..\plugin_openweater3.py:323
 msgid "Internal Vu+ Duo2 LCD 400x240"
-msgstr "Internes Vu+ Duo2 LCD 400x240"
+msgstr "Wewnętrzny Vu+ Duo2 LCD 400x240"
 
 #: ..\plugin.py:324 ..\plugin_openweater3.py:324
 msgid "128x32"
@@ -899,231 +904,231 @@ msgstr "96x64"
 #: ..\plugin.py:325 ..\plugin.py:326 ..\plugin_openweater3.py:325
 #: ..\plugin_openweater3.py:326
 msgid "Current"
-msgstr "Текущий"
+msgstr "Aktualne"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "2 Days 1 Line"
-msgstr "2 дня 1 линия"
+msgstr "2 dni 1 linia"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "2 Days 2 Line"
-msgstr "2 дня 2 линии"
+msgstr "2 dni 2 linie"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "4 Days 1 Line"
-msgstr "4 дня 1 линия"
+msgstr "4 dni 1 linia"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "4 Days 2 Lines"
-msgstr "4 дня 2 линии"
+msgstr "4 dni 2 linie"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "4 Days Vertical View"
-msgstr "4 дня вертикально"
+msgstr "4 dni Widok pionowy"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "5 Days 1 Line"
-msgstr "5 дней в 1 линию"
+msgstr "5 dni 1 linia"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "5 Days 2 Lines"
-msgstr "5 дней в 2 линии"
+msgstr "5 Dni 2 Linie"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "5 Days Vertical View"
-msgstr "5 дней вертикально"
+msgstr "5 dni Widok pionowy"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "Current Temperature (+C)"
-msgstr "Текущяя температура (+C)"
+msgstr "Bieżąca temperatura (+C)"
 
 #: ..\plugin.py:325 ..\plugin_openweater3.py:325
 msgid "Current Temperature (-C)"
-msgstr "Текущяя температура (-C)"
+msgstr "Bieżąca temperatura (-C)"
 
 #: ..\plugin.py:326 ..\plugin_openweater3.py:326
 msgid "Current Temperature"
-msgstr "Текущяя температура"
+msgstr "Bieżąca temperatura"
 
 #: ..\plugin.py:327 ..\plugin_openweater3.py:327
 msgid "All"
-msgstr "Все"
+msgstr "Wszystkie"
 
 #: ..\plugin.py:327 ..\plugin_openweater3.py:327
 msgid "Temperature"
-msgstr "Температура"
+msgstr "Temperatura"
 
 #: ..\plugin.py:327 ..\plugin_openweater3.py:327
 msgid "Temperature+Co2"
-msgstr "Температура+Co2"
+msgstr "Temperatura+Co2"
 
 #: ..\plugin.py:327 ..\plugin_openweater3.py:327
 msgid "Temperature+Co2+Pressure"
-msgstr "Температура+Co2+Давление"
+msgstr "Temperatura+Co2+ciśnienie"
 
 #: ..\plugin.py:327 ..\plugin_openweater3.py:327
 msgid "Temperature+Humidity"
-msgstr "Температура+Влажность"
+msgstr "Temperatura+Wilgotność"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1"
-msgstr "Модуль 1"
+msgstr "Moduł 1"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1+2"
-msgstr "Модуль 1+2"
+msgstr "Moduł 1+2"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1+2+3"
-msgstr "Модуль 1+2+3"
+msgstr "Moduł 1+2+3"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1+2+4"
-msgstr "Модуль 1+2+4"
+msgstr "Moduł 1+2+4"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1+3"
-msgstr "Модуль 1+3"
+msgstr "Moduł 1+3"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1+3+4"
-msgstr "Модуль 1+3+4"
+msgstr "Moduł 1+3+4"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1+4"
-msgstr "Модуль 1+4"
+msgstr "Moduł 1+4"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1-4"
-msgstr "Модуль 1-4"
+msgstr "Moduł 1-4"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1-5"
-msgstr "Модуль 1-5"
+msgstr "Moduł 1-5"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 1-6"
-msgstr "Модуль 1-6"
+msgstr "Moduł 1-6"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 2"
-msgstr "Модуль 2"
+msgstr "Moduł 2"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 2+3"
-msgstr "Модуль 2+3"
+msgstr "Moduł 2+3"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 2+3+4"
-msgstr "Модуль 2+3+4"
+msgstr "Moduł 2+3+4"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 2+4"
-msgstr "Модуль 2+4"
+msgstr "Moduł 2+4"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 2-6"
-msgstr "Модуль 2-6"
+msgstr "Moduł 2-6"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 3"
-msgstr "Модуль 3"
+msgstr "Moduł 3"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 3+4"
-msgstr "Модуль 3+4"
+msgstr "Moduł 3+4"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 3-6"
-msgstr "Модуль 3-6"
+msgstr "Moduł 3-6"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 4"
-msgstr "Модуль 4"
+msgstr "Moduł 4"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 4-6"
-msgstr "Модуль 4-6"
+msgstr "Moduł 4-6"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 5"
-msgstr "Модуль 5"
+msgstr "Moduł 5"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 5-6"
-msgstr "Модуль 5-6"
+msgstr "Moduł 5-6"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "Module 6"
-msgstr "Модуль 6"
+msgstr "Moduł 6"
 
 #: ..\plugin.py:328 ..\plugin_openweater3.py:328
 msgid "userdefined"
-msgstr "определяемые пользователем"
+msgstr "zdefiniowany przez użytkownika"
 
 #: ..\plugin.py:329 ..\plugin_openweater3.py:329
 msgid "Bar"
-msgstr "Balken"
+msgstr "Pasek"
 
 #: ..\plugin.py:329 ..\plugin_openweater3.py:329
 msgid "Bar+Value"
-msgstr "Balken+Wert"
+msgstr "Pasek+Wartość"
 
 #: ..\plugin.py:329 ..\plugin_openweater3.py:329
 msgid "Knob"
-msgstr "Кнопка"
+msgstr "Pokrętło"
 
 #: ..\plugin.py:329 ..\plugin_openweater3.py:329
 msgid "Knob+Value"
-msgstr "Кнопка + значение"
+msgstr "Pokrętło+Wartość"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Analog"
-msgstr "Аналоговый"
+msgstr "Analog"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Analog+Date"
-msgstr "Аналоговые+дата"
+msgstr "Analogowy+Data"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Analog+Date+Weekday"
-msgstr "Аналоговые+дата+будни"
+msgstr "Analogowy+Data+Dzień tygodnia"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Analog+Date+Weekday 2"
-msgstr "Аналоговые+дата+будни 2"
+msgstr "Analogowy+Data+2 dzień tygodnia"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Date"
-msgstr "Дата"
+msgstr "Data"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Date+Time"
-msgstr "Дата+Время"
+msgstr "Data+Czas"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Date+Time+Weekday"
-msgstr "Дата + время + день недели"
+msgstr "Data+Czas+Dzień tygodnia"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Flaps Design Date"
-msgstr "Закрылки Дизайн Дата"
+msgstr "Klapy Data projektu"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Flaps Design Weekday"
-msgstr "Закрылки Дизайн Будний день"
+msgstr "Klapy Dzień tygodnia projektu"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Time"
-msgstr "Время"
+msgstr "Czas"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Time+Weekday"
-msgstr "Время+День"
+msgstr "Czas+Dzień tygodnia"
 
 #: ..\plugin.py:330 ..\plugin_openweater3.py:330
 msgid "Weekday"
-msgstr "Будний день"
+msgstr "Dzień tygodnia"
 
 #: ..\plugin.py:331 ..\plugin.py:344 ..\plugin_openweater3.py:331
 #: ..\plugin_openweater3.py:344
@@ -1246,7 +1251,7 @@ msgstr "5%"
 #: ..\plugin_openweater3.py:1139 ..\plugin_openweater3.py:1743
 #: ..\plugin_openweater3.py:2130
 msgid "left"
-msgstr "слева"
+msgstr "lewo"
 
 #: ..\plugin.py:331 ..\plugin.py:639 ..\plugin.py:1132 ..\plugin.py:1140
 #: ..\plugin.py:1744 ..\plugin.py:2131 ..\plugin_openweater3.py:331
@@ -1254,127 +1259,127 @@ msgstr "слева"
 #: ..\plugin_openweater3.py:1139 ..\plugin_openweater3.py:1743
 #: ..\plugin_openweater3.py:2130
 msgid "right"
-msgstr "справа"
+msgstr "prawo"
 
 #: ..\plugin.py:331 ..\plugin.py:639 ..\plugin_openweater3.py:331
 #: ..\plugin_openweater3.py:638
 msgid "center"
-msgstr "центр"
+msgstr "środek"
 
 #: ..\plugin.py:332 ..\plugin_openweater3.py:332
 msgid "Extended"
-msgstr "Расширенное"
+msgstr "Rozszerzony"
 
 #: ..\plugin.py:332 ..\plugin_openweater3.py:332
 msgid "Extended (Short)"
-msgstr "Расширенное (Short)"
+msgstr "Rozszerzony (Krótkometrażowy)"
 
 #: ..\plugin.py:332 ..\plugin_openweater3.py:332
 msgid "Short"
-msgstr "Краткий"
+msgstr "Krótkie"
 
 #: ..\plugin.py:332 ..\plugin_openweater3.py:332
 msgid "Short (Extended)"
-msgstr "Краткий (Расширенный)"
+msgstr "Krótki (Rozszerzony)"
 
 #: ..\plugin.py:332 ..\plugin_openweater3.py:332
 msgid "Short+Extended"
-msgstr "Краткий+Расширенный"
+msgstr "Short+Extended"
 
 #: ..\plugin.py:333 ..\plugin_openweater3.py:333
 msgid "Month"
-msgstr "Месяц"
+msgstr "Miesiąc"
 
 #: ..\plugin.py:333 ..\plugin_openweater3.py:333
 msgid "Month+Header"
-msgstr "Месяц + заголовок"
+msgstr "Miesiąc+Nagłówek"
 
 #: ..\plugin.py:333 ..\plugin_openweater3.py:333
 msgid "Week"
-msgstr "Неделя"
+msgstr "Tydzien"
 
 #: ..\plugin.py:333 ..\plugin_openweater3.py:333
 msgid "Week+Header"
-msgstr "Неделя+Заголовок"
+msgstr "Tydzień + nagłówek"
 
 #: ..\plugin.py:333 ..\plugin_openweater3.py:333
 msgid "no Calendar"
-msgstr "нет календаря"
+msgstr "brak kalendarza"
 
 #: ..\plugin.py:334 ..\plugin.py:14234 ..\plugin_openweater3.py:334
 #: ..\plugin_openweater3.py:14234
 msgid "no Dates"
-msgstr "нет даты"
+msgstr "brak dat"
 
 #: ..\plugin.py:334 ..\plugin_openweater3.py:334
 msgid "Dates 1 Line"
-msgstr "Даты в 1 линию"
+msgstr "Daty 1 Linia"
 
 #: ..\plugin.py:334 ..\plugin_openweater3.py:334
 msgid "Dates 3 Lines"
-msgstr "Даты в 3 линии"
+msgstr "Daty 3 linie"
 
 #: ..\plugin.py:334 ..\plugin_openweater3.py:334
 msgid "Dates 5 Lines"
-msgstr "Даты в 5 линий"
+msgstr "Daty 5 linii"
 
 #: ..\plugin.py:334 ..\plugin_openweater3.py:334
 msgid "Dates 9 Lines"
-msgstr "Даты в 9 линий"
+msgstr "Daty 9 linii"
 
 #: ..\plugin.py:334 ..\plugin_openweater3.py:334
 msgid "Dates compact 2 Lines"
-msgstr "Даты компактно в 2 линии"
+msgstr "Daty 2 linie kompaktowe"
 
 #: ..\plugin.py:334 ..\plugin_openweater3.py:334
 msgid "Dates compact 3 Lines"
-msgstr "Даты компактно в 3 линии"
+msgstr "Daty 3 linie kompaktowe"
 
 #: ..\plugin.py:335 ..\plugin.py:816 ..\plugin.py:1375
 #: ..\plugin_openweater3.py:335 ..\plugin_openweater3.py:815
 #: ..\plugin_openweater3.py:1374
 msgid "Frame"
-msgstr "Фрейм"
+msgstr "Ramka"
 
 #: ..\plugin.py:335 ..\plugin_openweater3.py:335
 msgid "Underline"
-msgstr "Подчеркивание"
+msgstr "Podkreślenie"
 
 #: ..\plugin.py:335 ..\plugin_openweater3.py:335
 msgid "Underline 2"
-msgstr "Подчеркивание 2"
+msgstr "Podkreślenie 2"
 
 #: ..\plugin.py:336 ..\plugin_openweater3.py:336
 msgid "Dates"
-msgstr "Даты"
+msgstr "Daty"
 
 #: ..\plugin.py:336 ..\plugin_openweater3.py:336
 msgid "Dates compact"
-msgstr "Даты компактно"
+msgstr "Daty kompaktowe"
 
 #: ..\plugin.py:336 ..\plugin_openweater3.py:336
 msgid "Dates compact no Icon"
-msgstr "Даты компактно без иконок"
+msgstr "Prosta data bez ikon"
 
 #: ..\plugin.py:336 ..\plugin_openweater3.py:336
 msgid "Dates no Icon"
-msgstr "Даты без иконок"
+msgstr "Daty i ikony"
 
 #: ..\plugin.py:337 ..\plugin_openweater3.py:337
 msgid "no Icon"
-msgstr "нет значка"
+msgstr "brak ikony"
 
 #: ..\plugin.py:337 ..\plugin_openweater3.py:337
 msgid "no Icon, with Targetnumber"
-msgstr "без значка, с целевым числом"
+msgstr "bez ikony, z numerem docelowym"
 
 #: ..\plugin.py:337 ..\plugin_openweater3.py:337
 msgid "with Icon"
-msgstr "mit Icon"
+msgstr "z ikoną"
 
 #: ..\plugin.py:337 ..\plugin_openweater3.py:337
 msgid "with Icon & Targetnumber"
-msgstr "со значком и целевым числом"
+msgstr "z ikoną i numerem docelowym"
 
 #: ..\plugin.py:338 ..\plugin.py:339 ..\plugin.py:340 ..\plugin.py:350
 #: ..\plugin.py:418 ..\plugin.py:421 ..\plugin.py:453 ..\plugin.py:455
@@ -1391,7 +1396,7 @@ msgstr "со значком и целевым числом"
 #: ..\plugin_openweater3.py:1529 ..\plugin_openweater3.py:1736
 #: ..\plugin_openweater3.py:2011
 msgid "no"
-msgstr "нет"
+msgstr "nie"
 
 #: ..\plugin.py:338 ..\plugin_openweater3.py:338
 msgid "C"
@@ -1399,15 +1404,15 @@ msgstr "C"
 
 #: ..\plugin.py:338 ..\plugin_openweater3.py:338
 msgid "C + rpm"
-msgstr "C + об/мин"
+msgstr "C + obr"
 
 #: ..\plugin.py:338 ..\plugin_openweater3.py:338
 msgid "C + rpm/2"
-msgstr "C + об/мин/2"
+msgstr "C + obr/2"
 
 #: ..\plugin.py:338 ..\plugin_openweater3.py:338
 msgid "rpm"
-msgstr "rpm"
+msgstr "obr"
 
 #: ..\plugin.py:338 ..\plugin_openweater3.py:338
 msgid "rpm/2"
@@ -1436,71 +1441,71 @@ msgstr "db + % + BER"
 
 #: ..\plugin.py:339 ..\plugin_openweater3.py:339
 msgid "db + BER"
-msgstr "db + BER"
+msgstr "Db + BER"
 
 #: ..\plugin.py:340 ..\plugin_openweater3.py:340
 msgid "% + Load@1min"
-msgstr "% + Load@1min"
+msgstr "% + obciążenie@1 min."
 
 #: ..\plugin.py:340 ..\plugin_openweater3.py:340
 msgid "% + Load@5min"
-msgstr "% + Load@5min"
+msgstr "% + obciążenie@5 min."
 
 #: ..\plugin.py:340 ..\plugin_openweater3.py:340
 msgid "Load@1min"
-msgstr "Загрузить@1мин"
+msgstr "Ładuj@1 min."
 
 #: ..\plugin.py:340 ..\plugin_openweater3.py:340
 msgid "Load@5min"
-msgstr "Загрузить@5мин"
+msgstr "Ładuj@5 min."
 
 #: ..\plugin.py:341 ..\plugin_openweater3.py:341
 msgid "show run"
-msgstr "показать запущенные"
+msgstr "Pokaż uruchomione"
 
 #: ..\plugin.py:341 ..\plugin_openweater3.py:341
 msgid "show run+sleep"
-msgstr "показать запущенные+sleep"
+msgstr "pokaż uruchom+uśpij"
 
 #: ..\plugin.py:342 ..\plugin_openweater3.py:342
 msgid "Always All"
-msgstr "Всегда все"
+msgstr "Zawsze wszystko"
 
 #: ..\plugin.py:342 ..\plugin_openweater3.py:342
 msgid "Always New"
-msgstr "Всегда новые"
+msgstr "Zawsze nowy"
 
 #: ..\plugin.py:342 ..\plugin_openweater3.py:342
 msgid "Only New"
-msgstr "Только новости"
+msgstr "Tylko nowy"
 
 #: ..\plugin.py:343 ..\plugin_openweater3.py:343
 msgid "All Informations"
-msgstr "Вся информация"
+msgstr "Wszystkie informacje"
 
 #: ..\plugin.py:343 ..\plugin_openweater3.py:343
 msgid "Distance only"
-msgstr "Только расстояние"
+msgstr "Tylko odległość"
 
 #: ..\plugin.py:343 ..\plugin_openweater3.py:343
 msgid "Distance+Illumination"
-msgstr "Расстояние+Освещение"
+msgstr "Odległość+oświetlenie"
 
 #: ..\plugin.py:343 ..\plugin_openweater3.py:343
 msgid "Distance+Moonphase"
-msgstr "Расстояние+фаза луны"
+msgstr "Odległość + faza księżyca"
 
 #: ..\plugin.py:343 ..\plugin_openweater3.py:343
 msgid "Illumination only"
-msgstr "Только подсветка"
+msgstr "Tylko podświetlenie"
 
 #: ..\plugin.py:343 ..\plugin_openweater3.py:343
 msgid "Illumination+Moonphase"
-msgstr "Освещение+фаза луны"
+msgstr "Podświetlenie+faza księżyca"
 
 #: ..\plugin.py:343 ..\plugin_openweater3.py:343
 msgid "Moonphase only"
-msgstr "Только фаза луны"
+msgstr "Tylko tryb księżycowy"
 
 #: ..\plugin.py:344 ..\plugin_openweater3.py:344
 msgid "100%"
@@ -1552,27 +1557,27 @@ msgstr "Pop3-SSL"
 #: ..\plugin_openweater3.py:826 ..\plugin_openweater3.py:837
 #: ..\plugin_openweater3.py:5907
 msgid "Picon"
-msgstr "Пикон"
+msgstr "Picon"
 
 #: ..\plugin.py:348 ..\plugin_openweater3.py:348
 msgid "Channel"
-msgstr "Канал"
+msgstr "Kanał"
 
 #: ..\plugin.py:348 ..\plugin_openweater3.py:348
 msgid "Channel+Title"
-msgstr "Канал+Заголовок"
+msgstr "Kanał+Tytuł"
 
 #: ..\plugin.py:348 ..\plugin_openweater3.py:348
 msgid "Picon+Channel"
-msgstr "Пикон+Канал"
+msgstr "Pikona+Kanał"
 
 #: ..\plugin.py:348 ..\plugin_openweater3.py:348
 msgid "Picon+Channel+Title"
-msgstr "Пикон+Канал+Название"
+msgstr "Pikona+Kanał+Tytuł"
 
 #: ..\plugin.py:349 ..\plugin_openweater3.py:349
 msgid "same color"
-msgstr "такого же цвета"
+msgstr "ten sam kolor"
 
 #: ..\plugin.py:350 ..\plugin.py:453 ..\plugin.py:455 ..\plugin.py:568
 #: ..\plugin.py:570 ..\plugin.py:590 ..\plugin.py:700 ..\plugin.py:1737
@@ -1581,21 +1586,21 @@ msgstr "такого же цвета"
 #: ..\plugin_openweater3.py:569 ..\plugin_openweater3.py:589
 #: ..\plugin_openweater3.py:699 ..\plugin_openweater3.py:1736
 msgid "yes"
-msgstr "да"
+msgstr "tak"
 
 #: ..\plugin.py:350 ..\plugin_openweater3.py:350
 msgid "yes +25%"
-msgstr "да +25%"
+msgstr "tak +25%"
 
 #: ..\plugin.py:351 ..\plugin.py:885 ..\plugin.py:1473 ..\plugin.py:1919
 #: ..\plugin_openweater3.py:351 ..\plugin_openweater3.py:884
 #: ..\plugin_openweater3.py:1472 ..\plugin_openweater3.py:1918
 msgid "horizontally"
-msgstr "горизонтально"
+msgstr "poziomo"
 
 #: ..\plugin.py:351 ..\plugin_openweater3.py:351
 msgid "vertically"
-msgstr "вертикально"
+msgstr "pionowo"
 
 #: ..\plugin.py:352 ..\plugin.py:353 ..\plugin.py:395 ..\plugin.py:469
 #: ..\plugin.py:475 ..\plugin.py:480 ..\plugin.py:485
@@ -1642,195 +1647,195 @@ msgstr "7"
 
 #: ..\plugin.py:353 ..\plugin_openweater3.py:353
 msgid "all"
-msgstr "все"
+msgstr "wszystkie"
 
 #: ..\plugin.py:354 ..\plugin_openweater3.py:354
 msgid "Corner"
-msgstr "Угол"
+msgstr "Narożnik"
 
 #: ..\plugin.py:354 ..\plugin_openweater3.py:354
 msgid "Corner+Timeshift"
-msgstr "Угол+сдвиг во времени"
+msgstr "Narożnik+Timeshift"
 
 #: ..\plugin.py:354 ..\plugin_openweater3.py:354
 msgid "Picon+Timeshift"
-msgstr "Пикон+сдвиг во времени"
+msgstr "Picon+Timeshift"
 
 #: ..\plugin.py:355 ..\plugin_openweater3.py:355
 msgid "only Progress Bar"
-msgstr "только прогресс-бар"
+msgstr "tylko pasek postępu"
 
 #: ..\plugin.py:356 ..\plugin_openweater3.py:356
 msgid "with Remaining Minutes"
-msgstr "с оставшимися минутами"
+msgstr "z pozostałymi minutami"
 
 #: ..\plugin.py:356 ..\plugin_openweater3.py:356
 msgid "with Remaining Minutes (Size 1.5)"
-msgstr "с оставшимися минутами (Размер 1.5)"
+msgstr "z pozostałymi minutami (rozmiar 1.5)"
 
 #: ..\plugin.py:356 ..\plugin_openweater3.py:356
 msgid "with Remaining Minutes (Size 2)"
-msgstr "с оставшимися минутами (Размер 1.5)"
+msgstr "z pozostałymi minutami (rozmiar 2)"
 
 #: ..\plugin.py:357 ..\plugin_openweater3.py:357
 msgid "with Percent"
-msgstr "вместе с процентами"
+msgstr "z procentem"
 
 #: ..\plugin.py:357 ..\plugin_openweater3.py:357
 msgid "with Percent (Size 1.5)"
-msgstr "вместе с процентами (Размер 1.5)"
+msgstr "z procentem (rozmiar 1.5)"
 
 #: ..\plugin.py:357 ..\plugin_openweater3.py:357
 msgid "with Percent (Size 2)"
-msgstr "вместе с процентами (Размер 2)"
+msgstr "z procentem (rozmiar 2)"
 
 #: ..\plugin.py:358 ..\plugin_openweater3.py:358
 msgid "with Remaining Minutes (above)"
-msgstr "с оставшимися минутами (выше"
+msgstr "z pozostałymi minutami (powyżej)"
 
 #: ..\plugin.py:358 ..\plugin_openweater3.py:358
 msgid "with Remaining Minutes (above/Size 1.5)"
-msgstr "с оставшимися минутами (выше/Размер 1.5)"
+msgstr "z pozostałymi minutami (powyżej/rozmiar 1.5)"
 
 #: ..\plugin.py:358 ..\plugin_openweater3.py:358
 msgid "with Remaining Minutes (above/Size 2)"
-msgstr "с оставшимися минутами (выше/Размер 2)"
+msgstr "z pozostałymi minutami (powyżej/rozmiar 2)"
 
 #: ..\plugin.py:359 ..\plugin_openweater3.py:359
 msgid "with Percent (above)"
-msgstr "вместе с процентами (выше)"
+msgstr "z procentem (powyżej)"
 
 #: ..\plugin.py:359 ..\plugin_openweater3.py:359
 msgid "with Percent (above/Size 1.5)"
-msgstr "вместе с процентами (выше/Размер 1.5)"
+msgstr "z procentem (powyżej/rozmiar 1.5)"
 
 #: ..\plugin.py:359 ..\plugin_openweater3.py:359
 msgid "with Percent (above/Size 2)"
-msgstr "вместе с процентами (выше/Размер 2)"
+msgstr "z procentem (powyżej/rozmiar 2)"
 
 #: ..\plugin.py:360 ..\plugin_openweater3.py:360
 msgid "with Remaining Minutes (below)"
-msgstr "с оставшимися минутами (ниже)"
+msgstr "z pozostałymi minutami (poniżej)"
 
 #: ..\plugin.py:360 ..\plugin_openweater3.py:360
 msgid "with Remaining Minutes (below/Size 1.5)"
-msgstr "с оставшимися минутами (ниже/Размер 1.5)"
+msgstr "z pozostałymi minutami (poniżej/rozmiar 1.5)"
 
 #: ..\plugin.py:360 ..\plugin_openweater3.py:360
 msgid "with Remaining Minutes (below/Size 2)"
-msgstr "с оставшимися минутами (ниже/Размер 2)"
+msgstr "z pozostałymi minutami (poniżej/rozmiar 2)"
 
 #: ..\plugin.py:361 ..\plugin_openweater3.py:361
 msgid "with Percent (below)"
-msgstr "вместе с процентами (ниже)"
+msgstr "z procentem (poniżej)"
 
 #: ..\plugin.py:361 ..\plugin_openweater3.py:361
 msgid "with Percent (below/Size 1.5)"
-msgstr "вместе с процентами (ниже/Размер 1.5)"
+msgstr "z procentem (poniżej/rozmiar 1.5)"
 
 #: ..\plugin.py:361 ..\plugin_openweater3.py:361
 msgid "with Percent (below/Size 2)"
-msgstr "вместе с процентами (ниже/Размер 2)"
+msgstr "z procentem (poniżej/rozmiar 2)"
 
 #: ..\plugin.py:362 ..\plugin_openweater3.py:362
 msgid "with Current 00:00"
-msgstr "от текущего"
+msgstr "z aktualną godziną 00:00"
 
 #: ..\plugin.py:362 ..\plugin_openweater3.py:362
 msgid "with Current 00:00 (Size 1.5)"
-msgstr "от текущего 00:00 (размер 1.5)"
+msgstr "z bieżącym 00:00 (rozmiar 1.5)"
 
 #: ..\plugin.py:362 ..\plugin_openweater3.py:362
 msgid "with Current 00:00 (Size 2)"
-msgstr "от текущего 00:00 (размер 2)"
+msgstr "z bieżącym 00:00 (rozmiar 2)"
 
 #: ..\plugin.py:363 ..\plugin_openweater3.py:363
 msgid "with Current 00:00 (above)"
-msgstr "от текущего 00:00 (выше)"
+msgstr "z bieżącym 00:00 (powyżej)"
 
 #: ..\plugin.py:363 ..\plugin_openweater3.py:363
 msgid "with Current 00:00 (above/Size 1.5)"
-msgstr "with Current 00:00 (above/Size 1.5)"
+msgstr "z bieżącym 00:00 (powyżej/rozmiar 1.5)"
 
 #: ..\plugin.py:363 ..\plugin_openweater3.py:363
 msgid "with Current 00:00 (above/Size 2)"
-msgstr "with Current 00:00 (above/Size 2)"
+msgstr "z bieżącym 00:00 (powyżej/rozmiar 2)"
 
 #: ..\plugin.py:364 ..\plugin_openweater3.py:364
 msgid "with Current 00:00 (below)"
-msgstr "with Current 00:00 (below)"
+msgstr "z bieżącym 00:00 (poniżej)"
 
 #: ..\plugin.py:364 ..\plugin_openweater3.py:364
 msgid "with Current 00:00 (below/Size 1.5)"
-msgstr "with Current 00:00 (below/Size 1.5)"
+msgstr "z bieżącym 00:00 (poniżej/rozmiar 1.5)"
 
 #: ..\plugin.py:364 ..\plugin_openweater3.py:364
 msgid "with Current 00:00 (below/Size 2)"
-msgstr "with Current 00:00 (below/Size 2)"
+msgstr "z bieżącą godziną 00:00 (poniżej/rozmiar 2)"
 
 #: ..\plugin.py:365 ..\plugin_openweater3.py:365
 msgid "with Percent Minutes / Total (above)"
-msgstr "с процентами минут / Всего (выше)"
+msgstr "z procentem minut / całość (powyżej)"
 
 #: ..\plugin.py:365 ..\plugin_openweater3.py:365
 msgid "with Percent Minutes / Total (above/Size 1.5)"
-msgstr "с процентами минут / Всего (выше/Размер 1.5)"
+msgstr "z procentem minut / całość (powyżej/rozmiar 1.5)"
 
 #: ..\plugin.py:365 ..\plugin_openweater3.py:365
 msgid "with Percent Minutes / Total (above/Size 2)"
-msgstr "с процентами минут / Всего (выше/Размер 2)"
+msgstr "z procentem minut / całość (powyżej/rozmiar 2)"
 
 #: ..\plugin.py:366 ..\plugin_openweater3.py:366
 msgid "with absolute Endtime"
-msgstr "с абсолютным Концом"
+msgstr "z całkowitym czasem zakończenia"
 
 #: ..\plugin.py:366 ..\plugin_openweater3.py:366
 msgid "with absolute Endtime (Size 1.5)"
-msgstr "с абсолютным Концом (Размер 1.5)"
+msgstr "z całkowitym czasem zakończenia (rozmiar 1.5)"
 
 #: ..\plugin.py:366 ..\plugin_openweater3.py:366
 msgid "with absolute Endtime (Size 2)"
-msgstr "с абсолютным Концом (Размер 2)"
+msgstr "z całkowitym czasem zakończenia (rozmiar 2)"
 
 #: ..\plugin.py:367 ..\plugin_openweater3.py:367
 msgid "with Minutes Total / Endtime (above)"
-msgstr "с итогом в минутах / Время окончания (выше)"
+msgstr "z całością minut / czas końcowy (powyżej)"
 
 #: ..\plugin.py:367 ..\plugin_openweater3.py:367
 msgid "with Minutes Total / Endtime (above/Size 1.5)"
-msgstr "с итогом в минутах / Время окончания (выше/Размер 1.5)"
+msgstr "z całością minut / czas końcowy (powyżej/rozmiar 1.5)"
 
 #: ..\plugin.py:367 ..\plugin_openweater3.py:367
 msgid "with Minutes Total / Endtime (above/Size 2)"
-msgstr "с итогом в минутах / Время окончания (выше/Размер 2)"
+msgstr "z całością minut / czas końcowy (powyżej/rozmiar 2)"
 
 #: ..\plugin.py:376 ..\plugin_openweater3.py:376
 msgid "Fastmode (2s)"
-msgstr "Быстрый режим (2s)"
+msgstr "Tryb szybki (2 s)"
 
 #: ..\plugin.py:376 ..\plugin_openweater3.py:376
 msgid "Normal (5s)"
-msgstr "Нормальный (5с)"
+msgstr "Normalny (5 s)"
 
 #: ..\plugin.py:392 ..\plugin_openweater3.py:392
 msgid "alphabetic"
-msgstr "алфавитный"
+msgstr "alfabetyczny"
 
 #: ..\plugin.py:392 ..\plugin_openweater3.py:392
 msgid "random"
-msgstr "случайно"
+msgstr "losowe"
 
 #: ..\plugin.py:393 ..\plugin_openweater3.py:393
 msgid "better/slow"
-msgstr "лучше/медленная"
+msgstr "lepiej/wolno"
 
 #: ..\plugin.py:393 ..\plugin_openweater3.py:393
 msgid "low/fast (Picture only)"
-msgstr "низкий/быстрый (Только изображения)"
+msgstr "wolno/szybko (tylko obraz)"
 
 #: ..\plugin.py:393 ..\plugin_openweater3.py:393
 msgid "low/fast (all)"
-msgstr "низкий/быстрый (Все)"
+msgstr "wolno/szybko (wszystko)"
 
 #: ..\plugin.py:395 ..\plugin.py:475 ..\plugin.py:480 ..\plugin.py:485
 #: ..\plugin_openweater3.py:395 ..\plugin_openweater3.py:474
@@ -1846,11 +1851,11 @@ msgstr "20"
 
 #: ..\plugin.py:395 ..\plugin_openweater3.py:395
 msgid "0.5"
-msgstr "0.5"
+msgstr "0,5"
 
 #: ..\plugin.py:398 ..\plugin_openweater3.py:398
 msgid "JPG"
-msgstr "JPG"
+msgstr "JPEG"
 
 #: ..\plugin.py:398 ..\plugin_openweater3.py:398
 msgid "PNG"
@@ -1858,59 +1863,59 @@ msgstr "PNG"
 
 #: ..\plugin.py:399 ..\plugin_openweater3.py:399
 msgid "cache + adjustment (high quality, slow)"
-msgstr "тайник + корректирование (высокое качество, медленный)"
+msgstr "bufor + regulacja (wysoka jakość, powoli)"
 
 #: ..\plugin.py:399 ..\plugin_openweater3.py:399
 msgid "cache + adjustment (low quality, fast)"
-msgstr "тайник + корректирование (низкое качество, быстрый)"
+msgstr "bufor + regulacja (niska jakość, szybko)"
 
 #: ..\plugin.py:399 ..\plugin_openweater3.py:399
 msgid "no cache + no adjustment"
-msgstr "без кеша + без настройки"
+msgstr "brak bufora + brak regulacji"
 
 #: ..\plugin.py:418 ..\plugin_openweater3.py:418
 msgid "Plug Tuner"
-msgstr "Затыкать Тюнер"
+msgstr "Plug Tuner"
 
 #: ..\plugin.py:418 ..\plugin_openweater3.py:418
 msgid "USB Tuner"
-msgstr "USB Тюнер"
+msgstr "Tuner USB"
 
 #: ..\plugin.py:419 ..\plugin_openweater3.py:419
 msgid "EPG"
-msgstr "E"
+msgstr "EPG"
 
 #: ..\plugin.py:419 ..\plugin_openweater3.py:419
 msgid "Now/Next"
-msgstr "Сейчас/дальше"
+msgstr "Teraz/Następnie"
 
 #: ..\plugin.py:433 ..\plugin_openweater3.py:433
 msgid "normal"
-msgstr "нормальный"
+msgstr "normalny"
 
 #: ..\plugin.py:433 ..\plugin_openweater3.py:433
 msgid "reduced"
-msgstr "уменьшенный"
+msgstr "zmniejszony"
 
 #: ..\plugin.py:438 ..\plugin_openweater3.py:437
 msgid "Javascript"
-msgstr "JavaScript"
+msgstr "Javascript"
 
 #: ..\plugin.py:438 ..\plugin_openweater3.py:437
 msgid "Javascript no Refresh"
-msgstr "JavaScript нет обновления"
+msgstr "Javascript bez odświeżania"
 
 #: ..\plugin.py:438 ..\plugin_openweater3.py:437
 msgid "Reload"
-msgstr "Перезагрузить"
+msgstr "Przeładuj"
 
 #: ..\plugin.py:442 ..\plugin_openweater3.py:441
 msgid "1 - normal"
-msgstr "1 нормальный"
+msgstr "1 - normalny"
 
 #: ..\plugin.py:442 ..\plugin_openweater3.py:441
 msgid "2 - side by side"
-msgstr "2 - бок о бок"
+msgstr "2 - obok siebie"
 
 #: ..\plugin.py:443 ..\plugin_openweater3.py:442
 msgid "MSN"
@@ -1931,27 +1936,27 @@ msgstr "WeatherUnlocked"
 #: ..\plugin.py:453 ..\plugin.py:590 ..\plugin_openweater3.py:452
 #: ..\plugin_openweater3.py:589
 msgid "alternative Copy-Mode/DM800hd (24bit)"
-msgstr "alternative Copy-Mode/DM800hd (24bit)"
+msgstr "Alternatywny tryb kopiowania/DM800hd (24-bitowy)"
 
 #: ..\plugin.py:455 ..\plugin_openweater3.py:454
 msgid "yes + %"
-msgstr "да + %"
+msgstr "tak + %"
 
 #: ..\plugin.py:461 ..\plugin_openweater3.py:460
 msgid "yes, long"
-msgstr "да, долго"
+msgstr "tak, długo"
 
 #: ..\plugin.py:461 ..\plugin_openweater3.py:460
 msgid "yes, short"
-msgstr "да, коротко"
+msgstr "tak, krótki"
 
 #: ..\plugin.py:468 ..\plugin_openweater3.py:467
 msgid "km/h"
-msgstr "км/ч"
+msgstr "km/h"
 
 #: ..\plugin.py:468 ..\plugin_openweater3.py:467
 msgid "m/s"
-msgstr "м/с"
+msgstr "m/s"
 
 #: ..\plugin.py:475 ..\plugin.py:480 ..\plugin.py:485
 #: ..\plugin_openweater3.py:474 ..\plugin_openweater3.py:479
@@ -1961,7 +1966,7 @@ msgstr "60"
 
 #: ..\plugin.py:487 ..\plugin_openweater3.py:486
 msgid "Coversearch"
-msgstr "Обложка поиск"
+msgstr "Coversearch"
 
 #: ..\plugin.py:494 ..\plugin.py:495 ..\plugin.py:496
 #: ..\plugin_openweater3.py:493 ..\plugin_openweater3.py:494
@@ -1973,13 +1978,13 @@ msgstr "0"
 #: ..\plugin_openweater3.py:493 ..\plugin_openweater3.py:494
 #: ..\plugin_openweater3.py:495
 msgid "180"
-msgstr "180"
+msgstr "180 KM"
 
 #: ..\plugin.py:494 ..\plugin.py:495 ..\plugin.py:496
 #: ..\plugin_openweater3.py:493 ..\plugin_openweater3.py:494
 #: ..\plugin_openweater3.py:495
 msgid "270"
-msgstr "270"
+msgstr "270°"
 
 #: ..\plugin.py:494 ..\plugin.py:495 ..\plugin.py:496
 #: ..\plugin_openweater3.py:493 ..\plugin_openweater3.py:494
@@ -1991,101 +1996,101 @@ msgstr "90"
 #: ..\plugin_openweater3.py:502 ..\plugin_openweater3.py:503
 #: ..\plugin_openweater3.py:504 ..\plugin_openweater3.py:627
 msgid "always"
-msgstr "всегда"
+msgstr "zawsze"
 
 #: ..\plugin.py:503 ..\plugin.py:504 ..\plugin.py:505
 #: ..\plugin_openweater3.py:502 ..\plugin_openweater3.py:503
 #: ..\plugin_openweater3.py:504
 msgid "1 / min"
-msgstr "1 / мин"
+msgstr "1/min."
 
 #: ..\plugin.py:506 ..\plugin_openweater3.py:505
 msgid "On+Media+Standby"
-msgstr "On+Media+Standby"
+msgstr "Załącz+Media+Uśpij"
 
 #: ..\plugin.py:506 ..\plugin_openweater3.py:505
 msgid "Standby"
-msgstr "Ожидать"
+msgstr "Tryb Czuwania"
 
 #: ..\plugin.py:508 ..\plugin_openweater3.py:507
 msgid "32bit - color"
-msgstr "32bit -Цвет"
+msgstr "32bit - kolor"
 
 #: ..\plugin.py:508 ..\plugin_openweater3.py:507
 msgid "8bit - grayscale/color"
-msgstr "8bit - серый/цветной"
+msgstr "8bit - skala szarości/kolor"
 
 #: ..\plugin.py:518 ..\plugin.py:519 ..\plugin_openweater3.py:517
 #: ..\plugin_openweater3.py:518
 msgid "2 x InfoKey"
-msgstr "2 x EPG"
+msgstr "2 x InfoKey"
 
 #: ..\plugin.py:518 ..\plugin.py:519 ..\plugin_openweater3.py:517
 #: ..\plugin_openweater3.py:518
 msgid "2 x Mute"
-msgstr "2 x Немой"
+msgstr "2 x Wyciszenie"
 
 #: ..\plugin.py:518 ..\plugin.py:519 ..\plugin_openweater3.py:517
 #: ..\plugin_openweater3.py:518
 msgid "Long InfoKey"
-msgstr "Долгое нажатие EPG"
+msgstr "Long InfoKey"
 
 #: ..\plugin.py:518 ..\plugin_openweater3.py:517
 msgid "2 x FastForwardKey"
-msgstr "2 x  >>"
+msgstr "2 x FastForwardKey"
 
 #: ..\plugin.py:518 ..\plugin_openweater3.py:517
 msgid "2 x FastForwardKey Type 2"
-msgstr "2 x >> Тип 2"
+msgstr "2 x FastForwardKey Typ 2"
 
 #: ..\plugin.py:518 ..\plugin_openweater3.py:517
 msgid "Long FastForwardKey"
-msgstr "Долгое нажатие >>"
+msgstr "Long FastForwardKey"
 
 #: ..\plugin.py:518 ..\plugin_openweater3.py:517
 msgid "Long FastForwardKey Type 2"
-msgstr "Долгое нажатие >> Тип 2"
+msgstr "Long FastForwardKey Type 2"
 
 #: ..\plugin.py:519 ..\plugin_openweater3.py:518
 msgid "2 x FastBackwardKey"
-msgstr "2 x <<"
+msgstr "2 x FastBackwardKey"
 
 #: ..\plugin.py:519 ..\plugin_openweater3.py:518
 msgid "2 x FastBackwardKey Type 2"
-msgstr "2x << Тип 2"
+msgstr "2 x FastBackwardKey Typ 2"
 
 #: ..\plugin.py:519 ..\plugin_openweater3.py:518
 msgid "Long FastBackwardKey"
-msgstr "Долгое нажатие <<"
+msgstr "Long FastBackwardKey"
 
 #: ..\plugin.py:519 ..\plugin_openweater3.py:518
 msgid "Long FastBackwardKey Type 2"
-msgstr "Долгое нажатие << Тип 2"
+msgstr "Long FastBackwardKey Type 2"
 
 #: ..\plugin.py:540 ..\plugin.py:589 ..\plugin_openweater3.py:539
 #: ..\plugin_openweater3.py:588
 msgid "15min"
-msgstr "15мин"
+msgstr "15 min"
 
 #: ..\plugin.py:568 ..\plugin_openweater3.py:567
 msgid "yes, extended"
-msgstr "да, продлен"
+msgstr "tak, rozszerzony"
 
 #: ..\plugin.py:624 ..\plugin_openweater3.py:623
 msgid "Console normal"
-msgstr "Konsole normal"
+msgstr "Konsola działa normalnie"
 
 #: ..\plugin.py:624 ..\plugin_openweater3.py:623
 msgid "Logfile extensive"
-msgstr "Logfile extensive"
+msgstr "Plik dziennika"
 
 #: ..\plugin.py:624 ..\plugin_openweater3.py:623
 msgid "Logfile normal"
-msgstr "Logfile normal"
+msgstr "Normalny plik dziennika"
 
 #: ..\plugin.py:628 ..\plugin_openweater3.py:627
 msgid "disabled"
-msgstr "выключен"
+msgstr "wyłączony"
 
 #: ..\plugin.py:631 ..\plugin.py:1260 ..\plugin_openweater3.py:630
 #: ..\plugin_openweater3.py:1259
@@ -2094,11 +2099,11 @@ msgstr "TV"
 
 #: ..\plugin.py:631 ..\plugin_openweater3.py:630
 msgid "Radio"
-msgstr "Радио"
+msgstr "Radio"
 
 #: ..\plugin.py:631 ..\plugin_openweater3.py:630
 msgid "Radio+Media"
-msgstr "Радио+Медиа"
+msgstr "Radio+Media"
 
 #: ..\plugin.py:631 ..\plugin_openweater3.py:630
 msgid "TV+Radio"
@@ -2106,51 +2111,51 @@ msgstr "TV+Radio"
 
 #: ..\plugin.py:631 ..\plugin_openweater3.py:630
 msgid "TV+Radio+Media"
-msgstr "TV+Радио+Медиа"
+msgstr "TV+Radio+Media"
 
 #: ..\plugin.py:632 ..\plugin_openweater3.py:631
 msgid "TV (full)"
-msgstr "TV (полный)"
+msgstr "TV (pełny)"
 
 #: ..\plugin.py:632 ..\plugin_openweater3.py:631
 msgid "normal (full)"
-msgstr "нормальный (полный)"
+msgstr "normalny (pełny)"
 
 #: ..\plugin.py:632 ..\plugin_openweater3.py:631
 msgid "trimmed (black)"
-msgstr "обрезается (черный)"
+msgstr "przycięty (czarny)"
 
 #: ..\plugin.py:632 ..\plugin_openweater3.py:631
 msgid "trimmed (transparent)"
-msgstr "обрезается (прозрачный)"
+msgstr "Zablokowany (przeźroczysty)"
 
 #: ..\plugin.py:635 ..\plugin_openweater3.py:634
 msgid "MUTE or defined Keys"
-msgstr "Немой или определенные ключи"
+msgstr "Wyciszenie lub zdefiniowane klawisze"
 
 #: ..\plugin.py:635 ..\plugin_openweater3.py:634
 msgid "any Key"
-msgstr "любой ключ"
+msgstr "dowolny klucz"
 
 #: ..\plugin.py:772 ..\plugin.py:784 ..\plugin.py:796 ..\plugin.py:1343
 #: ..\plugin.py:1355 ..\plugin_openweater3.py:771 ..\plugin_openweater3.py:783
 #: ..\plugin_openweater3.py:795 ..\plugin_openweater3.py:1342
 #: ..\plugin_openweater3.py:1354
 msgid "Info"
-msgstr "Инфо"
+msgstr "Info"
 
 #: ..\plugin.py:772 ..\plugin.py:784 ..\plugin.py:796 ..\plugin.py:1343
 #: ..\plugin.py:1355 ..\plugin_openweater3.py:771 ..\plugin_openweater3.py:783
 #: ..\plugin_openweater3.py:795 ..\plugin_openweater3.py:1342
 #: ..\plugin_openweater3.py:1354
 msgid "Time+Info"
-msgstr "Время +Информация"
+msgstr "Czas+Info"
 
 #: ..\plugin.py:772 ..\plugin.py:784 ..\plugin.py:1343
 #: ..\plugin_openweater3.py:771 ..\plugin_openweater3.py:783
 #: ..\plugin_openweater3.py:1342
 msgid "Time+Duration+Info"
-msgstr "Время +Продолжительность+Информация"
+msgstr "Czas+Długość+Info"
 
 #: ..\plugin.py:796 ..\plugin.py:1355 ..\plugin_openweater3.py:795
 #: ..\plugin_openweater3.py:1354
@@ -2160,92 +2165,92 @@ msgstr "Mini-EPG"
 #: ..\plugin.py:796 ..\plugin.py:1355 ..\plugin_openweater3.py:795
 #: ..\plugin_openweater3.py:1354
 msgid "Time+Length+Info"
-msgstr "Время+Длинна+Инфо"
+msgstr "Czas+Długość+Info"
 
 #: ..\plugin.py:811 ..\plugin.py:1371 ..\plugin_openweater3.py:810
 #: ..\plugin_openweater3.py:1370
 msgid "half left"
-msgstr "левая половина"
+msgstr "połowa w lewo"
 
 #: ..\plugin.py:811 ..\plugin.py:1371 ..\plugin_openweater3.py:810
 #: ..\plugin_openweater3.py:1370
 msgid "half right"
-msgstr "правая половина"
+msgstr "pół w prawo"
 
 #: ..\plugin.py:816 ..\plugin.py:1375 ..\plugin_openweater3.py:815
 #: ..\plugin_openweater3.py:1374
 msgid "Frame x2"
-msgstr "Фрейм x2"
+msgstr "Rama x2"
 
 #: ..\plugin.py:816 ..\plugin.py:1375 ..\plugin_openweater3.py:815
 #: ..\plugin_openweater3.py:1374
 msgid "Line"
-msgstr "- Линия"
+msgstr "Linia"
 
 #: ..\plugin.py:816 ..\plugin.py:1375 ..\plugin_openweater3.py:815
 #: ..\plugin_openweater3.py:1374
 msgid "no Bar"
-msgstr "нет бара"
+msgstr "bez Paska"
 
 #: ..\plugin.py:816 ..\plugin.py:1375 ..\plugin_openweater3.py:815
 #: ..\plugin_openweater3.py:1374
 msgid "no Frame"
-msgstr "без рамки"
+msgstr "brak ramki"
 
 #: ..\plugin.py:818 ..\plugin.py:1377 ..\plugin.py:1738
 #: ..\plugin_openweater3.py:817 ..\plugin_openweater3.py:1376
 #: ..\plugin_openweater3.py:1737
 msgid "Normal"
-msgstr "Нормальный"
+msgstr "Normalny"
 
 #: ..\plugin.py:818 ..\plugin.py:1377 ..\plugin_openweater3.py:817
 #: ..\plugin_openweater3.py:1376
 msgid "Gradient"
-msgstr "Градиент"
+msgstr "Gradient"
 
 #: ..\plugin.py:818 ..\plugin.py:1377 ..\plugin_openweater3.py:817
 #: ..\plugin_openweater3.py:1376
 msgid "Shadow Edges"
-msgstr "Края тени"
+msgstr "Krawędzie cienia"
 
 #: ..\plugin.py:827 ..\plugin.py:838 ..\plugin_openweater3.py:826
 #: ..\plugin_openweater3.py:837
 msgid "Name"
-msgstr "Имя"
+msgstr "Nazwa"
 
 #: ..\plugin.py:827 ..\plugin_openweater3.py:826
 msgid "Picon+Position below"
-msgstr "Пикон+позиция ниже"
+msgstr "Pikona+Pozycja obok"
 
 #: ..\plugin.py:827 ..\plugin_openweater3.py:826
 msgid "Picon+Position left"
-msgstr "Пикон+позиция слева"
+msgstr "Pikona+Pozycja lewa"
 
 #: ..\plugin.py:827 ..\plugin_openweater3.py:826
 msgid "Picon+Position right"
-msgstr "Пикон+позиция справа"
+msgstr "Pikona+pozycjia prawa"
 
 #: ..\plugin.py:827 ..\plugin_openweater3.py:826
 msgid "Position"
-msgstr "Позиция"
+msgstr "Pozycja"
 
 #: ..\plugin.py:906 ..\plugin.py:1397 ..\plugin.py:1955
 #: ..\plugin_openweater3.py:905 ..\plugin_openweater3.py:1396
 #: ..\plugin_openweater3.py:1954
 msgid "Offline"
-msgstr "Оффлайн"
+msgstr "Rozłącz"
 
 #: ..\plugin.py:906 ..\plugin.py:1397 ..\plugin.py:1955
 #: ..\plugin_openweater3.py:905 ..\plugin_openweater3.py:1396
 #: ..\plugin_openweater3.py:1954
 msgid "Online"
-msgstr "Онлайн"
+msgstr "Online"
 
 #: ..\plugin.py:906 ..\plugin.py:1397 ..\plugin.py:1955
 #: ..\plugin_openweater3.py:905 ..\plugin_openweater3.py:1396
 #: ..\plugin_openweater3.py:1954
 msgid "Online+Offline"
-msgstr "Онлайн+Оффлайн"
+msgstr "Online+Offline"
 
 #: ..\plugin.py:950 ..\plugin.py:1014 ..\plugin.py:1434 ..\plugin.py:1553
 #: ..\plugin.py:1904 ..\plugin.py:1992 ..\plugin_openweater3.py:949
@@ -2253,7 +2258,7 @@ msgstr "Онлайн+Оффлайн"
 #: ..\plugin_openweater3.py:1552 ..\plugin_openweater3.py:1903
 #: ..\plugin_openweater3.py:1991
 msgid "only use Timer"
-msgstr "использовать только таймер"
+msgstr "używaj tylko Timera"
 
 #: ..\plugin.py:950 ..\plugin.py:1014 ..\plugin.py:1434 ..\plugin.py:1553
 #: ..\plugin.py:1904 ..\plugin.py:1992 ..\plugin_openweater3.py:949
@@ -2261,7 +2266,7 @@ msgstr "использовать только таймер"
 #: ..\plugin_openweater3.py:1552 ..\plugin_openweater3.py:1903
 #: ..\plugin_openweater3.py:1991
 msgid "use lead-time"
-msgstr "использовать время"
+msgstr "użyj czasu realizacji"
 
 #: ..\plugin.py:951 ..\plugin.py:1015 ..\plugin.py:1435 ..\plugin.py:1554
 #: ..\plugin.py:1905 ..\plugin.py:1993 ..\plugin_openweater3.py:950
@@ -2269,7 +2274,7 @@ msgstr "использовать время"
 #: ..\plugin_openweater3.py:1553 ..\plugin_openweater3.py:1904
 #: ..\plugin_openweater3.py:1992
 msgid "no total Timer"
-msgstr "нет общего таймера"
+msgstr "brak całkowitego Timera"
 
 #: ..\plugin.py:951 ..\plugin.py:1015 ..\plugin.py:1435 ..\plugin.py:1554
 #: ..\plugin.py:1905 ..\plugin.py:1993 ..\plugin_openweater3.py:950
@@ -2277,29 +2282,29 @@ msgstr "нет общего таймера"
 #: ..\plugin_openweater3.py:1553 ..\plugin_openweater3.py:1904
 #: ..\plugin_openweater3.py:1992
 msgid "show total Timer"
-msgstr "показать общий таймер"
+msgstr "show total Timer"
 
 #: ..\plugin.py:969 ..\plugin.py:1508 ..\plugin_openweater3.py:968
 #: ..\plugin_openweater3.py:1507
 msgid "one line"
-msgstr "одна линия"
+msgstr "jedna linia"
 
 #: ..\plugin.py:969 ..\plugin.py:1508 ..\plugin_openweater3.py:968
 #: ..\plugin_openweater3.py:1507
 msgid "two lines"
-msgstr "две строки"
+msgstr "dwa numery"
 
 #: ..\plugin.py:991 ..\plugin.py:1530 ..\plugin.py:2012
 #: ..\plugin_openweater3.py:990 ..\plugin_openweater3.py:1529
 #: ..\plugin_openweater3.py:2011
 msgid "Memory available"
-msgstr "Доступная память"
+msgstr "Dostępna pamięć"
 
 #: ..\plugin.py:991 ..\plugin.py:1530 ..\plugin.py:2012
 #: ..\plugin_openweater3.py:990 ..\plugin_openweater3.py:1529
 #: ..\plugin_openweater3.py:2011
 msgid "Memory free"
-msgstr "Свободная память"
+msgstr "Bez pamięci"
 
 #: ..\plugin.py:1207 ..\plugin_openweater3.py:1206
 msgid "cloudconvert.org"
@@ -2318,7 +2323,7 @@ msgstr "convertapi.com"
 #: ..\plugin_openweater3.py:2223 ..\plugin_openweater3.py:2232
 #: ..\plugin_openweater3.py:2241
 msgid "full Screen"
-msgstr "во весь экран"
+msgstr "pełny ekran"
 
 #: ..\plugin.py:1260 ..\plugin_openweater3.py:1259
 msgid "TV+OSD"
@@ -2326,7 +2331,7 @@ msgstr "TV+OSD"
 
 #: ..\plugin.py:1737 ..\plugin_openweater3.py:1736
 msgid "yes except records"
-msgstr "да, за исключением записей"
+msgstr "tak, z wyjątkiem zapisów"
 
 #: ..\plugin.py:1738 ..\plugin_openweater3.py:1737
 msgid "Google API"
@@ -2338,11 +2343,11 @@ msgstr "E"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "ENE"
-msgstr "E"
+msgstr "ENE"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "ESE"
-msgstr "E"
+msgstr "ESE"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "N"
@@ -2358,7 +2363,7 @@ msgstr "NNE"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "NNW"
-msgstr "NNW"
+msgstr "Nnw"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "NW"
@@ -2378,11 +2383,11 @@ msgstr "SSE"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "SSW"
-msgstr "SSW"
+msgstr "ZZW"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "SW"
-msgstr "SW"
+msgstr "SW: Miesięczne archiwa"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "W"
@@ -2390,7 +2395,7 @@ msgstr "W"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "WNW"
-msgstr "WNW"
+msgstr "WNW (WNW)"
 
 #: ..\plugin.py:2631 ..\plugin_openweater3.py:2630
 msgid "WSW"
@@ -2410,206 +2415,206 @@ msgstr "%d-%b-%Y"
 
 #: ..\plugin.py:5249 ..\plugin_openweater3.py:5248
 msgid "Load Active Config-File"
-msgstr "Загрузить активный конфиг"
+msgstr "Załaduj aktywny plik konfiguracyjny"
 
 #: ..\plugin.py:5250 ..\plugin_openweater3.py:5249
 msgid "Load Defaults / Empty Config"
-msgstr "Загрузить умолчанию / пустой конфиг"
+msgstr "Załaduj ustawienia domyślne / pusta konfiguracja"
 
 #: ..\plugin.py:5251 ..\plugin_openweater3.py:5250
 msgid "Save Config to File... (%s)"
-msgstr "Сохранить конфиг в файл... (%s)"
+msgstr "Zapis pliku konfiguracji do… (%s)"
 
 #: ..\plugin.py:5255 ..\plugin.py:5291 ..\plugin_openweater3.py:5254
 #: ..\plugin_openweater3.py:5290
 msgid "Load File : %s"
-msgstr "Загрузить Файл : %s"
+msgstr "Załaduj plik : %s"
 
 #: ..\plugin.py:5264 ..\plugin_openweater3.py:5263
 msgid "Delete File?"
-msgstr "Удалить файл?"
+msgstr "Usunąć plik?"
 
 #: ..\plugin.py:5299 ..\plugin_openweater3.py:5298
 msgid "deleted"
-msgstr "удаленный"
+msgstr "usunięte"
 
 #: ..\plugin.py:5324 ..\plugin_openweater3.py:5323
 msgid "currently set : %s"
-msgstr "настоящее время установлен : %s"
+msgstr "aktualnie ustawiony : %s"
 
 #: ..\plugin.py:5432 ..\plugin.py:7818 ..\plugin_openweater3.py:5431
 #: ..\plugin_openweater3.py:7816
 msgid "LCD4linux Settings"
-msgstr "LCD4linux Выключатель"
+msgstr "Ustawienia LCD4linux"
 
 #: ..\plugin.py:5482 ..\plugin_openweater3.py:5481
 msgid "Cancel"
-msgstr "Отмена"
+msgstr "Anuluj"
 
 #: ..\plugin.py:5483 ..\plugin_openweater3.py:5482
 msgid "Save"
-msgstr "Сохранить"
+msgstr "Zapisz"
 
 #: ..\plugin.py:5484 ..\plugin_openweater3.py:5483
 msgid "Restart Displays"
-msgstr "Рестарт дисплея"
+msgstr "Restart wyświetlaczy"
 
 #: ..\plugin.py:5485 ..\plugin.py:7819 ..\plugin_openweater3.py:5484
 #: ..\plugin_openweater3.py:7817
 msgid "Set On >>"
-msgstr "Задавать На >>"
+msgstr "Ustaw na >>"
 
 #: ..\plugin.py:5568 ..\plugin_openweater3.py:5567
 msgid "no LCD1 Picture-File"
-msgstr "нет LCD1 картинки-Файл"
+msgstr "Brak pliku obrazu LCD1"
 
 #: ..\plugin.py:5593 ..\plugin_openweater3.py:5592
 msgid "no LCD2 Picture-File"
-msgstr "нет LCD2 картинки-Файл"
+msgstr "Brak pliku obrazu LCD2"
 
 #: ..\plugin.py:5619 ..\plugin_openweater3.py:5618
 msgid "no LCD3 Picture-File"
-msgstr "нет LCD3 картинки-Файл"
+msgstr "Brak pliku obrazu LCD3"
 
 #: ..\plugin.py:5656 ..\plugin_openweater3.py:5655
 msgid "LCD4linux enabled"
-msgstr "LCD4linux включен"
+msgstr "LCD4linux włączony"
 
 #: ..\plugin.py:5657 ..\plugin_openweater3.py:5656
 msgid "LCD 1 Type"
-msgstr "LCD 1 Тип"
+msgstr "Typ LCD 1"
 
 #: ..\plugin.py:5658 ..\plugin_openweater3.py:5657
 msgid "- LCD 1 Rotate"
-msgstr "- LCD 1 чередовать"
+msgstr "- LCD 1 Obrót"
 
 #: ..\plugin.py:5659 ..\plugin.py:6627 ..\plugin.py:7255
 #: ..\plugin_openweater3.py:5658 ..\plugin_openweater3.py:6625
 #: ..\plugin_openweater3.py:7253
 msgid "- LCD 1 Background Color"
-msgstr "- LCD 1 Цвет фона"
+msgstr "- Kolor tła LCD 1"
 
 #: ..\plugin.py:5660 ..\plugin.py:6628 ..\plugin.py:7256
 #: ..\plugin_openweater3.py:5659 ..\plugin_openweater3.py:6626
 #: ..\plugin_openweater3.py:7254
 msgid "- LCD 1 Background-Picture [ok]>"
-msgstr "- LCD 1 Фон-картинка [ok]>"
+msgstr "-LCD 1 obraz tła [ok]>"
 
 #: ..\plugin.py:5661 ..\plugin.py:6629 ..\plugin.py:7257
 #: ..\plugin_openweater3.py:5660 ..\plugin_openweater3.py:6627
 #: ..\plugin_openweater3.py:7255
 msgid "- LCD 1 Brightness"
-msgstr "- LCD 1 Яркость"
+msgstr "- LCD 1 Jasność"
 
 #: ..\plugin.py:5662 ..\plugin.py:6630 ..\plugin.py:7258
 #: ..\plugin_openweater3.py:5661 ..\plugin_openweater3.py:6628
 #: ..\plugin_openweater3.py:7256
 msgid "- LCD 1 Night Reduction"
-msgstr "- LCD 1 Ночное сокращение"
+msgstr "- LCD 1 Redukcja nocna"
 
 #: ..\plugin.py:5663 ..\plugin_openweater3.py:5662
 msgid "- LCD 1 Refresh"
-msgstr "- LCD 1 Обновить"
+msgstr "- LCD 1 Odświeżanie"
 
 #: ..\plugin.py:5664 ..\plugin_openweater3.py:5663
 msgid "LCD 2 Type"
-msgstr "LCD 2 Тип"
+msgstr "Typ LCD 2"
 
 #: ..\plugin.py:5666 ..\plugin_openweater3.py:5665
 msgid "- LCD 2 Rotate"
-msgstr "- LCD 2 Чередовать"
+msgstr "- LCD 2 Obrót"
 
 #: ..\plugin.py:5667 ..\plugin.py:6631 ..\plugin.py:7259
 #: ..\plugin_openweater3.py:5666 ..\plugin_openweater3.py:6629
 #: ..\plugin_openweater3.py:7257
 msgid "- LCD 2 Background Color"
-msgstr "- LCD 2 Цвет фона"
+msgstr "- Kolor tła LCD 2"
 
 #: ..\plugin.py:5668 ..\plugin.py:6632 ..\plugin.py:7260
 #: ..\plugin_openweater3.py:5667 ..\plugin_openweater3.py:6630
 #: ..\plugin_openweater3.py:7258
 msgid "- LCD 2 Background-Picture [ok]>"
-msgstr "- LCD 2 Фон-Картинка [ok]>"
+msgstr "-LCD 2 obraz tła [ok]>"
 
 #: ..\plugin.py:5669 ..\plugin.py:6633 ..\plugin.py:7261
 #: ..\plugin_openweater3.py:5668 ..\plugin_openweater3.py:6631
 #: ..\plugin_openweater3.py:7259
 msgid "- LCD 2 Brightness"
-msgstr "- LCD 2 Яркость"
+msgstr "- LCD 2 Jasność"
 
 #: ..\plugin.py:5670 ..\plugin.py:6634 ..\plugin.py:7262
 #: ..\plugin_openweater3.py:5669 ..\plugin_openweater3.py:6632
 #: ..\plugin_openweater3.py:7260
 msgid "- LCD 2 Night Reduction"
-msgstr "- LCD 2 Ночное сокращение"
+msgstr "- LCD 2 Redukcja nocna"
 
 #: ..\plugin.py:5671 ..\plugin_openweater3.py:5670
 msgid "- LCD 2 Refresh"
-msgstr "- LCD 2 Обновить"
+msgstr "- LCD 2 Odświeżanie"
 
 #: ..\plugin.py:5672 ..\plugin_openweater3.py:5671
 msgid "LCD 3 Type"
-msgstr "LCD 3 Тип"
+msgstr "Typ LCD 3"
 
 #: ..\plugin.py:5674 ..\plugin_openweater3.py:5673
 msgid "- LCD 3 Rotate"
-msgstr "- LCD 3 Чередовать"
+msgstr "- LCD 3 Obróć"
 
 #: ..\plugin.py:5675 ..\plugin.py:6635 ..\plugin.py:7263
 #: ..\plugin_openweater3.py:5674 ..\plugin_openweater3.py:6633
 #: ..\plugin_openweater3.py:7261
 msgid "- LCD 3 Background Color"
-msgstr "- LCD 3 Цвет фона"
+msgstr "- LCD 3 Kolor tła"
 
 #: ..\plugin.py:5676 ..\plugin.py:6636 ..\plugin.py:7264
 #: ..\plugin_openweater3.py:5675 ..\plugin_openweater3.py:6634
 #: ..\plugin_openweater3.py:7262
 msgid "- LCD 3 Background-Picture [ok]>"
-msgstr "- LCD 3 Фон-Картинка [ok]>"
+msgstr "-LCD 3 obraz tła [ok]>"
 
 #: ..\plugin.py:5677 ..\plugin.py:6637 ..\plugin.py:7265
 #: ..\plugin_openweater3.py:5676 ..\plugin_openweater3.py:6635
 #: ..\plugin_openweater3.py:7263
 msgid "- LCD 3 Brightness"
-msgstr "- LCD 3 Яркость"
+msgstr "- LCD 3 Jasność"
 
 #: ..\plugin.py:5678 ..\plugin.py:6638 ..\plugin.py:7266
 #: ..\plugin_openweater3.py:5677 ..\plugin_openweater3.py:6636
 #: ..\plugin_openweater3.py:7264
 msgid "- LCD 3 Night Reduction"
-msgstr "- LCD 3 Ночное сокращение"
+msgstr "- LCD 3 Redukcja nocna"
 
 #: ..\plugin.py:5679 ..\plugin_openweater3.py:5678
 msgid "- LCD 3 Refresh"
-msgstr "- LCD 3 Обновить"
+msgstr "- LCD 3 Odświeżanie"
 
 #: ..\plugin.py:5681 ..\plugin_openweater3.py:5680
 msgid "Box-Skin-LCD Dimension"
-msgstr "Box-Skin-LCD размер"
+msgstr "Box-Skin-LCD Dimension"
 
 #: ..\plugin.py:5682 ..\plugin_openweater3.py:5681
 msgid "Box-Skin-LCD Offset"
-msgstr "Box-Skin-LCD Компенсировать"
+msgstr "Box-Skin-LCD Offset"
 
 #: ..\plugin.py:5683 ..\plugin_openweater3.py:5682
 msgid "Box-Skin-LCD Color"
-msgstr "Box-Skin-LCD цвет"
+msgstr "Box-Skin-LCD Kolor"
 
 #: ..\plugin.py:5684 ..\plugin_openweater3.py:5683
 msgid "Box-Skin-LCD Enable On-Mode"
-msgstr "Box-Skin-LCD Enable On-Mode"
+msgstr "Box-Skin-LCD włącza tryb załączenia"
 
 #: ..\plugin.py:5685 ..\plugin_openweater3.py:5684
 msgid "Box-Skin-LCD Enable Media-Mode"
-msgstr "Box-Skin-LCD включить медиа режим"
+msgstr "Box-Skin-LCD Załącz tryb mediów"
 
 #: ..\plugin.py:5686 ..\plugin_openweater3.py:5685
 msgid "Box-Skin-LCD Enable Idle-Mode"
-msgstr "Box-Skin-LCD Aktiviere Idle-Mode"
+msgstr "Box-Skin-LCD Załącz tryb uśpienia"
 
 #: ..\plugin.py:5687 ..\plugin_openweater3.py:5686
 msgid "OSD [display time]"
-msgstr "OSD [Отображение времени]"
+msgstr "OSD [czas wyświetlania]"
 
 #: ..\plugin.py:5690 ..\plugin.py:5697 ..\plugin.py:5906 ..\plugin.py:5911
 #: ..\plugin.py:5924 ..\plugin.py:5936 ..\plugin.py:5951 ..\plugin.py:5966
@@ -2727,31 +2732,31 @@ msgstr "OSD [Отображение времени]"
 #: ..\plugin_openweater3.py:7753 ..\plugin_openweater3.py:7765
 #: ..\plugin_openweater3.py:7774 ..\plugin_openweater3.py:7783
 msgid "- which LCD"
-msgstr "- какой LCD"
+msgstr "- który LCD"
 
 #: ..\plugin.py:5691 ..\plugin_openweater3.py:5690
 msgid "- Show in Mode"
-msgstr "- Показать в режиме"
+msgstr "- Pokaż w trybie"
 
 #: ..\plugin.py:5692 ..\plugin_openweater3.py:5691
 msgid "- OSD Size"
-msgstr "- Размер OSD"
+msgstr "- Rozmiar OSD"
 
 #: ..\plugin.py:5693 ..\plugin_openweater3.py:5692
 msgid "- Background/Transparency"
-msgstr "- Фон/Прозрачность"
+msgstr "- Tło/Przeźroczystość"
 
 #: ..\plugin.py:5694 ..\plugin_openweater3.py:5693
 msgid "- Fast Grab lower quality"
-msgstr "- Быстрый Grab низкого качества"
+msgstr "- Niższa jakość Fast Grab"
 
 #: ..\plugin.py:5695 ..\plugin_openweater3.py:5694
 msgid "Popup Text"
-msgstr "Всплывающий текст"
+msgstr "Tekst popup-a"
 
 #: ..\plugin.py:5698 ..\plugin_openweater3.py:5697
 msgid "- Clear Key"
-msgstr "- Очистить ключ"
+msgstr "- Wyczyść klucz"
 
 #: ..\plugin.py:5699 ..\plugin.py:5967 ..\plugin.py:5979 ..\plugin.py:5990
 #: ..\plugin.py:6003 ..\plugin.py:6016 ..\plugin.py:6029 ..\plugin.py:6097
@@ -2817,7 +2822,7 @@ msgstr "- Очистить ключ"
 #: ..\plugin_openweater3.py:7690 ..\plugin_openweater3.py:7743
 #: ..\plugin_openweater3.py:7755
 msgid "- Font Size"
-msgstr "- Размер шрифта"
+msgstr "- Rozmiar czcionki"
 
 #: ..\plugin.py:5700 ..\plugin.py:5913 ..\plugin.py:5926 ..\plugin.py:5943
 #: ..\plugin.py:5958 ..\plugin.py:5969 ..\plugin.py:5980 ..\plugin.py:5992
@@ -2927,7 +2932,7 @@ msgstr "- Размер шрифта"
 #: ..\plugin_openweater3.py:7744 ..\plugin_openweater3.py:7756
 #: ..\plugin_openweater3.py:7787
 msgid "- Position"
-msgstr "- Позиция"
+msgstr "- Pozycja"
 
 #: ..\plugin.py:5701 ..\plugin.py:5914 ..\plugin.py:5927 ..\plugin.py:5944
 #: ..\plugin.py:5959 ..\plugin.py:5970 ..\plugin.py:5981 ..\plugin.py:5993
@@ -3037,7 +3042,7 @@ msgstr "- Позиция"
 #: ..\plugin_openweater3.py:7745 ..\plugin_openweater3.py:7757
 #: ..\plugin_openweater3.py:7788
 msgid "- Alignment"
-msgstr "- Выравнивание"
+msgstr "- Wyrównanie"
 
 #: ..\plugin.py:5702 ..\plugin.py:5778 ..\plugin.py:5780 ..\plugin.py:5782
 #: ..\plugin.py:5784 ..\plugin.py:5786 ..\plugin.py:5907 ..\plugin.py:5946
@@ -3127,7 +3132,7 @@ msgstr "- Выравнивание"
 #: ..\plugin_openweater3.py:7759 ..\plugin_openweater3.py:7770
 #: ..\plugin_openweater3.py:7779
 msgid "- Color"
-msgstr "- Цвет"
+msgstr "- Kolor"
 
 #: ..\plugin.py:5703 ..\plugin.py:5983 ..\plugin.py:6206 ..\plugin.py:6354
 #: ..\plugin.py:6367 ..\plugin.py:6376 ..\plugin.py:6385 ..\plugin.py:6396
@@ -3160,7 +3165,7 @@ msgstr "- Цвет"
 #: ..\plugin_openweater3.py:7748 ..\plugin_openweater3.py:7760
 #: ..\plugin_openweater3.py:7771 ..\plugin_openweater3.py:7780
 msgid "- Background Color"
-msgstr "- Цвет фона"
+msgstr "- Kolor tła"
 
 #: ..\plugin.py:5704 ..\plugin.py:5948 ..\plugin.py:5963 ..\plugin.py:5975
 #: ..\plugin.py:5985 ..\plugin.py:5998 ..\plugin.py:6011 ..\plugin.py:6024
@@ -3238,104 +3243,104 @@ msgstr "- Цвет фона"
 #: ..\plugin_openweater3.py:7715 ..\plugin_openweater3.py:7728
 #: ..\plugin_openweater3.py:7750 ..\plugin_openweater3.py:7762
 msgid "- Font"
-msgstr "- Шрифт"
+msgstr "- Czcionka"
 
 #: ..\plugin.py:5707 ..\plugin_openweater3.py:5706
 msgid "Active Screen"
-msgstr "Активный экран"
+msgstr "Aktywny ekran"
 
 #: ..\plugin.py:5708 ..\plugin_openweater3.py:5707
 msgid "Screen Switch Select - Screen"
-msgstr "Экран Выключатель Выбирать - Экран"
+msgstr "Ekran Przełącznik wyboru - Ekran"
 
 #: ..\plugin.py:5709 ..\plugin_openweater3.py:5708
 msgid "Screen Switch Select - LCD"
-msgstr "Экран Выключатель Выбирать - LCD"
+msgstr "Ekran Przełącznik wyboru - LCD"
 
 #: ..\plugin.py:5710 ..\plugin_openweater3.py:5709
 msgid "Screens used for Changing"
-msgstr "Экраны используется для изменения"
+msgstr "Ekranów używanych dla zmiany"
 
 #: ..\plugin.py:5711 ..\plugin.py:7273 ..\plugin_openweater3.py:5710
 #: ..\plugin_openweater3.py:7271
 msgid "Screen 1 Changing Time"
-msgstr "Экран 1-Изменить время"
+msgstr "Ekran 1 czas zmiany"
 
 #: ..\plugin.py:5713 ..\plugin.py:7275 ..\plugin_openweater3.py:5712
 #: ..\plugin_openweater3.py:7273
 msgid "- Screen 2 Changing Time"
-msgstr "- Экран 2 Изменение времени"
+msgstr "- Ekran 2 czas zmiany"
 
 #: ..\plugin.py:5714 ..\plugin.py:7276 ..\plugin_openweater3.py:5713
 #: ..\plugin_openweater3.py:7274
 msgid "- Screen 3 Changing Time"
-msgstr "- Экран 3 Изменение времени"
+msgstr "- Ekran 3 czas zmiany"
 
 #: ..\plugin.py:5715 ..\plugin.py:7277 ..\plugin_openweater3.py:5714
 #: ..\plugin_openweater3.py:7275
 msgid "- Screen 4 Changing Time"
-msgstr "- Экран 4 Изменение времени"
+msgstr "- Ekran 4 czas zmiany"
 
 #: ..\plugin.py:5716 ..\plugin.py:7278 ..\plugin_openweater3.py:5715
 #: ..\plugin_openweater3.py:7276
 msgid "- Screen 5 Changing Time"
-msgstr "- Экран 5 Изменение времени"
+msgstr "- Ekran 5 czas zmiany"
 
 #: ..\plugin.py:5717 ..\plugin.py:7279 ..\plugin_openweater3.py:5716
 #: ..\plugin_openweater3.py:7277
 msgid "- Screen 6 Changing Time"
-msgstr "- Экран 6 Изменение времени"
+msgstr "- Ekran 6 czas zmiany"
 
 #: ..\plugin.py:5718 ..\plugin.py:7280 ..\plugin_openweater3.py:5717
 #: ..\plugin_openweater3.py:7278
 msgid "- Screen 7 Changing Time"
-msgstr "- Экран 7 Изменение времени"
+msgstr "- Ekran 7 czas zmiany"
 
 #: ..\plugin.py:5719 ..\plugin.py:7281 ..\plugin_openweater3.py:5718
 #: ..\plugin_openweater3.py:7279
 msgid "- Screen 8 Changing Time"
-msgstr "- Экран 8 Изменение времени"
+msgstr "- Ekran 8 czas zmiany"
 
 #: ..\plugin.py:5720 ..\plugin.py:7282 ..\plugin_openweater3.py:5719
 #: ..\plugin_openweater3.py:7280
 msgid "- Screen 9 Changing Time"
-msgstr "- Экран 9 Изменение времени"
+msgstr "- Ekran 9 czas zmiany"
 
 #: ..\plugin.py:5721 ..\plugin_openweater3.py:5720
 msgid "Picture Changing Time"
-msgstr "Картина Изменение времени"
+msgstr "Czas zmiany zdjęć"
 
 #: ..\plugin.py:5722 ..\plugin_openweater3.py:5721
 msgid "Picture Sort"
-msgstr "Картина Сортировка"
+msgstr "Sortowanie zdjęć"
 
 #: ..\plugin.py:5723 ..\plugin_openweater3.py:5722
 msgid "Picture Directory Recursive"
-msgstr "Картина каталог Рекурсивный"
+msgstr "Katalog zdjęć cykliczny"
 
 #: ..\plugin.py:5724 ..\plugin_openweater3.py:5723
 msgid "Picture Quality for Resizing"
-msgstr "Картина Качество для изменения размера"
+msgstr "Jakość obrazu skalowania"
 
 #: ..\plugin.py:5726 ..\plugin_openweater3.py:5725
 msgid "Picture Quick Update Time [s]"
-msgstr "Картина Время обновления [s]"
+msgstr "Szybka aktualizacja obraz [s]"
 
 #: ..\plugin.py:5728 ..\plugin_openweater3.py:5727
 msgid "Picture Type [only Picture]"
-msgstr "Картина Тип [Только Картина]"
+msgstr "Typ obrazu [tylko zdjęcie]"
 
 #: ..\plugin.py:5729 ..\plugin_openweater3.py:5728
 msgid "Background-Picture Type"
-msgstr "Задний план-Картина Тип"
+msgstr "Tło - typ obrazu"
 
 #: ..\plugin.py:5730 ..\plugin_openweater3.py:5729
 msgid "Weather API"
-msgstr "Weather"
+msgstr "Weather API"
 
 #: ..\plugin.py:5731 ..\plugin_openweater3.py:5730
 msgid "Weather API-Key OpenWeatherMap"
-msgstr "Weather API-Key OpenWeatherMap"
+msgstr "Pogoda Klucz-API OpenWeatherMap"
 
 #: ..\plugin.py:5732 ..\plugin_openweater3.py:5731
 msgid "Weather API-ID Key WeatherUnlocked"
@@ -3343,497 +3348,497 @@ msgstr "Weather API-ID Key WeatherUnlocked"
 
 #: ..\plugin.py:5733 ..\plugin_openweater3.py:5732
 msgid "Weather City"
-msgstr "Погода-Город"
+msgstr "Weather City"
 
 #: ..\plugin.py:5734 ..\plugin_openweater3.py:5733
 msgid "Weather City 2"
-msgstr "Погода-Город 2"
+msgstr "Weather City 2"
 
 #: ..\plugin.py:5735 ..\plugin_openweater3.py:5734
 msgid "Weather-Icon-Path [ok]>"
-msgstr "Погода-Икона-Дорожка [ok]>"
+msgstr "Pogoda-Ikona-Ścieżka [ok] >"
 
 #: ..\plugin.py:5736 ..\plugin_openweater3.py:5735
 msgid "Weather-Icon Zoom"
-msgstr "Погода-Икона зум"
+msgstr "Pogoda-Ikona Powiększenie"
 
 #: ..\plugin.py:5737 ..\plugin_openweater3.py:5736
 msgid "Weather Low Temperature Color"
-msgstr "Низкая температура(погода)-Цвет"
+msgstr "Pogoda kolor niskiej temperatury"
 
 #: ..\plugin.py:5738 ..\plugin_openweater3.py:5737
 msgid "Weather High Temperature Color"
-msgstr "Высокая температура(погода)-Цвет"
+msgstr "Pogoda kolor wysokiej temperatury"
 
 #: ..\plugin.py:5739 ..\plugin_openweater3.py:5738
 msgid "Weather Transparency"
-msgstr "Погода Прозрачность"
+msgstr "Przejrzystość pogody"
 
 #: ..\plugin.py:5740 ..\plugin_openweater3.py:5739
 msgid "Weather Wind speed unit"
-msgstr "Погода Ветер скорость единицы измерения"
+msgstr "Pogoda jednostka prędkości wiatru"
 
 #: ..\plugin.py:5741 ..\plugin_openweater3.py:5740
 msgid "Weather Wind Info Lines"
-msgstr "Линии информации о погоде и ветре"
+msgstr "Linie informacyjne o pogodzie i wietrze"
 
 #: ..\plugin.py:5742 ..\plugin_openweater3.py:5741
 msgid "Weather Rain Chance"
-msgstr "Возможен дождь"
+msgstr "Szansa na deszcz"
 
 #: ..\plugin.py:5744 ..\plugin_openweater3.py:5743
 msgid "- Rain Zoom"
-msgstr "- Увеличение дождя"
+msgstr "- Rain Zoom"
 
 #: ..\plugin.py:5745 ..\plugin_openweater3.py:5744
 msgid "- Rain Color"
-msgstr "- Цвет дождя"
+msgstr "- Kolor deszczu"
 
 #: ..\plugin.py:5746 ..\plugin_openweater3.py:5745
 msgid "- Rain use Color 2 from"
-msgstr "- Rain use Color 2 from"
+msgstr "- Deszcz używa kolor 2 z"
 
 #: ..\plugin.py:5747 ..\plugin_openweater3.py:5746
 msgid "- Rain Color 2"
-msgstr "- Цвет дождя 2"
+msgstr "- Kolor deszczu 2"
 
 #: ..\plugin.py:5748 ..\plugin_openweater3.py:5747
 msgid "Weather Humidity Color"
-msgstr "Погода-Город 2"
+msgstr "Pogoda Wilgotność Kolor"
 
 #: ..\plugin.py:5749 ..\plugin_openweater3.py:5748
 msgid "Weather Lines"
-msgstr "Погода-Линии"
+msgstr "Linie pogodowe"
 
 #: ..\plugin.py:5750 ..\plugin_openweater3.py:5749
 msgid "Weather Trendarrows"
-msgstr "трендов стрелки погодных"
+msgstr "Trendy pogodowe"
 
 #: ..\plugin.py:5751 ..\plugin_openweater3.py:5750
 msgid "Weather Extra Infos"
-msgstr "Погода-Экстра инфо"
+msgstr "Pogoda informacje dodatkowe"
 
 #: ..\plugin.py:5753 ..\plugin_openweater3.py:5752
 msgid "- Extra Zoom"
-msgstr "- Экстра увеличение"
+msgstr "- Dodatkowy zoom"
 
 #: ..\plugin.py:5754 ..\plugin_openweater3.py:5753
 msgid "- Show chill temperature from difference"
-msgstr "- Показать разницу температур"
+msgstr "- Pokaż temperaturę chłodzenia z różnicy"
 
 #: ..\plugin.py:5755 ..\plugin_openweater3.py:5754
 msgid "- Extra Color City"
-msgstr "- Дополнительные цвета городов"
+msgstr "- Extra Color City"
 
 #: ..\plugin.py:5756 ..\plugin_openweater3.py:5755
 msgid "- Extra Color Chill"
-msgstr "- Дополнительные цвета"
+msgstr "- Extra Color Chill"
 
 #: ..\plugin.py:5757 ..\plugin_openweater3.py:5756
 msgid "Netatmo CO2 Min Range"
-msgstr "Netatmo CO2 мин Диапазон"
+msgstr "Netatmo CO2 Min. zakres"
 
 #: ..\plugin.py:5758 ..\plugin_openweater3.py:5757
 msgid "Netatmo CO2 Max Range"
-msgstr "Netatmo CO2 Максимум Диапазон"
+msgstr "Netatmo CO2 Maks. zakres"
 
 #: ..\plugin.py:5759 ..\plugin_openweater3.py:5758
 msgid "Meteo URL"
-msgstr "Погода URL"
+msgstr "Adres URL stacji meteo"
 
 #: ..\plugin.py:5760 ..\plugin_openweater3.py:5759
 msgid "Moon-Icon-Path [ok]>"
-msgstr "Месяц-путь к иконкам[ok]>"
+msgstr "-Księżyc-Ikona-Ścieżka [ok] >"
 
 #: ..\plugin.py:5761 ..\plugin_openweater3.py:5760
 msgid "Recording Picture [ok]>"
-msgstr "Запись Картина [ok]"
+msgstr "Nagrywanie obrazu [ok]>"
 
 #: ..\plugin.py:5762 ..\plugin_openweater3.py:5761
 msgid "Double-button switches"
-msgstr "Double-button switches"
+msgstr "Podwójny-przycisk przełączniki"
 
 #: ..\plugin.py:5763 ..\plugin_openweater3.py:5762
 msgid "Key for Screen Change"
-msgstr "Клавиша изменения экрана"
+msgstr "Przycisk zmiany ekranu"
 
 #: ..\plugin.py:5764 ..\plugin_openweater3.py:5763
 msgid "Key for Screen On/Off"
-msgstr "Key for Screen On/Off"
+msgstr "Przycisk wyłączenia/włączenia ekranu"
 
 #: ..\plugin.py:5765 ..\plugin_openweater3.py:5764
 msgid "FritzCall Picture Path [ok]>"
-msgstr "FritzCall Путь изображения [ok]>"
+msgstr "FritzCall ścieżka do zdjęć [ok] >"
 
 #: ..\plugin.py:5766 ..\plugin_openweater3.py:5765
 msgid "FritzCall Number of Lines per Entry"
-msgstr "FritzCall Количество строк на вход"
+msgstr "FritzCall liczba lini we wpisie"
 
 #: ..\plugin.py:5767 ..\plugin_openweater3.py:5766
 msgid "FritzCall Number of List Entries"
-msgstr "FritzCall Количество записей в списке"
+msgstr "FritzCall Liczba wpisów na liście"
 
 #: ..\plugin.py:5768 ..\plugin_openweater3.py:5767
 msgid "FritzCall Number of Pictures"
-msgstr "FritzCall Количество изображений"
+msgstr "FritzCall Liczba zdjęć"
 
 #: ..\plugin.py:5769 ..\plugin_openweater3.py:5768
 msgid "FritzCall Picture Orientation"
-msgstr "FritzCall Ориентация изображения"
+msgstr "FritzCall orientacja zdjęć"
 
 #: ..\plugin.py:5770 ..\plugin_openweater3.py:5769
 msgid "FritzCall Picture Transparency"
-msgstr "FritzCall Прозрачность изображения"
+msgstr "FritzCall przeźroczystość zdjęć"
 
 #: ..\plugin.py:5771 ..\plugin_openweater3.py:5770
 msgid "FritzCall Pictures Search"
-msgstr "FritzCall Поиск картинок"
+msgstr "FritzCall wyszukiwarka zdjęć"
 
 #: ..\plugin.py:5772 ..\plugin_openweater3.py:5771
 msgid "FritzCall remove Calls after hours"
-msgstr "FritzCall Удалить звонок в нерабочее время"
+msgstr "FritzCall usuń rozmowy po"
 
 #: ..\plugin.py:5773 ..\plugin_openweater3.py:5772
 msgid "FritzCall Popup-Time"
-msgstr "FritzCall Выскакивать-Время"
+msgstr "FritzCall czas wyświetlania"
 
 #: ..\plugin.py:5774 ..\plugin_openweater3.py:5773
 msgid "FritzCall Popup LCD"
-msgstr "FritzCall Выскакивать LCD"
+msgstr "FritzCall kolor LCD"
 
 #: ..\plugin.py:5775 ..\plugin_openweater3.py:5774
 msgid "FritzCall Popup Color"
-msgstr "FritzCall Выскакивать окна"
+msgstr "FritzCall kolor okna"
 
 #: ..\plugin.py:5776 ..\plugin_openweater3.py:5775
 msgid "FritzCall Frame Picture [ok]>"
-msgstr "FritzCall Рамка Картина [ok]>"
+msgstr "FritzCall Frame Picture [ok]>"
 
 #: ..\plugin.py:5777 ..\plugin_openweater3.py:5776
 msgid "Calendar ics-Path [ok]>"
-msgstr "Календарь ics-путь [ok]>"
+msgstr "Kalendarz ics-ścieżka [ok]>"
 
 #: ..\plugin.py:5779 ..\plugin.py:5781 ..\plugin.py:5783
 #: ..\plugin_openweater3.py:5778 ..\plugin_openweater3.py:5780
 #: ..\plugin_openweater3.py:5782
 msgid "Calendar ics-URL"
-msgstr "Календарь ics-URL"
+msgstr "Kalendarz ics-URL"
 
 #: ..\plugin.py:5785 ..\plugin_openweater3.py:5784
 msgid "Calendar planerFS"
-msgstr "Календарь"
+msgstr "Kalendarz planerFS"
 
 #: ..\plugin.py:5787 ..\plugin_openweater3.py:5786
 msgid "Calendar Saturday Color"
-msgstr "Календарь Суббота Цвет"
+msgstr "Kalendarz yolor sobotz"
 
 #: ..\plugin.py:5788 ..\plugin_openweater3.py:5787
 msgid "Calendar Sunday Color"
-msgstr "Календарь Воскресенье Цвет"
+msgstr "Kalendarz kolor niedzieli"
 
 #: ..\plugin.py:5789 ..\plugin_openweater3.py:5788
 msgid "Calendar Line Thickness"
-msgstr "Календарь-толщина линий"
+msgstr "Kalendarz grubość lini"
 
 #: ..\plugin.py:5790 ..\plugin_openweater3.py:5789
 msgid "Calendar Day Event Preview"
-msgstr "Календарь Дневное событие превью"
+msgstr "Kalendarza dzień podgląd wydarzenia"
 
 #: ..\plugin.py:5791 ..\plugin_openweater3.py:5790
 msgid "Calendar Timezone Correction"
-msgstr "Календарь Коррекция часового пояса"
+msgstr "Kalendarz korekcja strefy czasowej"
 
 #: ..\plugin.py:5792 ..\plugin_openweater3.py:5791
 msgid "Calendar Transparency"
-msgstr "Календарь Прозрачность"
+msgstr "Przejrzystość kalendarza"
 
 #: ..\plugin.py:5793 ..\plugin_openweater3.py:5792
 msgid "Calendar Poll Interval"
-msgstr "Календарь Интервал опроса"
+msgstr "Interwał odpytywania kalendarza"
 
 #: ..\plugin.py:5794 ..\plugin_openweater3.py:5793
 msgid "Tuner Color"
-msgstr "Цвет тюнера"
+msgstr "Kolor tunera"
 
 #: ..\plugin.py:5795 ..\plugin_openweater3.py:5794
 msgid "Tuner Color Active"
-msgstr "Цвет активного тюнера"
+msgstr "Kolor aktywnego tunera"
 
 #: ..\plugin.py:5796 ..\plugin_openweater3.py:5795
 msgid "Tuner Color On"
-msgstr "Цвет тюнера"
+msgstr "Kolor tunera włączony"
 
 #: ..\plugin.py:5797 ..\plugin_openweater3.py:5796
 msgid "Service search first"
-msgstr "Поиск услуги в первую очередь"
+msgstr "Najpierw przeszukaj serwisy"
 
 #: ..\plugin.py:5798 ..\plugin_openweater3.py:5797
 msgid "DVB-T Signal-Quality Correction"
-msgstr "DVB-T Сигнал Качество Исправление"
+msgstr "Poprawa jakości sygnału DVB-T"
 
 #: ..\plugin.py:5799 ..\plugin_openweater3.py:5798
 msgid "Font global [ok]>"
-msgstr "Zeichensatz Global [ok]>"
+msgstr "Czcionka globalna [ok]>"
 
 #: ..\plugin.py:5800 ..\plugin_openweater3.py:5799
 msgid "Font 1 [ok]>"
-msgstr "Шрифт 1 [ok]>"
+msgstr "Czcionka 1 [ok]>"
 
 #: ..\plugin.py:5801 ..\plugin_openweater3.py:5800
 msgid "Font 2 [ok]>"
-msgstr "Шрифт 2 [ok]>"
+msgstr "Czcionka 2 [ok] >"
 
 #: ..\plugin.py:5802 ..\plugin_openweater3.py:5801
 msgid "Font 3 [ok]>"
-msgstr "Шрифт 3 [ok]>"
+msgstr "Czcionka 3 [ok]>"
 
 #: ..\plugin.py:5803 ..\plugin_openweater3.py:5802
 msgid "Font 4 [ok]>"
-msgstr "Шрифт 4 [ok]>"
+msgstr "Czcionka 4 [ok]>"
 
 #: ..\plugin.py:5804 ..\plugin_openweater3.py:5803
 msgid "Font 5 [ok]>"
-msgstr "Шрифт 5 [ok]>"
+msgstr "Czcionka 5 [ok]>"
 
 #: ..\plugin.py:5805 ..\plugin_openweater3.py:5804
 msgid "Mail 1 Connect"
-msgstr "Почта 1 подключить"
+msgstr "Poczta 1 połącz"
 
 #: ..\plugin.py:5806 ..\plugin_openweater3.py:5805
 msgid "Mail 1 Server"
-msgstr "Почта 1 Сервер"
+msgstr "Serwer poczty 1"
 
 #: ..\plugin.py:5807 ..\plugin_openweater3.py:5806
 msgid "Mail 1 [Displayname:]Username"
-msgstr "Почта 1 Имя пользователя"
+msgstr "Poczta 1 [Nazwa wyświetlana:]Użytkownik"
 
 #: ..\plugin.py:5808 ..\plugin_openweater3.py:5807
 msgid "Mail 1 Password"
-msgstr "Почта 1 - пароль"
+msgstr "Poczta 1 Hasło"
 
 #: ..\plugin.py:5809 ..\plugin_openweater3.py:5808
 msgid "Mail 2 Connect"
-msgstr "Почта 2 подключить"
+msgstr "Mail 2 Connect"
 
 #: ..\plugin.py:5810 ..\plugin_openweater3.py:5809
 msgid "Mail 2 Server"
-msgstr "Почта 2 Сервер"
+msgstr "Serwer poczty 2"
 
 #: ..\plugin.py:5811 ..\plugin_openweater3.py:5810
 msgid "Mail 2 [Displayname:]Username"
-msgstr "Почта 2 Имя пользователя"
+msgstr "Poczta 2 [Nazwa wyświetlana:]Użytkownik"
 
 #: ..\plugin.py:5812 ..\plugin_openweater3.py:5811
 msgid "Mail 2 Password"
-msgstr "Почта 2 - пароль"
+msgstr "Hasło Mail 2"
 
 #: ..\plugin.py:5813 ..\plugin_openweater3.py:5812
 msgid "Mail 3 Connect"
-msgstr "Почта 3 подключить"
+msgstr "Poczta 3 połącz"
 
 #: ..\plugin.py:5814 ..\plugin_openweater3.py:5813
 msgid "Mail 3 Server"
-msgstr "Почта 3 Сервер"
+msgstr "Serwer poczty 3"
 
 #: ..\plugin.py:5815 ..\plugin_openweater3.py:5814
 msgid "Mail 3 [Displayname:]Username"
-msgstr "Почта 3 Имя пользователя"
+msgstr "Poczta 3 [Nazwa wyświetlana:]Użytkownik"
 
 #: ..\plugin.py:5816 ..\plugin_openweater3.py:5815
 msgid "Mail 3 Password"
-msgstr "Почта 3 - пароль"
+msgstr "Hasło Mail 3"
 
 #: ..\plugin.py:5817 ..\plugin_openweater3.py:5816
 msgid "Mail 4 Connect"
-msgstr "Почта 4 подключить"
+msgstr "Mail 4 Connect"
 
 #: ..\plugin.py:5818 ..\plugin_openweater3.py:5817
 msgid "Mail 4 Server"
-msgstr "Почта 4 Сервер"
+msgstr "Serwer poczty 4"
 
 #: ..\plugin.py:5819 ..\plugin_openweater3.py:5818
 msgid "Mail 4 [Displayname:]Username"
-msgstr "Почта 4 Имя пользователя"
+msgstr "Poczta 4 [Nazwa wyświetlana:]Użytkownik"
 
 #: ..\plugin.py:5820 ..\plugin_openweater3.py:5819
 msgid "Mail 4 Password"
-msgstr "Почта 4 - пароль"
+msgstr "Mail 4 Password"
 
 #: ..\plugin.py:5821 ..\plugin_openweater3.py:5820
 msgid "Mail 5 Connect"
-msgstr "Почта 5 подключить"
+msgstr "Poczta 5 połącz"
 
 #: ..\plugin.py:5822 ..\plugin_openweater3.py:5821
 msgid "Mail 5 Server"
-msgstr "Почта 5 Сервер"
+msgstr "Serwer poczty 5"
 
 #: ..\plugin.py:5823 ..\plugin_openweater3.py:5822
 msgid "Mail 5 [Displayname:]Username"
-msgstr "Почта 5 Имя пользователя"
+msgstr "Poczta 5 [Nazwa wyświetlana:]Użytkownik"
 
 #: ..\plugin.py:5824 ..\plugin_openweater3.py:5823
 msgid "Mail 5 Password"
-msgstr "Почта 5 - пароль"
+msgstr "Hasło Mail 5"
 
 #: ..\plugin.py:5825 ..\plugin_openweater3.py:5824
 msgid "Mail Poll Interval"
-msgstr "Почта Интервал опроса"
+msgstr "Interwał odpytywania poczty"
 
 #: ..\plugin.py:5826 ..\plugin_openweater3.py:5825
 msgid "Mail IMAP limit to last days"
-msgstr "Почта IMAP предел до последних дней"
+msgstr "Mail IMAP limit dni"
 
 #: ..\plugin.py:5827 ..\plugin_openweater3.py:5826
 msgid "Mail Show Empty Mailboxes"
-msgstr "Почта-Показывать пустые почтовые ящики"
+msgstr "Poczta Pokaż puste skrzynki pocztowe"
 
 #: ..\plugin.py:5828 ..\plugin_openweater3.py:5827
 msgid "Mail Show Date"
-msgstr "Почта показать Дата"
+msgstr "Data pokazu poczty"
 
 #: ..\plugin.py:5829 ..\plugin_openweater3.py:5828
 msgid "Mail Hide Mailadress"
-msgstr "Почта Спрятать Почтовый адрес"
+msgstr "Mail Ukryj adres"
 
 #: ..\plugin.py:5830 ..\plugin_openweater3.py:5829
 msgid "Remote Box 1 [Displayname:]IP/Name"
-msgstr "Удаленный ящик 1 [Показать имя] IP/Имя"
+msgstr "Zdalny odbiornik 1 [Nazwa wyświetlana:]IP/Nazwa"
 
 #: ..\plugin.py:5831 ..\plugin_openweater3.py:5830
 msgid "Remote Box 2 [Displayname:]IP/Name"
-msgstr "Удаленный ящик 2 [Показать имя]IP/Имя"
+msgstr "Zdalny odbiornik 2 [Nazwa wyświetlana:]IP/Nazwa"
 
 #: ..\plugin.py:5832 ..\plugin_openweater3.py:5831
 msgid "Remote Box 3 [Displayname:]IP/Name"
-msgstr "Удаленный ящик 3 [Показать имя]IP/Имя"
+msgstr "Zdalny odbiornik 3 [Nazwa wyświetlana:]IP/Nazwa"
 
 #: ..\plugin.py:5833 ..\plugin_openweater3.py:5832
 msgid "Remote Box 4 [Displayname:]IP/Name"
-msgstr "Удаленный ящик 4 [Показать имя]IP/Имя"
+msgstr "Zdalny odbiornik 4 [Nazwa wyświetlana:]IP/Nazwa"
 
 #: ..\plugin.py:5834 ..\plugin_openweater3.py:5833
 msgid "Remote Box 5 [Displayname:]IP/Name"
-msgstr "Удаленный ящик 5 [Показать имя]IP/Имя"
+msgstr "Zdalny odbiornik 5 [Nazwa wyświetlana:]IP/Nazwa"
 
 #: ..\plugin.py:5835 ..\plugin_openweater3.py:5834
 msgid "Remote Box Poll every Minutes"
-msgstr "Удаленный ящик Опрашивайте каждую минуту"
+msgstr "Zdalny odbiornik sprawdź co minutę"
 
 #: ..\plugin.py:5836 ..\plugin_openweater3.py:5835
 msgid "Remote Box Timer [Displayname:]IP/Name"
-msgstr "Удаленный ящик Таймер [Показать имя]IP/Имя"
+msgstr "Zdalny odbiornik Timer[Nazwa wyświetlana:]IP/Nazwa"
 
 #: ..\plugin.py:5837 ..\plugin_openweater3.py:5836
 msgid "Remote Box Timer Poll every Minutes"
-msgstr "Удаленный ящик Таймер Опрашивайте каждую минуту"
+msgstr "Zdalny odbiornik sprawdź timer co minutę"
 
 #: ..\plugin.py:5838 ..\plugin_openweater3.py:5837
 msgid "WWW Converter Poll Interval"
-msgstr "WWW Converter Poll Interval"
+msgstr "WWW konwerter interwał próbkowania"
 
 #: ..\plugin.py:5839 ..\plugin_openweater3.py:5838
 msgid "WWW Converter Usage"
-msgstr "WWW Конвертер использование"
+msgstr "WWW użycie konwertera"
 
 #: ..\plugin.py:5840 ..\plugin_openweater3.py:5839
 msgid "WWW ApiKey from cloudconvert.org"
-msgstr "WWW ApiKey из cloudconvert.org"
+msgstr "WWW ApiKey z cloudconvert.org"
 
 #: ..\plugin.py:5841 ..\plugin_openweater3.py:5840
 msgid "WWW ApiKey from convertapi.com"
-msgstr "WWW ApiKey из convertapi.com"
+msgstr "WWW ApiKey z convertapi.com"
 
 #: ..\plugin.py:5842 ..\plugin_openweater3.py:5841
 msgid "WebIF Refresh [s]"
-msgstr "WebIF обновление [s]"
+msgstr "Odświeżanie WebIF [s]"
 
 #: ..\plugin.py:5843 ..\plugin_openweater3.py:5842
 msgid "WebIF Refresh Type"
-msgstr "WebIF тип обновления"
+msgstr "Typ odświeżania WebIF"
 
 #: ..\plugin.py:5844 ..\plugin_openweater3.py:5843
 msgid "WebIF Init Delay"
-msgstr "WebIF Инициализировать Задерживать"
+msgstr "WebIF Opóźnienie inicjalizacji"
 
 #: ..\plugin.py:5846 ..\plugin_openweater3.py:5845
 msgid "WebIF IP Deny"
-msgstr "WebIF IP Отрицать"
+msgstr "WebIF IP Zabronione"
 
 #: ..\plugin.py:5847 ..\plugin_openweater3.py:5846
 msgid "WebIF Design"
-msgstr "WebIF Дизайн"
+msgstr "WebIF Wygląd"
 
 #: ..\plugin.py:5848 ..\plugin_openweater3.py:5847
 msgid "Save as Picture for WebIF"
-msgstr "Сохранить как рисунок для WebIF"
+msgstr "Zapisz jako obraz dla WebIF"
 
 #: ..\plugin.py:5849 ..\plugin_openweater3.py:5848
 msgid "MJPEG Stream LCD 1 enable"
-msgstr "MJPEG Ручей LCD 1 включить"
+msgstr "Strumień MJPEG LCD 1 załącz"
 
 #: ..\plugin.py:5850 ..\plugin_openweater3.py:5849
 msgid "MJPEG Stream LCD 1 Port"
-msgstr "MJPEG Ручей LCD 1 Порт"
+msgstr "Strumień MJPEG LCD 1 Port"
 
 #: ..\plugin.py:5851 ..\plugin_openweater3.py:5850
 msgid "MJPEG Stream LCD 1 Virtual Brightness"
-msgstr "MJPEG Ручей LCD 1 виртуальная яркость"
+msgstr "Strumień MJPEG dla LCD1 wirtualna jasność"
 
 #: ..\plugin.py:5852 ..\plugin_openweater3.py:5851
 msgid "MJPEG Stream LCD 2 enable"
-msgstr "MJPEG Ручей LCD 2 включить"
+msgstr "Strumień MJPEG LCD 2 załącz"
 
 #: ..\plugin.py:5853 ..\plugin_openweater3.py:5852
 msgid "MJPEG Stream LCD 2 Port"
-msgstr "MJPEG Ручей LCD 2 Порт"
+msgstr "Strumień MJPEG LCD 2 Port"
 
 #: ..\plugin.py:5854 ..\plugin_openweater3.py:5853
 msgid "MJPEG Stream LCD 2 Virtual Brightness"
-msgstr "MJPEG Ручей LCD 2 виртуальная яркость"
+msgstr "Strumień MJPEG dla LCD2 wirtualna jasność"
 
 #: ..\plugin.py:5855 ..\plugin_openweater3.py:5854
 msgid "MJPEG Stream LCD 3 enable"
-msgstr "MJPEG Ручей LCD 3 включить"
+msgstr "Strumień MJPEG LCD 3 załącz"
 
 #: ..\plugin.py:5856 ..\plugin_openweater3.py:5855
 msgid "MJPEG Stream LCD 3 Port"
-msgstr "MJPEG Ручей LCD 3 Порт"
+msgstr "Strumień MJPEG LCD 3 Port"
 
 #: ..\plugin.py:5857 ..\plugin_openweater3.py:5856
 msgid "MJPEG Stream LCD 3 Virtual Brightness"
-msgstr "MJPEG Ручей LCD 3 виртуальная яркость"
+msgstr "Strumień MJPEG dla LCD3 wirtualna jasność"
 
 #: ..\plugin.py:5859 ..\plugin_openweater3.py:5858
 msgid "MJPEG Cycle"
-msgstr "MJPEG Цикл"
+msgstr "Cykl MJPEG"
 
 #: ..\plugin.py:5860 ..\plugin_openweater3.py:5859
 msgid "MJPEG Restart on Error"
-msgstr "MJPEG Перезагрузить при ошибке"
+msgstr "Restart MJPEG przy błędzie"
 
 #: ..\plugin.py:5861 ..\plugin_openweater3.py:5860
 msgid "MJPEG Header Mode"
-msgstr "MJPEG Режим заголовка"
+msgstr "Tryb nagłówka MJPEG"
 
 #: ..\plugin.py:5862
 msgid "Show Streams '4097; 5001...5003' in Mode"
-msgstr "Показать потоки '4097; 5001...5003' в режиме"
+msgstr "Pokaż strumienie '4097; 5001...5003' w trybie"
 
 #: ..\plugin.py:5863 ..\plugin_openweater3.py:5861
 msgid "Sonos IP"
-msgstr "Sonos IP"
+msgstr "Sonos adres IP"
 
 #: ..\plugin.py:5864 ..\plugin_openweater3.py:5862
 msgid "Sonos Ping Timeout [ms]"
-msgstr "Sonos Ping Тайм-аут [ms]"
+msgstr "Sonos limit czasu [ms]"
 
 #: ..\plugin.py:5865 ..\plugin_openweater3.py:5863
 msgid "Sonos Play Check"
-msgstr "Sonos играть Проверять"
+msgstr "Sonos Play Check"
 
 #: ..\plugin.py:5866 ..\plugin_openweater3.py:5864
 msgid "Sonos Refresh [s]"
-msgstr "Sonos Обновить [s]"
+msgstr "Sonos odświeżanie [s]"
 
 #: ..\plugin.py:5867 ..\plugin_openweater3.py:5865
 msgid "BlueSound IP"
@@ -3841,15 +3846,15 @@ msgstr "BlueSound IP"
 
 #: ..\plugin.py:5868 ..\plugin_openweater3.py:5866
 msgid "BlueSound Ping Timeout [ms]"
-msgstr "BlueSound Ping Тайм-аут [ms]"
+msgstr "BlueSound Ping Timeout [ms]"
 
 #: ..\plugin.py:5869 ..\plugin_openweater3.py:5867
 msgid "BlueSound Play Check"
-msgstr "BlueSound играть Проверять"
+msgstr "BlueSound Play Check"
 
 #: ..\plugin.py:5870 ..\plugin_openweater3.py:5868
 msgid "BlueSound Refresh [s]"
-msgstr "BlueSound Обновить [s]"
+msgstr "BlueSound Refresh [s]"
 
 #: ..\plugin.py:5871 ..\plugin_openweater3.py:5869
 msgid "MusicCast IP"
@@ -3857,142 +3862,142 @@ msgstr "MusicCast IP"
 
 #: ..\plugin.py:5872 ..\plugin_openweater3.py:5870
 msgid "MusicCast Server IP [optional]"
-msgstr "MusicCast Сервер IP [по желанию]"
+msgstr "Adres IP serwera MusicCast [opcjonalnie]"
 
 #: ..\plugin.py:5873 ..\plugin_openweater3.py:5871
 msgid "MusicCast Ping Timeout [ms]"
-msgstr "MusicCast Ping Тайм-аут [ms]"
+msgstr "MusicCast Ping Timeout [ms]"
 
 #: ..\plugin.py:5874 ..\plugin_openweater3.py:5872
 msgid "MusicCast Play Check"
-msgstr "MusicCast играть Проверять"
+msgstr "MusicCast Play Check"
 
 #: ..\plugin.py:5875 ..\plugin_openweater3.py:5873
 msgid "MusicCast Refresh [s]"
-msgstr "MusicCast Обновить [s]"
+msgstr "MusicCast Refresh [s]"
 
 #: ..\plugin.py:5876 ..\plugin_openweater3.py:5874
 msgid "MusicCast Cover"
-msgstr "MusicCast Обложка"
+msgstr "Okładka MusicCast"
 
 #: ..\plugin.py:5877 ..\plugin_openweater3.py:5875
 msgid "LCD Custom Width"
-msgstr "LCD Своя Ширина"
+msgstr "Niestandardowa szerokość wyświetlacza LCD"
 
 #: ..\plugin.py:5878 ..\plugin_openweater3.py:5876
 msgid "LCD Custom Height"
-msgstr "LCD Своя высота"
+msgstr "Niestandardowa wysokość wyświetlacza LCD"
 
 #: ..\plugin.py:5879 ..\plugin_openweater3.py:5877
 msgid "LCD Custom Width 2"
-msgstr "LCD Своя Ширина 2"
+msgstr "Niestandardowa szerokość wyświetlacza LCD 2"
 
 #: ..\plugin.py:5880 ..\plugin_openweater3.py:5878
 msgid "LCD Custom Height 2"
-msgstr "LCD Своя высота 2"
+msgstr "Niestandardowa wysokość wyświetlacza LCD 2"
 
 #: ..\plugin.py:5881 ..\plugin_openweater3.py:5879
 msgid "LCD Off when shutdown"
-msgstr "LCD выключен при выключении"
+msgstr "LCD wyłączony po wyłączeniu"
 
 #: ..\plugin.py:5882 ..\plugin_openweater3.py:5880
 msgid "Timing ! calc all Times to Time/5*2 in Fastmode"
-msgstr "Выбор времени! calc all Times to Time/5*2 in Fastmode"
+msgstr "Czas! Przelicz cały czas do czas/5*2 w szybkim trybie"
 
 #: ..\plugin.py:5883 ..\plugin_openweater3.py:5881
 msgid "Display Delay [ms]"
-msgstr "Задержка [ms]"
+msgstr "Opóźnienie wyświetlania [ms]"
 
 #: ..\plugin.py:5884 ..\plugin_openweater3.py:5882
 msgid "Threads per LCD"
-msgstr "Threads pro LCD"
+msgstr "Zadań na LCD"
 
 #: ..\plugin.py:5885 ..\plugin_openweater3.py:5883
 msgid "Show Crash Corner"
-msgstr "Показать Крушение Угол"
+msgstr "Pokaż Crash Corner"
 
 #: ..\plugin.py:5886 ..\plugin_openweater3.py:5884
 msgid "Show 'no ....' Messages"
-msgstr "Показать 'нет...' Сообщения"
+msgstr "Pokaż \"nie ... Wiadomości"
 
 #: ..\plugin.py:5887 ..\plugin_openweater3.py:5885
 msgid "Storage-Devices: Force Read"
-msgstr "Хранение-Устройство: Принудит Чтение"
+msgstr "Menadżer urządzeń: Wymuś odczyt"
 
 #: ..\plugin.py:5888 ..\plugin_openweater3.py:5886
 msgid "Storage-Devices: Color Back"
-msgstr "Хранение-Устройство: Цвет Задний план"
+msgstr "Urządzenia pamięci masowej: Kolorowy tył"
 
 #: ..\plugin.py:5889 ..\plugin_openweater3.py:5887
 msgid "Storage-Devices: Color Bar"
-msgstr "Хранение-Устройство: Цвет Бар"
+msgstr "Urządzenia pamięci masowej: Color Bar"
 
 #: ..\plugin.py:5890 ..\plugin_openweater3.py:5888
 msgid "Storage-Devices: Color Full"
-msgstr "Хранение-Устройство: Цвет Полный"
+msgstr "Urządzenia pamięci masowej: Kolor Pełny"
 
 #: ..\plugin.py:5891 ..\plugin_openweater3.py:5889
 msgid "Network Check active"
-msgstr "Проверка сети активна"
+msgstr "Sprawdzanie sieci aktywne"
 
 #: ..\plugin.py:5892 ..\plugin_openweater3.py:5890
 msgid "Switch FrameBuffer [if possible]"
-msgstr "Выключатель Кадровый буфер [если возможно]"
+msgstr "Przełącz FrameBuffer [jeśli możliwy]"
 
 #: ..\plugin.py:5893 ..\plugin_openweater3.py:5891
 msgid "Config Backup Path [ok]>"
-msgstr "Конфиг Путь к резервному копированию[ok]>"
+msgstr "Konfiguracja zapisu kopii zapasowej [ok] >"
 
 #: ..\plugin.py:5894 ..\plugin_openweater3.py:5892
 msgid "Config Restore All Settings"
-msgstr "Конфиг Восстановить все настройки"
+msgstr "Konfiguracja przywracania ustawień"
 
 #: ..\plugin.py:5895 ..\plugin_openweater3.py:5893
 msgid "Debug-Logging > /tmp/L4log.txt"
-msgstr "Debug-Logging > /tmp/L4log.txt"
+msgstr "Debugowanie > /tmp/L4log.txt"
 
 #: ..\plugin.py:5899 ..\plugin.py:7250 ..\plugin_openweater3.py:5897
 #: ..\plugin_openweater3.py:7248
 msgid "- Backlight Off [disable set Off=On]"
-msgstr "- Выключение подсветки [Off = On]"
+msgstr "-Podświetlenie wyłączone [wyłącz Off=On]"
 
 #: ..\plugin.py:5900 ..\plugin.py:7251 ..\plugin_openweater3.py:5898
 #: ..\plugin_openweater3.py:7249
 msgid "- Backlight On"
-msgstr "- Включение подсветки"
+msgstr "- Podświetlenie włączone"
 
 #: ..\plugin.py:5901 ..\plugin.py:7252 ..\plugin_openweater3.py:5899
 #: ..\plugin_openweater3.py:7250
 msgid "- Backlight Weekend Off [disable set Off=On]"
-msgstr "- Подсвечивать выходные [для отключения установить Off = On]"
+msgstr "-Podświetlenie w weekend wyłączone [wyłącz Off=On]"
 
 #: ..\plugin.py:5902 ..\plugin.py:7253 ..\plugin_openweater3.py:5900
 #: ..\plugin_openweater3.py:7251
 msgid "- Backlight Weekend On"
-msgstr "- Hintergrundbeleuchtung Wochenende Ein"
+msgstr "-Podświetlenie w weekend włączone"
 
 #: ..\plugin.py:5903 ..\plugin.py:6639 ..\plugin.py:7254
 #: ..\plugin_openweater3.py:5901 ..\plugin_openweater3.py:6637
 #: ..\plugin_openweater3.py:7252
 msgid "- LCD Auto-OFF"
-msgstr "- LCD Автоматическое отключение"
+msgstr "- LCD automatyczne wyłączenie"
 
 #: ..\plugin.py:5904 ..\plugin.py:6641 ..\plugin.py:7268
 #: ..\plugin_openweater3.py:5902 ..\plugin_openweater3.py:6639
 #: ..\plugin_openweater3.py:7266
 msgid "Background"
-msgstr "Задний план"
+msgstr "Tło"
 
 #: ..\plugin.py:5908 ..\plugin.py:6645 ..\plugin.py:7272
 #: ..\plugin_openweater3.py:5906 ..\plugin_openweater3.py:6643
 #: ..\plugin_openweater3.py:7270
 msgid "- Picture [ok]>"
-msgstr "Картина [ok]"
+msgstr "- Obraz[ok]>"
 
 #: ..\plugin.py:5912 ..\plugin.py:5925 ..\plugin_openweater3.py:5910
 #: ..\plugin_openweater3.py:5923
 msgid "- Picon Size"
-msgstr "- Размер пиконов"
+msgstr "- Rozmiar Picon"
 
 #: ..\plugin.py:5915 ..\plugin.py:5928 ..\plugin.py:5945 ..\plugin.py:5960
 #: ..\plugin.py:5972 ..\plugin.py:5995 ..\plugin.py:6008 ..\plugin.py:6021
@@ -4077,17 +4082,17 @@ msgstr "- Размер пиконов"
 #: ..\plugin_openweater3.py:7735 ..\plugin_openweater3.py:7746
 #: ..\plugin_openweater3.py:7758 ..\plugin_openweater3.py:7789
 msgid "- Split Screen"
-msgstr "- Разделение экрана"
+msgstr "- Podzielony ekran"
 
 #: ..\plugin.py:5916 ..\plugin.py:5929 ..\plugin_openweater3.py:5914
 #: ..\plugin_openweater3.py:5927
 msgid "- Full Screen"
-msgstr "- На весь экран"
+msgstr "- Pełny ekran"
 
 #: ..\plugin.py:5917 ..\plugin.py:5930 ..\plugin_openweater3.py:5915
 #: ..\plugin_openweater3.py:5928
 msgid "- Text Size"
-msgstr "- Размер текста"
+msgstr "- Rozmiar tekstu"
 
 #: ..\plugin.py:5918 ..\plugin.py:6443 ..\plugin.py:6453 ..\plugin.py:6463
 #: ..\plugin.py:6473 ..\plugin.py:7063 ..\plugin.py:7073 ..\plugin.py:7086
@@ -4099,40 +4104,40 @@ msgstr "- Размер текста"
 #: ..\plugin_openweater3.py:7613 ..\plugin_openweater3.py:7623
 #: ..\plugin_openweater3.py:7633 ..\plugin_openweater3.py:7643
 msgid "- Transparency"
-msgstr "- Прозрачность"
+msgstr "- Przejrzystość"
 
 #: ..\plugin.py:5919 ..\plugin.py:5931 ..\plugin.py:6103 ..\plugin.py:6115
 #: ..\plugin_openweater3.py:5917 ..\plugin_openweater3.py:5929
 #: ..\plugin_openweater3.py:6101 ..\plugin_openweater3.py:6113
 msgid "- Picon Path [ok]>"
-msgstr "- Путь к пиконам [ok]>"
+msgstr "- Ścieżka Picon [ok]>"
 
 #: ..\plugin.py:5920 ..\plugin.py:5932 ..\plugin_openweater3.py:5918
 #: ..\plugin_openweater3.py:5930
 msgid "- Picon Path 2 [ok]>"
-msgstr "- Путь к пиконам 2 [ok]>"
+msgstr "- Ścieżka pikon 2 [ok]>"
 
 #: ..\plugin.py:5921 ..\plugin.py:5933 ..\plugin_openweater3.py:5919
 #: ..\plugin_openweater3.py:5931
 msgid "- Picon Cache Path [ok]>"
-msgstr "- Picon Cache путь [ok]>"
+msgstr "-Ścieżka buforowania pikon[ok]>"
 
 #: ..\plugin.py:5922 ..\plugin_openweater3.py:5920
 msgid "Picon 2"
-msgstr "Пикон 2"
+msgstr "Picon 2"
 
 #: ..\plugin.py:5934 ..\plugin.py:6754 ..\plugin.py:7283
 #: ..\plugin_openweater3.py:5932 ..\plugin_openweater3.py:6752
 #: ..\plugin_openweater3.py:7281
 msgid "Clock"
-msgstr "Часы"
+msgstr "Zegar"
 
 #: ..\plugin.py:5937 ..\plugin.py:5952 ..\plugin.py:6614 ..\plugin.py:7240
 #: ..\plugin.py:7786 ..\plugin_openweater3.py:5935
 #: ..\plugin_openweater3.py:5950 ..\plugin_openweater3.py:6612
 #: ..\plugin_openweater3.py:7238 ..\plugin_openweater3.py:7784
 msgid "-  Type"
-msgstr "-  Тип"
+msgstr "-  Typ"
 
 #: ..\plugin.py:5939 ..\plugin.py:5954 ..\plugin.py:6759 ..\plugin.py:6774
 #: ..\plugin.py:7288 ..\plugin.py:7303 ..\plugin_openweater3.py:5937
@@ -4140,7 +4145,7 @@ msgstr "-  Тип"
 #: ..\plugin_openweater3.py:6772 ..\plugin_openweater3.py:7286
 #: ..\plugin_openweater3.py:7301
 msgid "- Analog Clock"
-msgstr "- Аналоговые часы"
+msgstr "- Zegar analogowy"
 
 #: ..\plugin.py:5941 ..\plugin.py:5956 ..\plugin.py:6761 ..\plugin.py:6776
 #: ..\plugin.py:7290 ..\plugin.py:7305 ..\plugin_openweater3.py:5939
@@ -4148,7 +4153,7 @@ msgstr "- Аналоговые часы"
 #: ..\plugin_openweater3.py:6774 ..\plugin_openweater3.py:7288
 #: ..\plugin_openweater3.py:7303
 msgid "- Spacing"
-msgstr "- Растояние"
+msgstr "- Rozstaw"
 
 #: ..\plugin.py:5942 ..\plugin.py:5957 ..\plugin.py:6044 ..\plugin.py:6060
 #: ..\plugin.py:6074 ..\plugin.py:6085 ..\plugin.py:6145 ..\plugin.py:6317
@@ -4187,7 +4192,7 @@ msgstr "- Растояние"
 #: ..\plugin_openweater3.py:7638 ..\plugin_openweater3.py:7719
 #: ..\plugin_openweater3.py:7732 ..\plugin_openweater3.py:7785
 msgid "- Size"
-msgstr "- Размер"
+msgstr "- Rozmiar"
 
 #: ..\plugin.py:5947 ..\plugin.py:5962 ..\plugin.py:5974 ..\plugin.py:5984
 #: ..\plugin.py:5997 ..\plugin.py:6010 ..\plugin.py:6023 ..\plugin.py:6036
@@ -4261,18 +4266,18 @@ msgstr "- Размер"
 #: ..\plugin_openweater3.py:7727 ..\plugin_openweater3.py:7749
 #: ..\plugin_openweater3.py:7761
 msgid "- Shadow Edges"
-msgstr "- Теневые грани"
+msgstr "- Krawędzie cienia"
 
 #: ..\plugin.py:5949 ..\plugin.py:6769 ..\plugin.py:7298
 #: ..\plugin_openweater3.py:5947 ..\plugin_openweater3.py:6767
 #: ..\plugin_openweater3.py:7296
 msgid "Clock 2"
-msgstr "Часы 2"
+msgstr "Zegar 2"
 
 #: ..\plugin.py:5964 ..\plugin.py:6684 ..\plugin_openweater3.py:5962
 #: ..\plugin_openweater3.py:6682
 msgid "Program Name"
-msgstr "Название передачи"
+msgstr "Nazwa programu"
 
 #: ..\plugin.py:5968 ..\plugin.py:5991 ..\plugin.py:6004 ..\plugin.py:6017
 #: ..\plugin.py:6030 ..\plugin.py:6064 ..\plugin.py:6078 ..\plugin.py:6132
@@ -4295,7 +4300,7 @@ msgstr "Название передачи"
 #: ..\plugin_openweater3.py:7347 ..\plugin_openweater3.py:7678
 #: ..\plugin_openweater3.py:7723
 msgid "- maximum Lines"
-msgstr "- маскимум линий"
+msgstr "- maksymalne linie"
 
 #: ..\plugin.py:5971 ..\plugin.py:5994 ..\plugin.py:6007 ..\plugin.py:6020
 #: ..\plugin.py:6033 ..\plugin.py:6047 ..\plugin.py:6088 ..\plugin.py:6137
@@ -4315,16 +4320,16 @@ msgstr "- маскимум линий"
 #: ..\plugin_openweater3.py:7137 ..\plugin_openweater3.py:7320
 #: ..\plugin_openweater3.py:7683
 msgid "- Length"
-msgstr "- Длина"
+msgstr "- Długość"
 
 #: ..\plugin.py:5976 ..\plugin_openweater3.py:5974
 msgid "Program Number"
-msgstr "Номер канала"
+msgstr "Numer programu"
 
 #: ..\plugin.py:5986 ..\plugin.py:6696 ..\plugin_openweater3.py:5984
 #: ..\plugin_openweater3.py:6694
 msgid "Program Info"
-msgstr "Инфо о програме"
+msgstr "Informacje o programie"
 
 #: ..\plugin.py:5989 ..\plugin.py:6002 ..\plugin.py:6015 ..\plugin.py:6028
 #: ..\plugin.py:6042 ..\plugin.py:6043 ..\plugin.py:6102 ..\plugin.py:6114
@@ -4392,63 +4397,63 @@ msgstr "Инфо о програме"
 #: ..\plugin_openweater3.py:7709 ..\plugin_openweater3.py:7725
 #: ..\plugin_openweater3.py:7736
 msgid "- Type"
-msgstr "- Тип"
+msgstr "- Typ"
 
 #: ..\plugin.py:5999 ..\plugin_openweater3.py:5997
 msgid "Program Info 2"
-msgstr "Инфо о програме 2"
+msgstr "Informacje o programie 2"
 
 #: ..\plugin.py:6012 ..\plugin.py:6709 ..\plugin_openweater3.py:6010
 #: ..\plugin_openweater3.py:6707
 msgid "Next Program Info"
-msgstr "Инфо о следующей программе"
+msgstr "Informacje o następnym programie"
 
 #: ..\plugin.py:6025 ..\plugin.py:6670 ..\plugin_openweater3.py:6023
 #: ..\plugin_openweater3.py:6668
 msgid "Extended Description"
-msgstr "Расширенное описание"
+msgstr "Rozszerzony opis"
 
 #: ..\plugin.py:6038 ..\plugin.py:6683 ..\plugin_openweater3.py:6036
 #: ..\plugin_openweater3.py:6681
 msgid "- use Info when empty"
-msgstr "- использовать информацию, когда она пуста"
+msgstr "- użyj informacji kiedy jest pusty"
 
 #: ..\plugin.py:6039 ..\plugin.py:6722 ..\plugin_openweater3.py:6037
 #: ..\plugin_openweater3.py:6720
 msgid "Progress Bar"
-msgstr "Прогресс бар"
+msgstr "Pasek postępu"
 
 #: ..\plugin.py:6049 ..\plugin.py:6732 ..\plugin_openweater3.py:6047
 #: ..\plugin_openweater3.py:6730
 msgid "- Color Text"
-msgstr "- Цвет Текст"
+msgstr "- Kolorowy tekst"
 
 #: ..\plugin.py:6050 ..\plugin.py:6733 ..\plugin_openweater3.py:6048
 #: ..\plugin_openweater3.py:6731
 msgid "- Border"
-msgstr "- Граница"
+msgstr "- Obramowanie"
 
 #: ..\plugin.py:6051 ..\plugin.py:6151 ..\plugin.py:6734 ..\plugin.py:6746
 #: ..\plugin_openweater3.py:6049 ..\plugin_openweater3.py:6149
 #: ..\plugin_openweater3.py:6732 ..\plugin_openweater3.py:6744
 msgid "- Shaded"
-msgstr "- Затенить"
+msgstr "- Zacieniony"
 
 #: ..\plugin.py:6052 ..\plugin.py:6735 ..\plugin_openweater3.py:6050
 #: ..\plugin_openweater3.py:6733
 msgid "- Unit min"
-msgstr "- единица измерения мин"
+msgstr "- Jednostka min."
 
 #: ..\plugin.py:6054 ..\plugin.py:6784 ..\plugin.py:7327
 #: ..\plugin_openweater3.py:6052 ..\plugin_openweater3.py:6782
 #: ..\plugin_openweater3.py:7325
 msgid "Informations"
-msgstr "Информация"
+msgstr "Informacje"
 
 #: ..\plugin.py:6057 ..\plugin.py:6071 ..\plugin_openweater3.py:6055
 #: ..\plugin_openweater3.py:6069
 msgid "- Tunerinfo"
-msgstr "- Инфо о тюнере"
+msgstr "- Tunerinfo"
 
 #: ..\plugin.py:6058 ..\plugin.py:6072 ..\plugin.py:6787 ..\plugin.py:6800
 #: ..\plugin.py:7330 ..\plugin.py:7343 ..\plugin_openweater3.py:6056
@@ -4456,7 +4461,7 @@ msgstr "- Инфо о тюнере"
 #: ..\plugin_openweater3.py:6798 ..\plugin_openweater3.py:7328
 #: ..\plugin_openweater3.py:7341
 msgid "- Sensors"
-msgstr "- Сенсор"
+msgstr "- Czujniki"
 
 #: ..\plugin.py:6059 ..\plugin.py:6073 ..\plugin.py:6788 ..\plugin.py:6801
 #: ..\plugin.py:7331 ..\plugin.py:7344 ..\plugin_openweater3.py:6057
@@ -4470,64 +4475,64 @@ msgstr "- CPU"
 #: ..\plugin_openweater3.py:6066 ..\plugin_openweater3.py:6795
 #: ..\plugin_openweater3.py:7338
 msgid "Informations 2"
-msgstr "Информация 2"
+msgstr "Informacje 2"
 
 #: ..\plugin.py:6082 ..\plugin_openweater3.py:6080
 msgid "Signal Quality Bar"
-msgstr "Уровень сигнала"
+msgstr "Pasek jakości sygnału"
 
 #: ..\plugin.py:6091 ..\plugin_openweater3.py:6089
 msgid "- Gradient"
-msgstr "- Градиент"
+msgstr "- Gradient"
 
 #: ..\plugin.py:6092 ..\plugin_openweater3.py:6090
 msgid "- Bar Range Min"
-msgstr "- Бар диапазон мин"
+msgstr "- Zakres paska min."
 
 #: ..\plugin.py:6093 ..\plugin_openweater3.py:6091
 msgid "- Bar Range Max"
-msgstr "- Бар диапазон макс"
+msgstr "- Zakres paska maks."
 
 #: ..\plugin.py:6094 ..\plugin_openweater3.py:6092
 msgid "Satellite"
-msgstr "Спутник"
+msgstr "Satelita"
 
 #: ..\plugin.py:6106 ..\plugin_openweater3.py:6104
 msgid "Provider"
-msgstr "Провайдер"
+msgstr "Nadawca"
 
 #: ..\plugin.py:6118 ..\plugin.py:6810 ..\plugin.py:7353
 #: ..\plugin_openweater3.py:6116 ..\plugin_openweater3.py:6808
 #: ..\plugin_openweater3.py:7351
 msgid "Used Tuner"
-msgstr "Используемый тюнер"
+msgstr "Używany tuner"
 
 #: ..\plugin.py:6126 ..\plugin.py:6818 ..\plugin.py:7361
 #: ..\plugin_openweater3.py:6124 ..\plugin_openweater3.py:6816
 #: ..\plugin_openweater3.py:7359
 msgid "- only active Tuner"
-msgstr "- только активный тюнер"
+msgstr "- tylko aktywny tuner"
 
 #: ..\plugin.py:6128 ..\plugin.py:6820 ..\plugin.py:7313
 #: ..\plugin_openweater3.py:6126 ..\plugin_openweater3.py:6818
 #: ..\plugin_openweater3.py:7311
 msgid "Next Timer Event"
-msgstr "Следующее событие таймера"
+msgstr "Następne zdarzenie timera"
 
 #: ..\plugin.py:6142 ..\plugin.py:6737 ..\plugin_openweater3.py:6140
 #: ..\plugin_openweater3.py:6735
 msgid "Volume"
-msgstr "Громкость"
+msgstr "Głośność"
 
 #: ..\plugin.py:6152 ..\plugin.py:6747 ..\plugin_openweater3.py:6150
 #: ..\plugin_openweater3.py:6745
 msgid "Mute"
-msgstr "Немой"
+msgstr "Wycisz"
 
 #: ..\plugin.py:6159 ..\plugin.py:6834 ..\plugin_openweater3.py:6157
 #: ..\plugin_openweater3.py:6832
 msgid "Audio/Video"
-msgstr "Аудио/Видео"
+msgstr "Audio/Wideo"
 
 #: ..\plugin.py:6170 ..\plugin.py:6845 ..\plugin_openweater3.py:6168
 #: ..\plugin_openweater3.py:6843
@@ -4538,19 +4543,19 @@ msgstr "Bitrate"
 #: ..\plugin_openweater3.py:6178 ..\plugin_openweater3.py:6853
 #: ..\plugin_openweater3.py:7361
 msgid "Online [Ping]"
-msgstr "Онлайн [Пинг]"
+msgstr "Online [Ping]"
 
 #: ..\plugin.py:6191 ..\plugin.py:6866 ..\plugin.py:7374
 #: ..\plugin_openweater3.py:6189 ..\plugin_openweater3.py:6864
 #: ..\plugin_openweater3.py:7372
 msgid "- Show State"
-msgstr "- Показать состояние"
+msgstr "- Pokaż stan"
 
 #: ..\plugin.py:6192 ..\plugin.py:6867 ..\plugin.py:7375
 #: ..\plugin_openweater3.py:6190 ..\plugin_openweater3.py:6865
 #: ..\plugin_openweater3.py:7373
 msgid "- Timeout [ms]"
-msgstr "- Тайм-аут [ms]"
+msgstr "- Timeout [ms]"
 
 #: ..\plugin.py:6193 ..\plugin.py:6194 ..\plugin.py:6195 ..\plugin.py:6196
 #: ..\plugin.py:6197 ..\plugin.py:6868 ..\plugin.py:6869 ..\plugin.py:6870
@@ -4565,35 +4570,35 @@ msgstr "- Тайм-аут [ms]"
 #: ..\plugin_openweater3.py:7376 ..\plugin_openweater3.py:7377
 #: ..\plugin_openweater3.py:7378
 msgid "- Online Name:Address"
-msgstr "- Ник:адрес"
+msgstr "- Nazwa online:Adres"
 
 #: ..\plugin.py:6198 ..\plugin.py:6873 ..\plugin.py:7381
 #: ..\plugin_openweater3.py:6196 ..\plugin_openweater3.py:6871
 #: ..\plugin_openweater3.py:7379
 msgid "External IP Address"
-msgstr "Внешний IP-адрес"
+msgstr "Zewnętrzny adres IP"
 
 #: ..\plugin.py:6209 ..\plugin_openweater3.py:6207
 msgid "- external IP URL"
-msgstr "- внешний IP URL"
+msgstr "- zewnętrzny adres URL IP"
 
 #: ..\plugin.py:6210 ..\plugin.py:6884 ..\plugin.py:7392
 #: ..\plugin_openweater3.py:6208 ..\plugin_openweater3.py:6882
 #: ..\plugin_openweater3.py:7390
 msgid "Storage-Devices"
-msgstr "Хранение-Устройство"
+msgstr "Urządzenia pamięci masowej"
 
 #: ..\plugin.py:6221 ..\plugin.py:6895 ..\plugin.py:7403
 #: ..\plugin_openweater3.py:6219 ..\plugin_openweater3.py:6893
 #: ..\plugin_openweater3.py:7401
 msgid "- free Warning"
-msgstr "- бесплатно предупреждение"
+msgstr "- bezpłatne ostrzeżenie"
 
 #: ..\plugin.py:6222 ..\plugin.py:6896 ..\plugin.py:7404
 #: ..\plugin_openweater3.py:6220 ..\plugin_openweater3.py:6894
 #: ..\plugin_openweater3.py:7402
 msgid "- extra Info"
-msgstr "- экстра инфо"
+msgstr "- dodatkowe informacje"
 
 #: ..\plugin.py:6223 ..\plugin.py:6224 ..\plugin.py:6225 ..\plugin.py:6226
 #: ..\plugin.py:6227 ..\plugin.py:6897 ..\plugin.py:6898 ..\plugin.py:6899
@@ -4608,7 +4613,7 @@ msgstr "- экстра инфо"
 #: ..\plugin_openweater3.py:7405 ..\plugin_openweater3.py:7406
 #: ..\plugin_openweater3.py:7407
 msgid "- Device Name"
-msgstr "- Имя устройства"
+msgstr "- Nazwa urządzenia"
 
 #: ..\plugin.py:6228 ..\plugin.py:6902 ..\plugin.py:7410
 #: ..\plugin_openweater3.py:6226 ..\plugin_openweater3.py:6900
@@ -4626,7 +4631,7 @@ msgstr "HDD"
 #: ..\plugin_openweater3.py:7420 ..\plugin_openweater3.py:7431
 #: ..\plugin_openweater3.py:7442 ..\plugin_openweater3.py:7705
 msgid "- Zoom"
-msgstr "- Увеличение"
+msgstr "- Zoom"
 
 #: ..\plugin.py:6243 ..\plugin.py:6254 ..\plugin.py:6265 ..\plugin.py:6917
 #: ..\plugin.py:6928 ..\plugin.py:6939 ..\plugin.py:7425 ..\plugin.py:7436
@@ -4636,19 +4641,19 @@ msgstr "- Увеличение"
 #: ..\plugin_openweater3.py:6937 ..\plugin_openweater3.py:7423
 #: ..\plugin_openweater3.py:7434 ..\plugin_openweater3.py:7445
 msgid "- Weather Type"
-msgstr "- Тип погоды"
+msgstr "- Typ pogody"
 
 #: ..\plugin.py:6247 ..\plugin.py:6921 ..\plugin.py:7429
 #: ..\plugin_openweater3.py:6245 ..\plugin_openweater3.py:6919
 #: ..\plugin_openweater3.py:7427
 msgid "Weather 2"
-msgstr "Погода 2"
+msgstr "Pogoda 2"
 
 #: ..\plugin.py:6258 ..\plugin.py:6932 ..\plugin.py:7440
 #: ..\plugin_openweater3.py:6256 ..\plugin_openweater3.py:6930
 #: ..\plugin_openweater3.py:7438
 msgid "Meteo-Weather Station"
-msgstr "Погода-Источник"
+msgstr "Stacja meteorologiczna"
 
 #: ..\plugin.py:6274 ..\plugin.py:6297 ..\plugin.py:6321 ..\plugin.py:6331
 #: ..\plugin.py:6948 ..\plugin.py:6971 ..\plugin.py:6995 ..\plugin.py:7005
@@ -4660,7 +4665,7 @@ msgstr "Погода-Источник"
 #: ..\plugin_openweater3.py:7454 ..\plugin_openweater3.py:7477
 #: ..\plugin_openweater3.py:7501 ..\plugin_openweater3.py:7511
 msgid "- Station"
-msgstr "- Станция"
+msgstr "- Stacja"
 
 #: ..\plugin.py:6275 ..\plugin.py:6298 ..\plugin.py:6949 ..\plugin.py:6972
 #: ..\plugin.py:7457 ..\plugin.py:7480 ..\plugin_openweater3.py:6273
@@ -4668,7 +4673,7 @@ msgstr "- Станция"
 #: ..\plugin_openweater3.py:6970 ..\plugin_openweater3.py:7455
 #: ..\plugin_openweater3.py:7478
 msgid "- Module"
-msgstr "- Модуль"
+msgstr "- Moduł"
 
 #: ..\plugin.py:6276 ..\plugin.py:6299 ..\plugin.py:6950 ..\plugin.py:6973
 #: ..\plugin.py:7458 ..\plugin.py:7481 ..\plugin_openweater3.py:6274
@@ -4676,7 +4681,7 @@ msgstr "- Модуль"
 #: ..\plugin_openweater3.py:6971 ..\plugin_openweater3.py:7456
 #: ..\plugin_openweater3.py:7479
 msgid "- Module userdefined"
-msgstr "- Модуль определяемые пользователем"
+msgstr "- Moduł zdefiniowany przez użytkownika"
 
 #: ..\plugin.py:6277 ..\plugin.py:6300 ..\plugin.py:6951 ..\plugin.py:6974
 #: ..\plugin.py:7459 ..\plugin.py:7482 ..\plugin_openweater3.py:6275
@@ -4684,7 +4689,7 @@ msgstr "- Модуль определяемые пользователем"
 #: ..\plugin_openweater3.py:6972 ..\plugin_openweater3.py:7457
 #: ..\plugin_openweater3.py:7480
 msgid "- Base"
-msgstr "Основание"
+msgstr "- Podstawa"
 
 #: ..\plugin.py:6278 ..\plugin.py:6301 ..\plugin.py:6952 ..\plugin.py:6975
 #: ..\plugin.py:7460 ..\plugin.py:7483 ..\plugin_openweater3.py:6276
@@ -4692,7 +4697,7 @@ msgstr "Основание"
 #: ..\plugin_openweater3.py:6973 ..\plugin_openweater3.py:7458
 #: ..\plugin_openweater3.py:7481
 msgid "- Name"
-msgstr "- Имя"
+msgstr "- Nazwa"
 
 #: ..\plugin.py:6282 ..\plugin.py:6305 ..\plugin.py:6496 ..\plugin.py:6956
 #: ..\plugin.py:6979 ..\plugin.py:7122 ..\plugin.py:7464 ..\plugin.py:7487
@@ -4702,7 +4707,7 @@ msgstr "- Имя"
 #: ..\plugin_openweater3.py:7120 ..\plugin_openweater3.py:7462
 #: ..\plugin_openweater3.py:7485 ..\plugin_openweater3.py:7666
 msgid "- Color 1"
-msgstr "- Цвет 1"
+msgstr "- Kolor 1"
 
 #: ..\plugin.py:6283 ..\plugin.py:6306 ..\plugin.py:6497 ..\plugin.py:6957
 #: ..\plugin.py:6980 ..\plugin.py:7123 ..\plugin.py:7465 ..\plugin.py:7488
@@ -4712,7 +4717,7 @@ msgstr "- Цвет 1"
 #: ..\plugin_openweater3.py:7121 ..\plugin_openweater3.py:7463
 #: ..\plugin_openweater3.py:7486 ..\plugin_openweater3.py:7667
 msgid "- Color 2"
-msgstr "- Цвет 2"
+msgstr "- Kolor 2"
 
 #: ..\plugin.py:6284 ..\plugin.py:6307 ..\plugin.py:6498 ..\plugin.py:6958
 #: ..\plugin.py:6981 ..\plugin.py:7124 ..\plugin.py:7466 ..\plugin.py:7489
@@ -4722,7 +4727,7 @@ msgstr "- Цвет 2"
 #: ..\plugin_openweater3.py:7122 ..\plugin_openweater3.py:7464
 #: ..\plugin_openweater3.py:7487 ..\plugin_openweater3.py:7668
 msgid "- Color 3"
-msgstr "- Цвет 3"
+msgstr "- Kolor 3"
 
 #: ..\plugin.py:6285 ..\plugin.py:6308 ..\plugin.py:6499 ..\plugin.py:6959
 #: ..\plugin.py:6982 ..\plugin.py:7125 ..\plugin.py:7467 ..\plugin.py:7490
@@ -4732,7 +4737,7 @@ msgstr "- Цвет 3"
 #: ..\plugin_openweater3.py:7123 ..\plugin_openweater3.py:7465
 #: ..\plugin_openweater3.py:7488 ..\plugin_openweater3.py:7669
 msgid "- Color 4"
-msgstr "- Цвет 4"
+msgstr "- Kolor 4"
 
 #: ..\plugin.py:6286 ..\plugin.py:6309 ..\plugin.py:6500 ..\plugin.py:6960
 #: ..\plugin.py:6983 ..\plugin.py:7126 ..\plugin.py:7468 ..\plugin.py:7491
@@ -4742,7 +4747,7 @@ msgstr "- Цвет 4"
 #: ..\plugin_openweater3.py:7124 ..\plugin_openweater3.py:7466
 #: ..\plugin_openweater3.py:7489 ..\plugin_openweater3.py:7670
 msgid "- Color 5"
-msgstr "- Цвет 5"
+msgstr "- Kolor 5"
 
 #: ..\plugin.py:6287 ..\plugin.py:6310 ..\plugin.py:6961 ..\plugin.py:6984
 #: ..\plugin.py:7469 ..\plugin.py:7492 ..\plugin_openweater3.py:6285
@@ -4750,7 +4755,7 @@ msgstr "- Цвет 5"
 #: ..\plugin_openweater3.py:6982 ..\plugin_openweater3.py:7467
 #: ..\plugin_openweater3.py:7490
 msgid "- Color 6"
-msgstr "- Цвет 6"
+msgstr "- Kolor 6"
 
 #: ..\plugin.py:6290 ..\plugin.py:6964 ..\plugin.py:7472
 #: ..\plugin_openweater3.py:6288 ..\plugin_openweater3.py:6962
@@ -4762,7 +4767,7 @@ msgstr "Netatmo 2"
 #: ..\plugin_openweater3.py:6311 ..\plugin_openweater3.py:6985
 #: ..\plugin_openweater3.py:7493
 msgid "Netatmo CO2 Indicator"
-msgstr "Netatmo CO2 Индикатор"
+msgstr "Netatmo CO2 Wskaźnik"
 
 #: ..\plugin.py:6319 ..\plugin.py:6329 ..\plugin.py:6993 ..\plugin.py:7003
 #: ..\plugin.py:7501 ..\plugin.py:7511 ..\plugin_openweater3.py:6317
@@ -4770,42 +4775,42 @@ msgstr "Netatmo CO2 Индикатор"
 #: ..\plugin_openweater3.py:7001 ..\plugin_openweater3.py:7499
 #: ..\plugin_openweater3.py:7509
 msgid "- Length [Bar]"
-msgstr "- Длина [Бар]"
+msgstr "- Długość [bar]"
 
 #: ..\plugin.py:6323 ..\plugin.py:6997 ..\plugin.py:7505
 #: ..\plugin_openweater3.py:6321 ..\plugin_openweater3.py:6995
 #: ..\plugin_openweater3.py:7503
 msgid "Netatmo Comfort Indicator"
-msgstr "Netatmo Комфорт Индикатор"
+msgstr "Netatmo CO2 Komfortowy wskaźnik"
 
 #: ..\plugin.py:6333 ..\plugin.py:7007 ..\plugin.py:7515
 #: ..\plugin_openweater3.py:6331 ..\plugin_openweater3.py:7005
 #: ..\plugin_openweater3.py:7513
 msgid "Moonphase"
-msgstr "Фазы Луны"
+msgstr "Moonphase"
 
 #: ..\plugin.py:6340 ..\plugin.py:7014 ..\plugin.py:7015 ..\plugin.py:7522
 #: ..\plugin_openweater3.py:6338 ..\plugin_openweater3.py:7012
 #: ..\plugin_openweater3.py:7013 ..\plugin_openweater3.py:7520
 msgid "- Infolines"
-msgstr "- Информационные строки"
+msgstr "- Infolinie"
 
 #: ..\plugin.py:6341 ..\plugin.py:7523 ..\plugin_openweater3.py:6339
 #: ..\plugin_openweater3.py:7521
 msgid "- Trendarrows"
-msgstr "- стрелки тренда"
+msgstr "- Trendarrows"
 
 #: ..\plugin.py:6346 ..\plugin.py:7020 ..\plugin.py:7528
 #: ..\plugin_openweater3.py:6344 ..\plugin_openweater3.py:7018
 #: ..\plugin_openweater3.py:7526
 msgid "Sunrise"
-msgstr "Восход солнца"
+msgstr "Wschód słońca"
 
 #: ..\plugin.py:6358 ..\plugin.py:7091 ..\plugin.py:7540
 #: ..\plugin_openweater3.py:6356 ..\plugin_openweater3.py:7089
 #: ..\plugin_openweater3.py:7538
 msgid "Show oscam.lcd"
-msgstr "Показать oscam.lcd"
+msgstr "Pokaż oscam.lcd"
 
 #: ..\plugin.py:6361 ..\plugin.py:6380 ..\plugin.py:6391 ..\plugin.py:6402
 #: ..\plugin.py:6467 ..\plugin.py:7035 ..\plugin.py:7046 ..\plugin.py:7552
@@ -4817,33 +4822,33 @@ msgstr "Показать oscam.lcd"
 #: ..\plugin_openweater3.py:7561 ..\plugin_openweater3.py:7572
 #: ..\plugin_openweater3.py:7637
 msgid "- File [ok]>"
-msgstr "- Файл [ok]>"
+msgstr "- Plik [ok]>"
 
 #: ..\plugin.py:6368 ..\plugin_openweater3.py:6366
 msgid "Show ecm.info"
-msgstr "Показать ecm.info"
+msgstr "Pokaż ecm.info"
 
 #: ..\plugin.py:6377 ..\plugin.py:7032 ..\plugin.py:7549
 #: ..\plugin_openweater3.py:6375 ..\plugin_openweater3.py:7030
 #: ..\plugin_openweater3.py:7547
 msgid "Show Textfile"
-msgstr "Показать текст файл"
+msgstr "Pokaż plik tekstowy"
 
 #: ..\plugin.py:6388 ..\plugin.py:7043 ..\plugin.py:7560
 #: ..\plugin_openweater3.py:6386 ..\plugin_openweater3.py:7041
 #: ..\plugin_openweater3.py:7558
 msgid "Show Textfile 2"
-msgstr "Показать текст файл 2"
+msgstr "Pokaż plik tekstowy 2"
 
 #: ..\plugin.py:6399 ..\plugin.py:7571 ..\plugin_openweater3.py:6397
 #: ..\plugin_openweater3.py:7569
 msgid "Show Textfile 3"
-msgstr "Показать текст файл 3"
+msgstr "Pokaż plik tekstowy 3"
 
 #: ..\plugin.py:6410 ..\plugin.py:7582 ..\plugin_openweater3.py:6408
 #: ..\plugin_openweater3.py:7580
 msgid "Show HTTP Text"
-msgstr "Показать HTTP текст"
+msgstr "Pokaż tekst HTTP"
 
 #: ..\plugin.py:6413 ..\plugin.py:6427 ..\plugin.py:7585 ..\plugin.py:7599
 #: ..\plugin_openweater3.py:6411 ..\plugin_openweater3.py:6425
@@ -4854,43 +4859,43 @@ msgstr "- URL"
 #: ..\plugin.py:6421 ..\plugin.py:7593 ..\plugin_openweater3.py:6419
 #: ..\plugin_openweater3.py:7591
 msgid "WWW-Internet Converter"
-msgstr "WWW-Internet Converter"
+msgstr "Konwerter WWW-Internet"
 
 #: ..\plugin.py:6428 ..\plugin.py:7600 ..\plugin_openweater3.py:6426
 #: ..\plugin_openweater3.py:7598
 msgid "- HTTP Width"
-msgstr "- HTTP Ширина"
+msgstr "- Szerokość HTTP"
 
 #: ..\plugin.py:6429 ..\plugin.py:7601 ..\plugin_openweater3.py:6427
 #: ..\plugin_openweater3.py:7599
 msgid "- HTTP Height"
-msgstr "- HTTP Высота"
+msgstr "- Wysokość HTTP"
 
 #: ..\plugin.py:6430 ..\plugin.py:7602 ..\plugin_openweater3.py:6428
 #: ..\plugin_openweater3.py:7600
 msgid "- Cut from X"
-msgstr "- Вырезать из X"
+msgstr "- Cięcie od X"
 
 #: ..\plugin.py:6431 ..\plugin.py:7603 ..\plugin_openweater3.py:6429
 #: ..\plugin_openweater3.py:7601
 msgid "- Cut from Y"
-msgstr "- Вырезать из Y"
+msgstr "- Odcięcie od Y"
 
 #: ..\plugin.py:6432 ..\plugin.py:7604 ..\plugin_openweater3.py:6430
 #: ..\plugin_openweater3.py:7602
 msgid "- Cut Width [disable = 0]"
-msgstr "- Обрезать по ширине [выкл. = 0]"
+msgstr "- Szerokość cięcia [disable = 0]"
 
 #: ..\plugin.py:6433 ..\plugin.py:7605 ..\plugin_openweater3.py:6431
 #: ..\plugin_openweater3.py:7603
 msgid "- Cut Height [disable = 0]"
-msgstr "- Обрезать по высоте [выкл. = 0]"
+msgstr "- Wysokość cięcia [disable = 0]"
 
 #: ..\plugin.py:6434 ..\plugin.py:7054 ..\plugin.py:7606
 #: ..\plugin_openweater3.py:6432 ..\plugin_openweater3.py:7052
 #: ..\plugin_openweater3.py:7604
 msgid "Show Picture"
-msgstr "Показать картинку"
+msgstr "Pokaż zdjęcie"
 
 #: ..\plugin.py:6437 ..\plugin.py:6447 ..\plugin.py:6457 ..\plugin.py:7057
 #: ..\plugin.py:7067 ..\plugin.py:7609 ..\plugin.py:7619 ..\plugin.py:7629
@@ -4899,7 +4904,7 @@ msgstr "Показать картинку"
 #: ..\plugin_openweater3.py:7065 ..\plugin_openweater3.py:7607
 #: ..\plugin_openweater3.py:7617 ..\plugin_openweater3.py:7627
 msgid "- File or Path [ok]>"
-msgstr "- Файл или путь [ok]>"
+msgstr "- Plik lub ścieżka [ok]>"
 
 #: ..\plugin.py:6439 ..\plugin.py:6449 ..\plugin.py:6459 ..\plugin.py:6469
 #: ..\plugin.py:7059 ..\plugin.py:7069 ..\plugin.py:7078 ..\plugin.py:7611
@@ -4911,7 +4916,7 @@ msgstr "- Файл или путь [ok]>"
 #: ..\plugin_openweater3.py:7619 ..\plugin_openweater3.py:7629
 #: ..\plugin_openweater3.py:7639
 msgid "- Size max Height"
-msgstr "- Высота макс"
+msgstr "- Rozmiar maks. Wysokość"
 
 #: ..\plugin.py:6442 ..\plugin.py:6452 ..\plugin.py:6462 ..\plugin.py:6472
 #: ..\plugin.py:7062 ..\plugin.py:7072 ..\plugin.py:7614 ..\plugin.py:7624
@@ -4922,35 +4927,35 @@ msgstr "- Высота макс"
 #: ..\plugin_openweater3.py:7622 ..\plugin_openweater3.py:7632
 #: ..\plugin_openweater3.py:7642
 msgid "- Quick Update"
-msgstr "- Быстрое обновление"
+msgstr "- Szybka aktualizacja"
 
 #: ..\plugin.py:6444 ..\plugin.py:7064 ..\plugin.py:7616
 #: ..\plugin_openweater3.py:6442 ..\plugin_openweater3.py:7062
 #: ..\plugin_openweater3.py:7614
 msgid "Show Picture 2"
-msgstr "Показать картинку 2"
+msgstr "Pokaż zdjęcie 2"
 
 #: ..\plugin.py:6454 ..\plugin.py:7626 ..\plugin_openweater3.py:6452
 #: ..\plugin_openweater3.py:7624
 msgid "Show Picture 3"
-msgstr "Показать картинку 3"
+msgstr "Pokaż zdjęcie 3"
 
 #: ..\plugin.py:6464 ..\plugin.py:7636 ..\plugin_openweater3.py:6462
 #: ..\plugin_openweater3.py:7634
 msgid "Show Picture 4"
-msgstr "Показать картинку 4"
+msgstr "Pokaż zdjęcie 4"
 
 #: ..\plugin.py:6483 ..\plugin.py:7109 ..\plugin.py:7655
 #: ..\plugin_openweater3.py:6481 ..\plugin_openweater3.py:7107
 #: ..\plugin_openweater3.py:7653
 msgid "- Lines"
-msgstr "- Линий"
+msgstr "- Linie"
 
 #: ..\plugin.py:6484 ..\plugin.py:7110 ..\plugin.py:7656
 #: ..\plugin_openweater3.py:6482 ..\plugin_openweater3.py:7108
 #: ..\plugin_openweater3.py:7654
 msgid "- Mail Konto"
-msgstr "- Учетная запись почты"
+msgstr "- Konto pocztowe"
 
 #: ..\plugin.py:6486 ..\plugin.py:6495 ..\plugin.py:6554 ..\plugin.py:7112
 #: ..\plugin.py:7121 ..\plugin.py:7180 ..\plugin.py:7658 ..\plugin.py:7667
@@ -4960,79 +4965,79 @@ msgstr "- Учетная запись почты"
 #: ..\plugin_openweater3.py:7178 ..\plugin_openweater3.py:7656
 #: ..\plugin_openweater3.py:7665 ..\plugin_openweater3.py:7724
 msgid "- max Width"
-msgstr "- ширина макс"
+msgstr "- maks. szerokość"
 
 #: ..\plugin.py:6504 ..\plugin.py:7130 ..\plugin.py:7676
 #: ..\plugin_openweater3.py:6502 ..\plugin_openweater3.py:7128
 #: ..\plugin_openweater3.py:7674
 msgid "Remote Box Timer"
-msgstr "Удаленный ящик v"
+msgstr "Zdalny wyłącznik czasowy"
 
 #: ..\plugin.py:6526 ..\plugin.py:7152 ..\plugin.py:7698
 #: ..\plugin_openweater3.py:6524 ..\plugin_openweater3.py:7150
 #: ..\plugin_openweater3.py:7696
 msgid "- Picture Size"
-msgstr "- Размер картинки"
+msgstr "- Rozmiar obrazu"
 
 #: ..\plugin.py:6527 ..\plugin.py:7153 ..\plugin.py:7699
 #: ..\plugin_openweater3.py:6525 ..\plugin_openweater3.py:7151
 #: ..\plugin_openweater3.py:7697
 msgid "- Picture Position"
-msgstr "-Позиция изображения"
+msgstr "- Pozycja na zdjęciu"
 
 #: ..\plugin.py:6528 ..\plugin.py:7154 ..\plugin.py:7700
 #: ..\plugin_openweater3.py:6526 ..\plugin_openweater3.py:7152
 #: ..\plugin_openweater3.py:7698
 msgid "- Picture Alignment"
-msgstr "- Выравнивание изображения"
+msgstr "- Wyrównanie obrazu"
 
 #: ..\plugin.py:6540 ..\plugin.py:7166 ..\plugin.py:7712
 #: ..\plugin_openweater3.py:6538 ..\plugin_openweater3.py:7164
 #: ..\plugin_openweater3.py:7710
 msgid "- Layout"
-msgstr "- Макет"
+msgstr "- Układ"
 
 #: ..\plugin.py:6542 ..\plugin.py:7168 ..\plugin.py:7714
 #: ..\plugin_openweater3.py:6540 ..\plugin_openweater3.py:7166
 #: ..\plugin_openweater3.py:7712
 msgid "- Current Day Background Color"
-msgstr "- Цвет фона текущего дня"
+msgstr "- Kolor tła bieżącego dnia"
 
 #: ..\plugin.py:6543 ..\plugin.py:7169 ..\plugin.py:7715
 #: ..\plugin_openweater3.py:6541 ..\plugin_openweater3.py:7167
 #: ..\plugin_openweater3.py:7713
 msgid "- Caption Color"
-msgstr "- Название цвета"
+msgstr "- Kolor napisów"
 
 #: ..\plugin.py:6546 ..\plugin.py:7172 ..\plugin.py:7718
 #: ..\plugin_openweater3.py:6544 ..\plugin_openweater3.py:7170
 #: ..\plugin_openweater3.py:7716
 msgid "Dates List"
-msgstr "Список дат"
+msgstr "Lista dat"
 
 #: ..\plugin.py:6559 ..\plugin.py:7185 ..\plugin.py:7731
 #: ..\plugin_openweater3.py:6557 ..\plugin_openweater3.py:7183
 #: ..\plugin_openweater3.py:7729
 msgid "Event Icon Bar"
-msgstr "Event Icon Bar"
+msgstr "Pasek ikon zdarzeń"
 
 #: ..\plugin.py:6567 ..\plugin.py:7193 ..\plugin.py:7739
 #: ..\plugin_openweater3.py:6565 ..\plugin_openweater3.py:7191
 #: ..\plugin_openweater3.py:7737
 msgid "- Popup Screen"
-msgstr "- Popup Screen"
+msgstr "- Ekran wyskakujący"
 
 #: ..\plugin.py:6568 ..\plugin.py:7194 ..\plugin.py:7740
 #: ..\plugin_openweater3.py:6566 ..\plugin_openweater3.py:7192
 #: ..\plugin_openweater3.py:7738
 msgid "- Popup LCD"
-msgstr "- Popup LCD"
+msgstr "- Wyskakujący wyświetlacz LCD"
 
 #: ..\plugin.py:6569 ..\plugin.py:7195 ..\plugin.py:7741
 #: ..\plugin_openweater3.py:6567 ..\plugin_openweater3.py:7193
 #: ..\plugin_openweater3.py:7739
 msgid "Show Text 1"
-msgstr "Показать текст 1"
+msgstr "Pokaż tekst 1"
 
 #: ..\plugin.py:6572 ..\plugin.py:6584 ..\plugin.py:7198 ..\plugin.py:7210
 #: ..\plugin.py:7744 ..\plugin.py:7756 ..\plugin_openweater3.py:6570
@@ -5040,19 +5045,19 @@ msgstr "Показать текст 1"
 #: ..\plugin_openweater3.py:7208 ..\plugin_openweater3.py:7742
 #: ..\plugin_openweater3.py:7754
 msgid "- Text"
-msgstr "- Текст"
+msgstr "- Tekst"
 
 #: ..\plugin.py:6581 ..\plugin.py:7207 ..\plugin.py:7753
 #: ..\plugin_openweater3.py:6579 ..\plugin_openweater3.py:7205
 #: ..\plugin_openweater3.py:7751
 msgid "Show Text 2"
-msgstr "Показать текст 2"
+msgstr "Pokaż tekst 2"
 
 #: ..\plugin.py:6593 ..\plugin.py:7219 ..\plugin.py:7765
 #: ..\plugin_openweater3.py:6591 ..\plugin_openweater3.py:7217
 #: ..\plugin_openweater3.py:7763
 msgid "Rectangle 1"
-msgstr "Прямоугольник 1"
+msgstr "Prostokąt 1"
 
 #: ..\plugin.py:6596 ..\plugin.py:6605 ..\plugin.py:7222 ..\plugin.py:7231
 #: ..\plugin.py:7768 ..\plugin.py:7777 ..\plugin_openweater3.py:6594
@@ -5060,7 +5065,7 @@ msgstr "Прямоугольник 1"
 #: ..\plugin_openweater3.py:7229 ..\plugin_openweater3.py:7766
 #: ..\plugin_openweater3.py:7775
 msgid "- Position x"
-msgstr "- Позиция по оси x"
+msgstr "- Pozycja x"
 
 #: ..\plugin.py:6597 ..\plugin.py:6606 ..\plugin.py:7223 ..\plugin.py:7232
 #: ..\plugin.py:7769 ..\plugin.py:7778 ..\plugin_openweater3.py:6595
@@ -5068,7 +5073,7 @@ msgstr "- Позиция по оси x"
 #: ..\plugin_openweater3.py:7230 ..\plugin_openweater3.py:7767
 #: ..\plugin_openweater3.py:7776
 msgid "- Position y"
-msgstr "- Позиция по оси y"
+msgstr "- Pozycja y"
 
 #: ..\plugin.py:6598 ..\plugin.py:6607 ..\plugin.py:7224 ..\plugin.py:7233
 #: ..\plugin.py:7770 ..\plugin.py:7779 ..\plugin_openweater3.py:6596
@@ -5076,7 +5081,7 @@ msgstr "- Позиция по оси y"
 #: ..\plugin_openweater3.py:7231 ..\plugin_openweater3.py:7768
 #: ..\plugin_openweater3.py:7777
 msgid "- Size x"
-msgstr "- Размер по оси x"
+msgstr "- Rozmiar x"
 
 #: ..\plugin.py:6599 ..\plugin.py:6608 ..\plugin.py:7225 ..\plugin.py:7234
 #: ..\plugin.py:7771 ..\plugin.py:7780 ..\plugin_openweater3.py:6597
@@ -5084,179 +5089,179 @@ msgstr "- Размер по оси x"
 #: ..\plugin_openweater3.py:7232 ..\plugin_openweater3.py:7769
 #: ..\plugin_openweater3.py:7778
 msgid "- Size y"
-msgstr "- Размер по оси y"
+msgstr "- Rozmiar y"
 
 #: ..\plugin.py:6602 ..\plugin.py:7228 ..\plugin.py:7774
 #: ..\plugin_openweater3.py:6600 ..\plugin_openweater3.py:7226
 #: ..\plugin_openweater3.py:7772
 msgid "Rectangle 2"
-msgstr "Прямоугольник 2"
+msgstr "Prostokąt 2"
 
 #: ..\plugin.py:6611 ..\plugin.py:7237 ..\plugin.py:7783
 #: ..\plugin_openweater3.py:6609 ..\plugin_openweater3.py:7235
 #: ..\plugin_openweater3.py:7781
 msgid "Recording"
-msgstr "Запись"
+msgstr "Nagrywanie"
 
 #: ..\plugin.py:6620 ..\plugin_openweater3.py:6618
 msgid "Stutter TV"
-msgstr "Заикание TV"
+msgstr "Stutter TV"
 
 #: ..\plugin.py:6640 ..\plugin.py:7267 ..\plugin_openweater3.py:6638
 #: ..\plugin_openweater3.py:7265
 msgid "- Screens used for Changing"
-msgstr "Функция используется для изменения экранов"
+msgstr "- Ekrany używane do zmiany"
 
 #: ..\plugin.py:6646 ..\plugin_openweater3.py:6644
 msgid "Title"
-msgstr "Заголовок"
+msgstr "Tytuł"
 
 #: ..\plugin.py:6658 ..\plugin_openweater3.py:6656
 msgid "Infos"
-msgstr "Узнайте больше"
+msgstr "Informacje"
 
 #: ..\plugin.py:7074 ..\plugin_openweater3.py:7072
 msgid "Show Cover"
-msgstr "Показать обложку"
+msgstr "Pokaż Okładkę"
 
 #: ..\plugin.py:7081 ..\plugin.py:7082 ..\plugin_openweater3.py:7079
 #: ..\plugin_openweater3.py:7080
 msgid "- Search Path [ok]>"
-msgstr "- Поиск пути [ok]>"
+msgstr "- Ścieżka wyszukiwania [ok]>"
 
 #: ..\plugin.py:7083 ..\plugin_openweater3.py:7081
 msgid "- Find Cover File [ok]>"
-msgstr "- Найти Обложка Файл [ok]>"
+msgstr "- Znajdź plik okładki [ok]>"
 
 #: ..\plugin.py:7084 ..\plugin_openweater3.py:7082
 msgid "- Default Cover [ok]>"
-msgstr "- По умолчанию обложка [ok]>"
+msgstr "- Domyślna osłona [ok]>"
 
 #: ..\plugin.py:7085 ..\plugin_openweater3.py:7083
 msgid "- Picon First"
-msgstr "- Первый пикон"
+msgstr "- Picon First"
 
 #: ..\plugin.py:7087 ..\plugin_openweater3.py:7085
 msgid "- Trimmed"
-msgstr "- Обрезанный"
+msgstr "- Przycięte"
 
 #: ..\plugin.py:7088 ..\plugin_openweater3.py:7086
 msgid "- Download Cover"
-msgstr "- Скачать обложку"
+msgstr "- Pobierz okładki"
 
 #: ..\plugin.py:7089 ..\plugin_openweater3.py:7087
 msgid "- Download Type"
-msgstr "- Скачать Тип"
+msgstr "- Pobierz typy"
 
 #: ..\plugin.py:7090 ..\plugin_openweater3.py:7088
 msgid "- Google API-Key console.developers.google.com/apis"
-msgstr "Google API-Key console.developers.google.com/apis"
+msgstr "-API-Key Google console.developers.google.com/apis"
 
 #: ..\plugin.py:7249 ..\plugin_openweater3.py:7247
 msgid "LCD Display"
-msgstr "LCD Дисплей"
+msgstr "Wyświetlacz LCD"
 
 #: ..\plugin.py:7803 ..\plugin_openweater3.py:7801
 msgid "LCD4linux Display-Mode On"
-msgstr "LCD4linux режим отображения На"
+msgstr "LCD4linux Tryb wyświetlania On"
 
 #: ..\plugin.py:7804 ..\plugin_openweater3.py:7802
 msgid "Set Media >>"
-msgstr "Задавать СМИ >>"
+msgstr "Ustaw media >>"
 
 #: ..\plugin.py:7808 ..\plugin_openweater3.py:7806
 msgid "LCD4linux Display-Mode MediaPlayer"
-msgstr "LCD4linux режим отображения Медиа плеер"
+msgstr "LCD4linux Tryb wyświetlania MediaPlayer"
 
 #: ..\plugin.py:7809 ..\plugin_openweater3.py:7807
 msgid "Set Idle >>"
-msgstr "Задавать Праздный  >>"
+msgstr "Ustaw zajętość >>"
 
 #: ..\plugin.py:7813 ..\plugin_openweater3.py:7811
 msgid "LCD4linux Display-Mode Idle"
-msgstr "LCD4linux режим отображения праздный"
+msgstr "LCD4linux Tryb wyświetlania Idle"
 
 #: ..\plugin.py:7814 ..\plugin_openweater3.py:7812
 msgid "Set Global >>"
-msgstr "Задавать Глобальный >>"
+msgstr "Ustaw globalnie >>"
 
 #: ..\plugin.py:7832 ..\plugin_openweater3.py:7830
 msgid "Choose dir"
-msgstr "Выберите каталог"
+msgstr "Wybrać reż"
 
 #: ..\plugin.py:7835 ..\plugin.py:7838 ..\plugin.py:7844 ..\plugin.py:7847
 #: ..\plugin_openweater3.py:7833 ..\plugin_openweater3.py:7836
 #: ..\plugin_openweater3.py:7842 ..\plugin_openweater3.py:7845
 msgid "Choose file"
-msgstr "Выберите файл"
+msgstr "Proszę wybrać plik"
 
 #: ..\plugin.py:7841 ..\plugin_openweater3.py:7839
 msgid "Choose font"
-msgstr "Выберите шрифт"
+msgstr "Wybierz czcionkę"
 
 #: ..\plugin.py:8004 ..\plugin_openweater3.py:8002
 msgid "%s - Current value: %s"
-msgstr "%s - Текущее значение: %s"
+msgstr "%s - bieżąca wartość: %s"
 
 #: ..\plugin.py:8146 ..\plugin_openweater3.py:8144
 msgid ""
 "GUI needs a restart to apply the changes.\n"
 "Do you want to Restart the GUI now?"
 msgstr ""
-"GUI должен быть перезапущен для активации изменений.\n"
-"Сделать это сейчас?"
+"GUI musi być uruchomione, aby zastosować zmiany.\n"
+"Czy chcesz uruchomić GUI teraz ?"
 
 #: ..\plugin.py:8147 ..\plugin_openweater3.py:8145
 msgid "Restart GUI now?"
-msgstr "Перегрузить GUI сейчас?"
+msgstr "Zrestartować GUI teraz?"
 
 #: ..\plugin.py:8701 ..\plugin_openweater3.py:8699
 msgid "Indoor"
-msgstr "В помещении"
+msgstr "Kryty"
 
 #: ..\plugin.py:8701 ..\plugin_openweater3.py:8699
 msgid "Outdoor"
-msgstr "Открытый"
+msgstr "Na zewnątrz"
 
 #: ..\plugin.py:8701 ..\plugin_openweater3.py:8699
 msgid "Rain"
-msgstr "Дождь"
+msgstr "Deszcz"
 
 #: ..\plugin.py:8701 ..\plugin_openweater3.py:8699
 msgid "Wind"
-msgstr "Ветер"
+msgstr "Wiatr"
 
 #: ..\plugin.py:10530 ..\plugin_openweater3.py:10530
 msgid "New Moon"
-msgstr "Новолуние"
+msgstr "Księżyc w nowiu"
 
 #: ..\plugin.py:10531 ..\plugin_openweater3.py:10531
 msgid "First Quarter"
-msgstr "Первая четверть"
+msgstr "Pierwszy kwartał"
 
 #: ..\plugin.py:10532 ..\plugin_openweater3.py:10532
 msgid "Waxing Crescent"
-msgstr "Растущий серп"
+msgstr "Waxing Crescent"
 
 #: ..\plugin.py:10533 ..\plugin_openweater3.py:10533
 msgid "Waxing Moon"
-msgstr "Растущая Луна"
+msgstr "Księżyc w pełni"
 
 #: ..\plugin.py:10534 ..\plugin_openweater3.py:10534
 msgid "Full Moon"
-msgstr "Полнолуние"
+msgstr "Pełnia Księżyca"
 
 #: ..\plugin.py:10535 ..\plugin_openweater3.py:10535
 msgid "Waning Moon"
-msgstr "Убывающая Луна"
+msgstr "Ubywający Księżyc"
 
 #: ..\plugin.py:10536 ..\plugin_openweater3.py:10536
 msgid "Waning Crescent"
-msgstr "Убывающая Луна"
+msgstr "Słabnący półksiężyc"
 
 #: ..\plugin.py:10537 ..\plugin_openweater3.py:10537
 msgid "Last Quarter"
-msgstr "Последняя четверть"
+msgstr "Ostatni kwartał"
 
 #: ..\plugin.py:11568 ..\plugin.py:11637 ..\plugin.py:11654 ..\plugin.py:11663
 #: ..\plugin_openweater3.py:11568 ..\plugin_openweater3.py:11637
@@ -5266,29 +5271,29 @@ msgstr "%d.%m.%Y"
 
 #: ..\plugin.py:11836 ..\plugin_openweater3.py:11836
 msgid "Picture not available"
-msgstr "Картина недоступен"
+msgstr "Obraz niedostępny"
 
 #: ..\plugin.py:11986 ..\plugin.py:11987 ..\plugin_openweater3.py:11986
 #: ..\plugin_openweater3.py:11987
 msgid "no Timer"
-msgstr "нет таймера"
+msgstr "brak Timera"
 
 #: ..\plugin.py:13237 ..\plugin.py:13240 ..\plugin_openweater3.py:13237
 #: ..\plugin_openweater3.py:13240
 msgid "OSCAM not running"
-msgstr "OSCAMне запущен"
+msgstr "OSCAM nie działa"
 
 #: ..\plugin.py:13587 ..\plugin_openweater3.py:13587
 msgid "no Calls"
-msgstr "нет звонки"
+msgstr "Brak połączeń"
 
 #: ..\plugin.py:13623 ..\plugin_openweater3.py:13623
 msgid "%d Mails  %d New  %s"
-msgstr "%d Почта  %d Новая  %s"
+msgstr "%d Wiadomości %d Nowe %s"
 
 #: ..\plugin.py:13823 ..\plugin_openweater3.py:13823
 msgid "no Netatmo-Plugin installed"
-msgstr "netatmo-Plugin не установлен"
+msgstr "Nie zainstalowano wtyczki Netatmo."
 
 #: ..\plugin.py:15478 ..\plugin.py:15479 ..\plugin_openweater3.py:15478
 #: ..\plugin_openweater3.py:15479
@@ -5297,8 +5302,8 @@ msgstr "LCD4linux"
 
 #: ..\plugin.py:15480 ..\plugin_openweater3.py:15480
 msgid "LCD4Linux"
-msgstr "LCD4linux"
+msgstr "LCD4Linux"
 
 #: ..\plugin.py:15481 ..\plugin_openweater3.py:15481
 msgid "LCD4linux Screen Switch"
-msgstr "LCD4linux Экран Выключатель"
+msgstr "Przełącznik ekranu LCD4linux"
