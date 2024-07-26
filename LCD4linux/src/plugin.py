@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r21"
+Version = "V5.0-r22"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -2986,15 +2986,14 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 			if not PY3:
 				name2 = "%s.png" % channelname.decode("utf-8").encode("latin-1", "ignore")
 				name4 = "%s.png" % channelname.decode("utf-8").encode("utf-8", "ignore")
-			else:
-				name2 = "%s.png" % channelname
-				name4 = "%s.png" % channelname
-			name = normalize('NFKD', channelname)
-			name = sub(r'[^a-z0-9]', '', "%s.png" % str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
-			if not PY3:
 				name3 = "%s.png" % channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
+				name = normalize('NFKD', unicode(str("" + channelname), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
 			else:
+				name2 = "%s.png" % channelname.encode("latin-1", "ignore").decode("utf-8")
+				name4 = "%s.png" % channelname.encode("utf-8", "ignore").decode("utf-8")
 				name3 = "%s.png" % channelname2.replace('\x87', '').replace('\x86', '')
+				name = normalize('NFKD', str("" + channelname))
+			name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 			PIC.append(join(P2, name3))
 			PIC.append(join(P2, name2))
 			PIC.append(join(P2, name))
@@ -9741,22 +9740,30 @@ class UpdateStatus(Screen):
 					callInThread(getPage, self.feedurl, boundFunction(self.downloadOMcallback, wetter), self.downloadListError)
 
 			elif LCD4linux.WetterApi.value == "OPENWEATHER":
-				apkey = "&appid=%s" % LCD4linux.WetterApiKeyOpenWeatherMap.value if len(LCD4linux.WetterApiKeyOpenWeatherMap.value) > 5 else ""
-				city = "id=%s" % quote(ort[3:]) if ort.startswith("wc:") else "q=%s" % quote(ort)
-				self.feedurl = "http://api.openweathermap.org/data/2.5/weather?%s&lang=%s&units=metric%s" % (city, la[:2], apkey)
-				L4logE("OWM-getcurrentweather%s: %s" % (wetter, self.feedurl))
-				callInThread(getPage, self.feedurl, boundFunction(self.downloadOWMcallback, wetter), self.downloadListError)
-				self.feedurl = "https://api.openweathermap.org/data/2.5/onecall?&lon=%s&lat=%s&units=metric&exclude=hourly,minutely,current&lang=%s%s" % (self.Long[wetter], self.Lat[wetter], la[:2], apkey)
-				L4logE("OWM-getforecastweather%s: %s" % (wetter, self.feedurl))
-				callInThread(getPage, self.feedurl, boundFunction(self.downloadOWMcallback, wetter), self.downloadListError)
+				if float(self.Long[wetter]) == 0 and float(self.Lat[wetter]) == 0:
+					self.feedurl = "https://geocoding-api.open-meteo.com/v1/search?language=%s&count=10&name=%s" % (la[:2], city)
+					L4logE("OWM-citysearch%s: %s" % (wetter, self.feedurl))
+					callInThread(getPage, self.feedurl, boundFunction(self.getCityCoords, wetter), self.downloadListError)
+				else:
+					apkey = LCD4linux.WetterApiKeyOpenWeatherMap.value if len(LCD4linux.WetterApiKeyOpenWeatherMap.value) > 5 else ""
+					self.feedurl = "https://api.openweathermap.org/data/3.0/onecall?&lon=%s&lat=%s&units=metric&exclude=hourly,minutely,current&lang=%s&appid=%s" % (self.Long[wetter], self.Lat[wetter], la[:2], apkey)
+					L4logE("OWM-getOneCallWeather%s: %s" % (wetter, self.feedurl))
+					callInThread(getPage, self.feedurl, boundFunction(self.downloadOWMcallback, wetter), self.downloadListError)
 
 			elif LCD4linux.WetterApi.value == "WEATHERUNLOCKED":
 				apkey = "?app_id=%s&app_key=%s" % (LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[0], LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[1]) if len(LCD4linux.WetterApiKeyWeatherUnlocked.value.split()) == 2 else ""
 				lang = "&lang=%s" % ort.split(".")[0] if "." in ort else ""
-				self.feedurl = "http://api.weatherunlocked.com/api/current/%s%s%s" % (city, apkey, lang)
+				city = LCD4linux.WetterCity.value if wetter == 0 else LCD4linux.Wetter2City.value
+				if "." in city:  # e.g. 'de.ZIPccode'
+					self.feedurl = "http://api.weatherunlocked.com/api/current/%s%s%s" % (city, apkey, lang)
+				else:
+					self.feedurl = "http://api.weatherunlocked.com/api/current/%s,%s%s%s" % (self.Long[wetter], self.Lat[wetter], apkey, lang)
 				L4logE("WU-getcurrentweather%s: %s" % (wetter, self.feedurl))
 				callInThread(getPage, self.feedurl, boundFunction(self.downloadWUcallback, wetter), self.downloadListError)
-				self.feedurl = "http://api.weatherunlocked.com/api/forecast/%s%s%s" % (city, apkey, lang)
+				if "." in city:  #  e.g. 'de.ZIPcode'
+					self.feedurl = "http://api.weatherunlocked.com/api/forecast/%s%s%s" % (city, apkey, lang)
+				else:
+					self.feedurl = "http://api.weatherunlocked.com/api/forecast/%s,%s%s%s" % (self.Long[wetter], self.Lat[wetter], apkey, lang)
 				L4logE("WU-getforecastweather%s: %s" % (wetter, self.feedurl))
 				callInThread(getPage, self.feedurl, boundFunction(self.downloadWUcallback, wetter), self.downloadListError)
 			L4log("Wetter%s: downloadstart %s:%s %s %s" % (wetter, LCD4linux.WetterApi.value, ort, language.getLanguage(), la))
@@ -10827,16 +10834,17 @@ def LCD4linuxPIC(self, session):
 					P2A = LCD4linux.PiconPathAlt.value
 					PIC = []
 					PIC.append(join(P2, picon))
-					name = normalize('NFKD', self.Lchannel_name)
-					name = sub(r'[^a-z0-9]', '', "%s.png" % str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 					if not PY3:
 						name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
 						name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore")
 						name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
+						name = normalize('NFKD', unicode(str("" + self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
 					else:
-						name2 = "%s.png" % self.Lchannel_name
-						name4 = "%s.png" % self.Lchannel_name
+						name2 = "%s.png" % self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8")
+						name4 = "%s.png" % self.Lchannel_name.encode("utf-8", "ignore").decode("utf-8")
 						name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
+						name = normalize('NFKD', str("" + self.Lchannel_name))
+					name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 					PIC.append(join(P2, name3))
 					PIC.append(join(P2, name2))
 					PIC.append(join(P2, name))
@@ -12037,16 +12045,17 @@ def LCD4linuxPIC(self, session):
 				useCache = False
 				PIC = []
 				PIC.append(join(P2, picon))
-				name = normalize('NFKD', self.Lchannel_name if PY3 else self.Lchannel_name.decode('unicode-escape'))
-				name = sub(r'[^a-z0-9]', '', "%s.png" % str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 				if not PY3:
 					name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
 					name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
 					name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
+					name = normalize('NFKD', self.Lchannel_name.decode('unicode-escape'))
 				else:
-					name2 = "%s.png" % self.Lchannel_name
-					name4 = "%s.png" % self.Lchannel_name
+					name2 = "%s.png" % self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8")
+					name4 = "%s.png" % self.Lchannel_name.encode("utf-8", "ignore").decode("utf-8")
 					name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
+					name = normalize('NFKD', self.Lchannel_name)
+				name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 				name5 = getPiconName(self.LsreftoString)
 				PIC.append(join(P2, name3))
 				PIC.append(join(P2, name2))
@@ -12772,7 +12781,6 @@ def LCD4linuxPIC(self, session):
 		number = -1
 		if self.Ltuner_number is not None:
 			number = self.Ltuner_number
-		i = ""
 		Tcount = 0
 		font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
 		w, h = getFsize("A ", font)
@@ -12801,10 +12809,7 @@ def LCD4linuxPIC(self, session):
 		for x in range(TunerCount):
 			isON = True
 			if TunerMask & count != 0:
-				if x == number:
-					c = LCD4linux.TunerColorActive.value
-				else:
-					c = LCD4linux.TunerColorOn.value
+				c = LCD4linux.TunerColorActive.value if x == number else LCD4linux.TunerColorOn.value
 			else:
 				c = LCD4linux.TunerColor.value
 				isON = False
@@ -12831,7 +12836,6 @@ def LCD4linuxPIC(self, session):
 
 		def NL(count):
 			return "\n" if int(count) > 2 else ""
-
 		global CPUtotal
 		global CPUidle
 		MAX_W, MAX_H = self.im[im].size
@@ -14442,7 +14446,7 @@ def LCD4linuxPIC(self, session):
 	if not LCD4linux.Enable.value:
 		return
 	tt = time()
-#	L4logE("MP-Mode",isMediaPlayer)
+#	L4logE("MP-Mode", isMediaPlayer)
 	L4log("creating LCD-Picture: %s" % ScreenActive)
 	if isdir("%slcd4linux" % TMP) == False:
 		try:
@@ -14486,8 +14490,8 @@ def LCD4linuxPIC(self, session):
 				self.CoverName = ["-", "-"]
 			elif sref.startswith(("4097:0", "5001:0", "5002:0", "5003:0")):
 				if self.Lpath and self.Lpath.startswith("http") and self.Llength and self.Llength[0] == -1:
-					L4log("detected IPTV")
-					isMediaPlayer = "mp3" if LCD4linux.Streaming.value == "0" else ""
+					L4log("detected AudioMedia or IPTV")
+					isMediaPlayer = "mp3"
 				else:
 					L4log("detected VOD Media")
 					isMediaPlayer = "mp3"
