@@ -2989,8 +2989,8 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 				name3 = "%s.png" % channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
 				name = normalize('NFKD', unicode(str("" + channelname), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
 			else:
-				name2 = "%s.png" % channelname.encode("latin-1", "ignore").decode("utf-8")
-				name4 = "%s.png" % channelname.encode("utf-8", "ignore").decode("utf-8")
+				name2 = "%s.png" % channelname
+				name4 = "%s.png" % channelname
 				name3 = "%s.png" % channelname2.replace('\x87', '').replace('\x86', '')
 				name = normalize('NFKD', str("" + channelname))
 			name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
@@ -10840,8 +10840,8 @@ def LCD4linuxPIC(self, session):
 						name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
 						name = normalize('NFKD', unicode(str("" + self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
 					else:
-						name2 = "%s.png" % self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8")
-						name4 = "%s.png" % self.Lchannel_name.encode("utf-8", "ignore").decode("utf-8")
+						name2 = "%s.png" % self.Lchannel_name
+						name4 = "%s.png" % self.Lchannel_name
 						name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
 						name = normalize('NFKD', str("" + self.Lchannel_name))
 					name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
@@ -12047,12 +12047,12 @@ def LCD4linuxPIC(self, session):
 				PIC.append(join(P2, picon))
 				if not PY3:
 					name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
-					name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
+					name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore")
 					name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
 					name = normalize('NFKD', self.Lchannel_name.decode('unicode-escape'))
 				else:
-					name2 = "%s.png" % self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8")
-					name4 = "%s.png" % self.Lchannel_name.encode("utf-8", "ignore").decode("utf-8")
+					name2 = "%s.png" % self.Lchannel_name
+					name4 = "%s.png" % self.Lchannel_name
 					name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
 					name = normalize('NFKD', self.Lchannel_name)
 				name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
