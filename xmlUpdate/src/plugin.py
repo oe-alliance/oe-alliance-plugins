@@ -133,5 +133,5 @@ def xmlUpdateMain(session, **kwargs):
 
 def Plugins(**kwargs):
 	pList = []
-	pList.append(PluginDescriptor(name=_("XML update"), description="For undating transponder xml files", where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=xmlUpdateStart))
+	pList.append(PluginDescriptor(name=_("XML update"), description=_("For updating transponder xml files"), where=PluginDescriptor.WHERE_MENU, needsRestart=False, fnc=xmlUpdateStart))
 	return pList
