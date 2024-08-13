@@ -48,7 +48,7 @@ class CTglobs():
 			response = get(url.encode(), headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
 		except exceptions.RequestException as error:
-			print("[%s] ERROR in module 'download': %s" % (CTglobs.MODULE_NAME, str(error)))
+			print("[%s] ERROR in module 'download': %s" % (self.MODULE_NAME, str(error)))
 		else:
 			callback(response.content.decode())
 
@@ -385,7 +385,7 @@ class CTmain(Screen, CTglobs):
 					if alert[1] != "aus" and sprit == alert[2] and centprice < float(alert[1]):
 						alerttype = alert[0]
 						break
-			picfile = join(f"{CTglobs.PLUGINPATH}pic/", f"alert-{alerttype}_{CTglobs.RESOLUTION}.png") if alerttype else join("")
+			picfile = join(f"{self.PLUGINPATH}pic/", f"alert-{alerttype}_{self.RESOLUTION}.png") if alerttype else join("")
 			return LoadPixmap(cached=True, path=picfile) if exists(picfile) else None
 
 	def toggleFrame_B(self):
@@ -426,7 +426,7 @@ class CTmain(Screen, CTglobs):
 			config.plugins.clevertanken.favorites.value = ",".join(self.favlist)
 			config.plugins.clevertanken.favorites.save()
 			config.plugins.clevertanken.save()
-			self.refreshFrame("AB")
+			self.refreshFrame("B")
 
 	def selectSort(self, frame):
 		if self.ready:
@@ -546,11 +546,11 @@ class CTmain(Screen, CTglobs):
 			self.refreshInfo()
 
 	def setEvadePosition(self):
-		ypos = int(100 * (1.5 if CTglobs.RESOLUTION == "fHD" else 1.0))
+		ypos = int(100 * (1.5 if self.RESOLUTION == "fHD" else 1.0))
 		if self.currframe == "A":
-			xpos = int(660 * (1.5 if CTglobs.RESOLUTION == "fHD" else 1.0))
+			xpos = int(660 * (1.5 if self.RESOLUTION == "fHD" else 1.0))
 		else:
-			xpos = int(280 * (1.5 if CTglobs.RESOLUTION == "fHD" else 1.0))
+			xpos = int(280 * (1.5 if self.RESOLUTION == "fHD" else 1.0))
 		CTinfo.moveInfo(self.showInfo, xpos, ypos)
 
 	def config(self):
@@ -558,9 +558,11 @@ class CTmain(Screen, CTglobs):
 		self.showInfo.hide()
 		self.session.openWithCallback(self.configCB, CTconfig)
 
-	def configCB(self):
-		self.getConfigs()
-		self.refreshFrame("AB")
+	def configCB(self, saved=False):
+		if saved:
+			self.getConfigs()
+			self.refreshButtons()
+			self.refreshFrame("AB")
 
 	def exit(self):
 		if self.isInfo:
@@ -649,7 +651,7 @@ class CTconfig(Setup, CTglobs):
 			self.VirtualKeyBoardCB("B", cityname)
 		else:
 			self.saveAll()
-			self.close()
+			self.close(True)
 
 
 def main(session, **kwargs):
