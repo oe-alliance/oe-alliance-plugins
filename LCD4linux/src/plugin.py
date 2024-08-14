@@ -18,8 +18,9 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 
-# PYTHON IMPORTS
 from __future__ import print_function, absolute_import, division
+
+# PYTHON IMPORTS
 from base64 import b64encode
 from calendar import Calendar, mdays, weekday, weekheader, month_name
 from colorsys import rgb_to_hls, hls_to_rgb
@@ -88,12 +89,11 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.SystemInfo import SystemInfo
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
-from Screens import Standby
 from Screens.InfoBar import InfoBar
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Screens.Standby import TryQuitMainloop
+from Screens.Standby import TryQuitMainloop, inStandby
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_FONTS, SCOPE_LIBDIR, SCOPE_SYSETC, resolveFilename
 
@@ -127,11 +127,11 @@ except AttributeError:
 else:
 	ssl._create_default_https_context = _create_unverified_https_context
 
-if not PY3:
+if PY3:
+	from html import unescape as _unescape
+else:
 	from HTMLParser import HTMLParser
 	_unescape = HTMLParser().unescape
-else:
-	from html import unescape as _unescape
 
 try:
 	from enigma import iDVBFrontend
@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r22"
+Version = "V5.0-r23"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -433,7 +433,7 @@ LCD4linux.MJPEGMode = ConfigSelection(choices=[("001", "001"), ("011", "011"), (
 LCD4linux.MJPEGHeader = ConfigSelection(choices=[("0", _("normal")), ("1", _("reduced"))], default="1")
 LCD4linux.MJPEGCycle = ConfigSelectionNumber(1, 10, 1, default=2)
 LCD4linux.MJPEGRestart = ConfigYesNo(default=True)
-LCD4linux.Streaming = ConfigSelection(choices=[("0", _("Media")), ("1", _("On"))], default="0")
+LCD4linux.Streaming = ConfigSelection(choices=[("0", _("Auto")), ("1", _("On")), ("2", _("Media"))], default="0")
 LCD4linux.WebIfRefresh = ConfigSelectionNumber(1, 60, 1, default=3)
 LCD4linux.WebIfType = ConfigSelection(choices=[("0", _("Javascript")), ("01", _("Javascript no Refresh")), ("1", _("Reload"))], default="0")
 LCD4linux.WebIfInitDelay = ConfigYesNo(default=False)
@@ -2393,7 +2393,7 @@ def Code_utf8(wert):
 def L4log(nfo, wert=""):
 	if str(LCD4linux.EnableEventLog.value) != "0":
 		print("[LCD4linux] %s %s" % (nfo, wert))
-		if str(LCD4linux.EnableEventLog.value) != "3":
+		if nfo and str(LCD4linux.EnableEventLog.value) != "3":
 			try:
 				with open("/tmp/L4log.txt", "a") as f:
 					f.write("%s %s %s\r\n" % (strftime("%H:%M:%S"), nfo, wert))
@@ -2983,16 +2983,16 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 			PD = ""
 			PIC = []
 			PIC.append(join(P2, picon))
-			if not PY3:
+			if PY3:
+				name2 = "%s.png" % channelname.encode("latin-1", "ignore").decode("utf-8")
+				name4 = "%s.png" % channelname.encode("utf-8", "ignore").decode("utf-8")
+				name3 = "%s.png" % channelname2.replace('\x87', '').replace('\x86', '')
+				name = normalize('NFKD', channelname)
+			else:
 				name2 = "%s.png" % channelname.decode("utf-8").encode("latin-1", "ignore")
 				name4 = "%s.png" % channelname.decode("utf-8").encode("utf-8", "ignore")
 				name3 = "%s.png" % channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
-				name = normalize('NFKD', unicode(str("" + channelname), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
-			else:
-				name2 = "%s.png" % channelname
-				name4 = "%s.png" % channelname
-				name3 = "%s.png" % channelname2.replace('\x87', '').replace('\x86', '')
-				name = normalize('NFKD', str("" + channelname))
+				name = normalize('NFKD', channelname.decode('unicode-escape'))
 			name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 			PIC.append(join(P2, name3))
 			PIC.append(join(P2, name2))
@@ -3562,7 +3562,7 @@ def NextScreen(PRESS):
 	if SaveEventListChanged == True:
 		L4logE("Event Change Aktive")
 		return
-	if (Standby.inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
+	if (inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
 		if ScreenActive[0] == "1":
 			ST = LCD4linux.StandbyScreenTime.value
 		elif ScreenActive[0] == "2":
@@ -3607,7 +3607,7 @@ def NextScreen(PRESS):
 	if ScreenTime >= int(ST) and int(ST) > 0 or PRESS == True:
 		ScreenTime = 0
 		ScreenActive[0] = str(int(ScreenActive[0]) + 1)
-		if (Standby.inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
+		if (inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
 			if int(ScreenActive[0]) > int(LCD4linux.StandbyScreenMax.value):
 				ScreenActive[0] = "1"
 		elif (isMediaPlayer != "" and isMediaPlayer != "radio"):
@@ -3641,7 +3641,7 @@ def getBilder():
 	BilderOrt = ["", "", ""]
 	Bilder = [[], [], []]
 	SuchExt = ["*.png", "*.PNG", "*.jpg", "*.JPG"]
-	if (Standby.inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
+	if (inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
 		if str(LCD4linux.StandbyBild.value) != "0":
 			BilderOrt[0] = LCD4linux.StandbyBildFile.value
 		if str(LCD4linux.StandbyBild2.value) != "0":
@@ -3992,13 +3992,13 @@ def MJPEG_stop(force):
 
 
 def getWWW():
-	if (str(LCD4linux.WWW1.value) != "0" and len(LCD4linux.WWW1url.value) > 10) and (not Standby.inStandby or isMediaDisplay(isMediaPlayer)):
+	if (str(LCD4linux.WWW1.value) != "0" and len(LCD4linux.WWW1url.value) > 10) and (not inStandby or isMediaDisplay(isMediaPlayer)):
 		L4log("WWW Converter check on")
 		if LCD4linux.WwwApiUsage == "convertapi":
 			getHTMLwwwConvertapi(1, LCD4linux.WWW1url.value, LCD4linux.WWW1w.value, LCD4linux.WWW1h.value)
 		else:
 			BriefRes.put([getHTMLwwwCloudconvert, 1, LCD4linux.WWW1url.value])
-	elif (str(LCD4linux.StandbyWWW1.value) != "0" and len(LCD4linux.StandbyWWW1url.value) > 10) and Standby.inStandby:
+	elif (str(LCD4linux.StandbyWWW1.value) != "0" and len(LCD4linux.StandbyWWW1url.value) > 10) and inStandby:
 		L4log("WWW Converter check stb")
 		if LCD4linux.WwwApiUsage == "convertapi":
 			getHTMLwwwConvertapi(1, LCD4linux.StandbyWWW1url.value, LCD4linux.StandbyWWW1w.value, LCD4linux.StandbyWWW1h.value)
@@ -4618,7 +4618,7 @@ try:
 	from Plugins.Extensions.Netatmo.NetatmoCore import NetatmoUnit
 	NetatmoOK = True
 	L4log("Register Netatmo ok")
-	L4log("Error:", format_exc())
+	L4log("Error:", format_exc().strip())
 except Exception:
 	NetatmoOK = False
 	L4log("Netatmo not registered")
@@ -8204,7 +8204,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self["config"].setCurrentIndex((len(self["config"].getList()) - 1))
 
 	def restartGUI(self, answer):
-		if answer is True:
+		if answer:
 			L4log("GUI Restart")
 			self.session.open(TryQuitMainloop, 3)
 		else:
@@ -8454,7 +8454,7 @@ class UpdateStatus(Screen):
 		MJPEG_start()
 
 	def standbyQuery(self, configElement):
-		Standby.inStandby.onClose.append(self.restartTimer)
+		inStandby.onClose.append(self.restartTimer)
 		self.Refresh = "1"
 		self.restartTimer()
 
@@ -8814,7 +8814,7 @@ class UpdateStatus(Screen):
 			FritzTime -= 1
 		if self.AutoOFF != -1:
 			self.AutoOFF += 1
-			if Standby.inStandby and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+			if inStandby and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 				if LCD4linux.StandbyAutoOFF.value != "0" and self.AutoOFF > int(LCD4linux.StandbyAutoOFF.value):
 					self.Refresh = "1"
 					self.AutoOFF = -1
@@ -8882,7 +8882,7 @@ class UpdateStatus(Screen):
 					self.SaveStandbyBildfile = 0
 					self.Refresh = "1"
 					self.restartTimer()
-		if (str(LCD4linux.ScreenTime.value) != "0" and (not Standby.inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyScreenTime.value) != "0" and Standby.inStandby):
+		if (str(LCD4linux.ScreenTime.value) != "0" and (not inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyScreenTime.value) != "0" and inStandby):
 			NextScreen(False)
 		elif SaveEventListChanged == False:
 			ScreenActive[0] = LCD4linux.ScreenActive.value
@@ -8935,21 +8935,21 @@ class UpdateStatus(Screen):
 			volctrl = eDVBVolumecontrol.getInstance()
 			if volctrl and self.LvolM != volctrl.isMuted():
 				self.LisRefresh = True
-		if (int(strftime("%M")) % int(LCD4linux.RBoxRefresh.value) == 0 and int(strftime("%S")) > 45 and self.LastwwwBox != strftime("%M")) or self.StandbyChanged != Standby.inStandby:
+		if (int(strftime("%M")) % int(LCD4linux.RBoxRefresh.value) == 0 and int(strftime("%S")) > 45 and self.LastwwwBox != strftime("%M")) or self.StandbyChanged != inStandby:
 			self.LastwwwBox = strftime("%M")
 			if self.NetworkConnectionAvailable or self.NetworkConnectionAvailable is None:
-				if ((str(LCD4linux.RBox.value) != "0" or str(LCD4linux.MPRBox.value) != "0") and (not Standby.inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyRBox.value) != "0" and Standby.inStandby):
+				if ((str(LCD4linux.RBox.value) != "0" or str(LCD4linux.MPRBox.value) != "0") and (not inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyRBox.value) != "0" and inStandby):
 					if "T" in LCD4linux.RBoxShow.value + LCD4linux.MPRBoxShow.value + LCD4linux.StandbyRBoxShow.value:
 						CType = 1
 					else:
 						CType = 0
 					self.downloadwwwBox([[LCD4linux.RBoxName1.value, CType], [LCD4linux.RBoxName2.value, CType], [LCD4linux.RBoxName3.value, CType], [LCD4linux.RBoxName4.value, CType], [LCD4linux.RBoxName5.value, CType]])
-		if (int(strftime("%M")) % int(LCD4linux.RBoxTimerRefresh.value) == 0 and int(strftime("%S")) > 45 and self.LastwwwBoxTimer != strftime("%M")) or self.StandbyChanged != Standby.inStandby:
+		if (int(strftime("%M")) % int(LCD4linux.RBoxTimerRefresh.value) == 0 and int(strftime("%S")) > 45 and self.LastwwwBoxTimer != strftime("%M")) or self.StandbyChanged != inStandby:
 			self.LastwwwBoxTimer = strftime("%M")
 			if self.NetworkConnectionAvailable or self.NetworkConnectionAvailable is None:
-				if ((str(LCD4linux.RBoxTimer.value) != "0" or str(LCD4linux.MPRBoxTimer.value) != "0") and (not Standby.inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyRBoxTimer.value) != "0" and Standby.inStandby):
+				if ((str(LCD4linux.RBoxTimer.value) != "0" or str(LCD4linux.MPRBoxTimer.value) != "0") and (not inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyRBoxTimer.value) != "0" and inStandby):
 					self.downloadwwwBoxTimer([[LCD4linux.RBoxTimerName1.value, 0]])
-		if strftime("%M") != self.DataMinute or BilderTime == 1 or self.StandbyChanged != Standby.inStandby or ConfigMode or (ScreenActive[0] != SaveScreenActive) or isVideoPlaying > 2 or OSDon == 3 or FritzTime > 0 or self.LisRecording != self.session.nav.RecordTimer.isRecording() or self.LisRefresh == True:
+		if strftime("%M") != self.DataMinute or BilderTime == 1 or self.StandbyChanged != inStandby or ConfigMode or (ScreenActive[0] != SaveScreenActive) or isVideoPlaying > 2 or OSDon == 3 or FritzTime > 0 or self.LisRecording != self.session.nav.RecordTimer.isRecording() or self.LisRefresh == True:
 			L4log("Data-Build")
 			self.Refresh = "1"
 			self.LisRefresh = False
@@ -9016,7 +9016,7 @@ class UpdateStatus(Screen):
 				if strftime("%M") in LCD4linux.WwwTime.value:
 					getWWW()
 			self.DataMinute = strftime("%M")
-			if self.StandbyChanged != Standby.inStandby:
+			if self.StandbyChanged != inStandby:
 				self.AutoOFF = 0
 				ScreenActive = ["1", "", "", ""]
 				AktHelligkeit = [-1, -1, -1, -1, -1, -1]
@@ -9025,7 +9025,7 @@ class UpdateStatus(Screen):
 				getBilder()
 				rmFile(PICfritz)
 				getWWW()
-			self.StandbyChanged = Standby.inStandby
+			self.StandbyChanged = inStandby
 			self.restartTimer()
 		if ConfigMode == True:
 			self.StatusTimer.startLongTimer(2)
@@ -9171,7 +9171,7 @@ class UpdateStatus(Screen):
 
 				info = service and service.info()
 				if info is not None:
-					if BitrateRegistred == True and not Standby.inStandby and ((str(LCD4linux.Bitrate.value) != "0" and isMediaPlayer == "") or (str(LCD4linux.MPBitrate.value) != "0" and isMediaPlayer != "")):
+					if BitrateRegistred == True and not inStandby and ((str(LCD4linux.Bitrate.value) != "0" and isMediaPlayer == "") or (str(LCD4linux.MPBitrate.value) != "0" and isMediaPlayer != "")):
 						if self.ref != self.LsreftoString:
 							self.startBitrateData()
 					self.LgetName = info.getName()
@@ -9352,7 +9352,7 @@ class UpdateStatus(Screen):
 
 	def runBitrateTimer(self):
 		self.BitrateTimer.stop()
-		if BitrateRegistred == True and not Standby.inStandby and ((str(LCD4linux.Bitrate.value) != "0" and isMediaPlayer == "") or (str(LCD4linux.MPBitrate.value) != "0" and isMediaPlayer != "")):
+		if BitrateRegistred == True and not inStandby and ((str(LCD4linux.Bitrate.value) != "0" and isMediaPlayer == "") or (str(LCD4linux.MPBitrate.value) != "0" and isMediaPlayer != "")):
 			self.startBitrateData()
 		self.BitrateTimer.startLongTimer(30)
 
@@ -9573,9 +9573,7 @@ class UpdateStatus(Screen):
 					if len(Auth) > 1 and len(Auth[0].split(":", 1)[-1].split(":")) == 2:
 						username, password = Auth[0].split(":", 1)[-1].split(":")
 						up = "%s:%s" % (username, password)
-						basicAuth = b64encode(ensure_binary(up))
-						if PY3:
-							basicAuth = basicAuth.decode()
+						basicAuth = b64encode(ensure_binary(up)).decode() if PY3 else b64encode(ensure_binary(up))
 						Header = {"Authorization": "Basic %s" % basicAuth}
 					if wwwURL[1] == 0:
 						feedurl = "http://%s/web/subservices" % URL
@@ -9628,9 +9626,7 @@ class UpdateStatus(Screen):
 					if len(Auth) > 1 and len(Auth[0].split(":", 1)[-1].split(":")) == 2:
 						username, password = Auth[0].split(":", 1)[-1].split(":")
 						up = "%s:%s" % (username, password)
-						basicAuth = b64encode(ensure_binary(up))
-						if PY3:
-							basicAuth = basicAuth.decode()
+						basicAuth = b64encode(ensure_binary(up)).decode() if PY3 else b64encode(ensure_binary(up))
 						Header = {"Authorization": "Basic %s" % basicAuth}
 					feedurl = "http://%s/web/timerlist" % URL
 					L4log("wwwBoxTimer %d" % i, feedurl)
@@ -10296,10 +10292,9 @@ def LCD4linuxPICThread(self, session):
 	ThreadRunning = 0
 
 
-def getNumber(actservice):
-	# actservice must be an instance of eServiceReference
+def getNumber(actservice):  # actservice must be an instance of eServiceReference
 	Servicelist = None
-	if InfoBar and InfoBar.instance:
+	if InfoBar and InfoBar.instance and InfoBar.instance.servicelist:
 		Servicelist = InfoBar.instance.servicelist
 	mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
 	number = 0
@@ -10834,21 +10829,23 @@ def LCD4linuxPIC(self, session):
 					P2A = LCD4linux.PiconPathAlt.value
 					PIC = []
 					PIC.append(join(P2, picon))
-					if not PY3:
+					if PY3:
+						name2 = "%s.png" % self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8")
+						name4 = "%s.png" % self.Lchannel_name.encode("utf-8", "ignore").decode("utf-8")
+						name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
+						name = normalize('NFKD', self.Lchannel_name)
+					else:
 						name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
 						name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore")
 						name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
-						name = normalize('NFKD', unicode(str("" + self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
-					else:
-						name2 = "%s.png" % self.Lchannel_name
-						name4 = "%s.png" % self.Lchannel_name
-						name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
-						name = normalize('NFKD', str("" + self.Lchannel_name))
+						name = normalize('NFKD', self.Lchannel_name.decode('unicode-escape'))
 					name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+					name5 = getPiconName(self.LsreftoString)
 					PIC.append(join(P2, name3))
 					PIC.append(join(P2, name2))
 					PIC.append(join(P2, name))
 					PIC.append(join(P2, name4))
+					PIC.append(join(P2, name5))
 					fields = picon.split("_", 3)
 					if fields[0] in ("4097", "5001", "5002", "5003"):
 						fields[0] = "1"
@@ -10941,7 +10938,7 @@ def LCD4linuxPIC(self, session):
 		global OldFeel
 		global OldHum
 		global OldWind
-		MAX_W, MAX_H = 0, 0
+		MAX_W, MAX_H, MAX_Wc = 0, 0, 0
 		MAX_Wi, MAX_Hi = self.im[im].size
 		if ConfigSplit == True:
 			MAX_Wi = int(MAX_Wi / 2)
@@ -11207,7 +11204,7 @@ def LCD4linuxPIC(self, session):
 						ShadowText(Wim, POSX - minus5, POSY + int(56 * Wmulti), Wind, font, ConfigColor, ConfigShadow)
 					font = ImageFont.truetype(ConfigFont, int((24 if largesize else 20) * Wmulti), encoding='unic')
 					w, h = getFsize(Temp_c, font)
-					if not PY3:  # for equal results, w needs an correction under Python 2
+					if not PY3:  # for equal results, 'w' needs an correction under Python 2
 						w = int(w * (0.57 if trendarrows else 0.66))
 					PX = MAX_Wc - int(w)
 					PY = POSY + int((8 if largesize else 16) * Wmulti)
@@ -11233,7 +11230,7 @@ def LCD4linuxPIC(self, session):
 
 						font = ImageFont.truetype(ConfigFont, int((15 if largesize else 12) * Wmulti), encoding='unic')
 						w, h = getFsize(Feel, font)
-						if not PY3:  # for equal results, w needs an correction under Python 2
+						if not PY3:  # for equal results, 'w' needs an correction under Python 2
 							w = int(w * (0.58 if trendarrows else 0.67))
 						PX = MAX_Wc - int(w)
 						PY = POSY + int((28 if largesize else 34) * Wmulti)
@@ -11241,7 +11238,7 @@ def LCD4linuxPIC(self, session):
 
 					font = ImageFont.truetype(ConfigFont, int((18 if largesize else 14) * Wmulti), encoding='unic')
 					w, h = getFsize(Hum, font)
-					if not PY3:  # for equal results, w needs an correction under Python 2
+					if not PY3:  # for equal results, 'w' needs an correction under Python 2
 						w = int(w * (0.72 if trendarrows else 0.98)) if largesize else int(w * (0.72 if trendarrows else 0.98))
 					PX = MAX_Wc - int(w)
 					PY = POSY + int((40 if largesize else 44) * Wmulti)
@@ -12045,16 +12042,16 @@ def LCD4linuxPIC(self, session):
 				useCache = False
 				PIC = []
 				PIC.append(join(P2, picon))
-				if not PY3:
-					name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
-					name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore")
-					name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
-					name = normalize('NFKD', self.Lchannel_name.decode('unicode-escape'))
-				else:
-					name2 = "%s.png" % self.Lchannel_name
-					name4 = "%s.png" % self.Lchannel_name
+				if PY3:
+					name2 = "%s.png" % self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8", "ignore")
+					name4 = "%s.png" % self.Lchannel_name.encode("utf-8", "ignore").decode("utf-8", "ignore")
 					name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
 					name = normalize('NFKD', self.Lchannel_name)
+				else:
+					name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
+					name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
+					name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
+					name = normalize('NFKD', self.Lchannel_name.decode('unicode-escape'))
 				name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 				name5 = getPiconName(self.LsreftoString)
 				PIC.append(join(P2, name3))
@@ -12181,10 +12178,7 @@ def LCD4linuxPIC(self, session):
 		channel_name = ""
 		Progress = getProgess(MAX_W, ConfigProzent)
 		if self.Lchannel_name is not None:
-			if not PY3:
-				channel_name = self.Lchannel_name
-			else:
-				channel_name = self.Lchannel_name.replace('\x87', '').replace('\x86', '')
+			channel_name = self.Lchannel_name.replace('\x87', '').replace('\x86', '') if PY3 else self.Lchannel_name
 			ch = self.LsreftoString.split("::")
 			if len(ch) > 1:
 				channel_name = Code_utf8(ch[1])
@@ -12604,7 +12598,7 @@ def LCD4linuxPIC(self, session):
 							self.im[im].paste(imW, (POSX, ConfigPos), imW)
 						else:
 							self.im[im].paste(imW, (POSX, ConfigPos))
-						if not PY3:  # no correction for PY3
+						if not PY3:  # correction for Python 2
 							POSX += x
 						if ConfigType[1:] == "C":
 							ShadowText(draw, POSX, ConfigPos + int(ConfigSize / 4), Code_utf8(orbital), font, ConfigColor, ConfigShadow)
@@ -14475,32 +14469,33 @@ def LCD4linuxPIC(self, session):
 			rmFile(MP3tmp)
 #			rmFile(GoogleCover)
 			if self.SonosRunning:
-				L4log("detected Sonos")
-				isMediaPlayer = "sonos"
+				isMediaPlayer, logtext = ("sonos", "detected Sonos")
 			elif self.YMCastRunning:
-				L4log("detected YMC")
-				isMediaPlayer = "ymc"
+				isMediaPlayer, logtext = ("ymc", "detected YMC")
 			elif self.BlueRunning:
-				L4log("detected BlueSound")
-				isMediaPlayer = "blue"
-			elif sref.startswith("1:0:2") is True:
-				L4log("detected Radio")
-				isMediaPlayer = "radio"
+				isMediaPlayer, logtext = ("blue", "detected BlueSound")
+			elif sref.startswith("1:0:2"):
+				isMediaPlayer, logtext = ("radio", "detected Radio")
 				self.CoverIm = None
 				self.CoverName = ["-", "-"]
 			elif sref.startswith(("4097:0", "5001:0", "5002:0", "5003:0")):
 				if self.Lpath and self.Lpath.startswith("http") and self.Llength and self.Llength[0] == -1:
-					L4log("detected AudioMedia or IPTV")
-					isMediaPlayer = "mp3"
+					if LCD4linux.Streaming.value == "0":  # autodetect mode?
+						if InfoBar and InfoBar.instance and InfoBar.instance.servicelist:  # current E2 mode: 0=TV, 1=Radio
+							isMediaPlayer, logtext = ("", "detected IPTV") if InfoBar.instance.servicelist.mode == 0 else ("mp3", "detected AudioMedia")
+						else:
+							isMediaPlayer, logtext = ("", "detection error: 'InfoBar.instance.servicelist.mode' is not available")
+					else:
+						isMediaPlayer, logtext = ("", "forced IPTV by setting") if LCD4linux.Streaming.value == "1" else ("mp3", "forced AudioMedia by setting")
 				else:
-					L4log("detected VOD Media")
-					isMediaPlayer = "mp3"
+					isMediaPlayer, logtext = ("mp3", "detected VOD Media")
 			elif "0:0:0:0:0:0:0:0:0:" in sref:
-				L4log("detected Video")
-				isMediaPlayer = "record"
+				isMediaPlayer, logtext = ("record", "detected Video")
 			else:
 				self.CoverIm = None
 				self.CoverName = ["-", "-"]
+				logtext = ""
+			L4log(logtext)
 			if isMediaPlayer != "mp3" and isMediaPlayer != "record":
 				rmFile("/tmp/.cover")
 				rmFile("/tmp/.wbrfs_pic")
@@ -14516,7 +14511,7 @@ def LCD4linuxPIC(self, session):
 	L4LElist.setResolution(1, MAX_W, MAX_H)
 	pil_open = ""
 	col_back = "black"
-	if (Standby.inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+	if (inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 		pil_open = LCD4linux.StandbyLCDBild1.value
 		col_back = LCD4linux.StandbyLCDColor1.value
 		if ScreenActive[0] in LCD4linux.StandbyBackground1.value and "1" in LCD4linux.StandbyBackground1LCD.value:
@@ -14538,7 +14533,7 @@ def LCD4linuxPIC(self, session):
 		self.im[1] = Image.new('RGB', (MAX_W, MAX_H), col_back)
 	self.draw[1] = ImageDraw.Draw(self.im[1])
 	checkTVrunning = False
-	if getSA(1) in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value and not Standby.inStandby:
+	if getSA(1) in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value and not inStandby:
 		checkTVrunning = True
 		if TVrunning == False:
 			doGrabTV(str(MAX_W), str(MAX_H), "1", LCD4linux.TVType.value)
@@ -14575,7 +14570,7 @@ def LCD4linuxPIC(self, session):
 		L4LElist.setResolution(2, MAX_W, MAX_H)
 		pil_open = ""
 		col_back = "black"
-		if (Standby.inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+		if (inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 			pil_open = LCD4linux.StandbyLCDBild2.value
 			col_back = LCD4linux.StandbyLCDColor2.value
 			if ScreenActive[0] in LCD4linux.StandbyBackground1.value and "2" in LCD4linux.StandbyBackground1LCD.value:
@@ -14596,7 +14591,7 @@ def LCD4linuxPIC(self, session):
 		if not ("2" in LCD4linux.TVLCD.value and ScreenActive[0] in LCD4linux.TV.value):
 			self.im[2] = Image.new('RGB', (MAX_W, MAX_H), col_back)
 		self.draw[2] = ImageDraw.Draw(self.im[2])
-		if getSA(2) in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value and not Standby.inStandby:
+		if getSA(2) in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value and not inStandby:
 			checkTVrunning = True
 			if TVrunning == False:
 				doGrabTV(str(MAX_W), str(MAX_H), "2", LCD4linux.TVType.value)
@@ -14636,7 +14631,7 @@ def LCD4linuxPIC(self, session):
 		L4LElist.setResolution(3, MAX_W, MAX_H)
 		pil_open = ""
 		col_back = "black"
-		if (Standby.inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+		if (inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 			pil_open = LCD4linux.StandbyLCDBild3.value
 			col_back = LCD4linux.StandbyLCDColor3.value
 			if ScreenActive[0] in LCD4linux.StandbyBackground1.value and "3" in LCD4linux.StandbyBackground1LCD.value:
@@ -14657,7 +14652,7 @@ def LCD4linuxPIC(self, session):
 		if not ("3" in LCD4linux.TVLCD.value and ScreenActive[0] in LCD4linux.TV.value):
 			self.im[3] = Image.new('RGB', (MAX_W, MAX_H), col_back)
 		self.draw[3] = ImageDraw.Draw(self.im[3])
-		if getSA(3) in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value and not Standby.inStandby:
+		if getSA(3) in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value and not inStandby:
 			checkTVrunning = True
 			if TVrunning == False:
 				doGrabTV(str(MAX_W), str(MAX_H), "3", LCD4linux.TVType.value)
@@ -14695,7 +14690,7 @@ def LCD4linuxPIC(self, session):
 ####
 #### Standby Modus
 ####
-	if (Standby.inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+	if (inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 		TVrunning = False
 		if str(LCD4linux.Standby.value) == "1":
 			if LCD4linux.LCDType1.value[0] == "4" or LCD4linux.LCDType2.value[0] == "4" or LCD4linux.LCDType3.value[0] == "4":
@@ -15301,7 +15296,7 @@ def LCD4linuxPIC(self, session):
 	Brief3.join()
 	TimePicture = time() - tt
 
-	if self.Refresh >= LCD4linux.LCDRefresh1.value and not (getSA(1) in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value and not Standby.inStandby):
+	if self.Refresh >= LCD4linux.LCDRefresh1.value and not (getSA(1) in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value and not inStandby):
 		if Dunkel and "1" in Dunkel:
 			MAX_W, MAX_H = self.im[1].size
 			self.draw[1].rectangle((0, 0, MAX_W, MAX_H), fill="black")
@@ -15309,14 +15304,14 @@ def LCD4linuxPIC(self, session):
 		if str(LCD4linux.LCDRotate1.value) != "0":
 			self.im[1] = self.im[1].rotate(int(LCD4linux.LCDRotate1.value))
 		Brief1.put([writeLCD1, self, 1, LCD4linux.BilderJPEG.value])
-	if LCD4linux.LCDType2.value != "00" and self.Refresh >= LCD4linux.LCDRefresh2.value and not (getSA(2) in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value and not Standby.inStandby):
+	if LCD4linux.LCDType2.value != "00" and self.Refresh >= LCD4linux.LCDRefresh2.value and not (getSA(2) in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value and not inStandby):
 		if Dunkel and "2" in Dunkel:
 			MAX_W, MAX_H = self.im[2].size
 			self.draw[2].rectangle((0, 0, MAX_W, MAX_H), fill="black")
 		if str(LCD4linux.LCDRotate2.value) != "0":
 			self.im[2] = self.im[2].rotate(int(LCD4linux.LCDRotate2.value))
 		Brief2.put([writeLCD2, self, 2, LCD4linux.BilderJPEG.value])
-	if LCD4linux.LCDType3.value != "00" and self.Refresh >= LCD4linux.LCDRefresh3.value and not (getSA(3) in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value and not Standby.inStandby):
+	if LCD4linux.LCDType3.value != "00" and self.Refresh >= LCD4linux.LCDRefresh3.value and not (getSA(3) in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value and not inStandby):
 		if Dunkel and "3" in Dunkel:
 			MAX_W, MAX_H = self.im[3].size
 			self.draw[3].rectangle((0, 0, MAX_W, MAX_H), fill="black")
