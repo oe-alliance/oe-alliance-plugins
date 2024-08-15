@@ -282,7 +282,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		self.bsTimer = eTimer()
 		self.bsTimer.callback.append(self.asyncBlindScan)
 
-		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.changedEntry)
+		ConfigListScreen.__init__(self, self.list, session=session, on_change=self.newConfig)
 		self["footnote"] = Label("")
 
 		self["actions"] = ActionMap(["SetupActions"],
@@ -637,14 +637,6 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		if cur and (cur == self.tunerEntry or cur == self.satelliteEntry or cur == self.onlyUnknownTpsEntry or cur == self.userDefinedLnbInversionEntry):
 			self.createSetup()
 		self.setBlueText()
-
-	def keyLeft(self):
-		ConfigListScreen.keyLeft(self)
-		self.newConfig()
-
-	def keyRight(self):
-		ConfigListScreen.keyRight(self)
-		self.newConfig()
 
 	def saveConfig(self):
 		for x in self["config"].list:
