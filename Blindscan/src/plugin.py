@@ -292,7 +292,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 
 		self["actions2"] = ActionMap(["ColorActions", "SetupActions"],
 		{
-			"ok": self.keyGo,
+			"ok": self.keySelect if hasattr(self, "keySelect") else self.keyGo,
 			"save": self.keyGo,
 			"blue": self.resetDefaults,
 		}, -2)
