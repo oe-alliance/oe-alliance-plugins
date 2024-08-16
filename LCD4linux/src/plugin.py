@@ -18,8 +18,9 @@
 #  Advertise with this Plugin is not allowed.
 #  For other uses, permission from the author is necessary.
 
-# PYTHON IMPORTS
 from __future__ import print_function, absolute_import, division
+
+# PYTHON IMPORTS
 from base64 import b64encode
 from calendar import Calendar, mdays, weekday, weekheader, month_name
 from colorsys import rgb_to_hls, hls_to_rgb
@@ -93,7 +94,6 @@ from Screens.InfoBar import InfoBar
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Screens.Standby import TryQuitMainloop
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_FONTS, SCOPE_LIBDIR, SCOPE_SYSETC, resolveFilename
 
@@ -127,11 +127,11 @@ except AttributeError:
 else:
 	ssl._create_default_https_context = _create_unverified_https_context
 
-if not PY3:
+if PY3:
+	from html import unescape as _unescape
+else:
 	from HTMLParser import HTMLParser
 	_unescape = HTMLParser().unescape
-else:
-	from html import unescape as _unescape
 
 try:
 	from enigma import iDVBFrontend
@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r22"
+Version = "V5.0-r23"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -433,7 +433,7 @@ LCD4linux.MJPEGMode = ConfigSelection(choices=[("001", "001"), ("011", "011"), (
 LCD4linux.MJPEGHeader = ConfigSelection(choices=[("0", _("normal")), ("1", _("reduced"))], default="1")
 LCD4linux.MJPEGCycle = ConfigSelectionNumber(1, 10, 1, default=2)
 LCD4linux.MJPEGRestart = ConfigYesNo(default=True)
-LCD4linux.Streaming = ConfigSelection(choices=[("0", _("Media")), ("1", _("On"))], default="0")
+LCD4linux.Streaming = ConfigSelection(choices=[("0", _("Auto")), ("1", _("On")), ("2", _("Media"))], default="0")
 LCD4linux.WebIfRefresh = ConfigSelectionNumber(1, 60, 1, default=3)
 LCD4linux.WebIfType = ConfigSelection(choices=[("0", _("Javascript")), ("01", _("Javascript no Refresh")), ("1", _("Reload"))], default="0")
 LCD4linux.WebIfInitDelay = ConfigYesNo(default=False)
@@ -2393,7 +2393,7 @@ def Code_utf8(wert):
 def L4log(nfo, wert=""):
 	if str(LCD4linux.EnableEventLog.value) != "0":
 		print("[LCD4linux] %s %s" % (nfo, wert))
-		if str(LCD4linux.EnableEventLog.value) != "3":
+		if nfo and str(LCD4linux.EnableEventLog.value) != "3":
 			try:
 				with open("/tmp/L4log.txt", "a") as f:
 					f.write("%s %s %s\r\n" % (strftime("%H:%M:%S"), nfo, wert))
@@ -2983,16 +2983,16 @@ def getpiconres(x, y, full, picon, channelname, channelname2, P2, P2A, P2C):
 			PD = ""
 			PIC = []
 			PIC.append(join(P2, picon))
-			if not PY3:
+			if PY3:
+				name2 = "%s.png" % channelname.encode("latin-1", "ignore").decode("utf-8")
+				name4 = "%s.png" % channelname.encode("utf-8", "ignore").decode("utf-8")
+				name3 = "%s.png" % channelname2.replace('\x87', '').replace('\x86', '')
+				name = normalize('NFKD', channelname)
+			else:
 				name2 = "%s.png" % channelname.decode("utf-8").encode("latin-1", "ignore")
 				name4 = "%s.png" % channelname.decode("utf-8").encode("utf-8", "ignore")
 				name3 = "%s.png" % channelname2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
-				name = normalize('NFKD', unicode(str("" + channelname), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
-			else:
-				name2 = "%s.png" % channelname
-				name4 = "%s.png" % channelname
-				name3 = "%s.png" % channelname2.replace('\x87', '').replace('\x86', '')
-				name = normalize('NFKD', str("" + channelname))
+				name = normalize('NFKD', channelname.decode('unicode-escape'))
 			name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 			PIC.append(join(P2, name3))
 			PIC.append(join(P2, name2))
@@ -4618,7 +4618,7 @@ try:
 	from Plugins.Extensions.Netatmo.NetatmoCore import NetatmoUnit
 	NetatmoOK = True
 	L4log("Register Netatmo ok")
-	L4log("Error:", format_exc())
+	L4log("Error:", format_exc().strip())
 except Exception:
 	NetatmoOK = False
 	L4log("Netatmo not registered")
@@ -8204,9 +8204,9 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self["config"].setCurrentIndex((len(self["config"].getList()) - 1))
 
 	def restartGUI(self, answer):
-		if answer is True:
+		if answer:
 			L4log("GUI Restart")
-			self.session.open(TryQuitMainloop, 3)
+			self.session.open(Standby.TryQuitMainloop, 3)
 		else:
 			self.close(True, self.session)
 
@@ -9573,9 +9573,7 @@ class UpdateStatus(Screen):
 					if len(Auth) > 1 and len(Auth[0].split(":", 1)[-1].split(":")) == 2:
 						username, password = Auth[0].split(":", 1)[-1].split(":")
 						up = "%s:%s" % (username, password)
-						basicAuth = b64encode(ensure_binary(up))
-						if PY3:
-							basicAuth = basicAuth.decode()
+						basicAuth = b64encode(ensure_binary(up)).decode() if PY3 else b64encode(ensure_binary(up))
 						Header = {"Authorization": "Basic %s" % basicAuth}
 					if wwwURL[1] == 0:
 						feedurl = "http://%s/web/subservices" % URL
@@ -9628,9 +9626,7 @@ class UpdateStatus(Screen):
 					if len(Auth) > 1 and len(Auth[0].split(":", 1)[-1].split(":")) == 2:
 						username, password = Auth[0].split(":", 1)[-1].split(":")
 						up = "%s:%s" % (username, password)
-						basicAuth = b64encode(ensure_binary(up))
-						if PY3:
-							basicAuth = basicAuth.decode()
+						basicAuth = b64encode(ensure_binary(up)).decode() if PY3 else b64encode(ensure_binary(up))
 						Header = {"Authorization": "Basic %s" % basicAuth}
 					feedurl = "http://%s/web/timerlist" % URL
 					L4log("wwwBoxTimer %d" % i, feedurl)
@@ -10296,10 +10292,9 @@ def LCD4linuxPICThread(self, session):
 	ThreadRunning = 0
 
 
-def getNumber(actservice):
-	# actservice must be an instance of eServiceReference
+def getNumber(actservice):  # actservice must be an instance of eServiceReference
 	Servicelist = None
-	if InfoBar and InfoBar.instance:
+	if InfoBar and InfoBar.instance and InfoBar.instance.servicelist:
 		Servicelist = InfoBar.instance.servicelist
 	mask = (eServiceReference.isMarker | eServiceReference.isDirectory)
 	number = 0
@@ -10834,21 +10829,23 @@ def LCD4linuxPIC(self, session):
 					P2A = LCD4linux.PiconPathAlt.value
 					PIC = []
 					PIC.append(join(P2, picon))
-					if not PY3:
+					if PY3:
+						name2 = "%s.png" % self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8")
+						name4 = "%s.png" % self.Lchannel_name.encode("utf-8", "ignore").decode("utf-8")
+						name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
+						name = normalize('NFKD', self.Lchannel_name)
+					else:
 						name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
 						name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore")
 						name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
-						name = normalize('NFKD', unicode(str("" + self.Lchannel_name), 'utf-8', errors='ignore')).encode('ASCII', 'ignore')
-					else:
-						name2 = "%s.png" % self.Lchannel_name
-						name4 = "%s.png" % self.Lchannel_name
-						name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
-						name = normalize('NFKD', str("" + self.Lchannel_name))
+						name = normalize('NFKD', self.Lchannel_name.decode('unicode-escape'))
 					name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
+					name5 = getPiconName(self.LsreftoString)
 					PIC.append(join(P2, name3))
 					PIC.append(join(P2, name2))
 					PIC.append(join(P2, name))
 					PIC.append(join(P2, name4))
+					PIC.append(join(P2, name5))
 					fields = picon.split("_", 3)
 					if fields[0] in ("4097", "5001", "5002", "5003"):
 						fields[0] = "1"
@@ -10941,7 +10938,7 @@ def LCD4linuxPIC(self, session):
 		global OldFeel
 		global OldHum
 		global OldWind
-		MAX_W, MAX_H = 0, 0
+		MAX_W, MAX_H, MAX_Wc = 0, 0, 0
 		MAX_Wi, MAX_Hi = self.im[im].size
 		if ConfigSplit == True:
 			MAX_Wi = int(MAX_Wi / 2)
@@ -11207,7 +11204,7 @@ def LCD4linuxPIC(self, session):
 						ShadowText(Wim, POSX - minus5, POSY + int(56 * Wmulti), Wind, font, ConfigColor, ConfigShadow)
 					font = ImageFont.truetype(ConfigFont, int((24 if largesize else 20) * Wmulti), encoding='unic')
 					w, h = getFsize(Temp_c, font)
-					if not PY3:  # for equal results, w needs an correction under Python 2
+					if not PY3:  # for equal results, 'w' needs an correction under Python 2
 						w = int(w * (0.57 if trendarrows else 0.66))
 					PX = MAX_Wc - int(w)
 					PY = POSY + int((8 if largesize else 16) * Wmulti)
@@ -11233,7 +11230,7 @@ def LCD4linuxPIC(self, session):
 
 						font = ImageFont.truetype(ConfigFont, int((15 if largesize else 12) * Wmulti), encoding='unic')
 						w, h = getFsize(Feel, font)
-						if not PY3:  # for equal results, w needs an correction under Python 2
+						if not PY3:  # for equal results, 'w' needs an correction under Python 2
 							w = int(w * (0.58 if trendarrows else 0.67))
 						PX = MAX_Wc - int(w)
 						PY = POSY + int((28 if largesize else 34) * Wmulti)
@@ -11241,7 +11238,7 @@ def LCD4linuxPIC(self, session):
 
 					font = ImageFont.truetype(ConfigFont, int((18 if largesize else 14) * Wmulti), encoding='unic')
 					w, h = getFsize(Hum, font)
-					if not PY3:  # for equal results, w needs an correction under Python 2
+					if not PY3:  # for equal results, 'w' needs an correction under Python 2
 						w = int(w * (0.72 if trendarrows else 0.98)) if largesize else int(w * (0.72 if trendarrows else 0.98))
 					PX = MAX_Wc - int(w)
 					PY = POSY + int((40 if largesize else 44) * Wmulti)
@@ -12045,16 +12042,16 @@ def LCD4linuxPIC(self, session):
 				useCache = False
 				PIC = []
 				PIC.append(join(P2, picon))
-				if not PY3:
-					name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
-					name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("utf-8", "ignore")
-					name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
-					name = normalize('NFKD', self.Lchannel_name.decode('unicode-escape'))
-				else:
-					name2 = "%s.png" % self.Lchannel_name
-					name4 = "%s.png" % self.Lchannel_name
+				if PY3:
+					name2 = "%s.png" % self.Lchannel_name.encode("latin-1", "ignore").decode("utf-8", "ignore")
+					name4 = "%s.png" % self.Lchannel_name.encode("utf-8", "ignore").decode("utf-8", "ignore")
 					name3 = "%s.png" % self.Lchannel_name2.replace('\x87', '').replace('\x86', '')
 					name = normalize('NFKD', self.Lchannel_name)
+				else:
+					name2 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
+					name4 = "%s.png" % self.Lchannel_name.decode("utf-8").encode("latin-1", "ignore")
+					name3 = "%s.png" % self.Lchannel_name2.replace('\xc2\x87', '').replace('\xc2\x86', '').decode("utf-8").encode("utf-8")
+					name = normalize('NFKD', self.Lchannel_name.decode('unicode-escape'))
 				name = "%s.png" % sub(r'[^a-z0-9]', '', str(name).replace('&', 'and').replace('+', 'plus').replace('*', 'star').lower())
 				name5 = getPiconName(self.LsreftoString)
 				PIC.append(join(P2, name3))
@@ -12181,10 +12178,7 @@ def LCD4linuxPIC(self, session):
 		channel_name = ""
 		Progress = getProgess(MAX_W, ConfigProzent)
 		if self.Lchannel_name is not None:
-			if not PY3:
-				channel_name = self.Lchannel_name
-			else:
-				channel_name = self.Lchannel_name.replace('\x87', '').replace('\x86', '')
+			channel_name = self.Lchannel_name.replace('\x87', '').replace('\x86', '') if PY3 else self.Lchannel_name
 			ch = self.LsreftoString.split("::")
 			if len(ch) > 1:
 				channel_name = Code_utf8(ch[1])
@@ -12604,7 +12598,7 @@ def LCD4linuxPIC(self, session):
 							self.im[im].paste(imW, (POSX, ConfigPos), imW)
 						else:
 							self.im[im].paste(imW, (POSX, ConfigPos))
-						if not PY3:  # no correction for PY3
+						if not PY3:  # correction for Python 2
 							POSX += x
 						if ConfigType[1:] == "C":
 							ShadowText(draw, POSX, ConfigPos + int(ConfigSize / 4), Code_utf8(orbital), font, ConfigColor, ConfigShadow)
@@ -14475,32 +14469,33 @@ def LCD4linuxPIC(self, session):
 			rmFile(MP3tmp)
 #			rmFile(GoogleCover)
 			if self.SonosRunning:
-				L4log("detected Sonos")
-				isMediaPlayer = "sonos"
+				isMediaPlayer, logtext = ("sonos", "detected Sonos")
 			elif self.YMCastRunning:
-				L4log("detected YMC")
-				isMediaPlayer = "ymc"
+				isMediaPlayer, logtext = ("ymc", "detected YMC")
 			elif self.BlueRunning:
-				L4log("detected BlueSound")
-				isMediaPlayer = "blue"
-			elif sref.startswith("1:0:2") is True:
-				L4log("detected Radio")
-				isMediaPlayer = "radio"
+				isMediaPlayer, logtext = ("blue", "detected BlueSound")
+			elif sref.startswith("1:0:2"):
+				isMediaPlayer, logtext = ("radio", "detected Radio")
 				self.CoverIm = None
 				self.CoverName = ["-", "-"]
 			elif sref.startswith(("4097:0", "5001:0", "5002:0", "5003:0")):
 				if self.Lpath and self.Lpath.startswith("http") and self.Llength and self.Llength[0] == -1:
-					L4log("detected AudioMedia or IPTV")
-					isMediaPlayer = "mp3"
+					if LCD4linux.Streaming.value == "0":  # autodetect mode?
+						if InfoBar and InfoBar.instance and InfoBar.instance.servicelist:  # current E2 mode: 0=TV, 1=Radio
+							isMediaPlayer, logtext = ("", "detected IPTV") if InfoBar.instance.servicelist.mode == 0 else ("mp3", "detected AudioMedia")
+						else:
+							isMediaPlayer, logtext = ("", "detection error: 'InfoBar.instance.servicelist.mode' is not available")
+					else:
+						isMediaPlayer, logtext = ("", "forced IPTV by setting") if LCD4linux.Streaming.value == "1" else ("mp3", "forced AudioMedia by setting")
 				else:
-					L4log("detected VOD Media")
-					isMediaPlayer = "mp3"
+					isMediaPlayer, logtext = ("mp3", "detected VOD Media")
 			elif "0:0:0:0:0:0:0:0:0:" in sref:
-				L4log("detected Video")
-				isMediaPlayer = "record"
+				isMediaPlayer, logtext = ("record", "detected Video")
 			else:
 				self.CoverIm = None
 				self.CoverName = ["-", "-"]
+				logtext = ""
+			L4log(logtext)
 			if isMediaPlayer != "mp3" and isMediaPlayer != "record":
 				rmFile("/tmp/.cover")
 				rmFile("/tmp/.wbrfs_pic")
