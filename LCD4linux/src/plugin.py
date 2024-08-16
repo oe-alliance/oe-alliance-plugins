@@ -89,11 +89,11 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Components.SystemInfo import SystemInfo
 from Components.Sources.StaticText import StaticText
 from Plugins.Plugin import PluginDescriptor
+from Screens import Standby
 from Screens.InfoBar import InfoBar
 from Screens.InputBox import InputBox
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
-from Screens.Standby import TryQuitMainloop, inStandby
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import SCOPE_PLUGINS, SCOPE_CONFIG, SCOPE_FONTS, SCOPE_LIBDIR, SCOPE_SYSETC, resolveFilename
 
@@ -3562,7 +3562,7 @@ def NextScreen(PRESS):
 	if SaveEventListChanged == True:
 		L4logE("Event Change Aktive")
 		return
-	if (inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
+	if (Standby.inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
 		if ScreenActive[0] == "1":
 			ST = LCD4linux.StandbyScreenTime.value
 		elif ScreenActive[0] == "2":
@@ -3607,7 +3607,7 @@ def NextScreen(PRESS):
 	if ScreenTime >= int(ST) and int(ST) > 0 or PRESS == True:
 		ScreenTime = 0
 		ScreenActive[0] = str(int(ScreenActive[0]) + 1)
-		if (inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
+		if (Standby.inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
 			if int(ScreenActive[0]) > int(LCD4linux.StandbyScreenMax.value):
 				ScreenActive[0] = "1"
 		elif (isMediaPlayer != "" and isMediaPlayer != "radio"):
@@ -3641,7 +3641,7 @@ def getBilder():
 	BilderOrt = ["", "", ""]
 	Bilder = [[], [], []]
 	SuchExt = ["*.png", "*.PNG", "*.jpg", "*.JPG"]
-	if (inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
+	if (Standby.inStandby or ConfigStandby) and not isMediaDisplay(isMediaPlayer):
 		if str(LCD4linux.StandbyBild.value) != "0":
 			BilderOrt[0] = LCD4linux.StandbyBildFile.value
 		if str(LCD4linux.StandbyBild2.value) != "0":
@@ -3992,13 +3992,13 @@ def MJPEG_stop(force):
 
 
 def getWWW():
-	if (str(LCD4linux.WWW1.value) != "0" and len(LCD4linux.WWW1url.value) > 10) and (not inStandby or isMediaDisplay(isMediaPlayer)):
+	if (str(LCD4linux.WWW1.value) != "0" and len(LCD4linux.WWW1url.value) > 10) and (not Standby.inStandby or isMediaDisplay(isMediaPlayer)):
 		L4log("WWW Converter check on")
 		if LCD4linux.WwwApiUsage == "convertapi":
 			getHTMLwwwConvertapi(1, LCD4linux.WWW1url.value, LCD4linux.WWW1w.value, LCD4linux.WWW1h.value)
 		else:
 			BriefRes.put([getHTMLwwwCloudconvert, 1, LCD4linux.WWW1url.value])
-	elif (str(LCD4linux.StandbyWWW1.value) != "0" and len(LCD4linux.StandbyWWW1url.value) > 10) and inStandby:
+	elif (str(LCD4linux.StandbyWWW1.value) != "0" and len(LCD4linux.StandbyWWW1url.value) > 10) and Standby.inStandby:
 		L4log("WWW Converter check stb")
 		if LCD4linux.WwwApiUsage == "convertapi":
 			getHTMLwwwConvertapi(1, LCD4linux.StandbyWWW1url.value, LCD4linux.StandbyWWW1w.value, LCD4linux.StandbyWWW1h.value)
@@ -8206,7 +8206,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 	def restartGUI(self, answer):
 		if answer:
 			L4log("GUI Restart")
-			self.session.open(TryQuitMainloop, 3)
+			self.session.open(Standby.TryQuitMainloop, 3)
 		else:
 			self.close(True, self.session)
 
@@ -8454,7 +8454,7 @@ class UpdateStatus(Screen):
 		MJPEG_start()
 
 	def standbyQuery(self, configElement):
-		inStandby.onClose.append(self.restartTimer)
+		Standby.inStandby.onClose.append(self.restartTimer)
 		self.Refresh = "1"
 		self.restartTimer()
 
@@ -8814,7 +8814,7 @@ class UpdateStatus(Screen):
 			FritzTime -= 1
 		if self.AutoOFF != -1:
 			self.AutoOFF += 1
-			if inStandby and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+			if Standby.inStandby and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 				if LCD4linux.StandbyAutoOFF.value != "0" and self.AutoOFF > int(LCD4linux.StandbyAutoOFF.value):
 					self.Refresh = "1"
 					self.AutoOFF = -1
@@ -8882,7 +8882,7 @@ class UpdateStatus(Screen):
 					self.SaveStandbyBildfile = 0
 					self.Refresh = "1"
 					self.restartTimer()
-		if (str(LCD4linux.ScreenTime.value) != "0" and (not inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyScreenTime.value) != "0" and inStandby):
+		if (str(LCD4linux.ScreenTime.value) != "0" and (not Standby.inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyScreenTime.value) != "0" and Standby.inStandby):
 			NextScreen(False)
 		elif SaveEventListChanged == False:
 			ScreenActive[0] = LCD4linux.ScreenActive.value
@@ -8935,21 +8935,21 @@ class UpdateStatus(Screen):
 			volctrl = eDVBVolumecontrol.getInstance()
 			if volctrl and self.LvolM != volctrl.isMuted():
 				self.LisRefresh = True
-		if (int(strftime("%M")) % int(LCD4linux.RBoxRefresh.value) == 0 and int(strftime("%S")) > 45 and self.LastwwwBox != strftime("%M")) or self.StandbyChanged != inStandby:
+		if (int(strftime("%M")) % int(LCD4linux.RBoxRefresh.value) == 0 and int(strftime("%S")) > 45 and self.LastwwwBox != strftime("%M")) or self.StandbyChanged != Standby.inStandby:
 			self.LastwwwBox = strftime("%M")
 			if self.NetworkConnectionAvailable or self.NetworkConnectionAvailable is None:
-				if ((str(LCD4linux.RBox.value) != "0" or str(LCD4linux.MPRBox.value) != "0") and (not inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyRBox.value) != "0" and inStandby):
+				if ((str(LCD4linux.RBox.value) != "0" or str(LCD4linux.MPRBox.value) != "0") and (not Standby.inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyRBox.value) != "0" and Standby.inStandby):
 					if "T" in LCD4linux.RBoxShow.value + LCD4linux.MPRBoxShow.value + LCD4linux.StandbyRBoxShow.value:
 						CType = 1
 					else:
 						CType = 0
 					self.downloadwwwBox([[LCD4linux.RBoxName1.value, CType], [LCD4linux.RBoxName2.value, CType], [LCD4linux.RBoxName3.value, CType], [LCD4linux.RBoxName4.value, CType], [LCD4linux.RBoxName5.value, CType]])
-		if (int(strftime("%M")) % int(LCD4linux.RBoxTimerRefresh.value) == 0 and int(strftime("%S")) > 45 and self.LastwwwBoxTimer != strftime("%M")) or self.StandbyChanged != inStandby:
+		if (int(strftime("%M")) % int(LCD4linux.RBoxTimerRefresh.value) == 0 and int(strftime("%S")) > 45 and self.LastwwwBoxTimer != strftime("%M")) or self.StandbyChanged != Standby.inStandby:
 			self.LastwwwBoxTimer = strftime("%M")
 			if self.NetworkConnectionAvailable or self.NetworkConnectionAvailable is None:
-				if ((str(LCD4linux.RBoxTimer.value) != "0" or str(LCD4linux.MPRBoxTimer.value) != "0") and (not inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyRBoxTimer.value) != "0" and inStandby):
+				if ((str(LCD4linux.RBoxTimer.value) != "0" or str(LCD4linux.MPRBoxTimer.value) != "0") and (not Standby.inStandby or self.SonosRunning or self.YMCastRunning or self.BlueRunning)) or (str(LCD4linux.StandbyRBoxTimer.value) != "0" and Standby.inStandby):
 					self.downloadwwwBoxTimer([[LCD4linux.RBoxTimerName1.value, 0]])
-		if strftime("%M") != self.DataMinute or BilderTime == 1 or self.StandbyChanged != inStandby or ConfigMode or (ScreenActive[0] != SaveScreenActive) or isVideoPlaying > 2 or OSDon == 3 or FritzTime > 0 or self.LisRecording != self.session.nav.RecordTimer.isRecording() or self.LisRefresh == True:
+		if strftime("%M") != self.DataMinute or BilderTime == 1 or self.StandbyChanged != Standby.inStandby or ConfigMode or (ScreenActive[0] != SaveScreenActive) or isVideoPlaying > 2 or OSDon == 3 or FritzTime > 0 or self.LisRecording != self.session.nav.RecordTimer.isRecording() or self.LisRefresh == True:
 			L4log("Data-Build")
 			self.Refresh = "1"
 			self.LisRefresh = False
@@ -9016,7 +9016,7 @@ class UpdateStatus(Screen):
 				if strftime("%M") in LCD4linux.WwwTime.value:
 					getWWW()
 			self.DataMinute = strftime("%M")
-			if self.StandbyChanged != inStandby:
+			if self.StandbyChanged != Standby.inStandby:
 				self.AutoOFF = 0
 				ScreenActive = ["1", "", "", ""]
 				AktHelligkeit = [-1, -1, -1, -1, -1, -1]
@@ -9025,7 +9025,7 @@ class UpdateStatus(Screen):
 				getBilder()
 				rmFile(PICfritz)
 				getWWW()
-			self.StandbyChanged = inStandby
+			self.StandbyChanged = Standby.inStandby
 			self.restartTimer()
 		if ConfigMode == True:
 			self.StatusTimer.startLongTimer(2)
@@ -9171,7 +9171,7 @@ class UpdateStatus(Screen):
 
 				info = service and service.info()
 				if info is not None:
-					if BitrateRegistred == True and not inStandby and ((str(LCD4linux.Bitrate.value) != "0" and isMediaPlayer == "") or (str(LCD4linux.MPBitrate.value) != "0" and isMediaPlayer != "")):
+					if BitrateRegistred == True and not Standby.inStandby and ((str(LCD4linux.Bitrate.value) != "0" and isMediaPlayer == "") or (str(LCD4linux.MPBitrate.value) != "0" and isMediaPlayer != "")):
 						if self.ref != self.LsreftoString:
 							self.startBitrateData()
 					self.LgetName = info.getName()
@@ -9352,7 +9352,7 @@ class UpdateStatus(Screen):
 
 	def runBitrateTimer(self):
 		self.BitrateTimer.stop()
-		if BitrateRegistred == True and not inStandby and ((str(LCD4linux.Bitrate.value) != "0" and isMediaPlayer == "") or (str(LCD4linux.MPBitrate.value) != "0" and isMediaPlayer != "")):
+		if BitrateRegistred == True and not Standby.inStandby and ((str(LCD4linux.Bitrate.value) != "0" and isMediaPlayer == "") or (str(LCD4linux.MPBitrate.value) != "0" and isMediaPlayer != "")):
 			self.startBitrateData()
 		self.BitrateTimer.startLongTimer(30)
 
@@ -14511,7 +14511,7 @@ def LCD4linuxPIC(self, session):
 	L4LElist.setResolution(1, MAX_W, MAX_H)
 	pil_open = ""
 	col_back = "black"
-	if (inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+	if (Standby.inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 		pil_open = LCD4linux.StandbyLCDBild1.value
 		col_back = LCD4linux.StandbyLCDColor1.value
 		if ScreenActive[0] in LCD4linux.StandbyBackground1.value and "1" in LCD4linux.StandbyBackground1LCD.value:
@@ -14533,7 +14533,7 @@ def LCD4linuxPIC(self, session):
 		self.im[1] = Image.new('RGB', (MAX_W, MAX_H), col_back)
 	self.draw[1] = ImageDraw.Draw(self.im[1])
 	checkTVrunning = False
-	if getSA(1) in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value and not inStandby:
+	if getSA(1) in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value and not Standby.inStandby:
 		checkTVrunning = True
 		if TVrunning == False:
 			doGrabTV(str(MAX_W), str(MAX_H), "1", LCD4linux.TVType.value)
@@ -14570,7 +14570,7 @@ def LCD4linuxPIC(self, session):
 		L4LElist.setResolution(2, MAX_W, MAX_H)
 		pil_open = ""
 		col_back = "black"
-		if (inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+		if (Standby.inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 			pil_open = LCD4linux.StandbyLCDBild2.value
 			col_back = LCD4linux.StandbyLCDColor2.value
 			if ScreenActive[0] in LCD4linux.StandbyBackground1.value and "2" in LCD4linux.StandbyBackground1LCD.value:
@@ -14591,7 +14591,7 @@ def LCD4linuxPIC(self, session):
 		if not ("2" in LCD4linux.TVLCD.value and ScreenActive[0] in LCD4linux.TV.value):
 			self.im[2] = Image.new('RGB', (MAX_W, MAX_H), col_back)
 		self.draw[2] = ImageDraw.Draw(self.im[2])
-		if getSA(2) in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value and not inStandby:
+		if getSA(2) in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value and not Standby.inStandby:
 			checkTVrunning = True
 			if TVrunning == False:
 				doGrabTV(str(MAX_W), str(MAX_H), "2", LCD4linux.TVType.value)
@@ -14631,7 +14631,7 @@ def LCD4linuxPIC(self, session):
 		L4LElist.setResolution(3, MAX_W, MAX_H)
 		pil_open = ""
 		col_back = "black"
-		if (inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+		if (Standby.inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 			pil_open = LCD4linux.StandbyLCDBild3.value
 			col_back = LCD4linux.StandbyLCDColor3.value
 			if ScreenActive[0] in LCD4linux.StandbyBackground1.value and "3" in LCD4linux.StandbyBackground1LCD.value:
@@ -14652,7 +14652,7 @@ def LCD4linuxPIC(self, session):
 		if not ("3" in LCD4linux.TVLCD.value and ScreenActive[0] in LCD4linux.TV.value):
 			self.im[3] = Image.new('RGB', (MAX_W, MAX_H), col_back)
 		self.draw[3] = ImageDraw.Draw(self.im[3])
-		if getSA(3) in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value and not inStandby:
+		if getSA(3) in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value and not Standby.inStandby:
 			checkTVrunning = True
 			if TVrunning == False:
 				doGrabTV(str(MAX_W), str(MAX_H), "3", LCD4linux.TVType.value)
@@ -14690,7 +14690,7 @@ def LCD4linuxPIC(self, session):
 ####
 #### Standby Modus
 ####
-	if (inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
+	if (Standby.inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 		TVrunning = False
 		if str(LCD4linux.Standby.value) == "1":
 			if LCD4linux.LCDType1.value[0] == "4" or LCD4linux.LCDType2.value[0] == "4" or LCD4linux.LCDType3.value[0] == "4":
@@ -15296,7 +15296,7 @@ def LCD4linuxPIC(self, session):
 	Brief3.join()
 	TimePicture = time() - tt
 
-	if self.Refresh >= LCD4linux.LCDRefresh1.value and not (getSA(1) in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value and not inStandby):
+	if self.Refresh >= LCD4linux.LCDRefresh1.value and not (getSA(1) in LCD4linux.TV.value and "1" in LCD4linux.TVLCD.value and not Standby.inStandby):
 		if Dunkel and "1" in Dunkel:
 			MAX_W, MAX_H = self.im[1].size
 			self.draw[1].rectangle((0, 0, MAX_W, MAX_H), fill="black")
@@ -15304,14 +15304,14 @@ def LCD4linuxPIC(self, session):
 		if str(LCD4linux.LCDRotate1.value) != "0":
 			self.im[1] = self.im[1].rotate(int(LCD4linux.LCDRotate1.value))
 		Brief1.put([writeLCD1, self, 1, LCD4linux.BilderJPEG.value])
-	if LCD4linux.LCDType2.value != "00" and self.Refresh >= LCD4linux.LCDRefresh2.value and not (getSA(2) in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value and not inStandby):
+	if LCD4linux.LCDType2.value != "00" and self.Refresh >= LCD4linux.LCDRefresh2.value and not (getSA(2) in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value and not Standby.inStandby):
 		if Dunkel and "2" in Dunkel:
 			MAX_W, MAX_H = self.im[2].size
 			self.draw[2].rectangle((0, 0, MAX_W, MAX_H), fill="black")
 		if str(LCD4linux.LCDRotate2.value) != "0":
 			self.im[2] = self.im[2].rotate(int(LCD4linux.LCDRotate2.value))
 		Brief2.put([writeLCD2, self, 2, LCD4linux.BilderJPEG.value])
-	if LCD4linux.LCDType3.value != "00" and self.Refresh >= LCD4linux.LCDRefresh3.value and not (getSA(3) in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value and not inStandby):
+	if LCD4linux.LCDType3.value != "00" and self.Refresh >= LCD4linux.LCDRefresh3.value and not (getSA(3) in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value and not Standby.inStandby):
 		if Dunkel and "3" in Dunkel:
 			MAX_W, MAX_H = self.im[3].size
 			self.draw[3].rectangle((0, 0, MAX_W, MAX_H), fill="black")
