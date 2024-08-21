@@ -68,10 +68,6 @@ class CTinfo(Screen):
 		self.instance.move(ePoint(xpos, ypos))
 
 
-class CTchoicebox(Screen):
-	pass  # future option
-
-
 class CTmain(Screen, CTglobs):
 	skin = """
 	<screen name="CleverTankenMain" position="center,center" size="1863,1032" resolution="1920,1080" title="" flags="wfNoBorder">
@@ -354,9 +350,9 @@ class CTmain(Screen, CTglobs):
 				break
 		rawentry = self.searchOneValue(r'<div class="price-footer row col-12 text text-color-ice-blue d-flex flex-column">(.*?)</div>', output, "", flag_S=True)
 		pcngtype, pcngdate, pcngdur = ("geändert", "unbekannt", "unbekannt")
-		for last in rawentry.replace("<span>", "").replace("</span>", "").strip().split("\n"):
-			part = last.split(": ")
-			pcngdate, pcngdur = part[1].split(" ") if len(part) > 1 else ("unbekannt", "unbekannt")
+		changes = rawentry.replace("<span>", "").replace("</span>", "").strip().split("\n")
+		part = changes[0].split(": ") if changes else []  # changes[0] = Letzte MTS-K Preisänderung, changes[1] = Letzte Aktualisierung
+		pcngdate, pcngdur = part[1].split(" ") if len(part) > 1 else ("unbekannt", "unbekannt")
 		pricealert = self.createPricealert(price, self.sprit["B"])
 		self.framefavs.append(tuple((ident, price[0], price[1], pcngtype, pcngdate, pcngdur, name, street, f"{zipcode} {city}", "", "♥", pricealert)))
 		if len(self.framefavs) == len(self.favlist):  # all favorites downloaded?
