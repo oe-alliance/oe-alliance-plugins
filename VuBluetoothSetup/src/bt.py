@@ -1,37 +1,16 @@
-from Plugins.Plugin import PluginDescriptor
-
 from Screens.MessageBox import MessageBox
-from Screens.Screen import Screen
-from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Screens.InputBox import InputBox
 from Screens.ChoiceBox import ChoiceBox
 
-from Components.Label import Label
-from Components.ActionMap import ActionMap
-from Components.config import config, ConfigSelection, getConfigListEntry, ConfigSubsection, ConfigYesNo, ConfigText, ConfigSelectionNumber, ConfigNumber
-from Components.ConfigList import ConfigListScreen
-from Components.Console import Console
-from Components.GUIComponent import GUIComponent
-from Components.MenuList import MenuList
-from Components.Pixmap import Pixmap, MultiPixmap
-from Components.Sources.List import List
-from Components.Sources.StaticText import StaticText
-from Components.VolumeControl import VolumeControl
-
-from Tools.BoundFunction import boundFunction
+from Components.config import config, ConfigSelection, ConfigSubsection, ConfigYesNo, ConfigText, ConfigSelectionNumber, ConfigNumber
 
 from Tools.Notifications import AddNotification, AddNotificationWithCallback, AddPopup
-from Tools.Directories import pathExists, fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, SCOPE_CURRENT_SKIN, SCOPE_METADIR
-from skin import loadSkin
 
 from enigma import eTimer, eServiceReference
 from enigma import eDVBVolumecontrol
 
-import os
-import re
 import time
 from . import vubt
-from .bt_types import getEventDesc, isAudioProfile, getIcon
+from .bt_types import isAudioProfile
 from . import bt_types
 
 from .OTAUpdate import VuRcuOtaUpdate
@@ -239,11 +218,15 @@ class BTVolumeControl:
 		self.initVolumeTimer.start(500, True)
 
 	def InitVolume(self):
-		try:
-			vol = config.audio.volume.value
+		if hasattr(config, "volumeControl"):
+			vol = config.volumeControl.volume.value
 			self.setVolume(vol)
-		except:
-			self.initVolumeTimer.start(100, True)
+		else:
+			try:
+				vol = config.audio.volume.value
+				self.setVolume(vol)
+			except:
+				self.initVolumeTimer.start(100, True)
 
 	def setVolume(self, vol):
 		self.vubt.setVolume(int(vol))

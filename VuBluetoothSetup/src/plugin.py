@@ -2,10 +2,7 @@ from __future__ import absolute_import
 from Plugins.Plugin import PluginDescriptor
 from .bt_setup import BluetoothSetupScreen
 from .bt import pybluetooth_instance
-from Components.config import config, ConfigBoolean
 from enigma import eActionMap, eDVBVolumecontrol
-from Tools.HardwareInfo import HardwareInfo
-import os
 
 g_BTVolumeControlHandle = None
 

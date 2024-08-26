@@ -6,7 +6,7 @@ from Components.config import config
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from enigma import eTimer
-from .bt_types import getEventDesc, isAudioProfile, getIcon
+from .bt_types import isAudioProfile, getIcon
 from .bt import pybluetooth_instance
 from .bt_config import BluetoothSetupConfig
 from . import bt_types

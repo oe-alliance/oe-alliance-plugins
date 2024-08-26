@@ -1,28 +1,20 @@
 from __future__ import absolute_import
 # GUI (Screens)
 from Screens.Screen import Screen
-from Screens.MessageBox import MessageBox
-from Screens.InputBox import InputBox
 from Screens.HelpMenu import HelpableScreen
-from Screens.ChoiceBox import ChoiceBox
 
 # Generic
-from Tools.BoundFunction import boundFunction
 from Tools.Directories import *
-from Components.config import config
-import os
 
 # GUI (Components)
-from Components.ActionMap import ActionMap, HelpableActionMap
+from Components.ActionMap import ActionMap
 from Components.Label import Label
-from Components.Button import Button
 from Components.ProgressBar import ProgressBar
 
 # Timer
 from enigma import eTimer
 
 from . import bt_types
-from .bt_types import getEventDesc
 from .bt_task import BluetoothTask
 
 OTA_ERROR_SERVICE_DISCOVERY = 0

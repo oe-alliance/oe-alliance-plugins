@@ -2,21 +2,18 @@ from __future__ import print_function
 from __future__ import absolute_import
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
-from Screens.MessageBox import MessageBox
-from Tools.Notifications import AddNotification
 from Components.Label import Label
 from Components.ActionMap import HelpableActionMap
 from Components.config import config
 from Components.Sources.List import List
 from Components.Sources.StaticText import StaticText
 from enigma import eTimer
-from .bt_types import getEventDesc, isAudioProfile, getIcon
+from .bt_types import isAudioProfile, getIcon
 from .bt import pybluetooth_instance
 from .bt_config import BluetoothSetupConfig
 from .bt_scan import BluetoothDiscoveryScreen, BluetoothRCUSetup
 from .bt_task import BluetoothTask
 from . import bt_types
-from .OTAUpdate import GbRcuOtaUpdate
 
 
 class BluetoothSetup(BluetoothTask):

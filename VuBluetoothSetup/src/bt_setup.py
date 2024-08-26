@@ -1,7 +1,5 @@
 from Screens.Screen import Screen
 from Screens.HelpMenu import HelpableScreen
-from Screens.MessageBox import MessageBox
-from Tools.Notifications import AddNotification
 from Components.Label import Label
 from Components.ActionMap import HelpableActionMap
 from Components.config import config
@@ -14,7 +12,6 @@ from .bt_config import BluetoothSetupConfig
 from .bt_scan import BluetoothDiscoveryScreen, BluetoothRCUSetup
 from .bt_task import BluetoothTask
 from . import bt_types
-from .OTAUpdate import VuRcuOtaUpdate
 
 
 class BluetoothSetup(BluetoothTask):
