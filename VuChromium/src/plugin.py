@@ -3,16 +3,13 @@ from Plugins.Plugin import PluginDescriptor
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.config import config
-from Components.ActionMap import ActionMap
-from Components.VolumeControl import VolumeControl
 
-import os
 import time
 import subprocess
 from . import cbcfg
 from . import pipc
 
-from enigma import eTimer, fbClass, eRCInput, eDVBResourceManager
+from enigma import eTimer, fbClass, eRCInput, eDVBResourceManager, eDVBVolumecontrol
 
 from Tools.Transponder import ConvertToHumanReadable
 
@@ -117,8 +114,8 @@ class BBrowserLauncher(Screen):
             if feId != -1:
                 self.TryCloseFrontend(feId)
 
-        if VolumeControl.instance.volctrl.isMuted():
-            VolumeControl.instance.volctrl.volumeUnMute()
+        if eDVBVolumecontrol.getInstance().isMuted():
+            eDVBVolumecontrol.getInstance().volumeUnMute()
             self.isMute = 1
         else:
             self.isMute = 0
@@ -205,9 +202,9 @@ class BBrowserLauncher(Screen):
 
     def Exit(self):
         if self.isMute:
-            VolumeControl.instance.volctrl.volumeMute()
+            eDVBVolumecontrol.getInstance().volumeMute()
         else:
-            VolumeControl.instance.volctrl.volumeUnMute()
+            eDVBVolumecontrol.getInstance().volumeUnMute()
 
         cbcfg.DEBUG("[Chromium Plugin] ==== >> default mute [%d] , restore mute [%d]" % (self.isMute, self.isMute))
 

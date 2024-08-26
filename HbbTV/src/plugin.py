@@ -10,8 +10,7 @@ from Screens.MessageBox import MessageBox
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Components.config import config
 from Components.ServiceEventTracker import ServiceEventTracker
-from Components.VolumeControl import VolumeControl
-from enigma import eTimer, fbClass, eRCInput, iServiceInformation, iPlayableService
+from enigma import eTimer, fbClass, eRCInput, iServiceInformation, iPlayableService, eDVBVolumecontrol
 from . import vbcfg
 from .__init__ import _
 from .hbbtv import HbbTVWindow
@@ -85,7 +84,7 @@ class VBHandler(VBHandlers):
 				return
 
 		if self.max_volume < 0:
-			self.max_volume = VolumeControl.instance.volctrl.getVolume()
+			self.max_volume = eDVBVolumecontrol.getInstance().getVolume()
 
 		self.max_volume += volume
 		if self.max_volume > 100:
@@ -95,9 +94,9 @@ class VBHandler(VBHandlers):
 
 		if self.soft_volume > 0:
 			v = int((self.max_volume * self.soft_volume) / 100)
-			VolumeControl.instance.volctrl.setVolume(v, v)
+			eDVBVolumecontrol.getInstance().setVolume(v, v)
 		else:
-			VolumeControl.instance.volctrl.setVolume(self.max_volume, self.max_volume)
+			eDVBVolumecontrol.getInstance().setVolume(self.max_volume, self.max_volume)
 
 	def close_vkb(self, data=""):
 		fbClass.getInstance().lock()
@@ -155,13 +154,13 @@ class VBHandler(VBHandlers):
 
 	def _CB_CONTROL_SET_VOLUME(self, result, packet):
 		if self.max_volume < 0:
-			self.max_volume = VolumeControl.instance.volctrl.getVolume()
+			self.max_volume = eDVBVolumecontrol.getInstance().getVolume()
 		self.soft_volume = int(packet)
 
 		v = 0
 		if self.soft_volume > 0 and self.max_volume > 0:
 			v = int((self.max_volume * self.soft_volume) / 100)
-		VolumeControl.instance.volctrl.setVolume(v, v)
+		eDVBVolumecontrol.getInstance().setVolume(v, v)
 		return (True, None)
 
 	def _CB_CONTROL_VOLUME_UP(self, result, packet):
