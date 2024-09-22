@@ -82,7 +82,7 @@ class CTmain(Screen, CTglobs):
 		<widget source="frameAactive" render="Label" conditional="frameAactive" position="0,120" size="921,810" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="frame_A" render="Listbox" position="6,126" size="909,795" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/CleverTanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
+		<widget source="frame_A" render="Listbox" position="6,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/CleverTanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
@@ -108,7 +108,7 @@ class CTmain(Screen, CTglobs):
 		<widget source="frameBactive" render="Label" conditional="frameBactive" position="939,120" size="921,810" backgroundColor="#00c8ff12" zPosition="-1">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<widget source="frame_B" render="Listbox" position="945,126" size="909,795" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/CleverTanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
+		<widget source="frame_B" render="Listbox" position="945,126" size="909,798" backgroundColor="#10f5f5f5" selectionPixmap="/usr/lib/enigma2/python/Plugins/Extensions/CleverTanken/pic/selector_%s.png" enableWrapAround="1" scrollbarMode="showNever" scrollbarBorderWidth="2" scrollbarForegroundColor="#10f5f5f5" scrollbarBorderColor="#7e7e7e">
 			<convert type="TemplatedMultiContent">
 				{"template": [  # index 0 is the identnumber (here unused)
 				MultiContentEntryText(pos=(0,0), size=(906,114), font=1, color="#10152e4e", backcolor="#10f5f5f5", color_sel="#10f5f5f5", backcolor_sel="#10152e4e"),  # background filler
@@ -272,11 +272,11 @@ class CTmain(Screen, CTglobs):
 				cnglen = len(change) if change else 0
 				firstline = change[0].split("<br>")
 				lenfline = len(firstline) if firstline else 0
-				if len(firstline) < 3:  # normal case: '<span class="price-changed">geändert<br></span> <span class="price-changed">Heute<br></span> <span class="price-changed">vor 38 Min.</span>'
+				if len(firstline) < 3:  # Normalfall: '<span class="price-changed">geändert<br></span> <span class="price-changed">Heute<br></span> <span class="price-changed">vor 38 Min.</span>'
 					pcngtype = change[0].replace("<br>", "") if cnglen > 0 else "unbekannt"
 					pcngdate = change[1].replace("<br>", "") if cnglen > 1 else "unbekannt"
 					pcngdur = change[2].replace("<br>", "") if cnglen > 2 else "unbekannt"
-				else:  # special case: <span class="price-changed">geändert<br>Gestern<br> <span class="price-changed"></span>23:12 Uhr</span>
+				else:  # Spezialfall: <span class="price-changed">geändert<br>Gestern<br> <span class="price-changed"></span>23:12 Uhr</span>
 					pcngtype = firstline[0] if lenfline > 0 else "unbekannt"
 					pcngdate = firstline[1] if lenfline > 1 else "unbekannt"
 					pcngdur = self.searchOneValue(r'<span class="price-changed"></span>(.*?)</span>', eintrag, "unbekannt", flag_S=True)
@@ -298,7 +298,7 @@ class CTmain(Screen, CTglobs):
 		self.identdict[frame] = identlist
 		self[f"frame_{frame}"].updateList(framelist)
 		zipname = config.plugins.clevertanken.cityAzipname.value if frame == "A" else config.plugins.clevertanken.cityBzipname.value
-		self[f"headline_{frame}"].setText(f"Hauptort: {zipname} | {len(identlist)} Tankstellen")
+		self[f"headline_{frame}"].setText(f"{'Hauptort' if frame == 'A' else 'Zweitort'}: {zipname} | {len(identlist)} Tankstellen")
 		self.ready = True
 		self.refreshInfo()
 
@@ -355,7 +355,7 @@ class CTmain(Screen, CTglobs):
 		pcngdate, pcngdur = part[1].split(" ") if len(part) > 1 else ("unbekannt", "unbekannt")
 		pricealert = self.createPricealert(price, self.sprit["B"])
 		self.framefavs.append(tuple((ident, price[0], price[1], pcngtype, pcngdate, pcngdur, name, street, f"{zipcode} {city}", "", "♥", pricealert)))
-		if len(self.framefavs) == len(self.favlist):  # all favorites downloaded?
+		if len(self.framefavs) == len(self.favlist):  # alle Favoriten heruntergeladen?
 			self.sortRefreshFavorites()
 
 	def sortRefreshFavorites(self):
@@ -426,7 +426,7 @@ class CTmain(Screen, CTglobs):
 
 	def selectSort(self, frame):
 		if self.ready:
-			outlist = list({v: k for k, v in self.SORTDICT.items()}.items())  # flip keys and values in dict
+			outlist = list({v: k for k, v in self.SORTDICT.items()}.items())  # Vertausche keys und values in dict
 			if frame == "B" and self.frameBmode == "F" and ("km", "km") in outlist:
 				outlist.remove(("km", "km"))
 			elif ("keine", "keine") in outlist:
