@@ -1,0 +1,121 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"PO-Revision-Date: 2024-09-22 23:31+0300\n"
+"Last-Translator: Viacheslav Dikonov <sdiconov@mail.ru>\n"
+"Language-Team: openATV\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Connection failed! Aborted!"
+msgstr "Соединение установить не удалось. Отмена!"
+
+msgid "Delete IPTV Bouquets before Import"
+msgstr "Удалить букеты IPTV перед импортом"
+
+msgid "IPTV Import"
+msgstr "Импорт IPTV"
+
+msgid "Import Arabic Channels in Bouquet"
+msgstr "Импортировать арабские каналы в букет"
+
+msgid "Import Bundesliga Channels in Bouquet"
+msgstr "Импортировать каналы Бундеслиги в букет"
+
+msgid "Import Ex-Yu Channels in Bouquet"
+msgstr "Импортировать каналы Ex-Ju в букет"
+
+msgid "Import Finland Channels in Bouquet"
+msgstr "Импортировать финские каналы в букет"
+
+msgid "Import France Channels in Bouquet"
+msgstr "Импортировать французские каналы в букет"
+
+msgid "Import German Sport Channels in Bouquet"
+msgstr "Импортировать немецкие спортивные каналы в букет"
+
+msgid "Import Germany Channels in Bouquet"
+msgstr "Импортировать немецкие каналы в букет"
+
+msgid "Import Italian Channels in Bouquet"
+msgstr "Импортировать итальянские каналы в букет"
+
+msgid "Import Netherlands Channels in Bouquet"
+msgstr "Импортировать голландские каналы в букет"
+
+msgid "Import Polish Channels in Bouquet"
+msgstr "Импортировать польские каналы в букет"
+
+msgid "Import Portugal Channels in Bouquet"
+msgstr "Импортировать португальские каналы в букет"
+
+msgid "Import Romania Channels in Bouquet"
+msgstr "Импортировать румынские каналы в букет"
+
+msgid "Import Sky Germany Channels in Bouquet"
+msgstr "Импортировать каналы Sky Deutschland в букет"
+
+msgid "Import Spain Channels in Bouquet"
+msgstr "Импортировать испанские каналы в букет"
+
+msgid "Import Suisse and Austria Channels in Bouquet"
+msgstr "Импортировать швейцарские и австрийские каналы в букет"
+
+msgid "Import Sweden Channels in Bouquet"
+msgstr "Импортировать шведские каналы в букет"
+
+msgid "Import Turkey Channels in Bouquet"
+msgstr "Импортировать турецкие каналы в букет"
+
+msgid "Import UK Channels in Bouquet"
+msgstr "Импортировать английские каналы в букет"
+
+msgid "Import US Channels in Bouquet"
+msgstr "Импортировать американские каналы в букет"
+
+msgid "Import VOD in Bouquet"
+msgstr "Импортировать VOD (видео-по-запросу) в букет"
+
+msgid "Import XXX Channels in Bouquet"
+msgstr "Импортировать порноканалы в букет"
+
+msgid "Import successful!"
+msgstr "Импорт успешно завершен!"
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Portal"
+msgstr "Портал"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Show IPTV Importer in Extensions"
+msgstr "Показывать импорт IPTV в меню расширений"
+
+msgid "Show IPTV Importer in Menu"
+msgstr "Показывать импорт IPTV в главном меню"
+
+msgid "Show IPTV Importer in Plugins"
+msgstr "Показывать импорт IPTV в меню плагинов"
+
+msgid "Start Import"
+msgstr "Начать импорт"
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "none"
+msgstr "ничего"

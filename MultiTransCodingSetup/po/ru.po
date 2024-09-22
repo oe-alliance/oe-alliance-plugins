@@ -3,28 +3,29 @@ msgstr ""
 "Project-Id-Version: TransCodingSetup\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2016-05-07 13:44+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
-"Language-Team: ViX <LL@li.org>\n"
-"Language: nl_DE\n"
+"PO-Revision-Date: 2024-09-22 23:55+0300\n"
+"Last-Translator: Viacheslav Dikonov <sdiconov@mail.ru>\n"
+"Language-Team: OpenATV\n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "Generated-By: pygettext.py 1.5\n"
-"X-Poedit-SourceCharset: utf-8\n"
-"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Poedit 3.3.2\n"
 
 msgid "1.0 Mbps"
-msgstr ""
+msgstr "1.0 Мбит/с"
 
 msgid "1.2 Mbps"
-msgstr ""
+msgstr "1.2 Мбит/с"
 
 msgid "1.5 Mbps"
-msgstr ""
+msgstr "1.5 Мбит/с"
 
 msgid "100 kbps"
-msgstr ""
+msgstr "100 Кбит/с"
 
 msgid "160x120"
 msgstr ""
@@ -33,37 +34,37 @@ msgid "16x9"
 msgstr ""
 
 msgid "2.0 Mbps"
-msgstr ""
+msgstr "2.0 Мбит/с"
 
 msgid "2.5 Mbps"
-msgstr ""
+msgstr "2.5 Мбит/с"
 
 msgid "23.976 fps"
-msgstr ""
+msgstr "23.976 кадров"
 
 msgid "24 fps"
-msgstr ""
+msgstr "24 кадра"
 
 msgid "25 fps"
-msgstr ""
+msgstr "25 кадров"
 
 msgid "3.0 Mbps"
-msgstr ""
+msgstr "3.0 Мбит/с"
 
 msgid "3.5 Mbps"
-msgstr ""
+msgstr "3.5 Мбит/с"
 
 msgid "30 fps"
-msgstr ""
+msgstr "30 кадров"
 
 msgid "300 kbps"
-msgstr ""
+msgstr "300 Кбит/с"
 
 msgid "320x240"
 msgstr ""
 
 msgid "4.0 Mbps"
-msgstr ""
+msgstr "4.0 Мбит/с"
 
 msgid "480p"
 msgstr ""
@@ -72,10 +73,10 @@ msgid "4x3"
 msgstr ""
 
 msgid "5.0 Mbps"
-msgstr ""
+msgstr "5.0 Мбит/с"
 
 msgid "500 kbps"
-msgstr ""
+msgstr "500 Кбит/с"
 
 msgid "576p"
 msgstr ""
@@ -84,39 +85,37 @@ msgid "720p"
 msgstr ""
 
 msgid "800 kbps"
-msgstr ""
+msgstr "800 Кбит/с"
 
 msgid "Aspect Ratio"
-msgstr ""
+msgstr "Соотношение сторон"
 
 msgid "Auto"
-msgstr ""
+msgstr "Авто"
 
 msgid "Bitrate in bits"
-msgstr ""
+msgstr "Битрейт в битах"
 
 msgid "Encoder Aspect Ratio"
-msgstr ""
+msgstr "Соотношение сторон"
 
-#, fuzzy
 msgid "Encoder Bitrate"
-msgstr "Битрейт"
+msgstr "Битрейт кодирования"
 
-#, fuzzy
 msgid "Encoder Framerate"
-msgstr "Частота кадров"
+msgstr "Частота кадров кодирования"
 
 msgid "Encoder Interlaced"
-msgstr ""
+msgstr "Чересстрочность"
 
 msgid "Encoder Resolution"
-msgstr ""
+msgstr "Разрешение"
 
 msgid "Encoder Video Codec"
-msgstr ""
+msgstr "Видеокодек"
 
 msgid "Exit"
-msgstr ""
+msgstr "Выход"
 
 msgid "Framerate"
 msgstr "Частота кадров"
@@ -137,22 +136,22 @@ msgid "HD720"
 msgstr ""
 
 msgid "Interlaced"
-msgstr ""
+msgstr "Чересстрочное изображение"
 
 msgid "Max"
-msgstr ""
+msgstr "Макс"
 
 msgid "Min"
-msgstr ""
+msgstr "Мин"
 
 msgid "Multi device transcoding setup"
-msgstr ""
+msgstr "Настройка транскодирования для различных устройств"
 
 msgid "Multi-Transcoding Setup"
-msgstr ""
+msgstr "Настройка мультитранскодирования"
 
 msgid "No"
-msgstr ""
+msgstr "Нет"
 
 msgid "PAL"
 msgstr ""
@@ -164,27 +163,29 @@ msgid "PAL SVCD"
 msgstr ""
 
 msgid "PAL-wide"
-msgstr ""
+msgstr "PAL-широкоэкранный"
 
 msgid "Really close without saving settings?"
 msgstr "Закрыть без сохранения?"
 
 msgid "Resolution"
-msgstr ""
+msgstr "Разрешение"
 
 msgid "Save"
 msgstr "Сохранить"
 
 msgid "Setup your timezone."
-msgstr ""
+msgstr "Укажите свой часовой пояс"
 
 msgid "This model does not support transcoding."
-msgstr ""
+msgstr "Эта модель не поддерживает транскодирование"
 
 msgid ""
 "To use transcoding You can build URL for VLC by Yourself\n"
 "\n"
 msgstr ""
+"Вы можете сами составить URL с транскодированием для VLC\n"
+"\n"
 
 msgid "Transcoding Setup"
 msgstr "Настройка транскодирования"
@@ -193,15 +194,17 @@ msgid ""
 "Transcoding from HDMI-IN e.x:\n"
 "\n"
 msgstr ""
+"Транскодирование из HDMI-IN:\n"
+"\n"
 
 msgid "Video codec"
-msgstr ""
+msgstr "Видеокодек"
 
 msgid "Yes"
-msgstr ""
+msgstr "Да"
 
 msgid "disable"
-msgstr ""
+msgstr "выкл"
 
 msgid "enable"
-msgstr ""
+msgstr "вкл"
