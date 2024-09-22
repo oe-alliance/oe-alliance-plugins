@@ -22,7 +22,8 @@ from twisted.internet.reactor import callInThread
 from xml.sax.saxutils import unescape
 
 # ENIGMA IMPORTS
-from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, RT_WRAP, eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG, addFont
+from enigma import BT_HALIGN_CENTER, BT_KEEP_ASPECT_RATIO, BT_SCALE, BT_VALIGN_CENTER, RT_HALIGN_CENTER, RT_HALIGN_LEFT, RT_HALIGN_RIGHT, RT_VALIGN_CENTER, RT_VALIGN_BOTTOM, RT_WRAP
+from enigma import iPlayableService, eConsoleAppContainer, eEPGCache, eServiceCenter, eServiceReference, eTimer, loadJPG, loadPNG, addFont
 from Components.ActionMap import ActionMap, NumberActionMap
 from Components.config import config, ConfigDirectory, ConfigInteger, ConfigPassword, ConfigSelection, ConfigSubsection, ConfigText, ConfigYesNo, ConfigSelectionNumber, configfile, getConfigListEntry
 from Components.ConfigList import ConfigListScreen
@@ -31,6 +32,7 @@ from Components.MenuList import MenuList
 from Components.MultiContent import MultiContentEntryPixmapAlphaTest, MultiContentEntryProgress, MultiContentEntryText
 from Components.Pixmap import Pixmap
 from Components.ScrollLabel import ScrollLabel
+from Components.ServiceEventTracker import ServiceEventTracker
 from Plugins.Plugin import PluginDescriptor
 from RecordTimer import RecordTimerEntry
 from Screens.ChannelSelection import ChannelSelection
@@ -446,12 +448,12 @@ class TVSBaseScreen(TVSAllScreen):
 						self['infotext%s' % i].hide()
 
 	def showRatinginfos(self, output):
-		startpos = output.find('<section class="broadcast-detail__rating">')
-		endpos = output.find('<section class="broadcast-detail__description">')
+		startpos = output.find('<div class="content-rating__rating-genre__container">')
+		endpos = output.find('<div class="detail-tab__wrapper js-detail-tab">')
 		bereich = output[startpos:endpos]
 		bereich = cleanHTML(bereich)
-		ratinglabels = findall(r'<span class="broadcast-detail__rating-label">(.*?)</span>', bereich)  # Humor, Anspruch, Action, Spannung, Erotik
-		ratingdots = findall(r'<span class="broadcast-detail__rating-dots__rating rating-(.*?)">', bereich)
+		ratinglabels = findall(r'content-rating__rating-genre__list-item__label">(.*?)</span>', bereich)  # Humor, Anspruch, Action, Spannung, Erotik
+		ratingdots = findall(r'content-rating__rating-genre__list-item__rating rating-(.*?)">', bereich)
 		for i, ri in enumerate(ratinglabels):
 			if len(ratingdots) <= i:
 				ratingdots.append('0')
@@ -464,25 +466,17 @@ class TVSBaseScreen(TVSAllScreen):
 					self['ratingdot%s' % i].show()
 				except IndexError:
 					pass
-		starslabel = findall(r'<span class="rating-stars__label">(.*?)</span>', bereich)  # Community
-		starsrating = findall(r'<span class="rating-stars__rating" data-rating="(.*?)"></span>', bereich)
-		if len(starsrating):
-			starsfile = join(ICONPATH, 'starbar%s.png' % starsrating[0])
-			if exists(starsfile):
-				try:
-					self['starslabel'].setText(starslabel[0])
-					self['starslabel'].show()
-					self['starsrating'].instance.setPixmapFromFile(starsfile)
-					self['starsrating'].show()
-				except IndexError:
-					pass
+		communities = findall(r'content-rating__imdb-rating__label">(.*?)</span>', bereich)  # Name der Community
+		commratings = findall(r'rating__rating-value">(.*?)</div><div class="content-rating__imdb-rating__rating-max">(.*?)</div>', bereich)  # Community-Bewertung
+		if communities and commratings:
+			self['commrating'].setText(f"{communities[0]}{"".join(commratings[0])}")
+			self['commrating'].show()
 
 	def hideRatingInfos(self):
 		for i in range(5):
 			self['ratinglabel%s' % i].hide()
 			self['ratingdot%s' % i].hide()
-		self['starslabel'].hide()
-		self['starsrating'].hide()
+		self['commrating'].hide()
 
 	def getShortdesc(self, output):
 		startpos = output.find('<article class="broadcast-detail" >')
@@ -946,8 +940,7 @@ class TVSBaseScreen(TVSAllScreen):
 		for i in range(5):
 			self['ratinglabel%s' % i] = Label()
 			self['ratingdot%s' % i] = Pixmap()
-		self['starslabel'] = Label()
-		self['starsrating'] = Pixmap()
+		self['commrating'] = Label()
 		self['searchmenu'] = ItemList([])
 		self['editorial'] = Label()
 		self['ranking'] = Label()
@@ -2401,8 +2394,6 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 			self.movie_eof = config.usage.on_movie_eof.value
 			config.usage.on_movie_stop.value = 'quit'
 			config.usage.on_movie_eof.value = 'quit'
-			from Components.ServiceEventTracker import ServiceEventTracker
-			from enigma import iPlayableService
 			self.event_tracker = ServiceEventTracker(screen=self, eventmap={iPlayableService.evUpdatedEventInfo: self.zapRefresh})
 			self.channel_db = channelDB(SERVICEFILE)
 		elif not self.tagestipp:
@@ -3695,7 +3686,7 @@ class TVSsearchYouTube(TVSAllScreen):
 			try:
 				from yt_dlp import YoutubeDL
 			except Exception:
-				self.session.open(MessageBox, 'Plugin "yt_dlp" nicht gefunden!\n\nBitte im Forum nachfragen wie genau und dann installieren!', MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
+				self.session.open(MessageBox, 'Plugin "yt_dlp" nicht gefunden!\n\nBitte über den Feed installieren, notfalls im Forum nachfragen!', MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 				return
 			c = self['list'].getSelectedIndex()
 			trailer_id = self.trailer_id[c]
@@ -4649,7 +4640,6 @@ class TVSgotoPageMenu(TVSAllScreen):
 		sender = [sub.replace('&amp;', '&') for sub in sender]
 		# für Analysezwecke, z.B. wenn Picon fehlen oder überflüsssig sind
 		if config.plugins.tvspielfilm.debuglog.value and config.plugins.tvspielfilm.logtofile.value:
-			from glob import glob
 			fullnames = findall(r"<option label='(.*?)' value=", bereich)
 			ff = open('/home/root/logs/komplette_Senderliste.log', 'w')
 			ff.write('vollständige Liste der unterstützten Sender:\n')
@@ -4803,10 +4793,9 @@ class TVSTipps(TVSAllScreen):
 
 	def getTagesTipps(self, output):
 		self.ready = False
-		startpos = output.find('<p class="headline h2 top-title">Top Spielfilme</p>')
-		endpos = output.find('<div class="controls-wrapper controls-disabled">')
+		startpos = output.find('<div class="tvtips">')
+		endpos = output.rfind('<span>Zu allen Spielfilm-Tipps</span>')
 		bereich = output[startpos:endpos]
-		tippslist = bereich.split("</a>")
 		tippstitle = []
 		tippslink = []
 		tippspicurl = []
@@ -4814,20 +4803,21 @@ class TVSTipps(TVSAllScreen):
 		tippstime = []
 		tippschannel = []
 #		tippsrating = []  # not used for the moment
-		for idx, tipp in enumerate(tippslist):  # idx is used to show very first pictucture immediately
+		# https://live.tvspielfilm.de/api/reco/content/pub/teasers/tips-of-the-day?date=2024-09-21
+		for idx, tipp in enumerate(bereich.split("</a>")[:-1]):  # idx is used to show very first pictucture immediately
 			logo = search(r'<img src=".*?mini/(.*?).png" alt', tipp)
 			logo = logo.group(1) if logo else ""
 			if logo and self.service_db.lookup(logo) != "nope":  # only if fits to the imported channels
 				title = self.searchOneValue(r'<a href=".*?title="(.*?)"\s', tipp, "", flag_S=True)
 				link = self.searchOneValue(r'<a href="(.*?)"\sclass', tipp, "")
 				picurl = self.searchOneValue(r'style="background-image:\surl\((.*?)\);"', tipp, "")
-				release = self.searchOneValue(r'<span class="detail-release">(.*?)</span>', tipp, "")
+				release = self.searchOneValue(r'<div class="tips-teaser__bottom__intro">(.*?)</div>', tipp, "")  # e.g. 'heute | 20:15 | ZDF'
 				release = release.split(" | ") if release else []
 				time = release[1] if len(release) > 1 else ""
 				channel = release[2] if len(release) > 2 else ""
-				teaser = self.searchOneValue(r'<span class="tips-teaser__bottom__category">(.*?)</span>', tipp, "")
-				detail = self.searchOneValue(r'<span class="detail-info">(.*?)</span>', tipp, "")
-				info = "%s | %s" % (teaser, detail) if teaser else detail
+				ratingtext = self.searchOneValue(r'<div class="tips-teaser__bottom__top-rating-text">(.*?)</div>', tipp, "")
+				genre = self.searchOneValue(r'<span class="detail-genre">(.*?)</span>', tipp, "")
+				info = "%s | %s" % (genre, ratingtext) if ratingtext else genre
 #				rating = []  # [tipp, new]  # not used for the moment
 #				rating.append(self.searchOneValue(r'<span class="add-info icon-tip">(.*?)</span>', tipp, ""))
 #				rating.append(self.searchOneValue(r'<span class="add-info icon-new">(.*?)</span>', tipp, ""))
@@ -5056,6 +5046,7 @@ class TVSHeuteView(TVSBaseScreen):
 		self.srefs = [[] for _ in range(6)]
 		self.zaps = [True for _ in range(6)]
 		self.spalten = 6
+		self.maxpages = 0
 		self.picloads = {}
 		self.searchlink = []
 		self.searchref = []
@@ -5101,6 +5092,7 @@ class TVSHeuteView(TVSBaseScreen):
 		self['Line_down'] = Label()
 		self['label5'] = Label()
 		self['bluebutton'] = Label()
+		self['commrating'] = Label()
 		for i in range(6):
 			self['pic%s' % i] = Pixmap()
 			self['picon%s' % i] = Pixmap()

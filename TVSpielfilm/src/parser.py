@@ -54,7 +54,7 @@ def transCHANNEL(data):
 			r"sky .*?action.*?": "sky-a",
 			r"sky .*?atlantic.*?": "skyat",
 			r"sky .*?fun.*?": "sky-c",
-			r"sky .*?highlights.*?": "skych",
+			r"sky .*?special.*?": "skycs",
 			r"sky .*?family.*?": "sky-f",
 			r"sky .*?007.*?": "sky-h",
 			r"sky .*?best of.*?": "sky-h",
@@ -66,7 +66,8 @@ def transCHANNEL(data):
 			r"sky .*?classics.*?": "sky-n",
 			r"sky .*?select.*?": "sky-s",
 			r"sky .*?replay.*?": "skyrp",
-			r"sky .*?premiere.*?": "cin",
+			r"sky .*?premieren.*?24.*?": "cin24",
+			r"sky .*?premieren.*?": "cin",
 			r"sky .*?thriller.*?": "skyth",
 			r"sky .*?special.*?": "skycs",
 			r"sky .*?showcase.*?": "skysh",
@@ -298,10 +299,10 @@ def searchTwoValues(regex, text, fallback1, fallback2, flags=None):
 
 
 def parsedetail(bereich, debug=None):
-	quelle = search(r'<p\s*class="title">(.*?)</p>', bereich)
+	quelle = search(r'content-rating__rating-genre__title">(.*?)</div>', bereich)
 	quelle = quelle.group(1) if quelle else ""
-	bewertung = search(r'<blockquote class="broadcast-detail__quote">\s*<p>(.*?)</p>\s*</blockquote>', bereich, flags=S)
-	bewertung = bewertung.group(1) if bewertung else ""
+	bewertung = search(r'content-rating__rating-genre__conclusion-quote">\s*<p>(.*?)</p>', bereich, flags=S)
+	bewertung = bewertung.group(1) if bewertung else "{keine Bewertung gefunden}"
 	# entferne alle Tags
 	bereich = sub(r'<p\s*class="title">(.*?)</p>', '', bereich)
 	bereich = sub(r'<blockquote class="broadcast-detail__quote">\s*<p>(.*?)</p>\s*</blockquote>', '', bereich, flags=S)
