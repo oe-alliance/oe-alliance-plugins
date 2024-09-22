@@ -10,10 +10,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;_\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
 msgid " "
@@ -55,8 +55,9 @@ msgstr "Нет"
 msgid "Please wait, Loading image."
 msgstr "Подождите, идет загрузка изображения."
 
+# This is a small button label. It has to be 1 word only.
 msgid "Reload Device"
-msgstr "Перезагрузить устройство"
+msgstr "Перезагрузить"
 
 msgid "Save"
 msgstr "Сохранить"
@@ -64,8 +65,9 @@ msgstr "Сохранить"
 msgid "Setting"
 msgstr "Настройка"
 
+# This is a small button label. It has to be 1 word only.
 msgid "Show Device"
-msgstr "Показать устройства"
+msgstr "Устройства"
 
 msgid "Slideshow Interval"
 msgstr "Интервал слайд-шоу"
@@ -77,7 +79,7 @@ msgid "Stop playing this movie?"
 msgstr "Остановить воспроизведение?"
 
 msgid "This is dlna/upnp client using djmount."
-msgstr ""
+msgstr "Клиент dlna/upnp использующий djmount."
 
 msgid "Top"
 msgstr "Топ"
