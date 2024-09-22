@@ -469,7 +469,7 @@ class TVSBaseScreen(TVSAllScreen):
 		communities = findall(r'content-rating__imdb-rating__label">(.*?)</span>', bereich)  # Name der Community
 		commratings = findall(r'rating__rating-value">(.*?)</div><div class="content-rating__imdb-rating__rating-max">(.*?)</div>', bereich)  # Community-Bewertung
 		if communities and commratings:
-			self['commrating'].setText(f"{communities[0]}{"".join(commratings[0])}")
+			self['commrating'].setText(f"{communities[0]}{''.join(commratings[0])}")
 			self['commrating'].show()
 
 	def hideRatingInfos(self):
