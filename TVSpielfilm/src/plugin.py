@@ -282,7 +282,8 @@ class TVSAllScreen(Screen):
 		text = search(regex, text, flags=S) if flag_S else search(regex, text)
 		return text.group(1) if text else fallback
 
-	def checkPath(self):
+	def checkPath(self, session):
+		self.session = session
 		try:
 			if exists(TEMPPATH):
 				rmtree(TEMPPATH)
@@ -392,7 +393,7 @@ class TVSBaseScreen(TVSAllScreen):
 	def getPics(self, picurllist, offset, show=True, playshow=False):
 		for idx in range(6):
 			try:
-				picurl = picurllist[offset + i]
+				picurl = picurllist[offset + idx]
 				callInThread(self.iPicDownload, picurl, idx)
 				if show:
 					self['pic%s' % idx].show()
@@ -1715,7 +1716,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 															'yellow': self.yellow,
 															'red': self.makeTimer,
 															'blue': self.hideScreen}, -1)
-		self.checkPath()
+		self.checkPath(self.session)
 		self.service_db = serviceDB(SERVICEFILE)
 		if exists(SERVICEFILE):
 			with open(SERVICEFILE, 'r') as f:
@@ -2149,7 +2150,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 			end = len(self.searchentries) - 1
 			self['searchmenu'].moveToIndex(end)
 
-	def downloadError(self, error):
+	def downloadError(self, output):
 		self['CHANNELkey'].hide()
 		self['CHANNELtext'].hide()
 		self['BOUQUETkey'].hide()
@@ -2163,7 +2164,7 @@ class TVSJetztView(TVSGenreJetztProgrammView):
 		self['INFOtext'].setText('Jetzt/Gleich im TV')
 		self['INFOtext'].show()
 		self.ready = True
-		self.showDownloadError(error)
+		self.showDownloadError(output)
 
 	def refresh(self):
 		self.postviewready = False
@@ -2380,7 +2381,7 @@ class TVSProgrammView(TVSGenreJetztProgrammView):
 															'yellow': self.yellow,
 															'red': self.makeTimer,
 															'blue': self.hideScreen}, -1)
-		self.checkPath()
+		self.checkPath(self.session)
 		if exists(TIMERFILE):
 			self.timer = open(TIMERFILE).read().split('\n')
 		else:
@@ -3599,6 +3600,7 @@ class TVSsearchYouTube(TVSAllScreen):
 		if movie:
 			name = "%s Trailer" % name
 		name = ensure_str(name.encode('ascii', 'xmlcharrefreplace')).replace(' ', '+')
+		             #https://www.youtube.com/results?search_query=das+boot
 		self.link = 'https://www.youtube.com/results?filters=video&search_query=%s' % name
 		self.titel = 'YouTube Trailer Suche'
 		self.localposter = []
@@ -3647,8 +3649,8 @@ class TVSsearchYouTube(TVSAllScreen):
 	def makeTrailerList(self, output):
 		output = ensure_str(output)
 		self.setTitle(self.titel)
-		startpos = output.find('class="masthead-skeleton-icon">')
-		endpos = output.find(';/*')
+		startpos = output.find('primaryContents')
+		endpos = output.find('a11ySkipNavigationButton')
 		bereich = unescape(output[startpos:endpos]).replace("&shy;", "-")
 		# für Analysezwecke, wenn z.B. der YouTube-Zugang nicht ordentlich läuft
 		if config.plugins.tvspielfilm.debuglog.value and config.plugins.tvspielfilm.logtofile.value:
@@ -3876,7 +3878,7 @@ class TVSMain(TVSBaseScreen):
 																   'green': self.green,
 																   'blue': self.hideScreen,
 																   'menu': self.config}, -1)
-		self.checkPath()
+		self.checkPath(self.session)
 		self.onShown.append(self.onShownFinished)
 
 	def onShownFinished(self):
