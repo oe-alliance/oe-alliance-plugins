@@ -664,7 +664,7 @@ def sessionstart(reason, session=None, **kwargs):
 		fsortlist = fulllist[:]
 		fsortlist.remove(("km", "km")) if ("km", "km") in fsortlist else None
 		maxlist = [(0, "alle Einträge"), (7, "max. 7 Einträge"), (14, "max. 14 Einträge"), (21, "max. 21 Einträge"), (29, "max. 29 Einträge")]
-		pricelist = ["aus"] + ["{:.2f}".format(x / 100) for x in range(100, 300)]
+		pricelist = ["aus"] + ["{:.2f}".format(x / 100) for x in range(80, 300)]
 		config.plugins.clevertanken = ConfigSubsection()
 		config.plugins.clevertanken.maxcities = ConfigSelection(default=10, choices=[(10, "max. 10 Städte"), (20, "max. 20 Städte"), (30, "max. 30 Städte"), (40, "max. 40 Städte"), (50, "max. 50 Städte")])
 		config.plugins.clevertanken.cityAzipname = ConfigText(default="10117 Berlin", fixed_size=False)
