@@ -134,11 +134,13 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 		Screen.__init__(self, session)
 		Screen.setTitle(self, _("Bluetooth Devices Manager Setup"))
 		self.skinName = ["Setup"]
+		self['footnote'] = Label()
 
 		list = []
 		list.append(getConfigListEntry(_('Autostart'), config.btdevicesmanager.autostart))
-		list.append(getConfigListEntry(_('Audio Connect'), config.btdevicesmanager.audioconnect))
-		list.append(getConfigListEntry(_('Audio Address'), config.btdevicesmanager.audioaddress))
+		if MACHINEBUILD not in ("gb7252",):
+			list.append(getConfigListEntry(_('Audio Connect'), config.btdevicesmanager.audioconnect))
+			list.append(getConfigListEntry(_('Audio Address'), config.btdevicesmanager.audioaddress))
 
 		self["key_red"] = Label(_("Exit"))
 		self["key_green"] = Label(_("Save"))
