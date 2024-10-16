@@ -1141,7 +1141,7 @@ class tmdbScreenPerson(Screen, HelpableScreen, CoverHelper):
 					gender = ""
 #			print("[TMDb]", json_data_person["also_known_as"])
 			if "also_known_as" in json_data_person and json_data_person["also_known_as"] != []:
-				altname = f"\n{_("Known as: ")}{json_data_person['also_known_as'][0]}"
+				altname = f"\n{_('Known as: ')}{json_data_person['also_known_as'][0]}"
 				if len(json_data_person['also_known_as']) > 1:
 					altname = f"{altname}, {json_data_person['also_known_as'][1]}"
 
@@ -1195,7 +1195,7 @@ class tmdbScreenPerson(Screen, HelpableScreen, CoverHelper):
 			for cast in data_movies:
 				cast_movies += f"{cast}\n"
 
-			data = f"{data}\n{_("Known for:")}\n{cast_movies}"
+			data = f"{data}\n{_('Known for:')}\n{cast_movies}"
 			self['fulldescription'].setText(data)
 			self['searchinfo'].setText(f"{self.mname}")
 		else:
@@ -1270,7 +1270,7 @@ class tmdbScreenSeason(Screen, HelpableScreen, CoverHelper):
 		try:
 			json_data_seasons = tmdb.TV(self.id).info(language=self.lang)
 		except Exception as e:
-			print("[TMDb] 5 Selectedtmdb.TV(self.id).info", e)
+			print(f"[TMDb] 5 Selectedtmdb.TV(self.id).info {e}")
 			self['searchinfo'].setText(_("TMDb: ") + _("No results found, or does not respond!"))
 			return
 		if json_data_seasons:
