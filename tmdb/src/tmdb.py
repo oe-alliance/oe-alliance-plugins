@@ -1146,7 +1146,7 @@ class tmdbScreenPerson(Screen, HelpableScreen, CoverHelper):
 					altname = f"{altname}, {json_data_person['also_known_as'][1]}"
 
 			if "popularity'" in json_data_person:
-				rank = f"\n{_("Popularity")}: {json_data_person['popularity']}"
+				rank = f"\n{_('Popularity')}: {json_data_person['popularity']}"
 
 			if "biography" in json_data_person:
 				biography = json_data_person['biography']
