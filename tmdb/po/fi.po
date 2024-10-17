@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: tmdb\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-11-03 14:49+0100\n"
-"PO-Revision-Date: 2023-07-25 20:27+0300\n"
+"PO-Revision-Date: 2024-10-17 16:48+0300\n"
 "Last-Translator: orlandox\n"
 "Language-Team: orlandox\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 msgid " "
 msgstr " "
@@ -83,7 +83,7 @@ msgstr "Elokuvan kuvaus tallennettu!"
 
 #, python-format
 msgid "No results for %s"
-msgstr "Ei tuloksia haulle %s"
+msgstr "Ei tuloksia haulle: %s"
 
 msgid "No results found, or does not respond!"
 msgstr "Ei tuloksia tai ei vastaa!"
@@ -224,3 +224,6 @@ msgstr "Elokuvatietokanta antaa yksityiskohtaisia tietoja valitusta ohjelmasta t
 
 msgid "not specified"
 msgstr "ei määritelty"
+
+msgid "No cast details found"
+msgstr "Näyttelijätietoja ei löytynyt"
