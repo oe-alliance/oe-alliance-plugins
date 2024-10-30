@@ -17,7 +17,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: C:/Users/michael/Desktop/Plugins/Plugin tmdb/tmdb\n"
 
 msgid " "
-msgstr ""
+msgstr " "
 
 msgid "Author:"
 msgstr "Autor:"
@@ -102,10 +102,13 @@ msgstr "Opis filmu został zapisany!"
 
 #, python-format
 msgid "No results for %s"
-msgstr "Brak wyników dla %s"
+msgstr "Brak wyników dla: %s"
 
 msgid "No results found, or does not respond!"
 msgstr "Nie znaleziono wyników lub nie odpowiada!"
+
+msgid "No cast details found"
+msgstr "Nie znaleziono szczegółów obsady"
 
 msgid "Page down"
 msgstr "Strona w dół"
@@ -124,7 +127,7 @@ msgstr "Zalecenia"
 
 #, python-format
 msgid "Results for %s"
-msgstr "Wyniki dla %s"
+msgstr "Wyniki dla: %s"
 
 msgid "Runtime:"
 msgstr "Czas:"
@@ -191,7 +194,7 @@ msgid "TMDb Search"
 msgstr "TMDb Szukaj"
 
 msgid "TMDb: "
-msgstr "TMDb:"
+msgstr "TMDb: "
 
 msgid "Upcoming movies"
 msgstr "Nadchodzące filmy"
