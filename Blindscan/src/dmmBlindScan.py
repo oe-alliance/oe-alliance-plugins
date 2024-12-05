@@ -603,10 +603,10 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
 		if self.scan_nims.value == "":  # no usable nims were found (handled in createConfig())
-			self["introduction"] = Label(_("Please setup your tuner configuration."))
+			self["footnote"] = Label(_("Please setup your tuner configuration."))
 		else:
 			self.createSetup()
-			self["introduction"] = Label(_("Press OK to start the scan."))
+			self["footnote"] = Label(_("Press OK to start the scan."))
 
 		if not self.selectionChanged in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
