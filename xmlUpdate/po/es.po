@@ -5,10 +5,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-30 19:14+0200\n"
-"PO-Revision-Date: 2018-04-10 11:56+0200\n"
+"POT-Creation-Date: 2024-12-17 12:06+0000\n"
+"PO-Revision-Date: 2024-12-22 12:09+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -16,63 +16,69 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.5\n"
 
 msgid "/etc/enigma2"
-msgstr ""
+msgstr "/etc/enigma2"
 
 msgid "/etc/tuxbox (default)"
-msgstr ""
+msgstr "/etc/tuxbox (defecto)"
 
 msgid "Exit"
-msgstr ""
+msgstr "Salir"
 
 msgid "Fetch"
-msgstr ""
+msgstr "Descargar"
 
 #, python-format
 msgid ""
 "Fetching and saving %s.xml succeeded.\n"
 "Restart now for changes to take immediate effect?"
 msgstr ""
+"La descarga y el guardado de %s.xml se realizaron correctamente.\n"
+"¿Reiniciar ahora para que los cambios surtan efecto de inmediato?"
 
 msgid "File being updated, i.e. satellites.xml, cables.xml, or terrestrial.xml."
-msgstr ""
+msgstr "Archivo que se está actualizando, es decir, satellites.xml, cables.xml o terrestrial.xml."
 
 msgid "Folder where the downloaded file will be saved. \"/etc/tuxbox\" is the default location. Files stored in \"/etc/enigma2\" override the default file and are not updated on a software update."
-msgstr ""
+msgstr "Carpeta donde se guardará el archivo descargado. \"/etc/tuxbox\" es la ubicación predeterminada. Los archivos almacenados en \"/etc/enigma2\" tienen prioridad sobre el archivo predeterminado y no se actualizan con una actualización de software."
+
+msgid "For updating transponder xml files"
+msgstr "Para actualizar los archivos xml del transpondedor"
 
 msgid "OE-Alliance"
-msgstr ""
+msgstr "OE-Alliance"
 
 msgid "Online source where the transponder xml file is being retrieved from."
-msgstr ""
+msgstr "Fuente desde donde se descarga el archivo xml del transpondedor."
 
 msgid "Save to"
-msgstr ""
+msgstr "Guardar en"
 
 #, python-format
 msgid "Saving the %s.xml file failed"
-msgstr ""
+msgstr "Error al guardar el archivo %s.xml"
 
 msgid "Source"
-msgstr ""
+msgstr "Fuente"
 
 #, python-format
 msgid "The %s.xml download was corrupt."
-msgstr ""
+msgstr "El %s.xml descargado estaba dañado."
 
 #, python-format
 msgid "The %s.xml file could not be fetched"
-msgstr ""
+msgstr "No se pudo descargar el archivo %s.xml"
 
 msgid "XML update"
-msgstr ""
+msgstr "Actualización de XML"
 
 msgid "cable"
-msgstr ""
+msgstr "cable"
 
 msgid "satellite"
-msgstr ""
+msgstr "satellite"
 
 msgid "terrestrial"
-msgstr ""
+msgstr "terrestrial"
