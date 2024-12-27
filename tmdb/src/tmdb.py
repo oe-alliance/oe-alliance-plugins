@@ -81,7 +81,7 @@ def cleanText(text):
 
 	for word in cutlist:
 		text = sub(r'(\_|\-|\.|\+)' + word + r'(\_|\-|\.|\+)', '+', text, flags=I)
-	text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '').replace(" Director's Cut", "").replace(" director's cut", "").replace("[Uncut]", "").replace("Uncut", "")
+	text = text.replace('.', ' ').replace('-', ' ').replace('_', ' ').replace('+', '').replace(" Director's Cut", "").replace(" director's cut", "").replace("[Uncut]", "").replace("Uncut", "").replace("Elokuva: ", "").replace("Uusi Kino: ", "").replace("Kino Klassikko: ", "").replace("Kino Suomi: ", "").replace("Kino: ", "")
 
 	text_split = text.split()
 	if text_split and text_split[0].lower() in ("new:", "live:"):
