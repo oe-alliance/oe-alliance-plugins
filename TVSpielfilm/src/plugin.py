@@ -1795,7 +1795,7 @@ class TVimport(TVhelper, Screen):
 		for service in services:
 			found = ""
 			sname = service[1].strip()
-			sref = f"{service[0].split("http")[0]}{{IPTV-Stream}}" if "http" in service[0].lower() else service[0]
+			sref = f"{service[0].split('http')[0]}{{IPTV-Stream}}" if "http" in service[0].lower() else service[0]
 			for channelId, regstr in self.readMappingList():  # find TVSpielfilm shortcut for channelname
 				if match(compile(regstr), sname.lower()):
 					found = channelId
