@@ -403,7 +403,7 @@ class TVhelper(Screen):
 				timeEnd = datetime.fromtimestamp(timeEnd).strftime("%H:%M") if timeEnd else ""
 				timeStartEnd = f"{timeStart} - {timeEnd}" if timeStart or timeEnd else ""
 				imgurl = tip.get("images", {}).get("size3", "")
-				imgfile = join(f"{self.getTMPpath()}images/", f"{imgurl[imgurl.rfind("/") + 1:]}") if imgurl else ""
+				imgfile = join(f"{self.getTMPpath()}images/", f"{imgurl[imgurl.rfind('/') + 1:]}") if imgurl else ""
 				if imgfile:
 					if index1:
 						if not exists(imgfile):
