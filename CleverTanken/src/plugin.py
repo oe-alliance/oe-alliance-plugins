@@ -23,7 +23,7 @@ from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 from Tools.LoadPixmap import LoadPixmap
 
 
-class CTglobs():
+class CTglobals():
 	MODULE_NAME = __name__.split(".")[-2]
 	PLUGINPATH = f"{resolveFilename(SCOPE_PLUGINS)}Extensions/{MODULE_NAME}/"
 	RESOLUTION = "fHD" if getDesktop(0).size().width() > 1300 else "HD"
@@ -34,6 +34,11 @@ class CTglobs():
 				 '264': 'GTL-Diesel', '2': 'LKW-Diesel', '1': 'LPG', '8': 'CNG', '262': 'LNG', '4': 'Bioethanol',
 				 '266': 'AdBlue PKW', '13': 'AdBlue LKW', '246': 'Wasserstoff', '314': 'HVO Diesel'}
 
+
+ctglobals = CTglobals()
+
+
+class CThelper():
 	def download(self, url, callback):
 		AGENTS = [
 				"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
@@ -48,7 +53,7 @@ class CTglobs():
 			response = get(url.encode(), headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
 		except exceptions.RequestException as error:
-			print("[%s] ERROR in module 'download': %s" % (self.MODULE_NAME, str(error)))
+			print("[%s] ERROR in module 'download': %s" % (ctglobals.MODULE_NAME, str(error)))
 		else:
 			callback(response.content.decode())
 
@@ -68,7 +73,7 @@ class CTinfo(Screen):
 		self.instance.move(ePoint(xpos, ypos))
 
 
-class CTmain(Screen, CTglobs):
+class CTmain(Screen, CThelper):
 	skin = """
 	<screen name="CleverTankenMain" position="center,center" size="1863,1032" resolution="1920,1080" title="" flags="wfNoBorder">
 		<eLabel position="0,75" size="1860,1032" backgroundColor="#10152e4e" zPosition="-2" />
@@ -153,7 +158,7 @@ class CTmain(Screen, CTglobs):
 		<eLabel name="line" position="945,582" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,696" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
 		<eLabel name="line" position="945,810" size="909, 2" backgroundColor="#103B5AA2" zPosition="10" />
-	</screen>""" % (CTglobs.RESOLUTION, CTglobs.RESOLUTION)
+	</screen>""" % (ctglobals.RESOLUTION, ctglobals.RESOLUTION)
 
 	def __init__(self, session):
 		Screen.__init__(self, session)
@@ -226,7 +231,7 @@ class CTmain(Screen, CTglobs):
 					self.ready = False
 					self.framefavs = []
 					for ident in self.favlist:
-						callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit[frame]}", self.makeFavoriteView)
+						callInThread(self.download, f"{ctglobals.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit[frame]}", self.makeFavoriteView)
 				else:
 					self[f"frame_{frame}"].updateList([tuple(("", "", "", "", "", "", "keine Favoriten vorhanden", "", "", "", ""))])
 			else:
@@ -252,7 +257,7 @@ class CTmain(Screen, CTglobs):
 		else:
 			zipname = config.plugins.clevertanken.cityBzipname.value.replace(" ", "+").replace("/", "%2F")
 			geodata = eval(config.plugins.clevertanken.cityBgeodata.value)
-		return f'{self.BASEURL}/tankstelle_liste?lat={geodata[0]}&lon={geodata[1]}&ort={zipname}&spritsorte={self.sprit[frame]}&r={self.radius[frame]}&sort={self.sort[frame]}'
+		return f'{ctglobals.BASEURL}/tankstelle_liste?lat={geodata[0]}&lon={geodata[1]}&ort={zipname}&spritsorte={self.sprit[frame]}&r={self.radius[frame]}&sort={self.sort[frame]}'
 
 	def makeTankenView(self, frame, output):
 		startpos = output.find('<div class="background-row-container background-mat-blue">')
@@ -335,7 +340,7 @@ class CTmain(Screen, CTglobs):
 		self.ready = True
 
 	def makeFavoriteView(self, output):
-		spritdict = self.SPRITDICT
+		spritdict = ctglobals.SPRITDICT
 		ident = self.searchOneValue(r"var object_id = '(.*?)'", output, "")
 		name = self.searchOneValue(r'itemprop="name">(.*?)</span>', output, "")
 		street = self.searchOneValue(r'<span itemprop="streetAddress">(.*?)</span>', output, "")
@@ -381,7 +386,7 @@ class CTmain(Screen, CTglobs):
 					if alert[1] != "aus" and sprit == alert[2] and centprice < float(alert[1]):
 						alerttype = alert[0]
 						break
-			picfile = join(f"{self.PLUGINPATH}pic/", f"alert-{alerttype}_{self.RESOLUTION}.png") if alerttype else join("")
+			picfile = join(f"{ctglobals.PLUGINPATH}pic/", f"alert-{alerttype}_{ctglobals.RESOLUTION}.png") if alerttype else join("")
 			return LoadPixmap(cached=True, path=picfile) if exists(picfile) else None
 
 	def toggleFrame_B(self):
@@ -401,14 +406,14 @@ class CTmain(Screen, CTglobs):
 		else:
 			current = self[f"frame_{self.currframe}"].getCurrent()
 			if current:
-				callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit['B']}", self.makeTankenInfo)
+				callInThread(self.download, f"{ctglobals.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit['B']}", self.makeTankenInfo)
 
 	def changeFavorites(self):
 		current = self[f"frame_{self.currframe}"].getCurrent()
 		if current:
 			self.refreshButtons()
 			self["frame_B"].updateList([])
-			callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit['B']}", boundFunction(self.makeTankenView, "B"))
+			callInThread(self.download, f"{ctglobals.BASEURL}/tankstelle_details/{current[0]}?spritsorte={self.sprit['B']}", boundFunction(self.makeTankenView, "B"))
 			ident = current[0]
 			if ident in self.favlist:
 				text = "Wollen Sie diese Tankstelle wirklich aus den Favoriten entfernen?"
@@ -426,7 +431,7 @@ class CTmain(Screen, CTglobs):
 
 	def selectSort(self, frame):
 		if self.ready:
-			outlist = list({v: k for k, v in self.SORTDICT.items()}.items())  # Vertausche keys und values in dict
+			outlist = list({v: k for k, v in ctglobals.SORTDICT.items()}.items())  # Vertausche keys und values in dict
 			if frame == "B" and self.frameBmode == "F" and ("km", "km") in outlist:
 				outlist.remove(("km", "km"))
 			elif ("keine", "keine") in outlist:
@@ -449,7 +454,7 @@ class CTmain(Screen, CTglobs):
 
 	def selectRadius(self, frame):
 		if self.ready and not (frame == "B" and self.frameBmode == "F"):
-			outlist = list({v: k for k, v in self.RADIUSDICT.items()}.items())  # flip keys and values in dict
+			outlist = list({v: k for k, v in ctglobals.RADIUSDICT.items()}.items())  # flip keys and values in dict
 			keylist = [x[1] for x in outlist]
 			index = keylist.index(self.radius[frame]) if self.radius[frame] in keylist else 0
 			self.session.openWithCallback(boundFunction(self.selectRadius_CB, frame), ChoiceBox, list=outlist, keys=[], selection=index, windowTitle="Wähle den gewünschten Suchradius:")
@@ -465,7 +470,7 @@ class CTmain(Screen, CTglobs):
 
 	def selectSprit(self, frame):
 		if self.ready:
-			outlist = list({v: k for k, v in self.SPRITDICT.items()}.items())  # flip keys and values in dict
+			outlist = list({v: k for k, v in ctglobals.SPRITDICT.items()}.items())  # flip keys and values in dict
 			keylist = [x[1] for x in outlist]
 			index = keylist.index(self.sprit[frame]) if self.sprit[frame] in keylist else 0
 			self.session.openWithCallback(boundFunction(self.selectSprit_CB, frame), ChoiceBox, list=outlist, keys=[], selection=index, windowTitle="Wähle die gewünschte Kraftstoffart:")
@@ -479,7 +484,7 @@ class CTmain(Screen, CTglobs):
 				self[f"headline_{frame}"].setText(self.fwaittext)
 				self.framefavs = []
 				for ident in self.favlist:
-					callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit[frame]}", boundFunction(self.makeFavoriteView))
+					callInThread(self.download, f"{ctglobals.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit[frame]}", boundFunction(self.makeFavoriteView))
 			else:
 				self.refreshButtons()
 				self[f"headline_{frame}"].setText(self.twaittext)
@@ -490,12 +495,12 @@ class CTmain(Screen, CTglobs):
 			self.sort["B"] = "keine"
 		if self.frameBmode == "Z" and self.sort["B"] == "keine":
 			self.sort["B"] = "km"
-		self["ukey_red"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['A'], '€')}")
-		self["dkey_red"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['A'], 'SuperPlus')}")
-		self["ukey_green"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['A'], '5 km')}")
-		self["ukey_yellow"].setText(f"kurz | Sortierung: {self.SORTDICT.get(self.sort['B'], '€')}")
-		self["dkey_yellow"].setText(f"lang | Sprit: {self.SPRITDICT.get(self.sprit['B'], 'SuperPlus')}")
-		self["ukey_blue"].setText(f"kurz | Radius: {self.RADIUSDICT.get(self.radius['B'], 'SuperPlus')}" if self.frameBmode == "Z" else "")
+		self["ukey_red"].setText(f"kurz | Sortierung: {ctglobals.SORTDICT.get(self.sort['A'], '€')}")
+		self["dkey_red"].setText(f"lang | Sprit: {ctglobals.SPRITDICT.get(self.sprit['A'], 'SuperPlus')}")
+		self["ukey_green"].setText(f"kurz | Radius: {ctglobals.RADIUSDICT.get(self.radius['A'], '5 km')}")
+		self["ukey_yellow"].setText(f"kurz | Sortierung: {ctglobals.SORTDICT.get(self.sort['B'], '€')}")
+		self["dkey_yellow"].setText(f"lang | Sprit: {ctglobals.SPRITDICT.get(self.sprit['B'], 'SuperPlus')}")
+		self["ukey_blue"].setText(f"kurz | Radius: {ctglobals.RADIUSDICT.get(self.radius['B'], 'SuperPlus')}" if self.frameBmode == "Z" else "")
 		self["dkey_blue"].setText("lang | wechsle zu Favoriten" if self.frameBmode == "Z" else "lang | wechsle zu Zweitort")
 
 	def refreshInfo(self):
@@ -505,7 +510,7 @@ class CTmain(Screen, CTglobs):
 				ident = current[0]
 				if ident:
 					if self.isInfo:
-						callInThread(self.download, f"{self.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit['B']}", self.makeTankenInfo)
+						callInThread(self.download, f"{ctglobals.BASEURL}/tankstelle_details/{ident}?spritsorte={self.sprit['B']}", self.makeTankenInfo)
 					self["dkey_green"].setText("lang | aus Favoriten entfernen" if ident in self.favlist else "lang | zu Favoriten hinzufügen")
 				else:
 					if self.isInfo:
@@ -542,11 +547,11 @@ class CTmain(Screen, CTglobs):
 			self.refreshInfo()
 
 	def setEvadePosition(self):
-		ypos = int(100 * (1.5 if self.RESOLUTION == "fHD" else 1.0))
+		ypos = int(100 * (1.5 if ctglobals.RESOLUTION == "fHD" else 1.0))
 		if self.currframe == "A":
-			xpos = int(660 * (1.5 if self.RESOLUTION == "fHD" else 1.0))
+			xpos = int(660 * (1.5 if ctglobals.RESOLUTION == "fHD" else 1.0))
 		else:
-			xpos = int(280 * (1.5 if self.RESOLUTION == "fHD" else 1.0))
+			xpos = int(280 * (1.5 if ctglobals.RESOLUTION == "fHD" else 1.0))
 		CTinfo.moveInfo(self.showInfo, xpos, ypos)
 
 	def config(self):
@@ -569,7 +574,7 @@ class CTmain(Screen, CTglobs):
 			self.close()
 
 
-class CTconfig(Setup, CTglobs):
+class CTconfig(Setup, CThelper):
 	def __init__(self, session):
 		Setup.__init__(self, session, "clevertankenconfig", plugin="Extensions/CleverTanken", PluginLanguageDomain="CleverTanken")
 		self["key_yellow"] = StaticText("Hauptort suchen")
@@ -606,7 +611,7 @@ class CTconfig(Setup, CTglobs):
 		try:
 			citydict = loads(jsonstr)
 		except Exception as error:
-			print("[%s] ERROR in module 'citysearchCB': %s" % (self.MODULE_NAME, str(error)))
+			print("[%s] ERROR in module 'citysearchCB': %s" % (ctglobals.MODULE_NAME, str(error)))
 		citylist = []
 		for city in citydict:
 			zipname, lat, lon = city.get("value", ""), city.get("lat", ""), city.get("lon", "")
@@ -656,9 +661,9 @@ def main(session, **kwargs):
 
 def sessionstart(reason, session=None, **kwargs):
 	if reason == 0:
-		radiuslist = list(CTglobs.RADIUSDICT.items())
-		spritlist = list(CTglobs.SPRITDICT.items())
-		fulllist = list(CTglobs.SORTDICT.items())
+		radiuslist = list(ctglobals.RADIUSDICT.items())
+		spritlist = list(ctglobals.SPRITDICT.items())
+		fulllist = list(ctglobals.SORTDICT.items())
 		sortlist = fulllist[:]
 		sortlist.remove(("keine", "keine")) if ("keine", "keine") in sortlist else None
 		fsortlist = fulllist[:]
