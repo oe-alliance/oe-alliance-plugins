@@ -445,7 +445,7 @@ class TVhelper(Screen):
 
 	def isAlreadyListed(self, timespan, sref, currdatetime, timerlist):
 		startTs, endTs = self.splitTimespan(timespan.split(" - "), currdatetime)  #  e.g. '20:15 - 21:45'
-		timer = f"{datetime.fromtimestamp(startTs).strftime("%Y-%m-%d")}:::{datetime.fromtimestamp(startTs).strftime("%H:%M")}:::{sref}"  # e.g. ['2024-12-21:::20:15:::1:0:19:283D:41B:1:FFFF0000:0:0:0:', ...]
+		timer = f"{datetime.fromtimestamp(startTs).strftime('%Y-%m-%d')}:::{datetime.fromtimestamp(startTs).strftime('%H:%M')}:::{sref}"  # e.g. ['2024-12-21:::20:15:::1:0:19:283D:41B:1:FFFF0000:0:0:0:', ...]
 		return timer in timerlist
 
 	def splitTimespan(self, timespan, currdatetime):
