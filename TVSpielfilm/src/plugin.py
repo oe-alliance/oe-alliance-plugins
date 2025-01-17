@@ -1613,7 +1613,7 @@ class TVmain(TVhelper, Screen):
 			else:
 				self.tvtipsbox.hideWidget("thumb")
 		imgurl = tip[14]
-		imgfile = join(f"{self.getTMPpath()}images/", f"{imgurl[imgurl.rfind("/") + 1:]}") if imgurl else ""
+		imgfile = join(f"{self.getTMPpath()}images/", f"{imgurl[imgurl.rfind('/') + 1:]}") if imgurl else ""
 		if exists(imgfile):
 			self.tvtipsbox.setImage("image", imgfile)
 			self.tvtipsbox.showWidget("image")
