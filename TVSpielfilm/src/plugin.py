@@ -2022,16 +2022,13 @@ def showCurrentEvent(session, callback=None, **kwargs):
 			if channelId:
 				eventStart = datetime.fromtimestamp(eventStartTs)
 				eventStart -= timedelta(minutes=eventStart.minute % 15, seconds=eventStart.second, microseconds=0)  # round to last 15 minutes
-				date = eventStart.strftime("%F")
-				timeStart = eventStart.strftime("%H:%M")
-				downloaded, assetsdict = getAllAssets(channelId[0], date, timeStart)
+				downloaded, assetsdict = getAllAssets(channelId[0], eventStart.strftime("%F"), eventStart.strftime("%H:%M"))
 				if downloaded and assetsdict:
 					assetId = ""
 					for assetdict in assetsdict:
-						timeStartTs = assetdict.get("airInfo", {}).get("timeStart", 0)
-						if timeStart and timeStartTs <= eventStart.timestamp():
+						startTime = assetdict.get("startTime", 0)
+						if startTime and datetime.fromisoformat(startTime.replace('Z', '+00:00')).timestamp() <= eventStart.timestamp():
 							assetId = assetdict.get("assetId", "")
-						else:
 							break
 					if assetId:
 						if callback:
