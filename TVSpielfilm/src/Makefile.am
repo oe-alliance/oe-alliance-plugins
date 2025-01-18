@@ -1,4 +1,4 @@
-SUBDIRS = db font picons pics
+SUBDIRS = db pics
 
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/TVSpielfilm
 

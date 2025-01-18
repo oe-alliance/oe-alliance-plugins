@@ -4,7 +4,7 @@ Description: TV Spielfilm Plugin
 Architecture: all
 Section: extra
 Priority: optional
-Maintainer: kashmir (RIP), oe-a
-Homepage: http://www.kashmir-plugins.de (OFFLINE)
+Maintainer: Mr.Servo, oe-a
+Homepage: www.opena.tv
 Depends: python-pyopenssl python-textutils
 Source: https://github.com/oe-alliance/oe-alliance-plugins
