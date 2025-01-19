@@ -166,17 +166,12 @@ class TVhelper(Screen):
 			# isExpectedMediathek = assetdict.get("flags", {}).get("isExpectedMediathek", "")
 			airInfo = assetdict.get("airInfo", {})
 			timeStartTs = airInfo.get("timeStart", 0)
-			timeStart = datetime.fromtimestamp(timeStartTs) if timeStartTs else ""
-			if timeStart:
-				self.currdatetime = timeStart
-				timeStartStr = timeStart.strftime("%H:%M")
-			else:
-				self.currdatetime = datetime.today()
-				timeStartStr = self.currdatetime.strftime("%H:%M")
+			timeStart = datetime.fromtimestamp(timeStartTs) if timeStartTs else datetime.today()
 			timeEndTs = airInfo.get("timeEnd", 0)
-			timeEndStr = datetime.fromtimestamp(timeEndTs).strftime("%H:%M") if timeEndTs else ""
-			if fullscreen:
-				self.spanStarts = timeStartStr
+			timeEnd = datetime.fromtimestamp(timeEndTs) if timeEndTs else datetime.today()
+			self.currdatetime = timeStart if timeStart else datetime.today()
+			timeStartStr = self.currdatetime.strftime("%H:%M")
+			timeStartEnd = f"{timeStartStr} - {timeEnd.strftime('%H:%M')}"
 			repeatHint = unescape(airInfo.get("repeatHint", ""))  # e.g.'Wh. um 00:20 Uhr, Nächste Episode um 21:55 Uhr (Staffel 8, Episode 24)'
 			channelId = airInfo.get("channel", {}).get("id", "").lower()
 			channelName = airInfo.get("channel", {}).get("name", "") if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(channelId, ["", ""])[1]
@@ -228,8 +223,9 @@ class TVhelper(Screen):
 			productionInfo = assetdict.get("productionInfo", {})
 			lengthNetAndGross = productionInfo.get("lengthNetAndGross", "").split("/")[0]
 			lengthNetAndGross = int(lengthNetAndGross) if lengthNetAndGross else 0
-			titleLength = lengthNetAndGross or productionInfo.get("titleLength", 0)
-			self.titleLenStr = f"{lengthNetAndGross or titleLength} Minuten" if lengthNetAndGross or titleLength else ""
+			titleLength = productionInfo.get("titleLength", 0)
+			self.spanDuranceTs = lengthNetAndGross or titleLength or int((timeEndTs - timeStartTs) / 60)
+			self.titleLenStr = f"{self.spanDuranceTs} Minuten" if self.spanDuranceTs else ""
 			anchorman = productionInfo.get("anchorman", "")
 			anchorman = f"mit {anchorman}\n" if anchorman else ""
 			currentTopics = productionInfo.get("currentTopics", "")
@@ -275,7 +271,6 @@ class TVhelper(Screen):
 				crewlist += f"{role}: {', '.join(namelist)}\n"
 			personslist += crewlist
 			sref = tvglobals.IMPORTDICT.get(channelId, ["", ""])[0]
-			timeStartEnd = f"{timeStartStr} - {timeEndStr}"
 			hasTimer = self.isAlreadyListed(timeStartEnd, sref, self.currdatetime, self.getTimerlist()) if timeStartEnd and sref else False
 			piconfile = self.getPiconFile(channelId)
 			if piconfile and exists(piconfile):
@@ -342,14 +337,13 @@ class TVhelper(Screen):
 				self.timeStartEnd = timeStartEnd
 				self.serviceRef = sref
 				self.subLine = subline
-				self.spanDuranceTs = int(titleLength)
-			self.setReviewdate(fullscreen)
+				self.spanStarts = timeStartStr
+				self.setReviewdate(datetime.today().astimezone(), fullscreen=True)
 
-	def setReviewdate(self, fullscreen=False):
+	def setReviewdate(self, currdatetime, fullscreen=False):
 		now = datetime.today()
 		now -= timedelta(minutes=now.minute % 15, seconds=now.second, microseconds=now.microsecond)  # round to last 15 minutes for 'Jetzt im TV'
 		spanStarts = self.spanStarts or now.strftime("%H:%M")
-		currdatetime = self.currdatetime
 		currdateonly = currdatetime.replace(hour=0, minute=0, second=0, microsecond=0)
 		todaydateonly = datetime.today().astimezone().replace(hour=0, minute=0, second=0, microsecond=0)
 		weekday = "heute" if currdateonly == todaydateonly else ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"][currdateonly.weekday()]
@@ -1084,6 +1078,9 @@ class TVoverview(TVhelper, Screen):
 		self.assetslist = []
 		self.skinlist = []
 		downloaded = False
+		now = datetime.today().astimezone()
+		now -= timedelta(minutes=now.minute % 15, seconds=now.second, microseconds=now.microsecond)  # round to last 15 minutes in case of 'Jetzt im TV'
+		spanStarts = self.spanStarts or now.strftime("%H:%M")
 		for index, item in enumerate(tvglobals.IMPORTDICT.items()):
 			if self.loadAllEPGstop:
 				break
@@ -1099,13 +1096,14 @@ class TVoverview(TVhelper, Screen):
 						break
 					startTime_iso, endTime_iso = asset.get("startTime", ""), asset.get("endTime", "")  # e.g. '2024-11-24T22:05:00.000Z'
 					startTime, endTime = datetime.fromisoformat(startTime_iso).astimezone(), datetime.fromisoformat(endTime_iso).astimezone()
-					now = datetime.today().astimezone()
-					now -= timedelta(minutes=now.minute % 15, seconds=now.second, microseconds=now.microsecond)  # round to last 15 minutes in case of 'Jetzt im TV'
-					spanStarts = self.spanStarts or now.strftime("%H:%M")
-					hour, minute = self.spanStarts.split(":") if self.spanStarts else [now.strftime("%H"), now.strftime("%M")]  # spanstars empty = 'Jetzt im TV'
+					hour, minute = self.spanStarts.split(":") if self.spanStarts else [now.strftime("%H"), now.strftime("%M")]  # self.spanstars empty = 'Jetzt im TV'
 					spanStarts = self.currdatetime.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 					spanEnds = spanStarts + timedelta(minutes=self.spanDuranceTs)
-					if startTime and startTime.timestamp() >= spanStarts.timestamp() and startTime.timestamp() <= spanEnds.timestamp() and startTime not in startslist:  # begin of transmission still in the period?
+					if self.spanStarts:
+						isInTimespan = startTime.timestamp() >= spanStarts.timestamp() and startTime.timestamp() < spanEnds.timestamp()
+					else:  # self.spanstars empty = 'Jetzt im TV'
+						isInTimespan = startTime.timestamp() < spanEnds.timestamp()
+					if startTime and isInTimespan and startTime not in startslist:  # begin of transmission still in the period?
 						startslist.append(startTime)
 						progress = -1
 						if endTime:
@@ -1265,8 +1263,7 @@ class TVoverview(TVhelper, Screen):
 		self.startLoadAllEPG()
 
 	def startLoadAllEPG(self):
-		self.currdatetime = datetime.today().astimezone() + timedelta(days=self.currdaydelta)
-		self.setReviewdate(False)
+		self.setReviewdate(datetime.today().astimezone() + timedelta(days=self.currdaydelta), fullscreen=False)
 		self.setLongstatus()
 		if self.loadAllEPGactive:
 			self.loadAllEPGstop = True
@@ -2032,8 +2029,8 @@ def showCurrentEvent(session, callback=None, **kwargs):
 				if downloaded and assetsdict:
 					assetId = ""
 					for assetdict in assetsdict:
-						startTimeTs = assetdict.get("startTime", 0)
-						if startTimeTs and datetime.fromisoformat(startTimeTs.replace('Z', '+00:00')).timestamp() >= eventStart.timestamp():
+						startTime = assetdict.get("startTime", 0)
+						if startTime and datetime.fromisoformat(startTime.replace('Z', '+00:00')).timestamp() >= eventStart.timestamp():
 							assetId = assetdict.get("assetId", "")
 							break
 					if assetId:
