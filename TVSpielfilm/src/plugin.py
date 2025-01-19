@@ -171,7 +171,7 @@ class TVhelper(Screen):
 			timeEnd = datetime.fromtimestamp(timeEndTs) if timeEndTs else datetime.today()
 			self.currdatetime = timeStart if timeStart else datetime.today()
 			timeStartStr = self.currdatetime.strftime("%H:%M")
-			timeStartEnd = f"{timeStartStr} - {timeEnd.strftime("%H:%M")}"
+			timeStartEnd = f"{timeStartStr} - {timeEnd.strftime('%H:%M')}"
 			repeatHint = unescape(airInfo.get("repeatHint", ""))  # e.g.'Wh. um 00:20 Uhr, Nächste Episode um 21:55 Uhr (Staffel 8, Episode 24)'
 			channelId = airInfo.get("channel", {}).get("id", "").lower()
 			channelName = airInfo.get("channel", {}).get("name", "") if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(channelId, ["", ""])[1]
