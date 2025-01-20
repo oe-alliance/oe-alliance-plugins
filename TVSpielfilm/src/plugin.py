@@ -125,9 +125,9 @@ class TVhelper(Screen):
 	def saveAllAssets(self, assetsdict, date, spanStarts):
 		if assetsdict and date:
 			try:
-				filename = join(f"{self.getTMPpath()}cache/", f"allAssets{date}T{spanStarts}.json")
-				if not exists(filename):
-					with open(filename, "w") as file:
+				assetsfile = join(f"{self.getTMPpath()}cache/", f"allAssets{date}T{spanStarts}.json")
+				if not exists(assetsfile):
+					with open(assetsfile, "w") as file:
 						file.write(dumps(assetsdict))
 			except OSError as error:
 				self.session.open(MessageBox, "Datensatz konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
@@ -999,6 +999,7 @@ class TVoverview(TVhelper, Screen):
 		self.spanStarts, self.spanDuranceTs = (userspan[0], int(userspan[1])) if userspan else ("", config.plugins.tvspielfilm.durance_n.value)
 		if tvglobals.RESOLUTION == "FHD":
 			self.skin = self.skin.replace("/HD/", "/FHD/")
+		self.tvinfobox = session.instantiateDialog(TVinfoBox)
 		self.assetTitle = ""
 		self.trailerUrl = ""
 		self.filterIndex = config.plugins.tvspielfilm.filter.value
@@ -1080,7 +1081,9 @@ class TVoverview(TVhelper, Screen):
 		downloaded = False
 		now = datetime.today().astimezone()
 		now -= timedelta(minutes=now.minute % 15, seconds=now.second, microseconds=now.microsecond)  # round to last 15 minutes in case of 'Jetzt im TV'
-		spanStarts = self.spanStarts or now.strftime("%H:%M")
+		hour, minute = self.spanStarts.split(":") if self.spanStarts else [now.strftime("%H"), now.strftime("%M")]  # self.spanstars empty = 'Jetzt im TV'
+		spanStartsDt = self.currdatetime.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
+		spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
 		for index, item in enumerate(tvglobals.IMPORTDICT.items()):
 			if self.loadAllEPGstop:
 				break
@@ -1089,20 +1092,18 @@ class TVoverview(TVhelper, Screen):
 			self["shortStatus"].setText(f"Lade TVS-EPG Daten für '{item[1][1]}'")
 			channelId = item[0]
 			startslist = []  # avoids displaying duplicate entries for combination channels such as 'SWF/SR'
-			downloaded, assetsdict = getAllAssets(channelId, todaydate, self.spanStarts)
+			downloaded, assetsdict = getAllAssets(channelId, todaydate, spanStartsDt.strftime("%H:%M"))
 			if assetsdict:
 				for asset in assetsdict:
 					if self.loadAllEPGstop:
 						break
 					startTime_iso, endTime_iso = asset.get("startTime", ""), asset.get("endTime", "")  # e.g. '2024-11-24T22:05:00.000Z'
-					startTime, endTime = datetime.fromisoformat(startTime_iso).astimezone(), datetime.fromisoformat(endTime_iso).astimezone()
-					hour, minute = self.spanStarts.split(":") if self.spanStarts else [now.strftime("%H"), now.strftime("%M")]  # self.spanstars empty = 'Jetzt im TV'
-					spanStarts = self.currdatetime.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
-					spanEnds = spanStarts + timedelta(minutes=self.spanDuranceTs)
+					startTime = datetime.fromisoformat(startTime_iso).astimezone() if startTime_iso else spanStartsDt
+					endTime = datetime.fromisoformat(endTime_iso).astimezone() if endTime_iso else spanEndsDt
 					if self.spanStarts:
-						isInTimespan = startTime.timestamp() >= spanStarts.timestamp() and startTime.timestamp() < spanEnds.timestamp()
+						isInTimespan = startTime.timestamp() >= spanStartsDt.timestamp() and startTime.timestamp() < spanEndsDt.timestamp()
 					else:  # self.spanstars empty = 'Jetzt im TV'
-						isInTimespan = startTime.timestamp() < spanEnds.timestamp()
+						isInTimespan = startTime.timestamp() < spanEndsDt.timestamp()
 					if startTime and isInTimespan and startTime not in startslist:  # begin of transmission still in the period?
 						startslist.append(startTime)
 						progress = -1
@@ -1133,12 +1134,11 @@ class TVoverview(TVhelper, Screen):
 			self.refreshSkinlist()
 		if self.loadAllEPGstop:
 			FinishOnStop()
-		elif spanStarts:  # don't save to cache on 'Jetzt im TV' because this has no pre-defined time period to save
-			self.saveAllAssets(allAssets, todaydate, spanStarts)
 		self.setLongstatus()
 		self["progressBar"].setValue(0)
 		self["progressTxt"].setText("")
 		self["shortStatus"].setText("")
+		self.saveAllAssets(allAssets, todaydate, spanStartsDt.strftime("%H:%M"))
 		self.showCurrentAsset()
 		self.loadAllEPGactive = False
 
@@ -1240,30 +1240,35 @@ class TVoverview(TVhelper, Screen):
 
 	def prevday(self):
 		if self.currdaydelta == -7:
-			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis maximal 7 Tage danach verfügbar.", 2500)
-		self.currdaydelta = max(self.currdaydelta - 1, -7)  # max 7 days in past
-		self.startLoadAllEPG()
+			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis maximal -7 Tage danach verfügbar.", 2500)
+		else:
+			self.currdaydelta = max(self.currdaydelta - 1, -7)  # max 7 days in past
+			self.startLoadAllEPG()
 
 	def prevweek(self):
 		if self.currdaydelta == -7:
-			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis maximal 7 Tage danach verfügbar.", 2500)
-		self.currdaydelta = max(self.currdaydelta - 7, -7)  # max 7 days in past
-		self.startLoadAllEPG()
+			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis maximal -7 Tage danach verfügbar.", 2500)
+		else:
+			self.currdaydelta = max(self.currdaydelta - 7, -7)  # max 7 days in past
+			self.startLoadAllEPG()
 
 	def nextday(self):
 		if self.currdaydelta == 13:
-			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis maximal 13 Tage im Voraus verfügbar.", 2500)
-		self.currdaydelta = min(self.currdaydelta + 1, 13)  # max 13 days in future
-		self.startLoadAllEPG()
+			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis maximal +13 Tage im Voraus verfügbar.", 2500)
+		else:
+			self.currdaydelta = min(self.currdaydelta + 1, 13)  # max 13 days in future
+			self.startLoadAllEPG()
 
 	def nextweek(self):
 		if self.currdaydelta == 13:
-			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis maximal 13 Tage im Voraus verfügbar.", 2500)
-		self.currdaydelta = min(self.currdaydelta + 7, 13)  # max 13 days in future
-		self.startLoadAllEPG()
+			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis maximal +13 Tage im Voraus verfügbar.", 2500)
+		else:
+			self.currdaydelta = min(self.currdaydelta + 7, 13)  # max 13 days in future
+			self.startLoadAllEPG()
 
 	def startLoadAllEPG(self):
-		self.setReviewdate(datetime.today().astimezone() + timedelta(days=self.currdaydelta), fullscreen=False)
+		self.currdatetime = datetime.today().astimezone() + timedelta(days=self.currdaydelta)
+		self.setReviewdate(self.currdatetime, fullscreen=False)
 		self.setLongstatus()
 		if self.loadAllEPGactive:
 			self.loadAllEPGstop = True
@@ -1380,8 +1385,8 @@ class TVmain(TVhelper, Screen):
 		usermenu = []
 		for index, userspan in enumerate(userspans):  # build main menu
 			usermenu.append((f"{userspan[0]} im TV", index, TVoverview, userspan))
-		usermenu.append(("Jetzt im TV", 4, TVoverview, None))
-		usermenu.append(("laufende Sendung", 5, None, None))
+		usermenu.append(("Jetzt im TV", 4, TVoverview, ""))
+		usermenu.append(("laufende Sendung", 5, "", ""))
 		usermenu.append(("TVS-EPG Datenupdate", 6))
 		usermenu.append(("lösche TVS-EPG Cache", 7))
 		self["mainmenu"].updateList(usermenu)
@@ -1554,7 +1559,7 @@ class TVmain(TVhelper, Screen):
 			for timespan in timespans:  # go through all defined timespans (A to D)
 				if visible and self.updateStop:
 					break
-				spanstart = timespan[0]
+				spanStarts = timespan[0]
 				spancache = timespan[2]
 				self.setProgressRange(0, (0, len_total))
 				for index0, day in enumerate(range(spancache + 1)):  # from today up to next to be cached days
@@ -1564,16 +1569,16 @@ class TVmain(TVhelper, Screen):
 					datestr = date.strftime("%F")
 					weekday = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"][date.weekday()] if index0 else "heute"
 					progress += 1
-					self.setProgressValues(0, (f"Zeitraum: '{spanstart}' | {weekday} (+{index0}/+{spancache} Tage)", progress, f"{progress}/{len_total}"))
+					self.setProgressValues(0, (f"Zeitraum: '{spanStarts}' | {weekday} (+{index0}/+{spancache} Tage)", progress, f"{progress}/{len_total}"))
 					for index1, item in enumerate(importdict.items()):
 						if visible and self.updateStop:
 							break
 						self.setProgressValues(1, (f"Sender: '{item[1][1]}'", index1, f"{index1}/{len_importdict}"))
 						channelId = item[0]
-						downloaded, assetsdict = getAllAssets(channelId, datestr, spanstart, noLoadExisting=True)
+						downloaded, assetsdict = getAllAssets(channelId, datestr, spanStarts, noLoadExisting=True)
 						if downloaded:
 							allAssets[channelId] = assetsdict
-					if not self.saveAllAssets(allAssets, datestr, spanstart):
+					if not self.saveAllAssets(allAssets, datestr, spanStarts):
 						self.updateStop = True  # force stop thread due to OS-error
 		self.tvupdate.hideDialog(False)
 		self.tvinfobox.showDialog("TVS-EPG Update erfolgreich abgebrochen." if self.updateStop else "TVS-EPG Update erfolgreich beendet.", 2500)
