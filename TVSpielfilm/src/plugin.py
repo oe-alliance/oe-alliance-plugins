@@ -352,7 +352,7 @@ class TVhelper(Screen):
 		if fullscreen:
 			reviewdate = f"{weekday} {currdatetime.strftime('%d.%m.%Y')} | von {spanStarts} Uhr bis {spanEnds} Uhr | {self.titleLenStr}"
 		else:
-			reviewdate = f"{weekday} {currdatetime.strftime('%d.%m.%Y')} | +{self.currdaydelta} Tag(e) | {spanStarts} Uhr bis {spanEnds} Uhr"
+			reviewdate = f"{weekday} {currdatetime.strftime('%d.%m.%Y')} | {self.currdaydelta:+} Tag(e) | {spanStarts} Uhr bis {spanEnds} Uhr"
 		self["reviewdate"].setText(reviewdate)
 
 	def setWidgetsImage(self, widget, filename):
@@ -370,7 +370,7 @@ class TVhelper(Screen):
 			piconfile = join(join(resolveFilename(SCOPE_SKIN_IMAGE), "picon/"), f"{piconsref}.png")
 			if exists(piconfile):
 				return piconfile
-			return ""
+		return ""
 
 	def getTips(self, callback):
 		date = datetime.today().strftime("%F")
@@ -1178,7 +1178,7 @@ class TVoverview(TVhelper, Screen):
 			self.skinlist = []
 			self.hideCurrentAsset()
 		self["menuList"].updateList(skinlist)
-		self.lenskinlist = len(skinlist)
+		self.lenskinlist = len(self.skinlist)
 
 	def showCurrentAsset(self):
 		if self.skinlist:
