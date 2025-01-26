@@ -117,10 +117,13 @@ class TVhelper(Screen):
 			except exceptions.RequestException as error:
 				print("[%s] ERROR in class 'TVglobals:imageDownload': %s" % (tvglobals.MODULE_NAME, str(error)))
 				return
-			with open(imgfile, "wb") as file:
-				file.write(response.content)
-			if callback:
-				callback(imgfile, assetId)
+			try:
+				with open(imgfile, "wb") as file:
+					file.write(response.content)
+				if callback:
+					callback(imgfile, assetId)
+			except OSError as error:
+				self.session.open(MessageBox, "Bild konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
 
 	def saveAllAssets(self, assetsdict, date, spanStarts):
 		if assetsdict and date:
@@ -130,7 +133,7 @@ class TVhelper(Screen):
 					with open(assetsfile, "w") as file:
 						file.write(dumps(assetsdict))
 			except OSError as error:
-				self.session.open(MessageBox, "Datensatz konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
+				self.session.open(MessageBox, "Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
 				return False
 		return True
 
@@ -153,8 +156,12 @@ class TVhelper(Screen):
 				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVoverview:showAssetDetails': {errmsg}!")
 				return
 			assetdict = jsondict.get("asset", {})
-			with open(assetfile, "w") as file:  # save details for current asset to cache
-				file.write(dumps(assetdict))
+			try:
+				with open(assetfile, "w") as file:  # save details for current asset to cache
+					file.write(dumps(assetdict))
+			except OSError as error:
+				self.session.open(MessageBox, "Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
+
 		if assetdict:
 			isTopTip = assetdict.get("flags", {}).get("isTopTip", "")
 			isTipOfTheDay = assetdict.get("flags", {}).get("isTipOfTheDay", "")
@@ -387,8 +394,11 @@ class TVhelper(Screen):
 			if errmsg:
 				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:getTips': {errmsg}!")
 				return
-			with open(tipsfile, "w") as file:
-				file.write(dumps(tipsdict))
+			try:
+				with open(tipsfile, "w") as file:
+					file.write(dumps(tipsdict))
+			except OSError as error:
+				self.session.open(MessageBox, "Datensatz 'Tipps' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
 		tipslist = []
 		for index, tips in enumerate([[tipsdict.get("topTip", {})], tipsdict.get("tips", {}), tipsdict.get("highlights", {}),]):
 			for tip in tips:
