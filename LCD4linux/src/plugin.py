@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r23"
+Version = "V5.0-r24"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -347,6 +347,7 @@ MailKonto = [("1", _("1")), ("2", _("1-2")), ("3", _("1-3")), ("4", _("1-4")), (
 MailConnect = [("0", _("Pop3-SSL")), ("1", _("Pop3")), ("2", _("IMAP-SSL")), ("3", _("IMAP"))]
 RBoxType = [("PCT", _("Picon+Channel+Title")), ("PC", _("Picon+Channel")), ("P", _("Picon")), ("CT", _("Channel+Title")), ("C", _("Channel"))]
 OffFarbe = [("0", _("same color"))] + Farbe
+TpzFarbe = [("0", _("transparent"))] + Farbe
 Split = [("false", _("no")), ("true", _("yes")), ("true25", _("yes +25%"))]
 DirType = [("0", _("horizontally")), ("2", _("vertically"))]
 FontType = [("0", _("Global")), ("1", _("1")), ("2", _("2")), ("3", _("3")), ("4", _("4")), ("5", _("5"))]
@@ -812,6 +813,7 @@ LCD4linux.ProgressAlign = ConfigSelection(choices=[("5", _("half left")), ("6", 
 LCD4linux.ProgressPos = ConfigSlider(default=120, increment=2, limits=(0, 1024))
 LCD4linux.ProgressColor = ConfigSelection(choices=Farbe, default="white")
 LCD4linux.ProgressColorText = ConfigSelection(choices=Farbe, default="white")
+LCD4linux.ProgressColorBG = ConfigSelection(choices=TpzFarbe, default="0")
 LCD4linux.ProgressMinutes = ConfigYesNo(default=True)
 LCD4linux.ProgressBorder = ConfigSelection(choices=[("off", _("no Bar")), ("true", _("Frame")), ("true2", _("Frame x2")), ("false", _("no Frame")), ("line", _("Line"))], default="true")
 LCD4linux.ProgressShadow = ConfigYesNo(default=False)
@@ -1255,6 +1257,24 @@ LCD4linux.Bild4Pos = ConfigSlider(default=0, increment=2, limits=(0, 1024))
 LCD4linux.Bild4Align = ConfigSelection(choices=AlignType + [("9", _("full Screen"))], default="0")
 LCD4linux.Bild4Quick = ConfigYesNo(default=False)
 LCD4linux.Bild4Transp = ConfigYesNo(default=False)
+LCD4linux.Bild5 = ConfigSelection(choices=ScreenSelect, default="0")
+LCD4linux.Bild5LCD = ConfigSelection(choices=LCDSelect, default="1")
+LCD4linux.Bild5File = ConfigText(default="/tmp/lcd4linux.jpg", fixed_size=False, visible_width=50)
+LCD4linux.Bild5Size = ConfigSlider(default=240, increment=10, limits=(10, 1024))
+LCD4linux.Bild5SizeH = ConfigSlider(default=0, increment=10, limits=(0, 800))
+LCD4linux.Bild5Pos = ConfigSlider(default=0, increment=2, limits=(0, 1024))
+LCD4linux.Bild5Align = ConfigSelection(choices=AlignType + [("9", _("full Screen"))], default="0")
+LCD4linux.Bild5Quick = ConfigYesNo(default=False)
+LCD4linux.Bild5Transp = ConfigYesNo(default=False)
+LCD4linux.Bild6 = ConfigSelection(choices=ScreenSelect, default="0")
+LCD4linux.Bild6LCD = ConfigSelection(choices=LCDSelect, default="1")
+LCD4linux.Bild6File = ConfigText(default="/tmp/lcd4linux.jpg", fixed_size=False, visible_width=50)
+LCD4linux.Bild6Size = ConfigSlider(default=240, increment=10, limits=(10, 1024))
+LCD4linux.Bild6SizeH = ConfigSlider(default=0, increment=10, limits=(0, 800))
+LCD4linux.Bild6Pos = ConfigSlider(default=0, increment=2, limits=(0, 1024))
+LCD4linux.Bild6Align = ConfigSelection(choices=AlignType + [("9", _("full Screen"))], default="0")
+LCD4linux.Bild6Quick = ConfigYesNo(default=False)
+LCD4linux.Bild6Transp = ConfigYesNo(default=False)
 LCD4linux.TV = ConfigSelection(choices=ScreenSelect, default="0")
 LCD4linux.TVLCD = ConfigSelection(choices=LCDSelect, default="1")
 LCD4linux.TVType = ConfigSelection(choices=[("0", _("TV")), ("1", _("TV+OSD"))], default="0")
@@ -1371,6 +1391,7 @@ LCD4linux.MPProgressPos = ConfigSlider(default=120, increment=2, limits=(0, 1024
 LCD4linux.MPProgressAlign = ConfigSelection(choices=[("5", _("half left")), ("6", _("half right"))] + AlignType, default="1")
 LCD4linux.MPProgressColor = ConfigSelection(choices=Farbe, default="white")
 LCD4linux.MPProgressColorText = ConfigSelection(choices=Farbe, default="white")
+LCD4linux.MPProgressColorBG = ConfigSelection(choices=TpzFarbe, default="0")
 LCD4linux.MPProgressMinutes = ConfigYesNo(default=True)
 LCD4linux.MPProgressBorder = ConfigSelection(choices=[("off", _("no Bar")), ("true", _("Frame")), ("true2", _("Frame x2")), ("false", _("no Frame")), ("line", _("Line"))], default="true")
 LCD4linux.MPProgressShadow = ConfigYesNo(default=False)
@@ -2242,6 +2263,24 @@ LCD4linux.StandbyBild4Pos = ConfigSlider(default=0, increment=2, limits=(0, 1024
 LCD4linux.StandbyBild4Align = ConfigSelection(choices=AlignType + [("9", _("full Screen"))], default="0")
 LCD4linux.StandbyBild4Quick = ConfigYesNo(default=False)
 LCD4linux.StandbyBild4Transp = ConfigYesNo(default=False)
+LCD4linux.StandbyBild5 = ConfigSelection(choices=ScreenSelect, default="0")
+LCD4linux.StandbyBild5LCD = ConfigSelection(choices=LCDSelect, default="1")
+LCD4linux.StandbyBild5File = ConfigText(default="/tmp/lcd4linux.jpg", fixed_size=False, visible_width=50)
+LCD4linux.StandbyBild5Size = ConfigSlider(default=240, increment=10, limits=(10, 1024))
+LCD4linux.StandbyBild5SizeH = ConfigSlider(default=0, increment=10, limits=(0, 800))
+LCD4linux.StandbyBild5Pos = ConfigSlider(default=0, increment=2, limits=(0, 1024))
+LCD4linux.StandbyBild5Align = ConfigSelection(choices=AlignType + [("9", _("full Screen"))], default="0")
+LCD4linux.StandbyBild5Quick = ConfigYesNo(default=False)
+LCD4linux.StandbyBild5Transp = ConfigYesNo(default=False)
+LCD4linux.StandbyBild6 = ConfigSelection(choices=ScreenSelect, default="0")
+LCD4linux.StandbyBild6LCD = ConfigSelection(choices=LCDSelect, default="1")
+LCD4linux.StandbyBild6File = ConfigText(default="/tmp/lcd4linux.jpg", fixed_size=False, visible_width=50)
+LCD4linux.StandbyBild6Size = ConfigSlider(default=240, increment=10, limits=(10, 1024))
+LCD4linux.StandbyBild6SizeH = ConfigSlider(default=0, increment=10, limits=(0, 800))
+LCD4linux.StandbyBild6Pos = ConfigSlider(default=0, increment=2, limits=(0, 1024))
+LCD4linux.StandbyBild6Align = ConfigSelection(choices=AlignType + [("9", _("full Screen"))], default="0")
+LCD4linux.StandbyBild6Quick = ConfigYesNo(default=False)
+LCD4linux.StandbyBild6Transp = ConfigYesNo(default=False)
 LCD4linux.StandbyMail = ConfigSelection(choices=ScreenSelect, default="0")
 LCD4linux.StandbyMailLCD = ConfigSelection(choices=LCDSelect, default="1")
 LCD4linux.StandbyMailSize = ConfigSlider(default=12, increment=1, limits=(5, 150))
@@ -6046,6 +6085,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				self.list2.append(getConfigListEntry(_("- Length"), LCD4linux.ProgressLen))
 				self.list2.append(getConfigListEntry(_("- Color"), LCD4linux.ProgressColor))
 				self.list2.append(getConfigListEntry(_("- Color Text"), LCD4linux.ProgressColorText))
+				self.list2.append(getConfigListEntry(_("- Color Background"), LCD4linux.ProgressColorBG))
 				self.list2.append(getConfigListEntry(_("- Border"), LCD4linux.ProgressBorder))
 				self.list2.append(getConfigListEntry(_("- Shaded"), LCD4linux.ProgressShadow))
 				self.list2.append(getConfigListEntry(_("- Unit min"), LCD4linux.ProgressMinutes))
@@ -6470,6 +6510,26 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.Bild4Align))
 				self.list2.append(getConfigListEntry(_("- Quick Update"), LCD4linux.Bild4Quick))
 				self.list2.append(getConfigListEntry(_("- Transparency"), LCD4linux.Bild4Transp))
+			self.list2.append(getConfigListEntry(_("Show Picture 5"), LCD4linux.Bild5))
+			if LCD4linux.Bild5.value != "0":
+				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.Bild5LCD))
+				self.list2.append(getConfigListEntry(_("- File [ok]>"), LCD4linux.Bild5File))
+				self.list2.append(getConfigListEntry(_("- Size"), LCD4linux.Bild5Size))
+				self.list2.append(getConfigListEntry(_("- Size max Height"), LCD4linux.Bild5SizeH))
+				self.list2.append(getConfigListEntry(_("- Position"), LCD4linux.Bild5Pos))
+				self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.Bild5Align))
+				self.list2.append(getConfigListEntry(_("- Quick Update"), LCD4linux.Bild5Quick))
+				self.list2.append(getConfigListEntry(_("- Transparency"), LCD4linux.Bild5Transp))
+			self.list2.append(getConfigListEntry(_("Show Picture 6"), LCD4linux.Bild6))
+			if LCD4linux.Bild6.value != "0":
+				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.Bild6LCD))
+				self.list2.append(getConfigListEntry(_("- File [ok]>"), LCD4linux.Bild6File))
+				self.list2.append(getConfigListEntry(_("- Size"), LCD4linux.Bild6Size))
+				self.list2.append(getConfigListEntry(_("- Size max Height"), LCD4linux.Bild6SizeH))
+				self.list2.append(getConfigListEntry(_("- Position"), LCD4linux.Bild6Pos))
+				self.list2.append(getConfigListEntry(_("- Alignment"), LCD4linux.Bild6Align))
+				self.list2.append(getConfigListEntry(_("- Quick Update"), LCD4linux.Bild6Quick))
+				self.list2.append(getConfigListEntry(_("- Transparency"), LCD4linux.Bild6Transp))
 			self.list2.append(getConfigListEntry(_("Mail"), LCD4linux.Mail))
 			if LCD4linux.Mail.value != "0":
 				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.MailLCD))
@@ -6729,6 +6789,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				self.list3.append(getConfigListEntry(_("- Length"), LCD4linux.MPProgressLen))
 				self.list3.append(getConfigListEntry(_("- Color"), LCD4linux.MPProgressColor))
 				self.list3.append(getConfigListEntry(_("- Color Text"), LCD4linux.MPProgressColorText))
+				self.list3.append(getConfigListEntry(_("- Color Background"), LCD4linux.MPProgressColorBG))
 				self.list3.append(getConfigListEntry(_("- Border"), LCD4linux.MPProgressBorder))
 				self.list3.append(getConfigListEntry(_("- Shaded"), LCD4linux.MPProgressShadow))
 				self.list3.append(getConfigListEntry(_("- Unit min"), LCD4linux.MPProgressMinutes))
@@ -7642,6 +7703,26 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				self.list4.append(getConfigListEntry(_("- Alignment"), LCD4linux.StandbyBild4Align))
 				self.list4.append(getConfigListEntry(_("- Quick Update"), LCD4linux.StandbyBild4Quick))
 				self.list4.append(getConfigListEntry(_("- Transparency"), LCD4linux.StandbyBild4Transp))
+			self.list4.append(getConfigListEntry(_("Show Picture 5"), LCD4linux.StandbyBild5))
+			if LCD4linux.StandbyBild5.value != "0":
+				self.list4.append(getConfigListEntry(_("- which LCD"), LCD4linux.StandbyBild5LCD))
+				self.list4.append(getConfigListEntry(_("- File [ok]>"), LCD4linux.StandbyBild5File))
+				self.list4.append(getConfigListEntry(_("- Size"), LCD4linux.StandbyBild5Size))
+				self.list4.append(getConfigListEntry(_("- Size max Height"), LCD4linux.StandbyBild5SizeH))
+				self.list4.append(getConfigListEntry(_("- Position"), LCD4linux.StandbyBild5Pos))
+				self.list4.append(getConfigListEntry(_("- Alignment"), LCD4linux.StandbyBild5Align))
+				self.list4.append(getConfigListEntry(_("- Quick Update"), LCD4linux.StandbyBild5Quick))
+				self.list4.append(getConfigListEntry(_("- Transparency"), LCD4linux.StandbyBild5Transp))
+			self.list4.append(getConfigListEntry(_("Show Picture 6"), LCD4linux.StandbyBild6))
+			if LCD4linux.StandbyBild6.value != "0":
+				self.list4.append(getConfigListEntry(_("- which LCD"), LCD4linux.StandbyBild6LCD))
+				self.list4.append(getConfigListEntry(_("- File [ok]>"), LCD4linux.StandbyBild6File))
+				self.list4.append(getConfigListEntry(_("- Size"), LCD4linux.StandbyBild6Size))
+				self.list4.append(getConfigListEntry(_("- Size max Height"), LCD4linux.StandbyBild6SizeH))
+				self.list4.append(getConfigListEntry(_("- Position"), LCD4linux.StandbyBild6Pos))
+				self.list4.append(getConfigListEntry(_("- Alignment"), LCD4linux.StandbyBild6Align))
+				self.list4.append(getConfigListEntry(_("- Quick Update"), LCD4linux.StandbyBild6Quick))
+				self.list4.append(getConfigListEntry(_("- Transparency"), LCD4linux.StandbyBild6Transp))
 			self.list4.append(getConfigListEntry(_("Mail"), LCD4linux.StandbyMail))
 			if LCD4linux.StandbyMail.value != "0":
 				self.list4.append(getConfigListEntry(_("- which LCD"), LCD4linux.StandbyMailLCD))
@@ -7832,13 +7913,13 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			elif sel in [LCD4linux.LCDBild1, LCD4linux.LCDBild2, LCD4linux.MPLCDBild1, LCD4linux.MPLCDBild2, LCD4linux.StandbyLCDBild1, LCD4linux.StandbyLCDBild2, LCD4linux.FritzFrame]:
 				L4log("select File 1")
 				self.session.openWithCallback(self.fileSelected, LCDdisplayFile, text=_("Choose file"), FileName=self["config"].getCurrent()[1].value, showFiles=True)
-			elif sel in [LCD4linux.OSCAMFile, LCD4linux.TextFile, LCD4linux.Text2File, LCD4linux.Text3File, LCD4linux.MPTextFile, LCD4linux.MPCoverFile, LCD4linux.MPCoverFile2, LCD4linux.BildFile, LCD4linux.Bild2File, LCD4linux.Bild3File, LCD4linux.Bild4File, LCD4linux.RecordingPath]:
+			elif sel in [LCD4linux.OSCAMFile, LCD4linux.TextFile, LCD4linux.Text2File, LCD4linux.Text3File, LCD4linux.MPTextFile, LCD4linux.MPCoverFile, LCD4linux.MPCoverFile2, LCD4linux.BildFile, LCD4linux.Bild2File, LCD4linux.Bild3File, LCD4linux.Bild4File, LCD4linux.Bild5File, LCD4linux.Bild6File, LCD4linux.RecordingPath]:
 				L4log("select File 2")
 				self.session.openWithCallback(self.fileSelected, LCDdisplayFile, text=_("Choose file"), FileName=self["config"].getCurrent()[1].value, showFiles=True)
 			elif sel in [LCD4linux.Font, LCD4linux.Font1, LCD4linux.Font2, LCD4linux.Font3, LCD4linux.Font4, LCD4linux.Font5]:
 				L4log("select File 3")
 				self.session.openWithCallback(self.fileSelected, LCDdisplayFile, matchingPattern="ttf", text=_("Choose font"), FileName=self["config"].getCurrent()[1].value, showFiles=True)
-			elif sel in [LCD4linux.MPBildFile, LCD4linux.MPBild2File, LCD4linux.StandbyBildFile, LCD4linux.StandbyBild2File, LCD4linux.StandbyBild3File, LCD4linux.StandbyBild4File, LCD4linux.StandbyTextFile, LCD4linux.StandbyText2File, LCD4linux.StandbyText3File]:
+			elif sel in [LCD4linux.MPBildFile, LCD4linux.MPBild2File, LCD4linux.StandbyBildFile, LCD4linux.StandbyBild2File, LCD4linux.StandbyBild3File, LCD4linux.StandbyBild4File, LCD4linux.StandbyBild5File, LCD4linux.StandbyBild6File, LCD4linux.StandbyTextFile, LCD4linux.StandbyText2File, LCD4linux.StandbyText3File]:
 				L4log("select File 4")
 				self.session.openWithCallback(self.fileSelected, LCDdisplayFile, text=_("Choose file"), FileName=self["config"].getCurrent()[1].value, showFiles=True)
 			elif sel in [LCD4linux.Background1Bild, LCD4linux.LCD4linux.MPBackground1Bild, LCD4linux.StandbyBackground1Bild]:
@@ -7925,6 +8006,10 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				LCD4linux.Bild3File.value = dirdir
 			elif sel == LCD4linux.Bild4File:
 				LCD4linux.Bild4File.value = dirdir
+			elif sel == LCD4linux.Bild5File:
+				LCD4linux.Bild5File.value = dirdir
+			elif sel == LCD4linux.Bild6File:
+				LCD4linux.Bild6File.value = dirdir
 			elif sel == LCD4linux.MPBildFile:
 				LCD4linux.MPBildFile.value = dirdir
 			elif sel == LCD4linux.MPBild2File:
@@ -7937,6 +8022,10 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				LCD4linux.StandbyBild3File.value = dirdir
 			elif sel == LCD4linux.StandbyBild4File:
 				LCD4linux.StandbyBild4File.value = dirdir
+			elif sel == LCD4linux.StandbyBild5File:
+				LCD4linux.StandbyBild5File.value = dirdir
+			elif sel == LCD4linux.StandbyBild6File:
+				LCD4linux.StandbyBild6File.value = dirdir
 			elif sel == LCD4linux.StandbyTextFile:
 				LCD4linux.StandbyTextFile.value = dirdir
 			elif sel == LCD4linux.StandbyText2File:
@@ -10586,10 +10675,7 @@ def LCD4linuxPIC(self, session):
 			tx0 = tx - D
 			ty1 = ty + D
 			ty0 = ty - D
-			if tCol[0] == '#':
-				COL = tCol
-			else:
-				COL = ImageColor.colormap[tCol]
+			COL = tCol if tCol[0] == '#' else ImageColor.colormap[tCol]
 			if isinstance(COL, tuple):
 				RGB = COL
 			else:
@@ -12198,7 +12284,7 @@ def LCD4linuxPIC(self, session):
 
 # Progress Bar
 	def putProgress(workaround, draw, im):
-		(ConfigPos, ConfigSize, ConfigProzent, ConfigType, ConfigColor, ConfigColorText, ConfigAlign, ConfigMinutes, ConfigBorder, ConfigShadow, ConfigShadowBar, ConfigFont) = workaround
+		(ConfigPos, ConfigSize, ConfigProzent, ConfigType, ConfigColor, ConfigColorText, ConfigColorBG, ConfigAlign, ConfigMinutes, ConfigBorder, ConfigShadow, ConfigShadowBar, ConfigFont) = workaround
 		ConfigPos = int(ConfigPos)
 		ConfigSize = int(ConfigSize)
 		global isVideoPlaying
@@ -12222,12 +12308,7 @@ def LCD4linuxPIC(self, session):
 			ProgressBar -= getSplit(ConfigSplit, ConfigAlign, MAX_W, ProgressBar)
 		POSX = getSplit(ConfigSplit, ConfigAlign, MAX_W, ProgressBar)
 		if self.LsreftoString is not None:
-			if ConfigMinutes:
-				Minutes = " min"
-				Prozent = " %"
-			else:
-				Minutes = ""
-				Prozent = ""
+			Minutes, Prozent = (" min", " %") if ConfigMinutes else ("", "")
 			if ConfigType[1:] == "1":
 				ms = 1.5
 			elif ConfigType[1:] == "2":
@@ -12412,9 +12493,15 @@ def LCD4linuxPIC(self, session):
 			if isData == True and ConfigBorder != "off":
 				event_run = min(max(event_run, 0), ProgressBar)
 				if ConfigBorder[:4] == "true":
-					self.draw[draw].rectangle((POSX + 9, ConfigPos, POSX + ProgressBar + 11, ConfigPos + ConfigSize), outline=ConfigColor)
+					if ConfigColorBG == "0":  # don't fill (=transparency)
+						self.draw[draw].rectangle((POSX + 9, ConfigPos, POSX + ProgressBar + 11, ConfigPos + ConfigSize), outline=ConfigColor)
+					else:
+						self.draw[draw].rectangle((POSX + 9, ConfigPos, POSX + ProgressBar + 11, ConfigPos + ConfigSize), outline=ConfigColor, fill=ConfigColorBG)
 					if ConfigBorder == "true2":
-						self.draw[draw].rectangle((POSX + 10, ConfigPos + 1, POSX + ProgressBar + 10, ConfigPos + ConfigSize - 1), outline=ConfigColor)
+						if ConfigColorBG == "0":  # don't fill (=transparency)
+							self.draw[draw].rectangle((POSX + 10, ConfigPos + 1, POSX + ProgressBar + 10, ConfigPos + ConfigSize - 1), outline=ConfigColor)
+						else:
+							self.draw[draw].rectangle((POSX + 10, ConfigPos + 1, POSX + ProgressBar + 10, ConfigPos + ConfigSize - 1), outline=ConfigColor, fill=ConfigColorBG)
 				elif ConfigBorder == "line":
 					self.draw[draw].rectangle((POSX + 10, ConfigPos + int(ConfigSize / 2) - 1, POSX + ProgressBar + 10, ConfigPos + int(ConfigSize / 2) + 1), outline=ConfigColor, fill=ConfigColor)
 				self.draw[draw].rectangle((POSX + 10, ConfigPos, POSX + event_run + 10, ConfigPos + ConfigSize), fill=ConfigColor)
@@ -14725,6 +14812,17 @@ def LCD4linuxPIC(self, session):
 					ShowPicture = getShowPicture(LCD4linux.StandbyBild4File.value, 0)
 					Para = LCD4linux.StandbyBild4Pos.value, LCD4linux.StandbyBild4Size.value, LCD4linux.StandbyBild4SizeH.value, LCD4linux.StandbyBild4Align.value, LCD4linux.StandbyBild4Quick.value, LCD4linux.StandbyBild4Transp.value, 0, ShowPicture, LCD4linux.StandbyBild4File.value
 					Lput4(LCD4linux.StandbyBild4LCD.value, LCD4linux.StandbyBild4.value, putBild, Para)
+# Bild 5
+				if LCD4linux.StandbyBild5.value != "0" and (ScreenActive[0] in LCD4linux.StandbyBild5.value or ScreenActive[-3:] != ["", "", ""]):
+					ShowPicture = getShowPicture(LCD4linux.StandbyBild5File.value, 0)
+					Para = LCD4linux.StandbyBild5Pos.value, LCD4linux.StandbyBild5Size.value, LCD4linux.StandbyBild5SizeH.value, LCD4linux.StandbyBild5Align.value, LCD4linux.StandbyBild5Quick.value, LCD4linux.StandbyBild5Transp.value, 0, ShowPicture, LCD4linux.StandbyBild5File.value
+					Lput4(LCD4linux.StandbyBild5LCD.value, LCD4linux.StandbyBild5.value, putBild, Para)
+# Bild 6
+				if LCD4linux.StandbyBild6.value != "0" and (ScreenActive[0] in LCD4linux.StandbyBild6.value or ScreenActive[-3:] != ["", "", ""]):
+					ShowPicture = getShowPicture(LCD4linux.StandbyBild6File.value, 0)
+					Para = LCD4linux.StandbyBild6Pos.value, LCD4linux.StandbyBild6Size.value, LCD4linux.StandbyBild6SizeH.value, LCD4linux.StandbyBild6Align.value, LCD4linux.StandbyBild6Quick.value, LCD4linux.StandbyBild6Transp.value, 0, ShowPicture, LCD4linux.StandbyBild6File.value
+					Lput4(LCD4linux.StandbyBild6LCD.value, LCD4linux.StandbyBild6.value, putBild, Para)
+
 				Brief1.join()
 				Brief2.join()
 				Brief3.join()
@@ -14928,7 +15026,7 @@ def LCD4linuxPIC(self, session):
 			Para = LCD4linux.MPBox2x1.value, LCD4linux.MPBox2y1.value, LCD4linux.MPBox2x2.value, LCD4linux.MPBox2y2.value, LCD4linux.MPBox2Color.value, LCD4linux.MPBox2BackColor.value
 			Lput(LCD4linux.MPBox2LCD.value, LCD4linux.MPBox2.value, putBox, Para)
 # Progress Bar
-			Para = LCD4linux.MPProgressPos.value, LCD4linux.MPProgressSize.value, LCD4linux.MPProgressLen.value, LCD4linux.MPProgressType.value, LCD4linux.MPProgressColor.value, LCD4linux.MPProgressColorText.value, LCD4linux.MPProgressAlign.value, LCD4linux.MPProgressMinutes.value, LCD4linux.MPProgressBorder.value, LCD4linux.MPProgressShadow.value, LCD4linux.MPProgressShadow2.value, getFont(LCD4linux.MPProgressFont.value)
+			Para = LCD4linux.MPProgressPos.value, LCD4linux.MPProgressSize.value, LCD4linux.MPProgressLen.value, LCD4linux.MPProgressType.value, LCD4linux.MPProgressColor.value, LCD4linux.MPProgressColorText.value, LCD4linux.MPProgressColorBG.value, LCD4linux.MPProgressAlign.value, LCD4linux.MPProgressMinutes.value, LCD4linux.MPProgressBorder.value, LCD4linux.MPProgressShadow.value, LCD4linux.MPProgressShadow2.value, getFont(LCD4linux.MPProgressFont.value)
 			Lput(LCD4linux.MPProgressLCD.value, LCD4linux.MPProgress.value, putProgress, Para)
 # Volume
 			Para = LCD4linux.MPVolPos.value, LCD4linux.MPVolSize.value, LCD4linux.MPVolLen.value, LCD4linux.MPVolAlign.value, LCD4linux.MPVolSplit.value, LCD4linux.MPVolColor.value, LCD4linux.MPVolShadow.value
@@ -15079,10 +15177,20 @@ def LCD4linuxPIC(self, session):
 				Para = LCD4linux.Bild3Pos.value, LCD4linux.Bild3Size.value, LCD4linux.Bild3SizeH.value, LCD4linux.Bild3Align.value, LCD4linux.Bild3Quick.value, LCD4linux.Bild3Transp.value, 0, ShowPicture, LCD4linux.Bild3File.value
 				Lput4(LCD4linux.Bild3LCD.value, LCD4linux.Bild3.value, putBild, Para)
 # Bild 4
-			if LCD4linux.Bild4.value != "0" and (ScreenActive[0] in LCD4linux.Bild4.value or ScreenActive[-3:] != ["", "", ""]):
+			if LCD4linux.Bild4.value != "0" and (ScreenActive[0] in LCD4linux.Bild5.value or ScreenActive[-3:] != ["", "", ""]):
 				ShowPicture = getShowPicture(LCD4linux.Bild4File.value, 0)
 				Para = LCD4linux.Bild4Pos.value, LCD4linux.Bild4Size.value, LCD4linux.Bild4SizeH.value, LCD4linux.Bild4Align.value, LCD4linux.Bild4Quick.value, LCD4linux.Bild4Transp.value, 0, ShowPicture, LCD4linux.Bild4File.value
 				Lput4(LCD4linux.Bild4LCD.value, LCD4linux.Bild4.value, putBild, Para)
+# Bild 5
+			if LCD4linux.Bild5.value != "0" and (ScreenActive[0] in LCD4linux.Bild5.value or ScreenActive[-3:] != ["", "", ""]):
+				ShowPicture = getShowPicture(LCD4linux.Bild5File.value, 0)
+				Para = LCD4linux.Bild5Pos.value, LCD4linux.Bild5Size.value, LCD4linux.Bild5SizeH.value, LCD4linux.Bild5Align.value, LCD4linux.Bild5Quick.value, LCD4linux.Bild5Transp.value, 0, ShowPicture, LCD4linux.Bild5File.value
+				Lput4(LCD4linux.Bild5LCD.value, LCD4linux.Bild5.value, putBild, Para)
+# Bild 6
+			if LCD4linux.Bild6.value != "0" and (ScreenActive[0] in LCD4linux.Bild6.value or ScreenActive[-3:] != ["", "", ""]):
+				ShowPicture = getShowPicture(LCD4linux.Bild6File.value, 0)
+				Para = LCD4linux.Bild6Pos.value, LCD4linux.Bild6Size.value, LCD4linux.Bild6SizeH.value, LCD4linux.Bild6Align.value, LCD4linux.Bild6Quick.value, LCD4linux.Bild6Transp.value, 0, ShowPicture, LCD4linux.Bild6File.value
+				Lput4(LCD4linux.Bild6LCD.value, LCD4linux.Bild6.value, putBild, Para)
 # HTTP WWW Site
 			Para = 1, LCD4linux.WWW1Pos.value, LCD4linux.WWW1Size.value, LCD4linux.WWW1Align.value, LCD4linux.WWW1CutX.value, LCD4linux.WWW1CutY.value, LCD4linux.WWW1CutW.value, LCD4linux.WWW1CutH.value
 			Lput(LCD4linux.WWW1LCD.value, LCD4linux.WWW1.value, putWWW, Para)
@@ -15162,7 +15270,7 @@ def LCD4linuxPIC(self, session):
 			Para = LCD4linux.ChannelPos.value, LCD4linux.ChannelSize.value, LCD4linux.ChannelLen.value, LCD4linux.ChannelLines.value, LCD4linux.ChannelAlign.value, LCD4linux.ChannelSplit.value, LCD4linux.ChannelColor.value, LCD4linux.ChannelShadow.value, getFont(LCD4linux.ChannelFont.value)
 			Lput(LCD4linux.ChannelLCD.value, LCD4linux.Channel.value, putChannel, Para)
 # Progress Bar
-			Para = LCD4linux.ProgressPos.value, LCD4linux.ProgressSize.value, LCD4linux.ProgressLen.value, LCD4linux.ProgressType.value, LCD4linux.ProgressColor.value, LCD4linux.ProgressColorText.value, LCD4linux.ProgressAlign.value, LCD4linux.ProgressMinutes.value, LCD4linux.ProgressBorder.value, LCD4linux.ProgressShadow.value, LCD4linux.ProgressShadow2.value, getFont(LCD4linux.ProgressFont.value)
+			Para = LCD4linux.ProgressPos.value, LCD4linux.ProgressSize.value, LCD4linux.ProgressLen.value, LCD4linux.ProgressType.value, LCD4linux.ProgressColor.value, LCD4linux.ProgressColorText.value, LCD4linux.ProgressColorBG.value, LCD4linux.ProgressAlign.value, LCD4linux.ProgressMinutes.value, LCD4linux.ProgressBorder.value, LCD4linux.ProgressShadow.value, LCD4linux.ProgressShadow2.value, getFont(LCD4linux.ProgressFont.value)
 			Lput(LCD4linux.ProgressLCD.value, LCD4linux.Progress.value, putProgress, Para)
 # Volume
 			Para = LCD4linux.VolPos.value, LCD4linux.VolSize.value, LCD4linux.VolLen.value, LCD4linux.VolAlign.value, LCD4linux.VolSplit.value, LCD4linux.VolColor.value, LCD4linux.VolShadow.value
@@ -15374,7 +15482,7 @@ def autostart(reason, **kwargs):
 			LCD4linux.Crash.value = True
 		CheckFstab()
 		TFTCheck(False)
-		if isfile(LCD4enigma2config + "skin_user.xml"):
+		if isfile(join(LCD4enigma2config, "skin_user.xml")):
 			xmlRead()
 			LCD4linux.xmlType01.value = False if xmlFind(1) == -1 else True
 			LCD4linux.xmlType02.value = False if xmlFind(2) == -1 else True
