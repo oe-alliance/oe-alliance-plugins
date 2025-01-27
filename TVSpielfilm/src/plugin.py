@@ -58,6 +58,7 @@ config.plugins.tvspielfilm.prefered_db = ConfigSelection(default=0, choices=[(0,
 config.plugins.tvspielfilm.update_mapfile = ConfigSelection(default=1, choices=[(0, "niemals"), (1, "nach Updates")])
 config.plugins.tvspielfilm.cachepath = ConfigText(default=join("/media/hdd/"))
 config.plugins.tvspielfilm.keepcache = ConfigSelection(default=7, choices=[(x, f"-{x} Tage") for x in range(8)])
+config.plugins.tvspielfilm.durance_n = ConfigSelection(default=90, choices=DURANCES)  # 'now on TV'
 config.plugins.tvspielfilm.use_a = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.starttime_a = ConfigSelection(default=4, choices=STARTING)
 config.plugins.tvspielfilm.durance_a = ConfigSelection(default=90, choices=DURANCES)
@@ -74,12 +75,11 @@ config.plugins.tvspielfilm.use_d = ConfigYesNo(default=True)
 config.plugins.tvspielfilm.starttime_d = ConfigSelection(default=13, choices=STARTING)
 config.plugins.tvspielfilm.durance_d = ConfigSelection(default=90, choices=DURANCES)
 config.plugins.tvspielfilm.cache_d = ConfigSelection(default=7, choices=CACHEDAYS)
-config.plugins.tvspielfilm.durance_n = ConfigSelection(default=90, choices=DURANCES)
 
 
 class TVglobals():
 	IMPORTDICT = {}
-	RELEASE = "v1.0"
+	RELEASE = "v1.1"
 	MODULE_NAME = __name__.split(".")[-2]
 	RESOLUTION = "FHD" if getDesktop(0).size().width() > 1300 else "HD"
 	PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/TVSpielfilm/")
@@ -123,7 +123,7 @@ class TVhelper(Screen):
 				if callback:
 					callback(imgfile, assetId)
 			except OSError as error:
-				self.session.open(MessageBox, "Bild konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
+				self.session.open(MessageBox, "Bild konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
 
 	def saveAllAssets(self, assetsdict, date, spanStarts):
 		if assetsdict and date:
@@ -133,7 +133,7 @@ class TVhelper(Screen):
 					with open(assetsfile, "w") as file:
 						file.write(dumps(assetsdict))
 			except OSError as error:
-				self.session.open(MessageBox, "Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
+				self.session.open(MessageBox, "Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
 				return False
 		return True
 
@@ -160,7 +160,7 @@ class TVhelper(Screen):
 				with open(assetfile, "w") as file:  # save details for current asset to cache
 					file.write(dumps(assetdict))
 			except OSError as error:
-				self.session.open(MessageBox, "Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
+				self.session.open(MessageBox, "Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
 
 		if assetdict:
 			isTopTip = assetdict.get("flags", {}).get("isTopTip", "")
@@ -398,7 +398,7 @@ class TVhelper(Screen):
 				with open(tipsfile, "w") as file:
 					file.write(dumps(tipsdict))
 			except OSError as error:
-				self.session.open(MessageBox, "Datensatz 'Tipps' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
+				self.session.open(MessageBox, "Datensatz 'Tipps' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
 		tipslist = []
 		for index, tips in enumerate([[tipsdict.get("topTip", {})], tipsdict.get("tips", {}), tipsdict.get("highlights", {}),]):
 			for tip in tips:
@@ -1016,9 +1016,10 @@ class TVoverview(TVhelper, Screen):
 	</screen>
 	"""
 
-	def __init__(self, session, userspan=""):
+	def __init__(self, session, userspan, singleChannel=""):
 		self.session = session
-		self.spanStarts, self.spanDuranceTs = (userspan[0], int(userspan[1])) if userspan else ("", config.plugins.tvspielfilm.durance_n.value)
+		self.spanStarts, self.spanDuranceTs = userspan[0], int(userspan[1])
+		self.singleChannel = singleChannel
 		if tvglobals.RESOLUTION == "FHD":
 			self.skin = self.skin.replace("/HD/", "/FHD/")
 		self.tvinfobox = session.instantiateDialog(TVinfoBox)
@@ -1094,6 +1095,9 @@ class TVoverview(TVhelper, Screen):
 				self[icon[0]].hide()
 		self.startLoadAllEPG()
 
+#	def loadSinglechannel(self):
+#		downloaded, assetsdict = getAllAssets(channelId, todaydate, "")
+
 	def loadAllEPG(self, FinishOnStop):
 		self.loadAllEPGactive = True
 		todaydate = self.currdatetime.strftime("%F")
@@ -1111,7 +1115,7 @@ class TVoverview(TVhelper, Screen):
 		hour, minute = self.spanStarts.split(":") if self.spanStarts else [now.strftime("%H"), now.strftime("%M")]  # self.spanstars empty = 'Jetzt im TV'
 		spanStartsDt = self.currdatetime.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 		spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
-		for index, item in enumerate(tvglobals.IMPORTDICT.items()):
+		for index, item in enumerate([(self.singleChannel.lower(), ["", ""])] if self.singleChannel else tvglobals.IMPORTDICT.items()):
 			if self.loadAllEPGstop:
 				break
 			self["progressBar"].setValue(index)
@@ -1119,7 +1123,8 @@ class TVoverview(TVhelper, Screen):
 			self["shortStatus"].setText(f"Lade TVS-EPG Daten für '{item[1][1]}'")
 			channelId = item[0]
 			startslist = []  # avoids displaying duplicate entries for combination channels such as 'SWF/SR'
-			downloaded, assetsdict = getAllAssets(channelId, todaydate, spanStartsDt.strftime("%H:%M"))
+			spanStarts = "" if self.singleChannel else spanStartsDt.strftime("%H:%M")
+			downloaded, assetsdict = getAllAssets(channelId, todaydate, spanStarts)
 			if assetsdict:
 				for asset in assetsdict:
 					if self.loadAllEPGstop:
@@ -1137,6 +1142,8 @@ class TVoverview(TVhelper, Screen):
 						if endTime:
 							durance = endTime - startTime
 							progress = int(((now - startTime) / durance) * 100) if durance else -1
+							if progress:  # transmission is currently on air?
+								isOnAirIndex = self.allAssetsCount
 						assetId = asset.get("assetId", "")
 						title = unescape(asset.get("title", ""))
 						time = asset.get("time", "").split(" | ")  # e.g. '20:15 - 21:45 | DAS ERSTE'
@@ -1179,6 +1186,7 @@ class TVoverview(TVhelper, Screen):
 	def refreshSkinlist(self):
 		timerlist = self.getTimerlist()
 		skinlist = []
+		listPos, entryCounter = 0, 0
 		currfilter = ASSETFILTERS[self.filterIndex]
 		for asset in self.assetslist:
 			if currfilter[1]:  # is a filter set?
@@ -1198,6 +1206,9 @@ class TVoverview(TVhelper, Screen):
 			icon2 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}new.png") if asset[9] else None  # isNew
 			icon3 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}timer.png") if hasTimer else None  # timer-icon
 			skinlist.append((assetId, piconpix, channelName, timespan, progress, title, info, icon0, icon1, icon2, icon3, sref))
+			if self.singleChannel and progress > 0 and progress < 100 and not listPos:  # first transmission currently on air?
+				listPos = entryCounter
+			entryCounter += 1
 		if skinlist:
 			self.skinlist = skinlist
 		else:
@@ -1205,13 +1216,15 @@ class TVoverview(TVhelper, Screen):
 			self.skinlist = []
 			self.hideCurrentAsset()
 		self["menuList"].updateList(skinlist)
+		if listPos:
+			self["menuList"].setCurrentIndex(listPos)
 		self.lenskinlist = len(self.skinlist)
 
 	def showCurrentAsset(self):
 		if self.skinlist:
 			current = min(self["menuList"].getCurrentIndex(), len(self.skinlist) - 1)
 			assetId = self.skinlist[current][0]
-			self.zapAllowed = self.skinlist[current][4] > -1  # progressbar visible means TV program is currently running
+			self.zapAllowed = self.skinlist[current][4] > -1  # progressbar visible means transmission is currently on air
 			self["key_blue"].setText("Zap" if self.zapAllowed else "")
 			if assetId != self.currentAssetId:  # is a new asset?
 				callInThread(self.showAssetDetails, assetId, False)
@@ -1330,7 +1343,7 @@ class TVmain(TVhelper, Screen):
 		<eLabel name="TV_line" position="2,407" size="316,2" backgroundColor=" #0027153c , #00101093 , black , horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="70,20" font="Regular;18" textBorderColor="#505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
-		<widget source="mainmenu" render="Listbox" position="2,60" size="316,320" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showNever">
+		<widget source="mainmenu" render="Listbox" position="2,60" size="316,320" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">{"template": [
 				MultiContentEntryText(pos=(0,0), size=(316,40), font=0, color=0xffffff, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)  # menutext
 				],
@@ -1365,6 +1378,7 @@ class TVmain(TVhelper, Screen):
 		self.tvtipsboxTimer = eTimer()
 		self.tvtipsboxTimer.callback.append(self.showNextTip)
 		self.oldChannelName = config.plugins.tvspielfilm.channelname.value
+		self.singleChannel = False
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["mainmenu"] = List()
 		self["key_red"] = StaticText("Import")
@@ -1418,10 +1432,11 @@ class TVmain(TVhelper, Screen):
 		usermenu = []
 		for index, userspan in enumerate(userspans):  # build main menu
 			usermenu.append((f"{userspan[0]} im TV", index, TVoverview, userspan))
-		usermenu.append(("Jetzt im TV", 4, TVoverview, ""))
-		usermenu.append(("laufende Sendung", 5, "", ""))
-		usermenu.append(("TVS-EPG Datenupdate", 6))
-		usermenu.append(("lösche TVS-EPG Cache", 7))
+		usermenu.append(("Jetzt im TV", 4, TVoverview, ("", config.plugins.tvspielfilm.durance_n.value)))
+		usermenu.append(("laufende Sendung", 5))
+		usermenu.append(("Senderübersicht", 6))
+		usermenu.append(("TVS-EPG Datenupdate", 7))
+		usermenu.append(("lösche TVS-EPG Cache", 8))
 		self["mainmenu"].updateList(usermenu)
 
 	def keyOk(self):
@@ -1436,12 +1451,16 @@ class TVmain(TVhelper, Screen):
 				self.tvupdate.hideDialog(self.tvupdate.getIsVisible())
 				callInThread(showCurrentEvent, self.session, self.returnOk4)
 			elif current[1] == 6:
+				self.hideTVtipsBox()
+				self.tvupdate.hideDialog(self.tvupdate.getIsVisible())
+				self.session.openWithCallback(self.returnOk1, selectChannelCategory)
+			elif current[1] == 7:
 				if self.updateActive:
 					self.tvinfobox.showDialog("Das TVS-EPG Update läuft bereits.", 2500)
 				else:
 					msgtext = "\nTVS-EPG Update durchführen?\n\nDies gilt für die im Setup eingestellten Zeiträume,\nläuft im Hintergrund und kann einige Minuten dauern."
 					self.session.openWithCallback(self.returnOk2, MessageBox, msgtext, MessageBox.TYPE_YESNO, timeout=10, default=False)
-			elif current[1] == 7:
+			elif current[1] == 8:
 				if self.updateActive:
 					self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer TVS-EPG Zwischenspeicher kann daher im Moment nicht gelöscht werden.", 2500)
 				else:
@@ -1611,6 +1630,7 @@ class TVmain(TVhelper, Screen):
 							break
 						self.setProgressValues(1, (f"Sender: '{item[1][1]}'", index1, f"{index1}/{len_importdict}"))
 						channelId = item[0]
+						spanStarts = "00:00" if self.singleChannel else spanStarts
 						downloaded, assetsdict = getAllAssets(channelId, datestr, spanStarts, noLoadExisting=True)
 						if downloaded:
 							allAssets[channelId] = assetsdict
@@ -1689,6 +1709,96 @@ class TVmain(TVhelper, Screen):
 		self.tvupdate.setText(f"progressTxt{index}", valuelist[2])
 
 
+class selectChannelCategory(TVhelper, Screen):
+	skin = """
+	<screen name="selectChannelCategory" position="480,50" size="320,620" backgroundColor="#16000000" flags="wfNoBorder" resolution="1280,720" title="TV Spielfilm Servicedatei">
+		<eLabel position="0,0" size="320,620" backgroundColor="#00203060" zPosition="-2" />
+		<eLabel position="2,2" size="316,616" zPosition="-1" />
+		<eLabel name="TV_bg" position="2,2" size="316,58" backgroundColor=" black, #00203060, horizontal" zPosition="1" />
+		<eLabel name="TV_line" position="2,60" size="316,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
+		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
+		<widget source="release" render="Label" position="180,28" size="70,20" font="Regular;18" textBorderColor="#00505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
+		<widget source="menulist" render="Listbox" position="2,60" size="316,560" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
+			<convert type="TemplatedMultiContent">{"template": [
+				MultiContentEntryText(pos=(0,0), size=(316,40), font=0,  flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)  # menutext
+				],
+				"fonts": [gFont("Regular",24)],
+				"itemHeight":40
+				}</convert>
+		</widget>
+	</screen>
+	"""
+
+	def __init__(self, session):
+		self.session = session
+		if tvglobals.RESOLUTION == "FHD":
+			self.skin = self.skin.replace("/HD/", "/FHD/")
+		Screen.__init__(self, session)
+		self.channeldict = {}
+		self.channels = []
+		self.categories = []
+		self.categoryMenu = True
+		self.categoryIndex = 0
+		self.channelIndex = 0
+		self["release"] = StaticText(tvglobals.RELEASE)
+		self["menulist"] = List()
+		self["actions"] = ActionMap(["OkCancelActions"],
+							  						{"ok": self.keyOk,
+													"cancel": self.keyExit}, -1)
+		self.onLayoutFinish.append(self.layoutFinished)
+
+	def layoutFinished(self):
+		callInThread(self.getChannelList)
+
+	def getChannelList(self):
+		url = f"{tvglobals.BASEURL}/api/cms/channels/list"
+		errmsg, self.channeldict = getAPIdata(url)  # get current supported TVS channellist
+		if errmsg:
+			self.session.open(MessageBox, "Fehler beim Laden der Senderliste", type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
+			return
+		categories = []
+		for channel in self.channeldict:
+			category = channel.get("category", "")
+			channelId = channel.get("channelId", "")
+			if category and category not in categories:  # found category already listed?
+				if channelId.lower() in tvglobals.IMPORTDICT.keys():  # channel was imported?
+					categories.append(category)
+		self.categories = categories  # e.g. ['Hauptsender', 'Auslandssender', 'Spartensender', 'News und Dokus', 'Dritte Programme', 'Sportsender', 'Kindersender', 'Musiksender', 'Shopping', 'Regionalsender', 'Sky Cinema', 'Pay TV', 'Sky Sport', 'Sky Entertainment']
+		self["menulist"].updateList(categories)
+
+	def keyExit(self):
+		if self.categoryMenu:
+			self.close(False)
+		else:
+			self.categoryMenu = True
+			self["menulist"].updateList(self.categories)
+			self["menulist"].setCurrentIndex(self.categoryIndex)
+
+	def keyOk(self):
+		if self["menulist"]:
+			if self.categoryMenu:
+				self.categoryMenu = False
+				category = self["menulist"].getCurrent()
+				self.categoryIndex = self["menulist"].getCurrentIndex()
+				channels = []
+				for channel in self.channeldict:
+					channelId = channel.get("channelId", "")
+					if channel.get("category", "") == category and channelId.lower() in tvglobals.IMPORTDICT.keys():  # channel is in this category and was imported?
+						channelName = channel.get("name", "") if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(channelId.lower(), ["", ""])[1]
+						channels.append((channelName, channelId))
+				self.channels = channels
+				self["menulist"].updateList(channels)
+				self["menulist"].setCurrentIndex(self.channelIndex)
+			else:
+				self.channelIndex = self["menulist"].getCurrentIndex()
+				channel = self["menulist"].getCurrent()  # e.g. ("Das Erste", "ard")
+				self.session.openWithCallback(self.keyOkReturn, TVoverview, ("", 86400), channel[1])  # 24h
+
+	def keyOkReturn(self, answer):
+			if answer:
+				self.close(True)
+
+
 class TVimport(TVhelper, Screen):
 	skin = """
 	<screen name="TVimport" position="480,90" size="320,500" backgroundColor="#16000000" flags="wfNoBorder" resolution="1280,720" title="TV Spielfilm Servicedatei">
@@ -1698,7 +1808,7 @@ class TVimport(TVhelper, Screen):
 		<eLabel name="TV_line" position="2,60" size="316,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="70,20" font="Regular;18" textBorderColor="#00505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
-		<widget source="bouquetslist" render="Listbox" position="2,60" size="316,440" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showNever">
+		<widget source="bouquetslist" render="Listbox" position="2,60" size="316,440" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">{"template": [
 				MultiContentEntryText(pos=(0,0), size=(316,40), font=0,  flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)  # menutext
 				],
@@ -2035,18 +2145,20 @@ def getAPIdata(url, params=None):
 def getAllAssets(channelId, date, spanStarts, noLoadExisting=False):
 	assetsdict = {}
 	temppath = f"{config.plugins.tvspielfilm.cachepath.value}tmp/TVSpielfilm/" if config.plugins.tvspielfilm.cachepath.value == "/" else f"{config.plugins.tvspielfilm.cachepath.value}TVSpielfilm/"
-	assetsfile = join(f"{temppath}cache/", f"allAssets{date}T{spanStarts}.json")
-	if date and exists(assetsfile):  # load assets from cache if available and desired
-		if noLoadExisting:
-			return False, {}
+	assetsfile = join(f"{temppath}cache/", f"allAssets{date}T{spanStarts}.json") if spanStarts else ""
+	if date and assetsfile and exists(assetsfile) and not noLoadExisting:  # load assets from cache if available and desired
 		with open(assetsfile, "r") as file:
 			filedict = loads(file.read()) or {}
 		if filedict:
 			assetsdict = filedict.get(channelId, {})  # extract assets for current channelId
 		return False, assetsdict
 	else:  # download assets for current channelId
-		url = f"{tvglobals.BASEURL}api/epg/broadcast/{channelId.upper()}"
-		params = [('mode', 'current'), ('date', f'{date}T{spanStarts}')] if spanStarts else [('mode', 'current')]
+		if spanStarts:
+			url = f"{tvglobals.BASEURL}api/epg/broadcast/{channelId.upper()}"
+			params = [('mode', 'current'), ('date', f'{date}T{spanStarts}')] if spanStarts else [('mode', 'current')]
+		else:
+			url = f"{tvglobals.BASEURL}api/epg/broadcast/{channelId.upper()}/{date}"
+			params = ""
 		errmsg, jsondict = getAPIdata(url, params)  # get today's EPG for channel shortcuts (e.g. 'ard' instead of 'Das Erste')
 		if errmsg:
 			return False, {}
@@ -2090,15 +2202,14 @@ def showNowOnTv(session, **kwargs):
 	if not exists(join(resolveFilename(SCOPE_CONFIG, "TVSpielfilm/"), "tvs_imported.json")):
 		session.open(TVimport)
 	else:
-		session.open(TVoverview, "")
+		session.open(TVoverview, ("", 0))
 
 
 def showPrimeTime(session, **kwargs):
 	if not exists(join(resolveFilename(SCOPE_CONFIG, "TVSpielfilm/"), "tvs_imported.json")):
 		session.open(TVimport)
 	else:
-		userspan = (STARTTIMES[config.plugins.tvspielfilm.starttime_c.value], config.plugins.tvspielfilm.durance_c.value, config.plugins.tvspielfilm.cache_c.value)
-		session.open(TVoverview, userspan)
+		session.open(TVoverview, (STARTTIMES[config.plugins.tvspielfilm.starttime_c.value], config.plugins.tvspielfilm.durance_c.value))
 
 
 def main(session, **kwargs):
