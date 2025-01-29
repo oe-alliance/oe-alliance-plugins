@@ -561,10 +561,10 @@ class TVfullscreen(TVhelper, Screen):
 		<widget source="channelName" render="Label" position="548,158" size="220,32" font="Regular; 24" halign="center" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget source="editorial" render="Label" position="90,80" size="490,30" font="Regular; 18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 		<widget source="conclusion" render="Label" position="90,102" size="490,54" font="Regular;20" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" valign="top" />
-		<widget name="picon" position="586,66" size="147,88" alphatest="blend" scaleFlags="keepAspect" zPosition="1" />
+		<widget name="picon" position="586,66" size="147,88" alphatest="blend" scaleFlags="scale" zPosition="1" />
 		<widget source="title" render="Label" position="center,0" size="720,36" font="Regular;24" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" wrap="ellipsis" halign="center" valign="center" zPosition="10" />
 		<widget source="repeatHint" render="Label" position="10,600" size="750,46" font="Regular;18" valign="center" halign="left" backgroundColor="#16000000" transparent="1" />
-		<widget name="image" position="794,70" size="400,302" alphatest="blend" scaleFlags="keepAspect" zPosition="1" />
+		<widget name="image" position="794,70" size="400,300" alphatest="blend" scaleFlags="scale" zPosition="1" />
 		<widget name="playButton" position="970,194" size="60,60" alphatest="blend" zPosition="2" />
 		<widget name="fsk" position="800,326" size="40,40" alphatest="blend" zPosition="2" />
 		<widget source="credits" render="Label" position="756,372" size="474,22" font="Regular; 16" foregroundColor="grey" backgroundColor="#16000000" halign="center" transparent="1" />
@@ -623,7 +623,7 @@ class TVfullscreen(TVhelper, Screen):
 		<ePixmap position="910,664" size="46,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/info.png" alphatest="blend" zPosition="1" />
 		<ePixmap position="730,664" size="46,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/ok.png" alphatest="blend" zPosition="1" />
 		<widget name="play" position="1094,664" size="20,28" alphatest="blend" zPosition="2" />
-		<eLabel name="" position="252,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />skin =
+		<eLabel name="" position="252,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
 		<eLabel name="" position="172,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
 		<eLabel name="" position="212,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
 		<eLabel name="" position="132,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
@@ -750,22 +750,22 @@ class TVtipsBox(Screen):
 		<eLabel position="2,2" size="406,260" zPosition="-2" />
 		<eLabel name="TVSPro_line" position="2,38" size="406,2" backgroundColor=" #0027153c, #00101093, black, horizontal" zPosition="10" />
 		<eLabel name="TVSPro_line" position="2,234" size="406,2" backgroundColor=" #0027153c, #00101093, black, horizontal" zPosition="10" />
-		<eLabel position="2,2" size="406,36" backgroundColor=" #051a264d, #10304070, #051a264d, horizontal" zPosition="0" />
-		<widget name="image" position="6,42" size="202,158" alphatest="blend" scaleFlags="keepAspect" zPosition="1" />
-		<widget name="picon" position="258,82" size="100,60" alphatest="blend" scaleFlags="keepAspect" zPosition="1" />
-		<widget name="hasTimer" position="359,82" size="14,14" alphatest="blend" zPosition="1" />
-		<widget source="channelName" render="Label" position="212,42" size="194,36" font="Regular; 24" halign="center" valign="center" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
-		<widget source="timeStartEnd" render="Label" position="212,148" size="194,26" font="Regular;20" backgroundColor="#16000000" transparent="1" halign="center" />
-		<widget source="titleLength" render="Label" position="212,174" size="194,26" font="Regular;20" foregroundColor="grey" backgroundColor="#16000000" transparent="1" halign="center" />
+		<eLabel name="TV_bg" position="2,2" size="406,36" backgroundColor=" black, #00203060, horizontal" zPosition="0" />
+		<widget name="image" position="6,42" size="200,150" alphatest="blend" scaleFlags="scale" zPosition="1" />
+		<widget name="picon" position="258,92" size="100,60" alphatest="blend" scaleFlags="scale" zPosition="1" />
+		<widget name="hasTimer" position="359,92" size="14,14" alphatest="blend" zPosition="1" />
+		<widget source="channelName" render="Label" position="212,42" size="194,48" font="Regular; 20" halign="center" valign="center" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
+		<widget source="timeStartEnd" render="Label" position="212,156" size="194,24" font="Regular; 18" backgroundColor="#16000000" transparent="1" halign="center" />
+		<widget source="titleLength" render="Label" position="212,178" size="194,24" font="Regular; 18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" halign="center" />
 		<widget source="headline" render="Label" position="2,1" size="406,36" font="Regular; 24" wrap="ellipsis" backgroundColor="#16000000" zPosition="1" halign="center" valign="center" transparent="1" />
 		<widget source="title" render="Label" position="10,204" size="396,28" font="Regular;20" wrap="ellipsis" foregroundColor="#0092cbdf" backgroundColor="#16000000" halign="left" valign="center" transparent="1" />
 		<widget source="genreBroad" render="Label" position="70,236" size="286,24" font="Regular; 18" backgroundColor="#16000000" transparent="1" halign="left" valign="center" />
 		<eLabel text="Genre :" position="10,236" size="66,24" font="Regular;18" backgroundColor="#16000000" transparent="1" halign="left" valign="center" />
 		<widget source="yearCountry" render="Label" position="278,236" size="220,24" font="Regular; 18" backgroundColor="#16000000" transparent="1" halign="left" valign="center" />
-		<widget name="thumb" position="362,91" size="40,40" alphatest="blend" zPosition="1" />
-		<widget name="isTopTip" position="222,86" size="28,14" alphatest="blend" zPosition="1" />
-		<widget name="isTipOfTheDay" position="222,106" size="28,14" alphatest="blend" zPosition="1" />
-		<widget name="isNew" position="222,126" size="28,14" alphatest="blend" zPosition="1" />
+		<widget name="thumb" position="362,102" size="40,40" alphatest="blend" zPosition="1" />
+		<widget name="isTopTip" position="222,96" size="28,14" alphatest="blend" zPosition="1" />
+		<widget name="isTipOfTheDay" position="222,116" size="28,14" alphatest="blend" zPosition="1" />
+		<widget name="isNew" position="222,136" size="28,14" alphatest="blend" zPosition="1" />
 	</screen>
 	"""
 
@@ -952,9 +952,9 @@ class TVoverview(TVhelper, Screen):
 		<widget name="progressBar" position="450,32" size="430,24" foregroundColor="#203060" backgroundColor="#505050" transparent="1" zPosition="8" />
 		<widget source="progressTxt" render="Label" position="388,34" size="60,20" font="Regular; 16" foregroundColor="yellow" backgroundColor="#16000000" transparent="0" halign="center" valign="center" zPosition="9" />
 		<widget source="shortStatus" render="Label" position="452,34" size="426,20" font="Regular;16" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" wrap="ellipsis" zPosition="9" />
-		<widget name="picon" position="760,210" size="147,88" alphatest="blend" scaleFlags="keepAspect" zPosition="1" />
+		<widget name="picon" position="760,210" size="147,88" alphatest="blend" scaleFlags="scale" zPosition="1" />
 		<widget source="channelName" render="Label" position="740,178" size="187,32" font="Regular; 24" halign="center" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
-		<widget name="image" position="936,66" size="318,238" alphatest="blend" scaleFlags="keepAspect" zPosition="1" />
+		<widget name="image" position="936,66" size="320,240" alphatest="blend" scaleFlags="scale" zPosition="1" />
 		<widget name="playButton" position="1060,160" size="60,60" alphatest="blend" zPosition="2" />
 		<widget name="fsk" position="940,260" size="40,40" alphatest="blend" zPosition="2" />
 		<widget name="isTopTip" position="1010,310" size="28,14" alphatest="blend" zPosition="1" />
@@ -1142,8 +1142,6 @@ class TVoverview(TVhelper, Screen):
 						if endTime:
 							durance = endTime - startTime
 							progress = int(((now - startTime) / durance) * 100) if durance else -1
-							if progress:  # transmission is currently on air?
-								isOnAirIndex = self.allAssetsCount
 						assetId = asset.get("assetId", "")
 						title = unescape(asset.get("title", ""))
 						time = asset.get("time", "").split(" | ")  # e.g. '20:15 - 21:45 | DAS ERSTE'
@@ -1161,7 +1159,7 @@ class TVoverview(TVhelper, Screen):
 							self.allImagesCount += 1
 						self.assetslist.append([assetId, channelId, channelName, timespan, progress, title, info, isTopTip, isTipOfTheDay, isNew, sref, imgurl, imgfile])
 						if not self.allAssetsCount:  # immediate display of details after downloading the first asset
-							self.zapAllowed = progress > -1  # progressbar visible means TV program is currently running
+							self.zapAllowed = progress > -1  # progressbar visible means transmission is currently on air
 							self["key_blue"].setText("Zap" if self.zapAllowed else "")
 							callInThread(self.showAssetDetails, assetId, False)
 						self.allAssetsCount += 1
@@ -1186,7 +1184,7 @@ class TVoverview(TVhelper, Screen):
 	def refreshSkinlist(self):
 		timerlist = self.getTimerlist()
 		skinlist = []
-		listPos, entryCounter = 0, 0
+		listpos, entrycounter = 0, 0
 		currfilter = ASSETFILTERS[self.filterIndex]
 		for asset in self.assetslist:
 			if currfilter[1]:  # is a filter set?
@@ -1206,9 +1204,9 @@ class TVoverview(TVhelper, Screen):
 			icon2 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}new.png") if asset[9] else None  # isNew
 			icon3 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}timer.png") if hasTimer else None  # timer-icon
 			skinlist.append((assetId, piconpix, channelName, timespan, progress, title, info, icon0, icon1, icon2, icon3, sref))
-			if self.singleChannel and progress > 0 and progress < 100 and not listPos:  # first transmission currently on air?
-				listPos = entryCounter
-			entryCounter += 1
+			if self.singleChannel and progress > 0 and progress < 100 and not listpos:  # transmission currently on air?
+				listpos = entrycounter
+			entrycounter += 1
 		if skinlist:
 			self.skinlist = skinlist
 		else:
@@ -1216,8 +1214,8 @@ class TVoverview(TVhelper, Screen):
 			self.skinlist = []
 			self.hideCurrentAsset()
 		self["menuList"].updateList(skinlist)
-		if listPos:
-			self["menuList"].setCurrentIndex(listPos)
+		if listpos:
+			self["menuList"].setCurrentIndex(listpos)
 		self.lenskinlist = len(self.skinlist)
 
 	def showCurrentAsset(self):
@@ -1396,7 +1394,7 @@ class TVmain(TVhelper, Screen):
 														"yellow": self.keyYellow,
 														"blue": self.keyBlue,
 														"menu": self.config}, -1)
-		tvglobals.IMPORTDICT = readImportedFile()  # lade importierte Senderdaten
+		tvglobals.IMPORTDICT = readImportedFile()  # load imported channel data
 		if not self.createTMPpaths():
 			self.exit()
 		self.cleanupCache()
