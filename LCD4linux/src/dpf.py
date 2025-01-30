@@ -2,7 +2,7 @@
 from six import PY2
 try:
 	from . import dpflib
-except:
+except Exception:
 	print("[LCD4linux] dpflib-Error")
 
 PROPERTY_BRIGHTNESS = 0x01
@@ -15,7 +15,7 @@ def setBacklight(dev, value):
 	try:
 		dev.setProperty(PROPERTY_BRIGHTNESS, value)
 		return True
-	except:
+	except Exception:
 		print("[LCD4linux] Error set Backlight")
 		return False
 
@@ -29,7 +29,7 @@ def showImage(dev, image):
 		else:
 			dev.showRGBAImage(0, 0, x, y, ir.tobytes())
 		return True
-	except:
+	except Exception:
 		print("[LCD4linux] Error writing DPF Device")
 		return False
 
@@ -37,9 +37,9 @@ def showImage(dev, image):
 def open(usb):
 	try:
 		d = dpflib.open(usb)
-		d.setProperty(PROPERTY_ORIENTATION, 1)
+#		d.setProperty(PROPERTY_ORIENTATION, 1)
 		print("[LCD4linux] open %s" % usb)
-	except:
+	except Exception:
 		d = None
 		print("[LCD4linux] open Error: %s" % usb)
 	return d
@@ -49,5 +49,5 @@ def close(dev):
 	try:
 		if dev is not None:
 			dev.close()
-	except:
+	except Exception:
 		pass
