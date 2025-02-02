@@ -79,14 +79,14 @@ class L4Lelement:
 		return L4Lelement.Hold
 
 	def setHold(self, H):
-		print("[LCD4linuxE] Hold: %s" % H)
+		print("[LCD4linuxE] hold: %s" % H)
 		L4Lelement.Hold = H
 
 	def getHoldKey(self):
 		return L4Lelement.HoldKey
 
 	def setHoldKey(self, H=False):
-		print("[LCD4linuxE] HoldKey: %s" % H)
+		print("[LCD4linuxE] holdkey: %s" % H)
 		L4Lelement.HoldKey = H
 
 	def getFont(self, F="0"):
@@ -102,25 +102,20 @@ class L4Lelement:
 		return L4Lelement.Screen
 
 	def setScreen(self, S, Lcd="", Hold=False):
-		if Lcd != "":
-			if len(str(Lcd)) > 1 or int(Lcd) > 3:
-				Lcd = "1"
+		if Lcd != "" and (len(str(Lcd)) > 1 or int(Lcd) > 3):
+			Lcd = "1"
 		L4Lelement.Screen = str(S)
 		L4Lelement.LCD = str(Lcd)
 		L4Lelement.Hold = Hold
 		L4Lelement.Refresh = True
 
-	def resetBrightness(self, AKT=""):
-		if len(AKT) == 3:
-			L4Lelement.BrightAkt = AKT
-		else:
-			L4Lelement.Bright = [-1, -1, -1]
+	def resetBrightness(self, AKT=[]):
+		L4Lelement.BrightAkt = AKT if len(AKT) == 3 else [-1, -1, -1]
 
 	def setBrightness(self, LCD, BRI=-1):
-		if int(LCD) < 1 or int(LCD) > 3:
-			return
-		L4Lelement.Bright[int(LCD) - 1] = int(BRI)
-		L4Lelement.Refresh = True
+		if int(LCD) > 0 and int(LCD) < 4:
+			L4Lelement.Bright[int(LCD) - 1] = int(BRI)
+			L4Lelement.Refresh = True
 
 	def getBrightness(self, LCD=0, ORG=True):
 		if int(LCD) > 0 and int(LCD) < 4:
@@ -145,14 +140,13 @@ def getstatusoutput(cmd):
 		sts = pipe.close()
 		if sts is None:
 			sts = 0
-		if text[-1:] == '\n':
+		if text.endswith == '\n':
 			text = text[:-1]
 	except Exception:
 		sts = 1
 		text = "- -"
 		print("[LCD4linux] Error on os-call")
-	finally:
-		return sts, text
+	return sts, text
 
 
 def L4LVtest(VV):
@@ -172,6 +166,7 @@ def L4LVtest(VV):
 	if O != "":
 		try:
 			f = open(L4Linfo % (O, P))
+			B = f.readline()
 			OO = f.readline().strip().split()[1].startswith(VV[1:])
 			f.close()
 		except Exception:

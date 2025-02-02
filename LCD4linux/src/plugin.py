@@ -2698,7 +2698,8 @@ def getFB2(check):
 
 
 def BRI(w1, w2):
-	return int(w1) if L4LElist.getBrightness(w2, False) == -1 else int(L4LElist.getBrightness(w2, False))
+	gb = L4LElist.getBrightness(w2, False)
+	return int(w1) if gb == -1 else gb
 
 
 def virtBRI(LCD):
@@ -3129,9 +3130,9 @@ def writeHelligkeit(hell, night, STOP):
 	global AktHelligkeit
 	global AktNight
 	R = ""
-	h1 = BRI(int(hell[0]), 1)
-	h2 = BRI(int(hell[1]), 2)
-	h3 = BRI(int(hell[2]), 3)
+	h1 = BRI(hell[0], 1)
+	h2 = BRI(hell[1], 2)
+	h3 = BRI(hell[2], 3)
 	if isOffTime(L4LMoon, L4LSun, L4LMoon, L4LSun):
 		if int(night[0]) != 0:
 			h1 = max(h1 - int(night[0]), 0)
@@ -9182,10 +9183,10 @@ class UpdateStatus(Screen):
 			self.LsreftoString = sref.toString()
 			if self.LsreftoString is not None:
 				self.LsrefFile = self.LsreftoString[self.LsreftoString.rfind(":") + 1:]
-				if self.LsrefFile.endswith("/"):
+				if self.LsrefFile.startswith("/"):
 					tsref = self.LsreftoString[:-len(self.LsrefFile) - 1]
 					tsref = tsref[tsref.rfind(":") + 1:]
-					if tsref.starts("/"):
+					if tsref.startswith("/"):
 						self.LsrefFile = tsref
 			else:
 				self.LsrefFile = ""
@@ -12339,7 +12340,7 @@ def LCD4linuxPIC(self, session):
 				try:
 					length = self.Llength
 					position = self.Lposition
-					if length and length[1] > 0 and position:
+					if length and (length[1] > 0 and position):
 						if ConfigType[0] in ["2", "4", "6", "8", "9", "A"]:
 							if ConfigType[0] in ["8", "9", "A"] or length[0] == 1:
 								dur = int(position[1] / 90000)
