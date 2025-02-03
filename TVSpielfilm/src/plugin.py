@@ -46,7 +46,7 @@ from Tools.Directories import resolveFilename, isPluginInstalled, SCOPE_PLUGINS,
 from Tools.LoadPixmap import LoadPixmap
 
 STARTTIMES = ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "19:00", "20:00", "20:15", "22:00"]
-ASSETFILTERS = [("{keiner}", ""), ("Tipp", "isTipOfTheDay"), ("Neu", "isNew"), ("Tagestipp", "isTopTip")]
+ASSETFILTERS = [("{keiner}", ""), ("Daumen", "thumb"), ("Tipp", "isTipOfTheDay"), ("Neu", "isNew"), ("Tagestipp", "isTopTip")]
 STARTING = [(i, f"{x} Uhr") for i, x in enumerate(STARTTIMES)]
 DURANCES = [(x, f"{x} Minuten") for x in range(15, 135, 15)]
 CACHEDAYS = [(x, f"+{x} Tage") for x in range(1, 14)]
@@ -79,7 +79,7 @@ config.plugins.tvspielfilm.cache_d = ConfigSelection(default=7, choices=CACHEDAY
 
 class TVglobals():
 	IMPORTDICT = {}
-	RELEASE = "v1.1"
+	RELEASE = "v1.2"
 	MODULE_NAME = __name__.split(".")[-2]
 	RESOLUTION = "FHD" if getDesktop(0).size().width() > 1300 else "HD"
 	PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/TVSpielfilm/")
@@ -359,7 +359,10 @@ class TVhelper(Screen):
 		if fullscreen:
 			reviewdate = f"{weekday} {currdatetime.strftime('%d.%m.%Y')} | von {spanStarts} Uhr bis {spanEnds} Uhr | {self.titleLenStr}"
 		else:
-			reviewdate = f"{weekday} {currdatetime.strftime('%d.%m.%Y')} | {self.currdaydelta:+} Tag(e) | {spanStarts} Uhr bis {spanEnds} Uhr"
+			if self.singleChannel:
+				reviewdate = f"{weekday} {currdatetime.strftime('%d.%m.%Y')} | {self.currdaydelta:+} Tag(e) | alle Sendungen"
+			else:
+				reviewdate = f"{weekday} {currdatetime.strftime('%d.%m.%Y')} | {self.currdaydelta:+} Tag(e) | {spanStarts} Uhr bis {spanEnds} Uhr"
 		self["reviewdate"].setText(reviewdate)
 
 	def setAssetImage(self, imgfile, assetId):
@@ -497,10 +500,10 @@ class TVhelper(Screen):
 			elif config.plugins.tvspielfilm.prefered_db.value == 2:
 				self.openTmdb()
 			else:
-				outlist = []
+				choicelist = []
 				for database, index in enumerate(self.dataBases):
-					outlist.append((index, database))
-				self.session.openWithCallback(self.keyInfoCB, ChoiceBox, list=outlist, keys=[], windowTitle="Wähle die gewünschte Datenbank:")
+					choicelist.append((index, database))
+				self.session.openWithCallback(self.keyInfoCB, ChoiceBox, list=choicelist, keys=[], windowTitle="Wähle die gewünschte Datenbank:")
 
 	def keyInfoCB(self, answer):
 		if answer:
@@ -758,6 +761,8 @@ class TVtipsBox(Screen):
 		<widget source="timeStartEnd" render="Label" position="212,156" size="194,24" font="Regular; 18" backgroundColor="#16000000" transparent="1" halign="center" />
 		<widget source="titleLength" render="Label" position="212,178" size="194,24" font="Regular; 18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" halign="center" />
 		<widget source="headline" render="Label" position="2,1" size="406,36" font="Regular; 24" wrap="ellipsis" backgroundColor="#16000000" zPosition="1" halign="center" valign="center" transparent="1" />
+		<ePixmap position="8,14" size="24,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/left.png" alphatest="blend" zPosition="1" />
+		<ePixmap position="384,14" size="24,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/right.png" alphatest="blend" zPosition="1" />
 		<widget source="title" render="Label" position="10,204" size="396,28" font="Regular;20" wrap="ellipsis" foregroundColor="#0092cbdf" backgroundColor="#16000000" halign="left" valign="center" transparent="1" />
 		<widget source="genreBroad" render="Label" position="70,236" size="286,24" font="Regular; 18" backgroundColor="#16000000" transparent="1" halign="left" valign="center" />
 		<eLabel text="Genre :" position="10,236" size="66,24" font="Regular;18" backgroundColor="#16000000" transparent="1" halign="left" valign="center" />
@@ -777,17 +782,22 @@ class TVtipsBox(Screen):
 		for widget in ["isTopTip", "isTipOfTheDay", "isNew", "fsk", "thumb", "image", "picon", "hasTimer"]:
 			self[widget] = Pixmap()
 		self.isVisible = False
+		self.wasVisible = False
 
 	def showDialog(self):
 		self.isVisible = True
 		self.show()
 
 	def hideDialog(self):
+		self.wasVisible = self.isVisible
 		self.isVisible = False
 		self.hide()
 
 	def getIsVisible(self):
 		return self.isVisible
+
+	def getWasVisible(self):
+		return self.wasVisible
 
 	def setText(self, widget, text):
 		self[widget].setText(text)
@@ -873,16 +883,16 @@ class TVupdate(Screen):
 		self.isVisible = True
 		self.show()
 
-	def hideDialog(self, status):
-		self.wasVisible = status
+	def hideDialog(self):
+		self.wasVisible = self.isVisible
 		self.isVisible = False
 		self.hide()
 
-	def getIsVisible(self):
-		return self.isVisible
-
 	def getWasVisible(self):
 		return self.wasVisible
+
+	def getIsVisible(self):
+		return self.isVisible
 
 	def setRange(self, widget, range):
 		self[widget].setRange(range)
@@ -933,12 +943,13 @@ class TVoverview(TVhelper, Screen):
 				MultiContentEntryText(pos=(78,0), size=(100,16), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_ELLIPSIS, color=0x00ffff, text=2),  # channelName
 				MultiContentEntryText(pos=(78,18), size=(100,16), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, color=0x00ff00, text=3),  # time
 				MultiContentEntryProgress(pos=(80,38), size=(88,6), borderWidth=1, foreColor=0xcbcbcb, percent=-4),  # progress
-				MultiContentEntryText(pos=(184,0), size=(480,26), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_ELLIPSIS, text=5),  # title
-				MultiContentEntryText(pos=(184,22), size=(480,22), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_ELLIPSIS, text=6),  # info
-				MultiContentEntryPixmapAlphaBlend(pos=(666,0), size=(40,14), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER, png=7),  # icon0
-				MultiContentEntryPixmapAlphaBlend(pos=(666,16), size=(40,14), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER, png=8),  # icon1
-				MultiContentEntryPixmapAlphaBlend(pos=(666,32), size=(40,14), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER, png=9),  # icon2
-				MultiContentEntryPixmapAlphaBlend(pos=(56,0), size=(14,14), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER, png=10)  # icon3
+				MultiContentEntryText(pos=(184,0), size=(456,26), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_ELLIPSIS, text=5),  # title
+				MultiContentEntryText(pos=(184,22), size=(456,22), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_ELLIPSIS, text=6),  # info
+				MultiContentEntryPixmapAlphaBlend(pos=(640,4), size=(40,40), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER, png=7),  # thumb
+				MultiContentEntryPixmapAlphaBlend(pos=(680,0), size=(40,14), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER, png=8),  # icon0
+				MultiContentEntryPixmapAlphaBlend(pos=(680,16), size=(40,14), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER, png=9),  # icon1
+				MultiContentEntryPixmapAlphaBlend(pos=(680,32), size=(40,14), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER, png=10),  # icon2
+				MultiContentEntryPixmapAlphaBlend(pos=(56,0), size=(14,14), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER, png=11)  # icon3
 				],
 				"fonts": [gFont("Regular",20),gFont("Regular",16),gFont("Regular",14)],
 				"itemHeight":48
@@ -1095,9 +1106,6 @@ class TVoverview(TVhelper, Screen):
 				self[icon[0]].hide()
 		self.startLoadAllEPG()
 
-#	def loadSinglechannel(self):
-#		downloaded, assetsdict = getAllAssets(channelId, todaydate, "")
-
 	def loadAllEPG(self, FinishOnStop):
 		self.loadAllEPGactive = True
 		todaydate = self.currdatetime.strftime("%F")
@@ -1115,7 +1123,7 @@ class TVoverview(TVhelper, Screen):
 		hour, minute = self.spanStarts.split(":") if self.spanStarts else [now.strftime("%H"), now.strftime("%M")]  # self.spanstars empty = 'Jetzt im TV'
 		spanStartsDt = self.currdatetime.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 		spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
-		for index, item in enumerate([(self.singleChannel.lower(), ["", ""])] if self.singleChannel else tvglobals.IMPORTDICT.items()):
+		for index, item in enumerate([(self.singleChannel.lower(), ["", self.singleChannel])] if self.singleChannel else tvglobals.IMPORTDICT.items()):
 			if self.loadAllEPGstop:
 				break
 			self["progressBar"].setValue(index)
@@ -1135,7 +1143,7 @@ class TVoverview(TVhelper, Screen):
 					if self.spanStarts:
 						isInTimespan = startTime.timestamp() >= spanStartsDt.timestamp() and startTime.timestamp() < spanEndsDt.timestamp()
 					else:  # self.spanstars empty = 'Jetzt im TV'
-						isInTimespan = startTime.timestamp() < spanEndsDt.timestamp()
+						isInTimespan = True if self.singleChannel else startTime.timestamp() < spanEndsDt.timestamp()
 					if startTime and isInTimespan and startTime not in startslist:  # begin of transmission still in the period?
 						startslist.append(startTime)
 						progress = -1
@@ -1149,6 +1157,7 @@ class TVoverview(TVhelper, Screen):
 						if not config.plugins.tvspielfilm.channelname.value:
 							channelName = tvglobals.IMPORTDICT.get(channelId, ["", ""])[1]
 						info = asset.get("info", "")
+						thumbIdNumeric = asset.get("thumbIdNumeric", -1)
 						isTopTip = asset.get("isTopTip", False)
 						isTipOfTheDay = asset.get("isTipOfTheDay", False)
 						isNew = asset.get("flags", {}).get("isNew", False)
@@ -1157,9 +1166,9 @@ class TVoverview(TVhelper, Screen):
 						imgfile = join(f"{self.getTMPpath()}images/", imgurl[imgurl.rfind("/") + 1:]) if imgurl else ""
 						if imgfile:
 							self.allImagesCount += 1
-						self.assetslist.append([assetId, channelId, channelName, timespan, progress, title, info, isTopTip, isTipOfTheDay, isNew, sref, imgurl, imgfile])
+						self.assetslist.append([assetId, channelId, channelName, timespan, progress, title, info, thumbIdNumeric, isTopTip, isTipOfTheDay, isNew, sref, imgurl, imgfile])
 						if not self.allAssetsCount:  # immediate display of details after downloading the first asset
-							self.zapAllowed = progress > -1  # progressbar visible means transmission is currently on air
+							self.zapAllowed = progress > -1  # progressbar visible means: transmission is currently on air
 							self["key_blue"].setText("Zap" if self.zapAllowed else "")
 							callInThread(self.showAssetDetails, assetId, False)
 						self.allAssetsCount += 1
@@ -1189,28 +1198,33 @@ class TVoverview(TVhelper, Screen):
 		for asset in self.assetslist:
 			if currfilter[1]:  # is a filter set?
 				leaveout = True
-				for assetFlag in [(asset[7], "isTopTip"), (asset[8], "isTipOfTheDay"), (asset[9], "isNew")]:
-					if assetFlag[0] and assetFlag[1] == currfilter[1]:
-						leaveout = False
-						break
+				if currfilter[1] == "thumb" and asset[7] > -1:
+					leaveout = False
+				else:
+					for assetFlag in [(asset[8], "isTopTip"), (asset[9], "isTipOfTheDay"), (asset[10], "isNew")]:
+						if assetFlag[0] and assetFlag[1] == currfilter[1]:
+							leaveout = False
+							break
 				if leaveout:
 					continue
 			hasTimer = self.isAlreadyListed(asset[3], asset[10], self.currdatetime, timerlist)  # timespan, sref
 			piconfile = self.getPiconFile(asset[1])
 			piconpix = LoadPixmap(cached=True, path=piconfile) if piconfile and exists(piconfile) else None
-			assetId, channelName, timespan, progress, title, info, sref = asset[0], asset[2], asset[3], asset[4], asset[5], asset[6], asset[10]
-			icon0 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}top.png") if asset[7] else None  # isTopTip
-			icon1 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}tip.png") if asset[8] else None  # isTipOfTheDay
-			icon2 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}new.png") if asset[9] else None  # isNew
+			assetId, channelName, timespan, progress, title, info, sref = asset[0], asset[2], asset[3], asset[4], asset[5], asset[6], asset[11]
+			thumb = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}thumb{asset[7]}.png") if asset[7] > -1 else None  # thumbIdNumeric
+			icon0 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}top.png") if asset[8] else None  # isTopTip
+			icon1 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}tip.png") if asset[9] else None  # isTipOfTheDay
+			icon2 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}new.png") if asset[10] else None  # isNew
 			icon3 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}timer.png") if hasTimer else None  # timer-icon
-			skinlist.append((assetId, piconpix, channelName, timespan, progress, title, info, icon0, icon1, icon2, icon3, sref))
+			skinlist.append((assetId, piconpix, channelName, timespan, progress, title, info, thumb, icon0, icon1, icon2, icon3, sref))
 			if self.singleChannel and progress > 0 and progress < 100 and not listpos:  # transmission currently on air?
 				listpos = entrycounter
 			entrycounter += 1
 		if skinlist:
 			self.skinlist = skinlist
+			self.showCurrentAsset()
 		else:
-			skinlist.append(("", None, "", "", -1, "keine Einträge gefunden", f"Der Filter '{currfilter[0]}' liefert für diesen Zeitraum leider kein Ergebnis.", None, None, None, None, ""))
+			skinlist.append(("", None, "", "", -1, "keine Einträge gefunden", f"Der Filter '{currfilter[0]}' liefert für diesen Zeitraum kein Ergebnis.", None, None, None, None, ""))
 			self.skinlist = []
 			self.hideCurrentAsset()
 		self["menuList"].updateList(skinlist)
@@ -1222,7 +1236,7 @@ class TVoverview(TVhelper, Screen):
 		if self.skinlist:
 			current = min(self["menuList"].getCurrentIndex(), len(self.skinlist) - 1)
 			assetId = self.skinlist[current][0]
-			self.zapAllowed = self.skinlist[current][4] > -1  # progressbar visible means transmission is currently on air
+			self.zapAllowed = self.skinlist[current][4] > -1  # progressbar visible means: transmission is currently on air
 			self["key_blue"].setText("Zap" if self.zapAllowed else "")
 			if assetId != self.currentAssetId:  # is a new asset?
 				callInThread(self.showAssetDetails, assetId, False)
@@ -1385,8 +1399,8 @@ class TVmain(TVhelper, Screen):
 									 "ColorActions",
 									 "MenuActions"], {"ok": self.keyOk,
 			   											"back": self.exit,
-														"right": self.rightDown,
-														"left": self.leftUp,
+														"right": self.forceNextTip,
+														"left": self.forcePrevTip,
 														"down": self.down,
 														"up": self.up,
 														"red": self.keyRed,
@@ -1410,20 +1424,38 @@ class TVmain(TVhelper, Screen):
 		self.selectMainMenu()
 
 	def showTVtipsBox(self, delay):
-		self.tvtipsbox.showDialog()
-		self.tvtipsboxTimer.start(delay, False)
-		self["key_green"].setText("Sendungsdetail")
-		self.showNextTip()
-
-	def showNextTip(self):
 		if self.tipslist:
-			self.showTip(self.currTipCnt)
-			self.currTipCnt = (self.currTipCnt + 1) % len(self.tipslist)
+			self.tvtipsbox.showDialog()
+			self.tvtipsboxTimer.start(delay, False)
+			self["key_green"].setText("Sendungsdetail")
+			self.showNextTip()
 
 	def hideTVtipsBox(self):
-		self.tvtipsboxTimer.stop()
-		self.tvtipsbox.hideDialog()
-		self["key_green"].setText("Tipps anzeigen")
+		if self.tipslist:
+			self.tvtipsboxTimer.stop()
+			self.tvtipsbox.hideDialog()
+			self["key_green"].setText("Tipps anzeigen")
+
+	def showNextTip(self):
+		self.showTip(self.currTipCnt)
+		self.currTipCnt = (self.currTipCnt + 1) % len(self.tipslist)
+
+	def forceNextTip(self):
+		if self.tvtipsbox.getIsVisible():
+			self.tvtipsboxTimer.stop()
+			self.tvtipsboxTimer.start(5000, False)
+			self.showNextTip()
+		else:
+			self.rightDown()
+
+	def forcePrevTip(self):
+		if self.tvtipsbox.getIsVisible():
+			self.tvtipsboxTimer.stop()
+			self.tvtipsboxTimer.start(5000, False)
+			self.currTipCnt = (self.currTipCnt - 1) % len(self.tipslist)
+			self.showTip(self.currTipCnt)
+		else:
+			self.leftUp()
 
 	def selectMainMenu(self):
 		userspans = self.getActiveTimespans()
@@ -1442,22 +1474,24 @@ class TVmain(TVhelper, Screen):
 		if current:
 			if current[1] in [0, 1, 2, 3, 4]:
 				self.hideTVtipsBox()
-				self.tvupdate.hideDialog(self.tvupdate.getIsVisible())
+				self.tvupdate.hideDialog()
 				self.session.openWithCallback(self.returnOk1, current[2], current[3])
 			elif current[1] == 5:
 				self.hideTVtipsBox()
-				self.tvupdate.hideDialog(self.tvupdate.getIsVisible())
+				self.tvupdate.hideDialog()
 				callInThread(showCurrentEvent, self.session, self.returnOk4)
 			elif current[1] == 6:
 				self.hideTVtipsBox()
-				self.tvupdate.hideDialog(self.tvupdate.getIsVisible())
+				self.tvupdate.hideDialog()
 				self.session.openWithCallback(self.returnOk1, selectChannelCategory)
 			elif current[1] == 7:
 				if self.updateActive:
 					self.tvinfobox.showDialog("Das TVS-EPG Update läuft bereits.", 2500)
 				else:
-					msgtext = "\nTVS-EPG Update durchführen?\n\nDies gilt für die im Setup eingestellten Zeiträume,\nläuft im Hintergrund und kann einige Minuten dauern."
-					self.session.openWithCallback(self.returnOk2, MessageBox, msgtext, MessageBox.TYPE_YESNO, timeout=10, default=False)
+					self.hideTVtipsBox()
+					msgtext = "TVS-EPG Update (nur aktivierte Zeiträume) durchführen?"
+					choicelist = [("Abbruch", 0), ("Ergänze nur die neuen Datensätze", 1), ("Aktualisiere auch vorhandene Datensätze", 2)]
+					self.session.openWithCallback(self.returnOk2, ChoiceBox, list=choicelist, keys=[], title=msgtext)
 			elif current[1] == 8:
 				if self.updateActive:
 					self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer TVS-EPG Zwischenspeicher kann daher im Moment nicht gelöscht werden.", 2500)
@@ -1475,9 +1509,15 @@ class TVmain(TVhelper, Screen):
 				self.showTVtipsBox(5000)
 
 	def returnOk2(self, answer):
-		if answer is True:
-			self.updateStop = False
-			callInThread(self.updateFutureEPG, visible=True)
+		if answer:
+			if answer[1] == 1:
+				self.updateStop = False
+				callInThread(self.updateFutureEPG, visible=True, forceRefresh=False)
+			elif answer[1] == 2:
+				self.updateStop = False
+				callInThread(self.updateFutureEPG, visible=True)
+		if config.plugins.tvspielfilm.showtips.value == 2:  # show tips allways?
+			self.showTVtipsBox(5000)
 
 	def returnOk3(self, answer):
 		if answer is True:
@@ -1507,7 +1547,7 @@ class TVmain(TVhelper, Screen):
 
 	def keyGreen(self):
 		if self.tvtipsbox.getIsVisible():
-			self.tvupdate.hideDialog(self.tvupdate.getIsVisible())
+			self.tvupdate.hideDialog()
 			self.hideTVtipsBox()
 			self.session.openWithCallback(self.returnOk1, TVfullscreen, self.currentTipId)
 		else:
@@ -1523,9 +1563,9 @@ class TVmain(TVhelper, Screen):
 
 	def keyBlue(self):
 		if self.tvupdate.getIsVisible():
-			self.tvupdate.hideDialog(True)
+			self.tvupdate.hideDialog()
 		else:
-			self.tvupdate.showDialog(False)
+			self.tvupdate.showDialog()
 
 	def down(self):
 		self["mainmenu"].down()
@@ -1593,7 +1633,7 @@ class TVmain(TVhelper, Screen):
 			if exists(path):
 				rmtree(path)
 
-	def updateFutureEPG(self, visible=False):  # visible=False is mandatory
+	def updateFutureEPG(self, visible=False, forceRefresh=True):  # 'visible=False' is mandatory for interactive calls
 		self.updateActive = True
 		self.createTMPpaths()
 		self.cleanupCache()
@@ -1629,12 +1669,12 @@ class TVmain(TVhelper, Screen):
 						self.setProgressValues(1, (f"Sender: '{item[1][1]}'", index1, f"{index1}/{len_importdict}"))
 						channelId = item[0]
 						spanStarts = "00:00" if self.singleChannel else spanStarts
-						downloaded, assetsdict = getAllAssets(channelId, datestr, spanStarts, noLoadExisting=True)
+						downloaded, assetsdict = getAllAssets(channelId, datestr, spanStarts, forceRefresh=forceRefresh, updateOnly=False)
 						if downloaded:
 							allAssets[channelId] = assetsdict
 					if not self.saveAllAssets(allAssets, datestr, spanStarts):
-						self.updateStop = True  # force stop thread due to OS-error
-		self.tvupdate.hideDialog(False)
+						self.updateStop = True  # forced thread stop due to OS-error
+		self.tvupdate.hideDialog()
 		self.tvinfobox.showDialog("TVS-EPG Update erfolgreich abgebrochen." if self.updateStop else "TVS-EPG Update erfolgreich beendet.", 2500)
 		self.updateStop = False
 		self.updateActive = False
@@ -1790,7 +1830,7 @@ class selectChannelCategory(TVhelper, Screen):
 			else:
 				self.channelIndex = self["menulist"].getCurrentIndex()
 				channel = self["menulist"].getCurrent()  # e.g. ("Das Erste", "ard")
-				self.session.openWithCallback(self.keyOkReturn, TVoverview, ("", 86400), channel[1])  # 24h
+				self.session.openWithCallback(self.keyOkReturn, TVoverview, ("", 0), channel[1])
 
 	def keyOkReturn(self, answer):
 			if answer:
@@ -2140,15 +2180,16 @@ def getAPIdata(url, params=None):
 		return errmsg, jsondict
 
 
-def getAllAssets(channelId, date, spanStarts, noLoadExisting=False):
+def getAllAssets(channelId, date, spanStarts, forceRefresh=False, updateOnly=True):
 	assetsdict = {}
 	temppath = f"{config.plugins.tvspielfilm.cachepath.value}tmp/TVSpielfilm/" if config.plugins.tvspielfilm.cachepath.value == "/" else f"{config.plugins.tvspielfilm.cachepath.value}TVSpielfilm/"
 	assetsfile = join(f"{temppath}cache/", f"allAssets{date}T{spanStarts}.json") if spanStarts else ""
-	if date and assetsfile and exists(assetsfile) and not noLoadExisting:  # load assets from cache if available and desired
-		with open(assetsfile, "r") as file:
-			filedict = loads(file.read()) or {}
-		if filedict:
-			assetsdict = filedict.get(channelId, {})  # extract assets for current channelId
+	if exists(assetsfile) and not forceRefresh:  # load assets from cache if available and desired
+		if updateOnly:
+			with open(assetsfile, "r") as file:
+				filedict = loads(file.read()) or {}
+			if filedict:
+				assetsdict = filedict.get(channelId, {})  # extract assets for current channelId
 		return False, assetsdict
 	else:  # download assets for current channelId
 		if spanStarts:
