@@ -2698,13 +2698,13 @@ def getFB2(check):
 
 
 def BRI(w1, w2):
-	gb = L4LElist.getBrightness(w2, False)
+	gb = int(L4LElist.getBrightness(w2, False)[0])
 	return int(w1) if gb == -1 else gb
 
 
 def virtBRI(LCD):
 	global AktNight
-	vb = BRI(L4LElist.getBrightness(LCD), LCD)
+	vb = BRI(L4LElist.getBrightness(LCD)[0], LCD)
 	if vb < 1:
 		return 0
 	elif vb == 10:
@@ -5103,11 +5103,11 @@ class L4LWorker(Thread):
 								Date = ""
 								for R in mailserver.retr(M)[1]:
 									if str(R).upper().startswith("FROM:"):
-										From = R[R.find(" "):].strip()
+										From = R[str(R).find(" "):].strip()
 									elif str(R).upper().startswith("SUBJECT:"):
-										Subj = R[R.find(" "):].strip()
+										Subj = R[str(R).find(" "):].strip()
 									elif str(R).upper().startswith("DATE:") and LCD4linux.MailShowDate.value == True:
-										Date = R[R.find(" "):].strip()
+										Date = R[str(R).find(" "):].strip()
 										Date = "- %s" % str(Date).split("+")[0].split(",")[-1].strip()
 									if From != "" and Subj != "":
 										break
