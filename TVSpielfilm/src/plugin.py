@@ -84,6 +84,7 @@ class TVglobals():
 	RESOLUTION = "FHD" if getDesktop(0).size().width() > 1300 else "HD"
 	PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/TVSpielfilm/")
 	ICONPATH = f"{PLUGINPATH}pics/{RESOLUTION}/icons/"
+	LOGPATH = "/home/root/logs/"
 	FILTERDICT = {"{keiner}": "", "tip": "isTipOfTheDay", "Neu": "isNew", "Tagestipp": "isTopTip"}
 	BASEURL = bytes.fromhex("68747470733a2f2f6c6976652e7476737069656c66696c6d2e64652f7"[:-1]).decode()
 	USERAGENT = choice([
@@ -115,7 +116,7 @@ class TVhelper(Screen):
 				response = get(url, headers=headers, timeout=(3.05, 6))
 				response.raise_for_status()
 			except exceptions.RequestException as error:
-				print("[%s] ERROR in class 'TVglobals:imageDownload': %s" % (tvglobals.MODULE_NAME, str(error)))
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVglobals:imageDownload': {error}")
 				return
 			try:
 				with open(imgfile, "wb") as file:
@@ -445,7 +446,7 @@ class TVhelper(Screen):
 
 	def getTipsCB(self):
 		if config.plugins.tvspielfilm.showtips.value:
-			self.showTVtipsBox(5000)
+			self.showTVtipsBox(forceView=True)
 		else:
 			self.hideTVtipsBox()
 
@@ -1207,7 +1208,7 @@ class TVoverview(TVhelper, Screen):
 							break
 				if leaveout:
 					continue
-			hasTimer = self.isAlreadyListed(asset[3], asset[10], self.currdatetime, timerlist)  # timespan, sref
+			hasTimer = self.isAlreadyListed(asset[3], asset[11], self.currdatetime, timerlist)  # timespan, sref
 			piconfile = self.getPiconFile(asset[1])
 			piconpix = LoadPixmap(cached=True, path=piconfile) if piconfile and exists(piconfile) else None
 			assetId, channelName, timespan, progress, title, info, sref = asset[0], asset[2], asset[3], asset[4], asset[5], asset[6], asset[11]
@@ -1273,11 +1274,11 @@ class TVoverview(TVhelper, Screen):
 		if self.skinlist:
 			current = self["menuList"].getCurrentIndex()
 			skinlist = self.skinlist[current]
-			hasTimer = self.isAlreadyListed(skinlist[3], skinlist[11], self.currdatetime, self.getTimerlist())
+			hasTimer = self.isAlreadyListed(skinlist[3], skinlist[12], self.currdatetime, self.getTimerlist())
 			if not hasTimer:
 				title = skinlist[5]
 				shortdesc = skinlist[6]
-				serviceRef = ServiceReference(skinlist[11])
+				serviceRef = ServiceReference(skinlist[12])
 				startTs, endTs = self.splitTimespan(skinlist[3].split(" - "), self.currdatetime)  #  e.g. '20:15 - 21:45'
 				startTs -= int(config.recording.margin_before.value) * 60
 				endTs += int(config.recording.margin_after.value) * 60
@@ -1423,8 +1424,8 @@ class TVmain(TVhelper, Screen):
 		self.tvupdate.setText("key_blue", "Ein-/Ausblenden")
 		self.selectMainMenu()
 
-	def showTVtipsBox(self, delay):
-		if self.tipslist:
+	def showTVtipsBox(self, delay=5000, forceView=False):
+		if self.tipslist and (forceView or config.plugins.tvspielfilm.showtips.value == 2):  # show tips allways?
 			self.tvtipsbox.showDialog()
 			self.tvtipsboxTimer.start(delay, False)
 			self["key_green"].setText("Sendungsdetail")
@@ -1505,8 +1506,7 @@ class TVmain(TVhelper, Screen):
 		else:
 			if self.tvupdate.getWasVisible():
 				self.tvupdate.showDialog()
-			if config.plugins.tvspielfilm.showtips.value == 2:  # show tips allways?
-				self.showTVtipsBox(5000)
+			self.showTVtipsBox()
 
 	def returnOk2(self, answer):
 		if answer:
@@ -1516,8 +1516,7 @@ class TVmain(TVhelper, Screen):
 			elif answer[1] == 2:
 				self.updateStop = False
 				callInThread(self.updateFutureEPG, visible=True)
-		if config.plugins.tvspielfilm.showtips.value == 2:  # show tips allways?
-			self.showTVtipsBox(5000)
+		self.showTVtipsBox()
 
 	def returnOk3(self, answer):
 		if answer is True:
@@ -1533,16 +1532,21 @@ class TVmain(TVhelper, Screen):
 		if self.updateActive:
 			self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer Import kann daher im Moment nicht durchgeführt werden.", 2500)
 		else:
+			self.hideTVtipsBox()
 			msgtext = "Importiere TV Spielfilm Sender?\nACHTUNG: Der TVS-EPG Zwischenspeicher (=Cache)\nmuß hierfür unwiderruflich gelöscht werden.\nDanach sollte ein TVS-EPG Datenupdate erfolgen.\n\nSind Sie sicher das Sie das wollen?"
 			self.session.openWithCallback(self.returnRed, MessageBox, msgtext, MessageBox.TYPE_YESNO, timeout=10, default=False)
 
 	def returnRed(self, answer):
 		if answer is True:
 			self.session.openWithCallback(self.importfileCB, TVimport)
+		else:
+			self.showTVtipsBox()
 
 	def importfileCB(self):
 		self.removeTMPpaths()
 		self.createTMPpaths()
+		self.showTVtipsBox()
+		self.showTVtipsBox()
 		self.selectMainMenu()
 
 	def keyGreen(self):
@@ -1551,7 +1555,7 @@ class TVmain(TVhelper, Screen):
 			self.hideTVtipsBox()
 			self.session.openWithCallback(self.returnOk1, TVfullscreen, self.currentTipId)
 		else:
-			self.showTVtipsBox(5000)
+			self.showTVtipsBox()
 
 	def keyYellow(self):
 		if self.updateActive:
@@ -1564,7 +1568,7 @@ class TVmain(TVhelper, Screen):
 	def keyBlue(self):
 		if self.tvupdate.getIsVisible():
 			self.tvupdate.hideDialog()
-		else:
+		elif self.updateActive:
 			self.tvupdate.showDialog()
 
 	def down(self):
@@ -1587,8 +1591,7 @@ class TVmain(TVhelper, Screen):
 	def configCB(self):
 		if self.oldChannelName != config.plugins.tvspielfilm.channelname.value:
 			callInThread(self.getTips, self.getTipsCB)
-		if config.plugins.tvspielfilm.showtips.value == 2:  # show tips allways
-			self.showTVtipsBox(5000)
+		self.showTVtipsBox()
 		self.selectMainMenu()
 
 	def exit(self):
@@ -1854,6 +1857,8 @@ class TVimport(TVhelper, Screen):
 				"itemHeight":40
 				}</convert>
 		</widget>
+		<eLabel name="button_blue" position="40,460" size="6,36" backgroundColor="#101093,#4040ff,vertical" zPosition="1" />
+		<widget source="key_blue" render="Label" position="54,466" size="300,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 	</screen>
 	"""
 
@@ -1863,42 +1868,53 @@ class TVimport(TVhelper, Screen):
 			self.skin = self.skin.replace("/HD/", "/FHD/")
 		Screen.__init__(self, session)
 		self.tvinfobox = session.instantiateDialog(TVinfoBox)
+		self.maplist = []
 		self.totaldupes = []
 		self.totalimport = []
 		self.totalsupp = []
 		self.totalunsupp = []
+		self.configpath = ""
+		self.mappinglog = ""
+		self.mapfile = ""
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["bouquetslist"] = List()
-		self["actions"] = ActionMap(["OkCancelActions"],
-							  						{"ok": self.keyOk,
+		self["key_blue"] = StaticText("Überprüfe Konvertierungsregeln")
+		self['actions'] = ActionMap(["OkCancelActions",
+							   		"ColorActions"], {"ok": self.keyOk,
+							  						"blue": self.keyBlue,
 													"cancel": self.keyExit}, -1)
 		self.onShown.append(self.shownFinished)
 
 	def shownFinished(self):
-		configpath = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # /etc/enigma2/TVSpielfilm
-		if not exists(configpath):
-			makedirs(configpath, exist_ok=True)
+		self.maplist = self.readMappingList()
+		self.configpath = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # /etc/enigma2/TVSpielfilm
+		if not exists(self.configpath):
+			makedirs(self.configpath, exist_ok=True)
 		sourcefile = join(tvglobals.PLUGINPATH, "db/tvs_mapping.txt")
-		mapfile = join(configpath, "tvs_mapping.txt")
-		if not exists(mapfile) or config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) < int(getmtime(mapfile)):  # plugin mapfile older than user mapfile:
-			print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{mapfile}'.")
-			copy(sourcefile, mapfile)
-		if exists(mapfile):
+		self.mapfile = join(self.configpath, "tvs_mapping.txt")
+		if not exists(self.mapfile) or (config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) < int(getmtime(self.mapfile))):  # plugin mapfile older than user mapfile:
+			print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{self.mapfile}'.")
+			copy(sourcefile, self.mapfile)
+		if exists(self.mapfile):
 			self.getAllBouquets()
 		else:
-			print(f"[{tvglobals.MODULE_NAME}] Error in class 'TVimport:shownFinished': file '{mapfile}' not found.")
-			self.session.open(MessageBox, f"Datei '{mapfile}' kann weder gefunden noch angelegt werden.\nTVS Import kann daher nicht fortgefahren werden!", MessageBox.TYPE_ERROR, timeout=30, close_on_any_key=True)
+			print(f"[{tvglobals.MODULE_NAME}] Error in class 'TVimport:shownFinished': file '{self.mapfile}' not found.")
+			self.session.open(MessageBox, f"Datei '{self.mapfile}' kann weder gefunden noch angelegt werden.\nTVS Import kann daher nicht fortgefahren werden!", MessageBox.TYPE_ERROR, timeout=30, close_on_any_key=True)
 			self.keyExit()
 
 	def keyExit(self):
 		self.close()
+
+	def keyBlue(self):
+		self.checkMappingRules()
+		self.session.open(MessageBox, _(f"Konvertierungsregeln in der Datei:\n'{self.mapfile}'\nwurden geprüft.\n\nDie detaillierte Analyse finden Sie in der Logdatei:\n'{self.mappinglog}'"), MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 
 	def keyOk(self):
 		current = self["bouquetslist"].getCurrent()  # e.g. ('Favoriten (TV)', <enigma.eServiceReference; proxy of <Swig Object of type 'eServiceReference *' at 0xa70d46f8> >)
 		importlist, dupeslist, supplist, unsupplist = self.importBouquet(current[1])
 		if importlist:
 			# combine two lists without duplicate entries while retaining the sort order
-			self.totalimport = list(dict(dict(self.totalimport), **dict(importlist)).items())  # is later reduced by TVchannelselection
+			self.totalimport = list(dict(dict(self.totalimport), **dict(importlist)).items())  # will be later reduced by TVchannelselection
 			self.totaldupes = list(dict(dict(self.totaldupes), **dict(dupeslist)).items())
 			self.totalsupp = list(dict(dict(self.totalsupp), **dict(supplist)).items())  # complete list of channels supported by the server
 			self.totalunsupp = list(dict(dict(self.totalunsupp), **dict(unsupplist)).items())
@@ -1988,7 +2004,7 @@ class TVimport(TVhelper, Screen):
 			found = ""
 			sname = service[1].strip()
 			sref = f"{service[0].split('http')[0]}{{IPTV-Stream}}" if "http" in service[0].lower() else service[0]
-			for channelId, regstr in self.readMappingList():  # find TVSpielfilm shortcut for channelname
+			for channelId, regstr in self.maplist:  # find TVSpielfilm shortcut for channelname
 				if match(compile(regstr), sname.lower()):
 					found = channelId
 					break
@@ -2019,7 +2035,7 @@ class TVimport(TVhelper, Screen):
 		return maplist
 
 	def appendImportLog(self, bouquetname, totalfound, importlist, dupeslist, unsupported):  # append last successful import to logfile
-		with open("/home/root/logs/bouquetimport.log", "a") as file:
+		with open(f"{tvglobals.LOGPATH}bouquetimport.log", "a") as file:
 			file.write(f"{'=' * 78}\n{len(totalfound)} channels found in bouquet '{bouquetname}' (incl. duplicate TVSpielfilm shortcuts)\n{'=' * 78}\n")
 			formatstr = "{0:<10} {1:<40} {2:<0}\n"
 			for item in totalfound:
@@ -2034,6 +2050,59 @@ class TVimport(TVhelper, Screen):
 			for item in unsupported:
 				file.write(formatstr.format(*("n/a", item[0], item[1][1])))
 			file.write("\n")
+
+	def checkMappingRules(self):  # tool: checks whether conversion rules are missing / outdated / double in the mapping file
+		maplist = sorted(self.maplist, key=lambda x: x[0])
+		mapkeys = [x[0] for x in maplist]
+		url = f"{tvglobals.BASEURL}static/content/channel-list/livetv"
+		errmsg, results = getAPIdata(url)
+		if errmsg:
+			print(f"[{tvglobals.MODULE_NAME}] API download ERROR in class 'TVchannelselection:checkMappingRules': {errmsg}")
+		if results:
+			reskeys = [x.get("id", "n/a").lower() for x in results]
+			tabpos = "{0:<10} {1:<0}\n"
+			self.mappinglog = join(tvglobals.LOGPATH, "mappingrules.log")
+			with open(self.mappinglog, "w") as file:
+				file.write(f"{len(results)} Kanäle gefunden, die von TV Spielfilm unterstützt werden\n")
+				file.write("\nFehlende Regeln für Kanäle, die von TV Spielfilm unterstützt werden: ")
+				notfound = []
+				for service in results:  # search for missing conversion rules
+					shortkey = service.get("id", "n/a").lower()
+					if shortkey not in mapkeys:
+						notfound.append((shortkey, service.get("name", "n/v")))
+				if notfound:
+					file.write(f"\n{tabpos.format(*('Kürzel', 'Sendername'))}")
+					file.write(f"{'-' * 58}\n")
+					for service in notfound:
+						file.write(tabpos.format(*service))
+					file.write("EMPFEHLUNG: Diese Regel(n) in die Datei 'tvs_mapping.txt' einpflegen.\n")
+				else:
+					file.write("{Keine fehlenden Regeln gefunden}\n")
+				file.write("\nVeraltete Regeln für Kanäle, die von TV Spielfilm nicht unterstützt werden: ")
+				outdated = []
+				for service in maplist:  # search for outdated conversion rules
+					if service[0] not in reskeys:
+						outdated.append((service[0], service[1]))
+				if outdated:
+					file.write(f"\n{tabpos.format(*('Kürzel', 'Umsetzungsregel'))}")
+					file.write(f"{'-' * 58}\n")
+					for service in outdated:
+						file.write(tabpos.format(*service))
+					file.write("EMPFEHLUNG: Diese Regel(n) aus der Datei 'tvs_mapping.txt' entfernen.\n")
+				else:
+					file.write("{Keine veraltete Regeln gefunden}\n")
+				file.write("\nDoppelte Regeln für Kanäle, die von TV Spielfilm unterstützt werden: ")
+				double = []
+				for idx in [i for i, x in enumerate(mapkeys) if mapkeys.count(x) > 1]:  # search for duplicate rules and get indexes
+					double.append((maplist[idx][0], maplist[idx][1]))
+				if double:
+					file.write(f"\n{tabpos.format(*('Kürzel', 'Umsetzungsregel'))}")
+					file.write(f"{'-' * 58}\n")
+					for service in double:
+						file.write(tabpos.format(*service))
+					file.write("EMPFEHLUNG: Im Zweifel in der Datei 'tvs_mapping.txt' belasssen! Sender könnten z.B. bei verschiedenen Anbietern unter verschiedenen Namen geführt werden.\n")
+				else:
+					file.write("{Keine doppelten Regeln gefunden}\n")
 
 
 class TVchannelselection(Screen):
@@ -2076,7 +2145,7 @@ class TVchannelselection(Screen):
 		self["key_red"] = StaticText("Alle abwählen")
 		self["key_green"] = StaticText("Übernehmen")
 		self['actions'] = ActionMap(["OkCancelActions",
-							   		"ColorActions"], {"ok": self.keyOk,
+									"ColorActions"], {"ok": self.keyOk,
 													"red": self.keyRed,
 													"green": self.keyGreen,
 													"cancel": self.keyExit}, -1)
