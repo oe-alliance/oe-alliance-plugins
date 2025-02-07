@@ -1168,8 +1168,7 @@ class TVoverview(TVhelper, Screen):
 			self.skinlist = []
 			self.hideCurrentAsset()
 		self["menuList"].updateList(skinlist)
-		if listpos:
-			self["menuList"].setCurrentIndex(listpos)
+		self["menuList"].setCurrentIndex(listpos)
 		self.lenskinlist = len(self.skinlist)
 
 	def showCurrentAsset(self):
