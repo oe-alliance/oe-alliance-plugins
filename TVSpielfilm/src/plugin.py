@@ -385,76 +385,6 @@ class TVhelper(Screen):
 				return piconfile
 		return ""
 
-	def getTips(self, callback):
-		date = datetime.today().strftime("%F")
-		tipsfile = join(f"{self.getTMPpath()}cache/", f"allTips{date}.json")
-		if exists(tipsfile):
-			with open(tipsfile, "r") as file:
-				tipsdict = loads(file.read())
-		else:
-			url = f"{tvglobals.BASEURL}api/reco/content/pub/teasers/tips-of-the-day"
-			params = [('date', date)]
-			errmsg, tipsdict = getAPIdata(url, params)
-			if errmsg:
-				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:getTips': {errmsg}!")
-				return
-			try:
-				with open(tipsfile, "w") as file:
-					file.write(dumps(tipsdict))
-			except OSError as error:
-				self.session.open(MessageBox, "Datensatz 'Tipps' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
-		tipslist = []
-		for index, tips in enumerate([[tipsdict.get("topTip", {})], tipsdict.get("tips", {}), tipsdict.get("highlights", {}),]):
-			for tip in tips:
-				channelId = tip.get("channelId", "").lower()
-				isTipOfTheDay = tip.get("isTipOfTheDay", False)
-				programType = tip.get("programType", "")
-				if channelId not in tvglobals.IMPORTDICT and isTipOfTheDay or (index == 2 and programType != "SP"):
-					continue
-				self.currentTipId = tip.get("assetId", "")
-				title = unescape(tip.get("title", ""))
-				timeStart = tip.get("timeStart", "")
-				timeStart = datetime.fromtimestamp(timeStart).strftime("%H:%M") if timeStart else ""
-				timeEnd = tip.get("timeEnd", "")
-				timeEnd = datetime.fromtimestamp(timeEnd).strftime("%H:%M") if timeEnd else ""
-				timeStartEnd = f"{timeStart} - {timeEnd}" if timeStart or timeEnd else ""
-				imgurl = tip.get("images", {}).get("size3", "")
-				imgfile = join(f"{self.getTMPpath()}images/", f"{imgurl[imgurl.rfind('/') + 1:]}") if imgurl else ""
-				if imgfile and not exists(imgfile):
-					callInThread(self.imageDownload, imgurl, imgfile, self.setTipImage, self.currentTipId)  # download + set image (if this tipId is still current)
-				genreBroad = tip.get("genreBroad", "")
-				channelName = tip.get("channelName", "") if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(channelId, ["", ""])[1]
-				thumbIdNumeric = tip.get("thumbIdNumeric", -1)
-				isTopTip = tip.get("isTopTip", False)
-				isNew = tip.get("flags", {}).get("isNew", False)
-				productionInfo = tip.get("productionInfo", {})
-				titleLength = str(productionInfo.get("titleLength", ""))
-				titleLength = f"{titleLength} Minuten" if titleLength else ""
-				firstYear = productionInfo.get("firstYear", "")
-				country = productionInfo.get("country", "")
-				yearCountry = f"{firstYear} | {country}" if firstYear and country else firstYear or country
-				imdbRating = productionInfo.get("imdbRating", "")
-				imdbRating = f"IMDb-Wertung: {imdbRating}/10" if imdbRating else ""
-				fsk = productionInfo.get("fsk", "")
-				fskText = f"ab {fsk} Jahren" if fsk else ""
-				metaInfo = tip.get("metaInfo", {})
-				conclusion = unescape(metaInfo.get("conclusion", ""))
-				tipslist.append((title, timeStartEnd, genreBroad, channelName, titleLength, yearCountry, imdbRating,
-				  				fskText, conclusion, isTopTip, isTipOfTheDay, isNew, fsk, thumbIdNumeric, imgurl, channelId, self.currentTipId))
-		self.tipslist = tipslist
-		callback()
-
-	def getTipsCB(self):
-		if config.plugins.tvspielfilm.showtips.value:
-			self.showTVtipsBox(forceView=True)
-		else:
-			self.hideTVtipsBox()
-
-	def setTipImage(self, imgfile, tipId):
-		if exists(imgfile) and (not tipId or tipId == self.currentTipId):
-			self.tvtipsbox.setWidgetImage("image", imgfile)
-			self.tvtipsbox.showWidget("image")
-
 	def isAlreadyListed(self, timespan, sref, currdatetime, timerlist):
 		startTs, endTs = self.splitTimespan(timespan.split(" - "), currdatetime)  #  e.g. '20:15 - 21:45'
 		timer = f"{datetime.fromtimestamp(startTs).strftime('%Y-%m-%d')}:::{datetime.fromtimestamp(startTs).strftime('%H:%M')}:::{sref}"  # e.g. ['2024-12-21:::20:15:::1:0:19:283D:41B:1:FFFF0000:0:0:0:', ...]
@@ -651,9 +581,9 @@ class TVfullscreen(TVhelper, Screen):
 	def __init__(self, session, assetId, zapAllowed=False):
 		self.assetId = assetId
 		self.zapAllowed = zapAllowed
-		Screen.__init__(self, session)
 		if tvglobals.RESOLUTION == "FHD":
 			self.skin = self.skin.replace("/HD/", "/FHD/")
+		Screen.__init__(self, session)
 		self.assetTitle = ""
 		self.timeStartEnd = ""
 		self.spanStarts = ""
@@ -776,6 +706,8 @@ class TVtipsBox(Screen):
 	"""
 
 	def __init__(self, session):
+		if tvglobals.RESOLUTION == "FHD":
+			self.skin = self.skin.replace("/HD/", "/FHD/")
 		Screen.__init__(self, session)
 		for widget in ["headline", "title", "timeStartEnd", "genreBroad", "channelName", "titleLength",
 				 		"yearCountry", "imdbRating", "fskText", "editorial", "conclusion"]:
@@ -829,7 +761,7 @@ class TVinfoBox(Screen):
 		self.tvinfoboxTimer = eTimer()
 		self.tvinfoboxTimer.callback.append(self.hideDialog)
 
-	def showDialog(self, info, timeout):
+	def showDialog(self, info, timeout=2500):
 		self["info"].setText(info)
 		self.isVisible = True
 		self.show()
@@ -1034,6 +966,7 @@ class TVoverview(TVhelper, Screen):
 		self.singleChannel = singleChannel
 		if tvglobals.RESOLUTION == "FHD":
 			self.skin = self.skin.replace("/HD/", "/FHD/")
+		Screen.__init__(self, session)
 		self.tvinfobox = session.instantiateDialog(TVinfoBox)
 		self.assetTitle = ""
 		self.trailerUrl = ""
@@ -1051,10 +984,10 @@ class TVoverview(TVhelper, Screen):
 		self.currImdbId = ""
 		self.currServiceRef = ""
 		self.titleLenStr = ""
+		self.channelName = ""
 		self.loadAllEPGactive = False
 		self.loadAllEPGstop = False
 		self.zapAllowed = False
-		Screen.__init__(self, session)
 		self["release"] = StaticText(tvglobals.RELEASE)
 		for wname in ["reviewdate", "longStatus", "progressTxt", "shortStatus", "channelName", "timeStartEnd", "imdbRating", "repeatHint",
 						"title", "editorial", "conclusion", "longDescription", "key_info", "key_play"]:
@@ -1114,6 +1047,7 @@ class TVoverview(TVhelper, Screen):
 		self.lenIMPORTDICT = len(tvglobals.IMPORTDICT)
 		self["progressBar"].setRange((0, self.lenIMPORTDICT))
 		allAssets = {}
+		channelName = ""
 		self.allAssetsCount = 0
 		self.allImagesCount = 0
 		self.assetslist = []
@@ -1124,7 +1058,7 @@ class TVoverview(TVhelper, Screen):
 		hour, minute = self.spanStarts.split(":") if self.spanStarts else [now.strftime("%H"), now.strftime("%M")]  # self.spanstars empty = 'Jetzt im TV'
 		spanStartsDt = self.currdatetime.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 		spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
-		for index, item in enumerate([(self.singleChannel.lower(), ["", self.singleChannel])] if self.singleChannel else tvglobals.IMPORTDICT.items()):
+		for index, item in enumerate([(self.singleChannel, ["", self.singleChannel])] if self.singleChannel else tvglobals.IMPORTDICT.items()):
 			if self.loadAllEPGstop:
 				break
 			self["progressBar"].setValue(index)
@@ -1134,50 +1068,50 @@ class TVoverview(TVhelper, Screen):
 			startslist = []  # avoids displaying duplicate entries for combination channels such as 'SWF/SR'
 			spanStarts = "" if self.singleChannel else spanStartsDt.strftime("%H:%M")
 			downloaded, assetsdict = getAllAssets(channelId, todaydate, spanStarts)
-			if assetsdict:
-				for asset in assetsdict:
-					if self.loadAllEPGstop:
-						break
-					startTime_iso, endTime_iso = asset.get("startTime", ""), asset.get("endTime", "")  # e.g. '2024-11-24T22:05:00.000Z'
-					startTime = datetime.fromisoformat(startTime_iso).astimezone() if startTime_iso else spanStartsDt
-					endTime = datetime.fromisoformat(endTime_iso).astimezone() if endTime_iso else spanEndsDt
-					if self.spanStarts:
-						isInTimespan = startTime.timestamp() >= spanStartsDt.timestamp() and startTime.timestamp() < spanEndsDt.timestamp()
-					else:  # self.spanstars empty = 'Jetzt im TV'
-						isInTimespan = True if self.singleChannel else startTime.timestamp() < spanEndsDt.timestamp()
-					if startTime and isInTimespan and startTime not in startslist:  # begin of transmission still in the period?
-						startslist.append(startTime)
-						progress = -1
-						if endTime:
-							durance = endTime - startTime
-							progress = int(((now - startTime) / durance) * 100) if durance else -1
-						assetId = asset.get("assetId", "")
-						title = unescape(asset.get("title", ""))
-						time = asset.get("time", "").split(" | ")  # e.g. '20:15 - 21:45 | DAS ERSTE'
-						timespan, channelName = (time[0], time[1]) if time and len(time) > 1 else ("", "")
-						if not config.plugins.tvspielfilm.channelname.value:
-							channelName = tvglobals.IMPORTDICT.get(channelId, ["", ""])[1]
-						info = asset.get("info", "")
-						thumbIdNumeric = asset.get("thumbIdNumeric", -1)
-						isTopTip = asset.get("isTopTip", False)
-						isTipOfTheDay = asset.get("isTipOfTheDay", False)
-						isNew = asset.get("flags", {}).get("isNew", False)
-						sref = tvglobals.IMPORTDICT.get(channelId, ["", ""])[0]
-						imgurl = asset.get("image", {}).get("476x357", "")
-						imgfile = join(f"{self.getTMPpath()}images/", imgurl[imgurl.rfind("/") + 1:]) if imgurl else ""
-						if imgfile:
-							self.allImagesCount += 1
-						self.assetslist.append([assetId, channelId, channelName, timespan, progress, title, info, thumbIdNumeric, isTopTip, isTipOfTheDay, isNew, sref, imgurl, imgfile])
-						if not self.allAssetsCount:  # immediate display of details after downloading the first asset
-							self.zapAllowed = progress > -1  # progressbar visible means: transmission is currently on air
-							self["key_blue"].setText("Zap" if self.zapAllowed else "")
-							callInThread(self.showAssetDetails, assetId, False)
-						self.allAssetsCount += 1
-				if downloaded:
-					allAssets[channelId] = assetsdict
+			for asset in assetsdict:
+				if self.loadAllEPGstop:
+					break
+				startTime_iso, endTime_iso = asset.get("startTime", ""), asset.get("endTime", "")  # e.g. '2024-11-24T22:05:00.000Z'
+				startTime = datetime.fromisoformat(startTime_iso).astimezone() if startTime_iso else spanStartsDt
+				endTime = datetime.fromisoformat(endTime_iso).astimezone() if endTime_iso else spanEndsDt
+				if self.spanStarts:
+					isInTimespan = startTime.timestamp() >= spanStartsDt.timestamp() and startTime.timestamp() < spanEndsDt.timestamp()
+				else:  # self.spanstars empty = 'Jetzt im TV'
+					isInTimespan = True if self.singleChannel else startTime.timestamp() < spanEndsDt.timestamp()
+				if startTime and isInTimespan and startTime not in startslist:  # begin of transmission still in the period?
+					startslist.append(startTime)
+					progress = -1
+					if endTime:
+						durance = endTime - startTime
+						progress = int(((now - startTime) / durance) * 100) if durance else -1
+					assetId = asset.get("assetId", "")
+					title = unescape(asset.get("title", ""))
+					time = asset.get("time", "").split(" | ")  # e.g. '20:15 - 21:45 | DAS ERSTE'
+					timespan, channelName = (time[0], time[1]) if time and len(time) > 1 else ("", "")
+					if not config.plugins.tvspielfilm.channelname.value:
+						channelName = tvglobals.IMPORTDICT.get(channelId, ["", "{unbekannt}"])[1]
+					info = asset.get("info", "")
+					thumbIdNumeric = asset.get("thumbIdNumeric", -1)
+					isTopTip = asset.get("isTopTip", False)
+					isTipOfTheDay = asset.get("isTipOfTheDay", False)
+					isNew = asset.get("flags", {}).get("isNew", False)
+					sref = tvglobals.IMPORTDICT.get(channelId, ["", ""])[0]
+					imgurl = asset.get("image", {}).get("476x357", "")
+					imgfile = join(f"{self.getTMPpath()}images/", imgurl[imgurl.rfind("/") + 1:]) if imgurl else ""
+					if imgfile:
+						self.allImagesCount += 1
+					self.assetslist.append([assetId, channelId, channelName, timespan, progress, title, info, thumbIdNumeric, isTopTip, isTipOfTheDay, isNew, sref, imgurl, imgfile])
+					if not self.allAssetsCount:  # immediate display of details after downloading the first asset
+						self.zapAllowed = progress > -1  # progressbar visible means: transmission is currently on air
+						self["key_blue"].setText("Zap" if self.zapAllowed else "")
+						callInThread(self.showAssetDetails, assetId, False)
+					self.allAssetsCount += 1
+			if downloaded:
+				allAssets[channelId] = assetsdict
 			self.refreshSkinlist()
 		if self.loadAllEPGstop:
 			FinishOnStop()
+		self.channelName = channelName if self.singleChannel else ""
 		self.setLongstatus()
 		self["progressBar"].setValue(0)
 		self["progressTxt"].setText("")
@@ -1186,10 +1120,15 @@ class TVoverview(TVhelper, Screen):
 		self.loadAllEPGactive = False
 
 	def setLongstatus(self):
-		if self.allAssetsCount == self.lenskinlist:
-			self["longStatus"].setText(f"{self.allAssetsCount} Einträge und {self.allImagesCount} Bilder in insgesamt {self.lenIMPORTDICT} Sendern gefunden.")
+		msg = f"{self.allAssetsCount} Einträge und {self.allImagesCount} Bilder"
+		if self.singleChannel:
+			channelName = self.channelName if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(self.singleChannel, ["", "{unbekannt}"])[1]
+			msg += f" im Sender '{channelName}' gefunden."
 		else:
-			self["longStatus"].setText(f"{self.allAssetsCount} Einträge und {self.allImagesCount} Bilder in insgesamt {self.lenIMPORTDICT} Sendern gefunden. Gefilterte Einträge: {self.lenskinlist}")
+			msg += f" in insgesamt {self.lenIMPORTDICT} Sendern gefunden."
+			if self.allAssetsCount != self.lenskinlist:
+				msg += f" Gefilterte Einträge: {self.lenskinlist}"
+		self["longStatus"].setText(msg)
 
 	def refreshSkinlist(self):
 		timerlist = self.getTimerlist()
@@ -1299,28 +1238,28 @@ class TVoverview(TVhelper, Screen):
 
 	def prevday(self):
 		if self.currdaydelta == -7:
-			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis maximal -7 Tage danach verfügbar.", 2500)
+			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis maximal -7 Tage danach verfügbar.")
 		else:
 			self.currdaydelta = max(self.currdaydelta - 1, -7)  # max 7 days in past
 			self.startLoadAllEPG()
 
 	def prevweek(self):
 		if self.currdaydelta == -7:
-			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis maximal -7 Tage danach verfügbar.", 2500)
+			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis maximal -7 Tage danach verfügbar.")
 		else:
 			self.currdaydelta = max(self.currdaydelta - 7, -7)  # max 7 days in past
 			self.startLoadAllEPG()
 
 	def nextday(self):
 		if self.currdaydelta == 13:
-			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis maximal +13 Tage im Voraus verfügbar.", 2500)
+			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis maximal +13 Tage im Voraus verfügbar.")
 		else:
 			self.currdaydelta = min(self.currdaydelta + 1, 13)  # max 13 days in future
 			self.startLoadAllEPG()
 
 	def nextweek(self):
 		if self.currdaydelta == 13:
-			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis maximal +13 Tage im Voraus verfügbar.", 2500)
+			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis maximal +13 Tage im Voraus verfügbar.")
 		else:
 			self.currdaydelta = min(self.currdaydelta + 7, 13)  # max 13 days in future
 			self.startLoadAllEPG()
@@ -1381,8 +1320,10 @@ class TVmain(TVhelper, Screen):
 		self.tvupdate = session.instantiateDialog(TVupdate)
 		self.tvinfobox = session.instantiateDialog(TVinfoBox)
 		self.tvtipsbox = session.instantiateDialog(TVtipsBox)
+		self.tvtipsSuppress = False
 		self.updateActive = False
 		self.updateStop = False
+		self.tipsboxStop = False
 		self.tipslist = []
 		self.currentTipId = ""
 		self.currTipCnt = 0
@@ -1391,7 +1332,7 @@ class TVmain(TVhelper, Screen):
 		self.tvtipsboxTimer = eTimer()
 		self.tvtipsboxTimer.callback.append(self.showNextTip)
 		self.oldChannelName = config.plugins.tvspielfilm.channelname.value
-		self.singleChannel = False
+		self.singleChannel = ""
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["mainmenu"] = List()
 		self["key_red"] = StaticText("Import")
@@ -1427,12 +1368,14 @@ class TVmain(TVhelper, Screen):
 	def showTVtipsBox(self, delay=5000, forceView=False):
 		if self.tipslist and (forceView or config.plugins.tvspielfilm.showtips.value == 2):  # show tips allways?
 			self.tvtipsbox.showDialog()
+			self.tvtipsSuppress = False
 			self.tvtipsboxTimer.start(delay, False)
 			self["key_green"].setText("Sendungsdetail")
 			self.showNextTip()
 
 	def hideTVtipsBox(self):
 		if self.tipslist:
+			self.tvtipsSuppress = True
 			self.tvtipsboxTimer.stop()
 			self.tvtipsbox.hideDialog()
 			self["key_green"].setText("Tipps anzeigen")
@@ -1457,6 +1400,76 @@ class TVmain(TVhelper, Screen):
 			self.showTip(self.currTipCnt)
 		else:
 			self.leftUp()
+
+	def getTips(self, callback):
+		date = datetime.today().strftime("%F")
+		tipsfile = join(f"{self.getTMPpath()}cache/", f"allTips{date}.json")
+		if exists(tipsfile):
+			with open(tipsfile, "r") as file:
+				tipsdict = loads(file.read())
+		else:
+			url = f"{tvglobals.BASEURL}api/reco/content/pub/teasers/tips-of-the-day"
+			params = [('date', date)]
+			errmsg, tipsdict = getAPIdata(url, params)
+			if errmsg:
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:getTips': {errmsg}!")
+				return
+			try:
+				with open(tipsfile, "w") as file:
+					file.write(dumps(tipsdict))
+			except OSError as error:
+				self.session.open(MessageBox, "Datensatz 'Tipps' konnte nicht gespeichert werden:\n'%s'" % error, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
+		tipslist = []
+		for index, tips in enumerate([[tipsdict.get("topTip", {})], tipsdict.get("tips", {}), tipsdict.get("highlights", {}),]):
+			for tip in tips:
+				channelId = tip.get("channelId", "").lower()
+				isTipOfTheDay = tip.get("isTipOfTheDay", False)
+				programType = tip.get("programType", "")
+				if channelId not in tvglobals.IMPORTDICT and isTipOfTheDay or (index == 2 and programType != "SP"):
+					continue
+				self.currentTipId = tip.get("assetId", "")
+				title = unescape(tip.get("title", ""))
+				timeStart = tip.get("timeStart", "")
+				timeStart = datetime.fromtimestamp(timeStart).strftime("%H:%M") if timeStart else ""
+				timeEnd = tip.get("timeEnd", "")
+				timeEnd = datetime.fromtimestamp(timeEnd).strftime("%H:%M") if timeEnd else ""
+				timeStartEnd = f"{timeStart} - {timeEnd}" if timeStart or timeEnd else ""
+				imgurl = tip.get("images", {}).get("size3", "")
+				imgfile = join(f"{self.getTMPpath()}images/", f"{imgurl[imgurl.rfind('/') + 1:]}") if imgurl else ""
+				if imgfile and not exists(imgfile):
+					callInThread(self.imageDownload, imgurl, imgfile, self.setTipImage, self.currentTipId)  # download + set image (if this tipId is still current)
+				genreBroad = tip.get("genreBroad", "")
+				channelName = tip.get("channelName", "") if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(channelId, ["", ""])[1]
+				thumbIdNumeric = tip.get("thumbIdNumeric", -1)
+				isTopTip = tip.get("isTopTip", False)
+				isNew = tip.get("flags", {}).get("isNew", False)
+				productionInfo = tip.get("productionInfo", {})
+				titleLength = str(productionInfo.get("titleLength", ""))
+				titleLength = f"{titleLength} Minuten" if titleLength else ""
+				firstYear = productionInfo.get("firstYear", "")
+				country = productionInfo.get("country", "")
+				yearCountry = f"{firstYear} | {country}" if firstYear and country else firstYear or country
+				imdbRating = productionInfo.get("imdbRating", "")
+				imdbRating = f"IMDb-Wertung: {imdbRating}/10" if imdbRating else ""
+				fsk = productionInfo.get("fsk", "")
+				fskText = f"ab {fsk} Jahren" if fsk else ""
+				metaInfo = tip.get("metaInfo", {})
+				conclusion = unescape(metaInfo.get("conclusion", ""))
+				tipslist.append((title, timeStartEnd, genreBroad, channelName, titleLength, yearCountry, imdbRating, fskText,
+					 			conclusion, isTopTip, isTipOfTheDay, isNew, fsk, thumbIdNumeric, imgurl, channelId, self.currentTipId))
+		self.tipslist = tipslist
+		callback()
+
+	def getTipsCB(self):
+		if config.plugins.tvspielfilm.showtips.value and not self.tvtipsSuppress:
+			self.showTVtipsBox(forceView=True)
+		else:
+			self.hideTVtipsBox()
+
+	def setTipImage(self, imgfile, tipId):
+		if exists(imgfile) and (not tipId or tipId == self.currentTipId):
+			self.tvtipsbox.setWidgetImage("image", imgfile)
+			self.tvtipsbox.showWidget("image")
 
 	def selectMainMenu(self):
 		userspans = self.getActiveTimespans()
@@ -1487,15 +1500,15 @@ class TVmain(TVhelper, Screen):
 				self.session.openWithCallback(self.returnOk1, selectChannelCategory)
 			elif current[1] == 7:
 				if self.updateActive:
-					self.tvinfobox.showDialog("Das TVS-EPG Update läuft bereits.", 2500)
+					self.tvinfobox.showDialog("Das TVS-EPG Update läuft bereits.")
 				else:
 					self.hideTVtipsBox()
-					msgtext = "TVS-EPG Update (nur aktivierte Zeiträume) durchführen?"
-					choicelist = [("Abbruch", 0), ("Ergänze nur die neuen Datensätze", 1), ("Aktualisiere auch vorhandene Datensätze", 2)]
+					msgtext = "TVS-EPG Update (nur für aktivierte Zeiträume) durchführen?"
+					choicelist = [("Abbruch", 0), ("Ergänze nur die neuen Datensätze", 1), ("Überschreibe auch vorhandene Datensätze", 2)]
 					self.session.openWithCallback(self.returnOk2, ChoiceBox, list=choicelist, keys=[], title=msgtext)
 			elif current[1] == 8:
 				if self.updateActive:
-					self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer TVS-EPG Zwischenspeicher kann daher im Moment nicht gelöscht werden.", 2500)
+					self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer TVS-EPG Zwischenspeicher kann daher im Moment nicht gelöscht werden.")
 				else:
 					msgtext = "\nTVS-EPG Zwischenspeicher löschen?\n\nDies kann bei Problemen hilfreich sein,\ndanach sollte ein TVS-EPG Datenupdate durchgefürt werden."
 					self.session.openWithCallback(self.returnOk3, MessageBox, msgtext, MessageBox.TYPE_YESNO, timeout=10, default=False)
@@ -1522,15 +1535,16 @@ class TVmain(TVhelper, Screen):
 		if answer is True:
 			self.removeTMPpaths()
 			self.createTMPpaths()
-			self.tvinfobox.showDialog("TVS-EPG Zwischenspeicher (=Cache) erfolgreich gelöscht", 2500)
+			self.tvinfobox.showDialog("TVS-EPG Zwischenspeicher (=Cache) erfolgreich gelöscht")
 
 	def returnOk4(self, answer, unused):
 		if not answer:
 			self.session.open(MessageBox, "Dieser Sender wird von TV Spielfilm nicht unterstützt.", type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
+		self.showTVtipsBox()
 
 	def keyRed(self):
 		if self.updateActive:
-			self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer Import kann daher im Moment nicht durchgeführt werden.", 2500)
+			self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer Import kann daher im Moment nicht durchgeführt werden.")
 		else:
 			self.hideTVtipsBox()
 			msgtext = "Importiere TV Spielfilm Sender?\nACHTUNG: Der TVS-EPG Zwischenspeicher (=Cache)\nmuß hierfür unwiderruflich gelöscht werden.\nDanach sollte ein TVS-EPG Datenupdate erfolgen.\n\nSind Sie sicher das Sie das wollen?"
@@ -1678,7 +1692,7 @@ class TVmain(TVhelper, Screen):
 					if not self.saveAllAssets(allAssets, datestr, spanStarts):
 						self.updateStop = True  # forced thread stop due to OS-error
 		self.tvupdate.hideDialog()
-		self.tvinfobox.showDialog("TVS-EPG Update erfolgreich abgebrochen." if self.updateStop else "TVS-EPG Update erfolgreich beendet.", 2500)
+		self.tvinfobox.showDialog("TVS-EPG Update erfolgreich abgebrochen." if self.updateStop else "TVS-EPG Update erfolgreich beendet.")
 		self.updateStop = False
 		self.updateActive = False
 
@@ -1800,9 +1814,9 @@ class selectChannelCategory(TVhelper, Screen):
 		categories = []
 		for channel in self.channeldict:
 			category = channel.get("category", "")
-			channelId = channel.get("channelId", "")
+			channelId = channel.get("channelId", "").lower()
 			if category and category not in categories:  # found category already listed?
-				if channelId.lower() in tvglobals.IMPORTDICT.keys():  # channel was imported?
+				if channelId in tvglobals.IMPORTDICT.keys():  # channel was imported?
 					categories.append(category)
 		self.categories = categories  # e.g. ['Hauptsender', 'Auslandssender', 'Spartensender', 'News und Dokus', 'Dritte Programme', 'Sportsender', 'Kindersender', 'Musiksender', 'Shopping', 'Regionalsender', 'Sky Cinema', 'Pay TV', 'Sky Sport', 'Sky Entertainment']
 		self["menulist"].updateList(categories)
@@ -1823,9 +1837,9 @@ class selectChannelCategory(TVhelper, Screen):
 				self.categoryIndex = self["menulist"].getCurrentIndex()
 				channels = []
 				for channel in self.channeldict:
-					channelId = channel.get("channelId", "")
-					if channel.get("category", "") == category and channelId.lower() in tvglobals.IMPORTDICT.keys():  # channel is in this category and was imported?
-						channelName = channel.get("name", "") if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(channelId.lower(), ["", ""])[1]
+					channelId = channel.get("channelId", "").lower()
+					if channel.get("category", "") == category and channelId in tvglobals.IMPORTDICT.keys():  # channel is in this category and was imported?
+						channelName = channel.get("name", "") if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(channelId, ["", ""])[1]
 						channels.append((channelName, channelId))
 				self.channels = channels
 				self["menulist"].updateList(channels)
@@ -1967,9 +1981,9 @@ class TVimport(TVhelper, Screen):
 					with open(f"{unsuppfile}.new", 'w') as file:
 						file.write(dumps(dict(self.totalunsupp)))
 					rename(f"{unsuppfile}.new", unsuppfile)
-				self.tvinfobox.showDialog("Senderimport erfolgreich durchgeführt.", 2500)
+				self.tvinfobox.showDialog("Senderimport erfolgreich durchgeführt.")
 			else:
-				self.tvinfobox.showDialog("Senderimport abgebrochen!", 2500)
+				self.tvinfobox.showDialog("Senderimport abgebrochen!")
 			self.close()
 
 	def getAllBouquets(self):
@@ -2185,7 +2199,7 @@ class TVchannelselection(Screen):
 	def keyGreen(self):
 		if self.channellist:
 			if all(not x[1] for x in self.channellist):
-				self.tvinfobox.showDialog("Bitte wählen Sie mindestens einen Sender aus!", 2500)
+				self.tvinfobox.showDialog("Bitte wählen Sie mindestens einen Sender aus!")
 				self.updateChannellist()
 			else:
 				self.close((True, self.channellist))
@@ -2287,18 +2301,17 @@ def showCurrentEvent(session, callback=None, **kwargs):
 				eventStart = datetime.fromtimestamp(eventStartTs).astimezone()
 				eventStart -= timedelta(minutes=eventStart.minute % 15, seconds=eventStart.second, microseconds=0)  # round to last 15 minutes
 				downloaded, assetsdict = getAllAssets(channelId[0], eventStart.strftime("%F"), eventStart.strftime("%H:%M"))
-				if downloaded and assetsdict:
-					assetId = ""
-					for assetdict in assetsdict:
-						startTime = assetdict.get("startTime", 0)
-						if startTime and datetime.fromisoformat(startTime.replace('Z', '+00:00')).timestamp() >= eventStart.timestamp():
-							assetId = assetdict.get("assetId", "")
-							break
-					if assetId:
-						if callback:
-							session.openWithCallback(boundFunction(callback, True), TVfullscreen, assetId)
-						else:
-							session.open(TVfullscreen, assetId)
+				assetId = ""
+				for assetdict in assetsdict:
+					startTime = assetdict.get("startTime", 0)
+					if startTime and datetime.fromisoformat(startTime.replace('Z', '+00:00')).timestamp() >= eventStart.timestamp():
+						assetId = assetdict.get("assetId", "")
+						break
+				if assetId:
+					if callback:
+						session.openWithCallback(boundFunction(callback, True), TVfullscreen, assetId)
+					else:
+						session.open(TVfullscreen, assetId)
 	else:
 		if callback:
 			callback(False)
@@ -2310,7 +2323,7 @@ def showNowOnTv(session, **kwargs):
 	if not exists(join(resolveFilename(SCOPE_CONFIG, "TVSpielfilm/"), "tvs_imported.json")):
 		session.open(TVimport)
 	else:
-		session.open(TVoverview, ("", 0))
+		session.open(TVoverview, ("", config.plugins.tvspielfilm.durance_n.value))
 
 
 def showPrimeTime(session, **kwargs):
