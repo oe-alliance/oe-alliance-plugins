@@ -79,7 +79,7 @@ config.plugins.tvspielfilm.cache_d = ConfigSelection(default=7, choices=CACHEDAY
 
 class TVglobals():
 	IMPORTDICT = {}
-	RELEASE = "v1.2"
+	RELEASE = "v1.3"
 	MODULE_NAME = __name__.split(".")[-2]
 	RESOLUTION = "FHD" if getDesktop(0).size().width() > 1300 else "HD"
 	PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/TVSpielfilm/")
@@ -1324,6 +1324,7 @@ class TVmain(TVhelper, Screen):
 		self.updateStop = False
 		self.tipsboxStop = False
 		self.tipslist = []
+		self.singleChannel = ""
 		self.currentTipId = ""
 		self.currTipCnt = 0
 		self.currdaydelta = 0
@@ -1331,7 +1332,7 @@ class TVmain(TVhelper, Screen):
 		self.tvtipsboxTimer = eTimer()
 		self.tvtipsboxTimer.callback.append(self.showNextTip)
 		self.oldChannelName = config.plugins.tvspielfilm.channelname.value
-		self.singleChannel = ""
+		self.configpath = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # /etc/enigma2/TVSpielfilm
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["mainmenu"] = List()
 		self["key_red"] = StaticText("Import")
@@ -1353,6 +1354,9 @@ class TVmain(TVhelper, Screen):
 		if not self.createTMPpaths():
 			self.exit()
 		self.cleanupCache()
+		if not exists(self.configpath):
+			makedirs(self.configpath, exist_ok=True)
+		self.updateMappingfile()
 		callInThread(self.getTips, self.getTipsCB)
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -1363,6 +1367,132 @@ class TVmain(TVhelper, Screen):
 		self.tvupdate.setText("key_yellow", "Abbruch")
 		self.tvupdate.setText("key_blue", "Ein-/Ausblenden")
 		self.selectMainMenu()
+
+	def selectMainMenu(self):
+		userspans = self.getActiveTimespans()
+		usermenu = []
+		for index, userspan in enumerate(userspans):  # build main menu
+			usermenu.append((f"{userspan[0]} im TV", index, TVoverview, userspan))
+		usermenu.append(("Jetzt im TV", 4, TVoverview, ("", config.plugins.tvspielfilm.durance_n.value)))
+		usermenu.append(("laufende Sendung", 5))
+		usermenu.append(("Senderübersicht", 6))
+		usermenu.append(("TVS-EPG Datenupdate", 7))
+		usermenu.append(("lösche TVS-EPG Cache", 8))
+		self["mainmenu"].updateList(usermenu)
+
+	def keyOk(self):
+		current = self["mainmenu"].getCurrent()
+		if current:
+			if current[1] in [0, 1, 2, 3, 4]:
+				self.hideTVtipsBox()
+				self.tvupdate.hideDialog()
+				self.session.openWithCallback(self.returnOk1, current[2], current[3])
+			elif current[1] == 5:
+				self.hideTVtipsBox()
+				self.tvupdate.hideDialog()
+				callInThread(showCurrentEvent, self.session, self.returnOk4)
+			elif current[1] == 6:
+				self.hideTVtipsBox()
+				self.tvupdate.hideDialog()
+				self.session.openWithCallback(self.returnOk1, selectChannelCategory)
+			elif current[1] == 7:
+				if self.updateActive:
+					self.tvinfobox.showDialog("Das TVS-EPG Update läuft bereits.")
+				else:
+					self.hideTVtipsBox()
+					msgtext = "TVS-EPG Update (nur für aktivierte Zeiträume) durchführen?"
+					choicelist = [("Abbruch", 0), ("Ergänze nur die neuen Datensätze", 1), ("Überschreibe auch vorhandene Datensätze", 2)]
+					self.session.openWithCallback(self.returnOk2, ChoiceBox, list=choicelist, keys=[], title=msgtext)
+			elif current[1] == 8:
+				if self.updateActive:
+					self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer TVS-EPG Zwischenspeicher kann daher im Moment nicht gelöscht werden.")
+				else:
+					msgtext = "\nTVS-EPG Zwischenspeicher löschen?\n\nDies kann bei Problemen hilfreich sein,\ndanach sollte ein TVS-EPG Datenupdate durchgefürt werden."
+					self.session.openWithCallback(self.returnOk3, MessageBox, msgtext, MessageBox.TYPE_YESNO, timeout=10, default=False)
+
+	def returnOk1(self, answer):
+		if answer:  # close plugin (e.g. after zap)
+			self.exit()
+		else:
+			if self.tvupdate.getWasVisible():
+				self.tvupdate.showDialog()
+			self.showTVtipsBox()
+
+	def returnOk2(self, answer):
+		if answer:
+			if answer[1] == 1:
+				self.updateStop = False
+				callInThread(self.updateFutureEPG, visible=True, forceRefresh=False)
+			elif answer[1] == 2:
+				self.updateStop = False
+				callInThread(self.updateFutureEPG, visible=True)
+		self.showTVtipsBox()
+
+	def returnOk3(self, answer):
+		if answer is True:
+			self.removeTMPpaths()
+			self.createTMPpaths()
+			self.tvinfobox.showDialog("TVS-EPG Zwischenspeicher (=Cache) erfolgreich gelöscht")
+
+	def returnOk4(self, answer, unused):
+		if not answer:
+			self.session.open(MessageBox, "Dieser Sender wird von TV Spielfilm nicht unterstützt.", type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
+		self.showTVtipsBox()
+
+	def keyRed(self):
+		if self.updateActive:
+			self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer TVS Import kann daher im Moment nicht durchgeführt werden.")
+		else:
+			self.hideTVtipsBox()
+			msgtext = "Importiere TV Spielfilm Sender?\nACHTUNG: Der TVS-EPG Zwischenspeicher (=Cache)\nmuß hierfür unwiderruflich gelöscht werden.\nDanach sollte ein TVS-EPG Datenupdate erfolgen.\n\nSind Sie sicher das Sie das wollen?"
+			self.session.openWithCallback(self.returnRed, MessageBox, msgtext, MessageBox.TYPE_YESNO, timeout=10, default=False)
+
+	def returnRed(self, answer):
+		if answer is True:
+			self.session.openWithCallback(self.importfileCB, TVimport)
+		else:
+			self.showTVtipsBox()
+
+	def importfileCB(self):
+		self.removeTMPpaths()
+		self.createTMPpaths()
+		self.showTVtipsBox()
+		self.showTVtipsBox()
+		self.selectMainMenu()
+
+	def keyGreen(self):
+		if self.tvtipsbox.getIsVisible():
+			self.tvupdate.hideDialog()
+			self.hideTVtipsBox()
+			self.session.openWithCallback(self.returnOk1, TVfullscreen, self.currentTipId)
+		else:
+			self.showTVtipsBox()
+
+	def keyYellow(self):
+		if self.updateActive:
+			self.session.openWithCallback(self.returnYellow, MessageBox, '\nTVS-EPG Update abbrechen?', MessageBox.TYPE_YESNO, timeout=10, default=False)
+
+	def returnYellow(self, answer):
+		if answer is True:
+			self.updateStop = True
+
+	def keyBlue(self):
+		if self.tvupdate.getIsVisible():
+			self.tvupdate.hideDialog()
+		elif self.updateActive:
+			self.tvupdate.showDialog()
+
+	def down(self):
+		self["mainmenu"].down()
+
+	def up(self):
+		self["mainmenu"].up()
+
+	def leftUp(self):
+		self["mainmenu"].pageUp()
+
+	def rightDown(self):
+		self["mainmenu"].pageDown()
 
 	def showTVtipsBox(self, delay=5000, forceView=False):
 		if self.tipslist and (forceView or config.plugins.tvspielfilm.showtips.value == 2):  # show tips allways?
@@ -1470,131 +1600,13 @@ class TVmain(TVhelper, Screen):
 			self.tvtipsbox.setWidgetImage("image", imgfile)
 			self.tvtipsbox.showWidget("image")
 
-	def selectMainMenu(self):
-		userspans = self.getActiveTimespans()
-		usermenu = []
-		for index, userspan in enumerate(userspans):  # build main menu
-			usermenu.append((f"{userspan[0]} im TV", index, TVoverview, userspan))
-		usermenu.append(("Jetzt im TV", 4, TVoverview, ("", config.plugins.tvspielfilm.durance_n.value)))
-		usermenu.append(("laufende Sendung", 5))
-		usermenu.append(("Senderübersicht", 6))
-		usermenu.append(("TVS-EPG Datenupdate", 7))
-		usermenu.append(("lösche TVS-EPG Cache", 8))
-		self["mainmenu"].updateList(usermenu)
-
-	def keyOk(self):
-		current = self["mainmenu"].getCurrent()
-		if current:
-			if current[1] in [0, 1, 2, 3, 4]:
-				self.hideTVtipsBox()
-				self.tvupdate.hideDialog()
-				self.session.openWithCallback(self.returnOk1, current[2], current[3])
-			elif current[1] == 5:
-				self.hideTVtipsBox()
-				self.tvupdate.hideDialog()
-				callInThread(showCurrentEvent, self.session, self.returnOk4)
-			elif current[1] == 6:
-				self.hideTVtipsBox()
-				self.tvupdate.hideDialog()
-				self.session.openWithCallback(self.returnOk1, selectChannelCategory)
-			elif current[1] == 7:
-				if self.updateActive:
-					self.tvinfobox.showDialog("Das TVS-EPG Update läuft bereits.")
-				else:
-					self.hideTVtipsBox()
-					msgtext = "TVS-EPG Update (nur für aktivierte Zeiträume) durchführen?"
-					choicelist = [("Abbruch", 0), ("Ergänze nur die neuen Datensätze", 1), ("Überschreibe auch vorhandene Datensätze", 2)]
-					self.session.openWithCallback(self.returnOk2, ChoiceBox, list=choicelist, keys=[], title=msgtext)
-			elif current[1] == 8:
-				if self.updateActive:
-					self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer TVS-EPG Zwischenspeicher kann daher im Moment nicht gelöscht werden.")
-				else:
-					msgtext = "\nTVS-EPG Zwischenspeicher löschen?\n\nDies kann bei Problemen hilfreich sein,\ndanach sollte ein TVS-EPG Datenupdate durchgefürt werden."
-					self.session.openWithCallback(self.returnOk3, MessageBox, msgtext, MessageBox.TYPE_YESNO, timeout=10, default=False)
-
-	def returnOk1(self, answer):
-		if answer:  # close plugin (e.g. after zap)
-			self.exit()
-		else:
-			if self.tvupdate.getWasVisible():
-				self.tvupdate.showDialog()
-			self.showTVtipsBox()
-
-	def returnOk2(self, answer):
-		if answer:
-			if answer[1] == 1:
-				self.updateStop = False
-				callInThread(self.updateFutureEPG, visible=True, forceRefresh=False)
-			elif answer[1] == 2:
-				self.updateStop = False
-				callInThread(self.updateFutureEPG, visible=True)
-		self.showTVtipsBox()
-
-	def returnOk3(self, answer):
-		if answer is True:
-			self.removeTMPpaths()
-			self.createTMPpaths()
-			self.tvinfobox.showDialog("TVS-EPG Zwischenspeicher (=Cache) erfolgreich gelöscht")
-
-	def returnOk4(self, answer, unused):
-		if not answer:
-			self.session.open(MessageBox, "Dieser Sender wird von TV Spielfilm nicht unterstützt.", type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
-		self.showTVtipsBox()
-
-	def keyRed(self):
-		if self.updateActive:
-			self.tvinfobox.showDialog("Das TVS-EPG Update läuft gerade.\nDer Import kann daher im Moment nicht durchgeführt werden.")
-		else:
-			self.hideTVtipsBox()
-			msgtext = "Importiere TV Spielfilm Sender?\nACHTUNG: Der TVS-EPG Zwischenspeicher (=Cache)\nmuß hierfür unwiderruflich gelöscht werden.\nDanach sollte ein TVS-EPG Datenupdate erfolgen.\n\nSind Sie sicher das Sie das wollen?"
-			self.session.openWithCallback(self.returnRed, MessageBox, msgtext, MessageBox.TYPE_YESNO, timeout=10, default=False)
-
-	def returnRed(self, answer):
-		if answer is True:
-			self.session.openWithCallback(self.importfileCB, TVimport)
-		else:
-			self.showTVtipsBox()
-
-	def importfileCB(self):
-		self.removeTMPpaths()
-		self.createTMPpaths()
-		self.showTVtipsBox()
-		self.showTVtipsBox()
-		self.selectMainMenu()
-
-	def keyGreen(self):
-		if self.tvtipsbox.getIsVisible():
-			self.tvupdate.hideDialog()
-			self.hideTVtipsBox()
-			self.session.openWithCallback(self.returnOk1, TVfullscreen, self.currentTipId)
-		else:
-			self.showTVtipsBox()
-
-	def keyYellow(self):
-		if self.updateActive:
-			self.session.openWithCallback(self.returnYellow, MessageBox, '\nTVS-EPG Update abbrechen?', MessageBox.TYPE_YESNO, timeout=10, default=False)
-
-	def returnYellow(self, answer):
-		if answer is True:
-			self.updateStop = True
-
-	def keyBlue(self):
-		if self.tvupdate.getIsVisible():
-			self.tvupdate.hideDialog()
-		elif self.updateActive:
-			self.tvupdate.showDialog()
-
-	def down(self):
-		self["mainmenu"].down()
-
-	def up(self):
-		self["mainmenu"].up()
-
-	def leftUp(self):
-		self["mainmenu"].pageUp()
-
-	def rightDown(self):
-		self["mainmenu"].pageDown()
+	def updateMappingfile(self):
+		sourcefile = join(tvglobals.PLUGINPATH, "db/tvs_mapping.txt")
+		self.mapfile = join(self.configpath, "tvs_mapping.txt")
+		if not exists(self.mapfile) or (config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) > int(getmtime(self.mapfile))):  # plugin mapfile older than user mapfile:
+			print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{self.mapfile}'.")
+			copy(sourcefile, self.mapfile)
+			self.tvinfobox.showDialog("Die Sender-Zuweisungstabelle\n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\nwurde aktualisiert.", 5000)
 
 	def config(self):
 		self.hideTVtipsBox()
@@ -1886,9 +1898,9 @@ class TVimport(TVhelper, Screen):
 		self.totalimport = []
 		self.totalsupp = []
 		self.totalunsupp = []
-		self.configpath = ""
 		self.mappinglog = ""
-		self.mapfile = ""
+		self.configpath = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # /etc/enigma2/TVSpielfilm
+		self.mapfile = join(self.configpath, "tvs_mapping.txt")
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["bouquetslist"] = List()
 		self["key_blue"] = StaticText("Überprüfe Konvertierungsregeln")
@@ -1896,18 +1908,10 @@ class TVimport(TVhelper, Screen):
 							   		"ColorActions"], {"ok": self.keyOk,
 							  						"blue": self.keyBlue,
 													"cancel": self.keyExit}, -1)
+		self.maplist = self.readMappingList()
 		self.onShown.append(self.shownFinished)
 
 	def shownFinished(self):
-		self.maplist = self.readMappingList()
-		self.configpath = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # /etc/enigma2/TVSpielfilm
-		if not exists(self.configpath):
-			makedirs(self.configpath, exist_ok=True)
-		sourcefile = join(tvglobals.PLUGINPATH, "db/tvs_mapping.txt")
-		self.mapfile = join(self.configpath, "tvs_mapping.txt")
-		if not exists(self.mapfile) or (config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) < int(getmtime(self.mapfile))):  # plugin mapfile older than user mapfile:
-			print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{self.mapfile}'.")
-			copy(sourcefile, self.mapfile)
 		if exists(self.mapfile):
 			self.getAllBouquets()
 		else:
@@ -1956,26 +1960,29 @@ class TVimport(TVhelper, Screen):
 		if answer:
 			if answer[0] is True:
 				if self.totalimport:
-					supportedchannels = []
 					importedchannels = []
 					for index, channel in enumerate(answer[1]):
 						if channel[1]:
-							supportedchannels.append((self.totalsupp[index][1][0], (self.totalsupp[index][0], self.totalsupp[index][1][1])))
 							importedchannels.append((self.totalimport[index][1][0], (self.totalimport[index][0], self.totalimport[index][1][1])))  # e.g. ('ard', ('1:0:19:283D:41B:1:FFFF0000:0:0:0:', 'Das Erste HD'))
 					importfile = join(resolveFilename(SCOPE_CONFIG, "TVSpielfilm/"), "tvs_imported.json")
 					with open(f"{importfile}.new", 'w') as file:  # all imported channels only
 						file.write(dumps(dict(importedchannels)))
 						rename(f"{importfile}.new", importfile)
+				if self.totalsupp:
+					supportedchannels = []
+					for index, channel in enumerate(self.totalsupp):
+						if channel[1]:
+							supportedchannels.append((self.totalsupp[index][1][0], (self.totalsupp[index][0], self.totalsupp[index][1][1])))
 					suppfile = join(resolveFilename(SCOPE_CONFIG, "TVSpielfilm/"), "tvs_supported.json")
-					with open(f"{suppfile}.new", 'w') as file:  # all channels supported by Server
+					with open(f"{suppfile}.new", 'w') as file:  # all channels supported by server
 						file.write(dumps(dict(supportedchannels)))
 						rename(f"{suppfile}.new", suppfile)
-				if self.totaldupes:
+				if self.totaldupes:  # all unused (duplicate) channels in bouquets
 					dupesfile = join(resolveFilename(SCOPE_CONFIG, "TVSpielfilm/"), "tvs_dupes.json")
 					with open(f"{dupesfile}.new", 'w') as file:
 						file.write(dumps(dict(self.totaldupes)))
 					rename(f"{dupesfile}.new", dupesfile)
-				if self.totalunsupp:
+				if self.totalunsupp:  # all channels not supported by server
 					unsuppfile = join(resolveFilename(SCOPE_CONFIG, "TVSpielfilm/"), "tvs_unsupported.json")
 					with open(f"{unsuppfile}.new", 'w') as file:
 						file.write(dumps(dict(self.totalunsupp)))
@@ -2030,7 +2037,6 @@ class TVimport(TVhelper, Screen):
 				importlist.append(item)
 			else:
 				dupeslist.append(item)
-
 		return importlist, dupeslist, supported, unsupported
 
 	def readMappingList(self):  # Read mapping (=translation rules 'TVSpielfilm channel abbreviation: E2 service name')
@@ -2049,17 +2055,17 @@ class TVimport(TVhelper, Screen):
 
 	def appendImportLog(self, bouquetname, totalfound, importlist, dupeslist, unsupported):  # append last successful import to logfile
 		with open(f"{tvglobals.LOGPATH}bouquetimport.log", "a") as file:
-			file.write(f"{'=' * 78}\n{len(totalfound)} channels found in bouquet '{bouquetname}' (incl. duplicate TVSpielfilm shortcuts)\n{'=' * 78}\n")
+			file.write(f"{'=' * 78}\n{len(totalfound)} Kanäle im Bouquet gefunden '{bouquetname}' (inkl. doppelter TVSpielfilm-Kürzel)\n{'=' * 78}\n")
 			formatstr = "{0:<10} {1:<40} {2:<0}\n"
 			for item in totalfound:
 				file.write(formatstr.format(*(item[1][0] or "n/a", item[0], item[1][1])))
-			file.write(f"\n{len(importlist)} imported TV movie channels (without duplicate TVSpielfilm shortcuts):\n{'-' * 78}\n")
+			file.write(f"\n{len(importlist)} importierte TVSpielfilm Kanäle (ohne doppelte TVSpielfilm-Verknüpfungen):\n{'-' * 78}\n")
 			for item in importlist:
 				file.write(formatstr.format(*(item[1][0], item[0], item[1][1])))
-			file.write(f"\n{len(dupeslist)} not imported channels (because duplicate TVSpielfilm shortcuts):\n{'-' * 78}\n")
+			file.write(f"\n{len(dupeslist)} nicht importierte Kanäle (weil doppelte TVSpielfilm-Verknüpfungen):\n{'-' * 78}\n")
 			for item in dupeslist:
 				file.write(formatstr.format(*(item[1][0], item[0], item[1][1])))
-			file.write(f"\n{len(unsupported)} channels not supported by TV-Spielfilm:\n{'-' * 78}\n")
+			file.write(f"\n{len(unsupported)} Kanäle, die von TV-Spielfilm nicht unterstützt werden:\n{'-' * 78}\n")
 			for item in unsupported:
 				file.write(formatstr.format(*("n/a", item[0], item[1][1])))
 			file.write("\n")
