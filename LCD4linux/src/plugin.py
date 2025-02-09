@@ -12522,7 +12522,8 @@ def LCD4linuxPIC(self, session):
 						else:
 							self.draw[draw].rectangle((POSX + 10, ConfigPos + 1, POSX + ProgressBar + 10, ConfigPos + ConfigSize - 1), outline=ConfigColor, fill=ConfigColorBG)
 				elif ConfigBorder.startswith("false"):
-					self.draw[draw].rectangle((POSX + 9, ConfigPos, POSX + ProgressBar + 11, ConfigPos + ConfigSize), fill=ConfigColorBG)
+					if ConfigColorBG != "0":
+						self.draw[draw].rectangle((POSX + 10, ConfigPos, POSX + ProgressBar + 10, ConfigPos + ConfigSize), fill=ConfigColorBG)
 				elif ConfigBorder == "line":
 					self.draw[draw].rectangle((POSX + 10, ConfigPos + int(ConfigSize / 2) - 1, POSX + ProgressBar + 10, ConfigPos + int(ConfigSize / 2) + 1), outline=ConfigColor, fill=ConfigColor)
 				self.draw[draw].rectangle((POSX + 10, ConfigPos, POSX + event_run + 10, ConfigPos + ConfigSize), fill=ConfigColor)
@@ -15200,7 +15201,7 @@ def LCD4linuxPIC(self, session):
 				Para = LCD4linux.Bild3Pos.value, LCD4linux.Bild3Size.value, LCD4linux.Bild3SizeH.value, LCD4linux.Bild3Align.value, LCD4linux.Bild3Quick.value, LCD4linux.Bild3Transp.value, 0, ShowPicture, LCD4linux.Bild3File.value
 				Lput4(LCD4linux.Bild3LCD.value, LCD4linux.Bild3.value, putBild, Para)
 # Bild 4
-			if LCD4linux.Bild4.value != "0" and (ScreenActive[0] in LCD4linux.Bild5.value or ScreenActive[-3:] != ["", "", ""]):
+			if LCD4linux.Bild4.value != "0" and (ScreenActive[0] in LCD4linux.Bild4.value or ScreenActive[-3:] != ["", "", ""]):
 				ShowPicture = getShowPicture(LCD4linux.Bild4File.value, 0)
 				Para = LCD4linux.Bild4Pos.value, LCD4linux.Bild4Size.value, LCD4linux.Bild4SizeH.value, LCD4linux.Bild4Align.value, LCD4linux.Bild4Quick.value, LCD4linux.Bild4Transp.value, 0, ShowPicture, LCD4linux.Bild4File.value
 				Lput4(LCD4linux.Bild4LCD.value, LCD4linux.Bild4.value, putBild, Para)
@@ -15418,7 +15419,7 @@ def LCD4linuxPIC(self, session):
 		if "2" in LCD4linux.PopupLCD.value and LCD4linux.LCDType2.value != "00":
 			Brief2.put([putPopup, Para, 2, 2])
 		if "3" in LCD4linux.PopupLCD.value and LCD4linux.LCDType3.value != "00":
-			Brief2.put([putPopup, Para, 3, 3])
+			Brief3.put([putPopup, Para, 3, 3])
 # show isCrashlog
 	if LCD4linux.Crash.value == True:
 		Brief1.put([putCrash, 1, 1])
