@@ -109,6 +109,17 @@ class TVhelper(Screen):
 	def getTMPpath(self):
 		return f"{config.plugins.tvspielfilm.cachepath.value}tmp/TVSpielfilm/" if config.plugins.tvspielfilm.cachepath.value == "/" else f"{config.plugins.tvspielfilm.cachepath.value}TVSpielfilm/"
 
+	def updateMappingfile(self):
+		if not exists(self.configpath):
+			makedirs(self.configpath, exist_ok=True)
+		sourcefile = join(tvglobals.PLUGINPATH, "db/tvs_mapping.txt")
+		self.mapfile = join(self.configpath, "tvs_mapping.txt")
+		if not exists(self.mapfile) or (config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) > int(getmtime(self.mapfile))):  # plugin mapfile older than user mapfile:
+			print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{self.mapfile}'.")
+			copy(sourcefile, self.mapfile)
+			return True
+		return False
+
 	def imageDownload(self, url, imgfile, callback=None, assetId=""):
 		if not exists(imgfile):
 			headers = {"User-Agent": tvglobals.USERAGENT, }
@@ -1168,7 +1179,8 @@ class TVoverview(TVhelper, Screen):
 			self.skinlist = []
 			self.hideCurrentAsset()
 		self["menuList"].updateList(skinlist)
-		self["menuList"].setCurrentIndex(listpos)
+		if self.singleChannel:
+			self["menuList"].setCurrentIndex(listpos)
 		self.lenskinlist = len(self.skinlist)
 
 	def showCurrentAsset(self):
@@ -1353,10 +1365,9 @@ class TVmain(TVhelper, Screen):
 		tvglobals.IMPORTDICT = readImportedFile()  # load imported channel data
 		if not self.createTMPpaths():
 			self.exit()
+		if self.updateMappingfile():
+			self.tvinfobox.showDialog("Die Sender-Zuweisungstabelle\n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\nwurde aktualisiert.", 5000)
 		self.cleanupCache()
-		if not exists(self.configpath):
-			makedirs(self.configpath, exist_ok=True)
-		self.updateMappingfile()
 		callInThread(self.getTips, self.getTipsCB)
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -1599,14 +1610,6 @@ class TVmain(TVhelper, Screen):
 		if exists(imgfile) and (not tipId or tipId == self.currentTipId):
 			self.tvtipsbox.setWidgetImage("image", imgfile)
 			self.tvtipsbox.showWidget("image")
-
-	def updateMappingfile(self):
-		sourcefile = join(tvglobals.PLUGINPATH, "db/tvs_mapping.txt")
-		self.mapfile = join(self.configpath, "tvs_mapping.txt")
-		if not exists(self.mapfile) or (config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) > int(getmtime(self.mapfile))):  # plugin mapfile older than user mapfile:
-			print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{self.mapfile}'.")
-			copy(sourcefile, self.mapfile)
-			self.tvinfobox.showDialog("Die Sender-Zuweisungstabelle\n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\nwurde aktualisiert.", 5000)
 
 	def config(self):
 		self.hideTVtipsBox()
@@ -1908,6 +1911,8 @@ class TVimport(TVhelper, Screen):
 							   		"ColorActions"], {"ok": self.keyOk,
 							  						"blue": self.keyBlue,
 													"cancel": self.keyExit}, -1)
+		if self.updateMappingfile():
+			self.tvinfobox.showDialog("Die Sender-Zuweisungstabelle\n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\nwurde aktualisiert.", 5000)
 		self.maplist = self.readMappingList()
 		self.onShown.append(self.shownFinished)
 
@@ -1924,7 +1929,7 @@ class TVimport(TVhelper, Screen):
 
 	def keyBlue(self):
 		self.checkMappingRules()
-		self.session.open(MessageBox, _(f"Konvertierungsregeln in der Datei:\n'{self.mapfile}'\nwurden geprüft.\n\nDie detaillierte Analyse finden Sie in der Logdatei:\n'{self.mappinglog}'"), MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
+		self.session.open(MessageBox, f"Konvertierungsregeln in der Datei:\n'{self.mapfile}'\nwurden geprüft.\n\nDie detaillierte Analyse finden Sie in der Logdatei:\n'{self.mappinglog}'", MessageBox.TYPE_INFO, timeout=10, close_on_any_key=True)
 
 	def keyOk(self):
 		current = self["bouquetslist"].getCurrent()  # e.g. ('Favoriten (TV)', <enigma.eServiceReference; proxy of <Swig Object of type 'eServiceReference *' at 0xa70d46f8> >)
