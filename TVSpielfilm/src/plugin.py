@@ -45,6 +45,11 @@ from Screens.Timers import RecordTimerEdit, RecordTimerEntry
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, isPluginInstalled, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_CONFIG
 from Tools.LoadPixmap import LoadPixmap
+HAS_FUNCTIONTIMER = True
+try:
+	from Scheduler import functionTimer
+except ImportError:
+	HAS_FUNCTIONTIMER = False
 
 TVS_UPDATEACTIVE = False
 STARTTIMES = ["00:00", "02:00", "04:00", "06:00", "08:00", "10:00", "12:00", "14:00", "16:00", "18:00", "19:00", "20:00", "20:15", "22:00"]
@@ -2392,7 +2397,7 @@ def autostart(reason, **kwargs):
 
 
 def sessionstart(reason, session):
-	if reason == 0:
+	if reason == 0 and HAS_FUNCTIONTIMER:
 		functionTimer.add(("TVupdate", {"name": "TV-Spielfilm EPG-Datenupdate", "fnc": autoEPGupdate}))
 
 
