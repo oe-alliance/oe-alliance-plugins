@@ -34,7 +34,6 @@ from Components.Sources.StaticText import StaticText
 from Components.UsageConfig import preferredTimerPath
 from Plugins.Plugin import PluginDescriptor
 from ServiceReference import ServiceReference
-from Scheduler import functionTimer
 from Screens.ChoiceBox import ChoiceBox
 from Screens.InfoBar import MoviePlayer
 from Screens.LocationBox import defaultInhibitDirs, LocationBox
@@ -2398,7 +2397,8 @@ def autostart(reason, **kwargs):
 
 def sessionstart(reason, session):
 	if reason == 0 and HAS_FUNCTIONTIMER:
-		functionTimer.add(("TVupdate", {"name": "TV-Spielfilm EPG-Datenupdate", "fnc": autoEPGupdate}))
+		pass
+#		functionTimer.add(("TVupdate", {"name": "TV-Spielfilm EPG-Datenupdate", "fnc": autoEPGupdate}))
 
 
 def Plugins(**kwargs):
