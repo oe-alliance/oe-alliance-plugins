@@ -1589,10 +1589,10 @@ class TVmain(TVscreenHelper, Screen):
 		if answer:
 			if answer[1] == 1:
 				self.updateStop = False
-				callInThread(self.updateFutureEPG, visible=True, forceRefresh=False)
+				callInThread(self.updateFutureEPG, forceRefresh=False)
 			elif answer[1] == 2:
 				self.updateStop = False
-				callInThread(self.updateFutureEPG, visible=True)
+				callInThread(self.updateFutureEPG)
 		self.showTVtipsBox()
 
 	def returnOk3(self, answer):
