@@ -31,7 +31,7 @@ from Screens.Setup import Setup
 from Screens.VirtualKeyBoard import VirtualKeyBoard
 from Tools.BoundFunction import boundFunction
 
-from enigma import eListboxPythonMultiContent, ePicLoad, eTimer, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
+from enigma import eServiceReference, eListboxPythonMultiContent, ePicLoad, eTimer, gFont, RT_HALIGN_LEFT, RT_VALIGN_CENTER
 
 from skin import parameters
 import shutil
@@ -43,6 +43,25 @@ from twisted.internet.reactor import callInThread
 import tmdbsimple as tmdb
 from .__init__ import _
 from .skins import tmdbScreenSkin, tmdbScreenMovieSkin, tmdbScreenPeopleSkin, tmdbScreenPersonSkin, tmdbScreenSeasonSkin
+
+TrailerSupport = False
+YoutubeDL = None
+YoutubeDLP = None
+
+from Components.SystemInfo import BoxInfo
+distro = BoxInfo.getItem("distro").lower()
+if distro in ("openatv",):
+	try:
+		from youtube_dl import YoutubeDL
+		TrailerSupport = True
+	except ImportError:
+		YoutubeDL = None
+
+	try:
+		from yt_dlp import YoutubeDL as YoutubeDLP
+		TrailerSupport = True
+	except ImportError:
+		YoutubeDLP = None
 
 
 pname = "TMDb"
@@ -489,7 +508,8 @@ class tmdbScreenMovie(Screen, HelpableScreen, CoverHelper):
 				"yellow": (self.keyYellow, _("Seasons")),
 				"blue": (self.menu, _("More")),
 				"menu": (self.setup, _("Setup")),
-				"eventview": (self.menu, _("More"))
+				"eventview": (self.menu, _("More")),
+				"showMovies": (self.showTrailer, _("Show Trailer"))
 			}, -1)
 
 		self['searchinfo'] = Label(_("TMDb: ") + _("Loading..."))
@@ -597,6 +617,7 @@ class tmdbScreenMovie(Screen, HelpableScreen, CoverHelper):
 		self['searchinfo'].setText(_("TMDb: ") + _("Loading..."))
 		print("[TMDb][tmdbScreenMovie]1 ID, self.movie: ", self.id, "   ", self.movie)
 
+		videos = None
 		try:
 			if self.movie:
 				json_data = tmdb.Movies(self.id).info(language=self.lang)
@@ -607,6 +628,9 @@ class tmdbScreenMovie(Screen, HelpableScreen, CoverHelper):
 #				print("[TMDb][tmdbScreenMovie] Movie json_data_cast", json_data_cast)
 				json_data_fsk = tmdb.Movies(self.id).releases(language=self.lang)
 #				print("[TMDb][tmdbScreenMovie] Movie json_fsk", json_data_fsk)
+				if TrailerSupport:
+					videos = tmdb.Movies(self.id).videos(language=self.lang)
+					# print("[TMDb][tmdbScreenMovie] Movie videos", videos)
 			else:
 				json_data = tmdb.TV(self.id).info(language=self.lang)
 				if json_data and json_data['overview'] == "":
@@ -616,6 +640,9 @@ class tmdbScreenMovie(Screen, HelpableScreen, CoverHelper):
 #				print("[TMDb][tmdbScreenMovie] TV json_data_cast", json_data_cast)
 				json_data_fsk = tmdb.TV(self.id).content_ratings(language=self.lang)
 #				print("[TMDb][tmdbScreenMovie] TV json_fsk", json_data_fsk)
+				if TrailerSupport:
+					videos = tmdb.TV(self.id).videos(language=self.lang)
+					# print("[TMDb][tmdbScreenMovie] TV videos", videos)
 			self['searchinfo'].setText(f"{self.mname}")
 		except Exception as e:
 			print("[TMDb][tmdbScreenMovie]1 tmdb read fail", e)
@@ -623,6 +650,8 @@ class tmdbScreenMovie(Screen, HelpableScreen, CoverHelper):
 			return
 		year = vote_average = vote_count = runtime = country_string = genre_string = subtitle = cast_string = ""
 		crew_string = director = author = studio_string = ""
+
+		self.trailer = videos["results"] if TrailerSupport and videos else None
 
 		## Year
 
@@ -773,6 +802,44 @@ class tmdbScreenMovie(Screen, HelpableScreen, CoverHelper):
 
 	def dataError(self, error):
 		print(f"[TMDb] Error: {error}")
+
+	def playTrailer(self, url):
+		if url:
+			if YoutubeDLP:
+				try:
+					ydl = YoutubeDLP({"format": "b", "no_color": True, "usenetrc": True})
+					result = ydl.extract_info(url, download=False)
+					result = ydl.sanitize_info(result)
+					if result and result.get("url"):
+						url = result["url"]
+				except Exception as e:
+					print(f"[TMDb] YoutubeDLP Error: {e}")
+			elif YoutubeDL:
+				try:
+					ydl = YoutubeDL({'format': 'best'})
+					result = ydl.extract_info(url, download=False)
+					if result and hasattr(result, "url"):
+						url = result['url']
+				except Exception as e:
+					print(f"[TMDb] YoutubeDL Error: {e}")
+			if url:
+				from Screens.InfoBar import MoviePlayer
+				sref = eServiceReference(4097, 0, url)
+				sref.setName(self.mname)
+				self.session.open(MoviePlayer, sref, fromMovieSelection=False)
+
+	def showTrailer(self):
+		if self.trailer:
+			choiceList = []
+			for video in self.trailer:
+				if video.get("site") == "YouTube":
+					name = video.get("name")
+					type = video.get("type")
+					if type:
+						name = f"{name} ({type})"
+					link = f"https://www.youtube.com/watch?v={video['key']}"
+					choiceList.append((name, link))
+			self.session.openWithCallback(self.playTrailer, MessageBox, text=f"", list=choiceList, windowTitle=_("Select Video"))
 
 	def showCover(self, coverName):
 		if not exists(coverName):
