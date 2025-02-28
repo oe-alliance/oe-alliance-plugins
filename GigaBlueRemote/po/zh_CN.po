@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 14:48+0100\n"
+"PO-Revision-Date: 2025-02-28 15:03+0800\n"
+"Last-Translator: Mark Stone <Mark@kram.com>\n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.5\n"
+
+msgid "Always off"
+msgstr "总是关闭"
+
+msgid "Blink Record Led"
+msgstr "闪烁录像指示灯"
+
+msgid "Blue"
+msgstr "蓝色"
+
+msgid "Brightness"
+msgstr "亮度"
+
+msgid "Brightness Standby"
+msgstr "待机亮度"
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Change LED display settings"
+msgstr "更改指示灯显示设置"
+
+msgid "Channel number with leading zeros"
+msgstr "带有前导零的频道编号"
+
+msgid "Channelnumber in Standby Clock"
+msgstr "待机时钟中的频道编号"
+
+msgid "Channelnumber in Standby off"
+msgstr "待机关闭时的频道编号"
+
+msgid "Channelnumber/Clock in Standby Clock"
+msgstr "待机时钟中的频道编号/时钟"
+
+msgid "Clock always"
+msgstr "时钟常显"
+
+msgid "Display/LED"
+msgstr "显示屏 / 指示灯"
+
+msgid "Enable led"
+msgstr "启用指示灯"
+
+msgid "GigaBlue Setup"
+msgstr "GigaBlue 设置"
+
+msgid "LED"
+msgstr "指示灯"
+
+msgid "Led Deep Standby"
+msgstr "深度待机指示灯"
+
+msgid "Led state Deep Standby"
+msgstr "深度待机指示灯状态"
+
+msgid "Led state HDD /dev/sda active"
+msgstr "/dev/sda 硬盘活动指示灯状态"
+
+msgid "Led state HDD /dev/sdb active"
+msgstr "/dev/sdb 硬盘活动指示灯状态"
+
+msgid "Led state RUN"
+msgstr "运行指示灯状态"
+
+msgid "Led state Record"
+msgstr "录制指示灯状态"
+
+msgid "Led state Standby"
+msgstr "待机指示灯状态"
+
+msgid "No"
+msgstr "否"
+
+msgid "None"
+msgstr "无"
+
+msgid "Purple"
+msgstr "紫色"
+
+msgid "Red"
+msgstr "红色"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Show clock in Deep Standby"
+msgstr "深度待机时显示时钟"
+
+msgid "Show on VFD"
+msgstr "在 VFD 上显示"
+
+msgid "Time mode"
+msgstr "时间模式"
+
+msgid "Update Date/Time"
+msgstr "更新日期/时间"
+
+msgid "Yes"
+msgstr "是"
