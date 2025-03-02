@@ -266,6 +266,17 @@ fi
 AM_CONDITIONAL(HAVE_PYTHON3, test "$PYTHON" == "python3")
 AM_CONDITIONAL(HAVE_LCD4LINUX_SUBDIR, test "$PYTHON" == "python")
 
+AC_ARG_WITH(btsupport,
+	AC_HELP_STRING([--with-btsupport], [have btsupport]),
+	[[withbtsupport=$withval]],
+	[[withbtsupport=no]]
+)
+if test x"$withbtsupport" != xno ; then
+	AC_DEFINE(HAVE_BTSUPPORT, 1,[Define when having bt support])
+fi
+AM_CONDITIONAL(HAVE_BTSUPPORT, test x"$withbtsupport" != xno)
+
+
 AC_CONFIG_FILES([
 Makefile
 
