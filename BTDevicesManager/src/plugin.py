@@ -37,7 +37,6 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, fileExists, fileCheck
 from .bluetoothctl import iBluetoothctl, Bluetoothctl
 
-import six
 import os
 import time
 import signal
@@ -289,7 +288,8 @@ class BluetoothDevicesManager(Screen):
 
 		self.devicelist = []
 		self.devicelist.append((_("MAC:\t\tDevice name:"), _("entry")))
-		data = six.ensure_str(data)
+		if isinstance(data, bytes):
+			data = data.decode()
 		data = data.splitlines()
 		i = 1
 		if MACHINEBUILD in ("gb7252", "gbmv200", "sf8008"):
@@ -298,7 +298,7 @@ class BluetoothDevicesManager(Screen):
 			delimiter = "\t"
 		for x in data:
 			y = x.split(delimiter)
-			if not y[0] == "Scanning ...":  # We do not need to put this to the list
+			if len(y) > 2 and y[0] != "Scanning ...":  # We do not need to put this to the list
 				i += 1
 				self.devicelist.append((y[1] + "\t" + y[2], y[1]))
 
@@ -330,6 +330,8 @@ class BluetoothDevicesManager(Screen):
 				self["ConnStatus"].setText(_("No connected to any device"))
 
 	def cbPrintCurrentConnections(self, data):
+		if isinstance(data, bytes):
+			data = data.decode()
 		print("[BluetoothManager] cbPrintCurrentConnections")
 		msg = _("Connection with:\n") + data[:-12]
 		self["ConnStatus"].setText(msg)
