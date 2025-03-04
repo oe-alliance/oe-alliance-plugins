@@ -3,6 +3,8 @@ from __future__ import absolute_import
 # for localized messages
 from . import _
 
+
+from Screens.MessageBox import MessageBox
 from time import mktime, strftime, time, localtime
 from Components.config import config
 from enigma import eTimer
@@ -16,7 +18,7 @@ def autostart(reason, session=None, **kwargs):
 	"called with reason=1 to during /sbin/shutdown.sysvinit, with reason=0 at startup?"
 	global autoChannelsImporterTimer
 	global _session
-	now = int(time())
+	# now = int(time())
 	if reason == 0:
 		print("[ChannelsImporterScheduler][ChannelsImporterautostart] AutoStart Enabled")
 		if session is not None:
@@ -119,14 +121,16 @@ class AutoChannelsImporterTimer:
 		if wake - now < 60:
 			atLeast = 60
 			print("[ChannelsImporterScheduler][ChannelsImporteronTimer] onTimer occured at", strftime("%c", localtime(now)))
-			#from Screens.Standby import inStandby
-			#if not inStandby:
-				#message = _("Your channels list is about to be updated.\nDo you want to allow this?")
-				#ybox = self.session.openWithCallback(self.doChannelsImporter, MessageBox, message, MessageBox.TYPE_YESNO, timeout = 30)
-				#ybox.setTitle('Scheduled ChannelsImporter.')
-			#	self.doChannelsImporter(True)
-			#else:
-			#	self.doChannelsImporter(True)
+			"""
+			# from Screens.Standby import inStandby
+			# if not inStandby:
+				# message = _("Your channels list is about to be updated.\nDo you want to allow this?")
+				# ybox = self.session.openWithCallback(self.doChannelsImporter, MessageBox, message, MessageBox.TYPE_YESNO, timeout = 30)
+				# ybox.setTitle('Scheduled ChannelsImporter.')
+			#   self.doChannelsImporter(True)
+			# else:
+			#    self.doChannelsImporter(True)
+			"""
 			self.doChannelsImporter(True)
 		self.channelsimporterdate(atLeast)
 
