@@ -3,7 +3,7 @@ from __future__ import division, absolute_import
 from os.path import isfile, getmtime
 from six import ensure_str, ensure_binary
 from twisted.web import resource
-from .plugin import *
+from .plugin import getTMPL, LCD4linux, getConfigMode
 
 
 class LCD4linuxweb(resource.Resource):
@@ -17,7 +17,7 @@ class LCD4linuxweb(resource.Resource):
 	def render(self, req):
 		req.setHeader('Content-type', 'text/html')
 		req.setHeader('charset', 'UTF-8')
-#		rendering server response
+#       rendering server response
 		w = ""
 		command = req.args.get(b"width", None)
 		if command is not None:
@@ -44,7 +44,7 @@ class LCD4linuxweb(resource.Resource):
 			JavaRefresh = " id=\"reloader%%d\" onload=\"setTimeout('document.getElementById(\\'reloader%%d\\').src=\\'/lcd4linux/%%s?\\'+new Date().getTime()', %d)\"" % (int(LCD4linux.WebIfRefresh.value) * 1000)
 		html += "<title>LCD4linux</title>\n"
 		html += "</head>"
-		html += "<body bgcolor=\"%s\" text=\"#FFFFFF\">\n" % ("#666666" if getConfigMode() == True else "#000000")
+		html += "<body bgcolor=\"%s\" text=\"#FFFFFF\">\n" % ("#666666" if getConfigMode() is True else "#000000")
 		html += "<form method=\"POST\" action=\"--WEBBOT-SELF--\">\n"
 		datei = req.args.get(b"file", None)
 		if datei is not None:
