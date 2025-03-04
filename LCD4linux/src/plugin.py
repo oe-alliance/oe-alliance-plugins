@@ -9862,23 +9862,23 @@ class UpdateStatus(Screen):
 		self.WetterOK = False
 
 	def saveGeodata(self, wetter, Cityname, Long, Lat):
-			self.Long[wetter] = Long
-			self.Lat[wetter] = Lat
-			if wetter == 0:
-				LCD4linux.WetterCity.value = Cityname
-				LCD4linux.WetterCity.save()
-				LCD4linux.WetterCoords.value = "%s,%s" % (Long, Lat)
-				LCD4linux.WetterCoords.save()
-			else:
-				LCD4linux.Wetter2City.value = Cityname
-				LCD4linux.Wetter2City.save()
-				LCD4linux.Wetter2Coords.value = "%s,%s" % (Long, Lat)
-				LCD4linux.Wetter2Coords.save()
-			try:
-				LCD4linux.saveToFile(LCD4config)
-				L4log("Wetter%s-saveGeodata: successful" % wetter)
-			except Exception:
-				L4log("Wetter%s-saveGeodata Error: 'lcd4config' is in use by other process, retrying next time..." % wetter)
+		self.Long[wetter] = Long
+		self.Lat[wetter] = Lat
+		if wetter == 0:
+			LCD4linux.WetterCity.value = Cityname
+			LCD4linux.WetterCity.save()
+			LCD4linux.WetterCoords.value = "%s,%s" % (Long, Lat)
+			LCD4linux.WetterCoords.save()
+		else:
+			LCD4linux.Wetter2City.value = Cityname
+			LCD4linux.Wetter2City.save()
+			LCD4linux.Wetter2Coords.value = "%s,%s" % (Long, Lat)
+			LCD4linux.Wetter2Coords.save()
+		try:
+			LCD4linux.saveToFile(LCD4config)
+			L4log("Wetter%s-saveGeodata: successful" % wetter)
+		except Exception:
+			L4log("Wetter%s-saveGeodata Error: 'lcd4config' is in use by other process, retrying next time..." % wetter)
 
 	def getCityCoords(self, ConfigWWW, jsonData):
 		try:
