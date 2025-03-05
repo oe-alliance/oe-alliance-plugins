@@ -366,10 +366,10 @@ def controliniVfd():
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and iniVfd == None:
+	if gReason == 0 and mySession is not None and iniVfd is None:
 		print("[Stb LED] Starting !!")
 		iniVfd = VFD_INI(mySession)
-	elif gReason == 1 and iniVfd != None:
+	elif gReason == 1 and iniVfd is not None:
 		print("[Stb LED] Stopping !!")
 
 		iniVfd = None
