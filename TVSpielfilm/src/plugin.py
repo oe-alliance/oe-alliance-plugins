@@ -123,14 +123,15 @@ class TVcoreHelper():
 		return ""
 
 	def cleanupCache(self):  # delete older asset overviews, detailed assets and images
-		latest = datetime.today() - timedelta(days=config.plugins.tvspielfilm.keepcache.value)
+		today = datetime.today()
+		latest = today - timedelta(days=config.plugins.tvspielfilm.keepcache.value)
 		ldate = latest.replace(hour=0, minute=0, second=0, microsecond=0)
 		for filename in glob(join(f"{self.getTMPpath()}cache/", "allAssets*T*.json")):
 			if datetime.strptime(filename.split("/")[-1][9:19], "%Y-%m-%d") < ldate:  # keepcache or older?
 				remove(filename)
-		for filenames in [glob(join(f"{self.getTMPpath()}assets/", "*.*")), glob(join(f"{self.getTMPpath()}images/", "*.*"))]:
+		for filenames in [glob(join(f"{self.getTMPpath()}cache/", "allTips*.json")), glob(join(f"{self.getTMPpath()}assets/", "*.*")), glob(join(f"{self.getTMPpath()}images/", "*.*"))]:
 			for filename in filenames:
-				if (latest - datetime.fromtimestamp(getmtime(filename))).total_seconds() > 86400:  # older than 24h?
+				if datetime.timestamp(today) - getmtime(filename) > 86400:  # older than 24h?
 					remove(filename)
 
 	def getUserMenuUsage(self, index):
@@ -237,6 +238,18 @@ class TVcoreHelper():
 			with open(suppfile, "r") as file:
 				suppdict = loads(file.read())
 		return suppdict  # e.g. [('ard': ('1:0:27:212F:31B:1:FFFF0000:0:0:0:', 'Das Erste HD')), ...]
+
+	def updateMappingfile(self):
+		configpath = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # /etc/enigma2/TVSpielfilm/
+		if not exists(configpath):
+			makedirs(configpath)
+		sourcefile = join(tvglobals.PLUGINPATH, "db/tvs_mapping.txt")
+		mapfile = join(configpath, "tvs_mapping.txt")
+		if not exists(mapfile) or (config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) > int(getmtime(mapfile))):  # plugin mapfile older than user mapfile:
+			print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{mapfile}'.")
+			copy(sourcefile, mapfile)
+			return True
+		return False
 
 
 class TVscreenHelper(TVcoreHelper, Screen):
@@ -587,52 +600,6 @@ class TVscreenHelper(TVcoreHelper, Screen):
 		if self.zapAllowed and self.currServiceRef:
 			self.session.nav.playService(eServiceReference(self.currServiceRef))
 			self.close(True)  # close plugin
-
-	def updateFutureEPG(self, forceRefresh=True):
-		global TVS_UPDATEACTIVE
-		TVS_UPDATEACTIVE = True
-		self.createTMPpaths()
-		self.cleanupCache()
-		self.tvupdate.showDialog()
-		timespans = self.getActiveTimespans()
-		len_total = 0
-		for timespan in timespans:  # calculate len_total
-			len_total += timespan[2] + 1  # days of a timespan to be cached
-		progress = 0
-		if timespans:
-			importdict = tvglobals.IMPORTDICT  # mandatory if the thread should continue to run even if the plugin is terminated
-			len_importdict = len(importdict)
-			self.setProgressRange(1, (0, len_importdict))
-			allAssets = {}
-			for timespan in timespans:  # go through all defined timespans (A to D)
-				if self.updateStop:
-					break
-				spanStarts = timespan[0]
-				spancache = timespan[2]
-				self.setProgressRange(0, (0, len_total))
-				for index0, day in enumerate(range(spancache + 1)):  # from today up to next to be cached days
-					if self.updateStop:
-						break
-					date = datetime.today() + timedelta(days=day)
-					datestr = date.strftime("%F")
-					weekday = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"][date.weekday()] if index0 else "heute"
-					progress += 1
-					self.setProgressValues(0, (f"Zeitraum: '{spanStarts}' | {weekday} (+{index0}/+{spancache} Tage)", progress, f"{progress}/{len_total}"))
-					for index1, item in enumerate(importdict.items()):
-						self.setProgressValues(1, (f"Sender: '{item[1][1]}'", index1, f"{index1}/{len_importdict}"))
-						channelId = item[0]
-						spanStarts = "00:00" if self.singleChannel else spanStarts
-						downloaded, assetsdict = self.getAllAssets(channelId, datestr, spanStarts, forceRefresh=forceRefresh)
-						if downloaded:
-							allAssets[channelId] = assetsdict
-					errmsg = self.saveAllAssets(allAssets, datestr, spanStarts)
-					if errmsg:
-						self.updateStop = True  # forced thread stop due to OS-error
-						self.session.open(MessageBox, "Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'%s'" % errmsg, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
-		self.tvupdate.hideDialog()
-		self.tvinfobox.showDialog("TVS-EPG Update erfolgreich abgebrochen." if self.updateStop else "TVS-EPG Update erfolgreich beendet.")
-		self.updateStop = False
-		TVS_UPDATEACTIVE = False
 
 
 class TVfullscreen(TVscreenHelper, Screen):
@@ -1499,7 +1466,6 @@ class TVmain(TVscreenHelper, Screen):
 		self.tvtipsboxTimer = eTimer()
 		self.tvtipsboxTimer.callback.append(self.tipSlideshow)
 		self.oldChannelName = config.plugins.tvspielfilm.channelname.value
-		self.configpath = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # /etc/enigma2/TVSpielfilm
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["mainmenu"] = List()
 		self["key_red"] = StaticText("Import")
@@ -1523,17 +1489,16 @@ class TVmain(TVscreenHelper, Screen):
 	def layoutFinished(self):
 		if self.createTMPpaths():
 			self.exit()
-		else:
-			self.cleanupCache()
-			if self.updateMappingfile():
-				self.tvinfobox.showDialog("Die Sender-Zuweisungstabelle\n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\nwurde aktualisiert.", 5000)
-			callInThread(self.getTips)
-			for widget, iconfile in [("isTopTip", "top.png"), ("isTipOfTheDay", "tip.png"), ("isNew", "new.png"), ("hasTimer", "timer.png")]:
-				self.tvtipsbox.setWidgetImage(widget, f"{tvglobals.ICONPATH}{iconfile}")
-			self.tvupdate.setText("headline", "Sammle TVS-EPG Daten")
-			self.tvupdate.setText("key_yellow", "Abbruch")
-			self.tvupdate.setText("key_blue", "Ein-/Ausblenden")
-			self.selectMainMenu()
+		self.cleanupCache()
+		if self.updateMappingfile():
+			self.tvinfobox.showDialog("Die Sender-Zuweisungstabelle\n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\nwurde aktualisiert.", 5000)
+		callInThread(self.getTips)
+		for widget, iconfile in [("isTopTip", "top.png"), ("isTipOfTheDay", "tip.png"), ("isNew", "new.png"), ("hasTimer", "timer.png")]:
+			self.tvtipsbox.setWidgetImage(widget, f"{tvglobals.ICONPATH}{iconfile}")
+		self.tvupdate.setText("headline", "Sammle TVS-EPG Daten")
+		self.tvupdate.setText("key_yellow", "Abbruch")
+		self.tvupdate.setText("key_blue", "Ein-/Ausblenden")
+		self.selectMainMenu()
 
 	def selectMainMenu(self):
 		userspans = self.getActiveTimespans()
@@ -1557,7 +1522,7 @@ class TVmain(TVscreenHelper, Screen):
 			elif current[1] == 5:
 				self.hideTVtipsBox()
 				self.tvupdate.hideDialog()
-				callInThread(self.getCurrentAssetId, self.session.nav.getCurrentlyPlayingServiceOrGroup, self.returnOk4)
+				callInThread(self.getCurrentAssetId, self.session.nav.getCurrentlyPlayingServiceOrGroup(), self.returnOk4)
 			elif current[1] == 6:
 				self.hideTVtipsBox()
 				self.tvupdate.hideDialog()
@@ -1603,10 +1568,9 @@ class TVmain(TVscreenHelper, Screen):
 
 	def returnOk4(self, assetId):
 		if assetId:
-			self.session.open(TVfullscreen, assetId)
+			self.session.openWithCallback(self.returnOk1, TVfullscreen, assetId)
 		else:
 			self.session.open(MessageBox, "Dieser Sender wird von TV Spielfilm nicht unterstützt.", type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
-		self.showTVtipsBox()
 
 	def keyRed(self):
 		if TVS_UPDATEACTIVE:
@@ -1765,16 +1729,6 @@ class TVmain(TVscreenHelper, Screen):
 			self.tvtipsbox.setWidgetImage("image", imgfile)
 			self.tvtipsbox.showWidget("image")
 
-	def updateMappingfile(self):
-		sourcefile = join(tvglobals.PLUGINPATH, "db/tvs_mapping.txt")
-		self.mapfile = join(self.configpath, "tvs_mapping.txt")
-		if not exists(self.mapfile) or (config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) > int(getmtime(self.mapfile))):  # plugin mapfile older than user mapfile:
-			print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{self.mapfile}'.")
-			copy(sourcefile, self.mapfile)
-			self.tvinfobox.showDialog("Die Sender-Zuweisungstabelle\n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\nwurde aktualisiert.", 5000)
-			return True
-		return False
-
 	def config(self):
 		self.hideTVtipsBox()
 		self.oldChannelName = config.plugins.tvspielfilm.channelname.value
@@ -1858,6 +1812,52 @@ class TVmain(TVscreenHelper, Screen):
 		self.tvupdate.setText(f"progressHdr{index}", valuelist[0])
 		self.tvupdate.setValue(f"progressBar{index}", valuelist[1])
 		self.tvupdate.setText(f"progressTxt{index}", valuelist[2])
+
+	def updateFutureEPG(self, forceRefresh=True):
+		global TVS_UPDATEACTIVE
+		TVS_UPDATEACTIVE = True
+		self.createTMPpaths()
+		self.cleanupCache()
+		self.tvupdate.showDialog()
+		timespans = self.getActiveTimespans()
+		len_total = 0
+		for timespan in timespans:  # calculate len_total
+			len_total += timespan[2] + 1  # days of a timespan to be cached
+		progress = 0
+		if timespans:
+			importdict = tvglobals.IMPORTDICT  # mandatory if the thread should continue to run even if the plugin is terminated
+			len_importdict = len(importdict)
+			self.setProgressRange(1, (0, len_importdict))
+			allAssets = {}
+			for timespan in timespans:  # go through all defined timespans (A to D)
+				if self.updateStop:
+					break
+				spanStarts = timespan[0]
+				spancache = timespan[2]
+				self.setProgressRange(0, (0, len_total))
+				for index0, day in enumerate(range(spancache + 1)):  # from today up to next to be cached days
+					if self.updateStop:
+						break
+					date = datetime.today() + timedelta(days=day)
+					datestr = date.strftime("%F")
+					weekday = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"][date.weekday()] if index0 else "heute"
+					progress += 1
+					self.setProgressValues(0, (f"Zeitraum: '{spanStarts}' | {weekday} (+{index0}/+{spancache} Tage)", progress, f"{progress}/{len_total}"))
+					for index1, item in enumerate(importdict.items()):
+						self.setProgressValues(1, (f"Sender: '{item[1][1]}'", index1, f"{index1}/{len_importdict}"))
+						channelId = item[0]
+						spanStarts = "00:00" if self.singleChannel else spanStarts
+						downloaded, assetsdict = self.getAllAssets(channelId, datestr, spanStarts, forceRefresh=forceRefresh)
+						if downloaded:
+							allAssets[channelId] = assetsdict
+					errmsg = self.saveAllAssets(allAssets, datestr, spanStarts)
+					if errmsg:
+						self.updateStop = True  # forced thread stop due to OS-error
+						self.session.open(MessageBox, "Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'%s'" % errmsg, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
+		self.tvupdate.hideDialog()
+		self.tvinfobox.showDialog("TVS-EPG Update erfolgreich abgebrochen." if self.updateStop else "TVS-EPG Update erfolgreich beendet.")
+		self.updateStop = False
+		TVS_UPDATEACTIVE = False
 
 
 class selectChannelCategory(TVscreenHelper, Screen):
@@ -1985,8 +1985,7 @@ class TVimport(TVscreenHelper, Screen):
 		self.totalsupp = []
 		self.totalunsupp = []
 		self.mappinglog = ""
-		self.configpath = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # /etc/enigma2/TVSpielfilm
-		self.mapfile = join(self.configpath, "tvs_mapping.txt")
+		self.mapfile = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/tvs_mapping.txt")  # /etc/enigma2/TVSpielfilm/tvs_mapping.txt
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["bouquetslist"] = List()
 		self["key_blue"] = StaticText("Überprüfe Konvertierungsregeln")
@@ -1994,6 +1993,8 @@ class TVimport(TVscreenHelper, Screen):
 							   		"ColorActions"], {"ok": self.keyOk,
 							  						"blue": self.keyBlue,
 													"cancel": self.keyExit}, -1)
+		if self.createTMPpaths():
+			self.exit()
 		if self.updateMappingfile():
 			self.tvinfobox.showDialog("Die Sender-Zuweisungstabelle\n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\nwurde aktualisiert.", 5000)
 		self.maplist = self.readMappingList()
