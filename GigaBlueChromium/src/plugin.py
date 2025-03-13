@@ -268,10 +268,7 @@ def start_youtubetv_main(session, **kwargs):
 def menu_start_youtube(menuid, **kwargs):
 	print(' menu_start_youtube')
 	if menuid == 'mainmenu':
-		return [(_('YouTubeTV'),
-		  start_youtubetv_main,
-		  'youtubetv',
-		  46)]
+		return [(_('YouTubeTV'), start_youtubetv_main, 'youtubetv', 46)]
 	return []
 
 

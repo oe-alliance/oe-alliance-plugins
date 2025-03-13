@@ -97,10 +97,7 @@ class PServerThread(threading.Thread):
 		packet = ''
 		opcode, result, length = struct.unpack('ibi', data[:hlen])
 		cbcfg.DEBUG('%s %s %d - %d', opcode, result, length, len(data))
-		return [opcode,
-		 result,
-		 length,
-		 hlen]
+		return [opcode, result, length, hlen]
 
 	def assamble(self, opcode, result, packet):
 		print('PServerThread:assamble')
@@ -113,10 +110,7 @@ class PServerThread(threading.Thread):
 		print('PServerThread:process')
 		read_packet = conn.recv(12)
 		read_header = self.parse_header(read_packet)
-		opcode, result, length, hlen = (read_header[0],
-		 read_header[1],
-		 read_header[2],
-		 read_header[3])
+		opcode, result, length, hlen = (read_header[0], read_header[1], read_header[2], read_header[3])
 		recv_data = ''
 		if length > 0:
 			recv_data = conn.recv(length)

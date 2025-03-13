@@ -207,27 +207,26 @@ class fourODMainMenu(Screen):
 
 					for entry in entries:
 						"""
-						  <section id="categories" class="clearfix">
+							<section id="categories" class="clearfix">
 
-						    <aside class="catNav clearfix">
+							<aside class="catNav clearfix">
 							<nav>
-							    <h2>Most popular</h2>
-							    <ul>
+								<h2>Most popular</h2>
+								<ul>
 
 								<li class="active">
-								    <span class="chevron"></span>
-								    <a href="/4od/tags/comedy">Comedy (100)</a>
+									<span class="chevron"></span>
+									<a href="/4od/tags/comedy">Comedy (100)</a>
 								</li>
-							    </ul>
+								</ul>
 
-							    <h2>More categories</h2>
+								<h2>More categories</h2>
 
-							    <ul>
+								<ul>
 								<li>
-								    <span class="chevron"></span>
-								    <a href="/4od/tags/animals">Animals (4)</a>
+									<span class="chevron"></span>
+									<a href="/4od/tags/animals">Animals (4)</a>
 								</li>
-
 						"""
 
 						id = entry['href']
@@ -531,38 +530,38 @@ class StreamsThumb(StreamsThumbCommon):
 		# Below is a sample of the returned data stream for a Show.
 		"""
 		<article class="episode clearfix" data-rating="18"
-			 data-wsbrandtitle="/shameless" data-preselectasseturl="http://ais.channel4.com/asset/3270370"
-			 data-preselectassetguidance="Very strong language and sexual scenes">
+			data-wsbrandtitle="/shameless" data-preselectasseturl="http://ais.channel4.com/asset/3270370"
+			data-preselectassetguidance="Very strong language and sexual scenes">
 
 		<div class="screenshotCont">
-		    <a href="">
+			<a href="">
 			<img class="screenShot" src="http://cache.channel4.com/assets/programmes/images/shameless/series-1/episode-1/c06b3dbe-c9d6-4908-9f2c-708518482916_200x113.jpg" width="160" height="91"
-			     alt="Shameless"><span></span>
-		    </a>
+				alt="Shameless"><span></span>
+			</a>
 		</div>
 		<div class="details">
-		    <h1>
+			<h1>
 			<a href="/4od/shameless/series-1/3270370">
 				Shameless</a>
-		    </h1>
+			</h1>
 			<p>
 				Series 1
 				Episode 1
 
 			</p>
 			<p>
-			    12am
-			     Tue 13 Jan
-			     2004
+				12am
+				Tue 13 Jan
+				2004
 			</p>
-		    <p>
+			<p>
 				Channel 4
 			(49min)
-			    <span class="guidance">Very strong language and sexual scenes</span>
-		    </p>
+				<span class="guidance">Very strong language and sexual scenes</span>
+			</p>
 		</div>
 		<div class="rightLinks">
-				 <a class="seeAll" href="/4od/shameless/series-1/3270370"><span>More</span></a>
+			<a class="seeAll" href="/4od/shameless/series-1/3270370"><span>More</span></a>
 		</div>
 		</article>
 		"""
@@ -668,11 +667,11 @@ class StreamsThumb(StreamsThumbCommon):
 
 		# Below is a sample of the returned data stream for a Category.
 		"""
-		{"count":50,"results":[
-		    {    "title":"The Function Room",
-			 "url":"/4od/the-function-room",
-			 "img":"http://cache.channel4.com/assets/programmes/images/the-function-room/7d5d701c-f7f8-4357-a128-67cac7896f95_200x113.jpg"
-		    },...
+			{"count":50,"results":[
+				{	"title":"The Function Room",
+					"url":"/4od/the-function-room",
+					"img":"http://cache.channel4.com/assets/programmes/images/the-function-room/7d5d701c-f7f8-4357-a128-67cac7896f95_200x113.jpg"
+				},...
 		"""
 
 		# You can specify the order and page number but I'm just hard-coding for now.

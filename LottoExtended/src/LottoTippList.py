@@ -48,18 +48,18 @@ class LottoTippListScreen(Screen):
 		self["key_yellow"] = Button("Tipp bearbeiten")
 		self["key_blue"] = Button("zurück")
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
-			{
-			 "back": self.close,
-			 "red": self.keyDelete,
-			 "green": self.keyAddTipp,
-			 "yellow": self.keyEditTipp,
-			 "blue": self.close,
-			 "up": self.tipplist.selectPrevious,
-			 "down": self.tipplist.selectNext,
-			 "left": self.tipplist.pageUp,
-			 "right": self.tipplist.pageDown,
-			 "ok": self.keyEditTipp
-			 }, -1)
+		{
+			"back": self.close,
+			"red": self.keyDelete,
+			"green": self.keyAddTipp,
+			"yellow": self.keyEditTipp,
+			"blue": self.close,
+			"up": self.tipplist.selectPrevious,
+			"down": self.tipplist.selectNext,
+			"left": self.tipplist.pageUp,
+			"right": self.tipplist.pageDown,
+			"ok": self.keyEditTipp
+		}, -1)
 		self.onLayoutFinish.append(self.updateTipplist)
 
 	def updateTipplist(self):

@@ -31,8 +31,8 @@ class CTglobals():
 	SORTDICT = {"p": "€", "km": "km", "abc": "A-Z", "keine": "keine"}
 	RADIUSDICT = {'1': '1 km', '2': '2 km', '5': '5 km', '10': '10 km', '15': '15 km', '20': '20 km', '25': '25 km'}
 	SPRITDICT = {'3': 'Diesel', '5': 'Super E10', '7': 'Super E5', '6': 'SuperPlus', '12': 'Premium Diesel',
-				 '264': 'GTL-Diesel', '2': 'LKW-Diesel', '1': 'LPG', '8': 'CNG', '262': 'LNG', '4': 'Bioethanol',
-				 '266': 'AdBlue PKW', '13': 'AdBlue LKW', '246': 'Wasserstoff', '314': 'HVO Diesel'}
+				'264': 'GTL-Diesel', '2': 'LKW-Diesel', '1': 'LPG', '8': 'CNG', '262': 'LNG', '4': 'Bioethanol',
+				'266': 'AdBlue PKW', '13': 'AdBlue LKW', '246': 'Wasserstoff', '314': 'HVO Diesel'}
 
 
 ctglobals = CTglobals()
@@ -194,27 +194,26 @@ class CTmain(Screen, CThelper):
 		self["dkey_blue"] = StaticText()
 		self["key_ok"] = StaticText("Details ein/aus")
 		self["key_menu"] = StaticText("Einstellungen")
-		self["actions"] = ActionMap(["OkCancelActions",
-									"DirectionActions",
-									"MenuActions",
-		 							"ColorActions"], {"ok": self.ok,
-		 											"cancel": self.exit,
-		 											"right": self.toggleFrame,
-		 											"left": self.toggleFrame,
-		 											"down": self.down,
-		 											"up": self.up,
-													"chplus": self.pageUp,
-													"chminus": self.pageDown,
-		 											"red": boundFunction(self.selectSort, "A"),
-													"redlong": boundFunction(self.selectSprit, "A"),
-		 											"green": boundFunction(self.selectRadius, "A"),
-													"greenlong": self.changeFavorites,
-		 											"yellow": boundFunction(self.selectSort, "B"),
-		 											"yellowlong": boundFunction(self.selectSprit, "B"),
-		 											"blue": boundFunction(self.selectRadius, "B"),
-		 											"bluelong": self.toggleFrame_B,
-		 											"menu": self.config
-		 											}, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "DirectionActions", "MenuActions", "ColorActions"],
+		{
+			"ok": self.ok,
+			"cancel": self.exit,
+			"right": self.toggleFrame,
+			"left": self.toggleFrame,
+			"down": self.down,
+			"up": self.up,
+			"chplus": self.pageUp,
+			"chminus": self.pageDown,
+			"red": boundFunction(self.selectSort, "A"),
+			"redlong": boundFunction(self.selectSprit, "A"),
+			"green": boundFunction(self.selectRadius, "A"),
+			"greenlong": self.changeFavorites,
+			"yellow": boundFunction(self.selectSort, "B"),
+			"yellowlong": boundFunction(self.selectSprit, "B"),
+			"blue": boundFunction(self.selectRadius, "B"),
+			"bluelong": self.toggleFrame_B,
+			"menu": self.config
+		}, -1)
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
@@ -697,5 +696,5 @@ def sessionstart(reason, session=None, **kwargs):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(name="CleverTanken.de", description="Tankstellen-Preisvergleich", where=[PluginDescriptor.WHERE_PLUGINMENU], icon="plugin.png", fnc=main),
-		 PluginDescriptor(name="CleverTanken.de", description="Tankstellen-Preisvergleich mit eigenen Preisalarmen", where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main),
-		PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=True, fnc=sessionstart)]
+			PluginDescriptor(name="CleverTanken.de", description="Tankstellen-Preisvergleich mit eigenen Preisalarmen", where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main),
+			PluginDescriptor(where=PluginDescriptor.WHERE_SESSIONSTART, needsRestart=True, fnc=sessionstart)]

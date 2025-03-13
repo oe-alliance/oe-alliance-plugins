@@ -533,12 +533,12 @@ class DLNAImageViewer(Screen):
 
 	def setPictureLoadPara(self):
 		self.pictureLoad.setPara([self["image"].instance.size().width(),
-					  self["image"].instance.size().height(),
-					  1,
-					  1,
-					  0,
-					  int(config.pic.resize.value),
-					  '#00000000'])
+			self["image"].instance.size().height(),
+			1,
+			1,
+			0,
+			int(config.pic.resize.value),
+			'#00000000'])
 		self["icon"].hide()
 		if config.pic.infoline.value is False:
 			self["message"].setText("")
@@ -810,7 +810,7 @@ class DLNADeviceBrowser(Screen):
 			<widget source="key_blue" render="Label" position="455,0" zPosition="1" size="140,40" font="Regular;20" halign="center" valign="center" backgroundColor="#18188b" foregroundColor="#ffffff" transparent="1" />
 
 			<widget name="devicelist" position="0,50" size="600,300" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
-	        </screen>
+		</screen>
 		"""
 
 	def __init__(self, session):

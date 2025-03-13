@@ -25,10 +25,13 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 		self.menulist = []
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, self.menulist)
-		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'ok': self.keyGreen,
-		 'green': self.keyGreen,
-		 'red': self.keyRed,
-		 'cancel': self.keyRed}, -2)
+		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
+		{
+			'ok': self.keyGreen,
+			'green': self.keyGreen,
+			'red': self.keyRed,
+			'cancel': self.keyRed
+		}, -2)
 		self['key_red'] = StaticText(_('Cancel'))
 		self['key_green'] = StaticText(_('Save'))
 		self.makeConfigList()
@@ -105,16 +108,15 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 		self.session = session
 		Screen.__init__(self, session)
 		HelpableScreen.__init__(self)
-		self['actions'] = ActionMap(['WizardActions',
-		 'DirectionActions',
-		 'OkCancelActions',
-		 'ColorActions',
-		 'EPGSelectActions'], {'ok': self.keyGreen,
-		 'cancel': self.keyCancel,
-		 'red': self.keyCancel,
-		 'green': self.keyGreen,
-		 'yellow': self.keyYellow,
-		 'blue': self.keyBlue}, -2)
+		self['actions'] = ActionMap(['WizardActions', 'DirectionActions', 'OkCancelActions', 'ColorActions', 'EPGSelectActions'],
+		{
+			'ok': self.keyGreen,
+			'cancel': self.keyCancel,
+			'red': self.keyCancel,
+			'green': self.keyGreen,
+			'yellow': self.keyYellow,
+			'blue': self.keyBlue
+		}, -2)
 		self['key_green'] = StaticText(_('Start'))
 		self['key_blue'] = StaticText(_('Setting'))
 		self['key_yellow'] = StaticText(_('Help'))
@@ -133,18 +135,33 @@ class YoutubeTVWindow(Screen, HelpableScreen):
 
 	def setHelpModeActions(self):
 		self.helpList = []
-		self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions', {'ok': (self.keyPass, _('Play selected video')),
-		 'cancel': (self.keyPass, _('Exit YoutubeTV'))})
-		self['ColorActions'] = HelpableActionMap(self, 'ColorActions', {'red': (self.keyPass, _('Back key'))})
-		self['EventViewActions'] = HelpableActionMap(self, 'EventViewActions', {'pageUp': (self.keyPass, _('Move up')),
-		 'pageDown': (self.keyPass, _('Move down')),
-		 'prevEvent': (self.keyPass, _('Move left')),
-		 'nextEvent': (self.keyPass, _('Move right'))})
-		self['EPGSelectActions'] = HelpableActionMap(self, 'EPGSelectActions', {'info': (self.keyPass, _('Search a video'))})
-		self['InfobarSeekActions'] = HelpableActionMap(self, 'InfobarSeekActions', {'unPauseService': (self.keyPass, _('Play current video')),
-		 'playpauseService': (self.keyPass, _('Pause current video')),
-		 'seekFwd': (self.keyPass, _('Skip forward 10 sec')),
-		 'seekBack': (self.keyPass, _('Skip backward 10 sec'))})
+		self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions',
+		{
+			'ok': (self.keyPass, _('Play selected video')),
+			'cancel': (self.keyPass, _('Exit YoutubeTV'))
+		})
+		self['ColorActions'] = HelpableActionMap(self, 'ColorActions',
+		{
+			'red': (self.keyPass, _('Back key'))
+		})
+		self['EventViewActions'] = HelpableActionMap(self, 'EventViewActions',
+		{
+			'pageUp': (self.keyPass, _('Move up')),
+			'pageDown': (self.keyPass, _('Move down')),
+			'prevEvent': (self.keyPass, _('Move left')),
+			'nextEvent': (self.keyPass, _('Move right'))
+		})
+		self['EPGSelectActions'] = HelpableActionMap(self, 'EPGSelectActions',
+		{
+			'info': (self.keyPass, _('Search a video'))
+		})
+		self['InfobarSeekActions'] = HelpableActionMap(self, 'InfobarSeekActions',
+		{
+			'unPauseService': (self.keyPass, _('Play current video')),
+			'playpauseService': (self.keyPass, _('Pause current video')),
+			'seekFwd': (self.keyPass, _('Skip forward 10 sec')),
+			'seekBack': (self.keyPass, _('Skip backward 10 sec'))
+		})
 		self.showHelp()
 
 	def keyPass(self):

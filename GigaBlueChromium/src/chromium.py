@@ -26,10 +26,13 @@ class ChromiumOSSettings(ConfigListScreen, Screen):
 		self.menulist = []
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, self.menulist)
-		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'ok': self.keyGreen,
-		 'green': self.keyGreen,
-		 'red': self.keyRed,
-		 'cancel': self.keyRed}, -2)
+		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
+		{
+			'ok': self.keyGreen,
+			'green': self.keyGreen,
+			'red': self.keyRed,
+			'cancel': self.keyRed
+		}, -2)
 		self['key_red'] = StaticText(_('Cancel'))
 		self['key_green'] = StaticText(_('Save'))
 		self.makeConfigList()
@@ -109,12 +112,15 @@ class ChromiumOSHelpWindow(Screen, HelpableScreen):
 		self['key_green'] = StaticText(_('Global'))
 		self['key_yellow'] = StaticText(_('Mouse'))
 		self['key_blue'] = StaticText(_('Keyboard'))
-		self['actions'] = ActionMap(['DirectionActions', 'OkCancelActions', 'ColorActions'], {'ok': self.keyRed,
-		 'cancel': self.keyRed,
-		 'red': self.keyRed,
-		 'green': self.keyGreen,
-		 'yellow': self.keyYellow,
-		 'blue': self.keyBlue}, -2)
+		self['actions'] = ActionMap(['DirectionActions', 'OkCancelActions', 'ColorActions'],
+		{
+			'ok': self.keyRed,
+			'cancel': self.keyRed,
+			'red': self.keyRed,
+			'green': self.keyGreen,
+			'yellow': self.keyYellow,
+			'blue': self.keyBlue
+		}, -2)
 		self.showHelpTimer = eTimer()
 		self.showHelpTimer.callback.append(self.cbShowHelpTimerClosed)
 		self.showHelpTimer.start(500)
@@ -130,32 +136,65 @@ class ChromiumOSHelpWindow(Screen, HelpableScreen):
 	def setHelpModeActions(self, _mode=0):
 		self.helpList = []
 		if _mode == self.MODE_GLOBAL:
-			self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions', {'cancel': (self.keyPass, _('Exit the Browser.'))})
-			self['ColorActions'] = HelpableActionMap(self, 'ColorActions', {'green': (self.keyPass, _('Enter Key')),
-			 'blue': (self.keyPass, _('Backspace Key')),
-			 'yellow': (self.keyPass, _('Open the virtual-keyboard on enigma2'))})
-			self['EPGSelectActions'] = HelpableActionMap(self, 'EPGSelectActions', {'info': (self.keyPass, _('Switch to keyboard/mouse mode.'))})
+			self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions',
+			{
+				'cancel': (self.keyPass, _('Exit the Browser.'))
+			})
+			self['ColorActions'] = HelpableActionMap(self, 'ColorActions',
+			{
+				'green': (self.keyPass, _('Enter Key')),
+				'blue': (self.keyPass, _('Backspace Key')),
+				'yellow': (self.keyPass, _('Open the virtual-keyboard on enigma2'))
+			})
+			self['EPGSelectActions'] = HelpableActionMap(self, 'EPGSelectActions',
+			{
+				'info': (self.keyPass, _('Switch to keyboard/mouse mode.'))
+			})
 		elif _mode == self.MODE_MOUSE:
-			self['DirectionActions'] = HelpableActionMap(self, 'DirectionActions', {'up': (self.keyPass, _('It will move the mouse pointer up.')),
-			 'down': (self.keyPass, _('It will move the mouse pointer down.')),
-			 'left': (self.keyPass, _('It will move the mouse pointer left.')),
-			 'right': (self.keyPass, _('It will move the mouse pointer right.'))})
-			self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions', {'ok': (self.keyPass, _('Left Mouse Button'))})
-			self['EPGSelectActions'] = HelpableActionMap(self, 'EPGSelectActions', {'nextBouquet': (self.keyPass, _('Right Mouse Button')),
-			 'prevService': (self.keyPass, _('Left Key')),
-			 'nextService': (self.keyPass, _('Right Key'))})
-			self['MenuActions'] = HelpableActionMap(self, 'MenuActions', {'menu': (self.keyPass, _('Page up key'))})
-			self['InfobarActions'] = HelpableActionMap(self, 'InfobarActions', {'showTv': (self.keyPass, _('Page down key'))})
+			self['DirectionActions'] = HelpableActionMap(self, 'DirectionActions',
+			{
+				'up': (self.keyPass, _('It will move the mouse pointer up.')),
+				'down': (self.keyPass, _('It will move the mouse pointer down.')),
+				'left': (self.keyPass, _('It will move the mouse pointer left.')),
+				'right': (self.keyPass, _('It will move the mouse pointer right.'))
+			})
+			self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions',
+			{
+				'ok': (self.keyPass, _('Left Mouse Button'))
+			})
+			self['EPGSelectActions'] = HelpableActionMap(self, 'EPGSelectActions',
+			{
+				'nextBouquet': (self.keyPass, _('Right Mouse Button')),
+				'prevService': (self.keyPass, _('Left Key')),
+				'nextService': (self.keyPass, _('Right Key'))
+			})
+			self['MenuActions'] = HelpableActionMap(self, 'MenuActions',
+			{
+				'menu': (self.keyPass, _('Page up key'))
+			})
+			self['InfobarActions'] = HelpableActionMap(self, 'InfobarActions',
+			{
+				'showTv': (self.keyPass, _('Page down key'))
+			})
 		elif _mode == self.MODE_KEYBOARD:
-			self['DirectionActions'] = HelpableActionMap(self, 'DirectionActions', {'up': (self.keyPass, _('Up Key')),
-			 'down': (self.keyPass, _('Down Key')),
-			 'left': (self.keyPass, _('Left Key')),
-			 'right': (self.keyPass, _('Right Key'))})
-			self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions', {'ok': (self.keyPass, _('Enter Key'))})
-			self['EPGSelectActions'] = HelpableActionMap(self, 'EPGSelectActions', {'nextBouquet': (self.keyPass, _('PageUp Key')),
-			 'prevBouquet': (self.keyPass, _('PageDown Key')),
-			 'prevService': (self.keyPass, _('Go to previous page.')),
-			 'nextService': (self.keyPass, _('Go to next page.'))})
+			self['DirectionActions'] = HelpableActionMap(self, 'DirectionActions',
+			{
+				'up': (self.keyPass, _('Up Key')),
+				'down': (self.keyPass, _('Down Key')),
+				'left': (self.keyPass, _('Left Key')),
+				'right': (self.keyPass, _('Right Key'))
+			})
+			self['OkCancelActions'] = HelpableActionMap(self, 'OkCancelActions',
+			{
+					'ok': (self.keyPass, _('Enter Key'))
+			})
+			self['EPGSelectActions'] = HelpableActionMap(self, 'EPGSelectActions',
+			{
+				'nextBouquet': (self.keyPass, _('PageUp Key')),
+				'prevBouquet': (self.keyPass, _('PageDown Key')),
+				'prevService': (self.keyPass, _('Go to previous page.')),
+				'nextService': (self.keyPass, _('Go to next page.'))
+			})
 		if _mode > 0:
 			self.showHelp()
 
@@ -196,12 +235,15 @@ class ChromiumOSWindow(ConfigListScreen, Screen):
 		self.menulist = []
 		Screen.__init__(self, session)
 		ConfigListScreen.__init__(self, self.menulist)
-		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'], {'ok': self.keyGreen,
-		 'cancel': self.keyCancel,
-		 'red': self.keyCancel,
-		 'green': self.keyGreen,
-		 'blue': self.keyBlue,
-		 'yellow': self.keyYellow}, -2)
+		self['actions'] = ActionMap(['OkCancelActions', 'ColorActions'],
+		{
+			'ok': self.keyGreen,
+			'cancel': self.keyCancel,
+			'red': self.keyCancel,
+			'green': self.keyGreen,
+			'blue': self.keyBlue,
+			'yellow': self.keyYellow
+		}, -2)
 		self['key_green'] = StaticText(_('Start'))
 		self['key_blue'] = StaticText(_('Setting'))
 		self['key_yellow'] = StaticText(_('Help'))

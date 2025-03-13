@@ -206,7 +206,7 @@ class BlinkingLabel(Label, BlinkingWidget):
 
 class EditModemManual(ConfigListScreen, Screen):
 	skin = """
-  		<screen position="center,center" size="900,540">
+		<screen position="center,center" size="900,540">
 			<widget name="config" position="0,0" size="900,450" itemHeight="40" scrollbarMode="showOnDemand" zPosition="2" />
 			<eLabel name="red" position="10,480" size="6,60" backgroundColor="red" zPosition="1" />
 			<eLabel name="green" position="235,480" size="6,60" backgroundColor="green" zPosition="1" />
@@ -214,8 +214,7 @@ class EditModemManual(ConfigListScreen, Screen):
 			<widget source="key_red" render="Label" position="30,480" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
 			<widget source="key_green" render="Label" position="255,480" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
 			<widget source="key_blue" render="Label" position="695,480" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
-  		</screen>
-  		"""
+		</screen>"""
 
 	def __init__(self, session, cbFuncClose, uid=None, pwd=None, pin=None, apn=None, phone="*99#", isAdd=False):
 		Screen.__init__(self, session)
@@ -332,16 +331,16 @@ class EditModemManual(ConfigListScreen, Screen):
 class ModemManual(Screen):
 	skin = """
 		<screen position="center,center" size="880,690">
-  			<widget name="menulist" position="0,0" size="450,600" backgroundColor="#000000" scrollbarMode="showOnDemand" zPosition="2" />
-  			<widget name="apnInfo" position="465,0" size="435,600" font="Regular;30" halign="left" />
+			<widget name="menulist" position="0,0" size="450,600" backgroundColor="#000000" scrollbarMode="showOnDemand" zPosition="2" />
+			<widget name="apnInfo" position="465,0" size="435,600" font="Regular;30" halign="left" />
 			<eLabel name="red" position="10,630" size="6,60" backgroundColor="red" zPosition="1" />
 			<eLabel name="green" position="235,630" size="6,60" backgroundColor="green" zPosition="1" />
 			<eLabel name="yellow" position="460,630" size="6,60" backgroundColor="yellow" zPosition="1" />
 			<eLabel name="blue" position="675,630" size="6,60" backgroundColor="blue" zPosition="1" />
-  			<widget source="key_red" render="Label" position="30,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
-  			<widget source="key_green" render="Label" position="255,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
-  			<widget source="key_yellow" render="Label" position="480,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
-  			<widget source="key_blue" render="Label" position="695,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
+			<widget source="key_red" render="Label" position="30,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
+			<widget source="key_green" render="Label" position="255,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
+			<widget source="key_yellow" render="Label" position="480,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
+			<widget source="key_blue" render="Label" position="695,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
 		</screen>
 		"""
 
@@ -531,19 +530,19 @@ class ModemManager(Screen):
 			<widget name="usbinfo" position="465,0" size="435,230" font="Regular;27" halign="left" />
 			<widget name="statusTitle" position="160,235" size="180,40" font="Regular;30" foregroundColor="black" backgroundColor="grey" halign="center" />
 			<widget name="statusText" position="360,235" size="520,40" font="Regular;30" foregroundColor="red" halign="left" />
- 			<widget name="statusInfo" position="0,280" size="900,190" font="Regular;30" halign="left" />
+			<widget name="statusInfo" position="0,280" size="900,190" font="Regular;30" halign="left" />
 			<widget name="myip" position="75,480" size="900,180" font="Regular;30" halign="left" />
-  			<widget name="autostart_text" position="75,540" size="250,40" font="Regular;30" halign="left" valign="center" />
-  			<widget name="autostart_stop" position="350,535" size="200,50" font="Regular;30" halign="center" valign="center" backgroundColor="red" />
-  			<widget name="autostart_start" position="400,535" size="200,50" font="Regular;30" halign="center" valign="center" backgroundColor="green" zPosition="1" />
+			<widget name="autostart_text" position="75,540" size="250,40" font="Regular;30" halign="left" valign="center" />
+			<widget name="autostart_stop" position="350,535" size="200,50" font="Regular;30" halign="center" valign="center" backgroundColor="red" />
+			<widget name="autostart_start" position="400,535" size="200,50" font="Regular;30" halign="center" valign="center" backgroundColor="green" zPosition="1" />
 			<eLabel name="red" position="10,630" size="6,60" backgroundColor="red" zPosition="1" />
 			<eLabel name="green" position="235,630" size="6,60" backgroundColor="green" zPosition="1" />
 			<eLabel name="yellow" position="460,630" size="6,60" backgroundColor="yellow" zPosition="1" />
 			<eLabel name="blue" position="675,630" size="6,60" backgroundColor="blue" zPosition="1" />
-  			<widget source="key_red" render="Label" position="30,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
-  			<widget source="key_green" render="Label" position="255,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
-  			<widget source="key_yellow" render="Label" position="480,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
-  			<widget source="key_blue" render="Label" position="695,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
+			<widget source="key_red" render="Label" position="30,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
+			<widget source="key_green" render="Label" position="255,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
+			<widget source="key_yellow" render="Label" position="480,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
+			<widget source="key_blue" render="Label" position="695,630" size="210,60" font="Regular;30" halign="left" valign="center" foregroundColor="grey" zPosition="1" />
 		</screen>
 		"""
 

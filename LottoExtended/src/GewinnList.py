@@ -137,20 +137,20 @@ class GewinnListScreen(Screen):
 		self["key_blue"] = Button()
 		self["statuslabel"] = Label()
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
-			{
-			 "back": self.close,
-			 "red": self.prevDraw,
-			 "green": self.keyDetail,
-			 "yellow": self.keyDelete,
-			 "blue": self.nextDraw,
+		{
+			"back": self.close,
+			"red": self.prevDraw,
+			"green": self.keyDetail,
+			"yellow": self.keyDelete,
+			"blue": self.nextDraw,
 #			 "blue": self.changeZiehung,
-			 "up": self.up,
-			 "down": self.down,
-			 "left": self.left,
-			 "right": self.down,
-			 "ok": self.keyEditTipp
+			"up": self.up,
+			"down": self.down,
+			"left": self.left,
+			"right": self.down,
+			"ok": self.keyEditTipp
 #			 "ok": self.keyNoAction
-			 }, -1)
+		}, -1)
 		self.onLayoutFinish.append(self.newDrawing)
 		#self.newDrawing(currdate)
 
@@ -541,17 +541,17 @@ class GewinnDetailScreen(Screen):
 			self["key_yellow"].text = ""
 		self["statuslabel"] = Label()
 		self["actions"] = ActionMap(["WizardActions", "ColorActions"],
-			{
-			 "back": self.close,
-			 "blue": self.close,
-			 "yellow": self.nextEntry,
-			 "green": self.previousEntry,
-			 "up": self.detaillist.selectPrevious,
-			 "down": self.detaillist.selectNext,
-			 "left": self.detaillist.pageUp,
-			 "right": self.detaillist.pageDown,
-			 "ok": self.keyNoAction
-			}, -1)
+		{
+			"back": self.close,
+			"blue": self.close,
+			"yellow": self.nextEntry,
+			"green": self.previousEntry,
+			"up": self.detaillist.selectPrevious,
+			"down": self.detaillist.selectNext,
+			"left": self.detaillist.pageUp,
+			"right": self.detaillist.pageDown,
+			"ok": self.keyNoAction
+		}, -1)
 
 		self.onLayoutFinish.append(self.initialBuild)
 

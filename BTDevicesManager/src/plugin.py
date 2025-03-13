@@ -171,13 +171,11 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 				os.system("%s" % commandconnect)
 
 		config.btdevicesmanager.save()
-
 		self.close()
 
 	def dontSaveAndExit(self):
 		for x in self['config'].list:
-		    x[1].cancel()
-
+			x[1].cancel()
 		self.close()
 
 
@@ -196,7 +194,7 @@ class BluetoothDevicesManager(Screen):
 
 			<widget name="devicelist" position="0,50" size="600,300" foregroundColor="#ffffff" zPosition="10" scrollbarMode="showOnDemand" transparent="1"/>
 			<widget name="ConnStatus" position="0,330" size="600,150" zPosition="1" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
-	        </screen>
+		</screen>
 		"""
 
 	def __init__(self, session):

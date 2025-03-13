@@ -220,7 +220,7 @@ class StreamTVList(Screen):
 	skin = """
 		<screen name="StreamTVList" position="center,center" size="600,350" title="StreamTV List">
 			<widget name="streamlist" position="0,0" size="600,350" backgroundColor="#000000" zPosition="10" scrollbarMode="showOnDemand" />
-	        </screen>
+			</screen>
 		"""
 
 	def __init__(self, session):
@@ -339,12 +339,12 @@ class StreamTVList(Screen):
 		uriInfo = streamInfo.get('uri')
 		self.beforeService = self.session.nav.getCurrentlyPlayingServiceReference()
 		self.currentService = self.session.openWithCallback(self.cbFinishedStream,
-								    StreamTVPlayer,
-								    service,
-								    cbServiceCommand=self.cbServiceCommand,
-								    chName=str(streamInfo.get('name')),
-								    chURL=str(uriInfo.get('URL')),
-								    chIcon=str(streamInfo.get('icon')))
+		StreamTVPlayer,
+		service,
+		cbServiceCommand=self.cbServiceCommand,
+		chName=str(streamInfo.get('name')),
+		chURL=str(uriInfo.get('URL')),
+		chIcon=str(streamInfo.get('icon')))
 
 	def cbServiceCommand(self, params=None):
 		if params is None:

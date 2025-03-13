@@ -140,7 +140,7 @@ class TVcoreHelper():
 	def getActiveTimespans(self):
 		timespans = []
 		userconfigs = [(config.plugins.tvspielfilm.starttime_a.value, config.plugins.tvspielfilm.durance_a.value, config.plugins.tvspielfilm.cache_a.value),
-			 			(config.plugins.tvspielfilm.starttime_b.value, config.plugins.tvspielfilm.durance_b.value, config.plugins.tvspielfilm.cache_b.value),
+						(config.plugins.tvspielfilm.starttime_b.value, config.plugins.tvspielfilm.durance_b.value, config.plugins.tvspielfilm.cache_b.value),
 						(config.plugins.tvspielfilm.starttime_c.value, config.plugins.tvspielfilm.durance_c.value, config.plugins.tvspielfilm.cache_c.value),
 						(config.plugins.tvspielfilm.starttime_d.value, config.plugins.tvspielfilm.durance_d.value, config.plugins.tvspielfilm.cache_d.value)
 						]
@@ -747,22 +747,23 @@ class TVfullscreen(TVscreenHelper, Screen):
 		self["key_green"] = StaticText("Timer hinzufügen")
 		self["key_yellow"] = StaticText("EPG-Suche")
 		self["key_blue"] = StaticText("Zap" if zapAllowed else "")
-		self["actions"] = ActionMap(["OkCancelActions",
-									"ButtonSetupActions"],
-													{"ok": self.keyExit,
-													"cross_left": self.keyUp,
-													"cross_right": self.keyDown,
-													"cross_up": self.keyUp,
-													"cross_down": self.keyDown,
-													"channelup": self.keyUp,
-													"channeldown": self.keyDown,
-													"play": self.playTrailer,
-													"playpause": self.playTrailer,
-													"info": self.keyInfo,
-													"green": self.keyGreen,
-													"blue": self.zapToCurrent,
-		 											"yellow": self.openEPGSearch,
-													"cancel": self.keyExit}, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "ButtonSetupActions"],
+		{
+			"ok": self.keyExit,
+			"cross_left": self.keyUp,
+			"cross_right": self.keyDown,
+			"cross_up": self.keyUp,
+			"cross_down": self.keyDown,
+			"channelup": self.keyUp,
+			"channeldown": self.keyDown,
+			"play": self.playTrailer,
+			"playpause": self.playTrailer,
+			"info": self.keyInfo,
+			"green": self.keyGreen,
+			"blue": self.zapToCurrent,
+			"yellow": self.openEPGSearch,
+			"cancel": self.keyExit
+		}, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -843,7 +844,7 @@ class TVtipsBox(Screen):
 			self.skin = self.skin.replace("/HD/", "/FHD/")
 		Screen.__init__(self, session)
 		for widget in ["headline", "title", "timeStartEnd", "genreBroad", "channelName", "titleLength",
-				 		"yearCountry", "imdbRating", "editorial", "conclusion"]:
+						"yearCountry", "imdbRating", "editorial", "conclusion"]:
 			self[widget] = StaticText()
 		for widget in ["isTopTip", "isTipOfTheDay", "isNew", "thumb", "image", "fsk", "picon", "hasTimer"]:
 			self[widget] = Pixmap()
@@ -1141,21 +1142,22 @@ class TVoverview(TVscreenHelper, Screen):
 		self["key_green"] = StaticText("Timer")
 		self["key_yellow"] = StaticText("EPG-Suche")
 		self["key_blue"] = StaticText()
-		self["actions"] = ActionMap(["OkCancelActions",
-									"ButtonSetupActions"],
-													{"ok": self.keyOk,
-													"play": self.playTrailer,
-													"playpause": self.playTrailer,
-													"red": self.keyRed,
-													"green": self.keyGreen,
-		 											"yellow": self.openEPGSearch,
-													"blue": self.zapToCurrent,
-													"channeldown": self.prevday,
-													"channelup": self.nextday,
-													"previous": self.prevweek,
-													"next": self.nextweek,
-													"info": self.keyInfo,
-													"cancel": self.keyExit}, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "ButtonSetupActions"],
+		{
+			"ok": self.keyOk,
+			"play": self.playTrailer,
+			"playpause": self.playTrailer,
+			"red": self.keyRed,
+			"green": self.keyGreen,
+			"yellow": self.openEPGSearch,
+			"blue": self.zapToCurrent,
+			"channeldown": self.prevday,
+			"channelup": self.nextday,
+			"previous": self.prevweek,
+			"next": self.nextweek,
+			"info": self.keyInfo,
+			"cancel": self.keyExit
+		}, -1)
 		tvglobals.IMPORTDICT = self.readImportedFile()  # lade importierte Senderdaten
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -1470,19 +1472,20 @@ class TVmain(TVscreenHelper, Screen):
 		self["mainmenu"] = List()
 		self["key_red"] = StaticText("Import")
 		self["key_green"] = StaticText()
-		self["actions"] = ActionMap(["WizardActions",
-									 "ColorActions",
-									 "MenuActions"], {"ok": self.keyOk,
-			   											"back": self.exit,
-														"right": self.forceNextTip,
-														"left": self.forcePrevTip,
-														"down": self.down,
-														"up": self.up,
-														"red": self.keyRed,
-														"green": self.keyGreen,
-														"yellow": self.keyYellow,
-														"blue": self.keyBlue,
-														"menu": self.config}, -1)
+		self["actions"] = ActionMap(["WizardActions", "ColorActions", "MenuActions"],
+		{
+			"ok": self.keyOk,
+			"back": self.exit,
+			"right": self.forceNextTip,
+			"left": self.forcePrevTip,
+			"down": self.down,
+			"up": self.up,
+			"red": self.keyRed,
+			"green": self.keyGreen,
+			"yellow": self.keyYellow,
+			"blue": self.keyBlue,
+			"menu": self.config
+		}, -1)
 		tvglobals.IMPORTDICT = self.readImportedFile()  # load imported channel data
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -1720,7 +1723,7 @@ class TVmain(TVscreenHelper, Screen):
 				metaInfo = tip.get("metaInfo", {})
 				conclusion = unescape(metaInfo.get("conclusion", ""))
 				tipslist.append((title, timeStartEnd, genreBroad, channelName, titleLength, yearCountry, imdbRating, fskText,
-					 			conclusion, isTopTip, isTipOfTheDay, isNew, fsk, thumbIdNumeric, imgurl, channelId, self.currentTipId))
+								conclusion, isTopTip, isTipOfTheDay, isNew, fsk, thumbIdNumeric, imgurl, channelId, self.currentTipId))
 		self.tipslist = tipslist
 		self.showTVtipsBox(firstTip=self.currTipCnt == 0)
 
@@ -1894,8 +1897,10 @@ class selectChannelCategory(TVscreenHelper, Screen):
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["menulist"] = List()
 		self["actions"] = ActionMap(["OkCancelActions"],
-							  						{"ok": self.keyOk,
-													"cancel": self.keyExit}, -1)
+		{
+			"ok": self.keyOk,
+			"cancel": self.keyExit
+		}, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -1989,10 +1994,12 @@ class TVimport(TVscreenHelper, Screen):
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["bouquetslist"] = List()
 		self["key_blue"] = StaticText("Überprüfe Konvertierungsregeln")
-		self['actions'] = ActionMap(["OkCancelActions",
-							   		"ColorActions"], {"ok": self.keyOk,
-							  						"blue": self.keyBlue,
-													"cancel": self.keyExit}, -1)
+		self['actions'] = ActionMap(["OkCancelActions", "ColorActions"],
+		{
+			"ok": self.keyOk,
+			"blue": self.keyBlue,
+			"cancel": self.keyExit
+		}, -1)
 		if self.createTMPpaths():
 			self.exit()
 		if self.updateMappingfile():
@@ -2252,11 +2259,13 @@ class TVchannelselection(Screen):
 		self["channelList"] = List()
 		self["key_red"] = StaticText("Alle abwählen")
 		self["key_green"] = StaticText("Übernehmen")
-		self['actions'] = ActionMap(["OkCancelActions",
-									"ColorActions"], {"ok": self.keyOk,
-													"red": self.keyRed,
-													"green": self.keyGreen,
-													"cancel": self.keyExit}, -1)
+		self['actions'] = ActionMap(["OkCancelActions", "ColorActions"],
+		{
+			"ok": self.keyOk,
+			"red": self.keyRed,
+			"green": self.keyGreen,
+			"cancel": self.keyExit
+		}, -1)
 		self.onShown.append(self.onShownFinished)
 
 	def onShownFinished(self):

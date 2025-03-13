@@ -397,5 +397,5 @@ def autostart(reason, **kwargs):
 
 
 def Plugins(**kwargs):
- 	return [PluginDescriptor(name="DLNA Server", description="This is dlna server using minidlna.", where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=main),
-		PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]
+	return [PluginDescriptor(name="DLNA Server", description="This is dlna server using minidlna.", where=PluginDescriptor.WHERE_PLUGINMENU, needsRestart=False, fnc=main),
+			PluginDescriptor(where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)]

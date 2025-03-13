@@ -42,11 +42,14 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		self['backgroundImage'] = Pixmap()
 		self['foregroundImage'] = Pixmap()
 		self.onClose.append(self.clean)
-		self['actions'] = ActionMap(['OkCancelActions', 'ShortcutActions'], {'cancel': self.cancel,
-		 'ok': self.okClicked,
-		 'green': self.save,
-		 'yellow': self.startDownloadPicons,
-		 'red': self.cancel}, -1)
+		self['actions'] = ActionMap(['OkCancelActions', 'ShortcutActions'],
+		{
+			'cancel': self.cancel,
+			'ok': self.okClicked,
+			'green': self.save,
+			'yellow': self.startDownloadPicons,
+			'red': self.cancel
+		}, -1)
 		self.onChangedEntry = []
 		ConfigListScreen.__init__(self, self.getMenuItemList(), session, self.__selectionChanged)
 		# FIXME : don't scan channels on start without background thread

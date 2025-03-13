@@ -45,8 +45,8 @@ class DmmBlindscanState(Screen):
 		<widget source="list" render="Listbox" position="%d,%d" size="%d,%d" scrollbarMode="showAlways" >
 			<convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (%d, %d), size = (%d, %d), flags = RT_HALIGN_LEFT, text = %d) ],
-				 "fonts": [gFont("Regular", %d)],
-				 "itemHeight": %d
+					"fonts": [gFont("Regular", %d)],
+					"itemHeight": %d
 				}
 			</convert>
 		</widget>

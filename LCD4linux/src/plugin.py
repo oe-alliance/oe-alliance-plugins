@@ -5529,7 +5529,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			"blue": self.Page,
 			"nextBouquet": self.KeyUp,
 			"prevBouquet": self.KeyDown,
- 			"save": self.save,
+			"save": self.save,
 			"cancel": self.cancel,
 			"menu": self.SetupMenu,
 			"displayHelp": self.Exchange,
@@ -9817,8 +9817,8 @@ class UpdateStatus(Screen):
 					callInThread(getPage, self.feedurl, boundFunction(self.getCityCoords, wetter), self.downloadListError)
 				else:
 					timezones = {"-06": "America/Anchorage", "-05": "America/Los_Angeles", "-04": "America/Denver", "-03": "America/Chicago", "-02": "America/New_York",
-				  				"-01": "America/Sao_Paulo", "+00": "Europe/London", "+01": "Europe/Berlin", "+02": "Europe/Moscow", "+03": "Africa/Cairo",
-		  						"+04": "Asia/Bangkok", "+05": "Asia/Singapore", "+06": "Asia/Tokyo", "+07": "Australia/Sydney", "+08": "Pacific/Auckland"}
+								"-01": "America/Sao_Paulo", "+00": "Europe/London", "+01": "Europe/Berlin", "+02": "Europe/Moscow", "+03": "Africa/Cairo",
+								"+04": "Asia/Bangkok", "+05": "Asia/Singapore", "+06": "Asia/Tokyo", "+07": "Australia/Sydney", "+08": "Pacific/Auckland"}
 					currzone = timezones.get(strftime("%z", gmtime())[:3], "Europe/Berlin")
 					self.feedurl = "https://api.open-meteo.com/v1/forecast?longitude=%s&latitude=%s&hourly=temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m,winddirection_10m,precipitation_probability&daily=sunrise,sunset,weathercode,precipitation_probability_max,temperature_2m_max,temperature_2m_min&timezone=%s&windspeed_unit=kmh&temperature_unit=celsius" % (float(self.Long[wetter]), float(self.Lat[wetter]), currzone)
 					L4logE("OM-getweather%s: %s" % (wetter, self.feedurl))
@@ -9900,7 +9900,7 @@ class UpdateStatus(Screen):
 
 	def downloadMSNcallback(self, ConfigWWW, jsonData):
 		iconmap = {"d000": "32", "d100": "34", "d200": "30", "d210": "12", "d211": "5", "d212": "14", "d220": "11", "d221": "42",
-		 			"d222": "16", "d240": "4", "d300": "28", "d310": "11", "d311": "5", "d312": "14", "d320": "39", "d321": "5",
+					"d222": "16", "d240": "4", "d300": "28", "d310": "11", "d311": "5", "d312": "14", "d320": "39", "d321": "5",
 					"d322": "16", "d340": "4", "d400": "26", "d410": "9", "d411": "5", "d412": "14", "d420": "9", "d421": "5",
 					"d422": "16", "d430": "12", "d431": "5", "d432": "15", "d440": "4", "d500": "28", "d600": "20", "d603": "10",
 					"d605": "17", "d705": "17", "d900": "21", "d905": "17", "d907": "21", "n000": "31", "n100": "33", "n200": "29",

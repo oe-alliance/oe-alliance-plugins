@@ -227,14 +227,15 @@ class __LottoTippConfig(object):
 		newTippConfigSubsection.system = ConfigSubList()
 		for i in range(12):
 			newTippConfigSubsection.system.append(LottoSystem(
-				[("6", "Normaltipp"),
-				 ("7", "Vollsystem 6 aus 7"),
-				 ("8", "Vollsystem 6 aus 8"),
-				 ("9", "Vollsystem 6 aus 9"),
-				 ("10", "Vollsystem 6 aus 10"),
-				 ("11", "Vollsystem 6 aus 11"),
-				 ("12", "Vollsystem 6 aus 12"),
-				], "6", i))
+			[
+				("6", "Normaltipp"),
+				("7", "Vollsystem 6 aus 7"),
+				("8", "Vollsystem 6 aus 8"),
+				("9", "Vollsystem 6 aus 9"),
+				("10", "Vollsystem 6 aus 10"),
+				("11", "Vollsystem 6 aus 11"),
+				("12", "Vollsystem 6 aus 12"),
+			], "6", i))
 			newTippConfigSubsection.spiel.append(LottoConfigSequence(newTippConfigSubsection.system[i]))
 		newTipp = LottoTipp(newTippConfigSubsection)
 		self.tipplist.append(newTipp)

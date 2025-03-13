@@ -349,11 +349,11 @@ class CKview(AllScreen):
 			if fileExists(png):
 				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(14 * SCALE), int(36 * SCALE)), size=(int(75 * SCALE), int(15 * SCALE)), png=loadPNG(png)))  # STARS
 			res.append(MultiContentEntryText(pos=(int(11 * SCALE), int(52 * SCALE)), size=(int(75 * SCALE), int(30 * SCALE)), font=1, color=16777215, color_sel=16777215,
-											 flags=RT_HALIGN_CENTER, text='(%s)' % count))  # COUNT
+											flags=RT_HALIGN_CENTER, text='(%s)' % count))  # COUNT
 			res.append(MultiContentEntryText(pos=(int(111 * SCALE), int(45 * SCALE)), size=(int(965 * SCALE), int(70 * SCALE)),
-											 font=-1, color=10857646, color_sel=13817818, flags=RT_HALIGN_LEFT | RT_WRAP, text=text))  # TEXT
+											font=-1, color=10857646, color_sel=13817818, flags=RT_HALIGN_LEFT | RT_WRAP, text=text))  # TEXT
 			res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(6 * SCALE)), size=(int(75 * SCALE), int(26 * SCALE)), font=0, backcolor=3899463,
-											 color=16777215, backcolor_sel=15704383, color_sel=16777215, flags=RT_HALIGN_CENTER, text=time))  # TIME
+											color=16777215, backcolor_sel=15704383, color_sel=16777215, flags=RT_HALIGN_CENTER, text=time))  # TIME
 			kochentries.append(res)
 		self.titellist = titellist
 		self.videolist = videolist

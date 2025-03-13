@@ -859,7 +859,7 @@ class FavoritesThumb(StreamsThumbCommon):
 
 		try:
 			for item in self.favoriteConfig.Entries:
-            			# Iterate through the elements
+				# Iterate through the elements
 				date1 = str(item.bitrate.value)
 				name_tmp = str(item.name.value)
 				name = checkUnicode(name_tmp)

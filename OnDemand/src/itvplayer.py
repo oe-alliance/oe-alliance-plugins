@@ -375,28 +375,28 @@ class StreamsThumb(StreamsThumbCommon):
 	def wgetUrl(self, episodeID):
 
 		soapMessage = """<SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-		  <SOAP-ENV:Body>
+			<SOAP-ENV:Body>
 			<tem:GetPlaylist xmlns:tem="http://tempuri.org/" xmlns:itv="http://schemas.datacontract.org/2004/07/Itv.BB.Mercury.Common.Types" xmlns:com="http://schemas.itv.com/2009/05/Common">
-			  <tem:request>
+				<tem:request>
 			<itv:RequestGuid>FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF</itv:RequestGuid>
 			<itv:Vodcrid>
-			  <com:Id>%s</com:Id>
-			  <com:Partition>itv.com</com:Partition>
+				<com:Id>%s</com:Id>
+				<com:Partition>itv.com</com:Partition>
 			</itv:Vodcrid>
-			  </tem:request>
-			  <tem:userInfo>
+				</tem:request>
+				<tem:userInfo>
 			<itv:GeoLocationToken>
-			  <itv:Token/>
+				<itv:Token/>
 			</itv:GeoLocationToken>
 			<itv:RevenueScienceValue>scc=true; svisit=1; sc4=Other</itv:RevenueScienceValue>
-			  </tem:userInfo>
-			  <tem:siteInfo>
+				</tem:userInfo>
+				<tem:siteInfo>
 			<itv:Area>ITVPLAYER.VIDEO</itv:Area>
 			<itv:Platform>DotCom</itv:Platform>
 			<itv:Site>ItvCom</itv:Site>
-			  </tem:siteInfo>
+				</tem:siteInfo>
 			</tem:GetPlaylist>
-		  </SOAP-ENV:Body>
+			</SOAP-ENV:Body>
 		</SOAP-ENV:Envelope>
 		""" % episodeID
 

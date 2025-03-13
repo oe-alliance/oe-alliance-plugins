@@ -831,12 +831,12 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			eDVBFrontendParametersSatellite.RollOff_alpha_0_35,
 			eDVBFrontendParametersSatellite.Pilot_Off)
 		)  # OpenATV enigma2 needs patching so the other 3 fields can be added here.
-		  # Missing patches:
-		  # https://github.com/OpenPLi/enigma2/commit/9b0a0fcafaf3e96172a05ba8cf992a5aa64d4abc#diff-9124337eaf07c5d7314ae98b4eac37ef
-		  # https://github.com/OpenPLi/enigma2/commit/31100de1c93ce55ccc96340b21a02cc122bdb23e#diff-9124337eaf07c5d7314ae98b4eac37ef
-		  # https://github.com/OpenPLi/enigma2/commit/4030ed7c718accbcbc511a238b3b1abb288bb2f8#diff-021996494dde61d73519d0ab55099cb4
-		  # https://github.com/OpenPLi/enigma2/commit/7c0e71a5d059be5b0ac6df623e5810793938c09a#diff-d2b5b80c343086e51125ca863f948965
-		  # https://github.com/OpenPLi/enigma2/commit/597a9eec8f91d02c44c15d7a22e12e14d21589a6#diff-d2b5b80c343086e51125ca863f948965
+		# Missing patches:
+		# https://github.com/OpenPLi/enigma2/commit/9b0a0fcafaf3e96172a05ba8cf992a5aa64d4abc#diff-9124337eaf07c5d7314ae98b4eac37ef
+		# https://github.com/OpenPLi/enigma2/commit/31100de1c93ce55ccc96340b21a02cc122bdb23e#diff-9124337eaf07c5d7314ae98b4eac37ef
+		# https://github.com/OpenPLi/enigma2/commit/4030ed7c718accbcbc511a238b3b1abb288bb2f8#diff-021996494dde61d73519d0ab55099cb4
+		# https://github.com/OpenPLi/enigma2/commit/7c0e71a5d059be5b0ac6df623e5810793938c09a#diff-d2b5b80c343086e51125ca863f948965
+		# https://github.com/OpenPLi/enigma2/commit/597a9eec8f91d02c44c15d7a22e12e14d21589a6#diff-d2b5b80c343086e51125ca863f948965
 
 		nim = nimmanager.nim_slots[self.feid]
 		tunername = nim.description
@@ -1244,7 +1244,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 
 			# Filter off transponders on neighbouring satellites
 			if int(config.blindscan.filter_off_adjacent_satellites.value):
-				 self.tmp_tplist = self.filterOffAdjacentSatellites(self.tmp_tplist, self.orb_position, int(config.blindscan.filter_off_adjacent_satellites.value))
+				self.tmp_tplist = self.filterOffAdjacentSatellites(self.tmp_tplist, self.orb_position, int(config.blindscan.filter_off_adjacent_satellites.value))
 
 			# Process transponders still in list
 			if self.tmp_tplist != []:
