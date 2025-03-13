@@ -215,7 +215,7 @@ class VBHandler(VBHandlers):
 		offset = (time_struct.tm_hour * 3600) + (time_struct.tm_min * 60) + time_struct.tm_sec
 
 		try:
- 			data = struct.pack('i', int(offset))
+			data = struct.pack('i', int(offset))
 		except Exception as err:
 			vbcfg.ERR(err)
 			return (False, None)

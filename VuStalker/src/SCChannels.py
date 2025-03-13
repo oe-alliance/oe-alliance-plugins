@@ -369,7 +369,7 @@ class StalkerClient_ChannelSelection(Screen):
 					if isinstance(service, dict):
 						s = StalkerService(service)
 						self.scList.addItem(s)
-						if s.name is '':
+						if s.name == '':
 							need2reload = True
 					else:
 						need2reload = True

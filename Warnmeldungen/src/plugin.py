@@ -57,14 +57,10 @@ class NinaScreenX (Screen):
 ##############################################################################88
 
 
-skinMini = """<screen position="_dif_,_dif_" size="_miniW_,_miniH_"  zPosition="99" backgroundColor="#22550000"
-			title=" " flags="wfNoBorder">
-		<widget name="infoSmall" font="Regular;_fnt1_" position="_mX0_,_mY0_" size="_miniW_,_miniH_" foregroundColor="#ffffaa"
-			shadowColor="#111111"  shadowOffset="-1,-1"  zPosition="100"  valign="top" halign="left" transparent="1"   />
-		<ePixmap alphatest="blend" zPosition="100" position="_mX2_,_mY2_" size="_mW2_,_mH2_"
-				 scale="1" pixmap="%path%warnung.png" />
-		<eLabel  backgroundColor="#cc0000"  foregroundColor="#ffffff" position="_mX1_,_mY1_" size="_mW1_,_mH1_"
-				zPosition="101"  text="Ok _gt_"  font="Regular;_fnt0_" valign="center" halign="center" />
+skinMini = """<screen position="_dif_,_dif_" size="_miniW_,_miniH_"  zPosition="99" backgroundColor="#22550000" title=" " flags="wfNoBorder">
+		<widget name="infoSmall" font="Regular;_fnt1_" position="_mX0_,_mY0_" size="_miniW_,_miniH_" foregroundColor="#ffffaa" shadowColor="#111111"  shadowOffset="-1,-1"  zPosition="100"  valign="top" halign="left" transparent="1"   />
+		<ePixmap alphatest="blend" zPosition="100" position="_mX2_,_mY2_" size="_mW2_,_mH2_" scale="1" pixmap="%path%warnung.png" />
+		<eLabel  backgroundColor="#cc0000"  foregroundColor="#ffffff" position="_mX1_,_mY1_" size="_mW1_,_mH1_" zPosition="101"  text="Ok _gt_"  font="Regular;_fnt0_" valign="center" halign="center" />
 		</screen>"""
 
 
@@ -83,9 +79,9 @@ class NinaScreen (Screen):
 		<widget name="time" font="Regular;_fnt1_" position="_x1_,_y0c_" size="_w1_,_h0_" foregroundColor="#ffffff"
 			zPosition="99"  valign="top" halign="right" transparent="1"   />
 		<widget name="scrolltext0" font="Regular;_fnt2_" position="_x1_,_y1_" size="_w1_,_h1_" foregroundColor="#fffffff"
-				 		scrollbarSliderBorderColor="#00333333" scrollbarSliderBorderWidth="1"  scrollbarWidth="_sb_"
-				 		backgroundColor="#111111ff"
-				 		zPosition="3"  transparent="1" /> *buttons*
+			scrollbarSliderBorderColor="#00333333" scrollbarSliderBorderWidth="1"  scrollbarWidth="_sb_"
+			backgroundColor="#111111ff"
+			zPosition="3"  transparent="1" /> *buttons*
 		</screen>"""
 
 	def __init__(self, session, wasStandby=False):
@@ -204,7 +200,9 @@ class NinaScreen (Screen):
 		data.lastDoubleTime = datetime.now()
 		return error
 
-	def cfg(self): self.session.openWithCallback(self.warnReset, cfg.WarnCfg); self.countDown = -1
+	def cfg(self):
+		self.session.openWithCallback(self.warnReset, cfg.WarnCfg)
+		self.countDown = -1
 
 	def ok(self):
 		self.countDown = -1
@@ -222,7 +220,10 @@ class NinaScreen (Screen):
 		self._setText("countdown", '')
 		self.timer.start(1000, True)
 
-	def green(self): self._setText("countdown", 'Aktualisieren... '); self.refresh = True; self.timer.start(100, True)
+	def green(self):
+		self._setText("countdown", 'Aktualisieren... ')
+		self.refresh = True
+		self.timer.start(100, True)
 
 	def showDetail(self, init=True):
 		if init:
@@ -424,7 +425,7 @@ def Main(session, **kwargs):
 
 def Plugins(**kwargs):
 	return [PluginDescriptor(
-			 	where=[PluginDescriptor.WHERE_SESSIONSTART],
+				where=[PluginDescriptor.WHERE_SESSIONSTART],
 				fnc=sessionstart),
 			PluginDescriptor(
 				name="Warnmeldungen",

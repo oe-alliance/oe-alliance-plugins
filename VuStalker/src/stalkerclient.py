@@ -90,7 +90,7 @@ class SCAPI(object):
 
 	def CreateObject(self):
 		if not self.m_obj:
-			 self.m_obj = self.m_clib.SCAPI_CreateObject()
+			self.m_obj = self.m_clib.SCAPI_CreateObject()
 
 	def ResetString(self):
 		with self.m_lock:

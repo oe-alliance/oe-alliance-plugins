@@ -839,7 +839,7 @@ class tmdbScreenMovie(Screen, HelpableScreen, CoverHelper):
 						name = f"{name} ({type})"
 					link = f"https://www.youtube.com/watch?v={video['key']}"
 					choiceList.append((name, link))
-			self.session.openWithCallback(self.playTrailer, MessageBox, text=f"", list=choiceList, windowTitle=_("Select Video"))
+			self.session.openWithCallback(self.playTrailer, MessageBox, text="", list=choiceList, windowTitle=_("Select Video"))
 
 	def showCover(self, coverName):
 		if not exists(coverName):

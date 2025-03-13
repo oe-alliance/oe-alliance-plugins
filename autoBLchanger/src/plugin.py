@@ -64,9 +64,9 @@ def autoChangeBootLogo():
 		if BLogos:  # BootLogos found
 			iLogoIdx = getBootLogoIdx(BLogos)
 			checkBootLogo()  # check for BootLogo existence, rename or remove it
-			if strSelectMode is '1':  # ascending
+			if strSelectMode == '1':  # ascending
 				iLogoIdx = iLogoIdx + 1 if iLogoIdx + 1 < len(BLogos) else 0  # increase index by one or set to first index (0)
-			elif strSelectMode is '2':  # descanding
+			elif strSelectMode == '2':  # descanding
 				iLogoIdx = len(BLogos) - 1 if iLogoIdx - 1 < 0 else iLogoIdx - 1  # decrease index by one or set to last index
 			else:  # random
 				iRandIdx = iLogoIdx

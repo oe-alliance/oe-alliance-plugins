@@ -113,16 +113,16 @@ class WitAiSttThread(threading.Thread):
 			fd = open(self.voicePath, 'rb').read()
 			full_url = "https://api.wit.ai/speech"
 			headers = {
-			 'authorization': 'Bearer %s' % serverAccessToken,
-			 'accept': 'application/vnd.wit.20160526+json',
-			 'Content-Type': 'audio/wav'
+				'authorization': 'Bearer %s' % serverAccessToken,
+				'accept': 'application/vnd.wit.20160526+json',
+				'Content-Type': 'audio/wav'
 			}
 
 			#params = {'verbose':True}
 			resp = requests.post(
-				  url=full_url,
-				  data=fd,
-				  headers=headers)
+					url=full_url,
+					data=fd,
+					headers=headers)
 			if resp.status_code == 200:
 				text = resp.json()['_text']
 

@@ -137,7 +137,9 @@ def afterAlarm():
 	return datetime.now() <= timeAlarmEnd
 
 
-def formatDate(s): s = s.split('+'); return s[0].replace('T', '  um ')  # 2021-07-23T12:26:47+02:00 zu  2021-07-23 12:26:47
+def formatDate(s):
+	s = s.split('+')
+	return s[0].replace('T', '  um ')  # 2021-07-23T12:26:47+02:00 zu  2021-07-23 12:26:47
 	#return datetime.strptime( s , '%Y-%m-%d %H:%M:%S')
 
 
