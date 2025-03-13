@@ -54,7 +54,7 @@ class MergePiconJob:
 		try:
 			if len(self.executionQueueList) > 0:
 				self.mergePiconsCount += 1
-				progress = int(100 * (float(self.mergePiconsCount) / float(self.mergePiconsTotal)))
+				progress = int(100 * (float(self.mergePiconsCount) // float(self.mergePiconsTotal)))
 				self.session.current_dialog.setProgress(progress, _('Merge %d of %d Picons') % (self.mergePiconsCount, self.mergePiconsTotal))
 				mergeData = self.executionQueueList.popleft()
 				callInThread(self.mergePicon, mergeData.channelPicon, mergeData.targetPicon)

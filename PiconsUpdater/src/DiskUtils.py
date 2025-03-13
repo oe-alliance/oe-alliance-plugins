@@ -43,7 +43,7 @@ def getFilesFromPath(path):
 
 
 def getFilesWithNameKey(path, excludedDirNames=None, excludeDirs=None):
-#	get recursive all files from given path
+    # get recursive all files from given path
 	rs = {}
 	for dirPath, dirNames, fileNames in walk(path):
 		for fileName in fileNames:
@@ -57,7 +57,7 @@ def getFilesWithNameKey(path, excludedDirNames=None, excludeDirs=None):
 					if pathToCheck[:len(excludeDir)] == excludeDir:
 						skipFile = True
 						break
-			if skipFile == True:
+			if skipFile is True:
 				continue
 			rs[join(dirPath.replace(path, ''), fileName)] = fullFilePath
 	return rs
@@ -84,7 +84,7 @@ def mountpoint(path, first=True):
 def removeSymbolicLinks(pathList):
 	tmpExcludedDirs = []
 	for folder in pathList:
-		if islink(folder) == False:
+		if islink(folder) is False:
 			tmpExcludedDirs.append(folder)
 	return tmpExcludedDirs
 
@@ -108,7 +108,7 @@ def reachedLimit(path, limit):
 
 
 def __filterFileListByFileExtension(files, fileExtensions):
-#	fileExtensions as tuple. example: ('.txt', '.png')
+    # fileExtensions as tuple. example: ('.txt', '.png')
 	if fileExtensions is not None:
 		files = list(filter(lambda s: s.lower().endswith(fileExtensions), files))
 	return files

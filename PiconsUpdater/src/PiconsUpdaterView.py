@@ -1,5 +1,5 @@
 from os import makedirs
-from os.path import isdir, isfile, basename
+from os.path import isdir, join, isfile, basename
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Components.ActionMap import ActionMap
@@ -18,7 +18,7 @@ from .BouquetParser import BouquetParser
 
 class PiconsUpdaterView(ConfigListScreen, Screen):
 	skin = """
-	<screen name="PiconsUpdater-Setup" position="0,0" size="1280,720" flags="wfNoBorder" backgroundColor="#90000000">
+	<screen name="PiconsUpdater-Setup" position="center,center" size="1280,720" flags="wfNoBorder" backgroundColor="#90000000">
 	<eLabel name="new eLabel" position="40,40" zPosition="-2" size="1200,640" backgroundColor="#20000000" transparent="0" />
 	<eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="77,645" size="250,33" text="Cancel" transparent="1" />
 	<eLabel font="Regular; 20" foregroundColor="unffffff" backgroundColor="#20000000" halign="left" position="375,645" size="250,33" text="Save" transparent="1" />
@@ -42,11 +42,17 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		self['backgroundImage'] = Pixmap()
 		self['foregroundImage'] = Pixmap()
 		self.onClose.append(self.clean)
-		self['actions'] = ActionMap(['OkCancelActions', 'ShortcutActions'], {'cancel': self.cancel,
-		 'ok': self.okClicked,
-		 'green': self.save,
-		 'yellow': self.startDownloadPicons,
-		 'red': self.cancel}, -1)
+		self['actions'] = ActionMap(
+			['OkCancelActions', 'ShortcutActions'],
+			{
+				'cancel': self.cancel,
+				'ok': self.okClicked,
+				'green': self.save,
+				'yellow': self.startDownloadPicons,
+				'red': self.cancel
+			},
+			-1
+		)
 		self.onChangedEntry = []
 		ConfigListScreen.__init__(self, self.getMenuItemList(), session, self.__selectionChanged)
 		# FIXME : don't scan channels on start without background thread
@@ -100,7 +106,9 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		if isdir(TMP_PREVIEW_IMAGE_PATH) is False:
 			makedirs(TMP_PREVIEW_IMAGE_PATH, 493)
 		for key, piconStyleData in getPiconUrls().items():
-			localPreviewPath = TMP_PREVIEW_IMAGE_PATH + '/' + key + '.png'
+			localPreviewPath = join(TMP_PREVIEW_IMAGE_PATH, key + '.png')
+			if 'previewImage' not in piconStyleData or not piconStyleData['previewImage']:
+				print("Warning: Missing previewImage for key:", key)
 			if isfile(localPreviewPath) is False:
 				DownloadJob(piconStyleData['previewImage'], localPreviewPath, self.__previewDownloadFinished, self.__previewDownloadFailed)
 			else:
@@ -115,13 +123,14 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		if isdir(TMP_FG_PATH) is False:
 			makedirs(TMP_FG_PATH, 493)
 		for data in getBackgroundList():
-			localPiconBgPath = TMP_BG_PATH + '/' + basename(data['bg'])
-			if isfile(localPiconBgPath) is False:
-				DownloadJob(data['bg'], localPiconBgPath, self.__bgDownloadFinished, self.__bgDownloadFailed)
-			else:
-				self.__bgDownloadFinished()
+			if 'bg' in data:
+				localPiconBgPath = join(TMP_BG_PATH, basename(data['bg']))
+				if isfile(localPiconBgPath) is False:
+					DownloadJob(data['bg'], localPiconBgPath, self.__bgDownloadFinished, self.__bgDownloadFailed)
+				else:
+					self.__bgDownloadFinished()
 			if 'fg' in data:
-				localPiconFgPath = TMP_FG_PATH + '/' + basename(data['fg'])
+				localPiconFgPath = join(TMP_FG_PATH, basename(data['fg']))
 				if isfile(localPiconFgPath) is False:
 					DownloadJob(data['fg'], localPiconFgPath, self.__fgDownloadFinished, self.__fgDownloadFailed)
 				else:
@@ -170,7 +179,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 
 	def getPreviewImagePath(self):
 		try:
-			previewImagePath = TMP_PREVIEW_IMAGE_PATH + '/' + getPiconsTypeValue() + '.png'
+			previewImagePath = join(TMP_PREVIEW_IMAGE_PATH, getPiconsTypeValue() + '.png')
 			if isfile(previewImagePath) is False:
 				raise
 			return previewImagePath
@@ -185,7 +194,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		background = self.getCurrentBackground()
 		if background:
 			backgroundUrl = background['bg']
-			localPiconBgPath = '%s/%s' % (TMP_BG_PATH, basename(backgroundUrl))
+			localPiconBgPath = join(TMP_BG_PATH, basename(backgroundUrl))
 			return localPiconBgPath
 		else:
 			return None
@@ -194,7 +203,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		background = self.getCurrentBackground()
 		if background and 'fg' in background:
 			foregroundUrl = background['fg']
-			localPiconFgPath = '%s/%s' % (TMP_FG_PATH, basename(foregroundUrl))
+			localPiconFgPath = join(TMP_FG_PATH, basename(foregroundUrl))
 			return localPiconFgPath
 		else:
 			return None
@@ -214,12 +223,12 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 
 	def startDownloadPicons(self):
 		try:
-			if isdir(getPiconsPath().getValue()) == False:
+			if not isdir(getPiconsPath().getValue()):
 				makedirs(getPiconsPath().getValue(), 493)
-		except Exception:
-			pass
-
-		if self.__checkReadWriteDir(getPiconsPath()) == False:
+		except Exception as e:
+			print("Error creating directory:", e)
+			return
+		if self.__checkReadWriteDir(getPiconsPath()) is False:
 			return
 		bgimagepath = self.getBackgroundImagePath()
 		if bgimagepath and self.getCurrentBackgroundList() is not None and isfile(bgimagepath) is False:
@@ -228,11 +237,12 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		addEventListener(DOWNLOAD_ALL_FINISHED, self.__downloadAllFinished)
 		self.session.open(JobProgressView, 'Download Progress', msgBoxID='startDownload')
 		self.totalDownloads = 1
+
 		piconUrl = self.getCurrentPiconUrl()
 		if piconUrl is not None:
 			addEventListener(DOWNLOAD_FINISHED, self.__downloadFinished)
-			tmpPiconsPath = TMP_PICON_PATH + '/' + getPiconsTypeValue()
-			if isdir(tmpPiconsPath) is False:
+			tmpPiconsPath = join(TMP_PICON_PATH, getPiconsTypeValue())
+			if not isdir(tmpPiconsPath):
 				makedirs(tmpPiconsPath, 493)
 			downloadPicons = DownloadPicons(self.serviceList, piconUrl, tmpPiconsPath, self.getCurrentPiconNameType())
 			self.totalDownloads = downloadPicons.totalDownloads

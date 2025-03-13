@@ -17,5 +17,14 @@ def main(session, **kwargs):
 
 
 def Plugins(**kwargs):
-	pluginList = [PluginDescriptor(name='PiconsUpdater', description=_('Download Picons for your channellist (favourites)'), where=PluginDescriptor.WHERE_PLUGINMENU, icon='plugin.png', fnc=main, needsRestart=False)]
+	pluginList = [
+		PluginDescriptor(
+			name='PiconsUpdater',
+			description=_('Download Picons for your channellist (favourites)'),
+			where=PluginDescriptor.WHERE_PLUGINMENU,
+			icon='plugin.png',
+			fnc=main,
+			needsRestart=False
+		)
+	]
 	return pluginList

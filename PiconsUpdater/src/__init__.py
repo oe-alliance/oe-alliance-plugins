@@ -73,12 +73,16 @@ def getBackgroundList():
 
 def getPiconUrls():
 	if not hasattr(getPiconUrls, 'piconsUrls'):
-		getPiconUrls.piconUrls = {'picons-all': {'title': 'Picons for DVB-C/S/T - different styles',
-						'logo': 'https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/picon_all/%s.png',
-						'backgrounds': getBackgroundList(),
-						'size': POSSIBLE_PICONS_SIZE[:],
-						'previewImage': 'https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/picon_all/das-erste-hd.png',
-						'nameType': PICON_TYPE_NAME}}
+		getPiconUrls.piconUrls = {
+			'picons-all': {
+				'title': 'Picons for DVB-C/S/T - different styles',
+				'logo': 'https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/picon_all/%s.png',
+				'backgrounds': getBackgroundList(),
+				'size': POSSIBLE_PICONS_SIZE[:],
+				'previewImage': 'https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/picon_all/das-erste-hd.png',
+				'nameType': PICON_TYPE_NAME
+			}
+		}
 	return getPiconUrls.piconUrls
 
 

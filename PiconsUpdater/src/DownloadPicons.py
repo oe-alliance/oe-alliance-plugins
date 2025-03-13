@@ -1,7 +1,7 @@
 from os import remove
 from os.path import isfile
 from _collections import deque
-from . import printToConsole, getPiconsPath, getTmpLocalPicon, PICON_TYPE_NAME, _  # for localized messages
+from . import printToConsole, getPiconsPath, getTmpLocalPicon, PICON_TYPE_NAME
 from .BouquetParser import getChannelKey
 from .DiskUtils import getCleanFileName
 from .DownloadJob import DownloadJob

@@ -23,8 +23,14 @@ class JobProgressView(Screen):
 		self['downloadProgress'] = ProgressBar()
 		self['downloadProgress'].setValue(0)
 		self['downloadProgressText'] = StaticText('')
-		self['actions'] = ActionMap(['OkCancelActions'], {'ok': self.ok,
-		 'cancel': self.cancel}, -1)
+		self['actions'] = ActionMap(
+			['OkCancelActions'],
+			{
+				'ok': self.ok,
+				'cancel': self.cancel
+			},
+			-1
+		)
 
 	def __del__(self):
 		printToConsole('######## DESTRUCTOR: JobProgressView')
