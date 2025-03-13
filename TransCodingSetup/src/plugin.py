@@ -482,7 +482,7 @@ class TranscodingSetup(ConfigListScreen, Screen):
 
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
-		if not self.showDescription in self["config"].onSelectionChanged:
+		if self.showDescription not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.showDescription)
 
 	def showDescription(self):

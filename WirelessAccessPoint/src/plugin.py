@@ -440,7 +440,7 @@ class WirelessAccessPoint(ConfigListScreen, Screen):
 			else:
 				return True
 		else:
-			if not len(apModeConfig.wpa_passphrase.value) in range(8, 65):
+			if len(apModeConfig.wpa_passphrase.value) not in range(8, 65):
 				self.session.open(MessageBox, _("Invalid WPA key\n\n"), type=MessageBox.TYPE_ERROR, timeout=10)
 			else:
 				return True

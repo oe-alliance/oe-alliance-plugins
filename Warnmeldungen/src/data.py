@@ -187,7 +187,7 @@ def headlineAlreadyShown(s):
 	ignoreList = configValue('ignoreDoubleList', '')
 	if ignoreList and not inCheckList(s, ignoreList):
 		return False
-	if not (headLineSimple(s) in lastMessages):
+	if headLineSimple(s) not in lastMessages:
 		return False  # headline not shown before
 	if (not d.isdigit()) or (lastDoubleTime == None):
 		lastDoubleTime = None
@@ -514,7 +514,7 @@ def getNinaMsg(check=0, detail=0):
 		if not check:
 			lastMessages = []  # actMessages[:]
 			for m in actMessages:
-				if m and not (m in lastMessages):
+				if m and m not in lastMessages:
 					lastMessages.append(m)
 		if res and (newestDate > configValue('lastAlert', '')):
 			warnReset(newestDate)

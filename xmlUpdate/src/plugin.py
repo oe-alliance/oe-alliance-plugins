@@ -50,7 +50,7 @@ class xmlUpdate(ConfigListScreen, Screen):
 
 		self.createSetup()
 
-		if not self.selectionChanged in self["config"].onSelectionChanged:
+		if self.selectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
 

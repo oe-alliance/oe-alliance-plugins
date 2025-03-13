@@ -198,7 +198,7 @@ class AudioEffect(ConfigListScreen, Screen):
 				self.setupList.append(getConfigListEntry(_("3D Surround Speaker Position"), config.plugins.audioeffect.speakerposition))
 		self["config"].list = self.setupList
 		self["config"].l.setList(self.setupList)
-		if not self.showDescription in self["config"].onSelectionChanged:
+		if self.showDescription not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.showDescription)
 
 	def keySave(self):

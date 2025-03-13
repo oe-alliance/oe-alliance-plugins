@@ -350,7 +350,7 @@ class SATIPTuner(ConfigListScreen, Screen):
 		ConfigListScreen.__init__(self, self.list, session=self.session)
 		self.satipconfig = ConfigSubsection()
 
-		if not self.discoveryEnd in satipdiscovery.updateCallback:
+		if self.discoveryEnd not in satipdiscovery.updateCallback:
 			satipdiscovery.updateCallback.append(self.discoveryEnd)
 
 		self.onClose.append(self.OnClose)
@@ -415,7 +415,7 @@ class SATIPTuner(ConfigListScreen, Screen):
 		self["config"].list = self.list
 		self["config"].l.setList(self.list)
 
-		if not self.showChoices in self["config"].onSelectionChanged:
+		if self.showChoices not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.showChoices)
 
 		self.selectionChanged()

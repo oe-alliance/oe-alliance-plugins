@@ -172,7 +172,7 @@ class StalkerClient_SetupScreen(ConfigListScreen, Screen):
 		self.usernameEntry = getConfigListEntry(_("Stalker username"), config.plugins.stalker_client.username)
 		self.passwordEntry = getConfigListEntry(_("Stalker password"), config.plugins.stalker_client.password)
 
-		if not self.onSelectionChangedCB in self["config"].onSelectionChanged:
+		if self.onSelectionChangedCB not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.onSelectionChangedCB)
 
 	def createSetup(self):

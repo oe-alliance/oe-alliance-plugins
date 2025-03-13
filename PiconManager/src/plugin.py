@@ -381,7 +381,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self.auswahl = self['list'].getCurrent()[0][2]
 			picon_name = basename(self.auswahl)
 			if config.plugins.piconmanager.spicon.value != "":
-				if not "by name" in self['list'].getCurrent()[0][0].lower():
+				if "by name" not in self['list'].getCurrent()[0][0].lower():
 					picon_sname = txt = config.plugins.piconmanager.spicon.value.split('|')[0]
 				else:
 					picon_sname = txt = config.plugins.piconmanager.spicon.value.split('|')[1].replace(" ", "%20") + ".png"
@@ -624,7 +624,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self.nameList = []
 		self.reducedList = []
 		try:
-			if not "by name" in self['list'].getCurrent()[0][0].lower():
+			if "by name" not in self['list'].getCurrent()[0][0].lower():
 				return 1
 			self.auswahl = self['list'].getCurrent()[0][4]
 			self.cur_selected_dir = self['list'].getCurrent()[0][5]
@@ -717,7 +717,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 
 	def downloadError(self, error):
 		if self.aktdl_pico:
-			if not "by name" in self['list'].getCurrent()[0][0].lower():
+			if "by name" not in self['list'].getCurrent()[0][0].lower():
 				for channel in self.chlist:
 					if channel[0] == self.aktdl_pico.replace('_', ':') + ":":
 						self.aktdl_pico = self.aktdl_pico + " = " + channel[1] + " / " + channel[0]

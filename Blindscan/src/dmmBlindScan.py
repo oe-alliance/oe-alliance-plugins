@@ -608,7 +608,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			self.createSetup()
 			self["footnote"] = Label(_("Press OK to start the scan."))
 
-		if not self.selectionChanged in self["config"].onSelectionChanged:
+		if self.selectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
 		self.selectionChanged()
 
@@ -960,7 +960,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 				currSat = nimconfig.advanced.sat[int(nimconfig.advanced.sats.value)]
 				import ast
 				userSatellitesList = ast.literal_eval(currSat.userSatellitesList.getValue())
-				if not cur_orb_pos in userSatellitesList:
+				if cur_orb_pos not in userSatellitesList:
 					currSat = nimconfig.advanced.sat[cur_orb_pos]
 			else:
 				currSat = nimconfig.advanced.sat[cur_orb_pos]

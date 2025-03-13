@@ -63,7 +63,7 @@ class Channelnumber:
 			self.dvb_service = ""
 		else:
 			str_service = playref.toString()
-			if not '%3a//' in str_service and str_service.rsplit(":", 1)[1].startswith("/"):
+			if '%3a//' not in str_service and str_service.rsplit(":", 1)[1].startswith("/"):
 				self.dvb_service = "video"
 			else:
 				self.dvb_service = ""

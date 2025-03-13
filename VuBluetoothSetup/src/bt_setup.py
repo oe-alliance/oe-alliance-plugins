@@ -218,7 +218,7 @@ class BluetoothSetupScreen(Screen, HelpableScreen, BluetoothSetup):
 
 		self["description"] = StaticText(_("Starting..."))
 
-		if not self.selectionChanged in self["deviceList"].onSelectionChanged:
+		if self.selectionChanged not in self["deviceList"].onSelectionChanged:
 			self["deviceList"].onSelectionChanged.append(self.selectionChanged)
 
 		self.onLayoutFinish.append(self.onLayoutFinishCB)

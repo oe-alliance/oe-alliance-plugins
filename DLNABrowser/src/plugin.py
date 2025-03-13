@@ -230,7 +230,7 @@ class DLNAFileBrowser(Screen):
 					fileType = self["filelist"].getFileType()
 					newFiles = [fileDir + str(f[0][0])]
 				if len(newFiles) > 0:
-					if not fileType is None and fileType != 'unknown':
+					if fileType is not None and fileType != 'unknown':
 						if firstFileType is None or fileType == firstFileType:
 							firstFileType = fileType
 							files = files + newFiles

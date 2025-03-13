@@ -582,11 +582,11 @@ class StreamingChannelFromServerScreen(Screen):
 
 	def readBouquetList(self, list, rootstr):
 		bouquet_root = eServiceReference(rootstr)
-		if not bouquet_root is None:
+		if bouquet_root is not None:
 			serviceHandler = eServiceCenter.getInstance()
-			if not serviceHandler is None:
+			if serviceHandler is not None:
 				servicelist = serviceHandler.list(bouquet_root)
-				if not servicelist is None:
+				if servicelist is not None:
 					while True:
 						service = servicelist.getNext()
 						if not service.valid():
