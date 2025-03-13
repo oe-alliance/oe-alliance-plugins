@@ -303,9 +303,9 @@ def controlSeg():
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and Seg == None:
+	if gReason == 0 and mySession is not None and Seg is None:
 		Seg = SEG(mySession)
-	elif gReason == 1 and Seg != None:
+	elif gReason == 1 and Seg is not None:
 		Seg = None
 
 

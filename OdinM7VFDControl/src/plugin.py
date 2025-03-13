@@ -277,10 +277,10 @@ def controlodinm7Vfd():
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and odinm7Vfd == None:
+	if gReason == 0 and mySession is not None and odinm7Vfd is None:
 		print("[VFD-ODINM7] Starting !!")
 		odinm7Vfd = VFD_Odin(mySession)
-	elif gReason == 1 and odinm7Vfd != None:
+	elif gReason == 1 and odinm7Vfd is not None:
 		print("[VFD-ODINM7] Stopping !!")
 
 		odinm7Vfd = None

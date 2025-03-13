@@ -173,10 +173,10 @@ def controlsh4booster():
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and sh4booster == None:
+	if gReason == 0 and mySession is not None and sh4booster is None:
 		print("[SH4BoosterControl] Starting !!")
 		sh4booster = SH4_Booster(mySession)
-	elif gReason == 1 and sh4booster != None:
+	elif gReason == 1 and sh4booster is not None:
 		print("[SH4BoosterControl] Stopping !!")
 
 		sh4booster = None

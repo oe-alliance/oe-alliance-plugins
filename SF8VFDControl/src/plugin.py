@@ -355,10 +355,10 @@ def controlSF8VFD():
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and SF8VFD == None:
+	if gReason == 0 and mySession is not None and SF8VFD is None:
 		print("[VFD-SF8] Starting !!")
 		SF8VFD = VFD_SF8(mySession)
-	elif gReason == 1 and SF8VFD != None:
+	elif gReason == 1 and SF8VFD is not None:
 		print("[VFD-SF8] Stopping !!")
 
 		SF8VFD = None

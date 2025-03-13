@@ -321,7 +321,7 @@ def do_one(myStats, destIP, hostname, timeout, mySeqNumber, packet_size, quiet=F
     my_ID = os.getpid() & 0xFFFF
 
     sentTime = send_one_ping(mySocket, destIP, my_ID, mySeqNumber, packet_size)
-    if sentTime == None:
+    if sentTime is None:
         mySocket.close()
         return delay
 
@@ -510,7 +510,7 @@ def verbose_ping(hostname, timeout=WAIT_TIMEOUT, count=NUM_PACKETS,
     for i in range(count):
         delay = do_one(myStats, destIP, hostname, timeout, mySeqNumber, packet_size)
 
-        if delay == None:
+        if delay is None:
             delay = 0
 
         mySeqNumber += 1
@@ -551,7 +551,7 @@ def quiet_ping(hostname, timeout=WAIT_TIMEOUT, count=NUM_PACKETS,
         delay = do_one(myStats, destIP, hostname, timeout,
                         mySeqNumber, packet_size, quiet=True)
 
-        if delay == None:
+        if delay is None:
             delay = 0
 
         mySeqNumber += 1

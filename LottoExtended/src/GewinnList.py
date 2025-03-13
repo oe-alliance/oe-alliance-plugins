@@ -155,7 +155,7 @@ class GewinnListScreen(Screen):
 		#self.newDrawing(currdate)
 
 	def newDrawing(self, datum=None):
-		if datum != None:
+		if datum is not None:
 			self.currDate = datum
 		self.ziehung = self.ziehungen.drawings[self.currDate]
 		self.gezogen = list(map(int, self.ziehung.strLotto))
@@ -191,7 +191,7 @@ class GewinnListScreen(Screen):
 			tipplist.append(self.buildListboxEntry(tipp))
 		self["tipplist"].setList(tipplist)
 		if self.gewinne:
-			if self.ziehung.lottoquote == None:
+			if self.ziehung.lottoquote is None:
 				self["statuslabel"].setText("Quoten wurden noch nicht ermittelt")
 			if self.totalsumme:
 				self["statuslabel"].setText("Gewinnsumme: %s € - ohne Gewähr -" % num2FormStr(self.totalsumme))
@@ -247,7 +247,7 @@ class GewinnListScreen(Screen):
 							tipp.lottotreffer = list(map(lambda x, y: x + y, tipp.lottotreffer, SYSTEMTAB[systemtipp][pos]))
 						else:
 							tipp.lottotreffer[pos] += 1
-			if self.gewinne and self.ziehung.lottoquote != None:
+			if self.gewinne and self.ziehung.lottoquote is not None:
 				self.computeGewinnSumme(tipp)
 				self.totalsumme += tipp.gewinnSumme
 

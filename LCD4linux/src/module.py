@@ -46,7 +46,7 @@ class L4Lelement:
 		print(L4Lelement.List)
 
 	def get(self, element=None):
-		if element == None:
+		if element is None:
 			return L4Lelement.List
 		else:
 			return L4Lelement.List.get(element, {})

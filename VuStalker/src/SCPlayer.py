@@ -275,7 +275,7 @@ class StalkerClient_Player(Screen, InfoBarNotifications):
 
 	def cbDrawChannelIcon(self, picInfo=None):
 		ptr = self.picload.getData()
-		if ptr != None:
+		if ptr is not None:
 			self["channel_icon"].instance.setPixmap(ptr.__deref__())
 			self["channel_icon"].show()
 

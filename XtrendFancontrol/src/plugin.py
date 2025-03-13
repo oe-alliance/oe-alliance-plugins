@@ -202,7 +202,7 @@ class FanSetupScreen(ConfigListScreen, Screen):
 		except:
 			pass
 		self.curmode = power
-		if self.curmode != None:
+		if self.curmode is not None:
 			if self.curmode == "off":
 				self["daemon1"].hide()
 				self["daemon0"].show()

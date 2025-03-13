@@ -581,7 +581,7 @@ class DLNAImageViewer(Screen):
 	def finishDecode(self, picInfo=""):
 		self["status"].hide()
 		ptr = self.pictureLoad.getData()
-		if ptr != None:
+		if ptr is not None:
 			text = ""
 			try:
 				text = picInfo.split('\n', 1)
@@ -768,7 +768,7 @@ class DLNAClientConfig(ConfigListScreen, Screen):
 		def setDefault(key, default):
 			try:
 				value = self.oldConfig.get(key)
-				if value == None or value.strip() == '':
+				if value is None or value.strip() == '':
 					self.oldConfig[key] = default
 			except:
 				self.oldConfig[key] = default

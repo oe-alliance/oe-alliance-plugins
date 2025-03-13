@@ -282,10 +282,10 @@ def controlewVfd():
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and ewVfd == None:
+	if gReason == 0 and mySession is not None and ewVfd is None:
 		print("[VFD-EW] Starting !!")
 		ewVfd = vfd_ew(mySession)
-	elif gReason == 1 and ewVfd != None:
+	elif gReason == 1 and ewVfd is not None:
 		print("[VFD-EW] Stopping !!")
 
 		ewVfd = None

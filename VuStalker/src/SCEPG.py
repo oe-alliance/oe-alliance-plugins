@@ -643,7 +643,7 @@ class StalkerEPGList(MenuList):
 			if self.page_last < 0:
 				self.moveToIndex(self.item_last)
 			else:
-				self.item_refresh = True if not int(self.page_last) is 1 else False
+				self.item_refresh = True if int(self.page_last) is not 1 else False
 				self.leftPage()
 
 	def downPage(self):
@@ -653,7 +653,7 @@ class StalkerEPGList(MenuList):
 			if self.page_last < 0:
 				self.moveToIndex(0)
 			else:
-				self.item_refresh = True if not int(self.page_last) is 1 else False
+				self.item_refresh = True if int(self.page_last) is not 1 else False
 				self.rightPage()
 
 	def updateList(self, index=0):

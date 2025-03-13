@@ -306,7 +306,7 @@ class NinaScreen (Screen):
 
 	def scrollLabelRepair(self, elem):   #workaround (bug in scrolllabel.py)
 		try:
-			if (elem.long_text != None) and (elem.pageHeight) and (elem.pages > 10):
+			if (elem.long_text is not None) and (elem.pageHeight) and (elem.pages > 10):
 				s = elem.long_text.size()
 				elem.long_text.resize(eSize(s.width(), elem.pageHeight * elem.pages))
 				elem.updateScrollbar()
@@ -370,7 +370,7 @@ class NinaMonitor ():
 		self.stopTimer()
 		error = False
 		try:
-			if (mainSession != None):
+			if (mainSession is not None):
 				s = data.getNinaMsg(True)
 				error = data.wasError
 				if s or self.runFullView:

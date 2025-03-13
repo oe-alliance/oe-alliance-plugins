@@ -83,7 +83,7 @@ def resolve_http_redirect(url, depth=0):
 def Csplit(data, string, number=None):
 	if string in data:
 		data = data.split(string)
-		if number != None:
+		if number is not None:
 			data = data[number]
 	return data
 
@@ -682,7 +682,7 @@ class SmallScreen(Screen):
 			selection = self.mmenu[self.CurSel]
 		else:
 			selection = self["menu"].l.getCurrentSelection()
-		if selection[1] == None:
+		if selection[1] is None:
 			return
 		if self.cmd == 'rtlback':
 			self.session.open(OpenUg, ['rtlback', selection[1]])
@@ -906,7 +906,7 @@ class OpenUg(Screen):
 			self._lbl.visible = False
 
 	def layoutFinished(self):
-		if self.title == None or self.title == '':
+		if self.title is None or self.title == '':
 			self.setTitle("Open Uitzending Gemist")
 		else:
 			self.setTitle(self.title)
@@ -1261,7 +1261,7 @@ class OpenUg(Screen):
 	def finish_decode(self, picture_id, info):
 		ptr = self.picloads[picture_id].getData()
 		thumbnailFile = self.imagedir + str(picture_id)
-		if ptr != None:
+		if ptr is not None:
 			if picture_id in self.Details:
 				self.Details[picture_id]["thumbnail"] = ptr
 		self.tmplist = []

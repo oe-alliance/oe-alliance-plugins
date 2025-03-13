@@ -390,7 +390,7 @@ class StreamingChannelFromServerScreen(Screen):
 							# alternative services that cannot be fed directly into the "play"-handler.
 							if int(line.split()[1].split(":")[1]) & eServiceReference.mustDescent:
 								line = self.getAlternativeLine(line)
-								if line == None:
+								if line is None:
 									continue
 							# normal services
 							line = line.strip('\r\n')

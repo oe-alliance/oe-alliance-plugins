@@ -29,7 +29,7 @@ lotto_pluginversion = '16.01.2023'
 def str2floatQuotes(strList):
 	quotes = []
 	for q in strList:
-		if q == "unbesetzt" or q == None:
+		if q == "unbesetzt" or q is None:
 			q = "0"
 		elif q == "unbekannt":
 			q = "-1"
@@ -121,7 +121,7 @@ class Ziehungen():
 
 	def download(self, datum, callback, errback):
 		#print"[Ziehungen_download]"#
-		if datum == None:
+		if datum is None:
 			datum = self.getLastDrawDate()
 		if datum in self.drawings:
 			callback(datum)
@@ -286,7 +286,7 @@ class LottoMain(Screen):
 
 	def download(self, datum=None):
 		#print"[LottoMain download]"
-		if datum != None and datum in self.ziehungen.drawings:
+		if datum is not None and datum in self.ziehungen.drawings:
 			self.dispDraw(datum)
 		else:
 			self["statuslabel"].setText("Download gestartet")
@@ -387,7 +387,7 @@ class LottoMain(Screen):
 		self["displotto"].text = " - ".join(ziehung.strLotto) + ' / ' + ziehung.strSuperzahl
 		xlist = []
 		list = ["" for i in range(11)]
-		if ziehung.strLottoQuote == None:
+		if ziehung.strLottoQuote is None:
 			self["statuslabel"].setText("Ziehung vom %s, %s - Die Gewinnquoten stehen noch nicht fest." % (tag, self.currDate.strftime("%d.%m.%Y")))
 			xlist.append(tuple(list))
 			self["quotlist"].index = 0

@@ -344,7 +344,7 @@ class DLNAServer(ConfigListScreen, Screen):
 		def setDefault(key, default):
 			try:
 				value = self.oldConfig.get(key)
-				if value == None or value.strip() == '':
+				if value is None or value.strip() == '':
 					self.oldConfig[key] = default
 			except:
 				self.oldConfig[key] = default

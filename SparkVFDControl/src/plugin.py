@@ -394,10 +394,10 @@ def controlsparkVfd():
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and sparkVfd == None:
+	if gReason == 0 and mySession is not None and sparkVfd is None:
 		print("[VFD-SPARK] Starting !!")
 		sparkVfd = VFD_SPARK(mySession)
-	elif gReason == 1 and sparkVfd != None:
+	elif gReason == 1 and sparkVfd is not None:
 		print("[VFD-SPARK] Stopping !!")
 
 		sparkVfd = None

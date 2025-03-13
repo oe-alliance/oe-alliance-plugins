@@ -79,7 +79,7 @@ config.plugins.Warnung.debug = ConfigYesNo(default=False)
 
 def debugMode(reset=False):
 	global _isDebugMode  # buffer
-	if reset or (_isDebugMode == None):
+	if reset or (_isDebugMode is None):
 		_isDebugMode = config.plugins.Warnung.debug.value
 	return _isDebugMode
 
@@ -95,7 +95,7 @@ def warnReset(val=''):
 def configValue(id, default="0"):
 	try:
 		res = getattr(config.plugins.Warnung, id).value
-		if res == None:
+		if res is None:
 			return default
 		else:
 			return res
@@ -183,7 +183,7 @@ class WarnCfg (ConfigListScreen, Screen):
 
 	def channelChoiceFinish(self, answer):
 		import data
-		if (answer != None):
+		if (answer is not None):
 			if (self["config"].getCurrentIndex() == 3):
 				data.ARS2 = answer[1]
 				config.plugins.Warnung.ARS2.value = answer[1].replace(',  ', ', ')

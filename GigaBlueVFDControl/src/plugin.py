@@ -600,10 +600,10 @@ def controlgigaLED():
 	global gReason
 	global mySession
 
-	if gReason == 0 and mySession != None and gigaLED == None:
+	if gReason == 0 and mySession is not None and gigaLED is None:
 		print("[LED-GIGA] Starting !!")
 		gigaLED = LED_Giga(mySession)
-	elif gReason == 1 and gigaLED != None:
+	elif gReason == 1 and gigaLED is not None:
 		print("[LED-GIGA] Stopping !!")
 		gigaLED = None
 

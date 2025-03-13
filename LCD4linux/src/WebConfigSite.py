@@ -205,9 +205,9 @@ class LCD4linuxConfigweb(resource.Resource):
 		req.setHeader('Content-type', 'text/html')
 		req.setHeader('charset', 'UTF-8')
 		command = req.args.get(b"cmd", None)
-		_command = ensure_str(command[0]) if command != None else ""
+		_command = ensure_str(command[0]) if command is not None else ""
 		ex = req.args.get(b"ex", None)
-		_ex = ensure_str(ex[0]) if ex != None else req.args.get(b"ex", None)
+		_ex = ensure_str(ex[0]) if ex is not None else req.args.get(b"ex", None)
 		mo = req.args.get(b"Mode", None)
 		el = req.args.get(b"Element", None)
 		self.restartTimer()

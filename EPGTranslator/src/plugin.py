@@ -302,11 +302,11 @@ def DO_translation(text, source, dest):     # source, dest are langs
             split_re1 = "(?:(.{1,%s})(%s))" % (bsize, enc_wspace)
             split_re1 = re.compile(split_re1)
             match = split_re1.search(enc_text, si, ri)
-            if match == None:
+            if match is None:
                 split_re2 = "(?:(.{1,%s})(%s))" % (bsize, enc_space)
                 split_re2 = re.compile(split_re2)
                 match = split_re2.search(enc_text, si, ri)
-            if match == None:
+            if match is None:
                 res += "...unable to translate"
                 break
             this_encpart = match.group(1)
@@ -466,7 +466,7 @@ def EPGdata_translate(title, descr, start, duration, uref):
 # use as a cache basis (its original start time being useless for
 # this).
 #
-            if start == None:   # A non-native recording?
+            if start is None:   # A non-native recording?
                 to = int(time.time() + 10800)
             else:
                 to = int(start + duration + 60 * config.epg.histminutes.getValue())
@@ -776,11 +776,11 @@ Red: Refresh EPG
 # and display it
 #
     def translateEPG(self, title, descr, do_translate=True):
-        if title == None:
+        if title is None:
             title = ''
         else:
             title = title.strip()
-        if descr == None:
+        if descr is None:
             descr = ''
         else:
             descr = descr.strip()
@@ -813,7 +813,7 @@ Red: Refresh EPG
 #
             uref = make_uref(self.event[epg_I], self.event[epg_N])
             (t_title, t_descr) = AfCache.fetch(uref)
-            if t_descr == None:  # Not there...
+            if t_descr is None:  # Not there...
                 try:
                     start = self.event[epg_PB]
                 except:
@@ -905,7 +905,7 @@ Red: Refresh EPG
                 except:
                     pass
 
-            if eventID == None:
+            if eventID is None:
 # Generate another unique ID instead.
                 try:
                     path = ssn.getCurrentlyPlayingServiceOrGroup().getPath()
@@ -924,7 +924,7 @@ Red: Refresh EPG
             pbinfo[epg_N] = Servname
             pbinfo[epg_D] = dur
             pbinfo[epg_B] = rec_began
-            if play_began != None:
+            if play_began is not None:
                 pbinfo.append(play_began)   # epg_PB - and extra
             self.list = [tuple(pbinfo)]
         else:
@@ -1112,7 +1112,7 @@ def My_setEvent(self, event):
 #
     uref = make_uref(event.getEventId(), self.currentService.getServiceName())
     (t_title, t_descr) = AfCache.fetch(uref)
-    if t_descr == None:  # Not there...
+    if t_descr is None:  # Not there...
 
 # You may need to lookup in EventBase.setEvent to see how these fields
 # are used and so how you can get the text to translate.

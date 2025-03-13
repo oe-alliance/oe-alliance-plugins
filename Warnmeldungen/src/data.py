@@ -47,7 +47,7 @@ def eDebug(e, s=''):
 def isStandby():
 	try:
 		from Screens.Standby import inStandby
-		return inStandby != None
+		return inStandby is not None
 	except:
 		return 0
 
@@ -55,7 +55,7 @@ def isStandby():
 def wakeUp():
 	try:
 		from Screens.Standby import inStandby
-		if inStandby != None:
+		if inStandby is not None:
 			inStandby.Power()
 			return 1
 	except:
@@ -132,7 +132,7 @@ def setAlarmEnd():
 
 
 def afterAlarm():
-	if timeAlarmEnd == None:
+	if timeAlarmEnd is None:
 		return False
 	return datetime.now() <= timeAlarmEnd
 
@@ -158,7 +158,7 @@ def inCheckList(s, listS):
 
 def getInt(s):
 	try:
-		if s == None:
+		if s is None:
 			return 0
 		return int(str(s).strip())
 	except:
@@ -173,7 +173,7 @@ def headLineSimple(s): return ''.join([i for i in s if not i.isdigit()])
 def doubleEndTime():
 	d = configValue('noDouble', 'false')
 	d = str(d)
-	if (d.isdigit()) and (lastDoubleTime != None):
+	if (d.isdigit()) and (lastDoubleTime is not None):
 		return 'aktiv bis ' + str(lastDoubleTime + timedelta(minutes=int(d)))
 	return ['ohne', 'dauerhaft'][d.lower() != "false"]
 
@@ -189,7 +189,7 @@ def headlineAlreadyShown(s):
 		return False
 	if headLineSimple(s) not in lastMessages:
 		return False  # headline not shown before
-	if (not d.isdigit()) or (lastDoubleTime == None):
+	if (not d.isdigit()) or (lastDoubleTime is None):
 		lastDoubleTime = None
 		return True  # check always
 	okTime = lastDoubleTime + timedelta(minutes=int(d))
@@ -333,7 +333,7 @@ def getNiNAHeadlines(s, checkMode=0, detail=0):  # checkmode:hintergrundpruefung
 			timeList.append(sent)
 			debug('Meldung registriert (' + headLineSimple(headline) + ')')
 	#debug(msgList)
-	if timeAlarmEnd != None:
+	if timeAlarmEnd is not None:
 		debug(_('Verk_uerzter Alarm bis ') + str(timeAlarmEnd))
 	if len(msgList):
 		global actMessages
