@@ -416,7 +416,7 @@ def start_youtubetv_main(session, **kwargs):
 				session.nav.stopService()
 			vbcfg.g_browser = session.open(Browser, vbcfg.g_youtubetv_cfg.uri.value, True)
 
-	if config.plugins.youtubetv.showhelp.value == True:
+	if config.plugins.youtubetv.showhelp.value is True:
 		_cb_youtubetv_close(True)
 	else:
 		session.openWithCallback(_cb_youtubetv_close, YoutubeTVWindow)

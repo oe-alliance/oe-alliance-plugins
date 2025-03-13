@@ -233,14 +233,14 @@ class Filebrowser(Screen):
 			self.check_ext = False
 			if (self.firmware == "micom" and checkExt(".bin")):
 				self.check_ext = True
-			if self.check_ext == False:
+			if self.check_ext is False:
 				self.session.open(MessageBox, _("You chose the incorrect file."), MessageBox.TYPE_INFO)
 				return
 		except:
 			self.session.open(MessageBox, _("You chose the incorrect file."), MessageBox.TYPE_INFO)
 			return
 
-		if os.path.exists("/usr/bin/md5sum") == False:
+		if os.path.exists("/usr/bin/md5sum") is False:
 			self.session.open(MessageBox, _("Can't find /usr/bin/md5sum"), MessageBox.TYPE_INFO, timeout=10)
 			return
 		md5sum_A = os.popen("md5sum %s | awk \'{print $1}\'" % (self.gbin)).readline().strip()
@@ -477,11 +477,11 @@ class FirmwareUpgrade(Screen):
 			except:
 				self["status"].setText("Press the Green/OK button, if you want to upgrade to this file:\n%s\n" % (data))
 			self.updateFilePath = data
-			if self.fileopenmode == False:
+			if self.fileopenmode is False:
 				self.upgrade_auto_run_timer.start(1000)
 
 	def cbRunUpgrade(self, ret):
-		if ret == False:
+		if ret is False:
 			return
 
 		if self.updateFilePath == "":

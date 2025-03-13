@@ -512,7 +512,7 @@ class FUFilebrowser(Screen):
 			self.check_ext = False
 			if (self.firmware == "fp" and checkExt(".bin")) or (self.firmware == "fpga" and checkExt(".dat")) or (self.firmware == "vfd" and checkExt(".vfd")):
 				self.check_ext = True
-			if self.check_ext == False:
+			if self.check_ext is False:
 				print(self.firmware, ",", self["file_list"].getFilename())
 				self.session.open(MessageBox, _("You choose the incorrect file. "), MessageBox.TYPE_INFO)
 				return
@@ -521,7 +521,7 @@ class FUFilebrowser(Screen):
 			self.session.open(MessageBox, _("You choose the incorrect file. "), MessageBox.TYPE_INFO)
 			return
 
-		if os.path.exists("/usr/bin/md5sum") == False:
+		if os.path.exists("/usr/bin/md5sum") is False:
 			self.session.open(MessageBox, _("Can't find /usr/bin/md5sum"), MessageBox.TYPE_INFO, timeout=10)
 			return
 		md5sum_A = os.popen("md5sum %s | awk \'{print $1}\'" % (self.gbin)).readline().strip()
@@ -775,7 +775,7 @@ class FirmwareUpgrade(ConfigListScreen, Screen):
 		if data is not None:
 			self["status"].setText(" ")
 			self.updateFilePath = data
-			if self.fileopenmode == False:
+			if self.fileopenmode is False:
 				self.upgrade_auto_run_timer.start(1000)
 
 	# upgrade window callback function
@@ -783,7 +783,7 @@ class FirmwareUpgrade(ConfigListScreen, Screen):
 		self.setupStatus(message=message, reboot=reboot)
 
 	def cbRunUpgrade(self, ret):
-		if ret == False:
+		if ret is False:
 			return
 
 		if self.updateFilePath == "":

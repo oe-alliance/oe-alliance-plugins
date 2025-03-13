@@ -523,37 +523,37 @@ class BrowserLauncher(ConfigListScreen, Screen):
 	def keyExit(self):
 		if self.exit_wait_cond:
 			self.doExit()
-		if is_process_running(self.browser_name) == False:
+		if is_process_running(self.browser_name) is False:
 			self.doExit()
 
 	def keyLeft(self):
-		if is_process_running(self.browser_name) == False:
+		if is_process_running(self.browser_name) is False:
 			ConfigListScreen.keyLeft(self)
 			global alpha_value
 			alpha_value = self.alpha.value
 			#self.saveConfig()
 
 	def keyRight(self):
-		if is_process_running(self.browser_name) == False:
+		if is_process_running(self.browser_name) is False:
 			ConfigListScreen.keyRight(self)
 			alpha_value = self.alpha.value
 			#self.saveConfig()
 
 	def keyCancel(self):
-		if is_process_running(self.browser_name) == False:
+		if is_process_running(self.browser_name) is False:
 			self.doExit()
 		self.exit_wait_cond = True
 		self.timer_exit_cond.start(5000)
 
 	# mouse:keyboard:alpha_value
 	def saveConfig(self):
-		if is_process_running(self.browser_name) == False:
+		if is_process_running(self.browser_name) is False:
 			command = "echo \"%s:%s:%d:%s\" > %s" % (self.mouse.value, self.keyboard.value, int(self.alpha.value), self.langs.value, self.conf_file)
 			excute_cmd(command)
 
 	# mouse:keyboard:alpha_value
 	def loadConfig(self):
-		if os.path.exists(self.conf_file) == False:
+		if os.path.exists(self.conf_file) is False:
 			return
 		config_list = open(self.conf_file).readline().strip().split(':')
 		if len(config_list) == 3:
@@ -651,7 +651,7 @@ class BrowserLauncher(ConfigListScreen, Screen):
 	def keyGo(self):
 		self.saveConfig()
 		self.info.setText("Starting Webbrowser. Please wait...")
-		if self.lock == False:
+		if self.lock is False:
 			if self.langs.value == "de":
 				language.activateLanguageIndex(1)
 			else:

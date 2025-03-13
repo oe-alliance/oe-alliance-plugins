@@ -391,7 +391,7 @@ def autostart(reason, **kwargs):
 			else:
 				print("[DLNAServer] starting ...")
 				os.system(cmd)
-		elif config.plugins.dlnaserver.autostart.value == False and is_running == True:
+		elif config.plugins.dlnaserver.autostart.value is False and is_running is True:
 				print("[DLNAServer] stopping ...")
 				os.system(cmd)
 

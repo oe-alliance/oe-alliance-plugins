@@ -255,7 +255,7 @@ class StreamsThumb(StreamsThumbCommon):
 					dur_tmp = str(elem[3][0].text)
 					duration = dur_tmp.strip()
 
-				if contentSet == True:
+				if contentSet is True:
 					name = checkUnicode(name_tmp)
 					short = checkUnicode(short_tmp)
 

@@ -320,7 +320,7 @@ class FPGAUpgrade(Screen):
 			self.doExit()
 
 	def doUpgradeHandler(self, confirmed):
-		if confirmed == False:
+		if confirmed is False:
 			return
 
 		path = ''

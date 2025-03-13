@@ -57,7 +57,7 @@ def getFilesWithNameKey(path, excludedDirNames=None, excludeDirs=None):
 					if pathToCheck[:len(excludeDir)] == excludeDir:
 						skipFile = True
 						break
-			if skipFile == True:
+			if skipFile is True:
 				continue
 			rs[join(dirPath.replace(path, ''), fileName)] = fullFilePath
 	return rs
@@ -84,7 +84,7 @@ def mountpoint(path, first=True):
 def removeSymbolicLinks(pathList):
 	tmpExcludedDirs = []
 	for folder in pathList:
-		if islink(folder) == False:
+		if islink(folder) is False:
 			tmpExcludedDirs.append(folder)
 	return tmpExcludedDirs
 

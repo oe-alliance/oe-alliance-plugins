@@ -81,7 +81,7 @@ class YoutubeTVSettings(ConfigListScreen, Screen):
 #               self.menulist.append(entryUri)
         self.menulist.append(entryShowHelp)
         self.menulist.append(entryEnableNtpd)
-        if config.plugins.browser.youtube_enable_ntpd.value == True:
+        if config.plugins.browser.youtube_enable_ntpd.value is True:
             self.menulist.append(entryNtpdUri)
         self["config"].list = self.menulist
         self["config"].l.setList(self.menulist)

@@ -9,7 +9,7 @@ def hasEventListener(eventType, function):
 
 
 def addEventListener(eventType, function):
-	if hasEventListener(eventType, function) == False:
+	if hasEventListener(eventType, function) is False:
 		handler.append([eventType, function])
 
 

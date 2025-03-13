@@ -1044,7 +1044,7 @@ Red: Refresh EPG
 
 # ==================================================================
     def exit(self):
-        if self.hideflag == False:
+        if self.hideflag is False:
             with open('/proc/stb/video/alpha', 'w') as f:
                 f.write('%i' % config.av.osd_alpha.getValue())
         self.close()

@@ -261,7 +261,7 @@ class StreamsThumb(StreamsThumbCommon):
 						else:
 							duration = _("Duration: ") + str(elem[4].text)
 
-				if iconSet == True:
+				if iconSet is True:
 					# For all functions other than 'straight' we get the stream url from the icon url.
 					if self.cmd != 'straight':
 						stream = icon
@@ -312,7 +312,7 @@ class StreamsThumb(StreamsThumbCommon):
 					short = checkUnicode(short_tmp)
 					hrefSet = True
 
-				if hrefSet == True:
+				if hrefSet is True:
 					weekList.append((date, name, short, channel, stream, icon, duration, False))
 					hrefSet = False
 

@@ -126,10 +126,10 @@ class BBrowserLauncher(Screen):
         if mode == "youtubetv":
             self.setTitle(_('YouTubeTV'))
             command += "-u %s -x 0 -y 0 " % (config.plugins.browser.youtube_uri.value)
-            if config.plugins.browser.youtube_enable_ntpd.value == True:
+            if config.plugins.browser.youtube_enable_ntpd.value is True:
                 command += "-n %s " % (config.plugins.browser.youtube_ntpd_url.value)
             try:
-                if config.plugins.fccsetup.activate.value == True:
+                if config.plugins.fccsetup.activate.value is True:
                     command += "-d 4"
             except:
                 pass
@@ -138,11 +138,11 @@ class BBrowserLauncher(Screen):
             self.setTitle(_('ChromiumOS'))
             command += "-c %s " % (config.plugins.browser.startup.value)
             command += "-x %d -y %d " % (config.plugins.browser.margin_x.value, config.plugins.browser.margin_y.value)
-            if config.plugins.browser.enable_ntpd.value == True:
+            if config.plugins.browser.enable_ntpd.value is True:
                 command += "-n %s " % (config.plugins.browser.ntpd_url.value)
             command += "-r %s " % (config.plugins.browser.rcu_type.value)
             try:
-                if config.plugins.fccsetup.activate.value == True:
+                if config.plugins.fccsetup.activate.value is True:
                     command += "-d 4"
             except:
                 pass
@@ -151,11 +151,11 @@ class BBrowserLauncher(Screen):
             self.setTitle(_('ChromiumOS by STT'))
             command += "-c %s " % (url)
             command += "-x %d -y %d " % (config.plugins.browser.margin_x.value, config.plugins.browser.margin_y.value)
-            if config.plugins.browser.enable_ntpd.value == True:
+            if config.plugins.browser.enable_ntpd.value is True:
                 command += "-n %s " % (config.plugins.browser.ntpd_url.value)
             command += "-r %s " % (config.plugins.browser.rcu_type.value)
             try:
-                if config.plugins.fccsetup.activate.value == True:
+                if config.plugins.fccsetup.activate.value is True:
                     command += "-d 4"
             except:
                 pass
@@ -227,7 +227,7 @@ class BBrowserLauncher(Screen):
         self.virtual_keyboard_closed = True
 
     def GetVirtualKeyboardData(self):
-        if self.virtual_keyboard_closed == False:
+        if self.virtual_keyboard_closed is False:
             return None
         eRCInput.getInstance().lock()
         if self.virtual_keyboard_data is None:
@@ -247,7 +247,7 @@ global_session = None
 def stt_event_callback(text):
     global _g_locked
     url = "https://www.google.co.kr/search?q=" + text.replace(' ', '+')
-    if global_session is not None and _g_locked == False:
+    if global_session is not None and _g_locked is False:
         dvbapp_unlock()
         _g_locked = True
         cbcfg.g_browser = global_session.open(BBrowserLauncher, mode="chromiumos_stt", url=url)
@@ -259,7 +259,7 @@ def start_youtubetv_main(session, **kwargs):
             dvbapp_unlock()
             cbcfg.g_browser = session.open(BBrowserLauncher, mode="youtubetv")
 
-    if config.plugins.browser.youtube_showhelp.value == True:
+    if config.plugins.browser.youtube_showhelp.value is True:
         _cb_youtubetv_close(True)
     else:
         session.openWithCallback(_cb_youtubetv_close, YoutubeTVWindow)

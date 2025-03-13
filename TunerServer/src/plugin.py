@@ -150,7 +150,7 @@ NOTE: The server is built, based on your current ip and the current channel list
 		return name
 
 	def ServStop(self):
-		if self.my_serv_active == True:
+		if self.my_serv_active is True:
 			self["lab1"].setText(_("Your server is now being deleted\nPlease Wait ..."))
 			if os.path.exists("/media/hdd/tuner"):
 				rmtree("/media/hdd/tuner")

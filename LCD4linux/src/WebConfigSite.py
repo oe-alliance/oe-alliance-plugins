@@ -184,7 +184,7 @@ class LCD4linuxConfigweb(resource.Resource):
 				if IP.startswith(x):
 					Block = True
 					break
-		if Block == True:
+		if Block is True:
 			html = "<html>"
 			html += "<head>\n"
 			html += "<meta http-equiv=\"Content-Language\" content=\"de\">\n"
@@ -472,7 +472,7 @@ class LCD4linuxConfigweb(resource.Resource):
 						if _a.find("BildFile") > 0:
 							getBilder()
 						if _a.find("WWW1") > 0:
-							if _a.find("WWW1url") > 0 or isfile(WWWpic % "1") == False:
+							if _a.find("WWW1url") > 0 or isfile(WWWpic % "1") is False:
 								Cwww = True
 							else:
 								rmFile(WWWpic % "1p")
@@ -513,7 +513,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += ".style1 {\n"
 		html += "vertical-align: middle; font-size:8px; }\n"
 		html += "</style>\n"
-		if L4LElement.getRefresh() == True:
+		if L4LElement.getRefresh() is True:
 			glob
 			GI = getINFO().split()
 			GR = min(int(float(GI[6])) + 1, 6) if len(GI) > 6 else 6
@@ -526,8 +526,8 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<table border=\"1\" rules=\"groups\" width=\"100%\" bordercolorlight=\"#000000\" bordercolordark=\"#000000\" cellspacing=\"0\">"
 		html += "<tr><td bgcolor=\"#000000\" width=\"220\">\n"
 		html += "<p align=\"center\"><img title=\"\" border=\"0\" src=\"/lcd4linux/data/WEBdreambox.png\" width=\"181\" height=\"10\">\n"
-		CCM = "#FFFFFF" if getConfigMode() == False else "#FFCC00"
-		html += "<font color=\"%s\"><b>LCD4linux Config</b></font><br />%s\n" % (CCM, (Version if L4LElement.getVersion() == True else Version + "") + " (%s: Py" + ("2" if PY2 else "3") + ")") % _l(_("Mode"))
+		CCM = "#FFFFFF" if getConfigMode() is False else "#FFCC00"
+		html += "<font color=\"%s\"><b>LCD4linux Config</b></font><br />%s\n" % (CCM, (Version if L4LElement.getVersion() is True else Version + "") + " (%s: Py" + ("2" if PY2 else "3") + ")") % _l(_("Mode"))
 		if IP is None:
 			html += "<br><span style=\"font-size:7pt;color: #FF0000\">%s!</span>" % _l(_("IP seurity not supported by Box"))
 		html += "</p></td><td bgcolor=\"#000000\">\n"
@@ -575,7 +575,7 @@ class LCD4linuxConfigweb(resource.Resource):
 		html += "<input id=\"r2\" name=\"Mode\" type=\"radio\" value=\"2\" %s onclick=\"this.form.submit();\"><label %s for=\"r2\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("2", _l(_("On"))))
 		html += "<input id=\"r3\" name=\"Mode\" type=\"radio\" value=\"3\" %s onclick=\"this.form.submit();\"><label %s for=\"r3\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("3", _l(_("Media"))))
 		html += "<input id=\"r4\" name=\"Mode\" type=\"radio\" value=\"4\" %s onclick=\"this.form.submit();\"><label %s for=\"r4\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("4", _l(_("Idle"))))
-		if LCD4linuxConfigweb.RestartGUI == True:
+		if LCD4linuxConfigweb.RestartGUI is True:
 			html += "<span style=\"color: #FF0000;\"><strong>%s</strong></span>" % _l(_("GUI Restart is required"))
 		if str(LCD4linux.Popup.value) != "0":
 			html += "<input id=\"r5\" name=\"Mode\" type=\"radio\" value=\"5\" %s onclick=\"this.form.submit();\"><label %s for=\"r5\">%s&nbsp;&nbsp;</label>\n" % (AktiveMode("5", "Popup-Text"))
@@ -730,14 +730,14 @@ class LCD4linuxConfigweb(resource.Resource):
 			html += "<input type=\"submit\" style=\"background-color: #FFCC00\" value=\"%s\">\n" % _l(_("set Settings"))
 			html += "</fieldset></form>\n"
 
-		if ExeMode == True:
+		if ExeMode is True:
 			html += "<br />\n"
 			html += "<form method=\"GET\">\n"
 			html += "<input type=\"hidden\" name=\"cmd\" value=\"exec\">\n"
 			html += "<input style=\"width: 400px\" type=\"text\" name=\"ex\">\n"
 			html += "<input type=\"submit\" value=\"%s\">\n" % _l(_("Exec"))
 			html += "</form>\n"
-		if StatusMode == True:
+		if StatusMode is True:
 			html += "<br />\n"
 			html += "Screen: %s<br />\n" % str(getScreenActive(True))
 			html += "Hold/HoldKey: %s/%s<br />\n" % (str(getSaveEventListChanged()), str(L4LElement.getHoldKey()))

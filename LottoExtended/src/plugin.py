@@ -150,7 +150,7 @@ class Ziehungen():
 		elif today.weekday() in (3, 4):  # do, fr
 			days = (today.weekday() + 5) % 7
 		else:
-			if not_today == False:
+			if not_today is False:
 				hhmm = today.hour * 100 + today.minute + 5 - 100 * (today.weekday() == 5)  # 18:35 Mi; 19:35 Sa
 				if hhmm > 1835:
 					return today.date()

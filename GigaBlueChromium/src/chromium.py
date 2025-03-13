@@ -79,7 +79,7 @@ class ChromiumOSSettings(ConfigListScreen, Screen):
 		self.menulist.append(entryMarginX)
 		self.menulist.append(entryMarginY)
 		self.menulist.append(entryEnableNtpd)
-		if config.plugins.browser.enable_ntpd.value == True:
+		if config.plugins.browser.enable_ntpd.value is True:
 			self.menulist.append(entryNtpdUri)
 #		self.menulist.append(entryRcuType)
 		self['config'].list = self.menulist

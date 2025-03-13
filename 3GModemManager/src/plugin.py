@@ -1054,7 +1054,7 @@ def autostart(reason, **kwargs):
 				system(cmd)
 				printInfo("disable all others network adapters ...")
 				system("ifconfig eth0 down")
-		elif config.plugins.gmodemmanager.autostart.value == False and is_running == True:
+		elif config.plugins.gmodemmanager.autostart.value is False and is_running is True:
 				printInfo("stopping ...")
 				system(cmd)
 				printInfo("disable all others network adapters ...")

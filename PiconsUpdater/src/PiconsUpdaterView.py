@@ -214,12 +214,12 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 
 	def startDownloadPicons(self):
 		try:
-			if isdir(getPiconsPath().getValue()) == False:
+			if isdir(getPiconsPath().getValue()) is False:
 				makedirs(getPiconsPath().getValue(), 493)
 		except Exception:
 			pass
 
-		if self.__checkReadWriteDir(getPiconsPath()) == False:
+		if self.__checkReadWriteDir(getPiconsPath()) is False:
 			return
 		bgimagepath = self.getBackgroundImagePath()
 		if bgimagepath and self.getCurrentBackgroundList() is not None and isfile(bgimagepath) is False:

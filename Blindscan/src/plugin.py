@@ -1202,7 +1202,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 		self.blindscan_session = None
 		self.releaseFrontend()
 
-		if val[0] == False:
+		if val[0] is False:
 			self.tmp_tplist = []
 			self.running_count = self.max_count
 
@@ -1301,13 +1301,13 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 
 		else:
 			msg = _("No transponders were found for those search parameters!")
-			if val[0] == False:
+			if val[0] is False:
 				msg = _("The blindscan run was cancelled by the user.")
 			self.session.open(MessageBox, msg, MessageBox.TYPE_INFO, timeout=60)
 			self.tmp_tplist = []
 
 	def startScan(self, *retval):
-		if retval[0] == False:
+		if retval[0] is False:
 			return
 
 		tlist = retval[1]

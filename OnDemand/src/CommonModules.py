@@ -365,7 +365,7 @@ class StreamsThumbCommon(Screen):
 		self.hidemessage.timeout.get().append(self.hidewaitingtext)
 
 		self.imagedir = "/tmp/onDemandImg/"
-		if (os_path.exists(self.imagedir) != True):
+		if (os_path.exists(self.imagedir) is not True):
 			os_mkdir(self.imagedir)
 
 		self['list'] = EpisodeList(self.defaultImg, self.showIcon)

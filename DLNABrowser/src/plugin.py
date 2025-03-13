@@ -540,7 +540,7 @@ class DLNAImageViewer(Screen):
 					  int(config.pic.resize.value),
 					  '#00000000'])
 		self["icon"].hide()
-		if config.pic.infoline.value == False:
+		if config.pic.infoline.value is False:
 			self["message"].setText("")
 		self.startDecode()
 
@@ -548,12 +548,12 @@ class DLNAImageViewer(Screen):
 		for x in fileList:
 			l = len(fileList[0])
 			if l == 3:
-				if x[0][1] == False:
+				if x[0][1] is False:
 					self.fileList.append(path + x[0][0])
 				else:
 					self.directoryCount += 1
 			elif l == 2:
-				if x[0][1] == False:
+				if x[0][1] is False:
 					self.fileList.append(x[0][0])
 				else:
 					self.directoryCount += 1
@@ -600,7 +600,7 @@ class DLNAImageViewer(Screen):
 
 	def cbSlideShow(self):
 		print("slide to next Picture index=%s" % str(self.lsatIndex))
-		if config.pic.loop.value == False and self.lsatIndex == self.fileListLen:
+		if config.pic.loop.value is False and self.lsatIndex == self.fileListLen:
 			self.PlayPause()
 		self.displayNow = True
 		self.showPicture()
@@ -998,7 +998,7 @@ def autostart(reason, **kwargs):
 			else:
 				print("[DLNABrowser] starting ...")
 				os.system(cmd)
-		elif config.plugins.dlnabrowser.autostart.value == False and is_running == True:
+		elif config.plugins.dlnabrowser.autostart.value is False and is_running is True:
 				print("[DLNABrowser] stopping ...")
 				os.system(cmd)
 

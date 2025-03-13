@@ -149,9 +149,9 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		Screen.__init__(self, session)
 		self.skinName = "MoviePlayer"
 		InfoBarNotifications.__init__(self)
-		if seekable == True:
+		if seekable is True:
 			InfoBarSeek.__init__(self)
-		elif pauseable == True:
+		elif pauseable is True:
 			InfoBarSeek.__init__(self)
 		self.session = session
 		self.lastservice = session.nav.getCurrentlyPlayingServiceReference()
@@ -183,7 +183,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.onClose.append(self.__onClose)
 
 	def __seekableStatusChanged(self):
-		if self.seekable == False:
+		if self.seekable is False:
 			return
 		self.show()
 		self.__setHideTimer()
@@ -200,7 +200,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.handleLeave()
 
 	def __setHideTimer(self):
-		if self.radio == False:
+		if self.radio is False:
 			self.hidetimer.start(self.screen_timeout)
 
 	def showInfobar(self):
@@ -238,7 +238,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			self.__setHideTimer()
 
 	def playpauseService(self):
-		if self.pauseable == False:
+		if self.pauseable is False:
 			return
 		if self.state == self.STATE_PLAYING:
 			self.pauseService()
@@ -246,13 +246,13 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 			self.unPauseService()
 
 	def pauseService(self):
-		if self.pauseable == False:
+		if self.pauseable is False:
 			return
 		if self.state == self.STATE_PLAYING:
 			self.setSeekState(self.STATE_PAUSED)
 
 	def unPauseService(self):
-		if self.pauseable == False:
+		if self.pauseable is False:
 			return
 		if self.state == self.STATE_PAUSED:
 			self.setSeekState(self.STATE_PLAYING)
@@ -279,7 +279,7 @@ class UGMediaPlayer(Screen, InfoBarNotifications, InfoBarSeek):
 		self.session.openWithCallback(self.leavePlayerOnExitCallback, MessageBox, _("Exit movie player?"), simple=True)
 
 	def leavePlayerOnExitCallback(self, answer):
-		if answer == True:
+		if answer is True:
 			self.handleLeave()
 
 	def doEofInternal(self, playing):
@@ -375,7 +375,7 @@ class OpenUgConfigureScreen(ConfigListScreen, Screen):
 		self.session.openWithCallback(self.leavePlayerOnExitCallback, MessageBox, _("Save settings?"), simple=True)
 
 	def leavePlayerOnExitCallback(self, answer):
-		if answer == True:
+		if answer is True:
 			self.keyGo()
 		else:
 			self.keyCancel()
@@ -809,7 +809,7 @@ class OpenUg(Screen):
 		self.tmplist = []
 		self.mediaList = []
 		self.imagedir = "/tmp/openUgImg/"
-		if (os_path.exists(self.imagedir) != True):
+		if (os_path.exists(self.imagedir) is not True):
 			os_mkdir(self.imagedir)
 		self["list"] = MPanelList(list=self.tmplist, selection=0)
 		self.list = self["list"]
@@ -888,7 +888,7 @@ class OpenUg(Screen):
 					found = True
 					self["list"].moveToIndex(index)
 					break
-		if found == False and currentIndex > 0:
+		if found is False and currentIndex > 0:
 			itemsAbove = self.mediaList[1:currentIndex]
 			#first item (0) points parent folder - no point to include
 			for index, item in enumerate(itemsAbove):
@@ -952,7 +952,7 @@ class OpenUg(Screen):
 				if tmp_icon not in self.Details:
 					self.Details[tmp_icon] = {'thumbnail': None}
 				if x[self.UG_ICON] != '':
-					if (os_path.exists(thumbnailFile) == True):
+					if (os_path.exists(thumbnailFile) is True):
 						self.fetchFinished(True, picture_id=tmp_icon, failed=False)
 					else:
 						if config.plugins.OpenUitzendingGemist.showpictures.value:
@@ -1236,7 +1236,7 @@ class OpenUg(Screen):
 			return
 		else:
 			thumbnailFile = self.imagedir + str(picture_id)
-		if (os_path.exists(thumbnailFile) == True):
+		if (os_path.exists(thumbnailFile) is True):
 			start = self.page * self.MAX_PIC_PAGE
 			end = (self.page * self.MAX_PIC_PAGE) + self.MAX_PIC_PAGE
 			count = 0
@@ -1953,7 +1953,7 @@ class OpenUg(Screen):
 		data = wgetUrl(url)
 		data = Csplit(data, '<div class="contentBlok">', 1)
 		data = Csplit(data, '<div id="footerContent">', 0)
-		if podcast == True:
+		if podcast is True:
 			data = Csplit(data, '<a href="', )
 		else:
 			data = Csplit(data, '<div class="top">', )
@@ -1966,14 +1966,14 @@ class OpenUg(Screen):
 		channel = ''
 		for line in data:
 			if state == 0:
-				if '<a href="' in line and podcast == False:
+				if '<a href="' in line and podcast is False:
 					state = 1
-				elif 'class="potscast"' in line and podcast == True:
+				elif 'class="potscast"' in line and podcast is True:
 					state = 1
 			if state == 1:
-				if podcast == False:
+				if podcast is False:
 					url = line.split('<a href="')[1].split('"')[0]
-				elif podcast == True:
+				elif podcast is True:
 					url = line.split('"')[0]
 				name = line.split('</div>')[0]
 				tmp = '>&#8226;'

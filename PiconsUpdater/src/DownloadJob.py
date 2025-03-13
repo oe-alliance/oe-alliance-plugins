@@ -37,7 +37,7 @@ class DownloadJob:
 		self.callbackFinished = callbackFinished
 		self.callbackFailed = callbackFailed
 		self.download = None
-		if override == False and path.isfile(self.targetFileName) is True:
+		if override is False and path.isfile(self.targetFileName) is True:
 			callInThread(self.__downloadFromCache)
 		else:
 			self.run()
