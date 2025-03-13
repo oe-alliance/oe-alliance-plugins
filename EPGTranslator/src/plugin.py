@@ -175,7 +175,7 @@ def transHTMLEnts(text):
     def repl(ent):              # The code for re.sub to run on matches
         res = ent.group(0)      # get the text of the match
         ent = res[1:-1].lower()  # Strip & and ;
-        if re.match("#\d+", ent):  # Numeric entity
+        if re.match(r"#\d+", ent):  # Numeric entity
             res = dec2utf8(int(ent[1:]))
         else:
             try:                    # Look it up...
@@ -240,7 +240,7 @@ enc_wspace = ''
 enc_space = ''
 nenc_sep = ''
 for c in ([" ", "\n", "\t"]):   # Actually .<ws>
-    enc_wspace = enc_wspace + nenc_sep + '\.' + quote(c)
+    enc_wspace = enc_wspace + nenc_sep + r'\.' + quote(c)
     enc_space = enc_space + nenc_sep + quote(c)
     nenc_sep = '|'
 
@@ -357,11 +357,11 @@ def DO_translation(text, source, dest):     # source, dest are langs
 # Interpolated into the working patterns using %s (so look out for them -
 # do not confuse them with \s!)
 #
-sbk_prop = '\[[^\]]*\]'     # Square brackets
-par_prop = '\([^\)]*\)'     # Parentheses
+sbk_prop = r'\[[^\]]*\]'     # Square brackets
+par_prop = r'\([^\)]*\)'     # Parentheses
 
 #
-begin_props = """
+begin_props = r"""
 ^\s*                        # Strip any leading whitespace
 (                           # Start all [] + () groups saving
  (?:                        # Start multi-groups
@@ -375,7 +375,7 @@ begin_props = """
 """ % (sbk_prop, par_prop, sbk_prop)
 begin_matcher = re.compile(begin_props, flags=re.X | re.S)
 
-end_props = """
+end_props = r"""
 ^\s*                        # Strip any leading whitespace
 (.*?)                       # The real description (? else it takes all)
 \s*                         # Skip any intervening whitespace

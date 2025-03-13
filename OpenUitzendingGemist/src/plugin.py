@@ -1380,7 +1380,7 @@ class OpenUg(Screen):
 				if 'fetchLinkAndStart' in x:
 					tmp = x.split("('")[1].split("'")[0]
 					tmp = wgetUrl(self.UG_BASE_URL + tmp)
-					tmp = tmp.replace('\/', '/')
+					tmp = tmp.replace(r'\/', '/')
 					url = tmp.split("stream_link\":\"")[1].split("\",")[0]
 					break
 			if url != '':
@@ -1389,7 +1389,7 @@ class OpenUg(Screen):
 				self.session.open(UGMediaPlayer, myreference, False)
 		else:
 			data = wgetUrl('http://ida.omroep.nl/npoplayer/i.js')
-			token = compile('.token\s*=\s*"(.*?)"', DOTALL + IGNORECASE).search(str(data)).group(1)
+			token = compile(r'.token\s*=\s*"(.*?)"', DOTALL + IGNORECASE).search(str(data)).group(1)
 			playerid = self.mediaList[self["list"].getSelectionIndex()][self.UG_STREAMURL]
 			data = wgetUrl('http://ida.omroep.nl/odi/?prid=' + playerid + '&puboptions=adaptive&adaptive=yes&part=1&token=' + token)
 			if data != '':
@@ -1855,11 +1855,11 @@ class OpenUg(Screen):
 				url = url.replace("{", "").replace("}", "").split(",")
 				for line in url:
 					if '"720p"' in line:
-						vidurl = line.split('":"')[1].replace("\/", "/").replace('"', '')
+						vidurl = line.split('":"')[1].replace(r"\/", "/").replace('"', '')
 						if 'dumpert' in vidurl:
 							return vidurl
 					if '"tablet"' in line:
-						vidurl = line.split('":"')[1].replace("\/", "/").replace('"', '')
+						vidurl = line.split('":"')[1].replace(r"\/", "/").replace('"', '')
 				if 'dumpert' in vidurl:
 					return vidurl
 		return ''

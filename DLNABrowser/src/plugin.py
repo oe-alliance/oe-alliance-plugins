@@ -57,7 +57,7 @@ class DLNAFileList(FileList):
 	def __init__(self, directory):
 		self.rootDir = directory
 		inhibitDirs = ["/bin", "/boot", "/dev", "/etc", "/lib", "/proc", "/sbin", "/sys", "/usr", "/var"]
-		matchingPattern = "(?i)^.*\.(m4a|mp2|mp3|wav|ogg|flac|ts|avi|divx|m4v|mpg|mpeg|mkv|mp4|mov|m2ts|jpg|jpeg|png|bmp)"
+		matchingPattern = r"(?i)^.*\.(m4a|mp2|mp3|wav|ogg|flac|ts|avi|divx|m4v|mpg|mpeg|mkv|mp4|mov|m2ts|jpg|jpeg|png|bmp)"
 		FileList.__init__(self, directory=directory, matchingPattern=matchingPattern, showDirectories=True, showFiles=True, inhibitMounts=[], inhibitDirs=inhibitDirs, isTop=True)
 
 	def changeTop(self):

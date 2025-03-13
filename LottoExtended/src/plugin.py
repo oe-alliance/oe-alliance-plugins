@@ -34,7 +34,7 @@ def str2floatQuotes(strList):
 		elif q == "unbekannt":
 			q = "-1"
 		else:
-			q = sub('\.', '', q)
+			q = sub(r'\.', '', q)
 		quotes.append(sub(',', '.', q))
 	quotes.reverse()
 	return list(map(float, quotes))

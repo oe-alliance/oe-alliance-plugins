@@ -596,7 +596,7 @@ class StreamsThumb(StreamsThumbCommon):
 
 					try:
 						assetUrl = entry['data-preselectasseturl']
-						match = re.search(u'http://ais.channel4.com/asset/(\d+)', assetUrl)
+						match = re.search(r'http://ais.channel4.com/asset/(\d+)', assetUrl)
 						stream = str(match.group(1))
 					except (Exception) as exception:
 						stream = ""
@@ -636,7 +636,7 @@ class StreamsThumb(StreamsThumbCommon):
 						name = ""
 
 					try:
-						pattern = u'\s*Channel\s4\s*\((.*?)\)'
+						pattern = r'\s*Channel\s4\s*\((.*?)\)'
 						for p in pList:
 							try:
 								durationMatch = re.search(pattern, p.text, re.DOTALL | re.IGNORECASE)

@@ -247,7 +247,7 @@ class StreamsThumb(StreamsThumbCommon):
 					titleData = elem[0].attrib.get('title')
 					titleDecode = titleData.encode('charmap', 'ignore')
 
-					match = re.search("3player\s+\|\s+(.+),\s+(\d\d/\d\d/\d\d\d\d)\.\s*(.*)", titleDecode)
+					match = re.search(r"3player\s+\|\s+(.+),\s+(\d\d/\d\d/\d\d\d\d)\.\s*(.*)", titleDecode)
 					name_tmp = str(match.group(1))
 					name = checkUnicode(name_tmp)
 					date_tmp = str(match.group(2))

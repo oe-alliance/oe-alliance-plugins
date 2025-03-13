@@ -355,7 +355,7 @@ class OpenUg(StreamsThumbCommon):
 		out = wgetUrl(self.STAGING_UG_BASE_URL + "streams/video/pr_id/" + self.mediaList[selIndex][self.UG_STREAMURL])
 
 		if out:
-			myreference = eServiceReference(4097, 0, out.split('stream_link":"')[1].split('\",')[0].replace('\/', '/'))
+			myreference = eServiceReference(4097, 0, out.split('stream_link":"')[1].split('\",')[0].replace(r'\/', '/'))
 			myreference.setName(self.mediaList[selIndex][self.UG_PROGNAME])
 			lastservice = self.session.nav.getCurrentlyPlayingServiceOrGroup()
 			self.session.open(MoviePlayer, myreference, None, lastservice)

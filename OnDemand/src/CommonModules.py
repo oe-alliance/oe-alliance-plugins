@@ -44,6 +44,7 @@ import sys
 from six.moves.http_client import HTTPConnection
 from six.moves.urllib.request import HTTPHandler
 import six
+import re
 
 socket.setdefaulttimeout(300)  # in seconds
 
@@ -627,7 +628,7 @@ class RTMP:
 		else:
 			try:
 				# Replace "rtmp://abc.def.com:default_port/ghi/jkl" with "rtmp://abc.def.com:port/ghi/jkl"
-				match = re.search("(.+//[^/]+):\d+(/.*)", self.rtmp, re.DOTALL | re.IGNORECASE)
+				match = re.search(r"(.+//[^/]+):\d+(/.*)", self.rtmp, re.DOTALL | re.IGNORECASE)
 				if match is None:
 					# Replace "rtmp://abc.def.com/ghi/jkl" with "rtmp://abc.def.com:port/ghi/jkl"
 					match = re.search("(.+//[^/]+)(/.*)", self.rtmp, re.DOTALL | re.IGNORECASE)

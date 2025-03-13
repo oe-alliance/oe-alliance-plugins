@@ -65,7 +65,7 @@ class fempa(Screen):
 
 		html = gethtml("http://www.p4.no/section.aspx?id=443")
 
-		files = re.compile('''"Id":([0-9]*?),"Path":"openP4PlayerModal\('clip', ([0-9]*?)\); return false;","Title":"(.*?)","MediaLinkText":"(.+?)"''', re.DOTALL).findall(html)
+		files = re.compile(r'''"Id":([0-9]*?),"Path":"openP4PlayerModal\('clip', ([0-9]*?)\); return false;","Title":"(.*?)","MediaLinkText":"(.+?)"''', re.DOTALL).findall(html)
 
 		self.osdList = [(x[2], x[1]) for x in files]
 
