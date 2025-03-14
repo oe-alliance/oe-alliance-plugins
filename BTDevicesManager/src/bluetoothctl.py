@@ -46,7 +46,7 @@ class Bluetoothctl:
         """Run a command in bluetoothctl prompt, return output as a list of lines."""
         self.child.send(command + "\n")
         time.sleep(pause)
-        start_failed = self.child.expect([r"\#", pexpect.EOF])
+        start_failed = self.child.expect(["\#", pexpect.EOF])
 
         if start_failed:
             raise BluetoothctlError("Bluetoothctl failed after running " + command)

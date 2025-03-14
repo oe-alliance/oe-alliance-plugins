@@ -37,6 +37,7 @@ from Components.ServiceEventTracker import ServiceEventTracker
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS, SCOPE_CURRENT_PLUGIN, fileExists, fileCheck
 from .bluetoothctl import iBluetoothctl, Bluetoothctl
 
+import six
 import os
 import time
 import signal
@@ -171,11 +172,13 @@ class BluetoothDevicesManagerSetup(ConfigListScreen, Screen):
 				os.system("%s" % commandconnect)
 
 		config.btdevicesmanager.save()
+
 		self.close()
 
 	def dontSaveAndExit(self):
 		for x in self['config'].list:
-			x[1].cancel()
+		    x[1].cancel()
+
 		self.close()
 
 
@@ -194,7 +197,7 @@ class BluetoothDevicesManager(Screen):
 
 			<widget name="devicelist" position="0,50" size="600,300" foregroundColor="#ffffff" zPosition="10" scrollbarMode="showOnDemand" transparent="1"/>
 			<widget name="ConnStatus" position="0,330" size="600,150" zPosition="1" font="Regular;20" halign="center" valign="center" backgroundColor="#9f1313" foregroundColor="#ffffff" transparent="1" />
-		</screen>
+	        </screen>
 		"""
 
 	def __init__(self, session):
@@ -286,8 +289,7 @@ class BluetoothDevicesManager(Screen):
 
 		self.devicelist = []
 		self.devicelist.append((_("MAC:\t\tDevice name:"), _("entry")))
-		if isinstance(data, bytes):
-			data = data.decode()
+		data = six.ensure_str(data)
 		data = data.splitlines()
 		i = 1
 		if MACHINEBUILD in ("gb7252", "gbmv200", "sf8008"):
@@ -296,7 +298,7 @@ class BluetoothDevicesManager(Screen):
 			delimiter = "\t"
 		for x in data:
 			y = x.split(delimiter)
-			if len(y) > 2 and y[0] != "Scanning ...":  # We do not need to put this to the list
+			if not y[0] == "Scanning ...":  # We do not need to put this to the list
 				i += 1
 				self.devicelist.append((y[1] + "\t" + y[2], y[1]))
 
@@ -328,8 +330,6 @@ class BluetoothDevicesManager(Screen):
 				self["ConnStatus"].setText(_("No connected to any device"))
 
 	def cbPrintCurrentConnections(self, data):
-		if isinstance(data, bytes):
-			data = data.decode()
 		print("[BluetoothManager] cbPrintCurrentConnections")
 		msg = _("Connection with:\n") + data[:-12]
 		self["ConnStatus"].setText(msg)
@@ -519,8 +519,8 @@ def autostart(reason, **kwargs):
 		if BRAND in ("xcore", "edision"):
 			if config.btdevicesmanager.audioconnect.getValue():
 				os.system("%s %s" % (commandconnect, config.btdevicesmanager.audioaddress.getValue()))
-		if MACHINEBUILD in ("gbmv200",):
-			os.system("hciattach_sprd /dev/ttyBT0 sprd")
+#		if MACHINEBUILD in ("gbmv200",):
+#			os.system("hciattach_sprd /dev/ttyBT0 sprd")
 
 
 iBluetoothDevicesTask = None
