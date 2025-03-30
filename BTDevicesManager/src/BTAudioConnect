@@ -1,5 +1,13 @@
 #!/bin/sh
 
+LOG_TAG="BluetoothManager"
+
+log() {
+    logger -t "$LOG_TAG" "$1"
+}
+
+log "Script started"
+
 default_asoundconf() {
 cat << EOF > /etc/asound.conf
 pcm.!default {
@@ -12,6 +20,7 @@ ctl.mixer0 {
     card 0
 }
 EOF
+log "Reset /etc/asound.conf to default configuration"
 }
 
 bluetooth_asoundconf() {
@@ -34,22 +43,50 @@ ctl.bluetooth {
     type bluealsa
 }
 EOF
+log "Added Bluetooth device '$2' ($1) to /etc/asound.conf"
 }
 
+log "Checking for existing aplay process"
 if [ -f /var/run/aplay.pid ]; then
-  PID=$(cat /var/run/aplay.pid)
-  kill $PID
-  while ps -p $PID > /dev/null; do sleep 1; done
+    PID=$(cat /var/run/aplay.pid)
+    log "Stopping existing aplay process (PID: $PID)"
+    kill $PID
+    while ps -p $PID > /dev/null; do
+        sleep 1
+    done
+    log "Previous aplay process stopped"
 fi
+
+log "Applying default sound configuration"
 default_asoundconf
 
-if [ ! -z "$1" ]; then
-  bluetoothaddr=$@
-  bluetoothctl connect ${bluetoothaddr} || exit 0
-  bluetoothctl info ${bluetoothaddr}  | grep -q "Audio Sink" || exit 0
-  bluetoothname="$(bluetoothctl info ${bluetoothaddr} | grep "Name" | cut -d ':' -f 2)"
-  bluetooth_asoundconf ${bluetoothaddr} ${bluetoothname}
-  arecord -q -f dat -t raw | aplay -q -f dat -t raw -D bluetooth --process-id-file /var/run/aplay.pid &
+if [ -n "$1" ]; then
+    bluetoothaddr="$@"
+    log "Bluetooth address provided: $bluetoothaddr"
+
+    if ! bluetoothctl info "$bluetoothaddr" >/dev/null 2>&1; then
+        log "Error: Bluetooth device $bluetoothaddr not found"
+        exit 1
+    fi
+
+    log "Connecting to Bluetooth device: $bluetoothaddr"
+    bluetoothctl connect "$bluetoothaddr"
+    
+    if ! bluetoothctl info "$bluetoothaddr" | grep -q "Audio Sink"; then
+        log "Error: No Audio Sink profile found for $bluetoothaddr"
+        exit 1
+    fi
+
+    bluetoothname="$(bluetoothctl info "$bluetoothaddr" | grep "Name" | cut -d ':' -f 2 | xargs)"
+    log "Device name detected: $bluetoothname"
+
+    bluetooth_asoundconf "$bluetoothaddr" "$bluetoothname"
+
+    log "Starting audio streaming to Bluetooth device"
+    arecord -q -f dat -t raw | aplay -q -f dat -t raw -D bluetooth --process-id-file /var/run/aplay.pid &
+else
+    log "No Bluetooth address provided, exiting"
 fi
 
+log "Script finished"
 exit 0

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2025-03-29 20:16+0100\n"
 "PO-Revision-Date: 2022-11-04 07:29+0100\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <>\n"
@@ -16,17 +16,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-msgid "(Re)Scan"
-msgstr "Ripeti scansione"
-
-msgid "Audio Address"
-msgstr "Indirizzo audio"
-
 msgid "Audio Connect"
 msgstr "Collegamento audio"
 
-msgid "Autostart"
-msgstr "Avvio automatico"
+msgid "Audio Off"
+msgstr ""
+
+#, fuzzy
+msgid "Audio On"
+msgstr "Collegamento audio"
 
 msgid "Bluetooth Devices Manager"
 msgstr "Gestione dispositivi Bluetooth"
@@ -37,10 +35,11 @@ msgstr "Configurazione di Gestione dispositivi Bluetooth"
 msgid "Can't not pair with selected device!"
 msgstr "Impossibile accoppiare con il dispositivo selezionato!"
 
-msgid "Config"
-msgstr "Config"
-
 msgid "Connect"
+msgstr "Connetti"
+
+#, fuzzy
+msgid "Connected"
 msgstr "Connetti"
 
 msgid "Connection with:\n"
@@ -52,41 +51,32 @@ msgstr "Disconnetti"
 msgid "Disconnect with:\n"
 msgstr "Disconnessione da:\n"
 
+#, fuzzy
+msgid "Disconnecting please wait..."
+msgstr "Disconnessione da:\n"
+
 msgid "Exit"
 msgstr "Esci"
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tNome dispositivo:"
-
-msgid "No BT devices found!"
-msgstr "Nessun dispositivo BT trovato!"
 
 msgid "No connected to any device"
 msgstr "Non connesso a nessun dispositivo"
 
-msgid "Not detected devices around STB"
-msgstr "Nessun dispositivo rilevato intorno al ricevitore"
+#, fuzzy
+msgid "Not connected"
+msgstr "Non connesso a nessun dispositivo"
 
 msgid "Please Enter Passkey: \n"
 msgstr "Inserisci la chiave di accesso: \n"
 
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Carica il driver BT premendo BLU."
-
-msgid "Save"
-msgstr "Salva"
+#, fuzzy
+msgid "Scan"
+msgstr "Ripeti scansione"
 
 msgid "Scanning for devices..."
 msgstr "Ricerca dispositivi in ​​corso..."
-
-msgid "Scanning..."
-msgstr "Scansione..."
 
 msgid "This is bt devices manager"
 msgstr "Questo è Gestione dispositivi Bluetooth"
 
 msgid "Trying to pair with:"
 msgstr "Tentativo di accoppiamento con:"
-
-msgid "entry"
-msgstr "ingresso"

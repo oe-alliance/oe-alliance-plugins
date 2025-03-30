@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-10 16:30+0000\n"
+"POT-Creation-Date: 2025-03-29 20:16+0100\n"
 "PO-Revision-Date: 2025-01-10 16:40+0000\n"
 "Last-Translator: pololoko111\n"
 "Language-Team: \n"
@@ -18,17 +18,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 3.5\n"
 
-msgid "(Re)Scan"
-msgstr "Skanuj"
-
-msgid "Audio Address"
-msgstr "Adres audio"
-
 msgid "Audio Connect"
 msgstr "Połączenie audio"
 
-msgid "Autostart"
-msgstr "Autostart"
+msgid "Audio Off"
+msgstr ""
+
+#, fuzzy
+msgid "Audio On"
+msgstr "Połączenie audio"
 
 msgid "Bluetooth Devices Manager"
 msgstr "Menedżer urządzeń Bluetooth"
@@ -39,10 +37,11 @@ msgstr "Konfiguracja Menedżera urządzeń Bluetooth"
 msgid "Can't not pair with selected device!"
 msgstr "Nie można sparować z wybranym urządzeniem!"
 
-msgid "Config"
-msgstr "Konfiguracja"
-
 msgid "Connect"
+msgstr "Połącz"
+
+#, fuzzy
+msgid "Connected"
 msgstr "Połącz"
 
 msgid "Connection with:\n"
@@ -54,41 +53,32 @@ msgstr "Rozłącz"
 msgid "Disconnect with:\n"
 msgstr "Rozłącz się z:\n"
 
+#, fuzzy
+msgid "Disconnecting please wait..."
+msgstr "Rozłącz się z:\n"
+
 msgid "Exit"
 msgstr "Wyjście"
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tNazwa urządzenia:"
-
-msgid "No BT devices found!"
-msgstr "Nie znaleziono urządzeń BT!"
 
 msgid "No connected to any device"
 msgstr "Nie połączono z żadnym urządzeniem"
 
-msgid "Not detected devices around STB"
-msgstr "Nie wykryto urządzeń wokół STB"
+#, fuzzy
+msgid "Not connected"
+msgstr "Nie połączono z żadnym urządzeniem"
 
 msgid "Please Enter Passkey: \n"
 msgstr "Proszę wprowadzić hasło: \n"
 
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Proszę załadować sterownik BT naciskając NIEBIESKI przycisk."
-
-msgid "Save"
-msgstr "Zapisz"
+#, fuzzy
+msgid "Scan"
+msgstr "Skanuj"
 
 msgid "Scanning for devices..."
 msgstr "Skanowanie urządzeń..."
-
-msgid "Scanning..."
-msgstr "Skanowanie..."
 
 msgid "This is bt devices manager"
 msgstr "To jest menedżer urządzeń BT"
 
 msgid "Trying to pair with:"
 msgstr "Próba sparowania z:"
-
-msgid "entry"
-msgstr "wejście"

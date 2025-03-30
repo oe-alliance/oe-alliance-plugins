@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2025-03-29 20:16+0100\n"
 "PO-Revision-Date: 2022-05-24 16:13+0200\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: \n"
@@ -20,17 +20,15 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-msgid "(Re)Scan"
-msgstr "(Re)Scan"
-
-msgid "Audio Address"
-msgstr "Audio-adres"
-
 msgid "Audio Connect"
 msgstr "Verbind audio"
 
-msgid "Autostart"
-msgstr "Autostart"
+msgid "Audio Off"
+msgstr ""
+
+#, fuzzy
+msgid "Audio On"
+msgstr "Verbind audio"
 
 msgid "Bluetooth Devices Manager"
 msgstr "Bluetooth apparaat beheer"
@@ -41,10 +39,11 @@ msgstr "Bluetooth apparaat beheer instellingen"
 msgid "Can't not pair with selected device!"
 msgstr "Kan niet verbinden met geselecteerd apparaat!"
 
-msgid "Config"
-msgstr "Configuratie"
-
 msgid "Connect"
+msgstr "Verbind"
+
+#, fuzzy
+msgid "Connected"
 msgstr "Verbind"
 
 msgid "Connection with:\n"
@@ -56,41 +55,32 @@ msgstr "verbreek verbinding"
 msgid "Disconnect with:\n"
 msgstr "Verbreek verbinding met:\n"
 
+#, fuzzy
+msgid "Disconnecting please wait..."
+msgstr "Verbreek verbinding met:\n"
+
 msgid "Exit"
 msgstr "Sluit af"
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tApparaat naam:"
-
-msgid "No BT devices found!"
-msgstr "Geen BT apparaten gevonden !!"
 
 msgid "No connected to any device"
 msgstr "Niet verbonden met enig apparaat"
 
-msgid "Not detected devices around STB"
-msgstr "Geen aangesloten apparaten gevonden op STB"
+#, fuzzy
+msgid "Not connected"
+msgstr "Niet verbonden met enig apparaat"
 
 msgid "Please Enter Passkey: \n"
 msgstr "Geef Passkey in: \n"
 
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Laad BT-stuurprogramma door op de blauwe knop te drukken."
-
-msgid "Save"
-msgstr "Sla op"
+#, fuzzy
+msgid "Scan"
+msgstr "(Re)Scan"
 
 msgid "Scanning for devices..."
 msgstr "Zoekt apparaten..."
-
-msgid "Scanning..."
-msgstr "Zoekt..."
 
 msgid "This is bt devices manager"
 msgstr "Dit is bt apparaatbeheer"
 
 msgid "Trying to pair with:"
 msgstr "Probeert te verbinden met:"
-
-msgid "entry"
-msgstr "invoer"

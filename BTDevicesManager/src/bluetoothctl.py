@@ -1,8 +1,7 @@
-from __future__ import print_function
-# ReachView code is placed under the GPL license.
-# Written by Egor Fedorov (egor.fedorov@emlid.com)
-# Copyright (c) 2015, Emlid Limited
-# All rights reserved.
+# Based on ReachView code from Egor Fedorov (egor.fedorov@emlid.com)
+# Updated for Python 3.6.8 on a Raspberry  Pi
+# source: https://gist.github.com/castis/0b7a162995d0b465ba9c84728e60ec01#file-bluetoothctl-py
+# Updated for enigma2 by jbleyel
 
 # If you are interested in using ReachView code as a part of a
 # closed source project, please contact Emlid Limited (info@emlid.com).
@@ -22,60 +21,66 @@ from __future__ import print_function
 # You should have received a copy of the GNU General Public License
 # along with ReachView.  If not, see <http://www.gnu.org/licenses/>.
 
-import time
-import pexpect
-import subprocess
-import sys
-import re
-import six
-
-
-class BluetoothctlError(Exception):
-    """This exception is raised, when bluetoothctl fails to start."""
-    pass
+from pexpect import EOF, TIMEOUT, spawnu
+from re import compile
+from subprocess import check_output
+from time import sleep
 
 
 class Bluetoothctl:
     """A wrapper for bluetoothctl utility."""
 
     def __init__(self):
-        out = subprocess.check_output("rfkill unblock bluetooth", shell=True)
-        self.child = pexpect.spawn("bluetoothctl", echo=False)
+        check_output("rfkill unblock bluetooth", shell=True)
+        self.process = spawnu("bluetoothctl", echo=False)
+        self.process.expect("Agent registered")
+        self.isScanning = False
 
-    def get_output(self, command, pause=0):
+    def send(self, command, pause=0):
+        self.process.send(f"{command}\n")
+        sleep(pause)
+        if self.process.expect(["#", EOF, TIMEOUT]):
+            raise Exception(f"failed after {command}")
+
+    def get_output(self, *args, **kwargs):
         """Run a command in bluetoothctl prompt, return output as a list of lines."""
-        self.child.send(command + "\n")
-        time.sleep(pause)
-        start_failed = self.child.expect(["\#", pexpect.EOF])
-
-        if start_failed:
-            raise BluetoothctlError("Bluetoothctl failed after running " + command)
-
-        return self.child.before.splitlines()
+        self.send(*args, **kwargs)
+        return self.process.before.split("\r\n")
 
     def start_scan(self):
         """Start bluetooth scanning process."""
         try:
-            out = self.get_output("scan on")
-        except BluetoothctlError as e:
+            self.send("scan on")
+            self.isScanning = True
+        except Exception as e:
             print(e)
-            return None
+
+    def stop_scan(self):
+        """Start bluetooth scanning process."""
+        try:
+            self.send("scan off")
+            self.isScanning = False
+        except Exception as e:
+            print(e)
+
+    def scan(self, timeout=5):
+        """Start and stop bluetooth scanning process."""
+        self.start_scan()
+        sleep(timeout)
+        self.stop_scan()
 
     def make_discoverable(self):
         """Make device discoverable."""
         try:
-            out = self.get_output("discoverable on")
-        except BluetoothctlError as e:
+            self.send("discoverable on")
+        except Exception as e:
             print(e)
-            return None
 
     def parse_device_info(self, info_string):
         """Parse a string corresponding to a device."""
         device = {}
         block_list = ["[\x1b[0;", "removed"]
-        string_valid = not any(keyword in info_string for keyword in block_list)
-
-        if string_valid:
+        if not any(keyword in info_string for keyword in block_list):
             try:
                 device_position = info_string.index("Device")
             except ValueError:
@@ -93,37 +98,32 @@ class Bluetoothctl:
 
     def get_available_devices(self):
         """Return a list of tuples of paired and discoverable devices."""
+        available_devices = []
         try:
             out = self.get_output("devices")
-        except BluetoothctlError as e:
+        except Exception as e:
             print(e)
-            return None
         else:
-            available_devices = []
             for line in out:
-                line = six.ensure_str(line)
                 device = self.parse_device_info(line)
                 if device:
                     available_devices.append(device)
-
-            return available_devices
+        return available_devices
 
     def get_paired_devices(self):
         """Return a list of tuples of paired devices."""
+        paired_devices = []
         try:
             out = self.get_output("paired-devices")
-        except BluetoothctlError as e:
+        except Exception as e:
             print(e)
-            return None
         else:
-            paired_devices = []
             for line in out:
-                line = six.ensure_str(line)
                 device = self.parse_device_info(line)
                 if device:
                     paired_devices.append(device)
 
-            return paired_devices
+        return paired_devices
 
     def get_discoverable_devices(self):
         """Filter paired devices out of available."""
@@ -135,116 +135,128 @@ class Bluetoothctl:
     def get_device_info(self, mac_address):
         """Get device info by mac address."""
         try:
-            out = self.get_output("info " + mac_address)
-        except BluetoothctlError as e:
+            out = self.get_output(f"info {mac_address}")
+        except Exception as e:
             print(e)
-            return None
+            return False
         else:
             return out
 
     def pair(self, mac_address):
         """Try to pair with a device by mac address."""
+        if mac_address in [x['mac_address'] for x in self.get_paired_devices()]:
+            return True
         self.passkey = None
         try:
-            out = self.get_output("pair " + mac_address, 2)
-        except BluetoothctlError as e:
+            self.send(f"pair {mac_address}", 4)
+        except Exception as e:
             print(e)
-            return None
+            return False
         else:
-            res = self.child.expect(["Failed to pair", "Pairing successful", "Passkey: ", "PIN code: ", pexpect.EOF])
-            if res == 2 or res == 3:
-                ansi_escape = re.compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
-                self.passkey = ansi_escape.sub('', str(self.child.buffer))
-            success = True if res == 1 else False
-            return success
-
-    def remove(self, mac_address):
-        """Remove paired device by mac address, return success of the operation."""
-        try:
-            out = self.get_output("remove " + mac_address, 1)
-        except BluetoothctlError as e:
-            print(e)
-            return None
-        else:
-            res = self.child.expect(["not available", "Device has been removed", pexpect.EOF])
-            success = True if res == 1 else False
-            return success
-
-    def connect(self, mac_address):
-        """Try to connect to a device by mac address."""
-        try:
-            out = self.get_output("connect " + mac_address, 1)
-        except BluetoothctlError as e:
-            print(e)
-            return None
-        else:
-            res = self.child.expect(["Failed to connect", "Connection successful", pexpect.EOF])
-            success = True if res == 1 else False
-            return success
-
-    def disconnect(self, mac_address):
-        """Try to disconnect to a device by mac address."""
-        try:
-            out = self.get_output("disconnect " + mac_address, 1)
-        except BluetoothctlError as e:
-            print(e)
-            return None
-        else:
-            res = self.child.expect(["Failed to disconnect", "Successful disconnected", pexpect.EOF])
-            success = True if res == 1 else False
-            return success
+            res = self.process.expect(["Failed to pair", "Pairing successful", "Passkey: ", "PIN code: ", "Request authorization", EOF])
+            if res == 1:
+                return True
+            elif res == 4:
+                self.send("yes")
+                sleep(2)
+                if mac_address in [x['mac_address'] for x in self.get_paired_devices()]:
+                    return True
+                res = self.process.expect(["Request confirmation", EOF])
+                return res == 0
+            elif res in [2, 3]:
+                ansi_escape = compile(r'\x1B\[[0-?]*[ -/]*[@-~]')
+                self.passkey = ansi_escape.sub('', str(self.process.buffer))
+                return False
+            else:
+                print(f"Failed to pair. Res = {res}")
+                return False
 
     def trust(self, mac_address):
         """Trust the device with the given MAC address"""
         try:
-            out = self.get_output("trust " + mac_address)
-        except BluetoothctlError as e:
+            self.get_output(f"trust {mac_address}")
+        except Exception as e:
             print(e)
-            return None
+            return False
         else:
-            res = self.child.expect(["not available", "trust succeeded", pexpect.EOF])
-            success = True if res == 1 else False
-            return success
+            res = self.process.expect(
+                [".*not available\r\n", "trust succe", EOF]
+            )
+            return res == 1
+
+    def remove(self, mac_address):
+        """Remove paired device by mac address, return success of the operation."""
+        try:
+            self.send(f"remove {mac_address}", 3)
+        except Exception as e:
+            print(e)
+            return False
+        else:
+            res = self.process.expect(
+                ["not available", "Device has been removed", EOF]
+            )
+            return res == 1
+
+    def connect(self, mac_address):
+        """Try to connect to a device by mac address."""
+        try:
+            self.send(f"connect {mac_address}", 2)
+        except Exception as e:
+            print(e)
+            return False
+        else:
+            res = self.process.expect(
+                ["Failed to connect", "Connection successful", EOF]
+            )
+            return res == 1
+
+    def disconnect(self, mac_address):
+        """Try to disconnect to a device by mac address."""
+        try:
+            self.send(f"disconnect {mac_address}", 2)
+        except Exception as e:
+            print(e)
+            return False
+        else:
+            res = self.process.expect(
+                ["Failed to disconnect", "Successful disconnected", EOF]
+            )
+            return res == 1
 
     def agent_noinputnooutput(self):
         """Start agent"""
         try:
-            out = self.get_output("agent NoInputNoOutput")
-        except BluetoothctlError as e:
+            self.send("agent NoInputNoOutput")
+        except Exception as e:
             print(e)
-            return None
 
     def agent_off(self):
         """Stop agent"""
         try:
-            out = self.get_output("agent off")
-        except BluetoothctlError as e:
+            self.send("agent off")
+        except Exception as e:
             print(e)
-            return None
 
     def default_agent(self):
         """Start default agent"""
         try:
-            out = self.get_output("default-agent")
-        except BluetoothctlError as e:
+            self.send("default-agent")
+        except Exception as e:
             print(e)
-            return None
 
     def pairable_on(self):
         """Enable Pairable"""
         try:
-            out = self.get_output("pairable on")
-        except BluetoothctlError as e:
+            self.send("pairable on")
+        except Exception as e:
             print(e)
-            return None
 
     def pairable_off(self):
         """Disbale Pairable"""
         try:
-            out = self.get_output("pairable off")
-        except BluetoothctlError as e:
+            self.send("pairable off")
+        except Exception as e:
             print(e)
-            return None
 
 
 iBluetoothctl = Bluetoothctl()

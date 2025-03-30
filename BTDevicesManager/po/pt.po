@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Portuguese translation for BT devices Manager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2025-03-29 20:16+0100\n"
 "PO-Revision-Date: 2017-10-03 20:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: BH Team\n"
@@ -16,18 +16,16 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-msgid "(Re)Scan"
-msgstr "(Re)Procurar"
-
-msgid "Audio Address"
-msgstr ""
-
 #, fuzzy
 msgid "Audio Connect"
 msgstr "Conetar"
 
-msgid "Autostart"
-msgstr "Início automático"
+msgid "Audio Off"
+msgstr ""
+
+#, fuzzy
+msgid "Audio On"
+msgstr "Conetar"
 
 msgid "Bluetooth Devices Manager"
 msgstr "Gestor de dispositivos Bluetooth"
@@ -38,10 +36,11 @@ msgstr "Gestor de definições de dispositivos Bluetooth"
 msgid "Can't not pair with selected device!"
 msgstr "Não pode emparelhar com o dispositivo selecionado!"
 
-msgid "Config"
-msgstr "Config"
-
 msgid "Connect"
+msgstr "Conetar"
+
+#, fuzzy
+msgid "Connected"
 msgstr "Conetar"
 
 msgid "Connection with:\n"
@@ -54,41 +53,32 @@ msgstr "Desconetar"
 msgid "Disconnect with:\n"
 msgstr "Ligação com:\n"
 
+#, fuzzy
+msgid "Disconnecting please wait..."
+msgstr "Ligação com:\n"
+
 msgid "Exit"
 msgstr "Sair"
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC: Nome do dispositivo:"
-
-msgid "No BT devices found!"
-msgstr "Nenhum dispositivo BT encontrado!"
 
 msgid "No connected to any device"
 msgstr "Não ligado a qualquer dispositivo"
 
-msgid "Not detected devices around STB"
-msgstr "Não existem dispositivos ligados à STB"
+#, fuzzy
+msgid "Not connected"
+msgstr "Não ligado a qualquer dispositivo"
 
 msgid "Please Enter Passkey: \n"
 msgstr ""
 
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Por favor, carrega o driver de BT, pressionando o botão azul."
-
-msgid "Save"
-msgstr "Guardar"
+#, fuzzy
+msgid "Scan"
+msgstr "(Re)Procurar"
 
 msgid "Scanning for devices..."
 msgstr "A procurar por dispositivos..."
-
-msgid "Scanning..."
-msgstr "A Pesquisar..."
 
 msgid "This is bt devices manager"
 msgstr "Isto é o gestor de dispotivos BT"
 
 msgid "Trying to pair with:"
 msgstr "Tentando emparelhar com:"
-
-msgid "entry"
-msgstr "entrada"

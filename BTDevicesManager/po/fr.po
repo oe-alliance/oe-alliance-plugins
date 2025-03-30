@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-07-23 15:20+0200\n"
+"POT-Creation-Date: 2025-03-29 20:16+0100\n"
 "PO-Revision-Date: 2019-07-23 15:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,17 +18,15 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-msgid "(Re)Scan"
-msgstr "(Re)Scanner"
-
-msgid "Audio Address"
-msgstr "Adresse audio"
-
 msgid "Audio Connect"
 msgstr "Connexion audio"
 
-msgid "Autostart"
-msgstr "Démarrage automatique"
+msgid "Audio Off"
+msgstr ""
+
+#, fuzzy
+msgid "Audio On"
+msgstr "Connexion audio"
 
 msgid "Bluetooth Devices Manager"
 msgstr "Gestionnaire de périphériques Bluetooth"
@@ -39,10 +37,11 @@ msgstr "Configuration du gestionnaire de périphériques Bluetooth"
 msgid "Can't not pair with selected device!"
 msgstr "Impossible d’appairer avec l'appareil sélectionné!"
 
-msgid "Config"
-msgstr "Config"
-
 msgid "Connect"
+msgstr "Connecter"
+
+#, fuzzy
+msgid "Connected"
 msgstr "Connecter"
 
 msgid "Connection with:\n"
@@ -54,41 +53,32 @@ msgstr "Déconnecter"
 msgid "Disconnect with:\n"
 msgstr "Déconnecter avec:\n"
 
+#, fuzzy
+msgid "Disconnecting please wait..."
+msgstr "Déconnecter avec:\n"
+
 msgid "Exit"
 msgstr "Quitter"
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tNom de l'appareil:"
-
-msgid "No BT devices found!"
-msgstr "Aucun appareil BT n'a été trouvé !"
 
 msgid "No connected to any device"
 msgstr "Non connecté à aucun appareil"
 
-msgid "Not detected devices around STB"
-msgstr "Dispositifs non détectés autour du STB"
+#, fuzzy
+msgid "Not connected"
+msgstr "Non connecté à aucun appareil"
 
 msgid "Please Enter Passkey: \n"
 msgstr "Entrer la Passkey: \n"
 
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Veuillez charger le pilote BT en appuyant sur le bouton BLEU."
-
-msgid "Save"
-msgstr "Sauver"
+#, fuzzy
+msgid "Scan"
+msgstr "(Re)Scanner"
 
 msgid "Scanning for devices..."
 msgstr "Recherche d'appareils....."
-
-msgid "Scanning..."
-msgstr "Analyse en cours..."
 
 msgid "This is bt devices manager"
 msgstr "C'est le gestionnaire de périphériques bt"
 
 msgid "Trying to pair with:"
 msgstr "Essai d’appairage avec:"
-
-msgid "entry"
-msgstr "entrée"

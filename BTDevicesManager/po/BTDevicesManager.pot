@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the BTDevicesManager package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: BTDevicesManager 1.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 14:48+0100\n"
+"POT-Creation-Date: 2025-03-29 20:16+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,16 +17,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "(Re)Scan"
-msgstr ""
-
-msgid "Audio Address"
-msgstr ""
-
 msgid "Audio Connect"
 msgstr ""
 
-msgid "Autostart"
+msgid "Audio Off"
+msgstr ""
+
+msgid "Audio On"
 msgstr ""
 
 msgid "Bluetooth Devices Manager"
@@ -38,10 +35,10 @@ msgstr ""
 msgid "Can't not pair with selected device!"
 msgstr ""
 
-msgid "Config"
+msgid "Connect"
 msgstr ""
 
-msgid "Connect"
+msgid "Connected"
 msgstr ""
 
 msgid "Connection with:\n"
@@ -53,41 +50,29 @@ msgstr ""
 msgid "Disconnect with:\n"
 msgstr ""
 
+msgid "Disconnecting please wait..."
+msgstr ""
+
 msgid "Exit"
-msgstr ""
-
-msgid "MAC:\t\tDevice name:"
-msgstr ""
-
-msgid "No BT devices found!"
 msgstr ""
 
 msgid "No connected to any device"
 msgstr ""
 
-msgid "Not detected devices around STB"
+msgid "Not connected"
 msgstr ""
 
 msgid "Please Enter Passkey: \n"
 msgstr ""
 
-msgid "Please load BT driver by pressing BLUE button."
-msgstr ""
-
-msgid "Save"
+msgid "Scan"
 msgstr ""
 
 msgid "Scanning for devices..."
-msgstr ""
-
-msgid "Scanning..."
 msgstr ""
 
 msgid "This is bt devices manager"
 msgstr ""
 
 msgid "Trying to pair with:"
-msgstr ""
-
-msgid "entry"
 msgstr ""

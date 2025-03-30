@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2025-03-29 20:16+0100\n"
 "PO-Revision-Date: 2016-05-07 13:09+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: openspa <openspa.info>\n"
@@ -12,18 +12,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.7\n"
 
-msgid "(Re)Scan"
-msgstr "(Re)escanejar"
-
-msgid "Audio Address"
-msgstr ""
-
 #, fuzzy
 msgid "Audio Connect"
 msgstr "Connectar"
 
-msgid "Autostart"
-msgstr "Autoinici"
+msgid "Audio Off"
+msgstr ""
+
+#, fuzzy
+msgid "Audio On"
+msgstr "Connectar"
 
 msgid "Bluetooth Devices Manager"
 msgstr "Gestor de dispositius Bluetooth"
@@ -34,10 +32,11 @@ msgstr "Configuració del gestor de disp. Bluetooth"
 msgid "Can't not pair with selected device!"
 msgstr "No es pot vincular amb aquest dispositiu!"
 
-msgid "Config"
-msgstr "onfiguració"
-
 msgid "Connect"
+msgstr "Connectar"
+
+#, fuzzy
+msgid "Connected"
 msgstr "Connectar"
 
 msgid "Connection with:\n"
@@ -50,41 +49,32 @@ msgstr "Desconnectar"
 msgid "Disconnect with:\n"
 msgstr "Connectat amb:\n"
 
+#, fuzzy
+msgid "Disconnecting please wait..."
+msgstr "Connectat amb:\n"
+
 msgid "Exit"
 msgstr "Sortir"
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tNom:"
-
-msgid "No BT devices found!"
-msgstr "No s'ha trobat cap dispositiu Bluetooth"
 
 msgid "No connected to any device"
 msgstr "No s'ha connectat a cap dispositiu"
 
-msgid "Not detected devices around STB"
-msgstr "No s'ha detectat cap dispositiu aprop"
+#, fuzzy
+msgid "Not connected"
+msgstr "No s'ha connectat a cap dispositiu"
 
 msgid "Please Enter Passkey: \n"
 msgstr ""
 
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Carregueu el driver BT mitjançant el botó BLAU."
-
-msgid "Save"
-msgstr "Desar"
+#, fuzzy
+msgid "Scan"
+msgstr "(Re)escanejar"
 
 msgid "Scanning for devices..."
 msgstr "Cercant dispositius..."
-
-msgid "Scanning..."
-msgstr "Cercant..."
 
 msgid "This is bt devices manager"
 msgstr "Gestió dels dispositius Bluetooth"
 
 msgid "Trying to pair with:"
 msgstr "Intentant vincular amb:"
-
-msgid "entry"
-msgstr " "

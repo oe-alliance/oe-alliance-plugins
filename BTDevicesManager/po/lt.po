@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BTDevicesManager - oe-alliance\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2025-03-29 20:16+0100\n"
 "PO-Revision-Date: 2017-07-05 14:19+0300\n"
 "Last-Translator: Vytenis P. <vyteniui@gmail.com>\n"
 "Language-Team: Vytenis P. vyteniui@gmail.com\n"
@@ -20,18 +20,16 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Poedit-SearchPath-0: ..\n"
 
-msgid "(Re)Scan"
-msgstr "Paieška"
-
-msgid "Audio Address"
-msgstr ""
-
 #, fuzzy
 msgid "Audio Connect"
 msgstr "Prisijungti"
 
-msgid "Autostart"
-msgstr "Autopaleidimas"
+msgid "Audio Off"
+msgstr ""
+
+#, fuzzy
+msgid "Audio On"
+msgstr "Prisijungti"
 
 msgid "Bluetooth Devices Manager"
 msgstr "Bluetooth įrangos valdymas"
@@ -42,10 +40,11 @@ msgstr "Bluetooth įrangos valdymo sąranka"
 msgid "Can't not pair with selected device!"
 msgstr "Su pasirinktu įrenginiu susieti nepavyko!"
 
-msgid "Config"
-msgstr "Nustatymas"
-
 msgid "Connect"
+msgstr "Prisijungti"
+
+#, fuzzy
+msgid "Connected"
 msgstr "Prisijungti"
 
 msgid "Connection with:\n"
@@ -58,41 +57,32 @@ msgstr "Atjungti"
 msgid "Disconnect with:\n"
 msgstr "Ryšys su:\n"
 
+#, fuzzy
+msgid "Disconnecting please wait..."
+msgstr "Ryšys su:\n"
+
 msgid "Exit"
 msgstr "Uždaryti"
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tĮrenginys:"
-
-msgid "No BT devices found!"
-msgstr "BT įrenginių nerasta!"
 
 msgid "No connected to any device"
 msgstr "Neprisijungta prie jokio įrenginio"
 
-msgid "Not detected devices around STB"
-msgstr "Šioje aplinkoje nerasta įranga"
+#, fuzzy
+msgid "Not connected"
+msgstr "Neprisijungta prie jokio įrenginio"
 
 msgid "Please Enter Passkey: \n"
 msgstr ""
 
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Įkelkite BT tvarkyklę, paspaudę 'MĖLYNĄ' mygtuką."
-
-msgid "Save"
-msgstr "Išsaugoti"
+#, fuzzy
+msgid "Scan"
+msgstr "Paieška"
 
 msgid "Scanning for devices..."
 msgstr "Ieškoma Bluetooth įrangos..."
-
-msgid "Scanning..."
-msgstr "Vyksta paieška..."
 
 msgid "This is bt devices manager"
 msgstr "Tai BT įrenginių valdymas"
 
 msgid "Trying to pair with:"
 msgstr "Bandoma susieti su:"
-
-msgid "entry"
-msgstr "įrašas"

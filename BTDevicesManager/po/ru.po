@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: tuxbox-enigma 0.0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2025-03-29 20:16+0100\n"
 "PO-Revision-Date: 2024-09-22 23:16+0300\n"
 "Last-Translator: Viacheslav Dikonov <sdiconov@mail.ru>\n"
 "Language-Team: openATV\n"
@@ -16,18 +16,17 @@ msgstr ""
 "X-Generator: Poedit 3.3.2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-msgid "(Re)Scan"
-msgstr "(Пере)сканировать"
-
-msgid "Audio Address"
-msgstr "Адрес"
-
 #
 msgid "Audio Connect"
 msgstr "Подключить"
 
-msgid "Autostart"
-msgstr "Автозапуск"
+msgid "Audio Off"
+msgstr ""
+
+#
+#, fuzzy
+msgid "Audio On"
+msgstr "Подключить"
 
 msgid "Bluetooth Devices Manager"
 msgstr "Менеджер Bluetooth-устройств"
@@ -38,11 +37,13 @@ msgstr "Настройка менеджера Bluetooth-устройств"
 msgid "Can't not pair with selected device!"
 msgstr "Невозможно соединиться с выбранным устройством!"
 
-msgid "Config"
-msgstr "Настройки"
-
 #
 msgid "Connect"
+msgstr "Соединиться"
+
+#
+#, fuzzy
+msgid "Connected"
 msgstr "Соединиться"
 
 msgid "Connection with:\n"
@@ -55,41 +56,32 @@ msgstr "Отсоединить"
 msgid "Disconnect with:\n"
 msgstr "Отсоединить от:\n"
 
+#, fuzzy
+msgid "Disconnecting please wait..."
+msgstr "Отсоединить от:\n"
+
 msgid "Exit"
 msgstr "Выход"
-
-msgid "MAC:\t\tDevice name:"
-msgstr "MAC:\t\tИмя устройства:"
-
-msgid "No BT devices found!"
-msgstr "Не найдены BT-устройства!"
 
 msgid "No connected to any device"
 msgstr "Нет соединения ни с одним устройством"
 
-msgid "Not detected devices around STB"
-msgstr "Вокруг ресивера устройства не найдены"
+#, fuzzy
+msgid "Not connected"
+msgstr "Нет соединения ни с одним устройством"
 
 msgid "Please Enter Passkey: \n"
 msgstr "Введите пин-код:\n"
 
-msgid "Please load BT driver by pressing BLUE button."
-msgstr "Нажмите синюю кнопку, чтобы загрузить драйвер BT."
-
-msgid "Save"
-msgstr "Сохранить"
+#, fuzzy
+msgid "Scan"
+msgstr "(Пере)сканировать"
 
 msgid "Scanning for devices..."
 msgstr "Поиск устройств..."
-
-msgid "Scanning..."
-msgstr "Поиск..."
 
 msgid "This is bt devices manager"
 msgstr "Это менеджер Bluetooth-устройств"
 
 msgid "Trying to pair with:"
 msgstr "Попытка соединения с:"
-
-msgid "entry"
-msgstr "запись"

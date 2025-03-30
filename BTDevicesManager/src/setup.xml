@@ -1,0 +1,5 @@
+<setupxml>
+	<setup key="BluetoothDevicesManager" showOpenWebIF="1" title="Bluetooth Devices Manager Setup">
+		<item level="0" text="Audio Connect" description="Audio Connect">config.btdevicesmanager.audioconnect</item>
+	</setup>
+</setupxml>
