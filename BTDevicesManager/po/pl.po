@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: BTDevicesManager\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-03-29 20:16+0100\n"
-"PO-Revision-Date: 2025-01-10 16:40+0000\n"
+"PO-Revision-Date: 2025-03-30 13:40+0000\n"
 "Last-Translator: pololoko111\n"
 "Language-Team: \n"
 "Language: pl\n"
@@ -22,17 +22,16 @@ msgid "Audio Connect"
 msgstr "Połączenie audio"
 
 msgid "Audio Off"
-msgstr ""
+msgstr "Dźwięk wyłączony"
 
-#, fuzzy
 msgid "Audio On"
-msgstr "Połączenie audio"
+msgstr "Dźwięk włączony"
 
 msgid "Bluetooth Devices Manager"
-msgstr "Menedżer urządzeń Bluetooth"
+msgstr "Menadżer urządzeń Bluetooth"
 
 msgid "Bluetooth Devices Manager Setup"
-msgstr "Konfiguracja Menedżera urządzeń Bluetooth"
+msgstr "Konfiguracja Menadżera urządzeń Bluetooth"
 
 msgid "Can't not pair with selected device!"
 msgstr "Nie można sparować z wybranym urządzeniem!"
@@ -40,9 +39,8 @@ msgstr "Nie można sparować z wybranym urządzeniem!"
 msgid "Connect"
 msgstr "Połącz"
 
-#, fuzzy
 msgid "Connected"
-msgstr "Połącz"
+msgstr "Połączony"
 
 msgid "Connection with:\n"
 msgstr "Połączenie z:\n"
@@ -53,9 +51,8 @@ msgstr "Rozłącz"
 msgid "Disconnect with:\n"
 msgstr "Rozłącz się z:\n"
 
-#, fuzzy
 msgid "Disconnecting please wait..."
-msgstr "Rozłącz się z:\n"
+msgstr "Rozłączanie, proszę czekać..."
 
 msgid "Exit"
 msgstr "Wyjście"
@@ -63,14 +60,12 @@ msgstr "Wyjście"
 msgid "No connected to any device"
 msgstr "Nie połączono z żadnym urządzeniem"
 
-#, fuzzy
 msgid "Not connected"
-msgstr "Nie połączono z żadnym urządzeniem"
+msgstr "Nie połączony"
 
 msgid "Please Enter Passkey: \n"
 msgstr "Proszę wprowadzić hasło: \n"
 
-#, fuzzy
 msgid "Scan"
 msgstr "Skanuj"
 
@@ -78,7 +73,7 @@ msgid "Scanning for devices..."
 msgstr "Skanowanie urządzeń..."
 
 msgid "This is bt devices manager"
-msgstr "To jest menedżer urządzeń BT"
+msgstr "To jest menadżer urządzeń BT"
 
 msgid "Trying to pair with:"
 msgstr "Próba sparowania z:"
