@@ -9821,14 +9821,15 @@ class UpdateStatus(Screen):
 					L4logE("OM-citysearch%s: %s" % (wetter, feedurl))
 					callInThread(boundFunction(getPage, feedurl, params=params), boundFunction(self.getCityCoords, wetter), self.downloadListError)
 				else:
-					params = [("timezone", "auto"),
-					 		("latitude", self.Long[wetter]),
-							("longitude", self.Lat[wetter]),
-							("daily", "sunrise,sunset,weathercode,precipitation_probability_max,temperature_2m_max,temperature_2m_min"),
-							("hourly", "temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m,winddirection_10m,precipitation_probability"),
-							("windspeed_unit", "kmh"),
-							("temperature_unit", "celsius"),
-							]
+					params = [
+						("timezone", "auto"),
+						("latitude", self.Long[wetter]),
+						("longitude", self.Lat[wetter]),
+						("daily", "sunrise,sunset,weathercode,precipitation_probability_max,temperature_2m_max,temperature_2m_min"),
+						("hourly", "temperature_2m,relativehumidity_2m,apparent_temperature,weathercode,windspeed_10m,winddirection_10m,precipitation_probability"),
+						("windspeed_unit", "kmh"),
+						("temperature_unit", "celsius"),
+					]
 					feedurl = "https://api.open-meteo.com/v1/forecast"
 					L4logE("OM-getweather%s: %s" % (wetter, feedurl))
 					callInThread(boundFunction(getPage, feedurl, params=params), boundFunction(self.downloadOMcallback, wetter), self.downloadListError)
@@ -9856,10 +9857,11 @@ class UpdateStatus(Screen):
 					callInThread(boundFunction(getPage, feedurl, params=params), boundFunction(self.downloadOWMcallback, wetter), self.downloadListError)
 
 			elif LCD4linux.WetterApi.value == "WEATHERUNLOCKED" and len(LCD4linux.WetterApiKeyWeatherUnlocked.value.split()) == 2:
-				params = [("app_id", LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[0]),
-				 		("app_key", LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[1] if len(LCD4linux.WetterApiKeyWeatherUnlocked.value.split()) == 2 else ""),
-						("lang", la[:2])
-						]
+				params = [
+					("app_id", LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[0]),
+					("app_key", LCD4linux.WetterApiKeyWeatherUnlocked.value.split()[1] if len(LCD4linux.WetterApiKeyWeatherUnlocked.value.split()) == 2 else ""),
+					("lang", la[:2])
+				]
 				city = LCD4linux.WetterCity.value if wetter == 0 else LCD4linux.Wetter2City.value
 				if "." in city:  # e.g. 'de.ZIPccode'
 					feedurl = f"http://api.weatherunlocked.com/api/current/{city}"
