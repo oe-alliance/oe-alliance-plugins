@@ -1957,11 +1957,11 @@ class selectChannelCategory(TVscreenHelper, Screen):
 
 class TVimport(TVscreenHelper, Screen):
 	skin = """
-	<screen name="TVimport" position="480,90" size="320,500" backgroundColor="#16000000" flags="wfNoBorder" resolution="1280,720" title="TV Spielfilm Servicedatei">
-		<eLabel position="0,0" size="320,500" backgroundColor="#00203060" zPosition="-2" />
-		<eLabel position="2,2" size="316,496" zPosition="-1" />
-		<eLabel name="TV_bg" position="2,2" size="316,58" backgroundColor=" black, #00203060, horizontal" zPosition="1" />
-		<eLabel name="TV_line" position="2,60" size="316,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
+	<screen name="TVimport" position="480,90" size="360,550" backgroundColor="#16000000" flags="wfNoBorder" resolution="1280,720" title="TV Spielfilm Servicedatei">
+		<eLabel position="0,0" size="360,500" backgroundColor="#00203060" zPosition="-2" />
+		<eLabel position="2,2" size="356,496" zPosition="-1" />
+		<eLabel name="TV_bg" position="2,2" size="356,58" backgroundColor=" black, #00203060, horizontal" zPosition="1" />
+		<eLabel name="TV_line" position="2,60" size="356,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="70,20" font="Regular;18" textBorderColor="#00505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
 		<widget source="bouquetslist" render="Listbox" position="2,60" size="316,440" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
@@ -1973,8 +1973,8 @@ class TVimport(TVscreenHelper, Screen):
 				}
 			</convert>
 		</widget>
-		<eLabel name="button_blue" position="40,460" size="6,36" backgroundColor="#101093,#4040ff,vertical" zPosition="1" />
-		<widget source="key_blue" render="Label" position="54,466" size="300,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
+		<eLabel name="button_blue" position="40,510" size="6,36" backgroundColor="#101093,#4040ff,vertical" zPosition="1" />
+		<widget source="key_blue" render="Label" position="54,516" size="300,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 	</screen>
 	"""
 
