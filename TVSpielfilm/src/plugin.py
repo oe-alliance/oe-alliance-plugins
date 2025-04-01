@@ -764,7 +764,7 @@ class TVfullscreen(TVscreenHelper, Screen):
 													"info": self.keyInfo,
 													"green": self.keyGreen,
 													"blue": self.zapToCurrent,
-		 											"yellow": self.openEPGSearch,
+													"yellow": self.openEPGSearch,
 													"cancel": self.keyExit}, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -1151,7 +1151,7 @@ class TVoverview(TVscreenHelper, Screen):
 													"playpause": self.playTrailer,
 													"red": self.keyRed,
 													"green": self.keyGreen,
-		 											"yellow": self.openEPGSearch,
+													"yellow": self.openEPGSearch,
 													"blue": self.zapToCurrent,
 													"channeldown": self.prevday,
 													"channelup": self.nextday,
@@ -1474,9 +1474,9 @@ class TVmain(TVscreenHelper, Screen):
 		self["key_red"] = StaticText("Import")
 		self["key_green"] = StaticText()
 		self["actions"] = ActionMap(["WizardActions",
-									 "ColorActions",
-									 "MenuActions"], {"ok": self.keyOk,
-			   											"back": self.exit,
+									"ColorActions",
+									"MenuActions"], {"ok": self.keyOk,
+														"back": self.exit,
 														"right": self.forceNextTip,
 														"left": self.forcePrevTip,
 														"down": self.down,
@@ -1726,7 +1726,7 @@ class TVmain(TVscreenHelper, Screen):
 				metaInfo = tip.get("metaInfo", {})
 				conclusion = unescape(metaInfo.get("conclusion", ""))
 				tipslist.append((title, timeStartEnd, genreBroad, channelName, titleLength, yearCountry,
-					 			imdbRating, fskText, conclusion, isTopTip, isTipOfTheDay, isNew, fsk,
+								imdbRating, fskText, conclusion, isTopTip, isTipOfTheDay, isNew, fsk,
 								thumbIdNumeric, imgurl, channelId, self.currentTipId))
 		self.tipslist = tipslist
 		self.showTVtipsBox(firstTip=self.currTipCnt == 0)
@@ -1901,7 +1901,7 @@ class selectChannelCategory(TVscreenHelper, Screen):
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["menulist"] = List()
 		self["actions"] = ActionMap(["OkCancelActions"],
-							  						{"ok": self.keyOk,
+													{"ok": self.keyOk,
 													"cancel": self.keyExit}, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
 
