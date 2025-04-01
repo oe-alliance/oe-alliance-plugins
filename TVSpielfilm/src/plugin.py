@@ -1964,9 +1964,9 @@ class TVimport(TVscreenHelper, Screen):
 		<eLabel name="TV_line" position="2,60" size="356,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="70,20" font="Regular;18" textBorderColor="#00505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
-		<widget source="bouquetslist" render="Listbox" position="2,60" size="316,440" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
+		<widget source="bouquetslist" render="Listbox" position="2,60" size="356,440" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">{"template": [
-				MultiContentEntryText(pos=(0,0), size=(316,40), font=0,  flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)  # menutext
+				MultiContentEntryText(pos=(0,0), size=(346,40), font=0,  flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)  # menutext
 				],
 				"fonts": [gFont("Regular",24)],
 				"itemHeight":40
