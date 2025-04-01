@@ -86,7 +86,7 @@ config.plugins.tvspielfilm.cache_d = ConfigSelection(default=7, choices=CACHEDAY
 
 class TVglobals():
 	IMPORTDICT = {}
-	RELEASE = "v1.4"
+	RELEASE = "v1.5"
 	MODULE_NAME = __name__.split(".")[-2]
 	RESOLUTION = "FHD" if getDesktop(0).size().width() > 1300 else "HD"
 	PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/TVSpielfilm/")
@@ -167,16 +167,19 @@ class TVcoreHelper():
 			print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:getAPIdata': {errmsg}")
 			return errmsg, jsondict
 
-	def getAllAssets(self, channelId, date, spanStarts, forceRefresh=False):
+	def getAllAssets(self, channelId, date, spanStarts, forceRefresh=False, loadExisting=True):
 		assetsdict = {}
 		temppath = f"{config.plugins.tvspielfilm.cachepath.value}tmp/TVSpielfilm/" if config.plugins.tvspielfilm.cachepath.value == "/" else f"{config.plugins.tvspielfilm.cachepath.value}TVSpielfilm/"
 		assetsfile = join(f"{temppath}cache/", f"allAssets{date}T{spanStarts}.json") if spanStarts else ""
 		if exists(assetsfile) and not forceRefresh:  # load assets from cache if available and desired
-			with open(assetsfile, "r") as file:
-				filedict = loads(file.read()) or {}
-			if filedict:
-				assetsdict = filedict.get(channelId, {})  # extract assets for current channelId
-			return False, assetsdict
+			if loadExisting:
+				with open(assetsfile, "r") as file:
+					filedict = loads(file.read()) or {}
+				if filedict:
+					assetsdict = filedict.get(channelId, {})  # extract assets for current channelId
+				return False, assetsdict
+			else:
+				return False, {}
 		else:  # download assets for current channelId
 			if spanStarts:
 				url = f"{tvglobals.BASEURL}api/epg/broadcast/{channelId.upper()}"
@@ -747,23 +750,22 @@ class TVfullscreen(TVscreenHelper, Screen):
 		self["key_green"] = StaticText("Timer hinzufügen")
 		self["key_yellow"] = StaticText("EPG-Suche")
 		self["key_blue"] = StaticText("Zap" if zapAllowed else "")
-		self["actions"] = ActionMap(["OkCancelActions", "ButtonSetupActions"],
-		{
-			"ok": self.keyExit,
-			"cross_left": self.keyUp,
-			"cross_right": self.keyDown,
-			"cross_up": self.keyUp,
-			"cross_down": self.keyDown,
-			"channelup": self.keyUp,
-			"channeldown": self.keyDown,
-			"play": self.playTrailer,
-			"playpause": self.playTrailer,
-			"info": self.keyInfo,
-			"green": self.keyGreen,
-			"blue": self.zapToCurrent,
-			"yellow": self.openEPGSearch,
-			"cancel": self.keyExit
-		}, -1)
+		self["actions"] = ActionMap(["OkCancelActions",
+									"ButtonSetupActions"],
+													{"ok": self.keyExit,
+													"cross_left": self.keyUp,
+													"cross_right": self.keyDown,
+													"cross_up": self.keyUp,
+													"cross_down": self.keyDown,
+													"channelup": self.keyUp,
+													"channeldown": self.keyDown,
+													"play": self.playTrailer,
+													"playpause": self.playTrailer,
+													"info": self.keyInfo,
+													"green": self.keyGreen,
+													"blue": self.zapToCurrent,
+													"yellow": self.openEPGSearch,
+													"cancel": self.keyExit}, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -1142,22 +1144,21 @@ class TVoverview(TVscreenHelper, Screen):
 		self["key_green"] = StaticText("Timer")
 		self["key_yellow"] = StaticText("EPG-Suche")
 		self["key_blue"] = StaticText()
-		self["actions"] = ActionMap(["OkCancelActions", "ButtonSetupActions"],
-		{
-			"ok": self.keyOk,
-			"play": self.playTrailer,
-			"playpause": self.playTrailer,
-			"red": self.keyRed,
-			"green": self.keyGreen,
-			"yellow": self.openEPGSearch,
-			"blue": self.zapToCurrent,
-			"channeldown": self.prevday,
-			"channelup": self.nextday,
-			"previous": self.prevweek,
-			"next": self.nextweek,
-			"info": self.keyInfo,
-			"cancel": self.keyExit
-		}, -1)
+		self["actions"] = ActionMap(["OkCancelActions",
+									"ButtonSetupActions"],
+													{"ok": self.keyOk,
+													"play": self.playTrailer,
+													"playpause": self.playTrailer,
+													"red": self.keyRed,
+													"green": self.keyGreen,
+													"yellow": self.openEPGSearch,
+													"blue": self.zapToCurrent,
+													"channeldown": self.prevday,
+													"channelup": self.nextday,
+													"previous": self.prevweek,
+													"next": self.nextweek,
+													"info": self.keyInfo,
+													"cancel": self.keyExit}, -1)
 		tvglobals.IMPORTDICT = self.readImportedFile()  # lade importierte Senderdaten
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -1472,20 +1473,19 @@ class TVmain(TVscreenHelper, Screen):
 		self["mainmenu"] = List()
 		self["key_red"] = StaticText("Import")
 		self["key_green"] = StaticText()
-		self["actions"] = ActionMap(["WizardActions", "ColorActions", "MenuActions"],
-		{
-			"ok": self.keyOk,
-			"back": self.exit,
-			"right": self.forceNextTip,
-			"left": self.forcePrevTip,
-			"down": self.down,
-			"up": self.up,
-			"red": self.keyRed,
-			"green": self.keyGreen,
-			"yellow": self.keyYellow,
-			"blue": self.keyBlue,
-			"menu": self.config
-		}, -1)
+		self["actions"] = ActionMap(["WizardActions",
+									"ColorActions",
+									"MenuActions"], {"ok": self.keyOk,
+														"back": self.exit,
+														"right": self.forceNextTip,
+														"left": self.forcePrevTip,
+														"down": self.down,
+														"up": self.up,
+														"red": self.keyRed,
+														"green": self.keyGreen,
+														"yellow": self.keyYellow,
+														"blue": self.keyBlue,
+														"menu": self.config}, -1)
 		tvglobals.IMPORTDICT = self.readImportedFile()  # load imported channel data
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -1536,7 +1536,7 @@ class TVmain(TVscreenHelper, Screen):
 				else:
 					self.hideTVtipsBox()
 					msgtext = "TVS-EPG Update (nur für aktivierte Zeiträume) durchführen?"
-					choicelist = [("Abbruch", 0), ("Ergänze nur die neuen Datensätze", 1), ("Überschreibe auch vorhandene Datensätze", 2)]
+					choicelist = [("Abbruch", 0), ("Ergänze nur die fehlenden Datensätze", 1), ("Überschreibe die Datensätze des heutigen Tages", 2), ("Überschreibe alle bereits vorhandene Datensätze", 3)]
 					self.session.openWithCallback(self.returnOk2, ChoiceBox, list=choicelist, keys=[], title=msgtext)
 			elif current[1] == 8:
 				if TVS_UPDATEACTIVE:
@@ -1559,6 +1559,9 @@ class TVmain(TVscreenHelper, Screen):
 				self.updateStop = False
 				callInThread(self.updateFutureEPG, forceRefresh=False)
 			elif answer[1] == 2:
+				self.updateStop = False
+				callInThread(self.updateFutureEPG, todayOnly=True)
+			elif answer[1] == 3:
 				self.updateStop = False
 				callInThread(self.updateFutureEPG)
 		self.showTVtipsBox()
@@ -1722,8 +1725,9 @@ class TVmain(TVscreenHelper, Screen):
 				fskText = f"ab {fsk} Jahren" if fsk else ""
 				metaInfo = tip.get("metaInfo", {})
 				conclusion = unescape(metaInfo.get("conclusion", ""))
-				tipslist.append((title, timeStartEnd, genreBroad, channelName, titleLength, yearCountry, imdbRating, fskText,
-								conclusion, isTopTip, isTipOfTheDay, isNew, fsk, thumbIdNumeric, imgurl, channelId, self.currentTipId))
+				tipslist.append((title, timeStartEnd, genreBroad, channelName, titleLength, yearCountry,
+								imdbRating, fskText, conclusion, isTopTip, isTipOfTheDay, isNew, fsk,
+								thumbIdNumeric, imgurl, channelId, self.currentTipId))
 		self.tipslist = tipslist
 		self.showTVtipsBox(firstTip=self.currTipCnt == 0)
 
@@ -1816,7 +1820,7 @@ class TVmain(TVscreenHelper, Screen):
 		self.tvupdate.setValue(f"progressBar{index}", valuelist[1])
 		self.tvupdate.setText(f"progressTxt{index}", valuelist[2])
 
-	def updateFutureEPG(self, forceRefresh=True):
+	def updateFutureEPG(self, forceRefresh=True, todayOnly=False):
 		global TVS_UPDATEACTIVE
 		TVS_UPDATEACTIVE = True
 		self.createTMPpaths()
@@ -1825,7 +1829,7 @@ class TVmain(TVscreenHelper, Screen):
 		timespans = self.getActiveTimespans()
 		len_total = 0
 		for timespan in timespans:  # calculate len_total
-			len_total += timespan[2] + 1  # days of a timespan to be cached
+			len_total += 1 if todayOnly else timespan[2] + 1  # days of a timespan to be cached
 		progress = 0
 		if timespans:
 			importdict = tvglobals.IMPORTDICT  # mandatory if the thread should continue to run even if the plugin is terminated
@@ -1836,7 +1840,7 @@ class TVmain(TVscreenHelper, Screen):
 				if self.updateStop:
 					break
 				spanStarts = timespan[0]
-				spancache = timespan[2]
+				spancache = 0 if todayOnly else timespan[2]
 				self.setProgressRange(0, (0, len_total))
 				for index0, day in enumerate(range(spancache + 1)):  # from today up to next to be cached days
 					if self.updateStop:
@@ -1850,7 +1854,7 @@ class TVmain(TVscreenHelper, Screen):
 						self.setProgressValues(1, (f"Sender: '{item[1][1]}'", index1, f"{index1}/{len_importdict}"))
 						channelId = item[0]
 						spanStarts = "00:00" if self.singleChannel else spanStarts
-						downloaded, assetsdict = self.getAllAssets(channelId, datestr, spanStarts, forceRefresh=forceRefresh)
+						downloaded, assetsdict = self.getAllAssets(channelId, datestr, spanStarts, forceRefresh=forceRefresh, loadExisting=False)
 						if downloaded:
 							allAssets[channelId] = assetsdict
 					errmsg = self.saveAllAssets(allAssets, datestr, spanStarts)
@@ -1897,10 +1901,8 @@ class selectChannelCategory(TVscreenHelper, Screen):
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["menulist"] = List()
 		self["actions"] = ActionMap(["OkCancelActions"],
-		{
-			"ok": self.keyOk,
-			"cancel": self.keyExit
-		}, -1)
+													{"ok": self.keyOk,
+													"cancel": self.keyExit}, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -1994,12 +1996,10 @@ class TVimport(TVscreenHelper, Screen):
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["bouquetslist"] = List()
 		self["key_blue"] = StaticText("Überprüfe Konvertierungsregeln")
-		self['actions'] = ActionMap(["OkCancelActions", "ColorActions"],
-		{
-			"ok": self.keyOk,
-			"blue": self.keyBlue,
-			"cancel": self.keyExit
-		}, -1)
+		self['actions'] = ActionMap(["OkCancelActions",
+									"ColorActions"], {"ok": self.keyOk,
+									"blue": self.keyBlue,
+									"cancel": self.keyExit}, -1)
 		if self.createTMPpaths():
 			self.exit()
 		if self.updateMappingfile():
@@ -2169,20 +2169,20 @@ class TVimport(TVscreenHelper, Screen):
 	def checkMappingRules(self):  # tool: checks whether conversion rules are missing / outdated / double in the mapping file
 		maplist = sorted(self.maplist, key=lambda x: x[0])
 		mapkeys = [x[0] for x in maplist]
-		url = f"{tvglobals.BASEURL}static/content/channel-list/livetv"
+		url = f"{tvglobals.BASEURL}api/cms/channels/list"
 		errmsg, results = self.getAPIdata(url)
 		if errmsg:
 			print(f"[{tvglobals.MODULE_NAME}] API download ERROR in class 'TVchannelselection:checkMappingRules': {errmsg}")
 		if results:
-			reskeys = [x.get("id", "n/a").lower() for x in results]
+			reskeys = [x.get("channelId", "n/a").lower() for x in results]
 			tabpos = "{0:<10} {1:<0}\n"
 			self.mappinglog = join(tvglobals.LOGPATH, "mappingrules.log")
 			with open(self.mappinglog, "w") as file:
 				file.write(f"{len(results)} Kanäle gefunden, die von TV Spielfilm unterstützt werden\n")
-				file.write("\nFehlende Regeln für Kanäle, die von TV Spielfilm unterstützt werden: ")
+				file.write("\nFehlende Regel(n) für Kanäle, die von TV Spielfilm unterstützt werden: ")
 				notfound = []
 				for service in results:  # search for missing conversion rules
-					shortkey = service.get("id", "n/a").lower()
+					shortkey = service.get("channelId", "n/a").lower()
 					if shortkey not in mapkeys:
 						notfound.append((shortkey, service.get("name", "n/v")))
 				if notfound:
@@ -2192,8 +2192,8 @@ class TVimport(TVscreenHelper, Screen):
 						file.write(tabpos.format(*service))
 					file.write("EMPFEHLUNG: Diese Regel(n) in die Datei 'tvs_mapping.txt' einpflegen.\n")
 				else:
-					file.write("{Keine fehlenden Regeln gefunden}\n")
-				file.write("\nVeraltete Regeln für Kanäle, die von TV Spielfilm nicht unterstützt werden: ")
+					file.write("{Keine fehlenden Regel(n) gefunden}\n")
+				file.write("\nVeraltete Regel(n) für Kanäle, die von TV Spielfilm nicht unterstützt werden: ")
 				outdated = []
 				for service in maplist:  # search for outdated conversion rules
 					if service[0] not in reskeys:
@@ -2205,8 +2205,8 @@ class TVimport(TVscreenHelper, Screen):
 						file.write(tabpos.format(*service))
 					file.write("EMPFEHLUNG: Diese Regel(n) aus der Datei 'tvs_mapping.txt' entfernen.\n")
 				else:
-					file.write("{Keine veraltete Regeln gefunden}\n")
-				file.write("\nDoppelte Regeln für Kanäle, die von TV Spielfilm unterstützt werden: ")
+					file.write("{Keine veraltete Regel(n) gefunden}\n")
+				file.write("\nDoppelte Regel(n) für Kanäle, die von TV Spielfilm unterstützt werden: ")
 				double = []
 				for idx in [i for i, x in enumerate(mapkeys) if mapkeys.count(x) > 1]:  # search for duplicate rules and get indexes
 					double.append((maplist[idx][0], maplist[idx][1]))
@@ -2217,7 +2217,7 @@ class TVimport(TVscreenHelper, Screen):
 						file.write(tabpos.format(*service))
 					file.write("EMPFEHLUNG: Im Zweifel in der Datei 'tvs_mapping.txt' belasssen! Sender könnten z.B. bei verschiedenen Anbietern unter verschiedenen Namen geführt werden.\n")
 				else:
-					file.write("{Keine doppelten Regeln gefunden}\n")
+					file.write("{Keine doppelten Regel(n) gefunden}\n")
 
 
 class TVchannelselection(Screen):
@@ -2259,13 +2259,11 @@ class TVchannelselection(Screen):
 		self["channelList"] = List()
 		self["key_red"] = StaticText("Alle abwählen")
 		self["key_green"] = StaticText("Übernehmen")
-		self['actions'] = ActionMap(["OkCancelActions", "ColorActions"],
-		{
-			"ok": self.keyOk,
-			"red": self.keyRed,
-			"green": self.keyGreen,
-			"cancel": self.keyExit
-		}, -1)
+		self['actions'] = ActionMap(["OkCancelActions",
+									"ColorActions"], {"ok": self.keyOk,
+													"red": self.keyRed,
+													"green": self.keyGreen,
+													"cancel": self.keyExit}, -1)
 		self.onShown.append(self.onShownFinished)
 
 	def onShownFinished(self):
