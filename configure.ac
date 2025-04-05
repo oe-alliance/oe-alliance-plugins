@@ -253,12 +253,10 @@ AC_DEFINE_UNQUOTED(PYTHON,"$PYTHON",[python ver])
 
 if test "$PYTHON" == "python3" ; then
 	AM_CONDITIONAL(HAVE_LIBVUPLDEMO, test "$BOXTYPE" == vusolo2 -o "$BOXTYPE" == vusolose -o "$BOXTYPE" == vuduo2 -o "$BOXTYPE" == vuduo2 )
-	AM_CONDITIONAL(HAVE_VUSTALKER, test "$BOXTYPE" == vuzero )
 	AM_CONDITIONAL(HAVE_VUEXTRAS, test "$BOXTYPE" == vusolo4k -o "$BOXTYPE" == vuuno4k -o "$BOXTYPE" == vuzero4k -o "$BOXTYPE" == vuuno4kse -o "$BOXTYPE" == vuultimo4k -o "$BOXTYPE" == vuultimo4k -o "$BOXTYPE" == vuduo4k -o "$BOXTYPE" == vuduo4kse )
 	AM_CONDITIONAL(HAVE_GBEXTRAS, test "$BOXTYPE" == gb7252 -o "$BOXTYPE" == gb72604 )
 else
 	AM_CONDITIONAL(HAVE_LIBVUPLDEMO, false )
-	AM_CONDITIONAL(HAVE_VUSTALKER, false )
 	AM_CONDITIONAL(HAVE_VUEXTRAS, false )
 	AM_CONDITIONAL(HAVE_GBEXTRAS, false )
 fi

@@ -474,12 +474,8 @@ if HAVE_LIBVUPLDEMO
 SUBDIRS += libvupldemo
 endif
 
-if HAVE_VUSTALKER
-SUBDIRS += VuStalker
-endif
-
 if HAVE_VUEXTRAS
-SUBDIRS += VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup VuStalker
+SUBDIRS += VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup
 endif
 
 if HAVE_GBEXTRAS
