@@ -59,13 +59,13 @@ class Bluetoothctl:
     def _start_bluetoothctl(self):
         #while not self.isReady and self.attempts < self.max_attempts:
         while not self.isReady:
-            print(f"Trying to start bluetoothctl...")
+            print("Trying to start bluetoothctl...")
             self.kill_existing_bluetoothctl()
             try:
                 self.process = spawnu("bluetoothctl", echo=False)
                 self.process.expect("Agent registered", timeout=10)
                 self.isReady = True
-                print(f"bluetoothctl is ready.")
+                print("bluetoothctl is ready.")
             except Exception as e:
                 print(f"bluetoothctl start failed: {e}")
                 sleep(2)
