@@ -23,8 +23,10 @@
 
 from pexpect import EOF, TIMEOUT, spawnu
 from re import compile
-from subprocess import check_output
+from subprocess import check_output, CalledProcessError
 from time import sleep
+from os import kill
+import threading
 
 
 class Bluetoothctl:
@@ -32,15 +34,48 @@ class Bluetoothctl:
 
     def __init__(self):
         check_output("rfkill unblock bluetooth", shell=True)
-        self.process = spawnu("bluetoothctl", echo=False)
-        self.process.expect("Agent registered")
+        self.process = None
+        self.isReady = False
         self.isScanning = False
+        self._start_thread()
+        #self.max_attempts = 5
+        #self.attempts = 0
+
+    def _start_thread(self):
+        thread = threading.Thread(target=self._start_bluetoothctl)
+        thread.daemon = True
+        thread.start()
+
+    def kill_existing_bluetoothctl(self):
+        try:
+            output = check_output("pgrep bluetoothctl", shell=True).decode().strip()
+            for pid in output.splitlines():
+                print(f"Killing leftover bluetoothctl process {pid}")
+                kill(int(pid), 9)
+        except CalledProcessError:
+            # pgrep returns non-zero if no process found, which is fine
+            pass
+
+    def _start_bluetoothctl(self):
+        #while not self.isReady and self.attempts < self.max_attempts:
+        while not self.isReady:
+            print(f"Trying to start bluetoothctl...")
+            self.kill_existing_bluetoothctl()
+            try:
+                self.process = spawnu("bluetoothctl", echo=False)
+                self.process.expect("Agent registered", timeout=10)
+                self.isReady = True
+                print(f"bluetoothctl is ready.")
+            except Exception as e:
+                print(f"bluetoothctl start failed: {e}")
+                sleep(2)
+            #self.attempts += 1
 
     def send(self, command, pause=0):
         self.process.send(f"{command}\n")
         sleep(pause)
         if self.process.expect(["#", EOF, TIMEOUT]):
-            raise Exception(f"failed after {command}")
+            raise Exception(f"bluetoothctl failed after {command}")
 
     def get_output(self, *args, **kwargs):
         """Run a command in bluetoothctl prompt, return output as a list of lines."""
