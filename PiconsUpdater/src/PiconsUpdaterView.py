@@ -258,7 +258,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 			else:
 				return None
 		except Exception as e:
-			printToConsole('error:', e)
+			printToConsole('Error: %s' % e)
 
 	def getForegroundImagePath(self):
 		try:
@@ -270,7 +270,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 			else:
 				return None
 		except Exception as e:
-			printToConsole('error:', e)
+			printToConsole('Error: %s' % e)
 
 	def showBackgroundPicture(self):
 		if self.getCurrentBackgroundList() is not None:

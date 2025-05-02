@@ -117,8 +117,7 @@ def getRecursionLimit(val):
 # getRecursionLimit(10000) # TOOD
 
 
-def CheckInternet(opt=3):  # TODO
-	return True
+def CheckInternet(opt=3):
 	global verInt
 	sock = False
 	checklist = [
