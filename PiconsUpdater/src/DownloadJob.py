@@ -1,7 +1,8 @@
 from os import path
 from requests import get, exceptions
+from urllib.parse import quote
 from twisted.internet.reactor import callInThread
-from . import printToConsole, _  # for localized messages
+from . import printToConsole
 
 
 class download:
@@ -16,7 +17,7 @@ class download:
 		return
 
 	def downloadPage(self, link, file, success, fail=None):
-		link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '').encode('utf-8')
+		link = quote(link.strip(), safe=':/%')
 		try:
 			response = get(link, timeout=(3.05, 6))
 			content = response.content
@@ -47,8 +48,12 @@ class DownloadJob:
 
 	def clean(self):
 		try:
-			del self.callbackFailed
 			del self.callbackFinished
+		except:
+			pass
+
+		try:
+			del self.callbackFailed
 		except:
 			pass
 
@@ -71,9 +76,11 @@ class DownloadJob:
 
 	def __downloadFailed(self, errorMessage=''):
 		self.errorMessage = errorMessage
-#		if errorMessage == '' and failureInstance is not None:
-#			self.errorMessage = failureInstance.getErrorMessage()
-#		self.errorMessage = self.downloadUrl + ' - ' + self.errorMessage
+		"""
+		# if errorMessage == '' and failureInstance is not None:
+			# self.errorMessage = failureInstance.getErrorMessage()
+		# self.errorMessage = self.downloadUrl + ' - ' + self.errorMessage
+		"""
 		if self.callbackFailed is not None:
 			callback = self.callbackFailed
 			self.clean()

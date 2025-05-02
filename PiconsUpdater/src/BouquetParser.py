@@ -1,9 +1,15 @@
+# Standard library
 from re import match, findall, DOTALL, IGNORECASE
 from unicodedata import normalize
+
+# Enigma2 imports
 from enigma import eServiceCenter, eServiceReference
 from Components.config import config
 from Components.SystemInfo import BoxInfo
+
+# Local imports
 from ServiceReference import ServiceReference
+
 
 SKIP_BOUQUET_NAMES = 'userbouquet.lastscanned'
 
@@ -12,6 +18,7 @@ def getChannelKey(service):
 	channelKeyMatch = match('([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):', str(service))
 	if channelKeyMatch:
 		channelKey = '_'.join(map(str, channelKeyMatch.groups()))
+
 		try:
 			return normalize('NFKD', channelKey)
 		except Exception:
