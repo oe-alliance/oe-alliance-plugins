@@ -8677,7 +8677,7 @@ class UpdateStatus(Screen):
 				self.YMCastSoCoSave = LCD4linux.YMCastIP.value
 				L4log("MusicCast Connect", LCD4linux.YMCastIP.value)
 				try:
-					self.YMCastSoCo = YMC(LCD4linux.YMCastIP.value)
+					self.YMCastSoCo = YMC(LCD4linux.YMCastIP.value, L4logE)
 				except Exception:
 					L4log("YMCast Connect Error")
 					self.YMCastSoCo = None
@@ -9377,7 +9377,7 @@ class UpdateStatus(Screen):
 					if (LCD4linux.YMCastCover.value == "0" or self.LsTagTitle == "MusicCast"):
 						if self.YMCastInfo.get("input", "") == "mc_link" and LCD4linux.YMCastServerIP.value != "":
 							try:
-								YMCastServer = YMC(LCD4linux.YMCastServerIP.value)
+								YMCastServer = YMC(LCD4linux.YMCastServerIP.value, L4logE)
 								url = "http://%s%s" % (YMCastServer.IP, YMCastServer.getPlayInfo().get("albumart_url", ""))
 							except Exception:
 								L4logE("YMC Server Error")
