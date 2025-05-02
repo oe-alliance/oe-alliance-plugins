@@ -118,30 +118,32 @@ def getRecursionLimit(val):
 
 
 def CheckInternet(opt=3):
-	global verInt
-	sock = False
-	checklist = [
-		('8.8.4.4', 53),
-		('8.8.8.8', 53),
-		('www.google.com', 80),
-		('www.google.com', 443)
-	]
-	srv = checklist[opt]
-	try:
-		import socket
-		socket.setdefaulttimeout(0.5)
-		socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(srv)
-		sock = True
-		if verInt in (0, 2):
-			printToConsole('-Internet OK')
-			verInt = 1
-	except:
-		sock = False
-		if verInt in (0, 1):
-			printToConsole('-Internet KO')
-			verInt = 2
+    global verInt
+    sock = False
+    checklist = [
+        ('8.8.4.4', 53),  # Google DNS primary
+        ('8.8.8.8', 53),  # Google DNS secondary
+        ('1.1.1.1', 53),  # Cloudflare DNS
+        ('1.0.0.1', 53),  # Cloudflare DNS secondary
+        ('www.google.com', 80),  # HTTP check
+        ('www.google.com', 443)  # HTTPS check
+    ]
+    srv = checklist[opt]
+    try:
+        import socket
+        socket.setdefaulttimeout(0.5)
+        socket.socket(socket.AF_INET, socket.SOCK_STREAM).connect(srv)
+        sock = True
+        if verInt in (0, 2):
+            printToConsole('-Internet OK')
+            verInt = 1
+    except:
+        sock = False
+        if verInt in (0, 1):
+            printToConsole('-Internet KO')
+            verInt = 2
 
-	return sock
+    return sock
 
 
 def getSources():  # This function will be called AFTER config.plugins.PiconsUpdater is initialized
