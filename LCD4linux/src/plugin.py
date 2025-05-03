@@ -58,7 +58,7 @@ from socket import setdefaulttimeout
 from struct import unpack
 from textwrap import TextWrapper, wrap
 from threading import Thread
-from time import strftime, strptime, localtime, mktime, time, sleep, gmtime, timezone, altzone, daylight
+from time import strftime, strptime, localtime, mktime, time, sleep, timezone, altzone, daylight
 from traceback import format_exc, print_stack
 from twisted.internet.reactor import callInThread
 from unicodedata import normalize
@@ -73,8 +73,7 @@ from enigma import eEPGCache, eServiceReference, eServiceCenter, getDesktop, get
 from Components.ActionMap import ActionMap
 from Components.AVSwitch import AVSwitch
 from Components.Button import Button
-from Components.config import configfile, getConfigListEntry, ConfigPassword, ConfigYesNo, ConfigText, ConfigClock, ConfigSlider
-from Components.config import config, Config, ConfigSelectionNumber, ConfigSelection, ConfigText
+from Components.config import config, configfile, getConfigListEntry, Config, ConfigPassword, ConfigYesNo, ConfigText, ConfigClock, ConfigSelection, ConfigSelectionNumber, ConfigSlider
 from Components.ConfigList import ConfigListScreen
 from Components.Harddisk import harddiskmanager
 from Components.Input import Input
@@ -117,6 +116,8 @@ from .module import L4Lelement
 from .myFileList import FileList as myFileList
 from .ping import quiet_ping
 from .utils import getIPTVProvider, getAudio
+from .ymc import YMC
+from .bluesound import BlueSound
 
 # DEPENDING IMPORTS & GLOBALS & INITIALIZATION
 import ssl
@@ -149,7 +150,6 @@ CrashFile = "/tmp/L4Lcrash.txt"
 pngutil = None
 try:
 	if exists("/dev/lcd2"):
-		from fcntl import ioctl
 		from pngutil import png_util
 		pngutil = png_util.PNGUtil()
 		pngutilconnect = pngutil.connect()
@@ -297,15 +297,16 @@ L4LSun = (7, 0)
 L4LMoon = (19, 0)
 INFO = ""
 WeekDays = [_("Mon"), _("Tue"), _("Wed"), _("Thur"), _("Fri"), _("Sat"), _("Sun")]
-Farbe = [("black", _("black")), ("white", _("white")),
- ("gray", _("gray")), ("silver", _("silver")), ("slategray", _("slategray")),
- ("aquamarine", _("aquamarine")),
- ("yellow", _("yellow")), ("greenyellow", _("greenyellow")), ("gold", _("gold")),
- ("red", _("red")), ("tomato", _("tomato")), ("darkred", _("darkred")), ("indianred", _("indianred")), ("orange", _("orange")), ("darkorange", _("darkorange")), ("orangered", _("orangered")),
- ("green", _("green")), ("lawngreen", _("lawngreen")), ("darkgreen", _("darkgreen")), ("lime", _("lime")), ("lightgreen", _("lightgreen")),
- ("blue", _("blue")), ("blueviolet", _("blueviolet")), ("indigo", _("indigo")), ("darkblue", _("darkblue")), ("cadetblue", _("cadetblue")), ("cornflowerblue", _("cornflowerblue")), ("lightblue", _("lightblue")),
- ("magenta", _("magenta")), ("violet", _("violet")), ("darkorchid", _("darkorchid")), ("deeppink", _("deeppink")), ("cyan", _("cyan")),
- ("brown", _("brown")), ("sandybrown", _("sandybrown")), ("moccasin", _("moccasin")), ("rosybrown", _("rosybrown")), ("olive", _("olive")),
+Farbe = [
+	("black", _("black")), ("white", _("white")),
+	("gray", _("gray")), ("silver", _("silver")), ("slategray", _("slategray")),
+	("aquamarine", _("aquamarine")),
+	("yellow", _("yellow")), ("greenyellow", _("greenyellow")), ("gold", _("gold")),
+	("red", _("red")), ("tomato", _("tomato")), ("darkred", _("darkred")), ("indianred", _("indianred")), ("orange", _("orange")), ("darkorange", _("darkorange")), ("orangered", _("orangered")),
+	("green", _("green")), ("lawngreen", _("lawngreen")), ("darkgreen", _("darkgreen")), ("lime", _("lime")), ("lightgreen", _("lightgreen")),
+	("blue", _("blue")), ("blueviolet", _("blueviolet")), ("indigo", _("indigo")), ("darkblue", _("darkblue")), ("cadetblue", _("cadetblue")), ("cornflowerblue", _("cornflowerblue")), ("lightblue", _("lightblue")),
+	("magenta", _("magenta")), ("violet", _("violet")), ("darkorchid", _("darkorchid")), ("deeppink", _("deeppink")), ("cyan", _("cyan")),
+	("brown", _("brown")), ("sandybrown", _("sandybrown")), ("moccasin", _("moccasin")), ("rosybrown", _("rosybrown")), ("olive", _("olive")),
 ]
 ScreenSelect = [("0", _("off")), ("1", _("Screen 1")), ("2", _("Screen 2")), ("3", _("Screen 3")), ("12", _("Screen 1+2")), ("13", _("Screen 1+3")), ("23", _("Screen 2+3")), ("123", _("Screen 1+2+3")), ("4", _("Screen 4")), ("14", _("Screen 1+4")), ("24", _("Screen 2+4")), ("34", _("Screen 3+4")), ("124", _("Screen 1+2+4")), ("134", _("Screen 1+3+4")), ("234", _("Screen 2+3+4")), ("1234", _("Screen 1+2+3+4")), ("5", _("Screen 5")), ("6", _("Screen 6")), ("7", _("Screen 7")), ("8", _("Screen 8")), ("9", _("Screen 9")), ("12345", _("Screen 1-5")), ("123456", _("Screen 1-6")), ("1234567", _("Screen 1-7")), ("12345678", _("Screen 1-8")), ("123456789", _("Screen 1-9")), ("5678", _("Screen 5-8")), ("56789", _("Screen 5-9")), ("13579", _("Screen 1+3+5+7+9")), ("2468", _("Screen 2+4+6+8"))]
 ScreenUse = [("1", _("Screen 1")), ("2", _("Screen 1-2")), ("3", _("Screen 1-3")), ("4", _("Screen 1-4")), ("5", _("Screen 1-5")), ("6", _("Screen 1-6")), ("7", _("Screen 1-7")), ("8", _("Screen 1-8")), ("9", _("Screen 1-9"))]
@@ -314,11 +315,13 @@ OnOffSelect = [("0", _("off")), ("1", _("on"))]
 TimeSelect = [("1", _("5s")), ("2", _("10s")), ("3", _("15s")), ("4", _("20s")), ("6", _("30s")), ("8", _("40s")), ("10", _("50s")), ("12", _("1min")), ("24", _("2min")), ("36", _("3min")), ("48", _("4min")), ("60", _("5min")), ("120", _("10min")), ("240", _("20min")), ("360", _("30min")), ("720", _("60min")), ("1440", _("2h")), ("2160", _("3h")), ("3600", _("5h"))]
 LCDSelect = [("1", _("LCD 1")), ("2", _("LCD 2")), ("12", _("LCD 1+2")), ("3", _("LCD 3")), ("13", _("LCD 1+3")), ("23", _("LCD 2+3")), ("123", _("LCD 1+2+3"))]
 LCDSwitchSelect = [("0", _("LCD 1-3")), ("1", _("LCD 1")), ("2", _("LCD 2")), ("3", _("LCD 3"))]
-LCDType = [("11", _("Pearl (or compatible LCD) 320x240")), ("12", _("Pearl (or compatible LCD) 240x320")), ("121", _("Corby@Pearl 128x128")), ("122", _("AX206 (or compatible LCD) 480x320")), ("123", _("AX206 (or compatible LCD) 800x480")),
- ("210", _("Samsung SPF-72H 800x480")), ("23", _("Samsung SPF-75H/76H 800x480")), ("24", _("Samsung SPF-87H 800x480")), ("25", _("Samsung SPF-87H old 800x480")), ("26", _("Samsung SPF-83H 800x600")),
- ("29", _("Samsung SPF-85H/86H 800x600")), ("212", _("Samsung SPF-85P/86P 800x600")), ("28", _("Samsung SPF-105P 1024x600")), ("27", _("Samsung SPF-107H 1024x600")), ("213", _("Samsung SPF-107H old 1024x600")),
- ("211", _("Samsung SPF-700T 800x600")), ("215", _("Samsung SPF-800P 800x480")), ("214", _("Samsung SPF-1000P 1024x600")), ("430", _("Internal TFT-LCD 400x240")), ("50", _("Internal Box-Skin-LCD")),
- ("31", _("only Picture 320x240")), ("33", _("only Picture 800x480")), ("36", _("only Picture 800x600")), ("37", _("only Picture 1024x600")), ("320", _("only Picture Custom Size")), ("420", _("only Picture Custom Size 2"))]
+LCDType = [
+	("11", _("Pearl (or compatible LCD) 320x240")), ("12", _("Pearl (or compatible LCD) 240x320")), ("121", _("Corby@Pearl 128x128")), ("122", _("AX206 (or compatible LCD) 480x320")), ("123", _("AX206 (or compatible LCD) 800x480")),
+	("210", _("Samsung SPF-72H 800x480")), ("23", _("Samsung SPF-75H/76H 800x480")), ("24", _("Samsung SPF-87H 800x480")), ("25", _("Samsung SPF-87H old 800x480")), ("26", _("Samsung SPF-83H 800x600")),
+	("29", _("Samsung SPF-85H/86H 800x600")), ("212", _("Samsung SPF-85P/86P 800x600")), ("28", _("Samsung SPF-105P 1024x600")), ("27", _("Samsung SPF-107H 1024x600")), ("213", _("Samsung SPF-107H old 1024x600")),
+	("211", _("Samsung SPF-700T 800x600")), ("215", _("Samsung SPF-800P 800x480")), ("214", _("Samsung SPF-1000P 1024x600")), ("430", _("Internal TFT-LCD 400x240")), ("50", _("Internal Box-Skin-LCD")),
+	("31", _("only Picture 320x240")), ("33", _("only Picture 800x480")), ("36", _("only Picture 800x600")), ("37", _("only Picture 1024x600")), ("320", _("only Picture Custom Size")), ("420", _("only Picture Custom Size 2"))
+]
 if PNGutilOK:
 	LCDType.insert(14, ("930", _("Internal Vu+ Duo2 LCD 400x240")))
 xmlLCDType = [("96x64", _("96x64")), ("128x32", _("128x32")), ("128x64", _("128x64")), ("132x64", _("132x64")), ("220x176", _("220x176")), ("255x64", _("255x64")), ("400x240", _("400x240")), ("480x320", _("480x320")), ("700x390", _("720x405")), ("800x480", _("800x480"))]
@@ -353,19 +356,20 @@ DirType = [("0", _("horizontally")), ("2", _("vertically"))]
 FontType = [("0", _("Global")), ("1", _("1")), ("2", _("2")), ("3", _("3")), ("4", _("4")), ("5", _("5"))]
 DayType = [("0", _("all")), ("1", _("1")), ("2", _("2")), ("3", _("3")), ("7", _("7")), ("14", _("14")), ("30", _("30"))]
 RecordType = [("1", _("Corner")), ("1t", _("Corner+Timeshift")), ("2", _("Picon")), ("2t", _("Picon+Timeshift"))]
-ProgressType = [("1", _("only Progress Bar")),
-("2", _("with Remaining Minutes")), ("21", _("with Remaining Minutes (Size 1.5)")), ("22", _("with Remaining Minutes (Size 2)")),
-("3", _("with Percent")), ("31", _("with Percent (Size 1.5)")), ("32", _("with Percent (Size 2)")),
-("4", _("with Remaining Minutes (above)")), ("41", _("with Remaining Minutes (above/Size 1.5)")), ("42", _("with Remaining Minutes (above/Size 2)")),
-("5", _("with Percent (above)")), ("51", _("with Percent (above/Size 1.5)")), ("52", _("with Percent (above/Size 2)")),
-("6", _("with Remaining Minutes (below)")), ("61", _("with Remaining Minutes (below/Size 1.5)")), ("62", _("with Remaining Minutes (below/Size 2)")),
-("7", _("with Percent (below)")), ("71", _("with Percent (below/Size 1.5)")), ("72", _("with Percent (below/Size 2)")),
-("8", _("with Current 00:00")), ("81", _("with Current 00:00 (Size 1.5)")), ("82", _("with Current 00:00 (Size 2)")),
-("9", _("with Current 00:00 (above)")), ("91", _("with Current 00:00 (above/Size 1.5)")), ("92", _("with Current 00:00 (above/Size 2)")),
-("A", _("with Current 00:00 (below)")), ("A1", _("with Current 00:00 (below/Size 1.5)")), ("A2", _("with Current 00:00 (below/Size 2)")),
-("B", _("with Percent Minutes / Total (above)")), ("B1", _("with Percent Minutes / Total (above/Size 1.5)")), ("B2", _("with Percent Minutes / Total (above/Size 2)")),
-("C", _("with absolute Endtime")), ("C1", _("with absolute Endtime (Size 1.5)")), ("C2", _("with absolute Endtime (Size 2)")),
-("D", _("with Minutes Total / Endtime (above)")), ("D1", _("with Minutes Total / Endtime (above/Size 1.5)")), ("D2", _("with Minutes Total / Endtime (above/Size 2)")),
+ProgressType = [
+	("1", _("only Progress Bar")),
+	("2", _("with Remaining Minutes")), ("21", _("with Remaining Minutes (Size 1.5)")), ("22", _("with Remaining Minutes (Size 2)")),
+	("3", _("with Percent")), ("31", _("with Percent (Size 1.5)")), ("32", _("with Percent (Size 2)")),
+	("4", _("with Remaining Minutes (above)")), ("41", _("with Remaining Minutes (above/Size 1.5)")), ("42", _("with Remaining Minutes (above/Size 2)")),
+	("5", _("with Percent (above)")), ("51", _("with Percent (above/Size 1.5)")), ("52", _("with Percent (above/Size 2)")),
+	("6", _("with Remaining Minutes (below)")), ("61", _("with Remaining Minutes (below/Size 1.5)")), ("62", _("with Remaining Minutes (below/Size 2)")),
+	("7", _("with Percent (below)")), ("71", _("with Percent (below/Size 1.5)")), ("72", _("with Percent (below/Size 2)")),
+	("8", _("with Current 00:00")), ("81", _("with Current 00:00 (Size 1.5)")), ("82", _("with Current 00:00 (Size 2)")),
+	("9", _("with Current 00:00 (above)")), ("91", _("with Current 00:00 (above/Size 1.5)")), ("92", _("with Current 00:00 (above/Size 2)")),
+	("A", _("with Current 00:00 (below)")), ("A1", _("with Current 00:00 (below/Size 1.5)")), ("A2", _("with Current 00:00 (below/Size 2)")),
+	("B", _("with Percent Minutes / Total (above)")), ("B1", _("with Percent Minutes / Total (above/Size 1.5)")), ("B2", _("with Percent Minutes / Total (above/Size 2)")),
+	("C", _("with absolute Endtime")), ("C1", _("with absolute Endtime (Size 1.5)")), ("C2", _("with absolute Endtime (Size 2)")),
+	("D", _("with Minutes Total / Endtime (above)")), ("D1", _("with Minutes Total / Endtime (above/Size 1.5)")), ("D2", _("with Minutes Total / Endtime (above/Size 2)")),
 ]
 now = localtime()
 begin = mktime((now.tm_year, now.tm_mon, now.tm_mday, 6, 00, 0, now.tm_wday, now.tm_yday, now.tm_isdst))
@@ -4199,7 +4203,6 @@ def xmlDelete(Num):
 					L4log("enable Screen", xl[i2])
 					xmlList[i] = xmlList[i].replace("\"L4L%s\"" % xl[i2], "\"%s\"" % xl[i2])
 	i = 0
-	aa = 0
 	while i < len(xmlList):
 		if xmlList[i].startswith("<!--L4L%02d " % Num):
 			delON = True
@@ -4680,19 +4683,17 @@ try:
 except Exception:
 	SonosOK = False
 	L4log("Sonos not registered")
-from .ymc import YMC
-from .bluesound import BlueSound
 
 
 def getPage(link, success, fail=None, headers=None, params=None, timeout=(3.05, 6)):
 	agents = [
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
-			"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0"
-			"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)"
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75"
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
-			]
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
+		"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0",
+		"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edg/87.0.664.75",
+		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
+	]
 	if headers is None:
 		headers = {}
 	if "User-Agent" not in headers:
@@ -5156,7 +5157,7 @@ class L4LWorker(Thread):
 					try:
 						if mailserver is not None:
 							mailserver.select("inbox")
-#							typ, data = mailserver.search(None, '(SINCE "{date}")'.format(date=Date))
+#							# typ, data = mailserver.search(None, '(SINCE "{date}")'.format(date=Date))
 							if str(LCD4linux.MailIMAPDays.value) == "0":
 								typ, data = mailserver.search(None, 'ALL')
 							else:
@@ -8487,14 +8488,16 @@ class UpdateStatus(Screen):
 			self.BitrateTimer = eTimer()
 			self.BitrateTimer.callback.append(self.runBitrateTimer)
 			self.BitrateTimer.startLongTimer(30)
-		self.__event_tracker = ServiceEventTracker(screen=self, eventmap={
+		self.__event_tracker = ServiceEventTracker(
+			screen=self, eventmap={
 				iPlayableService.evUpdatedInfo: self.restartTimer,
 				iPlayableService.evUpdatedEventInfo: self.restartTimer,
 				iPlayableService.evVideoSizeChanged: self.restartTimer
-#				iPlayableService.evSeekableStatusChanged: self.restartTimer,
-#				iPlayableService.evVideoProgressiveChanged: self.restartTimer,
-#				iPlayableService.evUser: self.restartTimer
-			})
+				# iPlayableService.evSeekableStatusChanged: self.restartTimer,
+				# iPlayableService.evVideoProgressiveChanged: self.restartTimer,
+				# iPlayableService.evUser: self.restartTimer
+			}
+		)
 		self.InstanceKeyPressed = eActionMap.getInstance().bindAction('', -0x7FFFFFFF, self.rcKeyPressed)
 		self.recordtimer = session.nav.RecordTimer
 		self.LastTimerlistUpdate = 0
@@ -9100,11 +9103,11 @@ class UpdateStatus(Screen):
 						DpfCheckSerial()
 				if LCD4linux.LCDType1.value[0] == "2" or LCD4linux.LCDType2.value[0] == "2" or LCD4linux.LCDType3.value[0] == "2":
 					if SamsungCheck():
-#						SamsungDevice = None
-#						SamsungDevice2 = None
-#						SamsungDevice3 = None
-#						rmFiles(PIC + "*.*")
-#						L4log("reset all Samsung LCD!")
+						# SamsungDevice = None
+						# SamsungDevice2 = None
+						# SamsungDevice3 = None
+						# rmFiles(PIC + "*.*")
+						# L4log("reset all Samsung LCD!")
 						self.SamsungStart()
 				if strftime("%M") in LCD4linux.WwwTime.value:
 					getWWW()
@@ -9136,7 +9139,7 @@ class UpdateStatus(Screen):
 		else:
 			self.ServiceTimer.start(int(LCD4linux.Delay.value), True)
 
-############# Helper functions
+# Helper functions
 	def _getProcVal(self, pathname, base=10):
 		val = None
 		try:
@@ -9162,7 +9165,7 @@ class UpdateStatus(Screen):
 
 	def _getAspect(self, info):
 		return self._getValInt("/proc/stb/vmpeg/0/aspect", info, iServiceInformation.sAspect)
-############# End Helper functions
+# End Helper functions
 
 	def ServiceChange(self):
 		global ThreadRunning
@@ -9842,13 +9845,14 @@ class UpdateStatus(Screen):
 					callInThread(boundFunction(getPage, feedurl, params=params), boundFunction(self.getCityCoords, wetter), self.downloadListError)
 				else:
 					apkey = LCD4linux.WetterApiKeyOpenWeatherMap.value if len(LCD4linux.WetterApiKeyOpenWeatherMap.value) > 5 else ""
-					params = [("lat", self.Lat[wetter]),
-							("lon", self.Long[wetter]),
-							("lang", la[:2]),
-							("appid", apkey),
-							("units", "metric"),
-							("exclude", "hourly,minutely,current")
-							]
+					params = [
+						("lat", self.Lat[wetter]),
+						("lon", self.Long[wetter]),
+						("lang", la[:2]),
+						("appid", apkey),
+						("units", "metric"),
+						("exclude", "hourly,minutely,current")
+					]
 					feedurl = "https://api.openweathermap.org/data/2.5/weather"
 					L4logE("OWM-getcurrentweather%s: %s" % (wetter, feedurl))
 					callInThread(boundFunction(getPage, feedurl, params=params), boundFunction(self.downloadOWMcallback, wetter), self.downloadListError)
@@ -9886,23 +9890,23 @@ class UpdateStatus(Screen):
 		self.WetterOK = False
 
 	def saveGeodata(self, wetter, Cityname, Long, Lat):
-			self.Long[wetter] = Long
-			self.Lat[wetter] = Lat
-			if wetter == 0:
-				LCD4linux.WetterCity.value = Cityname
-				LCD4linux.WetterCity.save()
-				LCD4linux.WetterCoords.value = "%s,%s" % (Long, Lat)
-				LCD4linux.WetterCoords.save()
-			else:
-				LCD4linux.Wetter2City.value = Cityname
-				LCD4linux.Wetter2City.save()
-				LCD4linux.Wetter2Coords.value = "%s,%s" % (Long, Lat)
-				LCD4linux.Wetter2Coords.save()
-			try:
-				LCD4linux.saveToFile(LCD4config)
-				L4log("Wetter%s-saveGeodata: successful" % wetter)
-			except Exception:
-				L4log("Wetter%s-saveGeodata Error: 'lcd4config' is in use by other process, retrying next time..." % wetter)
+		self.Long[wetter] = Long
+		self.Lat[wetter] = Lat
+		if wetter == 0:
+			LCD4linux.WetterCity.value = Cityname
+			LCD4linux.WetterCity.save()
+			LCD4linux.WetterCoords.value = "%s,%s" % (Long, Lat)
+			LCD4linux.WetterCoords.save()
+		else:
+			LCD4linux.Wetter2City.value = Cityname
+			LCD4linux.Wetter2City.save()
+			LCD4linux.Wetter2Coords.value = "%s,%s" % (Long, Lat)
+			LCD4linux.Wetter2Coords.save()
+		try:
+			LCD4linux.saveToFile(LCD4config)
+			L4log("Wetter%s-saveGeodata: successful" % wetter)
+		except Exception:
+			L4log("Wetter%s-saveGeodata Error: 'lcd4config' is in use by other process, retrying next time..." % wetter)
 
 	def getCityCoords(self, ConfigWWW, jsonData):
 		try:
@@ -9923,17 +9927,20 @@ class UpdateStatus(Screen):
 			L4log("Wetter%s-citysearch Error: no data found." % ConfigWWW)
 
 	def downloadMSNcallback(self, ConfigWWW, jsonData):
-		iconmap = {"d000": "32", "d100": "34", "d200": "30", "d210": "12", "d211": "5", "d212": "14", "d220": "11", "d221": "42",
-					"d222": "16", "d240": "4", "d300": "28", "d310": "11", "d311": "5", "d312": "14", "d320": "39", "d321": "5",
-					"d322": "16", "d340": "4", "d400": "26", "d410": "9", "d411": "5", "d412": "14", "d420": "9", "d421": "5",
-					"d422": "16", "d430": "12", "d431": "5", "d432": "15", "d440": "4", "d500": "28", "d600": "20", "d603": "10",
-					"d605": "17", "d705": "17", "d900": "21", "d905": "17", "d907": "21", "n000": "31", "n100": "33", "n200": "29",
-					"n210": "45", "n211": "5", "n212": "46", "n220": "45", "n221": "5", "n222": "46", "n240": "47", "n300": "27",
-					"n310": "45", "n311": "11", "n312": "46", "n320": "45", "n321": "5", "n322": "46", "n340": "47", "n400": "26",
-					"n410": "9", "n411": "5", "n412": "14", "n420": "9", "n421": "5", "n422": "14", "n430": "12", "n431": "5",
-					"n432": "15", "n440": "4", "n500": "29", "n600": "20", "n603": "10", "n605": "17", "n705": "17", "n900": "21",
-					"n905": "17", "n907": "21"
-					}  # mapping: msn -> yahoo+
+		# Mapping of MSN weather conditions to Yahoo+ weather icons
+		iconmap = {
+			"d000": "32", "d100": "34", "d200": "30", "d210": "12", "d211": "5", "d212": "14", "d220": "11", "d221": "42",
+			"d222": "16", "d240": "4", "d300": "28", "d310": "11", "d311": "5", "d312": "14", "d320": "39", "d321": "5",
+			"d322": "16", "d340": "4", "d400": "26", "d410": "9", "d411": "5", "d412": "14", "d420": "9", "d421": "5",
+			"d422": "16", "d430": "12", "d431": "5", "d432": "15", "d440": "4", "d500": "28", "d600": "20", "d603": "10",
+			"d605": "17", "d705": "17", "d900": "21", "d905": "17", "d907": "21", "n000": "31", "n100": "33", "n200": "29",
+			"n210": "45", "n211": "5", "n212": "46", "n220": "45", "n221": "5", "n222": "46", "n240": "47", "n300": "27",
+			"n310": "45", "n311": "11", "n312": "46", "n320": "45", "n321": "5", "n322": "46", "n340": "47", "n400": "26",
+			"n410": "9", "n411": "5", "n412": "14", "n420": "9", "n421": "5", "n422": "14", "n430": "12", "n431": "5",
+			"n432": "15", "n440": "4", "n500": "29", "n600": "20", "n603": "10", "n605": "17", "n705": "17", "n900": "21",
+			"n905": "17", "n907": "21"
+		}  # mapping: msn -> yahoo+
+
 		global wwwWetter
 		self.WetterOK = False
 		wwwWetter[ConfigWWW] = ""
@@ -9984,10 +9991,12 @@ class UpdateStatus(Screen):
 			L4log("MSN-weather%s download Error: no data found." % ConfigWWW)
 
 	def downloadOMcallback(self, ConfigWWW, jsonData):
-		iconmap = {0: "32", 1: "34", 2: "30", 3: "28", 45: "20", 48: "21", 51: "9", 53: "9", 55: "9", 56: "8",
-					57: "10", 61: "9", 63: "11", 65: "12", 66: "8", 67: "7", 71: "42", 73: "14", 75: "41",
-					77: "35", 80: "9", 81: "11", 82: "12", 85: "42", 86: "43", 95: "38", 96: "4", 99: "4"
-					}  # mapping: om -> yahoo+
+		iconmap = {
+			0: "32", 1: "34", 2: "30", 3: "28", 45: "20", 48: "21", 51: "9", 53: "9", 55: "9", 56: "8",
+			57: "10", 61: "9", 63: "11", 65: "12", 66: "8", 67: "7", 71: "42", 73: "14", 75: "41",
+			77: "35", 80: "9", 81: "11", 82: "12", 85: "42", 86: "43", 95: "38", 96: "4", 99: "4"
+		}  # mapping: om -> yahoo+
+
 		global wwwWetter
 		self.WetterOK = False
 		wwwWetter[ConfigWWW] = ""
@@ -10011,8 +10020,8 @@ class UpdateStatus(Screen):
 			self.WDay[ConfigWWW] = {}
 			self.WDay[ConfigWWW]["Locname"] = LCD4linux.WetterCity.value if ConfigWWW == 0 else LCD4linux.Wetter2City.value
 			current = r.get("hourly", {})
-			for idx, time in enumerate(current.get("time", [])):  # collect current
-				if isotime in time:
+			for idx, time_val in enumerate(current.get("time", [])):  # collect current
+				if isotime in time_val:
 					self.WDay[ConfigWWW]["Temp_c"] = "%.0f" % current.get("temperature_2m", zerolist)[idx]
 					self.WDay[ConfigWWW]["Hum"] = "%.0f%%" % current.get("relativehumidity_2m", zerolist)[idx]
 					if LCD4linux.WetterWind.value == "0":
@@ -10041,13 +10050,14 @@ class UpdateStatus(Screen):
 			L4log("OM-weather%s download Error: no data found." % ConfigWWW)
 
 	def downloadOWMcallback(self, ConfigWWW, jsonData):
-		iconmap = {200: "37", 201: "4", 202: "3", 210: "37", 211: "4", 212: "3", 221: "3", 230: "37", 231: "38", 232: "38",
-					300: "9", 301: "9", 302: "9", 310: "9", 311: "9", 312: "9", 313: "11", 314: "12", 321: "11", 500: "9",
-					501: "11", 502: "11", 503: "12", 504: "12", 511: "10", 520: "11", 521: "11", 522: "12", 531: "40",
-					600: "42", 601: "16", 602: "15", 611: "18", 612: "10", 613: "17", 615: "6", 616: "5", 620: "14",
-					621: "42", 622: "13", 701: "20", 711: "22", 721: "21", 731: "19", 741: "20", 751: "19", 761: "19",
-					762: "22", 771: "23", 781: "0", 800: "32", 801: "34", 802: "30", 803: "26", 804: "28"
-					}  # mapping: owm -> yahoo+
+		iconmap = {
+			200: "37", 201: "4", 202: "3", 210: "37", 211: "4", 212: "3", 221: "3", 230: "37", 231: "38", 232: "38",
+			300: "9", 301: "9", 302: "9", 310: "9", 311: "9", 312: "9", 313: "11", 314: "12", 321: "11",
+			500: "9", 501: "11", 502: "11", 503: "12", 504: "12", 511: "10", 520: "11", 521: "11", 522: "12", 531: "40",
+			600: "42", 601: "16", 602: "15", 611: "18", 612: "10", 613: "17", 615: "6", 616: "5", 620: "14", 621: "42", 622: "13",
+			701: "20", 711: "22", 721: "21", 731: "19", 741: "20", 751: "19", 761: "19", 762: "22", 771: "23", 781: "0",
+			800: "32", 801: "34", 802: "30", 803: "26", 804: "28"
+		}  # mapping: owm -> yahoo+
 		global wwwWetter
 		self.WetterOK = False
 		wwwWetter[ConfigWWW] = ""
@@ -10118,13 +10128,14 @@ class UpdateStatus(Screen):
 			L4log("OWM-weather%s download Error: no data found." % ConfigWWW)
 
 	def downloadWUcallback(self, ConfigWWW, jsonData):
-		iconmap = {0: "32", 1: "34", 2: "30", 3: "28", 10: "21", 21: "40", 22: "42", 23: "18",
-					24: "8", 29: "38", 38: "15", 39: "41", 45: "20", 49: "20", 50: "9", 51: "9",
-					56: "8", 57: "8", 60: "40", 61: "11", 62: "40", 63: "12", 64: "40", 65: "12",
-					66: "10", 67: "10", 68: "6", 69: "18", 70: "14", 71: "14", 72: "16", 73: "16",
-					74: "41", 75: "41", 79: "17", 80: "11", 81: "12", 82: "12", 83: "18", 84: "18",
-					85: "14", 86: "16", 87: "7", 88: "18", 91: "37", 92: "38", 93: "16", 94: "41"
-					}  # mapping: wu -> yahoo+
+		iconmap = {
+			0: "32", 1: "34", 2: "30", 3: "28", 10: "21", 21: "40", 22: "42", 23: "18",
+			24: "8", 29: "38", 38: "15", 39: "41", 45: "20", 49: "20", 50: "9", 51: "9",
+			56: "8", 57: "8", 60: "40", 61: "11", 62: "40", 63: "12", 64: "40", 65: "12",
+			66: "10", 67: "10", 68: "6", 69: "18", 70: "14", 71: "14", 72: "16", 73: "16",
+			74: "41", 75: "41", 79: "17", 80: "11", 81: "12", 82: "12", 83: "18", 84: "18",
+			85: "14", 86: "16", 87: "7", 88: "18", 91: "37", 92: "38", 93: "16", 94: "41"
+		}  # mapping: wu -> yahoo+
 		global wwwWetter
 		self.WetterOK = False
 		wwwWetter[ConfigWWW] = ""
@@ -10185,15 +10196,15 @@ class UpdateStatus(Screen):
 
 	def downloadSunrise(self):
 		L4log("Sunrise...")
-		apkey = ""
 		if len(LCD4linux.WetterApiKeyOpenWeatherMap.value) > 599:
-			params = [("lat", self.Lat[0]),
-					("lon", self.Long[0]),
-					("lang", language.getLanguage().replace("_", "-").lower()[:2]),
-					("appid", LCD4linux.WetterApiKeyOpenWeatherMap.value),
-					("mode", "xml"),
-					("cnt", 1)
-					]
+			params = [
+				("lat", self.Lat[0]),
+				("lon", self.Long[0]),
+				("lang", language.getLanguage().replace("_", "-").lower()[:2]),
+				("appid", LCD4linux.WetterApiKeyOpenWeatherMap.value),
+				("mode", "xml"),
+				("cnt", 1)
+			]
 			feedurl = "http://api.openweathermap.org/data/2.5/weather"
 			L4log("Sunrise downloadstart:", feedurl)
 			callInThread(boundFunction(getPage, feedurl, params=params), self.downloadSunriseCallback, self.downloadSunriseError)
@@ -10665,8 +10676,7 @@ def MoonPosition(now=None):
 
 
 def MoonPhase(pos):
-	index = (pos * float(8)) + float("0.5")
-	index = floor(index)
+	index = floor(pos * 8 + 0.5)
 	return {
 		0: _("New Moon"),
 		1: _("First Quarter"),
@@ -10676,7 +10686,7 @@ def MoonPhase(pos):
 		5: _("Waning Moon"),
 		6: _("Waning Crescent"),
 		7: _("Last Quarter")
-		}[int(index) & 7]
+	}[index & 7]
 
 
 """
@@ -12572,7 +12582,7 @@ def LCD4linuxPIC(self, session):
 						else:
 							self.draw[draw].rectangle((POSX + 10, ConfigPos + 1, POSX + ProgressBar + 10, ConfigPos + ConfigSize - 1), outline=ConfigColor, fill=ConfigColorBG)
 				elif ConfigBorder.startswith("false") and ConfigColorBG != "0":  # no border, but show background (if not transparent)
-						self.draw[draw].rectangle((POSX + 10, ConfigPos, POSX + ProgressBar + 10, ConfigPos + ConfigSize), fill=ConfigColorBG)
+					self.draw[draw].rectangle((POSX + 10, ConfigPos, POSX + ProgressBar + 10, ConfigPos + ConfigSize), fill=ConfigColorBG)
 				elif ConfigBorder == "line":
 					self.draw[draw].rectangle((POSX + 10, ConfigPos + int(ConfigSize / 2) - 1, POSX + ProgressBar + 10, ConfigPos + int(ConfigSize / 2) + 1), outline=ConfigColor, fill=ConfigColor)
 				self.draw[draw].rectangle((POSX + 10, ConfigPos, POSX + event_run + 10, ConfigPos + ConfigSize), fill=ConfigColor)
@@ -12901,10 +12911,10 @@ def LCD4linuxPIC(self, session):
 					event_name += self.LEventsDesc[0][6]
 		if event_name == "":
 			if self.LShortDescription is not None and self.LExtendedDescription is not None:
-					if self.LShortDescription != "" and (ConfigType.startswith("1") or (ConfigType.startswith("2") and self.LExtendedDescription == "")):
-						event_name += self.LShortDescription + "\n"
-					if self.LExtendedDescription != "" and (ConfigType[1] == "1" or (ConfigType[1] == "2" and self.LShortDescription == "")):
-						event_name += self.LExtendedDescription
+				if self.LShortDescription != "" and (ConfigType.startswith("1") or (ConfigType.startswith("2") and self.LExtendedDescription == "")):
+					event_name += self.LShortDescription + "\n"
+				if self.LExtendedDescription != "" and (ConfigType[1] == "1" or (ConfigType[1] == "2" and self.LShortDescription == "")):
+					event_name += self.LExtendedDescription
 		if self.LsreftoString is not None and event_name == "":
 			sreffile = self.LsrefFile
 			datei = "%s.txt" % splitext(sreffile)[0]
@@ -14847,9 +14857,8 @@ def LCD4linuxPIC(self, session):
 			L4log("Error Background3")
 		if TVrunning is True and checkTVrunning is False:
 			TVrunning = False
-####
-#### Standby Modus
-####
+
+# Standby Modus
 	if (Standby.inStandby or ConfigStandby) and not self.SonosRunning and not self.YMCastRunning and not self.BlueRunning:
 		TVrunning = False
 		if str(LCD4linux.Standby.value) == "1":
@@ -15027,9 +15036,7 @@ def LCD4linuxPIC(self, session):
 		else:
 			Dunkel = writeHelligkeit([0, 0, 0], [0, 0, 0], False)
 
-####
-#### MediaPlayer
-####
+# MediaPlayer
 	elif (isMediaPlayer != "" and isMediaPlayer != "radio"):
 		if LCD4linux.LCDType1.value[0] == "4" or LCD4linux.LCDType2.value[0] == "4" or LCD4linux.LCDType3.value[0] == "4":
 			if "B" in LCD4linux.LCDTFT.value:
@@ -15219,9 +15226,7 @@ def LCD4linuxPIC(self, session):
 			Dunkel = writeHelligkeit([LCD4linux.MPHelligkeit.value, LCD4linux.MPHelligkeit2.value, LCD4linux.MPHelligkeit3.value], [LCD4linux.MPNight.value, LCD4linux.MPNight2.value, LCD4linux.MPNight3.value], False)
 	else:
 
-####
-#### ON Modus
-####
+# ON Modus
 		if LCD4linux.LCDType1.value[0] == "4" or LCD4linux.LCDType2.value[0] == "4" or LCD4linux.LCDType3.value[0] == "4":
 			if "A" in LCD4linux.LCDTFT.value:
 				if AktTFT != "BMP":
@@ -15575,7 +15580,7 @@ def autostart(reason, **kwargs):
 					exec("FritzList.append(%s)" % line)
 				rmFile(LCD4enigma2config + "lcd4fritz")
 		except Exception:
-				L4log("Error load Fritzlist")
+			L4log("Error load Fritzlist")
 
 	if reason == 1:
 		L4log("Stop...")
