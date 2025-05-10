@@ -45,8 +45,8 @@ class DmmBlindscanState(Screen):
 		<widget source="list" render="Listbox" position="%d,%d" size="%d,%d" scrollbarMode="showAlways" >
 			<convert type="TemplatedMultiContent">
 				{"template": [ MultiContentEntryText(pos = (%d, %d), size = (%d, %d), flags = RT_HALIGN_LEFT, text = %d) ],
-					"fonts": [gFont("Regular", %d)],
-					"itemHeight": %d
+				 	"fonts": [gFont("Regular", %d)],
+				 	"itemHeight": %d
 				}
 			</convert>
 		</widget>
@@ -599,14 +599,14 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		self["key_red"] = StaticText(_("Exit"))
 		self["key_green"] = StaticText("")
 		self["description"] = Label("")
+		self["footnote"] = Label("")
 
 		self.list = []
 		ConfigListScreen.__init__(self, self.list)
 		if self.scan_nims.value == "":  # no usable nims were found (handled in createConfig())
-			self["footnote"] = Label(_("Please setup your tuner configuration."))
+			self["footnote"].setText(_("Please setup your tuner configuration."))
 		else:
 			self.createSetup()
-			self["footnote"] = Label(_("Press OK to start the scan."))
 
 		if self.selectionChanged not in self["config"].onSelectionChanged:
 			self["config"].onSelectionChanged.append(self.selectionChanged)
@@ -638,7 +638,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 		self.list = []
 		self.multiscanlist = []
 		index_to_scan = int(self.scan_nims.value)
-		print("[dmmBlindscan][createSetup] ID: ", index_to_scan)
+		print("[dmmBlindscan][createSetup] ID:", index_to_scan)
 
 		self.tunerEntry = getConfigListEntry(_("Tuner"), self.scan_nims, _("Select a tuner that is configured for the satellite you wish to search"))
 		self.list.append(self.tunerEntry)
@@ -658,6 +658,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			self["description"].setText(_("LNB of current satellite not compatible with plugin"))
 			self["key_green"].setText("")
 			self["actions2"].setEnabled(False)
+			print("[dmmBlindscan][createSetup] SatBandCheck failed for nims:", self.scan_nims.value)
 			return
 
 		self.setFreqLimits()
@@ -939,7 +940,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 
 	def SatBandCheck(self, cur_orb_pos):
 	# search for LNB type in Universal, C band, or user defined.
-		print("cur_orb_pos : ", cur_orb_pos)
+		print("[dmmBlindscan][SatBandCheck] cur_orb_pos:", cur_orb_pos)
 		self.is_c_band_scan = False
 		self.is_Ku_band_scan = False
 		self.suggestedPolarisation = _("vertical and horizontal")
@@ -948,6 +949,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			nimconfig = nim.config.dvbs
 		else:
 			nimconfig = nim.config
+		print("[dmmBlindscan][SatBandCheck] configMode:", nimconfig.configMode.getValue())
 		if nimconfig.configMode.getValue() == "equal":
 			slotid = int(nimconfig.connectedTo.value)
 			nim = nimmanager.nim_slots[slotid]
@@ -956,7 +958,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			else:
 				nimconfig = nim.config
 		if nimconfig.configMode.getValue() == "advanced":
-			if nimconfig.advanced.sats.value in ("3605", "3606"):
+			if int(nimconfig.advanced.sats.value) in (3605, 3606):
 				currSat = nimconfig.advanced.sat[int(nimconfig.advanced.sats.value)]
 				import ast
 				userSatellitesList = ast.literal_eval(currSat.userSatellitesList.getValue())
@@ -965,14 +967,18 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			else:
 				currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
-			if lnbnum == 0 and nimconfig.advanced.sats.value in ("3601", "3602", "3603", "3604"):
+			print("[dmmBlindscan][SatBandCheck] lnbnum:", lnbnum)
+			if lnbnum == 0 and int(nimconfig.advanced.sats.value) in (3601, 3602, 3603, 3604):
 				lnbnum = 65 + int(nimconfig.advanced.sats.value) - 3601
+			print("[dmmBlindscan][SatBandCheck] nimconfig.advanced.sats:", nimconfig.advanced.sats.getValue())
+			print("[dmmBlindscan][SatBandCheck] modified lnbnum:", lnbnum)
 			currLnb = nimconfig.advanced.lnb[lnbnum]
+			print("[dmmBlindscan][SatBandCheck] currLnb:", currLnb)
 			if isinstance(currLnb, ConfigNothing):
 				return False
 			lof = currLnb.lof.getValue()
-			print("[Blindscan] lofl: ", currLnb.lofl.value)
-			print("[Blindscan] lofh: ", currLnb.lofh.value)
+			print("[dmmBlindscan][SatBandCheck] lofl: ", currLnb.lofl.value)
+			print("[dmmBlindscan][SatBandCheck] lofh: ", currLnb.lofh.value)
 			if lof == "universal_lnb":
 				self.is_Ku_band_scan = True
 				return True
@@ -986,7 +992,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 				else:  # normal "user_defined"
 					self.user_defined_lnb_lo_freq = currLnb.lofl.value
 				self.user_defined_lnb_scan = True
-				print("[Blindscan][SatBandCheck] user defined local oscillator frequency: %d" % self.user_defined_lnb_lo_freq)
+				print("[dmmBlindscan][SatBandCheck] user defined local oscillator frequency: %d" % self.user_defined_lnb_lo_freq)
 				return True
 			elif lof == "circular_lnb":  # lnb for use at positions 360 and 560
 				self.user_defined_lnb_lo_freq = self.circular_lnb_lo_freq
