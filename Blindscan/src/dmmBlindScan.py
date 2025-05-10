@@ -958,7 +958,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 			else:
 				nimconfig = nim.config
 		if nimconfig.configMode.getValue() == "advanced":
-			if int(nimconfig.advanced.sats.value) in (3605, 3606):
+			if nimconfig.advanced.sats.value in (3605, 3606):
 				currSat = nimconfig.advanced.sat[int(nimconfig.advanced.sats.value)]
 				import ast
 				userSatellitesList = ast.literal_eval(currSat.userSatellitesList.getValue())
@@ -968,7 +968,7 @@ class DmmBlindscan(ConfigListScreen, Screen, SatelliteTransponderSearchSupport, 
 				currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
 			print("[dmmBlindscan][SatBandCheck] lnbnum:", lnbnum)
-			if lnbnum == 0 and int(nimconfig.advanced.sats.value) in (3601, 3602, 3603, 3604):
+			if lnbnum == 0 and nimconfig.advanced.sats.value in (3601, 3602, 3603, 3604):
 				lnbnum = 65 + int(nimconfig.advanced.sats.value) - 3601
 			print("[dmmBlindscan][SatBandCheck] nimconfig.advanced.sats:", nimconfig.advanced.sats.getValue())
 			print("[dmmBlindscan][SatBandCheck] modified lnbnum:", lnbnum)
