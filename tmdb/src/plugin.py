@@ -10,6 +10,7 @@
 # source code of your modifications.
 #######################################################################
 
+from enigma import eServiceCenter
 from Plugins.Plugin import PluginDescriptor
 
 from Components.config import *
@@ -44,8 +45,7 @@ config.plugins.tmdb.apiKey = ConfigText(default='intern')
 
 
 def movielist(session, service, **kwargs):
-	reload(tmdb)
-	from enigma import eServiceCenter
+#	reload(tmdb)
 	serviceHandler = eServiceCenter.getInstance()
 	info = serviceHandler.info(service)
 	path = service.getPath()
@@ -60,7 +60,7 @@ def movielist(session, service, **kwargs):
 
 
 def eventinfo(session, eventName="", **kwargs):
-	reload(tmdb)
+#	reload(tmdb)
 	if not eventName:
 		s = session.nav.getCurrentService()
 		if s:
@@ -71,9 +71,20 @@ def eventinfo(session, eventName="", **kwargs):
 	session.open(tmdb.tmdbScreen, eventName)
 
 
+def channelSelectionContextMenu(session, service=None, *args, **kwargs):
+	try:
+		info = eServiceCenter.getInstance().info(service)
+		event = info.getEvent(service)
+		eventName = event and event.getEventName() or ''
+		session.open(tmdb.tmdbScreen, eventName)
+	except Exception as e:
+		print(f"[TMDb] Error: channelSelectionContextMenu {e}")
+
+
 def Plugins(**kwargs):
 	pList = [
 			PluginDescriptor(name="TMDb", description=_("TMDb search"), where=PluginDescriptor.WHERE_MOVIELIST, fnc=movielist, needsRestart=False),
+			PluginDescriptor(name=_("TMDb search"), description=_("TMDb search"), where=PluginDescriptor.WHERE_CHANNEL_CONTEXT_MENU, needsRestart=False, fnc=channelSelectionContextMenu),
 			PluginDescriptor(name=_("TMDb search"), description=_("The Movie Database gives detailed information about the selected program or movie."), where=PluginDescriptor.WHERE_EVENTINFO, fnc=eventinfo, needsRestart=False)
 			]
 	return pList
