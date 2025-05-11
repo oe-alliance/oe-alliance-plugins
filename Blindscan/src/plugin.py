@@ -1505,7 +1505,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			else:
 				nimconfig = nim.config
 		if nimconfig.configMode.getValue() == "advanced":
-			if nimconfig.advanced.sats.value in (3605, 3606):
+			if nimconfig.advanced.sats.value in ("3605", "3606"):
 				currSat = nimconfig.advanced.sat[int(nimconfig.advanced.sats.value)]
 				import ast
 				userSatellitesList = ast.literal_eval(currSat.userSatellitesList.getValue())
@@ -1514,7 +1514,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			else:
 				currSat = nimconfig.advanced.sat[cur_orb_pos]
 			lnbnum = int(currSat.lnb.getValue())
-			if lnbnum == 0 and nimconfig.advanced.sats.value in (3601, 3602, 3603, 3604):
+			if lnbnum == 0 and nimconfig.advanced.sats.value in ("3601", "3602", "3603", "3604"):
 				lnbnum = 65 + int(nimconfig.advanced.sats.value) - 3601
 			currLnb = nimconfig.advanced.lnb[lnbnum]
 			if isinstance(currLnb, ConfigNothing):
