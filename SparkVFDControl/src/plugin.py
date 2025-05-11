@@ -170,10 +170,14 @@ class Channelnumber:
 
 	def showRec(self):
 		try:
-			#not all images support recording type indicators
-			recordings = len(NavigationInstance.instance.getRecordings(False, Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue())))
+			# Not all images have getIndicatorRecordingsCount
+			recordings = NavigationInstance.instance.getIndicatorRecordingsCount()
 		except:
-			recordings = len(NavigationInstance.instance.getRecordings())
+			try:
+				# Not all images support recording type indicators / TODO: This should be replaced by getIndicatorRecordingsCount
+				recordings = len(NavigationInstance.instance.getRecordings(False, Components.RecordingConfig.recType(config.recording.show_rec_symbol_for_rec_types.getValue())))
+			except:
+				recordings = len(NavigationInstance.instance.getRecordings())
 
 		if recordings >= 1:
 			pattern = 4294967295
