@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PiconManagerMod\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-11 14:28+0200\n"
+"POT-Creation-Date: 2022-11-03 07:55+0100\n"
 "PO-Revision-Date: \n"
-"Last-Translator: Masta2002\n"
+"Last-Translator: NaseDC\n"
 "Language-Team: NaseDC+shadowrider <plugins@fselbig.de>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -17,333 +17,191 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#: plugin.py:75
-msgid "PiconManager"
-msgstr "PiconManager"
-
-#: plugin.py:76
-msgid "Manage your Picons"
-msgstr "Verwalten Sie Ihre Picons"
-
-#: plugin.py:247 plugin.py:1123
-msgid "Picon folder: "
-msgstr "Piconordner: "
-
-#: plugin.py:249
 msgid " "
 msgstr ""
 
-#: plugin.py:250
-msgid "Reading Channels..."
-msgstr "Lese Kanäle..."
-
-#: plugin.py:251
-msgid "Picons loaded: "
-msgstr "Picons geladen: "
-
-#: plugin.py:252 plugin.py:937 plugin.py:1013 plugin.py:1067
-msgid "Picons not found: "
-msgstr "Nicht gefundene Picons: "
-
-#: plugin.py:253
-msgid "Download progress: "
-msgstr "Fortschritt: "
-
-#: plugin.py:254
-msgid "Show group: "
-msgstr "Zeige Gruppe: "
-
-#: plugin.py:256
-msgid "Creator: "
-msgstr "Ersteller: "
-
-#: plugin.py:258
-msgid "Size: "
-msgstr "Größe: "
-
-#: plugin.py:260 plugin.py:1471
-msgid "Color depth: "
-msgstr "Farbtiefe: "
-
-#: plugin.py:262
-msgid "Not older than X days: "
-msgstr "Nicht älter als x Tage: "
-
-#: plugin.py:264
-msgid "Standard picon: "
-msgstr "Standard-Picon: "
-
-#: plugin.py:272 plugin.py:305
-msgid "Select drive"
-msgstr "Laufwerk auswählen"
-
-#: plugin.py:273 plugin.py:306
-msgid "Download picons"
-msgstr "Lade Picons"
-
-#: plugin.py:274 plugin.py:307
-msgid "Select path"
-msgstr "Verzeichnis wählen"
-
-#: plugin.py:275
-msgid "Remove Picons Unused"
-msgstr "Unbenutzte Picons entfernen"
-
-#: plugin.py:280
-msgid "Show random Picon"
-msgstr "Zeige zufälliges Picon"
-
-#: plugin.py:281
-msgid "Exit"
-msgstr "Beenden"
-
-#: plugin.py:289
-msgid "Previous picon creator"
-msgstr "Vorheriger Piconersteller"
-
-#: plugin.py:290
-msgid "Next picon creator"
-msgstr "Nächster Piconersteller"
-
-#: plugin.py:291
-msgid "Previous picon size"
-msgstr "Vorherige Picongrösse"
-
-#: plugin.py:292
-msgid "Next picon size"
-msgstr "Nächste Picongrösse"
-
-#: plugin.py:293
-msgid "Previous color depth"
-msgstr "Vorherige Farbtiefe"
-
-#: plugin.py:294
-msgid "Next color depth"
-msgstr "Nächste Farbtiefe"
-
-#: plugin.py:301
-msgid "More selections"
-msgstr "Weitere Filter"
-
-#: plugin.py:302
-msgid "Next Group"
-msgstr "Nächste Gruppe"
-
-#: plugin.py:303
-msgid "Previous Group"
-msgstr "Vorherige Gruppe"
-
-#: plugin.py:304
-msgid "Set / clear standard Picon"
-msgstr "Setze / entferne Standardpicon"
-
-#: plugin.py:308
-msgid "Open picon remover"
-msgstr "Öffne Picon Entferner"
-
-#: plugin.py:317 plugin.py:1119
-msgid "V"
-msgstr "V"
-
-#: plugin.py:338
 #, python-format
-msgid "Removed %d unused picons!"
-msgstr "%d unbenutzte Picons entfernt!"
+msgid "%s"
+msgstr ""
 
-#: plugin.py:348
-msgid "Select service for preferred picon"
-msgstr "Sender für das Picon wählen"
+msgid "Activate debug logging?"
+msgstr "Debug-Protokollierung aktivieren?"
 
-#: plugin.py:475
-msgid "FreeSpace: Drive Not Found!"
-msgstr "Freier Speicher: Laufwerk nicht gefunden!"
-
-#: plugin.py:490
-msgid "FreeSpace:"
-msgstr "Freier Speicher:"
-
-#: plugin.py:495
-#, python-brace-format
-msgid "FreeSpace: Error - {error}"
-msgstr "Freier Speicher: Fehler - {error}"
-
-#: plugin.py:541
-msgid "Channels:"
-msgstr "Kanäle:"
-
-#: plugin.py:558 plugin.py:649 plugin.py:660
 msgid "All"
 msgstr "Alle"
 
-#: plugin.py:562
-msgid "Loading, please wait..."
-msgstr "Lade, bitte warten ..."
-
-#: plugin.py:674
-#, python-format
-msgid "%s"
-msgstr "%s"
-
-#: plugin.py:732
-msgid "No search results, please change filter options..."
-msgstr "Keine Suchergebnisse , ändere bitte die Filteroptionen..."
-
-#: plugin.py:765
-msgid "No picons available in selected list"
-msgstr "Keine Picons in der ausgewählten Liste vorhanden"
-
-#: plugin.py:884
-msgid "is not installed."
-msgstr "ist nicht installiert."
-
-#: plugin.py:906
-msgid "loading"
-msgstr "Herunterladen der Picons"
-
-#: plugin.py:936 plugin.py:1004
-msgid "Picon loaded:"
-msgstr "Picons geladen:"
-
-#: plugin.py:950
-msgid "Downloads completed"
-msgstr "Downloads abgeschlossen"
-
-#: plugin.py:950
-#, python-format
-msgid "Success: %d"
-msgstr "Erfolgreich: %d"
-
-#: plugin.py:950
-#, python-format
-msgid "Errors: %d"
-msgstr "Fehler: %d"
-
-#: plugin.py:1048
-msgid "Clean up the directory"
-msgstr "Verzeichnis bereinigen"
-
-#: plugin.py:1068
-msgid "Download finished !"
-msgstr "Herunterladen beendet !"
-
-#: plugin.py:1081
-msgid "Sorry, service is temporarily unavailable"
-msgstr "Server momentan nicht erreichbar"
-
-#: plugin.py:1089
-msgid "Server temporarily unavailable"
-msgstr "Server momentan nicht erreichbar"
-
-#: plugin.py:1124
-msgid "Reading Picons..."
-msgstr "Lese Picons..."
-
-#: plugin.py:1127 plugin.py:1380 plugin.py:1442 plugin.py:1447 plugin.py:1457
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: plugin.py:1128
-msgid "Delete"
-msgstr "Löschen"
+msgid "Channels:"
+msgstr "Kanäle:"
 
-#: plugin.py:1142 plugin.py:1224
-msgid "Not valid path!"
-msgstr "Kein gültiger Pfad!"
-
-#: plugin.py:1151
-msgid "Picons to be deleted: {}"
-msgstr "Zu löschende Picons: {}"
-
-#: plugin.py:1156 plugin.py:1188
-msgid "Error: "
-msgstr "Fehler: "
-
-#: plugin.py:1175
-msgid "Picon path not found!"
-msgstr "Picon Pfad nicht gefunden!"
-
-#: plugin.py:1178
-msgid "Loading channels..."
-msgstr "Lade Kanäle..."
-
-#: plugin.py:1182
-msgid "Scanning picon folder..."
-msgstr "Scanne Picon Ordner..."
-
-#: plugin.py:1241
-msgid "Scanning Error"
-msgstr "Fehler beim Scannen"
-
-#: plugin.py:1250
-msgid "Picons founds: {}"
-msgstr "Picons gefunden: {}"
-
-#: plugin.py:1255
-msgid "Data display error"
-msgstr "Datenanzeigefehler"
-
-#: plugin.py:1293
-msgid "Operation completed!"
-msgstr "Vorgang abgeschlossen!"
-
-#: plugin.py:1294
-msgid "Deleted: {}"
-msgstr "Gelöscht: {}"
-
-#: plugin.py:1295
-msgid "Errors: {}"
-msgstr "Fehler: {}"
-
-#: plugin.py:1375
 msgid "Choose Picon folder"
 msgstr "Wähle Piconverzeichnis"
 
-#: plugin.py:1381
-msgid "Ok"
-msgstr "OK"
+msgid "Clean up the directory"
+msgstr "Verzeichnis bereinigen"
 
-#: plugin.py:1440
-msgid "PiconManagerMod - Settings"
-msgstr "PiconManagerMod - Einstellungen"
+msgid "Color depth: "
+msgstr "Farbtiefe: "
 
-#: plugin.py:1441
-msgid "OK"
-msgstr "OK"
+msgid "Create folder"
+msgstr "Erstelle Ordner"
 
-#: plugin.py:1448 plugin.py:1456
-msgid "OK and exit"
-msgstr "OK und Beenden"
-
-#: plugin.py:1467
-msgid "Select Server:"
-msgstr "Wähle Server:"
-
-#: plugin.py:1468
-msgid "Set Filter:"
-msgstr "Setze Filter:"
-
-#: plugin.py:1469
-msgid "Size"
-msgstr "Größe"
-
-#: plugin.py:1470
 msgid "Creator"
 msgstr "Ersteller"
 
-#: plugin.py:1472
+msgid "Creator: "
+msgstr "Ersteller: "
+
+msgid "Download finished !"
+msgstr "Herunterladen beendet !"
+
+msgid "Download picons"
+msgstr "Lade Picons"
+
+msgid "Download progress: "
+msgstr "Fortschritt: "
+
+msgid "Enter Picon Dir:"
+msgstr "Erstelle Piconverzeichnis:"
+
+msgid "Exit"
+msgstr "Beenden"
+
+msgid "FreeSpace:"
+msgstr "Freier Speicher:"
+
+msgid "FreeSpace: Drive Not Found !"
+msgstr "Freier Speicher: Kein Speicher gefunden!"
+
+msgid "Loaded Picons:"
+msgstr "Geladene Picons:"
+
+msgid "Loading, please wait..."
+msgstr "Lade, bitte warten ..."
+
+msgid "Manage your Picons"
+msgstr "Verwalten Sie Ihre Picons"
+
+msgid "More selections"
+msgstr "Weitere Filter"
+
+msgid "Next Group"
+msgstr "Nächste Gruppe"
+
+msgid "Next color depth"
+msgstr "Nächste Farbtiefe"
+
+msgid "Next picon creator"
+msgstr "Nächster Piconersteller"
+
+msgid "Next picon size"
+msgstr "Nächste Picongrösse"
+
+msgid "No search results, please change filter options ..."
+msgstr "Keine Suchergebnisse , ändere bitte die Filteroptionen ..."
+
+msgid "Not found Picons:"
+msgstr "Nicht gefundene Picons:"
+
 msgid "Not older than X days:"
 msgstr "Nicht älter als x Tage:"
 
-#: plugin.py:1473
+msgid "Not older than X days: "
+msgstr "Nicht älter als x Tage: "
+
+msgid "OK"
+msgstr "OK"
+
+msgid "OK and exit"
+msgstr "OK und Beenden"
+
+msgid "Ok"
+msgstr "OK"
+
 msgid "Option:"
 msgstr "Option:"
 
-#: plugin.py:1474
-msgid "Remember permanently?"
-msgstr "Dauerhaft merken?"
+msgid "Picon folder: "
+msgstr "Piconordner: "
 
-#: plugin.py:1475
-msgid "Activate debug logging?"
-msgstr "Debug-Protokollierung aktivieren?"
+msgid "PiconManager (mod)"
+msgstr "PiconManager (mod)"
+
+msgid "PiconManagerMod - Settings"
+msgstr "PiconManagerMod - Einstellungen"
+
+msgid "Picons loaded: "
+msgstr "Picons geladen: "
+
+msgid "Picons not found: "
+msgstr "Nicht gefundene Picons: "
+
+msgid "Previous Group"
+msgstr "Vorherige Gruppe"
+
+msgid "Previous color depth"
+msgstr "Vorherige Farbtiefe"
+
+msgid "Previous picon creator"
+msgstr "Vorheriger Piconersteller"
+
+msgid "Previous picon size"
+msgstr "Vorherige Picongrösse"
+
+msgid "Reading Channels..."
+msgstr "Lese Kanäle..."
+
+msgid "Remember permanently?"
+msgstr "dauerhaft merken?"
+
+msgid "Select Server:"
+msgstr "Wähle Server:"
+
+msgid "Select drive"
+msgstr "Laufwerk auswählen"
+
+msgid "Select path"
+msgstr "Verzeichnis wählen"
+
+msgid "Select service for preferred picon"
+msgstr "Sender für das Picon wählen"
+
+msgid "Server temporarily unavailable"
+msgstr "Server momentan nicht erreichbar"
+
+msgid "Set / clear standard Picon"
+msgstr "Setze / entferne Standardpicon"
+
+msgid "Set Filter:"
+msgstr "Setze Filter:"
+
+msgid "Show group: "
+msgstr "Zeige Gruppe: "
+
+msgid "Show random Picon"
+msgstr "Zeige zufälliges Picon"
+
+msgid "Size"
+msgstr "Größe"
+
+msgid "Size: "
+msgstr "Größe: "
+
+msgid "Sorry, service is temporarily unavailable"
+msgstr "Server momentan nicht erreichbar"
+
+msgid "Standard picon: "
+msgstr "Standard-Picon: "
+
+msgid "V"
+msgstr "V"
+
+msgid "is not installed."
+msgstr "ist nicht installiert."
+
+msgid "loading"
+msgstr "Herunterladen der Picons"
