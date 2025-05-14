@@ -23,3 +23,33 @@ def _(txt):
 
 localeInit()
 language.addCallback(localeInit)
+
+
+DEFAULT_PICON_PATH = '/usr/share/enigma2/picon'
+ALTERN_PICON_PATH = [
+	'/usr/share/enigma2/picon',
+	'/media/usb/picon',
+	'/media/hdd/picon',
+	'/picon',
+	'/data/picon',
+	'/media/mmc/picon',
+	'/media/sdcard/picon',
+	'/media/hdd/XPicons/picon',
+	'/media/hdd/ZZPicons/picon',
+	'/media/usb/XPicons/picon',
+	'/media/usb/ZZPicons/picon',
+	'/usr/share/enigma2/XPicons/picon',
+	'/usr/share/enigma2/ZZPicons/picon',
+	'user_defined'
+]
+
+
+def getConfigPathList():
+	ChoicePath = []
+	for path in ALTERN_PICON_PATH:
+		if len(path) == 2:
+			ChoicePath.append(path)
+		else:
+			ChoicePath.append((path, _(path)))
+
+	return ChoicePath

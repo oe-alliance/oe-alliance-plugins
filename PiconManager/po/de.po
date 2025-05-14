@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PiconManagerMod\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 07:55+0100\n"
+"POT-Creation-Date: 2025-05-14 15:14+0200\n"
 "PO-Revision-Date: \n"
-"Last-Translator: NaseDC\n"
+"Last-Translator: Masta2002\n"
 "Language-Team: NaseDC+shadowrider <plugins@fselbig.de>\n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid " "
 msgstr ""
 
 #, python-format
 msgid "%s"
-msgstr ""
+msgstr "%s"
 
 msgid "Activate debug logging?"
 msgstr "Debug-Protokollierung aktivieren?"
@@ -47,14 +47,20 @@ msgstr "Verzeichnis bereinigen"
 msgid "Color depth: "
 msgstr "Farbtiefe: "
 
-msgid "Create folder"
-msgstr "Erstelle Ordner"
-
 msgid "Creator"
 msgstr "Ersteller"
 
 msgid "Creator: "
 msgstr "Ersteller: "
+
+msgid "Data display error"
+msgstr "Datenanzeigefehler"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Deleted: {}"
+msgstr "Gelöscht: {}"
 
 msgid "Download finished !"
 msgstr "Herunterladen beendet !"
@@ -65,8 +71,15 @@ msgstr "Lade Picons"
 msgid "Download progress: "
 msgstr "Fortschritt: "
 
-msgid "Enter Picon Dir:"
-msgstr "Erstelle Piconverzeichnis:"
+msgid "Downloads completed"
+msgstr "Downloads abgeschlossen"
+
+#, python-format
+msgid "Errors: %d"
+msgstr "Fehler: %d"
+
+msgid "Errors: {}"
+msgstr "Fehler: {}"
 
 msgid "Exit"
 msgstr "Beenden"
@@ -74,11 +87,15 @@ msgstr "Beenden"
 msgid "FreeSpace:"
 msgstr "Freier Speicher:"
 
-msgid "FreeSpace: Drive Not Found !"
-msgstr "Freier Speicher: Kein Speicher gefunden!"
+msgid "FreeSpace: Drive Not Found!"
+msgstr "Freier Speicher: Laufwerk nicht gefunden!"
 
-msgid "Loaded Picons:"
-msgstr "Geladene Picons:"
+#, python-brace-format
+msgid "FreeSpace: Error - {error}"
+msgstr "Freier Speicher: Fehler - {error}"
+
+msgid "Invalid path!"
+msgstr "Ungültiger Pfad!"
 
 msgid "Loading, please wait..."
 msgstr "Lade, bitte warten ..."
@@ -101,11 +118,14 @@ msgstr "Nächster Piconersteller"
 msgid "Next picon size"
 msgstr "Nächste Picongrösse"
 
-msgid "No search results, please change filter options ..."
-msgstr "Keine Suchergebnisse , ändere bitte die Filteroptionen ..."
+msgid "No picons available in selected list"
+msgstr "Keine Picons in der ausgewählten Liste vorhanden"
 
-msgid "Not found Picons:"
-msgstr "Nicht gefundene Picons:"
+msgid "No picons to delete"
+msgstr "Keine Picons zu löschen"
+
+msgid "No search results, please change filter options..."
+msgstr "Keine Suchergebnisse , ändere bitte die Filteroptionen..."
 
 msgid "Not older than X days:"
 msgstr "Nicht älter als x Tage:"
@@ -122,23 +142,38 @@ msgstr "OK und Beenden"
 msgid "Ok"
 msgstr "OK"
 
+msgid "Open picon remover"
+msgstr "Öffne Picon Entferner"
+
+msgid "Operation completed!"
+msgstr "Vorgang abgeschlossen!"
+
 msgid "Option:"
 msgstr "Option:"
 
 msgid "Picon folder: "
 msgstr "Piconordner: "
 
-msgid "PiconManager (mod)"
-msgstr "PiconManager (mod)"
+msgid "Picon loaded:"
+msgstr "Picons geladen:"
+
+msgid "PiconManager"
+msgstr "PiconManager"
 
 msgid "PiconManagerMod - Settings"
-msgstr "PiconManagerMod - Einstellungen"
+msgstr "PiconManager - Einstellungen"
+
+msgid "Picons found: {}"
+msgstr "Picons gefunden: {}"
 
 msgid "Picons loaded: "
 msgstr "Picons geladen: "
 
 msgid "Picons not found: "
 msgstr "Nicht gefundene Picons: "
+
+msgid "Picons to be deleted: {}"
+msgstr "Zu löschende Picons: {}"
 
 msgid "Previous Group"
 msgstr "Vorherige Gruppe"
@@ -155,8 +190,18 @@ msgstr "Vorherige Picongrösse"
 msgid "Reading Channels..."
 msgstr "Lese Kanäle..."
 
+msgid "Reading Picons..."
+msgstr "Lese Picons..."
+
 msgid "Remember permanently?"
-msgstr "dauerhaft merken?"
+msgstr "Dauerhaft merken?"
+
+msgid "Remove Picons Unused"
+msgstr "Entferne Unbenutzte Picons"
+
+#, python-format
+msgid "Removed %d unused picons!"
+msgstr "%d unbenutzte Picons entfernt!"
 
 msgid "Select Server:"
 msgstr "Wähle Server:"
@@ -196,6 +241,13 @@ msgstr "Server momentan nicht erreichbar"
 
 msgid "Standard picon: "
 msgstr "Standard-Picon: "
+
+#, python-format
+msgid "Success: %d"
+msgstr "Erfolgreich: %d"
+
+msgid "To delete: {}"
+msgstr "Zu löschen: {}"
 
 msgid "V"
 msgstr "V"

@@ -1,14 +1,14 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the PiconManager package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: PiconManager VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 14:49+0100\n"
+"POT-Creation-Date: 2025-05-14 15:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,13 +45,19 @@ msgstr ""
 msgid "Color depth: "
 msgstr ""
 
-msgid "Create folder"
-msgstr ""
-
 msgid "Creator"
 msgstr ""
 
 msgid "Creator: "
+msgstr ""
+
+msgid "Data display error"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Deleted: {}"
 msgstr ""
 
 msgid "Download finished !"
@@ -63,7 +69,14 @@ msgstr ""
 msgid "Download progress: "
 msgstr ""
 
-msgid "Enter Picon Dir:"
+msgid "Downloads completed"
+msgstr ""
+
+#, python-format
+msgid "Errors: %d"
+msgstr ""
+
+msgid "Errors: {}"
 msgstr ""
 
 msgid "Exit"
@@ -72,10 +85,14 @@ msgstr ""
 msgid "FreeSpace:"
 msgstr ""
 
-msgid "FreeSpace: Drive Not Found !"
+msgid "FreeSpace: Drive Not Found!"
 msgstr ""
 
-msgid "Loaded Picons:"
+#, python-brace-format
+msgid "FreeSpace: Error - {error}"
+msgstr ""
+
+msgid "Invalid path!"
 msgstr ""
 
 msgid "Loading, please wait..."
@@ -99,10 +116,13 @@ msgstr ""
 msgid "Next picon size"
 msgstr ""
 
-msgid "No search results, please change filter options ..."
+msgid "No picons available in selected list"
 msgstr ""
 
-msgid "Not found Picons:"
+msgid "No picons to delete"
+msgstr ""
+
+msgid "No search results, please change filter options..."
 msgstr ""
 
 msgid "Not older than X days:"
@@ -120,22 +140,37 @@ msgstr ""
 msgid "Ok"
 msgstr ""
 
+msgid "Open picon remover"
+msgstr ""
+
+msgid "Operation completed!"
+msgstr ""
+
 msgid "Option:"
 msgstr ""
 
 msgid "Picon folder: "
 msgstr ""
 
-msgid "PiconManager (mod)"
+msgid "Picon loaded:"
+msgstr ""
+
+msgid "PiconManager"
 msgstr ""
 
 msgid "PiconManagerMod - Settings"
+msgstr ""
+
+msgid "Picons found: {}"
 msgstr ""
 
 msgid "Picons loaded: "
 msgstr ""
 
 msgid "Picons not found: "
+msgstr ""
+
+msgid "Picons to be deleted: {}"
 msgstr ""
 
 msgid "Previous Group"
@@ -153,7 +188,17 @@ msgstr ""
 msgid "Reading Channels..."
 msgstr ""
 
+msgid "Reading Picons..."
+msgstr ""
+
 msgid "Remember permanently?"
+msgstr ""
+
+msgid "Remove Picons Unused"
+msgstr ""
+
+#, python-format
+msgid "Removed %d unused picons!"
 msgstr ""
 
 msgid "Select Server:"
@@ -193,6 +238,13 @@ msgid "Sorry, service is temporarily unavailable"
 msgstr ""
 
 msgid "Standard picon: "
+msgstr ""
+
+#, python-format
+msgid "Success: %d"
+msgstr ""
+
+msgid "To delete: {}"
 msgstr ""
 
 msgid "V"

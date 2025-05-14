@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 #
-#	(c)2022 by Oberhesse (contact through www.vuplus-support.org)
-#	Creative Commons CC BY-NC-SA 3.0 License
+#   (c)2022 by Oberhesse (contact through www.vuplus-support.org)
+#   Creative Commons CC BY-NC-SA 3.0 License
 #
 
-def correctedFileName(s):  #remove forbidden characters
+def correctedFileName(s):  # remove forbidden characters
 	return s.replace('>', '').replace('<', '').replace('|', '').replace(':', '').replace('*', '').replace('=', '').replace('\\', '').replace('/', '').replace('?', '')
 
 
@@ -46,33 +46,33 @@ def reducedName(byName):
 def getInteroperableNames(serviceName, vtiMode=1):
 	try:
 		res = []
-		comp = fb = fbComp = ''  #example Nick/MTV+ HD
+		comp = fb = ''  # example Nick/MTV+ HD
 		if vtiMode:
-			serviceNameVTi = VTiName(serviceName)  #Nick_MTV+ HD
+			serviceNameVTi = VTiName(serviceName)  # Nick_MTV+ HD
 		else:
-			serviceNameVTi = serviceName   #Nick/MTV+ HD
+			serviceNameVTi = serviceName   # Nick/MTV+ HD
 
-		corr = correctedFileName(serviceName)   #NickMTV+ HD
+		corr = correctedFileName(serviceName)   # NickMTV+ HD
 		if (corr != serviceName):
 			res.append(corr)
 			serviceName = corr
 
-		comp = interoperableName(serviceName)   #nickmtvplushd
+		comp = interoperableName(serviceName)   # nickmtvplushd
 		if comp and (comp != serviceName):
 			res.append(comp)
 
-		fb = fallBackName(serviceNameVTi)   #Nick_MTV+
+		fb = fallBackName(serviceNameVTi)   # Nick_MTV+
 		if fb and (fb != serviceNameVTi):
 			res.append(fb)
 
 		if serviceNameVTi != serviceName:
-			fb = fallBackName(serviceName)  #NickMTV+
+			fb = fallBackName(serviceName)  # NickMTV+
 			if fb and (fb != serviceName):
 				res.append(fb)
 
-		fb2 = interoperableName(fb)  #nickmtvplus
+		fb2 = interoperableName(fb)  # nickmtvplus
 		if fb2 and (fb2 != fb):
 			res.append(fb2)
 	except:
 		pass
-	return res		# [ 'Nick_MTV+ HD', 'NickMTV+ HD', 'nickmtvplushd', 'Nick_MTV+', 'NickMTV+', 'nickmtvplus' ]
+	return res      # [ 'Nick_MTV+ HD', 'NickMTV+ HD', 'nickmtvplushd', 'Nick_MTV+', 'NickMTV+', 'nickmtvplus' ]

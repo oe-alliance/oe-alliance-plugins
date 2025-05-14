@@ -1,23 +1,17 @@
-# Italian translations for PACKAGE package
-# Traduzioni italiane per il pacchetto PACKAGE..
-# Copyright (C) 2022 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-#
-# Massimo Pissarello <mapi68@gmail.com>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 07:55+0100\n"
-"PO-Revision-Date: 2022-11-04 18:55+0100\n"
+"POT-Creation-Date: 2025-05-14 15:14+0200\n"
+"PO-Revision-Date: 2025-05-13 15:52+0200\n"
+"Last-Translator: Lululla <ekekaz@gmail.com>\n"
 "Language-Team: Italian <>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid " "
 msgstr ""
@@ -27,34 +21,40 @@ msgid "%s"
 msgstr ""
 
 msgid "Activate debug logging?"
-msgstr ""
+msgstr "Attivare il log debug?"
 
 msgid "All"
-msgstr ""
+msgstr "Tutti"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 msgid "Channels:"
-msgstr ""
+msgstr "Canali:"
 
 msgid "Choose Picon folder"
-msgstr ""
+msgstr "Scegli cartella Picons"
 
 msgid "Clean up the directory"
-msgstr ""
+msgstr "Pulisci cartella"
 
 msgid "Color depth: "
-msgstr ""
-
-msgid "Create folder"
-msgstr ""
+msgstr "Profondità del colore: "
 
 msgid "Creator"
-msgstr ""
+msgstr "Svilupaptore"
 
 msgid "Creator: "
 msgstr "Creatore: "
+
+msgid "Data display error"
+msgstr "Errore di visualizzazione dei dati"
+
+msgid "Delete"
+msgstr "Eliminare"
+
+msgid "Deleted: {}"
+msgstr "Cancellati: {}"
 
 msgid "Download finished !"
 msgstr "Download terminato!"
@@ -65,8 +65,15 @@ msgstr "Scarica Picon"
 msgid "Download progress: "
 msgstr "Avanzamento download: "
 
-msgid "Enter Picon Dir:"
-msgstr "Inserisci cartella Picon:"
+msgid "Downloads completed"
+msgstr "Download completato"
+
+#, python-format
+msgid "Errors: %d"
+msgstr "Errori: %d"
+
+msgid "Errors: {}"
+msgstr "Errori: {}"
 
 msgid "Exit"
 msgstr "Esci"
@@ -74,11 +81,15 @@ msgstr "Esci"
 msgid "FreeSpace:"
 msgstr "Spazio libero:"
 
-msgid "FreeSpace: Drive Not Found !"
+msgid "FreeSpace: Drive Not Found!"
 msgstr "Spazio libero: unità non trovata!"
 
-msgid "Loaded Picons:"
-msgstr "Picons caricati:"
+#, python-brace-format
+msgid "FreeSpace: Error - {error}"
+msgstr "FreeSpace: Errore - {error}"
+
+msgid "Invalid path!"
+msgstr "Percorso non valido!"
 
 msgid "Loading, please wait..."
 msgstr "Attendere il caricamento prego..."
@@ -101,11 +112,14 @@ msgstr "Creatore Picon successivo"
 msgid "Next picon size"
 msgstr "Dimensione Picon successiva"
 
-msgid "No search results, please change filter options ..."
-msgstr "Nessun risultato di ricerca, cambia le opzioni del filtro..."
+msgid "No picons available in selected list"
+msgstr "Nessuna icona disponibile nell'elenco selezionato"
 
-msgid "Not found Picons:"
-msgstr "Picon non trovate:"
+msgid "No picons to delete"
+msgstr "Nessun picon da cancellare"
+
+msgid "No search results, please change filter options..."
+msgstr "Nessun risultato di ricerca, cambia le opzioni del filtro..."
 
 msgid "Not older than X days:"
 msgstr "Non più vecchie di X giorni:"
@@ -122,23 +136,38 @@ msgstr "OK e esci"
 msgid "Ok"
 msgstr "Ok"
 
+msgid "Open picon remover"
+msgstr "Apri Picon remover"
+
+msgid "Operation completed!"
+msgstr "Operazione completata!"
+
 msgid "Option:"
 msgstr "Opzioni:"
 
 msgid "Picon folder: "
 msgstr "Cartella Picon: "
 
-msgid "PiconManager (mod)"
-msgstr "PiconManager (mod)"
+msgid "Picon loaded:"
+msgstr "Picon caricati:"
+
+msgid "PiconManager"
+msgstr "PiconManager"
 
 msgid "PiconManagerMod - Settings"
 msgstr "PiconManagerMod - Impostazioni"
+
+msgid "Picons found: {}"
+msgstr "Picon trovati: {}"
 
 msgid "Picons loaded: "
 msgstr "Picon caricati: "
 
 msgid "Picons not found: "
 msgstr "Picon non trovati: "
+
+msgid "Picons to be deleted: {}"
+msgstr "Picon da cancellare:  {}"
 
 msgid "Previous Group"
 msgstr "Gruppo precedente"
@@ -155,8 +184,18 @@ msgstr "Dimensione Picon precedente"
 msgid "Reading Channels..."
 msgstr "Lettura dei canali..."
 
+msgid "Reading Picons..."
+msgstr "Lettura dei Picons..."
+
 msgid "Remember permanently?"
 msgstr "Ricordare per sempre?"
+
+msgid "Remove Picons Unused"
+msgstr "Rimosse %d Picons inutilizzate"
+
+#, python-format
+msgid "Removed %d unused picons!"
+msgstr "Rimosse %d icone inutilizzate!"
 
 msgid "Select Server:"
 msgstr "Seleziona server:"
@@ -196,6 +235,13 @@ msgstr "Siamo spiacenti, il servizio è temporaneamente non disponibile"
 
 msgid "Standard picon: "
 msgstr "Picon standard: "
+
+#, python-format
+msgid "Success: %d"
+msgstr "Successo: %d"
+
+msgid "To delete: {}"
+msgstr "Da cancellare: {}"
 
 msgid "V"
 msgstr "V"
