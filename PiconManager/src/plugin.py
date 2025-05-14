@@ -696,7 +696,6 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		reload_picons=False,
 		alter=0
 	):
-
 		"""
 		Filter and display the picon list based on specified criteria.
 
