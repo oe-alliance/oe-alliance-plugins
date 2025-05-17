@@ -1,31 +1,34 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: INI\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2016-05-07 13:44+0200\n"
-"Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
+"POT-Creation-Date: 2022-11-03 14:49+0100\n"
+"PO-Revision-Date: 2025-05-17 11:16+0100\n"
+"Last-Translator: pololoko111\n"
 "Language-Team: \n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
-"X-Poedit-Basepath: .\n"
-"X-Generator: Poedit 1.8.7\n"
-"X-Poedit-SearchPath-0: ..\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid "1.0 Mbps"
-msgstr ""
+msgstr "1.0 Mb/s"
 
 msgid "1.2 Mbps"
-msgstr ""
+msgstr "1.2 Mb/s"
 
 msgid "1.5 Mbps"
-msgstr ""
+msgstr "1.5 Mb/s"
 
 msgid "100 kbps"
-msgstr ""
+msgstr "100 kbps"
 
 msgid "160x120"
 msgstr "160x120"
@@ -34,37 +37,37 @@ msgid "16x9"
 msgstr "16x9"
 
 msgid "2.0 Mbps"
-msgstr ""
+msgstr "2.0 Mb/s"
 
 msgid "2.5 Mbps"
-msgstr ""
+msgstr "2.5 Mb/s"
 
 msgid "23.976 fps"
-msgstr ""
+msgstr "23.976 kl"
 
 msgid "24 fps"
-msgstr ""
+msgstr "24 fps"
 
 msgid "25 fps"
-msgstr ""
+msgstr "25 fps"
 
 msgid "3.0 Mbps"
-msgstr ""
+msgstr "3.0 Mbps"
 
 msgid "3.5 Mbps"
-msgstr ""
+msgstr "3.5 Mbps"
 
 msgid "30 fps"
-msgstr ""
+msgstr "30 fps"
 
 msgid "300 kbps"
-msgstr ""
+msgstr "300 kbps"
 
 msgid "320x240"
 msgstr "320x240"
 
 msgid "4.0 Mbps"
-msgstr ""
+msgstr "4.0 Mbps"
 
 msgid "480p"
 msgstr "480p"
@@ -73,10 +76,10 @@ msgid "4x3"
 msgstr "4x3"
 
 msgid "5.0 Mbps"
-msgstr ""
+msgstr "5.0 Mbps"
 
 msgid "500 kbps"
-msgstr ""
+msgstr "500 kbps"
 
 msgid "576p"
 msgstr "576p"
@@ -85,63 +88,40 @@ msgid "720p"
 msgstr "720p"
 
 msgid "800 kbps"
-msgstr ""
+msgstr "800 kbps"
 
 msgid "Aspect Ratio"
-msgstr "Proporcja obrazu"
+msgstr "Proporcje obrazu"
 
 msgid "Auto"
-msgstr ""
+msgstr "Auto"
 
 msgid "Bitrate in bits"
-msgstr ""
-
-#, fuzzy
-msgid "Encoder Aspect Ratio"
-msgstr "Proporcja obrazu"
-
-#, fuzzy
-msgid "Encoder Bitrate"
-msgstr "Bitrate"
-
-#, fuzzy
-msgid "Encoder Framerate"
-msgstr "Ilość klatek"
-
-#, fuzzy
-msgid "Encoder Interlaced"
-msgstr "Przeplot"
-
-#, fuzzy
-msgid "Encoder Resolution"
-msgstr "Rozdzielczość"
-
-msgid "Encoder Video Codec"
-msgstr ""
+msgstr "Szybkość transmisji bitów"
 
 msgid "Exit"
 msgstr "Wyjdź"
 
 msgid "Framerate"
-msgstr "Ilość klatek"
+msgstr "Liczba klatek na sekundę"
 
 msgid "H.264"
-msgstr ""
+msgstr "H.264"
 
 msgid "H.265"
-msgstr ""
+msgstr "H.265"
 
 msgid "HD1080"
-msgstr ""
+msgstr "HD1080"
 
 msgid "HD1080 DV"
-msgstr ""
+msgstr "HD1080 DV"
 
 msgid "HD720"
-msgstr ""
+msgstr "HD720"
 
 msgid "Interlaced"
-msgstr "Przeplot"
+msgstr "Przeplatany"
 
 msgid "Max"
 msgstr "Maksimum"
@@ -150,28 +130,28 @@ msgid "Min"
 msgstr "Minimum"
 
 msgid "Multi device transcoding setup"
-msgstr "Ustawienia multi transkodowania"
+msgstr "Konfiguracja transkodowania wielu urządzeń"
 
 msgid "Multi-Transcoding Setup"
-msgstr "Ustawienia Multi-Transkodowania"
+msgstr "Konfiguracja multi-transkodowania"
 
 msgid "No"
 msgstr "Nie"
 
 msgid "PAL"
-msgstr ""
+msgstr "PAL"
 
 msgid "PAL DV"
-msgstr ""
+msgstr "PAL DV"
 
 msgid "PAL SVCD"
-msgstr ""
+msgstr "PAL SVCD"
 
 msgid "PAL-wide"
-msgstr ""
+msgstr "PAL-szeroko"
 
 msgid "Really close without saving settings?"
-msgstr "Naprawdę wyjść bez zapisywania?"
+msgstr "Naprawdę zamknąć bez zapisywania ustawień?"
 
 msgid "Resolution"
 msgstr "Rozdzielczość"
@@ -179,37 +159,55 @@ msgstr "Rozdzielczość"
 msgid "Save"
 msgstr "Zapisz"
 
-msgid "Setup your timezone."
-msgstr ""
-
 msgid "This model does not support transcoding."
-msgstr "Ten odbiornik nie wspiera transkodowania"
+msgstr "Ten model nie obsługuje transkodowania."
 
 msgid ""
 "To use transcoding You can build URL for VLC by Yourself\n"
 "\n"
 msgstr ""
-"Do używania transkodowania, możesz stworzyć sam URL do programu VLC\n"
+"Aby użyć transkodowania, możesz samodzielnie utworzyć adres URL dla programu VLC\n"
 "\n"
 
 msgid "Transcoding Setup"
-msgstr "Ustawienia transkodowania"
+msgstr "Konfiguracja transkodowania"
 
 msgid ""
 "Transcoding from HDMI-IN e.x:\n"
 "\n"
 msgstr ""
-"Transkodowanie ze złącza HDMI-IN:\n"
+"Transkodowanie z HDMI-IN np.:\n"
 "\n"
 
 msgid "Video codec"
-msgstr ""
+msgstr "Kodek wideo"
 
 msgid "Yes"
 msgstr "Tak"
 
 msgid "disable"
-msgstr "wyłącz"
+msgstr "Wyłącz"
 
 msgid "enable"
-msgstr "włącz"
+msgstr "Włącz"
+
+msgid "Encoder Aspect Ratio"
+msgstr "Proporcje obrazu enkodera"
+
+msgid "Encoder Bitrate"
+msgstr "Szybkość transmisji bitów enkodera"
+
+msgid "Encoder Framerate"
+msgstr "Liczba klatek na sekundę enkodera"
+
+msgid "Encoder Interlaced"
+msgstr "Enkoder przeplatany"
+
+msgid "Encoder Resolution"
+msgstr "Rozdzielczość enkodera"
+
+msgid "Encoder Video Codec"
+msgstr "Kodek wideo enkodera"
+
+msgid "Setup your timezone."
+msgstr "Ustaw swoją strefę czasową."
