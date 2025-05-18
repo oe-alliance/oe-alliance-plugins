@@ -45,11 +45,4 @@ ALTERN_PICON_PATH = [
 
 
 def getConfigPathList():
-	ChoicePath = []
-	for path in ALTERN_PICON_PATH:
-		if len(path) == 2:
-			ChoicePath.append(path)
-		else:
-			ChoicePath.append((path, _(path)))
-
-	return ChoicePath
+	return [(path, _(path)) for path in ALTERN_PICON_PATH]
