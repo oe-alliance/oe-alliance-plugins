@@ -250,18 +250,18 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		<widget name="piconslider" position="740,286" size="400,10" pixmap="skin_default/progress_big.png" zPosition="5" />
 		<widget name="picon" position="740,10" size="400,240" zPosition="3" transparent="1" borderWidth="0" borderColor="#0000000" alphatest="blend" />
 		<widget name="list" position="10,315" size="1130,320" zPosition="3" foregroundColor="#00ffffff" foregroundColorSelected="#00fff000" scrollbarMode="showOnDemand" transparent="1" />
-		<widget name="key_red" position="42,655" size="200,25" transparent="1" font="Regular;20" />
-		<widget name="key_green" position="265,655" size="200,25" transparent="1" font="Regular;20" />
-		<widget name="key_yellow" position="466,655" size="200,25" transparent="1" font="Regular;20" />
-		<widget name="key_blue" position="714,655" size="200,25" transparent="1" font="Regular;20" />
-		<ePixmap position="10,655" size="60,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_red.png" transparent="1" alphatest="on" />
-		<ePixmap position="227,655" size="60,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_green.png" transparent="1" alphatest="on" />
-		<ePixmap position="436,655" size="60,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_yellow.png" transparent="1" alphatest="on" />
-		<ePixmap position="681,655" size="60,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_blue.png" transparent="1" alphatest="on" />
-		<ePixmap position="916,650" size="60,35" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_info.png" transparent="1" alphatest="on" />
-		<ePixmap position="977,650" size="60,35" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_menu.png" transparent="1" alphatest="on" />
-		<ePixmap position="1038,650" size="60,35" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_channel.png" transparent="1" alphatest="on" />
-		<ePixmap position="1095,650" size="60,35" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_help.png" transparent="1" alphatest="on" />
+		<widget name="key_red" position="42,655" size="200,25" transparent="1" font="Regular;20" zPosition="3" />
+		<widget name="key_green" position="265,655" size="200,25" transparent="1" font="Regular;20" zPosition="3" />
+		<widget name="key_yellow" position="466,655" size="200,25" transparent="1" font="Regular;20" zPosition="3" />
+		<widget name="key_blue" position="714,655" size="200,25" transparent="1" font="Regular;20" zPosition="3" />
+		<ePixmap position="10,655" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_red.png" transparent="1" alphatest="on" />
+		<ePixmap position="227,655" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_green.png" transparent="1" alphatest="on" />
+		<ePixmap position="436,655" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_yellow.png" transparent="1" alphatest="on" />
+		<ePixmap position="681,655" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_blue.png" transparent="1" alphatest="on" />
+		<ePixmap position="916,650" size="60,35" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_info.png" transparent="1" alphatest="on" />
+		<ePixmap position="977,650" size="60,35" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_menu.png" transparent="1" alphatest="on" />
+		<ePixmap position="1038,650" size="60,35" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_channel.png" transparent="1" alphatest="on" />
+		<ePixmap position="1095,650" size="60,35" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_help.png" transparent="1" alphatest="on" />
 	</screen>"""
 
 	def __init__(self, session):
@@ -287,7 +287,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self['piconcount'] = Label(_("Reading Channels..."))
 		self['picondownload'] = Label(_("Picons loaded: "))
 		self['piconerror'] = Label(_("Picons not found: "))
-		self['piconslidername'] = Label(_("Download progress: "))
+		self['piconslidername'] = Label()
 		self['selectedname'] = Label(_("Show group: "))
 		self['selected'] = Label()
 		self['creatorname'] = Label(_("Creator: "))
@@ -916,7 +916,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 		self.countload = 0
 		self.counterrors = 0
 		urls = []
-
+		self['piconslidername'].setText("")
 		if self['list'].getCurrent():
 			if not isdir(self.picondir):
 				txt = f"{self.picondir}\n{_('is not installed.')}"
@@ -959,6 +959,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 			self.total_downloads = total_downloads
 			self.activityslider.setRange((0, total_downloads))
 			self.activityslider.setValue(0)
+			self['piconslidername'].setText(_("Download Progress"))
 			self["piconslider"] = self.activityslider
 			self["piconslider"].show()
 			ds = defer.DeferredSemaphore(tokens=10)
@@ -986,12 +987,16 @@ class PiconManagerScreen(Screen, HelpableScreen):
 					threads.deferToThread,
 					self.threadDownloadPage,
 					url,
-					path
+					path,
+					update_progress_success,
+					lambda e: update_progress_error(e)
 				)
 				d.addCallback(update_progress_success)
+				d.addErrback(update_progress_error)
 				downloads.append(d)
 
 			def final_update(result):
+				self['piconslidername'].setText(_("Download Completed"))
 				message = _("Downloads completed") + "\n" + _("Success: %d") % self.countload + "\n" + _("Errors: %d") % self.counterrors
 				reactor.callFromThread(
 					self.session.open,
@@ -1017,13 +1022,13 @@ class PiconManagerScreen(Screen, HelpableScreen):
 						f.write(chunk)
 
 			if callback:
-				callback(file_path)  # <-- questa mancava
+				callback(file_path)
 
 			return True
 		except Exception as e:
 			print("[ERROR] Download failed:", str(e))
 			if errorback:
-				errorback()
+				errorback(e)
 
 	def cleanup_after_download(self):
 		"""Callback after downloaded"""
@@ -1155,8 +1160,8 @@ class PicRemoverScreen(Screen):
 		<widget name="info" position="745,356" size="400,30" font="Regular;24" foregroundColor="#00fff000" transparent="1" zPosition="3" halign="center" />
 		<widget name="key_red" position="42,615" size="200,25" transparent="1" font="Regular;22" />
 		<widget name="key_green" position="265,615" size="200,25" transparent="1" font="Regular;22" />
-		<ePixmap position="10,615" size="60,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_red.png" transparent="1" alphatest="on" />
-		<ePixmap position="227,615" size="60,25" zPosition="0" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_green.png" transparent="1" alphatest="on" />
+		<ePixmap position="10,615" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_red.png" transparent="1" alphatest="on" />
+		<ePixmap position="227,615" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_green.png" transparent="1" alphatest="on" />
 	</screen>"""
 
 	def __init__(self, session, picon_path):
@@ -1377,13 +1382,14 @@ class PicRemoverScreen(Screen):
 
 class PiconManagerFolderScreen(Screen):
 	skin = """
-		<screen position="center,center" size="650,400" title=" ">
-			<widget name="media" position="10,10" size="540,30" valign="top" font="Regular;22" />
-			<widget name="folderlist" position="10,45" zPosition="1" size="540,300" scrollbarMode="showOnDemand"/>
-			<ePixmap position="10,370" size="260,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_red.png" alphatest="on" />
-			<ePixmap position="210,370" size="260,25" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_green.png" alphatest="on" />
-			<widget render="Label" source="key_red" position="40,372" size="100,20" valign="center" halign="left" zPosition="2" font="Regular;18" foregroundColor="white" />
-			<widget render="Label" source="key_green" position="240,372" size="70,20" valign="center" halign="left" zPosition="2" font="Regular;18" foregroundColor="white" />
+		<screen name="PiconManagerFolderScreen" position="center,center" size="1160,700" title="Picon Remover" flags="wfNoBorder">
+			<widget name="media" position="21,9" size="700,40" font="Regular;24" foregroundColor="#00fba207" transparent="1" zPosition="3" halign="center" />
+			<widget name="folderlist" position="20,54" size="700,520" itemHeight="35" font="Regular;28" transparent="1" scrollbarMode="showOnDemand" />
+			<widget name="key_red" position="42,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"  />
+			<widget name="key_green" position="265,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"  />
+			<ePixmap position="767,104" size="350,210" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/pmanager.png" alphatest="on" />
+			<ePixmap position="10,615" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_red.png" transparent="1" alphatest="on" />
+			<ePixmap position="227,615" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_green.png" transparent="1" alphatest="on" />
 		</screen>
 		"""
 
@@ -1391,8 +1397,15 @@ class PiconManagerFolderScreen(Screen):
 		Screen.__init__(self, session)
 		if not initDir or not isdir(initDir):
 			initDir = "/usr/share/enigma2/"
+		self.title = _("Choose Picon folder")
+		try:
+			self["title"] = StaticText(self.title)
+		except:
+			print('self["title"] was not found in skin')
 		self["folderlist"] = FileList(initDir, inhibitMounts=False, inhibitDirs=False, showMountpoints=False, showFiles=False)
 		self["media"] = Label()
+		self["key_green"] = Label(_("OK"))
+		self["key_red"] = Label(_("Cancel"))
 		self["actions"] = ActionMap(
 			["WizardActions", "DirectionActions", "ColorActions", "EPGSelectActions"],
 			{
@@ -1407,13 +1420,6 @@ class PiconManagerFolderScreen(Screen):
 			},
 			-1
 		)
-		self.title = _("Choose Picon folder")
-		try:
-			self["title"] = StaticText(self.title)
-		except:
-			print('self["title"] was not found in skin')
-		self["key_red"] = StaticText(_("Cancel"))
-		self["key_green"] = StaticText(_("Ok"))
 
 	def cancel(self):
 		self.close(None)
@@ -1454,12 +1460,13 @@ class PiconManagerFolderScreen(Screen):
 
 class pm_conf(ConfigListScreen, Screen, HelpableScreen):
 	skin = """
-		<screen position="center,center" size="600,480" title="Select Color" >
-		<widget name="config" position="10,5" size="580,430" scrollbarMode="showOnDemand" />
-		<ePixmap pixmap="skin_default/buttons/red.png" position="10,440" size="140,40" alphatest="on" />
-		<ePixmap pixmap="skin_default/buttons/green.png" position="155,440" size="140,40" alphatest="on" />
-		<widget name="key_red" position="10,443" zPosition="1" size="140,35" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" noWrap="1" shadowOffset="-1,-1" />
-		<widget name="key_green" position="155,443" zPosition="1" size="140,35" valign="center" halign="center" font="Regular;21" transparent="1" foregroundColor="white" shadowColor="black" noWrap="1" shadowOffset="-1,-1" />
+		<screen name="pm_conf" position="center,center" size="1160,700" title="Picon Remover" flags="wfNoBorder">
+			<widget name="config" position="20,54" size="700,520" itemHeight="35" font="Regular;28" transparent="1" scrollbarMode="showOnDemand" />
+			<widget name="key_red" position="42,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"  />
+			<widget name="key_green" position="265,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"  />
+			<ePixmap position="767,104" size="350,210" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/pmanager.png" alphatest="on" />
+			<ePixmap position="10,615" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_red.png" transparent="1" alphatest="on" />
+			<ePixmap position="227,615" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_green.png" transparent="1" alphatest="on" />
 		</screen>"""
 
 	def __init__(self, session):
