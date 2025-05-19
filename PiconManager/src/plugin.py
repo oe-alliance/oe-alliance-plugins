@@ -989,10 +989,10 @@ class PiconManagerScreen(Screen, HelpableScreen):
 					url,
 					path,
 					update_progress_success,
-					lambda e: update_progress_error()
+					lambda e: update_progress_error(e)
 				)
 				d.addCallback(update_progress_success)
-				d.addCallback(update_progress_error)
+				d.addErrback(update_progress_error)
 				downloads.append(d)
 
 			def final_update(result):
@@ -1022,7 +1022,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 						f.write(chunk)
 
 			if callback:
-				callback(file_path)	 # <-- questa mancava
+				callback(file_path)
 
 			return True
 		except Exception as e:
@@ -1385,7 +1385,7 @@ class PiconManagerFolderScreen(Screen):
 		<screen name="PiconManagerFolderScreen" position="center,center" size="1160,700" title="Picon Remover" flags="wfNoBorder">
 			<widget name="media" position="21,9" size="700,40" font="Regular;24" foregroundColor="#00fba207" transparent="1" zPosition="3" halign="center" />
 			<widget name="folderlist" position="20,54" size="700,520" itemHeight="35" font="Regular;28" transparent="1" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="42,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"	/>
+			<widget name="key_red" position="42,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"  />
 			<widget name="key_green" position="265,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"  />
 			<ePixmap position="767,104" size="350,210" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/pmanager.png" alphatest="on" />
 			<ePixmap position="10,615" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_red.png" transparent="1" alphatest="on" />
@@ -1420,7 +1420,6 @@ class PiconManagerFolderScreen(Screen):
 			},
 			-1
 		)
-
 
 	def cancel(self):
 		self.close(None)
@@ -1463,7 +1462,7 @@ class pm_conf(ConfigListScreen, Screen, HelpableScreen):
 	skin = """
 		<screen name="pm_conf" position="center,center" size="1160,700" title="Picon Remover" flags="wfNoBorder">
 			<widget name="config" position="20,54" size="700,520" itemHeight="35" font="Regular;28" transparent="1" scrollbarMode="showOnDemand" />
-			<widget name="key_red" position="42,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"	/>
+			<widget name="key_red" position="42,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"  />
 			<widget name="key_green" position="265,615" size="200,25" transparent="1" font="Regular;22" zPosition="3"  />
 			<ePixmap position="767,104" size="350,210" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/pmanager.png" alphatest="on" />
 			<ePixmap position="10,615" size="60,25" zPosition="3" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/PiconManager/pic/button_red.png" transparent="1" alphatest="on" />
