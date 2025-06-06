@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2025-06-06 07:26+0300\n"
+"PO-Revision-Date: 2025-06-06 11:25+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Orlandox\n"
 "Language: fi\n"
@@ -77,11 +77,20 @@ msgstr "Hollanti"
 msgid "English"
 msgstr "Englanti"
 
+msgid "EPG Translator"
+msgstr "EPG:n kielenkääntäjä"
+
+msgid "EPG Translator Setup - "
+msgstr "EPG:n kielenkääntäjän asetukset - "
+
+msgid "EPG Translator version: "
+msgstr "EPG:n kielenkääntäjän versio: "
+
 msgid "Estonian"
 msgstr "Viro"
 
 msgid "EventViews open translated:"
-msgstr "Ohjelmanäkymä aukeaa käännettynä:"
+msgstr "Ohjelmanäkymä aukeaa kieli käännettynä:"
 
 msgid "Exit"
 msgstr "Poistu"
@@ -155,6 +164,9 @@ msgstr "Ei"
 msgid "Norwegian"
 msgstr "Norja"
 
+msgid "On-line translation"
+msgstr "Online-käännös"
+
 msgid "Persian"
 msgstr "Persia"
 
@@ -177,10 +189,10 @@ msgid "Save"
 msgstr "Tallenna"
 
 msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
-msgstr "Valitse tämä vaihtoehto, jos haluat näyttää sekä lähdetekstin että käännetyn tekstin EPG-kääntäjän päänäytössä."
+msgstr "Valitse tämä vaihtoehto, jos haluat näyttää sekä lähdetekstin että käännetyn tekstin EPG:n kielenkääntäjän päänäytössä."
 
 msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
-msgstr "Valitse käännettävä lähdekieli tai valitse 'Tunnista kieli', jolloin kääntäjä yrittää tunnistaa lähdekielen automaattisesti."
+msgstr "Valitse käännettävä lähdekieli tai valitse 'Tunnista kieli', jolloin kielenkääntäjä yrittää tunnistaa lähdekielen automaattisesti."
 
 msgid "Serbian"
 msgstr "Serbia"
@@ -212,6 +224,9 @@ msgstr "Ruotsi"
 msgid "TEXT"
 msgstr "TEXT"
 
+msgid "Text Translator:"
+msgstr "Tekstin kääntäjä:"
+
 msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
 msgstr "Tämä on kehitysominaisuus. Käännösvirheen sattuessa, jos se on käytössä, kirjataan lisä debug-tietoja lokiin."
 
@@ -220,6 +235,9 @@ msgstr "Tämä on kieli, jolle lähdeteksti käännetään."
 
 msgid "Translate text"
 msgstr "Käännä tekstiä"
+
+msgid "Translate your EPG"
+msgstr "Käännä EPG:n kieli"
 
 msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
 msgstr "Käännökset tallennetaan välimuistiin tarpeettoman uudelleenkääntämisen välttämiseksi. Tämä on tuntimäärä, jonka käännös säilyy välimuistissa ennen poistamista. Valitse '0', jos haluat käännöksen poistuvan välimuistista ohjelman loputtua."
