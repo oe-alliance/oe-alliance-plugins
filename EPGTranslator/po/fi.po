@@ -1,246 +1,246 @@
-# Finnish translations for PACKAGE package.
+# Finnish translations for EPGTranslator package.
 # Copyright (C) 2021 THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# Automatically generated, 2021.
+# This file is distributed under the same license as the EPGTranslator package.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-04-16 19:01+0430\n"
-"PO-Revision-Date: 2021-02-17 00:23+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2025-06-06 07:26+0300\n"
+"Last-Translator: Orlandox\n"
+"Language-Team: Orlandox\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.6\n"
 
 msgid "Afrikaans"
-msgstr ""
+msgstr "Afrikaans"
 
 msgid "Albanian"
-msgstr ""
+msgstr "Albania"
 
 msgid "Arabic"
-msgstr ""
+msgstr "Arabia"
 
 msgid "Azerbaijani"
-msgstr ""
+msgstr "Azerbaidžani"
 
 msgid "Basque"
-msgstr ""
+msgstr "Baski"
 
 msgid "Belarusian"
-msgstr ""
+msgstr "Valkovenäjä"
 
 msgid "Bosnian"
-msgstr ""
+msgstr "Bosnia"
 
 msgid "Bulgarian"
-msgstr ""
+msgstr "Bulgaria"
 
 msgid "Cache cleared"
-msgstr ""
+msgstr "Välimuisti tyhjennetty"
 
 msgid "Cache timeout hours (0 == while valid):"
-msgstr ""
+msgstr "Välimuistin aikakatkaisun tunnit (0 == voimassaoloaikana):"
 
 msgid "Catalan"
-msgstr ""
+msgstr "Katalaani"
 
 msgid "Cebuano"
-msgstr ""
+msgstr "Cebuano"
 
 msgid "Clear cache"
-msgstr ""
+msgstr "Tyhjennä välimuisti"
 
 msgid "Croatian"
-msgstr ""
+msgstr "Kroatia"
 
 msgid "Czech"
-msgstr ""
+msgstr "Tšekki"
 
 msgid "Danish"
-msgstr ""
+msgstr "Tanska"
 
 msgid "Destination Language:"
-msgstr ""
+msgstr "Kohteen kieli:"
 
 msgid "Detect Language"
-msgstr ""
+msgstr "Tunnista kieli"
 
 msgid "Dutch"
-msgstr ""
+msgstr "Hollanti"
 
 msgid "English"
-msgstr ""
+msgstr "Englanti"
 
 msgid "Estonian"
-msgstr ""
+msgstr "Viro"
 
 msgid "EventViews open translated:"
-msgstr ""
+msgstr "Ohjelmanäkymä aukeaa käännettynä:"
 
 msgid "Exit"
-msgstr ""
+msgstr "Poistu"
 
 msgid "Filipino"
-msgstr ""
+msgstr "Filippiinit"
 
 msgid "Finnish"
-msgstr ""
+msgstr "Suomi"
 
 msgid "French"
-msgstr ""
+msgstr "Ranska"
 
 msgid "Galician"
-msgstr ""
+msgstr "Galicia"
 
 msgid "German"
-msgstr ""
+msgstr "Saksa"
 
 msgid "Greek"
-msgstr ""
+msgstr "Kreikka"
 
 msgid "Haitian Creole"
-msgstr ""
+msgstr "Haitin kreoli"
 
 msgid "Hide"
-msgstr ""
+msgstr "Piilota"
 
 msgid "Hungarian"
-msgstr ""
+msgstr "Unkari"
 
 msgid "Icelandic"
-msgstr ""
+msgstr "Islanti"
 
 msgid "Indonesian"
-msgstr ""
+msgstr "Indonesia"
 
 msgid "Info"
-msgstr ""
+msgstr "Tiedot"
 
 msgid "Irish"
-msgstr ""
+msgstr "Irlanti"
 
 msgid "Italian"
-msgstr ""
+msgstr "Italia"
 
 msgid "Javanese"
-msgstr ""
+msgstr "Jaava"
 
 msgid "Latvian"
-msgstr ""
+msgstr "Latvia"
 
 msgid "Lithuanian"
-msgstr ""
+msgstr "Liettua"
 
 msgid "MENU"
-msgstr ""
+msgstr "MENU"
 
 msgid "Macedonian"
-msgstr ""
+msgstr "Makedonia"
 
 msgid "Malay"
-msgstr ""
+msgstr "Malaiji"
 
 msgid "Maltese"
-msgstr ""
+msgstr "Malta"
 
 msgid "No"
-msgstr ""
+msgstr "Ei"
 
 msgid "Norwegian"
-msgstr ""
+msgstr "Norja"
 
 msgid "Persian"
-msgstr ""
+msgstr "Persia"
 
 msgid "Polish"
-msgstr ""
+msgstr "Puola"
 
 msgid "Portuguese"
-msgstr ""
+msgstr "Portugali"
 
 msgid "Refresh EPG"
-msgstr ""
+msgstr "Virkistä EPG"
 
 msgid "Romanian"
-msgstr ""
+msgstr "Romania"
 
 msgid "Russian"
-msgstr ""
+msgstr "Venäjä"
 
 msgid "Save"
-msgstr ""
+msgstr "Tallenna"
 
 msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
-msgstr ""
+msgstr "Valitse tämä vaihtoehto, jos haluat näyttää sekä lähdetekstin että käännetyn tekstin EPG-kääntäjän päänäytössä."
 
 msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
-msgstr ""
+msgstr "Valitse käännettävä lähdekieli tai valitse 'Tunnista kieli', jolloin kääntäjä yrittää tunnistaa lähdekielen automaattisesti."
 
 msgid "Serbian"
-msgstr ""
+msgstr "Serbia"
 
 msgid "Show Source EPG:"
-msgstr ""
+msgstr "Näytä lähdetekstin EPG:"
 
 msgid "Show traceback in errors:"
-msgstr ""
+msgstr "Näytä jäljitys virheissä:"
 
 msgid "Slovak"
-msgstr ""
+msgstr "Slovakia"
 
 msgid "Slovenian"
-msgstr ""
+msgstr "Slovenia"
 
 msgid "Source Language:"
-msgstr ""
+msgstr "Lähdekieli:"
 
 msgid "Spanish"
-msgstr ""
+msgstr "Espanja"
 
 msgid "Swahili"
-msgstr ""
+msgstr "Swahili"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Ruotsi"
 
 msgid "TEXT"
-msgstr ""
+msgstr "TEXT"
 
 msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
-msgstr ""
+msgstr "Tämä on kehitysominaisuus. Käännösvirheen sattuessa, jos se on käytössä, kirjataan lisä debug-tietoja lokiin."
 
 msgid "This is the language the source text will be translated into."
-msgstr ""
+msgstr "Tämä on kieli, jolle lähdeteksti käännetään."
 
 msgid "Translate text"
-msgstr ""
+msgstr "Käännä tekstiä"
 
 msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
-msgstr ""
+msgstr "Käännökset tallennetaan välimuistiin tarpeettoman uudelleenkääntämisen välttämiseksi. Tämä on tuntimäärä, jonka käännös säilyy välimuistissa ennen poistamista. Valitse '0', jos haluat käännöksen poistuvan välimuistista ohjelman loputtua."
 
 msgid "Turkish"
-msgstr ""
+msgstr "Turkki"
 
 msgid "Ukrainian"
-msgstr ""
+msgstr "Ukraina"
 
 msgid "Urdu"
-msgstr ""
+msgstr "Urdu"
 
 msgid "Vietnamese"
-msgstr ""
+msgstr "Vietnam"
 
 msgid "Welsh"
-msgstr ""
+msgstr "Wales"
 
 msgid "When an EventView window is opened, start with the translated text."
-msgstr ""
+msgstr "Kun ohjelmanäkymä avataan, aloita käännetyllä tekstillä."
 
 msgid "Yes"
-msgstr ""
+msgstr "Kyllä"
