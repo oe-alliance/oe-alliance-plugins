@@ -534,7 +534,7 @@ class translatorConfig(ConfigListScreen, Screen):
             -1)
         self["key_red"] = StaticText(_("Exit"))
         self["key_green"] = StaticText(_("Save"))
-        self.setTitle("EPG Translator Setup - " + EPGTrans_vers)
+        self.setTitle(_("EPG Translator Setup - ") + EPGTrans_vers)
         self["description"] = Label("")
         print(dir(self))
         self["config"].onSelectionChanged.append(self.selectionChanged)
@@ -656,7 +656,7 @@ Red: Refresh EPG
         self.inPlayBack = "0:0:0:0:0:0:0:0:0" in self.My_Sref().toCompareString()
 
 # Add the channel name.
-        wintitle = 'EPG Translator'
+        wintitle = _('EPG Translator')
         try:
             cur_serv = self.My_Sref().getServiceName()
             wintitle += " - " + cur_serv
@@ -717,7 +717,7 @@ Red: Refresh EPG
 # And update the channel name.
 #
     def __serviceTuned(self):
-        wintitle = 'EPG Translator'
+        wintitle = _('EPG Translator')
         try:
             cur_serv = self.My_Sref().getServiceName()
             wintitle += " - " + cur_serv
@@ -739,7 +739,7 @@ Red: Refresh EPG
 # Bound to OK key. Request text (via a VirtualKeyBoard) to translate.
 #
     def get_text(self):
-        self.session.openWithCallback(self.translateText, VirtualKeyBoard, title='Text Translator:', text='')
+        self.session.openWithCallback(self.translateText, VirtualKeyBoard, title=_('Text Translator:'), text='')
 
 # ==================================================================
 # Clear the cache of all items
@@ -762,7 +762,7 @@ Red: Refresh EPG
 # Set the time field to something useful.
 # It is just a text label.
 #
-        self['timing'].setText("On-line translation")
+        self['timing'].setText(_("On-line translation"))
         newtext = DO_translation(text, CfgPlTr.source.getValue(), CfgPlTr.destination.getValue())
         if self.showsource == 'yes':
             self['text'].setText(text)
@@ -1021,7 +1021,7 @@ Red: Refresh EPG
         lang = CfgPlTr.destination.getValue()
         if lang not in self.helptext:
             self.helptext[lang] = DO_translation(self.helptext['en'], 'en', lang)
-        text = "EPG Translator version: " + EPGTrans_vers + "\n\n" + self.helptext[lang]
+        text = _("EPG Translator version: ") + EPGTrans_vers + "\n\n" + self.helptext[lang]
         self.session.open(MessageBox, text, MessageBox.TYPE_INFO, close_on_any_key=True)
 
 # ==================================================================
@@ -1233,8 +1233,8 @@ def main(session, **kwargs):
 
 def Plugins(**kwargs):
     return [
-     PluginDescriptor(name='EPG Translator', description='Translate your EPG', where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main),
-     PluginDescriptor(name='EPG Translator', description='Translate your EPG', where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main),
-     PluginDescriptor(name='EPG Translator', description='Translate your EPG', where=[PluginDescriptor.WHERE_EVENTINFO], fnc=main),
-     PluginDescriptor(name='EPG Translator', description='Translate your EPG', where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
+     PluginDescriptor(name=_('EPG Translator'), description=_('Translate your EPG'), where=[PluginDescriptor.WHERE_PLUGINMENU], icon='plugin.png', fnc=main),
+     PluginDescriptor(name=_('EPG Translator'), description=_('Translate your EPG'), where=[PluginDescriptor.WHERE_EXTENSIONSMENU], fnc=main),
+     PluginDescriptor(name=_('EPG Translator'), description=_('Translate your EPG'), where=[PluginDescriptor.WHERE_EVENTINFO], fnc=main),
+     PluginDescriptor(name=_('EPG Translator'), description=_('Translate your EPG'), where=[PluginDescriptor.WHERE_AUTOSTART], fnc=autostart)
     ]
