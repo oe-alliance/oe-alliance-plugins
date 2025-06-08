@@ -164,7 +164,7 @@ class TVcoreHelper():
 		if channelId:  # single channel completely
 			filename = join(f"{self.getTMPpath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}_{channelId.lower()}.json")
 		elif spanStartsDt:  # time period
-			filename = join(f"{self.getTMPpath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}T{spanStartsDt.strftime("%H:%M")}.json")
+			filename = join(f"{self.getTMPpath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}T{spanStartsDt.strftime('%H:%M')}.json")
 		return filename
 
 	def loadAllAssets(self, spanStartsDt, channelId=None):  # load assets from cache if available
