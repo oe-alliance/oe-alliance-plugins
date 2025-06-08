@@ -1265,7 +1265,7 @@ class TVoverview(TVscreenHelper, Screen):
 			hasTimer = self.isAlreadyListed(assetDict["timespanTs"], assetDict["sref"])
 			piconfile = self.getPiconFile(assetDict["channelId"])
 			piconpix = LoadPixmap(cached=True, path=piconfile) if piconfile and exists(piconfile) else None
-			timeSpan = f"{datetime.fromtimestamp(timespanTs[0]).strftime("%H:%M")} - {datetime.fromtimestamp(timespanTs[1]).strftime("%H:%M")}"
+			timeSpan = f"{datetime.fromtimestamp(timespanTs[0]).strftime('%H:%M')} - {datetime.fromtimestamp(timespanTs[1]).strftime('%H:%M')}"
 			thumb = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}thumb{assetDict["thumbIdNumeric"]}.png") if assetDict["thumbIdNumeric"] > -1 else None
 			icon0 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}top.png") if assetDict["isTopTip"] else None
 			icon1 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}tip.png") if assetDict["isTipOfTheDay"] else None
