@@ -1317,7 +1317,7 @@ class TVoverview(TVscreenHelper, Screen):
 
 	def keyRed(self):
 		self.filterIndex = (self.filterIndex + 1) % len(ASSETFILTERS)
-		self["key_red"].setText(f"Filter: {ASSETFILTERS[self.filterIndex][0].replace("Unterhaltung", "Unterhalt.")}")
+		self["key_red"].setText(f"Filter: {ASSETFILTERS[self.filterIndex][0].replace('Unterhaltung', 'Unterhalt.')}")
 		self.refreshSkinlist()
 		self.showCurrentAsset()
 		self.setLongstatus()
@@ -1630,7 +1630,7 @@ class TVmain(TVscreenHelper, Screen):
 			self.leftUp()
 
 	def getTips(self, forceRefresh=False):
-		tipsfile = join(f"{self.getTMPpath()}cache/", f"allTips_{datetime.today().strftime("%F")}.json")
+		tipsfile = join(f"{self.getTMPpath()}cache/", f"allTips_{datetime.today().strftime('%F')}.json")
 		self.currTipCnt = 0
 		if exists(tipsfile) and not forceRefresh:
 			with open(tipsfile, "r") as file:
