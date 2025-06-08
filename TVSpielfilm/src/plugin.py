@@ -1266,10 +1266,10 @@ class TVoverview(TVscreenHelper, Screen):
 			piconfile = self.getPiconFile(assetDict["channelId"])
 			piconpix = LoadPixmap(cached=True, path=piconfile) if piconfile and exists(piconfile) else None
 			timeSpan = f"{datetime.fromtimestamp(timespanTs[0]).strftime('%H:%M')} - {datetime.fromtimestamp(timespanTs[1]).strftime('%H:%M')}"
-			thumb = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}thumb{assetDict["thumbIdNumeric"]}.png") if assetDict["thumbIdNumeric"] > -1 else None
-			icon0 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}top.png") if assetDict["isTopTip"] else None
-			icon1 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}tip.png") if assetDict["isTipOfTheDay"] else None
-			icon2 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}new.png") if assetDict["isNew"] else None
+			thumb = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}thumb{assetDict['thumbIdNumeric']}.png") if assetDict['thumbIdNumeric'] > -1 else None
+			icon0 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}top.png") if assetDict['isTopTip'] else None
+			icon1 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}tip.png") if assetDict['isTipOfTheDay'] else None
+			icon2 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}new.png") if assetDict['isNew'] else None
 			icon3 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}timer.png") if hasTimer else None  # timer-icon
 			skinlist.append((assetUrl, piconpix, channelName, timeSpan, progress, title, info, thumb, icon0, icon1, icon2, icon3, sref))
 			self.skinList = skinlist
