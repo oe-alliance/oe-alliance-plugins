@@ -2417,5 +2417,5 @@ def Plugins(**kwargs):
 	if config.plugins.tvspielfilm.currprogram.value == 1:
 		pdList.append(PluginDescriptor(name="TV Spielfilm - laufende Sendung", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=showCurrentProgram))
 	elif hasattr(PluginDescriptor, 'WHERE_BUTTONSETUP'):
-		pdList.append(PluginDescriptor(name="TV Spielfilm - laufende Sendung", where=PluginDescriptor.WHERE_BUTTONSETUP, fnc=showPrimeTime))
+		pdList.append(PluginDescriptor(name="TV Spielfilm - laufende Sendung", where=PluginDescriptor.WHERE_BUTTONSETUP, fnc=showCurrentProgram))
 	return pdList
