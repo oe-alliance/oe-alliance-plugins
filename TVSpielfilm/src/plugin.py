@@ -162,9 +162,9 @@ class TVcoreHelper():
 	def allAssetsFilename(self, spanStartsDt, channelId=None):
 		filename = ""
 		if channelId:  # single channel completely
-			filename = join(f"{self.getTMPpath()}cache/", f"allAssets_{spanStartsDt.strftime("%F")}_{channelId.lower()}.json")
+			filename = join(f"{self.getTMPpath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}_{channelId.lower()}.json")
 		elif spanStartsDt:  # time period
-			filename = join(f"{self.getTMPpath()}cache/", f"allAssets_{spanStartsDt.strftime("%F")}T{spanStartsDt.strftime("%H:%M")}.json")
+			filename = join(f"{self.getTMPpath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}T{spanStartsDt.strftime("%H:%M")}.json")
 		return filename
 
 	def loadAllAssets(self, spanStartsDt, channelId=None):  # load assets from cache if available
@@ -2417,5 +2417,5 @@ def Plugins(**kwargs):
 	if config.plugins.tvspielfilm.currprogram.value == 1:
 		pdList.append(PluginDescriptor(name="TV Spielfilm - laufende Sendung", where=PluginDescriptor.WHERE_EXTENSIONSMENU, fnc=showCurrentProgram))
 	elif hasattr(PluginDescriptor, 'WHERE_BUTTONSETUP'):
-		pdList.append(PluginDescriptor(name="TV Spielfilm - laufende Sendung", where=PluginDescriptor.WHERE_BUTTONSETUP, fnc=showCurrentProgram))
+		pdList.append(PluginDescriptor(name="TV Spielfilm - laufende Sendung", where=PluginDescriptor.WHERE_BUTTONSETUP, fnc=showPrimeTime))
 	return pdList
