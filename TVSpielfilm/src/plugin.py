@@ -324,7 +324,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			episodeNumber = f"E{episodeNumber}" if episodeNumber else ""
 			seasonEpisode = f"{seasonNumber} | {episodeNumber}" if seasonNumber else episodeNumber
 			conclusion = assetDict.get("conclusion", "")
-			text =assetDict.get("text", "").replace("\n\n", "\n")
+			text = assetDict.get("text", "").replace("\n\n", "\n")
 			self.assetTitle = assetDict.get("title", "") or assetDict.get("episodeTitle", "")
 			thumbIdNumeric = assetDict.get("thumbIdNumeric", 0)
 			thumbIdNumeric = 3 - thumbIdNumeric if thumbIdNumeric else -1
