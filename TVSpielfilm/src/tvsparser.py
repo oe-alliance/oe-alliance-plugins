@@ -86,7 +86,7 @@ class TVSparserTips():
 				intro = tvsphelper.searchOneValue(r'<div class="tips-teaser__bottom__intro">(.*?)</div>', entry, "")  # e.g. 'heute | 20:15 | ZDF'
 				intros = intro.split(" | ") if intro else []
 				timeStartTs, hourmin = None, datetime.strptime(intros[1], '%H:%M').time() if len(intros) > 1 else None
-				if hourmin:
+				if hourmin and intros:
 					if "heute" in intros[0]:
 						timeStartTs = int(datetime.combine(datetime.today(), hourmin).timestamp())
 					else:
@@ -238,13 +238,21 @@ class TVSparserAssets():
 			return errmsg, {}
 		extract = htmldata[htmldata.find('<div class="content-area">'):]
 		extract = extract[:extract.find('<div class="schedule-widget__tabs">')]
-		title = tvsphelper.searchOneValue(r'<h1 class="headline headline--article broadcast stage-heading">(.*?)</h1>', extract, "")
+		title = unescape(tvsphelper.searchOneValue(r'<h1 class="headline headline--article broadcast stage-heading">(.*?)</h1>', extract, ""))
 		block = tvsphelper.searchOneValue(r'<span class="text-row">(.*?)</span></div>', extract, "").split(" | ")
 		countryYear = block[0] if block else ""
-		genre = block[1] if len(block) > 1 else ""
+		if len(block) > 1:
+			genre = block[1][:block[1].find("</span>")] if "</span>" in block[1] else block[1]
+		else:
+			genre = ""
+		repeatHint = unescape(tvsphelper.searchOneValue(r'<span class="text-row repeat">(.*?)</span>', f"{block[1].replace('</span>', '')}</span>", "")) if len(block) > 1 else ""
+		serialinfo = tvsphelper.searchOneValue(r'<section class="serial-info">\s*<span>(.*?)</span>', extract, "").split(",")
+		len_serialinfo = len(serialinfo)
+		seasonNumber = serialinfo[0].replace("Staffel", "").strip() if len_serialinfo > 1 else ""
+		episodeNumber = serialinfo[len_serialinfo - 1].replace("Folge", "").strip()
 		category = tvsphelper.searchOneValue(r'"epgCategory1" : "(.*?)",', htmldata, "***").upper()  # e.g. "SP" for 'Spielfilm'
 		conclusion = tvsphelper.searchOneValue(r'<blockquote class="content-rating__rating-genre__conclusion-quote">(.*?)</blockquote>', extract, "", flags=S)
-		conclusion = conclusion.replace("<p>", "").replace("</p>", "").strip()
+		conclusion = unescape(conclusion.replace("<p>", "").replace("</p>", "").strip())
 		broadblock = tvsphelper.searchOneValue(r'<div class="schedule-widget__header__attributes">(.*?)</div>', extract, "", flags=S)
 		broadblock = findall(r'<li>(.*)</li>', broadblock) if broadblock else ["", "", ""]  # e.g. 'Heute | 20:15 Uhr - 21:45 Uhr | Das Erste'
 		timeStartEnd = broadblock[1].split(" - ") if broadblock[1] else ""
@@ -274,7 +282,7 @@ class TVSparserAssets():
 		trailerUrl = f"{part0}{access}/{trailerId}{part1}" if access and trailerId else ""
 		descblock = tvsphelper.searchOneValue(r'<section class="broadcast-detail__description">(.*?)</section>', extract, "", flags=S)
 		preview = tvsphelper.searchOneValue(r'<p class="headline">(.*?)</p>', descblock, "")
-		text = tvsphelper.searchOneValue(r'<p>(.*?)</p>', descblock, "")
+		text = unescape(tvsphelper.searchOneValue(r'<p>(.*?)</p>', descblock, ""))
 		infoblock = tvsphelper.searchOneValue(r'<p class="headline">Infos</p>(.*?)<p class="headline headline--spacing">', extract, "", flags=S)
 		infodict = dict(findall(r'<dt>(.*?)</dt>\s*<dd>(.*?)</dd>', infoblock, flags=S))
 		country, firstyear, length = infodict.get("Land", ""), infodict.get("Jahr", ""), infodict.get("Länge", "")
@@ -347,6 +355,9 @@ class TVSparserAssets():
 		assetDict["trailerUrl"] = trailerUrl
 		assetDict["channelId"] = channelId
 		assetDict["channelName"] = channelName
+		assetDict["seasonNumber"] = seasonNumber
+		assetDict["episodeNumber"] = episodeNumber
+		assetDict["repeatHint"] = repeatHint
 		assetDict["timeStart"] = f"{datetime.fromtimestamp(timeStartTs).isoformat()}+00:00" if timeStartTs else ""
 		assetDict["timeEnd"] = f"{datetime.fromtimestamp(timeEndTs).isoformat()}+00:00" if timeEndTs else ""
 		assetDict["assetUrl"] = assetUrl
@@ -384,7 +395,7 @@ def main(argv):  # shell interface
 		elif opt in ("-j", "--json"):
 			filename = arg
 		elif opt in ("-s", "--assetslist"):
-			errmsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/fussball-nations-league,6825d7c492d24c167be95d7c.html")
+			errmsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/tatort-feuer,6826041692d24c167bea36f6.html")
 		elif opt in ("-t", "--tipslist"):
 			jsonList = tvsptips.parseTips()
 	if jsonList and filename:
