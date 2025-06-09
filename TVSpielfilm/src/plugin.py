@@ -11,7 +11,6 @@
 # PYTHON IMPORTS
 from datetime import datetime, timedelta
 from glob import glob
-from html import unescape
 from io import BytesIO
 from json import load, dump
 from os import rename, makedirs, remove
@@ -314,7 +313,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			timeStartStr = self.currDateDt.strftime("%H:%M")
 			timeStartEnd = f"{timeStartStr} - {timeEndDt.strftime('%H:%M')}"
 			timeStartEndTs = (int(timeStartDt.timestamp()), int(timeEndDt.timestamp()))
-			repeatHint = ""  # unescape(assetDict.get("repeatHint", ""))  # e.g.'Wh. um 00:20 Uhr, Nächste Episode um 21:55 Uhr (Staffel 8, Episode 24)'
+			repeatHint = assetDict.get("repeatHint", "")  # e.g.'Wh. um 00:20 Uhr, Nächste Episode um 21:55 Uhr (Staffel 8, Episode 24)'
 			channelId = assetDict.get("channelId", "").lower()
 			channelName = assetDict.get("channelName", "") if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(channelId, ["", ""])[1]
 			subline = assetDict.get("preview", "")
@@ -323,10 +322,10 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			seasonNumber = f"S{seasonNumber}" if seasonNumber else ""
 			episodeNumber = assetDict.get("episodeNumber", "")
 			episodeNumber = f"E{episodeNumber}" if episodeNumber else ""
-			seasonEpisode = ""  # f"{seasonNumber} | {episodeNumber}" if seasonNumber else episodeNumber
-			conclusion = unescape(assetDict.get("conclusion", ""))
-			text = unescape(assetDict.get("text", "").replace("\n\n", "\n"))
-			self.assetTitle = unescape(assetDict.get("title", "") or assetDict.get("episodeTitle", ""))
+			seasonEpisode = f"{seasonNumber} | {episodeNumber}" if seasonNumber else episodeNumber
+			conclusion = assetDict.get("conclusion", "")
+			text =assetDict.get("text", "").replace("\n\n", "\n")
+			self.assetTitle = assetDict.get("title", "") or assetDict.get("episodeTitle", "")
 			thumbIdNumeric = assetDict.get("thumbIdNumeric", 0)
 			thumbIdNumeric = 3 - thumbIdNumeric if thumbIdNumeric else -1
 			demanding = assetDict.get("ratingDemanding")
@@ -480,7 +479,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			fallback = (f"{fallback}FIN").replace(":", "_").replace("_FIN", "").replace("FIN", "")
 		sref = f"{sref}FIN".replace(":", "_").replace("_FIN", "").replace("FIN", "")
 		for piconsref in [sref, fallback]:
-			piconfile = join(join(resolveFilename(SCOPE_SKIN_IMAGE), "picon/"), f"{piconsref}.png")
+			piconfile = join(resolveFilename(SCOPE_SKIN_IMAGE), "picon/{piconsref}.png")
 			if exists(piconfile):
 				return piconfile
 		return ""
@@ -1206,7 +1205,7 @@ class TVoverview(TVscreenHelper, Screen):
 						durance = timeEndDt - timeStartDt
 						progress = int(((now - timeStartDt) / durance) * 100) if durance else -1
 					assetUrl = assetDict.get("assetUrl", "")
-					title = unescape(assetDict.get("title", ""))
+					title = assetDict.get("title", "")
 					category = assetDict.get("category", "")  # e.g. 'SP' for 'Spielfilm'
 					genre = assetDict.get("genre", "")  # e.g. 'Katastrophenaction'
 					timespanTs = (int(timeStartDt.timestamp()), int(timeEndDt.timestamp()))
@@ -1658,7 +1657,7 @@ class TVmain(TVscreenHelper, Screen):
 				if channelId not in tvglobals.IMPORTDICT and isTipOfTheDay or (index == 2 and programType != "SP"):
 					continue
 				self.currAssetUrl = tipDict.get("assetUrl", "")
-				title = unescape(tipDict.get("title", ""))
+				title = tipDict.get("title", "")
 				timeInfos = tipDict.get("timeInfos", "")
 				imgUrl = tipDict.get("imgUrl", "")
 				if imgUrl:
@@ -1683,7 +1682,7 @@ class TVmain(TVscreenHelper, Screen):
 				fsk = tipDict.get("fsk", "")
 				fskText = f"ab {fsk} Jahren" if fsk and fsk > -1 else ""
 				metaInfo = tipDict.get("metaInfo", {})
-				conclusion = unescape(metaInfo.get("conclusion", ""))
+				conclusion = metaInfo.get("conclusion", "")
 				tipsDicts.append({"title": title, "timeInfos": timeInfos, "genre": genre, "category": category, "channelName": channelName,
 								"countryYear": countryYear, "imdbRating": imdbRating, "fskText": fskText, "conclusion": conclusion, "isTopTip": isTopTip,
 								"isTipOfTheDay": isTipOfTheDay, "isNew": isNew, "fsk": fsk, "thumbIdNumeric": thumbIdNumeric, "imgUrl": imgUrl,
