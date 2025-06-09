@@ -370,8 +370,9 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			persons = ""
 			for member in assetDict.get("crew", {}).items():
 				persons += f"{member[0]}:\t{', '.join(member[1])}\n"
-			persons += "Schauspieler:\n"
-			for member in assetDict.get("cast", {}).items():
+			for index, member in enumerate(assetDict.get("cast", {}).items()):
+				if not index:  # if very first member
+					persons += "Darsteller:\n"
 				persons += f"{', '.join(member[1])} als '{member[0]}'\n"
 			sref = tvglobals.IMPORTDICT.get(channelId, ["", ""])[0]
 			hasTimer = self.isAlreadyListed(timeStartEndTs, sref) if timeStartEndTs and sref else False
@@ -457,7 +458,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 		hour, minute = spanStartsStr.split(":") if spanStartsStr else [currentDt.strftime("%H"), currentDt.strftime("%M")]
 		spanEnds = (currentDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0) + timedelta(minutes=self.spanDuranceTs)).strftime("%H:%M")
 		if fullscreen:
-			reviewdate = f"{weekday} {currentDt.strftime('%d.%m.%Y')} | von {spanStartsStr} Uhr bis {spanEnds} Uhr | {self.titleLenStr}"
+			reviewdate = " | ".join(list(filter(None, [f"{weekday} {currentDt.strftime('%d.%m.%Y')}", f"von {spanStartsStr} Uhr bis {spanEnds} Uhr", f"{self.titleLenStr}"])))
 		else:
 			if self.singleChannelId:
 				reviewdate = f"{weekday} {currentDt.strftime('%d.%m.%Y')} | {self.currDayDelta:+} Tag(e) | alle Sendungen"
@@ -479,7 +480,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			fallback = (f"{fallback}FIN").replace(":", "_").replace("_FIN", "").replace("FIN", "")
 		sref = f"{sref}FIN".replace(":", "_").replace("_FIN", "").replace("FIN", "")
 		for piconsref in [sref, fallback]:
-			piconfile = join(resolveFilename(SCOPE_SKIN_IMAGE), "picon/{piconsref}.png")
+			piconfile = join(resolveFilename(SCOPE_SKIN_IMAGE), f"picon/{piconsref}.png")
 			if exists(piconfile):
 				return piconfile
 		return ""
