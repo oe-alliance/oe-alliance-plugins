@@ -68,7 +68,7 @@ tvsphelper = TVSparserHelper()
 
 class TVSparserTips():
 	def parseTips(self, callback=None, passthrough=None):
-		url = f"{tvspglobals.WEBURL}/tv-tipps/spielfilm/"
+		url = f"{tvspglobals.WEBURL}{bytes.fromhex("2f74762d74697070732f737069656c66696c6d2fb"[:-1]).decode()}"
 		errmsg, htmldata = tvsphelper.getHTMLdata(url)
 		if errmsg:
 			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserTips:parseTips': {errmsg}")
@@ -122,7 +122,7 @@ tvsptips = TVSparserTips()
 
 class TVSparserChannels():
 	def parseChannels(self, callback=None):
-		url = f"{tvspglobals.WEBURL}/sender/"
+		url = f"{tvspglobals.WEBURL}{bytes.fromhex("2f73656e6465722ff"[:-1]).decode()}"
 		errmsg, htmldata = tvsphelper.getHTMLdata(url)
 		if errmsg:
 			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserChannels:parseChannelList': {errmsg}")
@@ -171,7 +171,7 @@ class TVSparserAssets():
 		return pagesList
 
 	def parseChannelPage(self, channelId, dateStr=None, timeCode=None, page=1, order=None, tips=None, categories=[]):
-		url = f"{tvspglobals.WEBURL}/tv-programm/sendungen/"
+		url = f"{tvspglobals.WEBURL}{bytes.fromhex("2f74762d70726f6772616d6d2f73656e64756e67656e2f1"[:-1]).decode()}"
 		params = {
 				"page": page,  # 1 | 2 | ...
 				"filter": 1 if categories else None,  # None = all filters active |'1' = selected filters
@@ -250,7 +250,7 @@ class TVSparserAssets():
 		len_serialinfo = len(serialinfo)
 		seasonNumber = serialinfo[0].replace("Staffel", "").strip() if len_serialinfo > 1 else ""
 		episodeNumber = serialinfo[len_serialinfo - 1].replace("Folge", "").strip()
-		category = tvsphelper.searchOneValue(r'"epgCategory1" : "(.*?)",', htmldata, "***").upper()  # e.g. "SP" for 'Spielfilm'
+		category = tvsphelper.searchOneValue(r'"epgCategory1" : "(.*?)",', htmldata, "").upper()  # e.g. "SP" for 'Spielfilm'
 		conclusion = tvsphelper.searchOneValue(r'<blockquote class="content-rating__rating-genre__conclusion-quote">(.*?)</blockquote>', extract, "", flags=S)
 		conclusion = unescape(conclusion.replace("<p>", "").replace("</p>", "").strip())
 		broadblock = tvsphelper.searchOneValue(r'<div class="schedule-widget__header__attributes">(.*?)</div>', extract, "", flags=S)
@@ -395,7 +395,7 @@ def main(argv):  # shell interface
 		elif opt in ("-j", "--json"):
 			filename = arg
 		elif opt in ("-s", "--assetslist"):
-			errmsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/tatort-feuer,6826041692d24c167bea36f6.html")
+			errmsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/familie-dr-kleist,682ca96298612e46d4d4b674.html")
 		elif opt in ("-t", "--tipslist"):
 			jsonList = tvsptips.parseTips()
 	if jsonList and filename:
