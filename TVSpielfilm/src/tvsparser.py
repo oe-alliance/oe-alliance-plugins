@@ -68,7 +68,7 @@ tvsphelper = TVSparserHelper()
 
 class TVSparserTips():
 	def parseTips(self, callback=None, passthrough=None):
-		url = f"{tvspglobals.WEBURL}{bytes.fromhex("2f74762d74697070732f737069656c66696c6d2fb"[:-1]).decode()}"
+		url = f"{tvspglobals.WEBURL}{bytes.fromhex('2f74762d74697070732f737069656c66696c6d2fb'[:-1]).decode()}"
 		errmsg, htmldata = tvsphelper.getHTMLdata(url)
 		if errmsg:
 			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserTips:parseTips': {errmsg}")
@@ -122,7 +122,7 @@ tvsptips = TVSparserTips()
 
 class TVSparserChannels():
 	def parseChannels(self, callback=None):
-		url = f"{tvspglobals.WEBURL}{bytes.fromhex("2f73656e6465722ff"[:-1]).decode()}"
+		url = f"{tvspglobals.WEBURL}{bytes.fromhex('2f73656e6465722ff'[:-1]).decode()}"
 		errmsg, htmldata = tvsphelper.getHTMLdata(url)
 		if errmsg:
 			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserChannels:parseChannelList': {errmsg}")
@@ -171,7 +171,7 @@ class TVSparserAssets():
 		return pagesList
 
 	def parseChannelPage(self, channelId, dateStr=None, timeCode=None, page=1, order=None, tips=None, categories=[]):
-		url = f"{tvspglobals.WEBURL}{bytes.fromhex("2f74762d70726f6772616d6d2f73656e64756e67656e2f1"[:-1]).decode()}"
+		url = f"{tvspglobals.WEBURL}{bytes.fromhex('2f74762d70726f6772616d6d2f73656e64756e67656e2f1'[:-1]).decode()}"
 		params = {
 				"page": page,  # 1 | 2 | ...
 				"filter": 1 if categories else None,  # None = all filters active |'1' = selected filters
@@ -277,8 +277,8 @@ class TVSparserAssets():
 		access = tvsphelper.searchOneValue(r'<script src="(.*?)"></script>', extract, "")
 		access = access[access.find("key=") + 4:] if access else ""
 		trailerId = tvsphelper.searchOneValue(r'"contentDesc": "(.*?)"', extract, "")
-		part0 = bytes.fromhex('68747470733a2f2f6d656469612e64656c696768742e766964656f2fa'[:-1]).decode()
-		part1 = bytes.fromhex('2f4d454449412f76302f48442f6d656469612e6d7034f'[:-1]).decode()
+		part0 = bytes.fromhex("68747470733a2f2f6d656469612e64656c696768742e766964656f2fa"[:-1]).decode()
+		part1 = bytes.fromhex("2f4d454449412f76302f48442f6d656469612e6d7034f"[:-1]).decode()
 		trailerUrl = f"{part0}{access}/{trailerId}{part1}" if access and trailerId else ""
 		descblock = tvsphelper.searchOneValue(r'<section class="broadcast-detail__description">(.*?)</section>', extract, "", flags=S)
 		preview = tvsphelper.searchOneValue(r'<p class="headline">(.*?)</p>', descblock, "")
