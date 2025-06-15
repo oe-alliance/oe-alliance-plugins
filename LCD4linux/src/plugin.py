@@ -186,7 +186,7 @@ LCD4etc = resolveFilename(SCOPE_SYSETC)  # /etc/
 LCD4bin = "%s/" % eEnv.resolve("${bindir}")  # /usr/bin/
 LCD4python = "%s/" % eEnv.resolve("${PYTHONPATH}")  # /usr/lib/enigma2/python/
 LCD4share = "%s/" % eEnv.resolve("${datarootdir}")  # /usr/share/
-LCD4picon = join(LCD4share, "senigma2/picon/")  # /usr/share/enigma2/picon/
+LCD4picon = join(LCD4share, "enigma2/picon/")  # /usr/share/enigma2/picon/
 LCD4fonts = resolveFilename(SCOPE_FONTS)  # /usr/share/fonts/
 LCD4config = join(LCD4enigma2config, "lcd4config")  # /etc/enigma2/lcd4config
 LCD4plugin = join(LCD4enigma2plugin, "Extensions/LCD4linux/")  # /usr/lib/enigma2/python/Plugins/Extensions/LCD4linux/
@@ -13297,7 +13297,10 @@ def LCD4linuxPIC(self, session):
 						self.draw[draw].rectangle((lx + 8, ly + B1pixel, lx + 14, ly + B1pixel + B2pixel), outline=LCD4linux.DevBackColor.value, fill=LCD4linux.DevBackColor.value)
 					else:
 						self.draw[draw].rectangle((lx + 8, ly, lx + 18, ly + Fpixel), outline=LCD4linux.DevBackColor.value, fill=LCD4linux.DevBackColor.value)
-					lx += w + 20 if ConfigType == "0" else 2 * h + 3
+					if ConfigType == "0":
+						lx += w + 20
+					else:
+						ly += 2 * h + 3
 				else:
 					L4log("remove Device", l)
 					DeviceRemove.append(l)
