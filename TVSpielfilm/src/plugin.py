@@ -213,8 +213,7 @@ class TVcoreHelper():
 			eventStartTs = ptr.getBeginTime()
 			Event = epg.lookupEventTime(ref, eventStartTs, +1)
 			if Event:
-				sref = ServiceReference(ref).toString()
-				channelId = [shortcut for shortcut, detail in self.readSupportedFile().items() if detail[0] == sref]
+				channelId = [shortcut for shortcut, detail in self.readSupportedFile().items() if detail[0] == ref.toString()]
 				if channelId:
 					channelId = channelId[0].lower()
 					eventStartDt = datetime.fromtimestamp(eventStartTs)
@@ -306,7 +305,6 @@ class TVscreenHelper(TVcoreHelper, Screen):
 		errmsg, assetDict = self.getSingleAsset(assetUrl)
 		if errmsg:
 			print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:showAssetDetails': {errmsg}!")
-		if assetUrl != self.currAssetUrl:  # stop if another asset was selected in the meantime
 			return
 		if assetDict:
 			isTopTip = assetDict.get("isTopTip", "")
@@ -1080,7 +1078,7 @@ class TVoverview(TVscreenHelper, Screen):
 		self.filterIndex = config.plugins.tvspielfilm.filter.value
 		self.currDateDt = datetime.today()
 		self.dataBases, self.skinList, self.skinDicts = [], [], []
-		self.currDayDelta, self.lenImportdict, self.totalAssetsCount = 0, 0, 0
+		self.currDayDelta, self.lenImportdict = 0, 0
 		self.assetTitle, self.trailerUrl, self.currImdbId, self.currTmdbId = "", "", "", ""
 		self.channelName, self.currServiceRef, self.currAssetUrl = "", "", ""
 		self.loadAllEPGactive, self.loadAllEPGstop, self.zapAllowed = False, False, False
@@ -1210,7 +1208,6 @@ class TVoverview(TVscreenHelper, Screen):
 			skinDicts = []
 			importDict = tvglobals.IMPORTDICT.keys()
 			catFilters = {value: key for key, value in tvspassets.catFilters.items()}  # swap dict
-			self.totalAssetsCount = 0
 			for assetDict in allAssets:
 				if self.loadAllEPGstop:
 					break
@@ -1241,23 +1238,23 @@ class TVoverview(TVscreenHelper, Screen):
 								"progress": progress, "title": title, "info": info, "category": category, "genre": genre,
 								"thumbIdNumeric": thumbIdNumeric, "isTopTip": isTopTip, "isTipOfTheDay": isTipOfTheDay, "isNew": isNew}
 					skinDicts.append(skinDict)
-					if not self.totalAssetsCount:  # immediate display of details after downloading the very first asset
+					if len(skinDicts) == 1:  # immediate display of details after downloading the very first asset
 						self.currAssetUrl = assetUrl  # set 'assetUrl is still active'
 						callInThread(self.showAssetDetails, assetUrl, fullScreen=False)
-					self.totalAssetsCount += 1
 			self.skinDicts = skinDicts
 			self.refreshSkinlist()
 
 	def setLongstatus(self):
-		msg = f"{self.totalAssetsCount} Einträge"
+		lenSkinDicts = len(self.skinDicts)
+		msg = f"{lenSkinDicts} Einträge"
 		if self.singleChannelId:
 			channelName = self.channelName if config.plugins.tvspielfilm.channelname.value else tvglobals.IMPORTDICT.get(self.singleChannelId, ["", "{unbekannt}"])[1]
 			msg += f" im Sender '{channelName}' gefunden."
 		else:
 			msg += f" in insgesamt {self.lenImportdict} Sendern gefunden."
-			lenskinDicts = len(self.skinDicts)
-			if self.totalAssetsCount != lenskinDicts:
-				msg += f" Gefilterte Einträge: {lenskinDicts}"
+			lenskinList = len(self.skinList)
+			if lenSkinDicts != lenskinList:
+				msg += f" Gefilterte Einträge: {lenskinList}"
 		self["longStatus"].setText(msg)
 
 	def refreshSkinlist(self):
@@ -1306,11 +1303,13 @@ class TVoverview(TVscreenHelper, Screen):
 	def showCurrentAsset(self):
 		if self.skinList:
 			curridx = min(self["menuList"].getCurrentIndex(), len(self.skinList) - 1)
-			self.currAssetUrl = self.skinList[curridx][0]
+			assetUrl = self.skinList[curridx][0]
 			progress = self.skinList[curridx][4]
 			self.zapAllowed = progress > -1 and progress < 101  # progressbar visible means: transmission is currently on air
 			self["key_blue"].setText("Zap" if self.zapAllowed else "")
-			callInThread(self.showAssetDetails, self.currAssetUrl, fullScreen=False)
+			if assetUrl != self.currAssetUrl:  # is a new asset?
+				self.currAssetUrl = assetUrl
+				callInThread(self.showAssetDetails, assetUrl, fullScreen=False)
 
 	def hideCurrentAsset(self):
 		for widget in ["picon", "thumb", "image", "playButton"]:
@@ -1588,6 +1587,7 @@ class TVmain(TVscreenHelper, Screen):
 			self.session.openWithCallback(self.returnYellow, MessageBox, '\nTVS-EPG Update abbrechen?', MessageBox.TYPE_YESNO, timeout=10, default=False)
 
 	def returnYellow(self, answer):
+		global TVS_UPDATESTOP
 		if answer is True:
 			TVS_UPDATESTOP = True
 
@@ -1836,6 +1836,8 @@ class TVmain(TVscreenHelper, Screen):
 					allAssets = self.loadAllAssets(spanStartsDt) if not forceRefresh else []  # load from cache if available and desired
 					if not allAssets:  # build allAssets, channel by channel
 						for index1, item in enumerate(importdict.items()):
+							if TVS_UPDATESTOP:
+								break
 							self.setProgressValues(1, (f"Sender: '{item[1][1]}'", index1 + 1, f"{index1 + 1}/{len_importdict}"))
 							channelId = item[0].lower()
 							if self.singleChannelId:
