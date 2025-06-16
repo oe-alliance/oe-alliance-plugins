@@ -59,7 +59,7 @@ class TVSparserHelper():
 			return errmsg, htmldata
 
 	def searchOneValue(self, regex, text, fallback, flags=None):
-		text = search(regex, text) if flags is None else search(regex, text, flags=flags)
+		text = search(regex, text, flags=flags) if flags else search(regex, text)
 		return text.group(1) if text else fallback
 
 
@@ -84,7 +84,7 @@ class TVSparserTips():
 				genre = tvsphelper.searchOneValue(r'<span class="detail-genre">(.*?)</span>', entry, "")  # e.g. 'Katastrophenaction'
 				category = tvsphelper.searchOneValue(r'<span class="tips-teaser__top__category">(.*?)</span>', entry, "")  # e.g. 'SP' for 'Spielfilm'
 				intro = tvsphelper.searchOneValue(r'<div class="tips-teaser__bottom__intro">(.*?)</div>', entry, "")  # e.g. 'heute | 20:15 | ZDF'
-				intros = intro.split(" | ") if intro else []
+				intros = intro.split(" | ") or []
 				timeStartTs, hourmin = None, datetime.strptime(intros[1], '%H:%M').time() if len(intros) > 1 else None
 				if hourmin and intros:
 					if "heute" in intros[0]:
@@ -92,7 +92,7 @@ class TVSparserTips():
 					else:
 						timeStartTs = int(datetime.combine(datetime.strptime(f"{intros[0]}{datetime.today().year}", '%d.%m.%Y'), hourmin).timestamp())
 				channelName = intros[2] if len(intros) > 2 else ""
-				timeInfos = intros[0] if intros else ""
+				timeInfos = intros[0] or ""
 				timeInfos += f" | {intros[1]} Uhr" if len(intros) > 1 else ""
 				rating = tvsphelper.searchOneValue(r'<div class=\"tips-teaser__bottom__top-rating-text\">(.*?)</div>', entry, "").lower()
 				# 'TOP BEWERTET': Highlights, wenn sie von der TVSpielfilm-Redaktion einen 'Daumen hoch'und eine IMDb-Bewertung von über 7,0 erhalten haben.
@@ -254,7 +254,7 @@ class TVSparserAssets():
 		conclusion = tvsphelper.searchOneValue(r'<blockquote class="content-rating__rating-genre__conclusion-quote">(.*?)</blockquote>', extract, "", flags=S)
 		conclusion = unescape(conclusion.replace("<p>", "").replace("</p>", "").strip())
 		broadblock = tvsphelper.searchOneValue(r'<div class="schedule-widget__header__attributes">(.*?)</div>', extract, "", flags=S)
-		broadblock = findall(r'<li>(.*)</li>', broadblock) if broadblock else ["", "", ""]  # e.g. 'Heute | 20:15 Uhr - 21:45 Uhr | Das Erste'
+		broadblock = findall(r'<li>(.*)</li>', broadblock) or ["", "", ""]  # e.g. 'Heute | 20:15 Uhr - 21:45 Uhr | Das Erste'
 		timeStartEnd = broadblock[1].split(" - ") if broadblock[1] else ""
 		timeStartTs, startHourmin = None, datetime.strptime(timeStartEnd[0].replace(" Uhr", ""), '%H:%M').time() if timeStartEnd else None
 		timeEndTs, endHourmin = None, datetime.strptime(timeStartEnd[1].replace(" Uhr", ""), '%H:%M').time() if len(timeStartEnd) > 1 else None
