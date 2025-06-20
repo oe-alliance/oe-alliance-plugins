@@ -15,5 +15,10 @@
 		<key id="KEY_BLUE" mapto="blue" flags="m" />
 		<key id="KEY_INFO" mapto="info" flags="m" />
 		<key id="KEY_MENU" mapto="menu" flags="m" />
+		<key id="KEY_BACK" mapto="recall" flags="m" />
+	</map>
+	<map context="EventViewActions">
+		<key id="KEY_TEXT" mapto="text" flags="m" />
+		<key id="KEY_BACK" mapto="recall" flags="m" />
 	</map>
 </keymap>

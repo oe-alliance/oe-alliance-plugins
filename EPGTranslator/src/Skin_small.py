@@ -1,4 +1,4 @@
-# Skin data for screenwidth <= 1280
+# Skin data for screenwidth < 1280
 # Only contains "class" data.  No instance data
 #
 
@@ -30,20 +30,29 @@ class MySkinData:
             <ePixmap position="0,0" size="1000,50" pixmap="{plug_loc}/pic/translator.png" alphatest="blend" zPosition="1" />
             <ePixmap position="10,6" size="18,18" pixmap="{plug_loc}/pic/buttons/blue.png" alphatest="blend" zPosition="2" />
             <ePixmap position="10,26" size="18,18" pixmap="{plug_loc}/pic/buttons/yellow.png" alphatest="blend" zPosition="2" />
-            <widget name="label" position="34,6" size="200,20" font="Regular;16" foregroundColor="black" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+            <ePixmap position="215,6" size="18,18" pixmap="{plug_loc}/pic/buttons/red.png" alphatest="blend" zPosition="2" />
+            <ePixmap position="215,26" size="18,18" pixmap="{plug_loc}/pic/buttons/green.png" alphatest="blend" zPosition="2" />
+            <widget name="label1" position="34,6" size="200,20" font="Regular;16" foregroundColor="black" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
             <widget name="label2" position="34,26" size="200,20" font="Regular;16" foregroundColor="black" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+            <widget name="label3" position="239,6" size="200,20" font="Regular;16" foregroundColor="black" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+            <widget name="label4" position="239,26" size="200,20" font="Regular;16" foregroundColor="black" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+            <widget name="label5" position="589,6" size="200,20" font="Regular;16" foregroundColor="black" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
+            <widget name="label6" position="589,26" size="200,20" font="Regular;16" foregroundColor="black" backgroundColor="#FFFFFF" halign="left" transparent="1" zPosition="2" />
             <widget render="Label" source="global.CurrentTime" position="740,0" size="240,50" font="Regular;24" foregroundColor="#697178" backgroundColor="#FFFFFF" halign="right" valign="center" zPosition="2">
                 <convert type="ClockToText">Format:%H:%M:%S</convert>
             </widget>
             <widget name="timing" position="308,55" size="720,32" foregroundColor="orange" font="Bold;24" halign="left" zPosition="1" />
             <widget name="flag" position="10,90" size="288,288" alphatest="blend" zPosition="1" />
-            <widget name="text" position="308,90" size="720,{size}" font="Regular;24" halign="left" zPosition="2" />
+            <widget name="text" position="308,90" size="720,60" font="Regular;24" zPosition="2" />
+            <widget name="textd" position="308,150" size="720,{size}" font="Regular;24" zPosition="2" />
             <widget name="flag2" position="10,350" size="288,288" alphatest="blend" zPosition="1" />
-            <widget name="text2" position="308,350" size="720,255" font="Regular;24" halign="left" zPosition="1" />
+            <widget name="text2" position="308,350" size="720,60" font="Regular;24" zPosition="1" />
+            <widget name="text2d" position="308,410" size="720,195" font="Regular;24" zPosition="1" />
+
         </screen>
         """
-    tMyes = "255"
-    tMno = "515"
+    tMyes = "195"
+    tMno = "455"
 
 
 MySD = MySkinData()
