@@ -86,7 +86,7 @@ class BluetoothDevicesManager(Screen):
 		self["key_green"] = StaticText(_("Scan"))
 		self["key_yellow"] = StaticText(_("Connect"))
 		self["key_blue"] = StaticText("")
-		self["ConnStatus"] = Label(_("No connected to any device"))
+		self["ConnStatus"] = Label(_("Not connected to any device"))
 
 		self.devicelist = []
 		self["devicelist"] = MenuList(self.devicelist)
