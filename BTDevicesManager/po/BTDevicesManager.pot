@@ -56,7 +56,7 @@ msgstr ""
 msgid "Exit"
 msgstr ""
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr ""
 
 msgid "Not connected"

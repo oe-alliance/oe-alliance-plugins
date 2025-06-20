@@ -63,7 +63,7 @@ msgstr "Отсоединить от:\n"
 msgid "Exit"
 msgstr "Выход"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Нет соединения ни с одним устройством"
 
 #, fuzzy

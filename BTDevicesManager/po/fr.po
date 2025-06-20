@@ -60,7 +60,7 @@ msgstr "Déconnecter avec:\n"
 msgid "Exit"
 msgstr "Quitter"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Non connecté à aucun appareil"
 
 #, fuzzy

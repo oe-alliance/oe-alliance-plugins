@@ -56,7 +56,7 @@ msgstr "Conectado con:\n"
 msgid "Exit"
 msgstr "Salir"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "No se ha conectado a ningún dispositivo"
 
 #, fuzzy

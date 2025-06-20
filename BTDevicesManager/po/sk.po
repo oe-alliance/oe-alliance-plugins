@@ -62,7 +62,7 @@ msgstr "Pripojenie s:\n"
 msgid "Exit"
 msgstr "Skončiť"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Žiadne zariadenie nie je pripojené"
 
 #, fuzzy

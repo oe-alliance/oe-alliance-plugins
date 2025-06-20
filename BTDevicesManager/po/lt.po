@@ -64,7 +64,7 @@ msgstr "Ryšys su:\n"
 msgid "Exit"
 msgstr "Uždaryti"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Neprisijungta prie jokio įrenginio"
 
 #, fuzzy

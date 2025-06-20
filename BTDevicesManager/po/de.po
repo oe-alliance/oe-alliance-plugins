@@ -55,7 +55,7 @@ msgstr "Trennen bitte warten..."
 msgid "Exit"
 msgstr "Beenden"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Mit keinem Gerät verbunden"
 
 msgid "Not connected"

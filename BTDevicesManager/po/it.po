@@ -51,7 +51,7 @@ msgstr "Disconnessione in corso…"
 msgid "Exit"
 msgstr "Esci"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Non connesso a nessun dispositivo"
 
 msgid "Not connected"

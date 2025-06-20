@@ -62,7 +62,7 @@ msgstr "Verbreek verbinding met:\n"
 msgid "Exit"
 msgstr "Sluit af"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Niet verbonden met enig apparaat"
 
 #, fuzzy

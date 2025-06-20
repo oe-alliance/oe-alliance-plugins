@@ -60,7 +60,7 @@ msgstr "Ligação com:\n"
 msgid "Exit"
 msgstr "Sair"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Não ligado a qualquer dispositivo"
 
 #, fuzzy

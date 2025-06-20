@@ -64,7 +64,7 @@ msgstr "Σύνδεση με:\n"
 msgid "Exit"
 msgstr "Έξοδος"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Δεν έχει συνδεθεί συσκευή"
 
 #, fuzzy

@@ -57,7 +57,7 @@ msgstr "Rozłączanie, proszę czekać..."
 msgid "Exit"
 msgstr "Wyjście"
 
-msgid "No connected to any device"
+msgid "Not connected to any device"
 msgstr "Nie połączono z żadnym urządzeniem"
 
 msgid "Not connected"
