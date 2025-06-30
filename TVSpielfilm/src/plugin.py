@@ -94,7 +94,7 @@ config.plugins.tvspielfilm.mapfilehash = ConfigText(default="")
 
 
 class TVglobals():
-	RELEASE = "v2.2beta"
+	RELEASE = "v2.2"
 	MODULE_NAME = __name__.split(".")[-2]
 	IMPORTDICT = {}
 	CONFIGPATH = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # e.g. /etc/enigma2/TVSpielfilm/
