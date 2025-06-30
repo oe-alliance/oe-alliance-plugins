@@ -12,7 +12,7 @@
 #######################################################################################################
 
 # PYTHON IMPORTS
-from datetime import datetime
+from datetime import datetime, timedelta
 from getopt import getopt, GetoptError
 from html import unescape
 from json import dump, loads
@@ -172,6 +172,8 @@ class TVSparserAssets():
 
 	def parseChannelPage(self, channelId, dateStr=None, timeCode=None, page=1, order=None, tips=None, categories=[]):
 		url = f"{tvspglobals.WEBURL}{bytes.fromhex('2f74762d70726f6772616d6d2f73656e64756e67656e2f1'[:-1]).decode()}"
+		if timeCode == "0" and dateStr:  # if timespanStart = '00:00' -> use yesterday (server philosophy)
+			dateStr = (datetime.fromisoformat(dateStr) + timedelta(days=-1)).strftime("%F")
 		params = {
 				"page": page,  # 1 | 2 | ...
 				"filter": 1 if categories else None,  # None = all filters active |'1' = selected filters
@@ -267,12 +269,11 @@ class TVSparserAssets():
 			timeEndTs = int(datetime.combine(datetime.strptime(f"{daydate}{datetime.today().year}", '%d.%m.%Y'), endHourmin).timestamp()) if endHourmin else ""
 		channelName = broadblock[2] if len(broadblock) > 2 else ""
 		channelId = tvsphelper.searchOneValue(r'"pageElementCreative":"(.*?)"', extract, "").upper().replace("N\\/A", "").lower()
-		imgUrl = tvsphelper.searchOneValue(r'<picture class="">\s*<img src="(.*?)" width', extract, "", flags=S)
+		imgUrl = tvsphelper.searchOneValue(r'<picture class=".*?">\s*<img src="(.*?)" width', extract, "", flags=S)
 		if not imgUrl:  # alternative search
 			imgUrl = tvsphelper.searchOneValue(r'--tv-detail ">\s*<img src="(.*?)" alt', extract, "", flags=S)
 			if not imgUrl:  # alternative search for assets with trailer
 				imgUrl = tvsphelper.searchOneValue(r'<div class="tips-teaser__image">\s*<img src="(.*?)"\s*width', extract, "", flags=S)
-		imgUrl = f"{imgUrl}.jpg" if imgUrl else ""
 		imgCredits = tvsphelper.searchOneValue(r'<span class="credit">(.*?)</span>', extract, "")
 		access = tvsphelper.searchOneValue(r'<script src="(.*?)"></script>', extract, "")
 		access = access[access.find("key=") + 4:] if access else ""
@@ -381,10 +382,10 @@ def main(argv):  # shell interface
 		arg = arg.strip()
 		if not opts or opt == "-h":
 			print("Usage 'tvsparser v1.0': python tvsparser.py [option...] <data>\n"
-			"-a, --assetslist <options>\tget list of assets of a channel\n"
+			"-a, --assetslist <options>\tget list of assets of a channel (details: see code)\n"
 			"-c, --channellist\tget list of all supported channels\n"
 			"-h, --help\t\tget an overview of the options\n"
-			"-s, --single <url>\tget a single asset\n"
+			"-s, --single\tget a single asset (url: see code)\n"
 			"-t, --tipslist\t\tget all TV-tips\n"
 			"-j, --json <filename>\tFile output formatted in JSON\n")
 			exit()
@@ -395,7 +396,7 @@ def main(argv):  # shell interface
 		elif opt in ("-j", "--json"):
 			filename = arg
 		elif opt in ("-s", "--assetslist"):
-			errmsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/familie-dr-kleist,682ca96298612e46d4d4b674.html")
+			errmsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/citizen-sleuth-die-podcast-detektivin,68416ef34d62107df4f47a79.html")
 		elif opt in ("-t", "--tipslist"):
 			jsonList = tvsptips.parseTips()
 	if jsonList and filename:
