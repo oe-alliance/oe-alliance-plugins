@@ -11,7 +11,7 @@
 # PYTHON IMPORTS
 from datetime import datetime, timedelta
 from glob import glob
-from hashlib import sha256
+from hashlib import md5
 from io import BytesIO
 from json import load, dump
 from os import rename, makedirs, remove
@@ -46,21 +46,21 @@ from Screens.Timers import RecordTimerEdit, RecordTimerEntry
 from Tools.BoundFunction import boundFunction
 from Tools.Directories import resolveFilename, isPluginInstalled, SCOPE_PLUGINS, SCOPE_SKIN_IMAGE, SCOPE_CONFIG
 from Tools.LoadPixmap import LoadPixmap
-
-# PLUGIN IMPORTS
-from .tvsparser import tvsptips, tvspchannels, tvspassets
 HAS_FUNCTIONTIMER = True
 try:
 	from Scheduler import functionTimer
 except ImportError:
 	HAS_FUNCTIONTIMER = False
 
+# PLUGIN IMPORTS
+from .tvsparser import tvsptips, tvspchannels, tvspassets
+
 TVS_UPDATEACTIVE, TVS_UPDATESTOP = False, False
 STARTTIMES = [(spanSet[0].split("-")[0], spanSet[1]) for spanSet in tvspassets.spanSets.items()]  # [('00:00', '0'), ('05:00', '5'), ('14:00', '14'), ('18:00', '18'), ('20:00', '20'), ('20:15', 'prime'), ('22:00', '22')]
 CATFILTERS = list(tvspassets.catFilters.items())  #  [('Spielfilm', 'SP'), ('Serie', 'SE'), ('Report', 'RE'), ('Unterhaltung', 'U'), ('Kinder', 'KIN'), ('Sport', 'SPO'), ('Andere', 'AND')]
 ASSETFILTERS = [("{keiner}", ""), ("Daumen", "thumb"), ("Tipp", "isTipOfTheDay")] + CATFILTERS  # not supported by HP: ("Neu", "isNew"), ("Tagestipp", "isTopTip")]
 STARTING = [(i, f"{x[0]} Uhr") for i, x in enumerate(STARTTIMES)]
-DURANCES = [(x, f"{x} Minuten") for x in range(15, 540, 15)]
+DURANCES = [(x, f"{x} Minuten") for x in range(15, 555, 15)]
 CACHEDAYS = [(x, f"+{x} Tage") for x in range(1, 14)]
 VISIBILITY = [(0, "keine Anzeige"), (1, "im Extensionmenü (Taste BLAU-lang)"), (2, "im Pluginmanager (Taste GRÜN-kurz)"), (3, "in Extensionmenü und Pluginmanager")]
 config.plugins.tvspielfilm = ConfigSubsection()
@@ -72,11 +72,12 @@ config.plugins.tvspielfilm.update_mapfile = ConfigSelection(default=1, choices=[
 config.plugins.tvspielfilm.cachepath = ConfigText(default=join("/media/hdd/"))
 config.plugins.tvspielfilm.cacherange = ConfigSelection(default=7, choices=[(x, f"+{x} Tage") for x in range(1, 14)])
 config.plugins.tvspielfilm.keepcache = ConfigSelection(default=7, choices=[(x, f"-{x} Tage") for x in range(8)])
+config.plugins.tvspielfilm.data2200 = ConfigSelection(default=1, choices=[(0, "separat herunterladen"), (1, "generiere aus '20:15' Daten")])
 config.plugins.tvspielfilm.autoupdate = ConfigSelection(default=1, choices=[(0, "ergänze nur fehlende Daten"), (1, "überschreibe vorhandene Daten")])
 config.plugins.tvspielfilm.durance_n = ConfigSelection(default=90, choices=DURANCES)  # 'Jetzt im TV'
 config.plugins.tvspielfilm.use_a = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.starttime_a = ConfigSelection(default=1, choices=STARTING)
-config.plugins.tvspielfilm.durance_a = ConfigSelection(default=540, choices=DURANCES)
+config.plugins.tvspielfilm.durance_a = ConfigSelection(default=300, choices=DURANCES)
 config.plugins.tvspielfilm.use_b = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.starttime_b = ConfigSelection(default=2, choices=STARTING)
 config.plugins.tvspielfilm.durance_b = ConfigSelection(default=240, choices=DURANCES)
@@ -93,7 +94,7 @@ config.plugins.tvspielfilm.mapfilehash = ConfigText(default="")
 
 
 class TVglobals():
-	RELEASE = "v2.1"
+	RELEASE = "v2.2"
 	MODULE_NAME = __name__.split(".")[-2]
 	IMPORTDICT = {}
 	CONFIGPATH = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # e.g. /etc/enigma2/TVSpielfilm/
@@ -181,7 +182,6 @@ class TVcoreHelper():
 		return allAssets
 
 	def saveAllAssets(self, allAssets, spanStartsDt, channelId=None):
-		errmsg = ""
 		if allAssets:
 			assetsFile = self.allAssetsFilename(spanStartsDt, channelId=channelId)
 			try:
@@ -189,7 +189,23 @@ class TVcoreHelper():
 					with open(assetsFile, "w") as file:
 						dump(allAssets, file)
 			except OSError as errmsg:
-				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:saveAllAssets': {errmsg}!")
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:saveAllAssets_regular': {errmsg}!")
+			# special case: data record '20:15' contains data until the next early morning, therefore also create data record '22:00' if desired
+			if config.plugins.tvspielfilm.data2200.value and spanStartsDt.time() == datetime(1970, 1, 1, 20, 15).time():  # is current spanStart = '20:15'?
+				allAssets2200 = []
+				for assetDict in allAssets:
+					timeStart = assetDict.get("timeStart", "")
+					if timeStart:
+						if datetime.fromisoformat(timeStart).replace(tzinfo=None) >= datetime.today().replace(hour=22, minute=0):
+							allAssets2200.append(assetDict)  # add all dates from '22:00' onwards
+				if allAssets2200:
+					assets2200File = self.allAssetsFilename(spanStartsDt.replace(hour=22, minute=0), channelId=channelId)
+					try:
+						if not exists(assets2200File):
+							with open(assets2200File, "w") as file:
+								dump(allAssets2200, file)
+					except OSError as errmsg:
+						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:saveAllAssets_2200': {errmsg}!")
 		return ""
 
 	def getSingleAsset(self, assetUrl):
@@ -247,8 +263,12 @@ class TVcoreHelper():
 		return assetUrl[assetUrl.rfind(",") + 1:assetUrl.rfind(".html")]
 
 	def convertImageFilename(self, imgUrl):
-		filename = f"{imgUrl[imgUrl.rfind('/') + 1:imgUrl.rfind('?im')]}".replace(".jpeg", ".jpg")
-		return join(f"{self.getTMPpath()}images/", filename) if imgUrl else ""
+		if "?im" in imgUrl:  # filename is already 10bit-hashed
+			filename = imgUrl[imgUrl.rfind('/') + 1:imgUrl.rfind("?im")]
+		else:  # otherwise 10bit-hash the very long filename
+			extpos = imgUrl.rfind('.')
+			filename = f"{int.from_bytes(md5(imgUrl[imgUrl.rfind('/') + 1:extpos].encode()).digest()[:10], 'little')}{imgUrl[extpos:]}"
+		return join(f"{self.getTMPpath()}images/", filename.replace('.jpeg', '.jpg')) if imgUrl else ""
 
 	def readImportedFile(self):
 		importDict = {}
@@ -270,7 +290,7 @@ class TVcoreHelper():
 		sourcefile = join(tvglobals.PLUGINPATH, "db/tvs_mapping.txt")
 		if exists(tvglobals.MAPFILE) and (config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) > int(getmtime(tvglobals.MAPFILE))):  # plugin mapfile older than user mapfile:
 			with open(tvglobals.MAPFILE, "rb") as file:
-				hashcode = sha256(file.read()).hexdigest()
+				hashcode = md5(file.read()).hexdigest()
 			if hashcode != config.plugins.tvspielfilm.mapfilehash.value:  # has the content of the mapfile changed?
 				print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{tvglobals.MAPFILE}'.")
 				copy(sourcefile, tvglobals.MAPFILE)
@@ -309,7 +329,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 		if errmsg:
 			print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:showAssetDetails': {errmsg}!")
 			return
-		if assetDict:
+		if assetDict and assetUrl == self.currAssetUrl:  # show if assetUrl is still active
 			isTopTip = assetDict.get("isTopTip", "")
 			isTipOfTheDay = assetDict.get("isTipOfTheDay", "")
 			isNew = assetDict.get("isNew", "")
@@ -350,7 +370,6 @@ class TVscreenHelper(TVcoreHelper, Screen):
 					self["image"].instance.setPixmapFromFile(imgFile)
 					self["image"].show()
 				else:
-					self["image"].hide()
 					callInThread(self.imageDownload, imgUrl, imgFile, self.setAssetImage, assetUrl)  # download + set image (if this assetUrl is still current)
 			imgCredits = assetDict.get("imgCredits", "")
 			self.trailerUrl = assetDict.get("trailerUrl", "")
@@ -457,6 +476,18 @@ class TVscreenHelper(TVcoreHelper, Screen):
 				self.spanStartsStr = timeStartStr
 				self.setReviewdate(datetime.today(), timeStartEnd, fullScreen=True)
 
+	def hideAssetDetails(self):
+		for widget in ["picon", "thumb", "image", "playButton"]:
+			self[widget].hide()
+		for assetFlag in ["isTopTip", "isNew", "isTipOfTheDay", "hasTimer", "isIMDB", "isTMDB", "fsk"]:
+			self[assetFlag].hide()
+		for index in range(len(["Anspruch", "Humor", "Action", "Spannung", "Erotik"])):
+				self[f"ratingLabel{index}l"].setText("")
+				self[f"ratingLabel{index}h"].setText("")
+				self[f"ratingDots{index}"].hide()
+		for widget in ["channelName", "imdbRating", "repeatHint", "title", "editorial", "conclusion", "timeStartEnd", "longDescription"]:
+			self[widget].setText("")
+
 	def setReviewdate(self, currentDt, timeStartEnd, fullScreen=False):
 		now = datetime.today()
 		now -= timedelta(minutes=now.minute % 15, seconds=now.second, microseconds=now.microsecond)  # round to last 15 minutes for 'Jetzt im TV'
@@ -465,7 +496,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 		todaydateonly = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
 		weekday = "heute" if dateOnlyDt == todaydateonly else ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"][dateOnlyDt.weekday()]
 		hour, minute = spanStartsStr.split(":") if spanStartsStr else [currentDt.strftime("%H"), currentDt.strftime("%M")]
-		spanEnds = (currentDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0) + timedelta(minutes=self.spanDuranceTs)).strftime("%H:%M")
+		spanEndsStr = (currentDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0) + timedelta(minutes=self.spanDuranceTs)).strftime("%H:%M")
 		if timeStartEnd:
 			startStr, endStr = timeStartEnd.split(" - ")
 			titleLenStr = f"{int((datetime.strptime(endStr, '%H:%M') - datetime.strptime(startStr, '%H:%M')).seconds / 60)} Minuten"
@@ -478,7 +509,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			if self.singleChannelId:
 				reviewdate = " | ".join(list(filter(None, [f"{weekday} {currentDt.strftime('%d.%m.%Y')}", f"{self.currDayDelta:+} Tag(e)", "kompletter Tag"])))
 			else:
-				reviewdate = f"{weekday} {currentDt.strftime('%d.%m.%Y')} | {self.currDayDelta:+} Tag(e) | {spanStartsStr} - {spanEnds} Uhr"
+				reviewdate = f"{weekday} {currentDt.strftime('%d.%m.%Y')} | {self.currDayDelta:+} Tag(e) | {spanStartsStr} - {spanEndsStr} Uhr"
 		self["reviewdate"].setText(reviewdate)
 
 	def setAssetImage(self, imgFile, assetUrl):
@@ -587,17 +618,17 @@ class TVscreenHelper(TVcoreHelper, Screen):
 class TVfullscreen(TVscreenHelper, Screen):
 	skin = """
 	<screen name="TVfullscreen" position="10,10" size="1260,700" resolution="1280,720" flags="wfNoBorder" backgroundColor="#16000000" transparent="0" title="TV Spielfilm Detailansicht">
-		<eLabel name="TV_line" position="780,476" size="456,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
-		<eLabel name="TV_line" position="10,188" size="752,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
-		<eLabel name="TV_line" position="10,600" size="752,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
+		<eLabel position="780,476" size="456,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="10,188" size="752,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="10,600" size="752,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
 		<eLabel name="Gradient_BlueBlack" position="0,64" size="1260,590" zPosition="-10" backgroundColor="#10060613" />
-		<eLabel name="TV_bg" position="0,0" size="1260,60" backgroundColor=" black, #00203060, horizontal" zPosition="1" />
-		<eLabel name="TV_line" position="0,60" size="1260,2" backgroundColor=" #0027153c , #101093, black , horizontal" zPosition="10" />
-		<eLabel name="TV_line" position="0,652" size="1260,2" backgroundColor=" #0027153c , #101093 , black , horizontal" zPosition="10" />
+		<eLabel position="0,0" size="1260,60" backgroundColor=" black,#00203060,horizontal" zPosition="1" />
+		<eLabel position="0,60" size="1260,2" backgroundColor="#0027153c,#101093,black,horizontal" zPosition="10" />
+		<eLabel position="0,652" size="1260,2" backgroundColor="#0027153c,#101093,black,horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="80,20" font="Regular;18" textBorderColor="#00505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
-		<widget source="reviewdate" render="Label" position="270,34" size="720,24" font="Regular; 18" foregroundColor="white" backgroundColor="#16000000" halign="center" valign="center" zPosition="12" transparent="1" />
-		<widget source="global.CurrentTime" render="Label" position="1110,0" size="140,60" font="Regular; 46" noWrap="1" halign="center" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
+		<widget source="reviewdate" render="Label" position="270,34" size="720,24" font="Regular;18" foregroundColor="white" backgroundColor="#16000000" halign="center" valign="center" zPosition="12" transparent="1" />
+		<widget source="global.CurrentTime" render="Label" position="1110,0" size="140,60" font="Regular;46" noWrap="1" halign="center" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
 		<convert type="ClockToText">Default</convert>
 			</widget>
 		<widget source="global.CurrentTime" render="Label" position="1000,2" size="100,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
@@ -606,8 +637,8 @@ class TVfullscreen(TVscreenHelper, Screen):
 		<widget source="global.CurrentTime" render="Label" position="1000,26" size="100,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
 			<convert type="ClockToText">Format:%e. %B</convert>
 		</widget>
-		<widget source="channelName" render="Label" position="548,158" size="220,32" font="Regular; 24" halign="center" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
-		<widget source="editorial" render="Label" position="90,80" size="490,30" font="Regular; 18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
+		<widget source="channelName" render="Label" position="548,158" size="220,32" font="Regular;24" halign="center" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
+		<widget source="editorial" render="Label" position="90,80" size="490,30" font="Regular;18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 		<widget source="conclusion" render="Label" position="90,102" size="490,54" font="Regular;20" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" valign="top" />
 		<widget name="picon" position="586,66" size="148,88" alphatest="blend" scaleFlags="scale" zPosition="1" />
 		<widget name="hasTimer" position="718,68" size="14,14" alphatest="blend" zPosition="1" />
@@ -616,31 +647,31 @@ class TVfullscreen(TVscreenHelper, Screen):
 		<widget name="image" position="794,70" size="400,300" alphatest="blend" scaleFlags="centerBottom" zPosition="1" />
 		<widget name="playButton" position="970,194" size="60,60" alphatest="blend" zPosition="2" />
 		<widget name="fsk" position="800,326" size="40,40" alphatest="blend" zPosition="2" />
-		<widget source="credits" render="Label" position="756,372" size="474,22" font="Regular; 16" foregroundColor="grey" backgroundColor="#16000000" halign="center" transparent="1" />
+		<widget source="credits" render="Label" position="756,372" size="474,22" font="Regular;16" foregroundColor="grey" backgroundColor="#16000000" halign="center" transparent="1" />
 		<widget name="isTopTip" position="94,164" size="28,14" alphatest="blend" zPosition="1" />
 		<widget name="isTipOfTheDay" position="134,164" size="28,14" alphatest="blend" zPosition="1" />
 		<widget name="isNew" position="174,164" size="28,14" alphatest="blend" zPosition="1" />
 		<widget name="isIMDB" position="254,164" size="28,14" alphatest="blend" zPosition="1" />
 		<widget name="isTMDB" position="214,164" size="28,14" alphatest="blend" zPosition="1" />
-		<widget source="ratingLabel0l" render="Label" position="756,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel0h" render="Label" position="756,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel0l" render="Label" position="756,396" size="90,24" font="Regular;16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel0h" render="Label" position="756,396" size="90,24" font="Regular;16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots0" position="778,420" size="46,16" alphatest="blend" />
-		<widget source="ratingLabel1l" render="Label" position="852,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel1h" render="Label" position="852,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel1l" render="Label" position="852,396" size="90,24" font="Regular;16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel1h" render="Label" position="852,396" size="90,24" font="Regular;16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots1" position="874,420" size="46,16" alphatest="blend" />
-		<widget source="ratingLabel2l" render="Label" position="948,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel2h" render="Label" position="948,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel2l" render="Label" position="948,396" size="90,24" font="Regular;16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel2h" render="Label" position="948,396" size="90,24" font="Regular;16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots2" position="970,420" size="46,16" alphatest="blend" />
-		<widget source="ratingLabel3l" render="Label" position="1044,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel3h" render="Label" position="1044,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel3l" render="Label" position="1044,396" size="90,24" font="Regular;16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel3h" render="Label" position="1044,396" size="90,24" font="Regular;16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots3" position="1066,420" size="46,16" alphatest="blend" />
-		<widget source="ratingLabel4l" render="Label" position="1140,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel4h" render="Label" position="1140,396" size="90,24" font="Regular; 16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel4l" render="Label" position="1140,396" size="90,24" font="Regular;16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel4h" render="Label" position="1140,396" size="90,24" font="Regular;16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots4" position="1162,420" size="46,16" alphatest="blend" />
 		<widget source="imdbRating" render="Label" position="292,160" size="170,22" font="Regular;16" halign="center" foregroundColor="yellow" backgroundColor="#16000000" transparent="1" zPosition="1" />
 		<widget name="thumb" position="38,86" size="60,60" alphatest="blend" />
 		<widget name="longDescription" position="10,190" size="750,410" font="Regular;20" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand" scrollbarBorderWidth="1" scrollbarWidth="10" scrollbarBorderColor="blue" scrollbarForegroundColor="#203060" />
-		<widget source="title" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" position="780,444" size="456,34" font="Regular; 22" halign="left" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
+		<widget source="title" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" position="780,444" size="456,34" font="Regular;22" halign="left" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget source="typeLabel0l" render="Label" position="780,488" size="140,26" font="Regular;18" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
 		<widget source="typeLabel0h" render="Label" position="780,488" size="140,26" font="Regular;18" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
 		<widget source="typeLabel1l" render="Label" position="780,514" size="140,26" font="Regular;18" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
@@ -659,8 +690,8 @@ class TVfullscreen(TVscreenHelper, Screen):
 		<widget source="typeText3" render="Label" position="930,566" size="320,26" font="Regular;18" backgroundColor="#16000000" transparent="1" />
 		<widget source="typeText4" render="Label" position="930,592" size="320,26" font="Regular;18" backgroundColor="#16000000" transparent="1" />
 		<widget source="typeText5" render="Label" position="930,618" size="320,26" font="Regular;18" backgroundColor="#16000000" transparent="1" />
-		<eLabel name="button_green" position="10,660" size="6,36" zPosition="1" backgroundColor=" #00006600, #0024a424, vertical" />
-		<eLabel name="button_yellow" position="186,660" size="6,36" backgroundColor=" #007a6213, #00e6c619, vertical" zPosition="1" />
+		<eLabel name="button_green" position="10,660" size="6,36" zPosition="1" backgroundColor="#00006600,#0024a424,vertical" />
+		<eLabel name="button_yellow" position="186,660" size="6,36" backgroundColor="#007a6213,#00e6c619,vertical" zPosition="1" />
 		<eLabel name="button_blue" position="362,660" size="6,36" backgroundColor="#101093,#4040ff,vertical" zPosition="1" />
 		<widget source="key_green" render="Label" position="20,666" size="160,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 		<widget source="key_yellow" render="Label" position="196,666" size="150,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
@@ -671,23 +702,23 @@ class TVfullscreen(TVscreenHelper, Screen):
 		<ePixmap position="910,664" size="46,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/info.png" alphatest="blend" zPosition="1" />
 		<ePixmap position="730,664" size="46,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/ok.png" alphatest="blend" zPosition="1" />
 		<widget name="play" position="1094,664" size="20,28" alphatest="blend" zPosition="2" />
-		<eLabel name="" position="252,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
-		<eLabel name="" position="172,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
-		<eLabel name="" position="212,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
-		<eLabel name="" position="132,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
-		<eLabel name="" position="92,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
-		<eLabel name="" position="88,158" size="376,26" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
-		<eLabel name="" position="253,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
-		<eLabel name="" position="173,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
-		<eLabel name="" position="213,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
-		<eLabel name="" position="133,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
-		<eLabel name="" position="93,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
-		<eLabel name="" position="90,160" size="372,22" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
-		<eLabel name="" position="168,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
-		<eLabel name="" position="288,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
-		<eLabel name="" position="128,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
-		<eLabel name="" position="208,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
-		<eLabel name="" position="248,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
+		<eLabel position="252,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
+		<eLabel position="172,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
+		<eLabel position="212,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
+		<eLabel position="132,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
+		<eLabel position="92,162" size="32,18" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
+		<eLabel position="88,158" size="376,26" zPosition="-1" backgroundColor="#00505050" cornerRadius="2" />
+		<eLabel position="253,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
+		<eLabel position="173,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
+		<eLabel position="213,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
+		<eLabel position="133,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
+		<eLabel position="93,163" size="30,16" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
+		<eLabel position="90,160" size="372,22" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
+		<eLabel position="168,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
+		<eLabel position="288,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
+		<eLabel position="128,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
+		<eLabel position="208,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
+		<eLabel position="248,162" size="1,18" zPosition="1" backgroundColor="#00505050" />
 		<!-- <widget source="service" render="Cover" position="1140,478" size="104,156" zPosition="2" backgroundColor="#16000000" transparent="1" borderColor="#00203060" borderWidth="1" /> -->
 	</screen>
 	"""
@@ -773,7 +804,6 @@ class TVfullscreen(TVscreenHelper, Screen):
 				self.session.nav.RecordTimer.record(answer[1])
 				self["hasTimer"].show()
 				self["key_green"].setText("")
-
 				callInThread(self.showAssetDetails, self.currAssetUrl, fullScreen=True)
 
 	def keyUp(self):
@@ -791,23 +821,23 @@ class TVtipsBox(Screen):
 	<screen name="TVtips" position="50,center" size="410,264" flags="wfNoBorder" backgroundColor="#16000000" resolution="1280,720" title="TV Spielfilm Tipps">
 		<eLabel position="0,0" size="410,264" backgroundColor="#00203060" zPosition="-2" />
 		<eLabel position="2,2" size="406,260" zPosition="-2" />
-		<eLabel name="TVSPro_line" position="2,38" size="406,2" backgroundColor=" #0027153c, #00101093, black, horizontal" zPosition="10" />
-		<eLabel name="TVSPro_line" position="2,234" size="406,2" backgroundColor=" #0027153c, #00101093, black, horizontal" zPosition="10" />
-		<eLabel name="TV_bg" position="2,2" size="406,36" backgroundColor=" black, #00203060, horizontal" zPosition="0" />
+		<eLabel position="2,38" size="406,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="2,234" size="406,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="2,2" size="406,36" backgroundColor=" black,#00203060,horizontal" zPosition="0" />
 		<widget name="image" position="6,42" size="200,150" alphatest="blend" scaleFlags="scaleCenterBottom" zPosition="1" />
 		<widget name="fsk" position="10,148" size="40,40" alphatest="blend" zPosition="2" />
 		<widget name="picon" position="258,92" size="100,60" alphatest="blend" scaleFlags="scale" zPosition="1" />
 		<widget name="hasTimer" position="342,94" size="14,14" alphatest="blend" zPosition="1" />
-		<widget source="channelName" render="Label" position="212,42" size="194,48" font="Regular; 20" halign="center" valign="center" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
-		<widget source="timeInfos" render="Label" position="212,156" size="194,24" font="Regular; 18" backgroundColor="#16000000" transparent="1" halign="center" />
-		<widget source="imdbRating" render="Label" position="212,178" size="194,24" font="Regular; 18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" halign="center" />
-		<widget source="headline" render="Label" position="2,1" size="406,36" font="Regular; 24" wrap="ellipsis" backgroundColor="#16000000" zPosition="1" halign="center" valign="center" transparent="1" />
-		<ePixmap position="8,14" size="24,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/left.png" alphatest="blend" zPosition="1" />
-		<ePixmap position="384,14" size="24,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/right.png" alphatest="blend" zPosition="1" />
+		<widget source="channelName" render="Label" position="212,42" size="194,48" font="Regular;20" halign="center" valign="center" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
+		<widget source="timeInfos" render="Label" position="212,156" size="194,24" font="Regular;18" backgroundColor="#16000000" transparent="1" halign="center" />
+		<widget source="imdbRating" render="Label" position="212,178" size="194,24" font="Regular;18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" halign="center" />
+		<widget source="headline" render="Label" position="36,2" size="342,36" font="Regular;24" wrap="ellipsis" backgroundColor="#16000000" zPosition="1" halign="center" valign="center" transparent="1" />
+		<ePixmap position="8,10" size="24,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/left.png" alphatest="blend" zPosition="1" />
+		<ePixmap position="378,10" size="24,20" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/right.png" alphatest="blend" zPosition="1" />
 		<widget source="title" render="Label" position="10,204" size="396,28" font="Regular;20" wrap="ellipsis" foregroundColor="#0092cbdf" backgroundColor="#16000000" halign="left" valign="center" transparent="1" />
 		<eLabel text="Genre:" position="10,236" size="66,24" font="Regular;18" backgroundColor="#16000000" transparent="1" halign="left" valign="center" />
-		<widget source="genre" render="Label" position="68,236" size="286,24" font="Regular; 18" backgroundColor="#16000000" transparent="1" halign="left" valign="center" />
-		<widget source="category" render="Label" position="278,236" size="120,24" font="Regular; 18" backgroundColor="#16000000" transparent="1" halign="right" valign="center" />
+		<widget source="genre" render="Label" position="68,236" size="286,24" font="Regular;18" backgroundColor="#16000000" transparent="1" halign="left" valign="center" />
+		<widget source="category" render="Label" position="278,236" size="120,24" font="Regular;18" backgroundColor="#16000000" transparent="1" halign="right" valign="center" />
 		<widget name="thumb" position="362,102" size="40,40" alphatest="blend" zPosition="1" />
 		<widget name="isTopTip" position="222,96" size="28,14" alphatest="blend" zPosition="1" />
 		<widget name="isTipOfTheDay" position="222,116" size="28,14" alphatest="blend" zPosition="1" />
@@ -890,18 +920,18 @@ class TVupdate(Screen):
 	skin = """
 	<screen name="TVupdate" position="820,250" size="410,182" flags="wfNoBorder" resolution="1280,720" title="TV Spielfilm EPG-Update">
 		<eLabel name="TVSPro_bg" position="2,2" size="406,32" backgroundColor="black,#203060,horizontal" zPosition="-1" />
-		<eLabel name="TVSPro_line" position="2,34" size="406,2" backgroundColor=" #27153c , #101093, black , horizontal" zPosition="10" />
+		<eLabel name="TVSPro_line" position="2,34" size="406,2" backgroundColor="#27153c,#101093,black,horizontal" zPosition="10" />
 		<eLabel position="0,0" size="410,182" backgroundColor="#203060" zPosition="-3" />
 		<eLabel position="2,2" size="406,178" backgroundColor="#10060613" zPosition="-2" />
 		<widget source="headline" render="Label" position="10,2" size="400,32" font="Regular;24" transparent="1" halign="left" valign="center"/>
 		<widget source="progressHdr0" render="Label" position="10,38" size="390,28" font="Regular;18" wrap="ellipsis" transparent="1" valign="bottom" />
 		<widget name="progressBar0" position="80,68" size="320,20" foregroundColor="#203060" zPosition="1" backgroundColor="#505050" />
 		<widget source="progressTxt0" render="Label" position="10,70" size="68,16" font="Regular;14" foregroundColor="yellow" backgroundColor="#16000000" transparent="0" halign="center" valign="top" zPosition="2" />
-		<eLabel name="" position="8,68" size="72,20" zPosition="-1" backgroundColor="#324b96" />
+		<eLabel position="8,68" size="72,20" zPosition="-1" backgroundColor="#324b96" />
 		<widget source="progressHdr1" render="Label" position="10,90" size="390,28" font="Regular;18" wrap="ellipsis" transparent="1" valign="bottom" />
 		<widget name="progressBar1" position="80,120" size="320,20" foregroundColor="#203060" backgroundColor="#505050" />
 		<widget source="progressTxt1" render="Label" position="10,122" size="68,16" font="Regular;14" foregroundColor="yellow" backgroundColor="#16000000" transparent="0" halign="center" valign="top" zPosition="2" />
-		<eLabel name="" position="8,120" size="72,20" zPosition="-1" backgroundColor="#324b96" valign="top" halign="center" />
+		<eLabel position="8,120" size="72,20" zPosition="-1" backgroundColor="#324b96" valign="top" halign="center" />
 		<widget source="key_yellow" render="Label" position="36,148" size="120,24" font="Regular;18" transparent="1" halign="left" valign="center"/>
 		<widget source="key_blue" render="Label" position="176,148" size="160,24" font="Regular;18" transparent="1" halign="left" valign="center"/>
 		<eLabel name="button_yellow" position="20,146" size="6,30" backgroundColor="#7a6213,#e6c619,vertical" zPosition="1" />
@@ -963,15 +993,15 @@ class TVoverview(TVscreenHelper, Screen):
 	<screen name="TVoverview" position="10,10" size="1260,700" flags="wfNoBorder" resolution="1280,720" backgroundColor="#16000000" title="TV Spielfilm Übersicht">
 		<eLabel name="Gradient_BlueBlack" position="0,0" size="120,70" zPosition="-1" backgroundColor="#10060613" />
 		<eLabel name="Gradient_BlueBlack" position="0,64" size="1260,590" zPosition="-10" backgroundColor="#10060613" />
-		<eLabel name="TV_bg" position="0,0" size="1260,60" backgroundColor=" black, #00203060, horizontal" zPosition="1" />
-		<eLabel name="TV_line" position="0,60" size="1260,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
-		<eLabel name="TV_line" position="740,362" size="510,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
-		<eLabel name="TV_line" position="740,582" size="510,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
-		<eLabel name="TV_line" position="0,652" size="1260,2" backgroundColor=" #0027153c , #00101093 , black , horizontal" zPosition="10" />
+		<eLabel position="0,0" size="1260,60" backgroundColor=" black,#00203060,horizontal" zPosition="1" />
+		<eLabel position="0,60" size="1260,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="740,362" size="510,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="740,582" size="510,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="0,652" size="1260,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="80,20" font="Regular;18" textBorderColor="#00505050" textBorderWidth="1" foregroundColor="#ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
-		<widget source="reviewdate" render="Label" position="0,2" size="1260,30" font="Regular; 20" foregroundColor="white" backgroundColor="#16000000" halign="center" valign="center" zPosition="12" transparent="1" />
-		<widget source="global.CurrentTime" render="Label" position="1110,0" size="140,60" font="Regular; 46" noWrap="1" halign="center" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
+		<widget source="reviewdate" render="Label" position="0,2" size="1260,30" font="Regular;20" foregroundColor="white" backgroundColor="#16000000" halign="center" valign="center" zPosition="12" transparent="1" />
+		<widget source="global.CurrentTime" render="Label" position="1110,0" size="140,60" font="Regular;46" noWrap="1" halign="center" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
 			<convert type="ClockToText">Default</convert>
 		</widget>
 		<widget source="global.CurrentTime" render="Label" position="1000,2" size="100,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
@@ -980,7 +1010,7 @@ class TVoverview(TVscreenHelper, Screen):
 		<widget source="global.CurrentTime" render="Label" position="1000,26" size="100,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
 			<convert type="ClockToText">Format:%e. %B</convert>
 		</widget>
-		<widget source="menuList" render="Listbox" position="4,70" size="724,576" itemCornerRadiusSelected="6" itemGradientSelected=" black, #203060, black, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand" scrollbarBorderWidth="1" scrollbarWidth="10" scrollbarBorderColor="blue" scrollbarForegroundColor="#203060">
+		<widget source="menuList" render="Listbox" position="4,70" size="724,576" itemCornerRadiusSelected="6" itemGradientSelected=" black,#203060,black,horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand" scrollbarBorderWidth="1" scrollbarWidth="10" scrollbarBorderColor="blue" scrollbarForegroundColor="#203060">
 			<convert type="TemplatedMultiContent">{"template": [
 				MultiContentEntryPixmapAlphaBlend(pos=(6,4), size=(64,38), flags=BT_HALIGN_LEFT|BT_VALIGN_CENTER|BT_SCALE, png=1),  # picon
 				MultiContentEntryText(pos=(78,0), size=(100,16), font=1, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER|RT_ELLIPSIS, color=0x00ffff, text=2),  # channelName
@@ -999,16 +1029,16 @@ class TVoverview(TVscreenHelper, Screen):
 				}</convert>
 		</widget>
 		<eLabel position="8,1020" size="720,22" backgroundColor="grey" zPosition="-1" />
-		<widget source="longStatus" render="Label" conditional="longStatus" position="0,30" size="1260,26" font="Regular;16" foregroundColor="#92cbdf" backgroundColor=" black, #00203060, horizontal" halign="center" valign="center" zPosition="10">
+		<widget source="longStatus" render="Label" conditional="longStatus" position="0,30" size="1260,26" font="Regular;16" foregroundColor="#92cbdf" backgroundColor=" black,#00203060,horizontal" halign="center" valign="center" zPosition="10">
 			<convert type="ConditionalShowHide" />
 		</widget>
-		<eLabel name="" position="386,32" size="64,24" zPosition="8" backgroundColor="#203060" />
+		<eLabel position="386,32" size="64,24" zPosition="8" backgroundColor="#203060" />
 		<widget name="progressBar" position="450,32" size="430,24" foregroundColor="#203060" backgroundColor="#505050" transparent="1" zPosition="8" />
-		<widget source="progressTxt" render="Label" position="388,34" size="60,20" font="Regular; 16" foregroundColor="yellow" backgroundColor="#16000000" transparent="0" halign="center" valign="center" zPosition="9" />
+		<widget source="progressTxt" render="Label" position="388,34" size="60,20" font="Regular;16" foregroundColor="yellow" backgroundColor="#16000000" transparent="0" halign="center" valign="center" zPosition="9" />
 		<widget source="shortStatus" render="Label" position="452,34" size="426,20" font="Regular;16" foregroundColor="#ffffff" transparent="1" halign="left" valign="center" wrap="ellipsis" zPosition="9" />
 		<widget name="picon" position="760,210" size="148,88" alphatest="blend" scaleFlags="scale" zPosition="1" />
 		<widget name="hasTimer" position="892,212" size="14,14" alphatest="blend" zPosition="3" />
-		<widget source="channelName" render="Label" position="740,178" size="187,32" font="Regular; 24" halign="center" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
+		<widget source="channelName" render="Label" position="740,178" size="187,32" font="Regular;24" halign="center" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget name="image" position="936,66" size="320,240" alphatest="blend" scaleFlags="centerBottom" zPosition="1" />
 		<widget name="playButton" position="1060,160" size="60,60" alphatest="blend" zPosition="2" />
 		<widget name="fsk" position="940,262" size="40,40" alphatest="blend" zPosition="2" />
@@ -1018,31 +1048,31 @@ class TVoverview(TVscreenHelper, Screen):
 		<widget name="isIMDB" position="1078,310" size="28,14" alphatest="blend" zPosition="3" />
 		<widget name="isTMDB" position="1044,310" size="28,14" alphatest="blend" zPosition="3" />
 		<widget source="timeStartEnd" render="Label" position="748,302" size="170,24" font="Regular;24" halign="center" valign="center" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel0l" render="Label" position="760,70" size="90,24" font="Regular; 16" halign="right" valign="center" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel0h" render="Label" position="760,70" size="90,24" font="Regular; 16" halign="right" valign="center" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel0l" render="Label" position="760,70" size="90,24" font="Regular;16" halign="right" valign="center" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel0h" render="Label" position="760,70" size="90,24" font="Regular;16" halign="right" valign="center" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots0" position="860,74" size="46,14" alphatest="blend" />
-		<widget source="ratingLabel1l" render="Label" position="760,90" size="90,24" font="Regular; 16" valign="center" halign="right" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel1h" render="Label" position="760,90" size="90,24" font="Regular; 16" valign="center" halign="right" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel1l" render="Label" position="760,90" size="90,24" font="Regular;16" valign="center" halign="right" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel1h" render="Label" position="760,90" size="90,24" font="Regular;16" valign="center" halign="right" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots1" position="860,94" size="46,14" alphatest="blend" />
-		<widget source="ratingLabel2l" render="Label" position="760,110" size="90,24" font="Regular; 16" valign="center" halign="right" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel2h" render="Label" position="760,110" size="90,24" font="Regular; 16" valign="center" halign="right" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel2l" render="Label" position="760,110" size="90,24" font="Regular;16" valign="center" halign="right" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel2h" render="Label" position="760,110" size="90,24" font="Regular;16" valign="center" halign="right" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots2" position="860,114" size="45,15" alphatest="blend" />
-		<widget source="ratingLabel3l" render="Label" position="760,130" size="90,24" font="Regular; 16" valign="center" halign="right" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel3h" render="Label" position="760,130" size="90,24" font="Regular; 16" valign="center" halign="right" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel3l" render="Label" position="760,130" size="90,24" font="Regular;16" valign="center" halign="right" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel3h" render="Label" position="760,130" size="90,24" font="Regular;16" valign="center" halign="right" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots3" position="860,134" size="45,15" alphatest="blend" />
-		<widget source="ratingLabel4l" render="Label" position="760,150" size="90,24" font="Regular; 16" valign="center" halign="right" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
-		<widget source="ratingLabel4h" render="Label" position="760,150" size="90,24" font="Regular; 16" valign="center" halign="right" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel4l" render="Label" position="760,150" size="90,24" font="Regular;16" valign="center" halign="right" foregroundColor="#10333333" zPosition="0" backgroundColor="#16000000" transparent="1" />
+		<widget source="ratingLabel4h" render="Label" position="760,150" size="90,24" font="Regular;16" valign="center" halign="right" foregroundColor="white" zPosition="0" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots4" position="860,154" size="45,15" alphatest="blend" />
-		<widget source="imdbRating" render="Label" position="1112,308" size="140,18" font="Regular; 14" foregroundColor="yellow" halign="center" noWrap="1" zPosition="2" backgroundColor="#16000000" transparent="1" />
+		<widget source="imdbRating" render="Label" position="1112,308" size="140,18" font="Regular;14" foregroundColor="yellow" halign="center" noWrap="1" zPosition="2" backgroundColor="#16000000" transparent="1" />
 		<widget name="thumb" position="726,295" size="40,40" alphatest="blend" zPosition="2" />
-		<widget source="editorial" render="Label" position="740,584" size="510,24" font="Regular; 16" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
-		<widget source="conclusion" render="Label" position="740,602" size="510,24" font="Regular; 18" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
+		<widget source="editorial" render="Label" position="740,584" size="510,24" font="Regular;16" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
+		<widget source="conclusion" render="Label" position="740,602" size="510,24" font="Regular;18" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget source="repeatHint" render="RunningText" position="740,626" size="510,24" font="Regular;18" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" halign="left" noWrap="1" backgroundColor="#16000000" transparent="1" />
-		<widget source="title" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" position="740,330" size="510,32" font="Regular; 24" halign="left" noWrap="1" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
+		<widget source="title" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" position="740,330" size="510,32" font="Regular;24" halign="left" noWrap="1" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget source="longDescription" render="RunningText" options="movetype=running,startdelay=6000,steptime=60,direction=top,startpoint=0,wrap=1,always=0,repeat=2,oneshot=1" position="740,366" size="510,214" font="Regular;21" backgroundColor="#16000000" transparent="1" />
-		<eLabel name="button_red" position="10,660" size="6,36" backgroundColor=" #00821c17, #00fe0000, vertical" zPosition="1" />
-		<eLabel name="button_green" position="150,660" size="6,36" backgroundColor=" #00006600, #0024a424, vertical" zPosition="1" />
-		<eLabel name="button_yellow" position="256,660" size="6,36" backgroundColor=" #007a6213, #00e6c619, vertical" zPosition="1" />
+		<eLabel name="button_red" position="10,660" size="6,36" backgroundColor="#00821c17,#00fe0000,vertical" zPosition="1" />
+		<eLabel name="button_green" position="150,660" size="6,36" backgroundColor="#00006600,#0024a424,vertical" zPosition="1" />
+		<eLabel name="button_yellow" position="256,660" size="6,36" backgroundColor="#007a6213,#00e6c619,vertical" zPosition="1" />
 		<eLabel name="button_blue" position="362,660" size="6,36" backgroundColor="#101093,#4040ff,vertical" zPosition="1" />
 		<widget source="key_red" render="Label" position="20,666" size="130,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 		<widget source="key_green" render="Label" position="160,666" size="96,26" font="Regular;18" valign="center" halign="left" wrap="ellipsis" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
@@ -1052,21 +1082,21 @@ class TVoverview(TVscreenHelper, Screen):
 		<eLabel text="Woche + " position="838,666" size="76,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 		<widget source="key_info" render="Label" position="970,666" size="120,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 		<widget source="key_play" render="Label" position="1116,666" size="160,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
-		<eLabel text="Tag -" position="414,666" size="54,26" font="Regular; 18" valign="center" halign="right" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
-		<eLabel text="Tag +" position="526,666" size="54,26" font="Regular; 18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
+		<eLabel text="Tag -" position="414,666" size="54,26" font="Regular;18" valign="center" halign="right" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
+		<eLabel text="Tag +" position="526,666" size="54,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 		<eLabel text="Details" position="636,666" size="66,26" font="Regular;18" valign="center" halign="left" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
 		<ePixmap position="920,664" size="46,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/info.png" alphatest="blend" zPosition="1" />
 		<ePixmap position="474,664" size="46,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/ch_plus_minus.png" alphatest="blend" zPosition="1" />
 		<ePixmap position="788,664" size="46,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/left0right.png" alphatest="blend" zPosition="1" />
 		<ePixmap position="586,664" size="46,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/ok.png" alphatest="blend" zPosition="1" />
 		<widget name="play" position="1094,664" size="20,28" alphatest="blend" zPosition="2" />
-		<eLabel name="" position="936,306" size="318,22" zPosition="-1" backgroundColor="#505050" cornerRadius="2" />
-		<eLabel name="" position="937,307" size="316,20" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
-		<eLabel name="" position="1007,308" size="1,18" zPosition="10" backgroundColor="#505050" />
-		<eLabel name="" position="1109,308" size="1,18" zPosition="10" backgroundColor="#505050" />
-		<eLabel name="" position="973,308" size="1,18" zPosition="10" backgroundColor="#505050" />
-		<eLabel name="" position="1041,308" size="1,18" zPosition="10" backgroundColor="#505050" />
-		<eLabel name="" position="1075,308" size="1,18" zPosition="10" backgroundColor="#505050" />
+		<eLabel position="936,306" size="318,22" zPosition="-1" backgroundColor="#505050" cornerRadius="2" />
+		<eLabel position="937,307" size="316,20" zPosition="0" backgroundColor="#16000000" cornerRadius="2" />
+		<eLabel position="1007,308" size="1,18" zPosition="10" backgroundColor="#505050" />
+		<eLabel position="1109,308" size="1,18" zPosition="10" backgroundColor="#505050" />
+		<eLabel position="973,308" size="1,18" zPosition="10" backgroundColor="#505050" />
+		<eLabel position="1041,308" size="1,18" zPosition="10" backgroundColor="#505050" />
+		<eLabel position="1075,308" size="1,18" zPosition="10" backgroundColor="#505050" />
 	</screen>
 	"""
 
@@ -1303,33 +1333,23 @@ class TVoverview(TVscreenHelper, Screen):
 		if not skinlist:
 			skinlist.append(("", None, "", "", -1, "keine Einträge gefunden", f"Der Filter '{currfilter[0]}' liefert für diesen Zeitraum kein Ergebnis.", None, None, None, None, ""))
 			self.skinList = []
-			self.hideCurrentAsset()
+			self.hideAssetDetails()
 		self["menuList"].updateList(skinlist)
 		if self.singleChannelId:
 			self["menuList"].setCurrentIndex(listpos)
 
 	def showCurrentAsset(self):
+		self.hideAssetDetails()
 		if self.skinList:
+			self["image"].hide()
 			curridx = min(self["menuList"].getCurrentIndex(), len(self.skinList) - 1)
 			assetUrl = self.skinList[curridx][0]
 			progress = self.skinList[curridx][4]
 			self.zapAllowed = progress > -1 and progress < 101  # progressbar visible means: transmission is currently on air
 			self["key_blue"].setText("Zap" if self.zapAllowed else "")
 			if assetUrl != self.currAssetUrl:  # is a new asset?
-				self.currAssetUrl = assetUrl
+				self.currAssetUrl = assetUrl  # set 'assetUrl is still active'
 				callInThread(self.showAssetDetails, assetUrl, fullScreen=False)
-
-	def hideCurrentAsset(self):
-		for widget in ["picon", "thumb", "image", "playButton"]:
-			self[widget].hide()
-		for assetFlag in ["isTopTip", "isNew", "isTipOfTheDay", "hasTimer", "isIMDB", "isTMDB", "fsk"]:
-			self[assetFlag].hide()
-		for index in range(len(["Anspruch", "Humor", "Action", "Spannung", "Erotik"])):
-				self[f"ratingLabel{index}l"].setText("")
-				self[f"ratingLabel{index}h"].setText("")
-				self[f"ratingDots{index}"].hide()
-		for widget in ["channelName", "imdbRating", "repeatHint", "title", "editorial", "conclusion", "timeStartEnd", "longDescription"]:
-			self[widget].setText("")
 
 	def keyOk(self):
 		if self.skinList:
@@ -1413,13 +1433,13 @@ class TVmain(TVscreenHelper, Screen):
 	<screen name="TVmain" position="center,center" size="320,450" resolution="1280,720" backgroundColor="#16000000" flags="wfNoBorder" title="TV Spielfilm Hauptmenü">
 		<eLabel position="0,0" size="320,450" backgroundColor="#00203060" zPosition="-2" />
 		<eLabel position="2,2" size="316,446" zPosition="-1" />
-		<eLabel name="TV_bg" position="2,2" size="316,58" backgroundColor=" black, #00203060, horizontal" zPosition="1" />
-		<eLabel name="TV_line" position="2,60" size="316,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
-		<eLabel name="TV_line" position="2,382" size="316,2" backgroundColor=" #0027153c , #00101093 , black , horizontal" zPosition="10" />
-		<eLabel name="TV_line" position="2,407" size="316,2" backgroundColor=" #0027153c , #00101093 , black , horizontal" zPosition="10" />
+		<eLabel position="2,2" size="316,58" backgroundColor=" black,#00203060,horizontal" zPosition="1" />
+		<eLabel position="2,60" size="316,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="2,382" size="316,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="2,407" size="316,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="80,20" font="Regular;18" textBorderColor="#505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
-		<widget source="mainmenu" render="Listbox" position="2,60" size="316,320" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
+		<widget source="mainmenu" render="Listbox" position="2,60" size="316,320" itemCornerRadiusSelected="4" itemGradientSelected="#051a264d,#10304070,#051a264d,horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">{"template": [
 				MultiContentEntryText(pos=(0,0), size=(316,40), font=0, color=0xffffff, flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)  # menutext
 				],
@@ -1427,10 +1447,10 @@ class TVmain(TVscreenHelper, Screen):
 				"itemHeight":40
 				}</convert>
 		</widget>
-		<eLabel text="von Mr.Servo - Skin von stein17 " position="0,386" size="320,18" font="Regular; 14" foregroundColor="#0092cbdf" backgroundColor="#00000000" transparent="1" zPosition="2" halign="center" />
-		<eLabel name="button_red" position="70,414" size="6,30" backgroundColor=" #00821c17, #00fe0000, vertical" zPosition="1" />
+		<eLabel text="von Mr.Servo - Skin von stein17 " position="0,386" size="320,18" font="Regular;14" foregroundColor="#0092cbdf" backgroundColor="#00000000" transparent="1" zPosition="2" halign="center" />
+		<eLabel name="button_red" position="70,414" size="6,30" backgroundColor="#00821c17,#00fe0000,vertical" zPosition="1" />
 		<widget source="key_red" render="Label" position="84,418" size="70,24" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" valign="center" transparent="1" zPosition="2" />
-		<eLabel name="button_green" position="150,414" size="6,30" backgroundColor=" #00006600, #0024a424, vertical" zPosition="1" />
+		<eLabel name="button_green" position="150,414" size="6,30" backgroundColor="#00006600,#0024a424,vertical" zPosition="1" />
 		<widget source="key_green" render="Label" position="164,418" size="140,24" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" valign="center" transparent="1" zPosition="1" />
 		<ePixmap position="10,416" size="46,28" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/menu.png" alphatest="blend" zPosition="1" />
 	</screen>
@@ -1534,8 +1554,7 @@ class TVmain(TVscreenHelper, Screen):
 		if answer:  # close plugin (e.g. after zap)
 			self.exit()
 		else:
-			if self.tvupdate.getWasVisible():
-				self.tvupdate.showDialog()
+			self.keyBlue()
 			self.showTVtipsBox()
 
 	def returnOk2(self, answer):
@@ -1618,7 +1637,8 @@ class TVmain(TVscreenHelper, Screen):
 	def showTVtipsBox(self, delay=5000, firstTip=False):  # special case: the first tip could only be displayed after opening a screen and then interfere
 		if not firstTip:
 			self.tvtipsAllow = True
-		if self.tipsDicts and self.tvtipsAllow and (firstTip or config.plugins.tvspielfilm.showtips.value == 2):  # show tips allways?
+		showtips = config.plugins.tvspielfilm.showtips.value
+		if self.tipsDicts and self.tvtipsAllow and (showtips == 2 or (firstTip and showtips == 1)):  # show tips allways?
 			self.tvtipsbox.showDialog()
 			self.tvtipsboxTimer.start(delay, False)
 			self["key_green"].setText("Sendungsdetail")
@@ -1689,7 +1709,7 @@ class TVmain(TVscreenHelper, Screen):
 					imgFile = self.convertImageFilename(imgUrl)
 					if imgFile and not exists(imgFile):
 						if index:
-							callInThread(self.imageDownload, imgUrl, imgFile, assetUrl=self.currAssetUrl)  # download only image
+							callInThread(self.imageDownload, imgUrl, imgFile)  # download only image
 						else:  # set very first image immediately
 							callInThread(self.imageDownload, imgUrl, imgFile, self.setTipImage, self.currAssetUrl)  # download & set image
 				genre = tipDict.get("genre", "")  # e.g. 'Katastrophenaction'
@@ -1723,6 +1743,7 @@ class TVmain(TVscreenHelper, Screen):
 
 	def config(self):
 		self.hideTVtipsBox()
+		self.keyBlue()
 		self.oldChannelName = config.plugins.tvspielfilm.channelname.value
 		self.session.openWithCallback(self.configCB, TVsetup)
 
@@ -1731,6 +1752,7 @@ class TVmain(TVscreenHelper, Screen):
 			callInThread(self.getTips, forceRefresh=True)
 		else:
 			self.showTVtipsBox()
+		self.keyBlue()
 		self.selectMainMenu()
 
 	def exit(self):
@@ -1869,11 +1891,11 @@ class selectChannelCategory(TVscreenHelper, Screen):
 	<screen name="selectChannelCategory" position="480,50" size="320,620" backgroundColor="#16000000" flags="wfNoBorder" resolution="1280,720" title="TV Spielfilm Servicedatei">
 		<eLabel position="0,0" size="320,620" backgroundColor="#00203060" zPosition="-2" />
 		<eLabel position="2,2" size="316,616" zPosition="-1" />
-		<eLabel name="TV_bg" position="2,2" size="316,58" backgroundColor=" black, #00203060, horizontal" zPosition="1" />
-		<eLabel name="TV_line" position="2,60" size="316,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
+		<eLabel position="2,2" size="316,58" backgroundColor=" black,#00203060,horizontal" zPosition="1" />
+		<eLabel position="2,60" size="316,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="80,20" font="Regular;18" textBorderColor="#00505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
-		<widget source="menulist" render="Listbox" position="2,60" size="316,560" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
+		<widget source="menulist" render="Listbox" position="2,60" size="316,560" itemCornerRadiusSelected="4" itemGradientSelected="#051a264d,#10304070,#051a264d,horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">{"template": [
 				MultiContentEntryText(pos=(0,0), size=(316,40), font=0,  flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)  # menutext
 				],
@@ -1967,11 +1989,11 @@ class TVimport(TVscreenHelper, Screen):
 	<screen name="TVimport" position="480,90" size="360,550" backgroundColor="#16000000" flags="wfNoBorder" resolution="1280,720" title="TV Spielfilm Servicedatei">
 		<eLabel position="0,0" size="360,500" backgroundColor="#00203060" zPosition="-2" />
 		<eLabel position="2,2" size="356,496" zPosition="-1" />
-		<eLabel name="TV_bg" position="2,2" size="356,58" backgroundColor=" black, #00203060, horizontal" zPosition="1" />
-		<eLabel name="TV_line" position="2,60" size="356,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
+		<eLabel position="2,2" size="356,58" backgroundColor=" black,#00203060,horizontal" zPosition="1" />
+		<eLabel position="2,60" size="356,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="80,20" font="Regular;18" textBorderColor="#00505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
-		<widget source="bouquetslist" render="Listbox" position="2,60" size="356,440" itemCornerRadiusSelected="4" itemGradientSelected=" #051a264d, #10304070, #051a264d, horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
+		<widget source="bouquetslist" render="Listbox" position="2,60" size="356,440" itemCornerRadiusSelected="4" itemGradientSelected="#051a264d,#10304070,#051a264d,horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand">
 			<convert type="TemplatedMultiContent">{"template": [
 				MultiContentEntryText(pos=(0,0), size=(346,40), font=0,  flags=RT_HALIGN_CENTER|RT_VALIGN_CENTER, text=0)  # menutext
 				],
@@ -2229,9 +2251,9 @@ class TVchannelselection(Screen):
 	<screen name="TVchannelselection" position="480,20" size="320,660" backgroundColor="#16000000" flags="wfNoBorder" resolution="1280,720" title="TV Spielfilm Kanalauswahl">
 		<eLabel position="0,0" size="320,660" backgroundColor="#00203060" zPosition="-2" />
 		<eLabel position="2,2" size="316,656" zPosition="-1" />
-		<eLabel name="TV_bg" position="2,2" size="316,58" backgroundColor=" black, #00203060, horizontal" zPosition="1" />
-		<eLabel name="TV_line" position="2,60" size="316,2" backgroundColor=" #0027153c , #00101093, black , horizontal" zPosition="10" />
-		<eLabel name="TV_line" position="2,616" size="316,2" backgroundColor=" #0027153c , #00101093 , black , horizontal" zPosition="10" />
+		<eLabel position="2,2" size="316,58" backgroundColor=" black,#00203060,horizontal" zPosition="1" />
+		<eLabel position="2,60" size="316,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
+		<eLabel position="2,616" size="316,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
 		<ePixmap position="0,0" size="220,60" pixmap="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/logos/TVSpielfilm.png" alphatest="blend" zPosition="13" />
 		<widget source="release" render="Label" position="180,28" size="80,20" font="Regular;18" textBorderColor="#00505050" textBorderWidth="1" foregroundColor="#00ffff00" backgroundColor="#16000000" valign="center" zPosition="12" transparent="1" />
 		<widget source="channelList" render="Listbox" position="2,62" size="316,550" itemCornerRadiusSelected="4" itemGradientSelected="#051a264d,#10304070,#051a264d,horizontal" enableWrapAround="1" foregroundColorSelected="white" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand" scrollbarBorderWidth="1" scrollbarWidth="10" scrollbarBorderColor="blue" scrollbarForegroundColor="#00203060">
@@ -2244,8 +2266,8 @@ class TVchannelselection(Screen):
 				"itemHeight":34
 				}</convert>
 		</widget>
-		<eLabel name="button_red" position="10,626" size="6,30" backgroundColor=" #00821c17, #00fe0000, vertical" zPosition="1" />
-		<eLabel name="button_green" position="180,626" size="6,30" backgroundColor=" #00006600, #0024a424, vertical" zPosition="1" />
+		<eLabel name="button_red" position="10,626" size="6,30" backgroundColor="#00821c17,#00fe0000,vertical" zPosition="1" />
+		<eLabel name="button_green" position="180,626" size="6,30" backgroundColor="#00006600,#0024a424,vertical" zPosition="1" />
 		<widget source="key_red" render="Label" position="24,628" size="150,30" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" zPosition="2" halign="left" valign="center" />
 		<widget source="key_green" render="Label" position="194,628" size="150,30" font="Regular;18" foregroundColor="#00ffffff" backgroundColor="#00000000" transparent="1" zPosition="1" halign="left" valign="center" />
 	</screen>
