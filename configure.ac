@@ -337,7 +337,6 @@ EPGTranslator/po/Makefile
 EPGTranslator/src/Makefile
 EPGTranslator/src/pic/Makefile
 EPGTranslator/src/pic/buttons/Makefile
-EPGTranslator/src/pic/flag/Makefile
 
 FirmwareUpgrade/Makefile
 FirmwareUpgrade/src/Makefile
