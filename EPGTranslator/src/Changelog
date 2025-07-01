@@ -1,0 +1,34 @@
+3.00-release
+
+Fixes, mostly to fix the display of Arabic translations.
+
+ o Put the title and description into separate widgets in the Translator
+   screen, as joining them with "\n\n" and putting the result into one
+   widget caused very odd display issues in Arabic.
+
+ o Removed halign setting from Translator screen text widgets - so that
+   it can handle rtol languages
+
+ o Remove Python2 code handling.
+
+ o Sort language names in the user's locale.
+
+ o Change sepline to "**********".  "==========" did not work for
+   Persian translations, and "&&&&&&&&&&" failed for some other
+   languages.
+
+ o Add a second (alternate) translation language.  You toggle between
+   the two translations with the Back button.
+
+ o The Help/Info screen is now translated to the defautl Enigma2
+   language rather then the translation language.
+
+ o Changed the Skin definition to be a single one with a defined
+   resolution, and use standard "key_*" style entries.
+
+ o Add red/green/OK/Back/Menu button action descriptions to the
+   Translator screen
+
+ o Replaced the flag display with a simple language name field.
+
+ o Added a keymap for EventViewActions

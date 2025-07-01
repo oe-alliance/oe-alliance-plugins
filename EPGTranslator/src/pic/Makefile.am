@@ -1,4 +1,4 @@
-SUBDIRS = buttons flag
+SUBDIRS = buttons
 
 installdir = $(libdir)/enigma2/python/Plugins/Extensions/EPGTranslator/pic
 
