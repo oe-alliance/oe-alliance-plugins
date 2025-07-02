@@ -199,6 +199,7 @@ class TVcoreHelper():
 						if datetime.fromisoformat(timeStart).replace(tzinfo=None) >= datetime.today().replace(hour=22, minute=0):
 							allAssets2200.append(assetDict)  # add all dates from '22:00' onwards
 				if allAssets2200:
+					print(f"[{tvglobals.MODULE_NAME}] {spanStartsDt.strftime("%F")}: data set '22:00' was successfully created from data set '20:15'")
 					assets2200File = self.allAssetsFilename(spanStartsDt.replace(hour=22, minute=0), channelId=channelId)
 					try:
 						if not exists(assets2200File):
@@ -1360,9 +1361,6 @@ class TVoverview(TVscreenHelper, Screen):
 	def keyOkCB(self, answer):
 		if answer:
 			self.close(True)  # close plugin (e.g. after zap)
-		self.refreshSkinlist()
-		self.showCurrentAsset()
-		self.setLongstatus()
 
 	def keyRed(self):
 		self.filterIndex = (self.filterIndex + 1) % len(ASSETFILTERS)
@@ -1388,7 +1386,7 @@ class TVoverview(TVscreenHelper, Screen):
 				self.session.openWithCallback(self.finishKeyGreen, RecordTimerEdit, newEntry)
 
 	def finishKeyGreen(self, answer):
-		if answer and not isinstance(answer, bool):  # Special case for close recursive.
+		if answer and not isinstance(answer, bool):  # special case for close recursive.
 			if answer[0]:
 				self.session.nav.RecordTimer.record(answer[1])
 				self["hasTimer"].show()
@@ -1677,9 +1675,12 @@ class TVmain(TVscreenHelper, Screen):
 		tipsfile = join(f"{self.getTMPpath()}cache/", f"allTips_{datetime.today().strftime('%F')}.json")
 		self.currTipCnt = 0
 		if exists(tipsfile) and not forceRefresh:
-			with open(tipsfile, "r") as file:
-				completeDict = load(file)
-				self.createTipsDict(completeDict)
+			try:
+				with open(tipsfile, "r") as file:
+					completeDict = load(file)
+					self.createTipsDict(completeDict)
+			except OSError as errmsg:
+				self.session.open(MessageBox, "Datensatz 'Tipps' konnte nicht geladen:\n'%s'" % errmsg, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
 		else:
 			callInThread(tvsptips.parseTips, callback=self.getTipsReturn, passthrough=tipsfile)
 
