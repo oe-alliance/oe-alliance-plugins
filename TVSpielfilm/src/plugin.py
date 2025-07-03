@@ -199,7 +199,7 @@ class TVcoreHelper():
 						if datetime.fromisoformat(timeStart).replace(tzinfo=None) >= datetime.today().replace(hour=22, minute=0):
 							allAssets2200.append(assetDict)  # add all dates from '22:00' onwards
 				if allAssets2200:
-					print(f"[{tvglobals.MODULE_NAME}] {spanStartsDt.strftime("%F")}: data set '22:00' was successfully created from data set '20:15'")
+					print(f"[{tvglobals.MODULE_NAME}] {spanStartsDt.strftime('%F')}: data set '22:00' was successfully created from data set '20:15'")
 					assets2200File = self.allAssetsFilename(spanStartsDt.replace(hour=22, minute=0), channelId=channelId)
 					try:
 						if not exists(assets2200File):
