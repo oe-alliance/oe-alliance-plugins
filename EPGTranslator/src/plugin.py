@@ -100,7 +100,8 @@ rtol = {'ar', 'fa', 'ur'}
 
 def get_lang(l):
     for x in langs:
-        if x[0] == l: return x[1]
+        if x[0] == l:
+            return x[1]
     return "Unknown"
 
 # Source has an auto option in first place on the list
@@ -690,7 +691,8 @@ Red: Refresh EPG
 
     def onLayoutFinished(self):
         source = CfgPlTr.source.getValue()
-        if source == "auto": source = "Original"
+        if source == "auto":
+            source = "Original"
         if self.showsource == 'yes':
             self['from_lang'].setText(source)
             dest_w = 'to_lang'
