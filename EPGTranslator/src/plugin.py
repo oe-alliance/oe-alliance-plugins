@@ -135,7 +135,7 @@ curr_dest = CfgPlTr.destination.getValue()
 AfCache = AutoflushCache(CfgPlTr.timeout_hr.getValue(), null_return=(None, None))
 
 # Get the skin settings etc.
-# These are defined wrt a FullHD setting, and will be scaled if 
+# These are defined wrt a FullHD setting, and will be scaled if
 # the actual resolution differs.
 #
 from .Skin import MySD
