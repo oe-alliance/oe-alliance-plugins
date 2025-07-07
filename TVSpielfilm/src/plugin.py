@@ -125,16 +125,17 @@ tvglobals = TVglobals()
 
 
 class TVcoreHelper():
-	def getTMPpath(self):
+	def getCachePath(self):
 		return f"{config.plugins.tvspielfilm.cachepath.value}tmp/TVSpielfilm/" if config.plugins.tvspielfilm.cachepath.value == "/" else f"{config.plugins.tvspielfilm.cachepath.value}TVSpielfilm/"
 
-	def createTMPpaths(self):
+	def createCachePaths(self):
 		try:
-			tmppath = self.getTMPpath()
-			for path in [tmppath, f"{tmppath}cache/", f"{tmppath}assets/", f"{tmppath}images/"]:
+			cachePath = self.getCachePath()
+			for path in [cachePath, f"{cachePath}cache/", f"{cachePath}assets/", f"{cachePath}images/"]:
 				if not exists(path):
 					makedirs(path, exist_ok=True)
 		except OSError as errmsg:
+			print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:createCachePaths': {errmsg}!")
 			return errmsg
 		return ""
 
@@ -142,10 +143,10 @@ class TVcoreHelper():
 		now = datetime.today()
 		latest = now - timedelta(days=config.plugins.tvspielfilm.keepcache.value)
 		ldate = latest.replace(hour=0, minute=0, second=0, microsecond=0)
-		for filename in glob(join(f"{self.getTMPpath()}cache/", "assets*_*.json")):
+		for filename in glob(join(f"{self.getCachePath()}cache/", "assets*_*.json")):
 			if datetime.strptime(filename.split("/")[-1][6:16], "%Y-%m-%d") < ldate:  # keepcache or older?
 				remove(filename)
-		for filenames in [glob(join(f"{self.getTMPpath()}cache/", "allTips*.json")), glob(join(f"{self.getTMPpath()}assets/", "*.*")), glob(join(f"{self.getTMPpath()}images/", "*.*"))]:
+		for filenames in [glob(join(f"{self.getCachePath()}cache/", "allTips*.json")), glob(join(f"{self.getCachePath()}assets/", "*.*")), glob(join(f"{self.getCachePath()}images/", "*.*"))]:
 			for filename in filenames:
 				if datetime.timestamp(now) - getmtime(filename) > 86400:  # older than 24h?
 					remove(filename)
@@ -168,28 +169,32 @@ class TVcoreHelper():
 	def allAssetsFilename(self, spanStartsDt, channelId=None):
 		filename = ""
 		if channelId:  # single channel completely
-			filename = join(f"{self.getTMPpath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}_{channelId.lower()}.json")
+			filename = join(f"{self.getCachePath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}_{channelId.lower()}.json")
 		elif spanStartsDt:  # time period
-			filename = join(f"{self.getTMPpath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}T{spanStartsDt.strftime('%H:%M')}.json")
+			filename = join(f"{self.getCachePath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}T{spanStartsDt.strftime('%H:%M')}.json")
 		return filename
 
 	def loadAllAssets(self, spanStartsDt, channelId=None):  # load assets from cache if available
 		allAssets = []
 		filename = self.allAssetsFilename(spanStartsDt, channelId=channelId)
 		if filename and exists(filename):
-			with open(filename, "r") as file:
-				allAssets = load(file)
+			try:
+				with open(filename, "r") as file:
+					allAssets = load(file)
+			except OSError as errmsg:
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:loadAllAssets': {errmsg}!")
+
 		return allAssets
 
 	def saveAllAssets(self, allAssets, spanStartsDt, channelId=None):
 		if allAssets:
 			assetsFile = self.allAssetsFilename(spanStartsDt, channelId=channelId)
-			try:
-				if not exists(assetsFile):
+			if not exists(assetsFile):
+				try:
 					with open(assetsFile, "w") as file:
 						dump(allAssets, file)
-			except OSError as errmsg:
-				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:saveAllAssets_regular': {errmsg}!")
+				except OSError as errmsg:
+					print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:saveAllAssets_regular': {errmsg}!")
 			# special case: data record '20:15' contains data until the next early morning, therefore also create data record '22:00' if desired
 			if config.plugins.tvspielfilm.data2200.value and spanStartsDt.time() == datetime(1970, 1, 1, 20, 15).time():  # is current spanStart = '20:15'?
 				allAssets2200 = []
@@ -201,33 +206,35 @@ class TVcoreHelper():
 				if allAssets2200:
 					print(f"[{tvglobals.MODULE_NAME}] {spanStartsDt.strftime('%F')}: data set '22:00' was successfully created from data set '20:15'")
 					assets2200File = self.allAssetsFilename(spanStartsDt.replace(hour=22, minute=0), channelId=channelId)
-					try:
-						if not exists(assets2200File):
+					if not exists(assets2200File):
+						try:
 							with open(assets2200File, "w") as file:
 								dump(allAssets2200, file)
-					except OSError as errmsg:
-						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:saveAllAssets_2200': {errmsg}!")
+						except OSError as errmsg:
+							print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:saveAllAssets_2200': {errmsg}!")
 		return ""
 
 	def getSingleAsset(self, assetUrl):
-		errmsg = ""
 		assetDict = {}
 		if assetUrl:
-			assetfile = join(f"{self.getTMPpath()}assets/", f"{self.convertAssetId(assetUrl)}.json")
+			assetfile = join(f"{self.getCachePath()}assets/", f"{self.convertAssetId(assetUrl)}.json")
 			if exists(assetfile):  # load from cache if available
-				with open(assetfile, "r") as file:
-					assetDict = load(file)
-			else:  # download
+				try:
+					with open(assetfile, "r") as file:
+						assetDict = load(file)
+				except OSError as errmsg:
+					print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:getSingleAsset': {errmsg}!")
+			else:  # download & save into cache
 				errmsg, assetDict = tvspassets.parseSingleAsset(assetUrl)
 				if not errmsg:
-					try:
-						assetfile = join(f"{self.getTMPpath()}assets/", f"{self.convertAssetId(assetUrl)}.json")
-						if not exists(assetfile):
+					assetfile = join(f"{self.getCachePath()}assets/", f"{self.convertAssetId(assetUrl)}.json")
+					if not exists(assetfile):
+						try:
 							with open(assetfile, "w") as file:
 								dump(assetDict, file)
-					except OSError as saveErr:
-						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:getSingleAsset': {saveErr}!")
-		return errmsg, assetDict
+						except OSError as saveErr:
+							print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:getSingleAsset': {saveErr}!")
+		return assetDict
 
 	def getCurrentAssetUrl(self, ref, callback=None):
 		epg = eEPGCache.getInstance()
@@ -253,9 +260,7 @@ class TVcoreHelper():
 							assetUrl = assetDict.get("assetUrl", "")
 							break
 					if assetUrl:
-						errmsg, assetDict = self.getSingleAsset(assetUrl)
-						if errmsg:
-							print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:getCurrentAssetUrl': {errmsg}!")
+						self.getSingleAsset(assetUrl)  # simply save to cache
 		if callback:
 			callback(assetUrl)
 		return assetUrl
@@ -269,20 +274,27 @@ class TVcoreHelper():
 		else:  # otherwise 10bit-hash the very long filename
 			extpos = imgUrl.rfind('.')
 			filename = f"{int.from_bytes(md5(imgUrl[imgUrl.rfind('/') + 1:extpos].encode()).digest()[:10], 'little')}{imgUrl[extpos:]}"
-		return join(f"{self.getTMPpath()}images/", filename.replace('.jpeg', '.jpg')) if imgUrl else ""
+		return join(f"{self.getCachePath()}images/", filename.replace('.jpeg', '.jpg')) if imgUrl else ""
 
 	def readImportedFile(self):
 		importDict = {}
 		if exists(tvglobals.IMPORTFILE):
-			with open(tvglobals.IMPORTFILE, "r") as file:
-				importDict = load(file)
+			try:
+				with open(tvglobals.IMPORTFILE, "r") as file:
+					importDict = load(file)
+			except OSError as errmsg:
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:readImportedFile': {errmsg}!")
 		return importDict  # e.g. [('ard': ('1:0:27:212F:31B:1:FFFF0000:0:0:0:', 'Das Erste HD')), ...]
 
 	def readSupportedFile(self):
 		suppdict = {}
 		if exists(tvglobals.SUPPFILE):
-			with open(tvglobals.SUPPFILE, "r") as file:
-				suppdict = load(file)
+			try:
+				with open(tvglobals.SUPPFILE, "r") as file:
+					suppdict = load(file)
+			except OSError as errmsg:
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:readSupportedFile': {errmsg}!")
+
 		return suppdict  # e.g. [('ard': ('1:0:27:212F:31B:1:FFFF0000:0:0:0:', 'Das Erste HD')), ...]
 
 	def updateMappingfile(self):
@@ -290,8 +302,12 @@ class TVcoreHelper():
 			makedirs(tvglobals.CONFIGPATH)
 		sourcefile = join(tvglobals.PLUGINPATH, "db/tvs_mapping.txt")
 		if exists(tvglobals.MAPFILE) and (config.plugins.tvspielfilm.update_mapfile.value and int(getmtime(sourcefile)) > int(getmtime(tvglobals.MAPFILE))):  # plugin mapfile older than user mapfile:
-			with open(tvglobals.MAPFILE, "rb") as file:
-				hashcode = md5(file.read()).hexdigest()
+			hashcode = ""
+			try:
+				with open(tvglobals.MAPFILE, "rb") as file:
+					hashcode = md5(file.read()).hexdigest()
+			except OSError as errmsg:
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:updateMappingfile': {errmsg}!")
 			if hashcode != config.plugins.tvspielfilm.mapfilehash.value:  # has the content of the mapfile changed?
 				print(f"[{tvglobals.MODULE_NAME}] Copy '{sourcefile}' to '{tvglobals.MAPFILE}'.")
 				copy(sourcefile, tvglobals.MAPFILE)
@@ -326,10 +342,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVscreenHelper:imageDownload': {imgFile} - picture could not be saved: {errmsg}")
 
 	def showAssetDetails(self, assetUrl, fullScreen=False):
-		errmsg, assetDict = self.getSingleAsset(assetUrl)
-		if errmsg:
-			print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:showAssetDetails': {errmsg}!")
-			return
+		assetDict = self.getSingleAsset(assetUrl)
 		if assetDict and assetUrl == self.currAssetUrl:  # show if assetUrl is still active
 			isTopTip = assetDict.get("isTopTip", "")
 			isTipOfTheDay = assetDict.get("isTipOfTheDay", "")
@@ -548,7 +561,11 @@ class TVscreenHelper(TVcoreHelper, Screen):
 		timerlist = []
 		e2timer = resolveFilename(SCOPE_CONFIG, "timers.xml")  # /etc/enigma2/timers.xml
 		if exists(e2timer):
-			timerxml = open(e2timer).read()  # e.g. <timer begin="1734631080" end="1734636300" ... serviceref="1:0:19:C3FF:27FF:F001:FFFF0000:0:0:0:"
+			timerxml = ""
+			try:
+				timerxml = open(e2timer).read()  # e.g. <timer begin="1734631080" end="1734636300" ... serviceref="1:0:19:C3FF:27FF:F001:FFFF0000:0:0:0:"
+			except OSError as errmsg:
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:getTimerlist': {errmsg}!")
 			timers = findall(r'<timer begin="(.*?)" end=".*?" serviceref="(.*?)"', timerxml)
 			for timer in timers:
 				start = int(timer[0]) + int(config.recording.margin_before.value) * 60
@@ -563,7 +580,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			sref.setName(self.assetTitle)
 			try:
 				self.session.open(MoviePlayer, sref, fromMovieSelection=False)  # some images don't support this option
-			except Exception:
+			except Exception as errmsg:
 				self.session.open(MoviePlayer, sref)
 
 	def keyInfo(self):
@@ -594,21 +611,21 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			from Plugins.Extensions.IMDb.plugin import IMDB
 			self.session.open(IMDB, self.assetTitle, imdbId=self.currImdbId)
 		else:
-			self.session.open(MessageBox, "Das Plugin 'IMDb' (Internet Movie DataBase) wurde nicht gefunden. Es muss zuerst installiert werden.", type=MessageBox.TYPE_WARNING, timeout=10)
+			self.session.open(MessageBox, "Das Plugin 'IMDb' (Internet Movie DataBase) wurde nicht gefunden. Es muss zuerst installiert werden.", type=MessageBox.TYPE_WARNING, timeout=5)
 
 	def openTmdb(self):
 		if isPluginInstalled("tmdb"):
 			from Plugins.Extensions.tmdb.tmdb import tmdbScreen
 			self.session.open(tmdbScreen, self.assetTitle, 2)
 		else:
-			self.session.open(MessageBox, "Das Plugin 'TMDb' (The Movie DataBase) wurde nicht gefunden. Es muss zuerst installiert werden.", type=MessageBox.TYPE_WARNING, timeout=10)
+			self.session.open(MessageBox, "Das Plugin 'TMDb' (The Movie DataBase) wurde nicht gefunden. Es muss zuerst installiert werden.", type=MessageBox.TYPE_WARNING, timeout=5)
 
 	def openEPGSearch(self):
 		if isPluginInstalled("EPGSearch"):
 			from Plugins.Extensions.EPGSearch.EPGSearch import EPGSearch
 			self.session.open(EPGSearch, self.assetTitle, False)
 		else:
-			self.session.open(MessageBox, "Das Plugin 'EPGSearch' wurde nicht gefunden. Es muss zuerst installiert werden.", type=MessageBox.TYPE_WARNING, timeout=10)
+			self.session.open(MessageBox, "Das Plugin 'EPGSearch' wurde nicht gefunden. Es muss zuerst installiert werden.", type=MessageBox.TYPE_WARNING, timeout=5)
 
 	def zapToCurrent(self):
 		if self.zapAllowed and self.currServiceRef:
@@ -1361,6 +1378,7 @@ class TVoverview(TVscreenHelper, Screen):
 	def keyOkCB(self, answer):
 		if answer:
 			self.close(True)  # close plugin (e.g. after zap)
+		self.refreshSkinlist()  # required if a timer has been set in TVfullscreen
 
 	def keyRed(self):
 		self.filterIndex = (self.filterIndex + 1) % len(ASSETFILTERS)
@@ -1493,7 +1511,7 @@ class TVmain(TVscreenHelper, Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
-		if self.createTMPpaths():
+		if self.createCachePaths():
 			self.exit()
 		self.cleanupCache()
 		if self.updateMappingfile():
@@ -1567,8 +1585,8 @@ class TVmain(TVscreenHelper, Screen):
 
 	def returnOk3(self, answer):
 		if answer is True:
-			self.removeTMPpaths()
-			self.createTMPpaths()
+			self.removeCachePaths()
+			self.createCachePaths()
 			self.tvinfobox.showDialog("TVS-EPG Zwischenspeicher (=Cache) erfolgreich gelöscht")
 
 	def returnOk4(self, assetUrl):
@@ -1592,8 +1610,8 @@ class TVmain(TVscreenHelper, Screen):
 			self.showTVtipsBox()
 
 	def importfileCB(self):
-		self.removeTMPpaths()
-		self.createTMPpaths()
+		self.removeCachePaths()
+		self.createCachePaths()
 		self.showTVtipsBox()
 		self.selectMainMenu()
 
@@ -1672,7 +1690,7 @@ class TVmain(TVscreenHelper, Screen):
 			self.leftUp()
 
 	def getTips(self, forceRefresh=False):
-		tipsfile = join(f"{self.getTMPpath()}cache/", f"allTips_{datetime.today().strftime('%F')}.json")
+		tipsfile = join(f"{self.getCachePath()}cache/", f"allTips_{datetime.today().strftime('%F')}.json")
 		self.currTipCnt = 0
 		if exists(tipsfile) and not forceRefresh:
 			try:
@@ -1680,7 +1698,8 @@ class TVmain(TVscreenHelper, Screen):
 					completeDict = load(file)
 					self.createTipsDict(completeDict)
 			except OSError as errmsg:
-				self.session.open(MessageBox, "Datensatz 'Tipps' konnte nicht geladen:\n'%s'" % errmsg, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:getTips': {errmsg}!")
+				self.session.open(MessageBox, f"Datensatz 'Tipps' konnte nicht geladen:\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 		else:
 			callInThread(tvsptips.parseTips, callback=self.getTipsReturn, passthrough=tipsfile)
 
@@ -1689,7 +1708,8 @@ class TVmain(TVscreenHelper, Screen):
 			with open(tipsfile, "w") as file:
 				dump(completeDict, file)
 		except OSError as errmsg:
-			self.session.open(MessageBox, "Datensatz 'Tipps' konnte nicht gespeichert werden:\n'%s'" % errmsg, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
+			print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:getTipsReturn': {errmsg}!")
+			self.session.open(MessageBox, f"Datensatz 'Tipps' konnte nicht gespeichert werden:\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 		self.createTipsDict(completeDict)
 
 	def createTipsDict(self, completeDict):
@@ -1771,9 +1791,9 @@ class TVmain(TVscreenHelper, Screen):
 			self.session.deleteDialog(self.tvtipsbox)
 			self.close()
 
-	def removeTMPpaths(self):
-		tmppath = self.getTMPpath()
-		for path in [f"{tmppath}cache/", f"{tmppath}assets/", f"{tmppath}images/", tmppath]:
+	def removeCachePaths(self):
+		cachePath = self.getCachePath()
+		for path in [f"{cachePath}cache/", f"{cachePath}assets/", f"{cachePath}images/", cachePath]:
 			if exists(path):
 				rmtree(path)
 
@@ -1839,7 +1859,7 @@ class TVmain(TVscreenHelper, Screen):
 	def updateFutureEPG(self, forceRefresh=True, todayOnly=False):
 		global TVS_UPDATEACTIVE, TVS_UPDATESTOP
 		TVS_UPDATEACTIVE, TVS_UPDATESTOP = True, False
-		self.createTMPpaths()
+		self.createCachePaths()
 		self.cleanupCache()
 		self.tvupdate.showDialog()
 		timespans = self.getUserTimespans()
@@ -1877,11 +1897,11 @@ class TVmain(TVscreenHelper, Screen):
 							if errmsg:
 								print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:updateFutureEPG' - parsing failed: {errmsg}")
 							allAssets += assetsDict
-						saveErr = self.saveAllAssets(allAssets, spanStartsDt)
-						if saveErr:
+						errmsg = self.saveAllAssets(allAssets, spanStartsDt)
+						if errmsg:
 							TVS_UPDATESTOP = True  # forced thread stop due to OS-error
-							print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:updateFutureEPG' - saving failed: {saveErr}")
-							self.session.open(MessageBox, "Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'%s'" % saveErr, type=MessageBox.TYPE_ERROR, timeout=2, close_on_any_key=True)
+							print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:updateFutureEPG' - saving failed: {errmsg}")
+							self.session.open(MessageBox, f"Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 		self.tvupdate.hideDialog()
 		self.tvinfobox.showDialog("TVS-EPG Update erfolgreich abgebrochen." if TVS_UPDATESTOP else "TVS-EPG Update erfolgreich beendet.")
 		TVS_UPDATEACTIVE, TVS_UPDATESTOP = False, False
@@ -2024,7 +2044,7 @@ class TVimport(TVscreenHelper, Screen):
 									"ColorActions"], {"ok": self.keyOk,
 													"blue": self.keyBlue,
 													"cancel": self.keyExit}, -1)
-		if self.createTMPpaths():
+		if self.createCachePaths():
 			self.exit()
 		if self.updateMappingfile():
 			self.tvinfobox.showDialog("Die Sender-Zuweisungstabelle\n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\nwurde aktualisiert.", 5000)
@@ -2036,7 +2056,7 @@ class TVimport(TVscreenHelper, Screen):
 			self.getAllBouquets()
 		else:
 			print(f"[{tvglobals.MODULE_NAME}] Error in class 'TVimport:shownFinished': file '{tvglobals.MAPFILE}' not found.")
-			self.session.open(MessageBox, f"Datei '{tvglobals.MAPFILE}' kann weder gefunden noch angelegt werden.\nTVS Import kann daher nicht fortgefahren werden!", MessageBox.TYPE_ERROR, timeout=30, close_on_any_key=True)
+			self.session.open(MessageBox, f"Datei '{tvglobals.MAPFILE}' kann weder gefunden noch angelegt werden.\nTVS Import kann daher nicht fortgefahren werden!", MessageBox.TYPE_ERROR, timeout=5, close_on_any_key=True)
 			self.keyExit()
 
 	def keyExit(self):
@@ -2084,25 +2104,41 @@ class TVimport(TVscreenHelper, Screen):
 					for index, channel in enumerate(answer[1]):
 						if channel[1]:
 							importedchannels.append((self.totalimport[index][1][0], (self.totalimport[index][0], self.totalimport[index][1][1])))  # e.g. ('ard', ('1:0:19:283D:41B:1:FFFF0000:0:0:0:', 'Das Erste HD'))
-					with open(f"{tvglobals.IMPORTFILE}.new", 'w') as file:  # all imported channels only
-						dump(dict(importedchannels), file)
+					try:
+						with open(f"{tvglobals.IMPORTFILE}.new", 'w') as file:  # all imported channels only
+							dump(dict(importedchannels), file)
 						rename(f"{tvglobals.IMPORTFILE}.new", tvglobals.IMPORTFILE)
+					except OSError as errmsg:
+						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:anotherBouquetCB': {errmsg}!")
+						self.session.open(MessageBox, f"Fehler in 'weiteres Bouquet':\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 				if self.totalsupp:
 					supportedchannels = []
 					for index, channel in enumerate(self.totalsupp):
 						if channel[1]:
 							supportedchannels.append((self.totalsupp[index][1][0], (self.totalsupp[index][0], self.totalsupp[index][1][1])))
-					with open(f"{tvglobals.SUPPFILE}.new", 'w') as file:  # all channels supported by server
-						dump(dict(supportedchannels), file)
+					try:
+						with open(f"{tvglobals.SUPPFILE}.new", 'w') as file:  # all channels supported by server
+							dump(dict(supportedchannels), file)
 						rename(f"{tvglobals.SUPPFILE}.new", tvglobals.SUPPFILE)
+					except OSError as errmsg:
+						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:anotherBouquetCB_totalsupp': {errmsg}!")
+						self.session.open(MessageBox, f"Fehler beim Einlesen der unterstützten Kanäle':\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 				if self.totaldupes:  # all unused (duplicate) channels in bouquets
-					with open(f"{tvglobals.DUPESFILE}.new", 'w') as file:
-						dump(dict(self.totaldupes), file)
-					rename(f"{tvglobals.DUPESFILE}.new", tvglobals.DUPESFILE)
+					try:
+						with open(f"{tvglobals.DUPESFILE}.new", 'w') as file:
+							dump(dict(self.totaldupes), file)
+						rename(f"{tvglobals.DUPESFILE}.new", tvglobals.DUPESFILE)
+					except OSError as errmsg:
+						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:anotherBouquetCB_totaldupes': {errmsg}!")
+						self.session.open(MessageBox, f"Fehler beim Einlesen der doppelten Kanäle':\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 				if self.totalunsupp:  # all channels not supported by server
-					with open(f"{tvglobals.UNSUPPFILE}.new", 'w') as file:
-						dump(dict(self.totalunsupp), file)
-					rename(f"{tvglobals.UNSUPPFILE}.new", tvglobals.UNSUPPFILE)
+					try:
+						with open(f"{tvglobals.UNSUPPFILE}.new", 'w') as file:
+							dump(dict(self.totalunsupp), file)
+						rename(f"{tvglobals.UNSUPPFILE}.new", tvglobals.UNSUPPFILE)
+					except OSError as errmsg:
+						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:anotherBouquetCB_unsupp': {errmsg}!")
+						self.session.open(MessageBox, f"Fehler beim Einlesen der nicht unterstützten Kanäle':\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 				tvglobals.IMPORTDICT = self.readImportedFile()  # lade importierte Senderdaten
 				self.tvinfobox.showDialog("Senderimport erfolgreich durchgeführt.")
 			else:
@@ -2158,35 +2194,40 @@ class TVimport(TVscreenHelper, Screen):
 		return importlist, dupeslist, supported, unsupported
 
 	def readMappingList(self):  # Read mapping (=translation rules 'TVSpielfilm channel abbreviation: E2 service name')
+		line = "{No line evaluated yet}"
 		maplist = []
-		with open(tvglobals.MAPFILE) as file:  # /etc/enigma2/TVSpielfilm
-			line = "{No line evaluated yet}"
-			try:
+		try:
+			with open(tvglobals.MAPFILE) as file:  # /etc/enigma2/TVSpielfilm
 				for line in file.read().replace(",", "").strip().split("\n"):
 					if not line.startswith("#"):
 						items = line.strip().split(": ")
 						if items:
 							maplist.append((items[0], items[1]))
-			except Exception as errmsg:
-				print(f"[{tvglobals.MODULE_NAME}] Exception error class 'TVimport:readMappingList' in {line}: {errmsg}")
+		except Exception as errmsg:
+			print(f"[{tvglobals.MODULE_NAME}] Exception error class 'TVimport:readMappingList' in {line}: {errmsg}")
+			self.session.open(MessageBox, f"Fehler beim Einlesen der Sender-Zuweisungstabelle 'tvs_mapping.txt':\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 		return maplist
 
 	def appendImportLog(self, bouquetname, totalfound, importlist, dupeslist, unsupported):  # append last successful import to logfile
-		with open(join(tvglobals.LOGPATH, "bouquetimport.log"), "a") as file:
-			file.write(f"{'=' * 78}\n{len(totalfound)} Kanäle im Bouquet gefunden '{bouquetname}' (inkl. doppelter TVSpielfilm-Kürzel)\n{'=' * 78}\n")
-			formatstr = "{0:<10} {1:<40} {2:<0}\n"
-			for item in totalfound:
-				file.write(formatstr.format(*(item[1][0] or "n/a", item[0], item[1][1])))
-			file.write(f"\n{len(importlist)} importierte TVSpielfilm Kanäle (ohne doppelte TVSpielfilm-Verknüpfungen):\n{'-' * 78}\n")
-			for item in importlist:
-				file.write(formatstr.format(*(item[1][0], item[0], item[1][1])))
-			file.write(f"\n{len(dupeslist)} nicht importierte Kanäle (weil doppelte TVSpielfilm-Verknüpfungen):\n{'-' * 78}\n")
-			for item in dupeslist:
-				file.write(formatstr.format(*(item[1][0], item[0], item[1][1])))
-			file.write(f"\n{len(unsupported)} Kanäle, die von TV-Spielfilm nicht unterstützt werden:\n{'-' * 78}\n")
-			for item in unsupported:
-				file.write(formatstr.format(*("n/a", item[0], item[1][1])))
-			file.write("\n")
+		try:
+			with open(join(tvglobals.LOGPATH, "bouquetimport.log"), "a") as file:
+				file.write(f"{'=' * 78}\n{len(totalfound)} Kanäle im Bouquet gefunden '{bouquetname}' (inkl. doppelter TVSpielfilm-Kürzel)\n{'=' * 78}\n")
+				formatstr = "{0:<10} {1:<40} {2:<0}\n"
+				for item in totalfound:
+					file.write(formatstr.format(*(item[1][0] or "n/a", item[0], item[1][1])))
+				file.write(f"\n{len(importlist)} importierte TVSpielfilm Kanäle (ohne doppelte TVSpielfilm-Verknüpfungen):\n{'-' * 78}\n")
+				for item in importlist:
+					file.write(formatstr.format(*(item[1][0], item[0], item[1][1])))
+				file.write(f"\n{len(dupeslist)} nicht importierte Kanäle (weil doppelte TVSpielfilm-Verknüpfungen):\n{'-' * 78}\n")
+				for item in dupeslist:
+					file.write(formatstr.format(*(item[1][0], item[0], item[1][1])))
+				file.write(f"\n{len(unsupported)} Kanäle, die von TV-Spielfilm nicht unterstützt werden:\n{'-' * 78}\n")
+				for item in unsupported:
+					file.write(formatstr.format(*("n/a", item[0], item[1][1])))
+				file.write("\n")
+		except OSError as errmsg:
+			print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:appendImportLog': {errmsg}!")
+			self.session.open(MessageBox, f"Fehler beim Erstellen des Protokolls 'bouquetimport.log':\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 
 	def checkMappingRules(self):  # tool: checks whether conversion rules are missing / outdated / double in the mapping file
 		mapList = sorted(self.maplist, key=lambda x: x[0])
@@ -2204,47 +2245,51 @@ class TVimport(TVscreenHelper, Screen):
 		if usedChannels:
 			tabpos = "{0:<10} {1:<0}\n"
 			self.mappinglog = join(tvglobals.LOGPATH, "mappingrules.log")
-			with open(self.mappinglog, "w") as file:
-				file.write(f"{len(usedChannels)} Kanäle gefunden, die von TV Spielfilm unterstützt werden\n")
-				file.write("\nFehlende Regel(n) für Kanäle, die von TV Spielfilm unterstützt werden: ")
-				notfound = []
-				for service in usedChannels:  # search for missing conversion rules
-					shortkey = service.get("channelId", "n/a").lower()
-					if shortkey not in mapKeys:
-						notfound.append((shortkey, service.get("name", "n/v")))
-				if notfound:
-					file.write(f"\n{tabpos.format(*('Kürzel', 'Sendername'))}")
-					file.write(f"{'-' * 58}\n")
-					for service in notfound:
-						file.write(tabpos.format(*service))
-					file.write("EMPFEHLUNG: Diese Regel(n) in die Datei 'tvs_mapping.txt' einpflegen.\n")
-				else:
-					file.write("\n{Keine fehlenden Regel(n) gefunden}\n")
-				file.write("\nVeraltete Regel(n) für Kanäle, die von TV Spielfilm nicht unterstützt werden: ")
-				outdated = []
-				for service in mapList:  # search for outdated conversion rules
-					if service[0] not in channelKeys:
-						outdated.append((service[0], service[1]))
-				if outdated:
-					file.write(f"\n{tabpos.format(*('Kürzel', 'Umsetzungsregel'))}")
-					file.write(f"{'-' * 58}\n")
-					for service in outdated:
-						file.write(tabpos.format(*service))
-					file.write("EMPFEHLUNG: Diese Regel(n) aus der Datei 'tvs_mapping.txt' entfernen.\n")
-				else:
-					file.write("\n{Keine veraltete Regel(n) gefunden}\n")
-				file.write("\nDoppelte Regel(n) für Kanäle, die von TV Spielfilm unterstützt werden: ")
-				double = []
-				for idx in [i for i, x in enumerate(mapKeys) if mapKeys.count(x) > 1]:  # search for duplicate rules and get indexes
-					double.append((mapList[idx][0], mapList[idx][1]))
-				if double:
-					file.write(f"\n{tabpos.format(*('Kürzel', 'Umsetzungsregel'))}")
-					file.write(f"{'-' * 58}\n")
-					for service in double:
-						file.write(tabpos.format(*service))
-					file.write("EMPFEHLUNG: Im Zweifel in der Datei 'tvs_mapping.txt' belasssen!\nSender könnten z.B. bei verschiedenen Anbietern unter verschiedenen Namen geführt werden.\n")
-				else:
-					file.write("\n{Keine doppelten Regel(n) gefunden}\n")
+			try:
+				with open(self.mappinglog, "w") as file:
+					file.write(f"{len(usedChannels)} Kanäle gefunden, die von TV Spielfilm unterstützt werden\n")
+					file.write("\nFehlende Regel(n) für Kanäle, die von TV Spielfilm unterstützt werden: ")
+					notfound = []
+					for service in usedChannels:  # search for missing conversion rules
+						shortkey = service.get("channelId", "n/a").lower()
+						if shortkey not in mapKeys:
+							notfound.append((shortkey, service.get("name", "n/v")))
+					if notfound:
+						file.write(f"\n{tabpos.format(*('Kürzel', 'Sendername'))}")
+						file.write(f"{'-' * 58}\n")
+						for service in notfound:
+							file.write(tabpos.format(*service))
+						file.write("EMPFEHLUNG: Diese Regel(n) in die Datei 'tvs_mapping.txt' einpflegen.\n")
+					else:
+						file.write("\n{Keine fehlenden Regel(n) gefunden}\n")
+					file.write("\nVeraltete Regel(n) für Kanäle, die von TV Spielfilm nicht unterstützt werden: ")
+					outdated = []
+					for service in mapList:  # search for outdated conversion rules
+						if service[0] not in channelKeys:
+							outdated.append((service[0], service[1]))
+					if outdated:
+						file.write(f"\n{tabpos.format(*('Kürzel', 'Umsetzungsregel'))}")
+						file.write(f"{'-' * 58}\n")
+						for service in outdated:
+							file.write(tabpos.format(*service))
+						file.write("EMPFEHLUNG: Diese Regel(n) aus der Datei 'tvs_mapping.txt' entfernen.\n")
+					else:
+						file.write("\n{Keine veraltete Regel(n) gefunden}\n")
+					file.write("\nDoppelte Regel(n) für Kanäle, die von TV Spielfilm unterstützt werden: ")
+					double = []
+					for idx in [i for i, x in enumerate(mapKeys) if mapKeys.count(x) > 1]:  # search for duplicate rules and get indexes
+						double.append((mapList[idx][0], mapList[idx][1]))
+					if double:
+						file.write(f"\n{tabpos.format(*('Kürzel', 'Umsetzungsregel'))}")
+						file.write(f"{'-' * 58}\n")
+						for service in double:
+							file.write(tabpos.format(*service))
+						file.write("EMPFEHLUNG: Im Zweifel in der Datei 'tvs_mapping.txt' belasssen!\nSender könnten z.B. bei verschiedenen Anbietern unter verschiedenen Namen geführt werden.\n")
+					else:
+						file.write("\n{Keine doppelten Regel(n) gefunden}\n")
+			except OSError as errmsg:
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:checkMappingRules': {errmsg}!")
+				self.session.open(MessageBox, f"Fehler beim Prüfen Protokolls 'bouquetimport.log':\n{errmsg}" % errmsg, type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 
 
 class TVchannelselection(Screen):
@@ -2358,7 +2403,7 @@ class TVautoUpdate(TVcoreHelper):
 	def autoUpdateEPG(self):
 		global TVS_UPDATEACTIVE, TVS_UPDATEACTIVE
 		TVS_UPDATEACTIVE, TVS_UPDATESTOP = True, False
-		self.createTMPpaths()
+		self.createCachePaths()
 		self.cleanupCache()
 		print(f"[{tvglobals.MODULE_NAME}] Autoupdate starts, cache has been cleaned up")
 		timespans = self.getUserTimespans()
