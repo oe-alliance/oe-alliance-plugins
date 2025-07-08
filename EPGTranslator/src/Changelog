@@ -32,3 +32,7 @@ Fixes, mostly to fix the display of Arabic translations.
  o Replaced the flag display with a simple language name field.
 
  o Added a keymap for EventViewActions
+
+3.01-release
+
+ o Cater for Google translate returning fewer *s than sent (sepline).
