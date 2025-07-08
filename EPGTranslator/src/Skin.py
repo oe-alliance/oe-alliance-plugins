@@ -4,25 +4,6 @@
 
 class MySkinData:
 
-# class translatorConfig bits
-#
-    TranslatorConfig_skin = """
-        <screen resolution="1920,1080" position="center,center" size="1218,790" backgroundColor="#20000000" title="EPG Translator Setup">
-            <ePixmap position="200,0" size="818,75" pixmap="{plug_loc}/pic/fhd-translatorConfig.png" alphatest="blend" zPosition="1" />
-            <ePixmap position="110,89" size="998,1" pixmap="{plug_loc}/pic/separator.png" alphatest="off" zPosition="1" />
-            <widget name="config" position="15,90" size="1188,580" itemHeight="57" scrollbarMode="showOnDemand" font="Regular;36" secondfont="Regular;36" zPosition="1" />
-            <ePixmap position="110,680" size="998,1" pixmap="{plug_loc}/pic/separator.png" alphatest="off" zPosition="1" />
-
-            <widget source="key_red" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-red.png" position="318,700" size="27,27" alphatest="blend" conditional="key_red" transparent="1" zPosition="1">
-                <convert type="ConditionalShowHide" />
-            </widget>
-            <widget source="key_red" render="Label" position="355,690" size="300,40" font="Regular;36" foregroundColor="white" halign="left" conditional="key_red" transparent="1" valign="center" zPosition="2" />
-            <widget source="key_green" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-green.png" position="795,700" size="27,27" alphatest="blend" conditional="key_green" transparent="1" zPosition="2">
-                <convert type="ConditionalShowHide" />
-            </widget>
-            <widget source="key_green" render="Label" position="833,690" size="300,40" font="Regular;36" foregroundColor="white" halign="left" conditional="key_green" transparent="1" valign="center" zPosition="2" />
-        </screen>
-        """
 
 # class translatorMain bits
 #
@@ -30,21 +11,21 @@ class MySkinData:
 #
     TranslatorMain_skin = """
         <screen resolution="1920,1080" position="center,90" size="1500,925" title="EPG Translator">
-            <ePixmap position="0,0" size="1500,75" pixmap="{plug_loc}/pic/fhd-translator.png" alphatest="blend" zPosition="1" />
+            <ePixmap position="0,0" size="1500,75" pixmap="{plug_loc}/pic/fhd-translator.png" alphatest="blend" zPosition="1" scale="1"/>
 
-            <widget source="key_blue" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-blue.png" position="15,9" size="27,27" alphatest="blend" conditional="key_blue" transparent="1" zPosition="2">
+            <widget source="key_blue" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-blue.png" position="15,9" size="27,27" alphatest="blend" conditional="key_blue" transparent="1" zPosition="2" scale="1">
                 <convert type="ConditionalShowHide" />
             </widget>
             <widget source="key_blue" render="Label" position="51,9" size="300,30" backgroundColor="#FFFFFF" font="Regular;24" foregroundColor="black" halign="left" conditional="key_blue" transparent="1" valign="center" zPosition="2" />
-            <widget source="key_yellow" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-yellow.png" position="15,39" size="27,27" alphatest="blend" conditional="key_yellow" transparent="1" zPosition="2">
+            <widget source="key_yellow" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-yellow.png" position="15,39" size="27,27" alphatest="blend" conditional="key_yellow" transparent="1" zPosition="2" scale="1">
                 <convert type="ConditionalShowHide" />
             </widget>
             <widget source="key_yellow" render="Label" position="51,39" size="300,30" backgroundColor="#FFFFFF" font="Regular;24" foregroundColor="black" halign="left" conditional="key_yellow" transparent="1" valign="center" zPosition="2" />
-            <widget source="key_red" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-red.png" position="320,9" size="27,27" alphatest="blend" conditional="key_red" transparent="1" zPosition="2">
+            <widget source="key_red" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-red.png" position="320,9" size="27,27" alphatest="blend" conditional="key_red" transparent="1" zPosition="2" scale="1">
                 <convert type="ConditionalShowHide" />
             </widget>
             <widget source="key_red" render="Label" position="356,9" size="300,30" backgroundColor="#FFFFFF" font="Regular;24" foregroundColor="black" halign="left" conditional="key_red" transparent="1" valign="center" zPosition="2" />
-            <widget source="key_green" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-green.png" position="320,39" size="27,27" alphatest="blend" conditional="key_green" transparent="1" zPosition="2">
+            <widget source="key_green" render="Pixmap" pixmap="{plug_loc}/pic/buttons/fhd-green.png" position="320,39" size="27,27" alphatest="blend" conditional="key_green" transparent="1" zPosition="2" scale="1">
                 <convert type="ConditionalShowHide" />
             </widget>
             <widget source="key_green" render="Label" position="356,39" size="300,30" backgroundColor="#FFFFFF" font="Regular;24" foregroundColor="black" halign="left" conditional="key_green" transparent="1" valign="center" zPosition="2" />

@@ -232,7 +232,7 @@ msgstr "Vertaal tekst"
 msgid "Scroll translated text up"
 msgstr "Vertaal tekst"
 
-msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr "Kies deze optie om zowel de brontaal als de doeltaal in het hoofdscherm van EPG translator te laten zien."
 
 msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."

@@ -233,7 +233,7 @@ msgstr "Traduci testo"
 msgid "Scroll translated text up"
 msgstr "Traduci testo"
 
-msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr "Seleziona questa opzione per mostrare il testo sorgente e il testo tradotto nella schermata principale di EPG Translator."
 
 msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
