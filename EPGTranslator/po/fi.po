@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-08 01:36+0100\n"
-"PO-Revision-Date: 2025-06-06 11:25+0300\n"
+"PO-Revision-Date: 2025-07-08 10:53+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Orlandox\n"
 "Language: fi\n"
@@ -18,11 +18,10 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 
 msgid "Access plugin setup"
-msgstr ""
+msgstr "Mene lisäosan asetuksiin"
 
-#, fuzzy
 msgid "Access text translator"
-msgstr "Tekstin kääntäjä:"
+msgstr "Mene tekstinkääntäjään"
 
 msgid "Afrikaans"
 msgstr "Afrikaans"
@@ -30,13 +29,11 @@ msgstr "Afrikaans"
 msgid "Albanian"
 msgstr "Albania"
 
-#, fuzzy
 msgid "Alternate Language:"
-msgstr "Tunnista kieli"
+msgstr "Vaihtoehtoinen kieli:"
 
-#, fuzzy
 msgid "Alternative language the source text can be translated into."
-msgstr "Tämä on kieli, jolle lähdeteksti käännetään."
+msgstr "Vaihtoehtoinen kieli, jolle lähdeteksti voidaan kääntää."
 
 msgid "Arabic"
 msgstr "Arabia"
@@ -63,7 +60,7 @@ msgid "Cache timeout hours (0 == while valid):"
 msgstr "Välimuistin aikakatkaisun tunnit (0 == voimassaoloaikana):"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Peruuta"
 
 msgid "Catalan"
 msgstr "Katalaani"
@@ -75,7 +72,7 @@ msgid "Clear cache"
 msgstr "Tyhjennä välimuisti"
 
 msgid "Close plugin"
-msgstr ""
+msgstr "Sulje lisäosa"
 
 msgid "Croatian"
 msgstr "Kroatia"
@@ -98,9 +95,8 @@ msgstr "Hollanti"
 msgid "EPG Translator"
 msgstr "EPG:n kielenkääntäjä"
 
-#, fuzzy
 msgid "EPG Translator Actions"
-msgstr "EPG:n kielenkääntäjän versio: "
+msgstr "EPG:n kielenkääntäjän toiminnot"
 
 msgid "EPG Translator Setup - "
 msgstr "EPG:n kielenkääntäjän asetukset - "
@@ -108,9 +104,8 @@ msgstr "EPG:n kielenkääntäjän asetukset - "
 msgid "EPG Translator version: "
 msgstr "EPG:n kielenkääntäjän versio: "
 
-#, fuzzy
 msgid "EPGTranslator Actions"
-msgstr "EPG:n kielenkääntäjän versio: "
+msgstr "EPG:n kielenkääntäjän toiminnot"
 
 msgid "English"
 msgstr "Englanti"
@@ -119,7 +114,7 @@ msgid "Estonian"
 msgstr "Viro"
 
 msgid "Event View Actions"
-msgstr ""
+msgstr "Ohjelmanäkymän toiminnot"
 
 msgid "EventViews open translated:"
 msgstr "Ohjelmanäkymä aukeaa kieli käännettynä:"
@@ -149,7 +144,7 @@ msgid "Hide"
 msgstr "Piilota"
 
 msgid "Hide screen"
-msgstr ""
+msgstr "Piilota näyttö"
 
 msgid "Hungarian"
 msgstr "Unkari"
@@ -191,7 +186,7 @@ msgid "Maltese"
 msgstr "Malta"
 
 msgid "Next EPG event"
-msgstr ""
+msgstr "Seuraava ohjelma EPG:ssa"
 
 msgid "No"
 msgstr "Ei"
@@ -212,7 +207,7 @@ msgid "Portuguese"
 msgstr "Portugali"
 
 msgid "Previous EPG event"
-msgstr ""
+msgstr "Edellinen ohjelma EPG:ssa"
 
 msgid "Refresh EPG"
 msgstr "Virkistä EPG"
@@ -226,13 +221,11 @@ msgstr "Venäjä"
 msgid "Save"
 msgstr "Tallenna"
 
-#, fuzzy
 msgid "Scroll translated text down"
-msgstr "Käännä tekstiä"
+msgstr "Vieritä käännettyä tekstiä alaspäin"
 
-#, fuzzy
 msgid "Scroll translated text up"
-msgstr "Käännä tekstiä"
+msgstr "Vieritä käännettyä tekstiä ylöspäin"
 
 msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr "Valitse tämä vaihtoehto, jos haluat näyttää sekä lähdetekstin että käännetyn tekstin EPG:n kielenkääntäjän päänäytössä."
@@ -247,7 +240,7 @@ msgid "Show Source EPG:"
 msgstr "Näytä lähdetekstin EPG:"
 
 msgid "Show plugin info"
-msgstr ""
+msgstr "Näytä lisäosan tiedot"
 
 msgid "Show traceback in errors:"
 msgstr "Näytä jäljitys virheissä:"
@@ -274,7 +267,7 @@ msgid "Text Translator:"
 msgstr "Tekstin kääntäjä:"
 
 msgid "Text input"
-msgstr ""
+msgstr "Tekstin syöttö"
 
 msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
 msgstr "Tämä on kehitysominaisuus. Käännösvirheen sattuessa, jos se on käytössä, kirjataan lisä debug-tietoja lokiin."
@@ -282,13 +275,11 @@ msgstr "Tämä on kehitysominaisuus. Käännösvirheen sattuessa, jos se on käy
 msgid "This is the language the source text will be translated into."
 msgstr "Tämä on kieli, jolle lähdeteksti käännetään."
 
-#, fuzzy
 msgid "Toggle language"
-msgstr "Lähdekieli:"
+msgstr "Vaihda kieli"
 
-#, fuzzy
 msgid "Toggle translation"
-msgstr "Online-käännös"
+msgstr "Vaihda käännös"
 
 msgid "Translate your EPG"
 msgstr "Käännä EPG:n kieli"
@@ -318,7 +309,7 @@ msgid "Yes"
 msgstr "Kyllä"
 
 msgid "Zap down"
-msgstr ""
+msgstr "Kanavanvaihto alas"
 
 msgid "Zap up"
-msgstr ""
+msgstr "Kanavanvaihto ylös"
