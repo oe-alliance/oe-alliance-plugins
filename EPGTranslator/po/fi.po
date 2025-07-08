@@ -227,7 +227,7 @@ msgstr "Vieritä käännettyä tekstiä alaspäin"
 msgid "Scroll translated text up"
 msgstr "Vieritä käännettyä tekstiä ylöspäin"
 
-msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr "Valitse tämä vaihtoehto, jos haluat näyttää sekä lähdetekstin että käännetyn tekstin EPG:n kielenkääntäjän päänäytössä."
 
 msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."

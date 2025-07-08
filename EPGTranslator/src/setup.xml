@@ -1,0 +1,11 @@
+<setupxml>
+	<setup key="TranslatorConfig" showOpenWebIF="1" title="EPG Translator Setup">
+		<item level="0" text="Source Language:" description="Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language.">config.plugins.translator.source</item>
+		<item level="0" text="Destination Language:" description="This is the language the source text will be translated into.">config.plugins.translator.destination</item>
+		<item level="0" text="Alternate Language:" description="Alternative language the source text can be translated into.">config.plugins.translator.alternate</item>
+		<item level="0" text="EventViews open translated:" description="When an EventView window is opened, start with the translated text.">config.plugins.translator.start_EV_trans</item>
+		<item level="0" text="Cache timeout hours (0 == while valid):" description="Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed.">config.plugins.translator.timeout_hr</item>
+		<item level="0" text="Show Source EPG:" description="Select this option to show the source text as well as the translated text in EPG Translator main screen show.">config.plugins.translator.showsource</item>
+		<item level="0" text="Show traceback in errors:" description="This is a development feature. On a translation failure, if enabled, extra debug information will be logged.">config.plugins.translator.showtrace</item>
+	</setup>
+</setupxml>

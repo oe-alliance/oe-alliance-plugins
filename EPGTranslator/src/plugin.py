@@ -7,26 +7,22 @@ from . import _
 EPGTrans_vers = "3.00-release"
 
 from Components.ActionMap import ActionMap, HelpableActionMap
-from Components.config import (config, configfile, ConfigSubsection,
- ConfigSelection, ConfigInteger, ConfigBoolean, getConfigListEntry)
-from Components.ConfigList import ConfigListScreen
+from Components.config import (config, ConfigSubsection,
+ ConfigSelection, ConfigInteger, ConfigBoolean)
 from Components.Label import Label
 from Components.Language import language
-from Components.Pixmap import Pixmap
 from Components.ScrollLabel import ScrollLabel
 from Components.ServiceEventTracker import ServiceEventTracker
 from Components.Sources.StaticText import StaticText
-from enigma import (eEPGCache, eServiceReference, getDesktop,
- iPlayableService, iServiceInformation, eLabel)
+from enigma import eEPGCache, eServiceReference, iPlayableService, iServiceInformation
 from Plugins.Plugin import PluginDescriptor
-from Screens.EpgSelection import EPGSelection
 from Screens.EventView import EventViewBase
 from Screens.HelpMenu import HelpableScreen
 from Screens.InfoBar import InfoBar
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
+from Screens.Setup import Setup
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Tools.Directories import fileExists
 
 import re
 import time
@@ -64,7 +60,7 @@ ci = 0
 for i in list(range(len(EPG_OPTIONS))):
     if EPG_OPTIONS[i] == 'X':
         continue
-    exec("epg_%s = %d" % (EPG_OPTIONS[i], ci))
+    exec("epg_%s = %d" % (EPG_OPTIONS[i], ci))  # FIME : Refactor to not used exec
     ci += 1
 epg_PB = ci  # Extra index for Playback Begin time.
 
@@ -114,8 +110,7 @@ config.plugins.translator = ConfigSubsection()
 #
 CfgPlTr = config.plugins.translator
 
-CfgPlTr.source = ConfigSelection(default='auto',
- choices=[('auto', _('Detect Language'))] + langs[:])
+CfgPlTr.source = ConfigSelection(default='auto', choices=[('auto', _('Detect Language'))] + langs[:])
 
 # Destination has no auto...
 #
@@ -123,8 +118,7 @@ CfgPlTr.destination = ConfigSelection(default='en', choices=langs)
 CfgPlTr.alternate = ConfigSelection(default='en', choices=langs)
 CfgPlTr.start_EV_trans = ConfigBoolean(default=False)
 CfgPlTr.timeout_hr = ConfigInteger(0, (0, 350))
-CfgPlTr.showsource = ConfigSelection(default='yes',
- choices=[('yes', _('Yes')), ('no', _('No'))])
+CfgPlTr.showsource = ConfigSelection(default='yes', choices=[('yes', _('Yes')), ('no', _('No'))])
 CfgPlTr.showtrace = ConfigBoolean(default=False)
 
 curr_dest = CfgPlTr.destination.getValue()
@@ -504,67 +498,32 @@ plugin_location = os.path.dirname(os.path.realpath(__file__))
 #
 
 
-class TranslatorConfig(ConfigListScreen, Screen):
-
-# ==================================================================
+class TranslatorConfig(Setup):
     def __init__(self, session):
-        self.dict = {'plug_loc': plugin_location}
-        self.skin = applySkinVars(MySD.TranslatorConfig_skin, self.dict)
-        Screen.__init__(self, session)
-        list = [
-            getConfigListEntry(_('Source Language:'), CfgPlTr.source, _("Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language.")),
-            getConfigListEntry(_('Destination Language:'), CfgPlTr.destination, _("This is the language the source text will be translated into.")),
-            getConfigListEntry(_('Alternate Language:'), CfgPlTr.alternate, _("Alternative language the source text can be translated into.")),
-            getConfigListEntry(_('EventViews open translated:'), CfgPlTr.start_EV_trans, _("When an EventView window is opened, start with the translated text.")),
-            getConfigListEntry(_('Cache timeout hours (0 == while valid):'), CfgPlTr.timeout_hr, _("Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed.")),
-            getConfigListEntry(_('Show Source EPG:'), CfgPlTr.showsource, _("Selct this option to show the source text as well as the translated text in EPG Translator main screen show.")),
-            getConfigListEntry(_('Show traceback in errors:'), CfgPlTr.showtrace, _("This is a development feature. On a translation failure, if enabled, extra debug information will be logged.")),
-        ]
-        ConfigListScreen.__init__(self, list, on_change=self.updateComponents)
-        self['actions'] = ActionMap(['SetupActions'],
-             {'ok': self.save,
-              'cancel': self.cancel,
-              'save': self.save
-             },
-            -1)
-# For newer skins...
-#
-        self["key_red"] = StaticText(_("Cancel"))
-        self["key_green"] = StaticText(_("Save"))
+        Setup.__init__(self, session, "TranslatorConfig", plugin="Extensions/EPGTranslator", PluginLanguageDomain="EPGTranslator")
         self.setTitle(_("EPG Translator Setup - ") + EPGTrans_vers)
-        self["description"] = Label("")
-        self["config"].onSelectionChanged.append(self.selectionChanged)
-        self.onLayoutFinish.append(self.selectionChanged)
-        self.onLayoutFinish.append(self.updateComponents)
+        CfgPlTr.timeout_hr.addNotifier(self.changeTimeout)
 
-# ==================================================================
-
-    def selectionChanged(self):
-        self["description"].setText(self.getCurrentDescription())
-
-# ==================================================================
-    def updateComponents(self):
-        AfCache.change_timeout(CfgPlTr.timeout_hr.getValue())
-
-# ==================================================================
-    def save(self):
-        global curr_dest
-        for x in self['config'].list:
-            x[1].save()
-        curr_dest = CfgPlTr.destination.getValue()
-        configfile.save()
-        self.exit()
-
-# ==================================================================
-    def cancel(self):
+    def keyCancel(self):
         for x in self['config'].list:
             x[1].cancel()
         self.exit()
 
-# ==================================================================
+    def closeRecursive(self):
+        self.keyCancel()
+
+    def keySave(self):
+        self.saveAll()
+        self.exit()
+
     def exit(self):
         self.session.openWithCallback(self.close, TranslatorMain, None)
-        return
+
+    def changeTimeout(self, configElement):
+        AfCache.change_timeout(configElement.value)
+
+    def __del__(self):
+        CfgPlTr.timeout_hr.removeNotifier(self.changeTimeout)
 
 # -*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-
 
@@ -698,7 +657,6 @@ Red: Refresh EPG
 # ==================================================================
 # Set the current country flags as the screen displays
 #
-
 
     def onLayoutFinished(self):
         source = CfgPlTr.source.getValue()
@@ -854,7 +812,6 @@ Red: Refresh EPG
 # ==================================================================
 # Populate the EPG data in self.list from the box's internal EPG cache
 #
-
 
     def getEPG(self):
         self.max = 1
