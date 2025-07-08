@@ -703,7 +703,7 @@ Red: Refresh EPG
     def onLayoutFinished(self):
         source = CfgPlTr.source.getValue()
         if source == "auto":
-            source = "Original"
+            source = _("Original")
         if self.showsource == 'yes':
             self['from_lang'].setText(source)
             dest_w = 'to_lang'
