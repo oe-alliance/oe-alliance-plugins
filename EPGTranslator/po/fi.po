@@ -287,6 +287,9 @@ msgstr "Vaihda käännös"
 msgid "Translate your EPG"
 msgstr "Käännä EPG:n kieli"
 
+msgid "Translation error"
+msgstr "Käännösvirhe"
+
 msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
 msgstr "Käännökset tallennetaan välimuistiin tarpeettoman uudelleenkääntämisen välttämiseksi. Tämä on tuntimäärä, jonka käännös säilyy välimuistissa ennen poistamista. Valitse '0', jos haluat käännöksen poistuvan välimuistista ohjelman loputtua."
 
