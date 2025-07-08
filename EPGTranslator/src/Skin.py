@@ -39,7 +39,7 @@ class MySkinData:
             </widget>
             <widget source="key_back" render="Label" position="935,39" size="230,30" backgroundColor="#FFFFFF" font="Regular;24" foregroundColor="black" halign="left" conditional="key_back" transparent="1" valign="center" zPosition="2" />
 
-            <widget source="key_menu" render="Label" text="Menu" position="1200,9" size="90,29"  backgroundColor="#FFFFFF" font="Regular;24" foregroundColor="black" halign="left" conditional="key_menu" transparent="1" valign="center" zPosition="2" >
+            <widget source="key_menu" render="Label" text="Menu" position="1200,9" size="90,29"  backgroundColor="black" font="Regular;24" foregroundColor="white" halign="center" valign="center" conditional="key_menu" zPosition="2" >
                 <convert type="ConditionalShowHide" />
             </widget>
 

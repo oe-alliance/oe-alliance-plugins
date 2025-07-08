@@ -4,7 +4,7 @@
 # for localized messages
 from . import _
 
-EPGTrans_vers = "3.01-release"
+EPGTrans_vers = "3.02-release"
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.config import (config, ConfigSubsection,
@@ -546,6 +546,7 @@ Menu : Setup
 Blue: Hide screen
 Yellow: Clear cache
 Red: Refresh EPG
+Back: Toggle primary/alternate language
 """
 # Add the English (base) helptext now
 #
