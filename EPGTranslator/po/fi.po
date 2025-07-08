@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2025-07-08 01:36+0100\n"
 "PO-Revision-Date: 2025-06-06 11:25+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Orlandox\n"
@@ -17,11 +17,26 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
 
+msgid "Access plugin setup"
+msgstr ""
+
+#, fuzzy
+msgid "Access text translator"
+msgstr "Tekstin kääntäjä:"
+
 msgid "Afrikaans"
 msgstr "Afrikaans"
 
 msgid "Albanian"
 msgstr "Albania"
+
+#, fuzzy
+msgid "Alternate Language:"
+msgstr "Tunnista kieli"
+
+#, fuzzy
+msgid "Alternative language the source text can be translated into."
+msgstr "Tämä on kieli, jolle lähdeteksti käännetään."
 
 msgid "Arabic"
 msgstr "Arabia"
@@ -47,6 +62,9 @@ msgstr "Välimuisti tyhjennetty"
 msgid "Cache timeout hours (0 == while valid):"
 msgstr "Välimuistin aikakatkaisun tunnit (0 == voimassaoloaikana):"
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Catalan"
 msgstr "Katalaani"
 
@@ -55,6 +73,9 @@ msgstr "Cebuano"
 
 msgid "Clear cache"
 msgstr "Tyhjennä välimuisti"
+
+msgid "Close plugin"
+msgstr ""
 
 msgid "Croatian"
 msgstr "Kroatia"
@@ -74,11 +95,12 @@ msgstr "Tunnista kieli"
 msgid "Dutch"
 msgstr "Hollanti"
 
-msgid "English"
-msgstr "Englanti"
-
 msgid "EPG Translator"
 msgstr "EPG:n kielenkääntäjä"
+
+#, fuzzy
+msgid "EPG Translator Actions"
+msgstr "EPG:n kielenkääntäjän versio: "
 
 msgid "EPG Translator Setup - "
 msgstr "EPG:n kielenkääntäjän asetukset - "
@@ -86,14 +108,21 @@ msgstr "EPG:n kielenkääntäjän asetukset - "
 msgid "EPG Translator version: "
 msgstr "EPG:n kielenkääntäjän versio: "
 
+#, fuzzy
+msgid "EPGTranslator Actions"
+msgstr "EPG:n kielenkääntäjän versio: "
+
+msgid "English"
+msgstr "Englanti"
+
 msgid "Estonian"
 msgstr "Viro"
 
+msgid "Event View Actions"
+msgstr ""
+
 msgid "EventViews open translated:"
 msgstr "Ohjelmanäkymä aukeaa kieli käännettynä:"
-
-msgid "Exit"
-msgstr "Poistu"
 
 msgid "Filipino"
 msgstr "Filippiinit"
@@ -118,6 +147,9 @@ msgstr "Haitin kreoli"
 
 msgid "Hide"
 msgstr "Piilota"
+
+msgid "Hide screen"
+msgstr ""
 
 msgid "Hungarian"
 msgstr "Unkari"
@@ -158,6 +190,9 @@ msgstr "Malaiji"
 msgid "Maltese"
 msgstr "Malta"
 
+msgid "Next EPG event"
+msgstr ""
+
 msgid "No"
 msgstr "Ei"
 
@@ -176,6 +211,9 @@ msgstr "Puola"
 msgid "Portuguese"
 msgstr "Portugali"
 
+msgid "Previous EPG event"
+msgstr ""
+
 msgid "Refresh EPG"
 msgstr "Virkistä EPG"
 
@@ -188,6 +226,14 @@ msgstr "Venäjä"
 msgid "Save"
 msgstr "Tallenna"
 
+#, fuzzy
+msgid "Scroll translated text down"
+msgstr "Käännä tekstiä"
+
+#, fuzzy
+msgid "Scroll translated text up"
+msgstr "Käännä tekstiä"
+
 msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr "Valitse tämä vaihtoehto, jos haluat näyttää sekä lähdetekstin että käännetyn tekstin EPG:n kielenkääntäjän päänäytössä."
 
@@ -199,6 +245,9 @@ msgstr "Serbia"
 
 msgid "Show Source EPG:"
 msgstr "Näytä lähdetekstin EPG:"
+
+msgid "Show plugin info"
+msgstr ""
 
 msgid "Show traceback in errors:"
 msgstr "Näytä jäljitys virheissä:"
@@ -221,11 +270,11 @@ msgstr "Swahili"
 msgid "Swedish"
 msgstr "Ruotsi"
 
-msgid "TEXT"
-msgstr "TEXT"
-
 msgid "Text Translator:"
 msgstr "Tekstin kääntäjä:"
+
+msgid "Text input"
+msgstr ""
 
 msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
 msgstr "Tämä on kehitysominaisuus. Käännösvirheen sattuessa, jos se on käytössä, kirjataan lisä debug-tietoja lokiin."
@@ -233,8 +282,13 @@ msgstr "Tämä on kehitysominaisuus. Käännösvirheen sattuessa, jos se on käy
 msgid "This is the language the source text will be translated into."
 msgstr "Tämä on kieli, jolle lähdeteksti käännetään."
 
-msgid "Translate text"
-msgstr "Käännä tekstiä"
+#, fuzzy
+msgid "Toggle language"
+msgstr "Lähdekieli:"
+
+#, fuzzy
+msgid "Toggle translation"
+msgstr "Online-käännös"
 
 msgid "Translate your EPG"
 msgstr "Käännä EPG:n kieli"
@@ -262,3 +316,9 @@ msgstr "Kun ohjelmanäkymä avataan, aloita käännetyllä tekstillä."
 
 msgid "Yes"
 msgstr "Kyllä"
+
+msgid "Zap down"
+msgstr ""
+
+msgid "Zap up"
+msgstr ""

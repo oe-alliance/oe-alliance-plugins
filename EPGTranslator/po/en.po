@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2025-07-08 01:36+0100\n"
 "PO-Revision-Date: 2021-02-17 00:23+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,11 +17,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "Access plugin setup"
+msgstr ""
+
+msgid "Access text translator"
+msgstr ""
+
 msgid "Afrikaans"
 msgstr "Afrikaans"
 
 msgid "Albanian"
 msgstr "Albanian"
+
+#, fuzzy
+msgid "Alternate Language:"
+msgstr "Detect Language"
+
+msgid "Alternative language the source text can be translated into."
+msgstr ""
 
 msgid "Arabic"
 msgstr "Arabic"
@@ -47,6 +60,9 @@ msgstr "Cache cleared"
 msgid "Cache timeout hours (0 == while valid):"
 msgstr "Cache timeout hours (0 == while valid):"
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Catalan"
 msgstr "Catalan"
 
@@ -55,6 +71,9 @@ msgstr "Cebuano"
 
 msgid "Clear cache"
 msgstr "Clear cache"
+
+msgid "Close plugin"
+msgstr ""
 
 msgid "Croatian"
 msgstr "Croatian"
@@ -74,17 +93,32 @@ msgstr "Detect Language"
 msgid "Dutch"
 msgstr "Dutch"
 
+msgid "EPG Translator"
+msgstr ""
+
+msgid "EPG Translator Actions"
+msgstr ""
+
+msgid "EPG Translator Setup - "
+msgstr ""
+
+msgid "EPG Translator version: "
+msgstr ""
+
+msgid "EPGTranslator Actions"
+msgstr ""
+
 msgid "English"
 msgstr "English"
 
 msgid "Estonian"
 msgstr "Estonian"
 
-msgid "EventViews open translated:"
+msgid "Event View Actions"
 msgstr ""
 
-msgid "Exit"
-msgstr "Exit"
+msgid "EventViews open translated:"
+msgstr ""
 
 msgid "Filipino"
 msgstr "Filipino"
@@ -109,6 +143,9 @@ msgstr "Haitian Creole"
 
 msgid "Hide"
 msgstr "Hide"
+
+msgid "Hide screen"
+msgstr ""
 
 msgid "Hungarian"
 msgstr "Hungarian"
@@ -149,11 +186,17 @@ msgstr "Malay"
 msgid "Maltese"
 msgstr "Maltese"
 
+msgid "Next EPG event"
+msgstr ""
+
 msgid "No"
 msgstr "No"
 
 msgid "Norwegian"
 msgstr "Norwegian"
+
+msgid "On-line translation"
+msgstr ""
 
 msgid "Persian"
 msgstr "Persian"
@@ -163,6 +206,9 @@ msgstr "Polish"
 
 msgid "Portuguese"
 msgstr "Portuguese"
+
+msgid "Previous EPG event"
+msgstr ""
 
 msgid "Refresh EPG"
 msgstr "Refresh EPG"
@@ -176,6 +222,14 @@ msgstr "Russian"
 msgid "Save"
 msgstr "Save"
 
+#, fuzzy
+msgid "Scroll translated text down"
+msgstr "Translate text"
+
+#, fuzzy
+msgid "Scroll translated text up"
+msgstr "Translate text"
+
 msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr ""
 
@@ -187,6 +241,9 @@ msgstr "Serbian"
 
 msgid "Show Source EPG:"
 msgstr "Show Source EPG:"
+
+msgid "Show plugin info"
+msgstr ""
 
 msgid "Show traceback in errors:"
 msgstr "Show traceback in errors:"
@@ -209,7 +266,10 @@ msgstr "Swahili"
 msgid "Swedish"
 msgstr "Swedish"
 
-msgid "TEXT"
+msgid "Text Translator:"
+msgstr ""
+
+msgid "Text input"
 msgstr ""
 
 msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
@@ -218,7 +278,15 @@ msgstr ""
 msgid "This is the language the source text will be translated into."
 msgstr ""
 
-msgid "Translate text"
+#, fuzzy
+msgid "Toggle language"
+msgstr "Source Language:"
+
+msgid "Toggle translation"
+msgstr ""
+
+#, fuzzy
+msgid "Translate your EPG"
 msgstr "Translate text"
 
 msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
@@ -244,3 +312,9 @@ msgstr ""
 
 msgid "Yes"
 msgstr "Yes"
+
+msgid "Zap down"
+msgstr ""
+
+msgid "Zap up"
+msgstr ""

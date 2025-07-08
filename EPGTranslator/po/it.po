@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-16 19:01+0430\n"
+"POT-Creation-Date: 2025-07-08 01:36+0100\n"
 "PO-Revision-Date: 2022-11-04 08:14+0100\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <>\n"
@@ -19,11 +19,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.08.2\n"
 
+msgid "Access plugin setup"
+msgstr ""
+
+msgid "Access text translator"
+msgstr ""
+
 msgid "Afrikaans"
 msgstr "Africano"
 
 msgid "Albanian"
 msgstr "Albanese"
+
+#, fuzzy
+msgid "Alternate Language:"
+msgstr "Rileva lingua"
+
+#, fuzzy
+msgid "Alternative language the source text can be translated into."
+msgstr "Questa è la lingua in cui verrà tradotto il testo di partenza."
 
 msgid "Arabic"
 msgstr "Arabo"
@@ -49,6 +63,9 @@ msgstr "Cache cancellata"
 msgid "Cache timeout hours (0 == while valid):"
 msgstr "Ore timeout cache (0 == mentre è valido):"
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Catalan"
 msgstr "Catalano"
 
@@ -57,6 +74,9 @@ msgstr "Cebuano"
 
 msgid "Clear cache"
 msgstr "Svuota la cache"
+
+msgid "Close plugin"
+msgstr ""
 
 msgid "Croatian"
 msgstr "Croato"
@@ -76,17 +96,32 @@ msgstr "Rileva lingua"
 msgid "Dutch"
 msgstr "Olandese"
 
+msgid "EPG Translator"
+msgstr ""
+
+msgid "EPG Translator Actions"
+msgstr ""
+
+msgid "EPG Translator Setup - "
+msgstr ""
+
+msgid "EPG Translator version: "
+msgstr ""
+
+msgid "EPGTranslator Actions"
+msgstr ""
+
 msgid "English"
 msgstr "Inglese"
 
 msgid "Estonian"
 msgstr "Estone"
 
+msgid "Event View Actions"
+msgstr ""
+
 msgid "EventViews open translated:"
 msgstr "EventViews open tradotto:"
-
-msgid "Exit"
-msgstr "Esci"
 
 msgid "Filipino"
 msgstr "Filippino"
@@ -111,6 +146,9 @@ msgstr "Creolo haitiano"
 
 msgid "Hide"
 msgstr "Nascondi"
+
+msgid "Hide screen"
+msgstr ""
 
 msgid "Hungarian"
 msgstr "Ungherese"
@@ -151,11 +189,17 @@ msgstr "Malese"
 msgid "Maltese"
 msgstr "Maltese"
 
+msgid "Next EPG event"
+msgstr ""
+
 msgid "No"
 msgstr "No"
 
 msgid "Norwegian"
 msgstr "Norvegese"
+
+msgid "On-line translation"
+msgstr ""
 
 msgid "Persian"
 msgstr "Persiano"
@@ -165,6 +209,9 @@ msgstr "Polacco"
 
 msgid "Portuguese"
 msgstr "Portoghese"
+
+msgid "Previous EPG event"
+msgstr ""
 
 msgid "Refresh EPG"
 msgstr "Aggiorna EPG"
@@ -178,25 +225,28 @@ msgstr "Russo"
 msgid "Save"
 msgstr "Salva"
 
-msgid ""
-"Selct this option to show the source text as well as the translated text in"
-" EPG Translator main screen show."
-msgstr ""
-"Seleziona questa opzione per mostrare il testo sorgente e il testo tradotto"
-" nella schermata principale di EPG Translator."
+#, fuzzy
+msgid "Scroll translated text down"
+msgstr "Traduci testo"
 
-msgid ""
-"Select the source langauge to be translated, or select 'Detect Langauge' and"
-" the translator will attempt to automatically detect the source language."
-msgstr ""
-"Seleziona la lingua di origine da tradurre o seleziona \"Rileva lingua\" e il"
-" traduttore tenterà di rilevare automaticamente la lingua di origine."
+#, fuzzy
+msgid "Scroll translated text up"
+msgstr "Traduci testo"
+
+msgid "Selct this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgstr "Seleziona questa opzione per mostrare il testo sorgente e il testo tradotto nella schermata principale di EPG Translator."
+
+msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
+msgstr "Seleziona la lingua di origine da tradurre o seleziona \"Rileva lingua\" e il traduttore tenterà di rilevare automaticamente la lingua di origine."
 
 msgid "Serbian"
 msgstr "Serbo"
 
 msgid "Show Source EPG:"
 msgstr "Mostra EPG sorgente:"
+
+msgid "Show plugin info"
+msgstr ""
 
 msgid "Show traceback in errors:"
 msgstr "Mostra traceback negli errori:"
@@ -219,31 +269,31 @@ msgstr "Swahili"
 msgid "Swedish"
 msgstr "Svedese"
 
-msgid "TEXT"
-msgstr "TESTO"
-
-msgid ""
-"This is a development feature. On a translation failure, if enabled, extra"
-" debug information will be logged."
+msgid "Text Translator:"
 msgstr ""
-"Questa è una caratteristica di sviluppo. In caso di errore di traduzione, se"
-" abilitato, verranno registrate informazioni di debug aggiuntive."
+
+msgid "Text input"
+msgstr ""
+
+msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
+msgstr "Questa è una caratteristica di sviluppo. In caso di errore di traduzione, se abilitato, verranno registrate informazioni di debug aggiuntive."
 
 msgid "This is the language the source text will be translated into."
 msgstr "Questa è la lingua in cui verrà tradotto il testo di partenza."
 
-msgid "Translate text"
+#, fuzzy
+msgid "Toggle language"
+msgstr "Lingua di origine:"
+
+msgid "Toggle translation"
+msgstr ""
+
+#, fuzzy
+msgid "Translate your EPG"
 msgstr "Traduci testo"
 
-msgid ""
-"Translations are cached to avoid unnecessary re-translation. This is the"
-" number of hours the translation will survive in the cache before deletion."
-" Select '0' for the cache entry to expire once the program has completed."
-msgstr ""
-"Le traduzioni vengono memorizzate nella cache per evitare inutili"
-" ritraduzioni. Questo è il numero di ore in cui la traduzione sopravvive"
-" nella cache prima dell'eliminazione. Seleziona '0' per far scadere la voce"
-" della cache una volta completato il programma."
+msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
+msgstr "Le traduzioni vengono memorizzate nella cache per evitare inutili ritraduzioni. Questo è il numero di ore in cui la traduzione sopravvive nella cache prima dell'eliminazione. Seleziona '0' per far scadere la voce della cache una volta completato il programma."
 
 msgid "Turkish"
 msgstr "Turco"
@@ -261,8 +311,13 @@ msgid "Welsh"
 msgstr "Gallese"
 
 msgid "When an EventView window is opened, start with the translated text."
-msgstr ""
-"Quando viene aperta una finestra EventView, inizia con il testo tradotto."
+msgstr "Quando viene aperta una finestra EventView, inizia con il testo tradotto."
 
 msgid "Yes"
 msgstr "Sì"
+
+msgid "Zap down"
+msgstr ""
+
+msgid "Zap up"
+msgstr ""
