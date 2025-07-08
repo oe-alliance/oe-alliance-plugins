@@ -4,7 +4,7 @@
 # for localized messages
 from . import _
 
-EPGTrans_vers = "3.00-release"
+EPGTrans_vers = "3.01-release"
 
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.config import (config, ConfigSubsection,
@@ -164,7 +164,7 @@ def applySkinVars(skin, dict):
 def transHTMLEnts(text):
     def repl(ent):              # The code for re.sub to run on matches
         res = ent.group(0)      # get the text of the match
-        ent = res[1:-1].lower()  # Strip & and ;
+        ent = res[1:-1].lower() # Strip & and ;
         if re.match(r"#\d+", ent):  # Numeric entity
             res = chr(int(ent[1:]))
         else:
@@ -430,14 +430,16 @@ def EPGdata_translate(title, descr, start, duration, uref):
     r_text = sepline + "\n" + title + "\n" + sepline + "\n" + desc
     t_text = DO_translation(r_text, CfgPlTr.source.getValue(), curr_dest)
 
-# If this doesn't come back starting with sepline, we have an error
+# Check that the first line is a set of "*"s (from sepline)
+# The number of these may differ from that in sepline!
+# That different number will be used for the second separator too.
 #
-    if t_text[:len(sepline)] != sepline:
+    (t_sep, t_rest) = t_text.split("\n", 1)
+    if re.match(r"[^*]", t_sep):  # Something not from sepline
         t_title = _("Translation error")
         t_descr = t_text
     else:
         try:
-            (t_sep, t_rest) = t_text.split("\n", 1)
             (t_title, t_descr) = t_rest.split("\n" + t_sep + "\n", 1)
             if prop != "":
 # prop will contain the "correct" trailing/whitespace
