@@ -197,6 +197,9 @@ msgstr "Norja"
 msgid "On-line translation"
 msgstr "Online-käännös"
 
+msgid "Original"
+msgstr "Alkuperäinen"
+
 msgid "Persian"
 msgstr "Persia"
 
