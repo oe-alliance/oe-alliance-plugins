@@ -164,7 +164,7 @@ def applySkinVars(skin, dict):
 def transHTMLEnts(text):
     def repl(ent):              # The code for re.sub to run on matches
         res = ent.group(0)      # get the text of the match
-        ent = res[1:-1].lower() # Strip & and ;
+        ent = res[1:-1].lower()  # Strip & and ;
         if re.match(r"#\d+", ent):  # Numeric entity
             res = chr(int(ent[1:]))
         else:
