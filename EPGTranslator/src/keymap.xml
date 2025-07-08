@@ -16,9 +16,11 @@
 		<key id="KEY_INFO" mapto="info" flags="m" />
 		<key id="KEY_MENU" mapto="menu" flags="m" />
 		<key id="KEY_BACK" mapto="back" flags="m" />
+                <key id="KEY_PREVIOUS" mapto="back" flags="m" />
 	</map>
 	<map context="EventViewActions">
 		<key id="KEY_TEXT" mapto="text" flags="m" />
 		<key id="KEY_BACK" mapto="back" flags="m" />
+                <key id="KEY_PREVIOUS" mapto="back" flags="m" />
 	</map>
 </keymap>
