@@ -20,7 +20,7 @@ Fixes, mostly to fix the display of Arabic translations.
  o Add a second (alternate) translation language.  You toggle between
    the two translations with the Back button.
 
- o The Help/Info screen is now translated to the defautl Enigma2
+ o The Help/Info screen is now translated to the default Enigma2
    language rather then the translation language.
 
  o Changed the Skin definition to be a single one with a defined
@@ -38,3 +38,10 @@ Fixes, mostly to fix the display of Arabic translations.
  o Cater for Google translate returning fewer *s than sent (sepline).
 
  o Add KEY_PREVIOUS as equivalent of KEY_BACK in keymapping.
+
+3.02-release
+    Help/Info tidy-up
+
+  o Fix the Menu key label to have a black background.
+
+  o Add the (newly added) Back description to helptext.

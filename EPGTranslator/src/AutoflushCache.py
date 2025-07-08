@@ -42,7 +42,7 @@ class AutoflushCache:
 
 # Add a key/val pair with an optional key-specific absolute timeout.
 # This calls flush, whence it gets the current time.
-# Is allowed to ovrwrite an exisiting key.
+# It is allowed to overwrite an exisiting key.
 #
     def add(self, key, val, abs_timeout=0):
         now = self.flush()
