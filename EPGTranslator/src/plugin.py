@@ -433,7 +433,7 @@ def EPGdata_translate(title, descr, start, duration, uref):
 # If this doesn't come back starting with sepline, we have an error
 #
     if t_text[:len(sepline)] != sepline:
-        t_title = "Translation error"
+        t_title = _("Translation error")
         t_descr = t_text
     else:
         try:
