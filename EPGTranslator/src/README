@@ -20,10 +20,13 @@ may set:
 
     o The Source language (the default is "auto")
     o The Destination language (the default is English)
+    o An alternative Destination language.
     o The timeout (in hours) for cached entries (the default is to leave
       them in place until they would drop out of the EPG)
     o Whether to show the original description along with the
       translation
+    o Back - to toggle between the main and alternative translations
+    o OK - to enter text for translating
 
 When the plugin's programme description screen is active you may also
 press
@@ -38,5 +41,6 @@ those arrived at by pressing the Info key (or equivalent) when watching
 a programme or in the Grid, Single and Multi EPG (it does not work from
 the InfoBar EPG). This can only see the Now + Next programmes.
 Here you may toggle between original and translated text by using the
-Text key
+Text key and between the main and alternative translations with the
+Back key.
 Each new view starts in non-translating mode.

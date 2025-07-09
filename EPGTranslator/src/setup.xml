@@ -1,6 +1,6 @@
 <setupxml>
 	<setup key="TranslatorConfig" showOpenWebIF="1" title="EPG Translator Setup">
-		<item level="0" text="Source Language:" description="Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language.">config.plugins.translator.source</item>
+		<item level="0" text="Source Language:" description="Select the source language to be translated, or select 'Detect Language' and the translator will attempt to automatically detect the source language.">config.plugins.translator.source</item>
 		<item level="0" text="Destination Language:" description="This is the language the source text will be translated into.">config.plugins.translator.destination</item>
 		<item level="0" text="Alternate Language:" description="Alternative language the source text can be translated into.">config.plugins.translator.alternate</item>
 		<item level="0" text="EventViews open translated:" description="When an EventView window is opened, start with the translated text.">config.plugins.translator.start_EV_trans</item>
