@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-08 01:36+0100\n"
+"POT-Creation-Date: 2025-07-09 08:57+0100\n"
 "PO-Revision-Date: 2021-03-02 11:48+0100\n"
 "Last-Translator: Rob van der Does <RobvanderDoes@Gmail.com>\n"
 "Language-Team: none\n"
@@ -62,9 +62,6 @@ msgstr "Cache leeggemaakt"
 msgid "Cache timeout hours (0 == while valid):"
 msgstr "Cache timeout uren (0 == indien geldig):"
 
-msgid "Cancel"
-msgstr ""
-
 msgid "Catalan"
 msgstr ""
 
@@ -99,6 +96,9 @@ msgid "EPG Translator"
 msgstr ""
 
 msgid "EPG Translator Actions"
+msgstr ""
+
+msgid "EPG Translator Setup"
 msgstr ""
 
 msgid "EPG Translator Setup - "
@@ -200,6 +200,9 @@ msgstr ""
 msgid "On-line translation"
 msgstr ""
 
+msgid "Original"
+msgstr ""
+
 msgid "Persian"
 msgstr ""
 
@@ -221,9 +224,6 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-msgid "Save"
-msgstr "Sla op"
-
 #, fuzzy
 msgid "Scroll translated text down"
 msgstr "Vertaal tekst"
@@ -232,11 +232,12 @@ msgstr "Vertaal tekst"
 msgid "Scroll translated text up"
 msgstr "Vertaal tekst"
 
+#, fuzzy
+msgid "Select the source language to be translated, or select 'Detect Language' and the translator will attempt to automatically detect the source language."
+msgstr "Kies de te vertalen brontaal of kies \"Detecteer taal\" waarmee de translator zal proberen de brontaal automatisch te vinden."
+
 msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr "Kies deze optie om zowel de brontaal als de doeltaal in het hoofdscherm van EPG translator te laten zien."
-
-msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
-msgstr "Kies de te vertalen brontaal of kies \"Detecteer taal\" waarmee de translator zal proberen de brontaal automatisch te vinden."
 
 msgid "Serbian"
 msgstr ""
@@ -289,6 +290,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Translate your EPG"
+msgstr "Vertaal tekst"
+
+#, fuzzy
+msgid "Translation error"
 msgstr "Vertaal tekst"
 
 msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."

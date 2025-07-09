@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-08 01:36+0100\n"
+"POT-Creation-Date: 2025-07-09 08:57+0100\n"
 "PO-Revision-Date: 2025-07-08 10:53+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Orlandox\n"
@@ -59,9 +59,6 @@ msgstr "Välimuisti tyhjennetty"
 msgid "Cache timeout hours (0 == while valid):"
 msgstr "Välimuistin aikakatkaisun tunnit (0 == voimassaoloaikana):"
 
-msgid "Cancel"
-msgstr "Peruuta"
-
 msgid "Catalan"
 msgstr "Katalaani"
 
@@ -97,6 +94,10 @@ msgstr "EPG:n kielenkääntäjä"
 
 msgid "EPG Translator Actions"
 msgstr "EPG:n kielenkääntäjän toiminnot"
+
+#, fuzzy
+msgid "EPG Translator Setup"
+msgstr "EPG:n kielenkääntäjän asetukset - "
 
 msgid "EPG Translator Setup - "
 msgstr "EPG:n kielenkääntäjän asetukset - "
@@ -221,20 +222,18 @@ msgstr "Romania"
 msgid "Russian"
 msgstr "Venäjä"
 
-msgid "Save"
-msgstr "Tallenna"
-
 msgid "Scroll translated text down"
 msgstr "Vieritä käännettyä tekstiä alaspäin"
 
 msgid "Scroll translated text up"
 msgstr "Vieritä käännettyä tekstiä ylöspäin"
 
+#, fuzzy
+msgid "Select the source language to be translated, or select 'Detect Language' and the translator will attempt to automatically detect the source language."
+msgstr "Valitse käännettävä lähdekieli tai valitse 'Tunnista kieli', jolloin kielenkääntäjä yrittää tunnistaa lähdekielen automaattisesti."
+
 msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr "Valitse tämä vaihtoehto, jos haluat näyttää sekä lähdetekstin että käännetyn tekstin EPG:n kielenkääntäjän päänäytössä."
-
-msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
-msgstr "Valitse käännettävä lähdekieli tai valitse 'Tunnista kieli', jolloin kielenkääntäjä yrittää tunnistaa lähdekielen automaattisesti."
 
 msgid "Serbian"
 msgstr "Serbia"

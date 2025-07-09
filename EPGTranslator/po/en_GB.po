@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: enigma2-oe-alliance-plugins 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-08 01:36+0100\n"
+"POT-Creation-Date: 2025-07-09 08:57+0100\n"
 "PO-Revision-Date: 2017-07-04 16:35+0200\n"
 "Last-Translator: neoatomic <neoatomic@users.noreply.github.com>\n"
 "Language-Team: none\n"
@@ -62,9 +62,6 @@ msgstr ""
 msgid "Cache timeout hours (0 == while valid):"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
 msgid "Catalan"
 msgstr ""
 
@@ -99,6 +96,9 @@ msgid "EPG Translator"
 msgstr ""
 
 msgid "EPG Translator Actions"
+msgstr ""
+
+msgid "EPG Translator Setup"
 msgstr ""
 
 msgid "EPG Translator Setup - "
@@ -200,6 +200,9 @@ msgstr ""
 msgid "On-line translation"
 msgstr ""
 
+msgid "Original"
+msgstr ""
+
 msgid "Persian"
 msgstr ""
 
@@ -221,19 +224,16 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-msgid "Save"
-msgstr ""
-
 msgid "Scroll translated text down"
 msgstr ""
 
 msgid "Scroll translated text up"
 msgstr ""
 
-msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgid "Select the source language to be translated, or select 'Detect Language' and the translator will attempt to automatically detect the source language."
 msgstr ""
 
-msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
+msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr ""
 
 msgid "Serbian"
@@ -285,6 +285,9 @@ msgid "Toggle translation"
 msgstr ""
 
 msgid "Translate your EPG"
+msgstr ""
+
+msgid "Translation error"
 msgstr ""
 
 msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-08 01:36+0100\n"
+"POT-Creation-Date: 2025-07-09 08:57+0100\n"
 "PO-Revision-Date: 2022-11-04 08:14+0100\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <>\n"
@@ -63,9 +63,6 @@ msgstr "Cache cancellata"
 msgid "Cache timeout hours (0 == while valid):"
 msgstr "Ore timeout cache (0 == mentre è valido):"
 
-msgid "Cancel"
-msgstr ""
-
 msgid "Catalan"
 msgstr "Catalano"
 
@@ -100,6 +97,9 @@ msgid "EPG Translator"
 msgstr ""
 
 msgid "EPG Translator Actions"
+msgstr ""
+
+msgid "EPG Translator Setup"
 msgstr ""
 
 msgid "EPG Translator Setup - "
@@ -201,6 +201,9 @@ msgstr "Norvegese"
 msgid "On-line translation"
 msgstr ""
 
+msgid "Original"
+msgstr ""
+
 msgid "Persian"
 msgstr "Persiano"
 
@@ -222,9 +225,6 @@ msgstr "Rumeno"
 msgid "Russian"
 msgstr "Russo"
 
-msgid "Save"
-msgstr "Salva"
-
 #, fuzzy
 msgid "Scroll translated text down"
 msgstr "Traduci testo"
@@ -233,11 +233,12 @@ msgstr "Traduci testo"
 msgid "Scroll translated text up"
 msgstr "Traduci testo"
 
+#, fuzzy
+msgid "Select the source language to be translated, or select 'Detect Language' and the translator will attempt to automatically detect the source language."
+msgstr "Seleziona la lingua di origine da tradurre o seleziona \"Rileva lingua\" e il traduttore tenterà di rilevare automaticamente la lingua di origine."
+
 msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr "Seleziona questa opzione per mostrare il testo sorgente e il testo tradotto nella schermata principale di EPG Translator."
-
-msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
-msgstr "Seleziona la lingua di origine da tradurre o seleziona \"Rileva lingua\" e il traduttore tenterà di rilevare automaticamente la lingua di origine."
 
 msgid "Serbian"
 msgstr "Serbo"
@@ -290,6 +291,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Translate your EPG"
+msgstr "Traduci testo"
+
+#, fuzzy
+msgid "Translation error"
 msgstr "Traduci testo"
 
 msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."

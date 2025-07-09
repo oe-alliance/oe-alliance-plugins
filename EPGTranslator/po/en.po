@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-08 01:36+0100\n"
+"POT-Creation-Date: 2025-07-09 08:57+0100\n"
 "PO-Revision-Date: 2021-02-17 00:23+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -60,9 +60,6 @@ msgstr "Cache cleared"
 msgid "Cache timeout hours (0 == while valid):"
 msgstr "Cache timeout hours (0 == while valid):"
 
-msgid "Cancel"
-msgstr ""
-
 msgid "Catalan"
 msgstr "Catalan"
 
@@ -97,6 +94,9 @@ msgid "EPG Translator"
 msgstr ""
 
 msgid "EPG Translator Actions"
+msgstr ""
+
+msgid "EPG Translator Setup"
 msgstr ""
 
 msgid "EPG Translator Setup - "
@@ -198,6 +198,9 @@ msgstr "Norwegian"
 msgid "On-line translation"
 msgstr ""
 
+msgid "Original"
+msgstr ""
+
 msgid "Persian"
 msgstr "Persian"
 
@@ -219,9 +222,6 @@ msgstr "Romanian"
 msgid "Russian"
 msgstr "Russian"
 
-msgid "Save"
-msgstr "Save"
-
 #, fuzzy
 msgid "Scroll translated text down"
 msgstr "Translate text"
@@ -230,10 +230,10 @@ msgstr "Translate text"
 msgid "Scroll translated text up"
 msgstr "Translate text"
 
-msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgid "Select the source language to be translated, or select 'Detect Language' and the translator will attempt to automatically detect the source language."
 msgstr ""
 
-msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
+msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
 msgstr ""
 
 msgid "Serbian"
@@ -287,6 +287,10 @@ msgstr ""
 
 #, fuzzy
 msgid "Translate your EPG"
+msgstr "Translate text"
+
+#, fuzzy
+msgid "Translation error"
 msgstr "Translate text"
 
 msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."

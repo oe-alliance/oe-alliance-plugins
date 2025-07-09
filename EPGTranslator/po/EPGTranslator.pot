@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-08 01:36+0100\n"
+"POT-Creation-Date: 2025-07-09 08:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,12 +27,6 @@ msgid "Afrikaans"
 msgstr ""
 
 msgid "Albanian"
-msgstr ""
-
-msgid "Alternate Language:"
-msgstr ""
-
-msgid "Alternative language the source text can be translated into."
 msgstr ""
 
 msgid "Arabic"
@@ -56,12 +50,6 @@ msgstr ""
 msgid "Cache cleared"
 msgstr ""
 
-msgid "Cache timeout hours (0 == while valid):"
-msgstr ""
-
-msgid "Cancel"
-msgstr ""
-
 msgid "Catalan"
 msgstr ""
 
@@ -81,9 +69,6 @@ msgid "Czech"
 msgstr ""
 
 msgid "Danish"
-msgstr ""
-
-msgid "Destination Language:"
 msgstr ""
 
 msgid "Detect Language"
@@ -108,9 +93,6 @@ msgid "English"
 msgstr ""
 
 msgid "Estonian"
-msgstr ""
-
-msgid "EventViews open translated:"
 msgstr ""
 
 msgid "Filipino"
@@ -191,6 +173,9 @@ msgstr ""
 msgid "On-line translation"
 msgstr ""
 
+msgid "Original"
+msgstr ""
+
 msgid "Persian"
 msgstr ""
 
@@ -212,40 +197,22 @@ msgstr ""
 msgid "Russian"
 msgstr ""
 
-msgid "Save"
-msgstr ""
-
 msgid "Scroll translated text down"
 msgstr ""
 
 msgid "Scroll translated text up"
 msgstr ""
 
-msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
-msgstr ""
-
-msgid "Select the source langauge to be translated, or select 'Detect Langauge' and the translator will attempt to automatically detect the source language."
-msgstr ""
-
 msgid "Serbian"
 msgstr ""
 
-msgid "Show Source EPG:"
-msgstr ""
-
 msgid "Show plugin info"
-msgstr ""
-
-msgid "Show traceback in errors:"
 msgstr ""
 
 msgid "Slovak"
 msgstr ""
 
 msgid "Slovenian"
-msgstr ""
-
-msgid "Source Language:"
 msgstr ""
 
 msgid "Spanish"
@@ -263,12 +230,6 @@ msgstr ""
 msgid "Text input"
 msgstr ""
 
-msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
-msgstr ""
-
-msgid "This is the language the source text will be translated into."
-msgstr ""
-
 msgid "Toggle language"
 msgstr ""
 
@@ -278,7 +239,7 @@ msgstr ""
 msgid "Translate your EPG"
 msgstr ""
 
-msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
+msgid "Translation error"
 msgstr ""
 
 msgid "Turkish"
@@ -296,9 +257,6 @@ msgstr ""
 msgid "Welsh"
 msgstr ""
 
-msgid "When an EventView window is opened, start with the translated text."
-msgstr ""
-
 msgid "Yes"
 msgstr ""
 
@@ -312,4 +270,49 @@ msgid "EPGTranslator Actions"
 msgstr ""
 
 msgid "Event View Actions"
+msgstr ""
+
+msgid "Alternate Language:"
+msgstr ""
+
+msgid "Alternative language the source text can be translated into."
+msgstr ""
+
+msgid "Cache timeout hours (0 == while valid):"
+msgstr ""
+
+msgid "Destination Language:"
+msgstr ""
+
+msgid "EPG Translator Setup"
+msgstr ""
+
+msgid "EventViews open translated:"
+msgstr ""
+
+msgid "Select the source language to be translated, or select 'Detect Language' and the translator will attempt to automatically detect the source language."
+msgstr ""
+
+msgid "Select this option to show the source text as well as the translated text in EPG Translator main screen show."
+msgstr ""
+
+msgid "Show Source EPG:"
+msgstr ""
+
+msgid "Show traceback in errors:"
+msgstr ""
+
+msgid "Source Language:"
+msgstr ""
+
+msgid "This is a development feature. On a translation failure, if enabled, extra debug information will be logged."
+msgstr ""
+
+msgid "This is the language the source text will be translated into."
+msgstr ""
+
+msgid "Translations are cached to avoid unnecessary re-translation. This is the number of hours the translation will survive in the cache before deletion. Select '0' for the cache entry to expire once the program has completed."
+msgstr ""
+
+msgid "When an EventView window is opened, start with the translated text."
 msgstr ""
