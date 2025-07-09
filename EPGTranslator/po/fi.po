@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-07-09 08:57+0100\n"
-"PO-Revision-Date: 2025-07-08 10:53+0300\n"
+"PO-Revision-Date: 2025-07-09 17:02+0300\n"
 "Last-Translator: Orlandox\n"
 "Language-Team: Orlandox\n"
 "Language: fi\n"
@@ -95,9 +95,8 @@ msgstr "EPG:n kielenkääntäjä"
 msgid "EPG Translator Actions"
 msgstr "EPG:n kielenkääntäjän toiminnot"
 
-#, fuzzy
 msgid "EPG Translator Setup"
-msgstr "EPG:n kielenkääntäjän asetukset - "
+msgstr "EPG:n kielenkääntäjän asetukset"
 
 msgid "EPG Translator Setup - "
 msgstr "EPG:n kielenkääntäjän asetukset - "
@@ -228,7 +227,6 @@ msgstr "Vieritä käännettyä tekstiä alaspäin"
 msgid "Scroll translated text up"
 msgstr "Vieritä käännettyä tekstiä ylöspäin"
 
-#, fuzzy
 msgid "Select the source language to be translated, or select 'Detect Language' and the translator will attempt to automatically detect the source language."
 msgstr "Valitse käännettävä lähdekieli tai valitse 'Tunnista kieli', jolloin kielenkääntäjä yrittää tunnistaa lähdekielen automaattisesti."
 
