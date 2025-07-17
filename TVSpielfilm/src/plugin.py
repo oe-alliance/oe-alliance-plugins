@@ -810,8 +810,7 @@ class TVfullscreen(TVscreenHelper, Screen):
 
 	def keyGreen(self):
 		startTs, endTs = self.splitTimespan(self.timeStartEnd.split(" - "), self.timeStartDt)  #  e.g. '20:15 - 21:45' or 'heute | 20:15'
-		hasTimer = self.isAlreadyListed((startTs, endTs), self.currServiceRef)  # timeSpan, sref
-		if not hasTimer:
+		if not self.isAlreadyListed((startTs, endTs), self.currServiceRef):  # timeSpan, sref
 			startTs -= int(config.recording.margin_before.value) * 60
 			endTs += int(config.recording.margin_after.value) * 60
 			data = (startTs, endTs, self.assetTitle, self.subLine, None)
@@ -1423,11 +1422,10 @@ class TVoverview(TVscreenHelper, Screen):
 				startTs, endTs = self.splitTimespan(skinlist[3].split(" - "), datetime.today() + timedelta(days=self.currDayDelta + 1))  #  e.g. '00:15 - 01:45', but next day
 			else:
 				startTs, endTs = self.splitTimespan(skinlist[3].split(" - "), datetime.today() + timedelta(days=self.currDayDelta))  #  e.g. '20:15 - 21:45' or 'heute | 20:15'
-			hasTimer = self.isAlreadyListed((startTs, endTs), skinlist[12])
-			if not hasTimer:
+			if not self.isAlreadyListed((startTs, endTs), skinlist[13]):  # timeSpan, sref
 				title = skinlist[5]
 				shortdesc = skinlist[6]
-				serviceRef = ServiceReference(skinlist[12])
+				serviceRef = ServiceReference(skinlist[13])
 				startTs -= int(config.recording.margin_before.value) * 60
 				endTs += int(config.recording.margin_after.value) * 60
 				data = (startTs, endTs, title, shortdesc, None)
