@@ -25,6 +25,7 @@ from sys import exit, argv
 class TVSparserGlobals():
 	MODULE_NAME = __name__.split(".")[-1]
 	WEBURL = bytes.fromhex("687474703a2f2f7777772e7476737069656c66696c6d2e64653"[:-1]).decode()
+	MWEBURL = bytes.fromhex("68747470733a2f2f6d2e7476737069656c66696c6d2e64653"[:-1]).decode()
 	USERAGENT = choice([
 			"Mozilla/5.0 (Windows NT 11.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0",
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36 Edg/129.0.2792.65",
@@ -96,7 +97,7 @@ class TVSparserTips():
 				timeInfos += f" | {intros[1]} Uhr" if len(intros) > 1 else ""
 				rating = tvsphelper.searchOneValue(r'<div class=\"tips-teaser__bottom__top-rating-text\">(.*?)</div>', entry, "").lower()
 				# 'TOP BEWERTET': Highlights, wenn sie von der TVSpielfilm-Redaktion einen 'Daumen hoch'und eine IMDb-Bewertung von über 7,0 erhalten haben.
-				isTipOfTheDay, thumbIdNumeric, imdbRating = (True, 2, "TOP") if "top bewertet" in rating else (False, -1, "")
+				isTip, thumbIdNumeric, imdbRating = (True, 2, "TOP") if "top bewertet" in rating else (False, -1, "")
 				new = tvsphelper.searchOneValue(r'<div class=\"tips-teaser__bottom__new-text\">(.*?)</div>', entry, "").lower()
 				isNew = True if "neu" in new else False
 				isTopTip = False  # none of them
@@ -106,7 +107,7 @@ class TVSparserTips():
 				# not supported/used for the moment: timeEndTs, countryYear, titleLength, imdbRating, fskText, conclusion, fsk
 				tipsDicts.append({"tipId": tipId, "channelName": channelName, "channelId": channelId, "timeStart": timeStartTs,
 								"timeInfos": timeInfos, "title": title, "genre": genre, "category": category,
-								"imdbRating": imdbRating, "isTopTip": isTopTip, "isTipOfTheDay": isTipOfTheDay, "isNew": isNew,
+								"imdbRating": imdbRating, "isTopTip": isTopTip, "isTip": isTip, "isNew": isNew,
 								"thumbIdNumeric": thumbIdNumeric, "imgUrl": imgUrl, "assetUrl": assetUrl})
 		if callback:
 			if passthrough:
@@ -162,76 +163,71 @@ class TVSparserAssets():
 	def getChannelAssets(self, channelIds=[], dateStr=None, timeCode=None):
 		pagesList = []
 		for channelId in channelIds:
-			errmsg, pageAssets, lastPage = self.parseChannelPage(channelId, dateStr=dateStr, timeCode=timeCode)
+			errmsg, assetsDicts = self.parseChannelPage(channelId, dateStr=dateStr, timeCode=timeCode)
 			if errmsg:
-				print(f"Error when parsing page #1 of channel '{channelId}': {errmsg}")
+				print(f"Error when parsing channel '{channelId}': {errmsg}")
 			else:
-				print(f"Succesfully parsed page #1 of channel '{channelId}'")
-				pagesList += pageAssets
+				print(f"Succesfully parsed channel '{channelId}'")
+				pagesList += assetsDicts
 		return pagesList
 
-	def parseChannelPage(self, channelId, dateStr=None, timeCode=None, page=1, order=None, tips=None, categories=[]):
-		url = f"{tvspglobals.WEBURL}{bytes.fromhex('2f74762d70726f6772616d6d2f73656e64756e67656e2f1'[:-1]).decode()}"
-		if timeCode == "0" and dateStr:  # if timespanStart = '00:00' -> use yesterday (server philosophy)
-			dateStr = (datetime.fromisoformat(dateStr) + timedelta(days=-1)).strftime("%F")
-		params = {
-				"page": page,  # 1 | 2 | ...
-				"filter": 1 if categories else None,  # None = all filters active |'1' = selected filters
-				"order": order,  # sort order 'time' or 'channel', ('time' is default)
-				"date": dateStr or datetime.today().strftime("%F"),  # e.g. '2025-05-18'
-				"tips": tips,  # '1' = load tips only, ('None' is default)
-				"cat[]": [self.catFilters.get(catFilter) for catFilter in categories],   # e.g. ["Spielfilm", "Report"] -> ['SP', 'RE']
-				"time": timeCode or "prime",  # for details see dict {self.spanSets}
-				"channel": channelId  # e.g. 'ARD' for 'Das Erste'
-				}
-		errmsg, htmldata = tvsphelper.getHTMLdata(url, params)
-		if errmsg:
-			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserAssets:parseChannelPage': {errmsg}")
-			return errmsg, [], 0
-		pageAssets = []
-		pagination = tvsphelper.searchOneValue(r'<ul class="pagination__items">(.*?)</ul>', htmldata, "", flags=S)
-		lastPage = len(findall(r'href="(.*?)"', pagination, S))
-		extract = htmldata[htmldata.find(r'<table class="info-table">'):htmldata.find('<ul class="pagination__items">')]
-		for entry in findall(r'<tr class="hover">(.*?)</tr>', extract, S):
-			title = unescape(tvsphelper.searchOneValue(r'<strong>(.*?)</strong>\s*</a>', entry, ""))
-			if not title:  # alternative search
-				title = unescape(tvsphelper.searchOneValue(r'<div class="programm-listing-livetv">\s*<a title="(.*?)"', entry, "", flags=S))
-			col3block = tvsphelper.searchOneValue(r'<td class="col-3">(.*?)</td>', entry, "", flags=S)
-			spanblock = tvsphelper.searchOneValue(r'<span>\s*<a href=(.*?)\s*</span>', col3block, "", flags=S)
-			assetUrl, countryYear = "", ""
-			if spanblock:
-				spanblock = f"<a href={spanblock}"
-				assetUrl = tvsphelper.searchOneValue(r'<a href="(.*?)"', spanblock, "")
-				longtitles = tvsphelper.searchOneValue(r'title="(.*)" ', spanblock, "").split(", ")
-				countryYear = longtitles[-1] if len(longtitles) > 1 else ""
-			datastr = tvsphelper.searchOneValue(r"data-tracking-point=(.*?) data-tracking-datalayer", col3block, "").strip("'")
-			col3json = loads(datastr)
-			channelName = tvsphelper.searchOneValue(r'title="(.*?) Programm"', entry, "")
-			fsk = tvsphelper.searchOneValue(r'<td class="col-5">.*?<em>ab (.*?) Jahren</em>', entry, "", flags=S).strip()
-			fsk = int(fsk) if fsk.isdigit() else -1
-			thumbIdnumeric = tvsphelper.searchOneValue(r'class="editorial-rating small(.*?)"', entry, "0")
-			thumbIdnumeric = int(thumbIdnumeric) if thumbIdnumeric.isdigit() else 0
-			timeStartTs = tvsphelper.searchOneValue(r'data-rel-start="(.*?)"', entry, "")
-			timeStartTs = int(timeStartTs) if timeStartTs.isdigit() else 0
-			timeEndTs = tvsphelper.searchOneValue(r'data-rel-end="(.*?)"', entry, "")
-			timeEndTs = int(timeEndTs) if timeEndTs.isdigit() else 0
-			assetDict = {}
-			assetDict["title"] = title
-			assetDict["genre"] = col3json.get("category1", "")  # e.g. 'Katastrophenaction'
-			assetDict["category"] = col3json.get("genre", "")  # e.g. 'SP' for 'Spielfilm'
-			assetDict["countryYear"] = countryYear
-			assetDict["thumbIdNumeric"] = thumbIdnumeric
-			assetDict["isTopTip"] = False  # not supported for the moment
-			assetDict["isTipOfTheDay"] = True if col3json.get("tipp", 0) == 1 else False
-			assetDict["isNew"] = False  # not supported for the moment
-			assetDict["fsk"] = fsk
-			assetDict["channelId"] = col3json.get("channel", "").lower()
-			assetDict["channelName"] = channelName
-			assetDict["timeStart"] = f"{datetime.fromtimestamp(timeStartTs).isoformat()}+00:00"
-			assetDict["timeEnd"] = f"{datetime.fromtimestamp(timeEndTs).isoformat()}+00:00"
-			assetDict["assetUrl"] = assetUrl
-			pageAssets.append(assetDict)
-		return errmsg, pageAssets, lastPage
+	def parseChannelPage(self, channelId, dateStr=None, timeCode=None, offset=0, order=None, tips=None, categories=[]):
+		url = f"{tvspglobals.MWEBURL}{bytes.fromhex('2f73756368652e68746d6c1'[:-1]).decode()}"
+		if dateStr:
+			dateDt = datetime.fromisoformat(dateStr)
+		else:  # fallback to today
+			dateDt = datetime.today()
+			dateStr = dateDt.strftime("%F")
+		if timeCode == "0":  # if timespanStart = '00:00' -> use day before (server philosophy)
+			dateStr = (dateDt + timedelta(days=-1)).strftime("%F")
+		assetsDicts = []
+		while True:
+			params = {
+					"offset": offset,  # offset=20 means: next 20 assets
+					"filter": 1 if categories else None,  # None = all filters active |'1' = selected filters
+					"order": order,  # sort order 'time' or 'channel', ('time' is default)
+					"date": dateStr,  # e.g. '2025-05-18'
+					"tips": tips,  # '1' = load tips only, ('None' is default)
+					"cat[]": [self.catFilters.get(catFilter) for catFilter in categories],   # e.g. ["Spielfilm", "Report"] -> ['SP', 'RE']
+					"time": timeCode or "prime",  # for details see dict {self.spanSets}
+					"channel": channelId  # e.g. 'ARD' for 'Das Erste'
+					}
+			errmsg, htmldata = tvsphelper.getHTMLdata(url, params)
+			if errmsg:
+				print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserAssets:parseChannelPage': {errmsg}")
+				return errmsg, []
+			extract = htmldata[htmldata.find('<div class="row component tv-tip-list">'):htmldata.find('<div class="row component category-select">')]
+			for entry in findall(r'<li class="tv-tip time-listing js-tv-show"(.*?)</li>', extract, S):
+				assetDict = {}
+				assetDict["id"] = tvsphelper.searchOneValue(r'data-id="(.*?)"', entry, "")
+				assetDict["title"] = unescape(tvsphelper.searchOneValue(r'<span class="title">(.*?)</span>', entry, ""))
+				genretime = tvsphelper.searchOneValue(r'<span class="genre-time">(.*?)</span>', entry, "").split(" | ")
+				assetDict["countryYear"] = genretime[0].upper()  # e.g. 'SP' for 'Spielfilm'
+				assetDict["genre"] = genretime[1] if len(genretime) > 1 else ""  # e.g. 'Katastrophenaction'
+				itholder = tvsphelper.searchOneValue(r'<div class="image-text-holder">(.*?)</a>', entry, "", flags=S)
+				pageElement = tvsphelper.searchOneValue(r'"pageElementCreative":"(.*?)"', itholder, "").split("|")  # "the-big-bang-theory|pro7|se|daumen-hoch|sitcom|komoedie|0|0"
+				channelId = pageElement[1].lower()
+				assetDict["category"] = pageElement[2].upper()
+				thumbIdnumeric = tvsphelper.searchOneValue(r'<span class="listing-icon rating-(.*?)"></span>', itholder, "0")
+				assetDict["thumbIdNumeric"] = int(thumbIdnumeric) if thumbIdnumeric.isdigit() else -1
+#				assetDict["isTopTip"] = False  # not supported for the moment
+				assetDict["isTip"] = itholder.find('<span class="add-info icon-tip">TIPP</span>') > -1
+				assetDict["isNew"] = itholder.find('<span class="add-info icon-new">NEU</span>') > -1
+				assetDict["isLive"] = itholder.find('<span class="add-info icon-tip">Live</span>') > -1
+				assetDict["channelId"] = channelId
+				assetDict["channelName"] = tvsphelper.searchOneValue(r'<span class="c">(.*?)</span>', itholder, "")
+				timeStartStr = tvsphelper.searchOneValue(r'data-start-time="(.*?)"', entry, "")
+				timeStartTs = int(timeStartStr) if timeStartStr.isdigit() else 0
+				timeEndStr = tvsphelper.searchOneValue(r'data-end-time="(.*?)"', entry, "")
+				timeEndTs = int(timeEndStr) if timeEndStr.isdigit() else 0
+				assetDict["timeStart"] = f"{datetime.fromtimestamp(timeStartTs).isoformat()}+00:00"
+				assetDict["timeEnd"] = f"{datetime.fromtimestamp(timeEndTs).isoformat()}+00:00"
+				assetDict["assetUrl"] = tvsphelper.searchOneValue(r'<div class="image-text-holder">\s*<a href="(.*?)"', entry, "", flags=S).replace("https://m.", "https://")
+				assetsDicts.append(assetDict)
+			if extract.find('<span>Weitere Sendungen</span>') == -1:
+				break
+			offset += 20
+		return errmsg, assetsDicts
 
 	def parseSingleAsset(self, assetUrl):
 		errmsg, htmldata = tvsphelper.getHTMLdata(assetUrl)
@@ -316,11 +312,12 @@ class TVSparserAssets():
 		thumbIdnumeric = tvsphelper.searchOneValue(r'<div class="content-rating__rating-genre__thumb rating-(.*?)"></div>', extract, "0")
 		thumbIdnumeric = int(thumbIdnumeric) if thumbIdnumeric.isdigit() else 0
 		isTopTip = "TOP BEWERTET" in tvsphelper.searchOneValue(r'<div class="content-rating__top-rated">(.*?)</div>', extract, "").upper()
-		isTipOfTheDay, isNew = False, False
+		isTip, isNew, isLive = False, False, False
 		addinfo = tvsphelper.searchOneValue(r'<ul class="set-list">(.*?)</ul>', extract, "")
 		for info in findall(r'<span class="add-info icon-tip nodistance">(.*?)</span>', addinfo):
-			isTipOfTheDay = True if not isTipOfTheDay and "TIPP" in info else isTipOfTheDay
+			isTip = True if not isTip and "TIPP" in info else isTip
 			isNew = True if not isNew and "NEU" in info else isNew
+			isLive = True if not isLive and "LIVE" in info else isLive
 		ratingblock = tvsphelper.searchOneValue(r'<ul class="content-rating__rating-genre__list">(.*?)</ul>', extract, "", flags=S)
 		ratingblock = findall(r'<li class="content-rating__rating-genre__list-item">(.*?)</li>', ratingblock, flags=S)
 		ratingdict = {}
@@ -344,8 +341,9 @@ class TVSparserAssets():
 		assetDict["conclusion"] = conclusion
 		assetDict["thumbIdNumeric"] = thumbIdnumeric
 		assetDict["isTopTip"] = isTopTip
-		assetDict["isTipOfTheDay"] = isTipOfTheDay
+		assetDict["isTip"] = isTip
 		assetDict["isNew"] = isNew
+		assetDict["isLive"] = isLive
 		assetDict.update(ratingdict)
 		assetDict["imdbRating"] = imdbRating
 		assetDict.update(crewdict)
@@ -390,12 +388,12 @@ def main(argv):  # shell interface
 			"-j, --json <filename>\tFile output formatted in JSON\n")
 			exit()
 		elif opt in ("-a", "--assetslist"):
-			jsonList = tvspassets.getChannelAssets(["ARD", "ZDF", "WDR", "RTL"])
+			jsonList = tvspassets.getChannelAssets(["ZDF"], dateStr="2025-07-13", timeCode="day")
 		elif opt in ("-c", "--channellist"):
 			jsonList = tvspchannels.parseChannels()
 		elif opt in ("-j", "--json"):
 			filename = arg
-		elif opt in ("-s", "--assetslist"):
+		elif opt in ("-s", "--single"):
 			errmsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/citizen-sleuth-die-podcast-detektivin,68416ef34d62107df4f47a79.html")
 		elif opt in ("-t", "--tipslist"):
 			jsonList = tvsptips.parseTips()
