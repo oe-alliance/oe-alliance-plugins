@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r26"
+Version = "V5.0-r27"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -233,8 +233,8 @@ OSDtimer = -5
 OSDdontshow = ["LCD4linux Settings", "Virtual Zap", "InfoBar", "Infobar", "SecondInfoBar", "FanControl2", "Mute", "LCD Text", "UnhandledKey", "QuickZap", "Volume", "PVRState"]
 OSDdontskin = ["LCDdisplayFile", "VirtualZap", "InfoBar", "Infobar", "InfoBarSummary", "PictureInPicture", "SimpleSummary", "ScreenSummary", "TimeshiftState", "InfoScreen", "Standby", "EMCMediaCenter", "InfoBarMoviePlayerSummary", "PVRState", "ResolutionLabel", "WidgetBackground", "camodogFSScreen2", "camodogFSmini"]
 wwwWetter = ["", ""]
-WetterType = ["", ""]
-WetterZoom = [0, 0]
+WetterType = ""
+WetterZoom = 0
 OldTemp_c = -88
 OldFeel = -88
 OldHum = -88
@@ -1749,7 +1749,7 @@ LCD4linux.MPText2BackColor = ConfigSelection(choices=[("0", _("off"))] + Farbe, 
 LCD4linux.MPCover = ConfigSelection(choices=ScreenSelect, default="0")
 LCD4linux.MPCoverLCD = ConfigSelection(choices=LCDSelect, default="1")
 LCD4linux.MPCoverPath1 = ConfigText(default="/tmp", fixed_size=False, visible_width=50)
-LCD4linux.MPCoverPath2 = ConfigText(default="/tmp", fixed_size=False, visible_width=50)
+LCD4linux.MPCoverPath2 = ConfigText(default="/media/hdd/movie/", fixed_size=False, visible_width=50)
 LCD4linux.MPCoverFile = ConfigText(default="/tmp/lcd4linux.jpg", fixed_size=False, visible_width=50)
 LCD4linux.MPCoverFile2 = ConfigText(default="/tmp/lcd4linux.jpg", fixed_size=False, visible_width=50)
 LCD4linux.MPCoverSize = ConfigSlider(default=240, increment=10, limits=(10, 1024))
@@ -9868,15 +9868,15 @@ class UpdateStatus(Screen):
 				]
 				city = LCD4linux.WetterCity.value if wetter == 0 else LCD4linux.Wetter2City.value
 				if "." in city:  # e.g. 'de.ZIPccode'
-					feedurl = f"http://api.weatherunlocked.com/api/current/{city}"
+					feedurl = "http://api.weatherunlocked.com/api/current/%s" % city
 				else:
-					feedurl = f"http://api.weatherunlocked.com/api/current/{self.Long[wetter]},{self.Lat[wetter]}"
+					feedurl = "http://api.weatherunlocked.com/api/current/%s,%s" % (self.Long[wetter], self.Lat[wetter])
 				L4logE("WU-getcurrentweather%s: %s" % (wetter, feedurl))
 				callInThread(boundFunction(getPage, feedurl, params=params), boundFunction(self.downloadWUcallback, wetter), self.downloadListError)
 				if "." in ort:  #  e.g. 'de.ZIPcode'
-					feedurl = f"http://api.weatherunlocked.com/api/forecast/{city}"
+					feedurl = "http://api.weatherunlocked.com/api/forecast/%s" % city
 				else:
-					feedurl = f"http://api.weatherunlocked.com/api/forecast/{self.Long[wetter]},{self.Lat[wetter]}"
+					feedurl = "http://api.weatherunlocked.com/api/forecast/%s,%s" % (self.Long[wetter], self.Lat[wetter])
 				L4logE("WU-getforecastweather%s: %s" % (wetter, feedurl))
 				callInThread(boundFunction(getPage, feedurl, params=params), boundFunction(self.downloadWUcallback, wetter), self.downloadListError)
 			L4log("Wetter%s: downloadstart %s:%s %s %s" % (wetter, LCD4linux.WetterApi.value, ort, language.getLanguage(), la))
@@ -10676,7 +10676,7 @@ def MoonPosition(now=None):
 
 
 def MoonPhase(pos):
-	index = floor(pos * 8 + 0.5)
+	index = int(floor(pos * 8 + 0.5))
 	return {
 		0: _("New Moon"),
 		1: _("First Quarter"),
@@ -11094,8 +11094,8 @@ def LCD4linuxPIC(self, session):
 			UseWetterPath = WetterPath
 			if len(LCD4linux.WetterPath.value) > 2 and isfile(join(LCD4linux.WetterPath.value, "0.png")):
 				UseWetterPath = LCD4linux.WetterPath.value
-			WetterType[ConfigWWW] = ConfigType
-			WetterZoom[ConfigWWW] = ConfigZoom
+			WetterType = ConfigType
+			WetterZoom = ConfigZoom
 			POSX, POSY = 1, 0
 			Wmulti = ConfigZoom / 10.0
 			largesize = not ConfigType.startswith("3")
@@ -11128,7 +11128,7 @@ def LCD4linuxPIC(self, session):
 				MAX_W = int(55 * 5 * Wmulti)
 				MAX_Wc = int(50 * 2 * Wmulti) - MAX_Wr
 			elif ConfigType == "22":
-				MAX_W = int(554 * 2 * Wmulti)
+				MAX_W = int(55 * 2 * Wmulti)
 				MAX_Wc = int(50 * 2 * Wmulti) - MAX_Wr
 			elif ConfigType == "3":
 				MAX_W = int(48 * 2 * Wmulti) - MAX_Wr
@@ -11141,16 +11141,19 @@ def LCD4linuxPIC(self, session):
 				MAX_Wc = MAX_W
 				POSX = int(54 * 2 * Wmulti)
 				POSY = int(40 * 2 * Wmulti)
-			imageMode = "RGBA" if LCD4linux.WetterTransparenz.value == "true" else "RGB"
-			self.im[Wim] = Image.new(imageMode, (MAX_W, MAX_H), (0, 0, 0, 0))
-			if LCD4linux.WetterTransparenz.value == "crop":
-				POSXs = getSplit(ConfigSplit, ConfigAlign, MAX_Wi, MAX_W)
-				image_Back = self.im[im].crop((POSXs, ConfigPos, POSXs + MAX_W, ConfigPos + MAX_H))
-				self.im[Wim].paste(image_Back, (0, 0))
+			if LCD4linux.WetterTransparenz.value == "true":
+				self.im[Wim] = Image.new('RGBA', (MAX_W, MAX_H), (0, 0, 0, 0))
+			else:
+				self.im[Wim] = Image.new('RGB', (MAX_W, MAX_H), (0, 0, 0, 0))
+				if LCD4linux.WetterTransparenz.value == "crop":
+					POSXs = getSplit(ConfigSplit, ConfigAlign, MAX_Wi, MAX_W)
+					image_Back = self.im[im].crop((POSXs, ConfigPos, POSXs + MAX_W, ConfigPos + MAX_H))
+					self.im[Wim].paste(image_Back, (0, 0))
 			self.draw[Wim] = ImageDraw.Draw(self.im[Wim])
 			if ConfigType != "3" and not ConfigType.startswith("4"):
 				i = 0
 				for curr in self.WWeek[ConfigWWW]:
+					L4logE(str(curr))
 					if (i < 4 and ConfigType in ["1", "2", "5"]) or (i < 5 and ConfigType in ["11", "21", "51"]) or (i < 2 and ConfigType in ["12", "22"]):
 						i += 1
 						High = curr.get("High", "0")
@@ -11312,7 +11315,7 @@ def LCD4linuxPIC(self, session):
 				else:
 					xx = yy = 20
 					if isfile(join(UseWetterPath, Icon)):
-						pil_image = Image.open(join(UseWetterPath, Icon)).convert(imageMode)
+						pil_image = Image.open(join(UseWetterPath, Icon)).convert("RGBA" if LCD4linux.WetterTransparenz.value == "true" else "RGB")
 						xx, yy = pil_image.size
 						if ConfigType.startswith("5"):
 							y = int((int(LCD4linux.WetterIconZoom.value) + 5) * Wmulti / xx * yy)

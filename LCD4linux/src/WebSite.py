@@ -3,7 +3,7 @@ from __future__ import division, absolute_import
 from os.path import isfile, getmtime
 from six import ensure_str, ensure_binary
 from twisted.web import resource
-from .plugin import *
+from .plugin import getConfigMode, getTMPL, LCD4linux
 
 
 class LCD4linuxweb(resource.Resource):
