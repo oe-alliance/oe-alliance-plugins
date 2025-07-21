@@ -1125,7 +1125,7 @@ class TVoverview(TVscreenHelper, Screen):
 
 	def __init__(self, session, userspan, singleChannelId=""):
 		self.session = session
-		self.spanStartsStr, self.timeCode, self.spanDuranceTs = userspan[0][0], userspan[0][1], int(userspan[1])
+		self.spanStartsStr, self.timeCode, self.spanDuranceTs = userspan[0][0], userspan[0][1], userspan[1]
 		self.singleChannelId = singleChannelId
 		if tvglobals.RESOLUTION == "FHD":
 			self.skin = self.skin.replace("/HD/", "/FHD/")
@@ -1136,9 +1136,13 @@ class TVoverview(TVscreenHelper, Screen):
 		self.currDateDt = datetime.today()
 		self.dataBases, self.skinList, self.skinDicts = [], [], []
 		self.lenImportdict, self.totalAssetsCount = 0, 0
-		timestr = search(r"\d{2}:\d{2}", userspan[0][0])
-		midNight = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
-		self.currDayDelta = int(datetime.strptime(timestr.group(0), "%H:%M").time() < midNight.time()) if timestr else 0
+		now = datetime.today()
+		timeStr = search(r"\d{2}:\d{2}", userspan[0][0])
+		if timeStr:
+			spansEndsDt = datetime.combine(now, datetime.strptime(timeStr.group(0), "%H:%M").time())
+			self.currDayDelta = int(spansEndsDt < now)  # start with next day
+		else:
+			self.currDayDelta = 0
 		self.assetTitle, self.trailerUrl, self.currImdbId, self.currTmdbId = "", "", "", ""
 		self.channelName, self.currServiceRef, self.currAssetUrl = "", "", ""
 		self.loadAllEPGactive, self.loadAllEPGstop, self.zapAllowed, self.firstRun = False, False, False, True
