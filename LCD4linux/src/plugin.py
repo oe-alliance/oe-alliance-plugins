@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r27"
+Version = "V5.0-r28"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -382,17 +382,18 @@ LCD4linux.FastMode = ConfigSelection(choices=[("5", _("Normal (5s)")), ("2", _("
 LCD4linux.SwitchToFB2 = ConfigYesNo(default=True)
 LCD4linux.ScreenActive = ConfigSelection(choices=ScreenSet, default="1")
 LCD4linux.ScreenSwitch = ConfigSelection(choices=ScreenSet, default="2")
+LCD4linux.ScreenDefault = ConfigSelection(choices=[("0", _("last Screen"))] + ScreenSet, default="1")
 LCD4linux.ScreenSwitchLCD = ConfigSelection(choices=LCDSwitchSelect, default="0")
 LCD4linux.ScreenMax = ConfigSelection(choices=ScreenUse, default="1")
 LCD4linux.ScreenTime = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="0")
-LCD4linux.ScreenTime2 = ConfigSelection(choices=TimeSelect, default="1")
-LCD4linux.ScreenTime3 = ConfigSelection(choices=TimeSelect, default="1")
-LCD4linux.ScreenTime4 = ConfigSelection(choices=TimeSelect, default="1")
-LCD4linux.ScreenTime5 = ConfigSelection(choices=TimeSelect, default="1")
-LCD4linux.ScreenTime6 = ConfigSelection(choices=TimeSelect, default="1")
-LCD4linux.ScreenTime7 = ConfigSelection(choices=TimeSelect, default="1")
-LCD4linux.ScreenTime8 = ConfigSelection(choices=TimeSelect, default="1")
-LCD4linux.ScreenTime9 = ConfigSelection(choices=TimeSelect, default="1")
+LCD4linux.ScreenTime2 = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="1")
+LCD4linux.ScreenTime3 = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="1")
+LCD4linux.ScreenTime4 = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="1")
+LCD4linux.ScreenTime5 = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="1")
+LCD4linux.ScreenTime6 = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="1")
+LCD4linux.ScreenTime7 = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="1")
+LCD4linux.ScreenTime8 = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="1")
+LCD4linux.ScreenTime9 = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="1")
 LCD4linux.BilderTime = ConfigSelection(choices=[("0", _("off"))] + TimeSelect, default="0")
 LCD4linux.BilderSort = ConfigSelection(choices=[("0", _("off")), ("1", _("alphabetic")), ("2", _("random"))], default="1")
 LCD4linux.BilderQuality = ConfigSelection(choices=[("0", _("low/fast (all)")), ("1", _("low/fast (Picture only)")), ("2", _("better/slow"))], default="1")
@@ -5749,6 +5750,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 #				self.list1.append(getConfigListEntry(_("Internal TFT Active"), LCD4linux.LCDTFT))
 			self.list1.append(getConfigListEntry(_("Active Screen"), LCD4linux.ScreenActive))
 			self.list1.append(getConfigListEntry(_("Screen Switch Select - Screen"), LCD4linux.ScreenSwitch))
+			self.list1.append(getConfigListEntry(_("Screen Default after mode change - Screen"), LCD4linux.ScreenDefault))
 			self.list1.append(getConfigListEntry(_("Screen Switch Select - LCD"), LCD4linux.ScreenSwitchLCD))
 			self.list1.append(getConfigListEntry(_("Screens used for Changing"), LCD4linux.ScreenMax))
 			self.list1.append(getConfigListEntry(_("Screen 1 Changing Time"), LCD4linux.ScreenTime))
@@ -14637,7 +14639,8 @@ def LCD4linuxPIC(self, session):
 			L4log("Service changed")
 			self.ref = sref
 			if SaveEventListChanged is False:
-				ScreenActive[0] = "1"
+				if LCD4linux.ScreenDefault.value != "0":
+					ScreenActive[0] = LCD4linux.ScreenDefault.value
 				LCD4linux.ScreenActive.value = ScreenActive[0]
 				ScreenTime = 0
 			self.SaveisMediaPlayer = isMediaPlayer
