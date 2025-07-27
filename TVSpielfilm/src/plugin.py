@@ -353,8 +353,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			self.timeStartDt = datetime.fromisoformat(timeStartIso).replace(tzinfo=None) if timeStartIso else datetime.today()
 			timeEndIso = assetDict.get("timeEnd", "")
 			timeEndDt = datetime.fromisoformat(timeEndIso).replace(tzinfo=None) if timeEndIso else datetime.today()
-			self.currDateDt = self.timeStartDt if self.timeStartDt else datetime.today()
-			timeStartStr = self.currDateDt.strftime("%H:%M")
+			timeStartStr = (self.timeStartDt if self.timeStartDt else datetime.today()).strftime("%H:%M")
 			timeStartEnd = f"{timeStartStr} - {timeEndDt.strftime('%H:%M')}"
 			timeStartEndTs = (int(self.timeStartDt.timestamp()), int(timeEndDt.timestamp()))
 			repeatHint = assetDict.get("repeatHint", "")  # e.g.'Wh. um 00:20 Uhr, Nächste Episode um 21:55 Uhr (Staffel 8, Episode 24)'
@@ -755,7 +754,6 @@ class TVfullscreen(TVscreenHelper, Screen):
 		self.timeStartDt = datetime.today()
 		self.spanDuranceTs = 0
 		self.dataBases = []
-		self.currDateDt = datetime.today()
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["longDescription"] = ScrollLabel()
 		for wname in ["editorial", "conclusion", "repeatHint", "credits", "imdbRating", "timeStartEnd",
@@ -1135,17 +1133,10 @@ class TVoverview(TVscreenHelper, Screen):
 		self.filterSettings = loads(config.plugins.tvspielfilm.filtersettings.value)
 		self.currDateDt = datetime.today()
 		self.dataBases, self.skinList, self.skinDicts = [], [], []
-		self.lenImportdict, self.totalAssetsCount = 0, 0
-		now = datetime.today()
-		timeStr = search(r"\d{2}:\d{2}", userspan[0][0])
-		if timeStr:
-			spansEndsDt = datetime.combine(now, datetime.strptime(timeStr.group(0), "%H:%M").time())
-			self.currDayDelta = int(spansEndsDt < now)  # start with next day
-		else:
-			self.currDayDelta = 0
+		self.currDayDelta, self.lenImportdict, self.totalAssetsCount = 0, 0, 0
 		self.assetTitle, self.trailerUrl, self.currImdbId, self.currTmdbId = "", "", "", ""
 		self.channelName, self.currServiceRef, self.currAssetUrl = "", "", ""
-		self.loadAllEPGactive, self.loadAllEPGstop, self.zapAllowed, self.firstRun = False, False, False, True
+		self.loadAllEPGactive, self.loadAllEPGstop, self.zapAllowed = False, False, False
 		self["release"] = StaticText(tvglobals.RELEASE)
 		for wname in ["reviewdate", "longStatus", "progressTxt", "shortStatus", "channelName", "timeStartEnd", "imdbRating", "repeatHint",
 						"title", "editorial", "conclusion", "longDescription", "key_info", "key_play"]:
@@ -1200,7 +1191,14 @@ class TVoverview(TVscreenHelper, Screen):
 		self.startLoadAllEPG()
 
 	def startLoadAllEPG(self):
+		timeSearch = search(r"\d{2}:\d{2}", self.spanStartsStr)
+		if timeSearch and self.spanDuranceTs:
+			spanStartsDt = datetime.combine(self.currDateDt, datetime.strptime(timeSearch.group(0), "%H:%M").time())
+			spansEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
+			now = datetime.today()
+			self.currDayDelta += int(spanStartsDt < now and spansEndsDt < now)  # in case start with next day
 		self.currDateDt = datetime.today() + timedelta(days=self.currDayDelta)
+
 		self.setReviewdate(self.currDateDt, timeStartEnd="", fullScreen=False)
 		self.setLongstatus()
 		if self.loadAllEPGactive:
@@ -1254,9 +1252,10 @@ class TVoverview(TVscreenHelper, Screen):
 					self.createAssetsLists(allAssets, spanStartsDt, spanEndsDt, now)
 					self["progressBar"].setValue(index + 1)
 					self["progressTxt"].setText(f"{index + 1}/{self.lenImportdict}")
-				saveErr = self.saveAllAssets(allAssets, spanStartsDt, channelId=self.singleChannelId)
-				if saveErr:
-					self.tvinfobox.showDialog(f"Der Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'{saveErr}'")
+				if not self.loadAllEPGstop:
+					saveErr = self.saveAllAssets(allAssets, spanStartsDt, channelId=self.singleChannelId)
+					if saveErr:
+						self.tvinfobox.showDialog(f"Der Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'{saveErr}'")
 		self.createAssetsLists(allAssets, spanStartsDt, spanEndsDt, now)
 		self.setLongstatus()
 		self["progressBar"].setValue(0)
@@ -1300,9 +1299,6 @@ class TVoverview(TVscreenHelper, Screen):
 								"progress": progress, "title": title, "info": info, "category": category, "genre": genre,
 								"thumbIdNumeric": thumbIdNumeric, "isTopTip": isTopTip, "isTip": isTip, "isNew": isNew, "isLive": isLive}
 					skinDicts.append(skinDict)
-					if not self.totalAssetsCount:  # immediate display of details after downloading the very first asset
-						self.currAssetUrl = assetUrl  # set 'assetUrl is still active'
-						callInThread(self.showAssetDetails, assetUrl, fullScreen=False)
 					self.totalAssetsCount += 1
 			self.skinDicts = skinDicts
 			self.refreshSkinlist()
@@ -1322,7 +1318,7 @@ class TVoverview(TVscreenHelper, Screen):
 
 	def refreshSkinlist(self):
 		skinlist = []
-		listpos, entrycounter = 0, 0
+		listIndex, entrycounter = 0, 0
 		currfilter = self.filterSettings[self.filterIndex]
 		for assetDict in self.skinDicts:
 			if currfilter[0][1]:  # is a filter set?
@@ -1341,6 +1337,9 @@ class TVoverview(TVscreenHelper, Screen):
 					continue
 			assetUrl, channelName, timespanTs = assetDict["assetUrl"], assetDict["channelName"], assetDict["timespanTs"]
 			progress, title, info, sref = assetDict["progress"], assetDict["title"], assetDict["info"], assetDict["sref"]
+			if not entrycounter:  # immediate display details of first downloaded asset
+				self.currAssetUrl = assetUrl  # set 'assetUrl is still active'
+				callInThread(self.showAssetDetails, assetUrl, fullScreen=False)
 			hasTimer = self.isAlreadyListed(assetDict["timespanTs"], assetDict["sref"])
 			piconfile = self.getPiconFile(assetDict["channelId"])
 			piconpix = LoadPixmap(cached=True, path=piconfile) if piconfile and exists(piconfile) else None
@@ -1353,17 +1352,15 @@ class TVoverview(TVscreenHelper, Screen):
 			icon4 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}timer.png") if hasTimer else None  # timer-icon
 			skinlist.append((assetUrl, piconpix, channelName, timeSpan, progress, title, info, thumb, icon0, icon1, icon2, icon3, icon4, sref))
 			self.skinList = skinlist
-			if progress > -1 and progress < 101 and not listpos:  # transmission currently on air?
-				listpos = entrycounter
+			if progress > -1 and progress < 101 and not listIndex:  # transmission currently on air and listIndex not set yet?
+				listIndex = entrycounter
 			entrycounter += 1
 		if not skinlist:
 			skinlist.append(("", None, "", "", -1, "keine Einträge gefunden", f"Der Filter '{currfilter[0][0]}' liefert für diesen Zeitraum kein Ergebnis.", None, None, None, None, ""))
 			self.skinList = []
 			self.hideAssetDetails()
 		self["menuList"].updateList(skinlist)
-		if self.singleChannelId and self.firstRun:
-			self.firstRun = False
-			self["menuList"].setCurrentIndex(listpos)
+		self["menuList"].setCurrentIndex(listIndex)
 
 	def showCurrentAsset(self):
 		if self.skinList:
@@ -1420,12 +1417,7 @@ class TVoverview(TVscreenHelper, Screen):
 		if self.skinList:
 			curridx = self["menuList"].getCurrentIndex()
 			skinlist = self.skinList[curridx]
-			startStr = skinlist[3].split(" - ")[0].replace(":", "")
-			startInt = int(startStr) if startStr.isdigit() else 0
-			if startInt >= 0 and startInt < 500:  # between '00:00' and '00:50' h
-				startTs, endTs = self.splitTimespan(skinlist[3].split(" - "), datetime.today() + timedelta(days=self.currDayDelta + 1))  #  e.g. '00:15 - 01:45', but next day
-			else:
-				startTs, endTs = self.splitTimespan(skinlist[3].split(" - "), datetime.today() + timedelta(days=self.currDayDelta))  #  e.g. '20:15 - 21:45' or 'heute | 20:15'
+			startTs, endTs = self.splitTimespan(skinlist[3].split(" - "), datetime.today() + timedelta(days=self.currDayDelta))  #  e.g. '20:15 - 21:45' or 'heute | 20:15'
 			if not self.isAlreadyListed((startTs, endTs), skinlist[13]):  # timeSpan, sref
 				title = skinlist[5]
 				shortdesc = skinlist[6]
@@ -1934,11 +1926,12 @@ class TVmain(TVscreenHelper, Screen):
 							if errmsg:
 								print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:updateFutureEPG' - parsing failed: {errmsg}")
 							allAssets += assetsDicts
-						errmsg = self.saveAllAssets(allAssets, spanStartsDt)
-						if errmsg:
-							TVS_UPDATESTOP = True  # forced thread stop due to OS-error
-							print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:updateFutureEPG' - saving failed: {errmsg}")
-							self.session.open(MessageBox, f"Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
+						if not TVS_UPDATESTOP:
+							errmsg = self.saveAllAssets(allAssets, spanStartsDt)
+							if errmsg:
+								TVS_UPDATESTOP = True  # forced thread stop due to OS-error
+								print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVmain:updateFutureEPG' - saving failed: {errmsg}")
+								self.session.open(MessageBox, f"Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n{errmsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 		self.tvupdate.hideDialog()
 		self.tvinfobox.showDialog("TVS-EPG Update erfolgreich abgebrochen." if TVS_UPDATESTOP else "TVS-EPG Update erfolgreich beendet.")
 		TVS_UPDATEACTIVE, TVS_UPDATESTOP = False, False
@@ -2579,12 +2572,13 @@ class TVautoUpdate(TVcoreHelper):
 							if errmsg:
 								print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVautoUpdate:autoUpdateEPG' - parsing failed: {errmsg}")
 							allAssets += assetsDicts
-						saveErr = self.saveAllAssets(allAssets, spanStartsDt)
-						if saveErr:
-							TVS_UPDATESTOP = True  # forced thread stop due to OS-error
-							print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVautoUpdate:autoUpdateEPG' - record 'program details' could not be saved: {saveErr}")
-						else:
-							print(f"[{tvglobals.MODULE_NAME}] time period successfully in cache: '{spanStartsStr}' | {weekday} (+{index}/+{maxcachedays} days) for {len(importdict.items())}")
+						if not TVS_UPDATESTOP:
+							saveErr = self.saveAllAssets(allAssets, spanStartsDt)
+							if saveErr:
+								TVS_UPDATESTOP = True  # forced thread stop due to OS-error
+								print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVautoUpdate:autoUpdateEPG' - record 'program details' could not be saved: {saveErr}")
+							else:
+								print(f"[{tvglobals.MODULE_NAME}] time period successfully in cache: '{spanStartsStr}' | {weekday} (+{index}/+{maxcachedays} days) for {len(importdict.items())}")
 		if TVS_UPDATESTOP:
 			print(f"[{tvglobals.MODULE_NAME}] Autoupdate has been interrupted on user demand.")
 		print(f"[{tvglobals.MODULE_NAME}] Autoupdate finished")
