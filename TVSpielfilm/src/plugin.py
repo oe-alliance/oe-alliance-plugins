@@ -1136,7 +1136,7 @@ class TVoverview(TVscreenHelper, Screen):
 		self.currDayDelta, self.lenImportdict, self.totalAssetsCount = 0, 0, 0
 		self.assetTitle, self.trailerUrl, self.currImdbId, self.currTmdbId = "", "", "", ""
 		self.channelName, self.currServiceRef, self.currAssetUrl = "", "", ""
-		self.loadAllEPGactive, self.loadAllEPGstop, self.zapAllowed = False, False, False
+		self.loadAllEPGactive, self.loadAllEPGstop, self.zapAllowed, self.keyExitPressed = False, False, False, False
 		self["release"] = StaticText(tvglobals.RELEASE)
 		for wname in ["reviewdate", "longStatus", "progressTxt", "shortStatus", "channelName", "timeStartEnd", "imdbRating", "repeatHint",
 						"title", "editorial", "conclusion", "longDescription", "key_info", "key_play"]:
@@ -1205,15 +1205,9 @@ class TVoverview(TVscreenHelper, Screen):
 			self.loadAllEPGstop = True
 		else:
 			self.loadAllEPGstop = False
-			callInThread(self.loadAllEPG, self.startLoadAllEPGfinish)
+			callInThread(self.loadAllEPG)
 
-	def startLoadAllEPGfinish(self):
-		self.loadAllEPGstop = False
-		self.refreshSkinlist()
-		self.showCurrentAsset()
-		callInThread(self.loadAllEPG, self.startLoadAllEPGfinish)  # restart interrupted thread with new current datetime
-
-	def loadAllEPG(self, FinishOnStop):
+	def loadAllEPG(self):
 		self.loadAllEPGactive = True
 		self.totalAssetsCount = 0
 		self["longStatus"].setText("")
@@ -1256,14 +1250,17 @@ class TVoverview(TVscreenHelper, Screen):
 					saveErr = self.saveAllAssets(allAssets, spanStartsDt, channelId=self.singleChannelId)
 					if saveErr:
 						self.tvinfobox.showDialog(f"Der Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'{saveErr}'")
-		self.createAssetsLists(allAssets, spanStartsDt, spanEndsDt, now)
+		elif not self.loadAllEPGstop:
+			self.createAssetsLists(allAssets, spanStartsDt, spanEndsDt, now)
 		self.setLongstatus()
 		self["progressBar"].setValue(0)
 		self["progressTxt"].setText("")
 		self["shortStatus"].setText("")
-		self.loadAllEPGactive = False
-		if self.loadAllEPGstop and FinishOnStop:
-			FinishOnStop()
+		self.refreshSkinlist()
+		self.showCurrentAsset()
+		self.loadAllEPGstop, self.loadAllEPGactive = False, False
+		if self.keyExitPressed:
+			self.keyExit()
 
 	def createAssetsLists(self, allAssets, spanStartsDt, spanEndsDt, now):
 			skinDicts = []
@@ -1318,9 +1315,12 @@ class TVoverview(TVscreenHelper, Screen):
 
 	def refreshSkinlist(self):
 		skinlist = []
-		listIndex, entrycounter = 0, 0
+		entryCounter, newIndex = 0, -1
+		oldIndex = self["menuList"].getCurrentIndex()
 		currfilter = self.filterSettings[self.filterIndex]
 		for assetDict in self.skinDicts:
+			if self.loadAllEPGstop:
+				break
 			if currfilter[0][1]:  # is a filter set?
 				leaveout = True
 				if currfilter[0][1] == "thumb" and assetDict["thumbIdNumeric"]:
@@ -1337,9 +1337,12 @@ class TVoverview(TVscreenHelper, Screen):
 					continue
 			assetUrl, channelName, timespanTs = assetDict["assetUrl"], assetDict["channelName"], assetDict["timespanTs"]
 			progress, title, info, sref = assetDict["progress"], assetDict["title"], assetDict["info"], assetDict["sref"]
-			if not entrycounter:  # immediate display details of first downloaded asset
-				self.currAssetUrl = assetUrl  # set 'assetUrl is still active'
-				callInThread(self.showAssetDetails, assetUrl, fullScreen=False)
+			if newIndex == -1 and assetUrl == self.currAssetUrl:  # newIndex is not set yet and asset is still active?
+				newIndex = entryCounter
+				callInThread(self.showAssetDetails, assetUrl, fullScreen=False)  # show asset details with priority and immediately
+			if newIndex == -1 and self.singleChannelId and progress > -1 and progress < 101:  # newIndex is not set yet and 'Senderübersicht' and transmission is currently on air?
+				newIndex = entryCounter
+				callInThread(self.showAssetDetails, assetUrl, fullScreen=False)  # show asset details with priority and immediately
 			hasTimer = self.isAlreadyListed(assetDict["timespanTs"], assetDict["sref"])
 			piconfile = self.getPiconFile(assetDict["channelId"])
 			piconpix = LoadPixmap(cached=True, path=piconfile) if piconfile and exists(piconfile) else None
@@ -1352,27 +1355,25 @@ class TVoverview(TVscreenHelper, Screen):
 			icon4 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}timer.png") if hasTimer else None  # timer-icon
 			skinlist.append((assetUrl, piconpix, channelName, timeSpan, progress, title, info, thumb, icon0, icon1, icon2, icon3, icon4, sref))
 			self.skinList = skinlist
-			if progress > -1 and progress < 101 and not listIndex:  # transmission currently on air and listIndex not set yet?
-				listIndex = entrycounter
-			entrycounter += 1
+			entryCounter += 1
 		if not skinlist:
 			skinlist.append(("", None, "", "", -1, "keine Einträge gefunden", f"Der Filter '{currfilter[0][0]}' liefert für diesen Zeitraum kein Ergebnis.", None, None, None, None, ""))
 			self.skinList = []
 			self.hideAssetDetails()
 		self["menuList"].updateList(skinlist)
-		self["menuList"].setCurrentIndex(listIndex)
+		self["menuList"].setCurrentIndex(min(oldIndex, len(self.skinList) - 1) if newIndex == -1 else newIndex)
 
 	def showCurrentAsset(self):
 		if self.skinList:
-			curridx = min(self["menuList"].getCurrentIndex(), len(self.skinList) - 1)
-			assetUrl = self.skinList[curridx][0]
-			progress = self.skinList[curridx][4]
+			currIndex = min(self["menuList"].getCurrentIndex(), len(self.skinList) - 1)
+			assetUrl = self.skinList[currIndex][0]
+			progress = self.skinList[currIndex][4]
 			self.zapAllowed = progress > -1 and progress < 101  # progressbar visible means: transmission is currently on air
 			self["key_blue"].setText("Zap" if self.zapAllowed else "")
 			if assetUrl != self.currAssetUrl:  # is a new asset?
 				self["image"].hide()
 				self.hideAssetDetails()
-				self.currAssetUrl = assetUrl  # set 'assetUrl is still active'
+				self.currAssetUrl = assetUrl  # set new assetUrl
 				callInThread(self.showAssetDetails, assetUrl, fullScreen=False)
 		else:
 			self["image"].hide()
@@ -1380,8 +1381,8 @@ class TVoverview(TVscreenHelper, Screen):
 
 	def keyOk(self):
 		if self.skinList:
-			curridx = min(self["menuList"].getCurrentIndex(), len(self.skinList) - 1)
-			currAssetUrl = self.skinList[curridx][0]
+			currIndex = min(self["menuList"].getCurrentIndex(), len(self.skinList) - 1)
+			currAssetUrl = self.skinList[currIndex][0]
 			self.session.openWithCallback(self.keyOkCB, TVfullscreen, currAssetUrl, self.zapAllowed)
 
 	def keyOkCB(self, answer):
@@ -1411,12 +1412,13 @@ class TVoverview(TVscreenHelper, Screen):
 		self["key_red"].setText(f"Filter: {self.filterSettings[self.filterIndex][0][0].replace('Unterhaltung', 'Unterhalt.')}")
 		self.refreshSkinlist()
 		self.showCurrentAsset()
-		self.setLongstatus()
+		if not self.loadAllEPGactive:
+			self.setLongstatus()
 
 	def keyGreen(self):
 		if self.skinList:
-			curridx = self["menuList"].getCurrentIndex()
-			skinlist = self.skinList[curridx]
+			currIndex = self["menuList"].getCurrentIndex()
+			skinlist = self.skinList[currIndex]
 			startTs, endTs = self.splitTimespan(skinlist[3].split(" - "), datetime.today() + timedelta(days=self.currDayDelta))  #  e.g. '20:15 - 21:45' or 'heute | 20:15'
 			if not self.isAlreadyListed((startTs, endTs), skinlist[13]):  # timeSpan, sref
 				title = skinlist[5]
@@ -1467,7 +1469,10 @@ class TVoverview(TVscreenHelper, Screen):
 
 	def keyExit(self):
 		self.loadAllEPGstop = True
-		self.close(False)  # return to main menu
+		if self.loadAllEPGactive:
+			self.keyExitPressed = True
+		else:
+			self.close(False)  # return to main menu
 
 
 class TVmain(TVscreenHelper, Screen):
@@ -2307,8 +2312,8 @@ class TVimport(TVscreenHelper, Screen):
 						file.write("\n{Keine veraltete Regel(n) gefunden}\n")
 					file.write("\nDoppelte Regel(n) für Kanäle, die von TV Spielfilm unterstützt werden: ")
 					double = []
-					for idx in [i for i, x in enumerate(mapKeys) if mapKeys.count(x) > 1]:  # search for duplicate rules and get indexes
-						double.append((mapList[idx][0], mapList[idx][1]))
+					for index in [i for i, x in enumerate(mapKeys) if mapKeys.count(x) > 1]:  # search for duplicate rules and get indexes
+						double.append((mapList[index][0], mapList[index][1]))
 					if double:
 						file.write(f"\n{tabpos.format(*('Kürzel', 'Umsetzungsregel'))}")
 						file.write(f"{'-' * 58}\n")
@@ -2380,9 +2385,9 @@ class TVchannelselection(Screen):
 		self["channelList"].updateList(skinlist)
 
 	def keyOk(self):
-		curridx = self["channelList"].getCurrentIndex()
+		currIndex = self["channelList"].getCurrentIndex()
 		if self.channellist:
-			self.channellist[curridx][1] = not self.channellist[curridx][1]
+			self.channellist[currIndex][1] = not self.channellist[currIndex][1]
 		self.updateChannellist()
 
 	def keyRed(self):
@@ -2496,11 +2501,11 @@ class TVfilterselection(Screen):
 		self["filterList"].updateList(skinlist)
 
 	def keyOk(self):
-		curridx = self["filterList"].getCurrentIndex()
-		if curridx == self.defaultfilter and self.filterSettings[curridx][1]:
-			self.tvinfobox.showDialog(f"Filter '{self.filterSettings[curridx][0][0]}' kann als Startfilter nicht deaktiviert werden.")
+		currIndex = self["filterList"].getCurrentIndex()
+		if currIndex == self.defaultfilter and self.filterSettings[currIndex][1]:
+			self.tvinfobox.showDialog(f"Filter '{self.filterSettings[currIndex][0][0]}' kann als Startfilter nicht deaktiviert werden.")
 		elif self.filterSettings:
-			self.filterSettings[curridx][1] = not self.filterSettings[curridx][1]
+			self.filterSettings[currIndex][1] = not self.filterSettings[currIndex][1]
 			self.updateSkinList()
 
 	def keyRed(self):
@@ -2528,15 +2533,15 @@ class TVfilterselection(Screen):
 				self.keyExit()
 
 	def keyYellow(self):
-		curridx = self["filterList"].getCurrentIndex()
-		if self.filterSettings[curridx][1]:
-			if curridx == self.defaultfilter:
-				self.tvinfobox.showDialog(f"Filter '{self.filterSettings[curridx][0][0]}' ist bereits als Startfilter definiert.")
+		currIndex = self["filterList"].getCurrentIndex()
+		if self.filterSettings[currIndex][1]:
+			if currIndex == self.defaultfilter:
+				self.tvinfobox.showDialog(f"Filter '{self.filterSettings[currIndex][0][0]}' ist bereits als Startfilter definiert.")
 			else:
-				self.defaultfilter = curridx
+				self.defaultfilter = currIndex
 				self.updateSkinList()
 		else:
-			self.tvinfobox.showDialog(f"Filter '{self.filterSettings[curridx][0][0]}' ist deaktiviert und kann deswegen kein Startfilter sein.")
+			self.tvinfobox.showDialog(f"Filter '{self.filterSettings[currIndex][0][0]}' ist deaktiviert und kann deswegen kein Startfilter sein.")
 
 	def keyExit(self):
 		self.close()
