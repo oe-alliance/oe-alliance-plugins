@@ -76,19 +76,7 @@ config.plugins.plutotv.silentmode = ConfigYesNo(default=True)
 
 
 def fhd(num, factor=1.5):
-	if screenWidth and screenWidth == 1920:
-		prod = num * factor
-	else:
-		prod = num
-	return int(round(prod))
-
-
-def fontHD(nombre):
-	if screenWidth and screenWidth == 1920:
-		fuente = nombre
-	else:
-		fuente = nombre
-	return fuente
+	return int(round(num * factor)) if screenWidth and screenWidth == 1920 else num
 
 
 def setResumePoint(session, sid=None):
@@ -161,7 +149,7 @@ class SelList(MenuList):
 	def __init__(self, _list, enableWrapAround=False):
 		MenuList.__init__(self, _list, enableWrapAround, eListboxPythonMultiContent)
 		self.l.setItemHeight(fhd(35))
-		self.l.setFont(0, gFont(fontHD("Regular"), fhd(19)))
+		self.l.setFont(0, gFont("Regular", fhd(19)))
 
 
 def listentry(name, data, _id, epid=0, region=None):
