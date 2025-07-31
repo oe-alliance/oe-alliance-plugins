@@ -655,6 +655,7 @@ CleverTanken/src/pic/Makefile
 PlutoTV/Makefile
 PlutoTV/src/Makefile
 PlutoTV/src/images/Makefile
+PlutoTV/po/Makefile
 
 ])
 AC_OUTPUT
