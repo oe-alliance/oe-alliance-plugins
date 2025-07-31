@@ -75,77 +75,77 @@ config.plugins.plutotv.add_samsung = ConfigYesNo(default=True)
 
 _regions = {
 	"local": _("Local"),
-	"at": "{0}, {1}".format(_("AT"), _("Austria")),
-	"ca": "{0}, {1}".format(_("CA"), _("Canada")),
-	"ch": "{0}, {1}".format(_("CH"), _("Switzerland")),
-	"de": "{0}, {1}".format(_("DE"), _("Germany")),
-	"es": "{0}, {1}".format(_("ES"), _("Spain")),
-	"fi": "{0}, {1}".format(_("FI"), _("Finland")),
-	"fr": "{0}, {1}".format(_("FR"), _("France")),
-	"it": "{0}, {1}".format(_("IT"), _("Italy")),
-	"mx": "{0}, {1}".format(_("MX"), _("Mexico")),
-	"uk": "{0}, {1}".format(_("UK"), _("United Kingdom")),
-	"us": "{0}, {1}".format(_("US"), _("United States")),
-	"ar": "{0}, {1}".format(_("AR"), _("Argentina")),
-	"br": "{0}, {1}".format(_("BR"), _("Brazil")),
-	"co": "{0}, {1}".format(_("CO"), _("Colombia")),
-	"cr": "{0}, {1}".format(_("CR"), _("Costa Rica")),
-	"pe": "{0}, {1}".format(_("PE"), _("Peru")),
-	"ve": "{0}, {1}".format(_("VE"), _("Venezuela")),
-	"cl": "{0}, {1}".format(_("CL"), _("Chile")),
-	"bo": "{0}, {1}".format(_("BO"), _("Bolivia")),
-	"sv": "{0}, {1}".format(_("SV"), _("El Salvador")),
-	"gt": "{0}, {1}".format(_("GT"), _("Guatemala")),
-	"hn": "{0}, {1}".format(_("HN"), _("Honduras")),
-	"ni": "{0}, {1}".format(_("NI"), _("Nicaragua")),
-	"pa": "{0}, {1}".format(_("PA"), _("Panama")),
-	"uy": "{0}, {1}".format(_("UY"), _("Uruguay")),
-	"ec": "{0}, {1}".format(_("EC"), _("Ecuador")),
-	"py": "{0}, {1}".format(_("PY"), _("Paraguay")),
-	"do": "{0}, {1}".format(_("DO"), _("Dominican Republic")),
-	"se": "{0}, {1}".format(_("SE"), _("Sweden")),
-	"dk": "{0}, {1}".format(_("DK"), _("Denmark")),
-	"no": "{0}, {1}".format(_("NO"), _("Norway")),
-	"au": "{0}, {1}".format(_("AU"), _("Australia")),
+	"at": f"{_('AT')}, {_('Austria')}",
+	"ca": f"{_('CA')}, {_('Canada')}",
+	"ch": f"{_('CH')}, {_('Switzerland')}",
+	"de": f"{_('DE')}, {_('Germany')}",
+	"es": f"{_('ES')}, {_('Spain')}",
+	"fi": f"{_('FI')}, {_('Finland')}",
+	"fr": f"{_('FR')}, {_('France')}",
+	"it": f"{_('IT')}, {_('Italy')}",
+	"mx": f"{_('MX')}, {_('Mexico')}",
+	"uk": f"{_('UK')}, {_('United Kingdom')}",
+	"us": f"{_('US')}, {_('United States')}",
+	"ar": f"{_('AR')}, {_('Argentina')}",
+	"br": f"{_('BR')}, {_('Brazil')}",
+	"co": f"{_('CO')}, {_('Colombia')}",
+	"cr": f"{_('CR')}, {_('Costa Rica')}",
+	"pe": f"{_('PE')}, {_('Peru')}",
+	"ve": f"{_('VE')}, {_('Venezuela')}",
+	"cl": f"{_('CL')}, {_('Chile')}",
+	"bo": f"{_('BO')}, {_('Bolivia')}",
+	"sv": f"{_('SV')}, {_('El Salvador')}",
+	"gt": f"{_('GT')}, {_('Guatemala')}",
+	"hn": f"{_('HN')}, {_('Honduras')}",
+	"ni": f"{_('NI')}, {_('Nicaragua')}",
+	"pa": f"{_('PA')}, {_('Panama')}",
+	"uy": f"{_('UY')}, {_('Uruguay')}",
+	"ec": f"{_('EC')}, {_('Ecuador')}",
+	"py": f"{_('PY')}, {_('Paraguay')}",
+	"do": f"{_('DO')}, {_('Dominican Republic')}",
+	"se": f"{_('SE')}, {_('Sweden')}",
+	"dk": f"{_('DK')}, {_('Denmark')}",
+	"no": f"{_('NO')}, {_('Norway')}",
+	"au": f"{_('AU')}, {_('Australia')}",
 }
 
 BASE_REGIONS = [
-	("at", "{0}".format(_regions["at"])),
-	("au", "{0}".format(_regions["au"])),
-	("ca", "{0}".format(_regions["ca"])),
-	("ch", "{0}".format(_regions["ch"])),
-	("de", "{0}".format(_regions["de"])),
-	("dk", "{0}".format(_regions["dk"])),
-	("es", "{0}".format(_regions["es"])),
-	("fi", "{0}".format(_regions["fi"])),
-	("fr", "{0}".format(_regions["fr"])),
-	("it", "{0}".format(_regions["it"])),
-	("mx", "{0}".format(_regions["mx"])),
-	("no", "{0}".format(_regions["no"])),
-	("se", "{0}".format(_regions["se"])),
-	("uk", "{0}".format(_regions["uk"])),
-	("us", "{0}".format(_regions["us"])),
+	("at", f"{_regions['at']}"),
+	("au", f"{_regions['au']}"),
+	("ca", f"{_regions['ca']}"),
+	("ch", f"{_regions['ch']}"),
+	("de", f"{_regions['de']}"),
+	("dk", f"{_regions['dk']}"),
+	("es", f"{_regions['es']}"),
+	("fi", f"{_regions['fi']}"),
+	("fr", f"{_regions['fr']}"),
+	("it", f"{_regions['it']}"),
+	("mx", f"{_regions['mx']}"),
+	("no", f"{_regions['no']}"),
+	("se", f"{_regions['se']}"),
+	("uk", f"{_regions['uk']}"),
+	("us", f"{_regions['us']}"),
 ]
 
 # Latin American regions
 LATIN_REGIONS = [
-	("ar", "{0}".format(_regions["ar"])),
-	("br", "{0}".format(_regions["br"])),
-	("co", "{0}".format(_regions["co"])),
-	("cr", "{0}".format(_regions["cr"])),
-	("pe", "{0}".format(_regions["pe"])),
-	("ve", "{0}".format(_regions["ve"])),
-	("cl", "{0}".format(_regions["cl"])),
-	("bo", "{0}".format(_regions["bo"])),
-	("sv", "{0}".format(_regions["sv"])),
-	("gt", "{0}".format(_regions["gt"])),
-	("hn", "{0}".format(_regions["hn"])),
-	("ni", "{0}".format(_regions["ni"])),
-	("pa", "{0}".format(_regions["pa"])),
-	("uy", "{0}".format(_regions["uy"])),
-	("ec", "{0}".format(_regions["ec"])),
-	("py", "{0}".format(_regions["py"])),
-	("do", "{0}".format(_regions["do"])),
+	("ar", f"{_regions['ar']}"),
+	("br", f"{_regions['br']}"),
+	("co", f"{_regions['co']}"),
+	("cr", f"{_regions['cr']}"),
+	("pe", f"{_regions['pe']}"),
+	("ve", f"{_regions['ve']}"),
+	("cl", f"{_regions['cl']}"),
+	("bo", f"{_regions['bo']}"),
+	("sv", f"{_regions['sv']}"),
+	("gt", f"{_regions['gt']}"),
+	("hn", f"{_regions['hn']}"),
+	("ni", f"{_regions['ni']}"),
+	("pa", f"{_regions['pa']}"),
+	("uy", f"{_regions['uy']}"),
+	("ec", f"{_regions['ec']}"),
+	("py", f"{_regions['py']}"),
+	("do", f"{_regions['do']}"),
 ]
 
 if config.plugins.plutotv.add_latin_regions.value:
@@ -317,7 +317,7 @@ def getURL(
 		req.raise_for_status()
 		return req.json()
 	except Exception:
-		print("[PlutoDownload] error: {}".format(traceback.format_exc()))
+		print(f"[PlutoDownload] error: {traceback.format_exc()}")
 		return {}
 
 
@@ -451,7 +451,7 @@ class PlutoAPIDownloader(object):
 						if res:
 							raise Exception("[PlutoDownload] Update was canceled by the user.")
 				else:
-					print("[PlutoDownload] plutotv build guide, region '{}'...".format(_regions[region]))
+					print(f"[PlutoDownload] plutotv build guide, region '{_regions[region]}'...")
 					self.keystot = len(self.ChannelsList)
 					self.subtotal = len(self.ChannelsList[self.Categories[0]])
 					self.key = 0
@@ -465,8 +465,8 @@ class PlutoAPIDownloader(object):
 						self.TimerTemp.start(1, True)
 						yield self.deferred
 
-					print("[PlutoDownload] build bouquet, region '{}'...".format(_regions[region]))
-					bq = "_{}".format(region) if region != "local" else ""
+					print(f"[PlutoDownload] build bouquet, region '{_regions[region]}'...")
+					bq = f"_{region}" if region != "local" else ""
 					bq = BOUQUET.format(bq)
 					pluto_refs = yield self.build_bouquet(bq, region)
 					self.iprogress = 100
@@ -476,20 +476,20 @@ class PlutoAPIDownloader(object):
 					with open("/etc/enigma2/bouquets.tv", "r") as fd:
 						bouquets = fd.read()
 					if bq not in bouquets:
-						print("[PlutoDownload] add bouquet, region '{}'...".format(_regions[region]))
+						print(f"[PlutoDownload] add bouquet, region '{_regions[region]}'...")
 						self.addBouquet(bq, region)
 
 					db = eDVBDB.getInstance()
 					db.reloadServicelist()
 					db.reloadBouquets()
 
-					print("[PlutoDownload] import epg, region '{}'...".format(_regions[region]))
+					print(f"[PlutoDownload] import epg, region '{_regions[region]}'...")
 					evt_cnt = 0
 					for ch, ref in pluto_refs.items():
 						for genre in iter(self.GuideList.get(ch, [])):
 							evt_cnt += len(genre)
 							self.epgcache.importEvents(ref, genre)
-					print("[PlutoDownload] {0} events imported, for {1} channels".format(evt_cnt, self.total))
+					print(f"[PlutoDownload] {evt_cnt} events imported, for {self.total} channels")
 
 					if not self.silent:
 						self["status"].setText(_("Wait..."))
@@ -502,7 +502,7 @@ class PlutoAPIDownloader(object):
 			with open("/etc/Plutotv.timer", "w") as fd:
 				fd.write(str(time.time()))
 		except Exception:
-			print("[PlutoDownload] error: {}".format(traceback.format_exc()))
+			print(f"[PlutoDownload] error: {traceback.format_exc()}")
 			if not self.silent and not self.abort:
 				self.session.open(
 					MessageBox,
@@ -510,7 +510,7 @@ class PlutoAPIDownloader(object):
 					type=MessageBox.TYPE_ERROR,
 					timeout=10,
 				)
-			print("[PlutoDownload] an error occurred while updating region '{0}', update aborted.".format(_regions[region]))
+			print(f"[PlutoDownload] an error occurred while updating region '{_regions[region]}', update aborted.")
 			self.abort = True
 
 		if not self.silent:
@@ -529,7 +529,7 @@ class PlutoAPIDownloader(object):
 	def tmCallback(self):
 		if not self.silent:
 			self["progress"].setValue(self.iprogress)
-			self["espera"].setText("{0} %".format(self.iprogress))
+			self["espera"].setText(f"{self.iprogress} %")
 
 		if not self.deferred.called:
 			self.deferred.callback(None)
@@ -562,12 +562,12 @@ class PlutoAPIDownloader(object):
 		service_num = self.service_nums[region]
 		print("build_bouquet", service_num)
 		bq = []
-		nm = " ({0})".format(region.upper()) if region != "local" else ""
-		bq.append("#NAME Pluto TV{0}\n".format(nm))
+		nm = f" ({region.upper()})" if region != "local" else ""
+		bq.append(f"#NAME Pluto TV{nm}\n")
 		param = 0
 		group = 0
 		for cat in iter(self.Categories):
-			bq.append("#SERVICE 1:64:%s:0:0:0:0:0:0:0::%s\n#DESCRIPTION %s\n" % (group, cat, cat))
+			bq.append(f"#SERVICE 1:64:{group}:0:0:0:0:0:0:0::{cat}\n#DESCRIPTION {cat}\n")
 			group += 1
 			for param, channel in enumerate(self.ChannelsList[cat], param + 1):
 				if self.abort:
@@ -584,9 +584,9 @@ class PlutoAPIDownloader(object):
 					channel[4].replace(":", "%3A"),
 					name,
 				)
-				bq.append("%s\n#DESCRIPTION %s\n" % (sref, channel[2]))
+				bq.append(f"{sref}\n#DESCRIPTION {channel[2]}\n")
 
-				ref = "%s:0:1:%s:%s:0:0:0:0:0" % (service_num, channel[0], TIDS[region])
+				ref = f"{service_num}:0:1:{channel[0]}:{TIDS[region]}:0:0:0:0:0"
 				pluto_refs[channel[1]] = ref + ":0"
 				if not self.silent:
 					self["status"].setText(_("Wait for Channel: {0}").format(channel[2]))
@@ -728,9 +728,9 @@ class PlutoAPIDownloader(object):
 			else:
 				number = self.ch_numbers["last_number"] + 1
 				if number > 65535:
-					raise ValueError("Generated channel number to big: {0}".format(number))
+					raise ValueError(f"Generated channel number to big: {number}")
 				self.ch_numbers["last_number"] = number
-				number = "{:X}".format(number)
+				number = f"{number:X}"
 				self.ch_numbers[_id] = {}
 				self.ch_numbers[_id]["num"] = number
 				self.ch_numbers[_id]["name"] = channel["name"]
@@ -746,7 +746,7 @@ class PlutoAPIDownloader(object):
 		if config.usage.multibouquet.value:
 			bouquet_rootstr = '1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "bouquets.tv" ORDER BY bouquet'
 		else:
-			bouquet_rootstr = '%s FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet' % (cls.service_types_tv)
+			bouquet_rootstr = f'{cls.service_types_tv} FROM BOUQUET "userbouquet.favourites.tv" ORDER BY bouquet'
 		bouquet_root = eServiceReference(bouquet_rootstr)
 		serviceHandler = eServiceCenter.getInstance()
 		mutableBouquetList = serviceHandler.list(bouquet_root).startEdit()
@@ -758,8 +758,8 @@ class PlutoAPIDownloader(object):
 				eDVBDB.getInstance().reloadBouquets()
 				mutableBouquet = serviceHandler.list(new_bouquet_ref).startEdit()
 				if mutableBouquet:
-					region = " ({})".format(region.upper()) if region != "local" else ""
-					mutableBouquet.setListName("Pluto TV{}".format(region))
+					region = f" ({region.upper()})" if region != "local" else ""
+					mutableBouquet.setListName(f"Pluto TV{region}")
 					mutableBouquet.flushChanges()
 				else:
 					print("[PlutoDownload] get mutable list for new created bouquet failed")
@@ -821,12 +821,12 @@ class PlutoAPIDownloader(object):
 			epsubgenre = episode.get("subGenre", "")
 
 			if len(epmpaa) > 0 and "Not Rated" not in epmpaa:
-				epplot = _("{0}\nAge rating: {1}").format(epplot, "FSK-{0}".format(epmpaa) if epmpaa.isdigit() else epmpaa)
+				epplot = _("{0}\nAge rating: {1}").format(epplot, f"FSK-{epmpaa}" if epmpaa.isdigit() else epmpaa)
 
 			if eptype == "tv" and (epseason > 0 and epnumber >= 0):
 				epplot = _("{0}\n{1}. Season, episode {2}: {3}").format(epname, epseason, epnumber, epplot)
 			elif eptype == "film" and epsubgenre not in ("None", ""):
-				epplot = "{0}\n{1}".format(epsubgenre, epplot)
+				epplot = f"{epsubgenre}\n{epplot}"
 
 			self.GuideList[_id][-1].append((int(round(start)), epdur, title, "", epplot, genre))
 
