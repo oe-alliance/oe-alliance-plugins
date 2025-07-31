@@ -1,0 +1,5 @@
+<keymap>
+	<map context="PlutoTV_Actions">
+		<key id="KEY_TV" mapto="leavePlayer" flags="m" />
+	</map>
+</keymap>

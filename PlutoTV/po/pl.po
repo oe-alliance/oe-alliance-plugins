@@ -1,0 +1,467 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PlutoTV\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-08-31 14:40+0200\n"
+"PO-Revision-Date: 2024-08-30 12:32+0200\n"
+"Last-Translator: \n"
+"Language-Team: endriu\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-Basepath: ../../..\n"
+"X-Poedit-SearchPath-0: .\n"
+
+msgid "** My Favorites **"
+msgstr "** Moje Ulubione **"
+
+msgid "AR"
+msgstr ""
+
+msgid "AT"
+msgstr ""
+
+msgid "AU"
+msgstr ""
+
+msgid "Add Samsung Channels to bouquets"
+msgstr "Dodawanie kanałów Samsung do bukietów"
+
+#, fuzzy
+msgid "Add Xiaomi Channels to bouquets"
+msgstr "Dodawanie kanałów Samsung do bukietów"
+
+#, python-brace-format
+msgid "An error occurred while updating region '{0}', update aborted."
+msgstr "Błąd podczas aktualizowania regionu „{0}”, aktualizacja przerwana."
+
+msgid "Argentina"
+msgstr "Argentyna"
+
+msgid "Australia"
+msgstr "Australia"
+
+msgid "Austria"
+msgstr "Austria"
+
+msgid "BO"
+msgstr ""
+
+msgid "BR"
+msgstr ""
+
+msgid "Back"
+msgstr "Wstecz"
+
+msgid "Bolivia"
+msgstr "Boliwia"
+
+#, fuzzy
+msgid "Bouquet"
+msgstr "Bukiet PlutoTV"
+
+msgid "Brazil"
+msgstr "Brazylia"
+
+msgid "CA"
+msgstr ""
+
+msgid "CH"
+msgstr ""
+
+msgid "CL"
+msgstr ""
+
+msgid "CO"
+msgstr ""
+
+msgid "CR"
+msgstr ""
+
+msgid "Canada"
+msgstr "Kanada"
+
+msgid "Chile"
+msgstr "Chile"
+
+msgid "Colombia"
+msgstr "Kolumbia"
+
+msgid "Costa Rica"
+msgstr ""
+
+msgid "Create"
+msgstr "Utwórz"
+
+msgid "DE"
+msgstr ""
+
+msgid "DK"
+msgstr ""
+
+msgid "DO"
+msgstr ""
+
+msgid "Delete favorite"
+msgstr "Usuń ulubione"
+
+msgid "Denmark"
+msgstr ""
+
+msgid "Do you really want to leave PlutoTV?"
+msgstr "Czy na pewno chcesz opuścić PlutoTV?"
+
+msgid "Do you want to resume this playback?"
+msgstr "Czy chcesz wznowić to odtwarzanie?"
+
+msgid "Dominican Republic"
+msgstr "Dominikana"
+
+msgid "Download PlutoTV Bouquet, picons & EPG"
+msgstr "Pobierz Bukiet PlutoTV, pikony i EPG"
+
+msgid "EC"
+msgstr ""
+
+msgid "ES"
+msgstr ""
+
+msgid "Ecuador"
+msgstr "Ekwador"
+
+msgid "El Salvador"
+msgstr ""
+
+msgid "Episode"
+msgstr "Odcinek"
+
+msgid "Exit"
+msgstr "Wyjście"
+
+msgid "FI"
+msgstr ""
+
+msgid "FR"
+msgstr ""
+
+msgid "Favorite"
+msgstr "Ulubione"
+
+msgid "Favorite added"
+msgstr "Dodano ulubione"
+
+msgid "Favorite already exists"
+msgstr "Ulubiony już istnieje"
+
+msgid "Finland"
+msgstr "Finlandia"
+
+msgid "France"
+msgstr "Francja"
+
+msgid "GT"
+msgstr ""
+
+msgid "Germany"
+msgstr "Niemcy"
+
+msgid "Guatemala"
+msgstr "Gwatemala"
+
+msgid "HN"
+msgstr ""
+
+msgid "Honduras"
+msgstr "Honduras"
+
+msgid "IMDb"
+msgstr ""
+
+msgid "IT"
+msgstr ""
+
+msgid "Italy"
+msgstr "Włochy"
+
+msgid "LOCAL"
+msgstr "Lokalny"
+
+msgid "Last:"
+msgstr "Ostatni:"
+
+msgid "Live TV Channel Numbering"
+msgstr ""
+
+msgid "Live TV Mode"
+msgstr ""
+
+msgid "Loading data... Please wait"
+msgstr "Ładowanie danych... Proszę czekać"
+
+msgid "Local"
+msgstr "Lokalny"
+
+msgid "MX"
+msgstr ""
+
+msgid "Mexico"
+msgstr "Meksyk"
+
+msgid "NI"
+msgstr ""
+
+msgid "NO"
+msgstr "NO"
+
+msgid "NONE"
+msgstr "Brak"
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Nicaragua"
+msgstr "Nikaragua"
+
+#, fuzzy
+msgid "No episode available"
+msgstr "Brak Ulubionych"
+
+msgid "No favorites available"
+msgstr "Brak Ulubionych"
+
+#, fuzzy
+msgid "No season available"
+msgstr "Dostępne sezony"
+
+msgid "None"
+msgstr "Nigdy"
+
+msgid "Norway"
+msgstr ""
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Original"
+msgstr ""
+
+msgid "Original (4097)"
+msgstr ""
+
+msgid "PA"
+msgstr ""
+
+msgid "PE"
+msgstr ""
+
+msgid "PY"
+msgstr ""
+
+msgid "Panama"
+msgstr "Panama"
+
+msgid "Paraguay"
+msgstr "Paragwaj"
+
+msgid "Peru"
+msgstr ""
+
+msgid "Picon Directory"
+msgstr "Folder picon"
+
+msgid "Picon Mode"
+msgstr "Tryb picon"
+
+#, fuzzy
+msgid "Player Service"
+msgstr "Serwis PlutoTV"
+
+msgid "Plugin generated"
+msgstr ""
+
+msgid "Plugin to play videos and to create a PlutoTV channel list"
+msgstr "Odtwarza filmy i tworzy listy kanałów PlutoTV"
+
+#, fuzzy
+msgid "Pluto TV Bouquets"
+msgstr "Bukiet PlutoTV"
+
+msgid "Pluto TV download:"
+msgstr "Pobieram Pluto TV:"
+
+#, python-brace-format
+msgid "Pluto TV download: {0}"
+msgstr "Pobieram Pluto TV: {0}"
+
+msgid "PlutoTV"
+msgstr "PlutoTV"
+
+msgid "Press < or RED to go back in the menus"
+msgstr "Naciśnij < lub CZERWONY, aby wrócić do menu"
+
+msgid "Reference"
+msgstr "Referencje"
+
+#, python-format
+msgid "Resume position at %s"
+msgstr "Wznów pozycję od %s"
+
+msgid "SE"
+msgstr ""
+
+msgid "SNP"
+msgstr ""
+
+msgid "SV"
+msgstr ""
+
+msgid "Season"
+msgstr "Sezon"
+
+msgid "Seasons"
+msgstr "Sezony"
+
+msgid "Seasons available"
+msgstr "Dostępne sezony"
+
+msgid "Silent Download PlutoTV"
+msgstr "Ciche pobieranie PlutoTV"
+
+msgid "Spain"
+msgstr "Hiszpania"
+
+msgid "Start PlutoTV in Silent Mode"
+msgstr "Uruchom PlutoTV w trybie cichym"
+
+msgid "Stop play"
+msgstr "Zatrzymaj odtwarzanie"
+
+msgid "Stop play and exit to list movie?"
+msgstr "Zatrzymać odtwarzanie i wróć do listy filmów?"
+
+msgid "Sweden"
+msgstr ""
+
+msgid "Switzerland"
+msgstr "Szwajcaria"
+
+msgid "TMDb"
+msgstr ""
+
+msgid ""
+"The Enigma2 settings was changed and Enigma2 should be restarted\n"
+"\n"
+"Do you want to restart it now?"
+msgstr ""
+"Ustawienia E 2 zostały zmienione i system wymaga restartu\n"
+"\n"
+"Czy chcesz teraz ponownie uruchomić?"
+
+msgid ""
+"The Latin American setting was changed and Enigma2 should be restarted\n"
+"\n"
+"Do you want to restart it now?"
+msgstr ""
+"Zmieniono ustawienia Ameryki Łacińskiej i należy ponownie uruchomić system\n"
+"\n"
+"Czy chcesz teraz ponownie uruchomić?"
+
+#, fuzzy
+msgid "The PlutoTV Picons should be deleted before the next Bouquet update."
+msgstr "Tryb Picon został zmieniony, i Picony PlutoTV należy usunąć przed aktualizacją Bukietu."
+
+msgid "The download is in progress. Exit now?"
+msgstr "Trwa pobieranie. Wyjść teraz?"
+
+msgid "The silent download is in progress."
+msgstr "Trwa ciche pobieranie."
+
+#, python-brace-format
+msgid "There is no data, it is possible that Pluto TV is not available in region '{0}'. Exit now?"
+msgstr "Brak danych, możliwe, że Pluto TV nie jest dostępny w regionie '{0}'. Wyjść teraz?"
+
+msgid "There is no data, it is possible that Pluto TV is not available in your Country"
+msgstr "Brak danych, możliwe, że Pluto TV nie jest dostępny w Twoim kraju"
+
+msgid "UK"
+msgstr ""
+
+msgid "US"
+msgstr ""
+
+msgid "UY"
+msgstr ""
+
+msgid "United Kingdom"
+msgstr "Wielka Brytania"
+
+msgid "United States"
+msgstr "USA"
+
+msgid "Update"
+msgstr "Aktualizacja"
+
+#, fuzzy
+msgid "Update Pluto TV Bouquets"
+msgstr "Aktualizuj bukiet PlutoTV"
+
+msgid "Uruguay"
+msgstr "Urugwaj"
+
+msgid "Use Latin American regions"
+msgstr "Użyj regionów Ameryki Łacińskiej"
+
+msgid "VE"
+msgstr ""
+
+msgid "VOD Menu"
+msgstr "VOD-Menu"
+
+msgid "Venezuela"
+msgstr "Wenezuela"
+
+msgid "Video Region"
+msgstr "Region Video"
+
+#, python-brace-format
+msgid "Wait for Channel: {0}"
+msgstr "Czekaj na kanał: {0}"
+
+msgid "Wait..."
+msgstr "Czekaj..."
+
+msgid ""
+"You now have an updated favorites list with Pluto TV channels on your channel list.\n"
+"\n"
+"Everything will be updated automatically every 5 hours."
+msgstr ""
+"Masz teraz zaktualizowaną listę ulubionych z kanałami Pluto TV na liście kanałów.\n"
+"\n"
+"Wszystko będzie aktualizowane automatycznie co 5 godzin."
+
+#, python-brace-format
+msgid ""
+"{0}\n"
+"Age rating: {1}"
+msgstr ""
+"{0}\n"
+"Ograniczenia wiekowe {1}"
+
+#, python-brace-format
+msgid ""
+"{0}\n"
+"{1}. Season, episode {2}: {3}"
+msgstr ""
+"{0}\n"
+"{1}. Seria, Odcinek {2}: {3}"
+
+#, fuzzy, python-brace-format
+msgid ""
+"{0} Pluto TV Bouquets\n"
+"'{1}' missing"
+msgstr ""
+"{0} Bukiety PlutoTV\n"
+"'{1}' brak"

@@ -1,0 +1,5 @@
+#!/bin/sh
+echo "Cleanup..."
+rm -rf /usr/lib/enigma2/python/Plugins/Extensions/PlutoTV > /dev/null 2>&1
+unlink /etc/Plutotv.timer > /dev/null 2>&1
+exit 0
