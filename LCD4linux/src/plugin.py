@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r28"
+Version = "V5.0-r29"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -5613,31 +5613,32 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self["LCD1"].hide()
 		else:
 			self["LCD1text"].setText("")
-		ff = False
-		fn = "%s.jpg" % PIC2
-		try:
-			if isfile(fn):
-				ft = stat(fn).st_mtime
-				ff = True
-				if ft != self.mtime2:
-					self.picload2.startDecode(fn)
-					self.mtime2 = ft
-			else:
-				fn = "%s.png" % PIC2
-				ft = 0.0
+		if LCD4linux.LCDType2.value != "00":
+			ff = False
+			fn = "%s.jpg" % PIC2
+			try:
 				if isfile(fn):
 					ft = stat(fn).st_mtime
 					ff = True
 					if ft != self.mtime2:
 						self.picload2.startDecode(fn)
 						self.mtime2 = ft
-		except Exception:
-			L4log("Error Pic2 not found")
-		if ff is False:
-			self["LCD2text"].setText(_("no LCD2 Picture-File"))
-			self["LCD2"].hide()
-		else:
-			self["LCD2text"].setText("")
+				else:
+					fn = "%s.png" % PIC2
+					ft = 0.0
+					if isfile(fn):
+						ft = stat(fn).st_mtime
+						ff = True
+						if ft != self.mtime2:
+							self.picload2.startDecode(fn)
+							self.mtime2 = ft
+			except Exception:
+				L4log("Error Pic2 not found")
+			if ff is False:
+				self["LCD2text"].setText(_("no LCD2 Picture-File"))
+				self["LCD2"].hide()
+			else:
+				self["LCD2text"].setText("")
 		if LCD4linux.LCDType3.value != "00":
 			ff = False
 			fn = "%s.jpg" % PIC3
