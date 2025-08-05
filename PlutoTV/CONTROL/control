@@ -1,0 +1,11 @@
+Package: enigma2-plugin-extensions-plutotv
+Version: 20250731
+Section: extensions
+Priority: optional
+Architecture: all
+Maintainer: Billy2011 / jbleyel
+Description: PlutoTV
+Recommends: enigma2-plugin-systemplugins-serviceapp
+Source: 
+Homepage: 
+License: GPLv2+
