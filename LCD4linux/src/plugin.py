@@ -5338,11 +5338,12 @@ class LCDdisplayMenu(Screen):
 	def askForDelete(self, retval):
 		if (retval):
 			current = self["menu"].getCurrent()
-			if current and isfile(current[2]):
+			if len(current) > 1 and isfile(current[2]):
 				currentEntry = current[1]
-				i = int(currentEntry.split()[1])
-				self.list[i] = (_("deleted"),) + self.list[i][1:]
-				rmFile(current[2])
+				if len(currentEntry):
+					i = int(currentEntry.split()[1])
+					self.list[i] = (_("deleted"),) + self.list[i][1:]
+					rmFile(current[2])
 
 	def cancel(self):
 		self.close(False, self.session)
