@@ -65,7 +65,7 @@ CACHEDAYS = [(x, f"+{x} Tage") for x in range(1, 14)]
 VISIBILITY = [(0, "keine Anzeige"), (1, "im Extensionmenü (Taste BLAU-lang)"), (2, "im Pluginmanager (Taste GRÜN-kurz)"), (3, "in Extensionmenü und Pluginmanager")]
 config.plugins.tvspielfilm = ConfigSubsection()
 config.plugins.tvspielfilm.showtips = ConfigSelection(default=2, choices=[(0, "niemals"), (1, "nur bei Pluginstart"), (2, "immer")])
-config.plugins.tvspielfilm.defaultfilter = ConfigSelection(default=0, choices=[(i, f"{x[0]}") for i, x in enumerate(ASSETFILTERS)])
+config.plugins.tvspielfilm.defaultfilter = ConfigText(default="0")
 config.plugins.tvspielfilm.filtersettings = ConfigText(default=dumps([[x, True] for x in ASSETFILTERS]))
 config.plugins.tvspielfilm.channelname = ConfigSelection(default=1, choices=[(0, "vom Image"), (1, "vom Server")])
 config.plugins.tvspielfilm.prefered_db = ConfigSelection(default=0, choices=[(0, "jedesmal nachfragen"), (1, "IMDb - Internet Movie Database"), (2, "TMDb - The Movie Database")])
