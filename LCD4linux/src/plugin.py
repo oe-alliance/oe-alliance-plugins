@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r29"
+Version = "V5.0-r30"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -5273,12 +5273,13 @@ class LCDdisplayMenu(Screen):
 	skin = """
 		<screen position="center,center" size="600,380" title="LCD4linux - Config" >
 			<widget name="menu" position="10,20" size="580,350" scrollbarMode="showOnDemand" />
+			<eLabel name="button_red" position="10,340" size="6,36" backgroundColor="#00fe0000" zPosition="1" />
+			<widget source="key_red" render="Label" position="24,346" size="230,26" font="Regular;18" valign="center" halign="left" zPosition="1" />
 		</screen>"""
 
 	def __init__(self, session, args=None):
 		Screen.__init__(self, session)
 		self.session = session
-		self.list = []
 		self.SetList()
 		self["menu"] = MenuList(self.list)
 		self["key_red"] = StaticText(_("Delete"))
@@ -5295,10 +5296,11 @@ class LCDdisplayMenu(Screen):
 		self.list.append((_("Load Defaults / Empty Config"), "LoadDefault", ""))
 		self.list.append((_("Save Config to File... (%s)") % LCD4linux.ConfigPath.value, "SaveToConfig", ""))
 		Cdir = sorted(glob(join(LCD4linux.ConfigPath.value, "*.lcd")))
-		xx = 3
+		self.xx = 3
 		for ii in Cdir:
-			self.list.append((_("Load File : %s") % basename(ii), "LoadFile %d" % xx, ii))
-			xx += 1
+			self.list.append((_("Load File : %s") % basename(ii), "LoadFile %d" % self.xx, ii))
+			self.xx += 1
+		self.LastSavedConfig = 0
 
 	def entfernen(self):
 		current = self["menu"].getCurrent()
@@ -5319,31 +5321,38 @@ class LCDdisplayMenu(Screen):
 					LCD4linux.loadFromFile(LCD4default)
 					LCD4linux.loadFromFile(LCD4config)
 					LCD4linux.load()
+					self.cancel()
 			elif currentEntry == "SaveToConfig":
-				self.session.openWithCallback(self.askForConfigName, InputBox, title="Save Filename", text="LCD4linux-%s" % (strftime("%Y%m%d_%H%M")), type=Input.TEXT)
+				if self.LastSavedConfig == 0:
+					self.session.openWithCallback(self.askForConfigName, InputBox, title="Save Filename", text="LCD4linux-%s" % (strftime("%Y%m%d_%H%M")), type=Input.TEXT)
 			elif currentEntry.startswith("LoadFile"):
 				if isfile(current[2]):
 					L4LoadNewConfig(current[2])
+					self.cancel()
 			elif currentEntry == "LoadDefault" and isfile(LCD4default):
 				L4log("Config-Load", LCD4default)
 				LCD4linux.loadFromFile(LCD4default)
 				LCD4linux.load()
+				self.cancel()
 
 	def askForConfigName(self, name):
 		if name is not None and isdir(LCD4linux.ConfigPath.value):
 			LCD4linux.save()
 			LCD4linux.saveToFile(join(LCD4linux.ConfigPath.value, "%s.lcd" % name))
-			self.list.append((_("Load File : %s") % ("%s.lcd" % name), "LoadFile", join(LCD4linux.ConfigPath.value, "%s.lcd" % name)))
+			self.list.append((_("Load File : %s") % ("%s.lcd" % name), "LoadFile %d" % self.xx, join(LCD4linux.ConfigPath.value, "%s.lcd" % name)))
+			self.LastSavedConfig = self.xx
+			self.xx += 1
 
 	def askForDelete(self, retval):
 		if (retval):
 			current = self["menu"].getCurrent()
-			if len(current) > 1 and isfile(current[2]):
+			if current and isfile(current[2]):
 				currentEntry = current[1]
-				if len(currentEntry):
-					i = int(currentEntry.split()[1])
-					self.list[i] = (_("deleted"),) + self.list[i][1:]
-					rmFile(current[2])
+				i = int(currentEntry.split()[1])
+				if i == self.LastSavedConfig:
+					self.LastSavedConfig = 0
+				self.list[i] = (_("deleted"),) + self.list[i][1:]
+				rmFile(current[2])
 
 	def cancel(self):
 		self.close(False, self.session)
