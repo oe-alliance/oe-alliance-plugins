@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r30"
+Version = "V5.0-r31"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -3259,7 +3259,7 @@ def writeLCD1(s, im, quality, SAVE=True):
 			doDPF(1, im, s)
 		if "1" in LCD4linux.SavePicture.value and SAVE is True:
 			if str(LCD4linux.LCDRotate1.value) != "0":
-				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
+				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value), expand=True)
 			try:
 				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
 				if isfile(bild):
@@ -3292,7 +3292,7 @@ def writeLCD1(s, im, quality, SAVE=True):
 		try:
 			if "1" in LCD4linux.SavePicture.value and SAVE is True:
 				if str(LCD4linux.LCDRotate1.value) != "0":
-					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
+					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value), expand=True)
 				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
 				if isfile(bild):
 					rename(bild, "%s.png" % PIC)
@@ -3343,7 +3343,7 @@ def writeLCD1(s, im, quality, SAVE=True):
 			try:
 				datei = "%s.jpg" % PICtmp
 				if str(LCD4linux.LCDRotate1.value) != "0":
-					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
+					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value), expand=True)
 					s.im[im].save(datei, "JPEG")
 				elif pic is not None:
 					open(datei, "wb").write(pic)
@@ -3379,7 +3379,7 @@ def writeLCD2(s, im, quality, SAVE=True):
 			doDPF(2, im, s)
 		if "2" in LCD4linux.SavePicture.value and SAVE is True:
 			if str(LCD4linux.LCDRotate2.value) != "0":
-				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
+				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value), expand=True)
 			try:
 				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
 				if isfile(bild):
@@ -3401,7 +3401,7 @@ def writeLCD2(s, im, quality, SAVE=True):
 			s.im[im].save("/tmp/usbtft-bmp", "BMP")
 			if "2" in LCD4linux.SavePicture.value and SAVE is True:
 				if str(LCD4linux.LCDRotate2.value) != "0":
-					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
+					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value), expand=True)
 				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
 				if isfile(bild):
 					rename(bild, "%s.png" % PIC2)
@@ -3412,7 +3412,7 @@ def writeLCD2(s, im, quality, SAVE=True):
 		try:
 			if "2" in LCD4linux.SavePicture.value and SAVE is True:
 				if str(LCD4linux.LCDRotate2.value) != "0":
-					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
+					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value), expand=True)
 				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
 				if isfile(bild):
 					rename(bild, "%s.png" % PIC2)
@@ -3463,7 +3463,7 @@ def writeLCD2(s, im, quality, SAVE=True):
 			try:
 				datei = "%s.jpg" % PIC2tmp
 				if str(LCD4linux.LCDRotate2.value) != "0":
-					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value))
+					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate2.value), expand=True)
 					s.im[im].save(datei, "JPEG")
 				elif pic is not None:
 					open(datei, "wb").write(pic)
@@ -3499,7 +3499,7 @@ def writeLCD3(s, im, quality, SAVE=True):
 			doDPF(3, im, s)
 		if "3" in LCD4linux.SavePicture.value and SAVE is True:
 			if str(LCD4linux.LCDRotate3.value) != "0":
-				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
+				s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value), expand=True)
 			try:
 				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
 				if isfile(bild):
@@ -3521,7 +3521,7 @@ def writeLCD3(s, im, quality, SAVE=True):
 			s.im[im].save("/tmp/usbtft-bmp", "BMP")
 			if "3" in LCD4linux.SavePicture.value and SAVE is True:
 				if str(LCD4linux.LCDRotate3.value) != "0":
-					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
+					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value), expand=True)
 				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
 				if isfile(bild):
 					rename(bild, "%s.png" % PIC3)
@@ -3532,7 +3532,7 @@ def writeLCD3(s, im, quality, SAVE=True):
 		try:
 			if "3" in LCD4linux.SavePicture.value and SAVE is True:
 				if str(LCD4linux.LCDRotate3.value) != "0":
-					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
+					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value), expand=True)
 				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
 				if isfile(bild):
 					rename(bild, "%s.png" % PIC3)
@@ -3583,7 +3583,7 @@ def writeLCD3(s, im, quality, SAVE=True):
 			try:
 				datei = "%s.jpg" % PIC3tmp
 				if str(LCD4linux.LCDRotate3.value) != "0":
-					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value))
+					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate3.value), expand=True)
 					s.im[im].save(datei, "JPEG")
 				elif pic is not None:
 					open(datei, "wb").write(pic)
@@ -11806,7 +11806,7 @@ def LCD4linuxPIC(self, session):
 					else:
 						pil_image = pil_image.resize((x1, y1), Image.LANCZOS if PY3 else Image.ANTIALIAS)
 					S = int(strftime("%H")) % 12
-					pil_image = pil_image.rotate(360 - int(30 * S + int(int(strftime("%M")) / 2))).convert("RGBA")  # 360/12
+					pil_image = pil_image.rotate(360 - int(30 * S + int(int(strftime("%M")) / 2)), expand=True).convert("RGBA")  # 360/12
 					self.im[im].paste(pil_image, (POSX + int((x - x1) / 2), ConfigPos + int((y - y1) / 2)), pil_image)
 					# Minute
 					pil_image = Image.open(Clock + str(ConfigAnalog) + "/Minute.png")
@@ -11817,7 +11817,7 @@ def LCD4linuxPIC(self, session):
 						pil_image = pil_image.resize((x1, y1))
 					else:
 						pil_image = pil_image.resize((x1, y1), Image.LANCZOS if PY3 else Image.ANTIALIAS)
-					pil_image = pil_image.rotate(360 - int(6 * int(strftime("%M")))).convert("RGBA")  # 360/60
+					pil_image = pil_image.rotate(360 - int(6 * int(strftime("%M"))), expand=True).convert("RGBA")  # 360/60
 					self.im[im].paste(pil_image, (POSX + int((x - x1) / 2), ConfigPos + int((y - y1) / 2)), pil_image)
 					# Seconds: Due to the bad refresh rates, the second hand was deliberately not programmed!
 					# Date underneath clockface
@@ -15510,21 +15510,21 @@ def LCD4linuxPIC(self, session):
 			self.draw[1].rectangle((0, 0, MAX_W, MAX_H), fill="black")
 			QuickList = [[], [], []]
 		if str(LCD4linux.LCDRotate1.value) != "0":
-			self.im[1] = self.im[1].rotate(int(LCD4linux.LCDRotate1.value))
+			self.im[1] = self.im[1].rotate(int(LCD4linux.LCDRotate1.value), expand=True)
 		Brief1.put([writeLCD1, self, 1, LCD4linux.BilderJPEG.value])
 	if LCD4linux.LCDType2.value != "00" and self.Refresh >= LCD4linux.LCDRefresh2.value and not (getSA(2) in LCD4linux.TV.value and "2" in LCD4linux.TVLCD.value and not Standby.inStandby):
 		if Dunkel and "2" in Dunkel:
 			MAX_W, MAX_H = self.im[2].size
 			self.draw[2].rectangle((0, 0, MAX_W, MAX_H), fill="black")
 		if str(LCD4linux.LCDRotate2.value) != "0":
-			self.im[2] = self.im[2].rotate(int(LCD4linux.LCDRotate2.value))
+			self.im[2] = self.im[2].rotate(int(LCD4linux.LCDRotate2.value), expand=True)
 		Brief2.put([writeLCD2, self, 2, LCD4linux.BilderJPEG.value])
 	if LCD4linux.LCDType3.value != "00" and self.Refresh >= LCD4linux.LCDRefresh3.value and not (getSA(3) in LCD4linux.TV.value and "3" in LCD4linux.TVLCD.value and not Standby.inStandby):
 		if Dunkel and "3" in Dunkel:
 			MAX_W, MAX_H = self.im[3].size
 			self.draw[3].rectangle((0, 0, MAX_W, MAX_H), fill="black")
 		if str(LCD4linux.LCDRotate3.value) != "0":
-			self.im[3] = self.im[3].rotate(int(LCD4linux.LCDRotate3.value))
+			self.im[3] = self.im[3].rotate(int(LCD4linux.LCDRotate3.value), expand=True)
 		Brief3.put([writeLCD3, self, 3, LCD4linux.BilderJPEG.value])
 	Brief1.join()
 	Brief2.join()
