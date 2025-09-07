@@ -3281,7 +3281,7 @@ def writeLCD1(s, im, quality, SAVE=True):
 			s.im[im].save("/tmp/usbtft-bmp", "BMP")
 			if "1" in LCD4linux.SavePicture.value and SAVE is True:
 				if str(LCD4linux.LCDRotate1.value) != "0":
-					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value))
+					s.im[im] = s.im[im].rotate(-int(LCD4linux.LCDRotate1.value), expand=True)
 				s.im[im].save(bild, "PNG" if LCD4linux.BilderTyp.value == "png" else "JPEG")
 				if isfile(bild):
 					rename(bild, "%s.png" % PIC)
@@ -11806,7 +11806,7 @@ def LCD4linuxPIC(self, session):
 					else:
 						pil_image = pil_image.resize((x1, y1), Image.LANCZOS if PY3 else Image.ANTIALIAS)
 					S = int(strftime("%H")) % 12
-					pil_image = pil_image.rotate(360 - int(30 * S + int(int(strftime("%M")) / 2)), expand=True).convert("RGBA")  # 360/12
+					pil_image = pil_image.rotate(360 - int(30 * S + int(int(strftime("%M")) / 2)), expand=False).convert("RGBA")  # 360/12
 					self.im[im].paste(pil_image, (POSX + int((x - x1) / 2), ConfigPos + int((y - y1) / 2)), pil_image)
 					# Minute
 					pil_image = Image.open(Clock + str(ConfigAnalog) + "/Minute.png")
@@ -11817,7 +11817,7 @@ def LCD4linuxPIC(self, session):
 						pil_image = pil_image.resize((x1, y1))
 					else:
 						pil_image = pil_image.resize((x1, y1), Image.LANCZOS if PY3 else Image.ANTIALIAS)
-					pil_image = pil_image.rotate(360 - int(6 * int(strftime("%M"))), expand=True).convert("RGBA")  # 360/60
+					pil_image = pil_image.rotate(360 - int(6 * int(strftime("%M"))), expand=False).convert("RGBA")  # 360/60
 					self.im[im].paste(pil_image, (POSX + int((x - x1) / 2), ConfigPos + int((y - y1) / 2)), pil_image)
 					# Seconds: Due to the bad refresh rates, the second hand was deliberately not programmed!
 					# Date underneath clockface
