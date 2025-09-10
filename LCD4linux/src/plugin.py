@@ -8283,6 +8283,13 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		isMediaPlayer = self.SaveisMediaPlayer
 		TFTCheck(False)
 
+	def restartGUI(self, answer):
+		if answer:
+			L4log("GUI Restart")
+			self.session.open(Standby.TryQuitMainloop, 3)
+		else:
+			self.close(True, self.session)
+
 
 class UpdateStatus(Screen):
 
