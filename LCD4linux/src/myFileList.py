@@ -207,8 +207,8 @@ class FileList(MenuList):
 		return False if self.getSelection() == "" else self.getSelection()[1]
 
 	def descent(self):
-		if self.getSelection() != "" and self.current_directory is not None:
-			se = self.current_directory if self.current_directory.endswith("/") else os_path.basename(self.current_directory)
+		if self.getSelection() != "":
+			se = (self.current_directory if self.current_directory.endswith("/") else os_path.basename(self.current_directory)) if self.current_directory is not None else ""
 			self.changeDir(self.getSelection()[0], select=se)
 
 	def getFilename(self):
