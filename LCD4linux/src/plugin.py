@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r32"
+Version = "V5.0-r33"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -5581,7 +5581,6 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 		self.mode = _("Idle")
 		self.LastSelect = "5"
 		self.Page()
-		self.selectionChanged()
 
 	def NextScreenKey(self):
 		NextScreen(True)
@@ -5738,7 +5737,6 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				self.list1.append(getConfigListEntry(_("Box-Skin-LCD Enable Media-Mode"), LCD4linux.xmlType02))
 				self.list1.append(getConfigListEntry(_("Box-Skin-LCD Enable Idle-Mode"), LCD4linux.xmlType03))
 			self.list1.append(getConfigListEntry(_("OSD [display time]"), LCD4linux.OSD))
-
 			if LCD4linux.OSD.value != "0":
 				self.list1.append(getConfigListEntry(_("- which LCD"), LCD4linux.OSDLCD))
 				self.list1.append(getConfigListEntry(_("- Show in Mode"), LCD4linux.OSDshow))
@@ -5948,6 +5946,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.list1.append(getConfigListEntry(_("Config Restore All Settings"), LCD4linux.ConfigWriteAll))
 			self.list1.append(getConfigListEntry(_("Debug-Logging > /tmp/L4log.txt"), LCD4linux.EnableEventLog))
 			self["config"].setList(self.list1)
+
 		elif self.mode == _("On"):
 			self.list2 = []
 			self.list2.append(getConfigListEntry(_("- Backlight Off [disable set Off=On]"), LCD4linux.LCDoff))
@@ -6697,6 +6696,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				self.list2.append(getConfigListEntry(_("- which LCD"), LCD4linux.TVLCD))
 				self.list2.append(getConfigListEntry(_("- Type"), LCD4linux.TVType))
 			self["config"].setList(self.list2)
+
 		elif self.mode == _("Media"):
 			self.list3 = []
 			self.list3.append(getConfigListEntry(_("- LCD 1 Background Color"), LCD4linux.MPLCDColor1))
@@ -6830,7 +6830,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.list3.append(getConfigListEntry(_("Clock"), LCD4linux.MPClock))
 			if LCD4linux.MPClock.value != "0":
 				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPClockLCD))
-				self.list3.append(getConfigListEntry(_("- Type"), LCD4linux.MPClockType))
+				self.list3.append(getConfigListEntry(_("-  Type"), LCD4linux.MPClockType))
 				if LCD4linux.MPClockType.value[0] == "5":
 					self.list3.append(getConfigListEntry(_("- Analog Clock"), LCD4linux.MPClockAnalog))
 				elif LCD4linux.MPClockType.value[0] == "1":
@@ -6845,7 +6845,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.list3.append(getConfigListEntry(_("Clock 2"), LCD4linux.MPClock2))
 			if LCD4linux.MPClock2.value != "0":
 				self.list3.append(getConfigListEntry(_("- which LCD"), LCD4linux.MPClock2LCD))
-				self.list3.append(getConfigListEntry(_("- Type"), LCD4linux.MPClock2Type))
+				self.list3.append(getConfigListEntry(_("-  Type"), LCD4linux.MPClock2Type))
 				if LCD4linux.MPClock2Type.value[0] == "5":
 					self.list3.append(getConfigListEntry(_("- Analog Clock"), LCD4linux.MPClock2Analog))
 				elif LCD4linux.MPClock2Type.value[0] == "1":
@@ -7320,6 +7320,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 					self.list3.append(getConfigListEntry(_("- Alignment"), LCD4linux.MPRecordingAlign))
 					self.list3.append(getConfigListEntry(_("- Split Screen"), LCD4linux.MPRecordingSplit))
 			self["config"].setList(self.list3)
+
 		elif self.mode == _("Idle"):
 			self.list4 = []
 			self.list4.append(getConfigListEntry(_("LCD Display"), LCD4linux.Standby))
@@ -7359,7 +7360,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.list4.append(getConfigListEntry(_("Clock"), LCD4linux.StandbyClock))
 			if LCD4linux.StandbyClock.value != "0":
 				self.list4.append(getConfigListEntry(_("- which LCD"), LCD4linux.StandbyClockLCD))
-				self.list4.append(getConfigListEntry(_("- Type"), LCD4linux.StandbyClockType))
+				self.list4.append(getConfigListEntry(_("-  Type"), LCD4linux.StandbyClockType))
 				if LCD4linux.StandbyClockType.value[0] == "5":
 					self.list4.append(getConfigListEntry(_("- Analog Clock"), LCD4linux.StandbyClockAnalog))
 				elif LCD4linux.StandbyClockType.value[0] == "1":
@@ -7374,7 +7375,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.list4.append(getConfigListEntry(_("Clock 2"), LCD4linux.StandbyClock2))
 			if LCD4linux.StandbyClock2.value != "0":
 				self.list4.append(getConfigListEntry(_("- which LCD"), LCD4linux.StandbyClock2LCD))
-				self.list4.append(getConfigListEntry(_("- Type"), LCD4linux.StandbyClock2Type))
+				self.list4.append(getConfigListEntry(_("-  Type"), LCD4linux.StandbyClock2Type))
 				if LCD4linux.StandbyClock2Type.value[0] == "5":
 					self.list4.append(getConfigListEntry(_("- Analog Clock"), LCD4linux.StandbyClock2Analog))
 				elif LCD4linux.StandbyClock2Type.value[0] == "1":
@@ -7898,22 +7899,20 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.mode = _("On")
 			self.setTitle(_("LCD4linux Display-Mode On"))
 			self["key_blue"].setText(_("Set Media >>"))
-			self.SetList()
 		elif self.mode == _("On"):
 			self.mode = _("Media")
 			self.setTitle(_("LCD4linux Display-Mode MediaPlayer"))
 			self["key_blue"].setText(_("Set Idle >>"))
-			self.SetList()
 		elif self.mode == _("Media"):
 			self.mode = _("Idle")
 			self.setTitle(_("LCD4linux Display-Mode Idle"))
 			self["key_blue"].setText(_("Set Global >>"))
-			self.SetList()
 		elif self.mode == _("Idle"):
 			self.mode = _("Global")
 			self.setTitle(_("LCD4linux Settings"))
 			self["key_blue"].setText(_("Set On >>"))
-			self.SetList()
+		self.SetList()
+		self.selectionChanged()
 		getBilder()
 		self.toggle = time()
 
@@ -7926,7 +7925,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			if sel in [LCD4linux.PiconPath, LCD4linux.Picon2Path, LCD4linux.PiconCache, LCD4linux.Picon2Cache, LCD4linux.PiconPathAlt, LCD4linux.Picon2PathAlt, LCD4linux.ConfigPath, LCD4linux.WetterPath, LCD4linux.MPCoverPath1, LCD4linux.MPCoverPath2, LCD4linux.FritzPath, LCD4linux.CalPath, LCD4linux.SatPath, LCD4linux.ProvPath, LCD4linux.MoonPath]:
 				L4log("select Dir 1")
 				self.session.openWithCallback(self.dirSelected, LCDdisplayFile, text=_("Choose dir"), FileName=self["config"].getCurrent()[1].value, showFiles=False)
-			elif sel in [LCD4linux.LCDBild1, LCD4linux.LCDBild2, LCD4linux.MPLCDBild1, LCD4linux.MPLCDBild2, LCD4linux.StandbyLCDBild1, LCD4linux.StandbyLCDBild2, LCD4linux.FritzFrame]:
+			elif sel in [LCD4linux.LCDBild1, LCD4linux.LCDBild2, LCD4linux.LCDBild3, LCD4linux.MPLCDBild1, LCD4linux.MPLCDBild2, LCD4linux.MPLCDBild3, LCD4linux.StandbyLCDBild1, LCD4linux.StandbyLCDBild2, LCD4linux.StandbyLCDBild3, LCD4linux.FritzFrame]:
 				L4log("select File 1")
 				self.session.openWithCallback(self.fileSelected, LCDdisplayFile, text=_("Choose file"), FileName=self["config"].getCurrent()[1].value, showFiles=True)
 			elif sel in [LCD4linux.OSCAMFile, LCD4linux.TextFile, LCD4linux.Text2File, LCD4linux.Text3File, LCD4linux.MPTextFile, LCD4linux.MPCoverFile, LCD4linux.MPCoverFile2, LCD4linux.BildFile, LCD4linux.Bild2File, LCD4linux.Bild3File, LCD4linux.Bild4File, LCD4linux.Bild5File, LCD4linux.Bild6File, LCD4linux.RecordingPath]:
@@ -7992,14 +7991,20 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				LCD4linux.LCDBild1.value = dirdir
 			elif sel == LCD4linux.LCDBild2:
 				LCD4linux.LCDBild2.value = dirdir
+			elif sel == LCD4linux.LCDBild3:
+				LCD4linux.LCDBild3.value = dirdir
 			elif sel == LCD4linux.MPLCDBild1:
 				LCD4linux.MPLCDBild1.value = dirdir
 			elif sel == LCD4linux.MPLCDBild2:
 				LCD4linux.MPLCDBild2.value = dirdir
+			elif sel == LCD4linux.MPLCDBild3:
+				LCD4linux.MPLCDBild3.value = dirdir
 			elif sel == LCD4linux.StandbyLCDBild1:
 				LCD4linux.StandbyLCDBild1.value = dirdir
 			elif sel == LCD4linux.StandbyLCDBild2:
 				LCD4linux.StandbyLCDBild2.value = dirdir
+			elif sel == LCD4linux.StandbyLCDBild3:
+				LCD4linux.StandbyLCDBild3.value = dirdir
 			elif sel == LCD4linux.OSCAMFile:
 				LCD4linux.OSCAMFile.value = dirdir
 			elif sel == LCD4linux.TextFile:
