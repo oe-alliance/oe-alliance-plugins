@@ -15,7 +15,7 @@
 from datetime import datetime, timedelta
 from getopt import getopt, GetoptError
 from html import unescape
-from json import dump, loads
+from json import dump
 from re import compile, search, findall, S
 from requests import get, exceptions
 from secrets import choice
@@ -89,9 +89,9 @@ class TVSparserTips():
 				timeStartTs, hourmin = None, datetime.strptime(intros[1], '%H:%M').time() if len(intros) > 1 else None
 				if hourmin and intros:
 					if "heute" in intros[0]:
-						timeStartTs = int(datetime.combine(datetime.today(), hourmin).timestamp())
+						timeStartTs = int(datetime.combine(datetime.now(tz=None), hourmin).timestamp())
 					else:
-						timeStartTs = int(datetime.combine(datetime.strptime(f"{intros[0]}{datetime.today().year}", '%d.%m.%Y'), hourmin).timestamp())
+						timeStartTs = int(datetime.combine(datetime.strptime(f"{intros[0]}{datetime.now(tz=None).year}", '%d.%m.%Y'), hourmin).timestamp())
 				channelName = intros[2] if len(intros) > 2 else ""
 				timeInfos = intros[0] or ""
 				timeInfos += f" | {intros[1]} Uhr" if len(intros) > 1 else ""
@@ -176,7 +176,7 @@ class TVSparserAssets():
 		if dateStr:
 			dateDt = datetime.fromisoformat(dateStr)
 		else:  # fallback to today
-			dateDt = datetime.today()
+			dateDt = datetime.now(tz=None)
 			dateStr = dateDt.strftime("%F")
 		if timeCode == "0":  # if timespanStart = '00:00' -> use day before (server philosophy)
 			dateStr = (dateDt + timedelta(days=-1)).strftime("%F")
@@ -230,9 +230,37 @@ class TVSparserAssets():
 		return errmsg, assetsDicts
 
 	def parseSingleAsset(self, assetUrl):
+		def resolveTrailerUrl(contentId, licenseKey):
+			url = f"{bytes.fromhex("68747470733A2F2F6D656469612D6170692D70726F642E677265656E766964656F2E696F2F6170692F76312F636F6E74656E742F3"[:-1]).decode()}{contentId}"
+			headers = {
+						"User-Agent": tvspglobals.USERAGENT,
+  						"Accept": "*/*",
+						"Accept-Language": "de,en-US;q=0.7,en;q=0.3",
+  						"Accept-Encoding": "gzip, deflate, zstd",
+  						"Connection": "keep-alive",
+  						bytes.fromhex("52656665726572E"[:-1]).decode(): bytes.fromhex("68747470733A2F2F7777772E7476737069656C66696C6D2E64652FE"[:-1]).decode(),
+  						bytes.fromhex("782D646C382D6C6963656E73656B65794"[:-1]).decode(): licenseKey,
+						bytes.fromhex("4F726967696EE"[:-1]).decode(): bytes.fromhex("68747470733A2F2F7777772E7476737069656C66696C6D2E64651"[:-1]).decode(),
+  						bytes.fromhex("5365632D4750433"[:-1]).decode(): bytes.fromhex("311"[:-1]).decode(),
+  						bytes.fromhex("5365632D46657463682D44657374A"[:-1]).decode(): bytes.fromhex("656D7074796"[:-1]).decode(),
+						bytes.fromhex("5365632D46657463682D4D6F6465D"[:-1]).decode(): bytes.fromhex("636F72738"[:-1]).decode(),
+  						bytes.fromhex("5365632D46657463682D536974657"[:-1]).decode(): bytes.fromhex("63726F73732D73697465A"[:-1]).decode()
+						}
+			try:
+				response = get(url, headers=headers, timeout=(3.05, 6))
+				response.raise_for_status()
+				if response.ok:
+					trailerDicts = response.json().get("result", {}).get("videoRenditions", {})
+					return trailerDicts[0].get("src", "") if trailerDicts else ""
+				else:
+					print(f"[{tvspglobals.MODULE_NAME}] API server access ERROR, response code: {response.raise_for_status()}")
+			except exceptions.RequestException as errmsg:
+				print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserAssets:resolveTrailerUrl': {errmsg}")
+			return ""
+
 		errmsg, htmldata = tvsphelper.getHTMLdata(assetUrl)
 		if errmsg:
-			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserTips:parseSingleAsset': {errmsg}")
+			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserAssets:parseSingleAsset': {errmsg}")
 			return errmsg, {}
 		extract = htmldata[htmldata.find('<div class="content-area">'):]
 		extract = extract[:extract.find('<div class="schedule-widget__tabs">')]
@@ -257,12 +285,12 @@ class TVSparserAssets():
 		timeStartTs, startHourmin = None, datetime.strptime(timeStartEnd[0].replace(" Uhr", ""), '%H:%M').time() if timeStartEnd else None
 		timeEndTs, endHourmin = None, datetime.strptime(timeStartEnd[1].replace(" Uhr", ""), '%H:%M').time() if len(timeStartEnd) > 1 else None
 		if "heute" in broadblock[0].lower():
-			timeStartTs = int(datetime.combine(datetime.today(), startHourmin).timestamp()) if startHourmin else ""
-			timeEndTs = int(datetime.combine(datetime.today(), endHourmin).timestamp()) if endHourmin else ""
+			timeStartTs = int(datetime.combine(datetime.now(tz=None), startHourmin).timestamp()) if startHourmin else ""
+			timeEndTs = int(datetime.combine(datetime.now(tz=None), endHourmin).timestamp()) if endHourmin else ""
 		else:
 			daydate = broadblock[0][broadblock[0].find(",") + 2:]  # convert 'Fr., 23.05.' -> '23.05.'
-			timeStartTs = int(datetime.combine(datetime.strptime(f"{daydate}{datetime.today().year}", '%d.%m.%Y'), startHourmin).timestamp()) if startHourmin else ""
-			timeEndTs = int(datetime.combine(datetime.strptime(f"{daydate}{datetime.today().year}", '%d.%m.%Y'), endHourmin).timestamp()) if endHourmin else ""
+			timeStartTs = int(datetime.combine(datetime.strptime(f"{daydate}{datetime.now(tz=None).year}", '%d.%m.%Y'), startHourmin).timestamp()) if startHourmin else ""
+			timeEndTs = int(datetime.combine(datetime.strptime(f"{daydate}{datetime.now(tz=None).year}", '%d.%m.%Y'), endHourmin).timestamp()) if endHourmin else ""
 		channelName = broadblock[2] if len(broadblock) > 2 else ""
 		channelId = tvsphelper.searchOneValue(r'"pageElementCreative":"(.*?)"', extract, "").upper().replace("N\\/A", "").lower()
 		imgUrl = tvsphelper.searchOneValue(r'<picture class=".*?">\s*<img src="(.*?)" width', extract, "", flags=S)
@@ -273,10 +301,9 @@ class TVSparserAssets():
 		imgCredits = tvsphelper.searchOneValue(r'<span class="credit">(.*?)</span>', extract, "")
 		access = tvsphelper.searchOneValue(r'<script src="(.*?)"></script>', extract, "")
 		access = access[access.find("key=") + 4:] if access else ""
-		trailerId = tvsphelper.searchOneValue(r'"contentDesc": "(.*?)"', extract, "")
-		part0 = bytes.fromhex("68747470733a2f2f6d656469612e64656c696768742e766964656f2fa"[:-1]).decode()
-		part1 = bytes.fromhex("2f4d454449412f76302f48442f6d656469612e6d7034f"[:-1]).decode()
-		trailerUrl = f"{part0}{access}/{trailerId}{part1}" if access and trailerId else ""
+		contentId = tvsphelper.searchOneValue(r'content-id="(.*?)"', extract, "")
+		licenseKey = tvsphelper.searchOneValue(r'data-license-key="(.*?)"', extract, "")
+		trailerUrl = resolveTrailerUrl(contentId, licenseKey) if contentId and licenseKey else ""
 		descblock = tvsphelper.searchOneValue(r'<section class="broadcast-detail__description">(.*?)</section>', extract, "", flags=S)
 		preview = tvsphelper.searchOneValue(r'<p class="headline">(.*?)</p>', descblock, "")
 		text = unescape(tvsphelper.searchOneValue(r'<p>(.*?)</p>', descblock, ""))
@@ -394,7 +421,7 @@ def main(argv):  # shell interface
 		elif opt in ("-j", "--json"):
 			filename = arg
 		elif opt in ("-s", "--single"):
-			errmsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/citizen-sleuth-die-podcast-detektivin,68416ef34d62107df4f47a79.html")
+			errmsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/schtonk,68b6f1817d255456791151e0.html")
 		elif opt in ("-t", "--tipslist"):
 			jsonList = tvsptips.parseTips()
 	if jsonList and filename:

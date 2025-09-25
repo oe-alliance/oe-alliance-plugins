@@ -95,7 +95,7 @@ config.plugins.tvspielfilm.mapfilehash = ConfigText(default="")
 
 
 class TVglobals():
-	RELEASE = "v2.3"
+	RELEASE = "v2.4"
 	MODULE_NAME = __name__.split(".")[-2]
 	IMPORTDICT = {}
 	CONFIGPATH = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # e.g. /etc/enigma2/TVSpielfilm/
@@ -141,7 +141,7 @@ class TVcoreHelper():
 		return ""
 
 	def cleanupCache(self):  # delete older asset overviews, detailed assets and images
-		now = datetime.today()
+		now = datetime.now(tz=None)
 		latest = now - timedelta(days=config.plugins.tvspielfilm.keepcache.value)
 		ldate = latest.replace(hour=0, minute=0, second=0, microsecond=0)
 		for filename in glob(join(f"{self.getCachePath()}cache/", "assets*_*.json")):
@@ -202,7 +202,7 @@ class TVcoreHelper():
 				for assetDict in allAssets:
 					timeStart = assetDict.get("timeStart", "")
 					if timeStart:
-						if datetime.fromisoformat(timeStart).replace(tzinfo=None) >= datetime.today().replace(hour=22, minute=0):
+						if datetime.fromisoformat(timeStart).replace(tzinfo=None) >= datetime.now(tz=None).replace(hour=22, minute=0):
 							allAssets2200.append(assetDict)  # add all dates from '22:00' onwards
 				if allAssets2200:
 					print(f"[{tvglobals.MODULE_NAME}] {spanStartsDt.strftime('%F')}: data set '22:00' was successfully created from data set '20:15'")
@@ -256,7 +256,7 @@ class TVcoreHelper():
 						return ""
 					for asset in assetsDicts:
 						timeStartIso = asset.get("timeStart", "")
-						timeStartDt = datetime.fromisoformat(timeStartIso).replace(tzinfo=None) if timeStartIso else datetime.today()
+						timeStartDt = datetime.fromisoformat(timeStartIso).replace(tzinfo=None) if timeStartIso else datetime.now(tz=None)
 						if timeStartDt and timeStartDt >= eventStartDt:
 							assetUrl = asset.get("assetUrl", "")
 							break
@@ -350,10 +350,10 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			isNew = assetDict.get("isNew", "")
 			isLive = assetDict.get("isLive", "")
 			timeStartIso = assetDict.get("timeStart", "")
-			self.timeStartDt = datetime.fromisoformat(timeStartIso).replace(tzinfo=None) if timeStartIso else datetime.today()
+			self.timeStartDt = datetime.fromisoformat(timeStartIso).replace(tzinfo=None) if timeStartIso else datetime.now(tz=None)
 			timeEndIso = assetDict.get("timeEnd", "")
-			timeEndDt = datetime.fromisoformat(timeEndIso).replace(tzinfo=None) if timeEndIso else datetime.today()
-			timeStartStr = (self.timeStartDt if self.timeStartDt else datetime.today()).strftime("%H:%M")
+			timeEndDt = datetime.fromisoformat(timeEndIso).replace(tzinfo=None) if timeEndIso else datetime.now(tz=None)
+			timeStartStr = (self.timeStartDt if self.timeStartDt else datetime.now(tz=None)).strftime("%H:%M")
 			timeStartEnd = f"{timeStartStr} - {timeEndDt.strftime('%H:%M')}"
 			timeStartEndTs = (int(self.timeStartDt.timestamp()), int(timeEndDt.timestamp()))
 			repeatHint = assetDict.get("repeatHint", "")  # e.g.'Wh. um 00:20 Uhr, Nächste Episode um 21:55 Uhr (Staffel 8, Episode 24)'
@@ -489,7 +489,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 				self.timeStartEnd = timeStartEnd
 				self.subLine = subline
 				self.spanStartsStr = timeStartStr
-				self.setReviewdate(datetime.today(), timeStartEnd, fullScreen=True)
+				self.setReviewdate(datetime.now(tz=None), timeStartEnd, fullScreen=True)
 
 	def hideAssetDetails(self):
 		for widget in ["picon", "thumb", "image", "playButton"]:
@@ -504,11 +504,11 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			self[widget].setText("")
 
 	def setReviewdate(self, currentDt, timeStartEnd, fullScreen=False):
-		now = datetime.today()
+		now = datetime.now(tz=None)
 		now -= timedelta(minutes=now.minute % 15, seconds=now.second, microseconds=now.microsecond)  # round to last 15 minutes for 'Jetzt im TV'
 		spanStartsStr = self.spanStartsStr or now.strftime("%H:%M")
 		dateOnlyDt = currentDt.replace(hour=0, minute=0, second=0, microsecond=0)
-		todaydateonly = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
+		todaydateonly = datetime.now(tz=None).replace(hour=0, minute=0, second=0, microsecond=0)
 		weekday = "heute" if dateOnlyDt == todaydateonly else ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"][dateOnlyDt.weekday()]
 		hour, minute = spanStartsStr.split(":") if spanStartsStr else [currentDt.strftime("%H"), currentDt.strftime("%M")]
 		spanEndsStr = (currentDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0) + timedelta(minutes=self.spanDuranceTs)).strftime("%H:%M")
@@ -751,7 +751,7 @@ class TVfullscreen(TVscreenHelper, Screen):
 		Screen.__init__(self, session)
 		self.assetTitle, self.timeStartEnd, self.spanStartsStr = "", "", ""
 		self.currServiceRef, self.subLine, self.trailerUrl = "", "", ""
-		self.timeStartDt = datetime.today()
+		self.timeStartDt = datetime.now(tz=None)
 		self.spanDuranceTs = 0
 		self.dataBases = []
 		self["release"] = StaticText(tvglobals.RELEASE)
@@ -1131,7 +1131,7 @@ class TVoverview(TVscreenHelper, Screen):
 		self.tvinfobox = session.instantiateDialog(TVinfoBox)
 		self.filterIndex = int(config.plugins.tvspielfilm.defaultfilter.value)
 		self.filterSettings = loads(config.plugins.tvspielfilm.filtersettings.value)
-		self.currDateDt = datetime.today()
+		self.currDateDt = datetime.now(tz=None)
 		self.dataBases, self.skinList, self.skinDicts = [], [], []
 		self.currDayDelta, self.lenImportdict, self.totalAssetsCount = 0, 0, 0
 		self.assetTitle, self.trailerUrl, self.currImdbId, self.currTmdbId = "", "", "", ""
@@ -1195,9 +1195,9 @@ class TVoverview(TVscreenHelper, Screen):
 		if timeSearch and self.spanDuranceTs:
 			spanStartsDt = datetime.combine(self.currDateDt, datetime.strptime(timeSearch.group(0), "%H:%M").time())
 			spansEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
-			now = datetime.today()
+			now = datetime.now(tz=None)
 			self.currDayDelta += int(spanStartsDt < now and spansEndsDt < now)  # in case start with next day
-		self.currDateDt = datetime.today() + timedelta(days=self.currDayDelta)
+		self.currDateDt = datetime.now(tz=None) + timedelta(days=self.currDayDelta)
 
 		self.setReviewdate(self.currDateDt, timeStartEnd="", fullScreen=False)
 		self.setLongstatus()
@@ -1221,8 +1221,9 @@ class TVoverview(TVscreenHelper, Screen):
 		self["shortStatus"].setText(f"Lade TVS-EPG Daten für {channelText}")
 		self.allAssetsCount, self.allImagesCount = 0, 0
 		self.skinDicts, self.skinList = [], []
-		now = datetime.today()
+		now = datetime.now(tz=None)
 		now -= timedelta(minutes=now.minute % 15, seconds=now.second, microseconds=now.microsecond)  # round to last 15 minutes in case of 'Jetzt im TV'
+
 		hour, minute = self.spanStartsStr.split(":") if self.spanStartsStr else [now.strftime("%H"), now.strftime("%M")]
 		spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 		spanEndsDt = spanStartsDt + (timedelta(days=1) if self.singleChannelId else timedelta(minutes=self.spanDuranceTs))
@@ -1271,8 +1272,8 @@ class TVoverview(TVscreenHelper, Screen):
 					break
 				channelId = assetDict.get("channelId", "").lower()
 				timeStartIso = assetDict.get("timeStart", "")
-				timeStartDt = datetime.fromisoformat(timeStartIso).replace(tzinfo=None) if timeStartIso else spanStartsDt.replace(tzinfo=None)
-				if channelId in importDict and timeStartDt < spanEndsDt:  # channel was imported and begins before span ends
+				timeStartDt = datetime.fromisoformat(timeStartIso).replace(tzinfo=None) if timeStartIso else spanStartsDt
+				if channelId in importDict and timeStartDt >= spanStartsDt and timeStartDt < spanEndsDt:  # channel has been imported and starts within the time span
 					timeEndIso = assetDict.get("timeEnd", "")
 					timeEndDt = datetime.fromisoformat(timeEndIso).replace(tzinfo=None) if timeEndIso else spanEndsDt
 					progress = -1
@@ -1419,7 +1420,7 @@ class TVoverview(TVscreenHelper, Screen):
 		if self.skinList:
 			currIndex = self["menuList"].getCurrentIndex()
 			skinlist = self.skinList[currIndex]
-			startTs, endTs = self.splitTimespan(skinlist[3].split(" - "), datetime.today() + timedelta(days=self.currDayDelta))  #  e.g. '20:15 - 21:45' or 'heute | 20:15'
+			startTs, endTs = self.splitTimespan(skinlist[3].split(" - "), datetime.now(tz=None) + timedelta(days=self.currDayDelta))  #  e.g. '20:15 - 21:45' or 'heute | 20:15'
 			if not self.isAlreadyListed((startTs, endTs), skinlist[13]):  # timeSpan, sref
 				title = skinlist[5]
 				shortdesc = skinlist[6]
@@ -1517,7 +1518,7 @@ class TVmain(TVscreenHelper, Screen):
 		self.currAssetUrl = ""
 		self.currTipCnt = 0
 		self.currDayDelta = 0
-		self.currDateDt = datetime.today()
+		self.currDateDt = datetime.now(tz=None)
 		self.tvtipsboxTimer = eTimer()
 		self.tvtipsboxTimer.callback.append(self.tipSlideshow)
 		self.oldChannelName = config.plugins.tvspielfilm.channelname.value
@@ -1721,7 +1722,7 @@ class TVmain(TVscreenHelper, Screen):
 			self.leftUp()
 
 	def getTips(self, forceRefresh=False):
-		tipsfile = join(f"{self.getCachePath()}cache/", f"allTips_{datetime.today().strftime('%F')}.json")
+		tipsfile = join(f"{self.getCachePath()}cache/", f"allTips_{datetime.now(tz=None).strftime('%F')}.json")
 		self.currTipCnt = 0
 		if exists(tipsfile) and not forceRefresh:
 			try:
@@ -1908,7 +1909,7 @@ class TVmain(TVscreenHelper, Screen):
 				for index0, day in enumerate(range(maxcachedays)):  # from today up to next to be cached days
 					if TVS_UPDATESTOP:
 						break
-					currDateDt = datetime.today() + timedelta(days=day)
+					currDateDt = datetime.now(tz=None) + timedelta(days=day)
 					hour, minute = spanStartsStr.split(":")
 					spanStartsDt = currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 					# special case: data record '20:15' contains data until the next early morning, data record '22:00' could possibly already have been generated
@@ -2566,7 +2567,7 @@ class TVautoUpdate(TVcoreHelper):
 				for index, day in enumerate(range(maxcachedays + 1)):  # from today up to next to be cached days
 					if TVS_UPDATESTOP:
 						break
-					currDateDt = datetime.today() + timedelta(days=day)
+					currDateDt = datetime.now(tz=None) + timedelta(days=day)
 					hour, minute = spanStartsStr.split(":")
 					spanStartsDt = currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 					weekday = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"][currDateDt.weekday()] if index else "heute"
