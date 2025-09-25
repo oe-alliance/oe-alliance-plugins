@@ -231,7 +231,7 @@ class TVSparserAssets():
 
 	def parseSingleAsset(self, assetUrl):
 		def resolveTrailerUrl(contentId, licenseKey):
-			url = f"{bytes.fromhex("68747470733A2F2F6D656469612D6170692D70726F642E677265656E766964656F2E696F2F6170692F76312F636F6E74656E742F3"[:-1]).decode()}{contentId}"
+			url = f"{bytes.fromhex('68747470733A2F2F6D656469612D6170692D70726F642E677265656E766964656F2E696F2F6170692F76312F636F6E74656E742F3'[:-1]).decode()}{contentId}"
 			headers = {
 						"User-Agent": tvspglobals.USERAGENT,
   						"Accept": "*/*",
