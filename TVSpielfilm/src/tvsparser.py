@@ -234,10 +234,10 @@ class TVSparserAssets():
 			url = f"{bytes.fromhex('68747470733A2F2F6D656469612D6170692D70726F642E677265656E766964656F2E696F2F6170692F76312F636F6E74656E742F3'[:-1]).decode()}{contentId}"
 			headers = {
 						"User-Agent": tvspglobals.USERAGENT,
-  						"Accept": "*/*",
+						"Accept": "*/*",
 						"Accept-Language": "de,en-US;q=0.7,en;q=0.3",
-  						"Accept-Encoding": "gzip, deflate, zstd",
-  						"Connection": "keep-alive",
+						"Accept-Encoding": "gzip, deflate, zstd",
+						"Connection": "keep-alive",
 						bytes.fromhex("52656665726572E"[:-1]).decode(): bytes.fromhex("68747470733A2F2F7777772E7476737069656C66696C6D2E64652FE"[:-1]).decode(),
 						bytes.fromhex("782D646C382D6C6963656E73656B65794"[:-1]).decode(): licenseKey,
 						bytes.fromhex("4F726967696EE"[:-1]).decode(): bytes.fromhex("68747470733A2F2F7777772E7476737069656C66696C6D2E64651"[:-1]).decode(),
