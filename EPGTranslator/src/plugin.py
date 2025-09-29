@@ -434,8 +434,12 @@ def EPGdata_translate(title, descr, start, duration, uref):
 # The number of these may differ from that in sepline!
 # That different number will be used for the second separator too.
 #
-    (t_sep, t_rest) = t_text.split("\n", 1)
-    if re.match(r"[^*]", t_sep):  # Something not from sepline
+    try:
+        (t_sep, t_rest) = t_text.split("\n", 1)
+    except:
+        t_sep = "SPER"              # To fail "Something not from sepline"
+
+    if re.match(r"[^*]", t_sep):    # Something not from sepline
         t_title = _("Translation error")
         t_descr = t_text
     else:
