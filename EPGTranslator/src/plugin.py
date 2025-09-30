@@ -170,7 +170,7 @@ def transHTMLEnts(text):
         else:
             try:                    # Look it up...
                 res = chr(name2codepoint[ent])
-            except:                 # Leave as-is
+            except Exception:       # Leave as-is
                 pass
         return res
     text = re.sub("&.{,30}?;", repl, text)
@@ -216,7 +216,7 @@ def PART_translate(enc_text, source, dest):
         failed = False
 # Don't bother to distinguish error...
 #
-    except:
+    except Exception:
         newtext = ''    # leaving failed as True
     return (failed, newtext)
 
@@ -436,7 +436,7 @@ def EPGdata_translate(title, descr, start, duration, uref):
 #
     try:
         (t_sep, t_rest) = t_text.split("\n", 1)
-    except:
+    except Exception:
         t_sep = "SPER"              # To fail "Something not from sepline"
 
     if re.match(r"[^*]", t_sep):    # Something not from sepline
@@ -625,7 +625,7 @@ Back: Toggle primary/alternate language
         try:
             cur_serv = self.My_Sref().getServiceName()
             wintitle += " - " + cur_serv
-        except:
+        except Exception:
             pass
         self.setTitle(wintitle)
 
@@ -692,7 +692,7 @@ Back: Toggle primary/alternate language
         try:
             cur_serv = self.My_Sref().getServiceName()
             wintitle += " - " + cur_serv
-        except:
+        except Exception:
             pass
         self.setTitle(wintitle)
         self.getEPG()
@@ -769,7 +769,7 @@ Back: Toggle primary/alternate language
 #
         try:
             begin = time.strftime("%a %Y-%m-%d %H:%M", time.localtime(int(self.event[epg_B])))
-        except:
+        except Exception:
             begin = ''
         if self.event[epg_D] > 0:
             plen = (int(self.event[epg_D]) / 60)    # mins
@@ -792,7 +792,7 @@ Back: Toggle primary/alternate language
             if t_descr is None:  # Not there...
                 try:
                     start = self.event[epg_PB]
-                except:
+                except Exception:
                     start = self.event[epg_B]
                 (t_title, t_descr) = EPGdata_translate(title, descr,
                      start, self.event[epg_D], uref)
@@ -849,24 +849,24 @@ Back: Toggle primary/alternate language
             if curEvent:
                 try:
                     eventID = curEvent.getEventId()
-                except:
+                except Exception:
                     pass
                 try:
                     short = curEvent.getShortDescription()
-                except:
+                except Exception:
                     pass
                 try:
                     extended = curEvent.getExtendedDescription()
-                except:
+                except Exception:
                     pass
                 try:
                     ename = curEvent.getEventName()
-                except:
+                except Exception:
                     pass
                 Servname = ename
                 try:
                     dur = curEvent.getDuration()
-                except:
+                except Exception:
                     pass
 # Approximate start time of playback
 # The getPlayPosition is in units of 1/90000s
@@ -878,11 +878,11 @@ Back: Toggle primary/alternate language
                     seek = service.seek()
                     secs_in = seek.getPlayPosition()[1] / 90000
                     play_began = int(time.time() - secs_in)
-                except:
+                except Exception:
                     pass
                 try:
                     rec_began = curEvent.getBeginTime()
-                except:
+                except Exception:
                     pass
 
             if eventID is None:
@@ -891,7 +891,7 @@ Back: Toggle primary/alternate language
                     path = ssn.getCurrentlyPlayingServiceOrGroup().getPath()
                     finfo = os.stat(path)
                     eventID = str(finfo.st_dev) + ":" + str(finfo.st_ino)
-                except:
+                except Exception:
                     eventID = str(int(time.time()))
 
 # Create a list of the correct size with all elements None
@@ -940,7 +940,7 @@ Back: Toggle primary/alternate language
             short = self.event[epg_S]
             extended = self.event[epg_E]
             self.refresh = False
-        except:
+        except Exception:
             title = 'Press red button to refresh EPG'
             short = ''
             extended = ''
