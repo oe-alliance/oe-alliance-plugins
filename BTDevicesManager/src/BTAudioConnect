@@ -83,7 +83,7 @@ if [ -n "$1" ]; then
     bluetooth_asoundconf "$bluetoothaddr" "$bluetoothname"
 
     log "Starting audio streaming to Bluetooth device"
-    arecord -q -f dat -t raw | aplay -q -f dat -t raw -D bluetooth --process-id-file /var/run/aplay.pid &
+    arecord -q -f dat -t raw | aplay -q -f dat --buffer-size=16384 --period-size=2048 -t raw -D bluetooth --process-id-file /var/run/aplay.pid &
 else
     log "No Bluetooth address provided, exiting"
 fi
