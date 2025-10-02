@@ -22,17 +22,18 @@
 from os import path as os_path, listdir, stat as os_stat
 from Components.MenuList import MenuList
 from Components.Harddisk import harddiskmanager
-from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, eServiceReference, eServiceCenter, gFont, iServiceInformation
+from enigma import RT_HALIGN_LEFT, eListboxPythonMultiContent, eServiceReference, eServiceCenter, gFont, iServiceInformation, getDesktop
 from Tools.LoadPixmap import LoadPixmap
 from Tools.Directories import SCOPE_PLUGINS, resolveFilename
 
 
 def FileEntryComponent(name, absolute=None, isDir=False):
 	res = [(absolute, isDir)]
-	res.append((eListboxPythonMultiContent.TYPE_TEXT, 40, 2, 1000, 22, 0, RT_HALIGN_LEFT, name))
+	(x, y, w, h, y2) = (44, 2, 1000, 35, 8) if getDesktop(0).size().height() > 720 else (40, 2, 1000, 26, 3)
+	res.append((eListboxPythonMultiContent.TYPE_TEXT, x, y, w, h, 0, RT_HALIGN_LEFT, name))
 	png = LoadPixmap(resolveFilename(SCOPE_PLUGINS, "Extensions/LCD4linux/data/dir.png")) if isDir else None
 	if png is not None:
-		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 12, 3, 20, 20, png))
+		res.append((eListboxPythonMultiContent.TYPE_PIXMAP_ALPHATEST, 12, y2, 22, 22, png))
 	return res
 
 
@@ -59,8 +60,9 @@ class FileList(MenuList):
 			se = os_path.basename(directory)
 			direct = "%s/" % directory
 		self.changeDir(direct, se)
-		self.l.setFont(0, gFont("Regular", 18))
-		self.l.setItemHeight(26)
+		(s, h) = (27, 35) if getDesktop(0).size().height() > 720 else (18, 26)
+		self.l.setFont(0, gFont("Regular", s))
+		self.l.setItemHeight(h)
 		self.serviceHandler = eServiceCenter.getInstance()
 
 	def refreshMountpoints(self):
