@@ -86,6 +86,10 @@ def get_known_devices():
 	dlist.append({'name': "SPF800W Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x204c, 'width': 800, 'height': 600})
 	dlist.append({'name': "SPF800W Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x204b})
 
+	# 28,29 Samsung SPF-1000W (217)
+	dlist.append({'name': "SPF1000W Mini Monitor", 'idVendor': 0x04e8, 'idProduct': 0x204e, 'width': 1024, 'height': 768})
+	dlist.append({'name': "SPF1000W Mass Storage", 'idVendor': 0x04e8, 'idProduct': 0x204d})
+
 	# Amazon Fire 7 (9th Generation 2019)
 	dlist.append({'name': "Amazon Fire 7 Mini Monitor", 'idVendor': 0x1949, 'idProduct': 0x03C3, 'width': 1024, 'height': 600})
 	dlist.append({'name': "Amazon Fire 7 Mass Storage", 'idVendor': 0x1949, 'idProduct': 0x03C1})

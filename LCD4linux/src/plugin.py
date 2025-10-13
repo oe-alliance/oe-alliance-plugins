@@ -176,7 +176,7 @@ elif ARCH in ("aarch64"):
 	get_backend(find_library=lambda x: "/lib64/libusb-1.0.so.0")
 	print("[LCD4linux] libusb found :-)", getEnigmaVersionString())
 	USBok = True
-Version = "V5.0-r35"
+Version = "V5.0-r36"
 L4LElist = L4Lelement()
 L4LdoThread = True
 LCD4enigma2config = resolveFilename(SCOPE_CONFIG)  # /etc/enigma2/
@@ -319,7 +319,7 @@ LCDType = [
 	("11", _("Pearl (or compatible LCD) 320x240")), ("12", _("Pearl (or compatible LCD) 240x320")), ("121", _("Corby@Pearl 128x128")), ("122", _("AX206 (or compatible LCD) 480x320")), ("123", _("AX206 (or compatible LCD) 800x480")),
 	("210", _("Samsung SPF-72H 800x480")), ("23", _("Samsung SPF-75H/76H 800x480")), ("24", _("Samsung SPF-87H 800x480")), ("25", _("Samsung SPF-87H old 800x480")), ("26", _("Samsung SPF-83H 800x600")),
 	("29", _("Samsung SPF-85H/86H 800x600")), ("212", _("Samsung SPF-85P/86P 800x600")), ("28", _("Samsung SPF-105P 1024x600")), ("27", _("Samsung SPF-107H 1024x600")), ("213", _("Samsung SPF-107H old 1024x600")),
-	("211", _("Samsung SPF-700T 800x600")), ("215", _("Samsung SPF-800P 800x480")), ("214", _("Samsung SPF-1000P 1024x600")), ("216", _("Samsung SPF-800W 800x600")), ("430", _("Internal TFT-LCD 400x240")), ("50", _("Internal Box-Skin-LCD")),
+	("211", _("Samsung SPF-700T 800x600")), ("215", _("Samsung SPF-800P 800x480")), ("214", _("Samsung SPF-1000P 1024x600")), ("216", _("Samsung SPF-800W 800x600")), ("217", _("Samsung SPF-1000W 1024x768")), ("430", _("Internal TFT-LCD 400x240")), ("50", _("Internal Box-Skin-LCD")),
 	("31", _("only Picture 320x240")), ("33", _("only Picture 800x480")), ("36", _("only Picture 800x600")), ("37", _("only Picture 1024x600")), ("320", _("only Picture Custom Size")), ("420", _("only Picture Custom Size 2"))
 ]
 if PNGutilOK:
@@ -2907,7 +2907,7 @@ def getResolution(t, r):
 	elif t[1:] in ["7", "8", "13", "14"]:
 		MAX_W, MAX_H = 1024, 600
 	elif t[1:] == "17":
-		MAX_W, MAX_H = 220, 176
+		MAX_W, MAX_H = 1024, 768
 	elif t[1:] == "18":
 		MAX_W, MAX_H = 255, 64
 	elif t[1:] == "22":
@@ -5158,7 +5158,7 @@ class L4LWorker(Thread):
 					try:
 						if mailserver is not None:
 							mailserver.select("inbox")
-#                           typ, data = mailserver.search(None, '(SINCE "{date}")'.format(date=Date))
+#							typ, data = mailserver.search(None, '(SINCE "{date}")'.format(date=Date))
 							if str(LCD4linux.MailIMAPDays.value) == "0":
 								typ, data = mailserver.search(None, 'ALL')
 							else:
@@ -5753,8 +5753,8 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				self.list1.append(getConfigListEntry(_("- Color"), LCD4linux.PopupColor))
 				self.list1.append(getConfigListEntry(_("- Background Color"), LCD4linux.PopupBackColor))
 				self.list1.append(getConfigListEntry(_("- Font"), LCD4linux.PopupFont))
-#           if LCD4linux.LCDType1.value[0] == "4" or LCD4linux.LCDType2.value[0] == "4":
-#               self.list1.append(getConfigListEntry(_("Internal TFT Active"), LCD4linux.LCDTFT))
+#			if LCD4linux.LCDType1.value[0] == "4" or LCD4linux.LCDType2.value[0] == "4":
+#				self.list1.append(getConfigListEntry(_("Internal TFT Active"), LCD4linux.LCDTFT))
 			self.list1.append(getConfigListEntry(_("Active Screen"), LCD4linux.ScreenActive))
 			self.list1.append(getConfigListEntry(_("Screen Switch Select - Screen"), LCD4linux.ScreenSwitch))
 			self.list1.append(getConfigListEntry(_("Screen Default after mode change - Screen"), LCD4linux.ScreenDefault))
@@ -5774,9 +5774,9 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.list1.append(getConfigListEntry(_("Picture Sort"), LCD4linux.BilderSort))
 			self.list1.append(getConfigListEntry(_("Picture Directory Recursive"), LCD4linux.BilderRecursiv))
 			self.list1.append(getConfigListEntry(_("Picture Quality for Resizing"), LCD4linux.BilderQuality))
-#           self.list1.append(getConfigListEntry(_("Picture JPEG-Quality [%]"), LCD4linux.BilderJPEG))
+#			self.list1.append(getConfigListEntry(_("Picture JPEG-Quality [%]"), LCD4linux.BilderJPEG))
 			self.list1.append(getConfigListEntry(_("Picture Quick Update Time [s]"), LCD4linux.BilderQuick))
-#           self.list1.append(getConfigListEntry(_("Picture Quick JPEG-Quality [%]"), LCD4linux.BilderJPEGQuick))
+#			self.list1.append(getConfigListEntry(_("Picture Quick JPEG-Quality [%]"), LCD4linux.BilderJPEGQuick))
 			self.list1.append(getConfigListEntry(_("Picture Type [only Picture]"), LCD4linux.BilderTyp))
 			self.list1.append(getConfigListEntry(_("Background-Picture Type"), LCD4linux.BilderBackground))
 			self.list1.append(getConfigListEntry(_("Weather API"), LCD4linux.WetterApi))
@@ -5907,7 +5907,7 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 			self.list1.append(getConfigListEntry(_("MJPEG Stream LCD 3 enable"), LCD4linux.MJPEGenable3))
 			self.list1.append(getConfigListEntry(_("MJPEG Stream LCD 3 Port"), LCD4linux.MJPEGport3))
 			self.list1.append(getConfigListEntry(_("MJPEG Stream LCD 3 Virtual Brightness"), LCD4linux.MJPEGvirtbri3))
-# self.list1.append(getConfigListEntry(_("MJPEG Boundary Mode"), LCD4linux.MJPEGMode))
+#			self.list1.append(getConfigListEntry(_("MJPEG Boundary Mode"), LCD4linux.MJPEGMode))
 			self.list1.append(getConfigListEntry(_("MJPEG Cycle"), LCD4linux.MJPEGCycle))
 			self.list1.append(getConfigListEntry(_("MJPEG Restart on Error"), LCD4linux.MJPEGRestart))
 			self.list1.append(getConfigListEntry(_("MJPEG Header Mode"), LCD4linux.MJPEGHeader))
@@ -8021,8 +8021,8 @@ class LCDdisplayConfig(ConfigListScreen, Screen):
 				LCD4linux.MPTextFile.value = dirdir
 			elif sel == LCD4linux.MPCoverFile:
 				LCD4linux.MPCoverFile.value = dirdir
-#           elif sel == LCD4linux.MPCoverFile2:
-#               LCD4linux.MPCoverFile2.value = dirdir
+#			elif sel == LCD4linux.MPCoverFile2:
+#				LCD4linux.MPCoverFile2.value = dirdir
 			elif sel == LCD4linux.BildFile:
 				LCD4linux.BildFile.value = dirdir
 			elif sel == LCD4linux.Bild2File:
@@ -8504,7 +8504,7 @@ class UpdateStatus(Screen):
 			self.ExternalIP = getExternalIP()
 		self.timerlist = ""
 		self.pluginlist = ""
-# self.onShow.append(self.ServiceChange)
+#		self.onShow.append(self.ServiceChange)
 		config.misc.standbyCounter.addNotifier(self.standbyQuery, initial_call=False)
 		getBilder()
 		self.Temp = GetTempSensor()
@@ -8634,10 +8634,10 @@ class UpdateStatus(Screen):
 						return
 				if self.SonosSoCo is not None:
 					cti = self.SonosSoCo.get_current_transport_info()
-#               if LCD4linux.SonosON.value == True:
-#                   cti = {u'current_transport_status': 'OK', u'current_transport_state': 'PLAYING', u'current_transport_speed': '1'}
-#               else:
-#                   cti = {u'current_transport_status': 'OK', u'current_transport_state': 'STOPPED', u'current_transport_speed': '1'}
+#					if LCD4linux.SonosON.value == True:
+#						cti = {u'current_transport_status': 'OK', u'current_transport_state': 'PLAYING', u'current_transport_speed': '1'}
+#					else:
+#						cti = {u'current_transport_status': 'OK', u'current_transport_state': 'STOPPED', u'current_transport_speed': '1'}
 					self.SonosInfo = cti.get("current_transport_state", "STOPPED")
 					if self.SonosInfo != "PLAYING" or self.SonosSoCo.is_playing_tv:
 						if self.SonosRunning:
@@ -8650,7 +8650,7 @@ class UpdateStatus(Screen):
 					else:
 						self.SonosTrack = self.SonosSoCo.get_current_track_info()
 						self.Lvol = self.SonosSoCo.volume
-#                       self.SonosTrack = {u'album': 'Sehnsucht', u'artist': 'Rammstein', u'title': 'Eifersucht', u'uri': 'x-sonos-spotify:spotify%3atrack%3a4Ugp6Wu4hVXnbEKT3Nrka0?sid=9&flags=8224&sn=3', u'playlist_position': '10', u'duration': '0:03:35', u'position': '0:01:39', u'album_art': u'http://192.168.0.84:1400/getaa?s=1&u=x-sonos-spotify%3aspotify%253atrack%253a4Ugp6Wu4hVXnbEKT3Nrka0%3fsid%3d9%26flags%3d8224%26sn%3d3', u'metadata': '<DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:r="urn:schemas-rinconnetworks-com:metadata-1-0/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><item id="-1" parentID="-1" restricted="true"><res protocolInfo="sonos.com-spotify:*:audio/x-spotify:*" duration="0:03:35">x-sonos-spotify:spotify%3atrack%3a4Ugp6Wu4hVXnbEKT3Nrka0?sid=9&amp;flags=8224&amp;sn=3</res><r:streamContent></r:streamContent><upnp:albumArtURI>/getaa?s=1&amp;u=x-sonos-spotify%3aspotify%253atrack%253a4Ugp6Wu4hVXnbEKT3Nrka0%3fsid%3d9%26flags%3d8224%26sn%3d3</upnp:albumArtURI><dc:title>Eifersucht</dc:title><upnp:class>object.item.audioItem.musicTrack</upnp:class><dc:creator>Rammstein</dc:creator><upnp:album>Sehnsucht</upnp:album></item></DIDL-Lite>'}
+#						self.SonosTrack = {u'album': 'Sehnsucht', u'artist': 'Rammstein', u'title': 'Eifersucht', u'uri': 'x-sonos-spotify:spotify%3atrack%3a4Ugp6Wu4hVXnbEKT3Nrka0?sid=9&flags=8224&sn=3', u'playlist_position': '10', u'duration': '0:03:35', u'position': '0:01:39', u'album_art': u'http://192.168.0.84:1400/getaa?s=1&u=x-sonos-spotify%3aspotify%253atrack%253a4Ugp6Wu4hVXnbEKT3Nrka0%3fsid%3d9%26flags%3d8224%26sn%3d3', u'metadata': '<DIDL-Lite xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:upnp="urn:schemas-upnp-org:metadata-1-0/upnp/" xmlns:r="urn:schemas-rinconnetworks-com:metadata-1-0/" xmlns="urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/"><item id="-1" parentID="-1" restricted="true"><res protocolInfo="sonos.com-spotify:*:audio/x-spotify:*" duration="0:03:35">x-sonos-spotify:spotify%3atrack%3a4Ugp6Wu4hVXnbEKT3Nrka0?sid=9&amp;flags=8224&amp;sn=3</res><r:streamContent></r:streamContent><upnp:albumArtURI>/getaa?s=1&amp;u=x-sonos-spotify%3aspotify%253atrack%253a4Ugp6Wu4hVXnbEKT3Nrka0%3fsid%3d9%26flags%3d8224%26sn%3d3</upnp:albumArtURI><dc:title>Eifersucht</dc:title><upnp:class>object.item.audioItem.musicTrack</upnp:class><dc:creator>Rammstein</dc:creator><upnp:album>Sehnsucht</upnp:album></item></DIDL-Lite>'}
 						if self.SonosRunning is False:
 							self.SonosSoCo = None
 						self.SonosRunning = True
@@ -10458,7 +10458,7 @@ def getNumber(actservice):  # actservice must be an instance of eServiceReferenc
 						playable = not (service.flags & mask)
 						if playable:
 							number += 1
-#                       L4logE(" ",service.getPath())
+#						L4logE(" ",service.getPath())
 						if actbouquet:
 							if actbouquet == bouquet and actservice == service:
 								return number
@@ -12391,7 +12391,7 @@ def LCD4linuxPIC(self, session):
 			else:
 				ms = 1
 			font = ImageFont.truetype(ConfigFont, int(ConfigSize * ms) + 8, encoding='unic')  # 5
-#           if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath:  # Movie
+#			if self.Lpath and ":0:" not in self.Lpath and "//" not in self.Lpath:  # Movie
 			if self.Llength is not None and self.Llength[0] != -1:
 				isVideoPlaying = 1
 				try:
@@ -13980,7 +13980,7 @@ def LCD4linuxPIC(self, session):
 		if ConfigModule == "0":
 			ConfigModule = ConfigModuleUser
 		font = ImageFont.truetype(ConfigFont, ConfigSize, encoding='unic')
-#       font1 = ImageFont.truetype(ConfigFont, int(ConfigSize / 1.5), encoding='unic')
+#		font1 = ImageFont.truetype(ConfigFont, int(ConfigSize / 1.5), encoding='unic')
 		font2 = ImageFont.truetype(ConfigFont, int(ConfigSize / 2), encoding='unic')
 		font3 = ImageFont.truetype(ConfigFont, int(ConfigSize / 3), encoding='unic')
 		font4 = ImageFont.truetype(ConfigFont, int(ConfigSize / 5), encoding='unic')
@@ -14528,7 +14528,7 @@ def LCD4linuxPIC(self, session):
 		L4Lkeys = sorted(L4LElist.get().keys())
 		for E in L4Lkeys:
 			CUR = L4LElist.get(E)
-#           L4logE("CUR: %s Active %s" % (CUR,ScreenActive[0]))
+#			L4logE("CUR: %s Active %s" % (CUR,ScreenActive[0]))
 			LCD = str(CUR.get("Lcd", "1"))
 			if getSA(int(LCD)) in str(CUR.get("Screen", "1")) and MODE in CUR.get("Mode", "On"):
 				Typ = CUR.get("Typ", None)
@@ -14609,7 +14609,7 @@ def LCD4linuxPIC(self, session):
 	if not LCD4linux.Enable.value:
 		return
 	tt = time()
-#   L4logE("MP-Mode", isMediaPlayer)
+#	L4logE("MP-Mode", isMediaPlayer)
 	L4log("creating LCD-Picture: %s" % ScreenActive)
 	if isdir("%slcd4linux" % TMP) is False:
 		try:
@@ -14637,7 +14637,7 @@ def LCD4linuxPIC(self, session):
 			self.SaveisMediaPlayer = isMediaPlayer
 			isMediaPlayer = ""
 			rmFile(MP3tmp)
-#           rmFile(GoogleCover)
+#			rmFile(GoogleCover)
 			if self.SonosRunning:
 				isMediaPlayer, logtext = ("sonos", "detected Sonos")
 			elif self.YMCastRunning:
