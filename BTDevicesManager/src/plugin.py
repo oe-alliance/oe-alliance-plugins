@@ -44,6 +44,7 @@ config.btdevicesmanager.autostart = ConfigYesNo(default=False)
 config.btdevicesmanager.audioconnect = ConfigYesNo(default=False)
 config.btdevicesmanager.audioaddress = ConfigText(default="", fixed_size=False)
 
+
 def applyBTAudioState():
 	if not isfile("/proc/stb/audio/btaudio"):
 		return
