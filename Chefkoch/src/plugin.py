@@ -164,7 +164,7 @@ class AllScreen(Screen):
 
 	def showPic(self):
 		picload = ePicLoad()
-		picload.setPara(self['picture'].instance.size().width(), self['picture'].instance.size().height(), 1, 0, 0, 1, "#00000000")
+		picload.setPara((self['picture'].instance.size().width(), self['picture'].instance.size().height(), 1, 0, 0, 1, "#00000000"))
 		if picload.startDecode(PICFILE, 0, 0, False) == 0:
 			ptr = picload.getData()
 			if ptr is not None:
