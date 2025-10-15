@@ -942,7 +942,7 @@ class CKview(AllScreen):
 				print("[Chefkoch] Error writing picFile: %s" % str(err))
 			else:
 				picload = ePicLoad()
-				picload.setPara(self['pic%d' % i].instance.size().width(), self['pic%d' % i].instance.size().height(), 1.0, 0, False, 1, "#00000000")
+				picload.setPara((self['pic%d' % i].instance.size().width(), self['pic%d' % i].instance.size().height(), 0, 0, 1, 1, "#00000000"))
 				if picload.startDecode(picFile, 0, 0, False) == 0:
 					ptr = picload.getData()
 					if self.current == 'menu' and ptr is not None:
