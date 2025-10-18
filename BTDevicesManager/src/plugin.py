@@ -50,9 +50,10 @@ def applyBTAudioState():
 		return
 
 	newState = "off"
-	if config.btdevicesmanager.audioaddress.value:
+	if config.btdevicesmanager.audioaddress.value and config.av.btaudio.value:
 		newState = "on"
 
+	print(f"[BluetoothManager] newState: {newState}")
 	config.btdevicesmanager.audioaddress.save()
 	config.btdevicesmanager.audioconnect.save()
 	if hasattr(config, "av") and hasattr(config.av, "btaudio"):
