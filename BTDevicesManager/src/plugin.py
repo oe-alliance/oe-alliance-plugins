@@ -307,11 +307,11 @@ class BluetoothDevicesManager(Screen):
 				if config.btdevicesmanager.audioaddress.value == current[1]:
 					config.btdevicesmanager.audioaddress.value = ""
 					config.btdevicesmanager.audioconnect.value = False
-					config.av.btaudio.value = True
+					config.av.btaudio.value = False
 				else:
 					config.btdevicesmanager.audioaddress.value = current[1]
 					config.btdevicesmanager.audioconnect.value = True
-					config.av.btaudio.value = False
+					config.av.btaudio.value = True
 				applyBTAudioState()
 				self.selectionChanged()
 
