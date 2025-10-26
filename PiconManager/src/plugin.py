@@ -365,7 +365,7 @@ class PiconManagerScreen(Screen, HelpableScreen):
 				self.picondir = res.rstrip('/')
 				self.piconfolder = join(self.picondir, '')
 
-				create_picon_directory(ConfigSelection(default=self.picondir))
+				create_picon_directory(ConfigSelection(default=self.picondir, choices=[self.picondir]))
 				self['piconpath2'].setText(self.piconfolder)
 				self.getFreeSpace()
 				print(f"[DEBUG] New Path: {self.piconfolder}")
