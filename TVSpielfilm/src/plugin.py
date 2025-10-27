@@ -17,14 +17,16 @@ from json import load, loads, dump, dumps
 from os import rename, makedirs, remove
 from os.path import exists, join, getmtime
 from PIL import Image
-from re import compile, match, search, findall
+from re import compile, match, sub, search, findall
 from shutil import copy, rmtree
 from twisted.internet.reactor import callInThread
+from unicodedata import normalize
 
 # ENIGMA IMPORTS
 from enigma import getDesktop, eServiceReference, eServiceCenter, eTimer, eEPGCache
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigText
+from Components.Renderer.Picon import getPiconName
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.Sources.List import List
@@ -60,6 +62,8 @@ config.plugins.tvspielfilm.expertmode = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.showtips = ConfigSelection(default=2, choices=[(0, "niemals"), (1, "nur bei Pluginstart"), (2, "immer")])
 config.plugins.tvspielfilm.defaultfilter = ConfigText(default="0")
 config.plugins.tvspielfilm.filtersettings = ConfigText(default=dumps([[x, True] for x in ASSETFILTERS]))
+config.plugins.tvspielfilm.piconsource = ConfigSelection(default=0, choices=[(0, "vom Image (aus dem Standardverzeichnis)"), (1, "eigene, nur SRP (Service Reference Picons)"), (2, "eigene, nur SNP (Service Name Picons)"), (3, "eigene, SRP+SNR")])
+config.plugins.tvspielfilm.piconpath = ConfigText(default=resolveFilename(SCOPE_SKIN_IMAGE, "picon/"))
 config.plugins.tvspielfilm.channelname = ConfigSelection(default=1, choices=[(0, "vom Image"), (1, "vom Server")])
 config.plugins.tvspielfilm.prefered_db = ConfigSelection(default=0, choices=[(0, "jedesmal nachfragen"), (1, "IMDb - Internet Movie Database"), (2, "TMDb - The Movie Database")])
 config.plugins.tvspielfilm.update_mapfile = ConfigSelection(default=1, choices=[(0, "niemals"), (1, "nach Updates")])
@@ -94,7 +98,6 @@ class TVglobals:
 	IMPORTDICT = {}
 	RESOLUTION = "FHD" if getDesktop(0).size().width() > 1300 else "HD"
 	CONFIGPATH = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # e.g. /etc/enigma2/TVSpielfilm/
-	PICONPATH = resolveFilename(SCOPE_SKIN_IMAGE, "picon/")  # e.g. /usr/share/enigma2/picon/
 	PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/TVSpielfilm/")  # e.g. /usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/
 	ICONPATH = join(PLUGINPATH, f"pics/{RESOLUTION}/icons/")  # e.g. /usr/share/enigma2/icon/
 	IMPORTFILE = join(CONFIGPATH, "tvs_imported.json")
@@ -396,9 +399,9 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			sref = tvglobals.IMPORTDICT.get(channelId, ["", ""])[0]
 			hasTimer = self.isAlreadyListed(timeStartEndTs, sref) if timeStartEndTs and sref else False
 			self["key_info"].setText(infotext)
-			piconfile = self.getPiconFile(channelId)
-			if piconfile and exists(piconfile):
-				self["picon"].instance.setPixmapFromFile(piconfile)
+			piconFile = self.getPiconFile(channelId)
+			if piconFile and exists(piconFile):
+				self["picon"].instance.setPixmapFromFile(piconFile)
 				self["picon"].show()
 			else:
 				self["picon"].hide()
@@ -511,17 +514,38 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			self["image"].show()
 
 	def getPiconFile(self, channelId):
-		sref = tvglobals.IMPORTDICT.get(channelId, ["", ""])[0]
+		def getCleanFileName(value):
+			#   Converts to lowercase, removes non-word characters (alphanumerics and underscores) and converts spaces to hyphens.
+			#	Also strips leading and trailing whitespace. Function is from django
+			#	https://github.com/django/django/blob/9108696a7553123f57c5d42f9c4a90cad44532f4/django/utils/text.py#L417
+			value = normalize('NFKD', value)
+			value = sub("[+]", "plus", value)
+			value = sub("[&]", "and", value)
+			value = sub("[^\\w\\s-]", "", value).strip().lower()
+			value = sub("[-\\s]+", "-", value)
+			return value
+
+		sref = org_sref = tvglobals.IMPORTDICT.get(channelId, ["", ""])[0]
 		fallback = sref.split(":")  # fallback from "1:0:*:..." to "1:0:1:..."
 		if len(fallback) > 1:
 			fallback[2] = "1"
 			fallback = ":".join(fallback)
 			fallback = (f"{fallback}FIN").replace(":", "_").replace("_FIN", "").replace("FIN", "")
 		sref = f"{sref}FIN".replace(":", "_").replace("_FIN", "").replace("FIN", "")
-		for piconsref in [sref, fallback]:
-			piconfile = join(tvglobals.PICONPATH, f"{piconsref}.png")
-			if exists(piconfile):
-				return piconfile
+		piconSource = config.plugins.tvspielfilm.piconsource.value
+		if not piconSource:  # search olny for the image Service Reference Picons (SRPs)
+			piconFile = getPiconName(org_sref)
+			return piconFile if exists(piconFile) else ""
+		if piconSource & 1:  # search for Service Reference Picons (SRPs)
+			for piconsRef in [sref, fallback]:
+				piconFile = join(config.plugins.tvspielfilm.piconpath.value, f"{piconsRef}.png")
+				if exists(piconFile):
+					return piconFile
+		if piconSource & 2: # search for Service Name Picons (SNPs)
+			piconname = getCleanFileName(tvglobals.IMPORTDICT.get(channelId, ["", ""])[1])
+			piconFile = join(config.plugins.tvspielfilm.piconpath.value, f"{piconname}.png")
+			if exists(piconFile):
+				return piconFile
 		return ""
 
 	def isAlreadyListed(self, timespanTs, sref):
@@ -764,22 +788,22 @@ class TVfullscreen(TVscreenHelper, Screen):
 		self["key_green"] = StaticText("Timer hinzufügen")
 		self["key_yellow"] = StaticText("EPG-Suche")
 		self["key_blue"] = StaticText("Zap" if zapAllowed else "")
-		self["actions"] = ActionMap(["OkCancelActions",
-									"ButtonSetupActions"],
-													{"ok": self.keyExit,
-													"cross_left": self.keyUp,
-													"cross_right": self.keyDown,
-													"cross_up": self.keyUp,
-													"cross_down": self.keyDown,
-													"channelup": self.keyUp,
-													"channeldown": self.keyDown,
-													"play": self.playTrailer,
-													"playpause": self.playTrailer,
-													"info": self.keyInfo,
-													"green": self.keyGreen,
-													"blue": self.zapToCurrent,
-													"yellow": self.openEPGSearch,
-													"cancel": self.keyExit}, -1)
+		self["actions"] = ActionMap(["OkCancelActions",	"ButtonSetupActions"], {
+			"ok": self.keyExit,
+			"cross_left": self.keyUp,
+			"cross_right": self.keyDown,
+			"cross_up": self.keyUp,
+			"cross_down": self.keyDown,
+			"channelup": self.keyUp,
+			"channeldown": self.keyDown,
+			"play": self.playTrailer,
+			"playpause": self.playTrailer,
+			"info": self.keyInfo,
+			"green": self.keyGreen,
+			"blue": self.zapToCurrent,
+			"yellow": self.openEPGSearch,
+			"cancel": self.keyExit
+		}, -1)
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def layoutFinished(self):
@@ -1150,22 +1174,22 @@ class TVoverview(TVscreenHelper, Screen):
 		self["key_green"] = StaticText("Timer")
 		self["key_yellow"] = StaticText("EPG-Suche")
 		self["key_blue"] = StaticText()
-		self["actions"] = ActionMap(["OkCancelActions",
-									"ButtonSetupActions"],
-													{"ok": self.keyOk,
-													"play": self.playTrailer,
-													"playpause": self.playTrailer,
-													"red": self.keyRed,
-													"red_long": self.keyRedLong,
-													"green": self.keyGreen,
-													"yellow": self.openEPGSearch,
-													"blue": self.zapToCurrent,
-													"channeldown": self.prevday,
-													"channelup": self.nextday,
-													"previous": self.prevweek,
-													"next": self.nextweek,
-													"info": self.keyInfo,
-													"cancel": self.keyExit}, -1)
+		self["actions"] = ActionMap(["OkCancelActions", "ButtonSetupActions"], {
+			"ok": self.keyOk,
+			"play": self.playTrailer,
+			"playpause": self.playTrailer,
+			"red": self.keyRed,
+			"red_long": self.keyRedLong,
+			"green": self.keyGreen,
+			"yellow": self.openEPGSearch,
+			"blue": self.zapToCurrent,
+			"channeldown": self.prevday,
+			"channelup": self.nextday,
+			"previous": self.prevweek,
+			"next": self.nextweek,
+			"info": self.keyInfo,
+			"cancel": self.keyExit
+		}, -1)
 		tvglobals.IMPORTDICT = self.readImportedFile()  # lade importierte Senderdaten
 		self.prefetchTimer = eTimer()
 		self.prefetchTimer.callback.append(self.prefetchNextAsset)
@@ -1376,8 +1400,8 @@ class TVoverview(TVscreenHelper, Screen):
 				newIndex = entryCounter
 				callInThread(self.showAssetDetails, assetUrl, fullScreen=False)  # show asset details with priority and immediately
 			hasTimer = self.isAlreadyListed(assetDict["timespanTs"], assetDict["sref"])
-			piconfile = self.getPiconFile(assetDict["channelId"])
-			piconpix = LoadPixmap(cached=True, path=piconfile) if piconfile and exists(piconfile) else None
+			piconFile = self.getPiconFile(assetDict["channelId"])
+			piconpix = LoadPixmap(cached=True, path=piconFile) if piconFile and exists(piconFile) else None
 			timeSpan = f"{datetime.fromtimestamp(timespanTs[0]).strftime('%H:%M')} - {datetime.fromtimestamp(timespanTs[1]).strftime('%H:%M')}"
 			thumb = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}thumb{assetDict['thumbIdNumeric']}.png") if assetDict['thumbIdNumeric'] else None
 			icon0 = LoadPixmap(cached=True, path=f"{tvglobals.ICONPATH}top.png") if assetDict['isTopTip'] else None
@@ -1557,19 +1581,19 @@ class TVmain(TVscreenHelper, Screen):
 		self["mainmenu"] = List()
 		self["key_red"] = StaticText("Import")
 		self["key_green"] = StaticText()
-		self["actions"] = ActionMap(["WizardActions",
-									"ColorActions",
-									"MenuActions"], {"ok": self.keyOk,
-														"back": self.exit,
-														"right": self.forceNextTip,
-														"left": self.forcePrevTip,
-														"down": self.down,
-														"up": self.up,
-														"red": self.keyRed,
-														"green": self.keyGreen,
-														"yellow": self.keyYellow,
-														"blue": self.keyBlue,
-														"menu": self.config}, -1)
+		self["actions"] = ActionMap(["WizardActions", "ColorActions", "MenuActions"], {
+			"ok": self.keyOk,
+			"back": self.exit,
+			"right": self.forceNextTip,
+			"left": self.forcePrevTip,
+			"down": self.down,
+			"up": self.up,
+			"red": self.keyRed,
+			"green": self.keyGreen,
+			"yellow": self.keyYellow,
+			"blue": self.keyBlue,
+			"menu": self.config
+		}, -1)
 		tvglobals.IMPORTDICT = self.readImportedFile()  # load imported channel data
 		self.onLayoutFinish.append(self.layoutFinished)
 
@@ -1902,9 +1926,9 @@ class TVmain(TVscreenHelper, Screen):
 				self.tvtipsbox.hideWidget("image")
 			else:  # download, save & set very first image immediately (if this tipUrl is still up to date by then)
 				callInThread(self.imageDownload, imgUrl, imgFile, self.setTipImage, self.currAssetUrl)
-		piconfile = self.getPiconFile(tipDict.get("channelId", ""))
-		if piconfile and exists(piconfile):
-			self.tvtipsbox.setWidgetImage("picon", piconfile)
+		piconFile = self.getPiconFile(tipDict.get("channelId", ""))
+		if piconFile and exists(piconFile):
+			self.tvtipsbox.setWidgetImage("picon", piconFile)
 			self.tvtipsbox.showWidget("picon")
 		else:
 			self.tvtipsbox.hideWidget("picon")
@@ -2011,9 +2035,10 @@ class selectChannelCategory(TVscreenHelper, Screen):
 		self.channelLoaded = False
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["menulist"] = List()
-		self["actions"] = ActionMap(["OkCancelActions"],
-													{"ok": self.keyOk,
-													"cancel": self.keyExit}, -1)
+		self["actions"] = ActionMap(["OkCancelActions"], {
+			"ok": self.keyOk,
+			"cancel": self.keyExit
+		}, -1)
 		callInThread(self.createChannelDicts)
 		self.onLayoutFinish.append(self.refreshMenu)
 
@@ -2113,10 +2138,11 @@ class TVimport(TVscreenHelper, Screen):
 		self["release"] = StaticText(tvglobals.RELEASE)
 		self["bouquetslist"] = List()
 		self["key_blue"] = StaticText("Überprüfe Konvertierungsregeln")
-		self['actions'] = ActionMap(["OkCancelActions",
-									"ColorActions"], {"ok": self.keyOk,
-													"blue": self.keyBlue,
-													"cancel": self.keyExit}, -1)
+		self['actions'] = ActionMap(["OkCancelActions", "ColorActions"], {
+			"ok": self.keyOk,
+			"blue": self.keyBlue,
+			"cancel": self.keyExit
+			}, -1)
 		if self.createCachePaths():
 			self.exit()
 		if self.updateMappingfile():
@@ -2404,11 +2430,12 @@ class TVchannelselection(Screen):
 		self["channelList"] = List()
 		self["key_red"] = StaticText("Alle abwählen")
 		self["key_green"] = StaticText("Übernehmen")
-		self['actions'] = ActionMap(["OkCancelActions",
-									"ColorActions"], {"ok": self.keyOk,
-													"red": self.keyRed,
-													"green": self.keyGreen,
-													"cancel": self.keyExit}, -1)
+		self['actions'] = ActionMap(["OkCancelActions",	"ColorActions"], {
+			"ok": self.keyOk,
+			"red": self.keyRed,
+			"green": self.keyGreen,
+			"cancel": self.keyExit
+		}, -1)
 		self.onShown.append(self.onShownFinished)
 
 	def onShownFinished(self):
@@ -2457,24 +2484,33 @@ class TVsetup(TVscreenHelper, Setup):
 	def __init__(self, session):
 		Setup.__init__(self, session, "TVsetup", plugin="Extensions/TVSpielfilm", PluginLanguageDomain="TVSpielfilm")
 		self["key_blue"] = StaticText("Filtereinstellungen")
-		self["entryActions"] = HelpableActionMap(self, ["ColorActions"],
-														{
-														"blue": (self.keyblue, "Filtereinstellungen")
-														}, prio=0, description="TVSpielfilm Filtereinstellungen")
+		self["entryActions"] = HelpableActionMap(self, ["ColorActions"], {
+			"blue": (self.keyblue, "Filtereinstellungen")
+		}, prio=0, description="TVSpielfilm Filtereinstellungen")
 
 	def keyblue(self):
 		self.session.open(TVfilterselection)
 
 	def keySelect(self):
 		if self.getCurrentItem() == config.plugins.tvspielfilm.cachepath:
-			self.session.openWithCallback(self.keySelectCB, TVsettingsLocationBox, currDir=config.plugins.tvspielfilm.cachepath.value)
+			self.session.openWithCallback(self.keySelectCB1, TVsettingsLocationBox, currDir=config.plugins.tvspielfilm.cachepath.value)
+			return
+		if self.getCurrentItem() == config.plugins.tvspielfilm.piconpath:
+			self.session.openWithCallback(self.keySelectCB1, TVsettingsLocationBox, currDir=config.plugins.tvspielfilm.piconpath.value)
 			return
 		Setup.keySelect(self)
 
-	def keySelectCB(self, path):
+	def keySelectCB1(self, path):
 		if path is not None:
 			path = join(path, "")
 			config.plugins.tvspielfilm.cachepath.value = path
+		self["config"].invalidateCurrent()
+		self.changedEntry()
+
+	def keySelectCB2(self, path):
+		if path is not None:
+			path = join(path, "")
+			config.plugins.tvspielfilm.piconpath.value = path
 		self["config"].invalidateCurrent()
 		self.changedEntry()
 
@@ -2523,12 +2559,13 @@ class TVfilterselection(Screen):
 		self["key_red"] = StaticText("Alle abwählen")
 		self["key_green"] = StaticText("Übernehmen")
 		self["key_yellow"] = StaticText("Startfilter setzen")
-		self['actions'] = ActionMap(["OkCancelActions",
-									"ColorActions"], {"ok": self.keyOk,
-													"red": self.keyRed,
-													"green": self.keyGreen,
-													"yellow": self.keyYellow,
-													"cancel": self.keyExit}, -1)
+		self['actions'] = ActionMap(["OkCancelActions", "ColorActions"], {
+			"ok": self.keyOk,
+			"red": self.keyRed,
+			"green": self.keyGreen,
+			"yellow": self.keyYellow,
+			"cancel": self.keyExit
+		}, -1)
 		self.onShown.append(self.updateSkinList)
 
 	def updateSkinList(self):
