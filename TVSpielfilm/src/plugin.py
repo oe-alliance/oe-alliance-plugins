@@ -26,6 +26,7 @@ from unicodedata import normalize
 from enigma import getDesktop, eServiceReference, eServiceCenter, eTimer, eEPGCache
 from Components.ActionMap import ActionMap, HelpableActionMap
 from Components.config import config, ConfigSubsection, ConfigSelection, ConfigYesNo, ConfigText
+from Components.Renderer.Picon import getPiconName
 from Components.Pixmap import Pixmap
 from Components.ProgressBar import ProgressBar
 from Components.Sources.List import List
@@ -61,7 +62,7 @@ config.plugins.tvspielfilm.expertmode = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.showtips = ConfigSelection(default=2, choices=[(0, "niemals"), (1, "nur bei Pluginstart"), (2, "immer")])
 config.plugins.tvspielfilm.defaultfilter = ConfigText(default="0")
 config.plugins.tvspielfilm.filtersettings = ConfigText(default=dumps([[x, True] for x in ASSETFILTERS]))
-config.plugins.tvspielfilm.piconsource = ConfigSelection(default=0, choices=[(0, "vom Image"), (1, "eigene, nur SRP (Service Reference Picons)"), (2, "eigene, nur SNP (Service Name Picons)"), (3, "eigene, SRP+SNR")])
+config.plugins.tvspielfilm.piconsource = ConfigSelection(default=0, choices=[(0, "vom Image (aus dem Standardverzeichnis)"), (1, "eigene, nur SRP (Service Reference Picons)"), (2, "eigene, nur SNP (Service Name Picons)"), (3, "eigene, SRP+SNR")])
 config.plugins.tvspielfilm.piconpath = ConfigText(default=resolveFilename(SCOPE_SKIN_IMAGE, "picon/"))
 config.plugins.tvspielfilm.channelname = ConfigSelection(default=1, choices=[(0, "vom Image"), (1, "vom Server")])
 config.plugins.tvspielfilm.prefered_db = ConfigSelection(default=0, choices=[(0, "jedesmal nachfragen"), (1, "IMDb - Internet Movie Database"), (2, "TMDb - The Movie Database")])
@@ -524,7 +525,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			value = sub("[-\\s]+", "-", value)
 			return value
 
-		sref = tvglobals.IMPORTDICT.get(channelId, ["", ""])[0]
+		sref = org_sref = tvglobals.IMPORTDICT.get(channelId, ["", ""])[0]
 		fallback = sref.split(":")  # fallback from "1:0:*:..." to "1:0:1:..."
 		if len(fallback) > 1:
 			fallback[2] = "1"
@@ -532,12 +533,15 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			fallback = (f"{fallback}FIN").replace(":", "_").replace("_FIN", "").replace("FIN", "")
 		sref = f"{sref}FIN".replace(":", "_").replace("_FIN", "").replace("FIN", "")
 		piconSource = config.plugins.tvspielfilm.piconsource.value
-		if not piconSource or piconSource & 1:  # search for Service Reference Picons (SRPs)
+		if not piconSource:  # search olny for the image Service Reference Picons (SRPs)
+			piconFile = getPiconName(org_sref)
+			return piconFile if exists(piconFile) else ""
+		if piconSource & 1:  # search for Service Reference Picons (SRPs)
 			for piconsRef in [sref, fallback]:
 				piconFile = join(config.plugins.tvspielfilm.piconpath.value, f"{piconsRef}.png")
 				if exists(piconFile):
 					return piconFile
-		if piconSource & 2:  # search for Service Name Picons (SNPs)
+		if piconSource & 2: # search for Service Name Picons (SNPs)
 			piconname = getCleanFileName(tvglobals.IMPORTDICT.get(channelId, ["", ""])[1])
 			piconFile = join(config.plugins.tvspielfilm.piconpath.value, f"{piconname}.png")
 			if exists(piconFile):
@@ -784,7 +788,7 @@ class TVfullscreen(TVscreenHelper, Screen):
 		self["key_green"] = StaticText("Timer hinzufügen")
 		self["key_yellow"] = StaticText("EPG-Suche")
 		self["key_blue"] = StaticText("Zap" if zapAllowed else "")
-		self["actions"] = ActionMap(["OkCancelActions", "ButtonSetupActions"], {
+		self["actions"] = ActionMap(["OkCancelActions",	"ButtonSetupActions"], {
 			"ok": self.keyExit,
 			"cross_left": self.keyUp,
 			"cross_right": self.keyDown,
@@ -2426,7 +2430,7 @@ class TVchannelselection(Screen):
 		self["channelList"] = List()
 		self["key_red"] = StaticText("Alle abwählen")
 		self["key_green"] = StaticText("Übernehmen")
-		self['actions'] = ActionMap(["OkCancelActions", "ColorActions"], {
+		self['actions'] = ActionMap(["OkCancelActions",	"ColorActions"], {
 			"ok": self.keyOk,
 			"red": self.keyRed,
 			"green": self.keyGreen,
