@@ -1,6 +1,6 @@
 <setupxml>
 	<setup key="TVsetup" title="TV-Spielfilm Setup">
-		<item level="0" text="--- generelle Einstellungen -------------------------------------------------------------------------------"/>
+		<item level="0" text="--- generelle Einstellungen ---------------------------------------------------------------------------"/>
 		<item level="0" text="Expertenmodus für die Einstellugen:" description="Hier wird festgelegt, ob nur die normal üblichen Einstellungen oder alle möglichen Einstellungen gezeigt werden sollen (=Expertenmodus). Für die meisten Anwender reichen die üblichen Einstellungen vollkommen aus.">config.plugins.tvspielfilm.expertmode</item>
 		<item level="0" text="Zeige 'Tipps des Tages':" description="Hier wird festgelegt, ob das Fenster 'Tipps des Tages' angezeigt werden soll.">config.plugins.tvspielfilm.showtips</item>
 		<if conditional="config.plugins.tvspielfilm.expertmode.value">
@@ -9,7 +9,12 @@
 			<item level="0" text="Überschreibe eigene Sender-Zuweisungstabelle:" description="Hier wird festgelegt, ob die \n'/etc/enigma2/tvspielfilm/tvs_mapping.txt'\n bei Pluginstart aktualisiert werden darf. Diese Funktion sollte nur dann deaktiviert werden, wenn die Sender-Zuweisungstabelle individuell angepasst wurde und deswegen nicht mit aktuelleren Werten überschrieben werden soll.">config.plugins.tvspielfilm.update_mapfile</item>
 		</if>
 		<if conditional="config.plugins.tvspielfilm.expertmode.value">
-			<item level="0" text="--- Zwischenspeicher-Einstellungen der TVS-EPG Daten (= Cache) -------------------------"/>
+			<item level="0" text="--- Picon-Einstellungen --------------------------------------------------------------------------------"/>
+			<item level="0" text="Verwende Piconquelle:" description="Hier wird festgelegt, woher die gezeigten Picons geladen werden. Wenn es sich um eigene Picons handelt, dann kann man wählen zwischen SRP (Service Reference Picons) und SNR (Service Name Picons) oder beides.">config.plugins.tvspielfilm.piconsource</item>
+			<if conditional="config.plugins.tvspielfilm.piconsource.value">
+				<item level="0" text="Wähle eigenes Piconverzeichnis:" description="Hier wird der gewünschte Ablageort der eigenen Picons festgelegt">config.plugins.tvspielfilm.piconpath</item>
+			</if>
+			<item level="0" text="--- Zwischenspeicher-Einstellungen der TVS-EPG Daten (= Cache) ----------------------"/>
 			<item level="0" text="Quelle für Zeitraum '22:00':" description="Hier wird festgelegt, ob versucht werden soll die Daten für Zeitraum '22:00' aus den Daten des Zeitraums '20:15' zu erzeugen oder ob diese separat heruntergeladen werden sollen. Das erfolgreiche Erzeugen der Daten '22:00' halbiert bestenfalls die Dauer des TVS-EPG Datenupdates.">config.plugins.tvspielfilm.data2200</item>
 			<item level="0" text="Ablageort der TVS-EPG Daten: *" description="Wähle den Pfad auf dem die TVS-EPG Daten zwischengespeichert werden sollen. Dies sollte ein permenent verfügbares Laufwerk sein (z.B. Festplatte / SolidStateDisc / USB-Speicherstick).">config.plugins.tvspielfilm.cachepath</item>
 			<item level="0" text="Dauer der Bevorratung neuer TVS-EPG Daten:" description="Hier wird die gewünschte Anzahl der Tage für die zukünftige Datenbevorratung festgelegt. Je weniger Tage, um so schneller ist der TVS-EPG Datenupdate vollendet und um so geringer ist die Speicherplatzbelegung auf dem Datenträger.">config.plugins.tvspielfilm.cacherange</item>
@@ -17,7 +22,7 @@
 			<item level="0" text="Sendungsdetails vorauseilend laden (prefetch):" description="Hier wird festgelegt, ob oder wie schnell alle Sendungsdetails (ohne Vorschaubilder) nach dem Aufruf eines Zeitraums schon mal vorab in den Zwischenspeicher geladen werden sollen. Dieser Vorgang geschieht im Hintergrund, könnte aber bei langsamen Boxen oder bei langsamer Internetverbindung ausbremsen.">config.plugins.tvspielfilm.assetsprefetch</item>
 			<item level="0" text="Automatisches TVS-EPG Update:" description="Hier wird festgelegt, ob das automatische TVS-EPG Datenupdate auch bereits vorhandene Daten erneuern (empfohlen wegen kurzfristiger Programmänderungen) oder nur noch die fehlenden Daten ergänzen soll. Der Startzeitpunkt des Autoupdates wird über die imageeigene Aufgabenplanung gesetzt.">config.plugins.tvspielfilm.autoupdate</item>
 		</if>
-		<item level="0" text="--- Zeitraum-Einstellungen -------------------------------------------------------------------------------"/>
+		<item level="0" text="--- Zeitraum-Einstellungen ---------------------------------------------------------------------------"/>
 		<item level="0" text="Zeitraum 'Jetzt im TV' - Dauer:" description="Hier wird die gewünschte Zeitraumlänge für Zeitraum 'Jetzt im TV' festgelegt. Somit kann man die Anzahl der dargestellten Sendungen variieren.">config.plugins.tvspielfilm.durance_n</item>
 		<item level="0" text="Zeitraum A - Aktivieren:" description="Hier wird der Zeitraum 'A' aktiviert und somit im Hauptmenü dargestellt. Je weniger Zeiträume aktiviert sind, um so schneller ist der TVS-EPG Datenupdate vollendet und um so geringer ist die Speicherplatzbelegung auf dem Datenträger.">config.plugins.tvspielfilm.use_a</item>
 		<if conditional="config.plugins.tvspielfilm.use_a.value">
@@ -40,7 +45,7 @@
 			<item level="0" text="\tZeitraum D - Dauer:" description="Hier wird die gewünschte Zeitraumlänge 'D' festgelegt. Somit kann man die Anzahl der dargestellten Sendungen variieren.\nEs kann sein, dass nach der Umstellung nicht mehr alle Sendungen gefunden werden.\nTIPP: TVS-EPG Cache löschen und frisch updaten.">config.plugins.tvspielfilm.durance_d</item>
 		</if>
 		<if conditional="config.plugins.tvspielfilm.expertmode.value">
-			<item level="0" text="--- Anzeige-Einstellungen --------------------------------------------------------------------------------"/>
+			<item level="0" text="--- Anzeige-Einstellungen -----------------------------------------------------------------------------"/>
 			<item level="0" text="Anzeige von 'Primetime 20:15': *" description="Hier festgelegt, ob und wo der Menüpunkt 'TV Spielfilm - Primetime 20:15' angezeigt werden soll.">config.plugins.tvspielfilm.primetime</item>
 			<item level="0" text="Anzeige von 'Jetzt im TV': *" description="Hier festgelegt, ob und wo der Menüpunkt 'TV Spielfilm - Jetzt im TV' angezeigt werden soll.">config.plugins.tvspielfilm.nowontv</item>
 			<item level="0" text="Anzeige von 'laufende Sendung': *" description="Hier festgelegt, ob und wo der Menüpunkt 'TV Spielfilm - laufende Sendung angezeigt werden soll.">config.plugins.tvspielfilm.currprogram</item>
