@@ -788,7 +788,7 @@ class TVfullscreen(TVscreenHelper, Screen):
 		self["key_green"] = StaticText("Timer hinzufügen")
 		self["key_yellow"] = StaticText("EPG-Suche")
 		self["key_blue"] = StaticText("Zap" if zapAllowed else "")
-		self["actions"] = ActionMap(["OkCancelActions",	"ButtonSetupActions"], {
+		self["actions"] = ActionMap(["OkCancelActions", "ButtonSetupActions"], {
 			"ok": self.keyExit,
 			"cross_left": self.keyUp,
 			"cross_right": self.keyDown,
@@ -2430,7 +2430,7 @@ class TVchannelselection(Screen):
 		self["channelList"] = List()
 		self["key_red"] = StaticText("Alle abwählen")
 		self["key_green"] = StaticText("Übernehmen")
-		self['actions'] = ActionMap(["OkCancelActions",	"ColorActions"], {
+		self['actions'] = ActionMap(["OkCancelActions", "ColorActions"], {
 			"ok": self.keyOk,
 			"red": self.keyRed,
 			"green": self.keyGreen,
