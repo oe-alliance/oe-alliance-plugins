@@ -1202,7 +1202,7 @@ class TVoverview(TVscreenHelper, Screen):
 		self.lenImportdict = len(tvglobals.IMPORTDICT)
 		self["progressBar"].setRange((0, self.lenImportdict))
 		self["progressBar"].setValue(0)
-		self["progressTxt"].setText(f"{1}/{self.lenImportdict if self.timeCode == "now" else 1}")
+		self["progressTxt"].setText(f"{1}/{self.lenImportdict if self.timeCode == 'now' else 1}")
 		if self.singleChannelId:
 			self.channelName = tvglobals.IMPORTDICT.get(self.singleChannelId, ["", "{unbekannt}"])[1]
 		channelText = f"'{self.channelName}'" if self.channelName else "..."
