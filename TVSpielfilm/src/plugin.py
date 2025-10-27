@@ -541,7 +541,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 				piconFile = join(config.plugins.tvspielfilm.piconpath.value, f"{piconsRef}.png")
 				if exists(piconFile):
 					return piconFile
-		if piconSource & 2: # search for Service Name Picons (SNPs)
+		if piconSource & 2:  # search for Service Name Picons (SNPs)
 			piconname = getCleanFileName(tvglobals.IMPORTDICT.get(channelId, ["", ""])[1])
 			piconFile = join(config.plugins.tvspielfilm.piconpath.value, f"{piconname}.png")
 			if exists(piconFile):
