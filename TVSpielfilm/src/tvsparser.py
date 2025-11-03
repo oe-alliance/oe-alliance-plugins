@@ -22,7 +22,7 @@ from secrets import choice
 from sys import exit, argv
 
 
-class TVSparserGlobals():
+class TVSparserGlobals:
 	MODULE_NAME = __name__.split(".")[-1]
 	WEBURL = bytes.fromhex("687474703a2f2f7777772e7476737069656c66696c6d2e64653"[:-1]).decode()
 	MWEBURL = bytes.fromhex("68747470733a2f2f6d2e7476737069656c66696c6d2e64653"[:-1]).decode()
@@ -40,7 +40,7 @@ class TVSparserGlobals():
 tvspglobals = TVSparserGlobals()
 
 
-class TVSparserHelper():
+class TVSparserHelper:
 	def getHTMLdata(self, url, params=None, timeout=(3.05, 6)):
 		errMsg, htmldata = "", ""
 		headers = {"User-Agent": tvspglobals.USERAGENT}
@@ -82,7 +82,7 @@ class TVSparserHelper():
 tvsphelper = TVSparserHelper()
 
 
-class TVSparserTips():
+class TVSparserTips:
 	def parseTips(self, callback=None, passthrough=None):
 		url = f"{tvspglobals.WEBURL}{bytes.fromhex('2f74762d74697070732f737069656c66696c6d2fb'[:-1]).decode()}"
 		errMsg, htmldata = tvsphelper.getHTMLdata(url)
@@ -136,7 +136,7 @@ class TVSparserTips():
 tvsptips = TVSparserTips()
 
 
-class TVSparserChannels():
+class TVSparserChannels:
 	def parseChannels(self, callback=None):
 		url = f"{tvspglobals.WEBURL}{bytes.fromhex('2f73656e6465722ff'[:-1]).decode()}"
 		errMsg, htmldata = tvsphelper.getHTMLdata(url)
@@ -163,8 +163,8 @@ class TVSparserChannels():
 tvspchannels = TVSparserChannels()
 
 
-class TVSparserAssets():
-	spanSets = {"00:00-05:00": "0", "05:00-14:00": "5", "14:00-18:00": "14", "18:00-20:00": "18", "20:00-22:00": "20", "20:15": "prime", "22:00-00:00": "22"}
+class TVSparserAssets:
+	spanSets = {"05:00-14:00": "5", "14:00-18:00": "14", "18:00-20:00": "18", "20:00-22:00": "20", "20:15": "prime", "22:00-00:00": "22", "00:00-05:00": "0"}
 	# also existing but not used: {"jetzt": "now", "gleich": "shortly",  "abends": "primetips", "ganzer Tag": "day"}
 	catFilters = {"Spielfilm": "SP", "Serie": "SE", "Report": "RE", "Unterhaltung": "U", "Kinder": "KIN", "Sport": "SPO", "Andere": "AND"}
 	channelSets = {"Hauptsender": "g:1", "Dritte Programme": "g:2", "Sportsender": "g:8", "Spartensender ARD & ZDF": "g:4103125",
