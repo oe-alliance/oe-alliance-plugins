@@ -178,7 +178,7 @@ class BluetoothDevicesManager(Screen):
 		if self.devicelist:
 			self["ConnStatus"].setText("")
 		else:
-			self["ConnStatus"].setText(_("No connected to any device"))
+			self["ConnStatus"].setText(_("Not connected to any device"))
 		self["devicelist"].setList(self.devicelist)
 		self.selectionChanged()
 
