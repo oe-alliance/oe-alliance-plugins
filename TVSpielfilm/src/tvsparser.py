@@ -102,11 +102,12 @@ class TVSparserTips:
 				intro = tvsphelper.searchOneValue(r'<div class="tips-teaser__bottom__intro">(.*?)</div>', entry, "")  # e.g. 'heute | 20:15 | ZDF'
 				intros = intro.split(" | ") or []
 				timeStartTs, hourmin = None, datetime.strptime(intros[1], '%H:%M').time() if len(intros) > 1 else None
+				now = datetime.now(tz=None)
 				if hourmin and intros:
 					if "heute" in intros[0]:
-						timeStartTs = int(datetime.combine(datetime.now(tz=None), hourmin).timestamp())
+						timeStartTs = int(datetime.combine(now, hourmin).timestamp())
 					else:
-						timeStartTs = int(datetime.combine(datetime.strptime(f"{intros[0]}{datetime.now(tz=None).year}", '%d.%m.%Y'), hourmin).timestamp())
+						timeStartTs = int(datetime.combine(datetime.strptime(f"{intros[0]}{now.year}", '%d.%m.%Y'), hourmin).timestamp())
 				channelName = intros[2] if len(intros) > 2 else ""
 				timeInfos = intros[0] or ""
 				timeInfos += f" | {intros[1]} Uhr" if len(intros) > 1 else ""
@@ -180,9 +181,9 @@ class TVSparserAssets:
 		for channelId in channelIds:
 			errMsg, assetsDicts = self.parseChannelPage(channelId, dateOnlyStr=dateOnlyStr, timeCode=timeCode)
 			if errMsg:
-				print(f"Error when parsing channel '{channelId}': {errMsg}")
+				print(f"[{tvspglobals.MODULE_NAME}] Error when parsing channel '{channelId}': {errMsg}")
 			else:
-				print(f"Succesfully parsed channel '{channelId}'")
+				print(f"[{tvspglobals.MODULE_NAME}] Successfully parsed channel '{channelId}'")
 				pagesList += assetsDicts
 		return pagesList
 
@@ -190,18 +191,14 @@ class TVSparserAssets:
 		def setAssetKey(key, value):
 			if value:
 				assetDict[key] = value
-
+		now = datetime.now(tz=None)
 		url = f"{tvspglobals.MWEBURL}{bytes.fromhex('2f73756368652e68746d6c1'[:-1]).decode()}"
-		currDateDt = datetime.now(tz=None)
-		if dateOnlyStr:
-			dateOnlyDt = datetime.fromisoformat(dateOnlyStr)
-		else:  # fallback to today
-			dateOnlyDt = currDateDt
-			dateOnlyStr = dateOnlyDt.strftime("%F")
-		midnight = currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)
-		morning = currDateDt.replace(hour=5, minute=0, second=0, microsecond=0)
-		if timeCode == "now" and currDateDt >= midnight and currDateDt < morning:  # use day before (server philosophy: complete day is from today 05:00 to tomorrow 05:00)
-			dateOnlyStr = (dateOnlyDt + timedelta(days=-1)).strftime("%F")
+		dateOnlyDt = datetime.fromisoformat(dateOnlyStr) if dateOnlyStr else now  # fallback to today
+		# In case desired time span is between 00:00 and 05:00, request data from previous day
+		# Server philosophy: The server considers a day to be the period from 5:00 a.m. to 5:00 a.m. the following day.
+		midnight = dateOnlyDt.replace(hour=0, minute=0, second=0, microsecond=0)
+		morning = dateOnlyDt.replace(hour=5, minute=0, second=0, microsecond=0)
+		corrStartStr = (dateOnlyDt + timedelta(days=-1)).strftime("%F") if timeCode == "0" or timeCode == "now" and now >= midnight and now < morning else dateOnlyDt
 		finish = False
 		assetsDicts = []
 		index, offset = 0, 0
@@ -210,10 +207,10 @@ class TVSparserAssets:
 					"offset": offset,  # offset=20 means assets #20...#39
 					"filter": 1 if categories else None,  # None = all filters active |'1' = selected filters
 					"order": None,  # sort order 'time' or 'channel', ('time' is default)
-					"date": dateOnlyStr,  # e.g. '2025-05-18'
+					"date": corrStartStr,  # e.g. '2025-05-18'
 					"tips": tips,  # '1' = load tips only, ('None' is default)
 					"cat[]": [self.catFilters.get(catFilter) for catFilter in categories],   # e.g. ["Spielfilm", "Report"] -> ['SP', 'RE']
-					"time": timeCode or "prime",  # for details see dict {self.spanSets}
+					"time": timeCode or "prime",  # for details see dict {spanSets}
 					"channel": channelId  # e.g. 'ARD' for 'Das Erste'
 					}
 			errMsg, htmldata = tvsphelper.getHTMLdata(url, params)
@@ -238,7 +235,7 @@ class TVSparserAssets:
 				setAssetKey("category", pageElement[2].upper())
 				thumbIdnumeric = tvsphelper.searchOneValue(r'<span class="listing-icon rating-(.*?)"></span>', itholder, "0")
 				setAssetKey("thumbIdNumeric", int(thumbIdnumeric) if thumbIdnumeric.isdigit() else 0)
-#               setAssetKey("isTopTip", False  # not supported for the moment
+#               setAssetKey("isTopTip", False)  # not supported for the moment
 				setAssetKey("isTip", itholder.find('<span class="add-info icon-tip">TIPP</span>') > -1)
 				setAssetKey("isNew", itholder.find('<span class="add-info icon-new">NEU</span>') > -1)
 				setAssetKey("isLive", itholder.find('<span class="add-info icon-tip">Live</span>') > -1)
@@ -316,13 +313,14 @@ class TVSparserAssets:
 		timeStartEnd = broadblock[1].split(" - ") if broadblock[1] else ""
 		timeStartTs, startHourmin = None, datetime.strptime(timeStartEnd[0].replace(" Uhr", ""), '%H:%M').time() if timeStartEnd else None
 		timeEndTs, endHourmin = None, datetime.strptime(timeStartEnd[1].replace(" Uhr", ""), '%H:%M').time() if len(timeStartEnd) > 1 else None
+		now = datetime.now(tz=None)
 		if "heute" in broadblock[0].lower():
-			timeStartTs = int(datetime.combine(datetime.now(tz=None), startHourmin).timestamp()) if startHourmin else ""
-			timeEndTs = int(datetime.combine(datetime.now(tz=None), endHourmin).timestamp()) if endHourmin else ""
+			timeStartTs = int(datetime.combine(now, startHourmin).timestamp()) if startHourmin else ""
+			timeEndTs = int(datetime.combine(now, endHourmin).timestamp()) if endHourmin else ""
 		else:
 			daydate = broadblock[0][broadblock[0].find(",") + 2:]  # convert 'Fr., 23.05.' -> '23.05.'
-			timeStartTs = int(datetime.combine(datetime.strptime(f"{daydate}{datetime.now(tz=None).year}", '%d.%m.%Y'), startHourmin).timestamp()) if startHourmin else ""
-			timeEndTs = int(datetime.combine(datetime.strptime(f"{daydate}{datetime.now(tz=None).year}", '%d.%m.%Y'), endHourmin).timestamp()) if endHourmin else ""
+			timeStartTs = int(datetime.combine(datetime.strptime(f"{daydate}{now.year}", '%d.%m.%Y'), startHourmin).timestamp()) if startHourmin else ""
+			timeEndTs = int(datetime.combine(datetime.strptime(f"{daydate}{now.year}", '%d.%m.%Y'), endHourmin).timestamp()) if endHourmin else ""
 		channelName = broadblock[2] if len(broadblock) > 2 else ""
 		channelId = tvsphelper.searchOneValue(r'"pageElementCreative":"(.*?)"', extract, "").upper().replace("N\\/A", "").lower()
 		imgUrl = tvsphelper.searchOneValue(r'<picture class=".*?">\s*<img src="(.*?)" width', extract, "", flags=S)
@@ -440,7 +438,7 @@ def main(argv):  # shell interface
 		arg = arg.strip()
 		if not opts or opt == "-h":
 			print("Usage 'tvsparser v1.0': python tvsparser.py [option...] <data>\n"
-			"-a, --assetslist <options>\tget list of assets of a channel (details: see code)\n"
+			"-a, --assetslist\tget list of assets of a channel (details: see code)\n"
 			"-n, --now\t\t\tget list of assets of currently running programs (details: see code)\n"
 			"-c, --channellist\t\tget list of all supported channels\n"
 			"-h, --help\t\t\tget an overview of the options\n"
@@ -449,7 +447,7 @@ def main(argv):  # shell interface
 			"-j, --json <filename>\t\tFile output formatted in JSON\n")
 			exit()
 		elif opt in ("-a", "--assetslist"):
-			jsonList = tvspassets.getChannelAssets(["ZDF"], dateOnlyStr=currDateStr, timeCode="day")
+			jsonList = tvspassets.getChannelAssets(["ZDF"], dateOnlyStr=currDateStr, timeCode="0")
 		elif opt in ("-n", "--new"):
 			jsonList = tvspassets.getChannelAssets(["ARD"], dateOnlyStr=currDateStr, timeCode="now")
 		elif opt in ("-c", "--channellist"):
