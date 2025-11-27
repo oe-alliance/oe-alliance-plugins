@@ -17,7 +17,7 @@ from json import load, loads, dump, dumps
 from os import rename, makedirs, remove
 from os.path import exists, join, getmtime
 from PIL import Image
-from re import compile, match, sub, search, findall
+from re import compile, match, sub, findall
 from shutil import copy, rmtree
 from twisted.internet.reactor import callInThread
 from unicodedata import normalize
@@ -78,7 +78,7 @@ config.plugins.tvspielfilm.autoupdate = ConfigSelection(default=1, choices=[(0, 
 config.plugins.tvspielfilm.durance_n = ConfigSelection(default=30, choices=DURANCES)  # 'Jetzt im TV'
 config.plugins.tvspielfilm.use_a = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.starttime_a = ConfigSelection(default=1, choices=STARTING)
-config.plugins.tvspielfilm.durance_a = ConfigSelection(default=240, choices=DURANCES)
+config.plugins.tvspielfilm.durance_a = ConfigSelection(default=120, choices=DURANCES)
 config.plugins.tvspielfilm.use_b = ConfigYesNo(default=True)
 config.plugins.tvspielfilm.starttime_b = ConfigSelection(default=4, choices=STARTING)
 config.plugins.tvspielfilm.durance_b = ConfigSelection(default=105, choices=DURANCES)
@@ -87,7 +87,7 @@ config.plugins.tvspielfilm.starttime_c = ConfigSelection(default=5, choices=STAR
 config.plugins.tvspielfilm.durance_c = ConfigSelection(default=120, choices=DURANCES)
 config.plugins.tvspielfilm.use_d = ConfigYesNo(default=False)
 config.plugins.tvspielfilm.starttime_d = ConfigSelection(default=6, choices=STARTING)
-config.plugins.tvspielfilm.durance_d = ConfigSelection(default=300, choices=DURANCES)
+config.plugins.tvspielfilm.durance_d = ConfigSelection(default=120, choices=DURANCES)
 config.plugins.tvspielfilm.primetime = ConfigSelection(default=1, choices=VISIBILITY)
 config.plugins.tvspielfilm.nowontv = ConfigSelection(default=1, choices=VISIBILITY)
 config.plugins.tvspielfilm.currprogram = ConfigSelection(default=1, choices=VISIBILITY[:2])
@@ -137,7 +137,7 @@ class TVcoreHelper:
 				remove(filename)
 		for filenames in [glob(join(f"{self.getCachePath()}cache/", "allTips*.json")), glob(join(f"{self.getCachePath()}assets/", "*.*")), glob(join(f"{self.getCachePath()}images/", "*.*"))]:
 			for filename in filenames:
-				if int(nowDt.timestamp()) - int(getmtime(filename)) > 86400:  # older than 24h?
+				if int(nowDt.timestamp()) - int(getmtime(filename)) > 129600:  # older than 36h?
 					remove(filename)
 
 	def getUserMenuUsage(self, index):
@@ -155,22 +155,19 @@ class TVcoreHelper:
 				timeSpans.append((STARTTIMES[userconfig[0]], userconfig[1]))
 		return timeSpans
 
-	def allAssetsFilename(self, spanStartsDt, channelId=None):
-		filename = ""
-		if channelId:  # single channel completely
-			filename = join(f"{self.getCachePath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}_{channelId.lower()}.json")
-		elif spanStartsDt:  # time span
+	def allAssetsFilename(self, spanStartsDt):
+		if spanStartsDt:
 			filename = join(f"{self.getCachePath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}T{spanStartsDt.strftime('%H:%M')}.json")
+		else:
+			filename = join(f"{self.getCachePath()}cache/", "allAssets_now.json")
 		return filename
 
-	def loadAllAssets(self, spanStartsDt, channelId=None, nowFlag=False):  # load assets from cache if available
-		filename, allAssets = "", []
-		if nowFlag:
-			allAssetsNow = join(self.getCachePath(), "cache/allAssets_now.json")
-			if exists(allAssetsNow) and int(datetime.now(tz=None).timestamp()) - int(getmtime(allAssetsNow)) < 900:  # allAssetsNow less than 15 minutes old?
-				filename = allAssetsNow
-		else:
-			filename = self.allAssetsFilename(spanStartsDt, channelId=channelId)
+	def loadAllAssets(self, spanStartsDt):  # load assets from cache if available
+		allAssets = []
+		filename = self.allAssetsFilename(spanStartsDt)
+		if not spanStartsDt:  # 'Jetzt im TV'?
+			if exists(filename) and int(datetime.now(tz=None).timestamp()) - int(getmtime(filename)) > 900:  # cache data older than 15 minutes?
+				filename = ""
 		if filename and exists(filename):
 			try:
 				with open(filename) as file:
@@ -199,14 +196,11 @@ class TVcoreHelper:
 					cherryAssets.append(currDict)
 		return cherryAssets
 
-	def saveAllAssets(self, allAssets, spanStartsDt, channelId=None):
+	def saveAllAssets(self, allAssets, spanStartsDt):
 		if allAssets:
 			errMsg, allAssetsCurr = "", []
 			if allAssets:
-				if spanStartsDt:
-					assetsFile = self.allAssetsFilename(spanStartsDt, channelId=channelId)
-				else:  # 'Jetzt im TV'
-					assetsFile = join(f"{self.getCachePath()}cache/", "allAssets_now.json")
+				assetsFile = self.allAssetsFilename(spanStartsDt)
 				allAssetsCurr = allAssets
 				if not spanStartsDt or not exists(assetsFile):
 					try:
@@ -1224,19 +1218,13 @@ class TVoverview(TVscreenHelper, Screen):
 		self.startLoadAllEPG()
 
 	def startLoadAllEPG(self):
-		timeSearch = search(r"\d{2}:\d{2}", self.spanStartsStr)
-		now = datetime.now(tz=None)
-		if timeSearch and self.spanDuranceTs:
-			spanStartsDt = datetime.combine(self.currDateDt, datetime.strptime(timeSearch.group(0), "%H:%M").time())
-			spansEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
-			self.currDayDelta += int(spanStartsDt < now and spansEndsDt < now)  # in case start with next day
-		self.currDateDt = now + timedelta(days=self.currDayDelta)
+		self.currDateDt = datetime.now(tz=None) + timedelta(days=self.currDayDelta)
 		self.setReviewdate(self.currDateDt, timeStartEnd="", fullScreen=False)
 		self.setLongstatus()
 		self.loadAllEPGstop = self.loadAllEPGactive  # stop if running
 		callInThread(self.loadAllEPG)
 
-	def loadAllEPG(self):  # Threaded function
+	def loadAllEPG(self):  # threaded function
 		self.loadAllEPGactive = True
 		self.totalAssetsCount, self.lenAssetUrls = 0, 0
 		self["longStatus"].setText("")
@@ -1255,18 +1243,17 @@ class TVoverview(TVscreenHelper, Screen):
 		if self.singleChannelId:  # entire day for single channel
 			spanStartsDt = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)
 			spanEndsDt = self.currDateDt.replace(hour=23, minute=59, second=0, microsecond=0)
-			nowFlag = False
 		elif self.spanStartsStr:  # user time spans
 			spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 			spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
-			nowFlag = False
-		else:  # remaining = 'Jetzt im TV'
+		else:  # 'Jetzt im TV'
+			spanStartsDt = None
+		channelDicts = tvglobals.IMPORTDICT.items()
+		allAssets = [] if self.singleChannelId else self.loadAllAssets(spanStartsDt)  # first try to load existing Assets from cache
+		if not spanStartsDt:  # 'Jetzt im TV'
 			spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0) - timedelta(minutes=120)  # start 2 hours earlier to get ongoing shows
 			spanEndsDt = now + timedelta(minutes=self.spanDuranceTs)
-			nowFlag = True
-		channelDicts = tvglobals.IMPORTDICT.items()
-		allAssets = self.loadAllAssets(spanStartsDt, channelId=self.singleChannelId, nowFlag=nowFlag)  # first try to load existing Assets from cache
-		if not allAssets:  # build filtered Assetslist, channel by channel
+		if not allAssets:  # build filtered assetslist, channel by channel
 			if self.currDayDelta < -1:
 				self.tvinfobox.showDialog("Keine alten Daten im TVS-EPG Cache gefunden und Tage vor gestern sind auch nicht mehr downloadbar!", 5000)
 			else:
@@ -1295,10 +1282,11 @@ class TVoverview(TVscreenHelper, Screen):
 					print(f"[{tvglobals.MODULE_NAME}] TVS-EPG download was regularly terminated.")
 					if not self.spanStartsStr:  # 'Jetzt im TV'
 						spanStartsDt = None
-					saveErr = self.saveAllAssets(allAssets, spanStartsDt, channelId=self.singleChannelId)
-					saveErr2200 = self.saveAllAssets(assets2200, span2200StartsDt) if assets2200 else ""
-					if saveErr or saveErr2200:
-						self.tvinfobox.showDialog(f"Der Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'{saveErr or saveErr2200}'")
+					if not self.singleChannelId:  # don't save single channels
+						saveErr = self.saveAllAssets(allAssets, spanStartsDt)
+						saveErr2200 = self.saveAllAssets(assets2200, span2200StartsDt) if assets2200 else ""
+						if saveErr or saveErr2200:
+							self.tvinfobox.showDialog(f"Der Datensatz 'Sendungsdetails' konnte nicht gespeichert werden:\n'{saveErr or saveErr2200}'")
 		if self.loadAllEPGstop:
 			print(f"[{tvglobals.MODULE_NAME}] TVS-EPG download was stopped on user demand.")
 		else:
@@ -1532,38 +1520,29 @@ class TVoverview(TVscreenHelper, Screen):
 				self.showCurrentAsset()
 
 	def prevday(self):
-		if self.currDayDelta == -7:
-			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis\nmaximal-7 Tage im Nachhinein verfügbar.")
-		else:
-			self.currDayDelta = max(self.currDayDelta - 1, -7)  # max. 7 days in past
-			self.startLoadAllEPG()
+		self.changeDay(-1, 7, "Vergangene TVS-EPG Daten nur bis\nmaximal -7 Tage im Nachhinein verfügbar.")
 
 	def prevweek(self):
-		if self.currDayDelta == -7:
-			self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis\nmaximal -7 Tage im Nachhinein verfügbar.")
-		else:
-			self.currDayDelta = max(self.currDayDelta - 7, -7)  # max. 7 days in past
-			self.startLoadAllEPG()
+		self.changeDay(-7, 7, "Vergangene TVS-EPG Daten nur bis\nmaximal -7 Tage im Nachhinein verfügbar.")
 
 	def nextday(self):
-		if self.currDayDelta == 13:
-			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis\nmaximal +13 Tage im Voraus verfügbar.")
-		else:
-			self.currDayDelta = min(self.currDayDelta + 1, 13)  # max. 13 days in future
-			self.startLoadAllEPG()
+		self.changeDay(1, 13, "Zukünftige TVS-EPG Daten nur bis\nmaximal +13 Tage im Voraus verfügbar.")
 
 	def nextweek(self):
-		if self.currDayDelta == 13:
-			self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis\nmaximal +13 Tage im Voraus verfügbar.")
-		else:
-			self.currDayDelta = min(self.currDayDelta + 7, 13)  # max. 13 days in future
-			self.startLoadAllEPG()
+		self.changeDay(7, 13, "Zukünftige TVS-EPG Daten nur bis\nmaximal +13 Tage im Voraus verfügbar.")
+
+	def changeDay(self, jumpDays, cacheLimit, msgText):
+		if self.spanStartsStr or self.singleChannelId:  # not 'Jetzt im TV'
+			if self.currDayDelta == cacheLimit:
+				self.tvinfobox.showDialog(msgText)
+			else:
+				self.currDayDelta = min(self.currDayDelta + jumpDays, cacheLimit)
+				self.startLoadAllEPG()
 
 	def keyExit(self):
 		if self.loadAllEPGactive or self.prefetchActive:
 			self.keyExitPressed = True  # instruct threads to break and return to main menu
 			self.loadAllEPGstop = True
-
 		else:
 			self.close(False)  # return to main menu
 
@@ -2144,8 +2123,8 @@ class selectChannelCategory(TVscreenHelper, Screen):
 					self.session.openWithCallback(self.keyOkReturn, TVoverview, (("", "day"), 0), singleChannelId=channel[1])
 
 	def keyOkReturn(self, answer):
-			if answer:
-				self.close(True)
+		if answer:
+			self.close(True)
 
 
 class TVimport(TVscreenHelper, Screen):
