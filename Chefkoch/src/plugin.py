@@ -9,7 +9,7 @@ from json import loads
 from operator import itemgetter
 from os import rename, remove, makedirs, linesep
 from os.path import join, exists
-from random import randrange, choice
+from random import randrange, choice  # secrets is unknown in Python 2
 from requests import get, exceptions
 from PIL import Image
 from smtplib import SMTP, SMTP_SSL, SMTPResponseException
@@ -68,14 +68,15 @@ HIDEFLAG = False
 
 
 class CKglobals:
-	AGENTS = [
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
-			"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0",
-			"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edge/87.0.664.75",
-			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
-			]
+	AGENT = choice([
+			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.10 Safari/605.1.1",
+			"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.3,"
+			"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.3",
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:136.0) Gecko/20100101 Firefox/136.",
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.3",
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.",
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/117.0.0."
+			])
 	MODULE_NAME = __name__.split(".")[-1]
 	RELEASE = 'v%s' % __version__
 	LINESPERPAGE = 8
@@ -125,7 +126,7 @@ class AllScreen(Screen):
 
 	def getAPIdata(self, apiurl, params={}):
 		url = '%s%s' % (ckglobals.APIURLBASE, apiurl)
-		headers = {"User-Agent": choice(ckglobals.AGENTS), 'Accept': 'application/json'}
+		headers = {"User-Agent": ckglobals.AGENT, 'Accept': 'application/json'}
 		try:
 			response = get(url=url, params=params, headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
@@ -177,7 +178,7 @@ class AllScreen(Screen):
 
 	def Pdownload(self, link):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		headers = {"User-Agent": choice(ckglobals.AGENTS), 'Accept': 'application/json'}
+		headers = {"User-Agent": ckglobals.AGENT, 'Accept': 'application/json'}
 		try:
 			response = get(link, headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
@@ -953,7 +954,7 @@ class CKview(AllScreen):
 
 	def Idownload(self, link, index):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		headers = {"User-Agent": choice(ckglobals.AGENTS), 'Accept': 'application/json'}
+		headers = {"User-Agent": ckglobals.AGENT, 'Accept': 'application/json'}
 		try:
 			response = get(link, headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
