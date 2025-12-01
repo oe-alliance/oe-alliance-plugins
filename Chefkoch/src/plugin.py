@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 # Plugin still runs under Pyton 2 and Python 3
+from __future__ import print_function, absolute_import, division
 
 # PYTHON IMPORTS
 from base64 import b64encode, b64decode
 from datetime import datetime
 from json import loads
 from operator import itemgetter
-from os import linesep, rename, remove
+from os import rename, remove, makedirs, linesep
+from os.path import join, exists
 from random import randrange, choice
 from requests import get, exceptions
 from PIL import Image
 from smtplib import SMTP, SMTP_SSL, SMTPResponseException
+from shutil import copy
 from six import ensure_str, ensure_binary, PY3
 from six.moves.email_mime_multipart import MIMEMultipart
 from six.moves.email_mime_text import MIMEText
@@ -38,29 +41,13 @@ from Screens.InfoBar import MoviePlayer
 from Screens.MessageBox import MessageBox
 from Screens.Screen import Screen
 from Screens.VirtualKeyBoard import VirtualKeyBoard
-from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS
+from Tools.Directories import fileExists, resolveFilename, SCOPE_PLUGINS, SCOPE_CONFIG
 
-# GLOBALS
-RELEASE = 'V2.3'
-LINESPERPAGE = 8
-PICFILE = '/tmp/chefkoch.jpg'
-MODULE_NAME = __name__.split(".")[-1]
-PICURLBASE = 'https://img.chefkoch-cdn.de/rezepte/'
-APIURIBASE = 'https://api.chefkoch.de/v2/'
-NOPICURL = 'https://img.chefkoch-cdn.de/img/default/layout/recipe-nopicture.jpg'
-ALPHA = '/proc/stb/video/alpha' if fileExists('/proc/stb/video/alpha') else None
-AGENTS = [
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
-		"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0",
-		"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edge/87.0.664.75",
-		"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
-		]
+# PLUGIN IMPORTS
+from . import __version__
 
 # orderBy-Codes: 0= unbekannt, 1= = unbekannt, 2= unbekannt, 3= rating, 4= unbekannt, 5= unbekannt, 6= createdAt, 7= isPremium, 8= unbekannt
 # nicht unterstüzte orderBy-Queries: numVotes, preparationTime
-
 config.plugins.chefkoch = ConfigSubsection()
 config.plugins.chefkoch.font_size = ConfigSelection(default='large', choices=[('large', 'Groß'), ('normal', 'Normal')])
 config.plugins.chefkoch.maxrecipes = ConfigSelection(default='100', choices=['10', '20', '50', '100', '200', '500', '1000'])
@@ -76,29 +63,71 @@ config.plugins.chefkoch.port = ConfigInteger(465, (0, 99999))
 config.plugins.chefkoch.ssl = ConfigYesNo(default=True)
 config.plugins.chefkoch.debuglog = ConfigYesNo(default=False)
 config.plugins.chefkoch.logtofile = ConfigYesNo(default=False)
-FULLHD = True if getDesktop(0).size().width() >= 1920 else False
-PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/Chefkoch/")
-if FULLHD:
-	SCALE = 1.5
-	SKINFILE = "%sskin_FHD.xml" % PLUGINPATH
-else:
-	SCALE = 1.0
-	SKINFILE = "%sskin_HD.xml" % PLUGINPATH
+
+HIDEFLAG = False
+
+
+class CKglobals:
+	AGENTS = [
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36",
+			"Mozilla/5.0 (iPhone; CPU iPhone OS 14_4_2 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Mobile/15E148 Safari/604.1",
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/110.0",
+			"Mozilla/4.0 (compatible; MSIE 9.0; Windows NT 6.1)",
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36 Edge/87.0.664.75",
+			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18363"
+			]
+	MODULE_NAME = __name__.split(".")[-1]
+	RELEASE = 'v%s' % __version__
+	LINESPERPAGE = 8
+	HIDEFLAG = False
+	PICFILE = '/tmp/chefkoch.jpg'
+	PICURLBASE = bytes.fromhex("68747470733A2F2F696D672E636865666B6F63682D63646E2E64652F72657A657074652FF"[:-1]).decode()
+	APIURLBASE = bytes.fromhex("68747470733A2F2F6170692E636865666B6F63682E64652F76322FA"[:-1]).decode()
+	NOPICURL = bytes.fromhex("68747470733A2F2F696D672E636865666B6F63682D63646E2E64652F696D672F64656661756C742F6C61796F75742F7265636970652D6E6F706963747572652E6A70670"[:-1]).decode()
+	ALPHA = '/proc/stb/video/ckglobals.ALPHA' if fileExists('/proc/stb/video/ckglobals.ALPHA') else None
+	FULLHD = True if getDesktop(0).size().width() >= 1920 else False
+	PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/Chefkoch/")  # e.g. /usr/lib/enigma2/python/Plugins/Extensions/Chefkoch/
+	CONFIGPATH = resolveFilename(SCOPE_CONFIG, "Chefkoch/")  # e.g. /etc/enigma2/Chefkoch/
+	PICPATH = join(PLUGINPATH, "pic/")
+	VKATDB = join(CONFIGPATH, "VKATdb")
+	FAVORITES = join(CONFIGPATH, "favoriten")
+	SEARCHES = join(CONFIGPATH, "suchen")
+	SCALE, SKINFILE = (1.5, join(PLUGINPATH, "skin_FHD.xml")) if FULLHD else (1.0, join(PLUGINPATH, "skin_HD.xml"))
+
+
+ckglobals = CKglobals
 
 
 class AllScreen(Screen):
 	def __init__(self):
 		pass
 
+	def preparePaths(self):
+		try:
+			if not exists(ckglobals.CONFIGPATH):
+				makedirs(ckglobals.CONFIGPATH)
+			source = join(ckglobals.PLUGINPATH, "db/", "VKATdb")
+			if not exists(ckglobals.VKATDB) and exists(source):
+				copy(source, ckglobals.VKATDB)
+			for filename in ["favoriten", "suchen"]:  # DEPRECATED: frühere Versionen legten diese Dateien im Plugin-Ordner ab
+				source = join(ckglobals.PLUGINPATH, "db/", filename)
+				destination = join(ckglobals.CONFIGPATH, filename)
+				if not exists(destination) and exists(source):
+					copy(source, destination)  # kopiere Datei aus früherem Ordner (falsch) in den Config-Ordner (richtig)
+					remove(source)  # lösche an alter (falscher) Stelle
+		except OSError as err:
+			print("[%s] Error preparing paths: %s" % (ckglobals.MODULE_NAME, str(err)))
+
 	def applySkinVars(self, skin, dict):
 		for key in dict.keys():
 			skin = skin.replace('{%s}' % key, dict[key])
 		return skin
 
-	def getAPIdata(self, apiuri):
-		headers = {"User-Agent": choice(AGENTS), 'Accept': 'application/json'}
+	def getAPIdata(self, apiurl, params={}):
+		url = '%s%s' % (ckglobals.APIURLBASE, apiurl)
+		headers = {"User-Agent": choice(ckglobals.AGENTS), 'Accept': 'application/json'}
 		try:
-			response = get('%s%s' % (APIURIBASE, apiuri), headers=headers, timeout=(3.05, 6))
+			response = get(url=url, params=params, headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
 			return (response.text, response.status_code)
 		except exceptions.RequestException as error:
@@ -111,29 +140,29 @@ class AllScreen(Screen):
 			try:
 				with open('/home/root/logs/chefkoch.log', 'a') as f:
 					f.write('%s %s %s\r\n' % (strftime('%H:%M:%S'), info, wert))
-			except IOError as err:
-				print("[Chefkoch] Error writing Logfile: %s" % str(err))
+			except OSError as err:
+				print("[%s] Error writing Logfile: %s" % (ckglobals.MODULE_NAME, str(err)))
 		else:
-			print("[Chefkoch] %s %s" % (str(info), str(wert)))
+			print("[%s] %s %s" % (ckglobals.MODULE_NAME, str(info), str(wert)))
 
 	def hideScreen(self):
 		global HIDEFLAG
-		if ALPHA:
+		if ckglobals.ALPHA:
 			if HIDEFLAG:
 				HIDEFLAG = False
-				for i in range(40, -1, -1):
-					with open(ALPHA, 'w') as f:
-						f.write('%i' % (config.av.osd_alpha.value * i / 40))
+				for index in range(40, -1, -1):
+					with open(ckglobals.ALPHA, 'w') as f:
+						f.write('%i' % (config.av.osd_ckglobals.ALPHA.value * index / 40))
 			else:
 				HIDEFLAG = True
-				for i in range(41):
-					with open(ALPHA, 'w') as f:
-						f.write('%i' % (config.av.osd_alpha.value * i / 40))
+				for index in range(41):
+					with open(ckglobals.ALPHA, 'w') as f:
+						f.write('%i' % (config.av.osd_ckglobals.ALPHA.value * index / 40))
 
 	def readSkin(self, skin):
 		skintext = ""
 		try:
-			with open(SKINFILE, "r") as fd:
+			with open(ckglobals.SKINFILE, "r") as fd:
 				try:
 					domSkin = parse(fd).getroot()
 					for element in domSkin:
@@ -141,14 +170,14 @@ class AllScreen(Screen):
 							skintext = ensure_str(tostring(element))
 							break
 				except Exception as err:
-					print("[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (SKINFILE, err))
+					print("[Skin] Error: Unable to parse skin data in '%s' - '%s'!" % (ckglobals.SKINFILE, err))
 		except OSError as err:
-			print("[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (SKINFILE, err))
+			print("[Skin] Error: Unexpected error opening skin file '%s'! (%s)" % (ckglobals.SKINFILE, err))
 		return skintext
 
 	def Pdownload(self, link):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		headers = {"User-Agent": choice(AGENTS), 'Accept': 'application/json'}
+		headers = {"User-Agent": choice(ckglobals.AGENTS), 'Accept': 'application/json'}
 		try:
 			response = get(link, headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
@@ -156,16 +185,16 @@ class AllScreen(Screen):
 			self.downloadError(error)
 		else:
 			try:
-				with open(PICFILE, 'wb') as f:
+				with open(ckglobals.PICFILE, 'wb') as f:
 					f.write(response.content)
 					self.showPic()
-			except IOError as logerr:
-				self.CKlog("Error writing PICFILE: %s" % str(logerr))
+			except OSError as logerr:
+				self.CKlog("Error writing ckglobals.PICFILE: %s" % str(logerr))
 
 	def showPic(self):
 		picload = ePicLoad()
 		picload.setPara((self['picture'].instance.size().width(), self['picture'].instance.size().height(), 1, 0, 0, 1, "#00000000"))
-		if picload.startDecode(PICFILE, 0, 0, False) == 0:
+		if picload.startDecode(ckglobals.PICFILE, 0, 0, False) == 0:
 			ptr = picload.getData()
 			if ptr is not None:
 				self['picture'].instance.setPixmap(ptr)
@@ -178,8 +207,8 @@ class CKview(AllScreen):
 	def __init__(self, session, query, titel, sort, fav, zufall):
 		global HIDEFLAG
 		HIDEFLAG = True
-		fontsize = '%d' % int(22 * SCALE) if config.plugins.chefkoch.font_size.value == 'large' else '%d' % int(20 * SCALE)
-		self.dict = {'picpath': '%spic/' % PLUGINPATH, 'fontsize': fontsize}
+		fontsize = '%d' % int(22 * ckglobals.SCALE) if config.plugins.chefkoch.font_size.value == 'large' else '%d' % int(20 * ckglobals.SCALE)
+		self.dict = {'picpath': ckglobals.PICPATH, 'fontsize': fontsize}
 		skin = self.readSkin("CKview")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session, skin)
@@ -196,23 +225,23 @@ class CKview(AllScreen):
 		self.count = 0
 		self.maxPage = 0
 		self.currItem = 0
+		self.picCount = 0
+		self.videoCount = 0
 		self.current = 'menu'
 		self.name = ''
 		self.chefvideo = ''
-		self.GRP = {}
+		self.GRPs = []
 		self.REZ = {}
 		self.KOM = {}
-		self.orgGRP = []
-		self.kochId = []
 		self.picurllist = []
 		self.titellist = []
 		self.videolist = []
 		self.rezeptelist = []
 		self.rezeptelinks = []
 		self.sortname = ['{keine}', 'Anzahl Bewertungen', 'Anzahl Sterne', 'mit Video', 'Erstelldatum']
-		for i in range(LINESPERPAGE):
-			self['pic%d' % i] = Pixmap()
-			self['vid%d' % i] = Pixmap()
+		for index in range(ckglobals.LINESPERPAGE):
+			self['pic%d' % index] = Pixmap()
+			self['vid%d' % index] = Pixmap()
 		self['picture'] = Pixmap()
 		self['postvid'] = Pixmap()
 		self['stars'] = ProgressBar()
@@ -238,7 +267,7 @@ class CKview(AllScreen):
 		self['label_play'] = Label('')
 		self['button_play'] = Pixmap()
 		self['Line_Bottom'] = Label('')
-		self['release'] = Label(RELEASE)
+		self['release'] = Label(ckglobals.RELEASE)
 		self['NumberActions'] = NumberActionMap(['NumberActions', 'OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'ButtonSetupActions'], {
 			'ok': self.ok,
 			'cancel': self.exit,
@@ -270,10 +299,10 @@ class CKview(AllScreen):
 	def onLayoutFinished(self):
 		if self.zufall:
 			self.current = 'postview'
-			if not self.GRP:
-				self.GRP = self.getGRP()
-				self.maxPage = (len(self.GRP) - 1) // LINESPERPAGE + 1
-			self.showRecipe(self.GRP[randrange(0, len(self.GRP))]['id'])
+			if not self.GRPs:
+				self.GRPs = self.getGRPs()
+				self.maxPage = (len(self.GRPs) - 1) // ckglobals.LINESPERPAGE + 1
+			self.showRecipe(self.GRPs[randrange(0, len(self.GRPs))]['id'])
 			callInThread(self.fillRecipe)
 		elif self.fav:
 			self.current = 'postview'
@@ -285,9 +314,9 @@ class CKview(AllScreen):
 			callInThread(self.fillRlist)
 
 	def showRlist(self):  # zeige leere Rezeptliste
-		for i in range(LINESPERPAGE):
-			self['pic%d' % i].hide()
-			self['vid%d' % i].hide()
+		for index in range(ckglobals.LINESPERPAGE):
+			self['pic%d' % index].hide()
+			self['vid%d' % index].hide()
 		self['postvid'].hide()
 		self['Line_Bottom'].hide()
 		self['starsbg'].hide()
@@ -316,43 +345,42 @@ class CKview(AllScreen):
 		self['menu'].show()
 
 	def fillRlist(self):  # fülle die Rezeptliste
-		self.GRP = self.getGRP()
-		self.maxPage = (len(self.GRP) - 1) // LINESPERPAGE + 1
-		self.setTitle("%s %s Rezepte (%s %s)" % (len(self.GRP), self.titel.replace(" Rezepte", ""), self.videocount, "Video" if self.videocount == 1 else "Videos"))
+		self.GRPs = GRPs = self.getGRPs()
+		self.maxPage = (len(GRPs) - 1) // ckglobals.LINESPERPAGE + 1
+		self.setTitle("%s %s Rezepte (%s %s)" % (len(GRPs), self.titel.replace(" Rezepte", ""), self.videoCount, "Video" if self.videoCount == 1 else "Videos"))
 		self['label_green'].setText('Sortierung: %s' % self.sortname[self.sort])
-		self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
+		self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // ckglobals.LINESPERPAGE + 1), self.maxPage))
 		kochentries = []
 		titellist = []
 		videolist = []
 		picurllist = []
-		for i in range(len(self.GRP)):
-			ident = str(self.GRP[i]['id'])
-			titel = self.GRP[i]['title']
-			time = str(self.GRP[i]['preparationTime'])
-			if self.GRP[i]['numVotes']:
-				count = str(self.GRP[i]['numVotes'])
-				score = str(round(self.GRP[i]['rating'] / 5, 1) * 5).replace('.', '_').replace('_0', '')
+		for index in range(len(GRPs)):
+			ident = str(GRPs[index]['id'])
+			titel = GRPs[index]['title']
+			time = str(GRPs[index]['preparationTime'])
+			if GRPs[index]['numVotes']:
+				count = str(GRPs[index]['numVotes'])
+				score = str(round(GRPs[index]['rating'] / 5, 1) * 5).replace('.', '_').replace('_0', '')
 			else:
 				count = 'keine'
 				score = '0'
-			picurl = "%s%s/bilder/%s/crop-160x120/%s.jpg" % (PICURLBASE, ident, self.GRP[i]['previewImageId'], titel.replace(' ', '-')) if self.GRP[i]['previewImageId'] else NOPICURL
-			text = self.GRP[i]['subtitle']
+			picurl = "%s%s/bilder/%s/crop-160x120/%s.jpg" % (ckglobals.PICURLBASE, ident, GRPs[index]['previewImageId'], titel.replace(' ', '-')) if GRPs[index]['previewImageId'] else ckglobals.NOPICURL
+			text = GRPs[index]['subtitle']
 			if len(text) > 155:
 				text = "%s…" % text[:155]
-			self.kochId.append(ident)
 			titellist.append(titel)
-			videolist.append(self.GRP[i]['hasVideo'])
+			videolist.append(GRPs[index]['hasVideo'])
 			picurllist.append(picurl)
-			res = [i]
-			res.append(MultiContentEntryText(pos=(int(110 * SCALE), 10), size=(int(965 * SCALE), int(30 * SCALE)), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titel))  # TITLE
-			png = "%spic/FHD/smallFHD-%s.png" % (PLUGINPATH, score) if FULLHD else "%spic/HD/smallHD-%s.png" % (PLUGINPATH, score)
+			res = [index]
+			res.append(MultiContentEntryText(pos=(int(110 * ckglobals.SCALE), 10), size=(int(965 * ckglobals.SCALE), int(30 * ckglobals.SCALE)), font=-1, color_sel=16777215, flags=RT_HALIGN_LEFT, text=titel))  # TITLE
+			png = join(ckglobals.PICPATH, "FHD/", "smallFHD-%s.png" % score) if ckglobals.FULLHD else join(ckglobals.PICPATH, "HD/", "smallHD-%s.png" % score)
 			if fileExists(png):
-				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(14 * SCALE), int(36 * SCALE)), size=(int(75 * SCALE), int(15 * SCALE)), png=loadPNG(png)))  # STARS
-			res.append(MultiContentEntryText(pos=(int(11 * SCALE), int(52 * SCALE)), size=(int(75 * SCALE), int(30 * SCALE)), font=1, color=16777215, color_sel=16777215,
+				res.append(MultiContentEntryPixmapAlphaTest(pos=(int(14 * ckglobals.SCALE), int(36 * ckglobals.SCALE)), size=(int(75 * ckglobals.SCALE), int(15 * ckglobals.SCALE)), png=loadPNG(png)))  # STARS
+			res.append(MultiContentEntryText(pos=(int(11 * ckglobals.SCALE), int(52 * ckglobals.SCALE)), size=(int(75 * ckglobals.SCALE), int(30 * ckglobals.SCALE)), font=1, color=16777215, color_sel=16777215,
 											flags=RT_HALIGN_CENTER, text='(%s)' % count))  # COUNT
-			res.append(MultiContentEntryText(pos=(int(111 * SCALE), int(45 * SCALE)), size=(int(965 * SCALE), int(70 * SCALE)),
+			res.append(MultiContentEntryText(pos=(int(111 * ckglobals.SCALE), int(45 * ckglobals.SCALE)), size=(int(965 * ckglobals.SCALE), int(70 * ckglobals.SCALE)),
 											font=-1, color=10857646, color_sel=13817818, flags=RT_HALIGN_LEFT | RT_WRAP, text=text))  # TEXT
-			res.append(MultiContentEntryText(pos=(int(10 * SCALE), int(6 * SCALE)), size=(int(75 * SCALE), int(26 * SCALE)), font=0, backcolor=3899463,
+			res.append(MultiContentEntryText(pos=(int(10 * ckglobals.SCALE), int(6 * ckglobals.SCALE)), size=(int(75 * ckglobals.SCALE), int(26 * ckglobals.SCALE)), font=0, backcolor=3899463,
 											color=16777215, backcolor_sel=15704383, color_sel=16777215, flags=RT_HALIGN_CENTER, text=time))  # TIME
 			kochentries.append(res)
 		self.titellist = titellist
@@ -360,11 +388,11 @@ class CKview(AllScreen):
 		self.picurllist = picurllist
 		self.setPrevIcons(0)
 		self.len = len(kochentries)
-		self['menu'].l.setItemHeight(int(75 * SCALE))
+		self['menu'].l.setItemHeight(int(75 * ckglobals.SCALE))
 		self['menu'].l.setList(kochentries)
 		self['menu'].moveToIndex(self.currItem)
 		self.currItem = self['menu'].getSelectedIndex()
-		self.setPrevIcons(self.currItem - self.currItem % LINESPERPAGE)
+		self.setPrevIcons(self.currItem - self.currItem % ckglobals.LINESPERPAGE)
 
 	def formatDatum(self, date):
 		return str(datetime.strptime(date[:10], '%Y-%m-%d').strftime('%d.%m.%Y'))
@@ -380,9 +408,9 @@ class CKview(AllScreen):
 
 	def showRecipe(self, ident):  # zeige leeres Rezept
 		self.currId = ident
-		for i in range(LINESPERPAGE):
-			self['pic%d' % i].hide()
-			self['vid%d' % i].hide()
+		for index in range(ckglobals.LINESPERPAGE):
+			self['pic%d' % index].hide()
+			self['vid%d' % index].hide()
 		self['picture'].hide()
 		self['menu'].hide()
 		self['button_green'].hide()
@@ -408,7 +436,7 @@ class CKview(AllScreen):
 
 	def fillRecipe(self):  # fülle das Rezept
 		self.REZ = self.getREZ(self.currId)
-		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.REZ['previewImageId'], self.titel) if self.REZ['hasImage'] else NOPICURL
+		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (ckglobals.PICURLBASE, self.currId, self.REZ['previewImageId'], self.titel) if self.REZ['hasImage'] else ckglobals.NOPICURL
 		callInThread(self.Pdownload, picurl)
 		if self.REZ['rating']:
 			score = self.REZ['rating']['rating'] * 20.0
@@ -469,7 +497,7 @@ class CKview(AllScreen):
 			self.showRezept()
 
 	def getREZ(self, ident):  # hole den jeweiligen Rezeptdatensatz
-		content, resp = self.getAPIdata('recipes/%s' % ident)
+		content, resp = self.getAPIdata(apiurl='recipes/%s' % ident)
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
@@ -478,7 +506,7 @@ class CKview(AllScreen):
 			return loads(content)
 
 	def getIMG(self, ident):  # hole die jeweilige Rezeptbilderliste
-		content, resp = self.getAPIdata('recipes/%s/images?&offset=0&limit=%s' % (ident, config.plugins.chefkoch.maxpictures.value))
+		content, resp = self.getAPIdata(apiurl='recipes/%s/images' % ident, params={"offset": 0, "limit": config.plugins.chefkoch.maxpictures.value})
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
@@ -492,7 +520,7 @@ class CKview(AllScreen):
 			return img
 
 	def getKOM(self, ident):  # hole die jeweilige Rezeptkommentarliste
-		content, resp = self.getAPIdata('recipes/%s/comments?&offset=0&limit=%s' % (ident, config.plugins.chefkoch.maxcomments.value))
+		content, resp = self.getAPIdata(apiurl='recipes/%s/comments' % ident, params={"offset": 0, "limit": config.plugins.chefkoch.maxcomments.value})
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
@@ -502,52 +530,51 @@ class CKview(AllScreen):
 			self.KOMlen = int(config.plugins.chefkoch.maxcomments.value) if result['count'] > int(config.plugins.chefkoch.maxcomments.value) else result['count']
 			return result
 
-	def getGRP(self):  # hole die gewünschte Rezeptgruppe (alle Rezepte, davon 'videocount' mit Video)
-		if not self.orgGRP:
-			limit = int(config.plugins.chefkoch.maxrecipes.value)
-			videocount = 0
-			for i in range(max((limit) // 100, 1)):
-				content, resp = self.getAPIdata('recipes?query=%s&offset=%d&limit=%d&orderBy=3' % (self.query, i * 100, min(limit, 100)))  # 3= sort by 'rating'
-				if resp != 200:
-					self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
-					self.close()
-					return []
-				result = loads(content)
-				for j in range(len(result['results'])):
-					if result['results'][j]['recipe']['isRejected']:
-						continue
-					grp = {}
-					grp['id'] = result['results'][j]['recipe']['id']
-					grp['createdAt'] = result['results'][j]['recipe']['createdAt']
-					grp['preparationTime'] = result['results'][j]['recipe']['preparationTime']
-					if result['results'][j]['recipe']['rating']:
-						grp['rating'] = result['results'][j]['recipe']['rating']['rating']
-						grp['numVotes'] = result['results'][j]['recipe']['rating']['numVotes']
-					else:
-						grp['rating'] = 0
-						grp['numVotes'] = False
-					if result['results'][j]['recipe']['hasImage']:
-						grp['previewImageId'] = result['results'][j]['recipe']['previewImageId']
-					else:
-						grp['previewImageId'] = False
-					grp['hasVideo'] = result['results'][j]['recipe']['hasVideo']
-					titel = str(result['results'][j]['recipe']['title'])
-					grp['title'] = titel
-					grp['subtitle'] = str(result['results'][j]['recipe']['subtitle'])
-					if result['results'][j]['recipe']['hasVideo']:
-						videocount += 1
-					self.orgGRP.append(grp)
-			self.videocount = videocount
+	def getGRPs(self):  # hole die gewünschte Rezeptgruppe (alle Rezepte, davon 'videocount' mit Video)
+		limit = int(config.plugins.chefkoch.maxrecipes.value)
+		videocount, GRPs = 0, []
+		for index in range(max((limit) // 100, 1)):
+			content, resp = self.getAPIdata(apiurl='recipes', params={"query": self.query, "offset": index * 100, "limit": min(limit, 100)})  # 3= sort by 'rating'
+			if resp != 200:
+				self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
+				self.close()
+				return []
+			result = loads(content)
+			for j in range(len(result['results'])):
+				if result['results'][j]['recipe']['isRejected']:
+					continue
+				grp = {}
+				grp['id'] = result['results'][j]['recipe']['id']
+				grp['createdAt'] = result['results'][j]['recipe']['createdAt']
+				grp['preparationTime'] = result['results'][j]['recipe']['preparationTime']
+				if result['results'][j]['recipe']['rating']:
+					grp['rating'] = result['results'][j]['recipe']['rating']['rating']
+					grp['numVotes'] = result['results'][j]['recipe']['rating']['numVotes']
+				else:
+					grp['rating'] = 0
+					grp['numVotes'] = False
+				if result['results'][j]['recipe']['hasImage']:
+					grp['previewImageId'] = result['results'][j]['recipe']['previewImageId']
+				else:
+					grp['previewImageId'] = False
+				grp['hasVideo'] = result['results'][j]['recipe']['hasVideo']
+				titel = str(result['results'][j]['recipe']['title'])
+				grp['title'] = titel
+				grp['subtitle'] = str(result['results'][j]['recipe']['subtitle'])
+				if result['results'][j]['recipe']['hasVideo']:
+					videocount += 1
+				GRPs.append(grp)
+		self.videoCount = videocount
 		if self.sort == 0:
-			return self.orgGRP
+			return GRPs
 		elif self.sort == 1:
-			return sorted(self.orgGRP, key=itemgetter('numVotes'), reverse=True)
+			return sorted(GRPs, key=itemgetter('numVotes'), reverse=True)
 		elif self.sort == 2:
-			return sorted(self.orgGRP, key=itemgetter('rating'), reverse=True)
+			return sorted(GRPs, key=itemgetter('rating'), reverse=True)
 		elif self.sort == 3:
-			return sorted(self.orgGRP, key=itemgetter('hasVideo', 'numVotes'), reverse=True)
+			return sorted(GRPs, key=itemgetter('hasVideo', 'numVotes'), reverse=True)
 		elif self.sort == 4:
-			return sorted(self.orgGRP, key=itemgetter('createdAt'), reverse=True)
+			return sorted(GRPs, key=itemgetter('createdAt'), reverse=True)
 		else:
 			return []
 
@@ -571,8 +598,8 @@ class CKview(AllScreen):
 			if self.current == 'menu':
 				self.current = 'postview'
 				self.currItem = self['menu'].getSelectedIndex()
-				if self.kochId:
-					self.showRecipe(self.kochId[self.currItem])
+				if self.GRPs:
+					self.showRecipe(self.GRPs[self.currItem]["id"])
 					callInThread(self.fillRecipe)
 			elif self.current == 'postview' and self.REZ:
 				if self.picCount == 1:
@@ -591,13 +618,12 @@ class CKview(AllScreen):
 
 	def red_return(self, answer):
 		if answer is True:
-			favoriten = "%sdb/favoriten" % PLUGINPATH
 			if self.zufall:
-				data = '%s:::%s' % (self.name, self.kochId[self.currItem])
+				data = '%s:::%s' % (self.name, self.GRPs[self.currItem]["id"])
 			else:
 				self.currItem = self['menu'].getSelectedIndex()
-				data = '%s:::%s' % (self.titellist[self.currItem], self.kochId[self.currItem])
-			with open(favoriten, 'a') as f:
+				data = '%s:::%s' % (self.titellist[self.currItem], self.GRPs[self.currItem]["id"])
+			with open(ckglobals.FAVORITES, 'a') as f:
 				f.write(data)
 				f.write(linesep)
 			self.session.open(CKfavoriten)
@@ -606,7 +632,7 @@ class CKview(AllScreen):
 		if self.current == 'postview' and self.REZ:
 			if config.plugins.chefkoch.mail.value:
 				mailto = config.plugins.chefkoch.mailto.value.split(",")
-				mailto = [(i.strip(),) for i in mailto]
+				mailto = [(index.strip(),) for index in mailto]
 				self.session.openWithCallback(self.green_return, ChoiceBox, title='Rezept an folgende E-Mail Adresse senden:', list=mailto)
 			else:
 				self.session.open(MessageBox, '\nDie E-Mail Funktion ist nicht aktiviert. Aktivieren Sie die E-Mail Funktion im Setup des Plugins.', MessageBox.TYPE_INFO, timeout=5, close_on_any_key=True)
@@ -666,11 +692,11 @@ class CKview(AllScreen):
 				msgText += self.REZ['ingredientGroups'][i]['ingredients'][j]['usageInfo'] if self.REZ else ""
 		msgText += '\n\nZUBEREITUNG\n%s' % self.REZ['instructions'] if self.REZ else ""
 		msgText += '\n%s\nChefkoch.de' % ('_' * 30)
-		if fileExists(PICFILE):
+		if fileExists(ckglobals.PICFILE):
 			if PY3:
-				Image.open(PICFILE).resize((320, 240), Image.LANCZOS).save('/tmp/emailpic.jpg')
+				Image.open(ckglobals.PICFILE).resize((320, 240), Image.LANCZOS).save('/tmp/emailpic.jpg')
 			else:
-				Image.open(PICFILE).resize((320, 240), Image.ANTIALIAS).save('/tmp/emailpic.jpg')
+				Image.open(ckglobals.PICFILE).resize((320, 240), Image.ANTIALIAS).save('/tmp/emailpic.jpg')
 		mailFrom = ensure_str(config.plugins.chefkoch.mailfrom.value.encode('ascii', 'xmlcharrefreplace'))
 		mailTo = ensure_str(mailTo.encode('ascii', 'xmlcharrefreplace'))
 		mailLogin = ensure_str(config.plugins.chefkoch.login.value.encode('ascii', 'xmlcharrefreplace'))
@@ -718,9 +744,9 @@ class CKview(AllScreen):
 	def nextPage(self):
 		if self.current == 'menu':
 			self.currItem = self['menu'].getSelectedIndex()
-			offset = self.currItem % LINESPERPAGE
-			if self.currItem + LINESPERPAGE > self.len - 1:
-				if offset > (self.len - 1) % LINESPERPAGE:
+			offset = self.currItem % ckglobals.LINESPERPAGE
+			if self.currItem + ckglobals.LINESPERPAGE > self.len - 1:
+				if offset > (self.len - 1) % ckglobals.LINESPERPAGE:
 					self.currItem = self.len - 1
 					self['menu'].moveToIndex(self.currItem)  # springe auf letzten Eintrag der letzten Seite
 					self.setPrevIcons(self.currItem - offset)
@@ -729,21 +755,21 @@ class CKview(AllScreen):
 					self['menu'].moveToIndex(self.currItem)  # springe auf gleichen Offset der ersten Seite
 					self.setPrevIcons(0)
 			else:
-				self.currItem = self.currItem + LINESPERPAGE
+				self.currItem = self.currItem + ckglobals.LINESPERPAGE
 				self['menu'].pageDown()
 				self.setPrevIcons(self.currItem - offset)
 			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
-			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // ckglobals.LINESPERPAGE + 1), self.maxPage))
 		else:
 			self['textpage'].pageDown()
 
 	def prevPage(self):
 		if self.current == 'menu':
 			self.currItem = self['menu'].getSelectedIndex()
-			offset = self.currItem % LINESPERPAGE
-			lasttop = (self.len - 1) // LINESPERPAGE * LINESPERPAGE
-			if self.currItem - LINESPERPAGE < 0:
-				if offset > (self.len - 1) % LINESPERPAGE:
+			offset = self.currItem % ckglobals.LINESPERPAGE
+			lasttop = (self.len - 1) // ckglobals.LINESPERPAGE * ckglobals.LINESPERPAGE
+			if self.currItem - ckglobals.LINESPERPAGE < 0:
+				if offset > (self.len - 1) % ckglobals.LINESPERPAGE:
 					self.currItem = self.len - 1
 					self['menu'].moveToIndex(self.currItem)  # springe auf gleichen Offset der vorherigen Seite
 				else:
@@ -751,11 +777,11 @@ class CKview(AllScreen):
 					self['menu'].moveToIndex(self.currItem)  # springe auf letzten Eintrag der letzten Seite
 				self.setPrevIcons(lasttop)
 			else:
-				self.currItem = self.currItem - LINESPERPAGE
+				self.currItem = self.currItem - ckglobals.LINESPERPAGE
 				self['menu'].pageUp()
 				self.setPrevIcons(self.currItem - offset)
 			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
-			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // ckglobals.LINESPERPAGE + 1), self.maxPage))
 		else:
 			self['textpage'].pageUp()
 
@@ -764,10 +790,10 @@ class CKview(AllScreen):
 			self['menu'].down()
 			self.currItem = self['menu'].getSelectedIndex()
 			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
-			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // ckglobals.LINESPERPAGE + 1), self.maxPage))
 			if self.currItem == self.len:  # neue Vorschaubilder der ersten Seite anzeigen
 				self.setPrevIcons(0)
-			if self.currItem % LINESPERPAGE == 0:  # neue Vorschaubilder der nächsten Seite anzeigen
+			if self.currItem % ckglobals.LINESPERPAGE == 0:  # neue Vorschaubilder der nächsten Seite anzeigen
 				self.setPrevIcons(self.currItem)
 		else:
 			self['textpage'].pageDown()
@@ -777,12 +803,12 @@ class CKview(AllScreen):
 			self['menu'].up()
 			self.currItem = self['menu'].getSelectedIndex()
 			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
-			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // ckglobals.LINESPERPAGE + 1), self.maxPage))
 			if self.currItem == self.len - 1:  # neue Vorschaubilder der letzte Seite anzeigen
-				d = self.len % LINESPERPAGE if self.len % LINESPERPAGE != 0 else LINESPERPAGE
+				d = self.len % ckglobals.LINESPERPAGE if self.len % ckglobals.LINESPERPAGE != 0 else ckglobals.LINESPERPAGE
 				self.setPrevIcons(self.len - d)
-			if self.currItem % LINESPERPAGE == LINESPERPAGE - 1:  # neue Vorschaubilder der vorherige Seite anzeigen
-				self.setPrevIcons(self.currItem // LINESPERPAGE * LINESPERPAGE)
+			if self.currItem % ckglobals.LINESPERPAGE == ckglobals.LINESPERPAGE - 1:  # neue Vorschaubilder der vorherige Seite anzeigen
+				self.setPrevIcons(self.currItem // ckglobals.LINESPERPAGE * ckglobals.LINESPERPAGE)
 		else:
 			self['textpage'].pageUp()
 
@@ -804,23 +830,23 @@ class CKview(AllScreen):
 			if count > self.maxPage:
 				count = self.maxPage
 				self.session.open(MessageBox, '\nNur %s Seiten verfügbar. Gehe zu Seite %s.' % (count, count), MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
-			self.currItem = (count - 1) * LINESPERPAGE
+			self.currItem = (count - 1) * ckglobals.LINESPERPAGE
 			self['menu'].moveToIndex(self.currItem)
 			self.setPrevIcons(self.currItem)
 			self['label_rezeptnr'].setText('Rezept Nr. %s' % (self.currItem + 1))
-			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // LINESPERPAGE + 1), self.maxPage))
+			self['pageinfo'].setText('Seite %s von %s' % (int(self.currItem // ckglobals.LINESPERPAGE + 1), self.maxPage))
 
 	def setPrevIcons(self, toppos):
-		for i in range(LINESPERPAGE):
-			if len(self.picurllist) > toppos + i:
-				callInThread(self.Idownload, self.picurllist[toppos + i], i)
-				if self.videolist[toppos + i]:
-					self['vid%d' % i].show()
+		for index in range(ckglobals.LINESPERPAGE):
+			if len(self.picurllist) > toppos + index:
+				callInThread(self.Idownload, self.picurllist[toppos + index], index)
+				if self.videolist[toppos + index]:
+					self['vid%d' % index].show()
 				else:
-					self['vid%d' % i].hide()
+					self['vid%d' % index].hide()
 			else:
-				self['pic%d' % i].hide()
-				self['vid%d' % i].hide()
+				self['pic%d' % index].hide()
+				self['vid%d' % index].hide()
 
 	def yellow(self):
 		if self.current == 'menu':
@@ -859,7 +885,7 @@ class CKview(AllScreen):
 			text += self.formatUsername(kom['owner']['username'], kom['owner']['rank'], 0)
 			text += ' %s Uhr\n' % self.formatDatumZeit(kom['createdAt'])
 			text += kom['text']
-			if FULLHD:
+			if ckglobals.FULLHD:
 				repeat = 102 if config.plugins.chefkoch.font_size.value == 'large' else 109
 				text += '\n%s\n' % ('_' * repeat)
 			else:
@@ -917,7 +943,7 @@ class CKview(AllScreen):
 				text += self.REZ['ingredientGroups'][i]['ingredients'][j]['name'] if self.REZ else ""
 				text += self.REZ['ingredientGroups'][i]['ingredients'][j]['usageInfo'] if self.REZ else ""
 		text += '\n\nZUBEREITUNG\n%s' % self.REZ['instructions'] if self.REZ else ""
-		if FULLHD:
+		if ckglobals.FULLHD:
 			repeat = 102 if config.plugins.chefkoch.font_size.value == 'large' else 109
 		else:
 			repeat = 96 if config.plugins.chefkoch.font_size.value == 'large' else 105
@@ -925,29 +951,29 @@ class CKview(AllScreen):
 		self['textpage'].setText(str(text))
 		self['picture'].show()
 
-	def Idownload(self, link, i):
+	def Idownload(self, link, index):
 		link = ensure_binary(link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', ''))
-		headers = {"User-Agent": choice(AGENTS), 'Accept': 'application/json'}
+		headers = {"User-Agent": choice(ckglobals.AGENTS), 'Accept': 'application/json'}
 		try:
 			response = get(link, headers=headers, timeout=(3.05, 6))
 			response.raise_for_status()
 		except exceptions.RequestException as error:
 			self.downloadError(error)
 		else:
-			picFile = '/tmp/chefkoch%d.jpg' % i
+			ckglobals.PICFILE = '/tmp/chefkoch%d.jpg' % index
 			try:
-				with open(picFile, 'wb') as f:
+				with open(ckglobals.PICFILE, 'wb') as f:
 					f.write(response.content)
-			except IOError as err:
-				print("[Chefkoch] Error writing picFile: %s" % str(err))
+			except OSError as err:
+				print("[%s] Error writing PICFILE: %s" % (ckglobals.MODULE_NAME, str(err)))
 			else:
 				picload = ePicLoad()
-				picload.setPara((self['pic%d' % i].instance.size().width(), self['pic%d' % i].instance.size().height(), 1, 0, 0, 1, "#00000000"))
-				if picload.startDecode(picFile, 0, 0, False) == 0:
+				picload.setPara((self['pic%d' % index].instance.size().width(), self['pic%d' % index].instance.size().height(), 1, 0, 0, 1, "#00000000"))
+				if picload.startDecode(ckglobals.PICFILE, 0, 0, False) == 0:
 					ptr = picload.getData()
 					if self.current == 'menu' and ptr is not None:
-						self['pic%d' % i].instance.setPixmap(ptr)
-						self['pic%d' % i].show()
+						self['pic%d' % index].instance.setPixmap(ptr)
+						self['pic%d' % index].show()
 
 	def zap(self):
 		servicelist = self.session.instantiateDialog(ChannelSelection)
@@ -958,10 +984,10 @@ class CKview(AllScreen):
 
 	def exit(self):
 		global HIDEFLAG
-		if ALPHA and not HIDEFLAG:
+		if ckglobals.ALPHA and not HIDEFLAG:
 			HIDEFLAG = True
-			with open(ALPHA, 'w') as f:
-				f.write('%i' % config.av.osd_alpha.value)
+			with open(ckglobals.ALPHA, 'w') as f:
+				f.write('%i' % config.av.osd_ckglobals.ALPHA.value)
 		if self.current == 'menu':
 			self.close()
 		elif self.fav:
@@ -975,9 +1001,9 @@ class CKview(AllScreen):
 
 	def playVideo(self):
 		if self.current == 'menu':
-			self.REZ = self.getREZ(self.kochId[self.currItem])
+			self.REZ = self.getREZ(self.GRPs[self.currItem]["id"])
 		if self.REZ and self.REZ['recipeVideoId']:
-			content, resp = self.getAPIdata('videos/%s' % self.REZ['recipeVideoId'])
+			content, resp = self.getAPIdata(apiurl='videos/%s' % self.REZ['recipeVideoId'])
 			if resp != 200:
 				self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 				self.close()
@@ -1035,7 +1061,7 @@ class CKpicshow(AllScreen):
 	def __init__(self, session, titel, recipe, images):
 		global HIDEFLAG
 		HIDEFLAG = True
-		self.dict = {'picpath': '%spic/' % PLUGINPATH}
+		self.dict = {'picpath': ckglobals.PICPATH}
 		skin = self.readSkin("CKpicshow")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session, skin)
@@ -1062,7 +1088,7 @@ class CKpicshow(AllScreen):
 		self['button_ok'] = Pixmap()
 		self['label_left-right'] = Label('')
 		self['button_left-right'] = Pixmap()
-		self['release'] = Label(RELEASE)
+		self['release'] = Label(ckglobals.RELEASE)
 		self['NumberActions'] = NumberActionMap(['NumberActions', 'OkCancelActions', 'DirectionActions', 'ColorActions', 'HelpActions'], {
 			'ok': self.ok,
 			'cancel': self.exit,
@@ -1106,9 +1132,9 @@ class CKpicshow(AllScreen):
 		self['scoretext'].setText(scoretext)
 		self['scoretext'].show()
 		if self.IMG['count'] > 0:
-			for i in range(len(self.IMG['results'])):
-				self.pixlist.append(self.IMG['results'][i]['id'])
-			picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.REZ['previewImageId'], self.titel)
+			for index in range(len(self.IMG['results'])):
+				self.pixlist.append(self.IMG['results'][index]['id'])
+			picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (ckglobals.PICURLBASE, self.currId, self.REZ['previewImageId'], self.titel)
 			callInThread(self.Pdownload, picurl)
 			self.maxPics = len(self.pixlist) - 1
 			username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
@@ -1124,14 +1150,14 @@ class CKpicshow(AllScreen):
 
 	def picup(self):
 		self.count += 1 if self.count < self.maxPics else - self.count
-		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.IMG['results'][self.count]['id'], self.titel) if self.REZ['hasImage'] else NOPICURL
+		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (ckglobals.PICURLBASE, self.currId, self.IMG['results'][self.count]['id'], self.titel) if self.REZ['hasImage'] else ckglobals.NOPICURL
 		callInThread(self.Pdownload, picurl)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d\nvon %s' % (self.count + 1, self.maxPics + 1, username))
 
 	def picdown(self):
 		self.count -= 1 if self.count > 0 else - self.maxPics
-		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.IMG['results'][self.count]['id'], self.titel) if self.REZ['hasImage'] else NOPICURL
+		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (ckglobals.PICURLBASE, self.currId, self.IMG['results'][self.count]['id'], self.titel) if self.REZ['hasImage'] else ckglobals.NOPICURL
 		callInThread(self.Pdownload, picurl)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d\nvon %s' % (self.count + 1, self.maxPics + 1, username))
@@ -1143,16 +1169,16 @@ class CKpicshow(AllScreen):
 		if number > self.maxPics + 1:
 			number = self.maxPics + 1
 		self.count = number - 1
-		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (PICURLBASE, self.currId, self.IMG['results'][self.count]['id'], self.titel) if self.REZ['hasImage'] else NOPICURL
+		picurl = "%s%s/bilder/%s/crop-960x720/%s.jpg" % (ckglobals.PICURLBASE, self.currId, self.IMG['results'][self.count]['id'], self.titel) if self.REZ['hasImage'] else ckglobals.NOPICURL
 		self.pixlist[self.count]
 		callInThread(self.Pdownload, picurl)
 		username = self.formatUsername(self.IMG['results'][self.count]['owner']['username'], self.IMG['results'][self.count]['owner']['rank'], 22)
 		self['picindex'].setText('Bild %d von %d\nvon %s' % (self.count + 1, self.maxPics + 1, username))
 
 	def exit(self):
-		if ALPHA and not HIDEFLAG:
-			with open(ALPHA, 'w') as f:
-				f.write('%i' % config.av.osd_alpha.value)
+		if ckglobals.ALPHA and not HIDEFLAG:
+			with open(ckglobals.ALPHA, 'w') as f:
+				f.write('%i' % config.av.osd_ckglobals.ALPHA.value)
 		self.close()
 
 
@@ -1160,7 +1186,7 @@ class CKfullscreen(AllScreen):
 	def __init__(self, session):
 		global HIDEFLAG
 		HIDEFLAG = True
-		self.dict = {'picpath': '%spic/' % PLUGINPATH}
+		self.dict = {'picpath': ckglobals.PICPATH}
 		skin = self.readSkin("CKfullscreen")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session, skin)
@@ -1180,9 +1206,9 @@ class CKfullscreen(AllScreen):
 		self.showPic()
 
 	def exit(self):
-		if ALPHA and not HIDEFLAG:
-			with open(ALPHA, 'w') as f:
-				f.write('%i' % config.av.osd_alpha.value)
+		if ckglobals.ALPHA and not HIDEFLAG:
+			with open(ckglobals.ALPHA, 'w') as f:
+				f.write('%i' % config.av.osd_ckglobals.ALPHA.value)
 		self.close()
 
 
@@ -1190,11 +1216,11 @@ class CKfavoriten(AllScreen):
 	def __init__(self, session, favmode=True):
 		global HIDEFLAG
 		HIDEFLAG = True
-		self.dict = {'picpath': '%spic/' % PLUGINPATH}
+		self.dict = {'picpath': ckglobals.PICPATH}
 		skin = self.readSkin("CKfavoriten")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session, skin)
-		self['release'] = Label(RELEASE)
+		self['release'] = Label(ckglobals.RELEASE)
 		self.favmode = favmode
 		self.session = session
 		self.favlist = []
@@ -1216,13 +1242,13 @@ class CKfavoriten(AllScreen):
 	def makeFav(self):
 		if self.favmode:
 			self.setTitle("Chefkoch - Favoriten")
-			self.favoriten = "%sdb/favoriten" % PLUGINPATH
+			self.favoriten = ckglobals.FAVORITES
 		else:
 			self.setTitle("Chefkoch - letzte Suchbegriffe")
-			self.favoriten = "%sdb/suchen" % PLUGINPATH
+			self.favoriten = ckglobals.SEARCHES
 			titel = ">>> Neue Suche <<<"
 			res = ['']
-			res.append(MultiContentEntryText(pos=(4, 0), size=(int(570 * SCALE), int(34 * SCALE)), font=-2, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
+			res.append(MultiContentEntryText(pos=(4, 0), size=(int(570 * ckglobals.SCALE), int(34 * ckglobals.SCALE)), font=-2, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
 			self.faventries.append(res)
 			self.favlist.append(titel)
 			self.favId.append('')
@@ -1233,12 +1259,12 @@ class CKfavoriten(AllScreen):
 						favline = line.split(':::')
 						titel = str(favline[0])
 						res = ['']
-						res.append(MultiContentEntryText(pos=(4, 0), size=(int(570 * SCALE), int(34 * SCALE)), font=-2, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
+						res.append(MultiContentEntryText(pos=(4, 0), size=(int(570 * ckglobals.SCALE), int(34 * ckglobals.SCALE)), font=-2, flags=RT_HALIGN_CENTER | RT_VALIGN_CENTER, text=titel))
 						self.faventries.append(res)
 						self.favlist.append(titel)
 						self.favId.append(favline[1].replace('\n', ''))
 		self['favmenu'].l.setList(self.faventries)
-		self['favmenu'].l.setItemHeight(int(34 * SCALE))
+		self['favmenu'].l.setItemHeight(int(34 * ckglobals.SCALE))
 
 	def ok(self):
 		self.currItem = self.getIndex(self['favmenu'])
@@ -1348,9 +1374,9 @@ class CKfavoriten(AllScreen):
 		self['favmenu'].up()
 
 	def exit(self):
-		if ALPHA and not HIDEFLAG:
-			with open(ALPHA, 'w') as f:
-				f.write('%i' % config.av.osd_alpha.value)
+		if ckglobals.ALPHA and not HIDEFLAG:
+			with open(ckglobals.ALPHA, 'w') as f:
+				f.write('%i' % config.av.osd_ckglobals.ALPHA.value)
 		self.close()
 
 
@@ -1358,11 +1384,11 @@ class ItemList(MenuList):
 	def __init__(self, items, enableWrapAround=True):
 		MenuList.__init__(self, items, enableWrapAround, eListboxPythonMultiContent)
 		fontoffset = 2 if config.plugins.chefkoch.font_size.value == 'large' else 0
-		self.l.setFont(-2, gFont('Regular', int(24 * SCALE)))
-		self.l.setFont(-1, gFont('Regular', int((22 + fontoffset) * SCALE)))
-		self.l.setFont(0, gFont('Regular', int((20 + fontoffset) * SCALE)))
-		self.l.setFont(1, gFont('Regular', int((18 + fontoffset) * SCALE)))
-		self.l.setFont(2, gFont('Regular', int((16 + fontoffset) * SCALE)))
+		self.l.setFont(-2, gFont('Regular', int(24 * ckglobals.SCALE)))
+		self.l.setFont(-1, gFont('Regular', int((22 + fontoffset) * ckglobals.SCALE)))
+		self.l.setFont(0, gFont('Regular', int((20 + fontoffset) * ckglobals.SCALE)))
+		self.l.setFont(1, gFont('Regular', int((18 + fontoffset) * ckglobals.SCALE)))
+		self.l.setFont(2, gFont('Regular', int((16 + fontoffset) * ckglobals.SCALE)))
 
 
 class CKmain(AllScreen):
@@ -1370,9 +1396,9 @@ class CKmain(AllScreen):
 		global HIDEFLAG
 		self.session = session
 		HIDEFLAG = True
-		if not ALPHA:
-			self.CKlog('Alphachannel not found! Hide/Show-Function (=blue button) disabled')
-		self.dict = {'picpath': '%spic/' % PLUGINPATH}
+		if not ckglobals.ALPHA:
+			self.CKlog('ckglobals.ALPHAchannel not found! Hide/Show-Function (=blue button) disabled')
+		self.dict = {'picpath': ckglobals.PICPATH}
 		skin = self.readSkin("CKmain")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session, skin)
@@ -1387,7 +1413,7 @@ class CKmain(AllScreen):
 		self['label_green'] = Label('Zufall')
 		self['label_yellow'] = Label('Suche')
 		self['label_blue'] = Label('Ein-/Ausblenden')
-		self['release'] = Label(RELEASE)
+		self['release'] = Label(ckglobals.RELEASE)
 		self['totalrecipes'] = Label('')
 		self['actions'] = ActionMap(['OkCancelActions', 'DirectionActions', 'ColorActions', 'ChannelSelectBaseActions', 'InfoActions', 'MenuActions'], {
 			'ok': self.ok,
@@ -1408,6 +1434,7 @@ class CKmain(AllScreen):
 		self.movie_eof = config.usage.on_movie_eof.value
 		config.usage.on_movie_stop.value = 'quit'
 		config.usage.on_movie_eof.value = 'quit'
+		self.preparePaths()
 		self.onLayoutFinish.append(self.onLayoutFinished)
 
 	def onLayoutFinished(self):
@@ -1428,7 +1455,7 @@ class CKmain(AllScreen):
 			else:
 				self.CKvideo = False
 				self.currKAT = self.getNKAT()
-				if list(filter(lambda i: i['parentId'] == mainId, self.currKAT)):
+				if list(filter(lambda index: index['parentId'] == mainId, self.currKAT)):
 					callInThread(self.makeSecondMenu, mainId)
 				else:
 					sort = 4 if mainId == '999' else 1  # Datumsortierung für "Das perfekte Dinner"
@@ -1437,7 +1464,7 @@ class CKmain(AllScreen):
 
 		elif self.actmenu == 'secondmenu':
 			secondId = self.secondId[self.currItem]
-			if self.currKAT and list(filter(lambda i: i['parentId'] == secondId, self.currKAT)):
+			if self.currKAT and list(filter(lambda index: index['parentId'] == secondId, self.currKAT)):
 				callInThread(self.makeThirdMenu, secondId)
 			else:
 				sort = 3 if self.CKvideo else 1  # Videosortierung für "Chefkoch Video"
@@ -1450,7 +1477,7 @@ class CKmain(AllScreen):
 			self.session.openWithCallback(self.selectThirdMenu, CKview, query, "'%s'" % self.thirdmenutitle[self.currItem], sort, False, False)
 
 	def makeMainMenu(self):
-		content, resp = self.getAPIdata('recipes?limit=1')
+		content, resp = self.getAPIdata(apiurl='recipes', params={"limit": 1})
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
@@ -1465,16 +1492,16 @@ class CKmain(AllScreen):
 		self.mainmenutitle = []
 		self.mainId = []
 		self.currKAT = self.getNKAT()
-		for i in range(len(self.currKAT)):
+		for index in range(len(self.currKAT)):
 			res = ['']
-			if self.currKAT[i]['level'] == 1:
-				res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
+			if self.currKAT[index]['level'] == 1:
+				res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * ckglobals.SCALE), int(30 * ckglobals.SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[index]['descriptionText'])))
 				self.mainmenulist.append(res)
-				self.mainmenuquery.append(self.currKAT[i]['descriptionText'])
-				self.mainmenutitle.append(self.currKAT[i]['descriptionText'])
-				self.mainId.append(self.currKAT[i]['id'])
+				self.mainmenuquery.append(self.currKAT[index]['descriptionText'])
+				self.mainmenutitle.append(self.currKAT[index]['descriptionText'])
+				self.mainId.append(self.currKAT[index]['id'])
 		self['mainmenu'].l.setList(self.mainmenulist)
-		self['mainmenu'].l.setItemHeight(int(34 * SCALE))
+		self['mainmenu'].l.setItemHeight(int(34 * ckglobals.SCALE))
 		self.selectMainMenu()
 
 	def makeSecondMenu(self, parentId):
@@ -1484,16 +1511,16 @@ class CKmain(AllScreen):
 		self.secondId = []
 		self.parentId = parentId
 		if self.currKAT:
-			for i in range(len(self.currKAT)):
+			for index in range(len(self.currKAT)):
 				res = ['']
-				if self.currKAT[i]['level'] == 2 and self.currKAT[i]['parentId'] == parentId:
-					res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[i]['descriptionText'])))
+				if self.currKAT[index]['level'] == 2 and self.currKAT[index]['parentId'] == parentId:
+					res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * ckglobals.SCALE), int(30 * ckglobals.SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=str(self.currKAT[index]['descriptionText'])))
 					self.secondmenulist.append(res)
-					self.secondmenuquery.append(self.currKAT[i]['descriptionText'])
-					self.secondmenutitle.append(self.currKAT[i]['descriptionText'])
-					self.secondId.append(self.currKAT[i]['id'])
+					self.secondmenuquery.append(self.currKAT[index]['descriptionText'])
+					self.secondmenutitle.append(self.currKAT[index]['descriptionText'])
+					self.secondId.append(self.currKAT[index]['id'])
 			self['secondmenu'].l.setList(self.secondmenulist)
-			self['secondmenu'].l.setItemHeight(int(34 * SCALE))
+			self['secondmenu'].l.setItemHeight(int(34 * ckglobals.SCALE))
 			self['secondmenu'].moveToIndex(0)
 			for currkat in self.currKAT:
 				if currkat['id'] == parentId:
@@ -1509,12 +1536,12 @@ class CKmain(AllScreen):
 			for currkat in self.currKAT:
 				res = ['']
 				if currkat['level'] == 3 and currkat['parentId'] == parentId:
-					res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * SCALE), int(30 * SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=currkat['descriptionText']))
+					res.append(MultiContentEntryText(pos=(0, 1), size=(int(570 * ckglobals.SCALE), int(30 * ckglobals.SCALE)), font=-2, flags=RT_HALIGN_CENTER, text=currkat['descriptionText']))
 					self.thirdmenulist.append(res)
 					self.thirdmenuquery.append(currkat['descriptionText'])
 					self.thirdmenutitle.append(currkat['descriptionText'])
 			self['thirdmenu'].l.setList(self.thirdmenulist)
-			self['thirdmenu'].l.setItemHeight(int(34 * SCALE))
+			self['thirdmenu'].l.setItemHeight(int(34 * ckglobals.SCALE))
 			self['thirdmenu'].moveToIndex(0)
 			for currkat in self.currKAT:
 				if currkat['id'] == parentId:
@@ -1523,16 +1550,16 @@ class CKmain(AllScreen):
 			self.selectThirdMenu()
 
 	def makeVKATdb(self):  # hole alle verfügbaren Videokategorien
-		content, resp = self.getAPIdata('videos?&offset=0&limit=10000')
+		content, resp = self.getAPIdata(apiurl='videos', params={"offset": 0, "limit": 10000})
 		if resp != 200:
 			self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 			self.close()
 			return
 		result = loads(content)
 		VKAT = []
-		with open("%sdb/VKATdb" % PLUGINPATH, "a") as f:
-			for i in range(len(result)):
-				data = result[i]['video_format']
+		with open(ckglobals.VKATDB, "a") as f:
+			for index in range(len(result)):
+				data = result[index]['video_format']
 				if data != 'unknown':
 					if ''.join(x for x in data if x.isdigit()) not in VKAT:
 						VKAT.append(id)
@@ -1540,7 +1567,7 @@ class CKmain(AllScreen):
 
 	def getNKAT(self):  # erzeuge die normale Kategorie
 		if not self.NKAT:
-			content, resp = self.getAPIdata('recipes/categories')
+			content, resp = self.getAPIdata(apiurl='recipes/categories')
 			if resp != 200:
 				self.session.openWithCallback(self.eject, MessageBox, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 				self.close()
@@ -1553,17 +1580,16 @@ class CKmain(AllScreen):
 
 	def getVKAT(self):  # erzeuge die Videokategorie
 		if not self.VKAT:
-			for i in range(len(self.NKAT)):
-				if self.NKAT[i]['level'] == 1:
-					self.VKAT.append(self.NKAT[i])
-			datapath = "%sdb/VKATdb" % PLUGINPATH
-			if not fileExists(datapath):
+			for index in range(len(self.NKAT)):
+				if self.NKAT[index]['level'] == 1:
+					self.VKAT.append(self.NKAT[index])
+			if not fileExists(ckglobals.VKATDB):
 				self.makeVKATdb()  # wird nur bei fehlender VKATdb erzeugt (= Notfall)
-			i = 1000  # erzeuge eigene Video-IDs über 1000
-			with open(datapath, "r") as f:
+			index = 1000  # erzeuge eigene Video-IDs über 1000
+			with open(ckglobals.VKATDB, "r") as f:
 				for data in f:
 					dict = {}
-					dict['id'] = str(i)
+					dict['id'] = str(index)
 					dict['title'] = data.split('|')[1].replace('\n', '')
 					if data.split('|')[0].startswith('drupal'):
 						dict['parentId'] = '998'  # Id für CK-Video Hauptmenü (= Secondmenu)
@@ -1574,41 +1600,41 @@ class CKmain(AllScreen):
 					dict['descriptionText'] = data.split('|')[1].replace('\n', '')
 					dict['linkName'] = data.split('|')[0]
 					self.VKAT.append(dict)
-					i += 1
+					index += 1
 			self.VKAT.append({'id': '997', 'title': 'weitere Videos', 'parentId': '998', 'level': 2, 'descriptionText': '>>> weitere Chefkoch Videos <<<', 'linkName': ''})
 		return self.VKAT
 
 	def getMKAT(self):  # erzeuge die Magazinkategorie
 		if not self.MKAT:
-			content, resp = self.getAPIdata('magazine/categories')
+			content, resp = self.getAPIdata(apiurl='magazine/categories')
 			if resp != 200:
 				self.session.openWithCallback(self.eject, '\nFehlermeldung vom Chefkoch.de Server: %s' % resp, MessageBox.TYPE_INFO, timeout=30, close_on_any_key=True)
 				self.close()
 				return
 			result = loads(content)
 			offset = 2000  # erzeuge eigene Magazin-IDs über 2000
-			for i in range(len(result)):
+			for index in range(len(result)):
 				dict = {}
-				if result[i]['parent'] == '34' and result[i]['published']:  # Id 34 ist die Root von CK-Magazin
-					dict['id'] = str(int(result[i]['id']) + offset)
-					dict['title'] = result[i]['name']
+				if result[index]['parent'] == '34' and result[index]['published']:  # Id 34 ist die Root von CK-Magazin
+					dict['id'] = str(int(result[index]['id']) + offset)
+					dict['title'] = result[index]['name']
 					dict['parentId'] = '996'  # Id für CK-Magazin Hauptmenü (= Secondmenu)
 					dict['level'] = 2
-					dict['descriptionText'] = result[i]['name']
-					dict['linkName'] = result[i]['url']
+					dict['descriptionText'] = result[index]['name']
+					dict['linkName'] = result[index]['url']
 					self.MKAT.append(dict)
-			for i in range(len(result)):
+			for index in range(len(result)):
 				for j in range(len(self.MKAT)):
 					dict = {}
-					parentId = result[i]['parent']
+					parentId = result[index]['parent']
 					if parentId:
 						if int(parentId) + offset == int(self.MKAT[j]['id']):
-							dict['id'] = str(int(result[i]['id']) + offset)
-							dict['title'] = result[i]['name']
+							dict['id'] = str(int(result[index]['id']) + offset)
+							dict['title'] = result[index]['name']
 							dict['parentId'] = str(int(parentId) + offset)
 							dict['level'] = 3
-							dict['descriptionText'] = result[i]['name']
-							dict['linkName'] = result[i]['url']
+							dict['descriptionText'] = result[index]['name']
+							dict['linkName'] = result[index]['url']
 							self.MKAT.append(dict)
 							break
 			self.MKAT.reverse()
@@ -1682,19 +1708,19 @@ class CKmain(AllScreen):
 
 	def exit(self):
 		global HIDEFLAG
-		if ALPHA and not HIDEFLAG:
+		if ckglobals.ALPHA and not HIDEFLAG:
 			HIDEFLAG = True
-			with open(ALPHA, 'w') as f:
-				f.write('%i' % config.av.osd_alpha.value)
+			with open(ckglobals.ALPHA, 'w') as f:
+				f.write('%i' % config.av.osd_ckglobals.ALPHA.value)
 		if self.actmenu == 'mainmenu':
 			config.usage.on_movie_stop.value = self.movie_stop
 			config.usage.on_movie_eof.value = self.movie_eof
-			for i in range(LINESPERPAGE):
-				pic = '/tmp/chefkoch%d.jpg' % i
+			for index in range(ckglobals.LINESPERPAGE):
+				pic = '/tmp/chefkoch%d.jpg' % index
 				if fileExists(pic):
 					remove(pic)
-			if fileExists(PICFILE):
-				remove(PICFILE)
+			if fileExists(ckglobals.PICFILE):
+				remove(ckglobals.PICFILE)
 			if fileExists(self.rezeptfile):
 				remove(self.rezeptfile)
 			self.close()
@@ -1713,7 +1739,7 @@ class CKmain(AllScreen):
 
 class CKconfig(ConfigListScreen, AllScreen):
 	def __init__(self, session):
-		self.dict = {'picpath': '%spic/' % PLUGINPATH}
+		self.dict = {'picpath': ckglobals.PICPATH}
 		skin = self.readSkin("CKconfig")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session)
@@ -1741,15 +1767,7 @@ class CKconfig(ConfigListScreen, AllScreen):
 			'red': self.keyCancel,
 			'green': self.keySave
 		}, -2)
-		ConfigListScreen.__init__(self, clist, on_change=self.UpdateComponents)
-		self.onLayoutFinish.append(self.UpdateComponents)
-
-	def UpdateComponents(self):
-		png = "%spic/setup/%s'.png" % (PLUGINPATH, "FHD" if FULLHD else "HD")
-		if fileExists(png):
-			PNG = loadPNG(png)
-			if PNG:
-				self['plugin'].instance.setPixmap(PNG)
+		ConfigListScreen.__init__(self, clist)
 
 	def keySave(self):
 		if config.plugins.chefkoch.password.value != self.password:
