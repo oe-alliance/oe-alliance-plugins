@@ -69,7 +69,7 @@ config.plugins.tvspielfilm.piconpath = ConfigText(default=resolveFilename(SCOPE_
 config.plugins.tvspielfilm.channelname = ConfigSelection(default=1, choices=[(0, "vom Image"), (1, "vom Server")])
 config.plugins.tvspielfilm.prefered_db = ConfigSelection(default=0, choices=[(0, "jedesmal nachfragen"), (1, "IMDb - Internet Movie Database"), (2, "TMDb - The Movie Database")])
 config.plugins.tvspielfilm.update_mapfile = ConfigSelection(default=1, choices=[(0, "niemals"), (1, "nach Updates")])
-config.plugins.tvspielfilm.cachepath = ConfigText(default=join("/media/hdd/"))
+config.plugins.tvspielfilm.cachepath = ConfigText(default="/media/hdd/")
 config.plugins.tvspielfilm.cacherange = ConfigSelection(default=7, choices=[(x, f"+{x} Tage") for x in range(1, 14)])
 config.plugins.tvspielfilm.keepcache = ConfigSelection(default=7, choices=[(x, f"-{x} Tage") for x in range(8)])
 config.plugins.tvspielfilm.assetsprefetch = ConfigSelection(default=300, choices=[(0, "Aus"), (500, "langsam"), (300, "normal"), (200, "schnell")])
@@ -101,7 +101,7 @@ class TVglobals:
 	RESOLUTION = "FHD" if getDesktop(0).size().width() > 1300 else "HD"
 	CONFIGPATH = resolveFilename(SCOPE_CONFIG, "TVSpielfilm/")  # e.g. /etc/enigma2/TVSpielfilm/
 	PLUGINPATH = resolveFilename(SCOPE_PLUGINS, "Extensions/TVSpielfilm/")  # e.g. /usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/
-	ICONPATH = join(PLUGINPATH, f"pics/{RESOLUTION}/icons/")  # e.g. /usr/share/enigma2/icon/
+	ICONPATH = join(PLUGINPATH, f"pics/{RESOLUTION}/icons/")
 	IMPORTFILE = join(CONFIGPATH, "tvs_imported.json")
 	SUPPFILE = join(CONFIGPATH, "tvs_supported.json")
 	DUPESFILE = join(CONFIGPATH, "tvs_dupes.json")
@@ -1242,7 +1242,7 @@ class TVoverview(TVscreenHelper, Screen):
 		hour, minute = self.spanStartsStr.split(":") if self.spanStartsStr else [now.strftime("%H"), now.strftime("%M")]
 		if self.singleChannelId:  # entire day for single channel
 			spanStartsDt = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)
-			spanEndsDt = self.currDateDt.replace(hour=23, minute=59, second=0, microsecond=0)
+			spanEndsDt = self.currDateDt.replace(hour=23, minute=59, second=59, microsecond=0)
 		elif self.spanStartsStr:  # user time spans
 			spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 			spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
@@ -1251,7 +1251,7 @@ class TVoverview(TVscreenHelper, Screen):
 		channelDicts = tvglobals.IMPORTDICT.items()
 		allAssets = [] if self.singleChannelId else self.loadAllAssets(spanStartsDt)  # first try to load existing Assets from cache
 		if not spanStartsDt:  # 'Jetzt im TV'
-			spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0) - timedelta(minutes=120)  # start 2 hours earlier to get ongoing shows
+			spanStartsDt = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)  # start at midnight last night to get ongoing shows
 			spanEndsDt = now + timedelta(minutes=self.spanDuranceTs)
 		if not allAssets:  # build filtered assetslist, channel by channel
 			if self.currDayDelta < -1:
@@ -1697,7 +1697,9 @@ class TVmain(TVscreenHelper, Screen):
 		if assetUrl:
 			self.session.openWithCallback(self.returnOk1, TVfullscreen, assetUrl)
 		else:
-			self.tvinfobox.showDialog("Dieser Sender wird von TV Spielfilm nicht unterstützt.")
+			sRef = self.session.nav.getCurrentlyPlayingServiceReference().toString()
+			sName = ServiceReference(sRef).getServiceName()
+			self.tvinfobox.showDialog(f"Sender '{sName}' wird vom TV Spielfilm Server nicht unterstützt.")
 
 	def keyRed(self):
 		if TVS_UPDATEACTIVE or TVS_AUTOUPDATEACTIVE:
@@ -2741,7 +2743,7 @@ def showNowOnTv(session, **kwargs):
 
 def showPrimeTime(session, **kwargs):
 	if exists(tvglobals.IMPORTFILE):
-		session.open(TVoverview, (STARTTIMES[config.plugins.tvspielfilm.starttime_c.value], config.plugins.tvspielfilm.durance_c.value))
+		session.open(TVoverview, (STARTTIMES[config.plugins.tvspielfilm.starttime_b.value], config.plugins.tvspielfilm.durance_b.value))
 	else:
 		session.open(TVimport)
 

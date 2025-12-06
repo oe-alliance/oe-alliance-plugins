@@ -347,10 +347,10 @@ class TVSparserAssets:
 		crewdict = {}
 		crewdict["crew"] = {}
 		for crew in crewblock:
-			role = crew[0].strip()
-			name = tvsphelper.searchOneValue(r'title="(.*?)"', crew[1], "")
-			if not name:  # alternatively, in case of missing photo of this crew member
-				name = crew[1]
+			role = unescape(crew[0].strip())
+			name = unescape(tvsphelper.searchOneValue(r'title="(.*?)"', crew[1], ""))
+			if not name:  # alternatively, in case of missing picture of this crew member
+				name = unescape(crew[1].strip())
 			namelist = crewdict.get(role, [])
 			namelist.append(name)
 			crewdict["crew"][role] = namelist
@@ -359,10 +359,10 @@ class TVSparserAssets:
 		castdict = {}
 		castdict["cast"] = {}
 		for cast in castblock:
-			role = cast[0].strip()
-			name = tvsphelper.searchOneValue(r'title="(.*?)"', cast[1], "")
-			if not name:  # alternatively, in case there is no photo of this actor
-				name = cast[1]
+			role = unescape(cast[0].strip())
+			name = unescape(tvsphelper.searchOneValue(r'title="(.*?)"', cast[1], ""))
+			if not name:  # alternatively, in case there is no picture of this actor
+				name = unescape(cast[1].strip())
 			namelist = castdict.get(role, [])
 			namelist.append(name)
 			castdict["cast"][role] = namelist
@@ -455,7 +455,7 @@ def main(argv):  # shell interface
 		elif opt in ("-j", "--json"):
 			filename = arg
 		elif opt in ("-s", "--single"):
-			errMsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/schtonk,68b6f1817d255456791151e0.html")
+			errMsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/skyscraper,6912f53a5e01fc08fbd32fc8.html")
 			if errMsg:
 				print("errMsg")
 		elif opt in ("-t", "--tipslist"):
