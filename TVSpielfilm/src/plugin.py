@@ -480,7 +480,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 				self.timeStartEnd = timeStartEnd
 				self.subLine = subline
 				self.spanStartsStr = timeStartStr
-				self.setReviewdate(nowDt, timeStartEnd, fullScreen=True)
+				self.setReviewdate(self.timeStartDt, timeStartEnd, fullScreen=True)
 
 	def hideAssetDetails(self):
 		for widget in ["picon", "thumb", "image", "playButton"]:
