@@ -283,15 +283,14 @@ class TVcoreHelper:
 		return importDict  # e.g. [('ard': ('1:0:27:212F:31B:1:FFFF0000:0:0:0:', 'Das Erste HD')), ...]
 
 	def readSupportedFile(self):
-		suppdict = {}
+		suppDict = {}
 		if exists(tvglobals.SUPPFILE):
 			try:
 				with open(tvglobals.SUPPFILE) as file:
-					suppdict = load(file)
+					suppDict = load(file)
 			except OSError as errMsg:
 				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:readSupportedFile': {errMsg}!")
-
-		return suppdict  # e.g. [('ard': ('1:0:27:212F:31B:1:FFFF0000:0:0:0:', 'Das Erste HD')), ...]
+		return suppDict  # e.g. {'ard': ['1:0:19:283D:41B:1:FFFF0000:0:0:0:', 'Das Erste HD'], 'zdf': [...], ...}
 
 	def updateMappingfile(self):
 		if not exists(tvglobals.CONFIGPATH):
@@ -495,12 +494,12 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			self[widget].setText("")
 
 	def setReviewdate(self, currentDt, timeStartEnd, fullScreen=False):
-		now = datetime.now(tz=None)
-		spanStartsStr = self.spanStartsStr or now.strftime("%H:%M")
+		nowDt = datetime.now(tz=None)
+		spanStartsStr = self.spanStartsStr or nowDt.strftime("%H:%M")
 		hour, minute = spanStartsStr.split(":") if spanStartsStr else [currentDt.strftime("%H"), currentDt.strftime("%M")]
 		spanEndsStr = (currentDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0) + timedelta(minutes=self.spanDuranceTs)).strftime("%H:%M")
 		dateOnlyDt = currentDt.replace(hour=0, minute=0, second=0, microsecond=0)
-		todayDateOnly = now.replace(hour=0, minute=0, second=0, microsecond=0)
+		todayDateOnly = nowDt.replace(hour=0, minute=0, second=0, microsecond=0)
 		dayNames = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
 		weekday = "heute" if todayDateOnly == dateOnlyDt else dayNames[dateOnlyDt.weekday()]
 		if timeStartEnd:
@@ -1218,7 +1217,13 @@ class TVoverview(TVscreenHelper, Screen):
 		self.startLoadAllEPG()
 
 	def startLoadAllEPG(self):
-		self.currDateDt = datetime.now(tz=None) + timedelta(days=self.currDayDelta)
+		nowDt = datetime.now(tz=None)
+		hour, minute = self.spanStartsStr.split(":") if self.spanStartsStr else [nowDt.strftime("%H"), nowDt.strftime("%M")]
+		spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
+		spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
+		if spanEndsDt < nowDt:  # if the end of time span is already in the past, take the next day
+			self.currDayDelta += 1
+		self.currDateDt = nowDt + timedelta(days=self.currDayDelta)
 		self.setReviewdate(self.currDateDt, timeStartEnd="", fullScreen=False)
 		self.setLongstatus()
 		self.loadAllEPGstop = self.loadAllEPGactive  # stop if running
@@ -1238,8 +1243,8 @@ class TVoverview(TVscreenHelper, Screen):
 		self["shortStatus"].setText(f"Lade TVS-EPG Daten für {channelText}")
 		self.allAssetsCount, self.allImagesCount = 0, 0
 		self.skinDicts, self.skinList, self.assetUrls = [], [], []
-		now = datetime.now(tz=None)
-		hour, minute = self.spanStartsStr.split(":") if self.spanStartsStr else [now.strftime("%H"), now.strftime("%M")]
+		nowDt = datetime.now(tz=None)
+		hour, minute = self.spanStartsStr.split(":") if self.spanStartsStr else [nowDt.strftime("%H"), nowDt.strftime("%M")]
 		if self.singleChannelId:  # entire day for single channel
 			spanStartsDt = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)
 			spanEndsDt = self.currDateDt.replace(hour=23, minute=59, second=59, microsecond=0)
@@ -1252,7 +1257,7 @@ class TVoverview(TVscreenHelper, Screen):
 		allAssets = [] if self.singleChannelId else self.loadAllAssets(spanStartsDt)  # first try to load existing Assets from cache
 		if not spanStartsDt:  # 'Jetzt im TV'
 			spanStartsDt = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)  # start at midnight last night to get ongoing shows
-			spanEndsDt = now + timedelta(minutes=self.spanDuranceTs)
+			spanEndsDt = nowDt + timedelta(minutes=self.spanDuranceTs)
 		if not allAssets:  # build filtered assetslist, channel by channel
 			if self.currDayDelta < -1:
 				self.tvinfobox.showDialog("Keine alten Daten im TVS-EPG Cache gefunden und Tage vor gestern sind auch nicht mehr downloadbar!", 5000)
@@ -2222,6 +2227,15 @@ class TVimport(TVscreenHelper, Screen):
 			self.session.openWithCallback(self.anotherBouquetCB, TVchannelselection, self.totalimport)
 
 	def anotherBouquetCB(self, answer):
+		def writeDictFile(fileName, dataList, errText):
+			try:
+				with open(f"{fileName}.new", 'w') as file:  # all channels supported by server
+					dump(dict(dataList), file)
+				rename(f"{fileName}.new", fileName)
+			except OSError as errMsg:
+				print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:anotherBouquetCB': {errMsg}!")
+				self.session.open(MessageBox, f"{errText}:\n{errMsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
+
 		if answer:
 			if answer[0] is True:
 				if self.totalimport:
@@ -2229,41 +2243,17 @@ class TVimport(TVscreenHelper, Screen):
 					for index, channel in enumerate(answer[1]):
 						if channel[1]:
 							importedChannels.append((self.totalimport[index][1][0], (self.totalimport[index][0], self.totalimport[index][1][1])))  # e.g. ('ard', ('1:0:19:283D:41B:1:FFFF0000:0:0:0:', 'Das Erste HD'))
-					try:
-						with open(f"{tvglobals.IMPORTFILE}.new", 'w') as file:  # all imported channels only
-							dump(dict(importedChannels), file)
-						rename(f"{tvglobals.IMPORTFILE}.new", tvglobals.IMPORTFILE)
-					except OSError as errMsg:
-						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:anotherBouquetCB': {errMsg}!")
-						self.session.open(MessageBox, f"Fehler in 'weiteres Bouquet':\n{errMsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
+					writeDictFile(tvglobals.IMPORTFILE, importedChannels, "Fehler in 'weiteres Bouquet'")
 				if self.totalsupp:
-					supportedchannels = []
+					supportedChannels = []
 					for index, channel in enumerate(self.totalsupp):
 						if channel[1]:
-							supportedchannels.append((self.totalsupp[index][1][0], (self.totalsupp[index][0], self.totalsupp[index][1][1])))
-					try:
-						with open(f"{tvglobals.SUPPFILE}.new", 'w') as file:  # all channels supported by server
-							dump(dict(supportedchannels), file)
-						rename(f"{tvglobals.SUPPFILE}.new", tvglobals.SUPPFILE)
-					except OSError as errMsg:
-						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:anotherBouquetCB_totalsupp': {errMsg}!")
-						self.session.open(MessageBox, f"Fehler beim Einlesen der unterstützten Kanäle':\n{errMsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
+							supportedChannels.append((self.totalsupp[index][1][0], (self.totalsupp[index][0], self.totalsupp[index][1][1])))
+					writeDictFile(tvglobals.SUPPFILE, supportedChannels, "Fehler beim Einlesen der unterstützten Kanäle'")
 				if self.totaldupes:  # all unused (duplicate) channels in bouquets
-					try:
-						with open(f"{tvglobals.DUPESFILE}.new", 'w') as file:
-							dump(dict(self.totaldupes), file)
-						rename(f"{tvglobals.DUPESFILE}.new", tvglobals.DUPESFILE)
-					except OSError as errMsg:
-						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:anotherBouquetCB_totaldupes': {errMsg}!")
-						self.session.open(MessageBox, f"Fehler beim Einlesen der doppelten Kanäle':\n{errMsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
+					writeDictFile(tvglobals.DUPESFILE, self.totaldupes, "Fehler beim Einlesen der doppelten Kanäle'")
 				if self.totalunsupp:  # all channels not supported by server
-					try:
-						with open(f"{tvglobals.UNSUPPFILE}.new", 'w') as file:
-							dump(dict(self.totalunsupp), file)
-						rename(f"{tvglobals.UNSUPPFILE}.new", tvglobals.UNSUPPFILE)
-					except OSError as errMsg:
-						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVimport:anotherBouquetCB_unsupp': {errMsg}!")
-						self.session.open(MessageBox, f"Fehler beim Einlesen der nicht unterstützten Kanäle':\n{errMsg}", type=MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
+					writeDictFile(tvglobals.UNSUPPFILE, self.totalunsupp, "Fehler beim Einlesen der nicht unterstützten Kanäle'")
 				tvglobals.IMPORTDICT = self.readImportedFile()  # lade importierte Senderdaten
 				self.tvinfobox.showDialog("Senderimport erfolgreich durchgeführt.")
 			else:
