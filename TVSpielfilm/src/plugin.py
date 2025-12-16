@@ -562,7 +562,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 		timer = f"{datetime.fromtimestamp(timeSpanTs[0]).strftime('%Y-%m-%d')}:::{datetime.fromtimestamp(timeSpanTs[0]).strftime('%H:%M')}:::{sref}"  # e.g. ['2024-12-21:::20:15:::1:0:19:283D:41B:1:FFFF0000:0:0:0:', ...]
 		return timer in self.getTimerlist()
 
-	def splittimeSpan(self, timeSpan, currentDt):
+	def splitTimeSpan(self, timeSpan, currentDt):
 		startstr, endstr = timeSpan  # e.g. ("20:15", "22:45")
 		starthour, startminute = startstr.split(":")
 		endhour, endminute = endstr.split(":")
@@ -830,7 +830,7 @@ class TVfullscreen(TVscreenHelper, Screen):
 		callInThread(self.showAssetDetails, self.currAssetUrl, fullScreen=True)
 
 	def keyGreen(self):
-		startTs, endTs = self.splittimeSpan(self.timeStartEnd.split(" - "), self.timeStartDt)  # e.g. '20:15 - 21:45' or 'heute | 20:15'
+		startTs, endTs = self.splitTimeSpan(self.timeStartEnd.split(" - "), self.timeStartDt)  # e.g. '20:15 - 21:45' or 'heute | 20:15'
 		if not self.isAlreadyListed((startTs, endTs), self.currServiceRef):  # timeSpan, sref
 			startTs -= int(config.recording.margin_before.value) * 60
 			endTs += int(config.recording.margin_after.value) * 60
@@ -1071,7 +1071,8 @@ class TVoverview(TVscreenHelper, Screen):
 				],
 				"fonts": [gFont("Regular",20),gFont("Regular",16),gFont("Regular",14)],
 				"itemHeight":48
-				}</convert>
+				}
+			</convert>
 		</widget>
 		<eLabel position="8,1020" size="720,22" backgroundColor="grey" zPosition="-1" />
 		<widget source="longStatus" render="Label" conditional="longStatus" position="0,30" size="1260,26" font="Regular;16" foregroundColor="#92cbdf" backgroundColor=" black,#00203060,horizontal" halign="center" valign="center" zPosition="10">
@@ -1504,7 +1505,7 @@ class TVoverview(TVscreenHelper, Screen):
 		if self.skinList:
 			currIndex = self["menuList"].getCurrentIndex()
 			skinlist = self.skinList[currIndex]
-			startTs, endTs = self.splittimeSpan(skinlist[3].split(" - "), datetime.now(tz=None) + timedelta(days=self.currDayDelta))  # e.g. '20:15 - 21:45' or 'heute | 20:15'
+			startTs, endTs = self.splitTimeSpan(skinlist[3].split(" - "), datetime.now(tz=None) + timedelta(days=self.currDayDelta))  # e.g. '20:15 - 21:45' or 'heute | 20:15'
 			if not self.isAlreadyListed((startTs, endTs), skinlist[13]):  # timeSpan, sref
 				title = skinlist[5]
 				shortdesc = skinlist[6]
@@ -1567,7 +1568,8 @@ class TVmain(TVscreenHelper, Screen):
 				],
 				"fonts": [gFont("Regular",24)],
 				"itemHeight":40
-				}</convert>
+				}
+			</convert>
 		</widget>
 		<eLabel position="2,422" size="316,2" backgroundColor="#0027153c,#00101093,black,horizontal" zPosition="10" />
 		<eLabel text="von Mr.Servo - Skin von stein17 " position="0,426" size="320,18" font="Regular;14" foregroundColor="#0092cbdf" backgroundColor="#00000000" transparent="1" zPosition="2" halign="center" />
@@ -2050,7 +2052,8 @@ class selectChannelCategory(TVscreenHelper, Screen):
 				],
 				"fonts": [gFont("Regular",24)],
 				"itemHeight":40
-				}</convert>
+				}
+			</convert>
 		</widget>
 	</screen>
 	"""
@@ -2229,7 +2232,7 @@ class TVimport(TVscreenHelper, Screen):
 	def anotherBouquetCB(self, answer):
 		def writeDictFile(fileName, dataList, errText):
 			try:
-				with open(f"{fileName}.new", 'w') as file:  # all channels supported by server
+				with open(f"{fileName}.new", 'w') as file:
 					dump(dict(dataList), file)
 				rename(f"{fileName}.new", fileName)
 			except OSError as errMsg:
@@ -2421,11 +2424,12 @@ class TVchannelselection(Screen):
 			<convert type="TemplatedMultiContent">{"template": [
 				MultiContentEntryText(pos=(5,2), size=(270,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0),  # menutext
 				MultiContentEntryPixmapAlphaBlend(pos=(280,8), size=(20,20), flags=BT_SCALE, png="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/checkbox.png"),  # checkbox
-			MultiContentEntryText(pos=(282,6), size=(18,18), font=1, color=MultiContentTemplateColor(2), color_sel=MultiContentTemplateColor(2), flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1)  # checkmark
+				MultiContentEntryText(pos=(282,6), size=(18,18), font=1, color=MultiContentTemplateColor(2), color_sel=MultiContentTemplateColor(2), flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1)  # checkmark
 				],
 				"fonts": [gFont("Regular",20),gFont("Regular",20),gFont("Regular",36)],
 				"itemHeight":34
-				}</convert>
+				}
+			</convert>
 		</widget>
 		<eLabel name="button_red" position="10,626" size="6,30" backgroundColor="#00821c17,#00fe0000,vertical" zPosition="1" />
 		<eLabel name="button_green" position="180,626" size="6,30" backgroundColor="#00006600,#0024a424,vertical" zPosition="1" />
@@ -2547,11 +2551,12 @@ class TVfilterselection(Screen):
 				MultiContentEntryText(pos=(5,2), size=(270,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=0),  # menutext
 				MultiContentEntryText(pos=(310,2), size=(120,30), font=0, flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=1),  # startfilter
 				MultiContentEntryPixmapAlphaBlend(pos=(440,8), size=(20,20), flags=BT_SCALE, png="/usr/lib/enigma2/python/Plugins/Extensions/TVSpielfilm/pics/HD/icons/checkbox.png"),  # checkbox
-			MultiContentEntryText(pos=(442,6), size=(18,18), font=1, color=MultiContentTemplateColor(3), color_sel=MultiContentTemplateColor(3), flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2)  # checkmark
+				MultiContentEntryText(pos=(442,6), size=(18,18), font=1, color=MultiContentTemplateColor(3), color_sel=MultiContentTemplateColor(3), flags=RT_HALIGN_LEFT|RT_VALIGN_CENTER, text=2)  # checkmark
 				],
 				"fonts": [gFont("Regular",20),gFont("Regular",20),gFont("Regular",36)],
 				"itemHeight":34
-				}</convert>
+				}
+			</convert>
 		</widget>
 		<eLabel name="button_red" position="10,626" size="6,30" backgroundColor="#00821c17,#00fe0000,vertical" zPosition="1" />
 		<eLabel name="button_green" position="160,626" size="6,30" backgroundColor="#00006600,#0024a424,vertical" zPosition="1" />
