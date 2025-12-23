@@ -165,7 +165,8 @@ class TVcoreHelper:
 			spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 			spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
 		else:  # 'Jetzt im TV'
-			spanStartsDt = None
+			spanStartsDt = datetime.now(tz=None)
+			spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
 		return spanStartsDt, spanEndsDt
 
 	def allAssetsFilename(self, spanStartsDt):
