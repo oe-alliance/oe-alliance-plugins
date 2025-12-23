@@ -155,6 +155,19 @@ class TVcoreHelper:
 				timeSpans.append((STARTTIMES[userconfig[0]], userconfig[1]))
 		return timeSpans
 
+	def getStartsEndsDt(self):
+		spanStartsStr = self.spanStartsStr or self.currDateDt.strftime("%H:%M")
+		hour, minute = spanStartsStr.split(":") if spanStartsStr else (self.currDateDt.strftime("%H"), self.currDateDt.strftime("%M"))
+		if self.singleChannelId:  # 'singleChannel' means 'the entire day' from 05:00h to 05:00h next morning
+			spanStartsDt = self.currDateDt.replace(hour=5, minute=0, second=0, microsecond=0)
+			spanEndsDt = spanStartsDt + timedelta(days=1)
+		elif self.spanStartsStr:  # user time spans
+			spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
+			spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
+		else:  # 'Jetzt im TV'
+			spanStartsDt = None
+		return spanStartsDt, spanEndsDt
+
 	def allAssetsFilename(self, spanStartsDt):
 		if spanStartsDt:
 			filename = join(f"{self.getCachePath()}cache/", f"allAssets_{spanStartsDt.strftime('%F')}T{spanStartsDt.strftime('%H:%M')}.json")
@@ -479,7 +492,6 @@ class TVscreenHelper(TVcoreHelper, Screen):
 				self.timeStartEnd = timeStartEnd
 				self.subLine = subline
 				self.spanStartsStr = timeStartStr
-				self.setReviewdate(self.timeStartDt, timeStartEnd, fullScreen=True)
 
 	def hideAssetDetails(self):
 		for widget in ["picon", "thumb", "image", "playButton"]:
@@ -492,31 +504,6 @@ class TVscreenHelper(TVcoreHelper, Screen):
 				self[f"ratingDots{index}"].hide()
 		for widget in ["channelName", "imdbRating", "repeatHint", "title", "editorial", "conclusion", "timeStartEnd", "longDescription"]:
 			self[widget].setText("")
-
-	def setReviewdate(self, currentDt, timeStartEnd, fullScreen=False):
-		nowDt = datetime.now(tz=None)
-		spanStartsStr = self.spanStartsStr or nowDt.strftime("%H:%M")
-		hour, minute = spanStartsStr.split(":") if spanStartsStr else [currentDt.strftime("%H"), currentDt.strftime("%M")]
-		spanEndsStr = (currentDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0) + timedelta(minutes=self.spanDuranceTs)).strftime("%H:%M")
-		dateOnlyDt = currentDt.replace(hour=0, minute=0, second=0, microsecond=0)
-		todayDateOnly = nowDt.replace(hour=0, minute=0, second=0, microsecond=0)
-		dayNames = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
-		weekday = "heute" if todayDateOnly == dateOnlyDt else dayNames[dateOnlyDt.weekday()]
-		if timeStartEnd:
-			startStr, endStr = timeStartEnd.split(" - ")
-			titleLenStr = f"{int((datetime.strptime(endStr, '%H:%M') - datetime.strptime(startStr, '%H:%M')).seconds / 60)} Minuten"
-			timeStartEnd = f"{timeStartEnd} Uhr"
-		else:
-			titleLenStr = ""
-		if fullScreen:
-			reviewdate = " | ".join(list(filter(None, [f"{weekday} {currentDt.strftime('%d.%m.%Y')}", f"{timeStartEnd}", f"{titleLenStr}"])))
-		else:
-			if self.singleChannelId:  # 'singleChannel' means 'the entire day' from 05:00h to 05:00h next morning
-				currweekday, nextweekday = dayNames[dateOnlyDt.weekday()][:2], dayNames[(dateOnlyDt + timedelta(days=1)).weekday()][:2]
-				reviewdate = " | ".join(list(filter(None, [f"{weekday} {currentDt.strftime('%d.%m.%Y')}", f"{self.currDayDelta:+} Tag(e)", f"{currweekday} 05:00 - {nextweekday} 05:00 Uhr"])))
-			else:
-				reviewdate = f"{weekday} {currentDt.strftime('%d.%m.%Y')} | {self.currDayDelta:+} Tag(e) | {spanStartsStr} - {spanEndsStr} Uhr"
-		self["reviewdate"].setText(reviewdate)
 
 	def setAssetImage(self, imgFile, assetUrl):
 		if exists(imgFile) and assetUrl == self.currAssetUrl:  # show if no other asset was selected in the meantime
@@ -1159,7 +1146,8 @@ class TVoverview(TVscreenHelper, Screen):
 		self.filterSettings = loads(config.plugins.tvspielfilm.filtersettings.value)
 		self.currDateDt = datetime.now(tz=None)
 		self.dataBases, self.skinList, self.skinDicts, self.assetUrls = [], [], [], []
-		self.currDayDelta, self.lenImportDict, self.totalAssetsCount, self.lenAssetUrls = 0, 0, 0, 0
+		self.currDayDelta, self.correktion = 0, 0
+		self.lenImportDict, self.totalAssetsCount = 0, 0
 		self.assetTitle, self.trailerData, self.currImdbId, self.currTmdbId = "", "", "", ""
 		self.channelName, self.currServiceRef, self.currAssetUrl = "", "", ""
 		self.loadAllEPGactive, self.zapAllowed, self.prefetchActive = False, False, False
@@ -1218,20 +1206,14 @@ class TVoverview(TVscreenHelper, Screen):
 		self.startLoadAllEPG()
 
 	def startLoadAllEPG(self):
-		nowDt = datetime.now(tz=None)
-		hour, minute = self.spanStartsStr.split(":") if self.spanStartsStr else [nowDt.strftime("%H"), nowDt.strftime("%M")]
-		spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
-		spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
-		if spanEndsDt < nowDt:  # if the end of time span is already in the past, take the next day
-			self.currDayDelta += 1
-		self.currDateDt = nowDt + timedelta(days=self.currDayDelta)
-		self.setReviewdate(self.currDateDt, timeStartEnd="", fullScreen=False)
-		self.setLongstatus()
-		self.loadAllEPGstop = self.loadAllEPGactive  # stop if running
+		spanStartsDt, spanEndsDt = self.getStartsEndsDt()
+		self.correktion = 1 if spanEndsDt < self.currDateDt else 0  # if the end of time span is already in the past, take the next day
+		self.currDateDt = datetime.now(tz=None) + timedelta(days=self.currDayDelta + self.correktion)
 		callInThread(self.loadAllEPG)
 
 	def loadAllEPG(self):  # threaded function
 		self.loadAllEPGactive = True
+		self.setReviewdate(timeStartEnd="", fullScreen=False)
 		self.totalAssetsCount, self.lenAssetUrls = 0, 0
 		self["longStatus"].setText("")
 		self.lenImportDict = len(tvglobals.IMPORTDICT)
@@ -1244,21 +1226,9 @@ class TVoverview(TVscreenHelper, Screen):
 		self["shortStatus"].setText(f"Lade TVS-EPG Daten für {channelText}")
 		self.allAssetsCount, self.allImagesCount = 0, 0
 		self.skinDicts, self.skinList, self.assetUrls = [], [], []
-		nowDt = datetime.now(tz=None)
-		hour, minute = self.spanStartsStr.split(":") if self.spanStartsStr else [nowDt.strftime("%H"), nowDt.strftime("%M")]
-		if self.singleChannelId:  # entire day for single channel
-			spanStartsDt = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)
-			spanEndsDt = self.currDateDt.replace(hour=23, minute=59, second=59, microsecond=0)
-		elif self.spanStartsStr:  # user time spans
-			spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
-			spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
-		else:  # 'Jetzt im TV'
-			spanStartsDt = None
+		spanStartsDt, spanEndsDt = self.getStartsEndsDt()
 		channelDicts = tvglobals.IMPORTDICT.items()
 		allAssets = [] if self.singleChannelId else self.loadAllAssets(spanStartsDt)  # first try to load existing Assets from cache
-		if not spanStartsDt:  # 'Jetzt im TV'
-			spanStartsDt = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)  # start at midnight last night to get ongoing shows
-			spanEndsDt = nowDt + timedelta(minutes=self.spanDuranceTs)
 		if not allAssets:  # build filtered assetslist, channel by channel
 			if self.currDayDelta < -1:
 				self.tvinfobox.showDialog("Keine alten Daten im TVS-EPG Cache gefunden und Tage vor gestern sind auch nicht mehr downloadbar!", 5000)
@@ -1316,6 +1286,30 @@ class TVoverview(TVscreenHelper, Screen):
 			print(f"[{tvglobals.MODULE_NAME}] Asset prefetch for {len(self.assetUrls)} assets starts with cycle time {assetsprefetch} ms.")
 			self.prefetchActive = True
 			self.prefetchNextAsset()
+
+	def setReviewdate(self, timeStartEnd, fullScreen=False):
+		spanStartsDt, spanEndsDt = self.getStartsEndsDt()
+		spanStartsStr, spanEndsStr = spanStartsDt.strftime("%H:%M"), spanEndsDt.strftime("%H:%M")
+		dateOnlyDt = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)
+		todayDateOnly = datetime.now(tz=None).replace(hour=0, minute=0, second=0, microsecond=0)
+		dayNames = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
+		weekday = "heute" if todayDateOnly == dateOnlyDt else dayNames[dateOnlyDt.weekday()]
+		print()
+		if timeStartEnd:
+			startStr, endStr = timeStartEnd.split(" - ")
+			titleLenStr = f"{int((datetime.strptime(endStr, '%H:%M') - datetime.strptime(startStr, '%H:%M')).seconds / 60)} Minuten"
+			timeStartEnd = f"{timeStartEnd} Uhr"
+		else:
+			titleLenStr = ""
+		if fullScreen:
+			reviewdate = " | ".join(list(filter(None, [f"{weekday} {self.currDateDt.strftime('%d.%m.%Y')}", f"{timeStartEnd}", f"{titleLenStr}"])))
+		else:
+			if self.singleChannelId:  # 'singleChannel' means 'the entire day' from 05:00h to 05:00h next morning
+				currweekday, nextweekday = dayNames[dateOnlyDt.weekday()][:2], dayNames[(dateOnlyDt + timedelta(days=1)).weekday()][:2]
+				reviewdate = " | ".join(list(filter(None, [f"{weekday} {self.currDateDt.strftime('%d.%m.%Y')}", f"{self.currDayDelta:+} Tag(e)", f"{currweekday} 05:00 - {nextweekday} 05:00 Uhr"])))
+			else:
+				reviewdate = f"{weekday} {self.currDateDt.strftime('%d.%m.%Y')} | {self.currDayDelta:+} Tag(e) | {spanStartsStr} - {spanEndsStr} Uhr"
+		self["reviewdate"].setText(reviewdate)
 
 	def prefetchNextAsset(self):
 		def prefetchStop():
@@ -1526,23 +1520,30 @@ class TVoverview(TVscreenHelper, Screen):
 				self.showCurrentAsset()
 
 	def prevday(self):
-		self.changeDay(-1, 7, "Vergangene TVS-EPG Daten nur bis\nmaximal -7 Tage im Nachhinein verfügbar.")
+		self.changeDay(-1)
 
 	def prevweek(self):
-		self.changeDay(-7, 7, "Vergangene TVS-EPG Daten nur bis\nmaximal -7 Tage im Nachhinein verfügbar.")
+		self.changeDay(-7)
 
 	def nextday(self):
-		self.changeDay(1, 13, "Zukünftige TVS-EPG Daten nur bis\nmaximal +13 Tage im Voraus verfügbar.")
+		self.changeDay(1)
 
 	def nextweek(self):
-		self.changeDay(7, 13, "Zukünftige TVS-EPG Daten nur bis\nmaximal +13 Tage im Voraus verfügbar.")
+		self.changeDay(7)
 
-	def changeDay(self, jumpDays, cacheLimit, msgText):
+	def changeDay(self, jumpDays):
 		if self.spanStartsStr or self.singleChannelId:  # not 'Jetzt im TV'
-			if self.currDayDelta == cacheLimit:
-				self.tvinfobox.showDialog(msgText)
+			desiredDay = self.currDayDelta + jumpDays
+			if self.loadAllEPGactive:  # thread is still running
+				self.loadAllEPGstop = True
+				self.tvinfobox.showDialog("Laufender Prozess 'Lade TVS-EPG Daten' wird zuerst beendet.\nBitte gleich nochmal versuchen.")
+			elif desiredDay > 13:
+				self.tvinfobox.showDialog("Zukünftige TVS-EPG Daten nur bis\nmaximal +13 Tage im Voraus verfügbar.")
+			elif desiredDay < -7:
+				self.tvinfobox.showDialog("Vergangene TVS-EPG Daten nur bis\nmaximal -7 Tage im Nachhinein verfügbar.")
 			else:
-				self.currDayDelta = min(self.currDayDelta + jumpDays, cacheLimit)
+				self.currDayDelta += jumpDays
+				self.currDateDt = datetime.now(tz=None) + timedelta(days=self.currDayDelta + self.correktion)
 				self.startLoadAllEPG()
 
 	def keyExit(self):
@@ -2726,7 +2727,9 @@ def showCurrentProgram(session, **kwargs):
 	if assetUrl:
 		callInThread(session.open, TVfullscreen, assetUrl)
 	else:
-		session.open(MessageBox, "Dieser Sender wird nicht von TV Spielfilm unterstützt.", type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
+		sRef = session.nav.getCurrentlyPlayingServiceReference().toString()
+		sName = ServiceReference(sRef).getServiceName()
+		session.open(MessageBox, f"Sender '{sName}' wird vom TV Spielfilm Server nicht unterstützt.", type=MessageBox.TYPE_INFO, timeout=2, close_on_any_key=True)
 
 
 def showNowOnTv(session, **kwargs):
