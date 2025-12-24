@@ -128,8 +128,8 @@
 		<widget source="Title" render="Label" position="210,21" size="450,48" font="Regular; 36" transparent="1" foregroundColor="#336f3d" backgroundColor="white" halign="center" valign="center" zPosition="3" />
 		<ePixmap position="0,0" size="885,90" pixmap="{picpath}FHD/chefkochFHD.png" alphatest="blend" zPosition="1" />
 		<widget name="release" position="64,37" size="60,21" font="Regular; 21" foregroundColor="#697279" backgroundColor="white" halign="left" valign="center" transparent="1" zPosition="2" />
-		<widget name="plugin" position="15,110" size="855,835" font="Regular;33" itemHeight="51"  selectionPixmap="{picpath}FHD/BG_Pixmap_FHD.png" scrollbarMode="showNever" foregroundColor="white" foregroundColorSelected="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="1" transparent="1"/>
-		<widget name="config" position="15,110" size="855,835" font="Regular;33" itemHeight="51"  selectionPixmap="{picpath}FHD/BG_Pixmap_FHD.png" scrollbarMode="showNever" foregroundColor="white" foregroundColorSelected="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="1" transparent="1"/>
+		<ePixmap position="15,110" size="855,835" pixmap="{picpath}FHD/BG_Pixmap_FHD.png" zPosition="1" transparent="1"/>
+		<widget name="config" position="15,110" size="855,835" font="Regular;33" itemHeight="51" selectionPixmap="{picpath}FHD/BG_Pixmap_FHD.png" scrollbarMode="showNever" foregroundColor="white" foregroundColorSelected="white" backgroundColor="background" backgroundColorSelected="#20336f3d" zPosition="1" transparent="1"/>
 		<widget source="VKeyIcon" text="" render="Label" position="0,0" size="0,0" conditional="VKeyIcon">
 			<convert type="ConditionalShowHide" />
 		</widget>
