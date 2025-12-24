@@ -1761,7 +1761,7 @@ class CKconfig(ConfigListScreen, AllScreen):
 		clist.append(getConfigListEntry('*E-Mail Passwort:', config.plugins.chefkoch.password, "E-Mail Passwort"))
 		clist.append(getConfigListEntry('*E-Mail Server:', config.plugins.chefkoch.server, "E-Mail Server"))
 		clist.append(getConfigListEntry('*E-Mail Server Port:', config.plugins.chefkoch.port, "E-Mail Server Port"))
-		clist.append(getConfigListEntry('*E-Mail Server STARTTSL:', config.plugins.chefkoch.ssl, "E-Mail Server STARTTSL"))
+		clist.append(getConfigListEntry('*E-Mail Server STARTTLS:', config.plugins.chefkoch.ssl, "E-Mail Server STARTTLS"))
 		clist.append(getConfigListEntry('DebugLog', config.plugins.chefkoch.debuglog, "Debug Logging aktivieren"))
 		clist.append(getConfigListEntry('Log in Datei', config.plugins.chefkoch.logtofile, "Log in Datei '/home/root/logs'"))
 
