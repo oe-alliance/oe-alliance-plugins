@@ -12,7 +12,7 @@ from os.path import join, exists
 from random import randrange, choice  # secrets is unknown in Python 2
 from requests import get, exceptions
 from PIL import Image
-from smtplib import SMTP, SMTP_SSL, SMTPResponseException
+from smtplib import SMTP, SMTPResponseException
 from shutil import copy
 from six import ensure_str, ensure_binary, PY3
 from six.moves.email_mime_multipart import MIMEMultipart
@@ -77,7 +77,7 @@ class CKglobals:
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36 Edg/134.0.0.",
 			"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 OPR/117.0.0."
 			])
-	MODULE_NAME = __name__.split(".")[-1]
+	MODULE_NAME = __name__.split(".")[-2]
 	RELEASE = 'v%s' % __version__
 	LINESPERPAGE = 8
 	HIDEFLAG = False
@@ -720,27 +720,29 @@ class CKview(AllScreen):
 		msgImage.add_header('Content-ID', '<0>')
 		msgRoot.attach(msgImage)
 		try:
+			server = SMTP(mailServer, mailPort)
 			if config.plugins.chefkoch.ssl.value:
-				server = SMTP_SSL(mailServer, mailPort)
-			else:
-				server = SMTP(mailServer, mailPort)
+				server.starttls()
 		except Exception as err:
+			server.quit()
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAngaben (mailServer oder mailPort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=5, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAngaben (mailServer oder mailPort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 			return
 		try:
 			server.login(mailLogin, mailPassword)
 		except SMTPResponseException as err:
+			server.quit()
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAnmeldedaten (Login oder Passwort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=5, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAnmeldedaten (Login oder Passwort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 			return
 		try:
 			server.sendmail(mailFrom, mailTo, msgRoot.as_string())
 			server.quit()
-			self.session.open(MessageBox, 'E-Mail erfolgreich gesendet an: %s' % mailTo, MessageBox.TYPE_INFO, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail erfolgreich gesendet an: %s' % mailTo, MessageBox.TYPE_INFO, timeout=5, close_on_any_key=True)
 		except SMTPResponseException as err:
+			server.quit()
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
-			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nMailadressen (Absender oder Empfänger) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=5, close_on_any_key=True)
+			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nMailadressen (Absender oder Empfänger) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 
 	def nextPage(self):
 		if self.current == 'menu':
@@ -1744,9 +1746,9 @@ class CKconfig(ConfigListScreen, AllScreen):
 		skin = self.readSkin("CKconfig")
 		self.skin = self.applySkinVars(skin, self.dict)
 		Screen.__init__(self, session)
+		self['release'] = Label(ckglobals.RELEASE)
 		self['VKeyIcon'] = Boolean(False)
 		self.password = config.plugins.chefkoch.password.value
-		self['plugin'] = Pixmap()
 		clist = []
 		clist.append(getConfigListEntry('Schriftgröße Rezepte/Kommentare:', config.plugins.chefkoch.font_size, "Schriftgröße Langtexte"))
 		clist.append(getConfigListEntry('Maximale Anzahl Rezepte:', config.plugins.chefkoch.maxrecipes, "Maximale Anzahl Rezepte"))
