@@ -165,8 +165,9 @@ class TVcoreHelper:
 			spanStartsDt = self.currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 			spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
 		else:  # 'Jetzt im TV'
-			spanStartsDt = datetime.now(tz=None)
-			spanEndsDt = spanStartsDt + timedelta(minutes=self.spanDuranceTs)
+			nowDt = datetime.now(tz=None)
+			spanStartsDt = nowDt.replace(hour=5, minute=0, second=0, microsecond=0)
+			spanEndsDt = nowDt + timedelta(minutes=self.spanDuranceTs)
 		return spanStartsDt, spanEndsDt
 
 	def allAssetsFilename(self, spanStartsDt):
@@ -358,7 +359,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			timeEndIso = assetDict.get("timeEnd", "")
 			timeEndDt = datetime.fromisoformat(timeEndIso).replace(tzinfo=None) if timeEndIso else nowDt
 			timeStartStr = (self.timeStartDt if self.timeStartDt else nowDt).strftime("%H:%M")
-			timeStartEnd = f"{timeStartStr} - {timeEndDt.strftime('%H:%M')}"
+			timeStartEnd = timeStartEndStr = f"{timeStartStr} - {timeEndDt.strftime('%H:%M')}"
 			timeStartEndTs = (int(self.timeStartDt.timestamp()), int(timeEndDt.timestamp()))
 			repeatHint = assetDict.get("repeatHint", "")  # e.g.'Wh. um 00:20 Uhr, Nächste Episode um 21:55 Uhr (Staffel 8, Episode 24)'
 			channelId = assetDict.get("channelId", "").lower()
@@ -435,7 +436,6 @@ class TVscreenHelper(TVcoreHelper, Screen):
 					self[widget].show()
 				else:
 					self[widget].hide()
-			self["timeStartEnd"].setText(timeStartEnd)
 			if self.trailerData:
 				self["playButton"].show()
 				self["play"].show()
@@ -479,6 +479,11 @@ class TVscreenHelper(TVcoreHelper, Screen):
 			if fullScreen:
 				startStr, endStr = timeStartEnd.split(" - ")
 				titleLenStr = f"{int((datetime.strptime(endStr, '%H:%M') - datetime.strptime(startStr, '%H:%M')).seconds / 60)} Minuten"
+				dateOnlyDt = self.currDateDt.replace(hour=0, minute=0, second=0, microsecond=0)
+				todayDateOnly = datetime.now(tz=None).replace(hour=0, minute=0, second=0, microsecond=0)
+				dayNames = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
+				weekday = "heute" if todayDateOnly == dateOnlyDt else dayNames[dateOnlyDt.weekday()]
+				timeStartEndStr = f"{weekday} | {todayDateOnly.strftime('%d.%m.%Y')} | {timeStartEnd}"
 				for index, (label, text) in enumerate([("Staffel/Episode", seasonEpisode), ("Genre", genre), ("Typ", programType),
 														("Altersfreigabe", fskText), ("Land | Jahr", countryYear), ("Länge", titleLenStr)]):
 					if text:
@@ -490,9 +495,10 @@ class TVscreenHelper(TVcoreHelper, Screen):
 						self[f"typeLabel{index}l"].setText(label)
 						self[f"typeText{index}"].setText("")
 				self["credits"].setText(imgCredits)
-				self.timeStartEnd = timeStartEnd
-				self.subLine = subline
-				self.spanStartsStr = timeStartStr
+			self["timeStartEnd"].setText(timeStartEndStr)
+			self.timeStartEnd = timeStartEnd
+			self.subLine = subline
+			self.spanStartsStr = timeStartStr
 
 	def hideAssetDetails(self):
 		for widget in ["picon", "thumb", "image", "playButton"]:
@@ -665,10 +671,12 @@ class TVfullscreen(TVscreenHelper, Screen):
 		<widget source="global.CurrentTime" render="Label" position="1000,26" size="100,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
 			<convert type="ClockToText">Format:%e. %B</convert>
 		</widget>
-		<widget source="channelName" render="Label" position="548,158" size="220,32" font="Regular;24" halign="center" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
-		<widget source="editorial" render="Label" position="90,80" size="490,30" font="Regular;18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
-		<widget source="conclusion" render="Label" position="90,102" size="490,54" font="Regular;20" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" valign="top" />
+		<widget name="thumb" position="38,106" size="60,60" alphatest="blend" />
+		<widget source="timeStartEnd" render="Label" position="90,66" size="490,30" font="Regular;20" backgroundColor="#16000000" transparent="1" />
+		<widget source="editorial" render="Label" position="90,100" size="490,26" font="Regular;18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
+		<widget source="conclusion" render="Label" position="90,120" size="490,54" font="Regular;20" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget name="picon" position="586,66" size="148,88" alphatest="blend" scaleFlags="scale" zPosition="1" />
+		<widget source="channelName" render="Label" position="548,158" size="220,32" font="Regular;24" halign="center" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget name="hasTimer" position="718,68" size="14,14" alphatest="blend" zPosition="1" />
 		<widget source="title" render="Label" position="center,0" size="720,36" font="Regular;24" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" wrap="ellipsis" halign="center" valign="center" zPosition="10" />
 		<widget source="repeatHint" render="Label" position="10,600" size="750,46" font="Regular;18" valign="center" halign="left" backgroundColor="#16000000" transparent="1" />
@@ -680,7 +688,6 @@ class TVfullscreen(TVscreenHelper, Screen):
 		<widget name="isLive" position="94,164" size="28,14" alphatest="blend" zPosition="1" />
 		<widget name="isTip" position="134,164" size="28,14" alphatest="blend" zPosition="1" />
 		<widget name="isNew" position="174,164" size="28,14" alphatest="blend" zPosition="1" />
-		<widget name="isIMDB" position="254,164" size="28,14" alphatest="blend" zPosition="1" />
 		<widget name="isTMDB" position="214,164" size="28,14" alphatest="blend" zPosition="1" />
 		<widget source="ratingLabel0l" render="Label" position="756,396" size="90,24" font="Regular;16" halign="center" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
 		<widget source="ratingLabel0h" render="Label" position="756,396" size="90,24" font="Regular;16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
@@ -698,7 +705,6 @@ class TVfullscreen(TVscreenHelper, Screen):
 		<widget source="ratingLabel4h" render="Label" position="1140,396" size="90,24" font="Regular;16" halign="center" foregroundColor="white" backgroundColor="#16000000" transparent="1" />
 		<widget name="ratingDots4" position="1162,420" size="46,16" alphatest="blend" />
 		<widget source="imdbRating" render="Label" position="292,160" size="170,22" font="Regular;16" halign="center" foregroundColor="yellow" backgroundColor="#16000000" transparent="1" zPosition="1" />
-		<widget name="thumb" position="38,86" size="60,60" alphatest="blend" />
 		<widget name="longDescription" position="10,190" size="750,410" font="Regular;20" backgroundColor="#16000000" transparent="1" scrollbarMode="showOnDemand" scrollbarBorderWidth="1" scrollbarWidth="10" scrollbarBorderColor="blue" scrollbarForegroundColor="#203060" />
 		<widget source="title" render="RunningText" options="movetype=running,startpoint=0,startdelay=2000,wrap=0,always=0,repeat=2,oneshot=1" position="780,444" size="456,34" font="Regular;22" halign="left" foregroundColor="#92cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget source="typeLabel0l" render="Label" position="780,488" size="140,26" font="Regular;18" foregroundColor="#10333333" backgroundColor="#16000000" transparent="1" />
@@ -752,8 +758,9 @@ class TVfullscreen(TVscreenHelper, Screen):
 	</screen>
 	"""
 
-	def __init__(self, session, currAssetUrl, prefetchTimer=None, prefetchActive=False, zapAllowed=False):
+	def __init__(self, session, currAssetUrl, currDateDt, prefetchTimer=None, prefetchActive=False, zapAllowed=False):
 		self.currAssetUrl = currAssetUrl
+		self.currDateDt = currDateDt
 		self.prefetchTimer = prefetchTimer  # required & used...
 		self.prefetchActive = prefetchActive  # ...in TVscreenHelper
 		self.zapAllowed = zapAllowed
@@ -1295,7 +1302,6 @@ class TVoverview(TVscreenHelper, Screen):
 		todayDateOnly = datetime.now(tz=None).replace(hour=0, minute=0, second=0, microsecond=0)
 		dayNames = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
 		weekday = "heute" if todayDateOnly == dateOnlyDt else dayNames[dateOnlyDt.weekday()]
-		print()
 		if timeStartEnd:
 			startStr, endStr = timeStartEnd.split(" - ")
 			titleLenStr = f"{int((datetime.strptime(endStr, '%H:%M') - datetime.strptime(startStr, '%H:%M')).seconds / 60)} Minuten"
@@ -1464,7 +1470,7 @@ class TVoverview(TVscreenHelper, Screen):
 		if self.skinList:
 			currIndex = min(self["menuList"].getCurrentIndex(), len(self.skinList) - 1)
 			currAssetUrl = self.skinList[currIndex][0]
-			self.session.openWithCallback(self.keyOkCB, TVfullscreen, currAssetUrl, self.prefetchTimer, self.prefetchActive, self.zapAllowed)
+			self.session.openWithCallback(self.keyOkCB, TVfullscreen, currAssetUrl, self.currDateDt, self.prefetchTimer, self.prefetchActive, self.zapAllowed)
 
 	def keyOkCB(self, answer):
 		if answer:
@@ -1704,7 +1710,7 @@ class TVmain(TVscreenHelper, Screen):
 
 	def returnOk4(self, assetUrl):
 		if assetUrl:
-			self.session.openWithCallback(self.returnOk1, TVfullscreen, assetUrl)
+			self.session.openWithCallback(self.returnOk1, TVfullscreen, assetUrl, self.currDateDt)
 		else:
 			sRef = self.session.nav.getCurrentlyPlayingServiceReference().toString()
 			sName = ServiceReference(sRef).getServiceName()
@@ -1734,7 +1740,7 @@ class TVmain(TVscreenHelper, Screen):
 		if self.tvtipsbox.getIsVisible() and self.currAssetUrl:
 			self.tvupdate.hideDialog()
 			self.hideTVtipsBox()
-			self.session.openWithCallback(self.returnOk1, TVfullscreen, self.currAssetUrl)
+			self.session.openWithCallback(self.returnOk1, TVfullscreen, self.currAssetUrl, self.currDateDt)
 		else:
 			self.showTVtipsBox()
 
@@ -2726,7 +2732,7 @@ def stopAutoEPGupdate(*args, **kwargs):
 def showCurrentProgram(session, **kwargs):
 	assetUrl = tvcorehelper.getCurrentAssetUrl(session.nav.getCurrentlyPlayingServiceOrGroup())
 	if assetUrl:
-		callInThread(session.open, TVfullscreen, assetUrl)
+		callInThread(session.open, TVfullscreen, assetUrl, datetime.now())
 	else:
 		sRef = session.nav.getCurrentlyPlayingServiceReference().toString()
 		sName = ServiceReference(sRef).getServiceName()
