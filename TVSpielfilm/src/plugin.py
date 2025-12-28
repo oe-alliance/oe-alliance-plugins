@@ -1600,10 +1600,9 @@ class TVmain(TVscreenHelper, Screen):
 		self.tvtipsbox = session.instantiateDialog(TVtipsBox)
 		self.tvtipsAllow, self.createTipsActive = True, False
 		self.tipsDicts = []
-		self.singleChannelId = ""
-		self.currAssetUrl = ""
-		self.currTipCnt = 0
-		self.currDayDelta = 0
+		self.singleChannelId, self.currAssetUrl = "", ""
+		self.timeCode = ""  # is required for self.allAssetsFilename
+		self.currTipCnt, self.currDayDelta = 0, 0
 		self.currDateDt = datetime.now(tz=None)
 		self.tvtipsboxTimer = eTimer()
 		self.tvtipsboxTimer.callback.append(self.tipSlideshow)
