@@ -719,12 +719,14 @@ class CKview(AllScreen):
 			msgImage = MIMEImage(img.read(), _subtype="jpeg")
 		msgImage.add_header('Content-ID', '<0>')
 		msgRoot.attach(msgImage)
+		server = None
 		try:
 			server = SMTP(mailServer, mailPort)
 			if config.plugins.chefkoch.ssl.value:
 				server.starttls()
 		except Exception as err:
-			server.quit()
+			if server:
+				server.quit()
 			self.CKlog('SMTP_Response_Exception Error:', str(err))
 			self.session.open(MessageBox, 'E-Mail konnte aufgrund eines Serverproblems oder fehlerhafter\nAngaben (mailServer oder mailPort) nicht gesendet werden!\nERROR: %s' % str(err), MessageBox.TYPE_ERROR, timeout=10, close_on_any_key=True)
 			return
