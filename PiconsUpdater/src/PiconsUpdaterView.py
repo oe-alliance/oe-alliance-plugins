@@ -118,13 +118,13 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		if isdir(TMP_FG_PATH) is False:
 			makedirs(TMP_FG_PATH, 493)
 		for data in getBackgroundList():
-			localPiconBgPath = f"{TMP_BG_PATH}/{basename(data["bg"])}"
+			localPiconBgPath = f"{TMP_BG_PATH}/{basename(data['bg'])}"
 			if isfile(localPiconBgPath) is False:
 				DownloadJob(data["bg"], localPiconBgPath, self.__bgDownloadFinished, self.__bgDownloadFailed)
 			else:
 				self.__bgDownloadFinished()
 			if "fg" in data:
-				localPiconFgPath = f"{TMP_FG_PATH}/{basename(data["fg"])}"
+				localPiconFgPath = f"{TMP_FG_PATH}/{basename(data['fg'])}"
 				if isfile(localPiconFgPath) is False:
 					DownloadJob(data["fg"], localPiconFgPath, self.__fgDownloadFinished, self.__fgDownloadFailed)
 				else:

@@ -13,7 +13,7 @@ def getCleanFileName(value):
 	value = sub("[&]", "___and___", value)
 	value = sub("[^\\w\\s-]", "", value).strip().lower()
 	value = sub("[-\\s]+", "-", value)
-	return value.encode("utf-8")
+	return value
 
 
 def getOldestFile(path, fileExtensions=None):
