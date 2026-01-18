@@ -7,13 +7,13 @@ from Components.Language import language
 from Components.config import config
 from Tools.Directories import resolveFilename, SCOPE_PLUGINS
 
-PLUGIN_PATH = resolveFilename(SCOPE_PLUGINS, 'Extensions/PiconsUpdater')
-CONFIG_FILE = 'https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/config.json'
-PluginLanguageDomain = 'PiconsUpdater'
+PLUGIN_PATH = resolveFilename(SCOPE_PLUGINS, "Extensions/PiconsUpdater")
+CONFIG_FILE = "https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/config.json"
+PluginLanguageDomain = "PiconsUpdater"
 
 
 def localeInit():
-	bindtextdomain(PluginLanguageDomain, '%s/locale' % PLUGIN_PATH)
+	bindtextdomain(PluginLanguageDomain, f"{PLUGIN_PATH}/locale")
 
 
 def _(txt):
@@ -25,24 +25,24 @@ def _(txt):
 
 localeInit()
 language.addCallback(localeInit)
-basicConfig(level=DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+basicConfig(level=DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
 getLogger("PIL").setLevel(WARNING)
 
 
 def printToConsole(msg):
-	info('[PiconsUpdater] %s' % msg)
+	info(f"[PiconsUpdater] {msg}")
 
 
 PICON_TYPE_NAME = 0
 PICON_TYPE_KEY = 1
-POSSIBLE_PICONS_SIZE = ('60x40', '100x60', '130x80', '220x132')
-BOUQUET_PATH = '/etc/enigma2'
-TMP_PICON_PATH = '/tmp/piconsupdater'
-TMP_BG_PATH = TMP_PICON_PATH + '/bgs'
-TMP_FG_PATH = TMP_PICON_PATH + '/fgs'
-TMP_PREVIEW_IMAGE_PATH = TMP_PICON_PATH + '/preview'
-PREVIEW_IMAGE_PATH = PLUGIN_PATH + '/previewimage/default.png'
-DEFAULT_PICON_PATH = '/usr/share/enigma2/picon'
+POSSIBLE_PICONS_SIZE = ("60x40", "100x60", "130x80", "220x132")
+BOUQUET_PATH = "/etc/enigma2"
+TMP_PICON_PATH = "/tmp/piconsupdater"
+TMP_BG_PATH = f"{TMP_PICON_PATH}/bgs"
+TMP_FG_PATH = f"{TMP_PICON_PATH}/fgs"
+TMP_PREVIEW_IMAGE_PATH = f"{TMP_PICON_PATH}/preview"
+PREVIEW_IMAGE_PATH = f"{PLUGIN_PATH}/previewimage/default.png"
+DEFAULT_PICON_PATH = "/usr/share/enigma2/picon"
 
 
 def byteify(input):
@@ -55,16 +55,16 @@ def byteify(input):
 
 
 def getBackgroundList():
-	if not hasattr(getBackgroundList, 'config'):
+	if not hasattr(getBackgroundList, "config"):
 		configFile = None
 		try:
 			configFile = urlopen(CONFIG_FILE)
-		except HTTPError as e:
-			printToConsole(_("Error accessing the server!\nHTTPError: %s" % str(e)))
-		except URLError as e:
-			printToConsole(_("Error accessing the server!\nURLError: %s" % str(e)))
+		except HTTPError as err:
+			printToConsole(_(f"Error accessing the server!\nHTTPError: {err}"))
+		except URLError as err:
+			printToConsole(_(f"Error accessing the server!\nURLError: {err}"))
 		if configFile:
-			configFile.headers['content-type'].split('charset=')[-1]
+			configFile.headers["content-type"].split("charset=")[-1]
 			ucontent = configFile.read()
 			getBackgroundList.config = byteify(loads(ucontent))
 			configFile.close()
@@ -72,25 +72,25 @@ def getBackgroundList():
 
 
 def getPiconUrls():
-	if not hasattr(getPiconUrls, 'piconsUrls'):
-		getPiconUrls.piconUrls = {'picons-all': {'title': 'Picons for DVB-C/S/T - different styles',
-						'logo': 'https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/picon_all/%s.png',
-						'backgrounds': getBackgroundList(),
-						'size': POSSIBLE_PICONS_SIZE[:],
-						'previewImage': 'https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/picon_all/das-erste-hd.png',
-						'nameType': PICON_TYPE_NAME}}
+	if not hasattr(getPiconUrls, "piconsUrls"):
+		getPiconUrls.piconUrls = {"picons-all": {"title": "Picons for DVB-C/S/T - different styles",
+						"logo": "https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/picon_all/%s.png",
+						"backgrounds": getBackgroundList(),
+						"size": POSSIBLE_PICONS_SIZE[:],
+						"previewImage": "https://raw.githubusercontent.com/gigablue-support-org/templates_PiconsUpdater/master/picon_all/das-erste-hd.png",
+						"nameType": PICON_TYPE_NAME}}
 	return getPiconUrls.piconUrls
 
 
 def getCurrentPicon():
-	return getPiconUrls()['picons-all']
+	return getPiconUrls()["picons-all"]
 
 
 def getConfigSizeList():
 	piconsUrls = getCurrentPicon()
 	sizeChoices = []
-	if piconsUrls['size'] is not None:
-		for size in piconsUrls['size']:
+	if piconsUrls["size"] is not None:
+		for size in piconsUrls["size"]:
 			sizeChoices.append((size, size))
 	return sizeChoices
 
@@ -98,9 +98,9 @@ def getConfigSizeList():
 def getConfigBackgroundList():
 	piconsUrls = getCurrentPicon()
 	backgroundChoices = []
-	if piconsUrls['backgrounds'] is not None:
-		for background in piconsUrls['backgrounds']:
-			backgroundChoices.append((background['key'], background['key']))
+	if piconsUrls["backgrounds"] is not None:
+		for background in piconsUrls["backgrounds"]:
+			backgroundChoices.append((background["key"], background["key"]))
 	return backgroundChoices
 
 
@@ -109,11 +109,11 @@ def getPiconsPath():
 
 
 def getPiconsTypeValue():
-	return 'picons-all'
+	return "picons-all"
 
 
 def getTmpLocalPicon(piconName):
-	return TMP_PICON_PATH + '/' + getPiconsTypeValue() + '/' + piconName + '.png'
+	return f"{TMP_PICON_PATH}/{getPiconsTypeValue()}/{piconName}.png"
 
 
-__all__ = ['_', 'printToConsole', 'getPiconsPath']
+__all__ = ["_", "printToConsole", "getPiconsPath"]

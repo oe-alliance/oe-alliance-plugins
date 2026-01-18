@@ -8,17 +8,17 @@ def getCleanFileName(value):
 #   Converts to lowercase, removes non-word characters (alphanumerics and underscores) and converts spaces to hyphens.
 #	Also strips leading and trailing whitespace. Function is from django
 #	https://github.com/django/django/blob/9108696a7553123f57c5d42f9c4a90cad44532f4/django/utils/text.py#L417
-	value = normalize('NFKD', value)
-	value = sub('[+]', '___plus___', value)
-	value = sub('[&]', '___and___', value)
-	value = sub('[^\\w\\s-]', '', value).strip().lower()
-	value = sub('[-\\s]+', '-', value)
-	return value.encode('utf-8')
+	value = normalize("NFKD", value)
+	value = sub("[+]", "___plus___", value)
+	value = sub("[&]", "___and___", value)
+	value = sub("[^\\w\\s-]", "", value).strip().lower()
+	value = sub("[-\\s]+", "-", value)
+	return value.encode("utf-8")
 
 
 def getOldestFile(path, fileExtensions=None):
 #	get oldest file from folder
-#	fileExtensions as tuple. example: ('.txt', '.png')
+#	fileExtensions as tuple. example: (".txt", ".png")
 	files = getFilesFromPath(path)
 	if not files:
 		return None
@@ -29,7 +29,7 @@ def getOldestFile(path, fileExtensions=None):
 
 def getFiles(path, fileExtensions=None):
 #	get file list as an array sorted by date. The oldest first
-#	fileExtensions as tuple. example: ('.txt', '.png')
+#	fileExtensions as tuple. example: (".txt", ".png")
 	files = getFilesFromPath(path)
 	if not files:
 		return None
@@ -51,7 +51,7 @@ def getFilesWithNameKey(path, excludedDirNames=None, excludeDirs=None):
 				continue
 			fullFilePath = join(dirPath, fileName)
 			skipFile = False
-			pathToCheck = dirPath if dirPath.endswith('/') else "%s/" % dirPath
+			pathToCheck = dirPath if dirPath.endswith("/") else f"{dirPath}/"
 			if excludeDirs is not None:
 				for excludeDir in excludeDirs:
 					if pathToCheck[:len(excludeDir)] == excludeDir:
@@ -59,7 +59,7 @@ def getFilesWithNameKey(path, excludedDirNames=None, excludeDirs=None):
 						break
 			if skipFile is True:
 				continue
-			rs[join(dirPath.replace(path, ''), fileName)] = fullFilePath
+			rs[join(dirPath.replace(path, ""), fileName)] = fullFilePath
 	return rs
 
 
@@ -99,7 +99,7 @@ def getFreeDiskspace(path):
 
 def getFreeDiskspaceText(path):
 	free = getFreeDiskspace(path)
-	return '%d GB' % (free / 1024) if free >= 10240 else '%d MB' % free
+	return f"{free / 1024} GB" if free >= 10240 else f"{free} MB"
 
 
 def reachedLimit(path, limit):
@@ -108,7 +108,7 @@ def reachedLimit(path, limit):
 
 
 def __filterFileListByFileExtension(files, fileExtensions):
-#	fileExtensions as tuple. example: ('.txt', '.png')
+#	fileExtensions as tuple. example: (".txt", ".png")
 	if fileExtensions is not None:
 		files = list(filter(lambda s: s.lower().endswith(fileExtensions), files))
 	return files

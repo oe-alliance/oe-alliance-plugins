@@ -32,7 +32,7 @@ except ImportError:
 		from PIL import Image
 		from PIL import ImageOps
 	except ImportError:
-		raise ImportError('The Python Imaging Library was not found.')
+		raise ImportError("The Python Imaging Library was not found.")
 
 
 def add_reflection(im, opacity=0.8):
@@ -40,17 +40,17 @@ def add_reflection(im, opacity=0.8):
 #	The height of the reflection as a percentage of the orignal image opacity  The initial opacity of the reflection gradient
 #	Originally written for the Photologue image management system for Django and Based on the original concept by Bernd Schlapsi
 	reflection = im.copy().transpose(Image.FLIP_TOP_BOTTOM)
-	background = Image.new('RGBA', im.size)
+	background = Image.new("RGBA", im.size)
 	start = int(255 - 255 * opacity)
-	steps = int(255)
+	steps = 255
 	increment = (255 - start) / float(steps)
-	mask = Image.new('L', (1, 255))
+	mask = Image.new("L", (1, 255))
 	for y in range(255):
 		val = int(y * increment + start) if y < steps else 255
 		mask.putpixel((0, y), val)
 	alpha_mask = mask.resize(im.size)
 	reflection = Image.composite(background, reflection, alpha_mask)
-	invert_im = im.convert('RGB')
+	invert_im = im.convert("RGB")
 	real_pos = invert_im.getbbox()
 	if real_pos[1] == 0:
 		invert_im = ImageOps.invert(invert_im)
@@ -59,7 +59,7 @@ def add_reflection(im, opacity=0.8):
 		return im
 	reflection_height = im.size[1]
 	reflection = reflection.crop((0, 0, im.size[0], reflection_height))
-	composite = Image.new('RGBA', (im.size[0], im.size[1] + reflection_height))
+	composite = Image.new("RGBA", (im.size[0], im.size[1] + reflection_height))
 	reflection_y = real_pos[3] - real_pos[1]
 	composite.paste(im, (0, 0), im)
 	composite.paste(reflection, (0, reflection_y), reflection)
