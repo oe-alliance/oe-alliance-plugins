@@ -16,7 +16,7 @@ class download:
 		return
 
 	def downloadPage(self, link, file, success, fail=None):
-		link = link.encode('ascii', 'xmlcharrefreplace').decode().replace(' ', '%20').replace('\n', '').encode('utf-8')
+		link = link.encode("ascii", "xmlcharrefreplace").decode().replace(" ", "%20").replace("\n", "").encode("utf-8")
 		try:
 			response = get(link, timeout=(3.05, 6))
 			content = response.content
@@ -26,7 +26,7 @@ class download:
 			success(file)
 		except exceptions.RequestException as err:
 			if fail is not None:
-				printToConsole("Error in module 'downloadPage': %s" % err)
+				printToConsole(f"Error in module 'downloadPage': {err}")
 				fail(err)
 
 
@@ -49,7 +49,7 @@ class DownloadJob:
 		try:
 			del self.callbackFailed
 			del self.callbackFinished
-		except:
+		except Exception:
 			pass
 
 	def run(self):
@@ -57,10 +57,10 @@ class DownloadJob:
 		self.download.start(self.__downloadFinished, self.__downloadFailed)
 
 	def __downloadFromCache(self):
-		printToConsole("file '%s' already exists." % self.targetFileName)
+		printToConsole(f"file '{self.targetFileName}' already exists.")
 		self.__downloadFinished()
 
-	def __downloadFinished(self, string=''):
+	def __downloadFinished(self, string=""):
 		if self.callbackFinished is not None:
 			callback = self.callbackFinished
 			self.clean()
@@ -69,11 +69,11 @@ class DownloadJob:
 			self.download.stop()
 			self.download = None
 
-	def __downloadFailed(self, errorMessage=''):
+	def __downloadFailed(self, errorMessage=""):
 		self.errorMessage = errorMessage
-#		if errorMessage == '' and failureInstance is not None:
+#		if errorMessage == "" and failureInstance is not None:
 #			self.errorMessage = failureInstance.getErrorMessage()
-#		self.errorMessage = self.downloadUrl + ' - ' + self.errorMessage
+#		self.errorMessage = f"{self.downloadUrl} - {self.errorMessage}"
 		if self.callbackFailed is not None:
 			callback = self.callbackFailed
 			self.clean()

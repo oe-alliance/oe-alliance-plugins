@@ -38,17 +38,17 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 	def __init__(self, session):
 		Screen.__init__(self, session)
 		getPiconsPath().addNotifier(self.__checkReadWriteDir, initial_call=False, immediate_feedback=False)
-		self['previewImage'] = Pixmap()
-		self['backgroundImage'] = Pixmap()
-		self['foregroundImage'] = Pixmap()
+		self["previewImage"] = Pixmap()
+		self["backgroundImage"] = Pixmap()
+		self["foregroundImage"] = Pixmap()
 		self.onClose.append(self.clean)
-		self['actions'] = ActionMap(['OkCancelActions', 'ShortcutActions'],
+		self["actions"] = ActionMap(["OkCancelActions", "ShortcutActions"],
 		{
-			'cancel': self.cancel,
-			'ok': self.okClicked,
-			'green': self.save,
-			'yellow': self.startDownloadPicons,
-			'red': self.cancel
+			"cancel": self.cancel,
+			"ok": self.okClicked,
+			"green": self.save,
+			"yellow": self.startDownloadPicons,
+			"red": self.cancel
 		}, -1)
 		self.onChangedEntry = []
 		ConfigListScreen.__init__(self, self.getMenuItemList(), session, self.__selectionChanged)
@@ -64,36 +64,36 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		self.onLayoutFinish.append(self.layoutFinished)
 
 	def __del__(self):
-		print('######## DESTRUCTOR: PiconsUpdaterView')
+		print("######## DESTRUCTOR: PiconsUpdaterView")
 
 	def getMenuItemList(self):
 		menuList = []
 		piconsUrls = {}
 		try:
 			piconsUrls = getCurrentPicon()
-		except Exception as e:
-			print(e)
+		except Exception as err:
+			print(f"getMenuItemList getPicon exception:\n{err}")
 		try:
-			if piconsUrls['size'] is not None:
+			if piconsUrls["size"] is not None:
 				sizeChoices = getConfigSizeList()
 				config.plugins.PiconsUpdater.size.setChoices(sizeChoices, sizeChoices[0][0])
-				menuList.append(getConfigListEntry(_('Size'), config.plugins.PiconsUpdater.size, _('Picons size')))
-		except Exception as e:
-			print(e)
+				menuList.append(getConfigListEntry(_("Size"), config.plugins.PiconsUpdater.size, _("Picons size")))
+		except Exception as err:
+			print(f"getMenuItemList build exception:\n{err}")
 		try:
-			if piconsUrls['backgrounds'] is not None:
+			if piconsUrls["backgrounds"] is not None:
 				backgroundChoices = getConfigBackgroundList()
 				config.plugins.PiconsUpdater.background.setChoices(backgroundChoices, backgroundChoices[0][0])
-				menuList.append(getConfigListEntry(_('Picon Style'), config.plugins.PiconsUpdater.background, _('Picons background/foreground image'), 'BACKGROUND'))
-				self['backgroundImage'].visible = True
+				menuList.append(getConfigListEntry(_("Picon Style"), config.plugins.PiconsUpdater.background, _("Picons background/foreground image"), "BACKGROUND"))
+				self["backgroundImage"].visible = True
 			else:
-				self['backgroundImage'].visible = False
-		except Exception as e:
-			print(e)
-		menuList.append(getConfigListEntry(_('Mirror Effect'), config.plugins.PiconsUpdater.mirror_effect, _('Mirror Effect')))
-		menuList.append(getConfigListEntry(_('Picons Folder'), getPiconsPath(), _("Picons folder\n\nPress 'Ok' to open path selection view")))
-		menuList.append(getConfigListEntry(_('Exclude IPTV'), config.plugins.PiconsUpdater.exclude_iptv, _("Exclude IPTV")))
-		menuList.append(getConfigListEntry(_('Exclude Radio'), config.plugins.PiconsUpdater.exclude_radio, _("Exclude Radio")))
+				self["backgroundImage"].visible = False
+		except Exception as err:
+			print(f"getMenuItemList background exception:\n{err}")
+		menuList.append(getConfigListEntry(_("Mirror Effect"), config.plugins.PiconsUpdater.mirror_effect, _("Mirror Effect")))
+		menuList.append(getConfigListEntry(_("Picons Folder"), getPiconsPath(), _("Picons folder\n\nPress 'Ok' to open path selection view")))
+		menuList.append(getConfigListEntry(_("Exclude IPTV"), config.plugins.PiconsUpdater.exclude_iptv, _("Exclude IPTV")))
+		menuList.append(getConfigListEntry(_("Exclude Radio"), config.plugins.PiconsUpdater.exclude_radio, _("Exclude Radio")))
 		return menuList
 
 	def downloadPreviewImages(self):
@@ -103,9 +103,9 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		if isdir(TMP_PREVIEW_IMAGE_PATH) is False:
 			makedirs(TMP_PREVIEW_IMAGE_PATH, 493)
 		for key, piconStyleData in getPiconUrls().items():
-			localPreviewPath = TMP_PREVIEW_IMAGE_PATH + '/' + key + '.png'
+			localPreviewPath = f"{TMP_PREVIEW_IMAGE_PATH}/{key}.png"
 			if isfile(localPreviewPath) is False:
-				DownloadJob(piconStyleData['previewImage'], localPreviewPath, self.__previewDownloadFinished, self.__previewDownloadFailed)
+				DownloadJob(piconStyleData["previewImage"], localPreviewPath, self.__previewDownloadFinished, self.__previewDownloadFailed)
 			else:
 				self.__previewDownloadFinished()
 
@@ -118,15 +118,15 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		if isdir(TMP_FG_PATH) is False:
 			makedirs(TMP_FG_PATH, 493)
 		for data in getBackgroundList():
-			localPiconBgPath = TMP_BG_PATH + '/' + basename(data['bg'])
+			localPiconBgPath = f"{TMP_BG_PATH}/{basename(data['bg'])}"
 			if isfile(localPiconBgPath) is False:
-				DownloadJob(data['bg'], localPiconBgPath, self.__bgDownloadFinished, self.__bgDownloadFailed)
+				DownloadJob(data["bg"], localPiconBgPath, self.__bgDownloadFinished, self.__bgDownloadFailed)
 			else:
 				self.__bgDownloadFinished()
-			if 'fg' in data:
-				localPiconFgPath = TMP_FG_PATH + '/' + basename(data['fg'])
+			if "fg" in data:
+				localPiconFgPath = f"{TMP_FG_PATH}/{basename(data['fg'])}"
 				if isfile(localPiconFgPath) is False:
-					DownloadJob(data['fg'], localPiconFgPath, self.__fgDownloadFinished, self.__fgDownloadFailed)
+					DownloadJob(data["fg"], localPiconFgPath, self.__fgDownloadFinished, self.__fgDownloadFailed)
 				else:
 					self.__fgDownloadFinished()
 			else:
@@ -134,34 +134,34 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		self.__checkDownloadDecorateImagesFinished()
 
 	def getCurrentBackgroundList(self):
-		return getCurrentPicon()['backgrounds']
+		return getCurrentPicon()["backgrounds"]
 
 	def getCurrentBackground(self):
 		backgroundType = config.plugins.PiconsUpdater.background.getValue()
 		backgroundList = self.getCurrentBackgroundList()
 		if backgroundList is not None:
 			for background in backgroundList:
-				if background['key'] == backgroundType:
+				if background["key"] == backgroundType:
 					return background
 
 	def getCurrentPiconUrl(self):
 		piconUrls = {}
 		try:
-			piconUrls = getCurrentPicon()['logo']
+			piconUrls = getCurrentPicon()["logo"]
 			return piconUrls
 		except Exception:
-			return None
+			return
 
 	def getCurrentPiconNameType(self):
 		try:
-			piconType = getCurrentPicon()['nameType']
+			piconType = getCurrentPicon()["nameType"]
 			return piconType
 		except Exception:
-			return None
+			return
 
 	def getCurrentSize(self):
 		sizeValue = config.plugins.PiconsUpdater.size.getValue()
-		return tuple((int(i) for i in sizeValue.split('x')))
+		return tuple(int(i) for i in sizeValue.split("x"))
 
 	def layoutFinished(self):
 		self.setWindowTitle()
@@ -169,11 +169,11 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		self.downloadBackgroundImages()
 
 	def setWindowTitle(self):
-		self.setTitle(_('Choose Picons'))
+		self.setTitle(_("Choose Picons"))
 
 	def getPreviewImagePath(self):
 		try:
-			previewImagePath = TMP_PREVIEW_IMAGE_PATH + '/' + getPiconsTypeValue() + '.png'
+			previewImagePath = f"{TMP_PREVIEW_IMAGE_PATH}/{getPiconsTypeValue()}.png"
 			if isfile(previewImagePath) is False:
 				raise
 			return previewImagePath
@@ -181,39 +181,35 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 			return PREVIEW_IMAGE_PATH
 
 	def showPreviewPicture(self):
-		self['previewImage'].instance.setPixmapFromFile(self.getPreviewImagePath())
-		self['previewImage'].instance.setScale(1)
+		self["previewImage"].instance.setPixmapFromFile(self.getPreviewImagePath())
+		self["previewImage"].instance.setScale(1)
 
 	def getBackgroundImagePath(self):
 		background = self.getCurrentBackground()
 		if background:
-			backgroundUrl = background['bg']
-			localPiconBgPath = '%s/%s' % (TMP_BG_PATH, basename(backgroundUrl))
+			backgroundUrl = background["bg"]
+			localPiconBgPath = f"{TMP_BG_PATH}/{basename(backgroundUrl)}"
 			return localPiconBgPath
-		else:
-			return None
 
 	def getForegroundImagePath(self):
 		background = self.getCurrentBackground()
-		if background and 'fg' in background:
-			foregroundUrl = background['fg']
-			localPiconFgPath = '%s/%s' % (TMP_FG_PATH, basename(foregroundUrl))
+		if background and "fg" in background:
+			foregroundUrl = background["fg"]
+			localPiconFgPath = f"{TMP_FG_PATH}/{basename(foregroundUrl)}"
 			return localPiconFgPath
-		else:
-			return None
 
 	def showBackgroundPicture(self):
 		if self.getCurrentBackgroundList() is not None:
-			self['backgroundImage'].instance.setPixmapFromFile(self.getBackgroundImagePath())
-			self['backgroundImage'].instance.setScale(1)
+			self["backgroundImage"].instance.setPixmapFromFile(self.getBackgroundImagePath())
+			self["backgroundImage"].instance.setScale(1)
 
 	def showForegroundPicture(self):
 		if self.getCurrentBackgroundList() is not None and self.getForegroundImagePath() is not None:
-			self['foregroundImage'].instance.setPixmapFromFile(self.getForegroundImagePath())
-			self['foregroundImage'].instance.setScale(1)
-			self['foregroundImage'].visible = True
+			self["foregroundImage"].instance.setPixmapFromFile(self.getForegroundImagePath())
+			self["foregroundImage"].instance.setScale(1)
+			self["foregroundImage"].visible = True
 		else:
-			self['foregroundImage'].visible = False
+			self["foregroundImage"].visible = False
 
 	def startDownloadPicons(self):
 		try:
@@ -226,15 +222,15 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 			return
 		bgimagepath = self.getBackgroundImagePath()
 		if bgimagepath and self.getCurrentBackgroundList() is not None and isfile(bgimagepath) is False:
-			self.session.open(MessageBox, _('Background Image not downloaded yet, please wait some seconds and try again.'), type=MessageBox.TYPE_INFO, timeout=10)
+			self.session.open(MessageBox, _("Background Image not downloaded yet, please wait some seconds and try again."), type=MessageBox.TYPE_INFO, timeout=10)
 			return
 		addEventListener(DOWNLOAD_ALL_FINISHED, self.__downloadAllFinished)
-		self.session.open(JobProgressView, 'Download Progress', msgBoxID='startDownload')
+		self.session.open(JobProgressView, "Download Progress", msgBoxID="startDownload")
 		self.totalDownloads = 1
 		piconUrl = self.getCurrentPiconUrl()
 		if piconUrl is not None:
 			addEventListener(DOWNLOAD_FINISHED, self.__downloadFinished)
-			tmpPiconsPath = TMP_PICON_PATH + '/' + getPiconsTypeValue()
+			tmpPiconsPath = f"{TMP_PICON_PATH}/{getPiconsTypeValue()}"
 			if isdir(tmpPiconsPath) is False:
 				makedirs(tmpPiconsPath, 493)
 			downloadPicons = DownloadPicons(self.serviceList, piconUrl, tmpPiconsPath, self.getCurrentPiconNameType())
@@ -248,7 +244,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 			ConfigListScreen.keyOK(self)
 
 	def cancel(self):
-		for x in self['config'].list:
+		for x in self["config"].list:
 			if len(x) > 1:
 				x[1].cancel()
 
@@ -256,7 +252,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 
 	def save(self):
 		# FIXME : rescan channels if needed
-		for x in self['config'].list:
+		for x in self["config"].list:
 			if len(x) > 1:
 				x[1].save_forced = True
 				x[1].save()
@@ -265,7 +261,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		self.close()
 
 	def clean(self):
-		if hasattr(self, 'timer') and self.timer:
+		if hasattr(self, "timer") and self.timer:
 			self.timer.stop()
 			self.timer = None
 		removeEventListener(DOWNLOAD_FINISHED, self.__downloadFinished)
@@ -275,7 +271,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		getPiconsPath().clearNotifiers()
 
 	def getCurrent(self):
-		cur = self['config'].getCurrent()
+		cur = self["config"].getCurrent()
 		cur = cur and cur[1]
 		return cur
 
@@ -286,7 +282,7 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 
 	def __chooseDestination(self):
 		from Screens.LocationBox import LocationBox
-		self.session.openWithCallback(self.__pathSelected, LocationBox, _('Choose folder'), minFree=100)
+		self.session.openWithCallback(self.__pathSelected, LocationBox, _("Choose folder"), minFree=100)
 
 	def __setPreviewImageDownloadFinished(self):
 		self.previewImageDownloadCount += 1
@@ -317,15 +313,15 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 			return False
 
 	def __showPathIsNotWriteableWarning(self, dirName):
-		self.session.open(MessageBox, _('The directory %s is not writable.\nMake sure you select a writable directory instead.') % dirName, MessageBox.TYPE_ERROR, timeout=10)
+		self.session.open(MessageBox, _("The directory %s is not writable.\nMake sure you select a writable directory instead.") % dirName, MessageBox.TYPE_ERROR, timeout=10)
 
 	def __selectionChanged(self):
-		cur = self['config'].getCurrent()
+		cur = self["config"].getCurrent()
 		cur = cur and len(cur) > 3 and cur[3]
-		if cur == 'TYPE':
-			self['config'].setList(self.getMenuItemList())
+		if cur == "TYPE":
+			self["config"].setList(self.getMenuItemList())
 			self.showPreviewPicture()
-		elif cur == 'BACKGROUND':
+		elif cur == "BACKGROUND":
 			self.showBackgroundPicture()
 			self.showForegroundPicture()
 
@@ -334,42 +330,42 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 
 	def __previewDownloadFailed(self, downloadJob):
 		self.__setPreviewImageDownloadFinished()
-		printToConsole("[ERROR] Download Failed: '%s'" % downloadJob.errorMessage)
+		printToConsole(f"[ERROR] Download Failed: '{downloadJob.errorMessage}'")
 
 	def __bgDownloadFinished(self, downloadJob=None):
 		if downloadJob is not None:
-			printToConsole("Background Download finished for url '%s'" % downloadJob.downloadUrl)
+			printToConsole(f"Background Download finished for url '{downloadJob.downloadUrl}'")
 		self.__setBackgroundImageDownloadFinished()
 
 	def __bgDownloadFailed(self, downloadJob):
-		printToConsole("Background Download failed for url '%s'" % downloadJob.downloadUrl)
+		printToConsole(f"Background Download failed for url '{downloadJob.downloadUrl}'")
 		self.__setBackgroundImageDownloadFinished()
 
 	def __fgDownloadFinished(self, downloadJob=None):
 		if downloadJob is not None:
-			printToConsole("Foreground Download finished for url '%s'" % downloadJob.downloadUrl)
+			printToConsole(f"Foreground Download finished for url '{downloadJob.downloadUrl}'")
 		self.__setForegroundImageDownloadFinished()
 
 	def __fgDownloadFailed(self, downloadJob):
-		printToConsole("Foreground Download failed for url '%s'" % downloadJob.downloadUrl)
+		printToConsole(f"Foreground Download failed for url '{downloadJob.downloadUrl}'")
 		self.__setForegroundImageDownloadFinished()
 
 	def __downloadFinished(self, downloadsFinished):
 		progress = int(100 * (float(downloadsFinished) / float(self.totalDownloads)))
-		self.session.current_dialog.setProgress(progress, _('Downloading %d of %d Picons') % (downloadsFinished, self.totalDownloads))
+		self.session.current_dialog.setProgress(progress, _("Downloading %d of %d Picons") % (downloadsFinished, self.totalDownloads))
 
 	def __downloadAllFinished(self, downloadPicons):
 		removeEventListener(DOWNLOAD_FINISHED, self.__downloadFinished)
 		removeEventListener(DOWNLOAD_ALL_FINISHED, self.__downloadAllFinished)
-		printToConsole('Picons downloads finished!')
-		piconsNotFoundMessage = "Picons not found for '%s' channels" % len(downloadPicons.channelsNotFoundList)
-		channelsNotFoundFile = open(TMP_PICON_PATH + '/channelsNotFoundList.txt', 'w')
-		channelsNotFoundFile.write(piconsNotFoundMessage + '\n\n')
+		printToConsole("Picons downloads finished!")
+		piconsNotFoundMessage = f"Picons not found for '{len(downloadPicons.channelsNotFoundList)}' channels"
+		channelsNotFoundFile = open(f"{TMP_PICON_PATH}/channelsNotFoundList.txt", "w")
+		channelsNotFoundFile.write(f"{piconsNotFoundMessage}\n\n")
 		for channel in downloadPicons.channelsNotFoundList:
-			channelsNotFoundFile.write(basename(channel[1]) + ';' + channel[0] + ';' + channel[1] + '\n')
+			channelsNotFoundFile.write(f"{basename(channel[1])};{channel[0]};{channel[1]}\n")
 
 		channelsNotFoundFile.close()
-		self.finishedMessage = _('Process Finished.\n%s Picons downloaded\n%s Picons not found') % (str(downloadPicons.downloadsFinished), str(downloadPicons.downloadsFailed))
+		self.finishedMessage = _("Process Finished.\n%s Picons downloaded\n%s Picons not found") % (str(downloadPicons.downloadsFinished), str(downloadPicons.downloadsFailed))
 		printToConsole(self.finishedMessage)
 		self.session.current_dialog.callback = self.__mergePicons
 		self.session.current_dialog.close(True)
@@ -378,17 +374,17 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 		addEventListener(MERGE_PICONS_FINISHED, self.processFinished)
 		background = self.getCurrentBackground()
 		if background:
-			factor = background['factor']
+			factor = background["factor"]
 			MergePiconJob(self.session, self.serviceList, self.getBackgroundImagePath(), self.getForegroundImagePath(), factor, self.getCurrentSize())
 
 	def processFinished(self, *args):
-		printToConsole('merge finished')
+		printToConsole("merge finished")
 		removeEventListener(MERGE_PICONS_FINISHED, self.processFinished)
 		self.session.current_dialog.callback = self.showOptimizeFileSizeMessage
 		self.session.current_dialog.close(True)
 
 	def showOptimizeFileSizeMessage(self, *args):
-		self.session.openWithCallback(self.__optimizeFileSizeWindowCallback, MessageBox, _('Optimize Picons file size?\n\nBe aware, this function is maybe very slow and reduces the quality!!'), MessageBox.TYPE_YESNO, default=False, timeout=10)
+		self.session.openWithCallback(self.__optimizeFileSizeWindowCallback, MessageBox, _("Optimize Picons file size?\n\nBe aware, this function is maybe very slow and reduces the quality!!"), MessageBox.TYPE_YESNO, default=False, timeout=10)
 
 	def __optimizeFileSizeWindowCallback(self, result):
 		if result:
@@ -404,6 +400,6 @@ class PiconsUpdaterView(ConfigListScreen, Screen):
 
 	def showFinishedMessage(self, *args):
 		self.session.open(MessageBox, self.finishedMessage, type=MessageBox.TYPE_INFO, timeout=10)
-		print(' ')
-		printToConsole('Finished!')
-		print(' ')
+		print(" ")
+		printToConsole("Finished!")
+		print(" ")

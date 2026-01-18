@@ -13,8 +13,8 @@ from .JobProgressView import JobProgressView
 from .reflection import add_reflection
 from .import printToConsole, getPiconsPath, getTmpLocalPicon, _  # for localized messages
 
-MERGE_PICONS_FINISHED = 'mergePiconsFinished'
-OPTIMIZE_PICONS_FINISHED = 'optimizePiconsFinished'
+MERGE_PICONS_FINISHED = "mergePiconsFinished"
+OPTIMIZE_PICONS_FINISHED = "optimizePiconsFinished"
 
 
 class MergeVO:
@@ -26,18 +26,18 @@ class MergeVO:
 class MergePiconJob:
 	def __init__(self, session, serviceList, bgPath, fgPath, factor, size):
 		self.session = session
-		self.session.open(JobProgressView, _('Merge Picons'), msgBoxID='mergePicons')
+		self.session.open(JobProgressView, _("Merge Picons"), msgBoxID="mergePicons")
 		self.serviceList = serviceList
 		self.bgPath = bgPath
 		self.fgPath = fgPath
-		self.targetPicon = getPiconsPath().getValue() + '/%s.png'
+		self.targetPicon = getPiconsPath().getValue() + "/%s.png"
 		self.factor = factor
 		self.size = size
 		self.executionQueueList = deque()
 		for service in self.serviceList:
 			piconName = getChannelKey(service)
-			if any(piconName.find(i) + 1 for i in ['4097', '5001', '5002', '5003']):  # Internetstream found, therefore use SNP:
-				piconName = getCleanFileName(service.getServiceName()).decode().replace('-', '')
+			if any(piconName.find(i) + 1 for i in ["4097", "5001", "5002", "5003"]):  # Internetstream found, therefore use SNP:
+				piconName = getCleanFileName(service.getServiceName()).replace("-", "")
 			piconFile = getTmpLocalPicon(piconName)
 			if isfile(piconFile):
 				job = MergeVO(piconFile, self.targetPicon % piconName)
@@ -58,9 +58,9 @@ class MergePiconJob:
 				self.session.current_dialog.setProgress(progress, _('Merge %d of %d Picons') % (self.mergePiconsCount, self.mergePiconsTotal))
 				mergeData = self.executionQueueList.popleft()
 				callInThread(self.mergePicon, mergeData.channelPicon, mergeData.targetPicon)
-		except Exception as e:
+		except Exception as err:
 			self.__clearExecutionQueueList()
-			printToConsole('MergePicon execQueue exception:\n' + str(e))
+			printToConsole(f"MergePicon execQueue exception:\n{err}")
 
 	def __clearExecutionQueueList(self):
 		self.executionQueueList = deque()
@@ -70,23 +70,23 @@ class MergePiconJob:
 			if len(self.executionQueueList) > 0:
 				self.execQueue()
 			else:
-				printToConsole('MergePicon Queue finished!')
+				printToConsole("MergePicon Queue finished!")
 				dispatchEvent(MERGE_PICONS_FINISHED)
-		except Exception as e:
+		except Exception as err:
 			self.__clearExecutionQueueList()
-			printToConsole('MergePicon runFinished exception:\n' + str(e))
+			printToConsole(f"MergePicon runFinished exception:\n{err}")
 
 	def mergePicon(self, channelPicon, targetPicon):
 		try:
 			background = Image.open(self.bgPath)
 		except Exception:
-			printToConsole("Error: Background '%s' is corrupted!" % self.bgPath)
+			printToConsole(f"Error: Background '{self.bgPath}' is corrupted!")
 			self.__runFinished()
 
 		try:
 			picon = Image.open(channelPicon)
 		except Exception:
-			printToConsole("Error: Picon '%s' is corrupted!" % channelPicon)
+			printToConsole(f"Error: Picon '{channelPicon}' is corrupted!")
 			self.__runFinished()
 
 		backgroundWidth, backgroundHeight = background.size
@@ -102,8 +102,8 @@ class MergePiconJob:
 			if self.fgPath is not None:
 				foreground = Image.open(self.fgPath)
 				background.paste(foreground, None, foreground)
-		except Exception as e:
-			printToConsole("Error: ChannelPicon: %s '%s'" % (str(e), channelPicon))
+		except Exception as err:
+			printToConsole(f"Error: ChannelPicon: {err} '{channelPicon}'")
 			self.__runFinished()
 
 		if piconWidth != self.size[0] or piconHeight != self.size[1]:
@@ -117,15 +117,15 @@ class MergePiconJob:
 class OptimizePiconsFileSize:
 	def __init__(self, session):
 		self.session = session
-		self.session.open(JobProgressView, _('Optimize Picons Progress'), onAbort=self.onAbort, msgBoxID='optimizePicons')
-		self.execCommand = ''
+		self.session.open(JobProgressView, _("Optimize Picons Progress"), onAbort=self.onAbort, msgBoxID="optimizePicons")
+		self.execCommand = ""
 		self.executionQueueList = deque()
-		piconsList = getFiles(getPiconsPath().getValue(), '.png')
+		piconsList = getFiles(getPiconsPath().getValue(), ".png")
 		if piconsList:
 			self.optimizePiconsTotal = len(piconsList)
 			self.optimizePiconsCount = 0
 			for piconFile in piconsList:
-				execCommand = 'pngquant --ext .png --speed 10 --force 128 %s' % piconFile
+				execCommand = f"pngquant --ext .png --speed 10 --force 128 {piconFile}"
 				self.executionQueueList.append(execCommand)
 		self.execQueue()
 
@@ -137,12 +137,12 @@ class OptimizePiconsFileSize:
 			if len(self.executionQueueList) > 0:
 				self.optimizePiconsCount += 1
 				progress = int(100 * (float(self.optimizePiconsCount) / float(self.optimizePiconsTotal)))
-				self.session.current_dialog.setProgress(progress, _('Optimize %d of %d Picons') % (self.optimizePiconsCount, self.optimizePiconsTotal))
+				self.session.current_dialog.setProgress(progress, _(f"Optimize {self.optimizePiconsCount} of {self.optimizePiconsTotal} Picons"))
 				self.execCommand = self.executionQueueList.popleft()
 				callInThread(self.optimizePicon)
-		except Exception as e:
+		except Exception as err:
 			self.__clearExecutionQueueList()
-			printToConsole('OptimizePicons execQueue exception:\n' + str(e))
+			printToConsole(f"OptimizePicons execQueue exception:\n{err}")
 
 	def __clearExecutionQueueList(self):
 		self.executionQueueList = deque()
@@ -152,18 +152,18 @@ class OptimizePiconsFileSize:
 			if len(self.executionQueueList) > 0:
 				self.execQueue()
 			else:
-				printToConsole('OptimizePicons Queue finished!')
+				printToConsole("OptimizePicons Queue finished!")
 				dispatchEvent(OPTIMIZE_PICONS_FINISHED)
-		except Exception as e:
+		except Exception as err:
 			self.__clearExecutionQueueList()
-			printToConsole('OptimizePicons runFinished exception:\n' + str(e))
+			printToConsole(f"OptimizePicons runFinished exception:\n{err}")
 
 	def optimizePicon(self):
 		try:
 			call(self.execCommand, shell=True)
 			self.__runFinished()
-		except Exception as e:
-			printToConsole("Error: optimizePngFileSizes '%s'" % str(e))
+		except Exception as err:
+			printToConsole(f"Error: optimizePngFileSizes '{err}'")
 
 	def onAbort(self):
 		self.__clearExecutionQueueList()

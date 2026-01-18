@@ -5,15 +5,15 @@ from Components.config import config
 from Components.SystemInfo import BoxInfo
 from ServiceReference import ServiceReference
 
-SKIP_BOUQUET_NAMES = 'userbouquet.lastscanned'
+SKIP_BOUQUET_NAMES = "userbouquet.lastscanned"
 
 
 def getChannelKey(service):
-	channelKeyMatch = match('([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):', str(service))
+	channelKeyMatch = match("([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):([^:]+):", str(service))
 	if channelKeyMatch:
-		channelKey = '_'.join(map(str, channelKeyMatch.groups()))
+		channelKey = "_".join(map(str, channelKeyMatch.groups()))
 		try:
-			return normalize('NFKD', channelKey)
+			return normalize("NFKD", channelKey)
 		except Exception:
 			return channelKey
 
@@ -30,25 +30,25 @@ class BouquetParser:
 		return self.serviceList
 
 	def __loadBouquetList(self):
-		file = open(self.bouquetPath + '/bouquets.tv', 'r')
+		file = open(f"{self.bouquetPath}/bouquets.tv")
 		data = file.read()
 		file.close()
-		bouquetFilesTV = findall('([-_a-z0-9]+\\.[^.]+\\.[a-z]+)', data, DOTALL | IGNORECASE)
+		bouquetFilesTV = findall("([-_a-z0-9]+\\.[^.]+\\.[a-z]+)", data, DOTALL | IGNORECASE)
 		self.serviceList = []
 		for fileName in bouquetFilesTV:
 			if SKIP_BOUQUET_NAMES not in fileName.lower():
-				bouquetList = eServiceReference('1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "' + fileName + '" ORDER BY bouquet')
+				bouquetList = eServiceReference(f'1:7:1:0:0:0:0:0:0:0:FROM BOUQUET "{fileName}" ORDER BY bouquet')
 				services = self.__getBouquetServices(bouquetList)
 				self.serviceList += services
 		if self.excluderadio:
 			return
-		file = open(self.bouquetPath + '/bouquets.radio', 'r')
+		file = open(f"{self.bouquetPath}/bouquets.radio")
 		data = file.read()
 		file.close()
-		bouquetFilesRadio = findall('([-_a-z0-9]+\\.[^.]+\\.[a-z]+)', data, DOTALL | IGNORECASE)
+		bouquetFilesRadio = findall("([-_a-z0-9]+\\.[^.]+\\.[a-z]+)", data, DOTALL | IGNORECASE)
 		for fileName in bouquetFilesRadio:
 			if SKIP_BOUQUET_NAMES not in fileName.lower():
-				bouquetList = eServiceReference('1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "' + fileName + '" ORDER BY bouquet')
+				bouquetList = eServiceReference(f'1:7:2:0:0:0:0:0:0:0:FROM BOUQUET "{fileName}" ORDER BY bouquet')
 				services = self.__getBouquetServices(bouquetList)
 				self.serviceList += services
 
@@ -74,10 +74,10 @@ class BouquetParser:
 	def getService(self, service):
 		if self.excludeiptv:
 			sref = service.toString()
-			fields = sref.split(':', 10)[:10]
-			if fields[0] != '1':
+			fields = sref.split(":", 10)[:10]
+			if fields[0] != "1":
 				return None
-			sref = ':'.join(fields) + ':'
+			sref = f"{':'.join(fields)}:"
 			return ServiceReference(sref)
 		else:
 			return ServiceReference(service)
