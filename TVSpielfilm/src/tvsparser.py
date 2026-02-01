@@ -102,21 +102,21 @@ class TVSparserTips:
 				intro = tvsphelper.searchOneValue(r'<div class="tips-teaser__bottom__intro">(.*?)</div>', entry, "")  # e.g. 'heute | 20:15 | ZDF'
 				intros = intro.split(" | ") or []
 				timeStartTs, hourmin = None, datetime.strptime(intros[1], '%H:%M').time() if len(intros) > 1 else None
-				now = datetime.now(tz=None)
+				nowDt = datetime.now(tz=None)
 				if hourmin and intros:
 					if "heute" in intros[0]:
-						timeStartTs = int(datetime.combine(now, hourmin).timestamp())
+						timeStartTs = int(datetime.combine(nowDt, hourmin).timestamp())
 					else:
-						timeStartTs = int(datetime.combine(datetime.strptime(f"{intros[0]}{now.year}", '%d.%m.%Y'), hourmin).timestamp())
+						timeStartTs = int(datetime.combine(datetime.strptime(f"{intros[0]}{nowDt.year}", '%d.%m.%Y'), hourmin).timestamp())
 				channelName = intros[2] if len(intros) > 2 else ""
 				timeInfos = intros[0] or ""
 				timeInfos += f" | {intros[1]} Uhr" if len(intros) > 1 else ""
 				rating = tvsphelper.searchOneValue(r'<div class=\"tips-teaser__bottom__top-rating-text\">(.*?)</div>', entry, "").lower()
 				# 'TOP BEWERTET': Highlights, wenn sie von der TVSpielfilm-Redaktion einen 'Daumen hoch'und eine IMDb-Bewertung von über 7,0 erhalten haben.
-				isTip, thumbIdNumeric, imdbRating = (True, 3, "TOP") if "top bewertet" in rating else (False, 0, "")
+				isTopTip, thumbIdNumeric, imdbRating = (True, 3, "TOP") if "top bewertet" in rating else (False, 0, "")
+				isTip = not isTopTip  # either or
 				new = tvsphelper.searchOneValue(r'<div class=\"tips-teaser__bottom__new-text\">(.*?)</div>', entry, "").lower()
 				isNew = True if "neu" in new else False
-				isTopTip = False  # none of them
 				imgUrl = tvsphelper.searchOneValue(r'<img src="(.*?)" width', entry, "")
 				channelId = tvsphelper.searchOneValue(r'mini/(.*?).png', entry, "").lower()
 				assetUrl = tvsphelper.searchOneValue(r'<a href="(.*)"', entry, "")
@@ -191,14 +191,17 @@ class TVSparserAssets:
 		def setAssetKey(key, value):
 			if value:
 				assetDict[key] = value
-		now = datetime.now(tz=None)
+		nowDt = datetime.now(tz=None)
 		url = f"{tvspglobals.MWEBURL}{bytes.fromhex('2f73756368652e68746d6c1'[:-1]).decode()}"
-		dateOnlyDt = datetime.fromisoformat(dateOnlyStr) if dateOnlyStr else now  # fallback to today
-		# In case desired time span is between 00:00 and 05:00, request data from previous day
-		# Server philosophy: The server considers a day to be the period from 5:00 a.m. to 5:00 a.m. the following day.
-		midnight = dateOnlyDt.replace(hour=0, minute=0, second=0, microsecond=0)
-		morning = dateOnlyDt.replace(hour=5, minute=0, second=0, microsecond=0)
-		corrStartStr = (dateOnlyDt + timedelta(days=-1)).strftime("%F") if timeCode == "0" or timeCode == "now" and now >= midnight and now < morning else dateOnlyDt
+		if timeCode == "now":
+			corrStartStr = nowDt.strftime("%F")
+		else:
+			dateOnlyDt = datetime.fromisoformat(dateOnlyStr) if dateOnlyStr else nowDt  # fallback to today
+			# In case desired time span is between 00:00 and 05:00, request data from previous day
+			# Server philosophy: The server considers a day to be the period from 5:00 a.m. to 5:00 a.m. the following day.
+			midnight = dateOnlyDt.replace(hour=0, minute=0, second=0, microsecond=0)
+			morning = dateOnlyDt.replace(hour=5, minute=0, second=0, microsecond=0)
+			corrStartStr = (dateOnlyDt + timedelta(days=-1)).strftime("%F") if timeCode == "0" and nowDt >= midnight and nowDt < morning else dateOnlyDt
 		finish = False
 		assetsDicts = []
 		index, offset = 0, 0
@@ -313,14 +316,14 @@ class TVSparserAssets:
 		timeStartEnd = broadblock[1].split(" - ") if broadblock[1] else ""
 		timeStartTs, startHourmin = None, datetime.strptime(timeStartEnd[0].replace(" Uhr", ""), '%H:%M').time() if timeStartEnd else None
 		timeEndTs, endHourmin = None, datetime.strptime(timeStartEnd[1].replace(" Uhr", ""), '%H:%M').time() if len(timeStartEnd) > 1 else None
-		now = datetime.now(tz=None)
+		nowDt = datetime.now(tz=None)
 		if "heute" in broadblock[0].lower():
-			timeStartTs = int(datetime.combine(now, startHourmin).timestamp()) if startHourmin else ""
-			timeEndTs = int(datetime.combine(now, endHourmin).timestamp()) if endHourmin else ""
+			timeStartTs = int(datetime.combine(nowDt, startHourmin).timestamp()) if startHourmin else ""
+			timeEndTs = int(datetime.combine(nowDt, endHourmin).timestamp()) if endHourmin else ""
 		else:
 			daydate = broadblock[0][broadblock[0].find(",") + 2:]  # convert 'Fr., 23.05.' -> '23.05.'
-			timeStartTs = int(datetime.combine(datetime.strptime(f"{daydate}{now.year}", '%d.%m.%Y'), startHourmin).timestamp()) if startHourmin else ""
-			timeEndTs = int(datetime.combine(datetime.strptime(f"{daydate}{now.year}", '%d.%m.%Y'), endHourmin).timestamp()) if endHourmin else ""
+			timeStartTs = int(datetime.combine(datetime.strptime(f"{daydate}{nowDt.year}", '%d.%m.%Y'), startHourmin).timestamp()) if startHourmin else ""
+			timeEndTs = int(datetime.combine(datetime.strptime(f"{daydate}{nowDt.year}", '%d.%m.%Y'), endHourmin).timestamp()) if endHourmin else ""
 		channelName = broadblock[2] if len(broadblock) > 2 else ""
 		channelId = tvsphelper.searchOneValue(r'"pageElementCreative":"(.*?)"', extract, "").upper().replace("N\\/A", "").lower()
 		imgUrl = tvsphelper.searchOneValue(r'<picture class=".*?">\s*<img src="(.*?)" width', extract, "", flags=S)
@@ -455,7 +458,7 @@ def main(argv):  # shell interface
 		elif opt in ("-j", "--json"):
 			filename = arg
 		elif opt in ("-s", "--single"):
-			errMsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/skyscraper,6912f53a5e01fc08fbd32fc8.html")
+			errMsg, jsonList = tvspassets.parseSingleAsset("")
 			if errMsg:
 				print("errMsg")
 		elif opt in ("-t", "--tipslist"):
