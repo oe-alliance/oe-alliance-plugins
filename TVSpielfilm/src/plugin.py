@@ -338,7 +338,7 @@ class TVscreenHelper(TVcoreHelper, Screen):
 				if not errMsg:
 					img = Image.open(BytesIO(binary))
 					img.thumbnail((600, 450) if tvglobals.RESOLUTION == "FHD" else (400, 300), Image.LANCZOS)
-					img.save(imgFile, format="jpeg", quality=25)
+					img.save(imgFile, format="jpeg", quality=25, optimize=True)
 					img.close()
 					if callback:
 						callback(imgFile, assetUrl)
@@ -669,10 +669,10 @@ class TVfullscreen(TVscreenHelper, Screen):
 		<widget source="global.CurrentTime" render="Label" position="1000,26" size="100,26" font="Regular;16" noWrap="1" halign="right" valign="bottom" foregroundColor="white" backgroundColor="#16000000" zPosition="12" transparent="1">
 			<convert type="ClockToText">Format:%e. %B</convert>
 		</widget>
-		<widget name="thumb" position="38,106" size="60,60" alphatest="blend" />
+		<widget name="thumb" position="38,96" size="60,60" alphatest="blend" />
 		<widget source="timeStartEnd" render="Label" position="90,66" size="490,30" font="Regular;20" backgroundColor="#16000000" transparent="1" />
-		<widget source="editorial" render="Label" position="90,100" size="490,26" font="Regular;18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
-		<widget source="conclusion" render="Label" position="90,120" size="490,54" font="Regular;20" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
+		<widget source="editorial" render="Label" position="90,88" size="490,26" font="Regular;18" foregroundColor="grey" backgroundColor="#16000000" transparent="1" />
+		<widget source="conclusion" render="Label" position="90,106" size="490,54" font="Regular;20" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget name="picon" position="586,66" size="148,88" alphatest="blend" scaleFlags="scale" zPosition="1" />
 		<widget source="channelName" render="Label" position="548,158" size="220,32" font="Regular;24" halign="center" foregroundColor="#0092cbdf" backgroundColor="#16000000" transparent="1" />
 		<widget name="hasTimer" position="718,68" size="14,14" alphatest="blend" zPosition="1" />
@@ -873,10 +873,10 @@ class TVtipsBox(Screen):
 		<widget source="genre" render="Label" position="68,236" size="286,24" font="Regular;18" backgroundColor="#16000000" transparent="1" halign="left" valign="center" />
 		<widget source="category" render="Label" position="278,236" size="120,24" font="Regular;18" backgroundColor="#16000000" transparent="1" halign="right" valign="center" />
 		<widget name="thumb" position="362,102" size="40,40" alphatest="blend" zPosition="1" />
-		<widget name="isTopTip" position="192,96" size="28,14" alphatest="blend" zPosition="1" />
-		<widget name="isTip" position="222,96" size="28,14" alphatest="blend" zPosition="1" />
-		<widget name="isNew" position="222,116" size="28,14" alphatest="blend" zPosition="1" />
-		<widget name="isLive" position="222,136" size="28,14" alphatest="blend" zPosition="1" />
+		<widget name="isTopTip" position="222,96" size="28,14" alphatest="blend" zPosition="1" />
+		<widget name="isLive" position="222,96" size="28,14" alphatest="blend" zPosition="1" />
+		<widget name="isTip" position="222,116" size="28,14" alphatest="blend" zPosition="1" />
+		<widget name="isNew" position="222,136" size="28,14" alphatest="blend" zPosition="1" />
 	</screen>
 	"""
 
