@@ -114,7 +114,7 @@ class TVSparserTips:
 				rating = tvsphelper.searchOneValue(r'<div class=\"tips-teaser__bottom__top-rating-text\">(.*?)</div>', entry, "").lower()
 				# 'TOP BEWERTET': Highlights, wenn sie von der TVSpielfilm-Redaktion einen 'Daumen hoch'und eine IMDb-Bewertung von über 7,0 erhalten haben.
 				isTopTip, thumbIdNumeric, imdbRating = (True, 3, "TOP") if "top bewertet" in rating else (False, 0, "")
-				isTip = not isTopTip  # either or
+				isTip = False  # unfortunately not supported at this time
 				new = tvsphelper.searchOneValue(r'<div class=\"tips-teaser__bottom__new-text\">(.*?)</div>', entry, "").lower()
 				isNew = True if "neu" in new else False
 				imgUrl = tvsphelper.searchOneValue(r'<img src="(.*?)" width', entry, "")
