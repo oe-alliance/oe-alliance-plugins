@@ -1314,7 +1314,7 @@ class TVoverview(TVscreenHelper, Screen):
 				currweekday, nextweekday = dayNames[dateOnlyDt.weekday()][:2], dayNames[(dateOnlyDt + timedelta(days=1)).weekday()][:2]
 				reviewdate = " | ".join(list(filter(None, [f"{weekday} {spanStartsDt.strftime('%d.%m.%Y')}", f"{corrDayDelta:+} Tag(e)", f"{currweekday} 05:00 - {nextweekday} 05:00 Uhr"])))
 			elif self.timeCode == "now":
-				reviewdate = f"{weekday} {self.currDateDt.strftime('%d.%m.%Y')} | {corrDayDelta:+} Tag(e) | {self.currDateDt.strftime("%H:%M")} - {spanEndsStr} Uhr"
+				reviewdate = f"{weekday} {self.currDateDt.strftime('%d.%m.%Y')} | {corrDayDelta:+} Tag(e) | {self.currDateDt.strftime('%H:%M')} - {spanEndsStr} Uhr"
 			else:
 				reviewdate = f"{weekday} {spanStartsDt.strftime('%d.%m.%Y')} | {corrDayDelta:+} Tag(e) | {spanStartsStr} - {spanEndsStr} Uhr"
 		self["reviewdate"].setText(reviewdate)
