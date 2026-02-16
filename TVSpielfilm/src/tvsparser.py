@@ -55,7 +55,7 @@ class TVSparserHelper:
 			del response
 			return errMsg, htmldata
 		except exceptions.RequestException as errMsg:
-			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:getHTMLdata': {errMsg}")
+			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVcoreHelper:getHTMLdata': {errMsg}".replace("[__main__] ", ""))
 			return errMsg, htmldata
 
 	def getBinaryData(self, url):
@@ -71,7 +71,7 @@ class TVSparserHelper:
 			del response
 			return errMsg, binary
 		except exceptions.RequestException as errMsg:
-			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'tvsphelper:getBinaryData': {url} - binary data could not be downloaded: {errMsg}")
+			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'tvsphelper:getBinaryData': {url} - binary data could not be downloaded: {errMsg}".replace("[__main__] ", ""))
 			return errMsg, binary
 
 	def searchOneValue(self, regex, text, fallback, flags=None):
@@ -87,7 +87,7 @@ class TVSparserTips:
 		url = f"{tvspglobals.WEBURL}{bytes.fromhex('2f74762d74697070732f737069656c66696c6d2fb'[:-1]).decode()}"
 		errMsg, htmldata = tvsphelper.getHTMLdata(url)
 		if errMsg:
-			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserTips:parseTips': {errMsg}")
+			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserTips:parseTips': {errMsg}".replace("[__main__] ", ""))
 			return
 		extract = htmldata[htmldata.find('<div class="swiper-wrapper tips-teaser-container ">'):]
 		extract = extract[:extract.find('class="recommendations-box clear">')]
@@ -142,7 +142,7 @@ class TVSparserChannels:
 		url = f"{tvspglobals.WEBURL}{bytes.fromhex('2f73656e6465722ff'[:-1]).decode()}"
 		errMsg, htmldata = tvsphelper.getHTMLdata(url)
 		if errMsg:
-			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserChannels:parseChannelList': {errMsg}")
+			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserChannels:parseChannelList': {errMsg}".replace("[__main__] ", ""))
 			return []
 		extract = htmldata[htmldata.find('<div class="my-channels">'):]
 		extract = extract[:extract.find('</div>')]
@@ -176,32 +176,29 @@ class TVSparserAssets:
 	def __init__(self):
 		pass
 
-	def getChannelAssets(self, channelIds=[], dateOnlyStr=None, timeCode=None):
+	def getChannelAssets(self, channelIds=[], currDateDt=None, timeCode=None):
 		pagesList = []
 		for channelId in channelIds:
-			errMsg, assetsDicts = self.parseChannelPage(channelId, dateOnlyStr=dateOnlyStr, timeCode=timeCode)
+			errMsg, assetsDicts = self.parseChannelPage(channelId, currDateDt, timeCode=timeCode)
 			if errMsg:
-				print(f"[{tvspglobals.MODULE_NAME}] Error when parsing channel '{channelId}': {errMsg}")
+				print(f"[{tvspglobals.MODULE_NAME}] Error when parsing channel '{channelId}': {errMsg}".replace("[__main__] ", "").replace("[__main__] ", ""))
 			else:
-				print(f"[{tvspglobals.MODULE_NAME}] Successfully parsed channel '{channelId}'")
+				print(f"[{tvspglobals.MODULE_NAME}] Successfully parsed channel '{channelId}'".replace("[__main__] ", "").replace("[__main__] ", ""))
 				pagesList += assetsDicts
 		return pagesList
 
-	def parseChannelPage(self, channelId, dateOnlyStr=None, timeCode=None, tips=None, categories=[]):
+	def parseChannelPage(self, channelId, currDateDt, timeCode=None, tips=None, categories=[]):
 		def setAssetKey(key, value):
 			if value:
 				assetDict[key] = value
-		nowDt = datetime.now(tz=None)
+
 		url = f"{tvspglobals.MWEBURL}{bytes.fromhex('2f73756368652e68746d6c1'[:-1]).decode()}"
-		if timeCode == "now":
-			corrStartStr = nowDt.strftime("%F")
-		else:
-			dateOnlyDt = datetime.fromisoformat(dateOnlyStr) if dateOnlyStr else nowDt  # fallback to today
-			# In case desired time span is between 00:00 and 05:00, request data from previous day
-			# Server philosophy: The server considers a day to be the period from 5:00 a.m. to 5:00 a.m. the following day.
-			midnight = dateOnlyDt.replace(hour=0, minute=0, second=0, microsecond=0)
-			morning = dateOnlyDt.replace(hour=5, minute=0, second=0, microsecond=0)
-			corrStartStr = (dateOnlyDt + timedelta(days=-1)).strftime("%F") if timeCode == "0" and nowDt >= midnight and nowDt < morning else dateOnlyDt
+		currDateStr = (datetime.now(tz=None) if timeCode == "now" else currDateDt).strftime("%F")
+		# In case desired time span is between 00:00 and 05:00, request data from previous day
+		# Server philosophy: The server considers a day to be the period from 5:00 a.m. to 5:00 a.m. the following day.
+		currDateInt = int(f"{currDateDt.hour:02d}{currDateDt.minute:02d}")
+		if currDateInt >= 0 and currDateInt < 500:  # correct timespan when next day (00:00h to 05:00h)
+			currDateStr = (currDateDt + timedelta(days=-1)).strftime("%F")
 		finish = False
 		assetsDicts = []
 		index, offset = 0, 0
@@ -210,7 +207,7 @@ class TVSparserAssets:
 					"offset": offset,  # offset=20 means assets #20...#39
 					"filter": 1 if categories else None,  # None = all filters active |'1' = selected filters
 					"order": None,  # sort order 'time' or 'channel', ('time' is default)
-					"date": corrStartStr,  # e.g. '2025-05-18'
+					"date": currDateStr,  # e.g. '2025-05-18'
 					"tips": tips,  # '1' = load tips only, ('None' is default)
 					"cat[]": [self.catFilters.get(catFilter) for catFilter in categories],   # e.g. ["Spielfilm", "Report"] -> ['SP', 'RE']
 					"time": timeCode or "prime",  # for details see dict {spanSets}
@@ -218,11 +215,11 @@ class TVSparserAssets:
 					}
 			errMsg, htmldata = tvsphelper.getHTMLdata(url, params)
 			if errMsg:
-				print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserAssets:parseChannelPage': {errMsg}")
+				print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserAssets:parseChannelPage': {errMsg}".replace("[__main__] ", ""))
 				return errMsg, []
 			limit = 5 if timeCode == "now" else 0  # 'Jetzt im TV' needs only the first 5 assets per channel
 			extract = htmldata[htmldata.find('<div class="row component tv-tip-list">'):htmldata.find('<div class="row component category-select">')]
-			for entry in findall(r'<li class="tv-tip time-listing js-tv-show"(.*?)</li>', extract, S):
+			for index, entry in enumerate(findall(r'<li class="tv-tip time-listing js-tv-show"(.*?)</li>', extract, S)):
 				if limit and index > limit:
 					finish = True
 					break
@@ -252,7 +249,6 @@ class TVSparserAssets:
 				setAssetKey("timeEnd", f"{datetime.fromtimestamp(timeEndTs).isoformat()}+00:00")
 				setAssetKey("assetUrl", tvsphelper.searchOneValue(r'<div class="image-text-holder">\s*<a href="(.*?)"', entry, "", flags=S).replace("https://m.", "https://"))
 				assetsDicts.append(assetDict)
-				index += 1
 			if finish or extract.find('<span>Weitere Sendungen</span>') == -1:
 				break
 			offset += 20  # offset for the next 20 assets (=next page)
@@ -280,7 +276,7 @@ class TVSparserAssets:
 				trailerDicts = response.json().get("result", {}).get("videoRenditions", {})
 				return trailerDicts[0].get("src", "") if trailerDicts else ""
 			else:
-				print(f"[{tvspglobals.MODULE_NAME}] API server access ERROR, response code: {response.raise_for_status()}")
+				print(f"[{tvspglobals.MODULE_NAME}] API server access ERROR, response code: {response.raise_for_status()}".replace("[__main__] ", ""))
 		except exceptions.RequestException as errMsg:
 			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserAssets:resolveTrailerUrl': {errMsg}")
 		return ""
@@ -292,7 +288,7 @@ class TVSparserAssets:
 
 		errMsg, htmldata = tvsphelper.getHTMLdata(assetUrl)
 		if errMsg:
-			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserAssets:parseSingleAsset': {errMsg}")
+			print(f"[{tvspglobals.MODULE_NAME}] ERROR in class 'TVSparserAssets:parseSingleAsset': {errMsg}".replace("[__main__] ", ""))
 			return errMsg, {}
 		extract = htmldata[htmldata.find('<div class="content-area">'):]
 		extract = extract[:extract.find('<div class="schedule-widget__tabs">')]
@@ -311,20 +307,19 @@ class TVSparserAssets:
 		category = tvsphelper.searchOneValue(r'"epgCategory1" : "(.*?)",', htmldata, "").upper()  # e.g. "SP" for 'Spielfilm'
 		conclusion = tvsphelper.searchOneValue(r'<blockquote class="content-rating__rating-genre__conclusion-quote">(.*?)</blockquote>', extract, "", flags=S)
 		conclusion = unescape(conclusion.replace("<p>", "").replace("</p>", "").strip())
-		broadblock = tvsphelper.searchOneValue(r'<div class="schedule-widget__header__attributes">(.*?)</div>', extract, "", flags=S)
-		broadblock = findall(r'<li>(.*)</li>', broadblock) or ["", "", ""]  # e.g. 'Heute | 20:15 Uhr - 21:45 Uhr | Das Erste'
-		timeStartEnd = broadblock[1].split(" - ") if broadblock[1] else ""
+		stage = tvsphelper.searchOneValue(r'<span class="stage-underline gray">(.*?)</span>', extract, "", flags=S).split(" | ")
+		timeStartEnd = stage[1].split(" - ") if stage[1] else ""
 		timeStartTs, startHourmin = None, datetime.strptime(timeStartEnd[0].replace(" Uhr", ""), '%H:%M').time() if timeStartEnd else None
 		timeEndTs, endHourmin = None, datetime.strptime(timeStartEnd[1].replace(" Uhr", ""), '%H:%M').time() if len(timeStartEnd) > 1 else None
 		nowDt = datetime.now(tz=None)
-		if "heute" in broadblock[0].lower():
+		if "heute" in stage[0].lower():
 			timeStartTs = int(datetime.combine(nowDt, startHourmin).timestamp()) if startHourmin else ""
 			timeEndTs = int(datetime.combine(nowDt, endHourmin).timestamp()) if endHourmin else ""
 		else:
-			daydate = broadblock[0][broadblock[0].find(",") + 2:]  # convert 'Fr., 23.05.' -> '23.05.'
+			daydate = stage[0][stage[0].find(",") + 2:]  # convert 'Fr., 23.05.' -> '23.05.'
 			timeStartTs = int(datetime.combine(datetime.strptime(f"{daydate}{nowDt.year}", '%d.%m.%Y'), startHourmin).timestamp()) if startHourmin else ""
 			timeEndTs = int(datetime.combine(datetime.strptime(f"{daydate}{nowDt.year}", '%d.%m.%Y'), endHourmin).timestamp()) if endHourmin else ""
-		channelName = broadblock[2] if len(broadblock) > 2 else ""
+		channelName = stage[2] if len(stage) > 2 else ""
 		channelId = tvsphelper.searchOneValue(r'"pageElementCreative":"(.*?)"', extract, "").upper().replace("N\\/A", "").lower()
 		imgUrl = tvsphelper.searchOneValue(r'<picture class=".*?">\s*<img src="(.*?)" width', extract, "", flags=S)
 		if not imgUrl:  # alternative search
@@ -435,32 +430,31 @@ def main(argv):  # shell interface
 	except GetoptError as error:
 		print(f"Error: {error}\n{helpstring}")
 		exit(2)
-	currDateStr = datetime.now().strftime("%F")
 	for opt, arg in opts:
 		opt = opt.lower().strip()
 		arg = arg.strip()
 		if not opts or opt == "-h":
 			print("Usage 'tvsparser v1.0': python tvsparser.py [option...] <data>\n"
 			"-a, --assetslist\tget list of assets of a channel (details: see code)\n"
-			"-n, --now\t\t\tget list of assets of currently running programs (details: see code)\n"
-			"-c, --channellist\t\tget list of all supported channels\n"
-			"-h, --help\t\t\tget an overview of the options\n"
-			"-s, --single\t\t\tget a single asset (url: see code)\n"
-			"-t, --tipslist\t\t\tget all TV-tips\n"
-			"-j, --json <filename>\t\tFile output formatted in JSON\n")
+			"-n, --now\t\tget list of assets of currently running programs (details: see code)\n"
+			"-c, --channellist\tget list of all supported channels\n"
+			"-h, --help\t\tget an overview of the options\n"
+			"-s, --single\t\tget a single asset (url: see code)\n"
+			"-t, --tipslist\t\tget all TV-tips\n"
+			"-j, --json <filename>\tFile output formatted in JSON\n")
 			exit()
 		elif opt in ("-a", "--assetslist"):
-			jsonList = tvspassets.getChannelAssets(["ZDF"], dateOnlyStr=currDateStr, timeCode="0")
+			jsonList = tvspassets.getChannelAssets(["ZDF"], datetime.now(), timeCode="0")
 		elif opt in ("-n", "--new"):
-			jsonList = tvspassets.getChannelAssets(["ARD"], dateOnlyStr=currDateStr, timeCode="now")
+			jsonList = tvspassets.getChannelAssets(["ARD"], datetime.now(), timeCode="now")
 		elif opt in ("-c", "--channellist"):
 			jsonList = tvspchannels.parseChannels()
 		elif opt in ("-j", "--json"):
 			filename = arg
 		elif opt in ("-s", "--single"):
-			errMsg, jsonList = tvspassets.parseSingleAsset("")
+			errMsg, jsonList = tvspassets.parseSingleAsset("https://www.tvspielfilm.de/tv-programm/sendung/das-inferno-von-crans-montana,696e8392eb67150fe9f50cc9.html")
 			if errMsg:
-				print("errMsg")
+				print(f"Error parsing asset: {errMsg}")
 		elif opt in ("-t", "--tipslist"):
 			jsonList = tvsptips.parseTips()
 	if jsonList and filename:
