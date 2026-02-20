@@ -166,7 +166,8 @@ class TVcoreHelper:
 		else:  # user time spans
 			spanStartsDt = currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 			spanEndsDt = spanStartsDt + timedelta(minutes=spanDuranceTs)
-			if int(f"{spanStartsDt.hour:02d}{spanStartsDt.minute:02d}") < 500:  # correct timespan when next day (00:00h to 05:00h)
+			# correct timespan when timespan is over or on next day (00:00h to 05:00h)
+			if spanEndsDt < currDateDt or int(f"{spanStartsDt.hour:02d}{spanStartsDt.minute:02d}") < 500:
 				spanStartsDt += timedelta(days=1)
 				spanEndsDt += timedelta(days=1)
 		return spanStartsDt, spanEndsDt
@@ -1314,7 +1315,8 @@ class TVoverview(TVscreenHelper, Screen):
 				currweekday, nextweekday = dayNames[dateOnlyDt.weekday()][:2], dayNames[(dateOnlyDt + timedelta(days=1)).weekday()][:2]
 				reviewdate = " | ".join(list(filter(None, [f"{weekday} {spanStartsDt.strftime('%d.%m.%Y')}", f"{corrDayDelta:+} Tag(e)", f"{currweekday} 05:00 - {nextweekday} 05:00 Uhr"])))
 			elif self.timeCode == "now":
-				reviewdate = f"{weekday} {self.currDateDt.strftime('%d.%m.%Y')} | {corrDayDelta:+} Tag(e) | {self.currDateDt.strftime('%H:%M')} - {spanEndsStr} Uhr"
+				nowDt = datetime.now(tz=None)
+				reviewdate = f"heute {nowDt.strftime('%d.%m.%Y')} | {nowDt.strftime('%H:%M')} - {spanEndsStr} Uhr"
 			else:
 				reviewdate = f"{weekday} {spanStartsDt.strftime('%d.%m.%Y')} | {corrDayDelta:+} Tag(e) | {spanStartsStr} - {spanEndsStr} Uhr"
 		self["reviewdate"].setText(reviewdate)
