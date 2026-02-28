@@ -392,7 +392,7 @@ class BTInStandby:
 
 			self.disconnectAll()
 
-			time.sleep(0.1)
+			time.sleep(1.0)
 			self.disable(False)
 
 	def standbyEnd(self):
