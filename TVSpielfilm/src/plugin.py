@@ -166,8 +166,9 @@ class TVcoreHelper:
 		else:  # user time spans
 			spanStartsDt = currDateDt.replace(hour=int(hour), minute=int(minute), second=0, microsecond=0)
 			spanEndsDt = spanStartsDt + timedelta(minutes=spanDuranceTs)
+			midNight = currDateDt.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=1)
 			# correct timespan when timespan is over or on next day (00:00h to 05:00h)
-			if spanEndsDt < currDateDt or int(f"{spanStartsDt.hour:02d}{spanStartsDt.minute:02d}") < 500:
+			if spanEndsDt < currDateDt and spanStartsDt < midNight:  # has the timespan already expired and is it before midnight?
 				spanStartsDt += timedelta(days=1)
 				spanEndsDt += timedelta(days=1)
 		return spanStartsDt, spanEndsDt
