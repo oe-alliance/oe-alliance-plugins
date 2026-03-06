@@ -12,7 +12,7 @@
 from json import loads
 from os.path import join, exists
 from re import findall, search, S
-from random import choice
+from secrets import choice
 from requests import get, exceptions
 from twisted.internet.reactor import callInThread
 
