@@ -293,9 +293,11 @@ class TVSparserAssets:
 		extract = htmldata[htmldata.find('<div class="content-area">'):]
 		extract = extract[:extract.find('<div class="schedule-widget__tabs">')]
 		title = unescape(tvsphelper.searchOneValue(r'<h1 class="headline headline--article broadcast stage-heading">(.*?)</h1>', extract, ""))
+		countryYear, genre = "", ""
 		block = tvsphelper.searchOneValue(r'<span class="text-row">(.*?)</span></div>', extract, "").split(" | ")
-		countryYear = block[0] if block else ""
-		genre = block[1][:block[1].find("</span>")] if "</span>" in block[1] else block[1] if len(block) > 1 else ""
+		if block and len(block) > 1:
+			countryYear = block[0]
+			genre = block[1][:block[1].find("</span>")] if "</span>" in block[1] else block[1] if len(block) > 1 else ""
 		repeatHint = unescape(tvsphelper.searchOneValue(r'<span class="text-row repeat">(.*?)</span>', f"{block[1].replace('</span>', '')}</span>", "")) if len(block) > 1 else ""
 		serialinfo = tvsphelper.searchOneValue(r'<section class="serial-info">\s*<span>(.*?)</span>', extract, "").split(",")
 		len_serialinfo = len(serialinfo)
