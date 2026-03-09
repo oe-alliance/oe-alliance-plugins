@@ -118,7 +118,7 @@ class TVSparserTips:
 				new = tvsphelper.searchOneValue(r'<div class=\"tips-teaser__bottom__new-text\">(.*?)</div>', entry, "").lower()
 				isNew = True if "neu" in new else False
 				imgUrl = tvsphelper.searchOneValue(r'<img src="(.*?)" width', entry, "")
-				channelId = tvsphelper.searchOneValue(r'mini/(.*?).png', entry, "").lower()
+				channelId = tvsphelper.searchOneValue(r'<picture>\s*<img src=.*/(.*?).png', entry, "", flags=S).lower()
 				assetUrl = tvsphelper.searchOneValue(r'<a href="(.*)"', entry, "")
 				# not supported/used for the moment: timeEndTs, countryYear, titleLength, imdbRating, fskText, conclusion, fsk
 				tipsDicts.append({"tipId": tipId, "channelName": channelName, "channelId": channelId, "timeStart": timeStartTs,
