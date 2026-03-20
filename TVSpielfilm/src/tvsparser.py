@@ -35,6 +35,7 @@ class TVSparserGlobals:
 			"Mozilla/5.0 (Mozilla/5.0 (Macintosh; Intel Mac OS X 15_0 beta 7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17 Safari/605.1.15"
 			"Mozilla/5.0 (Mozilla/5.0 (Macintosh; Intel Mac OS X 15_0_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.6668.89 Safari/537.36"
 			])
+	LINES_PER_PAGE = 20  # fallback value
 
 
 tvspglobals = TVSparserGlobals()
@@ -166,7 +167,7 @@ tvspchannels = TVSparserChannels()
 
 class TVSparserAssets:
 	spanSets = {"05:00-14:00": "5", "14:00-18:00": "14", "18:00-20:00": "18", "20:00-22:00": "20", "20:15": "prime", "22:00-00:00": "22", "00:00-05:00": "0"}
-	# also existing but not used: {"jetzt": "now", "gleich": "shortly",  "abends": "primetips", "ganzer Tag": "day"}
+	# also existing but not used: {"jetzt": "now", "gleich": "shortly", "abends": "primetips", "ganzer Tag": "day"}
 	catFilters = {"Spielfilm": "SP", "Serie": "SE", "Report": "RE", "Unterhaltung": "U", "Kinder": "KIN", "Sport": "SPO", "Andere": "AND"}
 	channelSets = {"Hauptsender": "g:1", "Dritte Programme": "g:2", "Sportsender": "g:8", "Spartensender ARD & ZDF": "g:4103125",
 					"News und Doku": "g:11", "Kindersender": "g:10", "Ausland (deutschspr.)": "g:4", "Regionalsender": "g:3",
@@ -198,7 +199,7 @@ class TVSparserAssets:
 		# Server philosophy: The server considers a day to be the period from 5:00 a.m. to 5:00 a.m. the following day.
 		currDateInt = int(f"{currDateDt.hour:02d}{currDateDt.minute:02d}")
 		if currDateInt >= 0 and currDateInt < 500:  # correct timespan when next day (00:00h to 05:00h)
-			currDateStr = (currDateDt + timedelta(days=-1)).strftime("%F")
+			currDateStr = (currDateDt - timedelta(days=1)).strftime("%F")
 		finish = False
 		assetsDicts = []
 		index, offset = 0, 0
@@ -235,7 +236,7 @@ class TVSparserAssets:
 				setAssetKey("category", pageElement[2].upper())
 				thumbIdnumeric = tvsphelper.searchOneValue(r'<span class="listing-icon rating-(.*?)"></span>', itholder, "0")
 				setAssetKey("thumbIdNumeric", int(thumbIdnumeric) if thumbIdnumeric.isdigit() else 0)
-#               setAssetKey("isTopTip", False)  # not supported for the moment
+				setAssetKey("isTopTip", False)  # not supported for the moment
 				setAssetKey("isTip", itholder.find('<span class="add-info icon-tip">TIPP</span>') > -1)
 				setAssetKey("isNew", itholder.find('<span class="add-info icon-new">NEU</span>') > -1)
 				setAssetKey("isLive", itholder.find('<span class="add-info icon-tip">Live</span>') > -1)
@@ -251,7 +252,11 @@ class TVSparserAssets:
 				assetsDicts.append(assetDict)
 			if finish or extract.find('<span>Weitere Sendungen</span>') == -1:
 				break
-			offset += 20  # offset for the next 20 assets (=next page)
+			dataAjax = tvsphelper.searchOneValue(r'data-ajax=.*?offset=(.*?)&amp', extract, "", flags=S)
+			if dataAjax and dataAjax.isdigit():
+				offset = int(dataAjax)
+			else:  # fallback
+				offset += tvspglobals.LINES_PER_PAGE  # offset for the next ?? assets (=next page)
 		return errMsg, assetsDicts
 
 	def resolveTrailerUrl(self, cid, lic):
@@ -443,7 +448,7 @@ def main(argv):  # shell interface
 			"-j, --json <filename>\tFile output formatted in JSON\n")
 			exit()
 		elif opt in ("-a", "--assetslist"):
-			jsonList = tvspassets.getChannelAssets(["ZDF"], datetime.now(), timeCode="0")
+			jsonList = tvspassets.getChannelAssets(["ZDF"], datetime.now(), timeCode="day")
 		elif opt in ("-n", "--now"):
 			jsonList = tvspassets.getChannelAssets(["ARD"], datetime.now(), timeCode="now")
 		elif opt in ("-c", "--channellist"):
