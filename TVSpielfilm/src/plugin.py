@@ -158,9 +158,11 @@ class TVcoreHelper:
 	def getStartsEndsDt(self, currDateDt, spanStartsStr, spanDuranceTs, singleChannelId, timeCode):
 		hour, minute = spanStartsStr.split(":") if spanStartsStr else (currDateDt.strftime("%H"), currDateDt.strftime("%M"))
 		if singleChannelId:  # 'singleChannel' means 'the entire day' from 05:00h to 05:00h next morning, except it's before 05:00h
-			spanStartsDt = currDateDt.replace(hour=5, minute=0, second=0, microsecond=0) if currDateDt.hour > 5 else currDateDt
+			spanStartsDt = currDateDt.replace(hour=5, minute=0, second=0, microsecond=0)  # start scan today 05:00h
+			if currDateDt.hour < 5:  # if now is between 00:00h and 00500h, scan yesterday
+				spanStartsDt -= timedelta(days=1)  # start scan yesterday 05:00h
 			spanEndsDt = spanStartsDt + timedelta(days=1)
-		elif timeCode == "now":  # in order to also show long-running programs, the evaluation starts 5 hours before
+		elif timeCode == "now":  # to also show long-running programs, the evaluation starts 5 hours before
 			spanStartsDt = currDateDt - timedelta(minutes=300)
 			spanEndsDt = currDateDt + timedelta(minutes=spanDuranceTs)
 		else:  # user time spans
@@ -1236,12 +1238,12 @@ class TVoverview(TVscreenHelper, Screen):
 		spanStartsDt, spanEndsDt = self.getStartsEndsDt(self.currDateDt, self.spanStartsStr, self.spanDuranceTs, self.singleChannelId, self.timeCode)
 		allAssets = [] if self.singleChannelId else self.loadAllAssets(spanStartsDt, self.timeCode)  # first try to load existing assets from cache
 		if not allAssets:  # build filtered assetslist, channel by channel
-			if self.currDayDelta < -1:
+			nowDt = datetime.now(tz=None)
+			if (nowDt.hour < 5 and self.currDayDelta < 0) or (nowDt.hour >= 5 and self.currDayDelta < -1):
 				self.tvinfobox.showDialog("Keine alten Daten im TVS-EPG Cache gefunden und Tage vor gestern sind auch nicht mehr downloadbar!", 5000)
 			else:
 				print(f"[{tvglobals.MODULE_NAME}] TVS-EPG download starts for {len(channelDicts)} channels.")
-				# special case: if data record '20:15' contains data until the next early morning,
-				# therefore also create data record '22:00' if desired
+				# special case: if data record '20:15' contains data until the next early morning, therefore also create data record '22:00' if desired
 				assets2200 = []
 				span2200StartsDt, span2200EndsDt = self.get2200spanData(spanStartsDt)
 				for index, channelDict in enumerate(channelDicts):
@@ -1252,7 +1254,7 @@ class TVoverview(TVscreenHelper, Screen):
 					self["shortStatus"].setText(f"Lade TVS-EPG Daten für '{channelName}'")
 					if self.singleChannelId and self.singleChannelId != channelId:
 						continue  # skip downloads unless it is the desired channel in case of mode 'single channel' only
-					timeStartDt = datetime.now(tz=None) if self.timeCode == "now" else spanStartsDt
+					timeStartDt = nowDt if self.timeCode == "now" else spanStartsDt
 					errMsg, channelAssets = tvspassets.parseChannelPage(channelId, timeStartDt, self.timeCode)
 					if errMsg:
 						print(f"[{tvglobals.MODULE_NAME}] ERROR in class 'TVoverview:loadAllEPG' - parsing failed: {errMsg}")
@@ -1264,7 +1266,7 @@ class TVoverview(TVscreenHelper, Screen):
 					self["progressTxt"].setText(f"{index + 1}/{self.lenImportDict}")
 				if not self.loadAllEPGstop:
 					print(f"[{tvglobals.MODULE_NAME}] TVS-EPG download was regularly terminated.")
-					if not self.singleChannelId:  # don't save single channels
+					if not self.singleChannelId:  # don't save single channels, download is fast enough
 						saveErr = self.saveAllAssets(allAssets, spanStartsDt, self.timeCode)
 						saveErr2200 = self.saveAllAssets(assets2200, span2200StartsDt, self.timeCode) if assets2200 else ""
 						if saveErr or saveErr2200:
