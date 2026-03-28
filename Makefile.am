@@ -294,6 +294,10 @@ if H9COMBO
 SUBDIRS += MultiTransCodingSetup
 endif
 
+if H9COMBOSE
+SUBDIRS += MultiTransCodingSetup
+endif
+
 if H10
 SUBDIRS += MultiTransCodingSetup
 endif
