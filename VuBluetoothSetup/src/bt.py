@@ -468,6 +468,14 @@ class BTOTAProcess:
 		elif evType == BTOTAProcess.OTA_FILE_APP_VERSION:
 			self.firmwareFileVersion = value
 
+			# quick hack to prevent version check for new RCU_hy, because the new ota protocol is not supportet
+			first_octet = -1
+			try:
+				if len(self.bd_addr) >= 12: first_octet = int(self.bd_addr[:2])
+			except:
+				pass
+			if first_octet == 0 or self.rcuAppVersion == 17: return
+
 			# check app version
 			if self.firmwareFileVersion > self.rcuAppVersion:
 				if config.plugins.bluetoothsetup.vurcuSkipFwVer.value != self.firmwareFileVersion:
