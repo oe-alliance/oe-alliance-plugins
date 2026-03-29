@@ -471,10 +471,12 @@ class BTOTAProcess:
 			# quick hack to prevent version check for new RCU_hy, because the new ota protocol is not supportet
 			first_octet = -1
 			try:
-				if len(self.bd_addr) >= 12: first_octet = int(self.bd_addr[:2])
+				if len(self.bd_addr) >= 12:
+					first_octet = int(self.bd_addr[:2])
 			except:
 				pass
-			if first_octet == 0 or self.rcuAppVersion == 17: return
+			if first_octet == 0 or self.rcuAppVersion == 17:
+				return
 
 			# check app version
 			if self.firmwareFileVersion > self.rcuAppVersion:
