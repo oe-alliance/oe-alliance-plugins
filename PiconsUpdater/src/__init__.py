@@ -117,3 +117,5 @@ def getTmpLocalPicon(piconName):
 
 
 __all__ = ["_", "printToConsole", "getPiconsPath"]
+
+__version__ = "1.0"

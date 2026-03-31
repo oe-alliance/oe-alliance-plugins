@@ -12,3 +12,6 @@ def umlautS(s):
 
 
 def _(s): return umlautS(s)
+
+
+__version__ = "1.0.2"

@@ -43,3 +43,6 @@ ALTERN_PICON_PATH = [
 
 def getConfigPathList():
 	return [(path, _(path)) for path in ALTERN_PICON_PATH]
+
+
+__version__ = "2.6.0"

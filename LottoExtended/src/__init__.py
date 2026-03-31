@@ -7,3 +7,5 @@
 # Software Foundation; either version 2, or (at your option) any later
 # version.
 #===============================================================================
+
+__version__ = "1.0"

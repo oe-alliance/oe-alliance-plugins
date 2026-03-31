@@ -9,3 +9,5 @@ def _(txt):
     if t == txt:
         t = gettext.gettext(txt)
     return t
+
+__version__ = "1.0"

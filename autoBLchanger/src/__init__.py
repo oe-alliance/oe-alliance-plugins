@@ -25,3 +25,5 @@ language.addCallback(localeInit)
 config.plugins.autoBLchanger = ConfigSubsection()
 config.plugins.autoBLchanger.changeMode = ConfigSelection(default='man', choices=[('man', _('manual')), ('aut', _('startup'))])
 config.plugins.autoBLchanger.selectMode = ConfigSelection(default='0', choices=[('0', _('random')), ('1', _('ascending')), ('2', _('descending'))])
+
+__version__ = "1.0"
