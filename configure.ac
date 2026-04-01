@@ -26,34 +26,20 @@ AM_PATH_PYTHON
 AX_PYTHON_DEVEL
 AX_PTHREAD
 
-AC_ARG_WITH(amlplugins,
-	AC_HELP_STRING([--with-amlplugins], [have amlplugins]),
-	[[withamlplugins=$withval]],
-	[[withamlplugins=no]]
-)
-if test x"$withamlplugins" != xno ; then
-	AC_DEFINE(HAVE_AMLPLUGINS, 1,[Define when using a amlplugins])
-fi
-AM_CONDITIONAL(HAVE_AMLPLUGINS, test x"$withamlplugins" != xno)
-
-
 AC_ARG_WITH(arch,
 	[  --with-arch=NAME box arch [[none,ah4,mipsel...]]],
 	[ARCH="$withval"],[ARCH="mipsel"])
 AC_SUBST(ARCH)
 AC_DEFINE_UNQUOTED(ARCH,"$ARCH",[box arch])
 
-AM_CONDITIONAL(SH4, test `echo "$ARCH" | cut -b 1-3` == "sh4")
 AM_CONDITIONAL(MIPSEL, test `echo "$ARCH" | cut -b 1-6` == "mipsel")
 
 AC_ARG_WITH(boxtype,
-	[  --with-boxtype=NAME box type [[none,dm7025,dm800...]]],
-	[BOXTYPE="$withval"],[BOXTYPE="dm800"])
+	[  --with-boxtype=NAME box type [[none,dm8000,dm800se...]]],
+	[BOXTYPE="$withval"],[BOXTYPE="dm800se"])
 AC_SUBST(BOXTYPE)
 AC_DEFINE_UNQUOTED(BOXTYPE,"$BOXTYPE",[box type])
 
-AM_CONDITIONAL(AZBOX, test `echo "$BOXTYPE" | cut -b 1-5` == "azbox")
-AM_CONDITIONAL(CUBE, test `echo "$BOXTYPE" | cut -b 1-4` == "cube")
 AM_CONDITIONAL(DAGS, test `echo "$BOXTYPE" | cut -b 1-4` == "dags")
 AM_CONDITIONAL(DREAMBOX, test `echo "$BOXTYPE" | cut -b 1-2` == "dm")
 AM_CONDITIONAL(VUPLUS, test `echo "$BOXTYPE" | cut -b 1-2` == "vu")
@@ -61,19 +47,10 @@ AM_CONDITIONAL(XTREND, test `echo "$BOXTYPE" | cut -b 1-2` == "et")
 AM_CONDITIONAL(INI, test `echo "$BOXTYPE" | cut -b 1-3` == "ini")
 AM_CONDITIONAL(GIGABLUE, test `echo "$BOXTYPE" | cut -b 1-2` == "gb")
 AM_CONDITIONAL(ODIN, test `echo "$BOXTYPE" | cut -b 1-4` == "odin")
-AM_CONDITIONAL(EBOX, test `echo "$BOXTYPE" | cut -b 1-4` == "ebox")
-AM_CONDITIONAL(SPARK, test `echo "$BOXTYPE" | cut -b 1-5` == "spark")
-AM_CONDITIONAL(WETEK, test `echo "$BOXTYPE" | cut -b 1-5` == "wetek")
-AM_CONDITIONAL(HARDKERNEL, test `echo "$BOXTYPE"| cut -b 1-6` == "odroid")
 AM_CONDITIONAL(DINOBOT, test `echo "$BOXTYPE" | cut -b 1-2` == u5)
 
-AM_CONDITIONAL(AZBOXHD, test "$BOXTYPE" == "azboxhd")
-AM_CONDITIONAL(AZBOXME, test "$BOXTYPE" == "azboxme")
-AM_CONDITIONAL(AZBOXMINIME, test "$BOXTYPE" == "azboxminime")
 AM_CONDITIONAL(BLACKBOX7405, test "$BOXTYPE" == "blackbox7405")
 AM_CONDITIONAL(BEYONWIZV2, test "$BOXTYPE" == "beyonwizv2")
-AM_CONDITIONAL(CC1, test "$BOXTYPE" == "cc1")
-AM_CONDITIONAL(CUBE, test "$BOXTYPE" == "cube")
 AM_CONDITIONAL(DAGS1, test "$BOXTYPE" == "dags1")
 AM_CONDITIONAL(DAGS2, test "$BOXTYPE" == "dags2")
 AM_CONDITIONAL(DAGS3, test "$BOXTYPE" == "dags3")
@@ -88,17 +65,12 @@ AM_CONDITIONAL(DAGS7252, test "$BOXTYPE" == "dags7252")
 AM_CONDITIONAL(DAGSMV200, test "$BOXTYPE" == "dagsmv200")
 AM_CONDITIONAL(DM500HD, test "$BOXTYPE" == "dm500hd")
 AM_CONDITIONAL(DM500HDV2, test "$BOXTYPE" == "dm500hdv2")
-AM_CONDITIONAL(DM800, test "$BOXTYPE" == "dm800")
 AM_CONDITIONAL(DM800SE, test "$BOXTYPE" == "dm800se")
 AM_CONDITIONAL(DM800SEV2, test "$BOXTYPE" == "dm800sev2")
 AM_CONDITIONAL(DM7020HD, test "$BOXTYPE" == "dm7020hd")
 AM_CONDITIONAL(DM7020HDV2, test "$BOXTYPE" == "dm7020hdv2")
 AM_CONDITIONAL(DM8000, test "$BOXTYPE" == "dm8000")
 AM_CONDITIONAL(E3HD, test "$BOXTYPE" == "e3hd")
-AM_CONDITIONAL(EBOX5000, test "$BOXTYPE" == "ebox5000")
-AM_CONDITIONAL(EBOX5100, test "$BOXTYPE" == "ebox5100")
-AM_CONDITIONAL(EBOX7358, test "$BOXTYPE" == "ebox7358")
-AM_CONDITIONAL(EBOXLUMI, test "$BOXTYPE" == "eboxlumi")
 AM_CONDITIONAL(ET4X00, test "$BOXTYPE" == "et4x00")
 AM_CONDITIONAL(ET5X00, test "$BOXTYPE" == "et5x00")
 AM_CONDITIONAL(ET6X00, test "$BOXTYPE" == "et6x00")
@@ -151,8 +123,6 @@ AM_CONDITIONAL(INIHDE, test "$BOXTYPE" == "inihde")
 AM_CONDITIONAL(INIHDE2, test `echo "$BOXTYPE" | cut -b 1-7` == inihde2)
 AM_CONDITIONAL(INIHDP, test "$BOXTYPE" == "inihdp")
 AM_CONDITIONAL(INIHDX, test "$BOXTYPE" == "inihdx")
-AM_CONDITIONAL(IXUSSZERO, test "$BOXTYPE" == "ixusszero")
-AM_CONDITIONAL(IXUSSONE, test "$BOXTYPE" == "ixussone")
 AM_CONDITIONAL(HD51, test "$BOXTYPE" == "hd51")
 AM_CONDITIONAL(HD60, test "$BOXTYPE" == "hd60")
 AM_CONDITIONAL(HD61, test "$BOXTYPE" == "hd61")
@@ -205,7 +175,6 @@ AM_CONDITIONAL(IP8, test "$BOXTYPE" == "ip8")
 AM_CONDITIONAL(OG2OTT4K, test "$BOXTYPE" == "og2ott4k")
 AM_CONDITIONAL(OG2S4K, test "$BOXTYPE" == "og2s4k")
 AM_CONDITIONAL(S8100S, test `echo "$BOXTYPE"` == "8100s")
-AM_CONDITIONAL(SF5008, test `echo "$BOXTYPE"` == "sf5008")
 AM_CONDITIONAL(SH1, test `echo "$BOXTYPE"` == "sh1")
 AM_CONDITIONAL(H3, test `echo "$BOXTYPE"` == "h3")
 AM_CONDITIONAL(H5, test `echo "$BOXTYPE"` == "h5")
@@ -224,7 +193,6 @@ AM_CONDITIONAL(TIVIARAPLUS, test "$BOXTYPE" == tiviaraplus)
 AM_CONDITIONAL(USTYM4KOTTPREMIUM, test "$BOXTYPE" == "ustym4kottpremium")
 AM_CONDITIONAL(USTYM4KPRO, test "$BOXTYPE" == "ustym4kpro")
 AM_CONDITIONAL(USTYM4K2OTTX, test "$BOXTYPE" == "ustym4ks2ottx")
-AM_CONDITIONAL(SPARK, test `echo "$BOXTYPE" | cut -b 1-5` == spark)
 AM_CONDITIONAL(VS1000, test "$BOXTYPE" == "vs1000")
 AM_CONDITIONAL(V8PLUS, test "$BOXTYPE" == "v8plus")
 AM_CONDITIONAL(VIPER4K, test "$BOXTYPE" == "viper4k")
@@ -234,7 +202,6 @@ AM_CONDITIONAL(MULTIBOXPRO, test "$BOXTYPE" == multiboxpro)
 AM_CONDITIONAL(XC7362, test "$BOXTYPE" == xc7362)
 AM_CONDITIONAL(XC7358, test "$BOXTYPE" == xc7358)
 AM_CONDITIONAL(XC7358CI, test "$BOXTYPE" == xc7358ci)
-AM_CONDITIONAL(WETEKPLAY, test "$BOXTYPE" == wetekplay)
 if test `echo "$BOXTYPE" | cut -b 1-2` == "dm"; then
 	AC_DEFINE(DREAMBOX, 1, [Dreambox hardware])
 fi
@@ -436,16 +403,6 @@ RemoteChannelStreamConverter/Makefile
 RemoteChannelStreamConverter/src/Makefile
 RemoteChannelStreamConverter/po/Makefile
 
-SH4BoosterControl/Makefile
-SH4BoosterControl/src/Makefile
-SH4BoosterControl/meta/Makefile
-SH4BoosterControl/po/Makefile
-
-SH4OSDAdjustment/Makefile
-SH4OSDAdjustment/src/Makefile
-SH4OSDAdjustment/meta/Makefile
-SH4OSDAdjustment/po/Makefile
-
 TempFanControl/Makefile
 TempFanControl/src/Makefile
 TempFanControl/meta/Makefile
@@ -460,16 +417,6 @@ TunerServer/Makefile
 TunerServer/src/Makefile
 TunerServer/meta/Makefile
 TunerServer/po/Makefile
-
-ReZap/Makefile
-ReZap/src/Makefile
-ReZap/meta/Makefile
-
-RCUSelect/Makefile
-RCUSelect/src/Makefile
-RCUSelect/conf/Makefile
-RCUSelect/po/Makefile
-RCUSelect/meta/Makefile
 
 SatipClient/Makefile
 SatipClient/src/Makefile
@@ -503,9 +450,6 @@ VentonFancontrol/src/Makefile
 VentonFancontrol/meta/Makefile
 VentonFancontrol/po/Makefile
 
-libvupldemo/Makefile
-libvupldemo/src/Makefile
-
 witaispeechtotext/Makefile
 witaispeechtotext/src/Makefile
 
@@ -520,19 +464,6 @@ VuBluetoothSetup/src/vuuno4kse/Makefile
 VuBluetoothSetup/src/vuzero4k/Makefile
 VuBluetoothSetup/meta/Makefile
 VuBluetoothSetup/po/Makefile
-
-VuStalker/Makefile
-VuStalker/src/Makefile
-VuStalker/src/vuduo4k/Makefile
-VuStalker/src/vuduo4kse/Makefile
-VuStalker/src/vusolo4k/Makefile
-VuStalker/src/vuultimo4k/Makefile
-VuStalker/src/vuuno4k/Makefile
-VuStalker/src/vuuno4kse/Makefile
-VuStalker/src/vuzero4k/Makefile
-VuStalker/src/vuzero/Makefile
-VuStalker/meta/Makefile
-VuStalker/po/Makefile
 
 VuChromium/Makefile
 VuChromium/src/Makefile
@@ -575,16 +506,6 @@ XtrendRemote/Makefile
 XtrendRemote/src/Makefile
 XtrendRemote/meta/Makefile
 XtrendRemote/po/Makefile
-
-SparkVFDControl/Makefile
-SparkVFDControl/src/Makefile
-SparkVFDControl/meta/Makefile
-SparkVFDControl/po/Makefile
-
-SparkUnionTunerType/Makefile
-SparkUnionTunerType/src/Makefile
-SparkUnionTunerType/po/Makefile
-SparkUnionTunerType/meta/Makefile
 
 TVSpielfilm/Makefile
 TVSpielfilm/meta/Makefile

@@ -30,10 +30,6 @@ if DINOBOT
 SUBDIRS += MultiTransCodingSetup
 endif
 
-if CC1
-SUBDIRS += MultiTransCodingSetup
-endif
-
 if XTREND
 SUBDIRS += XtrendFancontrol XtrendRemote
 endif
@@ -43,10 +39,6 @@ SUBDIRS += MultiTransCodingSetup
 endif
 
 if ET13000
-SUBDIRS += MultiTransCodingSetup
-endif
-
-if SF5008
 SUBDIRS += MultiTransCodingSetup
 endif
 
@@ -414,10 +406,6 @@ if XP1000
 SUBDIRS += XtrendRemote SF8VFDControl
 endif
 
-if SPARK
-SUBDIRS += SparkVFDControl SparkUnionTunerType SH4BoosterControl SH4OSDAdjustment
-endif
-
 if OSMIO4K
 SUBDIRS += SimpleFancontrol
 endif
@@ -450,10 +438,6 @@ if VUPLUS
 SUBDIRS += HbbTV AudioEffect
 endif
 
-if HAVE_AMLPLUGINS
-SUBDIRS += RCUSelect ReZap
-endif
-
 if XC7362
 SUBDIRS += VPLEDControl
 endif
@@ -474,12 +458,8 @@ if OSNINOPLUS
 SUBDIRS += VPLEDControl
 endif
 
-if HAVE_LIBVUPLDEMO
-SUBDIRS += libvupldemo
-endif
-
 if HAVE_VUEXTRAS
-SUBDIRS += VuChromium libvupldemo witaispeechtotext WebkitHbbTV VuBluetoothSetup
+SUBDIRS += VuChromium witaispeechtotext WebkitHbbTV VuBluetoothSetup
 endif
 
 if HAVE_GBEXTRAS

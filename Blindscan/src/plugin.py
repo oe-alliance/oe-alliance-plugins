@@ -916,9 +916,8 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 			else:
 				self.session.open(MessageBox, _("Blindscan executable not found '%s'!") % exe_path, MessageBox.TYPE_ERROR)
 				return
-		elif BRAND in ('azbox', 'ceryon', 'amiko', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or MODEL.startswith('sf8008') or MACHINEBUILD in ('dags72604', 'dagsmv200', 'sfx6008', 'sx88v2'):
-			exe_filename = BRAND == 'azbox' and "avl_azbox_blindscan" or \
-							BRAND == 'amiko' and "amiko-blindscan" or \
+		elif BRAND in ('ceryon', 'amiko', 'clap', 'dinobot', 'gigablue', 'ini', 'home', 'uclan', 'vuplus', 'xtrend') or MODEL.startswith('sf8008') or MACHINEBUILD in ('dags72604', 'dagsmv200', 'sfx6008', 'sx88v2'):
+			exe_filename = BRAND == 'amiko' and "amiko-blindscan" or \
 							BRAND == 'ceryon' and "ceryon_blindscan" or \
 							BRAND == 'clap' and "clap_blindscan" or \
 							BRAND == 'dinobot' and "dinobot-blindscan" or \
@@ -940,8 +939,6 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 					cmd += " %d" % self.is_c_band_scan
 				if BRAND in ('clap', 'dinobot', 'uclan', 'amiko') or MODEL.startswith('sf8008') or MACHINEBUILD in ('gbmv200', 'dags72604', 'dagsmv200', 'sfx6008', 'sx88v2'):
 					cmd += " %d" % orb[0]
-				if BRAND in ('azbox',):
-					self.polsave = tab_pol[pol]  # Data returned by the binary is not good we must save polarisation
 				if BRAND in ('clap'):
 					self.frontend and self.frontend.closeFrontend()
 				if BRAND in ('uclan', 'amiko') or MACHINEBUILD in ('gbmv200'):  # or MODEL.startswith('sf8008')
@@ -1145,10 +1142,7 @@ class Blindscan(ConfigListScreen, Screen, TransponderFiltering):
 						"CIRCULARLEFT": parm.Polarisation_CircularLeft,
 						"VERTICAL": parm.Polarisation_Vertical}
 					parm.orbital_position = self.orb_position
-					if BRAND == 'azbox':
-						parm.polarisation = self.polsave
-					else:
-						parm.polarisation = pol.get(data[1], parm.Polarisation_Horizontal)
+					parm.polarisation = pol.get(data[1], parm.Polarisation_Horizontal)
 					parm.frequency = int(data[2])
 					parm.symbol_rate = int(data[3])
 					parm.system = sys.get(data[4], parm.System_DVB_S)
